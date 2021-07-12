@@ -7,21 +7,13 @@ info:
     name: ShipEngine Sales & Support
     url: https://www.shipengine.com/contact/
     x-phone: 1-512-856-5379
-  description: >
-    ShipEngine's easy-to-use REST API lets you manage all of your
-    shipping needs without worrying about the complexities of different carrier
-    APIs and protocols. We handle all the heavy lifting so you can focus on
-    providing a first-class shipping experience for your customers at the best
-    possible prices.
-
+  description: |
+    ShipEngine's easy-to-use REST API lets you manage all of your shipping needs without worrying about the complexities of different carrier APIs and protocols. We handle all the heavy lifting so you can focus on providing a first-class shipping experience for your customers at the best possible prices.
 
     Each of ShipEngine's features can be used by itself or in conjunction with each other to build powerful shipping functionality into your application or service.
 
-
     ## Getting Started
-
     If you're new to REST APIs then be sure to read our [introduction to REST](https://www.shipengine.com/docs/rest/) to understand the basics. Learn how to [authenticate yourself to ShipEngine](https://www.shipengine.com/docs/auth/), and then use our [sandbox environment](https://www.shipengine.com/docs/sandbox/) to kick the tires and get familiar with our API. If you run into any problems, then be sure to check the [error handling guide](https://www.shipengine.com/docs/errors/) for tips.
-
 
     Here are some step-by-step **tutorials** to get you started:
 
@@ -32,25 +24,18 @@ info:
 
 
     ## Shipping Labels for Every Major Carrier
-
     ShipEngine makes it easy to [create shipping labels for any carrier](https://www.shipengine.com/docs/labels/create-a-label/) and [download them](https://www.shipengine.com/docs/labels/downloading/) in a [variety of file formats](https://www.shipengine.com/docs/labels/formats/). You can even customize labels with your own [messages](https://www.shipengine.com/docs/labels/messages/) and [images](https://www.shipengine.com/docs/labels/branding/).
 
 
-
     ## Real-Time Package Tracking
-
     With ShipEngine you can [get the current status of a package](https://www.shipengine.com/docs/tracking/) or [subscribe to real-time tracking updates](https://www.shipengine.com/docs/tracking/webhooks/) via webhooks. You can also create [custimized tracking pages](https://www.shipengine.com/docs/tracking/branded-tracking-page/) with your own branding so your customers will always know where their package is.
 
 
-
     ## Compare Shipping Costs Across Carriers
-
     Make sure you ship as cost-effectively as possible by [comparing rates across carriers](https://www.shipengine.com/docs/rates/get-shipment-rates/) using the ShipEngine Rates API. Or if you don't know the full shipment details yet, then you can [get rate estimates](https://www.shipengine.com/docs/rates/estimate/) with limited address info.
 
 
-
     ## Worldwide Address Validation
-
     ShipEngine supports [address validation](https://www.shipengine.com/docs/addresses/validation/) for virtually [every country on Earth](https://www.shipengine.com/docs/addresses/validation/countries/), including the United States, Canada, Great Britain, Australia, Germany, France, Norway, Spain, Sweden, Israel, Italy, and over 160 others.
   termsOfService: https://www.shipengine.com/terms-of-service/
   title: ShipEngine API
@@ -67,31 +52,19 @@ info:
       version: "3.0"
   x-providerName: shipengine.com
 externalDocs:
-  description: >
-    ShipEngine's documentation is designed to help you start shipping
-    as quickly as possible. With easy-to-follow tutorials, detailed reference
-    docs, and ready-made recipes for common use cases, you'll see real results
-    in no time at all.
+  description: |
+    ShipEngine's documentation is designed to help you start shipping as quickly as possible. With easy-to-follow tutorials, detailed reference docs, and ready-made recipes for common use cases, you'll see real results in no time at all.
   url: https://www.shipengine.com/docs/
 security:
   - api_key: []
 tags:
-  - description: >
-      No matter your shipping volume, failed deliveries and address
-      change surcharges cut into your bottom line and damage perception with
-      customers. Our address validation services ensure your packages make it to
-      the right place the first time. [Learn how to leverage our address
-      validation services
-      here.](https://www.shipengine.com/docs/addresses/validation/)
-
+  - description: |
+      No matter your shipping volume, failed deliveries and address change surcharges cut into your bottom line and damage perception with customers. Our address validation services ensure your packages make it to the right place the first time. [Learn how to leverage our address validation services here.](https://www.shipengine.com/docs/addresses/validation/)
 
       ShipEngine supports address validation for virtually every country on Earth, including the United States, Canada, Great Britain, Australia, Germany, France, Norway, Spain, Sweden, Israel, Italy, and over 160 others.
     externalDocs:
-      description: >
-        Address validation ensures accurate addresses and can lead to
-        reduced shipping costs by preventing address correction surcharges.
-        ShipEngine cross references multiple databases to validate addresses and
-        identify potential deliverability issues.
+      description: |
+        Address validation ensures accurate addresses and can lead to reduced shipping costs by preventing address correction surcharges. ShipEngine cross references multiple databases to validate addresses and identify potential deliverability issues.
       url: https://www.shipengine.com/docs/addresses/validation/
     name: addresses
     x-displayName: Addresses
@@ -115,15 +88,10 @@ tags:
       insurance
     name: insurance
     x-displayName: Insurance
-  - description: >
-      Print shipping labels for any of the top global carriers in
-      minutes—instead of weeks. Simply [connect your existing carrier
-      accounts](https://www.shipengine.com/docs/carriers/setup/) in the API
-      dashboard, and then [begin creating
-      labels](https://www.shipengine.com/docs/shipping/use-a-carrier-service/).
+  - description: |
+      Print shipping labels for any of the top global carriers in minutes—instead of weeks. Simply [connect your existing carrier accounts](https://www.shipengine.com/docs/carriers/setup/) in the API dashboard, and then [begin creating labels](https://www.shipengine.com/docs/shipping/use-a-carrier-service/).
     externalDocs:
-      description: Follow this quick start guide to create your first shipping label
-        with ShipEngine
+      description: Follow this quick start guide to create your first shipping label with ShipEngine
       url: https://www.shipengine.com/docs/labels/create-a-label/
     name: labels
     x-displayName: Labels
@@ -135,31 +103,19 @@ tags:
       custom package types
     name: package_types
     x-displayName: Package Types
-  - description: >
-      Make sure you ship as cost-effectively as possible by [quickly
-      comparing rates](https://www.shipengine.com/docs/rates/) using the
-      ShipEngine Rates API. As long as you have the carrier connected to your
-      account, you'll be able to see and compare different rates and services.
+  - description: |
+      Make sure you ship as cost-effectively as possible by [quickly comparing rates](https://www.shipengine.com/docs/rates/) using the ShipEngine Rates API. As long as you have the carrier connected to your account, you'll be able to see and compare different rates and services.
     externalDocs:
-      description: >
-        This quick start guide shows you how to get shipping rates for
-        multiple carriers so you can choose the fastest, cheapest, or most
-        reliable option.
+      description: |
+        This quick start guide shows you how to get shipping rates for multiple carriers so you can choose the fastest, cheapest, or most reliable option.
       url: https://www.shipengine.com/docs/rates/
     name: rates
     x-displayName: Rates
-  - description: >
-      Shipments are at the center of the ShipEngine API.  A shipment is
-      the first step in [creating a shipping
-      label](https://www.shipengine.com/docs/labels/create-a-label/), or
-      [creating a
-      manifest](https://www.shipengine.com/docs/shipping/manifests/).  It's also
-      essential for [getting shipping
-      rates](https://www.shipengine.com/docs/rates/).
+  - description: |
+      Shipments are at the center of the ShipEngine API.  A shipment is the first step in [creating a shipping label](https://www.shipengine.com/docs/labels/create-a-label/), or [creating a manifest](https://www.shipengine.com/docs/shipping/manifests/).  It's also essential for [getting shipping rates](https://www.shipengine.com/docs/rates/).
     externalDocs:
-      description: >
-        Learn about the shipment object model concept, and how to persist
-        and re-use shipment data inside ShipEngine.
+      description: |
+        Learn about the shipment object model concept, and how to persist and re-use shipment data inside ShipEngine.
       url: https://www.shipengine.com/docs/shipping/create-a-shipment/
     name: shipments
     x-displayName: Shipments
@@ -167,14 +123,10 @@ tags:
       tags
     name: tags
     x-displayName: Tags
-  - description: >
-      [Track packages](https://www.shipengine.com/docs/tracking/) across
-      any of our 20+ supported carrier accounts and create tracking events to
-      keep your customers up-to-date. Easily integrate real-time tracking
-      information for shipments into your app, email, or SMS.
+  - description: |
+      [Track packages](https://www.shipengine.com/docs/tracking/) across any of our 20+ supported carrier accounts and create tracking events to keep your customers up-to-date. Easily integrate real-time tracking information for shipments into your app, email, or SMS.
     externalDocs:
-      description: Learn how to use ShipEngine to track any package with a carrier and
-        a tracking number
+      description: Learn how to use ShipEngine to track any package with a carrier and a tracking number
       url: https://www.shipengine.com/docs/tracking/
     name: tracking
     x-displayName: Tracking
@@ -182,16 +134,8 @@ tags:
       warehouses
     name: warehouses
     x-displayName: Warehouses
-  - description: >
-      [Webhooks](https://www.shipengine.com/docs/tracking/webhooks/) are
-      a powerful feature of ShipEngine that can save you from sending repeated
-      polling requests to check on the state of something.  With webhooks,
-      ShipEngine will automatically contact your servers when the stage
-      changes.  This can include [parcel
-      tracking](https://www.shipengine.com/docs/tracking/) events, notification
-      of the completion of a [batch
-      operation](https://www.shipengine.com/docs/labels/bulk/),  or new [salses
-      orders](https://www.shipengine.com/docs/orders/).
+  - description: |
+      [Webhooks](https://www.shipengine.com/docs/tracking/webhooks/) are a powerful feature of ShipEngine that can save you from sending repeated polling requests to check on the state of something.  With webhooks, ShipEngine will automatically contact your servers when the stage changes.  This can include [parcel tracking](https://www.shipengine.com/docs/tracking/) events, notification of the completion of a [batch operation](https://www.shipengine.com/docs/labels/bulk/),  or new [salses orders](https://www.shipengine.com/docs/orders/).
     externalDocs:
       description: Learn how to setup webhooks and start listening to ShipEngine events.
       url: https://www.shipengine.com/docs/tracking/webhooks/
@@ -199,21 +143,13 @@ tags:
     x-displayName: Webhooks
 paths:
   /v1/addresses/recognize:
-    description: >
-      Data often enters your system as unstructured text (for example:
-      emails, SMS messages, support tickets, or other documents). ShipEngine's
-      address-recognition API helps you extract meaningful address data (e.g.
-      recipient name, address line 1, line 2, city, postal code) from this
-      unstructured text.
+    description: |
+      Data often enters your system as unstructured text (for example: emails, SMS messages, support tickets, or other documents). ShipEngine's address-recognition API helps you extract meaningful address data (e.g. recipient name, address line 1, line 2, city, postal code) from this unstructured text.
     put:
-      description: >
-        The address-recognition API makes it easy for you to extract
-        address data from unstructured text, including the recipient name, line
-        1, line 2, city, postal code, and more.
-
+      description: |
+        The address-recognition API makes it easy for you to extract address data from unstructured text, including the recipient name, line 1, line 2, city, postal code, and more.
 
         Data often enters your system as unstructured text (for example: emails, SMS messages, support tickets, or other documents). ShipEngine's address-recognition API helps you extract meaningful, structured data from this unstructured text. The parsed address data is returned in the same structure that's used for other ShipEngine APIs, such as address validation, rate quotes, and shipping labels.
-
 
         > **Note:** Address recognition is currently supported for the United States, Canada, Australia, New Zealand, the United Kingdom, and Ireland.
       operationId: parse_address
@@ -222,34 +158,24 @@ paths:
           application/json:
             examples:
               some_known_fields:
-                description: >
-                  You can optionally provide an `address` object containing any
-                  already-known values. For example, you may already know the
-                  recipient's name, city, and country, and only want to parse
-                  the street address into separate lines.
+                description: |
+                  You can optionally provide an `address` object containing any already-known values. For example, you may already know the recipient's name, city, and country, and only want to parse the street address into separate lines.
                 summary: Some known fields
                 value:
                   address:
                     address_residential_indicator: yes
                     country_code: US
-                  text: Margie McMiller at 3800 North Lamar suite 200 in austin, tx.  The zip code
-                    there is 78652.
+                  text: Margie McMiller at 3800 North Lamar suite 200 in austin, tx.  The zip code there is 78652.
               text_only:
-                description: >
-                  This is the simplest way to call the address-recognition API. Just
-                  pass the text to be parsed and nothing else.
+                description: |
+                  This is the simplest way to call the address-recognition API. Just pass the text to be parsed and nothing else.
                 summary: Text only
                 value:
-                  text: Margie McMiller at 3800 North Lamar suite 200 in austin, tx.  The zip code
-                    there is 78652.
+                  text: Margie McMiller at 3800 North Lamar suite 200 in austin, tx.  The zip code there is 78652.
             schema:
               $ref: "#/components/schemas/parse_address_request_body"
-        description: >
-          The only required field is `text`, which is the text to be parsed.
-          You can optionally also provide an `address` containing already-known
-          values. For example, you may already know the recipient's name, city,
-          and country, and only want to parse the street address into separate
-          lines.
+        description: |
+          The only required field is `text`, which is the text to be parsed. You can optionally also provide an `address` containing already-known values. For example, you may already know the recipient's name, city, and country, and only want to parse the street address into separate lines.
         required: true
       responses:
         "200":
@@ -257,12 +183,8 @@ paths:
             application/json:
               examples:
                 some_known_fields:
-                  description: >
-                    This response is shows that the address-recognition API was able to
-                    recognize all the address entities in the text. Notice that
-                    the `country_code` and `address_residential_indicator`
-                    fields are populated with the values that were provided in
-                    the request.
+                  description: |
+                    This response is shows that the address-recognition API was able to recognize all the address entities in the text. Notice that the `country_code` and `address_residential_indicator` fields are populated with the values that were provided in the request.
                   value:
                     address:
                       address_line1: 3800 North Lamar
@@ -337,12 +259,8 @@ paths:
                         type: postal_code
                     score: 0.9122137426845613
                 text_only:
-                  description: >
-                    This response shows that the address-recognition API was able to
-                    recognize all the address entities in the text. Notice that
-                    the `country_code` is not populated and the
-                    `address_residential_indicator` is "unknown", since neither
-                    of these fields was included in the text.
+                  description: |
+                    This response shows that the address-recognition API was able to recognize all the address entities in the text. Notice that the `country_code` is not populated and the `address_residential_indicator` is "unknown", since neither of these fields was included in the text.
                   value:
                     address:
                       address_line1: 3800 North Lamar
@@ -417,9 +335,8 @@ paths:
                     score: 0.9122137426845613
               schema:
                 $ref: "#/components/schemas/parse_address_response_body"
-          description: >
-            Returns the parsed address, as well as a confidence score and a
-            list of all the entities that were recognized in the text.
+          description: |
+            Returns the parsed address, as well as a confidence score and a list of all the entities that were recognized in the text.
         "400":
           $ref: "#/components/responses/400_error_response"
         "500":
@@ -429,16 +346,12 @@ paths:
         - addresses
     summary: Parse an address
   /v1/addresses/validate:
-    description: >
-      Address validation ensures accurate addresses and can lead to
-      reduced shipping costs by preventing address correction surcharges.
-
+    description: |
+      Address validation ensures accurate addresses and can lead to reduced shipping costs by preventing address correction surcharges.
       ShipEngine cross references multiple databases to validate addresses and identify potential deliverability issues.
     post:
-      description: >
-        Address validation ensures accurate addresses and can lead to
-        reduced shipping costs by preventing address correction surcharges.
-
+      description: |
+        Address validation ensures accurate addresses and can lead to reduced shipping costs by preventing address correction surcharges.
         ShipEngine cross references multiple databases to validate addresses and identify potential deliverability issues.
       operationId: validate_address
       requestBody:
@@ -503,8 +416,7 @@ paths:
                       messages:
                         - code: a1001
                           detail_code: unsupported_country
-                          message: country_code is not currently a supported country please check the
-                            documentation for acceptable 2-letter country codes.
+                          message: country_code is not currently a supported country please check the documentation for acceptable 2-letter country codes.
                           type: error
                       original_address:
                         address_line1: null
@@ -531,12 +443,9 @@ paths:
         - addresses
     summary: Address Validation
   /v1/batches:
-    description: >
-      Batches are an advanced feature of ShipEngine designed for users
-      who need to generate hundreds or thousands of labels at a time.
-
+    description: |
+      Batches are an advanced feature of ShipEngine designed for users who need to generate hundreds or thousands of labels at a time.
       When ShipEngine generates labels it relies on many carriers, their services, their dependencies, and a number of other variables
-
       to fulfill your requests; those requests can take a few minutes for us to get back to you.
     get:
       description: List Batches associated with your Shipengine account
@@ -547,10 +456,8 @@ paths:
           required: false
           schema:
             $ref: "#/components/schemas/batch_status"
-        - description: >
-            Return a specific page of results. Defaults to the first page. If
-            set to a number that's greater than the number of pages of results,
-            an empty page is returned.
+        - description: |
+            Return a specific page of results. Defaults to the first page. If set to a number that's greater than the number of pages of results, an empty page is returned.
           example: 2
           in: query
           name: page
@@ -724,11 +631,8 @@ paths:
         - batches
     summary: Batch By ID
   "/v1/batches/{batch_id}/add":
-    description: >
-      You can check your balance for a particular carrier by calling
-      [List Carriers](https://www.shipengine.com/docs/reference/list-carriers/)
-      endpoint.
-
+    description: |
+      You can check your balance for a particular carrier by calling [List Carriers](https://www.shipengine.com/docs/reference/list-carriers/) endpoint.
       For any carrier account where requires_funded_amount is true, you can add funds.
     parameters:
       - description: Batch ID
@@ -767,23 +671,17 @@ paths:
         - batches
     summary: Add Funds to a Carrier
   "/v1/batches/{batch_id}/errors":
-    description: >
-      Error handling in batches are handled differently than in a single
-      synchronous request.
-
+    description: |
+      Error handling in batches are handled differently than in a single synchronous request.
       You must retrieve the status of your batch by [getting a batch](https://www.shipengine.com/docs/reference/get-batch-by-id/) and getting an overview of the statuses or you can list errors directly here below to get detailed information about the errors.
     get:
-      description: >
-        Error handling in batches are handled differently than in a single
-        synchronous request.
-
+      description: |
+        Error handling in batches are handled differently than in a single synchronous request.
         You must retrieve the status of your batch by [getting a batch](https://www.shipengine.com/docs/reference/get-batch-by-id/) and getting an overview of the statuses or you can list errors directly here below to get detailed information about the errors.
       operationId: list_batch_errors
       parameters:
-        - description: >
-            Return a specific page of results. Defaults to the first page. If
-            set to a number that's greater than the number of pages of results,
-            an empty page is returned.
+        - description: |
+            Return a specific page of results. Defaults to the first page. If set to a number that's greater than the number of pages of results, an empty page is returned.
           example: 2
           in: query
           name: page
@@ -901,10 +799,8 @@ paths:
         - batches
     summary: Remove Batch By ID
   /v1/carriers:
-    description: >
-      Carriers are a company or individual that specializes in
-      transporting freight from one destination to another.
-
+    description: |
+      Carriers are a company or individual that specializes in transporting freight from one destination to another.
       Shipengine allows you to easily integrate with multiple carriers so you can chose the shipping option that is right for you.
     get:
       description: List all carriers that have been added to this account
@@ -927,8 +823,7 @@ paths:
         - carriers
     summary: Carriers
   "/v1/carriers/{carrier_id}":
-    description: Perform actions and get information on individual carriers
-      connected with your account.
+    description: Perform actions and get information on individual carriers connected with your account.
     get:
       description: Retrive carrier info by ID
       operationId: get_carrier_by_id
@@ -958,8 +853,7 @@ paths:
           $ref: "#/components/schemas/se_id"
     summary: Individual carriers
   "/v1/carriers/{carrier_id}/add_funds":
-    description: All carriers require that funds to be attached to an account to
-      ensure payment for the various services they provide to their customers.
+    description: All carriers require that funds to be attached to an account to ensure payment for the various services they provide to their customers.
     parameters:
       - description: Carrier ID
         example: se-28529731
@@ -995,8 +889,7 @@ paths:
         - carriers
     summary: Carrier Funds
   "/v1/carriers/{carrier_id}/options":
-    description: Carriers support various options for particular shipments. Ex.
-      (non-machinable, is_alcohol, fragile, etc)
+    description: Carriers support various options for particular shipments. Ex. (non-machinable, is_alcohol, fragile, etc)
     get:
       description: Get a list of the options available for the carrier
       operationId: get_carrier_options
@@ -1026,10 +919,8 @@ paths:
           $ref: "#/components/schemas/se_id"
     summary: Carrier Options
   "/v1/carriers/{carrier_id}/packages":
-    description: >
-      Carriers support many different package types, Shipengine supports
-      retrieving all available package so that
-
+    description: |
+      Carriers support many different package types, Shipengine supports retrieving all available package so that
       you can best determine what is right for your particular shipment.
     get:
       description: List the package types associated with the carrier
@@ -1060,10 +951,8 @@ paths:
           $ref: "#/components/schemas/se_id"
     summary: Carrier Packages
   "/v1/carriers/{carrier_id}/services":
-    description: >
-      Carrier services usually refer to the various shipping options that
-      a carrier provides to its customers.
-
+    description: |
+      Carrier services usually refer to the various shipping options that a carrier provides to its customers.
       Ex. Priority mail, overnight, international
     get:
       description: List the services associated with the carrier ID
@@ -1096,8 +985,7 @@ paths:
   "/v1/connections/carriers/{carrier_name}":
     description: Carrier connections
     parameters:
-      - description: The carrier name, such as `stamps_com`, `ups`, `fedex`, or
-          `dhl_express`.
+      - description: The carrier name, such as `stamps_com`, `ups`, `fedex`, or `dhl_express`.
         example: dhl_express
         in: path
         name: carrier_name
@@ -1153,8 +1041,7 @@ paths:
         - carrier_accounts
     description: Disconnect a carrier
     parameters:
-      - description: The carrier name, such as `stamps_com`, `ups`, `fedex`, or
-          `dhl_express`.
+      - description: The carrier name, such as `stamps_com`, `ups`, `fedex`, or `dhl_express`.
         example: dhl_express
         in: path
         name: carrier_name
@@ -1189,8 +1076,7 @@ paths:
       tags:
         - carrier_accounts
     parameters:
-      - description: The carrier name, such as `stamps_com`, `ups`, `fedex`, or
-          `dhl_express`.
+      - description: The carrier name, such as `stamps_com`, `ups`, `fedex`, or `dhl_express`.
         example: dhl_express
         in: path
         name: carrier_name
@@ -1275,10 +1161,8 @@ paths:
         - insurance
     summary: Shipsurance Connection
   "/v1/downloads/{dir}/{subdir}/{filename}":
-    description: >
-      This endpoint is used to download forms that are generated in the
-      various pdf, png, zpl formats
-
+    description: |
+      This endpoint is used to download forms that are generated in the various pdf, png, zpl formats
       such as labels and batches
     get:
       description: Get File
@@ -1329,10 +1213,8 @@ paths:
           type: string
     summary: File Download
   /v1/environment/webhooks:
-    description: >
-      ShipEngine exposes asynchronous operations for long running
-      operations such as batch labels and rates.
-
+    description: |
+      ShipEngine exposes asynchronous operations for long running operations such as batch labels and rates.
       Webhooks allow the ShipEngine servers to contact your servers when an operation changes state, such as a batch label creation completion.
     get:
       description: List all webhooks currently enabled for the account.
@@ -1457,15 +1339,11 @@ paths:
         - webhooks
     summary: Webhook
   /v1/insurance/shipsurance/add_funds:
-    description: >
-      [Shipsurance](https://www.shipsurance.com/) is a shipping insurance
-      company offering coverage for shipments sent via the major shipping
-      carriers worldwide.
+    description: |
+      [Shipsurance](https://www.shipsurance.com/) is a shipping insurance company offering coverage for shipments sent via the major shipping carriers worldwide.
     patch:
-      description: >
-        You may need to auto fund your account from time to time. For
-        example, if you don't normally ship items over $100,
-
+      description: |
+        You may need to auto fund your account from time to time. For example, if you don't normally ship items over $100,
         and may want to add funds to insurance rather than keeping the account funded.
       operationId: add_funds_to_insurance
       requestBody:
@@ -1490,10 +1368,8 @@ paths:
         - insurance
     summary: Shipsurance
   /v1/insurance/shipsurance/balance:
-    description: >
-      [Shipsurance](https://www.shipsurance.com/) is a shipping insurance
-      company offering coverage for shipments sent via the major shipping
-      carriers worldwide.
+    description: |
+      [Shipsurance](https://www.shipsurance.com/) is a shipping insurance company offering coverage for shipments sent via the major shipping carriers worldwide.
     get:
       description: Retrieve the balance of your Shipsurance account.
       operationId: get_insurance_balance
@@ -1513,19 +1389,12 @@ paths:
         - insurance
     summary: Shipsurance
   /v1/labels:
-    description: >
-      Print shipping labels for any of the top global carriers in
-      minutes—instead of weeks. Simply [connect your existing carrier
-      accounts](https://www.shipengine.com/docs/carriers/setup/)
-
+    description: |
+      Print shipping labels for any of the top global carriers in minutes—instead of weeks. Simply [connect your existing carrier accounts](https://www.shipengine.com/docs/carriers/setup/)
       in the API dashboard, and then [begin creating labels](https://www.shipengine.com/docs/shipping/use-a-carrier-service/).
     get:
-      description: >
-        This endpoint returns a list of labels that you've
-        [created](https://www.shipengine.com/docs/labels/create-a-label/). You
-        can optionally filter the results as well as control their sort order
-        and the number of results returned at a time.
-
+      description: |
+        This endpoint returns a list of labels that you've [created](https://www.shipengine.com/docs/labels/create-a-label/). You can optionally filter the results as well as control their sort order and the number of results returned at a time.
 
         By default, all labels are returned, 25 at a time, starting with the most recently created ones.  You can combine multiple filter options to narrow-down the results.  For example, if you only want to get your UPS labels for your east coast warehouse you could query by both `warehouse_id` and `carrier_id`
       operationId: list_labels
@@ -1536,16 +1405,14 @@ paths:
           required: false
           schema:
             $ref: "#/components/schemas/label_status"
-        - description: Only return labels for a specific [carrier
-            service](https://www.shipengine.com/docs/shipping/use-a-carrier-service/)
+        - description: Only return labels for a specific [carrier service](https://www.shipengine.com/docs/shipping/use-a-carrier-service/)
           example: usps_first_class_mail
           in: query
           name: service_code
           required: false
           schema:
             $ref: "#/components/schemas/service_code"
-        - description: Only return labels for a specific [carrier
-            account](https://www.shipengine.com/docs/carriers/setup/)
+        - description: Only return labels for a specific [carrier account](https://www.shipengine.com/docs/carriers/setup/)
           in: query
           name: carrier_id
           required: false
@@ -1559,8 +1426,7 @@ paths:
           schema:
             minLength: 1
             type: string
-        - description: Only return labels that were created in a specific
-            [batch](https://www.shipengine.com/docs/labels/bulk/)
+        - description: Only return labels that were created in a specific [batch](https://www.shipengine.com/docs/labels/bulk/)
           in: query
           name: batch_id
           required: false
@@ -1578,8 +1444,7 @@ paths:
           required: false
           schema:
             $ref: "#/components/schemas/se_id"
-        - description: Only return labels that originate from a specific
-            [warehouse](https://www.shipengine.com/docs/shipping/ship-from-a-warehouse/)
+        - description: Only return labels that originate from a specific [warehouse](https://www.shipengine.com/docs/shipping/ship-from-a-warehouse/)
           in: query
           name: warehouse_id
           required: false
@@ -1593,8 +1458,7 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: Only return labels that were created on or before a specific
-            date/time
+        - description: Only return labels that were created on or before a specific date/time
           example: 2019-03-12T19:24:13.657Z
           in: query
           name: created_at_end
@@ -1602,10 +1466,8 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: >
-            Return a specific page of results. Defaults to the first page. If
-            set to a number that's greater than the number of pages of results,
-            an empty page is returned.
+        - description: |
+            Return a specific page of results. Defaults to the first page. If set to a number that's greater than the number of pages of results, an empty page is returned.
           example: 2
           in: query
           name: page
@@ -1649,13 +1511,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/list_labels_response_body"
-          description: >
-            The response includes a `labels` array containing a page of results
-            (as determined by the `page_size` query parameter).  It also
-            includes other useful information, such as the total number of
-            labels that match the query criteria, the number of pages of
-            results, and the URLs of the first, last, next, and previous pages
-            of results.
+          description: |
+            The response includes a `labels` array containing a page of results (as determined by the `page_size` query parameter).  It also includes other useful information, such as the total number of labels that match the query criteria, the number of pages of results, and the URLs of the first, last, next, and previous pages of results.
         "400":
           $ref: "#/components/responses/400_error_response"
         "500":
@@ -1692,9 +1549,8 @@ paths:
   "/v1/labels/external_shipment_id/{external_shipment_id}":
     description: Find a label using the external shipment id
     get:
-      description: >
-        Find a label by using the external shipment id that was used during
-        label creation
+      description: |
+        Find a label by using the external shipment id that was used during label creation
       operationId: get_label_by_external_shipment_id
       parameters:
         - example: url
@@ -1728,8 +1584,7 @@ paths:
           type: string
     summary: Get Label By External Shipment ID
   "/v1/labels/rates/{rate_id}":
-    description: Purchase a label using a `rate_id` that has been previously
-      generated while looking at various rates for a particular shipment.
+    description: Purchase a label using a `rate_id` that has been previously generated while looking at various rates for a particular shipment.
     parameters:
       - description: Rate ID
         in: path
@@ -1738,10 +1593,8 @@ paths:
         schema:
           $ref: "#/components/schemas/se_id"
     post:
-      description: >
-        When retrieving rates for shipments using the `/rates` endpoint,
-        the returned information contains a `rate_id` property that can be used
-
+      description: |
+        When retrieving rates for shipments using the `/rates` endpoint, the returned information contains a `rate_id` property that can be used
         to generate a label without having to refill in the shipment information repeatedly.
       operationId: create_label_from_rate
       requestBody:
@@ -1768,10 +1621,8 @@ paths:
         - labels
     summary: Use a rate to purchase a label
   "/v1/labels/shipment/{shipment_id}":
-    description: >
-      Purchase a label using a shipment ID that has already been created
-      with the desired address and
-
+    description: |
+      Purchase a label using a shipment ID that has already been created with the desired address and
       package info.
     parameters:
       - description: Shipment ID
@@ -1781,10 +1632,8 @@ paths:
         schema:
           $ref: "#/components/schemas/se_id"
     post:
-      description: >
-        Purchase a label using a shipment ID that has already been created
-        with the desired address and
-
+      description: |
+        Purchase a label using a shipment ID that has already been created with the desired address and
         package info.
       operationId: create_label_from_shipment
       requestBody:
@@ -1881,8 +1730,7 @@ paths:
         - labels
     summary: Return labels
   "/v1/labels/{label_id}/track":
-    description: Carriers will provide tracking information so the status of your
-      shipment can be monitored
+    description: Carriers will provide tracking information so the status of your shipment can be monitored
     get:
       description: Retrieve the label's tracking information
       operationId: get_tracking_log_from_label
@@ -1911,10 +1759,8 @@ paths:
           $ref: "#/components/schemas/se_id"
     summary: Tracking a Label
   "/v1/labels/{label_id}/void":
-    description: >
-      Some carriers charge for creating a label upon purchase vs upon
-      use. The Shipengine API allows you
-
+    description: |
+      Some carriers charge for creating a label upon purchase vs upon use. The Shipengine API allows you
       to void a label to get a refund.
     parameters:
       - description: Label ID
@@ -1944,22 +1790,16 @@ paths:
         - labels
     summary: Label Voiding
   /v1/manifests:
-    description: >
-      Many manifests are sent electronically to the carrier when you
-      create a label, and
-
+    description: |
+      Many manifests are sent electronically to the carrier when you create a label, and
       often physical manifests are not necessary. Carriers receive the package details, shipping date,
-
       and other information that help them plan your package's delivery when you create a label.
-
 
       However, some providers, like USPS require manifests when shipping large numbers of packages. Think about how long it would take for a delivery driver to arrive, pick up 100 packages, and individually scan each of them.
 
-
       A manifest exists so the carrier can scan the manifest and check in all the packages being shipped.
     get:
-      description: Similar to querying shipments, we allow you to query manifests
-        since there will likely be a large number over a long period of time.
+      description: Similar to querying shipments, we allow you to query manifests since there will likely be a large number over a long period of time.
       operationId: list_manifests
       parameters:
         - description: Warehouse ID
@@ -1984,8 +1824,7 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: Used to create a filter for when a resource was created (ex. A
-            shipment that was created after a certain time)
+        - description: Used to create a filter for when a resource was created (ex. A shipment that was created after a certain time)
           example: 2019-03-12T19:24:13.657Z
           in: query
           name: created_at_start
@@ -1993,8 +1832,7 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: Used to create a filter for when a resource was created, (ex. A
-            shipment that was created before a certain time)
+        - description: Used to create a filter for when a resource was created, (ex. A shipment that was created before a certain time)
           example: 2019-03-12T19:24:13.657Z
           in: query
           name: created_at_end
@@ -2008,10 +1846,8 @@ paths:
           required: false
           schema:
             $ref: "#/components/schemas/se_id"
-        - description: >
-            Return a specific page of results. Defaults to the first page. If
-            set to a number that's greater than the number of pages of results,
-            an empty page is returned.
+        - description: |
+            Return a specific page of results. Defaults to the first page. If set to a number that's greater than the number of pages of results, an empty page is returned.
           example: 2
           in: query
           name: page
@@ -2038,8 +1874,7 @@ paths:
           schema:
             description: Array of label ids
             items:
-              description: A string that uniquely identifies a ShipEngine resource, such as a
-                carrier, label, shipment, etc.
+              description: A string that uniquely identifies a ShipEngine resource, such as a carrier, label, shipment, etc.
               example: se-28529731
               maxLength: 25
               minLength: 1
@@ -2064,10 +1899,8 @@ paths:
       tags:
         - manifests
     post:
-      description: >
-        Each ShipEngine manifest is created for a specific warehouse, so
-        you'll need to provide the warehouse_id
-
+      description: |
+        Each ShipEngine manifest is created for a specific warehouse, so you'll need to provide the warehouse_id
         rather than the ship_from address. You can create a warehouse for each location that you want to create manifests for.
       operationId: create_manifest
       requestBody:
@@ -2121,10 +1954,8 @@ paths:
           $ref: "#/components/schemas/se_id"
     summary: Manifest ID
   /v1/packages:
-    description: >
-      Sometimes the default package types that carriers provide aren't
-      enough and you need to create your own. That's where
-
+    description: |
+      Sometimes the default package types that carriers provide aren't enough and you need to create your own. That's where
       the `/packages` endpoint becomes useful. Create, manage, and delete custom package types to suit your specific needs.
     get:
       description: List the custom package types associated with the account
@@ -2146,8 +1977,7 @@ paths:
       tags:
         - package_types
     post:
-      description: Create a custom package type to better assist in getting accurate
-        rate estimates
+      description: Create a custom package type to better assist in getting accurate rate estimates
       operationId: create_package_type
       requestBody:
         content:
@@ -2252,12 +2082,8 @@ paths:
   /v1/rates:
     description: Get the various rates for a set of carriers
     post:
-      description: >
-        It's not uncommon that you want to give your customer the choice
-        between whether they want to ship the fastest, cheapest, or the most
-        trusted route. Most companies don't solely ship things using a single
-        shipping option;
-
+      description: |
+        It's not uncommon that you want to give your customer the choice between whether they want to ship the fastest, cheapest, or the most trusted route. Most companies don't solely ship things using a single shipping option;
         so we provide functionality to show you all your options!
       operationId: calculate_rates
       requestBody:
@@ -2363,11 +2189,8 @@ paths:
           $ref: "#/components/schemas/se_id"
     summary: Rate
   /v1/shipments:
-    description: >
-      Shipments are the gatekeeper to more advanced functionality inside
-      ShipEngine. When you create a shipment, we respond with a shipment_id that
-      is a unique identifier inside of ShipEngine.
-
+    description: |
+      Shipments are the gatekeeper to more advanced functionality inside ShipEngine. When you create a shipment, we respond with a shipment_id that is a unique identifier inside of ShipEngine.
       Additionally, we realize that you may have your own identifier, you can set this by setting the `external_shipment_id` field in the request body.
     get:
       description: Get list of Shipments
@@ -2384,8 +2207,7 @@ paths:
           required: false
           schema:
             $ref: "#/components/schemas/se_id"
-        - description: Search for shipments based on the custom tag added to the shipment
-            object
+        - description: Search for shipments based on the custom tag added to the shipment object
           example: Letters_to_santa
           in: query
           name: tag
@@ -2393,8 +2215,7 @@ paths:
           schema:
             minLength: 1
             type: string
-        - description: Used to create a filter for when a resource was created (ex. A
-            shipment that was created after a certain time)
+        - description: Used to create a filter for when a resource was created (ex. A shipment that was created after a certain time)
           example: 2019-03-12T19:24:13.657Z
           in: query
           name: created_at_start
@@ -2402,8 +2223,7 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: Used to create a filter for when a resource was created, (ex. A
-            shipment that was created before a certain time)
+        - description: Used to create a filter for when a resource was created, (ex. A shipment that was created before a certain time)
           example: 2019-03-12T19:24:13.657Z
           in: query
           name: created_at_end
@@ -2411,8 +2231,7 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: Used to create a filter for when a resource was modified (ex. A
-            shipment that was modified after a certain time)
+        - description: Used to create a filter for when a resource was modified (ex. A shipment that was modified after a certain time)
           example: 2019-03-12T19:24:13.657Z
           in: query
           name: modified_at_start
@@ -2420,8 +2239,7 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: Used to create a filter for when a resource was modified (ex. A
-            shipment that was modified before a certain time)
+        - description: Used to create a filter for when a resource was modified (ex. A shipment that was modified before a certain time)
           example: 2019-03-12T19:24:13.657Z
           in: query
           name: modified_at_end
@@ -2429,10 +2247,8 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: >
-            Return a specific page of results. Defaults to the first page. If
-            set to a number that's greater than the number of pages of results,
-            an empty page is returned.
+        - description: |
+            Return a specific page of results. Defaults to the first page. If set to a number that's greater than the number of pages of results, an empty page is returned.
           example: 2
           in: query
           name: page
@@ -2513,12 +2329,10 @@ paths:
         - shipments
     summary: Shipments
   "/v1/shipments/external_shipment_id/{external_shipment_id}":
-    description: >
-      When a shipment object is created with a custom shipment ID, you
-      can query it using this endpoint
+    description: |
+      When a shipment object is created with a custom shipment ID, you can query it using this endpoint
     get:
-      description: Query Shipments created using your own custom ID convention using
-        this endpint
+      description: Query Shipments created using your own custom ID convention using this endpint
       operationId: get_shipment_by_external_id
       responses:
         "200":
@@ -2545,22 +2359,13 @@ paths:
           type: string
     summary: External Shipment ID
   /v1/shipments/recognize:
-    description: >
-      Data often enters your system as unstructured text (for example:
-      emails, SMS messages, support tickets, or other documents). ShipEngine's
-      shipment-recognition API helps you extract meaningful shipping data
-      (people's names, addresses, package weights and dimensions, insurance and
-      delivery requirements, etc.) from this unstructured text.
+    description: |
+      Data often enters your system as unstructured text (for example: emails, SMS messages, support tickets, or other documents). ShipEngine's shipment-recognition API helps you extract meaningful shipping data (people's names, addresses, package weights and dimensions, insurance and delivery requirements, etc.) from this unstructured text.
     put:
-      description: >
-        The shipment-recognition API makes it easy for you to extract
-        shipping data from unstructured text, including people's names,
-        addresses, package weights and dimensions, insurance and delivery
-        requirements, and more.
-
+      description: |
+        The shipment-recognition API makes it easy for you to extract shipping data from unstructured text, including people's names, addresses, package weights and dimensions, insurance and delivery requirements, and more.
 
         Data often enters your system as unstructured text (for example: emails, SMS messages, support tickets, or other documents). ShipEngine's shipment-recognition API helps you extract meaningful, structured data from this unstructured text. The parsed shipment data is returned in the same structure that's used for other ShipEngine APIs, so you can easily use the parsed data to create a shipping label.
-
 
         > **Note:** Shipment recognition is currently supported for the United States, Canada, Australia, New Zealand, the United Kingdom, and Ireland.
       operationId: parse_shipment
@@ -2569,11 +2374,8 @@ paths:
           application/json:
             examples:
               some_known_fields:
-                description: >
-                  You can optionally provide a `shipment` object containing any
-                  already-known values. For example, you probably already know
-                  the `ship_from` address, and you may also already know what
-                  carrier and service you want to use.
+                description: |
+                  You can optionally provide a `shipment` object containing any already-known values. For example, you probably already know the `ship_from` address, and you may also already know what carrier and service you want to use.
                 summary: Some known fields
                 value:
                   shipment:
@@ -2588,30 +2390,19 @@ paths:
                       phone: 555-555-5555
                       postal_code: 94110
                       state_province: CA
-                  text: >
-                    I have a 4oz package that's 5x10x14in, and I need to ship it to Margie
-                    McMiller at 3800 North Lamar suite 200 in austin, tx 78652.
-                    Please send it via USPS first class and require an adult
-                    signature. It also needs to be insured for $400.
+                  text: |
+                    I have a 4oz package that's 5x10x14in, and I need to ship it to Margie McMiller at 3800 North Lamar suite 200 in austin, tx 78652. Please send it via USPS first class and require an adult signature. It also needs to be insured for $400.
               text_only:
-                description: >
-                  This is the simplest way to call the shipment-recognition API. Just
-                  pass the text to be parsed and nothing else.
+                description: |
+                  This is the simplest way to call the shipment-recognition API. Just pass the text to be parsed and nothing else.
                 summary: Text only
                 value:
-                  text: >
-                    I have a 4oz package that's 5x10x14in, and I need to ship it to Margie
-                    McMiller at 3800 North Lamar suite 200 in austin, tx 78652.
-                    Please send it via USPS first class and require an adult
-                    signature. It also needs to be insured for $400.
+                  text: |
+                    I have a 4oz package that's 5x10x14in, and I need to ship it to Margie McMiller at 3800 North Lamar suite 200 in austin, tx 78652. Please send it via USPS first class and require an adult signature. It also needs to be insured for $400.
             schema:
               $ref: "#/components/schemas/parse_shipment_request_body"
-        description: >
-          The only required field is `text`, which is the text to be parsed.
-          You can optionally also provide a `shipment` containing any
-          already-known values. For example, you probably already know the
-          `ship_from` address, and you may also already know what carrier and
-          service you want to use.
+        description: |
+          The only required field is `text`, which is the text to be parsed. You can optionally also provide a `shipment` containing any already-known values. For example, you probably already know the `ship_from` address, and you may also already know what carrier and service you want to use.
         required: true
       responses:
         "200":
@@ -2619,11 +2410,8 @@ paths:
             application/json:
               examples:
                 some_known_fields:
-                  description: >
-                    This response is shows that the shipment-recognition API was able
-                    to recognize all the shipping entities in the text. Notice
-                    that the `ship_from` and `service_code` fields are populated
-                    with the values that were provided in the request.
+                  description: |
+                    This response is shows that the shipment-recognition API was able to recognize all the shipping entities in the text. Notice that the `ship_from` and `service_code` fields are populated with the values that were provided in the request.
                   value:
                     entities:
                       - end_index: 11
@@ -2664,9 +2452,7 @@ paths:
                           state_province: TX
                         score: 0.9281558837267101
                         start_index: 61
-                        text: to Margie McMiller at 3800 North Lamar suite 200 in austin, tx 78652.
-                          Please send it via USPS first class and require an
-                          adult signature
+                        text: to Margie McMiller at 3800 North Lamar suite 200 in austin, tx 78652. Please send it via USPS first class and require an adult signature
                         type: address
                       - end_index: 78
                         result:
@@ -2821,11 +2607,8 @@ paths:
                         postal_code: 78652
                         state_province: TX
                 text_only:
-                  description: >
-                    This response shows that the shipment-recognition API was able to
-                    recognize all the shipping entities in the text. Notice that
-                    the `ship_from` field is not populated, since it wasn't
-                    included in the request or in the parsed text.
+                  description: |
+                    This response shows that the shipment-recognition API was able to recognize all the shipping entities in the text. Notice that the `ship_from` field is not populated, since it wasn't included in the request or in the parsed text.
                   value:
                     entities:
                       - end_index: 11
@@ -2866,9 +2649,7 @@ paths:
                           state_province: TX
                         score: 0.9281558837267101
                         start_index: 61
-                        text: to Margie McMiller at 3800 North Lamar suite 200 in austin, tx 78652.
-                          Please send it via USPS first class and require an
-                          adult signature
+                        text: to Margie McMiller at 3800 North Lamar suite 200 in austin, tx 78652. Please send it via USPS first class and require an adult signature
                         type: address
                       - end_index: 78
                         result:
@@ -3014,9 +2795,8 @@ paths:
                         state_province: TX
               schema:
                 $ref: "#/components/schemas/parse_shipment_response_body"
-          description: >
-            Returns the parsed shipment, as well as a confidence score and a
-            list of all the shipping entities that were recognized in the text.
+          description: |
+            Returns the parsed shipment, as well as a confidence score and a list of all the shipping entities that were recognized in the text.
         "400":
           $ref: "#/components/responses/400_error_response"
         "500":
@@ -3089,13 +2869,9 @@ paths:
         schema:
           $ref: "#/components/schemas/se_id"
     put:
-      description: >
-        Mark a shipment cancelled, if it is no longer needed or being used
-        by your organized. Any label associated with the shipment needs to be
-        voided first
-
+      description: |
+        Mark a shipment cancelled, if it is no longer needed or being used by your organized. Any label associated with the shipment needs to be voided first
         An example use case would be if a batch label creation job is going to run at a set time and only queries `pending` shipments. Marking a shipment as cancelled
-
         would remove it from this process
       operationId: cancel_shipments
       responses:
@@ -3121,17 +2897,13 @@ paths:
   "/v1/shipments/{shipment_id}/errors":
     description: Shipment Errors
     get:
-      description: >
-        If there are no errors associated with this shipment then the API
-        will return a 404 Not Found response to indicate
-
+      description: |
+        If there are no errors associated with this shipment then the API will return a 404 Not Found response to indicate
         that no errors are associated with the request
       operationId: list_shipment_errors
       parameters:
-        - description: >
-            Return a specific page of results. Defaults to the first page. If
-            set to a number that's greater than the number of pages of results,
-            an empty page is returned.
+        - description: |
+            Return a specific page of results. Defaults to the first page. If set to a number that's greater than the number of pages of results, an empty page is returned.
           example: 2
           in: query
           name: page
@@ -3173,17 +2945,14 @@ paths:
           $ref: "#/components/schemas/se_id"
     summary: Shipment Errors
   "/v1/shipments/{shipment_id}/rates":
-    description: >
-      Once a shipment is complete with the desired shipping information,
-      you can then search for rates available
-
+    description: |
+      Once a shipment is complete with the desired shipping information, you can then search for rates available
       based on the carriers associated with your account
     get:
       description: Get Rates for the shipment information associated with the shipment ID
       operationId: list_shipment_rates
       parameters:
-        - description: Used to create a filter for when a resource was created (ex. A
-            shipment that was created after a certain time)
+        - description: Used to create a filter for when a resource was created (ex. A shipment that was created after a certain time)
           example: 2019-03-12T19:24:13.657Z
           in: query
           name: created_at_start
@@ -3238,9 +3007,8 @@ paths:
       summary: Remove Tag from Shipment
       tags:
         - shipments
-    description: >
-      Tags associated with the shipment object to be used to organize and
-      query shipment items.
+    description: |
+      Tags associated with the shipment object to be used to organize and query shipment items.
     parameters:
       - description: Shipment ID
         in: path
@@ -3274,10 +3042,8 @@ paths:
         - shipments
     summary: Shipment Tags
   /v1/tags:
-    description: >
-      Tags are simple text-based flags or identifiers. Tags can be used
-      as a simple label,
-
+    description: |
+      Tags are simple text-based flags or identifiers. Tags can be used as a simple label,
       such as Guaranteed_Overnight or Fragile so shipments can be easily [queried later](https://www.shipengine.com/docs/reference/list-shipments/).
     get:
       description: Get a list of all tags associated with an account.
@@ -3363,8 +3129,7 @@ paths:
         schema:
           $ref: "#/components/schemas/tag_name"
     put:
-      description: Change a tag name while still keeping the relevant shipments
-        attached to it
+      description: Change a tag name while still keeping the relevant shipments attached to it
       operationId: rename_tag
       responses:
         "204":
@@ -3387,8 +3152,7 @@ paths:
         - tags
     summary: Tag
   /v1/tracking:
-    description: If you generate your labels through ShipEngine, then you can
-      subscribe to real-time tracking events for free!
+    description: If you generate your labels through ShipEngine, then you can subscribe to real-time tracking events for free!
     get:
       description: Retrieve package tracking information
       operationId: get_tracking_log
@@ -3427,16 +3191,12 @@ paths:
         - tracking
     summary: Tracking a Package
   /v1/tracking/start:
-    description: >
-      Allows you to subscribe to tracking updates for a package. You
-      specify the carrier_code and tracking_number of the package,
-
+    description: |
+      Allows you to subscribe to tracking updates for a package. You specify the carrier_code and tracking_number of the package,
       and receive notifications via webhooks whenever the shipping status changes.
     post:
-      description: >
-        Allows you to subscribe to tracking updates for a package. You
-        specify the carrier_code and tracking_number of the package,
-
+      description: |
+        Allows you to subscribe to tracking updates for a package. You specify the carrier_code and tracking_number of the package,
         and receive notifications via webhooks whenever the shipping status changes.
       operationId: start_tracking
       parameters:
@@ -3519,10 +3279,8 @@ paths:
         - tracking
     summary: Stop Tracking a Package
   /v1/warehouses:
-    description: >
-      You likely have one or more warehouse locations that you frequently
-      ship from, in which case it would be annoying to have to specify the
-
+    description: |
+      You likely have one or more warehouse locations that you frequently ship from, in which case it would be annoying to have to specify the
       ship_from and return_to addresses on every shipment. The solution is to [Create a Warehouse](https://www.shipengine.com/docs/reference/create-warehouse/), then you can simply pass the warehouse_id instead.
     get:
       description: Retrieve a list of warehouses associated with this account.
@@ -3544,10 +3302,8 @@ paths:
       tags:
         - warehouses
     post:
-      description: >
-        Create a warehouse location that you can use to create shipping
-        items by simply passing in the generated warehouse id.
-
+      description: |
+        Create a warehouse location that you can use to create shipping items by simply passing in the generated warehouse id.
         If the return address is not supplied in the request body then it is assumed that the origin address is the return address as well
       operationId: create_warehouse
       requestBody:
@@ -3596,10 +3352,8 @@ paths:
       summary: Delete Warehouse By ID
       tags:
         - warehouses
-    description: >
-      You likely have one or more warehouse locations that you frequently
-      ship from, in which case it would be annoying to have to specify the
-
+    description: |
+      You likely have one or more warehouse locations that you frequently ship from, in which case it would be annoying to have to specify the
       ship_from and return_to addresses on every shipment. The solution is to [Create a Warehouse](https://www.shipengine.com/docs/reference/create-warehouse/), then you can simply pass the warehouse_id instead.
     get:
       description: Retrieve warehouse data based on the warehouse ID
@@ -3731,9 +3485,8 @@ components:
       additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/partial_address"
-      description: >
+      description: |
         Any residential or business mailing address, anywhere in the world.
-
 
         > **Note:** Either `name` or `company_name` must be set. Both may be specified, if relevant.
       required:
@@ -3801,8 +3554,7 @@ components:
       title: address_validation_code
       type: string
     address_validation_detail_code:
-      description: The detailed error codes that can be returned by the address
-        validation API
+      description: The detailed error codes that can be returned by the address validation API
       enum:
         - unsupported_country
         - non_supported_country
@@ -3865,8 +3617,7 @@ components:
       title: address_validation_detail_code
       type: string
     address_validation_message_type:
-      description: The different types of messages that can be returned by the address
-        validation API
+      description: The different types of messages that can be returned by the address validation API
       enum:
         - error
         - warning
@@ -3884,8 +3635,7 @@ components:
           readOnly: true
         messages:
           default: []
-          description: The list of messages that were generated during the address
-            validation request.
+          description: The list of messages that were generated during the address validation request.
           items:
             $ref: "#/components/schemas/response_message"
           readOnly: true
@@ -3919,38 +3669,28 @@ components:
       properties:
         bill_to_account:
           default: null
-          description: >
-            This field is used to [bill shipping costs to a third
-            party](https://www.shipengine.com/docs/shipping/bill-to-third-party/).
-            This field must be used in conjunction with the
-            `bill_to_country_code`, `bill_to_party`, and `bill_to_postal_code`
-            fields.
+          description: |
+            This field is used to [bill shipping costs to a third party](https://www.shipengine.com/docs/shipping/bill-to-third-party/). This field must be used in conjunction with the `bill_to_country_code`, `bill_to_party`, and `bill_to_postal_code` fields.
           nullable: true
           type: string
         bill_to_country_code:
           allOf:
             - $ref: "#/components/schemas/country_code"
           default: null
-          description: >
-            The two-letter [ISO 3166-1 country
-            code](https://en.wikipedia.org/wiki/ISO_3166-1) of the third-party
-            that is responsible for shipping costs.
+          description: |
+            The two-letter [ISO 3166-1 country code](https://en.wikipedia.org/wiki/ISO_3166-1) of the third-party that is responsible for shipping costs.
           nullable: true
         bill_to_party:
           allOf:
             - $ref: "#/components/schemas/bill_to_party"
           default: null
-          description: >
-            Indicates whether to bill shipping costs to the recipient or to a
-            third-party.  When billing to a third-party, the `bill_to_account`,
-            `bill_to_country_code`, and `bill_to_postal_code` fields must also
-            be set.
+          description: |
+            Indicates whether to bill shipping costs to the recipient or to a third-party.  When billing to a third-party, the `bill_to_account`, `bill_to_country_code`, and `bill_to_postal_code` fields must also be set.
           nullable: true
         bill_to_postal_code:
           default: null
-          description: >
-            The postal code of the third-party that is responsible for shipping
-            costs.
+          description: |
+            The postal code of the third-party that is responsible for shipping costs.
           nullable: true
           type: string
         collect_on_delivery:
@@ -3961,34 +3701,29 @@ components:
           type: boolean
         custom_field1:
           default: null
-          description: >
-            An arbitrary field that can be used to store information about the
-            shipment.
+          description: |
+            An arbitrary field that can be used to store information about the shipment.
           maxLength: 100
           nullable: true
           type: string
         custom_field2:
           default: null
-          description: >
-            An arbitrary field that can be used to store information about the
-            shipment.
+          description: |
+            An arbitrary field that can be used to store information about the shipment.
           maxLength: 100
           nullable: true
           type: string
         custom_field3:
           default: null
-          description: >
-            An arbitrary field that can be used to store information about the
-            shipment.
+          description: |
+            An arbitrary field that can be used to store information about the shipment.
           maxLength: 100
           nullable: true
           type: string
         delivered_duty_paid:
           default: false
-          description: >
-            Indicates that the shipper is paying the international delivery
-            duties for this shipment.  This option is supported by UPS, FedEx,
-            and DHL Express.
+          description: |
+            Indicates that the shipper is paying the international delivery duties for this shipment.  This option is supported by UPS, FedEx, and DHL Express.
           type: boolean
         dry_ice:
           default: false
@@ -4001,21 +3736,15 @@ components:
           nullable: true
         freight_class:
           default: null
-          description: >
-            The National Motor Freight Traffic Association [freight
-            class](http://www.nmfta.org/pages/nmfc?AspxAutoDetectCookieSupport=1),
-            such as "77.5", "110", or "250".
+          description: |
+            The National Motor Freight Traffic Association [freight class](http://www.nmfta.org/pages/nmfc?AspxAutoDetectCookieSupport=1), such as "77.5", "110", or "250".
           example: 77.5
           nullable: true
           type: string
         non_machinable:
           default: false
-          description: >
-            Indicates that the package cannot be processed automatically
-            because it is too large or irregularly shaped. This is primarily for
-            USPS shipments.  See [Section 1.2 of the USPS parcel
-            standards](https://pe.usps.com/text/dmm300/101.htm#ep1047495) for
-            details.
+          description: |
+            Indicates that the package cannot be processed automatically because it is too large or irregularly shaped. This is primarily for USPS shipments.  See [Section 1.2 of the USPS parcel standards](https://pe.usps.com/text/dmm300/101.htm#ep1047495) for details.
           type: boolean
         saturday_delivery:
           default: false
@@ -4023,37 +3752,23 @@ components:
           type: boolean
         use_ups_ground_freight_pricing:
           default: null
-          description: >
-            Whether to use [UPS Ground Freight
-            pricing](https://www.shipengine.com/docs/shipping/ups-ground-freight/).
-            If enabled, then a `freight_class` must also be specified.
+          description: |
+            Whether to use [UPS Ground Freight pricing](https://www.shipengine.com/docs/shipping/ups-ground-freight/). If enabled, then a `freight_class` must also be specified.
           nullable: true
           type: boolean
       title: advanced_shipment_options
       type: object
     ancillary_service_endorsement:
-      description: >
-        [Ancillary service
-        endorsements](https://pe.usps.com/text/qsg300/Q507.htm) are used by
-        mailers to request an addressee's new address and to provide the carrier
-        with instructions on how to handle packages that are undeliverable as
-        addressed.
-
+      description: |
+        [Ancillary service endorsements](https://pe.usps.com/text/qsg300/Q507.htm) are used by mailers to request an addressee's new address and to provide the carrier with instructions on how to handle packages that are undeliverable as addressed.
 
         | Ancillary Service Endorsement  | Description
-
         |--------------------------------|-----------------------------------------------------
-
         | `none`                         | No ancillary service is requested. Depending on the carrier servive, the package may be forwarded, returned, or discarded.
-
         | `return_service_requested`     | The package is returned to the sender. If possible, notification of the new address is is included with the returned package.
-
         | `forwarding_service_requested` | Forward the package to the new address, if possible; otherwise, return it to the sender.
-
         | `address_service_requested`    | Forward the package to the new address, if possible; otherwise, return it to the sender. This is similar to `forwarding_service_requested`, but different restrictions and charges may apply.
-
         | `change_service_requested`     | The package is discarded. If possible, notification of the new address is sent to the sender.
-
         | `leave_if_no_response`         |
       enum:
         - none
@@ -4066,10 +3781,8 @@ components:
       type: string
     batch:
       additionalProperties: false
-      description: >
-        Batches are an advanced feature of ShipEngine designed for users
-        who need to generate hundreds or
-
+      description: |
+        Batches are an advanced feature of ShipEngine designed for users who need to generate hundreds or
         thousands of labels at a time.
       properties:
         batch_errors_url:
@@ -4377,8 +4090,7 @@ components:
           readOnly: true
           type: array
         primary:
-          description: Is this the primary carrier that is used by default when no carrier
-            is specified in label/shipment creation
+          description: Is this the primary carrier that is used by default when no carrier is specified in label/shipment creation
           readOnly: true
           type: boolean
         requires_funded_amount:
@@ -4423,10 +4135,8 @@ components:
       title: carrier_advanced_option
       type: object
     carrier_code:
-      description: >
-        A [shipping
-        carrier](https://www.shipengine.com/docs/carriers/setup/), such as
-        `fedex`, `dhl_express`, `stamps_com`, etc.
+      description: |
+        A [shipping carrier](https://www.shipengine.com/docs/carriers/setup/), such as `fedex`, `dhl_express`, `stamps_com`, etc.
       example: dhl_express
       pattern: ^[a-z0-9]+(_[a-z0-9]+)*$
       title: carrier_code
@@ -4724,15 +4434,13 @@ components:
           allOf:
             - $ref: "#/components/schemas/ancillary_service_endorsement"
         api_key:
-          description: >
-            The DHL E-Commerce API key. This field is optional, but if not set
-            you will not be able to get rates for this account.
+          description: |
+            The DHL E-Commerce API key. This field is optional, but if not set you will not be able to get rates for this account.
           minLength: 1
           type: string
         api_secret:
-          description: >
-            The DHL E-Commerce API secret. This field is optional, but if not
-            set you will not be able to get rates for this account.
+          description: |
+            The DHL E-Commerce API secret. This field is optional, but if not set you will not be able to get rates for this account.
           minLength: 1
           type: string
         client_id:
@@ -5383,8 +5091,7 @@ components:
           minLength: 1
           type: string
         agree_to_technology_agreement:
-          description: The Agreement to the [UPS Technology
-            Agreement](https://www.ups.com/assets/resources/media/UTA_with_EUR.pdf)
+          description: The Agreement to the [UPS Technology Agreement](https://www.ups.com/assets/resources/media/UTA_with_EUR.pdf)
           type: boolean
         city:
           description: City
@@ -5453,9 +5160,8 @@ components:
       title: connect_ups_request_body
       type: object
     country_code:
-      description: >
-        A two-letter [ISO 3166-1 country
-        code](https://en.wikipedia.org/wiki/ISO_3166-1)
+      description: |
+        A two-letter [ISO 3166-1 country code](https://en.wikipedia.org/wiki/ISO_3166-1)
       example: CA
       maxLength: 2
       minLength: 2
@@ -5699,25 +5405,19 @@ components:
           allOf:
             - $ref: "#/components/schemas/label_format"
           default: pdf
-          description: >
-            The file format that you want the label to be in.  We recommend
-            `pdf` format because it is supported by all carriers, whereas some
-            carriers do not support the `png` or `zpl` formats.
+          description: |
+            The file format that you want the label to be in.  We recommend `pdf` format because it is supported by all carriers, whereas some carriers do not support the `png` or `zpl` formats.
         label_image_id:
           allOf:
             - $ref: "#/components/schemas/image_id"
-          description: The label image resource that was used to create a custom label
-            image.
+          description: The label image resource that was used to create a custom label image.
           nullable: true
         label_layout:
           allOf:
             - $ref: "#/components/schemas/label_layout"
           default: 4x6
-          description: >
-            The layout (size) that you want the label to be in.  The
-            `label_format` determines which sizes are allowed.  `4x6` is
-            supported for all label formats, whereas `letter` (8.5" x 11") is
-            only supported for `pdf` format.
+          description: |
+            The layout (size) that you want the label to be in.  The `label_format` determines which sizes are allowed.  `4x6` is supported for all label formats, whereas `letter` (8.5" x 11") is only supported for `pdf` format.
       title: create_return_label_request_body
       type: object
     create_return_label_response_body:
@@ -5867,10 +5567,8 @@ components:
           allOf:
             - $ref: "#/components/schemas/country_code"
           default: null
-          description: >
-            The two-letter [ISO 3166-1 country
-            code](https://en.wikipedia.org/wiki/ISO_3166-1) where this item
-            originated
+          description: |
+            The two-letter [ISO 3166-1 country code](https://en.wikipedia.org/wiki/ISO_3166-1) where this item originated
           nullable: true
         customs_item_id:
           allOf:
@@ -5885,8 +5583,7 @@ components:
           type: string
         harmonized_tariff_code:
           default: null
-          description: The [Harmonized Tariff
-            Code](https://en.wikipedia.org/wiki/Harmonized_System) of this item.
+          description: The [Harmonized Tariff Code](https://en.wikipedia.org/wiki/Harmonized_System) of this item.
           example: 3926.1
           nullable: true
           type: string
@@ -5916,19 +5613,16 @@ components:
       title: customs_item
       type: object
     date:
-      description: >
-        An [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) string that
-        represents a date, but not a specific time.  The value _may_ contain a
-        time component, but it will be set to `00:00:00` UTC by ShipEngine.
+      description: |
+        An [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) string that represents a date, but not a specific time.  The value _may_ contain a time component, but it will be set to `00:00:00` UTC by ShipEngine.
       example: 2018-09-23T00:00:00.000Z
       format: date-time
       pattern: ^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[-+]\d{2}:\d{2}))?$
       title: date
       type: string
     date_time:
-      description: >
-        An [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) string that
-        represents a date and time.
+      description: |
+        An [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) string that represents a date and time.
       example: 2018-09-23T15:00:00.000Z
       format: date-time
       pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[-+]\d{2}:\d{2})$
@@ -6015,8 +5709,7 @@ components:
           minLength: 1
           type: string
         should_hide_account_number_on_archive_doc:
-          description: Indicates if the account number should be hidden on the archive
-            documentation
+          description: Indicates if the account number should be hidden on the archive documentation
           type: boolean
       title: dhl_express_account_settings
       type: object
@@ -6176,9 +5869,8 @@ components:
         request_id:
           allOf:
             - $ref: "#/components/schemas/uuid"
-          description: >
+          description: |
             A UUID that uniquely identifies the request id.
-
             This can be given to the support team to help debug non-trivial issues that may occur
       required:
         - request_id
@@ -6186,10 +5878,8 @@ components:
       title: error_response_body
       type: object
     error_source:
-      description: >
-        The source of the error, as indicated by the name this informs us
-        if the API call failed because of the
-
+      description: |
+        The source of the error, as indicated by the name this informs us if the API call failed because of the
         carrier, the order source, or the ShipEngine API itself.
       enum:
         - carrier
@@ -6266,24 +5956,16 @@ components:
       title: fedex_account_settings_request_body
       type: object
     fedex_pickup_type:
-      description: >
+      description: |
         Determines how FedEx will pickup your packages
 
-
         |Pickup Type               |Description
-
         |--------------------------|-----------------------------------------
-
         |`none`                    | Not specified
-
         |`regular_pickup`          | You already have a daily pickup scheduled with FedEx
-
         |`request_courier`         | You will call FedEx to request a courier
-
         |`drop_box`                | You will drop-off packages in a FedEx drop box
-
         |`business_service_center` | You will drop-off packages at an authorized FedEx business service center
-
         |`station`                 | You will drop-off the package at a FedEx Station
       enum:
         - none
@@ -6495,8 +6177,7 @@ components:
           allOf:
             - $ref: "#/components/schemas/package_contents"
           default: merchandise
-          description: The type of contents in this shipment.  This may impact import
-            duties or customs treatment.
+          description: The type of contents in this shipment.  This may impact import duties or customs treatment.
         customs_items:
           default: []
           description: Customs declarations for each item in the shipment.
@@ -6516,35 +6197,26 @@ components:
       type: object
     label:
       additionalProperties: false
-      description: >
-        A label represents the physical sticker that you affix to a package
-        to ship it.  ShipEngine makes it easy for you to [create
-        labels](https://www.shipengine.com/docs/labels/create-a-label/) and then
-        download them in PDF, PNG, or ZPL format so you can print them.
+      description: |
+        A label represents the physical sticker that you affix to a package to ship it.  ShipEngine makes it easy for you to [create labels](https://www.shipengine.com/docs/labels/create-a-label/) and then download them in PDF, PNG, or ZPL format so you can print them.
       properties:
         batch_id:
           allOf:
             - $ref: "#/components/schemas/se_id"
-          description: >
-            If this label was created as part of a
-            [batch](https://www.shipengine.com/docs/labels/bulk/), then this is
-            the unique ID of that batch.
+          description: |
+            If this label was created as part of a [batch](https://www.shipengine.com/docs/labels/bulk/), then this is the unique ID of that batch.
           readOnly: true
         carrier_code:
           allOf:
             - $ref: "#/components/schemas/carrier_code"
-          description: >
-            The [shipping
-            carrier](https://www.shipengine.com/docs/carriers/setup/) who will
-            ship the package, such as `fedex`, `dhl_express`, `stamps_com`, etc.
+          description: |
+            The [shipping carrier](https://www.shipengine.com/docs/carriers/setup/) who will ship the package, such as `fedex`, `dhl_express`, `stamps_com`, etc.
           readOnly: true
         carrier_id:
           allOf:
             - $ref: "#/components/schemas/se_id"
-          description: >
-            The unique ID of the [carrier
-            account](https://www.shipengine.com/docs/carriers/setup/) that was
-            used to create this label
+          description: |
+            The unique ID of the [carrier account](https://www.shipengine.com/docs/carriers/setup/) that was used to create this label
           readOnly: true
         charge_event:
           allOf:
@@ -6559,39 +6231,31 @@ components:
         form_download:
           allOf:
             - $ref: "#/components/schemas/link"
-          description: >
-            The link to downlaod the customs form (a.k.a. commercial invoice)
-            for this shipment, if any.  Forms are in PDF format. This field is
-            null if the shipment does not require a customs form, or if the
-            carrier does not support it.
+          description: |
+            The link to downlaod the customs form (a.k.a. commercial invoice) for this shipment, if any.  Forms are in PDF format. This field is null if the shipment does not require a customs form, or if the carrier does not support it.
           nullable: true
           readOnly: true
         insurance_claim:
           allOf:
             - $ref: "#/components/schemas/link"
-          description: >
-            The link to submit an insurance claim for the shipment.  This field
-            is null if the shipment is not insured or if the insurance provider
-            does not support online claim submission.
+          description: |
+            The link to submit an insurance claim for the shipment.  This field is null if the shipment is not insured or if the insurance provider does not support online claim submission.
           nullable: true
           readOnly: true
         insurance_cost:
           allOf:
             - $ref: "#/components/schemas/monetary_value"
-          description: >
-            The insurance cost for this package.  Add this to the
-            `shipment_cost` field to get the total cost.
+          description: |
+            The insurance cost for this package.  Add this to the `shipment_cost` field to get the total cost.
           readOnly: true
         is_international:
-          description: >
-            Indicates whether this is an international shipment.  That is, the
-            originating country and destination country are different.
+          description: |
+            Indicates whether this is an international shipment.  That is, the originating country and destination country are different.
           readOnly: true
           type: boolean
         is_return_label:
-          description: >
-            Indicates whether this is a return label.  You may also want to set
-            the `rma_number` so you know what is being returned.
+          description: |
+            Indicates whether this is a return label.  You may also want to set the `rma_number` so you know what is being returned.
           type: boolean
         label_download:
           allOf:
@@ -6606,54 +6270,41 @@ components:
           allOf:
             - $ref: "#/components/schemas/label_format"
           default: pdf
-          description: >
-            The file format that you want the label to be in.  We recommend
-            `pdf` format because it is supported by all carriers, whereas some
-            carriers do not support the `png` or `zpl` formats.
+          description: |
+            The file format that you want the label to be in.  We recommend `pdf` format because it is supported by all carriers, whereas some carriers do not support the `png` or `zpl` formats.
         label_id:
           allOf:
             - $ref: "#/components/schemas/se_id"
-          description: >
-            A string that uniquely identifies the label. This ID is generated
-            by ShipEngine when the label is created.
+          description: |
+            A string that uniquely identifies the label. This ID is generated by ShipEngine when the label is created.
           readOnly: true
         label_image_id:
           allOf:
             - $ref: "#/components/schemas/image_id"
-          description: The label image resource that was used to create a custom label
-            image.
+          description: The label image resource that was used to create a custom label image.
           nullable: true
         label_layout:
           allOf:
             - $ref: "#/components/schemas/label_layout"
           default: 4x6
-          description: >
-            The layout (size) that you want the label to be in.  The
-            `label_format` determines which sizes are allowed.  `4x6` is
-            supported for all label formats, whereas `letter` (8.5" x 11") is
-            only supported for `pdf` format.
+          description: |
+            The layout (size) that you want the label to be in.  The `label_format` determines which sizes are allowed.  `4x6` is supported for all label formats, whereas `letter` (8.5" x 11") is only supported for `pdf` format.
         outbound_label_id:
           allOf:
             - $ref: "#/components/schemas/se_id"
-          description: >
-            The `label_id` of the original (outgoing) label that the return
-            label is for. This associates the two labels together, which is
-
+          description: |
+            The `label_id` of the original (outgoing) label that the return label is for. This associates the two labels together, which is
             required by some carriers.
           writeOnly: true
         package_code:
           allOf:
             - $ref: "#/components/schemas/package_code"
-          description: >
-            The [package
-            type](https://www.shipengine.com/docs/reference/list-carrier-packages/),
-            such as `thick_envelope`, `small_flat_rate_box`, `large_package`,
-            etc.  The code `package` indicates a custom or unknown package type.
+          description: |
+            The [package type](https://www.shipengine.com/docs/reference/list-carrier-packages/), such as `thick_envelope`, `small_flat_rate_box`, `large_package`, etc.  The code `package` indicates a custom or unknown package type.
           readOnly: true
         packages:
-          description: >
+          description: |
             The label's package(s).
-
 
             > **Note:** Some carriers only allow one package per label.  If you attempt to create a multi-package label for a carrier that doesn't allow it, an error will be returned.
           items:
@@ -6661,28 +6312,21 @@ components:
           readOnly: true
           type: array
         rma_number:
-          description: >
-            An optional Return Merchandise Authorization number.  This field is
-            useful for return labels.  You can set it to any string value.
+          description: |
+            An optional Return Merchandise Authorization number.  This field is useful for return labels.  You can set it to any string value.
           nullable: true
           type: string
         service_code:
           allOf:
             - $ref: "#/components/schemas/service_code"
-          description: >
-            The [carrier
-            service](https://www.shipengine.com/docs/shipping/use-a-carrier-service/)
-            used to ship the package, such as `fedex_ground`,
-            `usps_first_class_mail`, `flat_rate_envelope`, etc.
+          description: |
+            The [carrier service](https://www.shipengine.com/docs/shipping/use-a-carrier-service/) used to ship the package, such as `fedex_ground`, `usps_first_class_mail`, `flat_rate_envelope`, etc.
           readOnly: true
         ship_date:
           allOf:
             - $ref: "#/components/schemas/date"
-          description: >
-            The date that the package was (or will be) shippped.  ShipEngine
-            will take the day of week into consideration. For example, if the
-            carrier does not operate on Sundays, then a package that would have
-            shipped on Sunday will ship on Monday instead.
+          description: |
+            The date that the package was (or will be) shippped.  ShipEngine will take the day of week into consideration. For example, if the carrier does not operate on Sundays, then a package that would have shipped on Sunday will ship on Monday instead.
           readOnly: true
         shipment:
           allOf:
@@ -6692,21 +6336,14 @@ components:
         shipment_cost:
           allOf:
             - $ref: "#/components/schemas/monetary_value"
-          description: >
-            The cost of shipping, delivery confirmation, and other carrier
-            charges.  This amount **does not** include insurance costs.
+          description: |
+            The cost of shipping, delivery confirmation, and other carrier charges.  This amount **does not** include insurance costs.
           readOnly: true
         shipment_id:
           allOf:
             - $ref: "#/components/schemas/se_id"
-          description: >
-            The shipment that this label is for.  ShipEngine can create a
-            shipment for you automatically when you [create a
-            label](https://www.shipengine.com/docs/labels/create-a-label/), or
-            you can [create your own
-            shipment](https://www.shipengine.com/docs/shipping/create-a-shipment/)
-            and then [use it to print a
-            label](https://www.shipengine.com/docs/labels/create-from-shipment/)
+          description: |
+            The shipment that this label is for.  ShipEngine can create a shipment for you automatically when you [create a label](https://www.shipengine.com/docs/labels/create-a-label/), or you can [create your own shipment](https://www.shipengine.com/docs/shipping/create-a-shipment/) and then [use it to print a label](https://www.shipengine.com/docs/labels/create-from-shipment/)
           readOnly: true
         status:
           allOf:
@@ -6715,20 +6352,16 @@ components:
         test_label:
           default: false
           deprecated: true
-          description: Indicate if this label is being used only for testing purposes. If
-            true, then no charge will be added to your account.
+          description: Indicate if this label is being used only for testing purposes. If true, then no charge will be added to your account.
           type: boolean
           writeOnly: true
         trackable:
-          description: >
-            Indicates whether the shipment is trackable, in which case the
-            `tracking_status` field will reflect the current status and each
-            package will have a `tracking_number`.
+          description: |
+            Indicates whether the shipment is trackable, in which case the `tracking_status` field will reflect the current status and each package will have a `tracking_number`.
           readOnly: true
           type: boolean
         tracking_number:
-          description: The tracking number for the package. Tracking number formats vary
-            across carriers.
+          description: The tracking number for the package. Tracking number formats vary across carriers.
           example: "782758401696"
           minLength: 1
           readOnly: true
@@ -6736,8 +6369,7 @@ components:
         tracking_status:
           allOf:
             - $ref: "#/components/schemas/tracking_status"
-          description: The current status of the package, such as `in_transit` or
-            `delivered`
+          description: The current status of the package, such as `in_transit` or `delivered`
           readOnly: true
         validate_address:
           allOf:
@@ -6745,18 +6377,15 @@ components:
           default: validate_and_clean
           writeOnly: true
         voided:
-          description: >
-            Indicates whether the label has been
-            [voided](https://www.shipengine.com/docs/labels/voiding/)
+          description: |
+            Indicates whether the label has been [voided](https://www.shipengine.com/docs/labels/voiding/)
           readOnly: true
           type: boolean
         voided_at:
           allOf:
             - $ref: "#/components/schemas/date_time"
-          description: >
-            The date and time that the label was
-            [voided](https://www.shipengine.com/docs/labels/voiding/), or `null`
-            if the label has not been voided
+          description: |
+            The date and time that the label was [voided](https://www.shipengine.com/docs/labels/voiding/), or `null` if the label has not been voided
           nullable: true
           readOnly: true
       title: label
@@ -6771,9 +6400,8 @@ components:
       type: string
     label_download:
       additionalProperties: false
-      description: >
-        Reference to the various downloadable file formats for the
-        generated label
+      description: |
+        Reference to the various downloadable file formats for the generated label
       properties:
         href:
           allOf:
@@ -6794,17 +6422,12 @@ components:
       title: label_download
       type: object
     label_download_type:
-      description: >
-        There are two different ways to [download a
-        label](https://www.shipengine.com/docs/labels/downloading/):
-
+      description: |
+        There are two different ways to [download a label](https://www.shipengine.com/docs/labels/downloading/):
 
         |Label Download Type | Description
-
         |--------------------|------------------------------
-
         |`url`               |You will receive a URL, which you can use to download the label in a separate request. The URL will remain valid for 90 days.<br><br>This is the default if `label_download_type` is unspecified.
-
         |`inline`            |You will receive the Base64-encoded label as part of the response. No need for a second request to download the label.
       enum:
         - url
@@ -6812,21 +6435,13 @@ components:
       title: label_download_type
       type: string
     label_format:
-      description: >
-        The possible file formats in which shipping labels can be
-        downloaded. We recommend `pdf` format because it is supported by all
-        carriers, whereas some carriers do not support the `png` or `zpl`
-        formats.
-
+      description: |
+        The possible file formats in which shipping labels can be downloaded. We recommend `pdf` format because it is supported by all carriers, whereas some carriers do not support the `png` or `zpl` formats.
 
         |Label Format  | Supported Carriers
-
         |--------------|-----------------------------------
-
         |`pdf`         | All carriers
-
         |`png`         | `fedex` <br> `stamps_com` <br> `ups` <br> `usps`
-
         |`zpl`         | `access_worldwide` <br> `apc` <br> `asendia` <br> `dhl_global_mail` <br> `dhl_express` <br> `dhl_express_australia` <br> `dhl_express_canada` <br> `dhl_express_worldwide` <br> `dhl_express_uk` <br> `dpd` <br> `endicia` <br> `fedex` <br> `fedex_uk` <br> `firstmile` <br> `globegistics` <br> `imex` <br> `newgistics` <br> `ontrac` <br> `rr_donnelley` <br> `stamps_com` <br> `ups` <br> `usps`
       enum:
         - pdf
@@ -6835,11 +6450,8 @@ components:
       title: label_format
       type: string
     label_layout:
-      description: >
-        The available layouts (sizes) in which shipping labels can be
-        downloaded.  The label format determines which sizes are supported.
-        `4x6` is supported for all label formats, whereas `letter` (8.5" x 11")
-        is only supported for `pdf` format.
+      description: |
+        The available layouts (sizes) in which shipping labels can be downloaded.  The label format determines which sizes are supported. `4x6` is supported for all label formats, whereas `letter` (8.5" x 11") is only supported for `pdf` format.
       enum:
         - 4x6
         - letter
@@ -6847,47 +6459,32 @@ components:
       type: string
     label_messages:
       additionalProperties: false
-      description: >
-        Custom messages to print on the shipping label for the
-        package.  These are typically used to print invoice numbers, product
-        numbers, or other internal reference numbers.  Not all carriers support
-        label messages. The number of lines and the maximum length of each line
-        also varies by carrier.
-
+      description: |
+        Custom messages to print on the shipping label for the package.  These are typically used to print invoice numbers, product numbers, or other internal reference numbers.  Not all carriers support label messages. The number of lines and the maximum length of each line also varies by carrier.
 
         |Carrier            |Max lines |Max line length
-
         |-------------------|----------|--------------------
-
         |USPS (Stamps.com)  |3         |60
-
         |FedEx              |3         |35 for the first line. 30 for additional lines.
-
         |UPS                |2         |35
-
         |OnTrac             |2         |25
       properties:
         reference1:
           default: null
-          description: >
-            The first line of the custom label message.  Some carriers may
-            prefix this line with something like "REF", "Reference", "Trx Ref
-            No.", etc.
+          description: |
+            The first line of the custom label message.  Some carriers may prefix this line with something like "REF", "Reference", "Trx Ref No.", etc.
           nullable: true
           type: string
         reference2:
           default: null
-          description: >
-            The second line of the custom label message.  Some carriers may
-            prefix this line with something like "INV", "Reference 2", "Trx Ref
-            No.", etc.
+          description: |
+            The second line of the custom label message.  Some carriers may prefix this line with something like "INV", "Reference 2", "Trx Ref No.", etc.
           nullable: true
           type: string
         reference3:
           default: null
-          description: >
-            The third line of the custom label message.  Some carriers may
-            prefix this line with something like "PO", "Reference 3", etc.
+          description: |
+            The third line of the custom label message.  Some carriers may prefix this line with something like "PO", "Reference 3", etc.
           nullable: true
           type: string
       required:
@@ -6897,22 +6494,14 @@ components:
       title: label_messages
       type: object
     label_status:
-      description: >
-        The possible statuses that a [shipping
-        label](https://www.shipengine.com/docs/labels/create-a-label/) can be
-        in.
-
+      description: |
+        The possible statuses that a [shipping label](https://www.shipengine.com/docs/labels/create-a-label/) can be in.
 
         |Status       |Description
-
         |:------------|:-----------------------------------------------------
-
         |`processing` |When labels are created in a [batch](https://www.shipengine.com/docs/labels/bulk/), it may take a few minutes for all of the labels in the batch to be created.  During this period, they will be in `processing` status.
-
         |`completed`  |The label was successfully created
-
         |`error`      |The label could not be created due to an error, such as an invalid delivery address
-
         |`voided`     |The label has been [voided](https://www.shipengine.com/docs/labels/voiding/)
       enum:
         - processing
@@ -7049,44 +6638,30 @@ components:
       description: A list label response body
       properties:
         labels:
-          description: >
-            The labels that matched the query criteria.  If no matching labels
-            were found, then this array is empty; otherwise, it contains one
-            page of results.  The last page of results may have fewer labels
-            than the `page_size`.
+          description: |
+            The labels that matched the query criteria.  If no matching labels were found, then this array is empty; otherwise, it contains one page of results.  The last page of results may have fewer labels than the `page_size`.
           items:
             additionalProperties: false
-            description: >
-              A label represents the physical sticker that you affix to a package
-              to ship it.  ShipEngine makes it easy for you to [create
-              labels](https://www.shipengine.com/docs/labels/create-a-label/)
-              and then download them in PDF, PNG, or ZPL format so you can print
-              them.
+            description: |
+              A label represents the physical sticker that you affix to a package to ship it.  ShipEngine makes it easy for you to [create labels](https://www.shipengine.com/docs/labels/create-a-label/) and then download them in PDF, PNG, or ZPL format so you can print them.
             properties:
               batch_id:
                 allOf:
                   - $ref: "#/components/schemas/se_id"
-                description: >
-                  If this label was created as part of a
-                  [batch](https://www.shipengine.com/docs/labels/bulk/), then
-                  this is the unique ID of that batch.
+                description: |
+                  If this label was created as part of a [batch](https://www.shipengine.com/docs/labels/bulk/), then this is the unique ID of that batch.
                 readOnly: true
               carrier_code:
                 allOf:
                   - $ref: "#/components/schemas/carrier_code"
-                description: >
-                  The [shipping
-                  carrier](https://www.shipengine.com/docs/carriers/setup/) who
-                  will ship the package, such as `fedex`, `dhl_express`,
-                  `stamps_com`, etc.
+                description: |
+                  The [shipping carrier](https://www.shipengine.com/docs/carriers/setup/) who will ship the package, such as `fedex`, `dhl_express`, `stamps_com`, etc.
                 readOnly: true
               carrier_id:
                 allOf:
                   - $ref: "#/components/schemas/se_id"
-                description: >
-                  The unique ID of the [carrier
-                  account](https://www.shipengine.com/docs/carriers/setup/) that
-                  was used to create this label
+                description: |
+                  The unique ID of the [carrier account](https://www.shipengine.com/docs/carriers/setup/) that was used to create this label
                 readOnly: true
               charge_event:
                 allOf:
@@ -7101,39 +6676,31 @@ components:
               form_download:
                 allOf:
                   - $ref: "#/components/schemas/link"
-                description: >
-                  The link to downlaod the customs form (a.k.a. commercial invoice)
-                  for this shipment, if any.  Forms are in PDF format. This
-                  field is null if the shipment does not require a customs form,
-                  or if the carrier does not support it.
+                description: |
+                  The link to downlaod the customs form (a.k.a. commercial invoice) for this shipment, if any.  Forms are in PDF format. This field is null if the shipment does not require a customs form, or if the carrier does not support it.
                 nullable: true
                 readOnly: true
               insurance_claim:
                 allOf:
                   - $ref: "#/components/schemas/link"
-                description: >
-                  The link to submit an insurance claim for the shipment.  This field
-                  is null if the shipment is not insured or if the insurance
-                  provider does not support online claim submission.
+                description: |
+                  The link to submit an insurance claim for the shipment.  This field is null if the shipment is not insured or if the insurance provider does not support online claim submission.
                 nullable: true
                 readOnly: true
               insurance_cost:
                 allOf:
                   - $ref: "#/components/schemas/monetary_value"
-                description: >
-                  The insurance cost for this package.  Add this to the
-                  `shipment_cost` field to get the total cost.
+                description: |
+                  The insurance cost for this package.  Add this to the `shipment_cost` field to get the total cost.
                 readOnly: true
               is_international:
-                description: >
-                  Indicates whether this is an international shipment.  That is, the
-                  originating country and destination country are different.
+                description: |
+                  Indicates whether this is an international shipment.  That is, the originating country and destination country are different.
                 readOnly: true
                 type: boolean
               is_return_label:
-                description: >
-                  Indicates whether this is a return label.  You may also want to set
-                  the `rma_number` so you know what is being returned.
+                description: |
+                  Indicates whether this is a return label.  You may also want to set the `rma_number` so you know what is being returned.
                 type: boolean
               label_download:
                 allOf:
@@ -7148,56 +6715,41 @@ components:
                 allOf:
                   - $ref: "#/components/schemas/label_format"
                 default: pdf
-                description: >
-                  The file format that you want the label to be in.  We recommend
-                  `pdf` format because it is supported by all carriers, whereas
-                  some carriers do not support the `png` or `zpl` formats.
+                description: |
+                  The file format that you want the label to be in.  We recommend `pdf` format because it is supported by all carriers, whereas some carriers do not support the `png` or `zpl` formats.
               label_id:
                 allOf:
                   - $ref: "#/components/schemas/se_id"
-                description: >
-                  A string that uniquely identifies the label. This ID is generated
-                  by ShipEngine when the label is created.
+                description: |
+                  A string that uniquely identifies the label. This ID is generated by ShipEngine when the label is created.
                 readOnly: true
               label_image_id:
                 allOf:
                   - $ref: "#/components/schemas/image_id"
-                description: The label image resource that was used to create a custom label
-                  image.
+                description: The label image resource that was used to create a custom label image.
                 nullable: true
               label_layout:
                 allOf:
                   - $ref: "#/components/schemas/label_layout"
                 default: 4x6
-                description: >
-                  The layout (size) that you want the label to be in.  The
-                  `label_format` determines which sizes are allowed.  `4x6` is
-                  supported for all label formats, whereas `letter` (8.5" x 11")
-                  is only supported for `pdf` format.
+                description: |
+                  The layout (size) that you want the label to be in.  The `label_format` determines which sizes are allowed.  `4x6` is supported for all label formats, whereas `letter` (8.5" x 11") is only supported for `pdf` format.
               outbound_label_id:
                 allOf:
                   - $ref: "#/components/schemas/se_id"
-                description: >
-                  The `label_id` of the original (outgoing) label that the return
-                  label is for. This associates the two labels together, which
-                  is
-
+                description: |
+                  The `label_id` of the original (outgoing) label that the return label is for. This associates the two labels together, which is
                   required by some carriers.
                 writeOnly: true
               package_code:
                 allOf:
                   - $ref: "#/components/schemas/package_code"
-                description: >
-                  The [package
-                  type](https://www.shipengine.com/docs/reference/list-carrier-packages/),
-                  such as `thick_envelope`, `small_flat_rate_box`,
-                  `large_package`, etc.  The code `package` indicates a custom
-                  or unknown package type.
+                description: |
+                  The [package type](https://www.shipengine.com/docs/reference/list-carrier-packages/), such as `thick_envelope`, `small_flat_rate_box`, `large_package`, etc.  The code `package` indicates a custom or unknown package type.
                 readOnly: true
               packages:
-                description: >
+                description: |
                   The label's package(s).
-
 
                   > **Note:** Some carriers only allow one package per label. If you attempt to create a multi-package label for a carrier that doesn't allow it, an error will be returned.
                 items:
@@ -7205,28 +6757,21 @@ components:
                 readOnly: true
                 type: array
               rma_number:
-                description: >
-                  An optional Return Merchandise Authorization number.  This field is
-                  useful for return labels.  You can set it to any string value.
+                description: |
+                  An optional Return Merchandise Authorization number.  This field is useful for return labels.  You can set it to any string value.
                 nullable: true
                 type: string
               service_code:
                 allOf:
                   - $ref: "#/components/schemas/service_code"
-                description: >
-                  The [carrier
-                  service](https://www.shipengine.com/docs/shipping/use-a-carrier-service/)
-                  used to ship the package, such as `fedex_ground`,
-                  `usps_first_class_mail`, `flat_rate_envelope`, etc.
+                description: |
+                  The [carrier service](https://www.shipengine.com/docs/shipping/use-a-carrier-service/) used to ship the package, such as `fedex_ground`, `usps_first_class_mail`, `flat_rate_envelope`, etc.
                 readOnly: true
               ship_date:
                 allOf:
                   - $ref: "#/components/schemas/date"
-                description: >
-                  The date that the package was (or will be) shippped. ShipEngine
-                  will take the day of week into consideration. For example, if
-                  the carrier does not operate on Sundays, then a package that
-                  would have shipped on Sunday will ship on Monday instead.
+                description: |
+                  The date that the package was (or will be) shippped. ShipEngine will take the day of week into consideration. For example, if the carrier does not operate on Sundays, then a package that would have shipped on Sunday will ship on Monday instead.
                 readOnly: true
               shipment:
                 allOf:
@@ -7236,21 +6781,14 @@ components:
               shipment_cost:
                 allOf:
                   - $ref: "#/components/schemas/monetary_value"
-                description: >
-                  The cost of shipping, delivery confirmation, and other carrier
-                  charges.  This amount **does not** include insurance costs.
+                description: |
+                  The cost of shipping, delivery confirmation, and other carrier charges.  This amount **does not** include insurance costs.
                 readOnly: true
               shipment_id:
                 allOf:
                   - $ref: "#/components/schemas/se_id"
-                description: >
-                  The shipment that this label is for.  ShipEngine can create a
-                  shipment for you automatically when you [create a
-                  label](https://www.shipengine.com/docs/labels/create-a-label/),
-                  or you can [create your own
-                  shipment](https://www.shipengine.com/docs/shipping/create-a-shipment/)
-                  and then [use it to print a
-                  label](https://www.shipengine.com/docs/labels/create-from-shipment/)
+                description: |
+                  The shipment that this label is for.  ShipEngine can create a shipment for you automatically when you [create a label](https://www.shipengine.com/docs/labels/create-a-label/), or you can [create your own shipment](https://www.shipengine.com/docs/shipping/create-a-shipment/) and then [use it to print a label](https://www.shipengine.com/docs/labels/create-from-shipment/)
                 readOnly: true
               status:
                 allOf:
@@ -7259,20 +6797,16 @@ components:
               test_label:
                 default: false
                 deprecated: true
-                description: Indicate if this label is being used only for testing purposes. If
-                  true, then no charge will be added to your account.
+                description: Indicate if this label is being used only for testing purposes. If true, then no charge will be added to your account.
                 type: boolean
                 writeOnly: true
               trackable:
-                description: >
-                  Indicates whether the shipment is trackable, in which case the
-                  `tracking_status` field will reflect the current status and
-                  each package will have a `tracking_number`.
+                description: |
+                  Indicates whether the shipment is trackable, in which case the `tracking_status` field will reflect the current status and each package will have a `tracking_number`.
                 readOnly: true
                 type: boolean
               tracking_number:
-                description: The tracking number for the package. Tracking number formats vary
-                  across carriers.
+                description: The tracking number for the package. Tracking number formats vary across carriers.
                 example: "782758401696"
                 minLength: 1
                 readOnly: true
@@ -7280,8 +6814,7 @@ components:
               tracking_status:
                 allOf:
                   - $ref: "#/components/schemas/tracking_status"
-                description: The current status of the package, such as `in_transit` or
-                  `delivered`
+                description: The current status of the package, such as `in_transit` or `delivered`
                 readOnly: true
               validate_address:
                 allOf:
@@ -7289,18 +6822,15 @@ components:
                 default: validate_and_clean
                 writeOnly: true
               voided:
-                description: >
-                  Indicates whether the label has been
-                  [voided](https://www.shipengine.com/docs/labels/voiding/)
+                description: |
+                  Indicates whether the label has been [voided](https://www.shipengine.com/docs/labels/voiding/)
                 readOnly: true
                 type: boolean
               voided_at:
                 allOf:
                   - $ref: "#/components/schemas/date_time"
-                description: >
-                  The date and time that the label was
-                  [voided](https://www.shipengine.com/docs/labels/voiding/), or
-                  `null` if the label has not been voided
+                description: |
+                  The date and time that the label was [voided](https://www.shipengine.com/docs/labels/voiding/), or `null` if the label has not been voided
                 nullable: true
                 readOnly: true
             title: label
@@ -7489,10 +7019,8 @@ components:
       type: array
     manifest:
       additionalProperties: false
-      description: >
-        Used for combining packages into one scannable form that a carrier
-        can use when picking up a large
-
+      description: |
+        Used for combining packages into one scannable form that a carrier can use when picking up a large
         number of shipments
       properties:
         carrier_id:
@@ -7590,9 +7118,8 @@ components:
       type: object
     monetary_value:
       additionalProperties: false
-      description: >
-        A monetary value, such as the price of a shipping label, the
-        insured value of a package, or an account balance.
+      description: |
+        A monetary value, such as the price of a shipping label, the insured value of a package, or an account balance.
       properties:
         amount:
           description: The monetary amount, in the specified currency.
@@ -7616,12 +7143,10 @@ components:
       type: string
     normalized_entity:
       additionalProperties: true
-      description: >
+      description: |
         The normalized value of the entity.
 
-
         Most entity results have a `value` field, which is the normalized value of the entity.  For example, if the substring "john doe" was recognized as a "person" entity, then the value might be normalized to have proper capitalization (e.g. "John Doe").  Or if the substring "ft worth" was recognized as a "city" entity, then the value might be normalized to "Fort Worth".
-
 
         Some entities have other information in addition to, or instead of a `value`.  For example, a "dimensions" entity will have separate fields for `length`, `width`, `height`, and `unit`.
       properties: {}
@@ -7629,16 +7154,14 @@ components:
       type: object
     optional_link:
       additionalProperties: false
-      description: A link to a related resource, or an empty object if there is no
-        resource to link to
+      description: A link to a related resource, or an empty object if there is no resource to link to
       properties:
         href:
           allOf:
             - $ref: "#/components/schemas/url"
           description: The URL of the linked resource, if any
         type:
-          description: The type of resource, or the type of relationship to the parent
-            resource
+          description: The type of resource, or the type of relationship to the parent resource
           minLength: 1
           type: string
       title: optional_link
@@ -7670,8 +7193,7 @@ components:
       type: string
     package:
       additionalProperties: false
-      description: A package associated with a [shipping
-        label](https://www.shipengine.com/docs/labels/create-a-label/)
+      description: A package associated with a [shipping label](https://www.shipengine.com/docs/labels/create-a-label/)
       properties:
         dimensions:
           allOf:
@@ -7687,26 +7209,21 @@ components:
           default:
             - amount: 0
               currency: usd
-          description: >
-            The insured value of the package.  Requires the
-            `insurance_provider` field of the shipment to be set.
+          description: |
+            The insured value of the package.  Requires the `insurance_provider` field of the shipment to be set.
         label_messages:
           allOf:
             - $ref: "#/components/schemas/label_messages"
         package_code:
           allOf:
             - $ref: "#/components/schemas/package_code"
-          description: >
-            The [package
-            type](https://www.shipengine.com/docs/reference/list-carrier-packages/),
-            such as `thick_envelope`, `small_flat_rate_box`, `large_package`,
-            etc.  The code `package` indicates a custom or unknown package type.
+          description: |
+            The [package type](https://www.shipengine.com/docs/reference/list-carrier-packages/), such as `thick_envelope`, `small_flat_rate_box`, `large_package`, etc.  The code `package` indicates a custom or unknown package type.
         tracking_number:
           allOf:
             - $ref: "#/components/schemas/tracking_number"
-          description: >
-            The tracking number for the package.  The format depends on the
-            carrier.
+          description: |
+            The tracking number for the package.  The format depends on the carrier.
           readOnly: true
         weight:
           allOf:
@@ -7717,11 +7234,8 @@ components:
       title: package
       type: object
     package_code:
-      description: >
-        A [package
-        type](https://www.shipengine.com/docs/reference/list-carrier-packages/),
-        such as `thick_envelope`, `small_flat_rate_box`, `large_package`, etc.
-        Use the code `package` for custom or unknown package types.
+      description: |
+        A [package type](https://www.shipengine.com/docs/reference/list-carrier-packages/), such as `thick_envelope`, `small_flat_rate_box`, `large_package`, etc. Use the code `package` for custom or unknown package types.
       example: small_flat_rate_box
       pattern: ^[a-z0-9]+(_[a-z0-9]+)*$
       title: package_code
@@ -7767,29 +7281,19 @@ components:
       type: object
     paged_list_response_body:
       additionalProperties: true
-      description: >
-        Many ShipEngine endpoints return a paged list of items.  In
-        addition to the returned items, these responses also include information
-        about the total number of items, the number of pages of results, and
-        URLs of other pages of results.
+      description: |
+        Many ShipEngine endpoints return a paged list of items.  In addition to the returned items, these responses also include information about the total number of items, the number of pages of results, and URLs of other pages of results.
       properties:
         links:
           allOf:
             - $ref: "#/components/schemas/pagination_link"
         page:
-          description: The current page number of results.  For example, if there are 80
-            results, and the page size is 25, then `page` could be 1, 2, 3, or
-            4.  The first three pages would contain 25 items each, and the
-            fourth page would contain the five remaining items.
+          description: The current page number of results.  For example, if there are 80 results, and the page size is 25, then `page` could be 1, 2, 3, or 4.  The first three pages would contain 25 items each, and the fourth page would contain the five remaining items.
           example: 1
           minimum: 1
           type: integer
         pages:
-          description: The total number of pages of results.  For example, if there are 80
-            results, and the page size is 25, then `pages` would be 4.  The
-            first three pages would contain 25 items each, and the fourth page
-            would contain the five remaining items.  If there are no results,
-            then `pages` will be zero.
+          description: The total number of pages of results.  For example, if there are 80 results, and the page size is 25, then `pages` would be 4.  The first three pages would contain 25 items each, and the fourth page would contain the five remaining items.  If there are no results, then `pages` will be zero.
           example: 4
           minimum: 0
           type: integer
@@ -7812,29 +7316,23 @@ components:
         first:
           allOf:
             - $ref: "#/components/schemas/link"
-          description: >
-            The link to the first page of results.  This object will _always_
-            have an `href` field. If there are no results, then the first page
-            will contain an empty array of items.
+          description: |
+            The link to the first page of results.  This object will _always_ have an `href` field. If there are no results, then the first page will contain an empty array of items.
         last:
           allOf:
             - $ref: "#/components/schemas/link"
-          description: >
-            The link to the final page of results.  This object will _always_
-            have an `href` field. If there are no results, then the final page
-            will contain an empty array of items.
+          description: |
+            The link to the final page of results.  This object will _always_ have an `href` field. If there are no results, then the final page will contain an empty array of items.
         next:
           allOf:
             - $ref: "#/components/schemas/optional_link"
-          description: >
-            The link to the next page of results.  The `href` field will only
-            be set when the `page` is less than `pages`.
+          description: |
+            The link to the next page of results.  The `href` field will only be set when the `page` is less than `pages`.
         prev:
           allOf:
             - $ref: "#/components/schemas/optional_link"
-          description: >
-            The link to the previous page of results.  The `href` field will
-            only be set when the `page` is 2 or greater.
+          description: |
+            The link to the previous page of results.  The `href` field will only be set when the `page` is 2 or greater.
       required:
         - first
         - last
@@ -7844,25 +7342,17 @@ components:
       type: object
     parse_address_request_body:
       additionalProperties: false
-      description: >
-        The only required field is `text`, which is the text to be parsed.
-        You can optionally also provide an `address` containing already-known
-        values. For example, you may already know the recipient's name, city,
-        and country, and only want to parse the street address into separate
-        lines.
+      description: |
+        The only required field is `text`, which is the text to be parsed. You can optionally also provide an `address` containing already-known values. For example, you may already know the recipient's name, city, and country, and only want to parse the street address into separate lines.
       properties:
         address:
           allOf:
             - $ref: "#/components/schemas/partial_address"
-          description: >
-            You can optionally provide any already-known address values. For
-            example, you may already know the recipient's name, city, and
-            country, and only want to parse the street address into separate
-            lines.
+          description: |
+            You can optionally provide any already-known address values. For example, you may already know the recipient's name, city, and country, and only want to parse the street address into separate lines.
         text:
           description: The unstructured text that contains address-related entities
-          example: Margie McMiller at 3800 North Lamar suite 200 in austin, tx.  The zip
-            code there is 78652.
+          example: Margie McMiller at 3800 North Lamar suite 200 in austin, tx.  The zip code there is 78652.
           minLength: 1
           type: string
       required:
@@ -7871,34 +7361,26 @@ components:
       type: object
     parse_address_response_body:
       additionalProperties: false
-      description: >
-        The parsed address, as well as a confidence score and a list of all
-        the entities that were recognized in the text.
+      description: |
+        The parsed address, as well as a confidence score and a list of all the entities that were recognized in the text.
       properties:
         address:
           allOf:
             - $ref: "#/components/schemas/partial_address"
-          description: >
-            The parsed address.  This address may not be complete, depending on
-            how much information was included in the text and how confident the
-            API is about each recognized entity.
-
+          description: |
+            The parsed address.  This address may not be complete, depending on how much information was included in the text and how confident the API is about each recognized entity.
 
             > **Note:** The address-recognition API does not currently perform any validation of the parsed address, so we recommend that you use the [address-validation API](https://www.shipengine.com/docs/addresses/validation/) to ensure that the address is correct.
         entities:
-          description: >
-            All of the entities that were recognized in the text. An "entity"
-            is a single piece of data, such as a city, a postal code, or an
-            address line.  Each entity includes the original text and the parsed
-            value.
+          description: |
+            All of the entities that were recognized in the text. An "entity" is a single piece of data, such as a city, a postal code, or an address line.  Each entity includes the original text and the parsed value.
           items:
             $ref: "#/components/schemas/recognized_entity"
           minItems: 0
           type: array
         score:
-          description: >
-            A confidence score between zero and one that indicates how certain
-            the API is that it understood the text.
+          description: |
+            A confidence score between zero and one that indicates how certain the API is that it understood the text.
           format: double
           maximum: 1
           minimum: 0
@@ -7911,28 +7393,18 @@ components:
       type: object
     parse_shipment_request_body:
       additionalProperties: false
-      description: >
-        The only required field is `text`, which is the text to be parsed.
-        You can optionally also provide a `shipment` containing any
-        already-known values. For example, you probably already know the
-        `ship_from` address, and you may also already know what carrier and
-        service you want to use.
+      description: |
+        The only required field is `text`, which is the text to be parsed. You can optionally also provide a `shipment` containing any already-known values. For example, you probably already know the `ship_from` address, and you may also already know what carrier and service you want to use.
       properties:
         shipment:
           allOf:
             - $ref: "#/components/schemas/partial_shipment"
-          description: >
-            You can optionally provide a `shipment` object containing any
-            already-known values. For example, you probably already know the
-            `ship_from` address, and you may also already know what carrier and
-            service you want to use.
+          description: |
+            You can optionally provide a `shipment` object containing any already-known values. For example, you probably already know the `ship_from` address, and you may also already know what carrier and service you want to use.
         text:
           description: The unstructured text that contains shipping-related entities
-          example: >
-            I have a 4oz package that's 5x10x14in, and I need to ship it to Margie
-            McMiller at 3800 North Lamar suite 200 in austin, tx 78652. Please
-            send it via USPS first class and require an adult signature. It also
-            needs to be insured for $400.
+          example: |
+            I have a 4oz package that's 5x10x14in, and I need to ship it to Margie McMiller at 3800 North Lamar suite 200 in austin, tx 78652. Please send it via USPS first class and require an adult signature. It also needs to be insured for $400.
           minLength: 1
           type: string
       required:
@@ -7941,24 +7413,19 @@ components:
       type: object
     parse_shipment_response_body:
       additionalProperties: false
-      description: >
-        The parsed shipment, as well as a confidence score and a list of
-        all the shipping entities that were recognized in the text.
+      description: |
+        The parsed shipment, as well as a confidence score and a list of all the shipping entities that were recognized in the text.
       properties:
         entities:
-          description: >
-            All of the entities that were recognized in the text. An "entity"
-            is a single piece of data, such as a city, a postal code, a carrier
-            name, or a package weight.  Each entity includes the original text
-            and the parsed value.
+          description: |
+            All of the entities that were recognized in the text. An "entity" is a single piece of data, such as a city, a postal code, a carrier name, or a package weight.  Each entity includes the original text and the parsed value.
           items:
             $ref: "#/components/schemas/recognized_entity"
           minItems: 0
           type: array
         score:
-          description: >
-            A confidence score between zero and one that indicates how certain
-            the API is that it understood the text.
+          description: |
+            A confidence score between zero and one that indicates how certain the API is that it understood the text.
           format: double
           maximum: 1
           minimum: 0
@@ -7966,11 +7433,8 @@ components:
         shipment:
           allOf:
             - $ref: "#/components/schemas/partial_shipment"
-          description: >
-            The parsed shipment.  This shipment may not be complete, depending
-            on how much information was included in the text and how confident
-            the API is about each recognized entity.
-
+          description: |
+            The parsed shipment.  This shipment may not be complete, depending on how much information was included in the text and how confident the API is about each recognized entity.
 
             > **Note:** The shipment-recognition API does not currently perform any validation of the parsed addresses, so we recommend that you use the [address-validation API](https://www.shipengine.com/docs/addresses/validation/) to ensure that the addresses are correct.
       required:
@@ -7984,24 +7448,21 @@ components:
       description: A complete or partial mailing address.
       properties:
         address_line1:
-          description: >
-            The first line of the street address.  For some addresses, this may
-            be the only line.  Other addresses may require 2 or 3 lines.
+          description: |
+            The first line of the street address.  For some addresses, this may be the only line.  Other addresses may require 2 or 3 lines.
           example: 1999 Bishop Grandin Blvd.
           minLength: 1
           type: string
         address_line2:
-          description: >
-            The second line of the street address.  For some addresses, this
-            line may not be needed.
+          description: |
+            The second line of the street address.  For some addresses, this line may not be needed.
           example: Unit 408
           minLength: 1
           nullable: true
           type: string
         address_line3:
-          description: >
-            The third line of the street address.  For some addresses, this
-            line may not be needed.
+          description: |
+            The third line of the street address.  For some addresses, this line may not be needed.
           example: "Building #7"
           minLength: 1
           nullable: true
@@ -8018,9 +7479,8 @@ components:
           minLength: 1
           type: string
         company_name:
-          description: >
-            If this is a business address, then the company name should be
-            specified here.
+          description: |
+            If this is a business address, then the company name should be specified here.
           example: The Home Depot
           minLength: 1
           nullable: true
@@ -8028,21 +7488,18 @@ components:
         country_code:
           allOf:
             - $ref: "#/components/schemas/country_code"
-          description: >
-            The two-letter [ISO 3166-1 country
-            code](https://en.wikipedia.org/wiki/ISO_3166-1)
+          description: |
+            The two-letter [ISO 3166-1 country code](https://en.wikipedia.org/wiki/ISO_3166-1)
         name:
-          description: >
-            The name of a contact person at this address.  This field may be
-            set instead of - or in addition to - the `company_name` field.
+          description: |
+            The name of a contact person at this address.  This field may be set instead of - or in addition to - the `company_name` field.
           example: John Doe
           minLength: 1
           nullable: true
           type: string
         phone:
-          description: >
-            The phone number of a contact person at this address.  The format
-            of this phone number varies depending on the country.
+          description: |
+            The phone number of a contact person at this address.  The format of this phone number varies depending on the country.
           example: +1 204-253-9411 ext. 123
           minLength: 1
           nullable: true
@@ -8051,10 +7508,8 @@ components:
           allOf:
             - $ref: "#/components/schemas/postal_code"
         state_province:
-          description: >
-            The state or province.  For some countries (including the U.S.)
-            only abbreviations are allowed.  Other countries allow the full name
-            or abbreviation.
+          description: |
+            The state or province.  For some countries (including the U.S.) only abbreviations are allowed.  Other countries allow the full name or abbreviation.
           example: Manitoba
           minLength: 1
           type: string
@@ -8062,10 +7517,8 @@ components:
       type: object
     partial_shipment:
       additionalProperties: false
-      description: >
-        The information necessary to ship a package, such as the origin,
-        the destination, the carrier service, and the package dimensions and
-        weight.
+      description: |
+        The information necessary to ship a package, such as the origin, the destination, the carrier service, and the package dimensions and weight.
       properties:
         advanced_options:
           allOf:
@@ -8089,19 +7542,16 @@ components:
           allOf:
             - $ref: "#/components/schemas/international_shipment_options"
           default: null
-          description: >
-            Customs information.  This is usually only needed for international
-            shipments.
+          description: |
+            Customs information.  This is usually only needed for international shipments.
           nullable: true
         external_order_id:
           description: ID that the Order Source assigned
           nullable: true
           type: string
         external_shipment_id:
-          description: >
-            You can optionally use this field to store your own identifier for
-            this shipment.
-
+          description: |
+            You can optionally use this field to store your own identifier for this shipment.
 
             > **Warning:** The `external_shipment_id` is limited to 50 characters. Any additional characters will be truncated.
           maxLength: 50
@@ -8111,15 +7561,12 @@ components:
           allOf:
             - $ref: "#/components/schemas/insurance_provider"
           default: none
-          description: >
-            The insurance provider to use for any insured packages in the
-            shipment.
+          description: |
+            The insurance provider to use for any insured packages in the shipment.
         items:
           default: []
-          description: >
-            Describe the packages included in this shipment as related to
-            potential metadata that was imported from
-
+          description: |
+            Describe the packages included in this shipment as related to potential metadata that was imported from
             external order sources
           items:
             allOf:
@@ -8134,9 +7581,8 @@ components:
           allOf:
             - $ref: "#/components/schemas/order_source_name"
         packages:
-          description: >
+          description: |
             The packages in the shipment.
-
 
             > **Note:** Some carriers only allow one package per shipment.  If you attempt to create a multi-package shipment for a carrier that doesn't allow it, an error will be returned.
           items:
@@ -8147,34 +7593,23 @@ components:
         return_to:
           allOf:
             - $ref: "#/components/schemas/address"
-          description: >
-            The return address for this shipment.  Defaults to the `ship_from`
-            address.
+          description: |
+            The return address for this shipment.  Defaults to the `ship_from` address.
         service_code:
           allOf:
             - $ref: "#/components/schemas/service_code"
-          description: >
-            The [carrier
-            service](https://www.shipengine.com/docs/shipping/use-a-carrier-service/)
-            used to ship the package, such as `fedex_ground`,
-            `usps_first_class_mail`, `flat_rate_envelope`, etc.
+          description: |
+            The [carrier service](https://www.shipengine.com/docs/shipping/use-a-carrier-service/) used to ship the package, such as `fedex_ground`, `usps_first_class_mail`, `flat_rate_envelope`, etc.
         ship_date:
           allOf:
             - $ref: "#/components/schemas/date"
-          description: >
-            The date that the shipment was (or will be) shippped.  ShipEngine
-            will take the day of week into consideration. For example, if the
-            carrier does not operate on Sundays, then a package that would have
-            shipped on Sunday will ship on Monday instead.
+          description: |
+            The date that the shipment was (or will be) shippped.  ShipEngine will take the day of week into consideration. For example, if the carrier does not operate on Sundays, then a package that would have shipped on Sunday will ship on Monday instead.
         ship_from:
           allOf:
             - $ref: "#/components/schemas/address"
-          description: >
-            The shipment's origin address. If you frequently ship from the same
-            location, consider [creating a
-            warehouse](https://www.shipengine.com/docs/reference/create-warehouse/).
-            Then you can simply specify the `warehouse_id` rather than the
-            complete address each time.
+          description: |
+            The shipment's origin address. If you frequently ship from the same location, consider [creating a warehouse](https://www.shipengine.com/docs/reference/create-warehouse/). Then you can simply specify the `warehouse_id` rather than the complete address each time.
         ship_to:
           allOf:
             - $ref: "#/components/schemas/address"
@@ -8192,9 +7627,8 @@ components:
           readOnly: true
         tags:
           default: []
-          description: >
-            Arbitrary tags associated with this shipment.  Tags can be used to
-            categorize shipments, and shipments can be queried by their tags.
+          description: |
+            Arbitrary tags associated with this shipment.  Tags can be used to categorize shipments, and shipments can be queried by their tags.
           items:
             allOf:
               - $ref: "#/components/schemas/tag"
@@ -8210,11 +7644,8 @@ components:
           allOf:
             - $ref: "#/components/schemas/se_id"
           default: null
-          description: >
-            The
-            [warehouse](https://www.shipengine.com/docs/shipping/ship-from-a-warehouse/)
-            that the shipment is being shipped from.  Either `warehouse_id` or
-            `ship_from` must be specified.
+          description: |
+            The [warehouse](https://www.shipengine.com/docs/shipping/ship-from-a-warehouse/) that the shipment is being shipped from.  Either `warehouse_id` or `ship_from` must be specified.
           nullable: true
       title: partial_shipment
       type: object
@@ -8309,10 +7740,8 @@ components:
           description: The confirmation amount
           readOnly: true
         delivery_days:
-          description: >
-            The number of days estimated for delivery, this will show the
-            _actual_ deliverty
-
+          description: |
+            The number of days estimated for delivery, this will show the _actual_ deliverty
             time if for example, the package gets shipped on a Friday
           example: 5
           format: int32
@@ -8391,8 +7820,7 @@ components:
         tax_amount:
           allOf:
             - $ref: "#/components/schemas/monetary_value"
-          description: Tariff and additional taxes associated with an international
-            shipment.
+          description: Tariff and additional taxes associated with an international shipment.
           readOnly: true
         trackable:
           description: Indicates if rate is trackable
@@ -8413,10 +7841,8 @@ components:
           readOnly: true
           type: array
         zone:
-          description: >
-            Certain carriers base [their
-            rates](https://blog.stamps.com/2017/09/08/usps-postal-zones/) off of
-
+          description: |
+            Certain carriers base [their rates](https://blog.stamps.com/2017/09/08/usps-postal-zones/) off of
             custom zones that vary depending upon the ship_to and ship_from location
           example: 6
           format: int32
@@ -8677,35 +8103,28 @@ components:
       type: object
     recognized_entity:
       additionalProperties: false
-      description: >
-        An entity is a single piece of data that was recognized in
-        unstructured text.  For example, a city, a postal code, package
-        dimensions, insured value, etc.  Each entity includes the original text
-        and the parsed value.
+      description: |
+        An entity is a single piece of data that was recognized in unstructured text.  For example, a city, a postal code, package dimensions, insured value, etc.  Each entity includes the original text and the parsed value.
       properties:
         end_index:
-          description: The index of the last character of this entity within the original
-            text
+          description: The index of the last character of this entity within the original text
           minimum: 0
           type: integer
         result:
           $ref: "#/components/schemas/normalized_entity"
         score:
-          description: >
-            A confidence score between zero and one that indicates how certain
-            the API is that it correctly recognized this entity
+          description: |
+            A confidence score between zero and one that indicates how certain the API is that it correctly recognized this entity
           format: double
           maximum: 1
           minimum: 0
           type: number
         start_index:
-          description: The index of the first character of this entity within the original
-            text
+          description: The index of the first character of this entity within the original text
           minimum: 0
           type: integer
         text:
-          description: The substring from the original text that was recognized as this
-            entity
+          description: The substring from the original text that was recognized as this entity
           minLength: 1
           type: string
         type:
@@ -8729,8 +8148,7 @@ components:
       type: object
     response_message:
       additionalProperties: false
-      description: A response message that displays when additional info is needed for
-        an address validation request.
+      description: A response message that displays when additional info is needed for an address validation request.
       properties:
         code:
           allOf:
@@ -8753,8 +8171,7 @@ components:
       title: response_message
       type: object
     se_id:
-      description: A string that uniquely identifies a ShipEngine resource, such as a
-        carrier, label, shipment, etc.
+      description: A string that uniquely identifies a ShipEngine resource, such as a carrier, label, shipment, etc.
       example: se-28529731
       maxLength: 25
       minLength: 1
@@ -8800,11 +8217,8 @@ components:
       title: service
       type: object
     service_code:
-      description: >
-        A [carrier
-        service](https://www.shipengine.com/docs/shipping/use-a-carrier-service/),
-        such as `fedex_ground`, `usps_first_class_mail`, `flat_rate_envelope`,
-        etc.
+      description: |
+        A [carrier service](https://www.shipengine.com/docs/shipping/use-a-carrier-service/), such as `fedex_ground`, `usps_first_class_mail`, `flat_rate_envelope`, etc.
       example: usps_first_class_mail
       pattern: ^[a-z0-9]+(_[a-z0-9-]+)* ?$
       title: service_code
@@ -8813,11 +8227,8 @@ components:
       additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/partial_shipment"
-      description: >
-        The information necessary to ship a package, such as the origin,
-        the destination, the carrier service, and the package dimensions and
-        weight.
-
+      description: |
+        The information necessary to ship a package, such as the origin, the destination, the carrier service, and the package dimensions and weight.
 
         > **Note:** Either `ship_from` or `warehouse_id` must be set.
       required:
@@ -8996,12 +8407,8 @@ components:
       type: string
     tag:
       additionalProperties: false
-      description: >
-        Tags are arbitrary strings that you can use to categorize
-        shipments. For example, you may want to use tags to distinguish between
-        domestic and international shipments, or between insured and uninsured
-        shipments.  Or maybe you want to create a tag for each of your customers
-        so you can easily retrieve every shipment for a customer.
+      description: |
+        Tags are arbitrary strings that you can use to categorize shipments. For example, you may want to use tags to distinguish between domestic and international shipments, or between insured and uninsured shipments.  Or maybe you want to create a tag for each of your customers so you can easily retrieve every shipment for a customer.
       properties:
         name:
           description: The tag name.
@@ -9013,12 +8420,8 @@ components:
       title: tag
       type: object
     tag_name:
-      description: >
-        Tags are arbitrary strings that you can use to categorize
-        shipments. For example, you may want to use tags to distinguish between
-        domestic and international shipments, or between insured and uninsured
-        shipments.  Or maybe you want to create a tag for each of your customers
-        so you can easily retrieve every shipment for a customer.
+      description: |
+        Tags are arbitrary strings that you can use to categorize shipments. For example, you may want to use tags to distinguish between domestic and international shipments, or between insured and uninsured shipments.  Or maybe you want to create a tag for each of your customers so you can easily retrieve every shipment for a customer.
       example: Fragile
       minLength: 1
       title: tag_name
@@ -9049,8 +8452,7 @@ components:
         carrier_occurred_at:
           allOf:
             - $ref: "#/components/schemas/date_time"
-          description: Carrier timestamp for the event, it is assumed to be the local time
-            of where the event occurred.
+          description: Carrier timestamp for the event, it is assumed to be the local time of where the event occurred.
         city_locality:
           description: City locality
           example: AUSTIN
@@ -9139,8 +8541,7 @@ components:
           allOf:
             - $ref: "#/components/schemas/date_time"
         events:
-          description: The events that have occured during the lifetime of this tracking
-            number.
+          description: The events that have occured during the lifetime of this tracking number.
           items:
             $ref: "#/components/schemas/track_event"
           readOnly: true
@@ -9559,12 +8960,8 @@ components:
       type: string
   securitySchemes:
     api_key:
-      description: >
-        To authenticate yourself to ShipEngine, you need to include an
-        `API-Key` header in each API call. If you don't include a key when
-        making an API request, or if you use an incorrect or expired key, then
-        ShipEngine will respond with a `401 Unauthorized` error.
-
+      description: |
+        To authenticate yourself to ShipEngine, you need to include an `API-Key` header in each API call. If you don't include a key when making an API request, or if you use an incorrect or expired key, then ShipEngine will respond with a `401 Unauthorized` error.
 
         Learn more about API keys in our [authentication guide](https://www.shipengine.com/docs/auth/).
       in: header

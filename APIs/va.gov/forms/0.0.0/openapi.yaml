@@ -13,56 +13,35 @@ servers:
 info:
   contact:
     name: va.gov
-  description: >
-    Use the VA Forms API to search for VA forms, get the form's PDF
-    link and metadata, and check for new versions.
-
+  description: |
+    Use the VA Forms API to search for VA forms, get the form's PDF link and metadata, and check for new versions.
 
     Visit our VA Lighthouse [Contact Us page](https://developer.va.gov/support) for further assistance.
 
-
     ## Background
-
     This API offers an efficient way to stay up-to-date with the latest VA forms and information. The forms information listed on VA.gov matches the information returned by this API.
-
     - Search by form number, keyword, or title
-
     - Get a link to the form in PDF format
-
     - Get detailed form metadata including the number of pages, related forms, benefit categories, language, and more
-
     - Retrieve the latest date of PDF changes and the SHA256 checksum
-
     - Identify when a form is deleted by the VA
 
-
     ## Technical summary
-
     The VA Forms API collects form data from the official VA Form Repository on a nightly basis.  The Index endpoint can return all available forms or, if an optional query parameter is passed, will return only forms that may relate to the query value. When a valid form name is passed to the Show endpoint, it will return a single form with additional metadata and full revision history. A JSON response is given with the PDF link (if published) and the corresponding form metadata.
 
-
     ### Authentication and authorization
-
     The form information shared by this API is publicly available.  API requests are authorized through a symmetric API token, provided in an HTTP header with name apikey. [Get a sandbox API Key](https://developer.va.gov/apply).
 
-
     ### Testing in sandbox environment
-
     Form data in the sandbox environment is for testing your API only, and is not guaranteed to be up-to-date. This API also has a reduced API rate limit. When you're ready to move to production, be sure to [request a production API key.](https://developer.va.gov/go-live)
 
-
     ### SHA256 revision history
-
     Each form is checked nightly for recent file changes. A corresponding SHA256 checksum is calculated, which provides a record of when the PDF changed and the SHA256 hash that was calculated. This allows end users to know that they have the most recent version and can verify the integrity of a previously downloaded PDF.
 
-
     ### Valid PDF link
-
     Additionally, during the nightly refresh process, the link to the form PDF is verified and the `valid_pdf` metadata is updated accordingly. If marked `true`, the link is valid and is a current form. If marked `false`, the link is either broken or the form has been removed.
 
-
     ### Deleted forms
-
     If the `deleted_at` metadata is set, that means the VA has removed this form from the repository and it is no longer to be used.
   title: VA Forms
   version: 0.0.0
@@ -79,8 +58,7 @@ info:
 paths:
   /forms:
     get:
-      description: Returns an index of all available VA forms. Optionally, pass a
-        query parameter to filter forms by form number or title.
+      description: Returns an index of all available VA forms. Optionally, pass a query parameter to filter forms by form number or title.
       operationId: findForms
       parameters:
         - description: Returns form data based on entered form name.
@@ -131,9 +109,7 @@ paths:
       description: Returns a single form and the full revision history
       operationId: findFormByFormName
       parameters:
-        - description: The VA form_name of the form being requested. The exact form name
-            must be passed, including proper placement of prefixes and/or
-            hyphens.
+        - description: The VA form_name of the form being requested. The exact form name must be passed, including proper placement of prefixes and/or hyphens.
           example: 10-10EZ
           in: path
           name: form_name
@@ -246,8 +222,7 @@ components:
               type: string
             form_tool_intro:
               description: Introductory text describing the VA online tool for this form
-              example: You can apply online instead of filling out and sending us the paper
-                form.
+              example: You can apply online instead of filling out and sending us the paper form.
               nullable: true
               type: string
             form_tool_url:
@@ -262,8 +237,7 @@ components:
               type: string
             form_usage:
               description: A description of how the form is to be used
-              example: <p>Use VA Form 10-10EZ if you’re a Veteran and want to apply for VA
-                health care. You must be enrolled in...</p>
+              example: <p>Use VA Form 10-10EZ if you’re a Veteran and want to apply for VA health care. You must be enrolled in...</p>
               nullable: true
               type: string
             language:
@@ -307,8 +281,7 @@ components:
               nullable: true
               type: string
             valid_pdf:
-              description: A flag indicating whether the form url was confirmed as a valid
-                download
+              description: A flag indicating whether the form url was confirmed as a valid download
               example: "true"
               type: boolean
             versions:
@@ -376,8 +349,7 @@ components:
               type: string
             form_tool_intro:
               description: Introductory text describing the VA online tool for this form
-              example: You can apply online instead of filling out and sending us the paper
-                form.
+              example: You can apply online instead of filling out and sending us the paper form.
               nullable: true
               type: string
             form_tool_url:
@@ -392,8 +364,7 @@ components:
               type: string
             form_usage:
               description: A description of how the form is to be used
-              example: <p>Use VA Form 10-10EZ if you’re a Veteran and want to apply for VA
-                health care. You must be enrolled in...</p>
+              example: <p>Use VA Form 10-10EZ if you’re a Veteran and want to apply for VA health care. You must be enrolled in...</p>
               nullable: true
               type: string
             language:
@@ -442,8 +413,7 @@ components:
               nullable: true
               type: string
             valid_pdf:
-              description: A flag indicating whether the form url was confirmed as a valid
-                download
+              description: A flag indicating whether the form url was confirmed as a valid download
               example: "true"
               type: boolean
         id:

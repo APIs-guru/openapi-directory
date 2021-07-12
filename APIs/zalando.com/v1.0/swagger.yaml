@@ -4,8 +4,7 @@ schemes:
 host: api.zalando.com
 basePath: /
 info:
-  description: The shop API empowers developers to build amazing new apps or
-    websites using Zalando shop data and services.
+  description: The shop API empowers developers to build amazing new apps or websites using Zalando shop data and services.
   title: Zalando Shop
   version: v1.0
   x-apisguru-categories:
@@ -21,17 +20,13 @@ produces:
   - application/json
 parameters:
   acceptLanguage:
-    description: >-
+    description: |-
       Specify which Shop to use.
 
-
       A standard `Accept-Language` header which specifies the shop that should be used. E.g. `de-DE` will use the German
-
       shop (as does [https://www.zalando.de](https://www/zalando.de) and `de-AT` will use the Austrian one.
 
-
       The shop choosen will e.g. define the currency used for prices as well as the language for product names and
-
       descriptions. Furthermore it will impact which articles are available as they might differ between countries.
     enum:
       - da-DK
@@ -83,12 +78,10 @@ parameters:
     type: array
   articleId:
     collectionFormat: multi
-    description: >-
+    description: |-
       The `articleIds` to use use for filtering.
 
-
       One or more `articleIds` might be used as a filter criteria. Submit multiple `articleId` request parameters for
-
       more than one to be used. They will be treated as `OR` criteria.
     in: query
     items:
@@ -217,11 +210,8 @@ parameters:
     type: array
   fields:
     collectionFormat: multi
-    description: >-
-      Comma separated list of fields that should be returned. Fields of
-      subobjects are specified with dots as separator. Fields of objects within
-      lists are specified in the same way.
-
+    description: |-
+      Comma separated list of fields that should be returned. Fields of subobjects are specified with dots as separator. Fields of objects within lists are specified in the same way.
 
       Example: id,name,brand.key,brand.name, units.id,units.size,units.price.formatted
     in: query
@@ -232,8 +222,7 @@ parameters:
     type: array
   filling:
     collectionFormat: multi
-    description: "filters by different kinds of garment filling materials (eg:
-      satin, wolle)"
+    description: "filters by different kinds of garment filling materials (eg: satin, wolle)"
     in: query
     items:
       enum:
@@ -262,8 +251,7 @@ parameters:
     required: false
     type: array
   fullText:
-    description: "filters by text (eg: search by 'as' gives result with articles of
-      brand Sass)"
+    description: "filters by text (eg: search by 'as' gives result with articles of brand Sass)"
     in: query
     name: fullText
     required: false
@@ -697,10 +685,8 @@ paths:
       description: Zalando API Article Reviews Schema
       parameters:
         - collectionFormat: multi
-          description: >
-            Article IDs. A list of config SKUs for which the article reviews
-            will be returned.
-
+          description: |
+            Article IDs. A list of config SKUs for which the article reviews will be returned.
             Required if articleModelId is empty.
           in: query
           items:
@@ -709,10 +695,8 @@ paths:
           required: false
           type: array
         - collectionFormat: multi
-          description: >
-            Article model IDs. A list of model SKUs for which the article
-            reviews will be returned.
-
+          description: |
+            Article model IDs. A list of model SKUs for which the article reviews will be returned.
             Required if articleId is empty.
           in: query
           items:
@@ -763,8 +747,7 @@ paths:
       description: Zalando API Article Reviews Summaries Schema
       parameters:
         - collectionFormat: multi
-          description: Article model IDs. A list of model SKUs for which the article
-            review summaries will be returned.
+          description: Article model IDs. A list of model SKUs for which the article review summaries will be returned.
           in: query
           items:
             type: string
@@ -884,20 +867,14 @@ paths:
         - articles
   /articles:
     get:
-      description: >-
-        Search for articles based on various different possible filter like
-        e.g. the `brandFamily`, the `catagory` or a
-
+      description: |-
+        Search for articles based on various different possible filter like e.g. the `brandFamily`, the `catagory` or a
         specific `color`. See [Filters](https://todo) for a list of all available filter options.
 
-
         The default `pageSize` for responses is set to `20`. You can add a `pageSize` request parameter to adjust that.
-
         Please keep in mind that the maximum `pageSize` for this resource is `200`.
 
-
         The endpoint also supports reducing the fields returned for each article via the `fields` parameter. Please
-
         refer to [fields parameter](https://todo) for more details.
       parameters:
         - $ref: "#/parameters/articleId"
@@ -2352,8 +2329,7 @@ definitions:
               $ref: "#/definitions/Article"
             minItems: 0
             type: array
-    description: A simple container object that carries paging information as well
-      as a list of articles on the `content` property.
+    description: A simple container object that carries paging information as well as a list of articles on the `content` property.
     type: object
   Brand:
     description: Zalando API Brand Schema
@@ -2576,8 +2552,7 @@ definitions:
     description: Zalando API Filter Schema
     properties:
       multiValue:
-        description: can this filter be used multiple times with different values in one
-          search request
+        description: can this filter be used multiple times with different values in one search request
         type: boolean
       name:
         description: The unique name for a filter

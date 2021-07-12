@@ -2,24 +2,17 @@ openapi: 3.0.0
 servers:
   - url: https://app.drchrono.com
 info:
-  description: >+
-    This document is intended as a detailed reference for the precise
-    behavior of
-
+  description: |+
+    This document is intended as a detailed reference for the precise behavior of
     the drchrono API. If this is your first time using the API, start with our <a href="/api-docs-old/tutorial">tutorial</a>. If you are upgrading from a previous version, take a look at the changelog section.
-
 
     # Authorization
 
-
     ## Initial authorization
-
 
     There are three main steps in the OAuth 2.0 authentication workflow:
 
-
     1. Redirect the provider to the authorization page.
-
     2. The provider authorizes your application and is redirected back to
        your web application.
     3. Your application exchanges the `authorization_code` that came with
@@ -27,69 +20,43 @@ info:
 
     ### Step 1: Redirect to drchrono
 
-
     The first step is redirecting your user to drchrono, typically with a button
-
     labeled "Connect to drchrono" or "Login with drchrono".  This is just a link that
-
     takes your user to the following URL:
 
         https://drchrono.com/o/authorize/?redirect_uri=REDIRECT_URI_ENCODED&response_type=code&client_id=CLIENT_ID_ENCODED&scope=SCOPES_ENCODED
 
     - `REDIRECT_URI_ENCODED` is the URL-encoded version of the redirect URI (as registered for your application and used in later steps).
-
     - `CLIENT_ID_ENCODED` is the URL-encoded version of your application's client ID.
-
     - `SCOPES_ENCODED` is a URL-encoded version of a space-separated list of scopes, which can be found in each endpoint or omitted to default to all scopes.
 
-
     The `scope` parameter consists of an optional, space-separated list of scopes your application is requesting.
-
     If omitted, all scopes will be requested.
 
-
     Scopes are of the form `BASE_SCOPE:[read|write]` where `BASE_SCOPE` is any of `user`, `calendar`, `patients`, `patients:summary`, `billing`, `clinical` and `labs`.
-
     You should request only the scopes you need.
-
     For instance, an application which sends "Happy Birthday!" emails to a doctor's patients on their birthdays would use the scope parameter `"patients:summary:read"`,
-
     while one that allows patients to schedule appointments online would need at least
-
     `"patients:summary:read patients:summary:write calendar:read calendar:write clinical:read clinical:write"`.
-
 
     ### Step 2: Provider authorization
 
-
     After logging in (if necessary), the provider will be presented with a screen
-
     with your application's name and the list of permissions you requested (via the
-
     `scope` parameter).
 
-
     When they click the "Authorize" button, they will be redirected to your redirect
-
     URI with a `code` query parameter appended, which contains an authorization code to be
-
     used in step 3.  If they click the "Cancel" button, they will be redirected to
-
     your redirect URI with `error=access_denied` instead.
 
-
     Note: This authorization code expires extremely quickly, so you must perform
-
     step 3 immediately, ideally before rendering the resulting page for the end
-
     user.
-
 
     ### Step 3: Token exchange
 
-
     The `code` obtained from step 2 is usable exactly once to obtain an access token
-
     and refresh token.  Here is an example token exchange in Python:
 
         import datetime, pytz, requests
@@ -113,29 +80,18 @@ info:
         expires_timestamp = datetime.datetime.now(pytz.utc) + datetime.timedelta(seconds=data['expires_in'])
 
     You now have all you need to make API requests authenticated as that provider.
-
     When using this access token, you'll only be able to access the data that the
-
     user has access to and that you have been granted permissions for.
-
 
     ## Refreshing an access token
 
-
     Access tokens only last 48 hours (given in seconds in the `'expires_in'` key in
-
     the token exchange step above), so they occasionally need to be refreshed.  It
-
     would be inconvenient to ask the user to re-authorize every time, so instead you
-
     can use the refresh token like the original authorization to obtain a new access
-
     token.  Replace the `code` parameter with `refresh_token`, change the value
-
     `grant_type` from `authorization_code` to `refresh_token`, and omit the
-
     `redirect_uri` parameter.
-
 
     Example in Python:
 
@@ -150,102 +106,60 @@ info:
 
     # Webhooks
 
-
     In order to use drchrono API webhooks, you first need to have an API application on file
-
     (even if it is in Test Model).
-
     Each API webhook is associated with one API application, go to
-
     <a href="/api-management/" target="_blank">here</a> to set up both API applications and webhooks!
 
-
     Once you registered an API application, you will see webhook section in each saved API applications.
-
     Create a webhook and register some events there and save all the changes, then you are good to go!
-
 
     ## Webhooks setup
 
-
     All fields under webhooks section are required.
 
-
     **Callback URL**
-
     Callback URl is used to receive all hooks when subscribed events are triggered. This should be an URL under your control.
 
-
     **Secret token**
-
     Secret token is used to verify webhooks, this is very important, please set something with high entropy. Also we will
-
     talk more about this later.
-
 
     **Events**
 
-
     Events is used to register events you want to receiver notification when they happen. Currently we support following events.
 
-
     Event name | Event description
-
     ---------- | -----------------
-
     `APPOINTMENT_CREATE` | We will deliver a hook any time an appointment is created
-
     `APPOINTMENT_MODIFY` | We will deliver a hook any time an appointment is modified
-
     `PATIENT_CREATE` | We will deliver a hook any time a patient is created
-
     `PATIENT_MODIFY` | We will deliver a hook any time a patient is modified
-
     `PATIENT_PROBLEM_CREATE` | We will deliver a hook any time a patient problem is created
-
     `PATIENT_PROBLEM_MODIFY` | We will deliver a hook any time a patient problem is modified
-
     `PATIENT_ALLERGY_CREATE` | We will deliver a hook any time a patient allergy is created
-
     `PATIENT_ALLERGY_MODIFY` | We will deliver a hook any time a patient allergy is modified
-
     `PATIENT_MEDICATION_CREATE` | We will deliver a hook any time a patient medication is created
-
     `PATIENT_MEDICATION_MODIFY` | We will deliver a hook any time a patient medication is modified
-
     `CLINICAL_NOTE_LOCK` | We will deliver a hook any time a clinical note is locked
-
     `CLINICAL_NOTE_UNLOCK` | We will deliver a hook any time a clinical note is unlocked
-
     `TASK_CREATE` | We will deliver a hook any time a task is created
-
     `TASK_MODIFY` | We will deliver a hook any time a task is modified and any time creation, modification and deletion of task notes, associated task item
-
     `TASK_DELETE` | We will deliver a hook any time a task is deleted
-
 
 
     ## Webhooks verification
 
-
     In order to make sure the callback URL in webhook is under your control, we added a verification
-
     step before we send any hooks out to you.
 
-
     Verification can be done by clicking "Verify webhook" button in webhooks setup page. After you click
-
     the button, we will send a `GET` request to the callback URL, along with a parameter called `msg`.
 
-
     Please use your webhook's secret token as hash key and SHA-256 as digest constructor, hash the `msg` value with
-
     <a href="https://tools.ietf.org/html/rfc2104.html">HMAC algorithm</a>.
-
     And we expect a `200` JSON response, in JSON response body, there should be a key called `secret_token` existing, and its value should be
-
     equal to the <strong>hashed</strong> `msg`. Otherwise, verification will fail.
-
 
     Here is an example webhook verification in Python:
 
@@ -258,182 +172,109 @@ info:
             })
 
     <div class="alert alert-warning">
-
     <b>Note:</b> Verification will be needed when webhook is first created and anytime callback URl is changed.
-
     </div>
-
 
 
     ## Webhooks header and body
 
-
     **Header**
 
-
     Key | Value
-
     --- | -----
-
     `X-drchrono-event` | Event that triggered this hook, could be any one event above or `PING`
-
     `X-drchrono-signature` | Secret token associated with this webhook
-
     `X-drchrono-delivery` | ID of this delivery
-
 
     **Body**
 
-
     Key | Value
-
     --- | -----
-
     `receiver` | This will be an JSON representation of the webhook
-
     `object` | This will be an JSON representation of the object related to the triggered event, this would share same serializer as drchrono API
-
 
     ## Webhooks ping and deliveries
 
-
     Webhooks ping and deliveries will be sent as `POST` requests.
-
 
     **PING**:
 
-
     You can always ping your webhook to check things, by clicking the "Ping webhook" button in webhook setup page. And a hook with header `X-drchrono-event: PING` would be sent to the callback URL.
-
 
     **Deliveries**:
 
-
     You can check recent deliveries by clicking the "deliveries" link in webhook setup page. And you can resend a hook by clicking "redeliver" button after select a specific delivery.
-
 
     ## Webhooks delivery mechanism
 
-
     We will delivery a hook the moment a subscribed event is triggered. We will not record any response header or body you send back after you receive the hook.
-
     However we only consider the response status code. We will consider any `2xx` responses as successfully delivered.
-
     Any other responses, like `302` would be considered failing.
-
     And we will try to redeliver unsuccessfully delivered hooks 3 times, first redeliver happens at 1 hour after the initial event,
-
     second receliver happens 3 hours after the initial event, and the third redeliver happens 7 hours after the initial event.
-
     After these redeliveries, if the delivery is still unsuccessful, you have to redeliver it by hand.
-
 
 
     ## Webhooks security
 
-
     You may want to secure your webhooks to only consider requests send out from drchrono. And this is where <code>secret_token</code> is needed in
-
     request header.
-
     Try to set the <code>secret_token</code> to something with high entropy, a good example could be taking the output of
-
     <code>ruby -rsecurerandom -e 'puts SecureRandom.hex(20)'</code>.
-
     After this, you might want to verify all request headers you received on your server with this token.
-
 
 
     # iframe integration
 
-
     Some API apps provide additional functionality for interacting with patient data
-
     not offered by drchrono, and can benefit by being incorporated into drchrono's
-
     patient information page via iframe.  We have created a simple API to make this
-
     possible.
 
-
     To make an existing API application accessible via an iframe on the patient
-
     page, you need to update either "Patient iframe" or "Clinical note iframe" section in API management page,
-
     to make the iframe to appear on (either the patient page or the clinical note page),
-
     with the URL that the iframe will use for each page, and the height it should
-
     have. The application will be reviewed before it is approved to ensure that it
-
     is functional and secure.
-
 
     ## Register a Doctor
 
-
     iframe applications will appear as choices on the left-hand menu of the patient
-
     page for doctors registered with your application.  To register a doctor with
-
     your application, make a `POST` request to the `/api/iframe_integration`
-
     endpoint using the access token for the corresponding doctor. This endpoint does not
-
     expect any payload.
 
-
     To disable your iframe application for a doctor, make a `DELETE` request to the
-
     same endpoint.
-
 
     ## Populating the iframe
 
-
     There are two places where the iframe can be displayed, either within the
-
     patient detail page or the clinical note page, shown below respectively:
-
 
     <img src="{% asset 'public/images/iframe_patient_page.png' %}" alt="Iframe on the patient page"/>
 
-
     <img src="{% asset 'public/images/iframe_clinical_note.png' %}" alt="Iframe on the clinical note page"/>
 
-
     When requesting approval for your iframe app, you must specify a URL for one or
-
     both of these pages which will serve as the base URL for your IFrame
-
     contents. When a doctor views your iframe, the source URL will have various
-
     query parameters appended to it, for example for the patient page the `src`
-
     parameter of the IFrame will be:
 
-
     ```
-
     <iframe_url>?doctor_id=<doctor_id>&patient_id=<patient_id>&practice_id=<practice_id>&iat=<iat>&jwt=<jwt>
-
     ```
-
 
     The `jwt` parameter is crucial if your application transfers any sort of PHI and
-
     does not implement its own login system.  It encapsulates the other parameters
-
     in a [JSON web token (JWT)](http://jwt.io) and signs them using SHA-256 HMAC
-
     with your `client_secret` as the key.  This verifies that the iframe is being
-
     loaded within one of drchrono's pages by an authorized user.  In production, you
-
     should validate the JWT using an approved library (which are listed on the
-
     [official site](http://jwt.io)), and only use the parameters extracted from the
-
     JWT.  Using Python and Django, this might look like:
 
         import jwt
@@ -447,83 +288,51 @@ info:
             return jwt.decode(token, CLIENT_SECRET, algorithms=['HS256'], leeway=MAX_TIME_DRIFT_SECONDS)
 
     Modern browsers' same-origin policy means that data cannot be passed between
-
     your application and drchrono's page through the iframe.  Therefore, interaction
-
     must happen through the API, using information provided in JWT.
-
 
     # Versions and deprecation
 
-
     ## Stability Policy
 
-
     Changes to this API version will be limited to adding endpoints, or adding fields to existing
-
     endpoints, or adding optional query parameters. Any new fields which are not read-only will be optional.
-
 
     ## Deprecation Policy
 
-
     The drchrono API is versioned. Versions can be in the following states:
 
-
     * **Active:** This is our latest and greatest version of the API. It is actively supported by
-
     our API team and is improved upon with new features, bug fixes and optimizations that do
-
     not break backwards compatibility.
 
-
     * **Deprecated:** A deprecated API version is considered second best--having been
-
     surpassed by our active API version. An API version remains in this state for one year,
-
     after which time it falls to the not supported state. A deprecated API version is passively supported;
-
     while it won't be removed until becoming unsupported, it may not receive new features but will likely
-
     be subject to security updates and performance improvements.
 
-
     * **Unsupported:** An API version in the not supported state may be deactivated at any
-
     time. An application using an unsupported API version should migrate to an active API version.
 
-
     ## Version Map
-
     | Version Name | Previous Name | Start Date | Deprecation Date |
-
     |--------------|---------------|------------|------------------|
-
     | v2           | v2015_08      | 08/2015    | TBA              |
-
     | v3           | v2016_06      | 06/2016    |                  |
-
     | v4           | N/A           | 09/2018    |                  |
-
 
     If you are looking for documentation for an older version
 
-
     - [V4(Hunt Valley)](/api-docs-old/v4/documentation) (old V4 documentation)
-
     - [V3(Sunnyvale)](/api-docs-old/v3/documentation)
-
     - [V2(Mountain View)](/api-docs-old/v2/documentation)
-
 
     # Changelog
 
-
     Here's changelog for different versions
 
-
     - [V4 Changelog](/api-docs-old/v4/changelog)
-
     - [V3 changelog](/api-docs-old/v3/changelog)
 
   title: ""
@@ -868,8 +677,7 @@ paths:
       x-practice-access: '"share_patients" need to be set for data access among practice'
   /api/amendments:
     get:
-      description: Retrieve or search patient amendments. You can only interact with
-        amendments created by your API application
+      description: Retrieve or search patient amendments. You can only interact with amendments created by your API application
       operationId: amendments_list
       parameters:
         - in: query
@@ -1025,8 +833,7 @@ paths:
       x-practice-access: '"share_patients" need to be set for data access among practice'
   "/api/amendments/{id}":
     delete:
-      description: Delete an existing patient amendment, you can only interact with
-        amendments created by your API application
+      description: Delete an existing patient amendment, you can only interact with amendments created by your API application
       operationId: amendments_delete
       parameters:
         - in: path
@@ -1092,8 +899,7 @@ paths:
         - clinical-notes
       x-practice-access: '"share_patients" need to be set for data access among practice'
     get:
-      description: Retrieve an existing patient amendment, you can only interact with
-        amendments created by your API application
+      description: Retrieve an existing patient amendment, you can only interact with amendments created by your API application
       operationId: amendments_read
       parameters:
         - in: path
@@ -1162,8 +968,7 @@ paths:
         - clinical-notes
       x-practice-access: '"share_patients" need to be set for data access among practice'
     patch:
-      description: Update an existing patient amendment, you can only interact with
-        amendments created by your API application
+      description: Update an existing patient amendment, you can only interact with amendments created by your API application
       operationId: amendments_partial_update
       parameters:
         - in: path
@@ -1229,8 +1034,7 @@ paths:
         - clinical-notes
       x-practice-access: '"share_patients" need to be set for data access among practice'
     put:
-      description: Update an existing patient amendment, you can only interact with
-        amendments created by your API application
+      description: Update an existing patient amendment, you can only interact with amendments created by your API application
       operationId: amendments_update
       parameters:
         - in: path
@@ -1375,8 +1179,7 @@ paths:
       x-permissions:
         - scheduling
         - settings
-      x-practice-access: '"share_appointment_profiles" need to be set for data access
-        among practice'
+      x-practice-access: '"share_appointment_profiles" need to be set for data access among practice'
     post:
       description: Create appointment profiles for a doctor's calendar
       operationId: appointment_profiles_create
@@ -1425,8 +1228,7 @@ paths:
       x-permissions:
         - scheduling
         - settings
-      x-practice-access: '"share_appointment_profiles" need to be set for data access
-        among practice'
+      x-practice-access: '"share_appointment_profiles" need to be set for data access among practice'
   "/api/appointment_profiles/{id}":
     delete:
       description: Delete an existing appointment profile
@@ -1480,8 +1282,7 @@ paths:
       x-permissions:
         - scheduling
         - settings
-      x-practice-access: '"share_appointment_profiles" need to be set for data access
-        among practice'
+      x-practice-access: '"share_appointment_profiles" need to be set for data access among practice'
     get:
       description: Retrieve an existing appointment profile
       operationId: appointment_profiles_read
@@ -1537,8 +1338,7 @@ paths:
       x-permissions:
         - scheduling
         - settings
-      x-practice-access: '"share_appointment_profiles" need to be set for data access
-        among practice'
+      x-practice-access: '"share_appointment_profiles" need to be set for data access among practice'
     patch:
       description: Update an existing appointment profile
       operationId: appointment_profiles_partial_update
@@ -1591,8 +1391,7 @@ paths:
       x-permissions:
         - scheduling
         - settings
-      x-practice-access: '"share_appointment_profiles" need to be set for data access
-        among practice'
+      x-practice-access: '"share_appointment_profiles" need to be set for data access among practice'
     put:
       description: Update an existing appointment profile
       operationId: appointment_profiles_update
@@ -1645,8 +1444,7 @@ paths:
       x-permissions:
         - scheduling
         - settings
-      x-practice-access: '"share_appointment_profiles" need to be set for data access
-        among practice'
+      x-practice-access: '"share_appointment_profiles" need to be set for data access among practice'
   /api/appointment_templates:
     get:
       description: Retrieve or search appointment templates for a doctor's calendar
@@ -1743,8 +1541,7 @@ paths:
       x-permissions:
         - scheduling
         - settings
-      x-practice-access: '"share_appointment_profiles" need to be set for data access
-        among practice'
+      x-practice-access: '"share_appointment_profiles" need to be set for data access among practice'
     post:
       description: Create appointment templates for a doctor's calendar
       operationId: appointment_templates_create
@@ -1809,8 +1606,7 @@ paths:
       x-permissions:
         - scheduling
         - settings
-      x-practice-access: '"share_appointment_profiles" need to be set for data access
-        among practice'
+      x-practice-access: '"share_appointment_profiles" need to be set for data access among practice'
   "/api/appointment_templates/{id}":
     delete:
       description: Delete an existing appointment template
@@ -1880,8 +1676,7 @@ paths:
       x-permissions:
         - scheduling
         - settings
-      x-practice-access: '"share_appointment_profiles" need to be set for data access
-        among practice'
+      x-practice-access: '"share_appointment_profiles" need to be set for data access among practice'
     get:
       description: Retrieve an existing appointment template
       operationId: appointment_templates_read
@@ -1953,8 +1748,7 @@ paths:
       x-permissions:
         - scheduling
         - settings
-      x-practice-access: '"share_appointment_profiles" need to be set for data access
-        among practice'
+      x-practice-access: '"share_appointment_profiles" need to be set for data access among practice'
     patch:
       description: Update an existing appointment template
       operationId: appointment_templates_partial_update
@@ -2023,8 +1817,7 @@ paths:
       x-permissions:
         - scheduling
         - settings
-      x-practice-access: '"share_appointment_profiles" need to be set for data access
-        among practice'
+      x-practice-access: '"share_appointment_profiles" need to be set for data access among practice'
     put:
       description: Update an existing appointment template
       operationId: appointment_templates_update
@@ -2093,14 +1886,12 @@ paths:
       x-permissions:
         - scheduling
         - settings
-      x-practice-access: '"share_appointment_profiles" need to be set for data access
-        among practice'
+      x-practice-access: '"share_appointment_profiles" need to be set for data access among practice'
   /api/appointments:
     get:
       description: "Retrieve or search appointment or breaks.
 
-        <b>Note:</b> Either `since`, `date` or `date_range` parameter
-        must be specified.
+        <b>Note:</b> Either `since`, `date` or `date_range` parameter must be specified.
 
         \            "
       operationId: appointments_list
@@ -3493,8 +3284,7 @@ paths:
         - Clinical
       x-permissions:
         - clinical-notes
-      x-practice-access: '"share_clinical_templates" need to be set for data access
-        among practice'
+      x-practice-access: '"share_clinical_templates" need to be set for data access among practice'
   "/api/clinical_note_field_types/{id}":
     get:
       description: Retrieve an existing clinial note field type
@@ -3556,8 +3346,7 @@ paths:
         - Clinical
       x-permissions:
         - clinical-notes
-      x-practice-access: '"share_clinical_templates" need to be set for data access
-        among practice'
+      x-practice-access: '"share_clinical_templates" need to be set for data access among practice'
   /api/clinical_note_field_values:
     get:
       description: Retrieve or search clinical note field values
@@ -4073,8 +3862,7 @@ paths:
         - Clinical
       x-permissions:
         - clinical-notes
-      x-practice-access: '"share_clinical_templates" need to be set for data access
-        among practice'
+      x-practice-access: '"share_clinical_templates" need to be set for data access among practice'
   "/api/clinical_note_templates/{id}":
     get:
       description: Retrieve an existing clinical note tempalte
@@ -4128,8 +3916,7 @@ paths:
         - Clinical
       x-permissions:
         - clinical-notes
-      x-practice-access: '"share_clinical_templates" need to be set for data access
-        among practice'
+      x-practice-access: '"share_clinical_templates" need to be set for data access among practice'
   /api/clinical_notes:
     get:
       operationId: clinical_notes_list
@@ -5924,8 +5711,7 @@ paths:
       x-permissions:
         - clinical-notes
         - settings
-      x-practice-access: '"share_clinical_templates" need to be set for data access
-        among practice'
+      x-practice-access: '"share_clinical_templates" need to be set for data access among practice'
   "/api/custom_vitals/{id}":
     get:
       description: Retrieve an existing custom vital type
@@ -5982,8 +5768,7 @@ paths:
       x-permissions:
         - clinical-notes
         - settings
-      x-practice-access: '"share_clinical_templates" need to be set for data access
-        among practice'
+      x-practice-access: '"share_clinical_templates" need to be set for data access among practice'
   /api/doctors:
     get:
       description: Retrieve or search doctors within practice group
@@ -7355,8 +7140,7 @@ paths:
             description: ""
             title: ""
             type: string
-        - description: Search term, which can be either a partial name, partial ID or the
-            state.
+        - description: Search term, which can be either a partial name, partial ID or the state.
           in: query
           name: term
           required: false
@@ -7433,8 +7217,7 @@ paths:
             description: ""
             title: ""
             type: string
-        - description: Search term, which can be either a partial name, partial ID or the
-            state.
+        - description: Search term, which can be either a partial name, partial ID or the state.
           in: query
           name: term
           required: false
@@ -7959,16 +7742,12 @@ paths:
       x-permissions: []
       x-practice-access: '"share_patients" need to be set for data access among practice'
     post:
-      description: >
-        Create lab order documents. An example lab workflow is as
-        following:
-
+      description: |
+        Create lab order documents. An example lab workflow is as following:
 
         - When you get orders, submit them via `/api/lab_orders`, such that doctors can see them in drchrono.
 
-
         - When results come in, submit the result document PDF via `/api/lab_documents` and submit the results data via `/api/lab_results`
-
 
         - Update `/api/lab_orders` status
       operationId: lab_documents_create
@@ -8340,15 +8119,12 @@ paths:
       x-permissions: []
       x-practice-access: '"share_patients" need to be set for data access among practice'
     post:
-      description: >
+      description: |
         Create lab orders. An example lab workflow is as following:
-
 
         - When you get orders, submit them via `/api/lab_orders`, such that doctors can see them in drchrono.
 
-
         - When results come in, submit the result document PDF via `/api/lab_documents` and submit the results data via `/api/lab_results`
-
 
         - Update `/api/lab_orders` status
       operationId: lab_orders_create
@@ -8882,15 +8658,12 @@ paths:
       x-permissions: []
       x-practice-access: '"share_patients" need to be set for data access among practice'
     post:
-      description: >
+      description: |
         Create lab results. An example lab workflow is as following:
-
 
         - When you get orders, submit them via `/api/lab_orders`, such that doctors can see them in drchrono.
 
-
         - When results come in, submit the result document PDF via `/api/lab_documents` and submit the results data via `/api/lab_results`
-
 
         - Update `/api/lab_orders` status
       operationId: lab_results_create
@@ -9262,15 +9035,12 @@ paths:
       x-permissions: []
       x-practice-access: '"share_patients" need to be set for data access among practice'
     post:
-      description: >
+      description: |
         Create lab tests. An example lab workflow is as following:
-
 
         - When you get orders, submit them via `/api/lab_orders`, such that doctors can see them in drchrono.
 
-
         - When results come in, submit the result document PDF via `/api/lab_documents` and submit the results data via `/api/lab_results`
-
 
         - Update `/api/lab_orders` status
       operationId: lab_tests_create
@@ -10495,8 +10265,7 @@ paths:
       x-practice-access: '"share_patients" need to be set for data access among practice'
   "/api/medications/{id}/append_to_pharmacy_note":
     patch:
-      description: Append a message to the "pharmacy_note" section of the
-        prescription, in a new paragraph
+      description: Append a message to the "pharmacy_note" section of the prescription, in a new paragraph
       operationId: medications_append_to_pharmacy_note
       parameters:
         - in: path
@@ -14355,8 +14124,7 @@ paths:
         - Clinical
       x-permissions:
         - clinical-notes
-      x-practice-access: '"share_inventory", "share_patients" need to be set for data
-        access among practice'
+      x-practice-access: '"share_inventory", "share_patients" need to be set for data access among practice'
     post:
       description: Create patient vaccine records
       operationId: patient_vaccine_records_create
@@ -14426,8 +14194,7 @@ paths:
         - Clinical
       x-permissions:
         - clinical-notes
-      x-practice-access: '"share_inventory", "share_patients" need to be set for data
-        access among practice'
+      x-practice-access: '"share_inventory", "share_patients" need to be set for data access among practice'
   "/api/patient_vaccine_records/{id}":
     get:
       description: Retrieve an existing patient vaccine records
@@ -14505,8 +14272,7 @@ paths:
         - Clinical
       x-permissions:
         - clinical-notes
-      x-practice-access: '"share_inventory", "share_patients" need to be set for data
-        access among practice'
+      x-practice-access: '"share_inventory", "share_patients" need to be set for data access among practice'
     patch:
       description: Update an existing patient vaccine records
       operationId: patient_vaccine_records_partial_update
@@ -14580,8 +14346,7 @@ paths:
         - Clinical
       x-permissions:
         - clinical-notes
-      x-practice-access: '"share_inventory", "share_patients" need to be set for data
-        access among practice'
+      x-practice-access: '"share_inventory", "share_patients" need to be set for data access among practice'
     put:
       description: Update an existing patient vaccine records
       operationId: patient_vaccine_records_update
@@ -14655,8 +14420,7 @@ paths:
         - Clinical
       x-permissions:
         - clinical-notes
-      x-practice-access: '"share_inventory", "share_patients" need to be set for data
-        access among practice'
+      x-practice-access: '"share_inventory", "share_patients" need to be set for data access among practice'
   /api/patients:
     get:
       description: Retrieve or search patients
@@ -17804,15 +17568,12 @@ paths:
       x-permissions: []
       x-practice-access: Data access among practice is available
     post:
-      description: >
+      description: |
         Create sub-vendors
-
 
         - When you get orders, submit them via `/api/lab_orders`, such that doctors can see them in drchrono.
 
-
         - When results come in, submit the result document PDF via `/api/lab_documents` and submit the results data via `/api/lab_results`
-
 
         - Update `/api/lab_orders` status
       operationId: sublabs_create
@@ -19904,8 +19665,7 @@ paths:
       x-practice-access: Data access among practice is available
   /api/transactions:
     get:
-      description: Retrieve or search insurance transactions associated with billing
-        line items
+      description: Retrieve or search insurance transactions associated with billing line items
       operationId: transactions_list
       parameters:
         - in: query
@@ -20229,9 +19989,7 @@ paths:
       x-practice-access: Data access among practice is available
   /api/users:
     get:
-      description: Retrieve or search users, `/api/users/current` can be used to
-        identify logged in user, it will redirect to
-        `/api/users/{current_user_id}`
+      description: Retrieve or search users, `/api/users/current` can be used to identify logged in user, it will redirect to `/api/users/{current_user_id}`
       operationId: users_list
       parameters:
         - in: query
@@ -20306,9 +20064,7 @@ paths:
       x-practice-access: Data access among practice is available
   "/api/users/{id}":
     get:
-      description: Retrieve an existing user, `/api/users/current` can be used to
-        identify logged in user, it will redirect to
-        `/api/users/{current_user_id}`
+      description: Retrieve an existing user, `/api/users/current` can be used to identify logged in user, it will redirect to `/api/users/{current_user_id}`
       operationId: users_read
       parameters:
         - in: path
@@ -20375,8 +20131,7 @@ components:
           title: Base recurring appointment
           type: string
         billing_notes:
-          description: Billing notes of the appointment. For writing, check
-            `/api/claim_billing_notes`
+          description: Billing notes of the appointment. For writing, check `/api/claim_billing_notes`
           items:
             description: Structure of a billing note
             properties:
@@ -20414,10 +20169,7 @@ components:
           title: Billing provider
           type: string
         billing_status:
-          description: Should be one of `Auto Accident Claim`, `Balance Due`, `Bill
-            Insurance`, `Bill Secondary Insurance`, `Durable Medical Equipment
-            Claim`, `Internal Review`, `Paid In Full`, `Settled`, `Worker's Comp
-            Claim` or one of the custom billing status
+          description: Should be one of `Auto Accident Claim`, `Balance Due`, `Bill Insurance`, `Bill Secondary Insurance`, `Durable Medical Equipment Claim`, `Internal Review`, `Paid In Full`, `Settled`, `Worker's Comp Claim` or one of the custom billing status
           title: Billing status
           type: string
         clinical_note:
@@ -20439,8 +20191,7 @@ components:
           title: ClinicalNote
           type: object
         cloned_from:
-          description: ID of the original appointment which this appointment cloned from.
-            Will be null if the appointment is not cloned.
+          description: ID of the original appointment which this appointment cloned from. Will be null if the appointment is not cloned.
           title: Cloned From
           type: integer
         color:
@@ -20506,18 +20257,15 @@ components:
           title: Doctor
           type: integer
         duration:
-          description: Length of the appointment in minutes. Optional if `profile` is
-            provided.
+          description: Length of the appointment in minutes. Optional if `profile` is provided.
           title: Duration
           type: integer
         exam_room:
-          description: Index of the exam room that this appointment occurs in. See
-            `/api/offices`
+          description: Index of the exam room that this appointment occurs in. See `/api/offices`
           title: Exam room
           type: integer
         extended_updated_at:
-          description: The most recent update time among appointment itself, its vitals
-            and its custom vitals
+          description: The most recent update time among appointment itself, its vitals and its custom vitals
           readOnly: true
           title: Extended updated at
           type: string
@@ -20637,9 +20385,7 @@ components:
           title: Primary insurer payer id
           type: string
         profile:
-          description: ID of an `/api/appointment_profiles` instance. The profile sets
-            default values for `color`, `duration`, and `reason` on creation,
-            which can be overriden by setting these values explicitly.
+          description: ID of an `/api/appointment_profiles` instance. The profile sets default values for `color`, `duration`, and `reason` on creation, which can be overriden by setting these values explicitly.
           title: Profile
           type: integer
         reason:
@@ -20652,9 +20398,7 @@ components:
           title: Recurring appointment
           type: boolean
         reminder_profile:
-          description: Write-only. ID of an `/api/reminder_profiles` instance. Set this to
-            apply a reminder profile to the appointment. Cannot be applied to an
-            appointment with reminders.
+          description: Write-only. ID of an `/api/reminder_profiles` instance. Set this to apply a reminder profile to the appointment. Cannot be applied to an appointment with reminders.
           title: Reminder profile
           type: string
         reminders:
@@ -20706,9 +20450,7 @@ components:
           title: Secondary insurer payer id
           type: string
         status:
-          description: One of ``, `Arrived`, `Checked In`, `In Room`, `Cancelled`,
-            `Complete`, `Confirmed`, `In Session`, `No Show`, `Not Confirmed`,
-            or `Rescheduled`. Or one of the custom statuses.
+          description: One of ``, `Arrived`, `Checked In`, `In Room`, `Cancelled`, `Complete`, `Confirmed`, `In Session`, `No Show`, `Not Confirmed`, or `Rescheduled`. Or one of the custom statuses.
           enum:
             - ""
             - Arrived
@@ -20860,13 +20602,10 @@ components:
         - extended_updated_at
         - status_transitions
     AppointmentProfile:
-      description: Appointment profiles are for common kinds of appointments a doctor
-        might have, such as "physical exam", which have a standard duration and
-        should show up as the same color on the calendar.
+      description: Appointment profiles are for common kinds of appointments a doctor might have, such as "physical exam", which have a standard duration and should show up as the same color on the calendar.
       properties:
         archived:
-          description: Indicates that the object has been soft-deleted and should not be
-            used
+          description: Indicates that the object has been soft-deleted and should not be used
           readOnly: true
           title: Archived
           type: boolean
@@ -20900,8 +20639,7 @@ components:
           title: Reason
           type: string
         sort_order:
-          description: Override the usual ordering ordering of appointments in the
-            patient's appointments page. Lower values are shown at the top
+          description: Override the usual ordering ordering of appointments in the patient's appointments page. Lower values are shown at the top
           title: Sort order
           type: integer
       required:
@@ -20911,10 +20649,7 @@ components:
       type: object
       x-verbose-required: []
     AppointmentTemplate:
-      description: Appointment templates are blocks of time during which a doctor
-        usually sees appointments with the same profile. These may have a longer
-        duration then the corresponding profile, in which case they may allow
-        multiple appointments to be booked during that period.
+      description: Appointment templates are blocks of time during which a doctor usually sees appointments with the same profile. These may have a longer duration then the corresponding profile, in which case they may allow multiple appointments to be booked during that period.
       properties:
         archived:
           description: Indicats that the object has been soft-deleted and should not be used
@@ -20947,10 +20682,7 @@ components:
           title: Office
           type: integer
         open_slots:
-          description: Array of time intervals during which the template is available.
-            Only computed if the available and verbose query parameters are
-            passed. Note that only slots long enough to fit an appointment with
-            the corresponding profile are included.
+          description: Array of time intervals during which the template is available. Only computed if the available and verbose query parameters are passed. Note that only slots long enough to fit an appointment with the corresponding profile are included.
           items:
             description: ""
             properties:
@@ -20975,8 +20707,7 @@ components:
           title: Scheduled time
           type: string
         week_days:
-          description: Array of integers that indicate week days (`0` = Monday, ..., `6` =
-            Sunday)
+          description: Array of integers that indicate week days (`0` = Monday, ..., `6` = Sunday)
           items:
             description: ""
             title: ""
@@ -21028,12 +20759,7 @@ components:
           title: Billed
           type: number
         billing_status:
-          description: One of `""`, `"Incomplete Information"`, `"In Process Emdeon"`,
-            `"In Process iHCFA"`, `"In Process Gateway"`, `"Rejected Emdeon"`,
-            `"Rejected iHCFA"`, `"Rejected Gateway"`, `"In Process Payer"`,
-            `"Payer Acknowledged"`, `"Rejected Payer"`, `"Paid in
-            Full"`,  `"Partially Paid"`,  `"Coordination of Benefits"`,  `"ERA
-            Received"`,  `"ERA Denied"`
+          description: One of `""`, `"Incomplete Information"`, `"In Process Emdeon"`, `"In Process iHCFA"`, `"In Process Gateway"`, `"Rejected Emdeon"`, `"Rejected iHCFA"`, `"Rejected Gateway"`, `"In Process Payer"`, `"Payer Acknowledged"`, `"Rejected Payer"`, `"Paid in Full"`,  `"Partially Paid"`,  `"Coordination of Benefits"`,  `"ERA Received"`,  `"ERA Denied"`
           enum:
             - ""
             - Incomplete Information
@@ -21148,8 +20874,7 @@ components:
           title: Price
           type: number
         procedure_type:
-          description: One of `"CPT(C)"`, `"HCPCS(H)"`, `"Custom(U)"`, use 1 character
-            identifier when using `POST`
+          description: One of `"CPT(C)"`, `"HCPCS(H)"`, `"Custom(U)"`, use 1 character identifier when using `POST`
           enum:
             - C
             - H
@@ -21241,8 +20966,7 @@ components:
                       title: Quantity
                       type: string
                     units:
-                      description: Can be one of `F2`(International Unit), `GR`(Gram),
-                        `ME`(Milligram), `ML`(Millimeter) or `UN`(Unit)
+                      description: Can be one of `F2`(International Unit), `GR`(Gram), `ME`(Milligram), `ML`(Millimeter) or `UN`(Unit)
                       enum:
                         - F2
                         - GR
@@ -21347,8 +21071,7 @@ components:
                       title: Quantity
                       type: string
                     units:
-                      description: Can be one of `F2`(International Unit), `GR`(Gram),
-                        `ME`(Milligram), `ML`(Millimeter) or `UN`(Unit)
+                      description: Can be one of `F2`(International Unit), `GR`(Gram), `ME`(Milligram), `ML`(Millimeter) or `UN`(Unit)
                       enum:
                         - F2
                         - GR
@@ -21451,9 +21174,7 @@ components:
           title: Patient
           type: string
         plan_type:
-          description: "Can be one of the following: `1`(Goal), `2`(Patient education),
-            `3`(Patient decision aid), `4`(Patient clinical instruction),
-            `5`(Referral to other doctor), `6`(Health concerns)"
+          description: "Can be one of the following: `1`(Goal), `2`(Patient education), `3`(Patient decision aid), `4`(Patient clinical instruction), `5`(Referral to other doctor), `6`(Health concerns)"
           enum:
             - "1"
             - "2"
@@ -21552,11 +21273,7 @@ components:
           title: Patient
           type: integer
         payment_method:
-          description: '`"CASH", "CHCK" for Check, "DBIT" for Debit, "CRDT" for Credit
-            Card, "AMEX" for American Express, "VISA", "MSTR" for Mastercard,
-            "DISC" for Discover, "SQR1" for Square (legacy), "SQRE" for Square,
-            "PTPA" for Patient Payments, "ONPT" for onpatient, "OTHR" for
-            Other`'
+          description: '`"CASH", "CHCK" for Check, "DBIT" for Debit, "CRDT" for Credit Card, "AMEX" for American Express, "VISA", "MSTR" for Mastercard, "DISC" for Discover, "SQR1" for Square (legacy), "SQRE" for Square, "PTPA" for Patient Payments, "ONPT" for onpatient, "OTHR" for Other`'
           enum:
             - CASH
             - CHCK
@@ -21574,8 +21291,7 @@ components:
           title: Payment method
           type: string
         payment_transaction_type:
-          description: '`"" for Credit, "REF" for Refund, "COR" for Correction, "COPAY"
-            for Copay, "COINSR" for Coinsurance, "OTHR" for Other`'
+          description: '`"" for Credit, "REF" for Refund, "COR" for Correction, "COPAY" for Copay, "COINSR" for Coinsurance, "OTHR" for Other`'
           enum:
             - ""
             - REF
@@ -21649,11 +21365,7 @@ components:
           title: Patient
           type: string
         payment_method:
-          description: '`"CASH", "CHCK" for Check, "DBIT" for Debit, "CRDT" for Credit
-            Card, "AMEX" for American Express, "VISA", "MSTR" for Mastercard,
-            "DISC" for Discover, "SQR1" for Square (legacy), "SQRE" for Square,
-            "PTPA" for Patient Payments, "ONPT" for onpatient, "OTHR" for
-            Other`'
+          description: '`"CASH", "CHCK" for Check, "DBIT" for Debit, "CRDT" for Credit Card, "AMEX" for American Express, "VISA", "MSTR" for Mastercard, "DISC" for Discover, "SQR1" for Square (legacy), "SQRE" for Square, "PTPA" for Patient Payments, "ONPT" for onpatient, "OTHR" for Other`'
           enum:
             - CASH
             - CHCK
@@ -21773,8 +21485,7 @@ components:
           title: Archived
           type: boolean
         assign_by_default:
-          description: If true, consent form will always be automatically assigned to
-            appointments
+          description: If true, consent form will always be automatically assigned to appointments
           title: Assign by default
           type: boolean
         created_at:
@@ -21810,8 +21521,7 @@ components:
           title: Updated at
           type: string
         uri:
-          description: Files are passed using `multipart/form-data` encoding, but returned
-            as URLs.
+          description: Files are passed using `multipart/form-data` encoding, but returned as URLs.
           title: Uri
           type: string
       required:
@@ -21830,99 +21540,59 @@ components:
           title: Appointment
           type: string
         cob_level:
-          description: "The level of insurance the eligibility check was run on. Can be
-            one of the following: `Primary Insurance` or `Secondary Insurance`"
+          description: "The level of insurance the eligibility check was run on. Can be one of the following: `Primary Insurance` or `Secondary Insurance`"
           readOnly: true
           title: Cob level
           type: string
         coverage_details:
-          description: A variable size object containing the details of the eligibility
-            check, if returned by the clearinghouse that ran the eligibility
-            check
+          description: A variable size object containing the details of the eligibility check, if returned by the clearinghouse that ran the eligibility check
           readOnly: true
           title: Coverage details
           type: string
         coverage_subscriber:
-          description: A variable size object containing subscriber information, if
-            returned by the clearinghouse that ran the eligibility check
+          description: A variable size object containing subscriber information, if returned by the clearinghouse that ran the eligibility check
           readOnly: true
           title: Coverage subscriber
           type: string
         eligibility:
-          description: >
+          description: |
             
             Value | Description
-
             --- | ----
-
             `'1'` | Active Coverage
-
             `'2'` | Active - Full Risk Capitation
-
             `'3'` | Active - Services Capitated
-
             `'4'` | Active - Services Capitated to Primary Care Physician
-
             `'5'` | Active - Pending Investigation
-
             `'6'` | Inactive
-
             `'7'` | Inactive - Pending Eligibility Update
-
             `'8'` | Inactive - Pending Investigation
-
             `'A'` | Co-Insurance
-
             `'B'` | Co-Payment
-
             `'C'` | Deductible
-
             `'CB'` | Coverage Basis
-
             `'D'` | Benefit Description
-
             `'E'` | Exclusions
-
             `'F'` | Limitations
-
             `'G'` | Out of Pocket (Stop Loss)
-
             `'H'` | Unlimited
-
             `'I'` | Non-Covered
-
             `'J'` | Cost Containment
-
             `'K'` | Reserve
-
             `'L'` | Primary Care Provider
-
             `'M'` | Pre-existing Condition
-
             `'MC'` | Managed Care Coordinator
-
             `'N'` | Services Restricted to Following Provider
-
             `'O'` | Not Deemed a Medical Necessity
-
             `'P'` | Benefit Disclaimer
-
             `'Q'` | Second Surgical Opinion Required
-
             `'R'` | Other or Additional Payor
-
             `'S'` | Prior Year(s) History
-
             `'T'` | Card(s) Reported Lost/Stolen
-
             `'U'` | Contact Following Entity for Eligibility or Benefit Information
-
             `'V'` | Cannot Process
-
             `'W'` | Other Source of Data
-
             `'X'` | Health Care Facility
-
             `'Y'` | Spend Down
           title: Eligibility
           type: string
@@ -21932,8 +21602,7 @@ components:
           title: Patient
           type: string
         payer_name:
-          description: The name of the payer as returned by the clearinghouse that ran the
-            eligibility check
+          description: The name of the payer as returned by the clearinghouse that ran the eligibility check
           title: Payer name
           type: string
         query_date:
@@ -22333,8 +22002,7 @@ components:
     CustomAppointmentFieldType:
       properties:
         archived:
-          description: Indicates that the object has been soft-deleted and should not be
-            used
+          description: Indicates that the object has been soft-deleted and should not be used
           readOnly: true
           title: Archived
           type: boolean
@@ -22385,8 +22053,7 @@ components:
           title: Created at
           type: string
         doctor:
-          description: List custom appointment fields defined by the doctor with the given
-            ID
+          description: List custom appointment fields defined by the doctor with the given ID
           readOnly: true
           title: Doctor
           type: string
@@ -22418,8 +22085,7 @@ components:
           title: Allowed values
           type: string
         archived:
-          description: Indicates that the object has been soft-deleted, and should not be
-            used
+          description: Indicates that the object has been soft-deleted, and should not be used
           title: Archived
           type: boolean
         description:
@@ -22440,9 +22106,7 @@ components:
           title: Name
           type: string
         template_name:
-          description: Custom Patient Demographics with `template_name` set can be
-            inserted into clinical notes via Form Builder. Only letters (a-z or
-            A-Z), numbers (0-9) or underscore(_) are allowed for template name.
+          description: Custom Patient Demographics with `template_name` set can be inserted into clinical notes via Form Builder. Only letters (a-z or A-Z), numbers (0-9) or underscore(_) are allowed for template name.
           title: Template name
           type: string
       required:
@@ -22453,8 +22117,7 @@ components:
     CustomVitalType:
       properties:
         allowed_values:
-          description: If `data_type` is `single_sel`, this is the array of values in the
-            select's dropdown.
+          description: If `data_type` is `single_sel`, this is the array of values in the select's dropdown.
           items:
             description: ""
             title: ""
@@ -22462,8 +22125,7 @@ components:
           title: Allowed values
           type: array
         archived:
-          description: Indicates that the object has been soft-deleted and should not be
-            used
+          description: Indicates that the object has been soft-deleted and should not be used
           title: Archived
           type: boolean
         data_type:
@@ -22484,8 +22146,7 @@ components:
           title: Doctor
           type: string
         fraction_delimiter:
-          description: If `is_fraction_field` is true, this is the character separating
-            the numerator and denominator
+          description: If `is_fraction_field` is true, this is the character separating the numerator and denominator
           title: Fraction delimiter
           type: string
         id:
@@ -22819,8 +22480,7 @@ components:
           title: Office phone
           type: string
         practice_group:
-          description: The ID of the practice group this user belongs to. This can be used
-            to identify users in the same practice.
+          description: The ID of the practice group this user belongs to. This can be used to identify users in the same practice.
           readOnly: true
           title: Practice group
           type: string
@@ -24246,8 +23906,7 @@ components:
           title: Office
           type: integer
         payer_id:
-          description: Fee Schedule pricing specific to this payer, if null, then applies
-            as default to all payers without a more specific fee schedule.
+          description: Fee Schedule pricing specific to this payer, if null, then applies as default to all payers without a more specific fee schedule.
           title: Payer id
           type: string
         picklist_category:
@@ -24273,8 +23932,7 @@ components:
           title: Archived
           type: boolean
         attachment:
-          description: Files are passed using `multipart/form-data` encoding, but returned
-            as URLs.
+          description: Files are passed using `multipart/form-data` encoding, but returned as URLs.
           title: Attachment
           type: string
         doctor:
@@ -24310,8 +23968,7 @@ components:
           title: Message notes
           type: array
         owner:
-          description: ID of `/api/users` who owns the message, who may be the doctor
-            themselves or one of their staff members
+          description: ID of `/api/users` who owns the message, who may be the doctor themselves or one of their staff members
           title: Owner
           type: string
         patient:
@@ -24329,8 +23986,7 @@ components:
           title: Received at
           type: string
         responsible_user:
-          description: ID of `/api/users` who has been assigned to process the message,
-            who may be the doctor themselves or one of their staff members
+          description: ID of `/api/users` who has been assigned to process the message, who may be the doctor themselves or one of their staff members
           title: Responsible user
           type: string
         starred:
@@ -24391,8 +24047,7 @@ components:
           title: Updated at
           type: string
         workflow_step:
-          description: Used by doctors and their staff to keep track of what step of
-            processing the message is in
+          description: Used by doctors and their staff to keep track of what step of processing the message is in
           readOnly: true
           title: Workflow step
           type: string
@@ -24404,8 +24059,7 @@ components:
     EOBObject:
       properties:
         check_date:
-          description: Date of check. If missing, default to the date when the request is
-            made
+          description: Date of check. If missing, default to the date when the request is made
           title: Check date
           type: string
         deposit_date:
@@ -24434,11 +24088,7 @@ components:
           title: Insurance payer trace number
           type: string
         payment_method:
-          description: '`""` - Unknown, `"ACH"` - Automated Clearing House (ACH),
-            `"BOPCCP"` - Cash Concentration/Disbursement plus Addenda (CCD+)
-            (ACH), `"BOPCTX"` - Corporate Trade Exchange (CTX) (ACH), `"CHK"` -
-            Check, `"FWT"` - Federal Reserve Funds/Wire Transfer -
-            Nonrepetitive, `"VPAY"` - vPayment, `"NON"` - Non-Payment Data'
+          description: '`""` - Unknown, `"ACH"` - Automated Clearing House (ACH), `"BOPCCP"` - Cash Concentration/Disbursement plus Addenda (CCD+) (ACH), `"BOPCTX"` - Corporate Trade Exchange (CTX) (ACH), `"CHK"` - Check, `"FWT"` - Federal Reserve Funds/Wire Transfer - Nonrepetitive, `"VPAY"` - vPayment, `"NON"` - Non-Payment Data'
           enum:
             - ""
             - ACH
@@ -24503,8 +24153,7 @@ components:
           title: Expiration date
           type: string
         gmdn_pt_name:
-          description: '"GMDN PT Name" or "SNOMED CT Description" mapped to the attribute
-            in  the "GMDN PT Name"'
+          description: '"GMDN PT Name" or "SNOMED CT Description" mapped to the attribute in  the "GMDN PT Name"'
           readOnly: true
           title: GMDN PT Name
           type: string
@@ -24629,10 +24278,7 @@ components:
           title: Created at
           type: string
         current_quantity:
-          description: This field can onlyu be changed by creating new patient vaccine
-            record. Current quantity of an inventory vaccine is calculated by
-            subtract number of records pointing to this inventory from the
-            original quantity value.
+          description: This field can onlyu be changed by creating new patient vaccine record. Current quantity of an inventory vaccine is calculated by subtract number of records pointing to this inventory from the original quantity value.
           readOnly: true
           title: Current quantity
           type: integer
@@ -24690,8 +24336,7 @@ components:
           title: Sales tax applicable
           type: boolean
         status:
-          description: Status of vaccine, could be one of `active`, `inactive`,
-            `archived`, `voided`, default to `active`
+          description: Status of vaccine, could be one of `active`, `inactive`, `archived`, `voided`, default to `active`
           enum:
             - active
             - inactive
@@ -24825,18 +24470,13 @@ components:
           title: Timestamp
           type: string
         type:
-          description: >
+          description: |
             
             Value | Notes
-
             ----- | -----
-
             `"REQ"` | requisition form                                              |
-
             `"ABN"` | `ABN (Advance Beneficiary Notice)`                            |
-
             `"R-A"` | requisition form and :abbr:`ABN (Advance Beneficiary Notice)` |
-
             `"RES"` | lab results                                                   |
           enum:
             - REQ
@@ -24922,9 +24562,7 @@ components:
           title: Lab test
           type: integer
         normal_range:
-          description: When ``value_is_numeric`` is True, this parameter must be a string
-            of the form ``"<lower> <upper>", where both lower and upper are
-            numerical``
+          description: When ``value_is_numeric`` is True, this parameter must be a string of the form ``"<lower> <upper>", where both lower and upper are numerical``
           title: Normal range
           type: string
         observation_code:
@@ -25029,8 +24667,7 @@ components:
           title: Specimen total volume
           type: number
         status:
-          description: One of `"preliminary"`, `"pending"`, `"correction"`, `"final"` or
-            `"canceled"`. Defaults to `"preliminary"`
+          description: One of `"preliminary"`, `"pending"`, `"correction"`, `"final"` or `"canceled"`. Defaults to `"preliminary"`
           enum:
             - P
             - I
@@ -25427,8 +25064,7 @@ components:
           title: ID
           type: integer
         ins_name:
-          description: Can be one of the following, `1`(Primary Insurance), `2`(Secondary
-            Insurance)
+          description: Can be one of the following, `1`(Primary Insurance), `2`(Secondary Insurance)
           title: Ins name
           type: integer
         ins_paid:
@@ -25467,8 +25103,7 @@ components:
           title: Address
           type: string
         archived:
-          description: Indicates that the object has been soft-deleted and should not be
-            used
+          description: Indicates that the object has been soft-deleted and should not be used
           title: Archived
           type: boolean
         city:
@@ -26315,8 +25950,7 @@ components:
               title: Auto accident treatment duration
               type: string
             auto_accident_will_require_therapy:
-              description: Will the patient require rehabilitation and/or occupational therapy
-                as a result of the injuries sustained in this accident?
+              description: Will the patient require rehabilitation and/or occupational therapy as a result of the injuries sustained in this accident?
               title: Auto accident will require therapy
               type: boolean
             auto_accident_will_require_therapy_rec:
@@ -26380,8 +26014,7 @@ components:
           title: Default pharmacy
           type: string
         disable_sms_messages:
-          description: "If True, suppress SMS/Txt messages to this patient even if we have
-            a cell phone # for them."
+          description: "If True, suppress SMS/Txt messages to this patient even if we have a cell phone # for them."
           title: Disable sms messages
           type: boolean
         doctor:
@@ -26466,8 +26099,7 @@ components:
           title: Middle name
           type: string
         nick_name:
-          description: Common name for patient, should be used instead of first name if
-            supplied.
+          description: Common name for patient, should be used instead of first name if supplied.
           title: Nick name
           type: string
         office_phone:
@@ -26566,12 +26198,7 @@ components:
           title: Patient flags attached
           type: array
         patient_payment_profile:
-          description: One of `""`, `"Cash"`, `"Insurance"`, `"Insurance Out of Network"`,
-            `"Auto Accident"` or `"Worker's Comp"`.<br>**Note:** Patient must
-            already have either `primary_insurance` or `secondary_insurance` or
-            new `primary_insurance` or `secondary_insurance` is passed in
-            request if `Insurance`, `Auto Accident` or `Worker's Comp` payment
-            profiles are chosen.
+          description: One of `""`, `"Cash"`, `"Insurance"`, `"Insurance Out of Network"`, `"Auto Accident"` or `"Worker's Comp"`.<br>**Note:** Patient must already have either `primary_insurance` or `secondary_insurance` or new `primary_insurance` or `secondary_insurance` is passed in request if `Insurance`, `Auto Accident` or `Worker's Comp` payment profiles are chosen.
           enum:
             - ""
             - Cash
@@ -26619,10 +26246,7 @@ components:
           title: Primary care physician
           type: string
         primary_insurance:
-          description: "**Warning:** Changing insurance information may make past
-            appointments unbillable. Insurance data is also **unvalidated**; you
-            should use the [`/api/insurances`](#apiinsurances) endpoint to find
-            the appropriate insurance payer."
+          description: "**Warning:** Changing insurance information may make past appointments unbillable. Insurance data is also **unvalidated**; you should use the [`/api/insurances`](#apiinsurances) endpoint to find the appropriate insurance payer."
           properties:
             insurance_claim_office_number:
               description: Insurance office phone number
@@ -26682,8 +26306,7 @@ components:
               title: Insurance plan type
               type: string
             is_subscriber_the_patient:
-              description: True if the insurance policy is under patient's own name. Defaults
-                to true
+              description: True if the insurance policy is under patient's own name. Defaults to true
               title: Is subscriber the patient
               type: boolean
             patient_relationship_to_subscriber:
@@ -27095,8 +26718,7 @@ components:
           title: PrimaryInsurance
           type: object
         race:
-          description: One of `"blank"`, `"indian"`, `"asian"`, `"black"`, `"hawaiian"`,
-            `"white"` or `"declined"`
+          description: One of `"blank"`, `"indian"`, `"asian"`, `"black"`, `"hawaiian"`, `"white"` or `"declined"`
           enum:
             - blank
             - indian
@@ -27148,8 +26770,7 @@ components:
               title: Provider number
               type: string
             provider_qualifier:
-              description: "Can be one of following, `''`, `'0B'`(State License #),
-                `'1G'`(Provider UPIN #), `'G2'`(Provider Commercial #)"
+              description: "Can be one of following, `''`, `'0B'`(State License #), `'1G'`(Provider UPIN #), `'G2'`(Provider Commercial #)"
               enum:
                 - ""
                 - 0B
@@ -27158,51 +26779,7 @@ components:
               title: Provider qualifier
               type: string
             specialty:
-              description: Can be one of following, `''`, `'Acupuncture'`, `'Advanced Practice
-                Midwife'`, `'Aesthetic Medicine'`, `'Aesthetician'`,
-                `'Allergist/Immunologist'`, `'Anesthesiologist'`, `'Cardiac
-                Electrophysiologist'`, `'Cardiologist'`, `'Cardiothoracic
-                Surgeon'`, `'Child/Adolescent Psychiatry'`, `'Chiropractor'`,
-                `'Clinical Social Worker'`, `'Colorectal Surgeon'`,
-                `'Correactology'`, `'Cosmetic Medicine'`, `'Counselor Mental
-                Health'`, `'Counselor Professional'`, `'Counselor'`,
-                `'Dentist'`, `'Diabetology'`, `'Dermatologist'`, `'Diagnostic
-                Medical Sonographer'`, `'Dietitian, Registered'`,
-                `'Ear-Nose-Throat Specialist (ENT)'`, `'Emergency Medicine
-                Physician'`, `'Endocrinologist'`, `'Endodontist'`,
-                `'Epidemiologist'`, `'Family Practitioner'`,
-                `'Gastroenterologist'`, `'General Practice'`, `'General
-                Surgeon'`, `'Geneticist'`, `'Geriatrician'`, `'Gerontologist'`,
-                `'Gynecologist (no OB)'`, `'Gynegologic Oncologist'`, `'Hand
-                Surgeon'`, `'Hematologist'`, `'Home Care'`, `'Hospice'`,
-                `'Hospitalist'`, `'Infectious Disease Specialist'`,
-                `'Integrative and Functional Medicine'`, `'Integrative
-                Medicine'`, `'Internist'`, `'Interventional Radiology'`,
-                `'Laboratory Medicine Specialist'`, `'Laser Surgery'`, `'Massage
-                Therapist'`, `'Naturopathic Physician'`, `'Neonatologist'`,
-                `'Nephrologist'`, `'Neurologist'`, `'Neuropsychology'`,
-                `'Neurosurgeon'`, `'Not Actively Practicing'`, `'Nuclear
-                Medicine Specialist'`, `'Nurse Practitioner'`, `'Nursing'`,
-                `'Nutritionist'`, `'Obstetrician/Gynecologist'`, `'Occupational
-                Medicine'`, `'Occupational Therapist'`, `'Oncologist'`,
-                `'Ophthalmologist'`, `'Optometrist'`, `'Oral Surgeon'`,
-                `'Orofacial Pain'`, `'Orthodontist'`, `'Orthopedic Surgeon'`,
-                `'Orthotist'`, `'Other'`, `'Pain Management Specialist'`,
-                `'Pathologist'`, `'Pediatric Dentist'`, `'Pediatric
-                Gastroenterology'`, `'Pediatric Surgeon'`, `'Pediatrician'`,
-                `'Perinatologist'`, `'Periodontist'`, `'Physical Medicine and
-                Rehab Specialist'`, `'Physical Therapist'`, `'Physician
-                Assistant'`, `'Plastic Surgeon'`, `'Podiatrist'`,
-                `'Preventive-Aging Medicine'`, `'Preventive
-                Medicine/Occupational-Environmental Medicine'`, `'Primary Care
-                Physician'`, `'Prosthetist'`, `'Prosthodontist'`,
-                `'Psychiatrist'`, `'Psychologist'`, `'Public Health
-                Professional'`, `'Pulmonologist'`, `'Radiation Oncologist'`,
-                `'Radiologist'`, `'Registered Nurse'`, `'Religious Nonmedical
-                Practitioner'`, `'Reproductive Endocrinologist'`, `'Reproductive
-                Medicine'`, `'Rheumatologist'`, `'Sleep Medicine'`,
-                `'Speech-Language Pathologist'`, `'Sports Medicine Specialist'`,
-                `'Urologist'`, `'Urgent Care'`, `'Vascular Surgeon'`
+              description: Can be one of following, `''`, `'Acupuncture'`, `'Advanced Practice Midwife'`, `'Aesthetic Medicine'`, `'Aesthetician'`, `'Allergist/Immunologist'`, `'Anesthesiologist'`, `'Cardiac Electrophysiologist'`, `'Cardiologist'`, `'Cardiothoracic Surgeon'`, `'Child/Adolescent Psychiatry'`, `'Chiropractor'`, `'Clinical Social Worker'`, `'Colorectal Surgeon'`, `'Correactology'`, `'Cosmetic Medicine'`, `'Counselor Mental Health'`, `'Counselor Professional'`, `'Counselor'`, `'Dentist'`, `'Diabetology'`, `'Dermatologist'`, `'Diagnostic Medical Sonographer'`, `'Dietitian, Registered'`, `'Ear-Nose-Throat Specialist (ENT)'`, `'Emergency Medicine Physician'`, `'Endocrinologist'`, `'Endodontist'`, `'Epidemiologist'`, `'Family Practitioner'`, `'Gastroenterologist'`, `'General Practice'`, `'General Surgeon'`, `'Geneticist'`, `'Geriatrician'`, `'Gerontologist'`, `'Gynecologist (no OB)'`, `'Gynegologic Oncologist'`, `'Hand Surgeon'`, `'Hematologist'`, `'Home Care'`, `'Hospice'`, `'Hospitalist'`, `'Infectious Disease Specialist'`, `'Integrative and Functional Medicine'`, `'Integrative Medicine'`, `'Internist'`, `'Interventional Radiology'`, `'Laboratory Medicine Specialist'`, `'Laser Surgery'`, `'Massage Therapist'`, `'Naturopathic Physician'`, `'Neonatologist'`, `'Nephrologist'`, `'Neurologist'`, `'Neuropsychology'`, `'Neurosurgeon'`, `'Not Actively Practicing'`, `'Nuclear Medicine Specialist'`, `'Nurse Practitioner'`, `'Nursing'`, `'Nutritionist'`, `'Obstetrician/Gynecologist'`, `'Occupational Medicine'`, `'Occupational Therapist'`, `'Oncologist'`, `'Ophthalmologist'`, `'Optometrist'`, `'Oral Surgeon'`, `'Orofacial Pain'`, `'Orthodontist'`, `'Orthopedic Surgeon'`, `'Orthotist'`, `'Other'`, `'Pain Management Specialist'`, `'Pathologist'`, `'Pediatric Dentist'`, `'Pediatric Gastroenterology'`, `'Pediatric Surgeon'`, `'Pediatrician'`, `'Perinatologist'`, `'Periodontist'`, `'Physical Medicine and Rehab Specialist'`, `'Physical Therapist'`, `'Physician Assistant'`, `'Plastic Surgeon'`, `'Podiatrist'`, `'Preventive-Aging Medicine'`, `'Preventive Medicine/Occupational-Environmental Medicine'`, `'Primary Care Physician'`, `'Prosthetist'`, `'Prosthodontist'`, `'Psychiatrist'`, `'Psychologist'`, `'Public Health Professional'`, `'Pulmonologist'`, `'Radiation Oncologist'`, `'Radiologist'`, `'Registered Nurse'`, `'Religious Nonmedical Practitioner'`, `'Reproductive Endocrinologist'`, `'Reproductive Medicine'`, `'Rheumatologist'`, `'Sleep Medicine'`, `'Speech-Language Pathologist'`, `'Sports Medicine Specialist'`, `'Urologist'`, `'Urgent Care'`, `'Vascular Surgeon'`
               enum:
                 - ""
                 - Acupuncture
@@ -27342,10 +26919,7 @@ components:
           title: Responsible party relation
           type: string
         secondary_insurance:
-          description: "**Warning:** Changing insurance information may make past
-            appointments unbillable. Insurance data is also **unvalidated**; you
-            should use the [`/api/insurances`](#apiinsurances) endpoint to find
-            the appropriate insurance payer."
+          description: "**Warning:** Changing insurance information may make past appointments unbillable. Insurance data is also **unvalidated**; you should use the [`/api/insurances`](#apiinsurances) endpoint to find the appropriate insurance payer."
           properties:
             insurance_claim_office_number:
               description: Insurance office phone number
@@ -27405,8 +26979,7 @@ components:
               title: Insurance plan type
               type: string
             is_subscriber_the_patient:
-              description: True if the insurance policy is under patient's own name. Defaults
-                to true
+              description: True if the insurance policy is under patient's own name. Defaults to true
               title: Is subscriber the patient
               type: boolean
             patient_relationship_to_subscriber:
@@ -27826,10 +27399,7 @@ components:
           title: State
           type: string
         tertiary_insurance:
-          description: "**Warning:** Changing insurance information may make past
-            appointments unbillable. Insurance data is also **unvalidated**; you
-            should use the [`/api/insurances`](#apiinsurances) endpoint to find
-            the appropriate insurance payer."
+          description: "**Warning:** Changing insurance information may make past appointments unbillable. Insurance data is also **unvalidated**; you should use the [`/api/insurances`](#apiinsurances) endpoint to find the appropriate insurance payer."
           properties:
             insurance_claim_office_number:
               description: Insurance office phone number
@@ -27889,8 +27459,7 @@ components:
               title: Insurance plan type
               type: string
             is_subscriber_the_patient:
-              description: True if the insurance policy is under patient's own name. Defaults
-                to true
+              description: True if the insurance policy is under patient's own name. Defaults to true
               title: Is subscriber the patient
               type: boolean
             patient_relationship_to_subscriber:
@@ -28537,8 +28106,7 @@ components:
           title: Patient
           type: integer
         reaction:
-          description: Short description of the patient's allergic reaction, such as
-            `"Hives"`
+          description: Short description of the patient's allergic reaction, such as `"Hives"`
           title: Reaction
           type: string
         rxnorm:
@@ -28546,9 +28114,7 @@ components:
           title: Rxnorm
           type: string
         snomed_reaction:
-          description: SNOMED code for the reaction. For possible SnoMED codes, please see
-            [this link from PHIN
-            VADS](https://phinvads.cdc.gov/vads/ViewValueSet.action?id=896AABB4-5ACD-DE11-913D-0015173D1785)
+          description: SNOMED code for the reaction. For possible SnoMED codes, please see [this link from PHIN VADS](https://phinvads.cdc.gov/vads/ViewValueSet.action?id=896AABB4-5ACD-DE11-913D-0015173D1785)
           enum:
             - ""
             - "14669001"
@@ -28573,8 +28139,7 @@ components:
           title: Snomed reaction
           type: string
         status:
-          description: One of `"active"`, `"inactive"`. If absent in `POST`, default to
-            `"active"`
+          description: One of `"active"`, `"inactive"`. If absent in `POST`, default to `"active"`
           enum:
             - active
             - inactive
@@ -28589,8 +28154,7 @@ components:
     PatientAmendment:
       properties:
         amendment_file:
-          description: A PDF file containing the amended information for the patient's
-            record
+          description: A PDF file containing the amended information for the patient's record
           title: Amendment file
           type: string
         amendment_name:
@@ -28598,9 +28162,7 @@ components:
           title: Amendment name
           type: string
         appointment:
-          description: ID of the appointment to which the amendment applies, if any. If
-            present, the `amendment_file` will be appended to the clinical note
-            for this appointment.
+          description: ID of the appointment to which the amendment applies, if any. If present, the `amendment_file` will be appended to the clinical note for this appointment.
           title: Appointment
           type: integer
         comments:
@@ -28701,8 +28263,7 @@ components:
           title: Date stopped taking
           type: string
         daw:
-          description: If true, the prescription should be dispensed as written and not
-            substituted
+          description: If true, the prescription should be dispensed as written and not substituted
           title: Daw
           type: boolean
         dispense_quantity:
@@ -28714,9 +28275,7 @@ components:
           title: Doctor
           type: integer
         dosage_quantity:
-          description: Please note, this used to be an decimal field, you can still pass
-            decimal value to it. Or you can pass in some formatted string if
-            needed.
+          description: Please note, this used to be an decimal field, you can still pass decimal value to it. Or you can pass in some formatted string if needed.
           title: Dosage quantity
           type: string
         dosage_units:
@@ -28753,11 +28312,7 @@ components:
           title: Number refills
           type: integer
         order_status:
-          description: One of `""`, `"Ordered"`, `"Administered during visit"`,
-            `"Electronic eRx Sent"`, `"Phoned into Pharmacy"`, `"Faxed to
-            Pharmacy"`, `"Paper Rx"`, `"Prescription Printed"`,
-            `"Discontinued"`, `"Prescribed by other Dr"` or `"Over the
-            Counter"`. If omitted in writing, default to `""`
+          description: One of `""`, `"Ordered"`, `"Administered during visit"`, `"Electronic eRx Sent"`, `"Phoned into Pharmacy"`, `"Faxed to Pharmacy"`, `"Paper Rx"`, `"Prescription Printed"`, `"Discontinued"`, `"Prescribed by other Dr"` or `"Over the Counter"`. If omitted in writing, default to `""`
           enum:
             - ""
             - Ordered
@@ -28797,8 +28352,7 @@ components:
           title: Signature note
           type: string
         status:
-          description: If present, one of `"active"` or `"inactive"`. If omitted in
-            writing, default to `"active"`
+          description: If present, one of `"active"` or `"inactive"`. If omitted in writing, default to `"active"`
           enum:
             - active
             - inactive
@@ -28923,8 +28477,7 @@ components:
           title: Comments
           type: string
         doctor_signoff:
-          description: Check this box when the doctor has reviewed the lab result and
-            taken appropriate action.
+          description: Check this box when the doctor has reviewed the lab result and taken appropriate action.
           title: Doctor signoff
           type: boolean
         id:
@@ -29190,8 +28743,7 @@ components:
           title: ID
           type: integer
         info_url:
-          description: External URL with more information about the problem, intended for
-            patient education
+          description: External URL with more information about the problem, intended for patient education
           readOnly: true
           title: Info url
           type: string
@@ -29212,8 +28764,7 @@ components:
           title: SnoMED CT code
           type: string
         status:
-          description: Either `active`, `inactive` or `resolved`. If omitted in writing,
-            default to `active`
+          description: Either `active`, `inactive` or `resolved`. If omitted in writing, default to `active`
           enum:
             - active
             - inactive
@@ -29303,8 +28854,7 @@ components:
           title: Comments
           type: string
         completion_status:
-          description: Vaccination status, can be `CP`(Complete), `RE`(Refused), `NA`(Not
-            administered), `PA`(Partially administered)
+          description: Vaccination status, can be `CP`(Complete), `RE`(Refused), `NA`(Not administered), `PA`(Partially administered)
           enum:
             - CP
             - RE
@@ -29513,8 +29063,7 @@ components:
           title: Patient
           type: integer
         scheduled_time:
-          description: Date of phone call, if `appointment` is set, this field will be set
-            as the `scheduled_time` of that appointment
+          description: Date of phone call, if `appointment` is set, this field will be set as the `scheduled_time` of that appointment
           title: Scheduled time
           type: string
         title:
@@ -29552,11 +29101,7 @@ components:
           title: ID
           type: integer
         json_data:
-          description: Data sent along with `NewRx`, `RefillRequest`, and
-            `RefillResponses` messages. The format varies, but most likely it
-            will contain `BenefitsCoordination` section with insurance info and
-            `MedicationPrescribed` with medication info. `Patient`, `Pharmacy`,
-            and `Prescriber` are also usually present.
+          description: Data sent along with `NewRx`, `RefillRequest`, and `RefillResponses` messages. The format varies, but most likely it will contain `BenefitsCoordination` section with insurance info and `MedicationPrescribed` with medication info. `Patient`, `Pharmacy`, and `Prescriber` are also usually present.
           readOnly: true
           title: Json data
           type: string
@@ -29569,22 +29114,16 @@ components:
           title: Message direction
           type: string
         message_status:
-          description: "Message status for Incoming and Outgoing values. Success message
-            for message_type are: `NewRx` : `Sent`, `RefillRequest` :
-            `Received`, `RefillResponse` : `Sent`."
+          description: "Message status for Incoming and Outgoing values. Success message for message_type are: `NewRx` : `Sent`, `RefillRequest` : `Received`, `RefillResponse` : `Sent`."
           readOnly: true
           title: Message status
           type: string
         message_type:
-          description: Possible values are `NewRx` for outgoing new prescriptions,
-            `RefillRequest` for incoming refill requests, `RefillResponse` for
-            outgoing refill responses, `Error` for incoming errors, `Status` and
-            `Verify` for incoming status reports from Surescripts.
+          description: Possible values are `NewRx` for outgoing new prescriptions, `RefillRequest` for incoming refill requests, `RefillResponse` for outgoing refill responses, `Error` for incoming errors, `Status` and `Verify` for incoming status reports from Surescripts.
           title: Message type
           type: string
         parent_message:
-          description: Refers to the parent message, used for refill responses and
-            incoming error/status reports.
+          description: Refers to the parent message, used for refill responses and incoming error/status reports.
           readOnly: true
           title: Parent message
           type: string
@@ -29601,8 +29140,7 @@ components:
     ReminderProfile:
       properties:
         doctor:
-          description: Doctor who created the profile. Other doctors in the practice group
-            may have access to their profiles
+          description: Doctor who created the profile. Other doctors in the practice group may have access to their profiles
           title: Doctor
           type: integer
         id:
@@ -29670,9 +29208,7 @@ components:
           title: Doctor
           type: integer
         document:
-          description: When creating, if you receive response as 201, but this field is
-            `null`, please send a `GET` request with the created object's ID to
-            retrieve the updated file URL
+          description: When creating, if you receive response as 201, but this field is `null`, please send a `GET` request with the created object's ID to retrieve the updated file URL
           title: Document
           type: string
         id:
@@ -29681,9 +29217,7 @@ components:
           title: ID
           type: integer
         metatags:
-          description: Array of tags represented as string. This should be quoted--e.g.
-            `'["a", "b"]'`--since this endpoint requires `multipart/form-data`
-            encoding
+          description: Array of tags represented as string. This should be quoted--e.g. `'["a", "b"]'`--since this endpoint requires `multipart/form-data` encoding
           title: Metatags
           type: string
         patient:
@@ -29706,8 +29240,7 @@ components:
     SoapNoteCustomReport:
       properties:
         archived:
-          description: Indicates that the doctor has soft-deleted this template, and will
-            not use it for future appointments
+          description: Indicates that the doctor has soft-deleted this template, and will not use it for future appointments
           readOnly: true
           title: Archived
           type: boolean
@@ -29733,9 +29266,7 @@ components:
                 title: Clinical Note Template
                 type: integer
               data_type:
-                description: One of `""`, `"Checkbox"`, `"NullCheckbox"`, `"String"`,
-                  `"TwoStrings"`, `"FreeDraw"`, `"Photo"`, `"Header"`,
-                  `"Subheader"`
+                description: One of `""`, `"Checkbox"`, `"NullCheckbox"`, `"String"`, `"TwoStrings"`, `"FreeDraw"`, `"Photo"`, `"Header"`, `"Subheader"`
                 title: Data Type
                 type: string
               name:
@@ -29743,8 +29274,7 @@ components:
                 title: Name
                 type: string
               required:
-                description: Indicates that a note should not be locked unless a value is
-                  provided for this field
+                description: Indicates that a note should not be locked unless a value is provided for this field
                 title: Required
                 type: boolean
             title: Clinical Note Field
@@ -29797,8 +29327,7 @@ components:
     SoapNoteLineItemFieldType:
       properties:
         allowed_values:
-          description: Value options the field type relies on if applicable, otherwise it
-            will be an empty array
+          description: Value options the field type relies on if applicable, otherwise it will be an empty array
           items:
             description: Value option
             title: ""
@@ -29806,13 +29335,11 @@ components:
           title: Allowed values
           type: array
         archived:
-          description: Indicates that the field has been soft-deleted by the doctor and
-            will not be used in future notes
+          description: Indicates that the field has been soft-deleted by the doctor and will not be used in future notes
           title: Archived
           type: boolean
         clinical_note_template:
-          description: ID of the `/api/clinical_note_templates` object that the field
-            belongs to
+          description: ID of the `/api/clinical_note_templates` object that the field belongs to
           readOnly: true
           title: Clinical note template
           type: string
@@ -29821,8 +29348,7 @@ components:
           title: Comment
           type: string
         data_type:
-          description: One of `""`, `"Checkbox"`, `"NullCheckbox"`, `"String"`,
-            `"TwoStrings"`, `"FreeDraw"`, `"Photo"`, `"Header"`, `"Subheader"`
+          description: One of `""`, `"Checkbox"`, `"NullCheckbox"`, `"String"`, `"TwoStrings"`, `"FreeDraw"`, `"Photo"`, `"Header"`, `"Subheader"`
           title: Data type
           type: string
         id:
@@ -29835,8 +29361,7 @@ components:
           title: Name
           type: string
         required:
-          description: Indicates that a note should not be locked unless a value is
-            provided for this field
+          description: Indicates that a note should not be locked unless a value is provided for this field
           title: Required
           type: boolean
       type: object
@@ -29849,8 +29374,7 @@ components:
           title: Appointment
           type: integer
         clinical_note_field:
-          description: ID of `/api/clinical_note_field_types` object that indicates type
-            of the value
+          description: ID of `/api/clinical_note_field_types` object that indicates type of the value
           title: Clinical note field
           type: integer
         created_at:
@@ -29869,23 +29393,15 @@ components:
           title: Updated at
           type: string
         value:
-          description: >
+          description: |
             Value of the field. Interpretation varies by field type.
-
             `clinical_note_field.data_type` | Value | Description
-
             ------------------------------- | ----- | -----------
-
             `"Header"` | string | 
-
             `"SubHeader"` | string |
-
             `"String"` | string | If field is single/multiple select field, make sure value presents in allowed values set.
-
             `"TwoStrings"` | string | String is seperated by `"/"`
-
             `"NullCheckbox"` | string | Can be `"0"`, `"1"`, `"2"`, `"0"`-`Not selected`, `"1"`-`No`, `"2"`-`Yes`
-
             `"Checkbox"` | string | Can be `"True"`, `"False"`
           title: Value
           type: string
@@ -29924,8 +29440,7 @@ components:
                 title: Task
                 type: integer
               type:
-                description: Can be one of `"Appointment"`, `"Patient"`, `"Message"`,
-                  `"Document"`, `"Lab order"`
+                description: Can be one of `"Appointment"`, `"Patient"`, `"Message"`, `"Document"`, `"Lab order"`
                 enum:
                   - Patient
                   - Appointment
@@ -30146,8 +29661,7 @@ components:
           title: Practice group
           type: integer
         status_category:
-          description: Can be one of the following `O`(open), `P`(In progress), `H`(On
-            hold), `C`(Complete), default to `O`(Open)
+          description: Can be one of the following `O`(open), `P`(In progress), `H`(On hold), `C`(Complete), default to `O`(Open)
           enum:
             - O
             - P
@@ -30243,8 +29757,7 @@ components:
     UserProfile:
       properties:
         doctor:
-          description: For staff members, this is their primary physician's ID. For
-            doctors, it is their own ID.
+          description: For staff members, this is their primary physician's ID. For doctors, it is their own ID.
           readOnly: true
           title: Doctor
           type: string
@@ -30269,8 +29782,7 @@ components:
           title: Permissions
           type: string
         practice_group:
-          description: The ID of the practice group this user belongs to. This can be used
-            to identify users in the same practice.
+          description: The ID of the practice group this user belongs to. This can be used to identify users in the same practice.
           readOnly: true
           title: Practice group
           type: string
@@ -30334,23 +29846,18 @@ components:
             billing:write: Modify billing information.
             calendar:read: View your appointments.
             calendar:write: Schedule appointments and modify the data associated with them.
-            clinical:read: View clinical information, such as vitals, clinical notes,
-              medications and diagnoses.
-            clinical:write: Create and modify clinical information, such as vitals, clinical
-              notes, medications and diagnoses.
+            clinical:read: View clinical information, such as vitals, clinical notes, medications and diagnoses.
+            clinical:write: Create and modify clinical information, such as vitals, clinical notes, medications and diagnoses.
             labs:read: View patient lab orders and results.
             labs:write: Create and modify patient lab orders and results.
             messages:read: View messages in your message center.
             messages:write: Create and modify messages in your message center.
             patients:read: View detailed patient information.
-            patients:summary:read: View summary information about your patients. This
-              includes patients' name, chart_id, age, and gender.
+            patients:summary:read: View summary information about your patients. This includes patients' name, chart_id, age, and gender.
             patients:summary:write: Create new patients and set their name, chart_id, age, and gender.
             patients:write: Create patients and modify detailed patient information.
-            settings:read: View resources that requires Settings permission, such as custom
-              fields.
-            settings:write: Create resources that requires Settings permission, such as
-              custom fields.
+            settings:read: View resources that requires Settings permission, such as custom fields.
+            settings:write: Create resources that requires Settings permission, such as custom fields.
             tasks:read: View tasks in your tasks center
             tasks:write: Create and modify tasks in your tasks center
             user:read: View your basic information.

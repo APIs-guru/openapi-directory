@@ -22,8 +22,7 @@ produces:
 paths:
   /coursedesigns:
     get:
-      description: Lists all global course design templates. Only api callers that
-        have full access can call this method.
+      description: Lists all global course design templates. Only api callers that have full access can call this method.
       parameters: []
       responses:
         "200":
@@ -41,9 +40,8 @@ paths:
         - Course Designs
   /extorgunit:
     get:
-      description: >
-        Returns information about the organization unit with the specified
-        external id.
+      description: |
+        Returns information about the organization unit with the specified external id.
       parameters:
         - description: The external id of the organization unit
           format: extid
@@ -137,10 +135,8 @@ paths:
         - Users
   /globalusergroups:
     get:
-      description: >
-        Returns a list of Global User Groups. Global User Groups are set up
-        for the realm, and will generate groups that can be used on the client
-        level.
+      description: |
+        Returns a list of Global User Groups. Global User Groups are set up for the realm, and will generate groups that can be used on the client level.
       parameters: []
       responses:
         "200":
@@ -158,9 +154,8 @@ paths:
         - Global User Groups
   "/globalusergroups/{groupid}/members":
     get:
-      description: >
-        Returns a list of all members in User Groups that are based on the
-        Global Group with this groupid.
+      description: |
+        Returns a list of all members in User Groups that are based on the Global Group with this groupid.
       parameters:
         - description: ID of group
           format: int64
@@ -184,10 +179,8 @@ paths:
         - Global User Groups
   /orgunits:
     get:
-      description: >
-        The orgunits endpoint returns information about the available
-        organization units (orgunits).
-
+      description: |
+        The orgunits endpoint returns information about the available organization units (orgunits).
         The response includes the display name, internal and external id and client number.
       responses:
         "200":
@@ -215,8 +208,7 @@ paths:
           schema:
             $ref: "#/definitions/AddOrganizationUnitResponse"
         "409":
-          description: An organization with the same clientNumber or external id already
-            existed.
+          description: An organization with the same clientNumber or external id already existed.
         default:
           description: Unexpected error
           schema:
@@ -226,9 +218,8 @@ paths:
         - Organization Units
   "/orgunits/{orgid}":
     get:
-      description: >
+      description: |
         Returns information about the specified organization unit.
-
         The response includes the display name, internal and external id and client number.
       parameters:
         - description: Id of the organization unit
@@ -266,8 +257,7 @@ paths:
         "201":
           description: Organization Unit was successfully updated
         "409":
-          description: An organization with the same clientNumber or external id already
-            existed.
+          description: An organization with the same clientNumber or external id already existed.
         default:
           description: Unexpected error
           schema:
@@ -332,9 +322,8 @@ paths:
         - Projects
   "/orgunits/{orgid}/projects/{projectid}":
     delete:
-      description: >
-        Deletes the project. The project can only be deleted if the project
-        do not contain any participants.
+      description: |
+        Deletes the project. The project can only be deleted if the project do not contain any participants.
       parameters:
         - description: Id of the organization unit
           in: path
@@ -389,9 +378,8 @@ paths:
       tags:
         - Projects
     patch:
-      description: >
-        Updates information about a project. Values are only updated if the
-        fields are specified in the input
+      description: |
+        Updates information about a project. Values are only updated if the fields are specified in the input
       parameters:
         - description: Id of the organization unit
           in: path
@@ -455,11 +443,8 @@ paths:
       tags:
         - Projects
     post:
-      description: >
-        Add a user to the project. Participant information is created for
-        the user. In the body object, only one of either email or userid must be
-        specified. The participant needs to be activated before it the user can
-        access it.
+      description: |
+        Add a user to the project. Participant information is created for the user. In the body object, only one of either email or userid must be specified. The participant needs to be activated before it the user can access it.
       parameters:
         - description: Id of the organization unit
           in: path
@@ -485,8 +470,7 @@ paths:
               format: uri
               type: string
         "409":
-          description: Participant with the same email already existed. Location header
-            contains the url to the already existing participant.
+          description: Participant with the same email already existed. Location header contains the url to the already existing participant.
           headers:
             location:
               description: Location to the participant
@@ -501,14 +485,10 @@ paths:
         - Projects
   "/orgunits/{orgid}/projects/{projectid}/participants/${participantId}":
     delete:
-      description: >
-        Deletes a participant. The user itself will still remain but any
-        state related to the project will be deleted.
-
+      description: |
+        Deletes a participant. The user itself will still remain but any state related to the project will be deleted.
         It might not be possible due to constraints from the products in the project to delete the participant. However
-
         this can only be determined at the time of the delete. If a delete fails the participant will have their inError
-
         flag set.
       parameters:
         - description: Id of the organization unit
@@ -580,11 +560,8 @@ paths:
         - Projects
   "/orgunits/{orgid}/projects/{projectid}/participants/${participantId}/loginlink":
     post:
-      description: >
-        Returns a single sign on link for the participant. The link is only
-        usable once and should be used directly. The link expires after a few
-        minutes.
-
+      description: |
+        Returns a single sign on link for the participant. The link is only usable once and should be used directly. The link expires after a few minutes.
 
         This operation requires the *login link* permission.
       parameters:
@@ -609,8 +586,7 @@ paths:
           schema:
             $ref: "#/definitions/LoginLink"
         "422":
-          description: The participant is not in a state where a loginlink is possible to
-            get
+          description: The participant is not in a state where a loginlink is possible to get
           schema:
             $ref: "#/definitions/Error"
         default:
@@ -734,9 +710,8 @@ paths:
         - User Groups
   "/orgunits/{orgid}/usergroups/{groupid}/members":
     get:
-      description: >
-        Returns a list of all members in User Groups that are based on the
-        Global Group with this groupid.
+      description: |
+        Returns a list of all members in User Groups that are based on the Global Group with this groupid.
       parameters:
         - description: ID of organization
           format: int64
@@ -832,8 +807,7 @@ paths:
         - User Groups
   /users:
     get:
-      description: Lists all users. Only api callers that have full access can call
-        this method.
+      description: Lists all users. Only api callers that have full access can call this method.
       parameters:
         - default: 5000
           description: The maximum number of users to return
@@ -877,9 +851,7 @@ paths:
       tags:
         - Users
     post:
-      description: Adds a user. No two users can have the same email address. Email is
-        saved WITH case but compared regardless of case. Email can be changed
-        for a user assuming it doesn't cause a conflict.
+      description: Adds a user. No two users can have the same email address. Email is saved WITH case but compared regardless of case. Email can be changed for a user assuming it doesn't cause a conflict.
       parameters:
         - in: body
           name: body
@@ -925,9 +897,7 @@ paths:
       tags:
         - Users
     patch:
-      description: Updates a user. All values that have a key defined in the input
-        will be set. So if a value should not be updated omit it totally from
-        the input, otherwise it will be unset.
+      description: Updates a user. All values that have a key defined in the input will be set. So if a value should not be updated omit it totally from the input, otherwise it will be unset.
       parameters:
         - description: The user id
           format: uuid
@@ -954,11 +924,8 @@ paths:
         - Users
   "/users/{userid}/pic?key={APIKEY}":
     get:
-      description: >
-        Returns a thumbnail picture of the user. This can either be a
-        selected picture or an auto generated image. This method doesn't require
-        a full sign in. The api key is sufficient.
-
+      description: |
+        Returns a thumbnail picture of the user. This can either be a selected picture or an auto generated image. This method doesn't require a full sign in. The api key is sufficient.
         The image is square and is likely, but not necessary, to be in 128x128 PNG format. However the format will always be either PNG, JPEG or GIF.
       parameters:
         - description: The user id
@@ -972,8 +939,7 @@ paths:
           type: string
       responses:
         "200":
-          description: An image. Check the Content-Type header to determine which type the
-            returned image have
+          description: An image. Check the Content-Type header to determine which type the returned image have
         "302":
           description: A redirect to the profile
         default:
@@ -985,10 +951,8 @@ paths:
         - Users
   "/users/{userid}/projectParticipations":
     get:
-      description: >
-        Returns information about the projects the user is a participant
-        in. Only the projects that the current token have access to will be
-        listed.
+      description: |
+        Returns information about the projects the user is a participant in. Only the projects that the current token have access to will be listed.
       parameters:
         - description: A user id
           format: uuid
@@ -1033,13 +997,11 @@ definitions:
         format: uuid
         type: string
       clientNumber:
-        description: A client number. Sometimes used when communicating with external
-          system. Must be unique if specified.
+        description: A client number. Sometimes used when communicating with external system. Must be unique if specified.
         example: X-1234
         type: string
       country:
-        description: The country code that best matches the organization unit. If
-          unspecified the platform default will be set.
+        description: The country code that best matches the organization unit. If unspecified the platform default will be set.
         example: se
         format: locale
         type: string
@@ -1067,8 +1029,7 @@ definitions:
   AddParticipant:
     properties:
       email:
-        description: The email of the user. If no user exists with the specified email a
-          user will be created with default values and the specified email.
+        description: The email of the user. If no user exists with the specified email a user will be created with default values and the specified email.
         example: user@example.com
         format: email
         type: string
@@ -1087,8 +1048,7 @@ definitions:
         format: countrycode
         type: string
       createdBy:
-        description: The id of the user that created the project. If the creator is not
-          known this value can be *null* or not specified
+        description: The id of the user that created the project. If the creator is not known this value can be *null* or not specified
         example: 8c102c8e-fabd-4c8a-b245-4d2d2f77fc4b
         format: uuid
         type: string
@@ -1097,8 +1057,7 @@ definitions:
         format: int64
         type: integer
       locale:
-        description: The primary locale for this project. Default value will be used if
-          not specified
+        description: The primary locale for this project. Default value will be used if not specified
         example: en-US
         format: locale
         type: string
@@ -1114,12 +1073,10 @@ definitions:
         format: timezone
         type: string
       userDescription:
-        description: The description presented to participants. Do not specify for
-          default value from design
+        description: The description presented to participants. Do not specify for default value from design
         type: string
       userTitle:
-        description: The title presented to participants. Do not specify for default
-          value from design
+        description: The title presented to participants. Do not specify for default value from design
         type: string
     required:
       - name
@@ -1141,8 +1098,7 @@ definitions:
         description: True if the user should be locked from the system
         type: boolean
       homeOrg:
-        description: The primary organization for the user. Must match the id of an
-          Organization Unit.
+        description: The primary organization for the user. Must match the id of an Organization Unit.
         example: 1234
         format: int64
         type: integer
@@ -1151,14 +1107,12 @@ definitions:
         example: Doe
         format: string
       locale:
-        description: The user's preferred language/locale setting. Affects date and
-          number formatting.
+        description: The user's preferred language/locale setting. Affects date and number formatting.
         example: en-US
         format: locale
         type: string
       primaryEmail:
-        description: The primary email for the user. Used for communication from the
-          platform.
+        description: The primary email for the user. Used for communication from the platform.
         example: jane.doe@example.com
         type: string
   AddUserGroup:
@@ -1340,8 +1294,7 @@ definitions:
         description: The external id (foreign key). Must not exceed 255 characters.
         type: string
       id:
-        description: Unique identifier representing a specific organization unit. Id
-          numbers are never reused.
+        description: Unique identifier representing a specific organization unit. Id numbers are never reused.
         format: int64
         type: integer
       name:
@@ -1366,10 +1319,7 @@ definitions:
   Participation:
     properties:
       accessLink:
-        description: "A link to access this particular participation. The link requires
-          the user to login. Users that access the platform the first time must
-          set a password. This value is null if this participation is not
-          activated. "
+        description: "A link to access this particular participation. The link requires the user to login. Users that access the platform the first time must set a password. This value is null if this participation is not activated. "
         example: http://www.example.com/accesslink/123451
         format: url
         type: string
@@ -1387,54 +1337,44 @@ definitions:
         format: int64
         type: number
       errorMessage:
-        description: An optional error message that may describe why the participation
-          is in error state.
+        description: An optional error message that may describe why the participation is in error state.
         type: string
       expiration:
-        description: The timestamp when this participation will expire. Expiration never
-          happens if this value is *null*.
+        description: The timestamp when this participation will expire. Expiration never happens if this value is *null*.
         format: date-time
         type: string
       externalId:
         description: The external id (foreign key). Must not exceed 255 characters.
         type: string
       firstAccess:
-        description: The timestamp when the participant accessed the project for the
-          first time. This value can be null
+        description: The timestamp when the participant accessed the project for the first time. This value can be null
         format: date-time
         type: string
       firstActivation:
-        description: The timestamp when this participation was first activated. This
-          value can be null
+        description: The timestamp when this participation was first activated. This value can be null
         format: date-time
         type: string
       firstMail:
-        description: The timestamp when the first mail was sent to this participant.
-          This value can be null
+        description: The timestamp when the first mail was sent to this participant. This value can be null
         format: date-time
         type: string
       id:
-        description: Unique identifier representing this participation. Id numbers are
-          never reused
+        description: Unique identifier representing this participation. Id numbers are never reused
         format: int64
         type: integer
       inError:
-        description: True if this participation is in an error state. The user is not
-          able to access participations that are in error state.
+        description: True if this participation is in an error state. The user is not able to access participations that are in error state.
         type: boolean
       lastAccess:
-        description: The timestamp when the participant accessed the project the last
-          time. This value can be null
+        description: The timestamp when the participant accessed the project the last time. This value can be null
         format: date-time
         type: string
       lastActivation:
-        description: The timestamp when this participation was last activated. This
-          value can be null
+        description: The timestamp when this participation was last activated. This value can be null
         format: date-time
         type: string
       lastMail:
-        description: The timestamp when the last mail was sent to this participant. This
-          value can be null
+        description: The timestamp when the last mail was sent to this participant. This value can be null
         format: date-time
         type: string
       projectId:
@@ -1459,8 +1399,7 @@ definitions:
   Project:
     properties:
       adminUrl:
-        description: URL to the page where project administration can be done.
-          Administrative access is still required when accessing the url.
+        description: URL to the page where project administration can be done. Administrative access is still required when accessing the url.
         example: http://www.example.com/adminUrl/1234
         format: url
         type: string
@@ -1474,22 +1413,19 @@ definitions:
         format: date-time
         type: string
       createdBy:
-        description: The id of the user that created the project. If the creator is not
-          known this value is *null*
+        description: The id of the user that created the project. If the creator is not known this value is *null*
         example: 8c102c8e-fabd-4c8a-b245-4d2d2f77fc4b
         format: uuid
         type: string
       designId:
-        description: The id of the design this project are using or null if no design is
-          used
+        description: The id of the design this project are using or null if no design is used
         format: int64
         type: integer
       externalId:
         description: The external id (foreign key). Must not exceed 255 characters.
         type: string
       id:
-        description: Unique identifier representing a specific project. Id numbers are
-          never reused.
+        description: Unique identifier representing a specific project. Id numbers are never reused.
         format: int64
         type: integer
       locale:
@@ -1532,8 +1468,7 @@ definitions:
         $ref: "#/definitions/TeamRole"
         type: array
       userid:
-        description: The id of the user that created the project. If the creator is not
-          known this value is *null*
+        description: The id of the user that created the project. If the creator is not known this value is *null*
         example: 81590981-1e05-4fd5-aa15-15bc4b06cf7f
         format: uuid
         type: string
@@ -1553,13 +1488,11 @@ definitions:
         format: uuid
         type: string
       clientNumber:
-        description: A client number. Sometimes used when communicating with external
-          system. Must be unique if specified.
+        description: A client number. Sometimes used when communicating with external system. Must be unique if specified.
         example: X-1234
         type: string
       country:
-        description: The country code that best matches the organization unit. If
-          unspecified the platform default will be set.
+        description: The country code that best matches the organization unit. If unspecified the platform default will be set.
         example: se
         format: locale
         type: string
@@ -1633,12 +1566,10 @@ definitions:
         example: Jane
         type: string
       hardLock:
-        description: True if the user is locked and the lock has been set by an
-          administrator
+        description: True if the user is locked and the lock has been set by an administrator
         type: boolean
       homeOrg:
-        description: The primary organization for the user. Must match the id of an
-          Organization Unit.
+        description: The primary organization for the user. Must match the id of an Organization Unit.
         example: 1234
         format: int64
         type: integer
@@ -1661,8 +1592,7 @@ definitions:
       prefs:
         $ref: "#/definitions/UserPreferences"
       primaryEmail:
-        description: The primary email for this user. If the user has no email this
-          value is *null*.
+        description: The primary email for this user. If the user has no email this value is *null*.
         format: email
         type: string
   UserGroup:
@@ -1673,13 +1603,11 @@ definitions:
           $ref: "#/definitions/UserGroup"
         type: array
       globalId:
-        description: Global group ID if this group is based on a global group, otherwise
-          null.
+        description: Global group ID if this group is based on a global group, otherwise null.
         format: int64
         type: integer
       groupId:
-        description: Unique identifier representing a User Group. Id numbers are never
-          reused.
+        description: Unique identifier representing a User Group. Id numbers are never reused.
         format: int64
         type: integer
       name:
@@ -1707,10 +1635,7 @@ definitions:
   UserParticipationInfo:
     properties:
       accessLink:
-        description: "A link to access this particular participation. The link requires
-          the user to login. Users that access the platform the first time must
-          set a password. This value is null if this participation is not
-          activated. "
+        description: "A link to access this particular participation. The link requires the user to login. Users that access the platform the first time must set a password. This value is null if this participation is not activated. "
         example: http://www.example.com/accesslink/123451
         format: url
         type: string
@@ -1728,30 +1653,25 @@ definitions:
         format: int64
         type: number
       errorMessage:
-        description: An optional error message that may describe why the participation
-          is in error state.
+        description: An optional error message that may describe why the participation is in error state.
         type: string
       expiration:
-        description: The timestamp when this participation will expire. Expiration never
-          happens if this value is *null*.
+        description: The timestamp when this participation will expire. Expiration never happens if this value is *null*.
         format: date-time
         type: string
       externalId:
         description: The external id (foreign key). Must not exceed 255 characters.
         type: string
       firstAccess:
-        description: The timestamp when the participant accessed the project for the
-          first time. This value can be null
+        description: The timestamp when the participant accessed the project for the first time. This value can be null
         format: date-time
         type: string
       firstActivation:
-        description: The timestamp when this participation was first activated. This
-          value can be null
+        description: The timestamp when this participation was first activated. This value can be null
         format: date-time
         type: string
       firstMail:
-        description: The timestamp when the first mail was sent to this participant.
-          This value can be null
+        description: The timestamp when the first mail was sent to this participant. This value can be null
         format: date-time
         type: string
       id:
@@ -1759,22 +1679,18 @@ definitions:
         format: int64
         type: integer
       inError:
-        description: True if this participation is in an error state. The user is not
-          able to access participations that are in error state.
+        description: True if this participation is in an error state. The user is not able to access participations that are in error state.
         type: boolean
       lastAccess:
-        description: The timestamp when the participant accessed the project the last
-          time. This value can be null
+        description: The timestamp when the participant accessed the project the last time. This value can be null
         format: date-time
         type: string
       lastActivation:
-        description: The timestamp when this participation was last activated. This
-          value can be null
+        description: The timestamp when this participation was last activated. This value can be null
         format: date-time
         type: string
       lastMail:
-        description: The timestamp when the last mail was sent to this participant. This
-          value can be null
+        description: The timestamp when the last mail was sent to this participant. This value can be null
         format: date-time
         type: string
       projectId:
@@ -1807,8 +1723,7 @@ definitions:
   UserPreferences:
     properties:
       locale:
-        description: The preferred locale. This value can be *null* if no specific
-          preference has been selected.
+        description: The preferred locale. This value can be *null* if no specific preference has been selected.
         example: sv-SE
         format: locale
         type: string

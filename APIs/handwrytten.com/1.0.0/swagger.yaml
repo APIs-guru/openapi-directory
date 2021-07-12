@@ -7,18 +7,12 @@ info:
   contact:
     email: contact@handwrytten.com
     x-twitter: Handwrytten
-  description: >
-    This is the Handwrytten API for sending cards written in the
-    handwriting of your choice.
-
+  description: |
+    This is the Handwrytten API for sending cards written in the handwriting of your choice.
     Using this api, you can send cards to users.  You can also customize cards with logos, which
-
     can be saved and then used like any other card in the system.
-
     For a "sandbox" account, please contact contact@handwrytten.com
-
     To move from credit card per-transaction to monthly invoicing, also contact us.
-
     [https://www.handwrytten.com](https://www.handwrytten.com)
   termsOfService: https://www.handwrytten.com/terms/
   title: Handwrytten API
@@ -244,15 +238,11 @@ paths:
           schema:
             properties:
               card_id:
-                description: the card id of the card template you're starting with.  You can
-                  find this by logging into Handwrytten, clicking "customize"
-                  next to any customizable card, and pulling the card ID from
-                  the end of the URL
+                description: the card id of the card template you're starting with.  You can find this by logging into Handwrytten, clicking "customize" next to any customizable card, and pulling the card ID from the end of the URL
                 example: 243
                 type: integer
               cover_id:
-                description: the id of the image you want to use for the "cover".  The cover is
-                  the large image on the front of the flat card.
+                description: the id of the image you want to use for the "cover".  The cover is the large image on the front of the flat card.
                 example: 42
                 type: integer
               cover_size_percent:
@@ -260,13 +250,11 @@ paths:
                 example: 100
                 type: integer
               footer_align:
-                description: set to "left", "center", or "right" to align the footer
-                  appropriately
+                description: set to "left", "center", or "right" to align the footer appropriately
                 example: center
                 type: string
               footer_font_id:
-                description: font ID of the text in the footer, found by using
-                  ListFontForCustomizer
+                description: font ID of the text in the footer, found by using ListFontForCustomizer
                 example: 1
                 type: integer
               footer_font_size:
@@ -278,17 +266,14 @@ paths:
                 example: Sample text for the footer
                 type: string
               header_align:
-                description: set to "left", "center", or "right" to align the header
-                  appropriately
+                description: set to "left", "center", or "right" to align the header appropriately
                 example: center
                 type: string
               header_auto_size:
-                description: if set to true, the header will be maximized to fill the header
-                  area
+                description: if set to true, the header will be maximized to fill the header area
                 type: boolean
               header_font_id:
-                description: font ID of the text in the header, found by using
-                  ListFontForCustomizer
+                description: font ID of the text in the header, found by using ListFontForCustomizer
                 example: 8
                 type: integer
               header_font_size:
@@ -300,8 +285,7 @@ paths:
                 example: Sample text for the header
                 type: string
               logo_id:
-                description: Optional.  If setting "type" to "logo", set the id of the logo
-                  here.
+                description: Optional.  If setting "type" to "logo", set the id of the logo here.
                 example: 20
                 type: integer
               logo_size_percent:
@@ -313,8 +297,7 @@ paths:
                 example: my custom card design
                 type: string
               type:
-                description: Defines the top of the back of the card. Set to either "logo" or
-                  "text".
+                description: Defines the top of the back of the card. Set to either "logo" or "text".
                 example: logo
                 type: string
               uid:
@@ -336,8 +319,7 @@ paths:
         - customizer
   /cards/list:
     get:
-      description: Filterable card list.  If called with UID will also provide
-        user-specific cards.
+      description: Filterable card list.  If called with UID will also provide user-specific cards.
       operationId: simpleListCards
       produces:
         - application/json
@@ -370,8 +352,7 @@ paths:
                 example: 14
                 type: integer
               uid:
-                description: optional authorized UID of the session.  By providing this, the
-                  card list will include user-specific cards.
+                description: optional authorized UID of the session.  By providing this, the card list will include user-specific cards.
                 example: fhqwfuihuifqwhiuwqfhiqwfh124
                 type: string
             type: object
@@ -444,8 +425,7 @@ paths:
                 example: 14
                 type: integer
               uid:
-                description: optional authorized UID of the session.  By providing this, the
-                  card details can provide user-specific cards
+                description: optional authorized UID of the session.  By providing this, the card details can provide user-specific cards
                 example: fhqwfuihuifqwhiuwqfhiqwfh124
                 type: string
             type: object
@@ -461,8 +441,7 @@ paths:
         - cards
   /countries/list:
     get:
-      description: Lists the countries to which Handwritten can mail, their associated
-        country ID and any costs
+      description: Lists the countries to which Handwritten can mail, their associated country ID and any costs
       responses:
         "200":
           description: successful operation
@@ -504,8 +483,7 @@ paths:
         - customizer
   /giftCards/view:
     get:
-      description: Returns images and details (and associated denominations) of all
-        gift cards
+      description: Returns images and details (and associated denominations) of all gift cards
       operationId: getGiftCardDetails
       produces:
         - application/json
@@ -520,8 +498,7 @@ paths:
       tags:
         - giftCards
     post:
-      description: Returns images and details (and associated denominations) of all
-        gift cards
+      description: Returns images and details (and associated denominations) of all gift cards
       operationId: giftCardDetails
       produces:
         - application/json
@@ -539,8 +516,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Sends an order in one step.  No need to create then process
-        order.  Optionally include a gift card.
+      description: Sends an order in one step.  No need to create then process order.  Optionally include a gift card.
       operationId: singleStepOrder
       parameters:
         - description: additional parameters
@@ -554,9 +530,7 @@ paths:
                 example: 3404
                 type: integer
               credit_card_id:
-                description: the credit card id to charge for the order.  Currently this is
-                  required, even for invoiced accounts, it just won't be
-                  charged.
+                description: the credit card id to charge for the order.  Currently this is required, even for invoiced accounts, it just won't be charged.
                 example: 34124
                 type: integer
               denomination_id:
@@ -564,8 +538,7 @@ paths:
                 example: 12
                 type: integer
               font_label:
-                description: the colloquial name of the font, such as 'Fancy Jenna' or 'Casual
-                  David'
+                description: the colloquial name of the font, such as 'Fancy Jenna' or 'Casual David'
                 example: Chill Charity
                 type: string
               message:
@@ -581,8 +554,7 @@ paths:
                 example: 123 E Main Street
                 type: string
               recipient_address2:
-                description: the second line of the address, such as suite, apartment, building,
-                  etc. Optional
+                description: the second line of the address, such as suite, apartment, building, etc. Optional
                 example: Second Floor
                 type: string
               recipient_business_name:
@@ -606,9 +578,7 @@ paths:
                 example: Cosmo Spacely
                 type: string
               recipient_state:
-                description: the ABBREVIATED state or province of the recipient.  This is
-                  required for US and Canada addresses and optional for all
-                  other countries
+                description: the ABBREVIATED state or province of the recipient.  This is required for US and Canada addresses and optional for all other countries
                 example: ON
                 type: string
               recipient_zip:
@@ -620,8 +590,7 @@ paths:
                 example: 1430 E Indian School Road
                 type: string
               sender_address2:
-                description: the second line of the address, such as suite, apartment, building,
-                  etc. Optional
+                description: the second line of the address, such as suite, apartment, building, etc. Optional
                 example: Suite 100
                 type: string
               sender_business_name:
@@ -645,9 +614,7 @@ paths:
                 example: Joe Sender
                 type: string
               sender_state:
-                description: the ABBREVIATED state or province of the sender.  This is required
-                  for US and Canada addresses and optional for all other
-                  countries
+                description: the ABBREVIATED state or province of the sender.  This is required for US and Canada addresses and optional for all other countries
                 example: AZ
                 type: string
               sender_zip:
@@ -676,8 +643,7 @@ paths:
                 example: OK
                 type: string
             type: object
-      summary: sends an order in a single step.  This is much easier than using other
-        order commands
+      summary: sends an order in a single step.  This is much easier than using other order commands
       tags:
         - orders
   /profile/address:
@@ -693,8 +659,7 @@ paths:
           schema:
             properties:
               uid:
-                description: authorized UID of the session.  By providing this, the card list
-                  will include user-specific cards.
+                description: authorized UID of the session.  By providing this, the card list will include user-specific cards.
                 example: fhqwfuihuifqwhiuwqfhiqwfh124
                 type: string
             type: object
@@ -885,8 +850,7 @@ paths:
                 example: United States
                 type: string
               country_id:
-                description: the id of the country of the address. do not use with "country"
-                  parameter
+                description: the id of the country of the address. do not use with "country" parameter
                 example: 2
                 type: integer
               name:
@@ -999,8 +963,7 @@ paths:
         - address
   /templateCategories/list:
     get:
-      description: Lists the common template categories of all users. As you are not
-        logged in, this is what you are limited to.
+      description: Lists the common template categories of all users. As you are not logged in, this is what you are limited to.
       operationId: getTemplateCategories
       produces:
         - application/json
@@ -1017,8 +980,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Lists the template categories of all users. By passing the optional
-        UID, any custom template categories are also available.
+      description: Lists the template categories of all users. By passing the optional UID, any custom template categories are also available.
       operationId: getTemplateCategoriesAuthorized
       parameters:
         - description: additional parameters
@@ -1028,8 +990,7 @@ paths:
           schema:
             properties:
               uid:
-                description: optional authorized UID of the session.  By providing this, the
-                  template list will include user-specific template categories
+                description: optional authorized UID of the session.  By providing this, the template list will include user-specific template categories
                 example: fhqwfuihuifqwhiuwqfhiqwfh124
                 type: string
             type: object
@@ -1120,8 +1081,7 @@ paths:
         - templates
   /templates/list:
     get:
-      description: Lists the common template categories of all users. As you are not
-        logged in, this is what you are limited to.
+      description: Lists the common template categories of all users. As you are not logged in, this is what you are limited to.
       operationId: getTemplates
       produces:
         - application/json
@@ -1138,8 +1098,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Lists the template categories of all users. By passing the optional
-        UID, any custom template categories are also available.
+      description: Lists the template categories of all users. By passing the optional UID, any custom template categories are also available.
       operationId: getTemplatessAuthorized
       parameters:
         - description: additional parameters
@@ -1153,8 +1112,7 @@ paths:
                 example: 12
                 type: integer
               uid:
-                description: optional authorized UID of the session.  By providing this, the
-                  template list will include user-specific template categories
+                description: optional authorized UID of the session.  By providing this, the template list will include user-specific template categories
                 example: fhqwfuihuifqwhiuwqfhiqwfh124
                 type: string
             type: object
@@ -1229,8 +1187,7 @@ paths:
                 example: 12
                 type: integer
               uid:
-                description: optional authorized UID of the session.  By providing this, the
-                  user can specify user-sepecific templates
+                description: optional authorized UID of the session.  By providing this, the user can specify user-sepecific templates
                 example: fhqwfuihuifqwhiuwqfhiqwfh124
                 type: string
             type: object

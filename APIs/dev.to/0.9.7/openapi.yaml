@@ -7,19 +7,15 @@ info:
     email: yo@dev.to
     name: DEV Team
     url: https://dev.to/contact
-  description: >
+  description: |
     
     Access Forem articles, users and other resources via API.
 
-
     For a real-world example of Forem in action, check out [DEV](https://www.dev.to).
-
 
     All endpoints that don't require authentication are CORS enabled.
 
-
     Dates and date times, unless otherwise specified, must be in
-
     the [RFC 3339](https://tools.ietf.org/html/rfc3339) format.
   termsOfService: https://dev.to/terms
   title: DEV API (beta)
@@ -92,10 +88,8 @@ paths:
           name: tag
           schema:
             type: string
-        - description: >
-            Using this parameter will retrieve articles with any of the
-            comma-separated tags.
-
+        - description: |
+            Using this parameter will retrieve articles with any of the comma-separated tags.
 
             Articles will be ordered by descending popularity.
           example: javascript, css
@@ -103,10 +97,8 @@ paths:
           name: tags
           schema:
             type: string
-        - description: >
-            Using this parameter will retrieve articles that do _not_ contain
-            _any_ of comma-separated tags.
-
+        - description: |
+            Using this parameter will retrieve articles that do _not_ contain _any_ of comma-separated tags.
 
             Articles will be ordered by descending popularity.
           example: node, java
@@ -114,14 +106,11 @@ paths:
           name: tags_exclude
           schema:
             type: string
-        - description: >
+        - description: |
             Using this parameter will retrieve articles belonging
-
             to a User or Organization ordered by descending publication date.
 
-
             If `state=all` the number of items returned will be `1000` instead of the default `30`.
-
 
             This parameter can be used in conjuction with `state`.
           example: ben
@@ -129,15 +118,11 @@ paths:
           name: username
           schema:
             type: string
-        - description: >
-            Using this parameter will allow the client to check which articles
-            are fresh or rising.
-
+        - description: |
+            Using this parameter will allow the client to check which articles are fresh or rising.
 
             If `state=fresh` the server will return fresh articles.
-
             If `state=rising` the server will return rising articles.
-
 
             This param can be used in conjuction with `username`, only if set to `all`.
           example: fresh
@@ -149,17 +134,12 @@ paths:
               - rising
               - all
             type: string
-        - description: >
-            Using this parameter will allow the client to return the most
-            popular articles
-
+        - description: |
+            Using this parameter will allow the client to return the most popular articles
             in the last `N` days.
 
-
             `top` indicates the number of days since publication of the articles
-
             returned.
-
 
             This param can be used in conjuction with `tag`.
           example: 2
@@ -204,25 +184,18 @@ paths:
           source: |
             curl https://dev.to/api/articles?username=ben
     post:
-      description: >
+      description: |
         This endpoint allows the client to create a new article.
 
-
         "Articles" are all the posts that users create on DEV that typically
-
         show up in the feed. They can be a blog post, a discussion question,
-
         a help thread etc. but is referred to as article within the code.
-
 
         ### Rate limiting
 
-
         There is a limit of 10 requests per 30 seconds.
 
-
         ### Additional resources
-
 
         - [Rails tests for Articles API](https://github.com/forem/forem/blob/main/spec/requests/api/v0/articles_spec.rb)
       operationId: createArticle
@@ -315,20 +288,17 @@ paths:
       x-codeSamples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl -X POST -H "Content-Type: application/json" \
               -H "api-key: API_KEY" \
               -d '{"article":{"title":"Title","body_markdown":"Body","published":false,"tags":["discuss", "javascript"]}}' \
               https://dev.to/api/articles
         - label: curl (with front matter)
           lang: Shell
-          source: >
+          source: |
             curl -X POST -H "Content-Type: application/json" \
-
             -H "api-key: API_KEY" \
-
             -d '{"article":{"body_markdown":"---\ntitle:A sample article about...\npublished:false\n---\n..."}}' \
-
             https://dev.to/api/articles
   /articles/latest:
     get:
@@ -406,27 +376,18 @@ paths:
             curl -H "api-key: API_KEY" https://dev.to/api/articles/me
   /articles/me/all:
     get:
-      description: >
-        This endpoint allows the client to retrieve a list of all articles
-        on
-
+      description: |
+        This endpoint allows the client to retrieve a list of all articles on
         behalf of an authenticated user.
 
-
         "Articles" are all the posts that users create on DEV that typically
-
         show up in the feed. They can be a blog post, a discussion question,
-
         a help thread etc. but is referred to as article within the code.
-
 
         It will return both published and unpublished articles with pagination.
 
-
         Unpublished articles will be at the top of the list in reverse chronological creation order.
-
         Published articles will follow in reverse chronological publication order.
-
 
         By default a page will contain `30` articles.
       operationId: getUserAllArticles
@@ -513,25 +474,17 @@ paths:
             curl -H "api-key: API_KEY" https://dev.to/api/articles/me/published
   /articles/me/unpublished:
     get:
-      description: >
-        This endpoint allows the client to retrieve a list of unpublished
-        articles
-
+      description: |
+        This endpoint allows the client to retrieve a list of unpublished articles
         on behalf of an authenticated user.
 
-
         "Articles" are all the posts that users create on DEV that typically
-
         show up in the feed. They can be a blog post, a discussion question,
-
         a help thread etc. but is referred to as article within the code.
-
 
         Unpublished articles will be in reverse chronological creation order.
 
-
         It will return unpublished articles with pagination.
-
         By default a page will contain `30` articles.
       operationId: getUserUnpublishedArticles
       parameters:
@@ -565,7 +518,7 @@ paths:
       x-codeSamples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl -H "api-key: API_KEY" https://dev.to/api/articles/me/unpublished
   "/articles/{id}":
     get:
@@ -611,25 +564,18 @@ paths:
           minimum: 1
           type: integer
     put:
-      description: >
+      description: |
         This endpoint allows the client to update an existing article.
 
-
         "Articles" are all the posts that users create on DEV that typically
-
         show up in the feed. They can be a blog post, a discussion question,
-
         a help thread etc. but is referred to as article within the code.
-
 
         ### Rate limiting
 
-
         There is a limit of 30 requests per 30 seconds.
 
-
         ### Additional resources
-
 
         - [Rails tests for Articles API](https://github.com/forem/forem/blob/main/spec/requests/api/v0/articles_spec.rb)
       operationId: updateArticle
@@ -645,16 +591,12 @@ paths:
                 $ref: "#/components/examples/ArticleCreateTitleBody"
             schema:
               $ref: "#/components/schemas/ArticleUpdate"
-        description: >
+        description: |
           Article params for the update.
 
-
           *Note: if the article contains a front matter in its body, its front
-
           matter properties will still take precedence over any JSON equivalent
-
           params, which means that the full body_markdown with the modified
-
           front matter params needs to be provided for an update to be successful*
       responses:
         "200":
@@ -762,9 +704,8 @@ paths:
       x-codeSamples:
         - label: curl
           lang: Shell
-          source: >
-            curl
-            https://dev.to/api/articles/bytesized/byte-sized-episode-2-the-creation-of-graph-theory-34g1
+          source: |
+            curl https://dev.to/api/articles/bytesized/byte-sized-episode-2-the-creation-of-graph-theory-34g1
     parameters:
       - description: User or organization username.
         example: devteam
@@ -895,14 +836,11 @@ paths:
             curl https://dev.to/api/comments/m51e
   /followers/users:
     get:
-      description: >
+      description: |
         This endpoint allows the client to retrieve a list of the followers
-
         they have.
 
-
         "Followers" are users that are following other users on the website.
-
 
         It supports pagination, each page will contain `80` followers by default.
       operationId: getFollowers
@@ -991,21 +929,15 @@ paths:
             curl -H "api-key: API_KEY" https://dev.to/api/follows/tags
   /listings:
     get:
-      description: >
+      description: |
         This endpoint allows the client to retrieve a list of listings.
 
-
         "Listings" are classified ads that users create on DEV.
-
         They can be related to conference announcements, job offers, mentorships,
-
         upcoming events and more.
 
-
         By default it will return published listings ordered by descending
-
         freshness.
-
 
         It supports pagination, each page will contain `30` articles by default.
       operationId: getListings
@@ -1034,28 +966,19 @@ paths:
           source: |
             curl https://dev.to/api/listings
     post:
-      description: >
+      description: |
         This endpoint allows the client to create a new listing.
 
-
         "Listings" are classified ads that users create on DEV.
-
         They can be related to conference announcements, job offers, mentorships,
-
         upcoming events and more.
 
-
         The user creating the listing or the organization on which behalf the user
-
         is creating for need to have enough creadits for this operation to be
-
         successful. The server will prioritize the organization's credits over
-
         the user's credits.
 
-
         ### Additional resources
-
 
         - [Rails tests for Listings API](https://github.com/forem/forem/blob/main/spec/requests/api/v0/listings_spec.rb)
       operationId: createListing
@@ -1124,45 +1047,37 @@ paths:
       x-codeSamples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl -X POST -H "Content-Type: application/json" \
               -H "api-key: API_KEY" \
               -d '{"listing":{"title":"Title","body_markdown":"Body","category":"cfp"}}' \
               https://dev.to/api/listings
         - label: curl (with tags)
           lang: Shell
-          source: >
+          source: |
             curl -X POST -H "Content-Type: application/json" \
               -H "api-key: API_KEY" \
               -d '{"listing":{"title":"Title","body_markdown":"Body","category":"cfp","tags":["python"]}}' \
               https://dev.to/api/listings
         - label: curl (draft)
           lang: Shell
-          source: >
+          source: |
             curl -X POST -H "Content-Type: application/json" \
               -H "api-key: API_KEY" \
               -d '{"listing":{"title":"Title","body_markdown":"Body","category":"cfp","action":"draft"}}' \
               https://dev.to/api/listings
   "/listings/category/{category}":
     get:
-      description: >
-        This endpoint allows the client to retrieve a list of listings
-        belonging
-
+      description: |
+        This endpoint allows the client to retrieve a list of listings belonging
         to the specified category.
 
-
         "Listings" are classified ads that users create on DEV.
-
         They can be related to conference announcements, job offers, mentorships,
-
         upcoming events and more.
 
-
         By default it will return published listings ordered by descending
-
         freshness.
-
 
         It supports pagination, each page will contain `30` articles by default.
       operationId: getListingsByCategory
@@ -1266,19 +1181,14 @@ paths:
                 $ref: "#/components/examples/ListingUpdateActionUnpublish"
             schema:
               $ref: "#/components/schemas/ListingUpdate"
-        description: >
+        description: |
           Listing params for the update.
 
-
           **Note**: except for bumping, publishing and unpublishing there are the
-
           following restrictions on the ability to update listings:
 
-
           - the payload has to contain at least one param among `title`, `body_markdown` or `tags`/`tag_list`
-
           - the listing can't be updated if it has not been bumped in the last 24 hours
-
           - the listing can't be updated if it has been published but not recently bumped
       responses:
         "200":
@@ -1348,9 +1258,8 @@ paths:
               https://dev.to/api/listings/{id}
   "/organizations/{username}":
     get:
-      description: >
-        This endpoint allows the client to retrieve a single organization
-        by their username
+      description: |
+        This endpoint allows the client to retrieve a single organization by their username
       operationId: getOrganization
       parameters:
         - description: |
@@ -1390,10 +1299,8 @@ paths:
             curl https://dev.to/api/organizations/ecorp
   "/organizations/{username}/articles":
     get:
-      description: >
-        This endpoint allows the client to retrieve a list of Articles
-        belonging to the organization
-
+      description: |
+        This endpoint allows the client to retrieve a list of Articles belonging to the organization
 
         It supports pagination, each page will contain `30` listing by default.
       operationId: getOrgArticles
@@ -1439,10 +1346,8 @@ paths:
             curl https://dev.to/api/organizations/ecorp/listings
   "/organizations/{username}/listings":
     get:
-      description: >
-        This endpoint allows the client to retrieve a list of listings
-        belonging to the organization
-
+      description: |
+        This endpoint allows the client to retrieve a list of listings belonging to the organization
 
         It supports pagination, each page will contain `30` listing by default.
       operationId: getOrgListings
@@ -1492,10 +1397,8 @@ paths:
             curl https://dev.to/api/organizations/ecorp/listings
   "/organizations/{username}/users":
     get:
-      description: >
-        This endpoint allows the client to retrieve a list of users
-        belonging to the organization
-
+      description: |
+        This endpoint allows the client to retrieve a list of users belonging to the organization
 
         It supports pagination, each page will contain `30` users by default.
       operationId: getOrgUsers
@@ -1639,18 +1542,13 @@ paths:
             curl https://dev.to/api/profile_images/diogoosorio
   /readinglist:
     get:
-      description: >
-        This endpoint allows the client to retrieve a list of readinglist
-        reactions along with the related article for the authenticated user.
-
+      description: |
+        This endpoint allows the client to retrieve a list of readinglist reactions along with the related article for the authenticated user.
 
         Reading list will be in reverse chronological order base
-
         on the creation of the reaction.
 
-
         It will return paginated reading list items along with the articles
-
         they refer to. By default a page will contain `30` items
       operationId: getReadinglist
       parameters:
@@ -1761,9 +1659,8 @@ paths:
         id or by the user's username
       operationId: getUser
       parameters:
-        - description: >
+        - description: |
             Id of the user.
-
 
             It can be either of the following two values:
 
@@ -1849,17 +1746,12 @@ paths:
             curl https://dev.to/api/videos
   /webhooks:
     get:
-      description: >
-        This endpoint allows the client to retrieve a list of webhooks they
-        have
-
+      description: |
+        This endpoint allows the client to retrieve a list of webhooks they have
         previously registered.
 
-
         "Webhooks" are used to register HTTP endpoints that will be called once a relevant event is
-
         triggered inside the web application, events like `article_created`, `article_updated`.
-
 
         It will return all webhooks, without pagination.
       operationId: getWebhooks
@@ -1904,12 +1796,10 @@ paths:
           source: |
             curl -H "api-key: API_KEY" https://dev.to/api/webhooks
     post:
-      description: >
+      description: |
         This endpoint allows the client to create a new webhook.
 
-
         "Webhooks" are used to register HTTP endpoints that will be called once a relevant event is
-
         triggered inside the web application, events like `article_created`, `article_updated`.
       operationId: createWebhook
       requestBody:
@@ -1967,7 +1857,7 @@ paths:
       x-codeSamples:
         - label: curl
           lang: Shell
-          source: >
+          source: |
             curl -X POST -H "Content-Type: application/json" \
               -H "api-key: API_KEY" \
               -d '{"webhook_endpoint":{"target_url":"https://example.org/webhooks/webhook1","source":"DEV","events":["article_created"]}}' \
@@ -2104,11 +1994,8 @@ components:
           title: Hello, World!
     ArticleShow:
       value:
-        body_html: >
-          <p>Today's episode of Byte Sized is about Leonhard Euler and the
-          creation of <a href="https://en.wikipedia.org/wiki/Graph_theory">Graph
-          Theory</a>.</p>
-
+        body_html: |
+          <p>Today's episode of Byte Sized is about Leonhard Euler and the creation of <a href="https://en.wikipedia.org/wiki/Graph_theory">Graph Theory</a>.</p>
 
           <p>For more about how Graph Theory works, check out this video from BaseCS!</p>...
         body_markdown: "---\r
@@ -2117,14 +2004,11 @@ components:
 
           published: true\r
 
-          description: The full story of Leonhard Euler and the
-          creation of this fundamental computer science principle, delivered in
-          a few minutes.\r
+          description: The full story of Leonhard Euler and the creation of this fundamental computer science principle, delivered in a few minutes.\r
 
           tags: computerscience, graphtheory, bytesized, history\r
 
-          cover_image:
-          https://thepracticaldev.s3.amazonaws.com/i/88e62fzblbluz1dm7xjf.png\r
+          cover_image: https://thepracticaldev.s3.amazonaws.com/i/88e62fzblbluz1dm7xjf.png\r
 
           series: Byte Sized Season 1\r
 
@@ -2132,22 +2016,18 @@ components:
 
           \r
 
-          Today's episode of Byte Sized is about Leonhard Euler and
-          the creation of [Graph
-          Theory](https://en.wikipedia.org/wiki/Graph_theory).\r
+          Today's episode of Byte Sized is about Leonhard Euler and the creation of [Graph Theory](https://en.wikipedia.org/wiki/Graph_theory).\r
 
           \r
 
-          For more about how Graph Theory works, check out this video
-          from BaseCS!..."
+          For more about how Graph Theory works, check out this video from BaseCS!..."
         canonical_url: https://dev.to/bytesized/byte-sized-episode-2-the-creation-of-graph-theory-34g1
         collection_id: 1693
         comments_count: 21
         cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--qgutBUrH--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/88e62fzblbluz1dm7xjf.png
         created_at: 2019-07-31T11:15:06Z
         crossposted_at: null
-        description: The full story of Leonhard Euler and the creation of this
-          fundamental computer science principle, delivered in a few minutes.
+        description: The full story of Leonhard Euler and the creation of this fundamental computer science principle, delivered in a few minutes.
         edited_at: null
         id: 150589
         last_comment_at: 2019-08-06T16:48:10Z
@@ -2228,8 +2108,7 @@ components:
             - css
             - ux
           tags: meta, changelog, css, ux
-          title: There's a new DEV theme in town for all you 10x hackers out there (plus
-            one actually useful new feature)
+          title: There's a new DEV theme in town for all you 10x hackers out there (plus one actually useful new feature)
           type_of: article
           url: https://dev.to/devteam/there-s-a-new-dev-theme-in-town-for-all-you-10x-hackers-out-there-plus-one-actually-useful-new-feature-2kgk
           user:
@@ -2242,29 +2121,20 @@ components:
             website_url: http://benhalpern.com
     Comment:
       value:
-        body_html: >
-          <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
-          "http://www.w3.org/TR/REC-html40/loose.dtd">
-
+        body_html: |
+          <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
           <html><body>
-
           <p>...</p>
 
-
           <p>...</p>
-
 
           </body></html>
         children:
-          - body_html: >
-              <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
-              "http://www.w3.org/TR/REC-html40/loose.dtd">
-
+          - body_html: |
+              <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
               <html><body>
 
-
               <p>...</p>
-
 
               </body></html>
             children: []
@@ -2294,15 +2164,11 @@ components:
       value:
         body_html: <p>[deleted]</p>
         children:
-          - body_html: >
-              <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
-              "http://www.w3.org/TR/REC-html40/loose.dtd">
-
+          - body_html: |
+              <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
               <html><body>
 
-
               <p>...</p>
-
 
               </body></html>
             children: []
@@ -2323,15 +2189,11 @@ components:
       value:
         body_html: <p>[hidden by post author]</p>
         children:
-          - body_html: >
-              <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
-              "http://www.w3.org/TR/REC-html40/loose.dtd">
-
+          - body_html: |
+              <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
               <html><body>
 
-
               <p>...</p>
-
 
               </body></html>
             children: []
@@ -2350,14 +2212,10 @@ components:
         user: {}
     Comments:
       value:
-        - body_html: >
-            <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
-            "http://www.w3.org/TR/REC-html40/loose.dtd">
-
+        - body_html: |
+            <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
             <html><body>
-
             <p>...</p>
-
 
             </body></html>
           children: []
@@ -2372,29 +2230,20 @@ components:
             twitter_username: null
             username: heriberto_morissette
             website_url: null
-        - body_html: >
-            <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
-            "http://www.w3.org/TR/REC-html40/loose.dtd">
-
+        - body_html: |
+            <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
             <html><body>
-
             <p>...</p>
 
-
             <p>...</p>
-
 
             </body></html>
           children:
-            - body_html: >
-                <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
-                "http://www.w3.org/TR/REC-html40/loose.dtd">
-
+            - body_html: |
+                <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
                 <html><body>
 
-
                 <p>...</p>
-
 
                 </body></html>
               children: []
@@ -2424,15 +2273,11 @@ components:
       value:
         - body_html: <p>[deleted]</p>
           children:
-            - body_html: >
-                <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
-                "http://www.w3.org/TR/REC-html40/loose.dtd">
-
+            - body_html: |
+                <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
                 <html><body>
 
-
                 <p>...</p>
-
 
                 </body></html>
               children: []
@@ -2453,15 +2298,11 @@ components:
       value:
         - body_html: <p>[hidden by post author]</p>
           children:
-            - body_html: >
-                <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
-                "http://www.w3.org/TR/REC-html40/loose.dtd">
-
+            - body_html: |
+                <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
                 <html><body>
 
-
                 <p>...</p>
-
 
                 </body></html>
               children: []
@@ -2524,23 +2365,14 @@ components:
           username: yokohintz
     Listing:
       value:
-        body_markdown: >-
-          Do you want to learn about automation? Maybe you're interested in
-          AI-driven testing? Security testing? We have a selection of talks,
-          workshops and training courses to help you in a wide variety of areas
-          in software testing. Join us for our very first trip to Detroit MI! 
-
+        body_markdown: |-
+          Do you want to learn about automation? Maybe you're interested in AI-driven testing? Security testing? We have a selection of talks, workshops and training courses to help you in a wide variety of areas in software testing. Join us for our very first trip to Detroit MI! 
 
           https://bit.ly/TBDetroit
         category: cfp
         id: 1157
-        processed_html: >
-          <p>Do you want to learn about automation? Maybe you're
-          interested in AI-driven testing? Security testing? We have a selection
-          of talks, workshops and training courses to help you in a wide variety
-          of areas in software testing. Join us for our very first trip to
-          Detroit MI! </p>
-
+        processed_html: |
+          <p>Do you want to learn about automation? Maybe you're interested in AI-driven testing? Security testing? We have a selection of talks, workshops and training courses to help you in a wide variety of areas in software testing. Join us for our very first trip to Detroit MI! </p>
 
           <p><a href="https://bit.ly/TBDetroit">https://bit.ly/TBDetroit</a></p>
         published: true
@@ -2594,25 +2426,15 @@ components:
           action: unpublish
     Listings:
       value:
-        - body_markdown: >-
-            Do you want to learn about automation? Maybe you're interested in
-            AI-driven testing? Security testing? We have a selection of talks,
-            workshops and training courses to help you in a wide variety of
-            areas in software testing. Join us for our very first trip to
-            Detroit MI! 
-
+        - body_markdown: |-
+            Do you want to learn about automation? Maybe you're interested in AI-driven testing? Security testing? We have a selection of talks, workshops and training courses to help you in a wide variety of areas in software testing. Join us for our very first trip to Detroit MI! 
 
             https://bit.ly/TBDetroit
           category: cfp
           created_at: 2021-04-07 08:29:42 UTC
           id: 1157
-          processed_html: >
-            <p>Do you want to learn about automation? Maybe you're
-            interested in AI-driven testing? Security testing? We have a
-            selection of talks, workshops and training courses to help you in a
-            wide variety of areas in software testing. Join us for our very
-            first trip to Detroit MI! </p>
-
+          processed_html: |
+            <p>Do you want to learn about automation? Maybe you're interested in AI-driven testing? Security testing? We have a selection of talks, workshops and training courses to help you in a wide variety of areas in software testing. Join us for our very first trip to Detroit MI! </p>
 
             <p><a href="https://bit.ly/TBDetroit">https://bit.ly/TBDetroit</a></p>
           published: true
@@ -2632,13 +2454,8 @@ components:
             website_url: null
     ListingsByOrganization:
       value:
-        - body_markdown: >-
-            Do you want to learn about automation? Maybe you're interested in
-            AI-driven testing? Security testing? We have a selection of talks,
-            workshops and training courses to help you in a wide variety of
-            areas in software testing. Join us for our very first trip to
-            Detroit MI! 
-
+        - body_markdown: |-
+            Do you want to learn about automation? Maybe you're interested in AI-driven testing? Security testing? We have a selection of talks, workshops and training courses to help you in a wide variety of areas in software testing. Join us for our very first trip to Detroit MI! 
 
             https://bit.ly/TBDetroit
           category: cfp
@@ -2649,13 +2466,8 @@ components:
             profile_image_90: https://res.cloudinary.com/practicaldev/image/fetch/s--CjladMBD--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/136256/11cced64-afd2-4421-91e1-c5f7b216d49b.jpeg
             slug: ecorp
             username: ecorp
-          processed_html: >
-            <p>Do you want to learn about automation? Maybe you're
-            interested in AI-driven testing? Security testing? We have a
-            selection of talks, workshops and training courses to help you in a
-            wide variety of areas in software testing. Join us for our very
-            first trip to Detroit MI! </p>
-
+          processed_html: |
+            <p>Do you want to learn about automation? Maybe you're interested in AI-driven testing? Security testing? We have a selection of talks, workshops and training courses to help you in a wide variety of areas in software testing. Join us for our very first trip to Detroit MI! </p>
 
             <p><a href="https://bit.ly/TBDetroit">https://bit.ly/TBDetroit</a></p>
           published: true
@@ -2706,8 +2518,7 @@ components:
             image_url: https://dev-to-uploads.s3.amazonaws.com/uploads/podcast/image/2/9f50a462-9152-429a-b15e-d024baaa8e01.png
             slug: codenewbie
             title: CodeNewbie
-          title: S11:E6 - What are the pros and cons of working in civic tech (Aidan
-            Feldman)
+          title: S11:E6 - What are the pros and cons of working in civic tech (Aidan Feldman)
           type_of: podcast_episodes
     ProfileImage:
       value:
@@ -2875,49 +2686,30 @@ components:
         article:
           properties:
             body_markdown:
-              description: >
+              description: |
                 The body of the article.
-
 
                 It can contain an optional front matter. For example
 
-
                 ```markdown
-
                 ---
-
                 title: Hello, World!
-
                 published: true
-
                 tags: discuss, help
-
                 date: 20190701T10:00Z
-
                 series: Hello series
-
                 canonical_url: https://example.com/blog/hello
-
                 cover_image: article_published_cover_image
-
                 ---
-
                 ```
 
-
                 `date`, `series` and `canonical_url` are optional.
-
                 `date` is the publication date-time
-
                 `series` is the name of the series the article belongs to
-
                 `canonical_url` is the canonical URL of the article
-
                 `cover_image` is the main image of the article
 
-
                 *If the markdown contains a front matter, it will take precedence
-
                 on the equivalent params given in the payload.*
               type: string
             canonical_url:
@@ -2929,23 +2721,19 @@ components:
               format: url
               type: string
             organization_id:
-              description: >
-                Only users belonging to an organization can assign the article to
-                it
+              description: |
+                Only users belonging to an organization can assign the article to it
               format: int32
               type: integer
             published:
-              description: >
-                True to create a published article, false otherwise. Defaults to
-                false
+              description: |
+                True to create a published article, false otherwise. Defaults to false
               type: boolean
             series:
-              description: >
+              description: |
                 Article series name.
 
-
                 All articles belonging to the same series need to have the same name
-
                 in this parameter.
               type: string
             tags:
@@ -3271,49 +3059,30 @@ components:
         article:
           properties:
             body_markdown:
-              description: >
+              description: |
                 The body of the article.
-
 
                 It can contain an optional front matter. For example
 
-
                 ```markdown
-
                 ---
-
                 title: Hello, World!
-
                 published: true
-
                 tags: discuss, help
-
                 date: 20190701T10:00Z
-
                 series: Hello series
-
                 canonical_url: https://example.com/blog/hello
-
                 cover_image: article_published_cover_image
-
                 ---
-
                 ```
 
-
                 `date`, `series` and `canonical_url` are optional.
-
                 `date` is the publication date-time
-
                 `series` is the name of the series the article belongs to
-
                 `canonical_url` is the canonical URL of the article
-
                 `cover_image` is the main image of the article
 
-
                 *If the markdown contains a front matter, it will take precedence
-
                 on the equivalent params given in the payload.*
               type: string
             canonical_url:
@@ -3325,25 +3094,20 @@ components:
               format: url
               type: string
             organization_id:
-              description: >
-                Only users belonging to an organization can assign the article to
-                it
+              description: |
+                Only users belonging to an organization can assign the article to it
               format: int32
               type: integer
             published:
-              description: >
-                True to create a published article, false otherwise. Defaults to
-                false
+              description: |
+                True to create a published article, false otherwise. Defaults to false
               type: boolean
             series:
-              description: >
+              description: |
                 Article series name.
 
-
                 All articles belonging to the same series need to have the same name
-
                 in this parameter.
-
 
                 To remove an article from a series, the `null` value can be used.
               type: string
@@ -3558,9 +3322,8 @@ components:
               description: Geographical area or city for the listing.
               type: string
             organization_id:
-              description: >
+              description: |
                 The id of the organization the user is creating the listing for.
-
 
                 Only users belonging to an organization can assign the listing to it.
               format: int64
@@ -3572,9 +3335,8 @@ components:
                 A maximum of 8 tags are allowed.
               type: string
             tags:
-              description: >
+              description: |
                 Tags related to the listing.
-
 
                 A maximum of 8 tags are allowed and it takes precedence over `tag_list`.
               items:
@@ -3633,9 +3395,8 @@ components:
                 A maximum of 8 tags are allowed.
               type: string
             tags:
-              description: >
+              description: |
                 Tags related to the listing.
-
 
                 A maximum of 8 tags are allowed and it takes precedence over `tag_list`.
               items:
@@ -3723,8 +3484,7 @@ components:
       description: Profile image
       properties:
         image_of:
-          description: Discriminates what is the type of the profile image owner (user or
-            organization)
+          description: Discriminates what is the type of the profile image owner (user or organization)
           enum:
             - user
             - organization
@@ -3951,17 +3711,13 @@ components:
       type: object
   securitySchemes:
     api_key:
-      description: >
+      description: |
         API Key authentication.
 
-
         Authentication for some endpoints, like write operations on the
-
         Articles API require a DEV API key.
 
-
         ### Getting an API key
-
 
         To obtain one, please follow these steps:
 

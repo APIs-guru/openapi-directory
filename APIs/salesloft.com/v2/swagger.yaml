@@ -6,9 +6,8 @@ info:
   contact:
     email: integrations@salesloft.com
     x-twitter: SalesLoft
-  description: >
-    SalesLoft helps transform sales teams into modern sales
-    organizations  - converting more target accounts into customer accounts
+  description: |
+    SalesLoft helps transform sales teams into modern sales organizations  - converting more target accounts into customer accounts
   title: SalesLoft Platform
   version: v2
   x-apisguru-categories:
@@ -77,27 +76,20 @@ tags:
 paths:
   /v2/accounts.json:
     get:
-      description: >
-        Fetches multiple account records. The records can be filtered,
-        paged, and sorted according to
-
+      description: |
+        Fetches multiple account records. The records can be filtered, paged, and sorted according to
         the respective parameters.
       parameters:
-        - description: IDs of accounts to fetch. If a record can't be found, that record
-            won't be returned and your request will be successful
+        - description: IDs of accounts to fetch. If a record can't be found, that record won't be returned and your request will be successful
           in: query
           items:
             type: integer
           name: ids
           required: false
           type: array
-        - description: >
-            Equality filters that are applied to the updated_at field. A single
-            filter can be used by itself or combined with other filters to
-            create a range.
-
+        - description: |
+            Equality filters that are applied to the updated_at field. A single filter can be used by itself or combined with other filters to create a range.
             ---CUSTOM---
-
             {"type":"object","keys":[{"name":"gt","type":"iso8601 string","description":"Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"gte","type":"iso8601 string","description":"Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lt","type":"iso8601 string","description":"Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lte","type":"iso8601 string","description":"Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."}]}
           in: query
           items:
@@ -110,8 +102,7 @@ paths:
           name: domain
           required: false
           type: string
-        - description: "Key to sort on, must be one of: created_at, updated_at,
-            last_contacted_at. Defaults to updated_at"
+        - description: "Key to sort on, must be one of: created_at, updated_at, last_contacted_at. Defaults to updated_at"
           in: query
           name: sort_by
           required: false
@@ -121,8 +112,7 @@ paths:
           name: sort_direction
           required: false
           type: string
-        - description: How many records to show per page in the range [1, 100]. Defaults
-            to 25
+        - description: How many records to show per page in the range [1, 100]. Defaults to 25
           in: query
           name: per_page
           required: false
@@ -132,8 +122,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Whether to include total_pages and total_count in the metadata.
-            Defaults to false
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
           in: query
           name: include_paging_counts
           required: false
@@ -249,15 +238,12 @@ paths:
           name: size
           required: false
           type: string
-        - description: Whether this company can not be contacted. Values are either true
-            or false. Setting this to true will remove all associated people
-            from all active communications
+        - description: Whether this company can not be contacted. Values are either true or false. Setting this to true will remove all associated people from all active communications
           in: formData
           name: do_not_contact
           required: false
           type: boolean
-        - description: Custom fields are defined by the user's team. Only fields with
-            values are presented in the API.
+        - description: Custom fields are defined by the user's team. Only fields with values are presented in the API.
           in: formData
           items:
             type: string
@@ -291,12 +277,9 @@ paths:
         - Accounts
   "/v2/accounts/{id}.json":
     delete:
-      description: >
-        Deletes an account. This operation is not reversible without
-        contacting support.
-
+      description: |
+        Deletes an account. This operation is not reversible without contacting support.
         This operation can be called multiple times successfully.
-
 
         Deleting an account will remove all connected people from that account.
       parameters:
@@ -429,15 +412,12 @@ paths:
           name: size
           required: false
           type: string
-        - description: Whether this company can not be contacted. Values are either true
-            or false. Setting this to true will remove all associated people
-            from all active communications
+        - description: Whether this company can not be contacted. Values are either true or false. Setting this to true will remove all associated people from all active communications
           in: formData
           name: do_not_contact
           required: false
           type: boolean
-        - description: Custom fields are defined by the user's team. Only fields with
-            values are presented in the API.
+        - description: Custom fields are defined by the user's team. Only fields with values are presented in the API.
           in: formData
           items:
             type: string
@@ -476,10 +456,8 @@ paths:
         - Accounts
   /v2/action_details/call_instructions.json:
     get:
-      description: >
-        Fetches multiple call instruction records. The records can be
-        filtered, paged, and sorted according to
-
+      description: |
+        Fetches multiple call instruction records. The records can be filtered, paged, and sorted according to
         the respective parameters.
       parameters:
         - description: IDs of call instructions to fetch.
@@ -489,8 +467,7 @@ paths:
           name: ids
           required: false
           type: array
-        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults
-            to updated_at"
+        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults to updated_at"
           in: query
           name: sort_by
           required: false
@@ -500,8 +477,7 @@ paths:
           name: sort_direction
           required: false
           type: string
-        - description: How many records to show per page in the range [1, 100]. Defaults
-            to 25
+        - description: How many records to show per page in the range [1, 100]. Defaults to 25
           in: query
           name: per_page
           required: false
@@ -511,8 +487,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Whether to include total_pages and total_count in the metadata.
-            Defaults to false
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
           in: query
           name: include_paging_counts
           required: false
@@ -547,12 +522,9 @@ paths:
         - Action Details - Call Instructions
   /v2/actions.json:
     get:
-      description: >
-        Fetches multiple action records. The records can be filtered,
-        paged, and sorted according to
-
+      description: |
+        Fetches multiple action records. The records can be filtered, paged, and sorted according to
         the respective parameters. Only actions that are currently "in_progess" will be returned by
-
         this endpoint.
       parameters:
         - description: IDs of actions to fetch.
@@ -572,13 +544,9 @@ paths:
           name: type
           required: false
           type: string
-        - description: >
-            Equality filters that are applied to the due_on field. A single
-            filter can be used by itself or combined with other filters to
-            create a range.
-
+        - description: |
+            Equality filters that are applied to the due_on field. A single filter can be used by itself or combined with other filters to create a range.
             ---CUSTOM---
-
             {"type":"object","keys":[{"name":"gt","type":"iso8601 string","description":"Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"gte","type":"iso8601 string","description":"Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lt","type":"iso8601 string","description":"Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lte","type":"iso8601 string","description":"Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."}]}
           in: query
           items:
@@ -586,8 +554,7 @@ paths:
           name: due_on
           required: false
           type: array
-        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults
-            to updated_at"
+        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults to updated_at"
           in: query
           name: sort_by
           required: false
@@ -597,8 +564,7 @@ paths:
           name: sort_direction
           required: false
           type: string
-        - description: How many records to show per page in the range [1, 100]. Defaults
-            to 25
+        - description: How many records to show per page in the range [1, 100]. Defaults to 25
           in: query
           name: per_page
           required: false
@@ -608,8 +574,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Whether to include total_pages and total_count in the metadata.
-            Defaults to false
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
           in: query
           name: include_paging_counts
           required: false
@@ -626,11 +591,9 @@ paths:
         - Actions
   "/v2/actions/{id}.json":
     get:
-      description: >
+      description: |
         Fetches an action, by ID only.
-
         This endpoint will only return actions that are in_progress or pending_activity.
-
         Once an action is complete, the request for that action will return a 404 status code.
       parameters:
         - description: Action ID
@@ -648,27 +611,20 @@ paths:
         - Actions
   /v2/activities/calls.json:
     get:
-      description: >
-        Fetches multiple call records. The records can be filtered, paged,
-        and sorted according to
-
+      description: |
+        Fetches multiple call records. The records can be filtered, paged, and sorted according to
         the respective parameters.
       parameters:
-        - description: IDs of calls to fetch. If a record can't be found, that record
-            won't be returned and your request will be successful
+        - description: IDs of calls to fetch. If a record can't be found, that record won't be returned and your request will be successful
           in: query
           items:
             type: integer
           name: ids
           required: false
           type: array
-        - description: >
-            Equality filters that are applied to the updated_at field. A single
-            filter can be used by itself or combined with other filters to
-            create a range.
-
+        - description: |
+            Equality filters that are applied to the updated_at field. A single filter can be used by itself or combined with other filters to create a range.
             ---CUSTOM---
-
             {"type":"object","keys":[{"name":"gt","type":"iso8601 string","description":"Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"gte","type":"iso8601 string","description":"Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lt","type":"iso8601 string","description":"Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lte","type":"iso8601 string","description":"Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."}]}
           in: query
           items:
@@ -676,8 +632,7 @@ paths:
           name: updated_at
           required: false
           type: array
-        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults
-            to updated_at"
+        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults to updated_at"
           in: query
           name: sort_by
           required: false
@@ -687,8 +642,7 @@ paths:
           name: sort_direction
           required: false
           type: string
-        - description: How many records to show per page in the range [1, 100]. Defaults
-            to 25
+        - description: How many records to show per page in the range [1, 100]. Defaults to 25
           in: query
           name: per_page
           required: false
@@ -698,8 +652,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Whether to include total_pages and total_count in the metadata.
-            Defaults to false
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
           in: query
           name: include_paging_counts
           required: false
@@ -734,27 +687,20 @@ paths:
         - Calls
   /v2/activities/emails.json:
     get:
-      description: >
-        Fetches multiple email records. The records can be filtered, paged,
-        and sorted according to
-
+      description: |
+        Fetches multiple email records. The records can be filtered, paged, and sorted according to
         the respective parameters.
       parameters:
-        - description: IDs of emails to fetch. If a record can't be found, that record
-            won't be returned and your request will be successful
+        - description: IDs of emails to fetch. If a record can't be found, that record won't be returned and your request will be successful
           in: query
           items:
             type: integer
           name: ids
           required: false
           type: array
-        - description: >
-            Equality filters that are applied to the updated_at field. A single
-            filter can be used by itself or combined with other filters to
-            create a range.
-
+        - description: |
+            Equality filters that are applied to the updated_at field. A single filter can be used by itself or combined with other filters to create a range.
             ---CUSTOM---
-
             {"type":"object","keys":[{"name":"gt","type":"iso8601 string","description":"Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"gte","type":"iso8601 string","description":"Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lt","type":"iso8601 string","description":"Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lte","type":"iso8601 string","description":"Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."}]}
           in: query
           items:
@@ -777,8 +723,7 @@ paths:
           name: sort_direction
           required: false
           type: string
-        - description: How many records to show per page in the range [1, 100]. Defaults
-            to 25
+        - description: How many records to show per page in the range [1, 100]. Defaults to 25
           in: query
           name: per_page
           required: false
@@ -788,8 +733,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Whether to include total_pages and total_count in the metadata.
-            Defaults to false
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
           in: query
           name: include_paging_counts
           required: false
@@ -824,18 +768,13 @@ paths:
         - Emails
   /v2/cadence_memberships.json:
     get:
-      description: >
-        Fetches multiple cadence membership records. The records can be
-        filtered, paged, and sorted according to
-
+      description: |
+        Fetches multiple cadence membership records. The records can be filtered, paged, and sorted according to
         the respective parameters. A cadence membership is the association between a person and their current and
-
         historical time on a cadence. Cadence membership records are mutable and change over time. If a person is
-
         added to a cadence and re-added to the same cadence in the future, there is a single membership record.
       parameters:
-        - description: IDs of cadence memberships to fetch. If a record can't be found,
-            that record won't be returned and your request will be successful
+        - description: IDs of cadence memberships to fetch. If a record can't be found, that record won't be returned and your request will be successful
           in: query
           items:
             type: integer
@@ -852,13 +791,9 @@ paths:
           name: cadence_id
           required: false
           type: integer
-        - description: >
-            Equality filters that are applied to the updated_at field. A single
-            filter can be used by itself or combined with other filters to
-            create a range.
-
+        - description: |
+            Equality filters that are applied to the updated_at field. A single filter can be used by itself or combined with other filters to create a range.
             ---CUSTOM---
-
             {"type":"object","keys":[{"name":"gt","type":"iso8601 string","description":"Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"gte","type":"iso8601 string","description":"Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lt","type":"iso8601 string","description":"Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lte","type":"iso8601 string","description":"Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."}]}
           in: query
           items:
@@ -876,8 +811,7 @@ paths:
           name: sort_direction
           required: false
           type: string
-        - description: How many records to show per page in the range [1, 100]. Defaults
-            to 25
+        - description: How many records to show per page in the range [1, 100]. Defaults to 25
           in: query
           name: per_page
           required: false
@@ -887,8 +821,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Whether to include total_pages and total_count in the metadata.
-            Defaults to false
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
           in: query
           name: include_paging_counts
           required: false
@@ -904,15 +837,11 @@ paths:
       tags:
         - Cadence Memberships
     post:
-      description: >
-        Adds a person to a cadence. person_id and cadence_id are required,
-        and must be visible to the authenticated user. user_id will
-
+      description: |
+        Adds a person to a cadence. person_id and cadence_id are required, and must be visible to the authenticated user. user_id will
         default to the authenticated user, but can be set to any visible user on the authenticated team.
 
-
         A person cannot be added to a cadence on behalf of a teammate unless the cadence is a team cadence, or the cadence is owned by
-
         the teammate.
       parameters:
         - description: ID of the person to create a cadence membership for
@@ -925,8 +854,7 @@ paths:
           name: cadence_id
           required: true
           type: integer
-        - description: ID of the user to create a cadence membership for. The associated
-            cadence must be owned by the user, or it must be a team cadence
+        - description: ID of the user to create a cadence membership for. The associated cadence must be owned by the user, or it must be a team cadence
           in: query
           name: user_id
           required: false
@@ -972,27 +900,20 @@ paths:
         - Cadence Memberships
   /v2/cadences.json:
     get:
-      description: >
-        Fetches multiple cadence records. The records can be filtered,
-        paged, and sorted according to
-
+      description: |
+        Fetches multiple cadence records. The records can be filtered, paged, and sorted according to
         the respective parameters.
       parameters:
-        - description: IDs of cadences to fetch. If a record can't be found, that record
-            won't be returned and your request will be successful
+        - description: IDs of cadences to fetch. If a record can't be found, that record won't be returned and your request will be successful
           in: query
           items:
             type: integer
           name: ids
           required: false
           type: array
-        - description: >
-            Equality filters that are applied to the updated_at field. A single
-            filter can be used by itself or combined with other filters to
-            create a range.
-
+        - description: |
+            Equality filters that are applied to the updated_at field. A single filter can be used by itself or combined with other filters to create a range.
             ---CUSTOM---
-
             {"type":"object","keys":[{"name":"gt","type":"iso8601 string","description":"Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"gte","type":"iso8601 string","description":"Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lt","type":"iso8601 string","description":"Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lte","type":"iso8601 string","description":"Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."}]}
           in: query
           items:
@@ -1005,8 +926,7 @@ paths:
           name: team_cadence
           required: false
           type: boolean
-        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults
-            to updated_at"
+        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults to updated_at"
           in: query
           name: sort_by
           required: false
@@ -1016,8 +936,7 @@ paths:
           name: sort_direction
           required: false
           type: string
-        - description: How many records to show per page in the range [1, 100]. Defaults
-            to 25
+        - description: How many records to show per page in the range [1, 100]. Defaults to 25
           in: query
           name: per_page
           required: false
@@ -1027,8 +946,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Whether to include total_pages and total_count in the metadata.
-            Defaults to false
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
           in: query
           name: include_paging_counts
           required: false
@@ -1063,38 +981,28 @@ paths:
         - Cadences
   /v2/call_data_records.json:
     get:
-      description: >
-        Fetches multiple call data records. The records can be filtered,
-        paged, and sorted according to
-
+      description: |
+        Fetches multiple call data records. The records can be filtered, paged, and sorted according to
         the respective parameters.
 
-
         Call data records are records of all inbound and outbound calls through SalesLoft. A call data record may
-
         be associated with a call, but does not have to be.
       parameters:
-        - description: IDs of call data records to fetch. If a record can't be found, that
-            record won't be returned and your request will be successful
+        - description: IDs of call data records to fetch. If a record can't be found, that record won't be returned and your request will be successful
           in: query
           items:
             type: integer
           name: ids
           required: false
           type: array
-        - description: Return only call data records which have or do not have a call
-            logged for them
+        - description: Return only call data records which have or do not have a call logged for them
           in: query
           name: has_call
           required: false
           type: boolean
-        - description: >
-            Equality filters that are applied to the updated_at field. A single
-            filter can be used by itself or combined with other filters to
-            create a range.
-
+        - description: |
+            Equality filters that are applied to the updated_at field. A single filter can be used by itself or combined with other filters to create a range.
             ---CUSTOM---
-
             {"type":"object","keys":[{"name":"gt","type":"iso8601 string","description":"Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"gte","type":"iso8601 string","description":"Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lt","type":"iso8601 string","description":"Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lte","type":"iso8601 string","description":"Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."}]}
           in: query
           items:
@@ -1102,8 +1010,7 @@ paths:
           name: updated_at
           required: false
           type: array
-        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults
-            to updated_at"
+        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults to updated_at"
           in: query
           name: sort_by
           required: false
@@ -1113,8 +1020,7 @@ paths:
           name: sort_direction
           required: false
           type: string
-        - description: How many records to show per page in the range [1, 100]. Defaults
-            to 25
+        - description: How many records to show per page in the range [1, 100]. Defaults to 25
           in: query
           name: per_page
           required: false
@@ -1124,8 +1030,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Whether to include total_pages and total_count in the metadata.
-            Defaults to false
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
           in: query
           name: include_paging_counts
           required: false
@@ -1160,10 +1065,8 @@ paths:
         - Call Data Records
   /v2/crm_activities.json:
     get:
-      description: >
-        Fetches multiple crm activity records. The records can be filtered,
-        paged, and sorted according to
-
+      description: |
+        Fetches multiple crm activity records. The records can be filtered, paged, and sorted according to
         the respective parameters.
       parameters:
         - description: IDs of crm activities to fetch.
@@ -1173,13 +1076,9 @@ paths:
           name: ids
           required: false
           type: array
-        - description: >
-            Equality filters that are applied to the updated_at field. A single
-            filter can be used by itself or combined with other filters to
-            create a range.
-
+        - description: |
+            Equality filters that are applied to the updated_at field. A single filter can be used by itself or combined with other filters to create a range.
             ---CUSTOM---
-
             {"type":"object","keys":[{"name":"gt","type":"iso8601 string","description":"Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"gte","type":"iso8601 string","description":"Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lt","type":"iso8601 string","description":"Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lte","type":"iso8601 string","description":"Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."}]}
           in: query
           items:
@@ -1187,8 +1086,7 @@ paths:
           name: updated_at
           required: false
           type: array
-        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults
-            to updated_at"
+        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults to updated_at"
           in: query
           name: sort_by
           required: false
@@ -1198,8 +1096,7 @@ paths:
           name: sort_direction
           required: false
           type: string
-        - description: How many records to show per page in the range [1, 100]. Defaults
-            to 25
+        - description: How many records to show per page in the range [1, 100]. Defaults to 25
           in: query
           name: per_page
           required: false
@@ -1209,8 +1106,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Whether to include total_pages and total_count in the metadata.
-            Defaults to false
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
           in: query
           name: include_paging_counts
           required: false
@@ -1245,10 +1141,8 @@ paths:
         - CRM Activities
   /v2/custom_fields.json:
     get:
-      description: >
-        Fetches multiple custom field records. The records can be filtered,
-        paged, and sorted according to
-
+      description: |
+        Fetches multiple custom field records. The records can be filtered, paged, and sorted according to
         the respective parameters.
       parameters:
         - description: IDs of custom fields to fetch.
@@ -1258,14 +1152,12 @@ paths:
           name: ids
           required: false
           type: array
-        - description: "Type of field to fetch. Value must be one of: person, company,
-            opportunity"
+        - description: "Type of field to fetch. Value must be one of: person, company, opportunity"
           in: query
           name: field_type
           required: false
           type: string
-        - description: "Key to sort on, must be one of: created_at, updated_at, name.
-            Defaults to updated_at"
+        - description: "Key to sort on, must be one of: created_at, updated_at, name. Defaults to updated_at"
           in: query
           name: sort_by
           required: false
@@ -1275,8 +1167,7 @@ paths:
           name: sort_direction
           required: false
           type: string
-        - description: How many records to show per page in the range [1, 100]. Defaults
-            to 25
+        - description: How many records to show per page in the range [1, 100]. Defaults to 25
           in: query
           name: per_page
           required: false
@@ -1286,8 +1177,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Whether to include total_pages and total_count in the metadata.
-            Defaults to false
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
           in: query
           name: include_paging_counts
           required: false
@@ -1311,8 +1201,7 @@ paths:
           name: name
           required: true
           type: string
-        - description: "The field type of the custom field. Value must be one of: person,
-            company, opportunity"
+        - description: "The field type of the custom field. Value must be one of: person, company, opportunity"
           in: formData
           name: field_type
           required: false
@@ -1372,8 +1261,7 @@ paths:
           name: name
           required: false
           type: string
-        - description: "The field type of the custom field. Value must be one of: person,
-            company, opportunity"
+        - description: "The field type of the custom field. Value must be one of: person, company, opportunity"
           in: formData
           name: field_type
           required: false
@@ -1388,27 +1276,20 @@ paths:
         - Custom Fields
   /v2/email_templates.json:
     get:
-      description: >
-        Fetches multiple email template records. The records can be
-        filtered, paged, and sorted according to
-
+      description: |
+        Fetches multiple email template records. The records can be filtered, paged, and sorted according to
         the respective parameters.
       parameters:
-        - description: IDs of email templates to fetch. If a record can't be found, that
-            record won't be returned and your request will be successful
+        - description: IDs of email templates to fetch. If a record can't be found, that record won't be returned and your request will be successful
           in: query
           items:
             type: integer
           name: ids
           required: false
           type: array
-        - description: >
-            Equality filters that are applied to the updated_at field. A single
-            filter can be used by itself or combined with other filters to
-            create a range.
-
+        - description: |
+            Equality filters that are applied to the updated_at field. A single filter can be used by itself or combined with other filters to create a range.
             ---CUSTOM---
-
             {"type":"object","keys":[{"name":"gt","type":"iso8601 string","description":"Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"gte","type":"iso8601 string","description":"Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lt","type":"iso8601 string","description":"Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lte","type":"iso8601 string","description":"Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."}]}
           in: query
           items:
@@ -1416,14 +1297,12 @@ paths:
           name: updated_at
           required: false
           type: array
-        - description: Filters email templates by whether they are linked to a team
-            template or not
+        - description: Filters email templates by whether they are linked to a team template or not
           in: query
           name: linked_to_team_template
           required: false
           type: boolean
-        - description: "Key to sort on, must be one of: created_at, updated_at,
-            last_used_at. Defaults to updated_at"
+        - description: "Key to sort on, must be one of: created_at, updated_at, last_used_at. Defaults to updated_at"
           in: query
           name: sort_by
           required: false
@@ -1433,8 +1312,7 @@ paths:
           name: sort_direction
           required: false
           type: string
-        - description: How many records to show per page in the range [1, 100]. Defaults
-            to 25
+        - description: How many records to show per page in the range [1, 100]. Defaults to 25
           in: query
           name: per_page
           required: false
@@ -1444,8 +1322,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Whether to include total_pages and total_count in the metadata.
-            Defaults to false
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
           in: query
           name: include_paging_counts
           required: false
@@ -1483,24 +1360,21 @@ paths:
       description: |
         Fetches multiple imports.
       parameters:
-        - description: IDs of imports to fetch. If a record can't be found, that record
-            won't be returned and your request will be successful
+        - description: IDs of imports to fetch. If a record can't be found, that record won't be returned and your request will be successful
           in: query
           items:
             type: integer
           name: ids
           required: false
           type: array
-        - description: ID of users to fetch imports for. Using this filter will return an
-            empty array for non-admin users who request other user's imports
+        - description: ID of users to fetch imports for. Using this filter will return an empty array for non-admin users who request other user's imports
           in: query
           items:
             type: integer
           name: user_ids
           required: false
           type: array
-        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults
-            to created_at"
+        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults to created_at"
           in: query
           name: sort_by
           required: false
@@ -1510,8 +1384,7 @@ paths:
           name: sort_direction
           required: false
           type: string
-        - description: How many records to show per page in the range [1, 100]. Defaults
-            to 25
+        - description: How many records to show per page in the range [1, 100]. Defaults to 25
           in: query
           name: per_page
           required: false
@@ -1521,8 +1394,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Whether to include total_pages and total_count in the metadata.
-            Defaults to false
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
           in: query
           name: include_paging_counts
           required: false
@@ -1561,10 +1433,8 @@ paths:
         - Imports
   "/v2/imports/{id}.json":
     delete:
-      description: >
-        Deletes an import, by ID only. The associated people can be deleted
-        as part of the deletion process.
-
+      description: |
+        Deletes an import, by ID only. The associated people can be deleted as part of the deletion process.
 
         Admin users can access imports for the entire team, but non-admin users can only access their own imports.
       parameters:
@@ -1573,15 +1443,11 @@ paths:
           name: id
           required: true
           type: string
-        - description: >
-            Whether to delete people on this Import. Possible values are: [not
-            present], all, single.
-
+        - description: |
+            Whether to delete people on this Import. Possible values are: [not present], all, single.
 
             'single' will delete people who are only present in this Import.
-
             'all' will delete people even if they are present in other Imports.
-
             Not specifying this parameter will not delete any people
           in: query
           name: undo
@@ -1594,9 +1460,8 @@ paths:
       tags:
         - Imports
     get:
-      description: >
+      description: |
         Fetches an import, by ID only.
-
 
         Admin users can access imports for the entire team, but non-admin users can only access their own imports.
       parameters:
@@ -1614,9 +1479,8 @@ paths:
       tags:
         - Imports
     put:
-      description: >
+      description: |
         Updates an import, by ID only.
-
 
         Admin users can access imports for the entire team, but non-admin users can only access their own imports.
       parameters:
@@ -1645,12 +1509,9 @@ paths:
         - Imports
   /v2/me.json:
     get:
-      description: >
-        Authenticated user information. This endpoint does not accept any
-        parameters as it is
-
+      description: |
+        Authenticated user information. This endpoint does not accept any parameters as it is
         represents your authenticated user. The "Users" resource provides user information
-
         for other users on the team.
       responses:
         "200":
@@ -1662,31 +1523,23 @@ paths:
         - Me
   /v2/notes.json:
     get:
-      description: >
-        Fetches multiple note records. The records can be filtered, paged,
-        and sorted according to
-
+      description: |
+        Fetches multiple note records. The records can be filtered, paged, and sorted according to
         the respective parameters.
       parameters:
-        - description: "Case insensitive type of item with which the note is
-            associated.  Value must be one of: person, account"
+        - description: "Case insensitive type of item with which the note is associated.  Value must be one of: person, account"
           in: query
           name: associated_with_type
           required: false
           type: string
-        - description: ID of the item with which the note is associated.  The
-            associated_with_type must also be present if this parameter is used
+        - description: ID of the item with which the note is associated.  The associated_with_type must also be present if this parameter is used
           in: query
           name: associated_with_id
           required: false
           type: integer
-        - description: >
-            Equality filters that are applied to the updated_at field. A single
-            filter can be used by itself or combined with other filters to
-            create a range.
-
+        - description: |
+            Equality filters that are applied to the updated_at field. A single filter can be used by itself or combined with other filters to create a range.
             ---CUSTOM---
-
             {"type":"object","keys":[{"name":"gt","type":"iso8601 string","description":"Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"gte","type":"iso8601 string","description":"Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lt","type":"iso8601 string","description":"Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lte","type":"iso8601 string","description":"Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."}]}
           in: query
           items:
@@ -1694,16 +1547,14 @@ paths:
           name: updated_at
           required: false
           type: array
-        - description: IDs of notes to fetch. If a record can't be found, that record
-            won't be returned and your request will be successful
+        - description: IDs of notes to fetch. If a record can't be found, that record won't be returned and your request will be successful
           in: query
           items:
             type: integer
           name: ids
           required: false
           type: array
-        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults
-            to updated_at"
+        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults to updated_at"
           in: query
           name: sort_by
           required: false
@@ -1713,8 +1564,7 @@ paths:
           name: sort_direction
           required: false
           type: string
-        - description: How many records to show per page in the range [1, 100]. Defaults
-            to 25
+        - description: How many records to show per page in the range [1, 100]. Defaults to 25
           in: query
           name: per_page
           required: false
@@ -1724,8 +1574,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Whether to include total_pages and total_count in the metadata.
-            Defaults to false
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
           in: query
           name: include_paging_counts
           required: false
@@ -1749,8 +1598,7 @@ paths:
           name: content
           required: true
           type: string
-        - description: "Case insensitive type of item with which the note is
-            associated.  Value must be one of: person, account"
+        - description: "Case insensitive type of item with which the note is associated.  Value must be one of: person, account"
           in: formData
           name: associated_with_type
           required: true
@@ -1760,14 +1608,12 @@ paths:
           name: associated_with_id
           required: true
           type: integer
-        - description: Boolean indicating if the CRM sync should be skipped.  No syncing
-            will occur if true
+        - description: Boolean indicating if the CRM sync should be skipped.  No syncing will occur if true
           in: formData
           name: skip_crm_sync
           required: false
           type: boolean
-        - description: ID of the call with which the note is associated. The call cannot
-            already have a note
+        - description: ID of the call with which the note is associated. The call cannot already have a note
           in: formData
           name: call_id
           required: false
@@ -1799,9 +1645,8 @@ paths:
       tags:
         - Notes
     put:
-      description: >
-        Updates a note. Any changes to the note or associated records will
-        not reflect in Salesforce.com.
+      description: |
+        Updates a note. Any changes to the note or associated records will not reflect in Salesforce.com.
       parameters:
         - description: Note ID
           in: path
@@ -1813,9 +1658,7 @@ paths:
           name: content
           required: true
           type: string
-        - description: ID of the call with which the note is associated. The call cannot
-            already have a note. If the note is associated to a call already, it
-            will become associated to the requested call
+        - description: ID of the call with which the note is associated. The call cannot already have a note. If the note is associated to a call already, it will become associated to the requested call
           in: formData
           name: call_id
           required: false
@@ -1830,27 +1673,20 @@ paths:
         - Notes
   /v2/people.json:
     get:
-      description: >
-        Fetches multiple person records. The records can be filtered,
-        paged, and sorted according to
-
+      description: |
+        Fetches multiple person records. The records can be filtered, paged, and sorted according to
         the respective parameters.
       parameters:
-        - description: IDs of people to fetch. If a record can't be found, that record
-            won't be returned and your request will be successful
+        - description: IDs of people to fetch. If a record can't be found, that record won't be returned and your request will be successful
           in: query
           items:
             type: integer
           name: ids
           required: false
           type: array
-        - description: >
-            Equality filters that are applied to the updated_at field. A single
-            filter can be used by itself or combined with other filters to
-            create a range.
-
+        - description: |
+            Equality filters that are applied to the updated_at field. A single filter can be used by itself or combined with other filters to create a range.
             ---CUSTOM---
-
             {"type":"object","keys":[{"name":"gt","type":"iso8601 string","description":"Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"gte","type":"iso8601 string","description":"Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lt","type":"iso8601 string","description":"Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lte","type":"iso8601 string","description":"Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."}]}
           in: query
           items:
@@ -1865,8 +1701,7 @@ paths:
           name: email_addresses
           required: false
           type: array
-        - description: "Key to sort on, must be one of: created_at, updated_at,
-            last_contacted_at. Defaults to updated_at"
+        - description: "Key to sort on, must be one of: created_at, updated_at, last_contacted_at. Defaults to updated_at"
           in: query
           name: sort_by
           required: false
@@ -1876,8 +1711,7 @@ paths:
           name: sort_direction
           required: false
           type: string
-        - description: How many records to show per page in the range [1, 100]. Defaults
-            to 25
+        - description: How many records to show per page in the range [1, 100]. Defaults to 25
           in: query
           name: per_page
           required: false
@@ -1887,8 +1721,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Whether to include total_pages and total_count in the metadata.
-            Defaults to false
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
           in: query
           name: include_paging_counts
           required: false
@@ -1904,10 +1737,8 @@ paths:
       tags:
         - People
     post:
-      description: >
-        Creates a person. Either email_address or phone/last_name must be
-        provided as a unique lookup
-
+      description: |
+        Creates a person. Either email_address or phone/last_name must be provided as a unique lookup
         on the team.
       parameters:
         - description: Email address
@@ -1995,30 +1826,22 @@ paths:
           name: work_country
           required: false
           type: string
-        - description: Company name. This property is specific to this person, unrelated
-            to the company object. Updating the company object associated with
-            this person is recommended
+        - description: Company name. This property is specific to this person, unrelated to the company object. Updating the company object associated with this person is recommended
           in: formData
           name: person_company_name
           required: false
           type: string
-        - description: Company website. This property is specific to this person,
-            unrelated to the company object. Updating the company object
-            associated with this person is recommended
+        - description: Company website. This property is specific to this person, unrelated to the company object. Updating the company object associated with this person is recommended
           in: formData
           name: person_company_website
           required: false
           type: string
-        - description: Company industry. This property is specific to this person,
-            unrelated to the company object. Updating the company object
-            associated with this person is recommended
+        - description: Company industry. This property is specific to this person, unrelated to the company object. Updating the company object associated with this person is recommended
           in: formData
           name: person_company_industry
           required: false
           type: string
-        - description: Whether this person can not be contacted. Values are either true or
-            false. Setting this to true will remove the person from all active
-            communications
+        - description: Whether this person can not be contacted. Values are either true or false. Setting this to true will remove the person from all active communications
           in: formData
           name: do_not_contact
           required: false
@@ -2045,8 +1868,7 @@ paths:
           name: tags
           required: false
           type: array
-        - description: Custom fields are defined by the user's team. Only fields with
-            values are presented in the API.
+        - description: Custom fields are defined by the user's team. Only fields with values are presented in the API.
           in: formData
           items:
             type: string
@@ -2063,8 +1885,7 @@ paths:
           name: owner_id
           required: false
           type: integer
-        - description: ID of the Import this person is a part of. A person can be part of
-            multiple imports, but this ID will always be the most recent Import
+        - description: ID of the Import this person is a part of. A person can be part of multiple imports, but this ID will always be the most recent Import
           in: formData
           name: import_id
           required: false
@@ -2074,8 +1895,7 @@ paths:
           name: person_stage_id
           required: false
           type: integer
-        - description: Whether the date should be added to this person as a tag. Default
-            is false. The tag will be Y-m-d format.
+        - description: Whether the date should be added to this person as a tag. Default is false. The tag will be Y-m-d format.
           in: formData
           name: autotag_date
           required: false
@@ -2090,10 +1910,8 @@ paths:
         - People
   "/v2/people/{id}.json":
     delete:
-      description: >
-        Deletes a person. This operation is not reversible without
-        contacting support.
-
+      description: |
+        Deletes a person. This operation is not reversible without contacting support.
         This operation can be called multiple times successfully.
       parameters:
         - description: Person id
@@ -2213,30 +2031,22 @@ paths:
           name: work_country
           required: false
           type: string
-        - description: Company name. This property is specific to this person, unrelated
-            to the company object. Updating the company object associated with
-            this person is recommended
+        - description: Company name. This property is specific to this person, unrelated to the company object. Updating the company object associated with this person is recommended
           in: formData
           name: person_company_name
           required: false
           type: string
-        - description: Company website. This property is specific to this person,
-            unrelated to the company object. Updating the company object
-            associated with this person is recommended
+        - description: Company website. This property is specific to this person, unrelated to the company object. Updating the company object associated with this person is recommended
           in: formData
           name: person_company_website
           required: false
           type: string
-        - description: Company industry. This property is specific to this person,
-            unrelated to the company object. Updating the company object
-            associated with this person is recommended
+        - description: Company industry. This property is specific to this person, unrelated to the company object. Updating the company object associated with this person is recommended
           in: formData
           name: person_company_industry
           required: false
           type: string
-        - description: Whether this person can not be contacted. Values are either true or
-            false. Setting this to true will remove the person from all active
-            communications
+        - description: Whether this person can not be contacted. Values are either true or false. Setting this to true will remove the person from all active communications
           in: formData
           name: do_not_contact
           required: false
@@ -2263,8 +2073,7 @@ paths:
           name: tags
           required: false
           type: array
-        - description: Custom fields are defined by the user's team. Only fields with
-            values are presented in the API.
+        - description: Custom fields are defined by the user's team. Only fields with values are presented in the API.
           in: formData
           items:
             type: string
@@ -2281,8 +2090,7 @@ paths:
           name: owner_id
           required: false
           type: integer
-        - description: ID of the Import this person is a part of. A person can be part of
-            multiple imports, but this ID will always be the most recent Import
+        - description: ID of the Import this person is a part of. A person can be part of multiple imports, but this ID will always be the most recent Import
           in: formData
           name: import_id
           required: false
@@ -2307,10 +2115,8 @@ paths:
         - People
   /v2/person_stages.json:
     get:
-      description: >
-        Fetches multiple person stage records. The records can be filtered,
-        paged, and sorted according to
-
+      description: |
+        Fetches multiple person stage records. The records can be filtered, paged, and sorted according to
         the respective parameters.
       parameters:
         - description: IDs of person stages to fetch.
@@ -2320,8 +2126,7 @@ paths:
           name: ids
           required: false
           type: array
-        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults
-            to updated_at"
+        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults to updated_at"
           in: query
           name: sort_by
           required: false
@@ -2331,8 +2136,7 @@ paths:
           name: sort_direction
           required: false
           type: string
-        - description: How many records to show per page in the range [1, 100]. Defaults
-            to 25
+        - description: How many records to show per page in the range [1, 100]. Defaults to 25
           in: query
           name: per_page
           required: false
@@ -2342,8 +2146,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Whether to include total_pages and total_count in the metadata.
-            Defaults to false
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
           in: query
           name: include_paging_counts
           required: false
@@ -2377,10 +2180,8 @@ paths:
         - Person Stages
   "/v2/person_stages/{id}.json":
     delete:
-      description: >
-        Deletes a person stage. This operation is not reversible without
-        contacting support.
-
+      description: |
+        Deletes a person stage. This operation is not reversible without contacting support.
         This operation can be called multiple times successfully.
       parameters:
         - description: Stage ID
@@ -2457,10 +2258,8 @@ paths:
         - Caller IDs
   "/v2/phone_numbers/recording_settings/{id}.json":
     get:
-      description: >
-        Fetches the recording status for a given phone number, based on Do
-        Not Record and Recording Governance for your team.
-
+      description: |
+        Fetches the recording status for a given phone number, based on Do Not Record and Recording Governance for your team.
         Phone number should be in E.164 format.
       parameters:
         - description: E.164 Phone Number
@@ -2478,10 +2277,8 @@ paths:
         - Recording Settings
   /v2/steps.json:
     get:
-      description: >
-        Fetches multiple step records. The records can be filtered, paged,
-        and sorted according to
-
+      description: |
+        Fetches multiple step records. The records can be filtered, paged, and sorted according to
         the respective parameters.
       parameters:
         - description: IDs of steps to fetch.
@@ -2506,8 +2303,7 @@ paths:
           name: has_due_actions
           required: false
           type: boolean
-        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults
-            to updated_at"
+        - description: "Key to sort on, must be one of: created_at, updated_at. Defaults to updated_at"
           in: query
           name: sort_by
           required: false
@@ -2517,8 +2313,7 @@ paths:
           name: sort_direction
           required: false
           type: string
-        - description: How many records to show per page in the range [1, 100]. Defaults
-            to 25
+        - description: How many records to show per page in the range [1, 100]. Defaults to 25
           in: query
           name: per_page
           required: false
@@ -2528,8 +2323,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Whether to include total_pages and total_count in the metadata.
-            Defaults to false
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
           in: query
           name: include_paging_counts
           required: false
@@ -2564,27 +2358,20 @@ paths:
         - Steps
   /v2/successes.json:
     get:
-      description: >
-        Fetches multiple success records. The records can be filtered,
-        paged, and sorted according to
-
+      description: |
+        Fetches multiple success records. The records can be filtered, paged, and sorted according to
         the respective parameters.
       parameters:
-        - description: IDs of successes to fetch. If a record can't be found, that record
-            won't be returned and your request will be successful
+        - description: IDs of successes to fetch. If a record can't be found, that record won't be returned and your request will be successful
           in: query
           items:
             type: integer
           name: ids
           required: false
           type: array
-        - description: >
-            Equality filters that are applied to the updated_at field. A single
-            filter can be used by itself or combined with other filters to
-            create a range.
-
+        - description: |
+            Equality filters that are applied to the updated_at field. A single filter can be used by itself or combined with other filters to create a range.
             ---CUSTOM---
-
             {"type":"object","keys":[{"name":"gt","type":"iso8601 string","description":"Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"gte","type":"iso8601 string","description":"Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lt","type":"iso8601 string","description":"Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lte","type":"iso8601 string","description":"Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."}]}
           in: query
           items:
@@ -2592,8 +2379,7 @@ paths:
           name: updated_at
           required: false
           type: array
-        - description: "Key to sort on, must be one of: created_at, updated_at,
-            succeeded_at. Defaults to updated_at"
+        - description: "Key to sort on, must be one of: created_at, updated_at, succeeded_at. Defaults to updated_at"
           in: query
           name: sort_by
           required: false
@@ -2603,8 +2389,7 @@ paths:
           name: sort_direction
           required: false
           type: string
-        - description: How many records to show per page in the range [1, 100]. Defaults
-            to 25
+        - description: How many records to show per page in the range [1, 100]. Defaults to 25
           in: query
           name: per_page
           required: false
@@ -2614,8 +2399,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Whether to include total_pages and total_count in the metadata.
-            Defaults to false
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
           in: query
           name: include_paging_counts
           required: false
@@ -2644,34 +2428,24 @@ paths:
         - Team
   /v2/team_templates.json:
     get:
-      description: >
-        Fetches multiple team template records. The records can be
-        filtered, paged, and sorted according to
-
+      description: |
+        Fetches multiple team template records. The records can be filtered, paged, and sorted according to
         the respective parameters.
 
-
         Team templates are templates that are available team-wide. Admins may use
-
         team templates to create original content for the entire team, monitor version control to ensure templates are always up to date,
-
         and track template performance across the entire organization. All metrics on a team template reflect usage across the team; individual metrics can be found with the email_templates API endpoint.
       parameters:
-        - description: IDs of team templates to fetch. If a record can't be found, that
-            record won't be returned and your request will be successful
+        - description: IDs of team templates to fetch. If a record can't be found, that record won't be returned and your request will be successful
           in: query
           items:
             type: string
           name: ids
           required: false
           type: array
-        - description: >
-            Equality filters that are applied to the updated_at field. A single
-            filter can be used by itself or combined with other filters to
-            create a range.
-
+        - description: |
+            Equality filters that are applied to the updated_at field. A single filter can be used by itself or combined with other filters to create a range.
             ---CUSTOM---
-
             {"type":"object","keys":[{"name":"gt","type":"iso8601 string","description":"Returns all matching records that are greater than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"gte","type":"iso8601 string","description":"Returns all matching records that are greater than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lt","type":"iso8601 string","description":"Returns all matching records that are less than the provided iso8601 timestamp. The comparison is done using microsecond precision."},{"name":"lte","type":"iso8601 string","description":"Returns all matching records that are less than or equal to the provided iso8601 timestamp. The comparison is done using microsecond precision."}]}
           in: query
           items:
@@ -2679,8 +2453,7 @@ paths:
           name: updated_at
           required: false
           type: array
-        - description: "Key to sort on, must be one of: created_at, updated_at,
-            last_used_at. Defaults to updated_at"
+        - description: "Key to sort on, must be one of: created_at, updated_at, last_used_at. Defaults to updated_at"
           in: query
           name: sort_by
           required: false
@@ -2690,8 +2463,7 @@ paths:
           name: sort_direction
           required: false
           type: string
-        - description: How many records to show per page in the range [1, 100]. Defaults
-            to 25
+        - description: How many records to show per page in the range [1, 100]. Defaults to 25
           in: query
           name: per_page
           required: false
@@ -2701,8 +2473,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Whether to include total_pages and total_count in the metadata.
-            Defaults to false
+        - description: Whether to include total_pages and total_count in the metadata. Defaults to false
           in: query
           name: include_paging_counts
           required: false
@@ -2737,10 +2508,8 @@ paths:
         - Team Templates
   /v2/users.json:
     get:
-      description: >
-        Non Admin: Lists only your user, or all on team depending on group
-        visibility policy
-
+      description: |
+        Non Admin: Lists only your user, or all on team depending on group visibility policy
         Team Admin: Lists users associated with your team
       responses:
         "200":
@@ -2828,8 +2597,7 @@ definitions:
         example: https://na15.salesforce.com/003i000001mnhpD
         type: string
       custom_fields:
-        description: Custom fields are defined by the user's team. Only fields with
-          values are presented in the API.
+        description: Custom fields are defined by the user's team. Only fields with values are presented in the API.
         example:
           MyField: A Value
           Other: Field
@@ -2839,8 +2607,7 @@ definitions:
         example: British school of magic for students
         type: string
       do_not_contact:
-        description: Whether this company has opted out of communications. Do not
-          contact someone at this company when this is set to true
+        description: Whether this company has opted out of communications. Do not contact someone at this company when this is set to true
         example: true
         type: boolean
       domain:
@@ -2986,23 +2753,18 @@ definitions:
           _href: https://api.salesloft.com/v2/people/1
           id: 1
       status:
-        description: >
-          The current state of the person on the cadence. Possible values
-          are:
-
+        description: |
+          The current state of the person on the cadence. Possible values are:
 
           in_progress: this action has not been completed
 
-
           pending_activity: this action has been acted upon, but the action has not been completed.
-
           (i.e. the email is scheduled to send, but has not been delivered yet)
         example: in_progress
         type: string
       type:
-        description: >
-          The type of this action. Valid types are: email, phone, other. New
-          types may be added in the future.
+        description: |
+          The type of this action. Valid types are: email, phone, other. New types may be added in the future.
         example: phone
         type: string
       updated_at:
@@ -3067,8 +2829,7 @@ definitions:
         example: Prospecting - VP of Sales
         type: string
       opt_out_link_included:
-        description: Whether this cadence is configured to include an opt-out link by
-          default
+        description: Whether this cadence is configured to include an opt-out link by default
         example: true
         type: boolean
       owner:
@@ -3078,13 +2839,11 @@ definitions:
           _href: https://api.salesloft.com/v2/users/1
           id: 1
       remove_bounces_enabled:
-        description: Whether this cadence is configured to automatically remove people
-          who have bounced
+        description: Whether this cadence is configured to automatically remove people who have bounced
         example: true
         type: boolean
       remove_replies_enabled:
-        description: Whether this cadence is configured to automatically remove people
-          who have replied
+        description: Whether this cadence is configured to automatically remove people who have replied
         example: true
         type: boolean
       replied_stage:
@@ -3106,8 +2865,7 @@ definitions:
           type: string
         type: array
       team_cadence:
-        description: Whether this cadence is a team cadence.  A team cadence is created
-          by an admin and can be run by all users
+        description: Whether this cadence is a team cadence.  A team cadence is created by an admin and can be run by all users
         example: false
         type: boolean
       updated_at:
@@ -3122,8 +2880,7 @@ definitions:
         example: 59
         type: integer
       target_daily_people:
-        description: The user defined target for number of people to add to the cadence
-          each day
+        description: The user defined target for number of people to add to the cadence each day
         example: 10
         type: integer
   CadenceMembership:
@@ -3155,28 +2912,20 @@ definitions:
         format: date
         type: string
       current_state:
-        description: >
-          The current state of the person on the cadence. Possible values
-          are:
-
+        description: |
+          The current state of the person on the cadence. Possible values are:
 
           staged: The person is waiting for the first step in the cadence to occur
 
-
           active: The cadence has begun processing this person and is still in the process, but idle
-
 
           scheduled: The cadence has begun processing this person and is still in the process, with an activity scheduled to occur
 
-
           completed: The cadence has been completed for this person
-
 
           removed: The person was manually or automatically removed from the cadence
 
-
           removed_no_action: The person was removed from the cadence before any action occurred
-
 
           reassigned: The person's cadence execution was transferred to a different user, ending this user's interaction
         example: staged
@@ -3222,13 +2971,11 @@ definitions:
         example: 2
         type: integer
       clicks:
-        description: The number of times emails sent from the cadence to the person were
-          clicked
+        description: The number of times emails sent from the cadence to the person were clicked
         example: 5
         type: integer
       replies:
-        description: The number of times emails sent from the cadence to the person were
-          replied to
+        description: The number of times emails sent from the cadence to the person were replied to
         example: 2
         type: integer
       sent_emails:
@@ -3236,8 +2983,7 @@ definitions:
         example: 4
         type: integer
       views:
-        description: The number of times emails sent from the cadence to the person were
-          opened
+        description: The number of times emails sent from the cadence to the person were opened
         example: 10
         type: integer
   Call:
@@ -3402,9 +3148,7 @@ definitions:
   CrmActivity:
     properties:
       activity_type:
-        description: "The type of activity that is being recorded, if available. The
-          values can change over time, but could be one of: email, phone, email
-          reminder, inmail"
+        description: "The type of activity that is being recorded, if available. The values can change over time, but could be one of: email, phone, email reminder, inmail"
         example: phone
         type: string
       created_at:
@@ -3417,8 +3161,7 @@ definitions:
         example: 00T0H00003w2FBhUAM
         type: string
       custom_crm_fields:
-        description: Additional fields that are logged to Salesforce, if mapped by the
-          team at the time of writing to Salesforce
+        description: Additional fields that are logged to Salesforce, if mapped by the team at the time of writing to Salesforce
         example:
           ecorp__Call_Type__c: inbound follow up
         type: object
@@ -3427,9 +3170,7 @@ definitions:
         example: Timeline is 2 weeks for demo, set with Kate
         type: string
       error:
-        description: Information about why this crm activity failed to sync, if it did
-          fail to sync. Failed activities will be automatically retried and may
-          become successful in the future
+        description: Information about why this crm activity failed to sync, if it did fail to sync. Failed activities will be automatically retried and may become successful in the future
         type: string
       id:
         description: CrmActivity ID
@@ -3464,8 +3205,7 @@ definitions:
         format: date
         type: string
       field_type:
-        description: "Type of the Custom Field. Value must be one of: person, company,
-          opportunity."
+        description: "Type of the Custom Field. Value must be one of: person, company, opportunity."
         example: person
         type: string
       id:
@@ -3485,8 +3225,7 @@ definitions:
     properties:
       action:
         $ref: "#/definitions/EmbeddedResource"
-        description: Action that this email was sent from, or null if not sent through a
-          cadence
+        description: Action that this email was sent from, or null if not sent through a cadence
         example:
           id: 1
       bounced:
@@ -3519,8 +3258,7 @@ definitions:
           _href: https://api.salesloft.com/v2/crm_activities/1
           id: 1
       headers:
-        description: "Selected headers that are included if this email used them.
-          Available keys are: cc, bcc"
+        description: "Selected headers that are included if this email used them. Available keys are: cc, bcc"
         example:
           bcc: track@salesforce.com
           cc: sb@salesloft.com
@@ -3555,10 +3293,7 @@ definitions:
         format: date
         type: string
       status:
-        description: "Status of this email through the sending process. Possible values
-          are: sent, sent_from_gmail, sent_from_external, pending,
-          pending_reply_check, scheduled, sending, delivering, failed,
-          cancelled, pending_through_gmail, pending_through_external"
+        description: "Status of this email through the sending process. Possible values are: sent, sent_from_gmail, sent_from_external, pending, pending_reply_check, scheduled, sending, delivering, failed, cancelled, pending_through_gmail, pending_through_external"
         example: sent
         type: string
       updated_at:
@@ -3611,18 +3346,10 @@ definitions:
         type: string
       body:
         description: Sanitized body of the email template without email signature
-        example: <div><div>Welcome to the SalesLoft family! My name is Sarah and I’m
-          your implementation consultant. I’m here to get you up and running.
-          It's my job to help you configure your team's SalesLoft access,
-          provide customized training for your specific goals, and make sure
-          that you and your team are ready to crush your goals.</div><div
-          dir="ltr"><br></div>Thank you,<br></div>
+        example: <div><div>Welcome to the SalesLoft family! My name is Sarah and I’m your implementation consultant. I’m here to get you up and running. It's my job to help you configure your team's SalesLoft access, provide customized training for your specific goals, and make sure that you and your team are ready to crush your goals.</div><div dir="ltr"><br></div>Thank you,<br></div>
         type: string
       cadence_template:
-        description: Whether this email template is only used on a cadence step. These
-          templates are not visible in the SalesLoft application template list.
-          If false, this email template is visible in the SalesLoft application,
-          and may be used when composing an email or creating a cadence step.
+        description: Whether this email template is only used on a cadence step. These templates are not visible in the SalesLoft application template list. If false, this email template is visible in the SalesLoft application, and may be used when composing an email or creating a cadence step.
         example: true
         type: boolean
       click_tracking_enabled:
@@ -3710,8 +3437,7 @@ definitions:
   EmbeddedRecordingResource:
     properties:
       status:
-        description: The processing status of the recording. A completed status means
-          that the recording is fully available
+        description: The processing status of the recording. A completed status means that the recording is fully available
         example: completed
         type: string
       url:
@@ -3721,8 +3447,7 @@ definitions:
   EmbeddedResource:
     properties:
       _href:
-        description: Resource URL, pointed at your API version, present if this resource
-          is available in the API
+        description: Resource URL, pointed at your API version, present if this resource is available in the API
         example: https://api.salesloft.com/v2/widgets/10
         type: string
       id:
@@ -3753,8 +3478,7 @@ definitions:
         example: DataProvider -> SalesLoft 9/1/17
         type: string
       updated_at:
-        description: Datetime of when the import was last updated, ignoring relationship
-          changes
+        description: Datetime of when the import was last updated, ignoring relationship changes
         example: 2018-02-01T15:02:39.450663-05:00
         format: date
         type: string
@@ -3844,20 +3568,17 @@ definitions:
         example: https://na15.salesforce.com/003i000001mnhpD
         type: string
       custom_fields:
-        description: Custom fields are defined by the user's team. Only fields with
-          values are presented in the API.
+        description: Custom fields are defined by the user's team. Only fields with values are presented in the API.
         example:
           MyField: A Value
           Other: Field
         type: object
       display_name:
-        description: Either the full name or the email address. Use this when showing a
-          person's name
+        description: Either the full name or the email address. Use this when showing a person's name
         example: Pat Johnson
         type: string
       do_not_contact:
-        description: Whether or not this person has opted out of communications. Do not
-          contact someone when this is set to true
+        description: Whether or not this person has opted out of communications. Do not contact someone when this is set to true
         example: true
         type: boolean
       email_address:
@@ -3929,21 +3650,15 @@ definitions:
         example: 003i000001mnhpD
         type: string
       person_company_industry:
-        description: Company industry. This property is specific to this person,
-          unrelated to the company object. Updating the company object
-          associated with this person is recommended
+        description: Company industry. This property is specific to this person, unrelated to the company object. Updating the company object associated with this person is recommended
         example: Information Technology
         type: string
       person_company_name:
-        description: Company name. This property is specific to this person, unrelated
-          to the company object. Updating the company object associated with
-          this person is recommended
+        description: Company name. This property is specific to this person, unrelated to the company object. Updating the company object associated with this person is recommended
         example: SalesLoft
         type: string
       person_company_website:
-        description: Company website. This property is specific to this person,
-          unrelated to the company object. Updating the company object
-          associated with this person is recommended
+        description: Company website. This property is specific to this person, unrelated to the company object. Updating the company object associated with this person is recommended
         example: https://salesloft.com
         type: string
       person_stage:
@@ -4101,9 +3816,8 @@ definitions:
         example: 1
         type: integer
       type:
-        description: >
-          The type of the action scheduled by this step. Valid types are:
-          email, phone, other. New types may be added in the future.
+        description: |
+          The type of the action scheduled by this step. Valid types are: email, phone, other. New types may be added in the future.
         example: phone
         type: string
       updated_at:
@@ -4131,8 +3845,7 @@ definitions:
         type: integer
       latest_action:
         $ref: "#/definitions/EmbeddedResource"
-        description: The action that was most recently completed on this person before
-          the success
+        description: The action that was most recently completed on this person before the success
         example:
           id: 3
       latest_call:
@@ -4159,8 +3872,7 @@ definitions:
         format: date
         type: string
       success_window_started_at:
-        description: Datetime of when this person was first worked, leading up to the
-          success
+        description: Datetime of when this person was first worked, leading up to the success
         example: 2018-02-01T15:02:39.500302-05:00
         format: date
         type: string
@@ -4213,8 +3925,7 @@ definitions:
         example: examplecompany.com
         type: string
       dispositions_required:
-        description: Whether team members are required to mark disposition at the end of
-          calls
+        description: Whether team members are required to mark disposition at the end of calls
         example: false
         type: boolean
       email_daily_limit:
@@ -4222,12 +3933,9 @@ definitions:
         example: 1000
         type: integer
       group_privacy_setting:
-        description: >
-          Visibility setting for resources across the team. Possible values
-          are: group_public, all_public.
-
+        description: |
+          Visibility setting for resources across the team. Possible values are: group_public, all_public.
           When the value is group_public, certain resources will only be visible to members of the same group.
-
           When the value is all_public, all resources are visible to all users on this team.
         example: all_public
         type: string
@@ -4248,8 +3956,7 @@ definitions:
         example: The A-Team
         type: string
       plan:
-        description: "Plan type of the team, Possible values are: group, professional,
-          enterprise"
+        description: "Plan type of the team, Possible values are: group, professional, enterprise"
         example: professional
         type: string
       record_by_default:
@@ -4261,10 +3968,8 @@ definitions:
         example: false
         type: boolean
       team_visibility_default:
-        description: >
-          The default visibility of resources on the team, in the UI only.
-          The API does not utilize this default.
-
+        description: |
+          The default visibility of resources on the team, in the UI only. The API does not utilize this default.
           Possible values are: public, private.
         example: public
         type: string
@@ -4282,9 +3987,7 @@ definitions:
         type: string
       body:
         description: Body of the team template
-        example: <div>Do you know about birds?</div><div>You can find them here: <a
-          href="https://www.allaboutbirds.org/guide/search/"
-          target="_blank">https://www.allaboutbirds.org/guide/search/</a></div>
+        example: <div>Do you know about birds?</div><div>You can find them here: <a href="https://www.allaboutbirds.org/guide/search/" target="_blank">https://www.allaboutbirds.org/guide/search/</a></div>
         type: string
       click_tracking_enabled:
         description: Whether click tracking is enabled for this team template
@@ -4292,8 +3995,7 @@ definitions:
         type: boolean
       counts:
         $ref: "#/definitions/TeamTemplateCounts"
-        description: Various counts for this team template. Counts will update over time
-          but will not affect the 'updated at' field for the team template.
+        description: Various counts for this team template. Counts will update over time but will not affect the 'updated at' field for the team template.
         example:
           bounces: 10
           clicks: 20
@@ -4455,9 +4157,7 @@ definitions:
         example:
           id: 1
       sending_email_address:
-        description: "The email address that email of the user will be sent from,
-          resolved in the following resolution order: from_user,
-          email_client_email_address, email"
+        description: "The email address that email of the user will be sent from, resolved in the following resolution order: from_user, email_client_email_address, email"
         example: fake@salesloft.com
         type: string
       slack_username:

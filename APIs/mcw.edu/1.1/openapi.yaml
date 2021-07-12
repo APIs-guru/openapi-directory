@@ -7,8 +7,7 @@ info:
     name: Rat Genome Database
     url: http://rgd.mcw.edu
     x-twitter: medicalcollege
-  description: The RGD REST API provides programmatic access to information and
-    annotation stored in the Rat Genome Database
+  description: The RGD REST API provides programmatic access to information and annotation stored in the Rat Genome Database
   license:
     name: Creative Commons
     url: https://creativecommons.org/licenses/by/4.0/legalcode
@@ -77,8 +76,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Get affected genomic models (rat strains with gene alleles) submitted
-        by RGD to AGR by taxonId
+      summary: Get affected genomic models (rat strains with gene alleles) submitted by RGD to AGR by taxonId
       tags:
         - AGR
   "/agr/alleles/{taxonId}":
@@ -289,8 +287,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "true: return annotations for the term and children, false: return
-            annotations for the term only "
+        - description: "true: return annotations for the term and children, false: return annotations for the term only "
           in: path
           name: includeChildren
           required: true
@@ -330,8 +327,7 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: "true: return annotations for the term and children, false: return
-            annotations for the term only "
+        - description: "true: return annotations for the term and children, false: return annotations for the term only "
           in: path
           name: includeChildren
           required: true
@@ -371,8 +367,7 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: "true: return annotations for the term and children, false: return
-            annotations for the term only "
+        - description: "true: return annotations for the term and children, false: return annotations for the term only "
           in: path
           name: includeChildren
           required: true
@@ -471,9 +466,7 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: Ontology Prefix.  The prefix can be found left of the semicolon in
-            an ontology term accession ID.  As an example, term accession
-            PW:0000034 has the ontology prefix PW
+        - description: Ontology Prefix.  The prefix can be found left of the semicolon in an ontology term accession ID.  As an example, term accession PW:0000034 has the ontology prefix PW
           in: path
           name: ontologyPrefix
           required: true
@@ -549,8 +542,7 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: "true: return annotations for the term and children, false: return
-            annotations for the term only "
+        - description: "true: return annotations for the term and children, false: return annotations for the term only "
           in: path
           name: includeChildren
           required: true
@@ -571,8 +563,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Returns a list annotations for an ontology term or a term and it's
-        children
+      summary: Returns a list annotations for an ontology term or a term and it's children
       tags:
         - Annotation
   /enrichment/annotatedGenes:
@@ -600,8 +591,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Return a list of genes annotated to the term.Genes are rgdids separated
-        by comma.Species type is an integer value.term is the ontology
+      summary: Return a list of genes annotated to the term.Genes are rgdids separated by comma.Species type is an integer value.term is the ontology
       tags:
         - enrichment-web-service
   /enrichment/data:
@@ -629,9 +619,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Return a chart of ontology terms annotated to the genes.Genes are
-        rgdids separated by comma.Species type is an integer value.Aspect is the
-        Ontology group
+      summary: Return a chart of ontology terms annotated to the genes.Genes are rgdids separated by comma.Species type is an integer value.Aspect is the Ontology group
       tags:
         - enrichment-web-service
   "/genes/affyId/{affyId}/{speciesTypeKey}":
@@ -800,8 +788,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Species type key.  A list of species type keys can be found in the
-            lookup service
+        - description: Species type key.  A list of species type keys can be found in the lookup service
           in: path
           name: speciesTypeKey
           required: true
@@ -836,8 +823,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Species type key.  A list of species type keys can be found in the
-            lookup service
+        - description: Species type key.  A list of species type keys can be found in the lookup service
           in: path
           name: speciesTypeKey
           required: true
@@ -1165,8 +1151,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Species type key.  A list of species type keys can be found in the
-            lookup service
+        - description: Species type key.  A list of species type keys can be found in the lookup service
           in: path
           name: speciesTypeKey
           required: true
@@ -1754,8 +1739,7 @@ paths:
     get:
       operationId: getMapsUsingGET
       parameters:
-        - description: RGD species type key. A full list of keys is available throught the
-            lookup service.  1=human, 2=mouse, 3=rat,ect
+        - description: RGD species type key. A full list of keys is available throught the lookup service.  1=human, 2=mouse, 3=rat,ect
           in: path
           name: speciesTypeKey
           required: true
@@ -2101,13 +2085,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Return a list of quantitative phenotypes values based on a combination
-        of Clinical Measurement, Experimental Condition, Rat Strain, and/or
-        Measurement Method ontology terms.  Results will be all records that
-        match all terms submitted.  Ontology ids should be submitted as a comma
-        delimited list (ex. RS:0000029,CMO:0000155,CMO:0000139).  Species type
-        is an integer value (3=rat, 4=chinchilla).  Reference RGD ID for a study
-        works like a filter.
+      summary: Return a list of quantitative phenotypes values based on a combination of Clinical Measurement, Experimental Condition, Rat Strain, and/or Measurement Method ontology terms.  Results will be all records that match all terms submitted.  Ontology ids should be submitted as a comma delimited list (ex. RS:0000029,CMO:0000155,CMO:0000139).  Species type is an integer value (3=rat, 4=chinchilla).  Reference RGD ID for a study works like a filter.
       tags:
         - Quantitative Phenotype
   "/phenotype/phenominer/chart/{speciesTypeKey}/{termString}":
@@ -2142,12 +2120,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Return a list of quantitative phenotypes values based on a combination
-        of Clinical Measurement, Experimental Condition, Rat Strain, and/or
-        Measurement Method ontology terms.  Results will be all records that
-        match all terms submitted.  Ontology ids should be submitted as a comma
-        delimited list (ex. RS:0000029,CMO:0000155,CMO:0000139).  Species type
-        is an integer value (3=rat, 4=chinchilla)
+      summary: Return a list of quantitative phenotypes values based on a combination of Clinical Measurement, Experimental Condition, Rat Strain, and/or Measurement Method ontology terms.  Results will be all records that match all terms submitted.  Ontology ids should be submitted as a comma delimited list (ex. RS:0000029,CMO:0000155,CMO:0000139).  Species type is an integer value (3=rat, 4=chinchilla)
       tags:
         - Quantitative Phenotype
   "/qtls/mapped/{chr}/{start}/{stop}/{mapKey}":
@@ -2461,8 +2434,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Count of objects with reference sequence(s), by object type, for
-        specified species and date
+      summary: Count of objects with reference sequence(s), by object type, for specified species and date
       tags:
         - Statistics
   "/stats/count/objectWithReference/{speciesTypeKey}/{dateYYYYMMDD}":
@@ -2497,8 +2469,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Count of objects with reference, by object type, for specified species
-        and date
+      summary: Count of objects with reference, by object type, for specified species and date
       tags:
         - Statistics
   "/stats/count/objectWithXdb/{speciesTypeKey}/{objectKey}/{dateYYYYMMDD}":
@@ -2540,8 +2511,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Count of objects with external database ids, by database id, for
-        specified species, object type and date
+      summary: Count of objects with external database ids, by database id, for specified species, object type and date
       tags:
         - Statistics
   "/stats/count/proteinInteraction/{speciesTypeKey}/{dateYYYYMMDD}":
@@ -2792,8 +2762,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Count difference of active objects, by type, for specified species and
-        date range
+      summary: Count difference of active objects, by type, for specified species and date range
       tags:
         - Statistics
   "/stats/diff/geneType/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}":
@@ -2875,8 +2844,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Count difference of objects with given status, for specified species
-        and date range
+      summary: Count difference of objects with given status, for specified species and date range
       tags:
         - Statistics
   "/stats/diff/objectWithRefSeq/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}":
@@ -2917,8 +2885,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Count difference of objects with reference sequence(s), by object type,
-        for specified species and date range
+      summary: Count difference of objects with reference sequence(s), by object type, for specified species and date range
       tags:
         - Statistics
   "/stats/diff/objectWithReference/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}":
@@ -2959,8 +2926,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Count difference of objects with reference, by object type, for
-        specified species and date range
+      summary: Count difference of objects with reference, by object type, for specified species and date range
       tags:
         - Statistics
   "/stats/diff/objectWithXdb/{speciesTypeKey}/{objectKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}":
@@ -3008,8 +2974,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Count difference of objects with external database ids, by database id,
-        for specified species, object type and date range
+      summary: Count difference of objects with external database ids, by database id, for specified species, object type and date range
       tags:
         - Statistics
   "/stats/diff/proteinInteraction/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}":
@@ -3050,8 +3015,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Count difference of protein interactions, for specified species and
-        date range
+      summary: Count difference of protein interactions, for specified species and date range
       tags:
         - Statistics
   "/stats/diff/qtlInheritanceType/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}":
@@ -3092,8 +3056,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Count difference of strains, by qtl inheritance type, for specified
-        species and date range
+      summary: Count difference of strains, by qtl inheritance type, for specified species and date range
       tags:
         - Statistics
   "/stats/diff/retiredObject/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}":
@@ -3134,8 +3097,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Count difference of retired objects, by type, for specified species and
-        date range
+      summary: Count difference of retired objects, by type, for specified species and date range
       tags:
         - Statistics
   "/stats/diff/strainType/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}":
@@ -3217,8 +3179,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Count difference of withdrawn objects, by type, for specified species
-        and date range
+      summary: Count difference of withdrawn objects, by type, for specified species and date range
       tags:
         - Statistics
   "/stats/diff/xdb/{speciesTypeKey}/{dateFromYYYYMMDD}/{dateToYYYYMMDD}":
@@ -3259,8 +3220,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Count difference of external database ids, for specified species and
-        date range
+      summary: Count difference of external database ids, for specified species and date range
       tags:
         - Statistics
   "/stats/term/{accId}/{filterAccId}":

@@ -7,8 +7,7 @@ info:
     name: Ably Support
     url: https://www.ably.io/contact
     x-twitter: ablyrealtime
-  description: The [REST API
-    specification](https://www.ably.io/documentation/rest-api) for Ably.
+  description: The [REST API specification](https://www.ably.io/documentation/rest-api) for Ably.
   title: Ably REST API
   version: 1.1.0
   x-apisguru-categories:
@@ -37,14 +36,12 @@ paths:
           schema:
             default: 100
             type: integer
-        - description: Optionally limits the query to only those channels whose name
-            starts with the given prefix
+        - description: Optionally limits the query to only those channels whose name starts with the given prefix
           in: query
           name: prefix
           schema:
             type: string
-        - description: optionally specifies whether to return just channel names (by=id)
-            or ChannelDetails (by=value)
+        - description: optionally specifies whether to return just channel names (by=id) or ChannelDetails (by=value)
           in: query
           name: by
           schema:
@@ -303,15 +300,7 @@ paths:
       - $ref: "#/components/parameters/versionHeader"
       - $ref: "#/components/parameters/responseFormat"
     post:
-      description: This is the means by which clients obtain access tokens to use the
-        service. You can see how to construct an Ably TokenRequest in the [Ably
-        TokenRequest
-        spec](https://www.ably.io/documentation/rest-api/token-request-spec)
-        documentation, although we recommend you use an Ably SDK rather to
-        create a TokenRequest, as the construction of a TokenRequest is complex.
-        The resulting token response object contains the token properties as
-        defined in Ably TokenRequest spec. Authentication is not required if
-        using a Signed TokenRequest.
+      description: This is the means by which clients obtain access tokens to use the service. You can see how to construct an Ably TokenRequest in the [Ably TokenRequest spec](https://www.ably.io/documentation/rest-api/token-request-spec) documentation, although we recommend you use an Ably SDK rather to create a TokenRequest, as the construction of a TokenRequest is complex. The resulting token response object contains the token properties as defined in Ably TokenRequest spec. Authentication is not required if using a Signed TokenRequest.
       operationId: requestAccessToken
       parameters:
         - $ref: "#/components/parameters/key_name"
@@ -383,14 +372,12 @@ paths:
           name: channel
           schema:
             type: string
-        - description: Optional filter to restrict to devices associated with that
-            deviceId. Cannot be used with clientId.
+        - description: Optional filter to restrict to devices associated with that deviceId. Cannot be used with clientId.
           in: query
           name: deviceId
           schema:
             type: string
-        - description: Optional filter to restrict to devices associated with that
-            clientId. Cannot be used with deviceId.
+        - description: Optional filter to restrict to devices associated with that clientId. Cannot be used with deviceId.
           in: query
           name: clientId
           schema:
@@ -418,8 +405,7 @@ paths:
       - $ref: "#/components/parameters/versionHeader"
       - $ref: "#/components/parameters/responseFormat"
     post:
-      description: Subscribe either a single device or all devices associated with a
-        client ID to receive push notifications from messages sent to a channel.
+      description: Subscribe either a single device or all devices associated with a client ID to receive push notifications from messages sent to a channel.
       operationId: subscribePushDeviceToChannel
       requestBody:
         content:
@@ -530,18 +516,15 @@ paths:
       - $ref: "#/components/parameters/responseFormat"
   /push/deviceRegistrations:
     delete:
-      description: Unregisters devices. All their subscriptions for receiving push
-        notifications through channels will also be deleted.
+      description: Unregisters devices. All their subscriptions for receiving push notifications through channels will also be deleted.
       operationId: unregisterAllPushDevices
       parameters:
-        - description: Optional filter to restrict to devices associated with that
-            deviceId. Cannot be used with clientId.
+        - description: Optional filter to restrict to devices associated with that deviceId. Cannot be used with clientId.
           in: query
           name: deviceId
           schema:
             type: string
-        - description: Optional filter to restrict to devices associated with that
-            clientId. Cannot be used with deviceId.
+        - description: Optional filter to restrict to devices associated with that clientId. Cannot be used with deviceId.
           in: query
           name: clientId
           schema:
@@ -597,8 +580,7 @@ paths:
       - $ref: "#/components/parameters/versionHeader"
       - $ref: "#/components/parameters/responseFormat"
     post:
-      description: Register a device’s details, including the information necessary to
-        deliver push notifications to it. Requires "push-admin" capability.
+      description: Register a device’s details, including the information necessary to deliver push notifications to it. Requires "push-admin" capability.
       operationId: registerPushDevice
       requestBody:
         content:
@@ -628,8 +610,7 @@ paths:
         - Push
   "/push/deviceRegistrations/{device_id}":
     delete:
-      description: Unregisters a single device by its device ID. All its subscriptions
-        for receiving push notifications through channels will also be deleted.
+      description: Unregisters a single device by its device ID. All its subscriptions for receiving push notifications through channels will also be deleted.
       operationId: unregisterPushDevice
       parameters:
         - $ref: "#/components/parameters/deviceId"
@@ -668,8 +649,7 @@ paths:
       - $ref: "#/components/parameters/versionHeader"
       - $ref: "#/components/parameters/responseFormat"
     patch:
-      description: Specific attributes of an existing registration can be updated.
-        Only clientId, metadata and push.recipient are mutable.
+      description: Specific attributes of an existing registration can be updated. Only clientId, metadata and push.recipient are mutable.
       operationId: patchPushDeviceDetails
       parameters:
         - $ref: "#/components/parameters/deviceId"
@@ -703,9 +683,7 @@ paths:
       tags:
         - Push
     put:
-      description: Device registrations can be upserted (the existing registration is
-        replaced entirely) with a PUT operation. Only clientId, metadata and
-        push.recipient are mutable.
+      description: Device registrations can be upserted (the existing registration is replaced entirely) with a PUT operation. Only clientId, metadata and push.recipient are mutable.
       operationId: putPushDeviceDetails
       parameters:
         - $ref: "#/components/parameters/deviceId"
@@ -770,8 +748,7 @@ paths:
       - $ref: "#/components/parameters/versionHeader"
       - $ref: "#/components/parameters/responseFormat"
     post:
-      description: A convenience endpoint to deliver a push notification payload to a
-        single device or set of devices identified by their client identifier.
+      description: A convenience endpoint to deliver a push notification payload to a single device or set of devices identified by their client identifier.
       operationId: publishPushNotificationToDevices
       requestBody:
         content:
@@ -815,10 +792,7 @@ paths:
         - Push
   /stats:
     get:
-      description: The Ably system can be queried to obtain usage statistics for a
-        given application, and results are provided aggregated across all
-        channels in use in the application in the specified period. Stats may be
-        used to track usage against account quotas.
+      description: The Ably system can be queried to obtain usage statistics for a given application, and results are provided aggregated across all channels in use in the application in the specified period. Stats may be used to track usage against account quotas.
       operationId: getStats
       parameters:
         - $ref: "#/components/parameters/filterStart"
@@ -892,14 +866,10 @@ components:
       schema:
         type: string
     Link:
-      description: Links to related resources, in the format defined by [RFC
-        5988](https://tools.ietf.org/html/rfc5988#section-5). This will
-        potentially include a link with relation type `next`, `first`, and
-        `current`, where appropiate.
+      description: Links to related resources, in the format defined by [RFC 5988](https://tools.ietf.org/html/rfc5988#section-5). This will potentially include a link with relation type `next`, `first`, and `current`, where appropiate.
       required: true
       schema:
-        pattern: (<(.*)?>; rel=\"(first|current|last)?\",)*(<(.*)?>;
-          rel=\"(first|current|last)?\")+
+        pattern: (<(.*)?>; rel=\"(first|current|last)?\",)*(<(.*)?>; rel=\"(first|current|last)?\")+
         type: string
     ServerId:
       description: The ID for the server communicated with.
@@ -948,9 +918,7 @@ components:
       schema:
         type: string
     key_name:
-      description: The [key
-        name](https://www.ably.io/documentation/rest-api/token-request-spec#api-key-format)
-        comprises of the app ID and key ID of an API key.
+      description: The [key name](https://www.ably.io/documentation/rest-api/token-request-spec#api-key-format) comprises of the app ID and key ID of an API key.
       in: path
       name: keyName
       required: true
@@ -1000,13 +968,10 @@ components:
           description: The required name of the channel including any qualifier, if any.
           type: string
         isGlobalMaster:
-          description: In events relating to the activity of a channel in a specific
-            region, this optionally identifies whether or not that region is
-            responsible for global coordination of the channel.
+          description: In events relating to the activity of a channel in a specific region, this optionally identifies whether or not that region is responsible for global coordination of the channel.
           type: boolean
         region:
-          description: In events relating to the activity of a channel in a specific
-            region, this optionally identifies the region.
+          description: In events relating to the activity of a channel in a specific region, this optionally identifies the region.
           type: string
         status:
           $ref: "#/components/schemas/ChannelStatus"
@@ -1017,10 +982,7 @@ components:
       description: A ChannelStatus instance.
       properties:
         isActive:
-          description: A required boolean value indicating whether the channel that is the
-            subject of the event is active. For events indicating regional
-            activity of a channel this indicates activity in that region, not
-            global activity.
+          description: A required boolean value indicating whether the channel that is the subject of the event is active. For events indicating regional activity of a channel this indicates activity in that region, not global activity.
           type: boolean
         occupancy:
           $ref: "#/components/schemas/Occupancy"
@@ -1050,9 +1012,7 @@ components:
           description: Unique identifier for the device generated by the device itself.
           type: string
         metadata:
-          description: Optional metadata object for this device. The metadata for a device
-            may only be set by clients with push-admin privileges and will be
-            used more extensively in the future with smart notifications.
+          description: Optional metadata object for this device. The metadata for a device may only be set by clients with push-admin privileges and will be used more extensively in the future with smart notifications.
           type: object
         platform:
           description: Platform of the push device.
@@ -1091,9 +1051,7 @@ components:
           type: integer
       type: object
     Extras:
-      description: Extras object. Currently only allows for
-        [push](https://www.ably.io/documentation/general/push/publish#channel-broadcast-example)
-        extra.
+      description: Extras object. Currently only allows for [push](https://www.ably.io/documentation/general/push/publish#channel-broadcast-example) extra.
       properties:
         push:
           $ref: "#/components/schemas/Push"
@@ -1102,9 +1060,7 @@ components:
       description: Message object.
       properties:
         clientId:
-          description: The [client
-            ID](https://www.ably.io/documentation/core-features/authentication#identified-clients)
-            of the publisher of this message.
+          description: The [client ID](https://www.ably.io/documentation/core-features/authentication#identified-clients) of the publisher of this message.
           type: string
         connectionId:
           description: The connection ID of the publisher of this message.
@@ -1113,24 +1069,19 @@ components:
           description: The string encoded payload, with the encoding specified below.
           type: string
         encoding:
-          description: This will typically be empty as all messages received from Ably are
-            automatically decoded client-side using this value. However, if the
-            message encoding cannot be processed, this attribute will contain
-            the remaining transformations not applied to the data payload.
+          description: This will typically be empty as all messages received from Ably are automatically decoded client-side using this value. However, if the message encoding cannot be processed, this attribute will contain the remaining transformations not applied to the data payload.
           type: string
         extras:
           $ref: "#/components/schemas/Extras"
         id:
-          description: A Unique ID that can be specified by the publisher for [idempotent
-            publishing](https://www.ably.io/documentation/rest/messages#idempotent).
+          description: A Unique ID that can be specified by the publisher for [idempotent publishing](https://www.ably.io/documentation/rest/messages#idempotent).
           readOnly: true
           type: string
         name:
           description: The event name, if provided.
           type: string
         timestamp:
-          description: Timestamp when the message was received by the Ably, as
-            milliseconds since the epoch.
+          description: Timestamp when the message was received by the Ably, as milliseconds since the epoch.
           format: int64
           readOnly: true
           type: integer
@@ -1154,28 +1105,22 @@ components:
           type: string
       type: object
     Occupancy:
-      description: An Occupancy instance indicating the occupancy of a channel. For
-        events indicating regional activity of a channel this indicates activity
-        in that region, not global activity.
+      description: An Occupancy instance indicating the occupancy of a channel. For events indicating regional activity of a channel this indicates activity in that region, not global activity.
       properties:
         presenceConnections:
-          description: The number of connections that are authorised to enter members into
-            the presence channel.
+          description: The number of connections that are authorised to enter members into the presence channel.
           type: integer
         presenceMembers:
           description: The number of members currently entered into the presence channel.
           type: integer
         presenceSubscribers:
-          description: The number of connections that are authorised to subscribe to
-            presence messages.
+          description: The number of connections that are authorised to subscribe to presence messages.
           type: integer
         publishers:
-          description: The number of connections attached to the channel that are
-            authorised to publish.
+          description: The number of connections attached to the channel that are authorised to publish.
           type: integer
         subscribers:
-          description: The number of connections attached that are authorised to subscribe
-            to messages.
+          description: The number of connections attached that are authorised to subscribe to messages.
           type: integer
       type: object
     PresenceMessage:
@@ -1200,11 +1145,7 @@ components:
           description: The presence update payload, if provided.
           type: string
         encoding:
-          description: This will typically be empty as all presence updates received from
-            Ably are automatically decoded client-side using this value.
-            However, if the message encoding cannot be processed, this attribute
-            will contain the remaining transformations not applied to the data
-            payload.
+          description: This will typically be empty as all presence updates received from Ably are automatically decoded client-side using this value. However, if the message encoding cannot be processed, this attribute will contain the remaining transformations not applied to the data payload.
           type: string
         extras:
           $ref: "#/components/schemas/Extras"
@@ -1213,8 +1154,7 @@ components:
           readOnly: true
           type: string
         timestamp:
-          description: Timestamp when the presence update was received by Ably, as
-            milliseconds since the epoch.
+          description: Timestamp when the presence update was received by Ably, as milliseconds since the epoch.
           format: int64
           readOnly: true
           type: integer
@@ -1222,20 +1162,16 @@ components:
     Push:
       properties:
         apns:
-          description: Extends and overrides generic values when delivering via APNs. [See
-            examples](https://www.ably.io/documentation/general/push/publish#payload-structure)
+          description: Extends and overrides generic values when delivering via APNs. [See examples](https://www.ably.io/documentation/general/push/publish#payload-structure)
           properties:
             notification:
               $ref: "#/components/schemas/Notification"
           type: object
         data:
-          description: Arbitrary [key-value string-to-string
-            payload](https://www.ably.io/documentation/general/push/publish#channel-broadcast-example).
+          description: Arbitrary [key-value string-to-string payload](https://www.ably.io/documentation/general/push/publish#channel-broadcast-example).
           type: string
         fcm:
-          description: Extends and overrides generic values when delivering via GCM/FCM.
-            [See
-            examples](https://www.ably.io/documentation/general/push/publish#payload-structure)
+          description: Extends and overrides generic values when delivering via GCM/FCM. [See examples](https://www.ably.io/documentation/general/push/publish#payload-structure)
           properties:
             notification:
               $ref: "#/components/schemas/Notification"
@@ -1243,8 +1179,7 @@ components:
         notification:
           $ref: "#/components/schemas/Notification"
         web:
-          description: Extends and overrides generic values when delivering via web. [See
-            examples](https://www.ably.io/documentation/general/push/publish#payload-structure)
+          description: Extends and overrides generic values when delivering via web. [See examples](https://www.ably.io/documentation/general/push/publish#payload-structure)
           properties:
             notification:
               $ref: "#/components/schemas/Notification"
@@ -1280,8 +1215,7 @@ components:
         - $ref: "#/components/schemas/TokenRequest"
         - properties:
             mac:
-              description: A signature, generated as an HMAC of each of the above components,
-                using the key secret value.
+              description: A signature, generated as an HMAC of each of the above components, using the key secret value.
               type: string
           required:
             - mac
@@ -1307,30 +1241,21 @@ components:
     TokenRequest:
       properties:
         capability:
-          description: The
-            [capabilities](https://www.ably.io/documentation/core-features/authentication#capabilities-explained)
-            (i.e. a set of channel names/namespaces and, for each, a set of
-            operations) which should be a subset of the set of capabilities
-            associated with the key specified in keyName.
+          description: The [capabilities](https://www.ably.io/documentation/core-features/authentication#capabilities-explained) (i.e. a set of channel names/namespaces and, for each, a set of operations) which should be a subset of the set of capabilities associated with the key specified in keyName.
           example:
             channel1:
               - publish
               - subscribe
           type: object
         clientId:
-          description: The [client
-            ID](https://www.ably.io/documentation/core-features/authentication#identified-clients)
-            to be assosciated with the token. Can be set to * to allow for any
-            client ID to be used.
+          description: The [client ID](https://www.ably.io/documentation/core-features/authentication#identified-clients) to be assosciated with the token. Can be set to * to allow for any client ID to be used.
           type: string
         keyName:
-          description: Name of the key used for the TokenRequest. The keyName comprises of
-            the app ID and key ID on an API Key.
+          description: Name of the key used for the TokenRequest. The keyName comprises of the app ID and key ID on an API Key.
           example: xVLyHw.LMJZxw
           type: string
         nonce:
-          description: An unquoted, un-escaped random string of at least 16 characters.
-            Used to ensure the Ably TokenRequest cannot be reused.
+          description: An unquoted, un-escaped random string of at least 16 characters. Used to ensure the Ably TokenRequest cannot be reused.
           type: string
         timestamp:
           description: Time of creation of the Ably TokenRequest.
@@ -1343,14 +1268,10 @@ components:
       type: object
   securitySchemes:
     basicAuth:
-      description: Basic Authentication using an [API
-        key](https://www.ably.io/documentation/core-features/authentication#basic-authentication).
+      description: Basic Authentication using an [API key](https://www.ably.io/documentation/core-features/authentication#basic-authentication).
       scheme: basic
       type: http
     bearerAuth:
-      description: Token Authentication using an [Ably
-        Token](https://www.ably.io/documentation/core-features/authentication#basic-authentication),
-        or optionally an [Ably
-        JWT](https://www.ably.io/documentation/core-features/authentication#ably-jwt-process).
+      description: Token Authentication using an [Ably Token](https://www.ably.io/documentation/core-features/authentication#basic-authentication), or optionally an [Ably JWT](https://www.ably.io/documentation/core-features/authentication#ably-jwt-process).
       scheme: bearer
       type: http

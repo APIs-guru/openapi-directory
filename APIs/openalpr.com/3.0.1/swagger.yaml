@@ -6,12 +6,9 @@ basePath: /v3
 info:
   contact:
     x-twitter: openalpr
-  description: >
-    The OpenALPR CarCheck API allows you to send images to the cloud
-    for processing. 
-
+  description: |
+    The OpenALPR CarCheck API allows you to send images to the cloud for processing. 
     The image will be analyzed for license plates and vehicle make/models.  The results 
-
     are returned in JSON format
   title: OpenALPR CarCheck API
   version: 3.0.1
@@ -113,8 +110,7 @@ responses:
           description: The number of API credits that were used to process this image
           type: integer
         credits_monthly_total:
-          description: The maximum number of API credits available this month according to
-            your plan
+          description: The maximum number of API credits available this month according to your plan
           type: integer
         credits_monthly_used:
           description: The number of API credits used this month
@@ -321,11 +317,9 @@ paths:
     post:
       consumes:
         - application/json
-      description: >
+      description: |
         Send an image for OpenALPR to analyze and provide metadata back
-
         The image is sent as a URL.  The OpenALPR service will download the image 
-
         and process it
       operationId: recognizeUrl
       parameters:

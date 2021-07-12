@@ -34,228 +34,134 @@ tags: []
 paths:
   /BusPositions:
     get:
-      description: >-
+      description: |-
         <h4 class="text-primary">Description</h4>
 
-
         <p>Returns bus positions for the given route, with an optional search radius.
-
         If no parameters are specified, all bus positions are returned.</p>
 
-
         <p>Note that the RouteID parameter accepts only base route names and no
-
         variations, i.e.: use 10A instead of 10Av1 or 10Av2.</p>
-
 
         <p>Bus positions are refreshed approximately every <span style="text-decoration: line-through">20 to 30</span> 7 to 10 seconds.</p>
 
-
         <h4 class="text-primary">Response Elements</h4>
 
-
         <table class="table table-condensed table-hover">
-
         <thead>
-
         <tr>
-
         <th class="col-md-3">Element</th>
 
-
         <th>Description</th>
-
         </tr>
-
         </thead>
 
-
         <tbody>
-
         <tr>
-
         <td>BusPositions</td>
 
-
         <td>
-
         Array containing bus position information (<a href=
-
         "#BusPosition">BusPositions</a>).
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a id="BusPosition" name="BusPosition">BusPosition
-
         Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>DateTime</td>
 
-
         <td>Date and time (Eastern Standard Time) of last position update.
-
         Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:
-
         2014-10-27T13:23:40).</td>
-
         </tr>
 
-
         <tr>
-
         <td>Deviation</td>
 
-
         <td>Deviation, in minutes, from schedule. Positive values indicate
-
         that the bus is running late while negative ones are for buses
-
         running ahead of schedule.</td>
-
         </tr>
 
-
         <tr>
-
         <td style="text-decoration: line-through">DirectionNum</td>
 
-
         <td><span class="text-danger">Deprecated.</span> Use the
-
         DirectionText for a customer-friendly description of
-
         direction.</td>
-
         </tr>
 
-
         <tr>
-
         <td>DirectionText</td>
 
-
         <td>General direction of the trip, not the bus itself (e.g.: NORTH,
-
         SOUTH, EAST, WEST).</td>
-
         </tr>
 
-
         <tr>
-
         <td>Lat</td>
 
-
         <td>Last reported Latitude of the bus.</td>
-
         </tr>
 
-
         <tr>
-
         <td>Lon</td>
 
-
         <td>Last reported Longitude of the bus.</td>
-
         </tr>
 
-
         <tr>
-
         <td>RouteID</td>
 
-
         <td>Base route name as shown on the bus. Note that the base route
-
         name could also refer to any variant, so a RouteID of 10A could
-
         refer to 10A, 10Av1, 10Av2, etc.</td>
-
         </tr>
 
-
         <tr>
-
         <td>TripEndTime</td>
 
-
         <td>Scheduled end date and time (Eastern Standard Time) of the
-
         bus's current trip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:
-
         2014-10-27T13:17:00).</td>
-
         </tr>
 
-
         <tr>
-
         <td>TripHeadsign</td>
 
-
         <td>Destination of the bus.</td>
-
         </tr>
 
-
         <tr>
-
         <td>TripID</td>
 
-
         <td>Unique trip ID. This can be correlated with the data returned
-
         from the schedule-related methods.</td>
-
         </tr>
 
-
         <tr>
-
         <td>TripStartTime</td>
 
-
         <td>Scheduled start date and time (Eastern Standard Time) of the
-
         bus's current trip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:
-
         2014-10-27T12:40:00).</td>
-
         </tr>
-
 
         <tr>
-
         <td>VehicleID</td>
 
-
         <td>Unique identifier for the bus. This is usually visible on the
-
         bus itself.</td>
-
         </tr>
-
         </tbody>
-
         </table>
       operationId: 5476362a281d830c946a3d6e
       parameters:
@@ -266,18 +172,15 @@ paths:
           in: query
           name: RouteID
           type: string
-        - description: Center point Latitude, required if Longitude and Radius are
-            specified.
+        - description: Center point Latitude, required if Longitude and Radius are specified.
           in: query
           name: Lat
           type: string
-        - description: Center point Longitude, required if Latitude and Radius are
-            specified.
+        - description: Center point Longitude, required if Latitude and Radius are specified.
           in: query
           name: Lon
           type: string
-        - description: Radius (meters) to include in the search area, required if Latitude
-            and Longitude are specified.
+        - description: Radius (meters) to include in the search area, required if Latitude and Longitude are specified.
           in: query
           name: Radius
           type: string
@@ -343,9 +246,7 @@ paths:
     get:
       description: "<h4 class=\"text-primary\">Description</h4>\r
 
-        <p>For a given date, returns the set of ordered
-        latitude/longitude points along route variant along with the list of
-        stops served.</p>\r
+        <p>For a given date, returns the set of ordered latitude/longitude points along route variant along with the list of stops served.</p>\r
 
         <h4 class=\"text-primary\">Response Elements</h4>\r
 
@@ -371,20 +272,15 @@ paths:
 
         <td>\r
 
-        Structures describing <a
-        href=\"#Direction\">path/stop</a>information.<br>\r
+        Structures describing <a href=\"#Direction\">path/stop</a>information.<br>\r
 
         <br>\r
 
-        Most routes will return content in both Direction0 and
-        Direction1 elements, though a few will return NULL for Direction0 or for
-        Direction1.<br>\r
+        Most routes will return content in both Direction0 and Direction1 elements, though a few will return NULL for Direction0 or for Direction1.<br>\r
 
         <br>\r
 
-        0 or 1 are binary properties. There is no specific mapping to
-        direction, but a different value for the same route signifies that the
-        route is in an opposite direction.\r
+        0 or 1 are binary properties. There is no specific mapping to direction, but a different value for the same route signifies that the route is in an opposite direction.\r
 
         </td>\r
 
@@ -412,8 +308,7 @@ paths:
 
         <div class=\"text-primary\" style=\"margin-top: 1em\">\r
 
-        <a id=\"Direction\" name=\"Direction\">Direction0/Direction1
-        Elements</a>\r
+        <a id=\"Direction\" name=\"Direction\">Direction0/Direction1 Elements</a>\r
 
         </div>\r
 
@@ -425,9 +320,7 @@ paths:
 
         <td style=\"text-decoration: line-through\">DirectionNum</td>\r
 
-        <td><span class=\"text-danger\">Deprecated.</span> Use the
-        DirectionText element to denote the general direction of the route
-        variant.</td>\r
+        <td><span class=\"text-danger\">Deprecated.</span> Use the DirectionText element to denote the general direction of the route variant.</td>\r
 
         </tr>\r
 
@@ -435,8 +328,7 @@ paths:
 
         <td>DirectionText</td>\r
 
-        <td>General direction of the route variant (NORTH, SOUTH, EAST,
-        WEST, LOOP, etc.).</td>\r
+        <td>General direction of the route variant (NORTH, SOUTH, EAST, WEST, LOOP, etc.).</td>\r
 
         </tr>\r
 
@@ -446,8 +338,7 @@ paths:
 
         <td>\r
 
-        Array containing shape point information (<a
-        href=\"#ShapePoint\">ShapePoint</a>).\r
+        Array containing shape point information (<a href=\"#ShapePoint\">ShapePoint</a>).\r
 
         </td>\r
 
@@ -459,8 +350,7 @@ paths:
 
         <td>\r
 
-        Array containing stop information (<a
-        href=\"#Stop\">Stop</a>).\r
+        Array containing stop information (<a href=\"#Stop\">Stop</a>).\r
 
         </td>\r
 
@@ -470,9 +360,7 @@ paths:
 
         <td>TripHeadsign</td>\r
 
-        <td>Descriptive text of where the bus is headed. This is
-        similar, but not necessarily identical, to what is displayed on the
-        bus.</td>\r
+        <td>Descriptive text of where the bus is headed. This is similar, but not necessarily identical, to what is displayed on the bus.</td>\r
 
         </tr>\r
 
@@ -482,8 +370,7 @@ paths:
 
         <div class=\"text-primary\" style=\"margin-top: 1em\">\r
 
-        <a id=\"ShapePoint\" name=\"ShapePoint\">ShapePoint
-        Elements</a>\r
+        <a id=\"ShapePoint\" name=\"ShapePoint\">ShapePoint Elements</a>\r
 
         </div>\r
 
@@ -549,8 +436,7 @@ paths:
 
         <td>Name</td>\r
 
-        <td>Stop name. May be slightly different from what is spoken or
-        displayed in the bus.</td>\r
+        <td>Stop name. May be slightly different from what is spoken or displayed in the bus.</td>\r
 
         </tr>\r
 
@@ -558,9 +444,7 @@ paths:
 
         <td>Routes</td>\r
 
-        <td>String array of route variants which provide service at this
-        stop. Note that these are not date-specific; any route variant which
-        stops at this stop on any day will be listed.</td>\r
+        <td>String array of route variants which provide service at this stop. Note that these are not date-specific; any route variant which stops at this stop on any day will be listed.</td>\r
 
         </tr>\r
 
@@ -568,8 +452,7 @@ paths:
 
         <td>StopID</td>\r
 
-        <td>7-digit regional ID which can be used in various bus-related
-        methods. If unavailable, the StopID will be 0 or NULL.</td>\r
+        <td>7-digit regional ID which can be used in various bus-related methods. If unavailable, the StopID will be 0 or NULL.</td>\r
 
         </tr>\r
 
@@ -586,8 +469,7 @@ paths:
           name: RouteID
           required: true
           type: string
-        - description: Date in YYYY-MM-DD format for which to retrieve route and stop
-            information.  Defaults to today's date unless specified.
+        - description: Date in YYYY-MM-DD format for which to retrieve route and stop information.  Defaults to today's date unless specified.
           in: query
           name: Date
           type: string
@@ -597,7 +479,7 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/xml: >-
+            application/xml: |-
               <RouteDetailsInfo
                   xmlns="http://www.wmata.com"
                   xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
@@ -5433,8 +5315,7 @@ paths:
 
         \r
 
-        <p>Returns schedules for a given route variant for a given
-        date.</p>\r
+        <p>Returns schedules for a given route variant for a given date.</p>\r
 
         \r
 
@@ -5478,11 +5359,9 @@ paths:
 
         Most routes will return content in both Direction0 and\r
 
-        Direction1 elements, though a few (especially ones which run
-        in\r
+        Direction1 elements, though a few (especially ones which run in\r
 
-        a loop, such as the U8) will return content only for
-        Direction0\r
+        a loop, such as the U8) will return content only for Direction0\r
 
         and NULL content for Direction1.<br>\r
 
@@ -5536,8 +5415,7 @@ paths:
 
         <td><span class=\"text-danger\">Deprecated.</span> Use the\r
 
-        TripDirectionText element to denote the general direction of
-        the\r
+        TripDirectionText element to denote the general direction of the\r
 
         trip.</td>\r
 
@@ -5551,8 +5429,7 @@ paths:
 
         \r
 
-        <td>Scheduled end date and time (Eastern Standard Time) for
-        this\r
+        <td>Scheduled end date and time (Eastern Standard Time) for this\r
 
         trip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r
 
@@ -5582,8 +5459,7 @@ paths:
 
         \r
 
-        <td>Scheduled start date and time (Eastern Standard Time) for
-        this\r
+        <td>Scheduled start date and time (Eastern Standard Time) for this\r
 
         trip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r
 
@@ -5617,8 +5493,7 @@ paths:
 
         \r
 
-        <td>General direction of the trip (NORTH, SOUTH, EAST, WEST,
-        LOOP,\r
+        <td>General direction of the trip (NORTH, SOUTH, EAST, WEST, LOOP,\r
 
         etc.).</td>\r
 
@@ -5632,8 +5507,7 @@ paths:
 
         \r
 
-        <td>Descriptive text of where the bus is headed. This is
-        similar,\r
+        <td>Descriptive text of where the bus is headed. This is similar,\r
 
         but not necessarily identical, to what is displayed on the\r
 
@@ -5649,8 +5523,7 @@ paths:
 
         \r
 
-        <td>Unique trip ID. This can be correlated with the data
-        returned\r
+        <td>Unique trip ID. This can be correlated with the data returned\r
 
         from the schedule-related methods.</td>\r
 
@@ -5680,8 +5553,7 @@ paths:
 
         \r
 
-        <td>7-digit regional ID which can be used in various
-        bus-related\r
+        <td>7-digit regional ID which can be used in various bus-related\r
 
         methods. If unavailable, the StopID will be 0 or NULL.</td>\r
 
@@ -5695,8 +5567,7 @@ paths:
 
         \r
 
-        <td>Stop name. May be slightly different from what is spoken
-        or\r
+        <td>Stop name. May be slightly different from what is spoken or\r
 
         displayed in the bus.</td>\r
 
@@ -5722,8 +5593,7 @@ paths:
 
         \r
 
-        <td>Scheduled departure date and time (Eastern Standard Time)
-        from\r
+        <td>Scheduled departure date and time (Eastern Standard Time) from\r
 
         this stop. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r
 
@@ -5744,14 +5614,12 @@ paths:
           name: RouteID
           required: true
           type: string
-        - description: Date in YYYY-MM-DD format for which to retrieve schedule.  Defaults
-            to today's date unless specified.
+        - description: Date in YYYY-MM-DD format for which to retrieve schedule.  Defaults to today's date unless specified.
           in: query
           name: Date
           type: string
         - default: false
-          description: Whether or not to include variations.  For example, if B30 is
-            specified, include all variations such as B30v1, B30v2, etc.
+          description: Whether or not to include variations.  For example, if B30 is specified, include all variations such as B30v1, B30v2, etc.
           enum:
             - false
             - true
@@ -5764,7 +5632,7 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/xml: >-
+            application/xml: |-
               <RouteScheduleInfo
                   xmlns="http://www.wmata.com"
                   xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
@@ -8431,11 +8299,9 @@ paths:
 
         \r
 
-        <p>Returns a list of all bus route variants (patterns). For
-        example, the 10A\r
+        <p>Returns a list of all bus route variants (patterns). For example, the 10A\r
 
-        and 10Av1 are the same route, but may stop at slightly different
-        locations.</p>\r
+        and 10Av1 are the same route, but may stop at slightly different locations.</p>\r
 
         \r
 
@@ -8515,8 +8381,7 @@ paths:
 
         \r
 
-        <td>Unique identifier for a given route variant. Can be used
-        in\r
+        <td>Unique identifier for a given route variant. Can be used in\r
 
         various other bus-related methods.</td>\r
 
@@ -8532,9 +8397,7 @@ paths:
 
         \r
 
-        <td>Denotes the route variant’s grouping – lines are a
-        combination of routes which lie in the same corridor and which have
-        significant portions of their paths along the same roadways.</td>\r
+        <td>Denotes the route variant’s grouping – lines are a combination of routes which lie in the same corridor and which have significant portions of their paths along the same roadways.</td>\r
 
         </tr> \r
 
@@ -8548,9 +8411,8 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/xml: >-
-              <RoutesResp xmlns="http://www.wmata.com"
-              xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+            application/xml: |-
+              <RoutesResp xmlns="http://www.wmata.com" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
               	<Routes>
               		<Route>
               			<LineDescription>Hunting Point-Pentagon Line</LineDescription>
@@ -8581,8 +8443,7 @@ paths:
 
         \r
 
-        <p>Returns a set of buses scheduled at a stop for a given
-        date.</p>\r
+        <p>Returns a set of buses scheduled at a stop for a given date.</p>\r
 
         \r
 
@@ -8668,16 +8529,13 @@ paths:
 
         \r
 
-        <td>Denotes a binary direction (0 or 1) of the bus. There is
-        no\r
+        <td>Denotes a binary direction (0 or 1) of the bus. There is no\r
 
-        specific mapping to direction, but a different value for the
-        same\r
+        specific mapping to direction, but a different value for the same\r
 
         route signifies that the buses are traveling in opposite\r
 
-        directions. Use the TripDirectionText element to show the
-        actual\r
+        directions. Use the TripDirectionText element to show the actual\r
 
         destination of the bus.</td>\r
 
@@ -8691,8 +8549,7 @@ paths:
 
         \r
 
-        <td>Scheduled end date and time (Eastern Standard Time) for
-        this\r
+        <td>Scheduled end date and time (Eastern Standard Time) for this\r
 
         trip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r
 
@@ -8708,17 +8565,13 @@ paths:
 
         \r
 
-        <td>Bus route variant identifier (pattern). This variant can
-        be\r
+        <td>Bus route variant identifier (pattern). This variant can be\r
 
-        used in several other bus methods which accept variants. Note
-        that\r
+        used in several other bus methods which accept variants. Note that\r
 
-        customers will never see anything other than the base route
-        name,\r
+        customers will never see anything other than the base route name,\r
 
-        so variants 10A, 10Av1, 10Av2, etc. will be displayed as 10A on
-        the\r
+        so variants 10A, 10Av1, 10Av2, etc. will be displayed as 10A on the\r
 
         bus.</td>\r
 
@@ -8732,11 +8585,9 @@ paths:
 
         \r
 
-        <td>Date and time (Eastern Standard Time) when the bus is
-        scheduled\r
+        <td>Date and time (Eastern Standard Time) when the bus is scheduled\r
 
-        to stop at this location. Will be in YYYY-MM-DDTHH:mm:ss
-        format\r
+        to stop at this location. Will be in YYYY-MM-DDTHH:mm:ss format\r
 
         (e.g.: 2014-10-27T13:17:00).</td>\r
 
@@ -8750,8 +8601,7 @@ paths:
 
         \r
 
-        <td>Scheduled start date and time (Eastern Standard Time) for
-        this\r
+        <td>Scheduled start date and time (Eastern Standard Time) for this\r
 
         trip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r
 
@@ -8793,8 +8643,7 @@ paths:
 
         \r
 
-        <td>Trip identifier. This can be correlated with the data in
-        our\r
+        <td>Trip identifier. This can be correlated with the data in our\r
 
         bus schedule information as well as bus positions.</td>\r
 
@@ -8848,8 +8697,7 @@ paths:
 
         \r
 
-        <td>Stop name. May be slightly different from what is spoken
-        or\r
+        <td>Stop name. May be slightly different from what is spoken or\r
 
         displayed in the bus.</td>\r
 
@@ -8863,8 +8711,7 @@ paths:
 
         \r
 
-        <td>String array of route variants which provide service at
-        this\r
+        <td>String array of route variants which provide service at this\r
 
         stop. Note that these are not date-specific; any route variant\r
 
@@ -8880,8 +8727,7 @@ paths:
 
         \r
 
-        <td>7-digit regional ID which can be used in various
-        bus-related\r
+        <td>7-digit regional ID which can be used in various bus-related\r
 
         methods. If unavailable, the StopID will be 0 or NULL.</td>\r
 
@@ -8900,8 +8746,7 @@ paths:
           name: StopID
           required: true
           type: string
-        - description: Date in YYYY-MM-DD format for which to retrieve schedule.  Defaults
-            to today's date unless specified.
+        - description: Date in YYYY-MM-DD format for which to retrieve schedule.  Defaults to today's date unless specified.
           in: query
           name: Date
           type: string
@@ -8911,7 +8756,7 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/xml: >-
+            application/xml: |-
               <StopScheduleInfo
                   xmlns="http://www.wmata.com"
                   xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
@@ -10921,8 +10766,7 @@ paths:
 
         \r
 
-        <p>Returns a list of nearby bus stops based on latitude,
-        longitude, and radius.\r
+        <p>Returns a list of nearby bus stops based on latitude, longitude, and radius.\r
 
         Omit all parameters to retrieve a list of all stops.</p>\r
 
@@ -10960,8 +10804,7 @@ paths:
 
         <td>\r
 
-        Array containing stop information (<a
-        href=\"#Stop\">Stop</a>).\r
+        Array containing stop information (<a href=\"#Stop\">Stop</a>).\r
 
         </td>\r
 
@@ -11015,8 +10858,7 @@ paths:
 
         \r
 
-        <td>Stop name. May be slightly different from what is spoken
-        or\r
+        <td>Stop name. May be slightly different from what is spoken or\r
 
         displayed in the bus.</td>\r
 
@@ -11030,8 +10872,7 @@ paths:
 
         \r
 
-        <td>String array of route variants which provide service at
-        this\r
+        <td>String array of route variants which provide service at this\r
 
         stop. Note that these are not date-specific; any route variant\r
 
@@ -11047,8 +10888,7 @@ paths:
 
         \r
 
-        <td>7-digit regional ID which can be used in various
-        bus-related\r
+        <td>7-digit regional ID which can be used in various bus-related\r
 
         methods. If unavailable, the StopID will be 0 or NULL.</td>\r
 
@@ -11059,22 +10899,19 @@ paths:
         </table>"
       operationId: 5476362a281d830c946a3d73
       parameters:
-        - description: Center point Latitude, required if Longitude and Radius are
-            specified.
+        - description: Center point Latitude, required if Longitude and Radius are specified.
           enum:
             - "38.878586"
           in: query
           name: Lat
           type: string
-        - description: Center point Longitude, required if Latitude and Radius are
-            specified.
+        - description: Center point Longitude, required if Latitude and Radius are specified.
           enum:
             - "-76.989626"
           in: query
           name: Lon
           type: string
-        - description: Radius (feet) to include in the search area, required if Latitude
-            and Longitude are specified.
+        - description: Radius (feet) to include in the search area, required if Latitude and Longitude are specified.
           enum:
             - "500"
           in: query
@@ -11086,7 +10923,7 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/xml: >-
+            application/xml: |-
               <StopsResp
                   xmlns="http://www.wmata.com"
                   xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
@@ -11500,228 +11337,134 @@ paths:
       summary: XML - Stop Search
   /json/jBusPositions:
     get:
-      description: >-
+      description: |-
         <h4 class="text-primary">Description</h4>
 
-
         <p>Returns bus positions for the given route, with an optional search radius.
-
         If no parameters are specified, all bus positions are returned.</p>
 
-
         <p>Note that the RouteID parameter accepts only base route names and no
-
         variations, i.e.: use 10A instead of 10Av1 or 10Av2.</p>
-
 
         <p>Bus positions are refreshed approximately every <span style="text-decoration: line-through">20 to 30</span> 7 to 10 seconds.</p>
 
-
         <h4 class="text-primary">Response Elements</h4>
 
-
         <table class="table table-condensed table-hover">
-
         <thead>
-
         <tr>
-
         <th class="col-md-3">Element</th>
 
-
         <th>Description</th>
-
         </tr>
-
         </thead>
 
-
         <tbody>
-
         <tr>
-
         <td>BusPositions</td>
 
-
         <td>
-
         Array containing bus position information (<a href=
-
         "#BusPosition">BusPositions</a>).
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a id="BusPosition" name="BusPosition">BusPosition
-
         Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>DateTime</td>
 
-
         <td>Date and time (Eastern Standard Time) of last position update.
-
         Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:
-
         2014-10-27T13:23:40).</td>
-
         </tr>
 
-
         <tr>
-
         <td>Deviation</td>
 
-
         <td>Deviation, in minutes, from schedule. Positive values indicate
-
         that the bus is running late while negative ones are for buses
-
         running ahead of schedule.</td>
-
         </tr>
 
-
         <tr>
-
         <td style="text-decoration: line-through">DirectionNum</td>
 
-
         <td><span class="text-danger">Deprecated.</span> Use the
-
         DirectionText for a customer-friendly description of
-
         direction.</td>
-
         </tr>
 
-
         <tr>
-
         <td>DirectionText</td>
 
-
         <td>General direction of the trip, not the bus itself (e.g.: NORTH,
-
         SOUTH, EAST, WEST).</td>
-
         </tr>
 
-
         <tr>
-
         <td>Lat</td>
 
-
         <td>Last reported Latitude of the bus.</td>
-
         </tr>
 
-
         <tr>
-
         <td>Lon</td>
 
-
         <td>Last reported Longitude of the bus.</td>
-
         </tr>
 
-
         <tr>
-
         <td>RouteID</td>
 
-
         <td>Base route name as shown on the bus. Note that the base route
-
         name could also refer to any variant, so a RouteID of 10A could
-
         refer to 10A, 10Av1, 10Av2, etc.</td>
-
         </tr>
 
-
         <tr>
-
         <td>TripEndTime</td>
 
-
         <td>Scheduled end date and time (Eastern Standard Time) of the
-
         bus's current trip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:
-
         2014-10-27T13:17:00).</td>
-
         </tr>
 
-
         <tr>
-
         <td>TripHeadsign</td>
 
-
         <td>Destination of the bus.</td>
-
         </tr>
 
-
         <tr>
-
         <td>TripID</td>
 
-
         <td>Unique trip ID. This can be correlated with the data returned
-
         from the schedule-related methods.</td>
-
         </tr>
 
-
         <tr>
-
         <td>TripStartTime</td>
 
-
         <td>Scheduled start date and time (Eastern Standard Time) of the
-
         bus's current trip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:
-
         2014-10-27T12:40:00).</td>
-
         </tr>
-
 
         <tr>
-
         <td>VehicleID</td>
 
-
         <td>Unique identifier for the bus. This is usually visible on the
-
         bus itself.</td>
-
         </tr>
-
         </tbody>
-
         </table>
       operationId: 5476362a281d830c946a3d68
       parameters:
@@ -11732,18 +11475,15 @@ paths:
           in: query
           name: RouteID
           type: string
-        - description: Center point Latitude, required if Longitude and Radius are
-            specified.
+        - description: Center point Latitude, required if Longitude and Radius are specified.
           in: query
           name: Lat
           type: number
-        - description: Center point Longitude, required if Latitude and Radius are
-            specified.
+        - description: Center point Longitude, required if Latitude and Radius are specified.
           in: query
           name: Lon
           type: number
-        - description: Radius (meters) to include in the search area, required if Latitude
-            and Longitude are specified.
+        - description: Radius (meters) to include in the search area, required if Latitude and Longitude are specified.
           in: query
           name: Radius
           type: number
@@ -11807,8 +11547,7 @@ paths:
 
         \r
 
-        <p>For a given date, returns the set of ordered
-        latitude/longitude points along\r
+        <p>For a given date, returns the set of ordered latitude/longitude points along\r
 
         a route variant along with the list of stops served.</p>\r
 
@@ -11854,8 +11593,7 @@ paths:
 
         Most routes will return content in both Direction0 and\r
 
-        Direction1 elements, though a few will return NULL for
-        Direction0 or for Direction1.<br>\r
+        Direction1 elements, though a few will return NULL for Direction0 or for Direction1.<br>\r
 
         <br>\r
 
@@ -11921,8 +11659,7 @@ paths:
 
         <td><span class=\"text-danger\">Deprecated.</span> Use the\r
 
-        DirectionText element to denote the general direction of the
-        route\r
+        DirectionText element to denote the general direction of the route\r
 
         variant.</td>\r
 
@@ -11936,8 +11673,7 @@ paths:
 
         \r
 
-        <td>General direction of the route variant (NORTH, SOUTH,
-        EAST,\r
+        <td>General direction of the route variant (NORTH, SOUTH, EAST,\r
 
         WEST, LOOP, etc.).</td>\r
 
@@ -11971,8 +11707,7 @@ paths:
 
         <td>\r
 
-        Array containing stop information (<a
-        href=\"#Stop\">Stop</a>).\r
+        Array containing stop information (<a href=\"#Stop\">Stop</a>).\r
 
         </td>\r
 
@@ -11986,8 +11721,7 @@ paths:
 
         \r
 
-        <td>Descriptive text of where the bus is headed. This is
-        similar,\r
+        <td>Descriptive text of where the bus is headed. This is similar,\r
 
         but not necessarily identical, to what is displayed on the\r
 
@@ -12097,8 +11831,7 @@ paths:
 
         \r
 
-        <td>Stop name. May be slightly different from what is spoken
-        or\r
+        <td>Stop name. May be slightly different from what is spoken or\r
 
         displayed in the bus.</td>\r
 
@@ -12112,8 +11845,7 @@ paths:
 
         \r
 
-        <td>String array of route variants which provide service at
-        this\r
+        <td>String array of route variants which provide service at this\r
 
         stop. Note that these are not date-specific; any route variant\r
 
@@ -12129,8 +11861,7 @@ paths:
 
         \r
 
-        <td>7-digit regional ID which can be used in various
-        bus-related\r
+        <td>7-digit regional ID which can be used in various bus-related\r
 
         methods. If unavailable, the StopID will be 0 or NULL.</td>\r
 
@@ -12149,8 +11880,7 @@ paths:
           name: RouteID
           required: true
           type: string
-        - description: Date in YYYY-MM-DD format for which to retrieve route and stop
-            information.  Defaults to today's date unless specified.
+        - description: Date in YYYY-MM-DD format for which to retrieve route and stop information.  Defaults to today's date unless specified.
           in: query
           name: Date
           type: string
@@ -16980,8 +16710,7 @@ paths:
 
         \r
 
-        <p>Returns schedules for a given route variant for a given
-        date.</p>\r
+        <p>Returns schedules for a given route variant for a given date.</p>\r
 
         \r
 
@@ -17025,11 +16754,9 @@ paths:
 
         Most routes will return content in both Direction0 and\r
 
-        Direction1 elements, though a few (especially ones which run
-        in\r
+        Direction1 elements, though a few (especially ones which run in\r
 
-        a loop, such as the U8) will return content only for
-        Direction0\r
+        a loop, such as the U8) will return content only for Direction0\r
 
         and NULL content for Direction1.<br>\r
 
@@ -17083,8 +16810,7 @@ paths:
 
         <td><span class=\"text-danger\">Deprecated.</span> Use the\r
 
-        TripDirectionText element to denote the general direction of
-        the\r
+        TripDirectionText element to denote the general direction of the\r
 
         trip.</td>\r
 
@@ -17098,8 +16824,7 @@ paths:
 
         \r
 
-        <td>Scheduled end date and time (Eastern Standard Time) for
-        this\r
+        <td>Scheduled end date and time (Eastern Standard Time) for this\r
 
         trip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r
 
@@ -17129,8 +16854,7 @@ paths:
 
         \r
 
-        <td>Scheduled start date and time (Eastern Standard Time) for
-        this\r
+        <td>Scheduled start date and time (Eastern Standard Time) for this\r
 
         trip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r
 
@@ -17164,8 +16888,7 @@ paths:
 
         \r
 
-        <td>General direction of the trip (NORTH, SOUTH, EAST, WEST,
-        LOOP,\r
+        <td>General direction of the trip (NORTH, SOUTH, EAST, WEST, LOOP,\r
 
         etc.).</td>\r
 
@@ -17179,8 +16902,7 @@ paths:
 
         \r
 
-        <td>Descriptive text of where the bus is headed. This is
-        similar,\r
+        <td>Descriptive text of where the bus is headed. This is similar,\r
 
         but not necessarily identical, to what is displayed on the\r
 
@@ -17196,8 +16918,7 @@ paths:
 
         \r
 
-        <td>Unique trip ID. This can be correlated with the data
-        returned\r
+        <td>Unique trip ID. This can be correlated with the data returned\r
 
         from the schedule-related methods.</td>\r
 
@@ -17227,8 +16948,7 @@ paths:
 
         \r
 
-        <td>7-digit regional ID which can be used in various
-        bus-related\r
+        <td>7-digit regional ID which can be used in various bus-related\r
 
         methods. If unavailable, the StopID will be 0 or NULL.</td>\r
 
@@ -17242,8 +16962,7 @@ paths:
 
         \r
 
-        <td>Stop name. May be slightly different from what is spoken
-        or\r
+        <td>Stop name. May be slightly different from what is spoken or\r
 
         displayed in the bus.</td>\r
 
@@ -17269,8 +16988,7 @@ paths:
 
         \r
 
-        <td>Scheduled departure date and time (Eastern Standard Time)
-        from\r
+        <td>Scheduled departure date and time (Eastern Standard Time) from\r
 
         this stop. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r
 
@@ -17291,16 +17009,12 @@ paths:
           name: RouteID
           required: true
           type: string
-        - description: Date in YYYY-MM-DD format for which to retrieve schedule.  Defaults
-            to today's date unless specified.
+        - description: Date in YYYY-MM-DD format for which to retrieve schedule.  Defaults to today's date unless specified.
           in: query
           name: Date
           type: string
         - default: false
-          description: Whether or not to include variations if a base route is specified
-            in RouteID.  For example, if B30 is specified and
-            IncludingVariations is set to true, data for all variations of B30
-            such as B30v1, B30v2, etc. will be returned.
+          description: Whether or not to include variations if a base route is specified in RouteID.  For example, if B30 is specified and IncludingVariations is set to true, data for all variations of B30 such as B30v1, B30v2, etc. will be returned.
           enum:
             - false
             - true
@@ -17313,7 +17027,7 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "Direction0": [
                       {
@@ -19978,11 +19692,9 @@ paths:
 
         \r
 
-        <p>Returns a list of all bus route variants (patterns). For
-        example, the 10A\r
+        <p>Returns a list of all bus route variants (patterns). For example, the 10A\r
 
-        and 10Av1 are the same route, but may stop at slightly different
-        locations.</p>\r
+        and 10Av1 are the same route, but may stop at slightly different locations.</p>\r
 
         \r
 
@@ -20062,8 +19774,7 @@ paths:
 
         \r
 
-        <td>Unique identifier for a given route variant. Can be used
-        in\r
+        <td>Unique identifier for a given route variant. Can be used in\r
 
         various other bus-related methods.</td>\r
 
@@ -20077,9 +19788,7 @@ paths:
 
         \r
 
-        <td>Denotes the route variant’s grouping – lines are a
-        combination of routes which lie in the same corridor and which have
-        significant portions of their paths along the same roadways.</td>\r
+        <td>Denotes the route variant’s grouping – lines are a combination of routes which lie in the same corridor and which have significant portions of their paths along the same roadways.</td>\r
 
         </tr> \r
 
@@ -20125,8 +19834,7 @@ paths:
 
         \r
 
-        <p>Returns a set of buses scheduled at a stop for a given
-        date.</p>\r
+        <p>Returns a set of buses scheduled at a stop for a given date.</p>\r
 
         \r
 
@@ -20212,16 +19920,13 @@ paths:
 
         \r
 
-        <td>Denotes a binary direction (0 or 1) of the bus. There is
-        no\r
+        <td>Denotes a binary direction (0 or 1) of the bus. There is no\r
 
-        specific mapping to direction, but a different value for the
-        same\r
+        specific mapping to direction, but a different value for the same\r
 
         route signifies that the buses are traveling in opposite\r
 
-        directions. Use the TripDirectionText element to show the
-        actual\r
+        directions. Use the TripDirectionText element to show the actual\r
 
         destination of the bus.</td>\r
 
@@ -20235,8 +19940,7 @@ paths:
 
         \r
 
-        <td>Scheduled end date and time (Eastern Standard Time) for
-        this\r
+        <td>Scheduled end date and time (Eastern Standard Time) for this\r
 
         trip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r
 
@@ -20252,17 +19956,13 @@ paths:
 
         \r
 
-        <td>Bus route variant identifier (pattern). This variant can
-        be\r
+        <td>Bus route variant identifier (pattern). This variant can be\r
 
-        used in several other bus methods which accept variants. Note
-        that\r
+        used in several other bus methods which accept variants. Note that\r
 
-        customers will never see anything other than the base route
-        name,\r
+        customers will never see anything other than the base route name,\r
 
-        so variants 10A, 10Av1, 10Av2, etc. will be displayed as 10A on
-        the\r
+        so variants 10A, 10Av1, 10Av2, etc. will be displayed as 10A on the\r
 
         bus.</td>\r
 
@@ -20276,11 +19976,9 @@ paths:
 
         \r
 
-        <td>Date and time (Eastern Standard Time) when the bus is
-        scheduled\r
+        <td>Date and time (Eastern Standard Time) when the bus is scheduled\r
 
-        to stop at this location. Will be in YYYY-MM-DDTHH:mm:ss
-        format\r
+        to stop at this location. Will be in YYYY-MM-DDTHH:mm:ss format\r
 
         (e.g.: 2014-10-27T13:17:00).</td>\r
 
@@ -20294,8 +19992,7 @@ paths:
 
         \r
 
-        <td>Scheduled start date and time (Eastern Standard Time) for
-        this\r
+        <td>Scheduled start date and time (Eastern Standard Time) for this\r
 
         trip. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:\r
 
@@ -20337,8 +20034,7 @@ paths:
 
         \r
 
-        <td>Trip identifier. This can be correlated with the data in
-        our\r
+        <td>Trip identifier. This can be correlated with the data in our\r
 
         bus schedule information as well as bus positions.</td>\r
 
@@ -20392,8 +20088,7 @@ paths:
 
         \r
 
-        <td>Stop name. May be slightly different from what is spoken
-        or\r
+        <td>Stop name. May be slightly different from what is spoken or\r
 
         displayed in the bus.</td>\r
 
@@ -20407,8 +20102,7 @@ paths:
 
         \r
 
-        <td>String array of route variants which provide service at
-        this\r
+        <td>String array of route variants which provide service at this\r
 
         stop. Note that these are not date-specific; any route variant\r
 
@@ -20424,8 +20118,7 @@ paths:
 
         \r
 
-        <td>7-digit regional ID which can be used in various
-        bus-related\r
+        <td>7-digit regional ID which can be used in various bus-related\r
 
         methods. If unavailable, the StopID will be 0 or NULL.</td>\r
 
@@ -20444,8 +20137,7 @@ paths:
           name: StopID
           required: true
           type: string
-        - description: Date in YYYY-MM-DD format for which to retrieve schedule.  Defaults
-            to today's date unless specified.
+        - description: Date in YYYY-MM-DD format for which to retrieve schedule.  Defaults to today's date unless specified.
           in: query
           name: Date
           type: string
@@ -20455,7 +20147,7 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "ScheduleArrivals": [
                       {
@@ -22462,8 +22154,7 @@ paths:
 
         \r
 
-        <p>Returns a list of nearby bus stops based on latitude,
-        longitude, and radius.\r
+        <p>Returns a list of nearby bus stops based on latitude, longitude, and radius.\r
 
         Omit all parameters to retrieve a list of all stops.</p>\r
 
@@ -22501,8 +22192,7 @@ paths:
 
         <td>\r
 
-        Array containing stop information (<a
-        href=\"#Stop\">Stop</a>).\r
+        Array containing stop information (<a href=\"#Stop\">Stop</a>).\r
 
         </td>\r
 
@@ -22556,8 +22246,7 @@ paths:
 
         \r
 
-        <td>Stop name. May be slightly different from what is spoken
-        or\r
+        <td>Stop name. May be slightly different from what is spoken or\r
 
         displayed in the bus.</td>\r
 
@@ -22571,8 +22260,7 @@ paths:
 
         \r
 
-        <td>String array of route variants which provide service at
-        this\r
+        <td>String array of route variants which provide service at this\r
 
         stop. Note that these are not date-specific; any route variant\r
 
@@ -22588,8 +22276,7 @@ paths:
 
         \r
 
-        <td>7-digit regional ID which can be used in various
-        bus-related\r
+        <td>7-digit regional ID which can be used in various bus-related\r
 
         methods. If unavailable, the StopID will be 0 or NULL.</td>\r
 
@@ -22600,22 +22287,19 @@ paths:
         </table>"
       operationId: 5476362a281d830c946a3d6d
       parameters:
-        - description: Center point Latitude, required if Longitude and Radius are
-            specified.
+        - description: Center point Latitude, required if Longitude and Radius are specified.
           enum:
             - 38.878586
           in: query
           name: Lat
           type: number
-        - description: Center point Longitude, required if Latitude and Radius are
-            specified.
+        - description: Center point Longitude, required if Latitude and Radius are specified.
           enum:
             - -76.989626
           in: query
           name: Lon
           type: number
-        - description: Radius (meters) to include in the search area, required if Latitude
-            and Longitude are specified.
+        - description: Radius (meters) to include in the search area, required if Latitude and Longitude are specified.
           enum:
             - 500
           in: query

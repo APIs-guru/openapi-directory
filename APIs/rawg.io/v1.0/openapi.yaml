@@ -4,50 +4,30 @@ servers:
 info:
   contact:
     x-twitter: rawgtheworld
-  description: >
+  description: |
     
     The largest open video games database.
 
-
     ### Why build on RAWG
-
     - More than 350,000 games for 50 platforms including mobiles.
-
     - Rich metadata: tags, genres, developers, publishers, individual creators, official websites, release dates,
-
     Metacritic ratings.
-
     - Where to buy: links to digital distribution services
-
     - Similar games based on visual similarity.
-
     - Player activity data: Steam average playtime and RAWG player counts and ratings.
-
     - Actively developing and constantly getting better by user contribution and our algorithms.
 
-
     ### Terms of Use
-
     - Free for personal use as long as you attribute RAWG as the source of the data and/or images and add an active
-
     hyperlink from every page where the data of RAWG is used.
-
     - Free for commercial use for startups and hobby projects with not more than 100,000 monthly active users or 500,000
-
     page views per month. If your project is larger than that, email us at [api@rawg.io](mailto:api@rawg.io) for
-
     commercial terms.
-
     - No cloning. It would not be cool if you used our API to launch a clone of RAWG. We know it is not always easy
-
     to say what is a duplicate and what isn't. Drop us a line at [api@rawg.io](mailto:api@rawg.io) if you are in doubt,
-
     and we will talk it through.
-
     - You must include an API key with every request. The key can be obtained at https://rawg.io/apidocs.
-
     If you don’t provide it, we may ban your requests.
-
 
     __[Read more](https://rawg.io/apidocs)__.
   title: RAWG Video Games Database API
@@ -295,14 +275,12 @@ paths:
           name: stores
           schema:
             type: string
-        - description: "Filter by developers, for example: `1612,18893` or
-            `valve-software,feral-interactive`."
+        - description: "Filter by developers, for example: `1612,18893` or `valve-software,feral-interactive`."
           in: query
           name: developers
           schema:
             type: string
-        - description: "Filter by publishers, for example: `354,20987` or
-            `electronic-arts,microsoft-studios`."
+        - description: "Filter by publishers, for example: `354,20987` or `electronic-arts,microsoft-studios`."
           in: query
           name: publishers
           schema:
@@ -317,14 +295,12 @@ paths:
           name: tags
           schema:
             type: string
-        - description: "Filter by creators, for example: `78,28` or
-            `cris-velasco,mike-morasky`."
+        - description: "Filter by creators, for example: `78,28` or `cris-velasco,mike-morasky`."
           in: query
           name: creators
           schema:
             type: string
-        - description: "Filter by a release date, for example:
-            `2010-01-01,2018-12-31.1960-01-01,1969-12-31`."
+        - description: "Filter by a release date, for example: `2010-01-01,2018-12-31.1960-01-01,1969-12-31`."
           in: query
           name: dates
           schema:
@@ -369,9 +345,7 @@ paths:
           name: exclude_stores
           schema:
             type: string
-        - description: "Available fields: `name`, `released`, `added`, `created`,
-            `updated`, `rating`, `metacritic`. You can reverse the sort order
-            adding a hyphen, for example: `-released`."
+        - description: "Available fields: `name`, `released`, `added`, `created`, `updated`, `rating`, `metacritic`. You can reverse the sort order adding a hyphen, for example: `-released`."
           in: query
           name: ordering
           schema:
@@ -447,8 +421,7 @@ paths:
                   - results
                 type: object
           description: ""
-      summary: Get a list of DLC's for the game, GOTY and other editions, companion
-        apps, etc.
+      summary: Get a list of DLC's for the game, GOTY and other editions, companion apps, etc.
       tags:
         - games
     parameters:
@@ -860,8 +833,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GameSingle"
           description: ""
-      summary: Get a list of visually similar games, available only for business and
-        enterprise API users.
+      summary: Get a list of visually similar games, available only for business and enterprise API users.
       tags:
         - games
     parameters:
@@ -889,8 +861,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Twitch"
           description: ""
-      summary: Get streams on Twitch associated with the game, available only for
-        business and enterprise API users.
+      summary: Get streams on Twitch associated with the game, available only for business and enterprise API users.
       tags:
         - games
     parameters:
@@ -918,8 +889,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Youtube"
           description: ""
-      summary: Get videos from YouTube associated with the game, available only for
-        business and enterprise API users.
+      summary: Get videos from YouTube associated with the game, available only for business and enterprise API users.
       tags:
         - games
     parameters:
@@ -1663,8 +1633,7 @@ components:
           readOnly: true
           type: array
         metacritic_url:
-          description: For example
-            "http://www.metacritic.com/game/playstation-4/the-witcher-3-wild-hunt"
+          description: For example "http://www.metacritic.com/game/playstation-4/the-witcher-3-wild-hunt"
           minLength: 1
           readOnly: true
           title: Metacritic url

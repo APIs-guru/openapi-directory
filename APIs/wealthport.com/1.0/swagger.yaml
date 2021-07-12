@@ -4,12 +4,7 @@ schemes:
 host: api.wealthport.com
 basePath: /gateway/public/endpoints/1.0
 info:
-  description: Onedot provides a simple, lightweight and open Web API based on the
-    Open API 2.0 standard (<a href="https://www.openapis.org"
-    target="_blank">https://www.openapis.org</a>). Our APIs offer a variety of
-    operations related to managing Sources, Folders, Orders and Recipes. There
-    are operations to submit and track Jobs, upload and download data files and
-    many more.
+  description: Onedot provides a simple, lightweight and open Web API based on the Open API 2.0 standard (<a href="https://www.openapis.org" target="_blank">https://www.openapis.org</a>). Our APIs offer a variety of operations related to managing Sources, Folders, Orders and Recipes. There are operations to submit and track Jobs, upload and download data files and many more.
   termsOfService: https://www.onedot.com/terms-of-service
   title: Wealthport API
   version: "1.0"
@@ -77,8 +72,7 @@ paths:
             $ref: "#/definitions/Folder_Request"
       responses:
         "201":
-          description: Folder successfully created and available at the returned location
-            with the returned ID
+          description: Folder successfully created and available at the returned location with the returned ID
         "400":
           description: Wrong or missing mandatory arguments
         "401":
@@ -95,8 +89,7 @@ paths:
         - Folders
   "/folders/{id}":
     delete:
-      description: Deletes the specified Folder and all contained Sources from the
-        Data Inventory.
+      description: Deletes the specified Folder and all contained Sources from the Data Inventory.
       operationId: deleteFolder
       parameters:
         - description: Folder ID of the Folder to delete, including any Sources contained
@@ -258,19 +251,16 @@ paths:
         - text/plain
       responses:
         "200":
-          description: Job has finished, potentially with errors, result is returned as
-            JSON in the response
+          description: Job has finished, potentially with errors, result is returned as JSON in the response
           schema:
             type: string
         "201":
-          description: Job has finished successfully, resulting source is available at the
-            returned URL
+          description: Job has finished successfully, resulting source is available at the returned URL
           schema:
             format: url
             type: string
         "400":
-          description: Wrong or missing mandatory arguments, job has not yet finished or
-            is not in a valid state
+          description: Wrong or missing mandatory arguments, job has not yet finished or is not in a valid state
         "401":
           description: Invalid or unauthorised API key
         "403":
@@ -297,8 +287,7 @@ paths:
         - text/plain
       responses:
         "200":
-          description: Job has finished, potentially with errors, result is available and
-            Job ID is returned in the response
+          description: Job has finished, potentially with errors, result is available and Job ID is returned in the response
           headers:
             Location:
               description: URL to the Get Result operation to retrieve the result
@@ -356,10 +345,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Creates a new Order to be submitted.<p>Orders reference one or more
-        Sources, e.g. uploaded files, as well as one or more Folders (which
-        again can contain Sources).The Recipe describes what to do with the
-        referenced sources and where to publish the processing result to.</p>
+      description: Creates a new Order to be submitted.<p>Orders reference one or more Sources, e.g. uploaded files, as well as one or more Folders (which again can contain Sources).The Recipe describes what to do with the referenced sources and where to publish the processing result to.</p>
       operationId: createOrder
       parameters:
         - description: JSON
@@ -370,8 +356,7 @@ paths:
             $ref: "#/definitions/Order_Request"
       responses:
         "201":
-          description: Order successfully created and available at the returned location
-            with the returned ID
+          description: Order successfully created and available at the returned location with the returned ID
         "400":
           description: Wrong or missing mandatory arguments
         "401":
@@ -477,8 +462,7 @@ paths:
         - Orders
   "/orders/{id}/submit":
     post:
-      description: Submits the specified Order for processing and launches a
-        corresponding job.
+      description: Submits the specified Order for processing and launches a corresponding job.
       operationId: submitOrder
       parameters:
         - description: Order ID of the order to submit for processing
@@ -490,19 +474,16 @@ paths:
         - text/plain
       responses:
         "202":
-          description: Order has been submitted, Job is running and Job ID is returned in
-            the response
+          description: Order has been submitted, Job is running and Job ID is returned in the response
           headers:
             Location:
-              description: URL to the Get Status operation to poll for processing status
-                updates
+              description: URL to the Get Status operation to poll for processing status updates
               format: url
               type: string
           schema:
             type: string
         "400":
-          description: Wrong or missing mandatory arguments, order has no recipe or is not
-            valid otherwise
+          description: Wrong or missing mandatory arguments, order has no recipe or is not valid otherwise
         "401":
           description: Invalid or unauthorised API key
         "403":
@@ -662,11 +643,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Creates the specified Source.<p>Sources are either uploaded files
-        or a reference to a database. They are referenced in orders to specify
-        which data needs processing.</p><p>Most clients should probably use the
-        Upload File API which implicitly creates a new source on successful file
-        upload.</p>
+      description: Creates the specified Source.<p>Sources are either uploaded files or a reference to a database. They are referenced in orders to specify which data needs processing.</p><p>Most clients should probably use the Upload File API which implicitly creates a new source on successful file upload.</p>
       operationId: createSource
       parameters:
         - description: JSON
@@ -677,8 +654,7 @@ paths:
             $ref: "#/definitions/Source_Request"
       responses:
         "201":
-          description: Source successfully created and available at the returned location
-            with the returned ID
+          description: Source successfully created and available at the returned location with the returned ID
         "400":
           description: Wrong or missing mandatory arguments
         "401":
@@ -693,23 +669,10 @@ paths:
         - Sources
   /sources/upload:
     put:
-      description: Initiates a file upload and returns the URL where to upload the
-        file to.<p>Calling this API generates a secure, unique and
-        time-restricted URL where the file can be uploaded to. The URL is
-        available in the <pre>Location</pre> HTTP header of the response. The
-        temporal validity of the URL is available in the
-        <pre>Cache-Control</pre> HTTP header of the response.Clients may perform
-        a <pre>HTTP PUT</pre> request on the URL to upload the file using a form
-        where a file <pre>sample.csv</pre> is passed as property
-        <pre>file=sample.csv</pre>. For security reasons, clients must pass all
-        HTTP headers as returned by the <pre>X-WP-Upload-Headers</pre> in the
-        response, together with their values. This procedure ensures a secure,
-        encrypted file upload.</p><p>Note that calling this API automatically
-        generates a Source, there is no need to call the Create Source API.</p>
+      description: Initiates a file upload and returns the URL where to upload the file to.<p>Calling this API generates a secure, unique and time-restricted URL where the file can be uploaded to. The URL is available in the <pre>Location</pre> HTTP header of the response. The temporal validity of the URL is available in the <pre>Cache-Control</pre> HTTP header of the response.Clients may perform a <pre>HTTP PUT</pre> request on the URL to upload the file using a form where a file <pre>sample.csv</pre> is passed as property <pre>file=sample.csv</pre>. For security reasons, clients must pass all HTTP headers as returned by the <pre>X-WP-Upload-Headers</pre> in the response, together with their values. This procedure ensures a secure, encrypted file upload.</p><p>Note that calling this API automatically generates a Source, there is no need to call the Create Source API.</p>
       operationId: getUploadUrl
       parameters:
-        - description: Name of the source to create. The name must correspond to the exact
-            file name of the file being uploaded.
+        - description: Name of the source to create. The name must correspond to the exact file name of the file being uploaded.
           in: query
           name: name
           required: true
@@ -745,9 +708,7 @@ paths:
               format: url
               type: string
             X-WP-Upload-Headers:
-              description: Comma-separated list of HTTP headers from the response whose values
-                need to be passed again as HTTP headers to the <pre>HTTP
-                PUT</pre> request when uploading the source file
+              description: Comma-separated list of HTTP headers from the response whose values need to be passed again as HTTP headers to the <pre>HTTP PUT</pre> request when uploading the source file
               type: string
           schema:
             type: string
@@ -856,13 +817,7 @@ paths:
         - Sources
   "/sources/{id}/download":
     get:
-      description: Initiates a file download and returns the URL where to download the
-        file from.<p>Calling this API generates a secure, unique and
-        time-restricted URL where the file can be downloaded from. The URL is
-        available in the <pre>Location</pre> HTTP header of the response. The
-        time restriction of the URL is availablein the <pre>Cache-Control</pre>
-        HTTP header of the response.Clients may perform a <pre>HTTP GET</pre>
-        request on the URL to download the file.</p>
+      description: Initiates a file download and returns the URL where to download the file from.<p>Calling this API generates a secure, unique and time-restricted URL where the file can be downloaded from. The URL is available in the <pre>Location</pre> HTTP header of the response. The time restriction of the URL is availablein the <pre>Cache-Control</pre> HTTP header of the response.Clients may perform a <pre>HTTP GET</pre> request on the URL to download the file.</p>
       operationId: getDownloadUrl
       parameters:
         - description: Source ID of file to download

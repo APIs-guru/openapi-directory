@@ -57,8 +57,7 @@ paths:
           name: key
           required: true
           type: string
-        - description: when true we attempt to abbreviate the formatted field in the
-            response.
+        - description: when true we attempt to abbreviate the formatted field in the response.
           in: query
           name: abbrv
           type: boolean
@@ -66,13 +65,11 @@ paths:
           in: query
           name: add_request
           type: boolean
-        - description: four coordinate points forming the south-west and north-east
-            corners of a bounding box (min long, min lat, max long, max lat).
+        - description: four coordinate points forming the south-west and north-east corners of a bounding box (min long, min lat, max long, max lat).
           in: query
           name: bounds
           type: string
-        - description: two letter code ISO 3166-1 Alpha 2 code to limit results to that
-            country.
+        - description: two letter code ISO 3166-1 Alpha 2 code to limit results to that country.
           in: query
           name: countrycode
           type: string
@@ -88,8 +85,7 @@ paths:
           in: query
           name: limit
           type: integer
-        - description: integer from 1-10. Only results with at least this confidence are
-            returned.
+        - description: integer from 1-10. Only results with at least this confidence are returned.
           in: query
           name: min_confidence
           type: integer

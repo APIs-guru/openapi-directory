@@ -4,9 +4,7 @@ schemes:
 host: rms.api.bbc.co.uk
 basePath: /
 info:
-  description: We encapsulate Radio & Music business logic for iPlayer Radio and
-    BBC Music products on all platforms. We add value by reliably providing the
-    right blend of metadata needed by clients.
+  description: We encapsulate Radio & Music business logic for iPlayer Radio and BBC Music products on all platforms. We add value by reliably providing the right blend of metadata needed by clients.
   title: Radio & Music Services
   version: 1.0.0
   x-apisguru-categories:
@@ -67,9 +65,7 @@ parameters:
     required: false
     type: string
   decomposed:
-    description: In addition to the overall score, return a list of scores broken
-      down by day N.B Must be used in conjunction with since and/or until and
-      since is >= 31 days
+    description: In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days
     in: query
     name: decomposed
     required: false
@@ -143,17 +139,14 @@ parameters:
     required: false
     type: string
   until:
-    description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and
-      'until' date params
+    description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and 'until' date params
     in: query
     name: until
     required: false
     type: string
 tags:
   - name: Experience
-  - description: <a
-      href="https://confluence.dev.bbc.co.uk/display/RMServices/Playspace+API+Client+Documetation">Client
-      Documentation</a>
+  - description: <a href="https://confluence.dev.bbc.co.uk/display/RMServices/Playspace+API+Client+Documetation">Client Documentation</a>
     name: Playspace
   - name: Categories
   - name: Networks
@@ -198,8 +191,7 @@ paths:
           name: date
           required: false
           type: string
-        - description: Sort by provided query. E.g. 'start_at' sorts in ascending order,
-            and '-start_at' sorts in descending order
+        - description: Sort by provided query. E.g. 'start_at' sorts in ascending order, and '-start_at' sorts in descending order
           enum:
             - start_at
             - -start_at
@@ -252,8 +244,7 @@ paths:
           name: service_id
           required: false
           type: string
-        - description: Filter what is on air. E.g. 'now' returns current programme being
-            broadcasted.
+        - description: Filter what is on air. E.g. 'now' returns current programme being broadcasted.
           enum:
             - now
             - previous
@@ -262,20 +253,17 @@ paths:
           name: on_air
           required: false
           type: string
-        - description: Filter what will be on air next in minutes. E.g. '240' returns
-            programmes broadcasted in the next four hurs
+        - description: Filter what will be on air next in minutes. E.g. '240' returns programmes broadcasted in the next four hurs
           in: query
           name: next
           required: false
           type: string
-        - description: Filter what was on air previously in minutes. E.g. '240' returns
-            programmes broadcasted in the previous four hurs
+        - description: Filter what was on air previously in minutes. E.g. '240' returns programmes broadcasted in the previous four hurs
           in: query
           name: previous
           required: false
           type: string
-        - description: Sort by provided query. E.g. 'start_at' sorts in ascending order,
-            and '-start_at' sorts in descending order
+        - description: Sort by provided query. E.g. 'start_at' sorts in ascending order, and '-start_at' sorts in descending order
           enum:
             - start_at
             - -start_at
@@ -376,8 +364,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: Retrieve information about the category. E.g.
-            'sport-football-europeanchampionship'
+        - description: Retrieve information about the category. E.g. 'sport-football-europeanchampionship'
           in: path
           name: id
           required: true
@@ -474,21 +461,17 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period
-            and now
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period and now
           in: query
           name: since
           required: false
           type: string
-        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and
-            'until' date params
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and 'until' date params
           in: query
           name: until
           required: false
           type: string
-        - description: In addition to the overall score, return a list of scores broken
-            down by day N.B Must be used in conjunction with since and/or until
-            and since is >= 31 days
+        - description: In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days
           in: query
           name: decomposed
           required: false
@@ -528,21 +511,17 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period
-            and now
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period and now
           in: query
           name: since
           required: false
           type: string
-        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and
-            'until' date params
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and 'until' date params
           in: query
           name: until
           required: false
           type: string
-        - description: In addition to the overall score, return a list of scores broken
-            down by day N.B Must be used in conjunction with since and/or until
-            and since is >= 31 days
+        - description: In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days
           in: query
           name: decomposed
           required: false
@@ -577,21 +556,17 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period
-            and now
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period and now
           in: query
           name: since
           required: false
           type: string
-        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and
-            'until' date params
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and 'until' date params
           in: query
           name: until
           required: false
           type: string
-        - description: In addition to the overall score, return a list of scores broken
-            down by day N.B Must be used in conjunction with since and/or until
-            and since is >= 31 days
+        - description: In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days
           in: query
           name: decomposed
           required: false
@@ -631,21 +606,17 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period
-            and now
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period and now
           in: query
           name: since
           required: false
           type: string
-        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and
-            'until' date params
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and 'until' date params
           in: query
           name: until
           required: false
           type: string
-        - description: In addition to the overall score, return a list of scores broken
-            down by day N.B Must be used in conjunction with since and/or until
-            and since is >= 31 days
+        - description: In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days
           in: query
           name: decomposed
           required: false
@@ -671,9 +642,8 @@ paths:
         - Music
   /music/popular/tracks:
     get:
-      description: >
-        List of popular tracks for BBC Music. Filter by time, network,
-        artist, playlist or programme.
+      description: |
+        List of popular tracks for BBC Music. Filter by time, network, artist, playlist or programme.
       operationId: getMusicPopularTracks
       parameters:
         - description: API_KEY
@@ -681,14 +651,12 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period
-            and now
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period and now
           in: query
           name: since
           required: false
           type: string
-        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and
-            'until' date params
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and 'until' date params
           in: query
           name: until
           required: false
@@ -708,9 +676,7 @@ paths:
           name: artist
           required: false
           type: string
-        - description: In addition to the overall score, return a list of scores broken
-            down by day N.B Must be used in conjunction with since and/or until
-            and since is >= 31 days
+        - description: In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days
           in: query
           name: decomposed
           required: false
@@ -750,14 +716,12 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period
-            and now
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given time period and now
           in: query
           name: since
           required: false
           type: string
-        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and
-            'until' date params
+        - description: ISO 8601 Date yyyy-mm-dd.  Returns items between given 'since' and 'until' date params
           in: query
           name: until
           required: false
@@ -777,9 +741,7 @@ paths:
           name: artist
           required: false
           type: string
-        - description: In addition to the overall score, return a list of scores broken
-            down by day N.B Must be used in conjunction with since and/or until
-            and since is >= 31 days
+        - description: In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days
           in: query
           name: decomposed
           required: false
@@ -907,9 +869,8 @@ paths:
         - Personalised Categories
   /my/music/export:
     get:
-      description: >
-        Returns status of all previous third party export actions for a
-        given BBC Music user.
+      description: |
+        Returns status of all previous third party export actions for a given BBC Music user.
       operationId: getMusicExport
       parameters:
         - default: Bearer OAUTH_TOKEN
@@ -1383,9 +1344,8 @@ paths:
       tags:
         - Music
     get:
-      description: >
-        Check to see if a single track or clip entity is in a users
-        favourites - determines UX of add button.
+      description: |
+        Check to see if a single track or clip entity is in a users favourites - determines UX of add button.
       operationId: getPersonalisedMusicFavouritesByTypeById
       parameters:
         - default: Bearer OAUTH_TOKEN
@@ -1542,9 +1502,8 @@ paths:
         - Music
   /my/music/follows:
     get:
-      description: >
-        List of followed networks, categories, artists, playlists and
-        genres for a given user for BBC Music.
+      description: |
+        List of followed networks, categories, artists, playlists and genres for a given user for BBC Music.
       operationId: getPersonalisedMusicFollows
       parameters:
         - default: Bearer OAUTH_TOKEN
@@ -1618,10 +1577,8 @@ paths:
       tags:
         - Music
     post:
-      description: >
-        Add networks, categories, artists, playlists, networks, genres or
-        services in a users follows
-
+      description: |
+        Add networks, categories, artists, playlists, networks, genres or services in a users follows
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: postPersonalisedMusicFollowsBatch
@@ -1695,10 +1652,8 @@ paths:
       tags:
         - Music
     put:
-      description: >
-        Update networks, categories, artists, playlists, networks, genres
-        or services in a users follows
-
+      description: |
+        Update networks, categories, artists, playlists, networks, genres or services in a users follows
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: putPersonalisedMusicFollowsBatch
@@ -1773,9 +1728,8 @@ paths:
         - Music
   "/my/music/follows/{type}":
     get:
-      description: >
-        List of followed networks, categories, artists, playlists,
-        networks, genres, categories or services for a given BBC Music user.
+      description: |
+        List of followed networks, categories, artists, playlists, networks, genres, categories or services for a given BBC Music user.
       operationId: getPersonalisedMusicFollowsByType
       parameters:
         - default: Bearer OAUTH_TOKEN
@@ -1795,8 +1749,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: "Supported Music follows types: Playlists, Services, Genres &
-            Artists"
+        - description: "Supported Music follows types: Playlists, Services, Genres & Artists"
           enum:
             - playlists
             - services
@@ -1863,9 +1816,8 @@ paths:
         - Music
   "/my/music/follows/{type}/{id}":
     delete:
-      description: >
-        Remove a single network, category, artist, playlist, network, genre
-        or service entity is in a users follows
+      description: |
+        Remove a single network, category, artist, playlist, network, genre or service entity is in a users follows
       operationId: deletePersonalisedMusicFollowsByTypeById
       parameters:
         - default: Bearer OAUTH_TOKEN
@@ -1885,8 +1837,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: "Supported Music follows types: Playlists, Services, Genres &
-            Artists"
+        - description: "Supported Music follows types: Playlists, Services, Genres & Artists"
           enum:
             - playlists
             - services
@@ -1939,10 +1890,8 @@ paths:
       tags:
         - Music
     get:
-      description: >
-        Check to see if a single network, category, artist, playlist,
-        network, genre or service entity is in a users follows - determines UX
-        of add button.
+      description: |
+        Check to see if a single network, category, artist, playlist, network, genre or service entity is in a users follows - determines UX of add button.
       operationId: getPersonalisedMusicFollowsByTypeById
       parameters:
         - default: Bearer OAUTH_TOKEN
@@ -1962,8 +1911,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: "Supported Music follows types: Playlists, Services, Genres &
-            Artists"
+        - description: "Supported Music follows types: Playlists, Services, Genres & Artists"
           enum:
             - playlists
             - services
@@ -2016,10 +1964,8 @@ paths:
       tags:
         - Music
     post:
-      description: >
-        Add a single network, category, artist, playlist, network, genre or
-        service entity is in a users follows
-
+      description: |
+        Add a single network, category, artist, playlist, network, genre or service entity is in a users follows
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: postPersonalisedMusicFollowsByTypeById
@@ -2041,8 +1987,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: "Supported Music follows types: Playlists, Services, Genres &
-            Artists"
+        - description: "Supported Music follows types: Playlists, Services, Genres & Artists"
           enum:
             - playlists
             - services
@@ -2101,10 +2046,8 @@ paths:
       tags:
         - Music
     put:
-      description: >
-        Update a single network, category, artist, playlist, network, genre
-        or service entity is in a users follows
-
+      description: |
+        Update a single network, category, artist, playlist, network, genre or service entity is in a users follows
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: putPersonalisedMusicFollowsByTypeById
@@ -2126,8 +2069,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: "Supported Music follows types: Playlists, Services, Genres &
-            Artists"
+        - description: "Supported Music follows types: Playlists, Services, Genres & Artists"
           enum:
             - playlists
             - services
@@ -2187,9 +2129,8 @@ paths:
         - Music
   /my/music/preferences/export:
     delete:
-      description: >
-        Remove export preferences (e.g. 3rd party vendors, partner id's)
-        for a given BBC Music user.
+      description: |
+        Remove export preferences (e.g. 3rd party vendors, partner id's) for a given BBC Music user.
       operationId: deleteMusicPreferencesExport
       parameters:
         - default: Bearer OAUTH_TOKEN
@@ -2222,9 +2163,8 @@ paths:
       tags:
         - Music Export
     get:
-      description: >
-        Returns export preferences (e.g. 3rd party vendors, partner id's)
-        for a given BBC Music user.
+      description: |
+        Returns export preferences (e.g. 3rd party vendors, partner id's) for a given BBC Music user.
       operationId: getMusicPreferencesExport
       parameters:
         - default: Bearer OAUTH_TOKEN
@@ -2257,9 +2197,8 @@ paths:
       tags:
         - Music Export
     post:
-      description: >
-        Create export preferences (e.g. 3rd party vendors, partner id's)
-        for a given BBC Music user.
+      description: |
+        Create export preferences (e.g. 3rd party vendors, partner id's) for a given BBC Music user.
       operationId: postMusicPreferencesExport
       parameters:
         - default: Bearer OAUTH_TOKEN
@@ -2299,9 +2238,8 @@ paths:
         - Music Export
   "/my/music/preferences/export/{vendor}":
     delete:
-      description: >
-        Remove Vendor specific export preferences (e.g. 3rd party vendors,
-        partner id's) for a given BBC Music user.
+      description: |
+        Remove Vendor specific export preferences (e.g. 3rd party vendors, partner id's) for a given BBC Music user.
       operationId: deleteMusicPreferencesExportVendor
       parameters:
         - default: Bearer OAUTH_TOKEN
@@ -2386,9 +2324,8 @@ paths:
       tags:
         - Music Export
     post:
-      description: >
-        Create Vendor specific export preferences (e.g. 3rd party vendors,
-        partner id's) for a given BBC Music user.
+      description: |
+        Create Vendor specific export preferences (e.g. 3rd party vendors, partner id's) for a given BBC Music user.
       operationId: postMusicPreferencesExportVendor
       parameters:
         - default: Bearer OAUTH_TOKEN
@@ -2656,8 +2593,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: Clip or Episode PID of the previous or first content item in the
-            Playspace stream.
+        - description: Clip or Episode PID of the previous or first content item in the Playspace stream.
           in: query
           name: previous_pid
           required: true
@@ -2723,9 +2659,8 @@ paths:
         - Playspace
   /my/programmes/recommendations:
     get:
-      description: >
-        Recommended Programmes from the Audience Platforms' Recomendations
-        Service
+      description: |
+        Recommended Programmes from the Audience Platforms' Recomendations Service
       operationId: getRecommendations
       parameters:
         - default: Bearer OAUTH_TOKEN
@@ -2775,13 +2710,10 @@ paths:
         - Programmes
   /my/radio/favourites:
     get:
-      description: >
-        List of favourited episodes and clips for a given user for iPlayer
-        Radio.
-
+      description: |
+        List of favourited episodes and clips for a given user for iPlayer Radio.
 
         N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
-
         and Clip Summaries so we are defining data as a Programme Summary here.  This will be resolved in V3 with full support for
          anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
       operationId: getPersonalisedRadioFavourites
@@ -2822,8 +2754,7 @@ paths:
           name: sort
           required: false
           type: string
-        - description: Include items which have been 'soft' unfavourited in response. I.e
-            items with UAS type of 'unfavourited'
+        - description: Include items which have been 'soft' unfavourited in response. I.e items with UAS type of 'unfavourited'
           in: query
           name: show_all_activity
           required: false
@@ -2932,13 +2863,10 @@ paths:
         - Radio
   "/my/radio/favourites/{type}":
     get:
-      description: >
-        List of followed 'clips' or 'episode' items for a given iPlayer
-        Radio user
-
+      description: |
+        List of followed 'clips' or 'episode' items for a given iPlayer Radio user
 
         N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
-
         and Clip Summaries so we are defining data as a Programme Summary here.  This will be resolved in V3 with full support for
          anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
       operationId: getPersonalisedRadioFavouritesByType
@@ -2977,8 +2905,7 @@ paths:
           name: sort
           required: false
           type: string
-        - description: Include items which have been 'soft' unfavourited in response. I.e
-            items with UAS type of 'unfavourited'
+        - description: Include items which have been 'soft' unfavourited in response. I.e items with UAS type of 'unfavourited'
           in: query
           name: show_all_activity
           required: false
@@ -3054,13 +2981,10 @@ paths:
       tags:
         - Radio
     get:
-      description: >
-        Check to see if a single clip or episode entity is in a users
-        favourites - determines UX of add button.
-
+      description: |
+        Check to see if a single clip or episode entity is in a users favourites - determines UX of add button.
 
         N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
-
         and Clip Summaries so we are defining data as a Programme Summary here.  This will be resolved in V3 with full support for
          anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
       operationId: getPersonalisedRadioByActivityTypeById
@@ -3095,8 +3019,7 @@ paths:
           name: pid
           required: true
           type: string
-        - description: Include items which have been 'soft' unfavourited in response. I.e
-            items with UAS type of 'unfavourited'
+        - description: Include items which have been 'soft' unfavourited in response. I.e items with UAS type of 'unfavourited'
           in: query
           name: show_all_activity
           required: false
@@ -3225,13 +3148,10 @@ paths:
         - Radio
   /my/radio/follows:
     get:
-      description: >
-        List of favourited brands and series for a given user for iPlayer
-        Radio.
-
+      description: |
+        List of favourited brands and series for a given user for iPlayer Radio.
 
         N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
-
         and Clip Summaries so we are defining data as a Programme Summary here.  This will be resolved in V3 with full support for
          anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
       operationId: getPersonalisedRadioFollows
@@ -3272,8 +3192,7 @@ paths:
           name: sort
           required: false
           type: string
-        - description: Include items which have been 'soft' unfollowed in response. I.e
-            items with UAS type of 'unfollowed'
+        - description: Include items which have been 'soft' unfollowed in response. I.e items with UAS type of 'unfollowed'
           in: query
           name: show_all_activity
           required: false
@@ -3380,13 +3299,10 @@ paths:
         - Radio
   "/my/radio/follows/{type}":
     get:
-      description: >
-        List of followed 'brand' or 'series' items for a given iPlayer
-        Radio user
-
+      description: |
+        List of followed 'brand' or 'series' items for a given iPlayer Radio user
 
         N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
-
         and Clip Summaries so we are defining data as a Programme Summary here.  This will be resolved in V3 with full support for
          anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
       operationId: getPersonalisedRadioFollowsByType
@@ -3435,8 +3351,7 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: Include items which have been 'soft' unfollowed in response. I.e
-            items with UAS type of 'unfollowed'
+        - description: Include items which have been 'soft' unfollowed in response. I.e items with UAS type of 'unfollowed'
           in: query
           name: show_all_activity
           required: false
@@ -3502,9 +3417,8 @@ paths:
       tags:
         - Radio
     get:
-      description: >
-        Check to see if a single brand or series entity is in a users
-        follows - determines UX of add button.
+      description: |
+        Check to see if a single brand or series entity is in a users follows - determines UX of add button.
       operationId: getPersonalisedRadioFollowsByTypeById
       parameters:
         - default: Bearer OAUTH_TOKEN
@@ -3661,13 +3575,10 @@ paths:
         - Radio
   /my/radio/plays:
     get:
-      description: >
-        Returns mixed episode and clip plays for a given BBC iPlayer radio
-        user.
-
+      description: |
+        Returns mixed episode and clip plays for a given BBC iPlayer radio user.
 
         N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
-
         and Clip Summaries so we are defining data as a Programme Summary here.  This will be resolved in V3 with full support for
          anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
       operationId: getPersonalisedRadioPlays
@@ -3898,9 +3809,8 @@ paths:
         - Podcasts
   /radio/networks.json:
     get:
-      description: >
-        All iPlayer Radio networks - contains business logic for
-        masterbrand and service relationships
+      description: |
+        All iPlayer Radio networks - contains business logic for masterbrand and service relationships
       operationId: getRadioNetworks
       parameters:
         - description: API_KEY
@@ -3908,8 +3818,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: Returns all networks needed for iPlayer Radio responsive web
-            navigation
+        - description: Returns all networks needed for iPlayer Radio responsive web navigation
           in: query
           name: preset
           required: false
@@ -3951,16 +3860,14 @@ paths:
           name: type
           required: false
           type: string
-        - description: Filter by deduplication rule. E.g. 'tleo' returns programmes with
-            distinct top level episode objects
+        - description: Filter by deduplication rule. E.g. 'tleo' returns programmes with distinct top level episode objects
           enum:
             - tleo
           in: query
           name: distinct
           required: false
           type: string
-        - description: Filter by network master brand ID (mid). Accepts comma separated
-            values
+        - description: Filter by network master brand ID (mid). Accepts comma separated values
           in: query
           name: network
           required: false
@@ -4004,10 +3911,7 @@ paths:
           required: false
           type: string
         - collectionFormat: csv
-          description: "Filter by media set name. Accepts comma separated combinations of
-            the following:
-            pc,mobile-download,android-download-high,apple-ios-download-high,mo\
-            bile-cellular-main,mobile-phone-main,iptv-all"
+          description: "Filter by media set name. Accepts comma separated combinations of the following: pc,mobile-download,android-download-high,apple-ios-download-high,mobile-cellular-main,mobile-phone-main,iptv-all"
           enum:
             - pc
             - mobile-download
@@ -4040,13 +3944,10 @@ paths:
         - Programmes
   /radio/programmes:
     get:
-      description: >
-        Provides a paginated list of programmes by PID (brand, series,
-        episode and clip). Accepts various filters and sorting methods.
-
+      description: |
+        Provides a paginated list of programmes by PID (brand, series, episode and clip). Accepts various filters and sorting methods.
 
         N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
-
         and Clip Summaries so we are defining results as an array of Programme Summary here.  This will be resolved in V3 with full support for
          anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
       operationId: getRadioProgrammes
@@ -4056,16 +3957,14 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: Filter by provided query. E.g. 'tleo' returns top level objects,
-            ie. brands, orphaned series, and orphaned episodes
+        - description: Filter by provided query. E.g. 'tleo' returns top level objects, ie. brands, orphaned series, and orphaned episodes
           enum:
             - tleo
           in: query
           name: kind
           required: false
           type: string
-        - description: Filter by network master brand ID (mid). Accepts comma separated
-            values
+        - description: Filter by network master brand ID (mid). Accepts comma separated values
           in: query
           name: network
           required: false
@@ -4075,14 +3974,12 @@ paths:
           name: network_url_key
           required: false
           type: string
-        - description: Filter by category id. Accepts comma separated values. See
-            /category endpoint below for the type of response provided
+        - description: Filter by category id. Accepts comma separated values. See /category endpoint below for the type of response provided
           in: query
           name: category
           required: false
           type: string
-        - description: Sort by provided query. E.g. 'title' sorts in ascending order, and
-            -title sorts in descending order
+        - description: Sort by provided query. E.g. 'title' sorts in ascending order, and -title sorts in descending order
           enum:
             - available_from_date
             - -available_from_date
@@ -4122,12 +4019,10 @@ paths:
         - Programmes
   "/radio/programmes/{pid}":
     get:
-      description: >
+      description: |
         Find programmes by PID (brand, series, episode and clip)
 
-
         N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
-
         and Clip Summaries so we are defining results as an array of Programme Summary here.  This will be resolved in V3 with full support for
          anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
       operationId: getRadioProgrammesByPid

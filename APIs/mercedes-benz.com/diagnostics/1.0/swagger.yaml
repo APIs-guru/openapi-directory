@@ -7,10 +7,7 @@ info:
   contact:
     name: The open API platform by Mercedes-Benz
     x-twitter: MercedesBenz
-  description: The Remote Diagnostic Support API will provide the possibility for
-    3rd party applications (e.g. ADAC, ATU, etc.) to access vehicle diagnostics
-    data remotely on behalf of the Daimler customer. To use the endpoints you
-    need a valid vin/fin (vehicleId).
+  description: The Remote Diagnostic Support API will provide the possibility for 3rd party applications (e.g. ADAC, ATU, etc.) to access vehicle diagnostics data remotely on behalf of the Daimler customer. To use the endpoints you need a valid vin/fin (vehicleId).
   title: Remote Diagnostic Support
   version: "1.0"
   x-apisguru-categories:
@@ -35,11 +32,7 @@ tags:
 paths:
   "/vehicles/{vehicleId}/dtcReadouts":
     post:
-      description: "This API creates a readout of DTCs for one vehicle. If the result
-        is available immediately, the result is returned. If the result isn't
-        available, a location to the DTC readout is returned. This location
-        shall be polled until the result is available. INFO: GET Requests are
-        not yet supported!"
+      description: "This API creates a readout of DTCs for one vehicle. If the result is available immediately, the result is returned. If the result isn't available, a location to the DTC readout is returned. This location shall be polled until the result is available. INFO: GET Requests are not yet supported!"
       operationId: getDtcDataListByEcuUsingPOST
       parameters:
         - description: The vehicle identifier of the vehicle to read from.
@@ -48,14 +41,12 @@ paths:
           required: true
           type: string
           x-example: WDD111111PKW01000
-        - description: "Return DTCs from this ECU id only. Default: Return DTCs from all
-            ECUs."
+        - description: "Return DTCs from this ECU id only. Default: Return DTCs from all ECUs."
           in: query
           name: ecuId
           required: false
           type: string
-        - description: "Returns DTCs with this statuses only. Default: Return DTCs with
-            all statuses."
+        - description: "Returns DTCs with this statuses only. Default: Return DTCs with all statuses."
           in: query
           name: dtcStatus
           required: false
@@ -117,11 +108,7 @@ paths:
         - Diagnostic Trouble Codes (DTC's)
   "/vehicles/{vehicleId}/ecuId/{ecuId}/dtcId/{dtcId}/dtcSnapshotReadouts":
     post:
-      description: "This API creates a readout of a DTC snapshot from one vehicle. If
-        the result is available immediately, the result is returned. If the
-        result isn't available, a location to the DTC snapshot readout is
-        returned. This location shall be polled until the result is available.
-        INFO: GET Requests are not yet supported!"
+      description: "This API creates a readout of a DTC snapshot from one vehicle. If the result is available immediately, the result is returned. If the result isn't available, a location to the DTC snapshot readout is returned. This location shall be polled until the result is available. INFO: GET Requests are not yet supported!"
       operationId: getDtcSnapshotReadoutsUsingPOST
       parameters:
         - description: The vehicle identifier of the vehicle to read from
@@ -153,8 +140,7 @@ paths:
         "202":
           description: The request has been accepted for processing, but not completed.
         "204":
-          description: The request has been accepted for processing, but no content is
-            available.
+          description: The request has been accepted for processing, but no content is available.
         "400":
           description: Bad Request
           schema:
@@ -202,11 +188,7 @@ paths:
         - Diagnostic Trouble Code (DTC) Snapshots
   "/vehicles/{vehicleId}/ecuReadouts":
     post:
-      description: "This API creates a readout of ECUs for one vehicle. If the result
-        is available immediately, the result is returned. If the result isn't
-        available, a location to the ECU readout is returned. This location
-        shall be polled until the result is available. INFO: GET Requests are
-        not yet supported!"
+      description: "This API creates a readout of ECUs for one vehicle. If the result is available immediately, the result is returned. If the result isn't available, a location to the ECU readout is returned. This location shall be polled until the result is available. INFO: GET Requests are not yet supported!"
       operationId: getEcuDataListByVehicleIdUsingPOST
       parameters:
         - description: The vehicle identifier of the vehicle to read from
@@ -277,11 +259,7 @@ paths:
         - Electronical Control Units (ECU's)
   "/vehicles/{vehicleId}/resourceReadouts":
     post:
-      description: "This API creates a readout of available resources to the accessing
-        party for one vehicle. If the result is available immediately, the
-        result is returned. If the result isn't available, a location to the
-        resource readout is returned. This location shall be polled until the
-        result is available. INFO: GET Requests are not yet supported!"
+      description: "This API creates a readout of available resources to the accessing party for one vehicle. If the result is available immediately, the result is returned. If the result isn't available, a location to the resource readout is returned. This location shall be polled until the result is available. INFO: GET Requests are not yet supported!"
       operationId: getResourceReadoutsUsingPOST
       parameters:
         - description: vehicleId of the resources to be viewed
@@ -365,8 +343,7 @@ definitions:
           - Fail
         type: string
       asyncWait:
-        description: Not Implemented. Recommended waiting time in milliseconds until
-          next request for status.
+        description: Not Implemented. Recommended waiting time in milliseconds until next request for status.
         format: int64
         type: integer
       exveErrorId:
@@ -376,12 +353,10 @@ definitions:
         description: The error message in case something failed
         type: string
       exveErrorRef:
-        description: A unique reference to the error. Can be used in communication with
-          the offering party to help in resolving problems.
+        description: A unique reference to the error. Can be used in communication with the offering party to help in resolving problems.
         type: string
       exveNote:
-        description: A message regarding the result of the request. Can be filled both
-          when the request was completed and failed.
+        description: A message regarding the result of the request. Can be filled both when the request was completed and failed.
         type: string
       id:
         description: Id unique for this readout.
@@ -391,8 +366,7 @@ definitions:
         format: date-time
         type: string
       receivedTimestamp:
-        description: Timestamp when the data in the message was received by the ExVe
-          backend from the vehicle.
+        description: Timestamp when the data in the message was received by the ExVe backend from the vehicle.
         format: date-time
         type: string
       vehicleId:

@@ -730,8 +730,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/LandlordPhotoModelResults"
           description: OK
-      summary: A collection showing all the photos linked to a specific block,
-        property or room
+      summary: A collection showing all the photos linked to a specific block, property or room
       tags:
         - PropertyController
   "/v2/customer/{shortName}/session":
@@ -880,8 +879,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: (Optional) The branch ID linked to the login. This will determine
-            which in tray the request display in
+        - description: (Optional) The branch ID linked to the login. This will determine which in tray the request display in
           in: query
           name: branchID
           required: false
@@ -969,8 +967,7 @@ components:
           description: Branch address line 4.
           type: string
         CompanyName:
-          description: The relevant company name, if not the one specified on the branch
-            then the one on company.
+          description: The relevant company name, if not the one specified on the branch then the one on company.
           type: string
         County:
           description: County

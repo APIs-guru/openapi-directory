@@ -101,10 +101,7 @@ paths:
 components:
   parameters:
     callback:
-      description: Specifies a JavaScript function func, for a JSON-P response. When
-        provided, results are wrapped as `callback(data)`, and the returned MIME
-        type is application/javascript. This causes the caller to automatically
-        run the func with the JSON results as its argument.
+      description: Specifies a JavaScript function func, for a JSON-P response. When provided, results are wrapped as `callback(data)`, and the returned MIME type is application/javascript. This causes the caller to automatically run the func with the JSON results as its argument.
       in: query
       name: callback
       required: false

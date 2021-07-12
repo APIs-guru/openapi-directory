@@ -7,16 +7,7 @@ info:
     name: William Hill Labs
     url: http://developer.williamhill.com
     x-twitter: WilliamHill
-  description: The Bets API methods are used to place single, multiple and complex
-    bets and to retrieve a customer’s bet history. When retrieving a customer’s
-    bet history you can organize the bets from the betting history in terms of
-    date, bet type and whether the bet is settled or not. You can also specify
-    what fields to be included/excluded or return a list of all default fields
-    the method returns. <br /><br /> The Bets API will also generate a bet delay
-    if you’re placing a single/multiple bet in-Play by creating a time margin to
-    negate the effects of major changes to the market (for example, goals during
-    a football match). Note that in version 2 of our APIs, Bets API contains the
-    functionality of both Bets API v1 and the Betslips API v1.
+  description: The Bets API methods are used to place single, multiple and complex bets and to retrieve a customer’s bet history. When retrieving a customer’s bet history you can organize the bets from the betting history in terms of date, bet type and whether the bet is settled or not. You can also specify what fields to be included/excluded or return a list of all default fields the method returns. <br /><br /> The Bets API will also generate a bet delay if you’re placing a single/multiple bet in-Play by creating a time margin to negate the effects of major changes to the market (for example, goals during a football match). Note that in version 2 of our APIs, Bets API contains the functionality of both Bets API v1 and the Betslips API v1.
   title: Bets API
   version: 2.0.0
   x-apisguru-categories:
@@ -83,7 +74,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >
+                  value: |
                     {
                      "delayedBets" : [
                      {
@@ -115,11 +106,7 @@ paths:
       x-canReturnErrors: null
   /bet/single:
     post:
-      description: Places a single bet. When placing a single bet using live inplay
-        bets, the system might generate a bet delay to allow a time margin to
-        negate the effects of major changes (for example, goals) to the market.
-        Note that the amount of bet delay will vary by category and event type.
-        A delayedBetId will be recieved that can be used to resubmit the bet.
+      description: Places a single bet. When placing a single bet using live inplay bets, the system might generate a bet delay to allow a time margin to negate the effects of major changes (for example, goals) to the market. Note that the amount of bet delay will vary by category and event type. A delayedBetId will be recieved that can be used to resubmit the bet.
       operationId: placeSingleBet
       parameters:
         - $ref: "#/components/parameters/param_apiKey"
@@ -161,7 +148,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >
+                  value: |
                     {
                      "delayedBets" : [
                      {
@@ -186,8 +173,7 @@ paths:
       x-canReturnErrors: null
   /betslips:
     post:
-      description: Organises the betslip when one or more selections are made. It
-        returns a bet slip structure organised by betting opportunities.
+      description: Organises the betslip when one or more selections are made. It returns a bet slip structure organised by betting opportunities.
       operationId: validateBetslip
       parameters:
         - $ref: "#/components/parameters/param_apiKey"
@@ -247,10 +233,7 @@ paths:
       x-canreturnErrors: null
   /history:
     get:
-      description: Retrieves the customer’s bet history. Options are available to
-        organise the history in terms of date, bet type and settled and
-        unsettled bets. The maximum number of bets and bet history pages
-        retrieved can also be set.
+      description: Retrieves the customer’s bet history. Options are available to organise the history in terms of date, bet type and settled and unsettled bets. The maximum number of bets and bet history pages retrieved can also be set.
       operationId: getBetHistory
       parameters:
         - $ref: "#/components/parameters/param_apiKey"
@@ -264,8 +247,7 @@ paths:
         - $ref: "#/components/parameters/param_page"
         - $ref: "#/components/parameters/param_pageSize"
         - $ref: "#/components/parameters/param_sort"
-        - description: Filter by settled bets. If omitted, both settled and unsettled will
-            be returned.
+        - description: Filter by settled bets. If omitted, both settled and unsettled will be returned.
           in: query
           name: settled
           required: false
@@ -374,9 +356,7 @@ paths:
         - 20638
   "/{betId}/cashin":
     put:
-      description: Allows a trusted application to cash in a bet (take a return on a
-        bet) on behalf of the customer. If the customers monitor bets they can
-        cash in a bet at any point before the event ends.
+      description: Allows a trusted application to cash in a bet (take a return on a bet) on behalf of the customer. If the customers monitor bets they can cash in a bet at any point before the event ends.
       operationId: cashin
       parameters:
         - $ref: "#/components/parameters/param_apiKey"
@@ -417,8 +397,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errors"
           description: Errors
-      summary: Allows a trusted application to cash in a bet (take a return on a bet)
-        on behalf of the customer
+      summary: Allows a trusted application to cash in a bet (take a return on a bet) on behalf of the customer
       tags:
         - Bets
       x-canreturnErrors:
@@ -431,8 +410,7 @@ paths:
 components:
   parameters:
     param_apiKey:
-      description: A unique identifier of your application that is generated by the
-        API portal.
+      description: A unique identifier of your application that is generated by the API portal.
       in: header
       name: apiKey
       required: true
@@ -477,8 +455,7 @@ components:
         type: array
       style: form
     param_expanded:
-      description: Allows for all bets for given selections to be returned - not just
-        the specified type
+      description: Allows for all bets for given selections to be returned - not just the specified type
       in: query
       name: expanded
       required: false
@@ -505,8 +482,7 @@ components:
         type: string
       x-eg: 2013-09-25T13:34:20
     param_include:
-      description: Specify fields in addition to the default to return (Comma
-        Separated List)
+      description: Specify fields in addition to the default to return (Comma Separated List)
       explode: false
       in: query
       name: include
@@ -534,8 +510,7 @@ components:
         type: number
       x-eg: 15
     param_sort:
-      description: The order the response will be retuned by. i.e. transDateTime,desc.
-        Only transDateTime can be used currently
+      description: The order the response will be retuned by. i.e. transDateTime,desc. Only transDateTime can be used currently
       in: query
       name: sort
       required: false
@@ -559,8 +534,7 @@ components:
           description: The delayed bet identifier
           type: string
         freeBetId:
-          description: The ID number of the free bet token if used in conjunction with
-            this bet
+          description: The ID number of the free bet token if used in conjunction with this bet
           type: string
         legs:
           items:
@@ -585,16 +559,10 @@ components:
     betDelayed:
       properties:
         delayPeriodSeconds:
-          description: The delay time period of the bet in seconds. The resubmission of
-            the bet has to wait for the length of time (in seconds) returned in
-            the delayPeriod before submitting the second request.
+          description: The delay time period of the bet in seconds. The resubmission of the bet has to wait for the length of time (in seconds) returned in the delayPeriod before submitting the second request.
           type: integer
         delayedBetId:
-          description: The unique identifier of the delayed bet. After the initial
-            response is received, containing the delayPeriod and the delayBetId,
-            the request is then resubmitted using the same delayBetId token that
-            came in that initial response. Check the example below to see how to
-            resend a delayed bet payload.
+          description: The unique identifier of the delayed bet. After the initial response is received, containing the delayPeriod and the delayBetId, the request is then resubmitted using the same delayBetId token that came in that initial response. Check the example below to see how to resend a delayed bet payload.
           type: string
         id:
           description: The number of the bet
@@ -629,9 +597,7 @@ components:
           description: Number of the bet if this is part of a multiple bet
           type: number
         placedDateTime:
-          description: "The time the bet was placed. For example: 2013-01-30TT13:34:20.
-            The value of this element can be replaced with the current timestamp
-            if it was missing."
+          description: "The time the bet was placed. For example: 2013-01-30TT13:34:20. The value of this element can be replaced with the current timestamp if it was missing."
           type: string
         receipt:
           description: The unique ID of the bet receipt
@@ -709,20 +675,10 @@ components:
             $ref: "#/components/schemas/betslippart"
           type: array
         sort:
-          description: The leg sort. This element is present for complex bets but not for
-            single bets.
+          description: The leg sort. This element is present for complex bets but not for single bets.
           type: string
         type:
-          description: Type of leg that was placed on the bet, such as Win or Each-way.
-            Even though the priceNum and priceDen are required for the bets with
-            type value W (win), it is just optional from the endpoint point of
-            view. There are requests / bets like outcomes with starting price
-            but do not have a specific price. Generally prices can change, so if
-            the type is win you have to resubmit and thus verify the price that
-            the customer saw on the screen initially. The API will check if it
-            matches the current price of William Hill. Note that if you send a
-            wrong / outdated price you will receive the error message - Price
-            changed.
+          description: Type of leg that was placed on the bet, such as Win or Each-way. Even though the priceNum and priceDen are required for the bets with type value W (win), it is just optional from the endpoint point of view. There are requests / bets like outcomes with starting price but do not have a specific price. Generally prices can change, so if the type is win you have to resubmit and thus verify the price that the customer saw on the screen initially. The API will check if it matches the current price of William Hill. Note that if you send a wrong / outdated price you will receive the error message - Price changed.
           type: string
       required:
         - type
@@ -737,19 +693,16 @@ components:
           description: Indicates if the bet can be used in a multiple bet
           type: boolean
         legGroup:
-          description: To organise a number of outcome selections into one or more bet
-            groups, such as a Single bet, a Double bet, a Trixie, etc
+          description: To organise a number of outcome selections into one or more bet groups, such as a Single bet, a Double bet, a Trixie, etc
           type: integer
         priceChanged:
           description: Indicates if there has been a change in the price
           type: boolean
         priceDen:
-          description: Price denominator - will be ignored for types other than L (Fixed
-            Price)
+          description: Price denominator - will be ignored for types other than L (Fixed Price)
           type: integer
         priceNum:
-          description: Price numerator - will be ignored for types other than L (Fixed
-            Price)
+          description: Price numerator - will be ignored for types other than L (Fixed Price)
           type: integer
         priceType:
           description: The type of price selected. For example - ‘L’ (Fixed)
@@ -804,8 +757,7 @@ components:
           description: To help pinpoint the exact parameter where a request has failed
           type: string
         message:
-          description: A unique William Hill text string to enable you to identify the
-            error (in English only)
+          description: A unique William Hill text string to enable you to identify the error (in English only)
           type: string
         solution:
           $ref: "#/components/schemas/solution"
@@ -827,8 +779,7 @@ components:
           description: The time the free bet was awarded. For example 2014-11-013T23:59:10
           type: string
         displayText:
-          description: The message explaining the offer displayed to the customer along
-            with the free bet
+          description: The message explaining the offer displayed to the customer along with the free bet
           type: string
         expiryDateTime:
           description: The time the free bet expired. For example 2014-11-013T23:59:10
@@ -837,8 +788,7 @@ components:
           description: The identifier of the free bet
           type: integer
         offerDesc:
-          description: The description of the offer that enabled the customer to place a
-            free bet
+          description: The description of the offer that enabled the customer to place a free bet
           type: string
         offerId:
           description: The identifier of the offer
@@ -868,20 +818,10 @@ components:
             $ref: "#/components/schemas/part"
           type: array
         sort:
-          description: The leg sort. This element is present for complex bets but not for
-            single bets.
+          description: The leg sort. This element is present for complex bets but not for single bets.
           type: string
         type:
-          description: "The leg type. One of the following values: W - Win or E- Each-way.
-            Even though the priceNum and priceDen are required for the bets with
-            type value W (win), it is just optional from the endpoint point of
-            view. There are requests / bets like outcomes with starting price
-            but do not have a specific price. Generally prices can change, so if
-            the type is win you have to resubmit and thus verify the price that
-            the customer saw on the screen initially. The API will check if it
-            matches the current price of William Hill. Note that if you send a
-            wrong / outdated price you will receive the error message - Price
-            changed."
+          description: "The leg type. One of the following values: W - Win or E- Each-way. Even though the priceNum and priceDen are required for the bets with type value W (win), it is just optional from the endpoint point of view. There are requests / bets like outcomes with starting price but do not have a specific price. Generally prices can change, so if the type is win you have to resubmit and thus verify the price that the customer saw on the screen initially. The API will check if it matches the current price of William Hill. Note that if you send a wrong / outdated price you will receive the error message - Price changed."
           type: string
       required:
         - type
@@ -893,12 +833,10 @@ components:
           description: Indicates if the bet can be used in a multiple bet
           type: boolean
         priceDen:
-          description: Price denominator - will be ignored for types other than L (Fixed
-            Price)
+          description: Price denominator - will be ignored for types other than L (Fixed Price)
           type: integer
         priceNum:
-          description: Price numerator - will be ignored for types other than L (Fixed
-            Price)
+          description: Price numerator - will be ignored for types other than L (Fixed Price)
           type: integer
         priceType:
           description: The type of price selected. For example - ‘L’ (Fixed)
@@ -918,21 +856,15 @@ components:
     placedBet:
       properties:
         cashinValue:
-          description: The cash in value of the bet. For example £0.88. When no value is
-            given or no value is present, no cash in is available
+          description: The cash in value of the bet. For example £0.88. When no value is given or no value is present, no cash in is available
           format: double
           type: number
         estimatedReturns:
-          description: "The estimated value of the returns if the bet is successful. Note:
-            when an estimated return isn’t available, as in the case of a bet
-            placed on a horse at SP (starting price) where the actual price is
-            unknown when the bet is placed, ‘NOT_AVAILABLE’ will appear in the
-            response field."
+          description: "The estimated value of the returns if the bet is successful. Note: when an estimated return isn’t available, as in the case of a bet placed on a horse at SP (starting price) where the actual price is unknown when the bet is placed, ‘NOT_AVAILABLE’ will appear in the response field."
           format: double
           type: number
         freeBetValue:
-          description: If a free bet token is used for the bet, this element represents
-            the value
+          description: If a free bet token is used for the bet, this element represents the value
           format: double
           type: number
         id:
@@ -955,8 +887,7 @@ components:
           description: Whether the bet is settled
           type: boolean
         stake:
-          description: "The bet stake, which represents the total value of the bet. For
-            example: £ 12.34"
+          description: "The bet stake, which represents the total value of the bet. For example: £ 12.34"
           format: double
           type: number
         stakePerLine:
@@ -964,8 +895,7 @@ components:
           format: double
           type: number
         status:
-          description: "The status of the bet. Can be one of the following: A - Active, S
-            - suspended, C - Cashed Out"
+          description: "The status of the bet. Can be one of the following: A - Active, S - suspended, C - Cashed Out"
           type: string
         transDateTime:
           description: The time the bet was placed
@@ -1001,20 +931,10 @@ components:
             $ref: "#/components/schemas/placedBetPart"
           type: array
         sort:
-          description: The leg sort. This element is present for complex bets but not for
-            single bets.
+          description: The leg sort. This element is present for complex bets but not for single bets.
           type: string
         type:
-          description: "The leg type. One of the following values: W - Win or E- Each-way.
-            Even though the priceNum and priceDen are required for the bets with
-            type value W (win), it is just optional from the endpoint point of
-            view. There are requests / bets like outcomes with starting price
-            but do not have a specific price. Generally prices can change, so if
-            the type is win you have to resubmit and thus verify the price that
-            the customer saw on the screen initially. The API will check if it
-            matches the current price of William Hill. Note that if you send a
-            wrong / outdated price you will receive the error message - Price
-            changed."
+          description: "The leg type. One of the following values: W - Win or E- Each-way. Even though the priceNum and priceDen are required for the bets with type value W (win), it is just optional from the endpoint point of view. There are requests / bets like outcomes with starting price but do not have a specific price. Generally prices can change, so if the type is win you have to resubmit and thus verify the price that the customer saw on the screen initially. The API will check if it matches the current price of William Hill. Note that if you send a wrong / outdated price you will receive the error message - Price changed."
           type: string
       required:
         - type
@@ -1027,12 +947,10 @@ components:
           description: Human-friendly description of the bet
           type: string
         eachWayDen:
-          description: "When the odds are shown in vulgar fractions this is the
-            denominator of the fraction. For example: 2 in 5/2"
+          description: "When the odds are shown in vulgar fractions this is the denominator of the fraction. For example: 2 in 5/2"
           type: integer
         eachWayNum:
-          description: "When the odds are shown in vulgar fractions this is the numerator
-            of the fraction. For example: 5 in 5/2"
+          description: "When the odds are shown in vulgar fractions this is the numerator of the fraction. For example: 5 in 5/2"
           type: integer
         eachWayPlaces:
           description: The Each-way places available for the bet
@@ -1052,33 +970,28 @@ components:
           description: The description of type of the event
           type: string
         handicap:
-          description: "Denotes if the bet is part of a handicap market. For example: -1
-            if the selection starts on -1 goals (in football)"
+          description: "Denotes if the bet is part of a handicap market. For example: -1 if the selection starts on -1 goals (in football)"
           format: double
           type: number
         number:
           description: The number of the bet
           type: integer
         priceDen:
-          description: "When the odds are shown in vulgar fractions this is the
-            denominator of the fraction. For example: 2 in 5/2"
+          description: "When the odds are shown in vulgar fractions this is the denominator of the fraction. For example: 2 in 5/2"
           type: integer
         priceFormatted:
           $ref: "#/components/schemas/priceFormatted"
         priceNum:
-          description: "When the odds are shown in vulgar fractions this is the numerator
-            of the fraction. For example: 5 in 5/2"
+          description: "When the odds are shown in vulgar fractions this is the numerator of the fraction. For example: 5 in 5/2"
           type: integer
         priceType:
           description: "The price type chosen when the bet was placed. For example: L (Win)"
           type: string
         result:
-          description: "The outcome of the bet/event. Can be one of the following values:
-            W - Won; L - Lost; V - Void; - Result not yet available"
+          description: "The outcome of the bet/event. Can be one of the following values: W - Won; L - Lost; V - Void; - Result not yet available"
           type: string
         rule4Deductions:
-          description: The official scale of deductions that apply when a runner is
-            withdrawn
+          description: The official scale of deductions that apply when a runner is withdrawn
           format: double
           type: number
         selectionId:
@@ -1119,21 +1032,16 @@ components:
           description: The delayed bet identifier
           type: string
         freeBetId:
-          description: The ID number of the free bet token if used in conjunction with
-            this bet
+          description: The ID number of the free bet token if used in conjunction with this bet
           type: string
         priceDen:
-          description: "When the odds are shown in vulgar fractions this is the
-            denominator of the fraction. For example: 2 in 5/2"
+          description: "When the odds are shown in vulgar fractions this is the denominator of the fraction. For example: 2 in 5/2"
           type: integer
         priceNum:
-          description: "When the odds are shown in vulgar fractions this is the numerator
-            of the fraction. For example: 5 in 5/2"
+          description: "When the odds are shown in vulgar fractions this is the numerator of the fraction. For example: 5 in 5/2"
           type: integer
         priceType:
-          description: "The type of price taken by the customer when the bet is made. Can
-            be one of the following: L - Live Fixed price, S - Starting price -
-            Horse and Greyhound racing or G - Guaranteed best price."
+          description: "The type of price taken by the customer when the bet is made. Can be one of the following: L - Live Fixed price, S - Starting price - Horse and Greyhound racing or G - Guaranteed best price."
           pattern: ^(L|S|G)$
           type: string
         selectionId:
@@ -1146,8 +1054,7 @@ components:
           format: double
           type: number
         type:
-          description: "The type of bet placed. Can be one of the following: W - Win or E-
-            EachWay"
+          description: "The type of bet placed. Can be one of the following: W - Win or E- EachWay"
           pattern: ^(W|E)$
           type: string
       required:
@@ -1173,12 +1080,10 @@ components:
           description: The handicap precision
           type: string
         priceDen:
-          description: "When the odds are shown in vulgar fractions this is the
-            denominator of the fraction. For example: 2 in 5/2"
+          description: "When the odds are shown in vulgar fractions this is the denominator of the fraction. For example: 2 in 5/2"
           type: string
         priceNum:
-          description: "When the odds are shown in vulgar fractions this is the numerator
-            of the fraction. For example: 5 in 5/2"
+          description: "When the odds are shown in vulgar fractions this is the numerator of the fraction. For example: 5 in 5/2"
           type: string
         selectionHandicap:
           description: The selection handicap

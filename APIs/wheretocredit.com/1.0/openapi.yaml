@@ -2,8 +2,7 @@ openapi: 3.0.1
 info:
   contact:
     x-twitter: wheretocredit
-  description: The Where to Credit API provides mileage earning calculations for
-    frequent flyer programs around the world.
+  description: The Where to Credit API provides mileage earning calculations for frequent flyer programs around the world.
   title: Where to Credit API
   version: "1.0"
   x-apisguru-categories:
@@ -25,14 +24,12 @@ paths:
         content:
           application/json:
             schema:
-              description: Collection of <code>Itinerary</code> to allow multiple frequent
-                flyer mile or point calculations at once.
+              description: Collection of <code>Itinerary</code> to allow multiple frequent flyer mile or point calculations at once.
               items:
                 $ref: "#/components/schemas/Itinerary"
               nullable: true
               type: array
-        description: Collection of <code>Itinerary</code> to allow multiple frequent
-          flyer mile or point calculations at once.
+        description: Collection of <code>Itinerary</code> to allow multiple frequent flyer mile or point calculations at once.
       responses:
         "200":
           content:
@@ -41,8 +38,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/CalculateResult"
                 type: array
-          description: Success.  However individual <code>CalculateResults</code> in the
-            response could have failed.
+          description: Success.  However individual <code>CalculateResults</code> in the response could have failed.
         "429":
           description: Usage limits exceeded. (Free users only)
       summary: Calculates the number of miles earned for every frequent flyer program.
@@ -69,15 +65,13 @@ components:
     CalculateItineraryProgramResult:
       properties:
         airlines:
-          description: Two-letter IATA carrier codes that are associated with the frequent
-            flyer program.
+          description: Two-letter IATA carrier codes that are associated with the frequent flyer program.
           items:
             type: string
           nullable: true
           type: array
         id:
-          description: Unique identifier for the frequent flyer program. See
-            <code>Programs</code> API.
+          description: Unique identifier for the frequent flyer program. See <code>Programs</code> API.
           nullable: true
           type: string
         name:
@@ -88,12 +82,10 @@ components:
           description: Indicates that the itinerary includes revenue-based miles earnings.
           type: boolean
         unpublished:
-          description: Indicates that the itinerary may be missing miles due to
-            unpublished earning rates from the program.
+          description: Indicates that the itinerary may be missing miles due to unpublished earning rates from the program.
           type: boolean
         value:
-          description: Total redeemable miles or points earned for the frequent flyer
-            program.
+          description: Total redeemable miles or points earned for the frequent flyer program.
           format: int32
           type: integer
       type: object
@@ -125,26 +117,20 @@ components:
     Itinerary:
       properties:
         baseFareUSD:
-          description: Amount in USD that will be used to calculate revenue program
-            mileage earning.  This amount should generally include carrier
-            imposed surcharges but exclude other taxes. Default is 0.
+          description: Amount in USD that will be used to calculate revenue program mileage earning.  This amount should generally include carrier imposed surcharges but exclude other taxes. Default is 0.
           format: double
           type: number
         id:
-          description: Unique identifier for this itinerary that will be passed back to
-            help correlate a result.
+          description: Unique identifier for this itinerary that will be passed back to help correlate a result.
           nullable: true
           type: string
         segments:
-          description: Every flight transfer or stopover should be considered a separate
-            segment.
+          description: Every flight transfer or stopover should be considered a separate segment.
           items:
             $ref: "#/components/schemas/Segment"
           type: array
         ticketingCarrier:
-          description: Two-letter IATA carrier code for the ticketing or plating
-            airline.  This is used for revenue programs (i.e. UA, DL,
-            B6).  Leaving this value blank will exclude revenue programs.
+          description: Two-letter IATA carrier code for the ticketing or plating airline.  This is used for revenue programs (i.e. UA, DL, B6).  Leaving this value blank will exclude revenue programs.
           nullable: true
           type: string
       required:
@@ -153,8 +139,7 @@ components:
     Program:
       properties:
         airlines:
-          description: Two-letter IATA carrier codes that are associated with the frequent
-            flyer program.
+          description: Two-letter IATA carrier codes that are associated with the frequent flyer program.
           items:
             type: string
           nullable: true
@@ -164,8 +149,7 @@ components:
           nullable: true
           type: string
         fullName:
-          description: Full name of the frequent flyer program including the airline, if
-            applicable.
+          description: Full name of the frequent flyer program including the airline, if applicable.
           nullable: true
           type: string
         id:
@@ -186,23 +170,15 @@ components:
     Segment:
       properties:
         bookingClass:
-          description: Single-letter booking class used to determine the earning rate for
-            the flight segment.
+          description: Single-letter booking class used to determine the earning rate for the flight segment.
           type: string
         carrier:
-          description: "Two-letter IATA carrier code for the marketing airline.  This is
-            used to determine which earnings chart will be applied for this
-            segment.\r
+          description: "Two-letter IATA carrier code for the marketing airline.  This is used to determine which earnings chart will be applied for this segment.\r
 
-            NOTE: Frequent flyer programs based on operating
-            carrier, including but not limited to Star Alliance carriers, cannot
-            be reliably mapped to a booking class and will not be accurately
-            reflected in this API."
+            NOTE: Frequent flyer programs based on operating carrier, including but not limited to Star Alliance carriers, cannot be reliably mapped to a booking class and will not be accurately reflected in this API."
           type: string
         departure:
-          description: The date on the flight will depart from the origin to go to the
-            destination.  This is used to determine which earnings chart will be
-            in effect at time of departure.
+          description: The date on the flight will depart from the origin to go to the destination.  This is used to determine which earnings chart will be in effect at time of departure.
           format: date-time
           nullable: true
           type: string
@@ -210,24 +186,17 @@ components:
           description: Three-letter IATA airport code to which the flight is going.
           type: string
         distance:
-          description: The number of miles for this flight segment.  Otherwise, distance
-            is calculated using the great-circle distance between the origin and
-            destination and may not match other data sources exactly.
+          description: The number of miles for this flight segment.  Otherwise, distance is calculated using the great-circle distance between the origin and destination and may not match other data sources exactly.
           format: double
           nullable: true
           type: number
         flightNumber:
-          description: The airline identifier for the flight segment, most commonly (but
-            not always) a number and is used for earning charts that are
-            restricted to specific flight numbers.
+          description: The airline identifier for the flight segment, most commonly (but not always) a number and is used for earning charts that are restricted to specific flight numbers.
           format: int32
           nullable: true
           type: integer
         operatingCarrier:
-          description: Two-letter IATA carrier code for the operating airline.  This value
-            is only used when earning is based on marketing carrier but
-            restricted to a specific operating carrier.  Leaving this value
-            blank will assume the flight is operated by the marketing carrier.
+          description: Two-letter IATA carrier code for the operating airline.  This value is only used when earning is based on marketing carrier but restricted to a specific operating carrier.  Leaving this value blank will assume the flight is operated by the marketing carrier.
           nullable: true
           type: string
         origin:

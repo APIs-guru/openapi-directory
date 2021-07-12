@@ -6,9 +6,7 @@ info:
     email: support@webscraping.ai
     name: WebScraping.AI Support
     url: https://webscraping.ai
-  description: A client for https://webscraping.ai API. It provides a web scaping
-    automation API with Chrome JS rendering, rotating proxies and builtin HTML
-    parsing.
+  description: A client for https://webscraping.ai API. It provides a web scaping automation API with Chrome JS rendering, rotating proxies and builtin HTML parsing.
   title: WebScraping.AI
   version: 2.0.4
   x-apisguru-categories:
@@ -23,8 +21,7 @@ security:
 tags:
   - description: Get full HTML content of pages with proxies and Chrome JS rendering
     name: HTML
-  - description: Get HTML content of selected page areas (like price, search
-      results, page title, etc.)
+  - description: Get HTML content of selected page areas (like price, search results, page title, etc.)
     name: Selected HTML
   - description: Information about your account calls quota
     name: Account
@@ -182,10 +179,7 @@ paths:
 components:
   parameters:
     headers:
-      description: 'HTTP headers to pass to the target page. Can be specified either
-        via a nested query parameter
-        (...&headers[One]=value1&headers=[Another]=value2) or as a JSON encoded
-        object (...&headers={"One": "value1", "Another": "value2"})'
+      description: 'HTTP headers to pass to the target page. Can be specified either via a nested query parameter (...&headers[One]=value1&headers=[Another]=value2) or as a JSON encoded object (...&headers={"One": "value1", "Another": "value2"})'
       example:
         Cookie: session=some_id
       in: query
@@ -203,8 +197,7 @@ components:
         default: true
         type: boolean
     js_timeout:
-      description: Maximum JavaScript rendering time in ms. Increase it in case if you
-        see a loading indicator instead of data on the target page.
+      description: Maximum JavaScript rendering time in ms. Increase it in case if you see a loading indicator instead of data on the target page.
       example: 5000
       in: query
       name: timeout
@@ -222,10 +215,7 @@ components:
       schema:
         type: string
     proxy:
-      description: Type of proxy, use residential proxies if your site restricts
-        traffic from datacenters (datacenter by default). Note that residential
-        proxy requests are more expensive than datacenter, see the pricing page
-        for details.
+      description: Type of proxy, use residential proxies if your site restricts traffic from datacenters (datacenter by default). Note that residential proxy requests are more expensive than datacenter, see the pricing page for details.
       example: datacenter
       in: query
       name: proxy
@@ -236,8 +226,7 @@ components:
           - residential
         type: string
     timeout:
-      description: Maximum processing time in ms. Increase it in case of timeout
-        errors (5000 by default, maximum is 30000)
+      description: Maximum processing time in ms. Increase it in case of timeout errors (5000 by default, maximum is 30000)
       example: 5000
       in: query
       name: timeout

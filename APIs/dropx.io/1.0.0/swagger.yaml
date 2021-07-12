@@ -4,8 +4,7 @@ schemes:
 host: dropx.io
 basePath: /api/v1
 info:
-  description: dropX.io API provides programmatic access to the e-commerce
-    intelligence data.
+  description: dropX.io API provides programmatic access to the e-commerce intelligence data.
   title: DropX
   version: 1.0.0
   x-apisguru-categories:
@@ -57,17 +56,14 @@ paths:
         - Product Details
   /products/link-search:
     get:
-      description: Returns list of e-commerce product that are close to the one
-        provided -- one from each provider
+      description: Returns list of e-commerce product that are close to the one provided -- one from each provider
       parameters:
         - description: URL must be a url encoded value
           in: query
           name: url
           required: true
           type: string
-        - description: A valid e commerce website link(eg. www.flipkart.com or
-            http://www.amazon.in) by a ',' seperated values to filter response
-            by required e-commerce providers
+        - description: A valid e commerce website link(eg. www.flipkart.com or http://www.amazon.in) by a ',' seperated values to filter response by required e-commerce providers
           in: query
           name: providers
           type: string
@@ -91,14 +87,11 @@ paths:
         "459":
           description: Requested search products api required parameter "term" is missing
         "460":
-          description: Requested similar search products api required parameter "url" is
-            missing
+          description: Requested similar search products api required parameter "url" is missing
         "461":
-          description: Requested search product api required "term" parameter does not
-            have valid value or empty value passed
+          description: Requested search product api required "term" parameter does not have valid value or empty value passed
         "462":
-          description: Requested similar search product api required "url" parameter does
-            not have valid url or empty value passed
+          description: Requested similar search product api required "url" parameter does not have valid url or empty value passed
         "463":
           description: Error in processing search request in elastic search
         "490":
@@ -107,23 +100,19 @@ paths:
           description: internal server error
       security:
         - api_key: []
-      summary: Search for similar products by providing a link to any e-commerce
-        product.
+      summary: Search for similar products by providing a link to any e-commerce product.
       tags:
         - LookUp
   /products/link-search-v2:
     get:
-      description: Returns list of e-commerce product that are close to the one
-        provided -- one from each provider
+      description: Returns list of e-commerce product that are close to the one provided -- one from each provider
       parameters:
         - description: URL must be a url encoded value
           in: query
           name: url
           required: true
           type: string
-        - description: A valid e commerce website link(eg. www.flipkart.com or
-            http://www.amazon.in) by a ',' seperated values to filter response
-            by required e-commerce providers
+        - description: A valid e commerce website link(eg. www.flipkart.com or http://www.amazon.in) by a ',' seperated values to filter response by required e-commerce providers
           in: query
           name: providers
           type: string
@@ -147,14 +136,11 @@ paths:
         "459":
           description: Requested search products api required parameter "term" is missing
         "460":
-          description: Requested similar search products api required parameter "url" is
-            missing
+          description: Requested similar search products api required parameter "url" is missing
         "461":
-          description: Requested search product api required "term" parameter does not
-            have valid value or empty value passed
+          description: Requested search product api required "term" parameter does not have valid value or empty value passed
         "462":
-          description: Requested similar search product api required "url" parameter does
-            not have valid url or empty value passed
+          description: Requested similar search product api required "url" parameter does not have valid url or empty value passed
         "463":
           description: Error in processing search request in elastic search
         "490":
@@ -163,8 +149,7 @@ paths:
           description: internal server error
       security:
         - api_key: []
-      summary: Search for similar products by providing a link to any e-commerce
-        product.
+      summary: Search for similar products by providing a link to any e-commerce product.
       tags:
         - LookUp
   /products/search:
@@ -176,9 +161,7 @@ paths:
           name: term
           required: true
           type: string
-        - description: A valid e commerce website link(eg. www.flipkart.com or
-            http://www.amazon.in) by a ',' seperated values to filter response
-            by required e-commerce providers
+        - description: A valid e commerce website link(eg. www.flipkart.com or http://www.amazon.in) by a ',' seperated values to filter response by required e-commerce providers
           in: query
           name: providers
           type: string
@@ -202,14 +185,11 @@ paths:
         "459":
           description: Requested search products api required parameter "term" is missing
         "460":
-          description: Requested similar search products api required parameter "url" is
-            missing
+          description: Requested similar search products api required parameter "url" is missing
         "461":
-          description: Requested search product api required "term" parameter does not
-            have valid value or empty value passed
+          description: Requested search product api required "term" parameter does not have valid value or empty value passed
         "462":
-          description: Requested similar search product api required "url" parameter does
-            not have valid url or empty value passed
+          description: Requested similar search product api required "url" parameter does not have valid url or empty value passed
         "463":
           description: Error in processing search request in elastic search
         "490":
@@ -230,9 +210,7 @@ paths:
           name: term
           required: true
           type: string
-        - description: A valid e commerce website link(eg. www.flipkart.com or
-            http://www.amazon.in) by a ',' seperated values to filter response
-            by required e-commerce providers
+        - description: A valid e commerce website link(eg. www.flipkart.com or http://www.amazon.in) by a ',' seperated values to filter response by required e-commerce providers
           in: query
           name: providers
           type: string
@@ -256,14 +234,11 @@ paths:
         "459":
           description: Requested search products api required parameter "term" is missing
         "460":
-          description: Requested similar search products api required parameter "url" is
-            missing
+          description: Requested similar search products api required parameter "url" is missing
         "461":
-          description: Requested search product api required "term" parameter does not
-            have valid value or empty value passed
+          description: Requested search product api required "term" parameter does not have valid value or empty value passed
         "462":
-          description: Requested similar search product api required "url" parameter does
-            not have valid url or empty value passed
+          description: Requested similar search product api required "url" parameter does not have valid url or empty value passed
         "463":
           description: Error in processing search request in elastic search
         "490":

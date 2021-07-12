@@ -29,8 +29,7 @@ paths:
     get:
       operationId: DfsSlatesByDate
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -62,8 +61,7 @@ paths:
     get:
       operationId: DfsSlatesByWeek
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -73,18 +71,16 @@ paths:
               - XML
               - JSON
             type: string
-        - description: >-
-            Year of the season and the season type. If no season type is
-            provided, then the default is regular season.
+        - description: |-
+            Year of the season and the season type. If no season type is provided, then the default is regular season.
                       <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>
           in: path
           name: season
           required: true
           schema:
             type: string
-        - description: >-
-            Week of the season. Valid values are as follows: Preseason 0 to 4,
-            Regular Season 1 to 17, Postseason 1 to 4.
+        - description: |-
+            Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
                       Example: <code>1</code>
           in: path
           name: week
@@ -105,8 +101,7 @@ paths:
     get:
       operationId: ProjectedFantasyDefenseGameStatsWDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -116,11 +111,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is
-            provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>,
-            <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -128,8 +121,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4,
-            Regular Season 1 to 17, Postseason 1 to 4.
+        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
 
             \          Example: <code>1</code>
 
@@ -153,8 +145,7 @@ paths:
     get:
       operationId: ProjectedFantasyDefenseSeasonStatsWByeWeekAdp
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -164,11 +155,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is
-            provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>,
-            <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -190,8 +179,7 @@ paths:
     get:
       operationId: IdpProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -201,11 +189,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is
-            provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>,
-            <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -213,8 +199,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4,
-            Regular Season 1 to 17, Postseason 1 to 4.
+        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
 
             \          Example: <code>1</code>
 
@@ -224,9 +209,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Each NFL player has a unique ID assigned by FantasyData. Player IDs
-            can be determined by pulling player related data.
-            Example:<code>14257</code>.
+        - description: Each NFL player has a unique ID assigned by FantasyData. Player IDs can be determined by pulling player related data. Example:<code>14257</code>.
           in: path
           name: playerid
           required: true
@@ -239,14 +222,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/PlayerGameProjection"
           description: ""
-      summary: IDP Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS
-        Salaries)
+      summary: IDP Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS Salaries)
   "/{format}/IdpPlayerGameProjectionStatsByTeam/{season}/{week}/{team}":
     get:
       operationId: IdpProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -256,11 +237,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is
-            provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>,
-            <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -268,8 +247,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4,
-            Regular Season 1 to 17, Postseason 1 to 4.
+        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
 
             \          Example: <code>1</code>
 
@@ -294,14 +272,12 @@ paths:
                   $ref: "#/components/schemas/PlayerGameProjection"
                 type: array
           description: ""
-      summary: IDP Projected Player Game Stats by Team (w/ Injuries, Lineups, DFS
-        Salaries)
+      summary: IDP Projected Player Game Stats by Team (w/ Injuries, Lineups, DFS Salaries)
   "/{format}/IdpPlayerGameProjectionStatsByWeek/{season}/{week}":
     get:
       operationId: IdpProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -311,11 +287,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is
-            provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>,
-            <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -323,8 +297,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4,
-            Regular Season 1 to 17, Postseason 1 to 4.
+        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
 
             \          Example: <code>1</code>
 
@@ -343,14 +316,12 @@ paths:
                   $ref: "#/components/schemas/PlayerGameProjection"
                 type: array
           description: ""
-      summary: IDP Projected Player Game Stats by Week (w/ Injuries, Lineups, DFS
-        Salaries)
+      summary: IDP Projected Player Game Stats by Week (w/ Injuries, Lineups, DFS Salaries)
   "/{format}/PlayerGameProjectionStatsByPlayerID/{season}/{week}/{playerid}":
     get:
       operationId: ProjectedPlayerGameStatsByPlayerWInjuriesLineupsDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -360,11 +331,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is
-            provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>,
-            <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -374,9 +343,7 @@ paths:
             type: string
         - description: "
 
-            \          Week of the season. Valid values are as
-            follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to
-            4.
+            \          Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
 
             \          Example: <code>1</code>
 
@@ -386,9 +353,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Each NFL player has a unique ID assigned by FantasyData. Player IDs
-            can be determined by pulling player related data.
-            Example:<code>14257</code>.
+        - description: Each NFL player has a unique ID assigned by FantasyData. Player IDs can be determined by pulling player related data. Example:<code>14257</code>.
           in: path
           name: playerid
           required: true
@@ -401,14 +366,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/PlayerGameProjection"
           description: ""
-      summary: Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS
-        Salaries)
+      summary: Projected Player Game Stats by Player (w/ Injuries, Lineups, DFS Salaries)
   "/{format}/PlayerGameProjectionStatsByTeam/{season}/{week}/{team}":
     get:
       operationId: ProjectedPlayerGameStatsByTeamWInjuriesLineupsDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -418,11 +381,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is
-            provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>,
-            <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -430,8 +391,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4,
-            Regular Season 1 to 17, Postseason 1 to 4.
+        - description: "Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
 
             \          Example: <code>1</code>
 
@@ -461,8 +421,7 @@ paths:
     get:
       operationId: ProjectedPlayerGameStatsByWeekWInjuriesLineupsDfsSalaries
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -472,11 +431,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is
-            provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>,
-            <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -486,9 +443,7 @@ paths:
             type: string
         - description: "
 
-            \          Week of the season. Valid values are as
-            follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to
-            4.
+            \          Week of the season. Valid values are as follows: Preseason 0 to 4, Regular Season 1 to 17, Postseason 1 to 4.
 
             \          Example: <code>1</code>
 
@@ -512,8 +467,7 @@ paths:
     get:
       operationId: ProjectedPlayerSeasonStatsWByeWeekAdp
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -523,11 +477,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is
-            provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>,
-            <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -549,8 +501,7 @@ paths:
     get:
       operationId: ProjectedPlayerSeasonStatsByPlayerWByeWeekAdp
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -560,11 +511,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is
-            provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>,
-            <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path
@@ -572,9 +521,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Each NFL player has a unique ID assigned by FantasyData. Player IDs
-            can be determined by pulling player related data.
-            Example:<code>14257</code>.
+        - description: Each NFL player has a unique ID assigned by FantasyData. Player IDs can be determined by pulling player related data. Example:<code>14257</code>.
           in: path
           name: playerid
           required: true
@@ -592,8 +539,7 @@ paths:
     get:
       operationId: ProjectedPlayerSeasonStatsByTeamWByeWeekAdp
       parameters:
-        - description: Desired response format. Valid entries are <code>XML</code> or
-            <code>JSON</code>.
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
           in: path
           name: format
           required: true
@@ -603,11 +549,9 @@ paths:
               - XML
               - JSON
             type: string
-        - description: "Year of the season and the season type. If no season type is
-            provided, then the default is regular season.
+        - description: "Year of the season and the season type. If no season type is provided, then the default is regular season.
 
-            \          <br>Examples: <code>2015REG</code>,
-            <code>2015PRE</code>, <code>2015POST</code>.
+            \          <br>Examples: <code>2015REG</code>, <code>2015PRE</code>, <code>2015POST</code>.
 
             \        "
           in: path

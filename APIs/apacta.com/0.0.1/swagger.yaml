@@ -4,46 +4,27 @@ schemes:
 host: app.apacta.com
 basePath: /api/v1
 info:
-  description: >-
-    API for a tool to craftsmen used to register working hours,
-    material usage and quality assurance.    
-
+  description: |-
+    API for a tool to craftsmen used to register working hours, material usage and quality assurance.    
     # Endpoint
-
     The endpoint `https://app.apacta.com/api/v1` should be used to communicate with the API. API access is only allowed with SSL encrypted connection (https).
-
     # Authentication
-
     URL query authentication with an API key is used, so appending `?api_key={api_key}` to the URL where `{api_key}` is found within Apacta settings is used for authentication
-
     # Pagination
-
     If the endpoint returns a `pagination` object it means the endpoint supports pagination - currently it's only possible to change pages with `?page={page_number}` but implementing custom page sizes are on the road map.
 
 
-
     # Search/filter
-
     Is experimental but implemented in some cases - see the individual endpoints' docs for further explanation.
-
     # Ordering
-
     Is currently experimental, but on some endpoints it's implemented on URL querys so eg. to order Invoices by `invoice_number` appending `?sort=Invoices.invoice_number&direction=desc` would sort the list descending by the value of `invoice_number`.
-
     # Associations
-
     Is currently implemented on an experimental basis where you can append eg. `?include=Contacts,Projects`  to the `/api/v1/invoices/` endpoint to embed `Contact` and `Project` objects directly.
-
     # Project Files
-
     Currently project files can be retrieved from two endpoints. `/projects/{project_id}/files` handles files uploaded from wall posts or forms. `/projects/{project_id}/project_files` allows uploading and showing files, not belonging to specific form or wall post.
-
     # Errors/Exceptions
-
     ## 422 (Validation)
-
     Write something about how the `errors` object contains keys with the properties that failes validation like:
-
     ```
       {
           "success": false,
@@ -60,21 +41,14 @@ info:
           }
       }
     ```
-
     ## Code examples
-
     Running examples of how to retrieve the 5 most recent forms registered and embed the details of the User that made the form, and eventual products contained in the form
-
     ### Swift
-
     ```
       
     ```
-
     ### Java
-
     #### OkHttp
-
     ```
       OkHttpClient client = new OkHttpClient();
       
@@ -87,20 +61,15 @@ info:
       
       Response response = client.newCall(request).execute();
     ```
-
     #### Unirest
-
     ```
       HttpResponse<String> response = Unirest.get("https://app.apacta.com/api/v1/forms?extended=true&sort=Forms.created&direction=DESC&include=Products%2CCreatedBy&limit=5")
         .header("x-auth-token", "{INSERT_YOUR_TOKEN}")
         .header("accept", "application/json")
         .asString();
     ```
-
     ### Javascript
-
     #### Native
-
     ```
       var data = null;
       
@@ -119,9 +88,7 @@ info:
       
       xhr.send(data);
     ```
-
     #### jQuery
-
     ```
       var settings = {
         "async": true,
@@ -138,9 +105,7 @@ info:
         console.log(response);
       });
     ```
-
     #### NodeJS (Request)
-
     ```
       var request = require("request");
 
@@ -163,9 +128,7 @@ info:
       });
 
     ```
-
     ### Python 3
-
     ```
       import http.client
       
@@ -185,11 +148,8 @@ info:
       
       print(data.decode("utf-8"))
     ```
-
     ### C#
-
     #### RestSharp
-
     ```
       var client = new RestClient("https://app.apacta.com/api/v1/forms?extended=true&sort=Forms.created&direction=DESC&include=Products%2CCreatedBy&limit=5");
       var request = new RestRequest(Method.GET);
@@ -197,9 +157,7 @@ info:
       request.AddHeader("x-auth-token", "{INSERT_YOUR_TOKEN}");
       IRestResponse response = client.Execute(request);    
     ```
-
     ### Ruby
-
     ```
       require 'uri'
       require 'net/http'
@@ -217,9 +175,7 @@ info:
       response = http.request(request)
       puts response.read_body
     ```
-
     ### PHP (HttpRequest)
-
     ```
       <?php
 
@@ -248,9 +204,7 @@ info:
         echo $ex;
       }
     ```
-
     ### Shell (cURL)
-
     ```
 
       $ curl --request GET --url 'https://app.apacta.com/api/v1/forms?extended=true&sort=Forms.created&direction=DESC&include=Products%2CCreatedBy&limit=5' --header 'accept: application/json' --header 'x-auth-token: {INSERT_YOUR_TOKEN}'
@@ -310,8 +264,7 @@ securityDefinitions:
     name: X-Auth-Token
     type: apiKey
   api_key:
-    description: Uses the user's API token found from within the control panel in
-      "settings" -> "additional settings"
+    description: Uses the user's API token found from within the control panel in "settings" -> "additional settings"
     in: query
     name: api_token
     type: apiKey
@@ -809,8 +762,7 @@ paths:
                 maxLength: 255
                 type: string
               erp_id:
-                description: If company has integration to an ERP system, and the contacts are
-                  synchronized, this will be the ERP-systems ID of this contact
+                description: If company has integration to an ERP system, and the contacts are synchronized, this will be the ERP-systems ID of this contact
                 maxLength: 255
                 type: string
               name:
@@ -935,8 +887,7 @@ paths:
                 maxLength: 255
                 type: string
               erp_id:
-                description: If company has integration to an ERP system, and the contacts are
-                  synchronized, this will be the ERP-systems ID of this contact
+                description: If company has integration to an ERP system, and the contacts are synchronized, this will be the ERP-systems ID of this contact
                 maxLength: 255
                 type: string
               name:
@@ -1828,22 +1779,19 @@ paths:
   /forms:
     get:
       parameters:
-        - description: Used to have extended details from the forms from the `Form`'s
-            `FormFields`
+        - description: Used to have extended details from the forms from the `Form`'s `FormFields`
           enum:
             - true
             - false
           in: query
           name: extended
           type: string
-        - description: Used in conjunction with `date_to` to only show forms within these
-            dates - format like `2016-28-05`
+        - description: Used in conjunction with `date_to` to only show forms within these dates - format like `2016-28-05`
           format: Y-m-d
           in: query
           name: date_from
           type: string
-        - description: Used in conjunction with `date_from` to only show forms within
-            these dates - format like `2016-28-30`
+        - description: Used in conjunction with `date_from` to only show forms within these dates - format like `2016-28-30`
           format: Y-m-d
           in: query
           name: date_to
@@ -3291,8 +3239,7 @@ paths:
           name: project_status_id
           type: string
         - collectionFormat: csv
-          description: Used to filter on the `project_status_id` of the projects (match
-            any of the provided values)
+          description: Used to filter on the `project_status_id` of the projects (match any of the provided values)
           in: query
           items:
             format: uuid
@@ -3627,8 +3574,7 @@ paths:
         - Projects
   "/projects/{project_id}/project_files":
     get:
-      description: Returns files belonging to the project, not uploaded from wall post
-        or form
+      description: Returns files belonging to the project, not uploaded from wall post or form
       parameters:
         - in: path
           name: project_id
@@ -4108,8 +4054,7 @@ paths:
                 format: uuid
                 type: string
               sum:
-                description: Amount of seconds - should only be included when using is_all_day,
-                  otherwise will be calculated from from_time and to_time
+                description: Amount of seconds - should only be included when using is_all_day, otherwise will be calculated from from_time and to_time
                 format: int32
                 type: integer
               time_entry_type_id:
@@ -4596,8 +4541,7 @@ paths:
                 maxLength: 8
                 type: string
               receive_form_mails:
-                description: If `true` the employee will receive an email receipt of every form
-                  submitted
+                description: If `true` the employee will receive an email receipt of every form submitted
                 type: boolean
               sale_price:
                 description: The price this employee costs per hour when working
@@ -5096,8 +5040,7 @@ definitions:
         format: uuid
         type: string
       company_id:
-        description: Only filled out if this represents another company within Apacta
-          (used for partners)
+        description: Only filled out if this represents another company within Apacta (used for partners)
         format: uuid
         type: string
       created:
@@ -5118,8 +5061,7 @@ definitions:
         maxLength: 255
         type: string
       erp_id:
-        description: If company has integration to an ERP system, and the contacts are
-          synchronized, this will be the ERP-systems ID of this contact
+        description: If company has integration to an ERP system, and the contacts are synchronized, this will be the ERP-systems ID of this contact
         maxLength: 255
         type: string
       id:
@@ -5221,8 +5163,7 @@ definitions:
             description: The amount of validation errors
             type: integer
           errors:
-            description: Object that contains details information about which properties
-              failed validation and what rules they failed.
+            description: Object that contains details information about which properties failed validation and what rules they failed.
             type: object
           message:
             default: A validation error occurred
@@ -6212,8 +6153,7 @@ definitions:
         maxLength: 8
         type: string
       receive_form_mails:
-        description: If `true` the employee will receive an email receipt of every form
-          submitted
+        description: If `true` the employee will receive an email receipt of every form submitted
         type: boolean
       sale_price:
         description: The price this employee costs per hour when working

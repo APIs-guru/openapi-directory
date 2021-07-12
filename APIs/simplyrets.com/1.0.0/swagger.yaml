@@ -4,168 +4,100 @@ schemes:
 host: api.simplyrets.com
 basePath: /
 info:
-  description: >
+  description: |
     The SimplyRETS API is an exciting step towards making it easier for
-
     developers and real estate agents to build something awesome with
-
     real estate data!
 
-
     The documentation below makes live requests to our API using the
-
     trial data. To get set up with the API using live MLS data, you
-
     must have RETS credentials from your MLS, which you can then use to
-
     create an app with SimplyRETS. For more information on that
-
     process, please see our [FAQ](https://simplyrets.com/faq), [Getting
-
     Started](https://simplyrets.com/blog/getting-set-up.html) page, or
-
     [contact us](https://simplyrets.com/\#home-contact).
 
-
     Below you'll find the API endpoints, query parameters, response bodies,
-
     and other information about using the SimplyRETS API. You can run
-
     queries by clicking the 'Try it Out' button at the bottom of each
-
     section.
 
-
     ### Authentication
-
     The SimplyRETS API uses Basic Authentication. When you create an
-
     app, you'll get a set of API credentials to access your
-
     listings. If you're trying out the test data, you can use
-
     `simplyrets:simplyrets` for connecting to the API.
 
-
     ### Media Types
-
     The SimplyRETS API uses the `Accept` header to allow clients to
-
     control media types (content versions). We maintain backwards
-
     compatibility with API clients by allowing them to specify a
-
     content version. We highly recommend setting and explicity media
-
     type when your application reaches production. Both the structure
-
     and content of our API response bodies is subject to change so we
-
     can add new features while respecting the stability of applications
-
     which have already been developed.
 
-
     To always use the latest SimplyRETS content version, simply use
-
     `application/json` in your application `Accept` header.
 
-
     If you want to pin your clients media type to a specific version,
-
     you can use the vendor-specific SimplyRETS media type, e.g.
-
     `application/vnd.simplyrets-v0.1+json"`
 
-
     To view all valid content-types for making an `OPTIONS`, make a
-
     request to the SimplyRETS api root
-
 
     `curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/`
 
-
     The default media types used in our API responses may change in the
-
     future. If you're building an application and care about the
-
     stability of the API, be sure to request a specific media type in the
-
     Accept header as shown in the examples below.
 
-
     The wordpress plugin automatically sets the `Accept` header for the
-
     compatible SimplyRETS media types.
-
 
     ### Pagination
 
-
     To paginate through listings, start your query with these
-
     parameters: 'limit=500&lastId=0'. The 'lastId' is the important
-
     part, you can use any limit up to 500. When you receive the
-
     response from the API with the results, check the 'Link' header for
-
     the 'next' link. That link is pre-built to access the next 'page'
-
     of listings. Alternatively, you can use the last listing's 'mlsId'
-
     from the previous request and use that in the next query. For
-
     example:
-
 
     First query:
 
-
     curl -u username:password 'https://api.simplyrets.com/properties?limit=500&lastId=0'
-
 
     If the 'mlsId' in the last listing of the results is '1234567', then the next query will be:
 
-
     curl -u username:password 'https://api.simplyrets.com/properties?limit=500&lastId=1234567'
-
 
     ...and so one until you have reached the final page of listings.
 
-
     There a few pieces of useful information about each request stored
-
     in the HTTP Headers:
-
 
     - `X-Total-Count` shows you the total amount of listings that match
       your current query.
     - `Link` contains pre-built pagination links for accessing the next
-
     'page' of listings that match your query.
-
 
     ### RETS Vendor Compliance
 
-
     Many RETS vendors have strict requirements for showing disclaimers
-
     with specific information embedded. For example, in many areas it's
-
     required to show the timestamp of the time the listings were
-
     refreshed inside a disclaimer or on a listing page.
 
-
     The timestamp of the last listing refresh timestamp can be found in
-
     one of two spots:
 
-
     - The `X-SimplyRETS-LastUpdate` header from `GET /properties` or `GET /properties/{mlsId}`
-
 
     - Calling the API root `/` or properties api endpoint `/properties`
       with an OPTIONS request
@@ -226,19 +158,14 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: >
+          description: |
             Filter the openhouses returned by a list of valid cities.
-
 
             The `cities` query parameter is case-insensitive.
 
-
             The list of `cities` provided by your RETS vendor can be
-
             seen by sending an `OPTIONS` request to the `/properties`
-
             endpoint:
-
 
             `curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/openhouses`
           in: query
@@ -320,37 +247,24 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: >
+          description: |
             Include a extra fields which are not in the default
-
             response body
-
             - 'association' includes additional HOA data
-
             - 'agreement' information on the listing agreement
-
             - 'garageSpaces' additional garage data
-
             - 'maintenanceExpense' data on maintenance expenses
-
             - 'parking' additional parking data
-
             - 'pool' includes an additional pool description
-
             - 'taxAnnualAmount' include the annual tax amount
-
             - 'taxYear' include the tax year data
-
             - 'rooms' include parameter will include
                any additional rooms as a list.
 
             Note that your MLS must provide these fields in their RETS
-
             data for them to be available in the API response.
 
-
             In the future, fields which require an 'include' may become available
-
             by default.
           in: query
           items:
@@ -476,9 +390,8 @@ paths:
         listings but the data, query parameters, and response bodies
         will all work the same.
       parameters:
-        - description: >
+        - description: |
             A textual keyword search. This parameter will search  the following
-
             fields, when available:
               - listingId (This does _not_ search the `mlsId` field in the SimplyRETS response body)
               - street number
@@ -492,26 +405,17 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: >
+          description: |
             Request listings by a specific status. This parameter
-
             defaults to active and you can specify multiple statuses
-
             in a single query.
 
-
             Listing statuses depend on your MLS's availability. Below is
-
             a brief description of each status with possible synonyms which
-
             may map to your MLS-specific statuses
-
             - *Active*: Active Listing which is still on the market
-
             - *ActiveUnderContract*: An offer has been accepted but the listing is still on market. Synonyms: Accepting Backup Offers, Backup Offer, Active With Accepted. Synonyms: Offer, Backup, Contingent
-
             - *Pending*: An offer has been accepted and the listing is no longer on market. Synonyms: Offer Accepted, Under Contract
-
             - *Hold*: The listing has been withdrawn from the market, but a contract
               still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market
             - *Withdrawn*: The listing has been withdrawn from the market, but a contract
@@ -519,9 +423,7 @@ paths:
             - *Closed*: The purchase agreement has been fulfilled or the lease
               agreement has been executed. Synonyms: Sold, Leased, Rented, Closed Sale
             - *Expired*: The listing contract has expired
-
             - *Delete*: The listing contract was never valid or other reason for the contract to be nullified. Synonyms: Kill, Zap
-
             - *Incomplete*: The listing has not yet be completely entered and is not yet
               published in the MLS. Synonyms: Draft, Partially Complted
             - *ComingSoon*
@@ -694,10 +596,8 @@ paths:
           name: offset
           required: false
           type: integer
-        - description: >
-            Used as a cursor for pagination. When using `lastId`, the `sort`
-            parameter
-
+        - description: |
+            Used as a cursor for pagination. When using `lastId`, the `sort` parameter
             will not work.
           in: query
           name: lastId
@@ -725,36 +625,23 @@ paths:
           required: false
           type: array
         - collectionFormat: multi
-          description: >
+          description: |
             Filter the listings by specific interior features.  You
-
             can filter by multiple. For example, to filter trial listings
-
             by multiple features you can use,
-
             Return listings that are within a set of latitude
-
             longitude coordinates. For example,
 
-
             ```
-
             Wet Bar
-
             High Ceiling
-
             ```
-
 
             e.g. `https://simplyrets.com/services?features=Wet%20Bar&features=High%20Ceiling`
 
-
             The list of `features` provided by your RETS vendor can be
-
             seen by sending an `OPTIONS` request to the `/properties`
-
             endpoint:
-
 
             `curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/properties`
           in: query
@@ -763,47 +650,33 @@ paths:
           name: features
           required: false
           type: array
-        - description: >
+        - description: |
             Query water/waterfront listings only. Specify `true` to
-
             filter waterfront listings.
 
-
             If you specify `water=true`, all listings with any `waterfront` value
-
             will be queried.
 
-
             If you specify `water=false`, listings which are **NOT** waterfront
-
             listings will be queried.
 
-
             If you specify `water=LAKE+NAME` or another valid value contained in
-
             your feed, that value will be searched
           in: query
           name: water
           required: false
           type: string
         - collectionFormat: multi
-          description: >
+          description: |
             Filter the listings returned by specific neighborhoods and
-
             subdivisions. You can specify multiple `neighborhoods` by
-
             using the query parameter multiple times.
-
 
             The `neighborhoods` query parameter is case-insensitive.
 
-
             The list of `neighborhoods` provided by your RETS vendor can be
-
             seen by sending an `OPTIONS` request to the `/properties`
-
             endpoint:
-
 
             `curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/properties`
           in: query
@@ -813,21 +686,15 @@ paths:
           required: false
           type: array
         - collectionFormat: multi
-          description: >
+          description: |
             Filter the listings returned by specific cities. You can
-
             specify multiple `cities` query parameters.
-
 
             The `cities` query parameter is case-insensitive.
 
-
             The list of `cities` provided by your RETS vendor can be
-
             seen by sending an `OPTIONS` request to the `/properties`
-
             endpoint:
-
 
             `curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/openhouses`
           in: query
@@ -837,21 +704,15 @@ paths:
           required: false
           type: array
         - collectionFormat: multi
-          description: >
+          description: |
             Filter the listings returned by specific counties. You can
-
             specify multiple `counties` parameters.
-
 
             The `counties` query parameter is case-insensitive.
 
-
             The list of `counties` provided by your RETS vendor can be
-
             seen by sending an `OPTIONS` request to the `/properties`
-
             endpoint:
-
 
             `curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/openhouses`
           in: query
@@ -886,37 +747,24 @@ paths:
           required: false
           type: array
         - collectionFormat: multi
-          description: >
+          description: |
             Include a extra fields which are not in the default
-
             response body
-
             - 'association' includes additional HOA data
-
             - 'agreement' information on the listing agreement
-
             - 'garageSpaces' additional garage data
-
             - 'maintenanceExpense' data on maintenance expenses
-
             - 'parking' additional parking data
-
             - 'pool' includes an additional pool description
-
             - 'taxAnnualAmount' include the annual tax amount
-
             - 'taxYear' include the tax year data
-
             - 'rooms' include parameter will include
                any additional rooms as a list.
 
             Note that your MLS must provide these fields in their RETS
-
             data for them to be available in the API response.
 
-
             In the future, fields which require an 'include' may become available
-
             by default.
           enum:
             - association
@@ -1024,37 +872,24 @@ paths:
           required: true
           type: integer
         - collectionFormat: multi
-          description: >
+          description: |
             Include a extra fields which are not in the default
-
             response body
-
             - 'association' includes additional HOA data
-
             - 'agreement' information on the listing agreement
-
             - 'garageSpaces' additional garage data
-
             - 'maintenanceExpense' data on maintenance expenses
-
             - 'parking' additional parking data
-
             - 'pool' includes an additional pool description
-
             - 'rooms' include parameter will include
                any additional rooms as a list.
 
             Note that your MLS must provide these fields in their RETS
-
             data for them to be available with valid data in the API
-
             response. If your MLS does not offer these fields, they will
-
             contain 'null'.
 
-
             In the future, fields which require an 'include' may become available
-
             by default.
           enum:
             - association
@@ -1317,57 +1152,40 @@ definitions:
     description: RETS MLS Vendor Data
     properties:
       area:
-        description: MLS Area major. The major marketing area name, as defined by the
-          MLS or other non-governmental organization.
+        description: MLS Area major. The major marketing area name, as defined by the MLS or other non-governmental organization.
         type: string
       areaMinor:
-        description: MLS Area minor. The minor/sub marketing area name, as defined by
-          the MLS or other non-governmental organization.
+        description: MLS Area minor. The minor/sub marketing area name, as defined by the MLS or other non-governmental organization.
         type: string
       daysOnMarket:
         description: Amount of days the property has been Active
         format: int64
         type: integer
       originatingSystemName:
-        description: >
+        description: |
           Alias for the listing office or brokerage
-
 
           This field corresponds to the data-dictionary `OriginatingSystemName` field
 
-
           The name of the originating record provider.  Most commonly
-
           the name of the MLS. The place where the listing is
-
           originally input by the member.  The legal name of the
-
           company.  To be used for display.
 
-
           If you're RETS provider aggregates feeds from multiple
-
           MLS's, this will be the name of the corresponding MLS.
         type: string
       status:
-        description: >
+        description: |
           Normalized MLS Status Code. Compliant with data dictionary
-
           v1.3 ListingStatus Listing statuses depend on your MLS's
-
           availability. Below is a brief description of each status
-
           with possible synonyms which may map to your MLS-specific
-
           statuses
 
-
           - Active: Active Listing which is still on the market
-
           - ActiveUnderContract: An offer has been accepted but the listing is still on market. Synonyms: Accepting Backup Offers, Backup Offer, Active With Accepted. Synonyms: Offer, Backup, Contingent
-
           - Pending: An offer has been accepted and the listing is no longer on market. Synonyms: Offer Accepted, Under Contract
-
           - Hold: The listing has been withdrawn from the market, but a contract
             still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market
           - Withdrawn: The listing has been withdrawn from the market, but a contract
@@ -1375,9 +1193,7 @@ definitions:
           - Closed: The purchase agreement has been fulfilled or the lease
             agreement has been executed. Synonyms: Sold, Leased, Rented, Closed Sale
           - Expired: The listing contract has expired
-
           - Delete: The listing contract was never valid or other reason for the contract to be nullified. Synonyms: Kill, Zap
-
           - Incomplete: The listing has not yet be completely entered and is not yet
             published in the MLS. Synonyms: Draft, Partially Complted
           - ComingSoon
@@ -1433,10 +1249,8 @@ definitions:
         format: date-time
         type: string
       inputId:
-        description: >
-          The MLS number for the showing agent or agent which created the
-          OpenHouse
-
+        description: |
+          The MLS number for the showing agent or agent which created the OpenHouse
           in the MLS database.
       listing:
         $ref: "#/definitions/Listing"
@@ -1509,8 +1323,7 @@ definitions:
         description: The materials that were used in the construction of the property.
         type: string
       cooling:
-        description: A description of the cooling or air conditioning features of the
-          property.
+        description: A description of the cooling or air conditioning features of the property.
         type: string
       exteriorFeatures:
         description: |

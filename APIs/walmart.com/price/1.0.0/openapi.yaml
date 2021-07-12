@@ -7,9 +7,7 @@ servers:
 info:
   contact:
     x-twitter: Walmart
-  description: The price is a fundamental building block for your listing on
-    Walmart.com. You can use the price management APIs to set up and manage the
-    price for a given item
+  description: The price is a fundamental building block for your listing on Walmart.com. You can use the price management APIs to set up and manage the price for a given item
   title: Price Management
   version: 1.0.0
   x-apisguru-categories:
@@ -27,13 +25,10 @@ security:
 paths:
   /v3/cppreference:
     post:
-      description: >-
-        This API helps Sellers to completely opt-in or opt-out from CAP
-        program.
-
+      description: |-
+        This API helps Sellers to completely opt-in or opt-out from CAP program.
 
         If the subsidyEnrolled value = "true", the Seller enrolls in the CAP program. All eligible SKUs (current and future) are by default opt-in. Seller should use the SKU opt-in/opt-out API to opt-out individual items.
-
 
         If the subsidyEnrolled value = "false", the Seller stops participating in the CAP program and all eligible SKUs (current and future) are opt-out of the CAP program.
       externalDocs:
@@ -41,8 +36,7 @@ paths:
         url: /doc/us/mp/us-mp-price/#1290
       operationId: optCapProgramInPrice
       parameters:
-        - description: Basic authorization header. Base 64 encodes the Client ID and
-            Client Secret retrieved in step two of the integration steps.
+        - description: Basic authorization header. Base 64 encodes the Client ID and Client Secret retrieved in step two of the integration steps.
           example: Basic YzcyOTFjNmItNzI5MC00....
           in: header
           name: Authorization
@@ -56,15 +50,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: A unique ID to track the consumer request by channel. Use the
-            Consumer Channel Type received during onboarding
+        - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
           in: header
           name: WM_CONSUMER.CHANNEL.TYPE
           required: false
           schema:
             type: string
-        - description: A unique ID which identifies each API call and used to track and
-            debug issues; use a random generated GUID for this ID
+        - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
           example: b3261d2d-028a-4ef7-8602-633c23200af6
           in: header
           name: WM_QOS.CORRELATION_ID
@@ -84,8 +76,7 @@ paths:
             schema:
               properties:
                 subsidyEnrolled:
-                  description: A Boolean parameter that allows all sellers to completely enroll in
-                    or out of the Competitive Price Adjustment program
+                  description: A Boolean parameter that allows all sellers to completely enroll in or out of the Competitive Price Adjustment program
                   type: boolean
                 subsidyPreference:
                   type: boolean
@@ -104,8 +95,7 @@ paths:
                   statusInfo:
                     properties:
                       subsidyEnrolled:
-                        description: A Boolean parameter that allows all sellers to completely enroll in
-                          or out of the Competitive Price Adjustment program
+                        description: A Boolean parameter that allows all sellers to completely enroll in or out of the Competitive Price Adjustment program
                         type: boolean
                       subsidyPreference:
                         type: boolean
@@ -117,25 +107,18 @@ paths:
         - Prices
   /v3/feeds:
     post:
-      description: >-
+      description: |-
         Updates prices in bulk.
-
 
         In one Feed you can update up to 10,000 items in bulk. To ensure optimal Feed processing time, we recommend sending no more than 1000 items in one Feed and keeping the Feed sizes below 10 MB.
 
-
         The price sequence guarantee is observed by the bulk price update functionality, subject to the following rules:
 
-
         The timestamp used to determine precedence is passed in the request headers. All price updates in the feed are considered to have the same timestamp. The timestamp in the XML file is used only for auditing.
-
         You can send a single SKU multiple times in one Feed. If a SKU is repeated in a Feed, the price will be set for that SKU on Walmart.com, but there is no guarantee as to which SKU's price within that feed will be used.
-
         This API should be used in preference to the update a price. It should be called no sooner than 24 hours after a new item is set up and a wpid (Walmart Part ID) is available. Thereafter, the bulk price update has an service level agreement (SLA) of 15 minutes.
 
-
         After the update is submitted, wait for at least five minutes before verifying whether the bulk price update was successful. Individual SKU price update success or failure is only available after the entire feed is processed.
-
 
         If a SKU's price update fails (for example, multiple price updates were sent for the same SKU in a single feed), an error will be returned.
       operationId: priceBulkUploads
@@ -149,8 +132,7 @@ paths:
               - price
               - CPT_SELLER_ELIGIBILITY
             type: string
-        - description: Basic authorization header. Base 64 encodes the Client ID and
-            Client Secret retrieved in step two of the integration steps.
+        - description: Basic authorization header. Base 64 encodes the Client ID and Client Secret retrieved in step two of the integration steps.
           example: Basic YzcyOTFjNmItNzI5MC00....
           in: header
           name: Authorization
@@ -164,15 +146,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: A unique ID to track the consumer request by channel. Use the
-            Consumer Channel Type received during onboarding
+        - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
           in: header
           name: WM_CONSUMER.CHANNEL.TYPE
           required: false
           schema:
             type: string
-        - description: A unique ID which identifies each API call and used to track and
-            debug issues; use a random generated GUID for this ID
+        - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
           example: b3261d2d-028a-4ef7-8602-633c23200af6
           in: header
           name: WM_QOS.CORRELATION_ID
@@ -268,14 +248,12 @@ paths:
                   errors:
                     type: object
                   feedId:
-                    description: A unique ID, returned from the Bulk Upload API, used for tracking
-                      the feed file
+                    description: A unique ID, returned from the Bulk Upload API, used for tracking the feed file
                     type: string
                 type: object
             application/xml:
-              example: >-
+              example: |-
                 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
                 <ns2:FeedAcknowledgement xmlns:ns2="http://walmart.com/">
                     <ns2:feedId>55DE8A53B09F41BBBF261C1AB5FB2BC8@AVMBAgA</ns2:feedId>
                 </ns2:FeedAcknowledgement>
@@ -286,8 +264,7 @@ paths:
                   errors:
                     type: object
                   feedId:
-                    description: A unique ID, returned from the Bulk Upload API, used for tracking
-                      the feed file
+                    description: A unique ID, returned from the Bulk Upload API, used for tracking the feed file
                     type: string
                 type: object
           description: Successful Operation
@@ -299,8 +276,7 @@ paths:
       description: Updates the regular price for a given item.
       operationId: updatePrice
       parameters:
-        - description: Basic authorization header. Base 64 encodes the Client ID and
-            Client Secret retrieved in step two of the integration steps.
+        - description: Basic authorization header. Base 64 encodes the Client ID and Client Secret retrieved in step two of the integration steps.
           example: Basic YzcyOTFjNmItNzI5MC00....
           in: header
           name: Authorization
@@ -314,15 +290,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: A unique ID to track the consumer request by channel. Use the
-            Consumer Channel Type received during onboarding
+        - description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
           in: header
           name: WM_CONSUMER.CHANNEL.TYPE
           required: false
           schema:
             type: string
-        - description: A unique ID which identifies each API call and used to track and
-            debug issues; use a random generated GUID for this ID
+        - description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
           example: b3261d2d-028a-4ef7-8602-633c23200af6
           in: header
           name: WM_QOS.CORRELATION_ID
@@ -439,8 +413,7 @@ paths:
               example:
                 ItemPriceResponse:
                   mart: WALMART_US
-                  message: Thank you. Your price has been updated. Please allow up to five minutes
-                    for this change to be reflected on the site.
+                  message: Thank you. Your price has been updated. Please allow up to five minutes for this change to be reflected on the site.
                   sku: 97964_KFTest
               schema:
                 properties:
@@ -520,8 +493,7 @@ paths:
                     xml:
                       namespace: http://walmart.com/
                   sku:
-                    description: An arbitrary alphanumeric unique ID, specified by the seller, which
-                      identifies each item.
+                    description: An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item.
                     type: string
                     xml:
                       namespace: http://walmart.com/
@@ -533,9 +505,8 @@ paths:
                   name: ItemPriceResponse
                   namespace: http://walmart.com/
             application/xml:
-              example: >
+              example: |
                 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-
                 <ns2:ItemPriceResponse xmlns:ns2="http://walmart.com/">
                     <ns2:mart>WALMART_US</ns2:mart>
                     <ns2:sku>97964_KFTest</ns2:sku>
@@ -619,8 +590,7 @@ paths:
                     xml:
                       namespace: http://walmart.com/
                   sku:
-                    description: An arbitrary alphanumeric unique ID, specified by the seller, which
-                      identifies each item.
+                    description: An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item.
                     type: string
                     xml:
                       namespace: http://walmart.com/
@@ -654,8 +624,7 @@ components:
       schema:
         type: string
     authorization:
-      description: Basic authorization header. Base 64 encodes the Client ID and
-        Client Secret retrieved in step two of the integration steps.
+      description: Basic authorization header. Base 64 encodes the Client ID and Client Secret retrieved in step two of the integration steps.
       example: Basic YzcyOTFjNmItNzI5MC00....
       in: header
       name: Authorization
@@ -663,8 +632,7 @@ components:
       schema:
         type: string
     channelType:
-      description: A unique ID to track the consumer request by channel. Use the
-        Consumer Channel Type received during onboarding
+      description: A unique ID to track the consumer request by channel. Use the Consumer Channel Type received during onboarding
       in: header
       name: WM_CONSUMER.CHANNEL.TYPE
       required: false
@@ -679,8 +647,7 @@ components:
       schema:
         type: string
     correlationId:
-      description: A unique ID which identifies each API call and used to track and
-        debug issues; use a random generated GUID for this ID
+      description: A unique ID which identifies each API call and used to track and debug issues; use a random generated GUID for this ID
       example: b3261d2d-028a-4ef7-8602-633c23200af6
       in: header
       name: WM_QOS.CORRELATION_ID
@@ -704,8 +671,7 @@ components:
         statusInfo:
           properties:
             subsidyEnrolled:
-              description: A Boolean parameter that allows all sellers to completely enroll in
-                or out of the Competitive Price Adjustment program
+              description: A Boolean parameter that allows all sellers to completely enroll in or out of the Competitive Price Adjustment program
               type: boolean
             subsidyPreference:
               type: boolean
@@ -754,8 +720,7 @@ components:
         errors:
           type: object
         feedId:
-          description: A unique ID, returned from the Bulk Upload API, used for tracking
-            the feed file
+          description: A unique ID, returned from the Bulk Upload API, used for tracking the feed file
           type: string
       type: object
     GatewayError:
@@ -897,8 +862,7 @@ components:
           xml:
             namespace: http://walmart.com/
         sku:
-          description: An arbitrary alphanumeric unique ID, specified by the seller, which
-            identifies each item.
+          description: An arbitrary alphanumeric unique ID, specified by the seller, which identifies each item.
           type: string
           xml:
             namespace: http://walmart.com/
@@ -1059,8 +1023,7 @@ components:
     StatusInfo:
       properties:
         subsidyEnrolled:
-          description: A Boolean parameter that allows all sellers to completely enroll in
-            or out of the Competitive Price Adjustment program
+          description: A Boolean parameter that allows all sellers to completely enroll in or out of the Competitive Price Adjustment program
           type: boolean
         subsidyPreference:
           type: boolean

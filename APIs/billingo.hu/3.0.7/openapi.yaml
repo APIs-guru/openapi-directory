@@ -7,12 +7,7 @@ info:
     email: hello@billingo.hu
     name: Billingo Support
     url: https://www.billingo.hu/kapcsolat
-  description: This is a Billingo API v3 documentation. Our API based on REST
-    software architectural style. API has resource-oriented URLs, accepts
-    JSON-encoded request bodies and returns JSON-encoded responses. To use this
-    API you have to generate a new API key on our
-    [site](https://app.billingo.hu/api-key). After that, you can test your API
-    key on this page.
+  description: This is a Billingo API v3 documentation. Our API based on REST software architectural style. API has resource-oriented URLs, accepts JSON-encoded request bodies and returns JSON-encoded responses. To use this API you have to generate a new API key on our [site](https://app.billingo.hu/api-key). After that, you can test your API key on this page.
   termsOfService: https://www.billingo.hu/felhasznalasi-feltetelek
   title: Billingo API v3
   version: 3.0.7
@@ -44,9 +39,7 @@ tags:
 paths:
   /bank-accounts:
     get:
-      description: Returns a list of your bank accounts. The bank accounts are
-        returned sorted by creation date, with the most recent bank account
-        appearing first.
+      description: Returns a list of your bank accounts. The bank accounts are returned sorted by creation date, with the most recent bank account appearing first.
       operationId: ListBankAccount
       parameters:
         - in: query
@@ -103,8 +96,7 @@ paths:
       tags:
         - BankAccount
     post:
-      description: Create a new bank account. Returns a bank account object if the
-        create is succeded.
+      description: Create a new bank account. Returns a bank account object if the create is succeded.
       operationId: CreateBankAccount
       requestBody:
         content:
@@ -252,8 +244,7 @@ paths:
       tags:
         - BankAccount
     put:
-      description: Update an existing bank accounts. Returns a bank account object if
-        the update is succeded.
+      description: Update an existing bank accounts. Returns a bank account object if the update is succeded.
       operationId: UpdateBankAccount
       parameters:
         - in: path
@@ -367,9 +358,7 @@ paths:
         - Currency
   /document-blocks:
     get:
-      description: Returns a list of your document blocks. The document blocks are
-        returned sorted by creation date, with the most recent document blocks
-        appearing first.
+      description: Returns a list of your document blocks. The document blocks are returned sorted by creation date, with the most recent document blocks appearing first.
       operationId: ListDocumentBlock
       parameters:
         - in: query
@@ -427,8 +416,7 @@ paths:
         - DocumentBlock
   /documents:
     get:
-      description: Returns a list of your documents. The documents are returned sorted
-        by creation date, with the most recent documents appearing first.
+      description: Returns a list of your documents. The documents are returned sorted by creation date, with the most recent documents appearing first.
       operationId: ListDocument
       parameters:
         - in: query
@@ -487,16 +475,14 @@ paths:
           schema:
             format: date
             type: string
-        - description: Starting number of the document, should not contain year or any
-            other formatting. Required if `start_year` given
+        - description: Starting number of the document, should not contain year or any other formatting. Required if `start_year` given
           example: "1"
           in: query
           name: start_number
           required: false
           schema:
             type: integer
-        - description: Ending number of the document, should not contain year or any other
-            formatting. Required if `end_year` given
+        - description: Ending number of the document, should not contain year or any other formatting. Required if `end_year` given
           example: "10"
           in: query
           name: end_number
@@ -557,8 +543,7 @@ paths:
       tags:
         - Document
     post:
-      description: Create a new document. Returns a document object if the create is
-        succeded.
+      description: Create a new document. Returns a document object if the create is succeded.
       operationId: CreateDocument
       requestBody:
         content:
@@ -661,8 +646,7 @@ paths:
         - Document
   "/documents/{id}/cancel":
     post:
-      description: Cancel a document. Returns a cancellation document object if the
-        cancellation is succeded.
+      description: Cancel a document. Returns a cancellation document object if the cancellation is succeded.
       operationId: CancelDocument
       parameters:
         - in: path
@@ -715,8 +699,7 @@ paths:
         - Document
   "/documents/{id}/create-from-proforma":
     post:
-      description: Create a new document from proforma. Returns a document object if
-        the create is succeded.
+      description: Create a new document from proforma. Returns a document object if the create is succeded.
       operationId: CreateDocumentFromProforma
       parameters:
         - in: path
@@ -811,8 +794,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ClientError"
-          description: Document PDF has not generated yet. You should try to download
-            again later.
+          description: Document PDF has not generated yet. You should try to download again later.
           headers:
             Retry-After:
               description: How many seconds you have to wait before making new request.
@@ -1004,8 +986,7 @@ paths:
       tags:
         - Document
     put:
-      description: Update payment history an existing document. Returns a payment
-        history object if the update is succeded.
+      description: Update payment history an existing document. Returns a payment history object if the update is succeded.
       operationId: UpdatePayment
       parameters:
         - in: path
@@ -1223,8 +1204,7 @@ paths:
         - Organization
   /partners:
     get:
-      description: Returns a list of your partners. The partners are returned sorted
-        by creation date, with the most recent partners appearing first.
+      description: Returns a list of your partners. The partners are returned sorted by creation date, with the most recent partners appearing first.
       operationId: ListPartner
       parameters:
         - in: query
@@ -1429,8 +1409,7 @@ paths:
       tags:
         - Partner
     put:
-      description: Update an existing partner. Returns a partner object if the update
-        is succeded.
+      description: Update an existing partner. Returns a partner object if the update is succeded.
       operationId: UpdatePartner
       parameters:
         - in: path
@@ -1490,8 +1469,7 @@ paths:
         - Partner
   /products:
     get:
-      description: Returns a list of your products. The partners are returned sorted
-        by creation date, with the most recent partners appearing first.
+      description: Returns a list of your products. The partners are returned sorted by creation date, with the most recent partners appearing first.
       operationId: ListProduct
       parameters:
         - in: query
@@ -1696,8 +1674,7 @@ paths:
       tags:
         - Product
     put:
-      description: Update an existing product. Returns a product object if the update
-        is succeded.
+      description: Update an existing product. Returns a product object if the update is succeded.
       operationId: UpdateProduct
       parameters:
         - in: path
@@ -2011,10 +1988,7 @@ components:
         - currency
       type: object
     BankAccountList:
-      description: A object with a data property that contains an array of up to limit
-        bank accounts. Each entry in the array is a separate bank account
-        object. If no more bank accounts are available, the resulting array will
-        be empty.
+      description: A object with a data property that contains an array of up to limit bank accounts. Each entry in the array is a separate bank account object. If no more bank accounts are available, the resulting array will be empty.
       properties:
         current_page:
           type: integer
@@ -2453,10 +2427,7 @@ components:
           type: string
       type: object
     DocumentBlockList:
-      description: A object with a data property that contains an array of up to limit
-        document blocks. Each entry in the array is a separate document block
-        object. If no more document block are available, the resulting array
-        will be empty.
+      description: A object with a data property that contains an array of up to limit document blocks. Each entry in the array is a separate document block object. If no more document block are available, the resulting array will be empty.
       properties:
         current_page:
           type: integer
@@ -2583,9 +2554,7 @@ components:
         - sk
       type: string
     DocumentList:
-      description: A object with a data property that contains an array of up to limit
-        documents. Each entry in the array is a separate document object. If no
-        more documents are available, the resulting array will be empty.
+      description: A object with a data property that contains an array of up to limit documents. Each entry in the array is a separate document object. If no more documents are available, the resulting array will be empty.
       properties:
         current_page:
           type: integer
@@ -2775,9 +2744,7 @@ components:
             id:
               type: integer
     PartnerList:
-      description: A object with a data property that contains an array of up to limit
-        partners. Each entry in the array is a separate partner object. If no
-        more partners are available, the resulting array will be empty.
+      description: A object with a data property that contains an array of up to limit partners. Each entry in the array is a separate partner object. If no more partners are available, the resulting array will be empty.
       properties:
         current_page:
           type: integer
@@ -2908,9 +2875,7 @@ components:
         - unit
       type: object
     ProductList:
-      description: A object with a data property that contains an array of up to limit
-        products. Each entry in the array is a separate product object. If no
-        more products are available, the resulting array will be empty.
+      description: A object with a data property that contains an array of up to limit products. Each entry in the array is a separate product object. If no more products are available, the resulting array will be empty.
       properties:
         current_page:
           type: integer

@@ -6,19 +6,13 @@ basePath: /
 info:
   contact:
     x-twitter: VictorOps
-  description: >
-    This API allows you to interact with the VictorOps platform in
-    various ways. Your account may be limited
-
+  description: |
+    This API allows you to interact with the VictorOps platform in various ways. Your account may be limited
     to a total number of API calls per month. Also, some of these API calls have rate limits.
 
-
     NOTE: In this documentation when creating a sample curl request (clicking the TRY IT OUT! button), in some API
-
     viewing interfaces, the '@' in an email address may be encoded. Please note that the REST endpoints will not
-
     process the encoded version. Make sure that the encoded character '%40' is changed to its unencoded form before
-
     submitting the curl request.
   title: VictorOps
   version: 0.0.3
@@ -42,8 +36,7 @@ parameters:
     schema:
       properties:
         names:
-          description: Routing keys that maintenance mode state covers. An empty list
-            indicates global maintenance mode
+          description: Routing keys that maintenance mode state covers. An empty list indicates global maintenance mode
           items:
             type: string
           type: array
@@ -282,8 +275,7 @@ parameters:
     type: string
 responses:
   "400":
-    description: Problem with the request arguments.  The response payload may
-      include an error message.
+    description: Problem with the request arguments.  The response payload may include an error message.
   "401":
     description: Authentication parameters missing
   "403":
@@ -346,10 +338,8 @@ paths:
         - Alerts
   /api-public/v1/incidents:
     get:
-      description: >
-        Get a list of the currently open, acknowledged and recently
-        resolved incidents.
-
+      description: |
+        Get a list of the currently open, acknowledged and recently resolved incidents.
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -375,20 +365,14 @@ paths:
       tags:
         - Incidents
     post:
-      description: >
+      description: |
         Create a new incident.
 
-
         This call replicates the function of our
-
         <a href="https://help.victorops.com/knowledge-base/manual-incident-creation/">manual incident creation process</a>.
-
         Monitoring tools and custom integrations
-
         should be configured using our
-
         <a href="https://help.victorops.com/knowledge-base/victorops-restendpoint-integration/">REST Endpoint</a>.
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -416,10 +400,8 @@ paths:
         - Incidents
   /api-public/v1/incidents/ack:
     patch:
-      description: >
-        The incident(s) must be currently open.  The user supplied must be
-        a valid VictorOps user and a member of your organization.
-
+      description: |
+        The incident(s) must be currently open.  The user supplied must be a valid VictorOps user and a member of your organization.
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -446,10 +428,8 @@ paths:
         - Incidents
   /api-public/v1/incidents/byUser/ack:
     patch:
-      description: >
-        The incident(s) must be currently open.  The user supplied must be
-        a valid VictorOps user and a member of your organization.
-
+      description: |
+        The incident(s) must be currently open.  The user supplied must be a valid VictorOps user and a member of your organization.
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -476,10 +456,8 @@ paths:
         - Incidents
   /api-public/v1/incidents/byUser/resolve:
     patch:
-      description: >
-        The incident(s) must be currently open.  The user supplied must be
-        a valid VictorOps user and a member of your organization.
-
+      description: |
+        The incident(s) must be currently open.  The user supplied must be a valid VictorOps user and a member of your organization.
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -506,10 +484,8 @@ paths:
         - Incidents
   /api-public/v1/incidents/reroute:
     post:
-      description: >
-        Reroute one or more incidents to one or more users and/or
-        escalation policies
-
+      description: |
+        Reroute one or more incidents to one or more users and/or escalation policies
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -526,10 +502,8 @@ paths:
         - Incidents
   /api-public/v1/incidents/resolve:
     patch:
-      description: >
-        The incident(s) must be currently open.  The user supplied must be
-        a valid VictorOps user and a member of your organization.
-
+      description: |
+        The incident(s) must be currently open.  The user supplied must be a valid VictorOps user and a member of your organization.
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -585,9 +559,7 @@ paths:
         "403":
           $ref: "#/responses/403"
         "409":
-          description: You have an active global maintanance mode and are attempting to
-            start a second. You may only have a single Global maintenance mode
-            at a time
+          description: You have an active global maintanance mode and are attempting to start a second. You may only have a single Global maintenance mode at a time
         "420":
           description: You have reached the limit of allowed active maintenance modes
         "500":
@@ -707,10 +679,8 @@ paths:
       tags:
         - Scheduled Overrides
     post:
-      description: >
-        Creates a new scheduled override. Start and end dates are in
-        ISO8601 format. E.g. `2018-09-28'T'05:00:00Z`
-
+      description: |
+        Creates a new scheduled override. Start and end dates are in ISO8601 format. E.g. `2018-09-28'T'05:00:00Z`
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -873,8 +843,7 @@ paths:
           type: string
       responses:
         "200":
-          description: The assignment that was deleted for the given scheduled override
-            and policySlug
+          description: The assignment that was deleted for the given scheduled override and policySlug
           schema:
             $ref: "#/definitions/Assignment"
         "400":
@@ -1114,12 +1083,9 @@ paths:
         - Personal Paging Policy Values
   "/api-public/v1/policies/{policy}/oncall/user":
     patch:
-      description: >
-        Replaces a currently on-call user in the escalation policy with
-        another.  In many cases, the policy slug
-
+      description: |
+        Replaces a currently on-call user in the escalation policy with another.  In many cases, the policy slug
         will match the slug of the team that contains it.
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1151,10 +1117,8 @@ paths:
         - On-call
   "/api-public/v1/profile/{username}/policies":
     get:
-      description: >
-        Get all the paging policy steps for the user on the org associated
-        with the API key
-
+      description: |
+        Get all the paging policy steps for the user on the org associated with the API key
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1460,9 +1424,8 @@ paths:
         "404":
           $ref: "#/responses/team-not-found"
         "422":
-          description: >
-            Team name or email is unavailable, or you have reached your team
-            limit.
+          description: |
+            Team name or email is unavailable, or you have reached your team limit.
         "500":
           $ref: "#/responses/500"
       summary: Add a team
@@ -1494,9 +1457,8 @@ paths:
         "404":
           $ref: "#/responses/team-not-found"
         "422":
-          description: >
-            There was a problem with the delete such as the replacement team
-            was not found.
+          description: |
+            There was a problem with the delete such as the replacement team was not found.
         "500":
           $ref: "#/responses/500"
       summary: Remove a team
@@ -1529,9 +1491,8 @@ paths:
         "404":
           $ref: "#/responses/team-not-found"
         "422":
-          description: >
-            Team name or email is unavailable, or you have reached your team
-            limit.
+          description: |
+            Team name or email is unavailable, or you have reached your team limit.
         "500":
           $ref: "#/responses/500"
       summary: Retrieve information for a team
@@ -1565,9 +1526,8 @@ paths:
         "404":
           $ref: "#/responses/team-not-found"
         "422":
-          description: >
-            Team name or email is unavailable, or you have reached your team
-            limit.
+          description: |
+            Team name or email is unavailable, or you have reached your team limit.
         "500":
           $ref: "#/responses/500"
       summary: Update a team
@@ -1633,9 +1593,8 @@ paths:
         "404":
           $ref: "#/responses/team-not-found"
         "422":
-          description: >
-            Team name or email is unavailable, or you have reached your team
-            limit.
+          description: |
+            Team name or email is unavailable, or you have reached your team limit.
         "500":
           $ref: "#/responses/500"
       summary: Retrieve a list of members for a team
@@ -1669,9 +1628,8 @@ paths:
         "404":
           $ref: "#/responses/team-not-found"
         "422":
-          description: >
-            Team name or email is unavailable, or you have reached your team
-            limit.
+          description: |
+            Team name or email is unavailable, or you have reached your team limit.
         "500":
           $ref: "#/responses/500"
       summary: Add a team member
@@ -1709,9 +1667,8 @@ paths:
         "404":
           $ref: "#/responses/team-not-found"
         "422":
-          description: >
-            There was a problem with the delete such as the replacement team
-            member was not found.
+          description: |
+            There was a problem with the delete such as the replacement team member was not found.
         "500":
           $ref: "#/responses/500"
       summary: Remove a team member
@@ -1720,13 +1677,10 @@ paths:
   "/api-public/v1/team/{team}/oncall/schedule":
     get:
       deprecated: true
-      description: >
-        __NOTE: This call is deprecated. Please use `GET
-        /api-public/v2/team/{team}/oncall/schedule`.__
-
+      description: |
+        __NOTE: This call is deprecated. Please use `GET /api-public/v2/team/{team}/oncall/schedule`.__
 
         Get the on-call schedule for a team, including on-call overrides.
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1761,13 +1715,10 @@ paths:
   "/api-public/v1/team/{team}/oncall/user":
     patch:
       deprecated: true
-      description: >
-        __NOTE: This API call is deprecated. Please use `PATCH
-        /api-public/v2/policies/{policy}/oncall/user`__
-
+      description: |
+        __NOTE: This API call is deprecated. Please use `PATCH /api-public/v2/policies/{policy}/oncall/user`__
 
         Replaces a currently on-call user on the team with another.
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1813,8 +1764,7 @@ paths:
           type: string
       responses:
         "200":
-          description: The escalation policy list. This does not include details about the
-            actual notification steps of the policy.
+          description: The escalation policy list. This does not include details about the actual notification steps of the policy.
           schema:
             $ref: "#/definitions/EscalationPolicyList"
         "400":
@@ -1826,9 +1776,8 @@ paths:
         "404":
           $ref: "#/responses/team-not-found"
         "422":
-          description: >
-            Team name or email is unavailable, or you have reached your team
-            limit.
+          description: |
+            Team name or email is unavailable, or you have reached your team limit.
         "500":
           $ref: "#/responses/500"
       summary: Retrieve a list of escalation policies for a team
@@ -1888,9 +1837,8 @@ paths:
         "404":
           $ref: "#/responses/user-not-found"
         "422":
-          description: >
-            Username or email is unavailable, or you have reached your user
-            limit.
+          description: |
+            Username or email is unavailable, or you have reached your user limit.
         "500":
           $ref: "#/responses/500"
       summary: Add a user
@@ -1898,10 +1846,8 @@ paths:
         - Users
   "/api-public/v1/user/{user}":
     delete:
-      description: >
-        Remove a user from your organization. If no replacement is
-        specified, an empty JSON payload ("{}") is still required.
-
+      description: |
+        Remove a user from your organization. If no replacement is specified, an empty JSON payload ("{}") is still required.
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -1925,9 +1871,8 @@ paths:
         "404":
           $ref: "#/responses/user-not-found"
         "422":
-          description: >
-            There was a problem with the delete such as a replacement is
-            required or the replacement user was not found.
+          description: |
+            There was a problem with the delete such as a replacement is required or the replacement user was not found.
         "500":
           $ref: "#/responses/500"
       summary: Remove a user
@@ -1960,9 +1905,8 @@ paths:
         "404":
           $ref: "#/responses/user-not-found"
         "422":
-          description: >
-            Username or email is unavailable, or you have reached your user
-            limit.
+          description: |
+            Username or email is unavailable, or you have reached your user limit.
         "500":
           $ref: "#/responses/500"
       summary: Retrieve information for a user
@@ -1996,9 +1940,8 @@ paths:
         "404":
           $ref: "#/responses/user-not-found"
         "422":
-          description: >
-            Username or email is unavailable, or you have reached your user
-            limit.
+          description: |
+            Username or email is unavailable, or you have reached your user limit.
         "500":
           $ref: "#/responses/500"
       summary: Update a user
@@ -2468,13 +2411,10 @@ paths:
   "/api-public/v1/user/{user}/oncall/schedule":
     get:
       deprecated: true
-      description: >
-        __NOTE: This call is deprecated. Please use `GET
-        /api-public/v2/user/{user}/oncall/schedule`.__
-
+      description: |
+        __NOTE: This call is deprecated. Please use `GET /api-public/v2/user/{user}/oncall/schedule`.__
 
         Get the on-call schedule for a user for all teams, including on-call overrides.
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -2605,10 +2545,8 @@ paths:
         - On-call
   "/api-public/v2/user/{user}/oncall/schedule":
     get:
-      description: >
-        Get the on-call schedule for a user for all teams the user is on,
-        including on-call overrides.
-
+      description: |
+        Get the on-call schedule for a user for all teams the user is on, including on-call overrides.
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -2643,24 +2581,19 @@ paths:
   /api-reporting/v1/incidents:
     get:
       deprecated: true
-      description: >
+      description: |
         
         __NOTE: This call is deprecated. Please use `GET /api-reporting/v2/incidents`.__
 
-
         Retrieve incident history for your company, searching over date ranges and with filtering options.  This is historical
-
         data, and may be up to 15 minutes behind real-time incident data.  By default, only resolved incidents will be returned.
 
-
         This API may be called a maximum of once a minute.
-
 
         Incident requests are paginated with a offset and limit query string parameters.
           The query for incidents is run and offset records are skipped, after which limit records will be returned.
 
         The default offset is 0 and the default limit is 20. The maximum value allowed for limit is 100.
-
 
         On return, the total number of records available for that query will be returned in the payload as 'total'.
       parameters:
@@ -2668,45 +2601,38 @@ paths:
         - $ref: "#/parameters/apiKey"
         - $ref: "#/parameters/offset"
         - $ref: "#/parameters/limit"
-        - description: The entity ID involved  This is the unique identifier for the
-            entity causing the incident.
+        - description: The entity ID involved  This is the unique identifier for the entity causing the incident.
           in: query
           name: entityId
           required: false
           type: string
-        - description: >
-            The incident number as shown in VictorOps Multiple values and
-            ranges are allowed: 4,5,20:50
+        - description: |
+            The incident number as shown in VictorOps Multiple values and ranges are allowed: 4,5,20:50
           in: query
           name: incidentNumber
           required: false
           type: string
-        - description: Return incidents started after this timestamp Specify the timestamp
-            in ISO8601 format
+        - description: Return incidents started after this timestamp Specify the timestamp in ISO8601 format
           in: query
           name: startedAfter
           required: false
           type: string
-        - description: Find incidents started before this timestamp  Specify the timestamp
-            in ISO8601 format
+        - description: Find incidents started before this timestamp  Specify the timestamp in ISO8601 format
           in: query
           name: startedBefore
           required: false
           type: string
-        - description: The host involved in the incident Multiple values can be separated
-            with commas.
+        - description: The host involved in the incident Multiple values can be separated with commas.
           in: query
           name: host
           required: false
           type: string
-        - description: The service involved in the incident (if any) Multiple values can
-            be separated with commas.
+        - description: The service involved in the incident (if any) Multiple values can be separated with commas.
           in: query
           name: service
           required: false
           type: string
-        - description: The current phase of the incident "resolved", "triggered" or
-            "acknowledged". Multiple values can be separated with commas.
+        - description: The current phase of the incident "resolved", "triggered" or "acknowledged". Multiple values can be separated with commas.
           in: query
           name: currentPhase
           required: false
@@ -2733,12 +2659,9 @@ paths:
         - Reporting
   "/api-reporting/v1/team/{team}/oncall/log":
     get:
-      description: >
-        Returns a log of user shift changes for the specified team. This is
-        historical
-
+      description: |
+        Returns a log of user shift changes for the specified team. This is historical
         data, and may be up to 15 minutes behind real-time log data.
-
 
         This API may be called a maximum of 60 times per minute.
       parameters:
@@ -2749,25 +2672,19 @@ paths:
           name: team
           required: true
           type: string
-        - description: Return shift changes occurring after this timestamp. The default is
-            the start of the day at midnight. Specify the timestamp in ISO8601
-            format
+        - description: Return shift changes occurring after this timestamp. The default is the start of the day at midnight. Specify the timestamp in ISO8601 format
           format: date-time
           in: query
           name: start
           required: false
           type: string
-        - description: Return shift changes occurring before this timestamp. The default
-            is the end of the day at 11:59:59. Specify the timestamp in ISO8601
-            format
+        - description: Return shift changes occurring before this timestamp. The default is the end of the day at 11:59:59. Specify the timestamp in ISO8601 format
           format: date-time
           in: query
           name: end
           required: false
           type: string
-        - description: The VictorOps user ID. Return shift changes occurring during the
-            interval specified for this user. Without this parameter, all
-            relevant users (with respect to the specified interval) are returned
+        - description: The VictorOps user ID. Return shift changes occurring during the interval specified for this user. Without this parameter, all relevant users (with respect to the specified interval) are returned
           in: query
           name: userName
           required: false
@@ -2792,22 +2709,17 @@ paths:
         - Reporting
   /api-reporting/v2/incidents:
     get:
-      description: >
-        Retrieve incident history for your company, searching over date
-        ranges and with filtering options.
-
+      description: |
+        Retrieve incident history for your company, searching over date ranges and with filtering options.
 
         This API may be called a maximum of once a minute.
-
 
         Incident requests are paginated with a offset and limit query string parameters.
           The query for incidents is run and offset records are skipped, after which limit records will be returned.
 
         The default offset is 0 and the default limit is 20. The maximum value allowed for limit is 100.
 
-
         Unless specified otherwise with the parameter currentPhase, the response will only contain resolved incidents.
-
 
         On return, the total number of records available for that query will be returned in the payload as 'total'.
       parameters:
@@ -2815,46 +2727,38 @@ paths:
         - $ref: "#/parameters/apiKey"
         - $ref: "#/parameters/offset"
         - $ref: "#/parameters/limit"
-        - description: The entity ID involved  This is the unique identifier for the
-            entity causing the incident.
+        - description: The entity ID involved  This is the unique identifier for the entity causing the incident.
           in: query
           name: entityId
           required: false
           type: string
-        - description: >
-            The incident number as shown in VictorOps Multiple values and
-            ranges are allowed: 4,5,20:50
+        - description: |
+            The incident number as shown in VictorOps Multiple values and ranges are allowed: 4,5,20:50
           in: query
           name: incidentNumber
           required: false
           type: string
-        - description: Return incidents started after this timestamp Specify the timestamp
-            in ISO8601 format
+        - description: Return incidents started after this timestamp Specify the timestamp in ISO8601 format
           in: query
           name: startedAfter
           required: false
           type: string
-        - description: Find incidents started before this timestamp  Specify the timestamp
-            in ISO8601 format
+        - description: Find incidents started before this timestamp  Specify the timestamp in ISO8601 format
           in: query
           name: startedBefore
           required: false
           type: string
-        - description: The host involved in the incident Multiple values can be separated
-            with commas.
+        - description: The host involved in the incident Multiple values can be separated with commas.
           in: query
           name: host
           required: false
           type: string
-        - description: The service involved in the incident (if any) Multiple values can
-            be separated with commas.
+        - description: The service involved in the incident (if any) Multiple values can be separated with commas.
           in: query
           name: service
           required: false
           type: string
-        - description: The current phase of the incident "resolved", "triggered" or
-            "acknowledged". Multiple values can be separated with commas. By
-            default, response contains only "resolved" incidents
+        - description: The current phase of the incident "resolved", "triggered" or "acknowledged". Multiple values can be separated with commas. By default, response contains only "resolved" incidents
           in: query
           name: currentPhase
           required: false
@@ -2927,8 +2831,7 @@ definitions:
         type: string
     type: object
   AckUser:
-    description: A JSON object with first/last name and email of the user that
-      acknowledged the incident.
+    description: A JSON object with first/last name and email of the user that acknowledged the incident.
     properties:
       email:
         type: string
@@ -2944,12 +2847,10 @@ definitions:
         description: The number of alerts received for this incident
         type: number
       currentPhase:
-        description: The current phase of the incident "resolved", "triggered" or
-          "acknowledged".
+        description: The current phase of the incident "resolved", "triggered" or "acknowledged".
         type: string
       entityId:
-        description: The unique identification of the entity being monitored that caused
-          the incident
+        description: The unique identification of the entity being monitored that caused the incident
         type: string
       host:
         description: The host on which the incident occurred
@@ -3005,8 +2906,7 @@ definitions:
         description: external friendly unique id for maintenance mode
         type: string
       isGlobal:
-        description: whether this instance is a global maintenance mode or for specific
-          routing keys
+        description: whether this instance is a global maintenance mode or for specific routing keys
         type: boolean
       startedAt:
         description: millis from epoch marking the start time
@@ -3063,8 +2963,7 @@ definitions:
         type: string
       expirationHours:
         default: 24
-        description: The validity duration for the invitatation/set password link sent
-          to the added user.
+        description: The validity duration for the invitatation/set password link sent to the added user.
         type: number
       firstName:
         type: string
@@ -3254,13 +3153,11 @@ definitions:
           The type of alert; INFO, WARNING, ACKNOWLEDGEMENT, CRITICAL, RECOVERY
         type: string
       monitoringTool:
-        description: The name of the monitoring system software (eg. nagios, icinga,
-          sensu, etc.)
+        description: The name of the monitoring system software (eg. nagios, icinga, sensu, etc.)
         type: string
       raw:
-        description: >
-          The full, raw alert details JSON string (i.e. parse the string into
-          a JSON object)
+        description: |
+          The full, raw alert details JSON string (i.e. parse the string into a JSON object)
         type: string
       stateMessage:
         description: Any additional status information from the alert item.
@@ -3287,8 +3184,7 @@ definitions:
         description: The number of alerts received for this incident
         type: number
       currentPhase:
-        description: The current phase of the incident "resolved", "triggered" or
-          "acknowledged".
+        description: The current phase of the incident "resolved", "triggered" or "acknowledged".
         type: string
       endTime:
         description: The time the incident ended
@@ -3297,8 +3193,7 @@ definitions:
         description: The display name of the entity causing the incident
         type: string
       entityId:
-        description: The unique identification of the entity being monitored that caused
-          the incident
+        description: The unique identification of the entity being monitored that caused the incident
         type: string
       entityType:
         description: The type of entity causing the incident (host/service)
@@ -3431,8 +3326,7 @@ definitions:
   MaintenanceModeTarget:
     properties:
       names:
-        description: Routing keys that maintenance mode state covers. An empty list
-          indicates global maintenance mode
+        description: Routing keys that maintenance mode state covers. An empty list indicates global maintenance mode
         items:
           type: string
         type: array

@@ -500,20 +500,13 @@ paths:
         - Tags
   /transactions:
     get:
-      description: >
-        Retrieve a list of all transactions across all accounts for the
-        currently
-
+      description: |
+        Retrieve a list of all transactions across all accounts for the currently
         authenticated user. The returned list is [paginated](#pagination) and can
-
         be scrolled by following the `next` and `prev` links where present. To
-
         narrow the results to a specific date range pass one or both of
-
         `filter[since]` and `filter[until]` in the query string. These filter
-
         parameters **should not** be used for pagination. Results are ordered
-
         newest first to oldest last.
       parameters:
         - description: |
@@ -722,16 +715,11 @@ paths:
         - Transactions
   "/transactions/{transactionId}/relationships/tags":
     delete:
-      description: >
-        Disassociates one or more tags from a specific transaction. Tags
-        that are
-
+      description: |
+        Disassociates one or more tags from a specific transaction. Tags that are
         not associated are silently ignored. An HTTP `204` is returned on
-
         success. The associated tags, along with this request URL, are also
-
         exposed via the `tags` relationship on the transaction resource returned
-
         from `/transactions/{id}`.
       parameters:
         - description: |
@@ -853,9 +841,7 @@ paths:
               queryParameters: {}
             response:
               errors:
-                - detail: The request was not authenticated because no valid credential was found
-                    in the Authorization header, or the Authorization header was
-                    not present.
+                - detail: The request was not authenticated because no valid credential was found in the Authorization header, or the Authorization header was not present.
                   status: "401"
                   title: Not Authorized
             type: exampleRequestResponse
@@ -919,141 +905,86 @@ paths:
         Event:
           "{webhookURL}":
             post:
-              description: >
-                Once you have created a webhook in the Up API, events are sent to
-                the
-
+              description: |
+                Once you have created a webhook in the Up API, events are sent to the
                 webhook’s configured URL as JSON-encoded `POST` requests. The webhook
-
                 URL must respond with a HTTP `200` status on success.
 
-
                 It is important that the URL responds in a timely manner. If the URL
-
                 takes too long to respond (currently 30s), the request will be timed
-
                 out. For this reason it is strongly advised to avoid any heavy
-
                 processing before a response has been returned from the URL. A common
-
                 solution to this problem is to use a message broker such as RabbitMQ
-
                 to do the work asynchronously.
 
-
                 Event delivery is retried with exponential backoff in the case of any
-
                 non-`200` response status, if the URL is unreachable, or if the request
-
                 is timed out.
 
-
                 Refer to the `eventType` attribute in order to determine what course of
-
                 action to take when handling the event. The following event types are
-
                 currently sent:
-
 
                 **`PING`**
 
-
                 Manually triggered by calls to the webhook `ping` endpoint. Used for
-
                 testing and debugging purposes.
-
 
                 **`TRANSACTION_CREATED`**
 
-
                 Triggered whenever a new transaction is created in Up. This event
-
                 includes a `transaction` relationship that provides the unique
-
                 identifier for the transaction and a link to the transaction within the
-
                 Up API. This link should be used to retrieve the complete transaction
-
                 data.
-
 
                 **`TRANSACTION_SETTLED`**
 
-
                 Triggered whenever a transaction transitions from the `HELD` status to
-
                 the `SETTLED` status. This event includes a `transaction` relationship
-
                 that provides the unique identifier for the transaction and a link to
-
                 the transaction within the Up API. This link should be used to retrieve
-
                 the complete transaction data.
 
-
                 Due to external factors in banking processes, on rare occasions this
-
                 event may not be triggered. Separate `TRANSACTION_DELETED` and
-
                 `TRANSACTION_CREATED` events will be received in its place.
-
 
                 **`TRANSACTION_DELETED`**
 
-
                 Triggered whenever a `HELD` transaction is deleted from Up. This
-
                 generally occurs for example when a hotel deposit is returned. This
-
                 event includes a `transaction` relationship that provides the unique
-
                 identifier for the transaction, however no link is provided to the
-
                 transaction within the Up API as it no longer exists.
-
 
                 ## Securing Webhook Event Handlers
 
-
                 Incoming webhook event requests include a `X-Up-Authenticity-Signature`
-
                 header, which can be used to verify that the event was sent by Up.
-
                 Verification of the signature requires knowledge of the shared
-
                 `secretKey` that was returned upon creation of the webhook. This key is
-
                 known only to your application and to Up.
-
 
                 The verification process involves:
 
-
                 1. Taking the raw, unparsed webhook event request body.
-
                 2. Computing the SHA-256 HMAC signature of the request body, using the
                    shared `secretKey`.
                 3. Comparing the computed HMAC signature with the value of the
                    `X-Up-Authenticity-Signature` header.
 
                 If the computed SHA-256 HMAC signature matches the
-
                 `X-Up-Authenticity-Signature` header, the request is valid.
-
 
                 A few language-specific examples follow.
 
-
                 **Ruby**:
-
 
                 This example uses the Ruby on Rails framework.
 
-
                 ```ruby
-
                 require 'openssl'
-
 
                 def handle_webhook_event
                   received_signature =
@@ -1069,18 +1000,13 @@ paths:
                     # Process webhook event
                   end
                 end
-
                 ```
-
 
                 **PHP**:
 
-
                 This example uses the Laravel framework.
 
-
                 ```php
-
                 public function handleWebhookEvent(Request $request) {
                     $received_signature = $request->header(
                         'X-Up-Authenticity-Signature',
@@ -1093,18 +1019,13 @@ paths:
                         // Process webhook event
                     }
                 }
-
                 ```
-
 
                 **Go**:
 
-
                 This example is in plain Go.
 
-
                 ```go
-
                 import (
                     "crypto/hmac"
                     "crypto/sha256"
@@ -1112,7 +1033,6 @@ paths:
                     "io"
                     "net/http"
                 )
-
 
                 func handleWebhookEvent(w http.ResponseWriter, r *http.Request) {
                     receivedSignature, _ := hex.DecodeString(
@@ -1127,19 +1047,14 @@ paths:
                         // Process webhook event
                     }
                 }
-
                 ```
 
-
                 If the `secretKey` for a webhook is lost, simply create a new webhook
-
                 with the same URL, capture the returned `secretKey` and delete the
-
                 original webhook.
               parameters:
-                - description: >
+                - description: |
                     The SHA-256 HMAC signature of the raw request body, signed using
-
                     the `secretKey` of the webhook.
                   example: 317c0a8ea81df3f53c1d2aef5dcbf60492d0df557197b2990e71daa4a0693364
                   in: header
@@ -1184,42 +1099,26 @@ paths:
                           related: https://api.up.com.au/api/v1/webhooks/3c62e0a3-86e5-4dcd-a217-d7c1d096ba0e
                     type: webhook-events
                 type: examplePayload
-      description: >
+      description: |
         Create a new webhook with a given URL. The URL will receive webhook
-
         events as JSON-encoded `POST` requests. The URL must respond with a HTTP
-
         `200` status on success.
 
-
         There is currently a limit of 10 webhooks at any given time. Once this
-
         limit is reached, existing webhooks will need to be deleted before new
-
         webhooks can be created.
 
-
         Event delivery is retried with exponential backoff if the URL is
-
         unreachable or it does not respond with a `200` status. The response
-
         includes a `secretKey` attribute, which is used to sign requests sent to
-
         the webhook URL. It will not be returned from any other endpoints within
-
         the Up API. If the `secretKey` is lost, simply create a new webhook with
-
         the same URL, capture its `secretKey` and then delete the original
-
         webhook. See [Handling webhook events](#callback_post_webhookURL) for
-
         details on how to process webhook events.
 
-
         It is probably a good idea to test the webhook by
-
         [sending it a `PING` event](#post_webhooks_webhookId_ping) after creating
-
         it.
       requestBody:
         content:
@@ -1407,12 +1306,9 @@ paths:
         - Webhooks
   "/webhooks/{webhookId}/ping":
     post:
-      description: >
-        Send a `PING` event to a webhook by providing its unique
-        identifier.
-
+      description: |
+        Send a `PING` event to a webhook by providing its unique identifier.
         This is useful for testing and debugging purposes. The event is delivered
-
         asynchronously and its data is returned in the response to this request.
       parameters:
         - description: |
@@ -1473,10 +1369,8 @@ components:
             balance:
               allOf:
                 - $ref: "#/components/schemas/MoneyObject"
-              description: >
-                The available balance of the account, taking into account any
-                amounts
-
+              description: |
+                The available balance of the account, taking into account any amounts
                 that are currently on hold.
             createdAt:
               description: |
@@ -1513,7 +1407,7 @@ components:
                 links:
                   properties:
                     related:
-                      description: >
+                      description: |
                         The link to retrieve the related resource(s) in this relationship.
                       type: string
                   required:
@@ -1533,10 +1427,8 @@ components:
         - relationships
       type: object
     AccountTypeEnum:
-      description: >
-        Specifies the type of bank account. Currently returned values are
-        `SAVER`
-
+      description: |
+        Specifies the type of bank account. Currently returned values are `SAVER`
         and `TRANSACTIONAL`.
       enum:
         - SAVER
@@ -1573,10 +1465,8 @@ components:
             - name
           type: object
         id:
-          description: >
-            The unique identifier for this category. This is a human-readable
-            but
-
+          description: |
+            The unique identifier for this category. This is a human-readable but
             URL-safe value.
           type: string
         links:
@@ -1610,7 +1500,7 @@ components:
                 links:
                   properties:
                     related:
-                      description: >
+                      description: |
                         The link to retrieve the related resource(s) in this relationship.
                       type: string
                   required:
@@ -1638,7 +1528,7 @@ components:
                 links:
                   properties:
                     related:
-                      description: >
+                      description: |
                         The link to retrieve the related resource(s) in this relationship.
                       type: string
                   required:
@@ -1690,21 +1580,15 @@ components:
         Provides information about an error processing a request.
       properties:
         detail:
-          description: >
-            A detailed description of this error. This should be considered
-            unique
-
+          description: |
+            A detailed description of this error. This should be considered unique
             to individual occurrences of an error and subject to change. It is
-
             useful for debugging purposes.
           type: string
         source:
-          description: >
-            If applicable, location in the request that this error relates to.
-            This
-
+          description: |
+            If applicable, location in the request that this error relates to. This
             may be a parameter in the query string, or a an attribute in the
-
             request body.
           properties:
             parameter:
@@ -1719,19 +1603,15 @@ components:
               type: string
           type: object
         status:
-          description: >
+          description: |
             The HTTP status code associated with this error. This can also be
-
             obtained from the response headers. The status indicates the broad type
-
             of error according to HTTP semantics.
           type: string
         title:
-          description: >
+          description: |
             A short description of this error. This should be stable across
-
             multiple occurrences of this type of error and typically expands on the
-
             reason for the status code.
           type: string
       required:
@@ -1814,11 +1694,9 @@ components:
         foreignAmount:
           allOf:
             - $ref: "#/components/schemas/MoneyObject"
-          description: >
+          description: |
             The foreign currency amount of this transaction while in the `HELD`
-
             status. This field will be `null` for domestic transactions. The amount
-
             was converted to the AUD amount reflected in the `amount` field.
           nullable: true
       required:
@@ -1826,12 +1704,9 @@ components:
         - foreignAmount
       type: object
     ListAccountsResponse:
-      description: >
-        Successful response to get all accounts. This returns a paginated
-        list of
-
+      description: |
+        Successful response to get all accounts. This returns a paginated list of
         accounts, which can be scrolled by following the `prev` and `next` links
-
         if present.
       properties:
         data:
@@ -1843,17 +1718,14 @@ components:
         links:
           properties:
             next:
-              description: >
+              description: |
                 The link to the next page in the results. If this value is `null`
-
                 there is no next page.
               nullable: true
               type: string
             prev:
-              description: >
-                The link to the previous page in the results. If this value is
-                `null`
-
+              description: |
+                The link to the previous page in the results. If this value is `null`
                 there is no previous page.
               nullable: true
               type: string
@@ -1894,17 +1766,14 @@ components:
         links:
           properties:
             next:
-              description: >
+              description: |
                 The link to the next page in the results. If this value is `null`
-
                 there is no next page.
               nullable: true
               type: string
             prev:
-              description: >
-                The link to the previous page in the results. If this value is
-                `null`
-
+              description: |
+                The link to the previous page in the results. If this value is `null`
                 there is no previous page.
               nullable: true
               type: string
@@ -1931,17 +1800,14 @@ components:
         links:
           properties:
             next:
-              description: >
+              description: |
                 The link to the next page in the results. If this value is `null`
-
                 there is no next page.
               nullable: true
               type: string
             prev:
-              description: >
-                The link to the previous page in the results. If this value is
-                `null`
-
+              description: |
+                The link to the previous page in the results. If this value is `null`
                 there is no previous page.
               nullable: true
               type: string
@@ -1954,12 +1820,9 @@ components:
         - links
       type: object
     ListWebhookDeliveryLogsResponse:
-      description: >
-        Successful response to get all delivery logs for a webhook. This
-        returns
-
+      description: |
+        Successful response to get all delivery logs for a webhook. This returns
         a paginated list of delivery logs, which can be scrolled by following the
-
         `next` and `prev` links if present.
       properties:
         data:
@@ -1971,17 +1834,14 @@ components:
         links:
           properties:
             next:
-              description: >
+              description: |
                 The link to the next page in the results. If this value is `null`
-
                 there is no next page.
               nullable: true
               type: string
             prev:
-              description: >
-                The link to the previous page in the results. If this value is
-                `null`
-
+              description: |
+                The link to the previous page in the results. If this value is `null`
                 there is no previous page.
               nullable: true
               type: string
@@ -1994,12 +1854,9 @@ components:
         - links
       type: object
     ListWebhooksResponse:
-      description: >
-        Successful response to get all webhooks. This returns a paginated
-        list of
-
+      description: |
+        Successful response to get all webhooks. This returns a paginated list of
         webhooks, which can be scrolled by following the `prev` and `next` links
-
         if present.
       properties:
         data:
@@ -2011,17 +1868,14 @@ components:
         links:
           properties:
             next:
-              description: >
+              description: |
                 The link to the next page in the results. If this value is `null`
-
                 there is no next page.
               nullable: true
               type: string
             prev:
-              description: >
-                The link to the previous page in the results. If this value is
-                `null`
-
+              description: |
+                The link to the previous page in the results. If this value is `null`
                 there is no previous page.
               nullable: true
               type: string
@@ -2042,21 +1896,15 @@ components:
             The ISO 4217 currency code.
           type: string
         value:
-          description: >
-            The amount of money, formatted as a string in the relevant
-            currency.
-
+          description: |
+            The amount of money, formatted as a string in the relevant currency.
             For example, for an Australian dollar value of $10.56, this field will
-
             be `"10.56"`. The currency symbol is not included in the string.
           type: string
         valueInBaseUnits:
-          description: >
-            The amount of money in the smallest denomination for the currency,
-            as a
-
+          description: |
+            The amount of money in the smallest denomination for the currency, as a
             64-bit integer.  For example, for an Australian dollar value of $10.56,
-
             this field will be `1056`.
           type: integer
       required:
@@ -2086,28 +1934,22 @@ components:
         - meta
       type: object
     RoundUpObject:
-      description: >
-        Provides information about how a Round Up was applied, such as
-        whether or
-
+      description: |
+        Provides information about how a Round Up was applied, such as whether or
         not a boost was included in the Round Up.
       properties:
         amount:
           allOf:
             - $ref: "#/components/schemas/MoneyObject"
-          description: >
-            The total amount of this Round Up, including any boosts,
-            represented as
-
+          description: |
+            The total amount of this Round Up, including any boosts, represented as
             a negative value.
         boostPortion:
           allOf:
             - $ref: "#/components/schemas/MoneyObject"
-          description: >
+          description: |
             The portion of the Round Up `amount` owing to boosted Round Ups,
-
             represented as a negative value. If no boost was added to the Round Up
-
             this field will be `null`.
           nullable: true
       required:
@@ -2119,7 +1961,7 @@ components:
         Uniquely identifies a single tag in the API.
       properties:
         id:
-          description: >
+          description: |
             The label of the tag, which also acts as the tag’s unique identifier.
           type: string
         type:
@@ -2134,7 +1976,7 @@ components:
         Provides information about a tag.
       properties:
         id:
-          description: >
+          description: |
             The label of the tag, which also acts as the tag’s unique identifier.
           type: string
         relationships:
@@ -2144,7 +1986,7 @@ components:
                 links:
                   properties:
                     related:
-                      description: >
+                      description: |
                         The link to retrieve the related resource(s) in this relationship.
                       type: string
                   required:
@@ -2169,20 +2011,16 @@ components:
             amount:
               allOf:
                 - $ref: "#/components/schemas/MoneyObject"
-              description: >
+              description: |
                 The amount of this transaction in Australian dollars. For
-
                 transactions that were once `HELD` but are now `SETTLED`, refer to
-
                 the `holdInfo` field for the original `amount` the transaction was
-
                 `HELD` at.
             cashback:
               allOf:
                 - $ref: "#/components/schemas/CashbackObject"
-              description: >
+              description: |
                 If all or part of this transaction was instantly reimbursed in the
-
                 form of cashback, details of the reimbursement.
               nullable: true
             createdAt:
@@ -2191,66 +2029,51 @@ components:
               format: date-time
               type: string
             description:
-              description: >
+              description: |
                 A short description for this transaction. Usually the merchant name
-
                 for purchases.
               type: string
             foreignAmount:
               allOf:
                 - $ref: "#/components/schemas/MoneyObject"
-              description: >
+              description: |
                 The foreign currency amount of this transaction. This field will be
-
                 `null` for domestic transactions. The amount was converted to the AUD
-
                 amount reflected in the `amount` of this transaction. Refer to the
-
                 `holdInfo` field for the original `foreignAmount` the transaction was
-
                 `HELD` at.
               nullable: true
             holdInfo:
               allOf:
                 - $ref: "#/components/schemas/HoldInfoObject"
-              description: >
-                If this transaction is currently in the `HELD` status, or was ever
-                in
-
+              description: |
+                If this transaction is currently in the `HELD` status, or was ever in
                 the `HELD` status, the `amount` and `foreignAmount` of the
-
                 transaction while `HELD`.
               nullable: true
             message:
-              description: >
-                Attached message for this transaction, such as a payment message,
-                or a
-
+              description: |
+                Attached message for this transaction, such as a payment message, or a
                 transfer note.
               nullable: true
               type: string
             rawText:
-              description: >
-                The original, unprocessed text of the transaction. This is often
-                not
-
+              description: |
+                The original, unprocessed text of the transaction. This is often not
                 a perfect indicator of the actual merchant, but it is useful for
-
                 reconciliation purposes in some cases.
               nullable: true
               type: string
             roundUp:
               allOf:
                 - $ref: "#/components/schemas/RoundUpObject"
-              description: >
+              description: |
                 Details of how this transaction was rounded-up. If no Round Up was
-
                 applied this field will be `null`.
               nullable: true
             settledAt:
-              description: >
+              description: |
                 The date-time at which this transaction settled. This field will be
-
                 `null` for transactions that are currently in the `HELD` status.
               format: date-time
               nullable: true
@@ -2307,7 +2130,7 @@ components:
                 links:
                   properties:
                     related:
-                      description: >
+                      description: |
                         The link to retrieve the related resource(s) in this relationship.
                       type: string
                   required:
@@ -2335,7 +2158,7 @@ components:
                 links:
                   properties:
                     related:
-                      description: >
+                      description: |
                         The link to retrieve the related resource(s) in this relationship.
                       type: string
                   required:
@@ -2363,7 +2186,7 @@ components:
                 links:
                   properties:
                     related:
-                      description: >
+                      description: |
                         The link to retrieve the related resource(s) in this relationship.
                       type: string
                   required:
@@ -2378,9 +2201,8 @@ components:
                   items:
                     properties:
                       id:
-                        description: >
-                          The label of the tag, which also acts as the tag’s unique
-                          identifier.
+                        description: |
+                          The label of the tag, which also acts as the tag’s unique identifier.
                         type: string
                       type:
                         description: "The type of this resource: `tags`"
@@ -2393,10 +2215,8 @@ components:
                 links:
                   properties:
                     self:
-                      description: >
-                        The link to retrieve or modify linkage between this resources and
-                        the
-
+                      description: |
+                        The link to retrieve or modify linkage between this resources and the
                         related resource(s) in this relationship.
                       type: string
                   required:
@@ -2421,13 +2241,10 @@ components:
         - relationships
       type: object
     TransactionStatusEnum:
-      description: >
+      description: |
         Specifies which stage of processing a transaction is currently at.
-
         Currently returned values are `HELD` and `SETTLED`. When a transaction is
-
         held, its account’s `availableBalance` is affected. When a transaction is
-
         settled, its account’s `currentBalance` is affected.
       enum:
         - HELD
@@ -2474,9 +2291,8 @@ components:
                 - body
               type: object
             response:
-              description: >
-                Information about the response that was received from the webhook
-                URL.
+              description: |
+                Information about the response that was received from the webhook URL.
               nullable: true
               properties:
                 body:
@@ -2576,20 +2392,16 @@ components:
             eventType:
               allOf:
                 - $ref: "#/components/schemas/WebhookEventTypeEnum"
-              description: >
-                The type of this event. This can be used to determine what action
-                to
-
+              description: |
+                The type of this event. This can be used to determine what action to
                 take in response to the event.
           required:
             - eventType
             - createdAt
           type: object
         id:
-          description: >
-            The unique identifier for this event. This will remain constant
-            across
-
+          description: |
+            The unique identifier for this event. This will remain constant across
             delivery retries.
           type: string
         relationships:
@@ -2612,7 +2424,7 @@ components:
                 links:
                   properties:
                     related:
-                      description: >
+                      description: |
                         The link to retrieve the related resource(s) in this relationship.
                       type: string
                   required:
@@ -2639,7 +2451,7 @@ components:
                 links:
                   properties:
                     related:
-                      description: >
+                      description: |
                         The link to retrieve the related resource(s) in this relationship.
                       type: string
                   required:
@@ -2661,12 +2473,9 @@ components:
         - relationships
       type: object
     WebhookEventTypeEnum:
-      description: >
-        Specifies the type of a webhook event. This can be used to
-        determine what
-
+      description: |
+        Specifies the type of a webhook event. This can be used to determine what
         action to take in response to the event, such as which relationships to
-
         expect.
       enum:
         - TRANSACTION_CREATED
@@ -2686,10 +2495,8 @@ components:
               nullable: true
               type: string
             url:
-              description: >
-                The URL that this webhook should post events to. This must be a
-                valid
-
+              description: |
+                The URL that this webhook should post events to. This must be a valid
                 HTTP or HTTPS URL that does not exceed 300 characters in length.
               format: uri
               type: string
@@ -2711,36 +2518,24 @@ components:
               format: date-time
               type: string
             description:
-              description: >
-                An optional description that was provided at the time the webhook
-                was
-
+              description: |
+                An optional description that was provided at the time the webhook was
                 created.
               nullable: true
               type: string
             secretKey:
-              description: >
+              description: |
                 A shared secret key used to sign all webhook events sent to the
-
                 configured webhook URL. This field is returned only once, upon the
-
                 initial creation of the webhook. If lost, create a new webhook and
-
                 delete this webhook.
 
-
                 The webhook URL receives a request with a
-
                 `X-Up-Authenticity-Signature` header, which is the SHA-256 HMAC of
-
                 the entire raw request body signed using this `secretKey`. It is
-
                 advised to compute and check this signature to verify the
-
                 authenticity of requests sent to the webhook URL. See
-
                 [Handling webhook events](#callback_post_webhookURL) for full
-
                 details.
               type: string
             url:
@@ -2772,7 +2567,7 @@ components:
                 links:
                   properties:
                     related:
-                      description: >
+                      description: |
                         The link to retrieve the related resource(s) in this relationship.
                       type: string
                   required:

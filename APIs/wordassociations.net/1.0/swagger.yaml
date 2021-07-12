@@ -6,13 +6,7 @@ basePath: /associations/v1.0
 info:
   contact:
     email: contact@wordassociations.net
-  description: The Word Associations Network API allows developers to embed the
-    ability to find associations for a word or phrase into their mobile apps or
-    web services. Words are grouped by semantics, meaning, and psychological
-    perception. The Word Associations Network API currently supports English,
-    French, Spanish, German, Italian, Portuguese, and Russian vocabulary. Please
-    [register and subscribe](https://api.wordassociations.net/subscriptions/) to
-    one of available tariff plans to get a valid API key.
+  description: The Word Associations Network API allows developers to embed the ability to find associations for a word or phrase into their mobile apps or web services. Words are grouped by semantics, meaning, and psychological perception. The Word Associations Network API currently supports English, French, Spanish, German, Italian, Portuguese, and Russian vocabulary. Please [register and subscribe](https://api.wordassociations.net/subscriptions/) to one of available tariff plans to get a valid API key.
   termsOfService: https://wordassociations.net/en/api
   title: Word Associations API
   version: "1.0"
@@ -32,9 +26,7 @@ produces:
   - application/json
 securityDefinitions:
   internalApiKey:
-    description: API key. Please register and subscribe to one of available tariff
-      plans to get a valid API key
-      https://api.wordassociations.net/subscriptions/.
+    description: API key. Please register and subscribe to one of available tariff plans to get a valid API key https://api.wordassociations.net/subscriptions/.
     in: query
     name: apikey
     type: apiKey
@@ -47,11 +39,9 @@ paths:
         Gets associations with the given word or phrase.
       parameters:
         - collectionFormat: multi
-          description: >
+          description: |
             Word or phrase to find associations with.
-
             Tip. You can use multiple parameters 'text' in a request (from 1 to 10 inclusive). This way you can get associations for several input words or phrases in one response.
-
             Restriction: regardless of the size of the text association lookup is always performed by the first 10 words of the text.
           in: query
           items:
@@ -83,13 +73,10 @@ paths:
           required: true
           type: string
         - default: stimulus
-          description: >
+          description: |
             Type of result.
-
             Possible values: 
-
             * stimulus - an input data (the text parameter) is considered as a response word. The service returns a list of stimuli words, which evoke a given response word;
-
             * response - an input data (the text parameter) is considered as a stimulus word. The service returns a list of response words, which come to mind for a given stimulus word.
           enum:
             - stimulus
@@ -99,11 +86,9 @@ paths:
           required: false
           type: string
         - default: 50
-          description: >
+          description: |
             Maximum number of results to return.
-
             Allows to limit the number of results (associations) in response.
-
             The value of this parameter is an integer number from 1 to 300 inclusive.
           in: query
           maximum: 300
@@ -116,19 +101,13 @@ paths:
             - adjective
             - verb
             - adverb
-          description: >
+          description: |
             Parts of speech to return.
-
             Allows to limit results by specified parts of speech. The value of this parameter is a list of parts of speech separated by comma.
-
             The following parts of speech codes are supported:
-
             * noun
-
             * adjective
-
             * verb
-
             * adverb
           in: query
           items:
@@ -176,11 +155,9 @@ paths:
         Gets associations with the given word or phrase.
       parameters:
         - collectionFormat: multi
-          description: >
+          description: |
             Word or phrase to find associations with.
-
             Tip. You can use multiple parameters 'text' in a request (from 1 to 10 inclusive). This way you can get associations for several input words or phrases in one response.
-
             Restriction: regardless of the size of the text association lookup is always performed by the first 10 words of the text.
           in: formData
           items:
@@ -212,13 +189,10 @@ paths:
           required: true
           type: string
         - default: stimulus
-          description: >
+          description: |
             Type of result.
-
             Possible values: 
-
             * stimulus - an input data (the text parameter) is considered as a response word. The service returns a list of stimuli words, which evoke a given response word;
-
             * response - an input data (the text parameter) is considered as a stimulus word. The service returns a list of response words, which come to mind for a given stimulus word.
           enum:
             - stimulus
@@ -228,11 +202,9 @@ paths:
           required: false
           type: string
         - default: 50
-          description: >
+          description: |
             Maximum number of results to return.
-
             Allows to limit the number of results (associations) in response.
-
             The value of this parameter is an integer number from 1 to 300 inclusive.
           in: formData
           maximum: 300
@@ -245,19 +217,13 @@ paths:
             - adjective
             - verb
             - adverb
-          description: >
+          description: |
             Parts of speech to return.
-
             Allows to limit results by specified parts of speech. The value of this parameter is a list of parts of speech separated by comma.
-
             The following parts of speech codes are supported:
-
             * noun
-
             * adjective
-
             * verb
-
             * adverb
           in: formData
           items:

@@ -2,13 +2,12 @@ openapi: 3.0.1
 servers:
   - url: https://www.thebluealliance.com/api/v3
 info:
-  description: >-
+  description: |-
     # Overview 
 
      Information and statistics about FIRST Robotics Competition teams and events. 
 
     # Authentication 
-
 
     All endpoints require an Auth Key to be passed in the header `X-TBA-Auth-Key`. If you do not have an auth key yet, you can obtain one from your [Account Page](/account). 
 
@@ -17,42 +16,7 @@ info:
   version: 3.8.0
   x-apisguru-categories:
     - open_data
-  x-changes: "3.8.0-3.8.1: Added Webcast date field. 3.7.0-3.8.0: Added 2020 Match
-    Breakdown. 3.6.0-3.7.0: Added Zebra MotionWorks endpoints and models.
-    3.5.2-3.6.0: Added `school_name` to the Team model. 3.5.1-3.5.2: Removed
-    `key` from the Media object, set `foreign_key` as a required property.
-    3.5-3.5.1: Fixed api clients crashing when requesting simple matches
-    resulting in ties. 3.04.1 - 3.5: Updated the spec to follow OpenAPI
-    standards. 3.04.0 - 3.04.1: Team motto will now return null. 3.03.1 -
-    3.04.0: Add direct_url and view_url to the Media model. 3.03.0 - 3.03.1: Fix
-    model of /team/{team_key}/robots to match API, add min and max for year and
-    add min for page_num. 3.02.1 - 3.03.0: Added Timeseries models and
-    endpoints. 3.02.0 - 3.02.1: Fixed the model for `/team/{team_key}/districts`
-    to match return from API. 3.1.0 - 3.02.0: Added `tba_gameData` to score
-    breakdown and a leading zero to the minor version number to allow for easier
-    sorting later. 3.0.5 - 3.1.0: Version bump for 2018 added fields and
-    endpoints. Models Updated: `Team_Event_Status`, `Media`, 2018 Score
-    Breakdowns. Endpoints Added: `/team/{team_key}/events/{year}/statuses`,
-    `/event/{event_key}/teams/statuses` 3.0.4 - 3.0.5: Minor spelling fixes.
-    Remove 2016 fields from `Match_Score_Breakdown_2017_Alliance` model. Fix
-    `first_event_id` in `Event` model to correct type. Update `Media`.`type`
-    enum. --- 3.0.3 - 3.0.4: Correct syntax in `Team_Event_Status_playoff`
-    object, include descriptions in `Event_District_Points` and fix the path in
-    `Team_Event_Status_playoff.properties.record` in order to more closely match
-    Swagger spec. Fix syntax of `Match.video` to be correct and accurately
-    reflect what is returned by the API. --- 3.0.2 - 3.0.3: `extra_stats` and
-    `extra_stats_info` added to `Event_Ranking` model. Corrected match video
-    property claiming to use the `Media` model, which it doesn't. Added
-    `first_event_code` to the `Event` model. Added
-    `/team/{team_key}/media/tag/{media_tag}` and year endpoints. Added
-    `dq_team_keys` to `Match_alliance` model.  --- 3.0.1 - 3.0.2:
-    `Team_Event_Status` and `Event_Ranking` model documentation changed to
-    reflect actual API return. Changes involved W-L-T and ranking properties.
-    --- 3.0.0 - 3.0.1: Descriptions updated to clarify some terms and improve
-    grammar. The `district` property on the `Event` object now points to the
-    `District_List` model, which was identical. `Required` fields on fully
-    documented models now represent fields that may not be `null`.
-    `District_Ranking` model documented."
+  x-changes: "3.8.0-3.8.1: Added Webcast date field. 3.7.0-3.8.0: Added 2020 Match Breakdown. 3.6.0-3.7.0: Added Zebra MotionWorks endpoints and models. 3.5.2-3.6.0: Added `school_name` to the Team model. 3.5.1-3.5.2: Removed `key` from the Media object, set `foreign_key` as a required property. 3.5-3.5.1: Fixed api clients crashing when requesting simple matches resulting in ties. 3.04.1 - 3.5: Updated the spec to follow OpenAPI standards. 3.04.0 - 3.04.1: Team motto will now return null. 3.03.1 - 3.04.0: Add direct_url and view_url to the Media model. 3.03.0 - 3.03.1: Fix model of /team/{team_key}/robots to match API, add min and max for year and add min for page_num. 3.02.1 - 3.03.0: Added Timeseries models and endpoints. 3.02.0 - 3.02.1: Fixed the model for `/team/{team_key}/districts` to match return from API. 3.1.0 - 3.02.0: Added `tba_gameData` to score breakdown and a leading zero to the minor version number to allow for easier sorting later. 3.0.5 - 3.1.0: Version bump for 2018 added fields and endpoints. Models Updated: `Team_Event_Status`, `Media`, 2018 Score Breakdowns. Endpoints Added: `/team/{team_key}/events/{year}/statuses`, `/event/{event_key}/teams/statuses` 3.0.4 - 3.0.5: Minor spelling fixes. Remove 2016 fields from `Match_Score_Breakdown_2017_Alliance` model. Fix `first_event_id` in `Event` model to correct type. Update `Media`.`type` enum. --- 3.0.3 - 3.0.4: Correct syntax in `Team_Event_Status_playoff` object, include descriptions in `Event_District_Points` and fix the path in `Team_Event_Status_playoff.properties.record` in order to more closely match Swagger spec. Fix syntax of `Match.video` to be correct and accurately reflect what is returned by the API. --- 3.0.2 - 3.0.3: `extra_stats` and `extra_stats_info` added to `Event_Ranking` model. Corrected match video property claiming to use the `Media` model, which it doesn't. Added `first_event_code` to the `Event` model. Added `/team/{team_key}/media/tag/{media_tag}` and year endpoints. Added `dq_team_keys` to `Match_alliance` model.  --- 3.0.1 - 3.0.2: `Team_Event_Status` and `Event_Ranking` model documentation changed to reflect actual API return. Changes involved W-L-T and ranking properties. --- 3.0.0 - 3.0.1: Descriptions updated to clarify some terms and improve grammar. The `district` property on the `Event` object now points to the `District_List` model, which was identical. `Required` fields on fully documented models now represent fields that may not be `null`. `District_Ranking` model documented."
   x-logo:
     url: https://thebluealliance.com/icons/apple-touch-icon.png
   x-origin:
@@ -60,16 +24,7 @@ info:
       url: https://www.thebluealliance.com/swagger/api_v3.json
       version: "3.0"
   x-providerName: thebluealliance.com
-  x-version-info: Versions of the API follow the format X.Y.Z, with X being a
-    major version, Y denoting the minor version, and Z the point release.
-    Changes to the spec or API that result in a major version change will
-    significantly impact implementations. Changes to the minor version indicate
-    paths and/or fields in existing models may be added, and any breaking
-    changes will be confined to paths or models listed as in-development in the
-    prior minor version. Changes to the point release indicate no format or
-    structure changes to the paths or models, but updated or clarified
-    documentation. Note that changes to paths and models refer to the actual
-    result from the API, not the documentation.
+  x-version-info: Versions of the API follow the format X.Y.Z, with X being a major version, Y denoting the minor version, and Z the point release. Changes to the spec or API that result in a major version change will significantly impact implementations. Changes to the minor version indicate paths and/or fields in existing models may be added, and any breaking changes will be confined to paths or models listed as in-development in the prior minor version. Changes to the point release indicate no format or structure changes to the paths or models, but updated or clarified documentation. Note that changes to paths and models refer to the actual result from the API, not the documentation.
 tags:
   - description: Calls that expose TBA internals or status.
     name: TBA
@@ -102,15 +57,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -142,15 +93,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -186,15 +133,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -225,15 +168,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -248,8 +187,7 @@ paths:
         - list
   "/district/{district_key}/teams":
     get:
-      description: Gets a list of `Team` objects that competed in events in the given
-        district.
+      description: Gets a list of `Team` objects that competed in events in the given district.
       operationId: getDistrictTeams
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -265,15 +203,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -288,8 +222,7 @@ paths:
         - list
   "/district/{district_key}/teams/keys":
     get:
-      description: Gets a list of `Team` objects that competed in events in the given
-        district.
+      description: Gets a list of `Team` objects that competed in events in the given district.
       operationId: getDistrictTeamsKeys
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -306,15 +239,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -329,8 +258,7 @@ paths:
         - list
   "/district/{district_key}/teams/simple":
     get:
-      description: Gets a short-form list of `Team` objects that competed in events in
-        the given district.
+      description: Gets a short-form list of `Team` objects that competed in events in the given district.
       operationId: getDistrictTeamsSimple
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -346,15 +274,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -369,8 +293,7 @@ paths:
         - list
   "/districts/{year}":
     get:
-      description: Gets a list of districts and their corresponding district key, for
-        the given year.
+      description: Gets a list of districts and their corresponding district key, for the given year.
       operationId: getDistrictsByYear
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -386,15 +309,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -421,15 +340,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -458,15 +373,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -495,15 +406,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -530,15 +437,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -566,15 +469,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -603,15 +502,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -642,15 +537,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -680,15 +571,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -702,13 +589,9 @@ paths:
         - match
   "/event/{event_key}/matches/timeseries":
     get:
-      description: >-
-        Gets an array of Match Keys for the given event key that have
-        timeseries data. Returns an empty array if no matches have timeseries
-        data.
-
+      description: |-
+        Gets an array of Match Keys for the given event key that have timeseries data. Returns an empty array if no matches have timeseries data.
         *WARNING:* This is *not* official data, and is subject to a significant possibility of error, or missing data. Do not rely on this data for any purpose. In fact, pretend we made it up.
-
         *WARNING:* This endpoint and corresponding data models are under *active development* and may change at any time, including in breaking ways.
       operationId: getEventMatchTimeseries
       parameters:
@@ -726,15 +609,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -748,8 +627,7 @@ paths:
         - match
   "/event/{event_key}/oprs":
     get:
-      description: Gets a set of Event OPRs (including OPR, DPR, and CCWM) for the
-        given Event.
+      description: Gets a set of Event OPRs (including OPR, DPR, and CCWM) for the given Event.
       operationId: getEventOPRs
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -763,15 +641,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -784,9 +658,7 @@ paths:
         - event
   "/event/{event_key}/predictions":
     get:
-      description: Gets information on TBA-generated predictions for the given Event.
-        Contains year-specific information. *WARNING* This endpoint is currently
-        under development and may change at any time.
+      description: Gets information on TBA-generated predictions for the given Event. Contains year-specific information. *WARNING* This endpoint is currently under development and may change at any time.
       operationId: getEventPredictions
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -800,15 +672,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -835,15 +703,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -870,15 +734,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -907,15 +767,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -947,15 +803,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -970,8 +822,7 @@ paths:
         - list
   "/event/{event_key}/teams/simple":
     get:
-      description: Gets a short-form list of `Team` objects that competed in the given
-        event.
+      description: Gets a short-form list of `Team` objects that competed in the given event.
       operationId: getEventTeamsSimple
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -987,15 +838,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1010,8 +857,7 @@ paths:
         - list
   "/event/{event_key}/teams/statuses":
     get:
-      description: Gets a key-value list of the event statuses for teams competing at
-        the given event.
+      description: Gets a key-value list of the event statuses for teams competing at the given event.
       operationId: getEventTeamsStatuses
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -1023,21 +869,16 @@ paths:
               schema:
                 additionalProperties:
                   $ref: "#/components/schemas/Team_Event_Status"
-                description: A key-value pair of `Team_Event_Status` objects with the event key
-                  as the key.
+                description: A key-value pair of `Team_Event_Status` objects with the event key as the key.
                 type: object
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1068,15 +909,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1107,15 +944,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1145,15 +978,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1181,15 +1010,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1216,15 +1041,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1237,12 +1058,9 @@ paths:
         - match
   "/match/{match_key}/timeseries":
     get:
-      description: >-
-        Gets an array of game-specific Match Timeseries objects for the
-        given match key or an empty array if not available.
-
+      description: |-
+        Gets an array of game-specific Match Timeseries objects for the given match key or an empty array if not available.
         *WARNING:* This is *not* official data, and is subject to a significant possibility of error, or missing data. Do not rely on this data for any purpose. In fact, pretend we made it up.
-
         *WARNING:* This endpoint and corresponding data models are under *active development* and may change at any time, including in breaking ways.
       operationId: getMatchTimeseries
       parameters:
@@ -1260,15 +1078,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1295,15 +1109,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1329,15 +1139,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1364,15 +1170,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1401,15 +1203,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1439,15 +1237,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1460,9 +1254,7 @@ paths:
         - team
   "/team/{team_key}/districts":
     get:
-      description: Gets an array of districts representing each year the team was in a
-        district. Will return an empty array if the team was never in a
-        district.
+      description: Gets an array of districts representing each year the team was in a district. Will return an empty array if the team was never in a district.
       operationId: getTeamDistricts
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -1478,15 +1270,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1517,15 +1305,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1556,15 +1340,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1597,15 +1377,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1637,15 +1413,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1675,15 +1447,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1713,15 +1481,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1752,15 +1516,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1790,15 +1550,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1829,15 +1585,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1851,8 +1603,7 @@ paths:
         - event
   "/team/{team_key}/events/{year}/keys":
     get:
-      description: Gets a list of the event keys for events this team has competed at
-        in the given year.
+      description: Gets a list of the event keys for events this team has competed at in the given year.
       operationId: getTeamEventsByYearKeys
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -1870,15 +1621,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1892,8 +1639,7 @@ paths:
         - event
   "/team/{team_key}/events/{year}/simple":
     get:
-      description: Gets a short-form list of events this team has competed at in the
-        given year.
+      description: Gets a short-form list of events this team has competed at in the given year.
       operationId: getTeamEventsByYearSimple
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -1910,15 +1656,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1932,8 +1674,7 @@ paths:
         - event
   "/team/{team_key}/events/{year}/statuses":
     get:
-      description: Gets a key-value list of the event statuses for events this team
-        has competed at in the given year.
+      description: Gets a key-value list of the event statuses for events this team has competed at in the given year.
       operationId: getTeamEventsStatusesByYear
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -1946,21 +1687,16 @@ paths:
               schema:
                 additionalProperties:
                   $ref: "#/components/schemas/Team_Event_Status"
-                description: A key-value pair of `Team_Event_Status` objects with the event key
-                  as the key.
+                description: A key-value pair of `Team_Event_Status` objects with the event key as the key.
                 type: object
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -1992,15 +1728,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -2032,15 +1764,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -2071,15 +1799,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -2110,15 +1834,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -2131,8 +1851,7 @@ paths:
         - team
   "/team/{team_key}/media/tag/{media_tag}/{year}":
     get:
-      description: Gets a list of Media (videos / pictures) for the given team, tag
-        and year.
+      description: Gets a list of Media (videos / pictures) for the given team, tag and year.
       operationId: getTeamMediaByTagYear
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -2150,15 +1869,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -2188,15 +1903,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -2209,9 +1920,7 @@ paths:
         - team
   "/team/{team_key}/robots":
     get:
-      description: Gets a list of year and robot name pairs for each year that a robot
-        name was provided. Will return an empty array if the team has never
-        named a robot.
+      description: Gets a list of year and robot name pairs for each year that a robot name was provided. Will return an empty array if the team has never named a robot.
       operationId: getTeamRobots
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -2227,15 +1936,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -2262,15 +1967,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -2299,15 +2000,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -2320,8 +2017,7 @@ paths:
         - team
   "/team/{team_key}/years_participated":
     get:
-      description: Gets a list of years in which the team participated in at least one
-        competition.
+      description: Gets a list of years in which the team participated in at least one competition.
       operationId: getTeamYearsParticipated
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -2337,15 +2033,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -2374,15 +2066,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -2396,9 +2084,7 @@ paths:
         - list
   "/teams/{page_num}/keys":
     get:
-      description: Gets a list of Team keys, paginated in groups of 500. (Note, each
-        page will not have 500 teams, but will include the teams within that
-        range of 500.)
+      description: Gets a list of Team keys, paginated in groups of 500. (Note, each page will not have 500 teams, but will include the teams within that range of 500.)
       operationId: getTeamsKeys
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -2414,15 +2100,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -2436,8 +2118,7 @@ paths:
         - list
   "/teams/{page_num}/simple":
     get:
-      description: Gets a list of short form `Team_Simple` objects, paginated in
-        groups of 500.
+      description: Gets a list of short form `Team_Simple` objects, paginated in groups of 500.
       operationId: getTeamsSimple
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -2453,15 +2134,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -2473,12 +2150,10 @@ paths:
       tags:
         - team
         - list
-    x-comment: Simple (non-full) responses need a separate path definition. See also
-      https://github.com/OAI/OpenAPI-Specification/issues/270
+    x-comment: Simple (non-full) responses need a separate path definition. See also https://github.com/OAI/OpenAPI-Specification/issues/270
   "/teams/{year}/{page_num}":
     get:
-      description: Gets a list of `Team` objects that competed in the given year,
-        paginated in groups of 500.
+      description: Gets a list of `Team` objects that competed in the given year, paginated in groups of 500.
       operationId: getTeamsByYear
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -2495,15 +2170,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -2517,8 +2188,7 @@ paths:
         - list
   "/teams/{year}/{page_num}/keys":
     get:
-      description: Gets a list Team Keys that competed in the given year, paginated in
-        groups of 500.
+      description: Gets a list Team Keys that competed in the given year, paginated in groups of 500.
       operationId: getTeamsByYearKeys
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -2536,15 +2206,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -2558,8 +2224,7 @@ paths:
         - list
   "/teams/{year}/{page_num}/simple":
     get:
-      description: Gets a list of short form `Team_Simple` objects that competed in
-        the given year, paginated in groups of 500.
+      description: Gets a list of short form `Team_Simple` objects that competed in the given year, paginated in groups of 500.
       operationId: getTeamsByYearSimple
       parameters:
         - $ref: "#/components/parameters/If-Modified-Since"
@@ -2576,15 +2241,11 @@ paths:
           description: Successful response
           headers:
             Cache-Control:
-              description: The `Cache-Control` header, in particular the `max-age` value,
-                contains the number of seconds the result should be considered
-                valid for. During this time subsequent calls should return from
-                the local cache directly.
+              description: The `Cache-Control` header, in particular the `max-age` value, contains the number of seconds the result should be considered valid for. During this time subsequent calls should return from the local cache directly.
               schema:
                 type: string
             Last-Modified:
-              description: Indicates the date and time the data returned was last updated.
-                Used by clients in the `If-Modified-Since` request header.
+              description: Indicates the date and time the data returned was last updated. Used by clients in the `If-Modified-Since` request header.
               schema:
                 type: string
         "304":
@@ -2599,8 +2260,7 @@ paths:
 components:
   parameters:
     If-Modified-Since:
-      description: Value of the `Last-Modified` header in the most recently cached
-        response by the client.
+      description: Value of the `Last-Modified` header in the most recently cached response by the client.
       in: header
       name: If-Modified-Since
       schema:
@@ -2668,8 +2328,7 @@ components:
           description: Year of the current FRC season.
           type: integer
         down_events:
-          description: An array of strings containing event keys of any active events that
-            are no longer updating.
+          description: An array of strings containing event keys of any active events that are no longer updating.
           items:
             type: string
           type: array
@@ -2695,8 +2354,7 @@ components:
           description: Internal use - Latest application version available.
           type: integer
         min_app_version:
-          description: Internal use - Minimum application version required to correctly
-            connect and process data.
+          description: Internal use - Minimum application version required to correctly connect and process data.
           type: integer
       required:
         - latest_app_version
@@ -2705,20 +2363,16 @@ components:
     Award:
       properties:
         award_type:
-          description: Type of award given. See
-            https://github.com/the-blue-alliance/the-blue-alliance/blob/master/consts/award_type.py#L6
+          description: Type of award given. See https://github.com/the-blue-alliance/the-blue-alliance/blob/master/consts/award_type.py#L6
           type: integer
         event_key:
           description: The event_key of the event the award was won at.
           type: string
         name:
-          description: The name of the award as provided by FIRST. May vary for the same
-            award type.
+          description: The name of the award as provided by FIRST. May vary for the same award type.
           type: string
         recipient_list:
-          description: A list of recipients of the award at the event. May have either a
-            team_key or an awardee, both, or neither (in the case the award
-            wasn't awarded at the event).
+          description: A list of recipients of the award at the event. May have either a team_key or an awardee, both, or neither (in the case the award wasn't awarded at the event).
           items:
             $ref: "#/components/schemas/Award_Recipient"
           type: array
@@ -2733,8 +2387,7 @@ components:
         - year
       type: object
     Award_Recipient:
-      description: An `Award_Recipient` object represents the team and/or person who
-        received an award at an event.
+      description: An `Award_Recipient` object represents the team and/or person who received an award at an event.
       properties:
         awardee:
           description: The name of the individual given the award. May be null.
@@ -2888,20 +2541,16 @@ components:
           description: Event short code, as provided by FIRST.
           type: string
         event_type:
-          description: "Event Type, as defined here:
-            https://github.com/the-blue-alliance/the-blue-alliance/blob/master/\
-            consts/event_type.py#L2"
+          description: "Event Type, as defined here: https://github.com/the-blue-alliance/the-blue-alliance/blob/master/consts/event_type.py#L2"
           type: integer
         event_type_string:
           description: Event Type, eg Regional, District, or Offseason.
           type: string
         first_event_code:
-          description: Public facing event code used by FIRST (on
-            frc-events.firstinspires.org, for example)
+          description: Public facing event code used by FIRST (on frc-events.firstinspires.org, for example)
           type: string
         first_event_id:
-          description: The FIRST internal Event ID, used to link to the event on the FRC
-            webpage.
+          description: The FIRST internal Event ID, used to link to the event on the FRC webpage.
           type: string
         gmaps_place_id:
           description: Google Maps Place ID for the event address.
@@ -2911,8 +2560,7 @@ components:
           format: url
           type: string
         key:
-          description: TBA event key with the format yyyy[EVENT_CODE], where yyyy is the
-            year, and EVENT_CODE is the event code of the event.
+          description: TBA event key with the format yyyy[EVENT_CODE], where yyyy is the year, and EVENT_CODE is the event code of the event.
           type: string
         lat:
           description: Latitude for the event address.
@@ -2923,22 +2571,16 @@ components:
           format: double
           type: number
         location_name:
-          description: Name of the location at the address for the event, eg. Blue
-            Alliance High School.
+          description: Name of the location at the address for the event, eg. Blue Alliance High School.
           type: string
         name:
-          description: Official name of event on record either provided by FIRST or
-            organizers of offseason event.
+          description: Official name of event on record either provided by FIRST or organizers of offseason event.
           type: string
         parent_event_key:
-          description: The TBA Event key that represents the event's parent. Used to link
-            back to the event from a division event. It is also the inverse
-            relation of `divison_keys`.
+          description: The TBA Event key that represents the event's parent. Used to link back to the event from a division event. It is also the inverse relation of `divison_keys`.
           type: string
         playoff_type:
-          description: "Playoff Type, as defined here:
-            https://github.com/the-blue-alliance/the-blue-alliance/blob/master/\
-            consts/playoff_type.py#L4, or null."
+          description: "Playoff Type, as defined here: https://github.com/the-blue-alliance/the-blue-alliance/blob/master/consts/playoff_type.py#L4, or null."
           type: integer
         playoff_type_string:
           description: String representation of the `playoff_type`, or null.
@@ -2947,8 +2589,7 @@ components:
           description: Postal code from the event address.
           type: string
         short_name:
-          description: Same as `name` but doesn't include event specifiers, such as
-            'Regional' or 'District'. May be null.
+          description: Same as `name` but doesn't include event specifiers, such as 'Regional' or 'District'. May be null.
           type: string
         start_date:
           description: Event start date in `yyyy-mm-dd` format.
@@ -2968,12 +2609,7 @@ components:
           description: The event's website, if any.
           type: string
         week:
-          description: Week of the event relative to the first official season event,
-            zero-indexed. Only valid for Regionals, Districts, and District
-            Championships. Null otherwise. (Eg. A season with a week 0
-            'preseason' event does not count, and week 1 events will show 0
-            here. Seasons with a week 0.5 regional event will show week 0 for
-            those event(s) and week 1 for week 1 events and so on.)
+          description: Week of the event relative to the first official season event, zero-indexed. Only valid for Regionals, Districts, and District Championships. Null otherwise. (Eg. A season with a week 0 'preseason' event does not count, and week 1 events will show 0 here. Seasons with a week 0.5 regional event will show week 0 for those event(s) and week 1 for week 1 events and so on.)
           type: integer
         year:
           description: Year the event data is for.
@@ -3015,9 +2651,7 @@ components:
               - qual_points
               - total
             type: object
-          description: Points gained for each team at the event. Stored as a key-value
-            pair with the team key as the key, and an object describing the
-            points as its value.
+          description: Points gained for each team at the event. Stored as a key-value pair with the team key as the key, and an object describing the points as its value.
           type: object
         tiebreakers:
           additionalProperties:
@@ -3029,17 +2663,13 @@ components:
               qual_wins:
                 type: integer
             type: object
-          description: Tiebreaker values for each team at the event. Stored as a key-value
-            pair with the team key as the key, and an object describing the
-            tiebreaker elements as its value.
+          description: Tiebreaker values for each team at the event. Stored as a key-value pair with the team key as the key, and an object describing the tiebreaker elements as its value.
           type: object
       required:
         - points
       type: object
     Event_Insights:
-      description: A year-specific event insight object expressed as a JSON string,
-        separated in to `qual` and `playoff` fields. See also
-        Event_Insights_2016, Event_Insights_2017, etc.
+      description: A year-specific event insight object expressed as a JSON string, separated in to `qual` and `playoff` fields. See also Event_Insights_2016, Event_Insights_2017, etc.
       properties:
         playoff:
           description: Insights for the playoff round of an event
@@ -3054,64 +2684,55 @@ components:
       description: Insights for FIRST Stronghold qualification and elimination matches.
       properties:
         A_ChevalDeFrise:
-          description: For the Cheval De Frise - An array with three values, number of
-            times damaged, number of opportunities to damage, and percentage.
+          description: For the Cheval De Frise - An array with three values, number of times damaged, number of opportunities to damage, and percentage.
           items:
             format: float
             type: number
           type: array
         A_Portcullis:
-          description: For the Portcullis - An array with three values, number of times
-            damaged, number of opportunities to damage, and percentage.
+          description: For the Portcullis - An array with three values, number of times damaged, number of opportunities to damage, and percentage.
           items:
             format: float
             type: number
           type: array
         B_Moat:
-          description: For the Moat - An array with three values, number of times damaged,
-            number of opportunities to damage, and percentage.
+          description: For the Moat - An array with three values, number of times damaged, number of opportunities to damage, and percentage.
           items:
             format: float
             type: number
           type: array
         B_Ramparts:
-          description: For the Ramparts - An array with three values, number of times
-            damaged, number of opportunities to damage, and percentage.
+          description: For the Ramparts - An array with three values, number of times damaged, number of opportunities to damage, and percentage.
           items:
             format: float
             type: number
           type: array
         C_Drawbridge:
-          description: For the Drawbridge - An array with three values, number of times
-            damaged, number of opportunities to damage, and percentage.
+          description: For the Drawbridge - An array with three values, number of times damaged, number of opportunities to damage, and percentage.
           items:
             format: float
             type: number
           type: array
         C_SallyPort:
-          description: For the Sally Port - An array with three values, number of times
-            damaged, number of opportunities to damage, and percentage.
+          description: For the Sally Port - An array with three values, number of times damaged, number of opportunities to damage, and percentage.
           items:
             format: float
             type: number
           type: array
         D_RockWall:
-          description: For the Rock Wall - An array with three values, number of times
-            damaged, number of opportunities to damage, and percentage.
+          description: For the Rock Wall - An array with three values, number of times damaged, number of opportunities to damage, and percentage.
           items:
             format: float
             type: number
           type: array
         D_RoughTerrain:
-          description: For the Rough Terrain - An array with three values, number of times
-            damaged, number of opportunities to damage, and percentage.
+          description: For the Rough Terrain - An array with three values, number of times damaged, number of opportunities to damage, and percentage.
           items:
             format: float
             type: number
           type: array
         LowBar:
-          description: For the Low Bar - An array with three values, number of times
-            damaged, number of opportunities to damage, and percentage.
+          description: For the Low Bar - An array with three values, number of times damaged, number of opportunities to damage, and percentage.
           items:
             format: float
             type: number
@@ -3157,35 +2778,30 @@ components:
           format: float
           type: number
         breaches:
-          description: An array with three values, number of times breached, number of
-            opportunities to breach, and percentage.
+          description: An array with three values, number of times breached, number of opportunities to breach, and percentage.
           items:
             format: float
             type: number
           type: array
         captures:
-          description: An array with three values, number of times captured, number of
-            opportunities to capture, and percentage.
+          description: An array with three values, number of times captured, number of opportunities to capture, and percentage.
           items:
             format: float
             type: number
           type: array
         challenges:
-          description: An array with three values, number of times challenged, number of
-            opportunities to challenge, and percentage.
+          description: An array with three values, number of times challenged, number of opportunities to challenge, and percentage.
           items:
             format: float
             type: number
           type: array
         high_score:
-          description: An array with three values, high score, match key from the match
-            with the high score, and the name of the match.
+          description: An array with three values, high score, match key from the match with the high score, and the name of the match.
           items:
             type: string
           type: array
         scales:
-          description: An array with three values, number of times scaled, number of
-            opportunities to scale, and percentage.
+          description: An array with three values, number of times scaled, number of opportunities to scale, and percentage.
           items:
             format: float
             type: number
@@ -3300,84 +2916,71 @@ components:
           format: float
           type: number
         high_kpa:
-          description: An array with three values, kPa scored, match key from the match
-            with the high kPa, and the name of the match
+          description: An array with three values, kPa scored, match key from the match with the high kPa, and the name of the match
           items:
             type: string
           type: array
         high_score:
-          description: An array with three values, high score, match key from the match
-            with the high score, and the name of the match
+          description: An array with three values, high score, match key from the match with the high score, and the name of the match
           items:
             type: string
           type: array
         kpa_achieved:
-          description: An array with three values, number of times kPa bonus achieved,
-            number of opportunities to bonus, and percentage.
+          description: An array with three values, number of times kPa bonus achieved, number of opportunities to bonus, and percentage.
           items:
             format: float
             type: number
           type: array
         mobility_counts:
-          description: An array with three values, number of times mobility bonus
-            achieved, number of opportunities to bonus, and percentage.
+          description: An array with three values, number of times mobility bonus achieved, number of opportunities to bonus, and percentage.
           items:
             format: float
             type: number
           type: array
         rotor_1_engaged:
-          description: An array with three values, number of times rotor 1 engaged, number
-            of opportunities to engage, and percentage.
+          description: An array with three values, number of times rotor 1 engaged, number of opportunities to engage, and percentage.
           items:
             format: float
             type: number
           type: array
         rotor_1_engaged_auto:
-          description: An array with three values, number of times rotor 1 engaged in
-            auto, number of opportunities to engage in auto, and percentage.
+          description: An array with three values, number of times rotor 1 engaged in auto, number of opportunities to engage in auto, and percentage.
           items:
             format: float
             type: number
           type: array
         rotor_2_engaged:
-          description: An array with three values, number of times rotor 2 engaged, number
-            of opportunities to engage, and percentage.
+          description: An array with three values, number of times rotor 2 engaged, number of opportunities to engage, and percentage.
           items:
             format: float
             type: number
           type: array
         rotor_2_engaged_auto:
-          description: An array with three values, number of times rotor 2 engaged in
-            auto, number of opportunities to engage in auto, and percentage.
+          description: An array with three values, number of times rotor 2 engaged in auto, number of opportunities to engage in auto, and percentage.
           items:
             format: float
             type: number
           type: array
         rotor_3_engaged:
-          description: An array with three values, number of times rotor 3 engaged, number
-            of opportunities to engage, and percentage.
+          description: An array with three values, number of times rotor 3 engaged, number of opportunities to engage, and percentage.
           items:
             format: float
             type: number
           type: array
         rotor_4_engaged:
-          description: An array with three values, number of times rotor 4 engaged, number
-            of opportunities to engage, and percentage.
+          description: An array with three values, number of times rotor 4 engaged, number of opportunities to engage, and percentage.
           items:
             format: float
             type: number
           type: array
         takeoff_counts:
-          description: An array with three values, number of times takeoff was counted,
-            number of opportunities to takeoff, and percentage.
+          description: An array with three values, number of times takeoff was counted, number of opportunities to takeoff, and percentage.
           items:
             format: float
             type: number
           type: array
         unicorn_matches:
-          description: An array with three values, number of times a unicorn match (Win +
-            kPa & Rotor Bonuses) occured, number of opportunities to have a
-            unicorn match, and percentage.
+          description: An array with three values, number of times a unicorn match (Win + kPa & Rotor Bonuses) occured, number of opportunities to have a unicorn match, and percentage.
           items:
             format: float
             type: number
@@ -3420,9 +3023,7 @@ components:
       description: Insights for FIRST Power Up qualification and elimination matches.
       properties:
         auto_quest_achieved:
-          description: An array with three values, number of times auto quest was
-            completed, number of opportunities to complete the auto quest, and
-            percentage.
+          description: An array with three values, number of times auto quest was completed, number of opportunities to complete the auto quest, and percentage.
           items:
             format: float
             type: number
@@ -3496,53 +3097,42 @@ components:
           format: float
           type: number
         boost_played_counts:
-          description: An array with three values, number of times a boost power up was
-            played, number of opportunities to play a boost power up, and
-            percentage.
+          description: An array with three values, number of times a boost power up was played, number of opportunities to play a boost power up, and percentage.
           items:
             format: float
             type: number
           type: array
         climb_counts:
-          description: An array with three values, number of times a climb occurred,
-            number of opportunities to climb, and percentage.
+          description: An array with three values, number of times a climb occurred, number of opportunities to climb, and percentage.
           items:
             format: float
             type: number
           type: array
         face_the_boss_achieved:
-          description: An array with three values, number of times an alliance faced the
-            boss, number of opportunities to face the boss, and percentage.
+          description: An array with three values, number of times an alliance faced the boss, number of opportunities to face the boss, and percentage.
           items:
             format: float
             type: number
           type: array
         force_played_counts:
-          description: An array with three values, number of times a force power up was
-            played, number of opportunities to play a force power up, and
-            percentage.
+          description: An array with three values, number of times a force power up was played, number of opportunities to play a force power up, and percentage.
           items:
             format: float
             type: number
           type: array
         high_score:
-          description: An array with three values, high score, match key from the match
-            with the high score, and the name of the match
+          description: An array with three values, high score, match key from the match with the high score, and the name of the match
           items:
             type: string
           type: array
         levitate_played_counts:
-          description: An array with three values, number of times a levitate power up was
-            played, number of opportunities to play a levitate power up, and
-            percentage.
+          description: An array with three values, number of times a levitate power up was played, number of opportunities to play a levitate power up, and percentage.
           items:
             format: float
             type: number
           type: array
         run_counts_auto:
-          description: An array with three values, number of times a team scored mobility
-            points in auto, number of opportunities to score mobility points in
-            auto, and percentage.
+          description: An array with three values, number of times a team scored mobility points in auto, number of opportunities to score mobility points in auto, and percentage.
           items:
             format: float
             type: number
@@ -3560,24 +3150,19 @@ components:
           format: float
           type: number
         switch_owned_counts_auto:
-          description: An array with three values, number of times a switch was owned
-            during auto, number of opportunities to own a switch during auto,
-            and percentage.
+          description: An array with three values, number of times a switch was owned during auto, number of opportunities to own a switch during auto, and percentage.
           items:
             format: float
             type: number
           type: array
         unicorn_matches:
-          description: An array with three values, number of times a unicorn match (Win +
-            Auto Quest + Face the Boss) occurred, number of opportunities to
-            have a unicorn match, and percentage.
+          description: An array with three values, number of times a unicorn match (Win + Auto Quest + Face the Boss) occurred, number of opportunities to have a unicorn match, and percentage.
           items:
             format: float
             type: number
           type: array
         winning_opp_switch_denial_percentage_teleop:
-          description: Average opposing switch denail percentage for the winning alliance
-            during teleop.
+          description: Average opposing switch denail percentage for the winning alliance during teleop.
           format: float
           type: number
         winning_own_switch_ownership_percentage:
@@ -3585,13 +3170,11 @@ components:
           format: float
           type: number
         winning_own_switch_ownership_percentage_auto:
-          description: Average own switch ownership percentage for the winning alliance
-            during auto.
+          description: Average own switch ownership percentage for the winning alliance during auto.
           format: float
           type: number
         winning_own_switch_ownership_percentage_teleop:
-          description: Average own switch ownership percentage for the winning alliance
-            during teleop.
+          description: Average own switch ownership percentage for the winning alliance during teleop.
           format: float
           type: number
         winning_scale_ownership_percentage:
@@ -3599,13 +3182,11 @@ components:
           format: float
           type: number
         winning_scale_ownership_percentage_auto:
-          description: Average scale ownership percentage for the winning alliance during
-            auto.
+          description: Average scale ownership percentage for the winning alliance during auto.
           format: float
           type: number
         winning_scale_ownership_percentage_teleop:
-          description: Average scale ownership percentage for the winning alliance during
-            teleop.
+          description: Average scale ownership percentage for the winning alliance during teleop.
           format: float
           type: number
       required:
@@ -3655,8 +3236,7 @@ components:
             description: CCWM for team.
             format: float
             type: number
-          description: A key-value pair with team key (eg `frc254`) as key and CCWM as
-            value.
+          description: A key-value pair with team key (eg `frc254`) as key and CCWM as value.
           type: object
         dprs:
           additionalProperties:
@@ -3674,22 +3254,19 @@ components:
           type: object
       type: object
     Event_Predictions:
-      description: JSON Object containing prediction information for the event.
-        Contains year-specific information and is subject to change.
+      description: JSON Object containing prediction information for the event. Contains year-specific information and is subject to change.
       type: object
     Event_Ranking:
       properties:
         extra_stats_info:
-          description: List of special TBA-generated values provided in the `extra_stats`
-            array for each item.
+          description: List of special TBA-generated values provided in the `extra_stats` array for each item.
           items:
             properties:
               name:
                 description: Name of the field used in the `extra_stats` array.
                 type: string
               precision:
-                description: Integer expressing the number of digits of precision in the number
-                  provided in `sort_orders`.
+                description: Integer expressing the number of digits of precision in the number provided in `sort_orders`.
                 type: number
             required:
               - name
@@ -3704,8 +3281,7 @@ components:
                 description: Number of times disqualified.
                 type: integer
               extra_stats:
-                description: Additional special data on the team's performance calculated by
-                  TBA.
+                description: Additional special data on the team's performance calculated by TBA.
                 items:
                   type: number
                 type: array
@@ -3713,8 +3289,7 @@ components:
                 description: Number of matches played by this team.
                 type: integer
               qual_average:
-                description: The average match score during qualifications. Year specific. May
-                  be null if not relevant for a given year.
+                description: The average match score during qualifications. Year specific. May be null if not relevant for a given year.
                 type: integer
               rank:
                 description: The team's rank at the event as provided by FIRST.
@@ -3722,8 +3297,7 @@ components:
               record:
                 $ref: "#/components/schemas/WLT_Record"
               sort_orders:
-                description: Additional year-specific information, may be null. See parent
-                  `sort_order_info` for details.
+                description: Additional year-specific information, may be null. See parent `sort_order_info` for details.
                 items:
                   type: number
                 type: array
@@ -3739,16 +3313,14 @@ components:
             type: object
           type: array
         sort_order_info:
-          description: List of year-specific values provided in the `sort_orders` array
-            for each team.
+          description: List of year-specific values provided in the `sort_orders` array for each team.
           items:
             properties:
               name:
                 description: Name of the field used in the `sort_order` array.
                 type: string
               precision:
-                description: Integer expressing the number of digits of precision in the number
-                  provided in `sort_orders`.
+                description: Integer expressing the number of digits of precision in the number provided in `sort_orders`.
                 type: integer
             required:
               - name
@@ -3777,17 +3349,13 @@ components:
           description: Event short code, as provided by FIRST.
           type: string
         event_type:
-          description: "Event Type, as defined here:
-            https://github.com/the-blue-alliance/the-blue-alliance/blob/master/\
-            consts/event_type.py#L2"
+          description: "Event Type, as defined here: https://github.com/the-blue-alliance/the-blue-alliance/blob/master/consts/event_type.py#L2"
           type: integer
         key:
-          description: TBA event key with the format yyyy[EVENT_CODE], where yyyy is the
-            year, and EVENT_CODE is the event code of the event.
+          description: TBA event key with the format yyyy[EVENT_CODE], where yyyy is the year, and EVENT_CODE is the event code of the event.
           type: string
         name:
-          description: Official name of event on record either provided by FIRST or
-            organizers of offseason event.
+          description: Official name of event on record either provided by FIRST or organizers of offseason event.
           type: string
         start_date:
           description: Event start date in `yyyy-mm-dd` format.
@@ -3811,8 +3379,7 @@ components:
     Match:
       properties:
         actual_time:
-          description: UNIX timestamp (seconds since 1-Jan-1970 00:00:00) of actual match
-            start time.
+          description: UNIX timestamp (seconds since 1-Jan-1970 00:00:00) of actual match start time.
           format: int64
           type: integer
         alliances:
@@ -3836,38 +3403,28 @@ components:
           description: Event key of the event the match was played at.
           type: string
         key:
-          description: TBA match key with the format
-            `yyyy[EVENT_CODE]_[COMP_LEVEL]m[MATCH_NUMBER]`, where `yyyy` is the
-            year, and `EVENT_CODE` is the event code of the event, `COMP_LEVEL`
-            is (qm, ef, qf, sf, f), and `MATCH_NUMBER` is the match number in
-            the competition level. A set number may be appended to the
-            competition level if more than one match in required per set.
+          description: TBA match key with the format `yyyy[EVENT_CODE]_[COMP_LEVEL]m[MATCH_NUMBER]`, where `yyyy` is the year, and `EVENT_CODE` is the event code of the event, `COMP_LEVEL` is (qm, ef, qf, sf, f), and `MATCH_NUMBER` is the match number in the competition level. A set number may be appended to the competition level if more than one match in required per set.
           type: string
         match_number:
           description: The match number of the match in the competition level.
           type: integer
         post_result_time:
-          description: UNIX timestamp (seconds since 1-Jan-1970 00:00:00) when the match
-            result was posted.
+          description: UNIX timestamp (seconds since 1-Jan-1970 00:00:00) when the match result was posted.
           format: int64
           type: integer
         predicted_time:
-          description: UNIX timestamp (seconds since 1-Jan-1970 00:00:00) of the TBA
-            predicted match start time.
+          description: UNIX timestamp (seconds since 1-Jan-1970 00:00:00) of the TBA predicted match start time.
           format: int64
           type: integer
         score_breakdown:
-          description: Score breakdown for auto, teleop, etc. points. Varies from year to
-            year. May be null.
+          description: Score breakdown for auto, teleop, etc. points. Varies from year to year. May be null.
           properties: {}
           type: object
         set_number:
-          description: The set number in a series of matches where more than one match is
-            required in the match series.
+          description: The set number in a series of matches where more than one match is required in the match series.
           type: integer
         time:
-          description: UNIX timestamp (seconds since 1-Jan-1970 00:00:00) of the scheduled
-            match time, as taken from the published schedule.
+          description: UNIX timestamp (seconds since 1-Jan-1970 00:00:00) of the scheduled match time, as taken from the published schedule.
           format: int64
           type: integer
         videos:
@@ -3883,8 +3440,7 @@ components:
             type: object
           type: array
         winning_alliance:
-          description: The color (red/blue) of the winning alliance. Will contain an empty
-            string in the event of no winner, or a tie.
+          description: The color (red/blue) of the winning alliance. Will contain an empty string in the event of no winner, or a tie.
           enum:
             - red
             - blue
@@ -4153,8 +3709,7 @@ components:
           type: string
       type: object
     Match_Score_Breakdown_2018:
-      description: See the 2018 FMS API documentation for a description of each value.
-        https://frcevents2.docs.apiary.io/#/reference/match-results/score-details
+      description: See the 2018 FMS API documentation for a description of each value. https://frcevents2.docs.apiary.io/#/reference/match-results/score-details
       properties:
         blue:
           $ref: "#/components/schemas/Match_Score_Breakdown_2018_Alliance"
@@ -4202,15 +3757,7 @@ components:
         rp:
           type: integer
         tba_gameData:
-          description: Unofficial TBA-computed value of the FMS provided GameData given to
-            the alliance teams at the start of the match. 3 Character String
-            containing `L` and `R` only. The first character represents the near
-            switch, the 2nd the scale, and the 3rd the far, opposing, switch
-            from the alliance's perspective. An `L` in a position indicates the
-            platform on the left will be lit for the alliance while an `R` will
-            indicate the right platform will be lit for the alliance. See also
-            [WPI Screen
-            Steps](https://wpilib.screenstepslive.com/s/currentCS/m/getting_started/l/826278-2018-game-data-details).
+          description: Unofficial TBA-computed value of the FMS provided GameData given to the alliance teams at the start of the match. 3 Character String containing `L` and `R` only. The first character represents the near switch, the 2nd the scale, and the 3rd the far, opposing, switch from the alliance's perspective. An `L` in a position indicates the platform on the left will be lit for the alliance while an `R` will indicate the right platform will be lit for the alliance. See also [WPI Screen Steps](https://wpilib.screenstepslive.com/s/currentCS/m/getting_started/l/826278-2018-game-data-details).
           type: string
         techFoulCount:
           type: integer
@@ -4248,8 +3795,7 @@ components:
           type: integer
       type: object
     Match_Score_Breakdown_2019:
-      description: See the 2019 FMS API documentation for a description of each value.
-        https://frcevents2.docs.apiary.io/#/reference/match-results/score-details
+      description: See the 2019 FMS API documentation for a description of each value. https://frcevents2.docs.apiary.io/#/reference/match-results/score-details
       properties:
         blue:
           $ref: "#/components/schemas/Match_Score_Breakdown_2019_Alliance"
@@ -4362,8 +3908,7 @@ components:
           type: integer
       type: object
     Match_Score_Breakdown_2020:
-      description: See the 2020 FMS API documentation for a description of each value.
-        https://frcevents2.docs.apiary.io/#/reference/match-results/score-details
+      description: See the 2020 FMS API documentation for a description of each value. https://frcevents2.docs.apiary.io/#/reference/match-results/score-details
       properties:
         blue:
           $ref: "#/components/schemas/Match_Score_Breakdown_2020_Alliance"
@@ -4423,13 +3968,10 @@ components:
         stage3TargetColor:
           type: string
         tba_numRobotsHanging:
-          description: Unofficial TBA-computed value that counts the number of robots who
-            were hanging at the end of the match.
+          description: Unofficial TBA-computed value that counts the number of robots who were hanging at the end of the match.
           type: integer
         tba_shieldEnergizedRankingPointFromFoul:
-          description: Unofficial TBA-computed value that indicates whether the
-            shieldEnergizedRankingPoint was earned normally or awarded due to a
-            foul.
+          description: Unofficial TBA-computed value that indicates whether the shieldEnergizedRankingPoint was earned normally or awarded due to a foul.
           type: boolean
         techFoulCount:
           type: integer
@@ -4449,8 +3991,7 @@ components:
     Match_Simple:
       properties:
         actual_time:
-          description: UNIX timestamp (seconds since 1-Jan-1970 00:00:00) of actual match
-            start time.
+          description: UNIX timestamp (seconds since 1-Jan-1970 00:00:00) of actual match start time.
           format: int64
           type: integer
         alliances:
@@ -4474,33 +4015,24 @@ components:
           description: Event key of the event the match was played at.
           type: string
         key:
-          description: TBA match key with the format
-            `yyyy[EVENT_CODE]_[COMP_LEVEL]m[MATCH_NUMBER]`, where `yyyy` is the
-            year, and `EVENT_CODE` is the event code of the event, `COMP_LEVEL`
-            is (qm, ef, qf, sf, f), and `MATCH_NUMBER` is the match number in
-            the competition level. A set number may append the competition level
-            if more than one match in required per set.
+          description: TBA match key with the format `yyyy[EVENT_CODE]_[COMP_LEVEL]m[MATCH_NUMBER]`, where `yyyy` is the year, and `EVENT_CODE` is the event code of the event, `COMP_LEVEL` is (qm, ef, qf, sf, f), and `MATCH_NUMBER` is the match number in the competition level. A set number may append the competition level if more than one match in required per set.
           type: string
         match_number:
           description: The match number of the match in the competition level.
           type: integer
         predicted_time:
-          description: UNIX timestamp (seconds since 1-Jan-1970 00:00:00) of the TBA
-            predicted match start time.
+          description: UNIX timestamp (seconds since 1-Jan-1970 00:00:00) of the TBA predicted match start time.
           format: int64
           type: integer
         set_number:
-          description: The set number in a series of matches where more than one match is
-            required in the match series.
+          description: The set number in a series of matches where more than one match is required in the match series.
           type: integer
         time:
-          description: UNIX timestamp (seconds since 1-Jan-1970 00:00:00) of the scheduled
-            match time, as taken from the published schedule.
+          description: UNIX timestamp (seconds since 1-Jan-1970 00:00:00) of the scheduled match time, as taken from the published schedule.
           format: int64
           type: integer
         winning_alliance:
-          description: The color (red/blue) of the winning alliance. Will contain an empty
-            string in the event of no winner, or a tie.
+          description: The color (red/blue) of the winning alliance. Will contain an empty string in the event of no winner, or a tie.
           enum:
             - red
             - blue
@@ -4514,19 +4046,16 @@ components:
         - set_number
       type: object
     Match_Timeseries_2018:
-      description: >-
+      description: |-
         Timeseries data for the 2018 game *FIRST* POWER UP.
-
         *WARNING:* This is *not* official data, and is subject to a significant possibility of error, or missing data. Do not rely on this data for any purpose. In fact, pretend we made it up.
-
         *WARNING:* This model is currently under active development and may change at any time, including in breaking ways.
       properties:
         blue_auto_quest:
           description: 1 if the blue alliance is credited with the AUTO QUEST, 0 if not.
           type: integer
         blue_boost_count:
-          description: Number of POWER CUBES in the BOOST section of the blue alliance
-            VAULT.
+          description: Number of POWER CUBES in the BOOST section of the blue alliance VAULT.
           type: integer
         blue_boost_played:
           description: Returns 1 if the blue alliance BOOST was played, or 0 if not played.
@@ -4538,23 +4067,19 @@ components:
           description: 1 if the blue alliance is credited with FACING THE BOSS, 0 if not.
           type: integer
         blue_force_count:
-          description: Number of POWER CUBES in the FORCE section of the blue alliance
-            VAULT.
+          description: Number of POWER CUBES in the FORCE section of the blue alliance VAULT.
           type: integer
         blue_force_played:
           description: Returns 1 if the blue alliance FORCE was played, or 0 if not played.
           type: integer
         blue_levitate_count:
-          description: Number of POWER CUBES in the LEVITATE section of the blue alliance
-            VAULT.
+          description: Number of POWER CUBES in the LEVITATE section of the blue alliance VAULT.
           type: integer
         blue_levitate_played:
-          description: Returns 1 if the blue alliance LEVITATE was played, or 0 if not
-            played.
+          description: Returns 1 if the blue alliance LEVITATE was played, or 0 if not played.
           type: integer
         blue_powerup_time_remaining:
-          description: Number of seconds remaining in the blue alliance POWER UP time, or
-            0 if none is active.
+          description: Number of seconds remaining in the blue alliance POWER UP time, or 0 if none is active.
           type: string
         blue_scale_owned:
           description: 1 if the blue alliance owns the SCALE, 0 if not.
@@ -4566,16 +4091,13 @@ components:
           description: 1 if the blue alliance owns their SWITCH, 0 if not.
           type: integer
         event_key:
-          description: TBA event key with the format yyyy[EVENT_CODE], where yyyy is the
-            year, and EVENT_CODE is the event code of the event.
+          description: TBA event key with the format yyyy[EVENT_CODE], where yyyy is the year, and EVENT_CODE is the event code of the event.
           type: string
         match_id:
-          description: Match ID consisting of the level, match number, and set number, eg
-            `qm45` or `f1m1`.
+          description: Match ID consisting of the level, match number, and set number, eg `qm45` or `f1m1`.
           type: string
         mode:
-          description: Current mode of play, can be `pre_match`, `auto`, `telop`, or
-            `post_match`.
+          description: Current mode of play, can be `pre_match`, `auto`, `telop`, or `post_match`.
           type: string
         play:
           type: integer
@@ -4601,16 +4123,13 @@ components:
           description: Returns 1 if the red alliance FORCE was played, or 0 if not played.
           type: integer
         red_levitate_count:
-          description: Number of POWER CUBES in the LEVITATE section of the red alliance
-            VAULT.
+          description: Number of POWER CUBES in the LEVITATE section of the red alliance VAULT.
           type: integer
         red_levitate_played:
-          description: Returns 1 if the red alliance LEVITATE was played, or 0 if not
-            played.
+          description: Returns 1 if the red alliance LEVITATE was played, or 0 if not played.
           type: integer
         red_powerup_time_remaining:
-          description: Number of seconds remaining in the red alliance POWER UP time, or 0
-            if none is active.
+          description: Number of seconds remaining in the red alliance POWER UP time, or 0 if none is active.
           type: string
         red_scale_owned:
           description: 1 if the red alliance owns the SCALE, 0 if not.
@@ -4622,8 +4141,7 @@ components:
           description: 1 if the red alliance owns their SWITCH, 0 if not.
           type: integer
         time_remaining:
-          description: Amount of time remaining in the match, only valid during `auto` and
-            `teleop` modes.
+          description: Amount of time remaining in the match, only valid during `auto` and `teleop` modes.
           type: integer
       type: object
     Match_alliance:
@@ -4653,8 +4171,7 @@ components:
         - team_keys
       type: object
     Media:
-      description: The `Media` object contains a reference for most any media
-        associated with a team or event on TBA.
+      description: The `Media` object contains a reference for most any media associated with a team or event on TBA.
       properties:
         details:
           description: If required, a JSON dict of additional media information.
@@ -4702,8 +4219,7 @@ components:
           description: City of team derived from parsing the address registered with FIRST.
           type: string
         country:
-          description: Country of team derived from parsing the address registered with
-            FIRST.
+          description: Country of team derived from parsing the address registered with FIRST.
           type: string
         gmaps_place_id:
           description: Will be NULL, for future development.
@@ -4713,13 +4229,11 @@ components:
           format: url
           type: string
         home_championship:
-          description: Location of the team's home championship each year as a key-value
-            pair. The year (as a string) is the key, and the city is the value.
+          description: Location of the team's home championship each year as a key-value pair. The year (as a string) is the key, and the city is the value.
           properties: {}
           type: object
         key:
-          description: TBA team key with the format `frcXXXX` with `XXXX` representing the
-            team number.
+          description: TBA team key with the format `frcXXXX` with `XXXX` representing the team number.
           type: string
         lat:
           description: Will be NULL, for future development.
@@ -4733,8 +4247,7 @@ components:
           description: Will be NULL, for future development.
           type: string
         motto:
-          description: Team's motto as provided by FIRST. This field is deprecated and
-            will return null - will be removed at end-of-season in 2019.
+          description: Team's motto as provided by FIRST. This field is deprecated and will return null - will be removed at end-of-season in 2019.
           type: string
         name:
           description: Official long name registered with FIRST.
@@ -4771,26 +4284,21 @@ components:
         alliance:
           $ref: "#/components/schemas/Team_Event_Status_alliance"
         alliance_status_str:
-          description: An HTML formatted string suitable for display to the user
-            containing the team's alliance pick status.
+          description: An HTML formatted string suitable for display to the user containing the team's alliance pick status.
           type: string
         last_match_key:
-          description: TBA match key for the last match the team played in at this event,
-            or null.
+          description: TBA match key for the last match the team played in at this event, or null.
           type: string
         next_match_key:
-          description: TBA match key for the next match the team is scheduled to play in
-            at this event, or null.
+          description: TBA match key for the next match the team is scheduled to play in at this event, or null.
           type: string
         overall_status_str:
-          description: An HTML formatted string suitable for display to the user
-            containing the team's overall status summary of the event.
+          description: An HTML formatted string suitable for display to the user containing the team's overall status summary of the event.
           type: string
         playoff:
           $ref: "#/components/schemas/Team_Event_Status_playoff"
         playoff_status_str:
-          description: An HTML formatter string suitable for display to the user
-            containing the team's playoff status.
+          description: An HTML formatter string suitable for display to the user containing the team's playoff status.
           type: string
         qual:
           $ref: "#/components/schemas/Team_Event_Status_rank"
@@ -4806,8 +4314,7 @@ components:
           description: Alliance number.
           type: integer
         pick:
-          description: Order the team was picked in the alliance from 0-2, with 0 being
-            alliance captain.
+          description: Order the team was picked in the alliance from 0-2, with 0 being alliance captain.
           type: integer
       required:
         - number
@@ -4824,8 +4331,7 @@ components:
           type: string
       type: object
     Team_Event_Status_playoff:
-      description: Playoff status for this team, may be null if the team did not make
-        playoffs, or playoffs have not begun.
+      description: Playoff status for this team, may be null if the team did not make playoffs, or playoffs have not begun.
       properties:
         current_level_record:
           $ref: "#/components/schemas/WLT_Record"
@@ -4839,8 +4345,7 @@ components:
             - f
           type: string
         playoff_average:
-          description: The average match score during playoffs. Year specific. May be null
-            if not relevant for a given year.
+          description: The average match score during playoffs. Year specific. May be null if not relevant for a given year.
           type: integer
         record:
           $ref: "#/components/schemas/WLT_Record"
@@ -4875,8 +4380,7 @@ components:
             record:
               $ref: "#/components/schemas/WLT_Record"
             sort_orders:
-              description: Ordered list of values used to determine the rank. See the
-                `sort_order_info` property for the name of each value.
+              description: Ordered list of values used to determine the rank. See the `sort_order_info` property for the name of each value.
               items:
                 type: number
               type: array
@@ -4885,17 +4389,14 @@ components:
               type: string
           type: object
         sort_order_info:
-          description: Ordered list of names corresponding to the elements of the
-            `sort_orders` array.
+          description: Ordered list of names corresponding to the elements of the `sort_orders` array.
           items:
             properties:
               name:
                 description: The descriptive name of the value used to sort the ranking.
                 type: string
               precision:
-                description: The number of digits of precision used for this value, eg `2` would
-                  correspond to a value of `101.11` while `0` would correspond
-                  to `101`.
+                description: The number of digits of precision used for this value, eg `2` would correspond to a value of `101.11` while `0` would correspond to `101`.
                 type: integer
             type: object
           type: array
@@ -4928,12 +4429,10 @@ components:
           description: City of team derived from parsing the address registered with FIRST.
           type: string
         country:
-          description: Country of team derived from parsing the address registered with
-            FIRST.
+          description: Country of team derived from parsing the address registered with FIRST.
           type: string
         key:
-          description: TBA team key with the format `frcXXXX` with `XXXX` representing the
-            team number.
+          description: TBA team key with the format `frcXXXX` with `XXXX` representing the team number.
           type: string
         name:
           description: Official long name registered with FIRST.
@@ -4972,9 +4471,7 @@ components:
     Webcast:
       properties:
         channel:
-          description: Type specific channel information. May be the YouTube stream, or
-            Twitch channel name. In the case of iframe types, contains HTML to
-            embed the stream in an HTML iframe.
+          description: Type specific channel information. May be the YouTube stream, or Twitch channel name. In the case of iframe types, contains HTML to embed the stream in an HTML iframe.
           type: string
         date:
           description: The date for the webcast in `yyyy-mm-dd` format. May be null.
@@ -5018,18 +4515,10 @@ components:
               type: array
           type: object
         key:
-          description: TBA match key with the format
-            `yyyy[EVENT_CODE]_[COMP_LEVEL]m[MATCH_NUMBER]`, where `yyyy` is the
-            year, and `EVENT_CODE` is the event code of the event, `COMP_LEVEL`
-            is (qm, ef, qf, sf, f), and `MATCH_NUMBER` is the match number in
-            the competition level. A set number may be appended to the
-            competition level if more than one match in required per set.
+          description: TBA match key with the format `yyyy[EVENT_CODE]_[COMP_LEVEL]m[MATCH_NUMBER]`, where `yyyy` is the year, and `EVENT_CODE` is the event code of the event, `COMP_LEVEL` is (qm, ef, qf, sf, f), and `MATCH_NUMBER` is the match number in the competition level. A set number may be appended to the competition level if more than one match in required per set.
           type: string
         times:
-          description: A list of relative timestamps for each data point. Each timestamp
-            will correspond to the X and Y value at the same index in a team xs
-            and ys arrays. `times`, all teams `xs` and all teams `ys` are
-            guarenteed to be the same length.
+          description: A list of relative timestamps for each data point. Each timestamp will correspond to the X and Y value at the same index in a team xs and ys arrays. `times`, all teams `xs` and all teams `ys` are guarenteed to be the same length.
           items:
             example:
               - 0
@@ -5050,9 +4539,7 @@ components:
           example: frc7332
           type: string
         xs:
-          description: A list containing doubles and nulls representing a teams X position
-            in feet at the corresponding timestamp. A null value represents no
-            tracking data for a given timestamp.
+          description: A list containing doubles and nulls representing a teams X position in feet at the corresponding timestamp. A null value represents no tracking data for a given timestamp.
           items:
             example:
               - 2.73
@@ -5062,9 +4549,7 @@ components:
             type: number
           type: array
         ys:
-          description: A list containing doubles and nulls representing a teams Y position
-            in feet at the corresponding timestamp. A null value represents no
-            tracking data for a given timestamp.
+          description: A list containing doubles and nulls representing a teams Y position in feet at the corresponding timestamp. A null value represents no tracking data for a given timestamp.
           items:
             example:
               - 2.73
@@ -5080,8 +4565,7 @@ components:
       type: object
   securitySchemes:
     apiKey:
-      description: Your TBA v3 API Key can be obtained from your [Account
-        Page](/account) on the TBA website.
+      description: Your TBA v3 API Key can be obtained from your [Account Page](/account) on the TBA website.
       in: header
       name: X-TBA-Auth-Key
       type: apiKey

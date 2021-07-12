@@ -4,9 +4,8 @@ schemes:
 host: api.abr.ato.gov.au
 basePath: /
 info:
-  description: >
+  description: |
     # Introduction
-
     The Business Registries API is built on HTTP. The API is RESTful. It has predictable resource URIs.
 
       The API is documented in <a target="_blank" href="https://github.com/OAI/OpenAPI-Specification">OpenAPI</a> format.
@@ -14,17 +13,13 @@ info:
       <a target="_blank" href="https://github.com/Rebilly/ReDoc/blob/master/docs/redoc-vendor-extensions.md">vendor extensions</a>.
 
     # Overview
-
     The following sections describe the resources that make up the Business Registries REST API.
-
     ## Current Version
-
     By default, all requests to https://api.abr.ato.gov.au receive the `v1` version of the REST API. We encourage you to explicitly request this version via the `Accept` header.
 
         Accept: application/vnd.abr-ato.v1+json
 
     ## Schema
-
     All API access is over HTTPS, and accessed from https://api.abr.ato.gov.au. All data is sent and received as JSON. Blank fields are included.
 
       All dates use the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format:
@@ -40,17 +35,13 @@ info:
       For example: `2017-07-01T11:05:06+10:00`
 
     ## Timezones
-
     Some requests allow for specifying timestamps or generate timestamps with time zone information. We apply the following rules, in order of priority, to determine timezone information for API calls.
-
     ### Explicitly provide an ISO 8601 timestamp with timezone information
-
     For API calls that allow for a timestamp to be specified, we use that exact timestamp.
 
       For example: `2017-07-01T11:05:06+10:00`
 
     ## Pagination
-
     Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
       For example:
@@ -59,19 +50,14 @@ info:
               <https://api.abr.ato.gov.au/individuals?page=34>; rel="last"
 
     `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
-
     ## Parameters
-
     Many API methods take optional parameters:
 
         GET /individuals/1234/addresses/?addressType='Mailing'
 
     In this example, the '1234' value is provided for the `:partyId` parameter in the path while `:addressType` is passed in the query string.
-
     For POST, PATCH, PUT, and DELETE requests, parameters not included in the URL should be encoded as JSON with a Content-Type of 'application/json'.
-
     ## Metadata
-
     The API provides **metadata services** that you can use to discover information about the classifcation schemes and values used by the Registry.
 
       For example:
@@ -95,13 +81,11 @@ info:
         ]
 
     ## Root Endpoint
-
     You can issue a GET request to the root endpoint (also known as the service root) to get all the endpoint categories that the REST API supports:
 
         curl https://api.abr.ato.gov.au
 
     ## Authentication
-
     The Business Registries API supports API Key authentication.
 
       When you sign up for an account, you are given your first API key. You can generate additional API keys, and delete
@@ -144,8 +128,7 @@ parameters:
     required: true
     type: string
   dateOfBirth:
-    description: The individual's date of birth, for example, `1979-01-13` (in [ISO
-      8601](https://en.wikipedia.org/wiki/ISO_8601) format).
+    description: The individual's date of birth, for example, `1979-01-13` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).
     in: query
     name: dateOfBirth
     required: false
@@ -208,143 +191,106 @@ responses:
     schema:
       $ref: "#/definitions/unauthenticated"
 tags:
-  - description: >
-      An individual is a person about whom the registry wishes to
-      maintain information.
+  - description: |
+      An individual is a person about whom the registry wishes to maintain information.
 
         For example, the individual's date and place of birth (for the purposes of identification) and the individual's
         residential address (which is used for administrative purposes).
     name: Individuals
-  - description: >
-      A role defines the characteristics of a relationship between
-      parties.
-
+  - description: |
+      A role defines the characteristics of a relationship between parties.
       An Individual can participate in a relationship with other individuals and organisations.
-
 
       For example:
 
-
       | Party         | Role           | Relationship     | Role          | Party                           |
-
       | ------------- | -------------- | ---------------- | ------------- | ------------------------------- |
-
       | Homer Simpson | Husband        | Marriage         | Wife          | Marge Simpson                   |
-
       | Homer Simpson | Employee       | Employment       | Employer      | Springfield Nuclear Power Plant |
-
       | Homer Simpson | Safety Officer | Colleague        | Supervisor    | Carl Carlson                    |
-
       | Homer Simpson | Director       | Directorship     | Company       | Compu Global Hyper Mega Net     |
-
       | Homer Simpson | Employee       | Employment       | Employer      | Compu Global Hyper Mega Net     |
-
       | Homer Simpson | Member         | Membership       | Organisation  | The Stonecutters                |
-
       | Homer Simpson | Partner        | Partnership      | Partnership   | The Be Sharps                   |
-
       | Homer Simpson | Trustee        | Trusteeship      | Trust         | The Simpson Family Trust        |
-
       | Homer Simpson | Member         | Membership       | Association   | Mensa International             |
 
-
       You can use the API's **metadata services** to retrieve information about the classifcation schemes and
-
       values used by the Registry.
     name: Individuals Roles
-  - description: >
-      The registry maintains information about an individual's contact
-      details for administrative purposes.
+  - description: |
+      The registry maintains information about an individual's contact details for administrative purposes.
 
         Including:
         - an address for the service of documents
         - a principal place of business address
     name: Individuals Addresses
-  - description: >
-      The registry maintains information about an individual's contact
-      details for administrative purposes.
+  - description: |
+      The registry maintains information about an individual's contact details for administrative purposes.
 
         Including:
         - an email address
         - a mobile number
     name: Individuals Electronic Addresses
-  - description: >
-      A business name is a name or title under which a person conducts a
-      business.
+  - description: |
+      A business name is a name or title under which a person conducts a business.
     name: Individuals Business Names
-  - description: >
+  - description: |
       If you carry on a business you may need to hold a licence.
 
         For example, if you provide financial services, you are required to hold an Australian Financial
         Services (AFS) licence.
     name: Individuals Licenses
-  - description: >
-      An organisation usually consists of a number of individuals or
-      groups bound by a common purpose about whom the
-
+  - description: |
+      An organisation usually consists of a number of individuals or groups bound by a common purpose about whom the
       registry wishes to maintain information.
 
         For example, the organisation's legal entity type (e.g., Incorporated Entity, Unincorporated Entity,
         Partnership or Joint Venture).
     name: Organisations
-  - description: >
-      A role defines the characteristics of a relationship between
-      parties.
-
+  - description: |
+      A role defines the characteristics of a relationship between parties.
       An Organisation can participate in a relationship with other organisations and indiviuals.
-
 
       For example:
 
-
       | Party                           | Role     | Relationship | Role         | Party             |
-
       | ------------------------------- | -------- | -------------| ------------ | ----------------- |
-
       | Springfield Nuclear Power Plant | Employer | Employment   | Employee     | Homer Simpson     |
-
       | Springfield Nuclear Power Plant | Company  | Directorship | Director     | Mr Burns          |
-
       | Springfield Nuclear Power Plant | Employer | Employment   | Employee     | Mr Burns          |
-
       | Springfield Nuclear Power Plant | Sponsor  | Sponsorship  | Organisation | The Stonecutters  |
 
-
       You can use the API's **metadata services** to retrieve information about the classifcation schemes and
-
       values used by the Registry.
     name: Organisations Roles
-  - description: >
-      The registry maintains information about an organisation's contact
-      details for administrative purposes.
+  - description: |
+      The registry maintains information about an organisation's contact details for administrative purposes.
 
         Including:
         - an address for the service of documents
         - a principal place of business address
     name: Organisations Addresses
-  - description: >
-      The registry maintains information about an organisation's contact
-      details for administrative purposes.
+  - description: |
+      The registry maintains information about an organisation's contact details for administrative purposes.
 
         Including:
         - an email address
         - a mobile number
     name: Organisations Electronic Addresses
-  - description: >
-      A business name is a name or title under which an organisation
-      conducts a business.
+  - description: |
+      A business name is a name or title under which an organisation conducts a business.
     name: Organisations Business Names
-  - description: >
+  - description: |
       If you carry on a business you may need to hold a licence.
 
         For example, if you provide financial services, you are required to hold an Australian Financial
         Services (AFS) licence.
     name: Organisations Licenses
-  - description: >
-      A business name is a name or title under which a person or
-      organisation conducts a business.
+  - description: |
+      A business name is a name or title under which a person or organisation conducts a business.
     name: Business Names
-  - description: >
+  - description: |
       If you carry on a business you may need to hold a licence.
 
         For example, if you provide financial services, you are required to hold an Australian Financial
@@ -383,9 +329,8 @@ tags:
   - description: |
       A classification scheme for registered identifiers.
     name: Registered Identifier Types
-  - description: >
-      A classification scheme for the characteristics of relationships
-      between parties (individuals and organisations).
+  - description: |
+      A classification scheme for the characteristics of relationships between parties (individuals and organisations).
     name: Roles
 paths:
   /business-names:
@@ -399,10 +344,8 @@ paths:
           description: A list of business names was retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -428,10 +371,8 @@ paths:
           description: Address types were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -441,8 +382,7 @@ paths:
               type: string
           schema:
             example:
-              - description: The address at which an individual or organisation receives letters
-                  or packages.
+              - description: The address at which an individual or organisation receives letters or packages.
                 id: 123e4567-e89b-12d3-a456-426655440001
                 name: Mailing
               - description: The main location where work is conducted.
@@ -467,10 +407,8 @@ paths:
           description: Business name lifecycle states were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -514,10 +452,8 @@ paths:
           description: Electronic address types were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -552,10 +488,8 @@ paths:
           description: Genders were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -592,10 +526,8 @@ paths:
           description: Legal entity types were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -605,27 +537,19 @@ paths:
               type: string
           schema:
             example:
-              - description: If you operate as a sole trader, you're responsible for all aspects
-                  of the business, including any debts the business incurs.
+              - description: If you operate as a sole trader, you're responsible for all aspects of the business, including any debts the business incurs.
                 id: 123e4567-e89b-12d3-a456-426655440001
                 name: Sole Trader
-              - description: A partnership is two or more individuals or organisations who do
-                  business as partners or receive income jointly.
+              - description: A partnership is two or more individuals or organisations who do business as partners or receive income jointly.
                 id: 123e4567-e89b-12d3-a456-426655440002
                 name: Partnership
-              - description: A joint venture is two or more people or entities who join to do
-                  business together for a particular purpose, usually a single
-                  project, rather than as an ongoing business.
+              - description: A joint venture is two or more people or entities who join to do business together for a particular purpose, usually a single project, rather than as an ongoing business.
                 id: 123e4567-e89b-12d3-a456-426655440003
                 name: Joint Venture
-              - description: A company is a separate legal entity. This means it has the same
-                  rights as a natural person and can incur debt, sue and be
-                  sued.
+              - description: A company is a separate legal entity. This means it has the same rights as a natural person and can incur debt, sue and be sued.
                 id: 123e4567-e89b-12d3-a456-426655440004
                 name: Company
-              - description: A trust is an obligation imposed on a person – the trustee – to
-                  hold property or assets (e.g. business assets) for the benefit
-                  of others (known as beneficiaries).
+              - description: A trust is an obligation imposed on a person – the trustee – to hold property or assets (e.g. business assets) for the benefit of others (known as beneficiaries).
                 id: 123e4567-e89b-12d3-a456-426655440005
                 name: Trust
             items:
@@ -647,10 +571,8 @@ paths:
           description: License lifecycle states were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -694,10 +616,8 @@ paths:
           description: License types were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -707,12 +627,10 @@ paths:
               type: string
           schema:
             example:
-              - description: To conduct a financial services business in Australia, you must
-                  have an Australian Financial Services (AFS) licence.
+              - description: To conduct a financial services business in Australia, you must have an Australian Financial Services (AFS) licence.
                 id: 123e4567-e89b-12d3-a456-426655440001
                 name: Australian Financial Services License
-              - description: To conduct a <insert-name-here> business you must have a 2B
-                  licence.
+              - description: To conduct a <insert-name-here> business you must have a 2B licence.
                 id: 123e4567-e89b-12d3-a456-426655440002
                 name: 2B License
             items:
@@ -734,10 +652,8 @@ paths:
           description: Name directions were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -772,10 +688,8 @@ paths:
           description: Name prefixes were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -785,12 +699,10 @@ paths:
               type: string
           schema:
             example:
-              - description: A title used before a family name or formal salutation to address a
-                  man.
+              - description: A title used before a family name or formal salutation to address a man.
                 id: 123e4567-e89b-12d3-a456-426655440001
                 name: Mr
-              - description: A title used before a family name or formal salutation to address a
-                  woman.
+              - description: A title used before a family name or formal salutation to address a woman.
                 id: 123e4567-e89b-12d3-a456-426655440002
                 name: Ms
             items:
@@ -812,10 +724,8 @@ paths:
           description: Name types were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -850,10 +760,8 @@ paths:
           description: Registered identifier types were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -863,13 +771,10 @@ paths:
               type: string
           schema:
             example:
-              - description: An Australian Business Number (ABN) is a unique eleven-character
-                  number issued by the Australian Business Register (ABR).
+              - description: An Australian Business Number (ABN) is a unique eleven-character number issued by the Australian Business Register (ABR).
                 id: 123e4567-e89b-12d3-a456-426655440001
                 name: ABN
-              - description: An Australian Company Number (ACN) is a unique nine-character
-                  number issued by the Australian Securities and Investments
-                  Commission (ASIC).
+              - description: An Australian Company Number (ACN) is a unique nine-character number issued by the Australian Securities and Investments Commission (ASIC).
                 id: 123e4567-e89b-12d3-a456-426655440002
                 name: ACN
             items:
@@ -891,10 +796,8 @@ paths:
           description: Roles were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -909,8 +812,7 @@ paths:
                 reciprocalRoleDescription: An incorporated legal entity.
                 relationship: Directorship
                 role: Director
-                roleDescription: An individual responsible for managing a company's business
-                  activities.
+                roleDescription: An individual responsible for managing a company's business activities.
               - id: 123e4567-e89b-12d3-a456-426655440002
                 reciprocalRole: Employer
                 reciprocalRoleDescription: An individual or organisation that employs people.
@@ -942,10 +844,8 @@ paths:
           description: A list of individuals was retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -980,10 +880,8 @@ paths:
           description: Individual was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/individual"
@@ -1060,10 +958,8 @@ paths:
           description: Addresses were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -1100,10 +996,8 @@ paths:
           description: Address was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/address"
@@ -1178,10 +1072,8 @@ paths:
           description: Business Names were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -1218,10 +1110,8 @@ paths:
           description: Business Name was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/business-name"
@@ -1296,10 +1186,8 @@ paths:
           description: Electronic addresses were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -1336,10 +1224,8 @@ paths:
           description: Electronic Address was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/electronic-address"
@@ -1414,10 +1300,8 @@ paths:
           description: Licenses were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -1454,10 +1338,8 @@ paths:
           description: License was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/license"
@@ -1532,10 +1414,8 @@ paths:
           description: Roles were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -1572,10 +1452,8 @@ paths:
           description: Role was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/party-role"
@@ -1654,10 +1532,8 @@ paths:
           description: A list of licenses was retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -1689,10 +1565,8 @@ paths:
           description: A list of organisations was retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -1727,10 +1601,8 @@ paths:
           description: Organisation was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/organisation"
@@ -1807,10 +1679,8 @@ paths:
           description: Addresses were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -1847,10 +1717,8 @@ paths:
           description: Address was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/address"
@@ -1925,10 +1793,8 @@ paths:
           description: Business Names were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -1965,10 +1831,8 @@ paths:
           description: Business Name was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/business-name"
@@ -2043,10 +1907,8 @@ paths:
           description: Electronic addresses were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -2083,10 +1945,8 @@ paths:
           description: Electronic Address was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/electronic-address"
@@ -2161,10 +2021,8 @@ paths:
           description: Licenses were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -2201,10 +2059,8 @@ paths:
           description: License was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/license"
@@ -2279,10 +2135,8 @@ paths:
           description: Roles were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -2319,10 +2173,8 @@ paths:
           description: Role was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: "#/definitions/party-role"
@@ -2403,8 +2255,7 @@ definitions:
         example: Australia
         type: string
       fromDate:
-        description: The date and time the resource became active in the format defined
-          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -2439,8 +2290,7 @@ definitions:
         example: Civic
         type: string
       toDate:
-        description: The date and time the resource became inactive in the format
-          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true
@@ -2458,8 +2308,7 @@ definitions:
     description: The Business Name resource.
     properties:
       fromDate:
-        description: The date and time the resource became active in the format defined
-          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -2484,8 +2333,7 @@ definitions:
         example: XYZ Technology Ventures
         type: string
       toDate:
-        description: The date and time the resource became inactive in the format
-          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true
@@ -2525,8 +2373,7 @@ definitions:
         example: ""
         type: string
       fromDate:
-        description: The date and time the resource became active in the format defined
-          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -2541,8 +2388,7 @@ definitions:
         example: "62164453"
         type: string
       toDate:
-        description: The date and time the resource became inactive in the format
-          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true
@@ -2610,8 +2456,7 @@ definitions:
           $ref: "#/definitions/individual-address"
         type: array
       dateOfBirth:
-        description: The individual's date of birth, for example, `1979-01-13` (in [ISO
-          8601](https://en.wikipedia.org/wiki/ISO_8601) format).
+        description: The individual's date of birth, for example, `1979-01-13` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).
         example: 1979-01-13
         format: date
         type: string
@@ -2620,8 +2465,7 @@ definitions:
           $ref: "#/definitions/electronic-address"
         type: array
       fromDate:
-        description: The date and time the resource became active in the format defined
-          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -2649,8 +2493,7 @@ definitions:
         example: Tamworth
         type: string
       toDate:
-        description: The date and time the resource became inactive in the format
-          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true
@@ -2672,15 +2515,13 @@ definitions:
               - Principal Place of Residence
             type: string
           fromDate:
-            description: The date and time the resource became active in the format defined
-              by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+            description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
             example: 1979-01-13T09:05:06+10:00
             format: date-time
             readOnly: true
             type: string
           toDate:
-            description: The date and time the resource became inactive in the format
-              defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+            description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
             example: ""
             format: date-time
             readOnly: true
@@ -2705,8 +2546,7 @@ definitions:
         example: Mr Robert Ferguson
         type: string
       fromDate:
-        description: The date and time the resource became active in the format defined
-          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -2747,8 +2587,7 @@ definitions:
           - Principal Name
         type: string
       toDate:
-        description: The date and time the resource became inactive in the format
-          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true
@@ -2781,8 +2620,7 @@ definitions:
     description: The License resource.
     properties:
       fromDate:
-        description: The date and time the resource became active in the format defined
-          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -2810,8 +2648,7 @@ definitions:
           - Suspended
         type: string
       toDate:
-        description: The date and time the resource became inactive in the format
-          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true
@@ -2868,14 +2705,12 @@ definitions:
           $ref: "#/definitions/electronic-address"
         type: array
       establishmentDate:
-        description: The organisation's establishment date, for example, `1928-03-03`
-          (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).
+        description: The organisation's establishment date, for example, `1928-03-03` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).
         example: 1928-03-03
         format: date
         type: string
       fromDate:
-        description: The date and time the resource became active in the format defined
-          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -2903,8 +2738,7 @@ definitions:
           $ref: "#/definitions/registered-identifier"
         type: array
       toDate:
-        description: The date and time the resource became inactive in the format
-          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true
@@ -2925,15 +2759,13 @@ definitions:
               - Principal Place of Business
             type: string
           fromDate:
-            description: The date and time the resource became active in the format defined
-              by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+            description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
             example: 1979-01-13T09:05:06+10:00
             format: date-time
             readOnly: true
             type: string
           toDate:
-            description: The date and time the resource became inactive in the format
-              defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+            description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
             example: ""
             format: date-time
             readOnly: true
@@ -2943,8 +2775,7 @@ definitions:
     description: The Organisation Name resource.
     properties:
       fromDate:
-        description: The date and time the resource became active in the format defined
-          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 1928-03-03T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -2959,8 +2790,7 @@ definitions:
         example: 321 Technology Ventures
         type: string
       toDate:
-        description: The date and time the resource became inactive in the format
-          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true
@@ -2970,8 +2800,7 @@ definitions:
     description: The Party Role resource.
     properties:
       fromDate:
-        description: The date and time the resource became active in the format defined
-          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 2016-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -3017,8 +2846,7 @@ definitions:
           - Trusteeship
         type: string
       toDate:
-        description: The date and time the resource became inactive in the format
-          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true
@@ -3054,8 +2882,7 @@ definitions:
     description: The Registered Identifier resource.
     properties:
       fromDate:
-        description: The date and time the resource became active in the format defined
-          by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
@@ -3077,8 +2904,7 @@ definitions:
           - ABN
         type: string
       toDate:
-        description: The date and time the resource became inactive in the format
-          defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
         example: ""
         format: date-time
         readOnly: true

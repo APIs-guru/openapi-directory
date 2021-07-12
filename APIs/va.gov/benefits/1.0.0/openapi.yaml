@@ -13,104 +13,66 @@ servers:
 info:
   contact:
     name: va.gov
-  description: >
+  description: |
     # Benefits Intake
-
 
     Are you a Veteran? [Check your benefits or appeals claim status](https://www.va.gov/claim-or-appeal-status/).
 
-
     https://api.va.gov/services/vba_documents/docs/v1/api
-
 
     The Benefits Intake API allows authorized third-party systems used by Veteran Service Organizations (VSOs), agencies, and Veterans to digitally submit VA benefits claim documents directly to the Veterans Benefits Administration's (VBA) claims intake process. This API handles documents related to the following benefit claim types: 
 
-
     * Compensation
-
     * Pension/Survivors Benefits
-
     * Education
-
     * Fiduciary
-
     * Insurance
-
     * Veteran Readiness & Employment (VRE)
-
     * Board of Veteran Appeals (BVA)
-
 
     This API also provides submission status updates until documents are successfully established for VBA claim processing, eliminating the need for users to switch between systems to manually check whether documents have been successfully uploaded.
 
-
     ## Background 
-
     This API provides a secure, efficient, and tracked alternative to mail or fax for VA benefit claim document submissions. Documents are uploaded directly to the VBA system, where they can then be processed. Compared to mail or fax, these documents are processed faster, ultimately providing Veterans with claim decisions more quickly. 
-
 
     All successfully submitted documents are routed to the correct office for processing. 
 
-
     ## Technical overview
-
     The Benefits Intake API first provides an upload location and unique submission identifier, and then accepts a payload consisting of a document in PDF format, zero or more optional attachments in PDF format, and some JSON metadata. 
-
 
     The metadata describes the document and attachments, and identifies the person for whom it is being submitted. This payload is encoded as binary multipart/form-data (not base64). The unique identifier supplied with the payload can subsequently be used to request the processing status of the uploaded document package.
 
-
     API consumers are encouraged to validate the `zipcode`,`fileNumber`, `veteranFirstName`, and 'veteranLastName' fields before submission according to their description in the DocumentUploadMetadata model and use the 'businessLine' attribute for the most efficient processing. Additionally, please ensure no PDF user or owner passwords are used in submitted PDFs. 
 
-
     ### Attachment & file size limits
-
     There is no limit on the number of files a payload can contain, but size limits do apply.
 
-
     * Uploaded documents cannot be larger than 21" x 21"
-
     * The entire payload cannot exceed 5 GB
-
     * No single file in a payload can exceed 100 MB
 
-
     ### Date of receipt
-
     The date and time that documents are successfully submitted through the Benefits Intake API is used as the official VA date of receipt. However, note that until a document status of `received`, `processing`, `success`, or `vbms` is returned, a client cannot consider the document received by VA. 
-
 
     A status of `received` means that the document package has been transmitted, but may not be validated. Any errors with the document package, such as unreadable PDFs or a Veteran not found, will cause the status to change to `error`.
 
-
     If the document status is `error`, VA has not received the submission and cannot honor the submission date as the date of receipt.
 
-
     ### Authentication and Authorization
-
     API requests are authorized through a symmetric API token, provided in an HTTP header with name 'apikey'. [Request an API key.](https://developer.va.gov/apply)
 
-
     ### Testing in the sandbox environment
-
     In the sandbox environment, the final status of a submission is `received` and submissions do not actually progress to the central mail repository or VBMS. 
-
 
     Progress beyond the `received` status can be simulated for testing. We allow passing in a `Status-Override` header on the `/uploads/{id}` endpoint so that you can change the status of your submission to simulate the various scenarios. 
 
-
     The available statuses are `pending`, `uploaded`, `received`, `processing`, `success`, `vbms`, and `error`. The meaning of the various statuses is listed below in Models under DocumentUploadStatusAttributes.
 
-
     ### Test data
-
     We use mock test data in the sandbox environment. Data is not sent upstream and it is not necessary to align submitted test data with any other systems' data.
 
-
     ### Upload operation
-
     Allows a client to upload a multi-part document package (form + attachments + metadata).
-
 
     1. Client Request: POST https://sandbox-api.va.gov/services/vba_documents/v1/
         * No request body or parameters required
@@ -128,30 +90,21 @@ info:
         * Additionally, the response includes an ETag header containing an MD5 hash of the submitted payload. This can be compared to the submitted payload to ensure data integrity of the upload.
 
     ### Status caching
-
     Due to current system limitations, data for the `/uploads/report` endpoint is cached for one hour.
-
 
     A request to the `/uploads/{id}` endpoint will return a real-time status for that GUID, and update its status in `/uploads/report`.
 
-
     The `updated_at` field indicates the last time the status for a given GUID was updated.
-
 
     ### Optional Base64 encoding
 
-
     Base64 is an encoding scheme that converts binary data into text format, so that encoded textual data can be easily transported over networks uncorrupted and without data loss. 
-
 
     Base64 can be used to encode binary multipart/form-data it in its entirety.  Note that the whole payload must be encoded, not individual parts/attachments.
 
-
     After encoding your payload, you'll be required to preface your base64 string with `data:multipart/form-data;base64,` in order to allow our system to distinguish the file type. Your final string payload would look something like `data:multipart/form-data;base64,(encryption string)==` and close with the standard == marker.  Note that the multipart boundaries i.e. -----WebKitFormBoundaryVfOwzCyvug0JmWYo and ending ------WebKitFormBoundaryVfOwzCyvug0JmWYo- must also be included.
 
-
     ### Consumer onboarding process
-
     When you're ready to move to production, [request a production API key.](https://developer.va.gov/go-live)
   title: Benefits Intake
   version: 1.0.0
@@ -171,100 +124,60 @@ tags:
 paths:
   /path:
     put:
-      description: >
-        Accepts document metadata, document binary, and attachment
-        binaries.Full URL, including
-
+      description: |
+        Accepts document metadata, document binary, and attachment binaries.Full URL, including
         query parameters, provided from POST `/document_uploads`.
-
 
         ## Example Payload
 
-
         The following demonstrates a (redacted) multipart payload suitable for submitting to the PUT
-
         endpoint. Most programming languages should have provisions for assembling a multipart
-
         payload like this without having to do so manually.
 
-
         ```
-
         --17de1ed8f01442b2a2d7a93506314b76
-
         Content-Disposition: form-data; name="metadata"
-
         Content-Type: application/json
 
-
         {"veteranFirstName": "Jane",
-
         "veteranLastName": "Doe",
-
         "fileNumber": "012345678",
-
         "zipCode": "97202",
-
         "source": "MyVSO",
-
         "docType": "21-22"
-
         "businessLine": "CMP"}
-
         --17de1ed8f01442b2a2d7a93506314b76
-
         Content-Disposition: form-data; name="content"
-
         Content-Type: application/pdf
-
 
         <Binary PDF contents>
-
         --17de1ed8f01442b2a2d7a93506314b76
-
         Content-Disposition: form-data; name="attachment1"
-
         Content-Type: application/pdf
 
-
         <Binary PDF attachment contents>
-
         --17de1ed8f01442b2a2d7a93506314b76--
-
         ```
-
 
         This PUT request would have an overall HTTP Content-Type header:
 
-
         ```
-
         Content-Type: multipart/form-data; boundary=17de1ed8f01442b2a2d7a93506314b76
-
         ```
-
 
         Note that the Content-Disposition parameter "name" in each part must be the expected values
-
         "metadata", "content", "attachment1"..."attachmentN". The attachment attributes must be named 
-
         exactly as they are listed here (case sensitive), for example: "attachment_1" or "Attachment2"
-
         are invalid.
-
 
         This is an example curl command:
 
-
         ```
-
         curl -v -L -X PUT '<Location from \uploads>' -F 'metadata="{\"veteranFirstName\": \"Jane\",\"veteranLastName\": \"Doe\",\"fileNumber\": \"012345678\",\"zipCode\": \"97202\",\"source\": \"MyVSO\",\"docType\": \"21-22\",\"businessLine\": \"CMP\"}";type=application/json' -F 'content=@"content.pdf"' -F 'attachment1=@"file1.pdf"' -F 'attachment2=@"another_file.pdf"'
-
         ```
       operationId: putBenefitsDocumentUpload
       parameters:
-        - description: Base64-encoded 128-bit MD5 digest of the message. Use for integrity
-            control
+        - description: Base64-encoded 128-bit MD5 digest of the message. Use for integrity control
           in: header
           name: Content-MD5
           required: false
@@ -299,28 +212,18 @@ paths:
               schema:
                 properties:
                   code:
-                    description: >
+                    description: |
                       Unambiguous status code. Only present if status = "error"
 
-
                       * `DOC101` - Invalid multipart payload provided - not a multipart, or missing one or more required parts.
-
                       * `DOC102` - Invalid metadata - not parseable as JSON, incorrect fields, etc.
-
                       * `DOC103` - Invalid content - not parseable as PDF. Detail field will indicate which document or attachment part was affected.
-
                       * `DOC104` - Upload rejected by upstream system. Processing failed and upload must be resubmitted. Detail field will indicate nature of rejection.
-
                       * `DOC105` - Invalid or unknown id
-
                       * `DOC106` - File size limit exceeded. Each document may be a maximum of 100MB.
-
                       * `DOC107` - Empty payload.
-
                       * `DOC108` - Maximum dimensions exceeded. Height and width must be less than 21 in x 21 in.
-
                       * `DOC201` - Upload server error.
-
                       * `DOC202` - Error during processing by upstream system. Processing failed and upload must be resubmitted. Detail field will provide additional details where available.
                     example: 500
                     type: string
@@ -329,28 +232,18 @@ paths:
                     example: Internal server error
                     type: string
                   status:
-                    description: >
+                    description: |
                       Unambiguous status code. Only present if status = "error"
 
-
                       * `DOC101` - Invalid multipart payload provided - not a multipart, or missing one or more required parts.
-
                       * `DOC102` - Invalid metadata - not parseable as JSON, incorrect fields, etc.
-
                       * `DOC103` - Invalid content - not parseable as PDF. Detail field will indicate which document or attachment part was affected.
-
                       * `DOC104` - Upload rejected by upstream system. Processing failed and upload must be resubmitted. Detail field will indicate nature of rejection.
-
                       * `DOC105` - Invalid or unknown id
-
                       * `DOC106` - File size limit exceeded. Each document may be a maximum of 100MB.
-
                       * `DOC107` - Empty payload.
-
                       * `DOC108` - Maximum dimensions exceeded. Height and width must be less than 21 in x 21 in.
-
                       * `DOC201` - Upload server error.
-
                       * `DOC202` - Error during processing by upstream system. Processing failed and upload must be resubmitted. Detail field will provide additional details where available.
                     example: 500
                     type: string
@@ -438,28 +331,18 @@ paths:
               schema:
                 properties:
                   code:
-                    description: >
+                    description: |
                       Unambiguous status code. Only present if status = "error"
 
-
                       * `DOC101` - Invalid multipart payload provided - not a multipart, or missing one or more required parts.
-
                       * `DOC102` - Invalid metadata - not parseable as JSON, incorrect fields, etc.
-
                       * `DOC103` - Invalid content - not parseable as PDF. Detail field will indicate which document or attachment part was affected.
-
                       * `DOC104` - Upload rejected by upstream system. Processing failed and upload must be resubmitted. Detail field will indicate nature of rejection.
-
                       * `DOC105` - Invalid or unknown id
-
                       * `DOC106` - File size limit exceeded. Each document may be a maximum of 100MB.
-
                       * `DOC107` - Empty payload.
-
                       * `DOC108` - Maximum dimensions exceeded. Height and width must be less than 21 in x 21 in.
-
                       * `DOC201` - Upload server error.
-
                       * `DOC202` - Error during processing by upstream system. Processing failed and upload must be resubmitted. Detail field will provide additional details where available.
                     example: 500
                     type: string
@@ -468,28 +351,18 @@ paths:
                     example: Internal server error
                     type: string
                   status:
-                    description: >
+                    description: |
                       Unambiguous status code. Only present if status = "error"
 
-
                       * `DOC101` - Invalid multipart payload provided - not a multipart, or missing one or more required parts.
-
                       * `DOC102` - Invalid metadata - not parseable as JSON, incorrect fields, etc.
-
                       * `DOC103` - Invalid content - not parseable as PDF. Detail field will indicate which document or attachment part was affected.
-
                       * `DOC104` - Upload rejected by upstream system. Processing failed and upload must be resubmitted. Detail field will indicate nature of rejection.
-
                       * `DOC105` - Invalid or unknown id
-
                       * `DOC106` - File size limit exceeded. Each document may be a maximum of 100MB.
-
                       * `DOC107` - Empty payload.
-
                       * `DOC108` - Maximum dimensions exceeded. Height and width must be less than 21 in x 21 in.
-
                       * `DOC201` - Upload server error.
-
                       * `DOC202` - Error during processing by upstream system. Processing failed and upload must be resubmitted. Detail field will provide additional details where available.
                     example: 500
                     type: string
@@ -588,28 +461,18 @@ paths:
               schema:
                 properties:
                   code:
-                    description: >
+                    description: |
                       Unambiguous status code. Only present if status = "error"
 
-
                       * `DOC101` - Invalid multipart payload provided - not a multipart, or missing one or more required parts.
-
                       * `DOC102` - Invalid metadata - not parseable as JSON, incorrect fields, etc.
-
                       * `DOC103` - Invalid content - not parseable as PDF. Detail field will indicate which document or attachment part was affected.
-
                       * `DOC104` - Upload rejected by upstream system. Processing failed and upload must be resubmitted. Detail field will indicate nature of rejection.
-
                       * `DOC105` - Invalid or unknown id
-
                       * `DOC106` - File size limit exceeded. Each document may be a maximum of 100MB.
-
                       * `DOC107` - Empty payload.
-
                       * `DOC108` - Maximum dimensions exceeded. Height and width must be less than 21 in x 21 in.
-
                       * `DOC201` - Upload server error.
-
                       * `DOC202` - Error during processing by upstream system. Processing failed and upload must be resubmitted. Detail field will provide additional details where available.
                     example: 500
                     type: string
@@ -618,28 +481,18 @@ paths:
                     example: Internal server error
                     type: string
                   status:
-                    description: >
+                    description: |
                       Unambiguous status code. Only present if status = "error"
 
-
                       * `DOC101` - Invalid multipart payload provided - not a multipart, or missing one or more required parts.
-
                       * `DOC102` - Invalid metadata - not parseable as JSON, incorrect fields, etc.
-
                       * `DOC103` - Invalid content - not parseable as PDF. Detail field will indicate which document or attachment part was affected.
-
                       * `DOC104` - Upload rejected by upstream system. Processing failed and upload must be resubmitted. Detail field will indicate nature of rejection.
-
                       * `DOC105` - Invalid or unknown id
-
                       * `DOC106` - File size limit exceeded. Each document may be a maximum of 100MB.
-
                       * `DOC107` - Empty payload.
-
                       * `DOC108` - Maximum dimensions exceeded. Height and width must be less than 21 in x 21 in.
-
                       * `DOC201` - Upload server error.
-
                       * `DOC202` - Error during processing by upstream system. Processing failed and upload must be resubmitted. Detail field will provide additional details where available.
                     example: 500
                     type: string
@@ -711,28 +564,18 @@ paths:
               schema:
                 properties:
                   code:
-                    description: >
+                    description: |
                       Unambiguous status code. Only present if status = "error"
 
-
                       * `DOC101` - Invalid multipart payload provided - not a multipart, or missing one or more required parts.
-
                       * `DOC102` - Invalid metadata - not parseable as JSON, incorrect fields, etc.
-
                       * `DOC103` - Invalid content - not parseable as PDF. Detail field will indicate which document or attachment part was affected.
-
                       * `DOC104` - Upload rejected by upstream system. Processing failed and upload must be resubmitted. Detail field will indicate nature of rejection.
-
                       * `DOC105` - Invalid or unknown id
-
                       * `DOC106` - File size limit exceeded. Each document may be a maximum of 100MB.
-
                       * `DOC107` - Empty payload.
-
                       * `DOC108` - Maximum dimensions exceeded. Height and width must be less than 21 in x 21 in.
-
                       * `DOC201` - Upload server error.
-
                       * `DOC202` - Error during processing by upstream system. Processing failed and upload must be resubmitted. Detail field will provide additional details where available.
                     example: 404
                     type: string
@@ -741,28 +584,18 @@ paths:
                     example: The record identified by {{ind}} could not be found
                     type: string
                   status:
-                    description: >
+                    description: |
                       Unambiguous status code. Only present if status = "error"
 
-
                       * `DOC101` - Invalid multipart payload provided - not a multipart, or missing one or more required parts.
-
                       * `DOC102` - Invalid metadata - not parseable as JSON, incorrect fields, etc.
-
                       * `DOC103` - Invalid content - not parseable as PDF. Detail field will indicate which document or attachment part was affected.
-
                       * `DOC104` - Upload rejected by upstream system. Processing failed and upload must be resubmitted. Detail field will indicate nature of rejection.
-
                       * `DOC105` - Invalid or unknown id
-
                       * `DOC106` - File size limit exceeded. Each document may be a maximum of 100MB.
-
                       * `DOC107` - Empty payload.
-
                       * `DOC108` - Maximum dimensions exceeded. Height and width must be less than 21 in x 21 in.
-
                       * `DOC201` - Upload server error.
-
                       * `DOC202` - Error during processing by upstream system. Processing failed and upload must be resubmitted. Detail field will provide additional details where available.
                     example: 404
                     type: string
@@ -806,28 +639,18 @@ paths:
               schema:
                 properties:
                   code:
-                    description: >
+                    description: |
                       Unambiguous status code. Only present if status = "error"
 
-
                       * `DOC101` - Invalid multipart payload provided - not a multipart, or missing one or more required parts.
-
                       * `DOC102` - Invalid metadata - not parseable as JSON, incorrect fields, etc.
-
                       * `DOC103` - Invalid content - not parseable as PDF. Detail field will indicate which document or attachment part was affected.
-
                       * `DOC104` - Upload rejected by upstream system. Processing failed and upload must be resubmitted. Detail field will indicate nature of rejection.
-
                       * `DOC105` - Invalid or unknown id
-
                       * `DOC106` - File size limit exceeded. Each document may be a maximum of 100MB.
-
                       * `DOC107` - Empty payload.
-
                       * `DOC108` - Maximum dimensions exceeded. Height and width must be less than 21 in x 21 in.
-
                       * `DOC201` - Upload server error.
-
                       * `DOC202` - Error during processing by upstream system. Processing failed and upload must be resubmitted. Detail field will provide additional details where available.
                     example: 500
                     type: string
@@ -836,28 +659,18 @@ paths:
                     example: Internal server error
                     type: string
                   status:
-                    description: >
+                    description: |
                       Unambiguous status code. Only present if status = "error"
 
-
                       * `DOC101` - Invalid multipart payload provided - not a multipart, or missing one or more required parts.
-
                       * `DOC102` - Invalid metadata - not parseable as JSON, incorrect fields, etc.
-
                       * `DOC103` - Invalid content - not parseable as PDF. Detail field will indicate which document or attachment part was affected.
-
                       * `DOC104` - Upload rejected by upstream system. Processing failed and upload must be resubmitted. Detail field will indicate nature of rejection.
-
                       * `DOC105` - Invalid or unknown id
-
                       * `DOC106` - File size limit exceeded. Each document may be a maximum of 100MB.
-
                       * `DOC107` - Empty payload.
-
                       * `DOC108` - Maximum dimensions exceeded. Height and width must be less than 21 in x 21 in.
-
                       * `DOC201` - Upload server error.
-
                       * `DOC202` - Error during processing by upstream system. Processing failed and upload must be resubmitted. Detail field will provide additional details where available.
                     example: 500
                     type: string
@@ -876,10 +689,7 @@ paths:
         - document_uploads
   "/uploads/{id}/download":
     get:
-      description: An endpoint that will allow you to see exactly what the server
-        sees. We split apart all submitted docs and metadata and zip the file to
-        make it available to you to help with debugging purposes. Only available
-        in sandbox
+      description: An endpoint that will allow you to see exactly what the server sees. We split apart all submitted docs and metadata and zip the file to make it available to you to help with debugging purposes. Files are deleted after 10 days. Only available in testing environments, not production.
       operationId: getBenefitsDocumentUploadDownload
       parameters:
         - description: ID as returned by a previous create upload request
@@ -931,28 +741,18 @@ paths:
               schema:
                 properties:
                   code:
-                    description: >
+                    description: |
                       Unambiguous status code. Only present if status = "error"
 
-
                       * `DOC101` - Invalid multipart payload provided - not a multipart, or missing one or more required parts.
-
                       * `DOC102` - Invalid metadata - not parseable as JSON, incorrect fields, etc.
-
                       * `DOC103` - Invalid content - not parseable as PDF. Detail field will indicate which document or attachment part was affected.
-
                       * `DOC104` - Upload rejected by upstream system. Processing failed and upload must be resubmitted. Detail field will indicate nature of rejection.
-
                       * `DOC105` - Invalid or unknown id
-
                       * `DOC106` - File size limit exceeded. Each document may be a maximum of 100MB.
-
                       * `DOC107` - Empty payload.
-
                       * `DOC108` - Maximum dimensions exceeded. Height and width must be less than 21 in x 21 in.
-
                       * `DOC201` - Upload server error.
-
                       * `DOC202` - Error during processing by upstream system. Processing failed and upload must be resubmitted. Detail field will provide additional details where available.
                     example: 404
                     type: string
@@ -961,28 +761,18 @@ paths:
                     example: The record identified by {{ind}} could not be found
                     type: string
                   status:
-                    description: >
+                    description: |
                       Unambiguous status code. Only present if status = "error"
 
-
                       * `DOC101` - Invalid multipart payload provided - not a multipart, or missing one or more required parts.
-
                       * `DOC102` - Invalid metadata - not parseable as JSON, incorrect fields, etc.
-
                       * `DOC103` - Invalid content - not parseable as PDF. Detail field will indicate which document or attachment part was affected.
-
                       * `DOC104` - Upload rejected by upstream system. Processing failed and upload must be resubmitted. Detail field will indicate nature of rejection.
-
                       * `DOC105` - Invalid or unknown id
-
                       * `DOC106` - File size limit exceeded. Each document may be a maximum of 100MB.
-
                       * `DOC107` - Empty payload.
-
                       * `DOC108` - Maximum dimensions exceeded. Height and width must be less than 21 in x 21 in.
-
                       * `DOC201` - Upload server error.
-
                       * `DOC202` - Error during processing by upstream system. Processing failed and upload must be resubmitted. Detail field will provide additional details where available.
                     example: 404
                     type: string
@@ -1013,28 +803,18 @@ paths:
               schema:
                 properties:
                   code:
-                    description: >
+                    description: |
                       Unambiguous status code. Only present if status = "error"
 
-
                       * `DOC101` - Invalid multipart payload provided - not a multipart, or missing one or more required parts.
-
                       * `DOC102` - Invalid metadata - not parseable as JSON, incorrect fields, etc.
-
                       * `DOC103` - Invalid content - not parseable as PDF. Detail field will indicate which document or attachment part was affected.
-
                       * `DOC104` - Upload rejected by upstream system. Processing failed and upload must be resubmitted. Detail field will indicate nature of rejection.
-
                       * `DOC105` - Invalid or unknown id
-
                       * `DOC106` - File size limit exceeded. Each document may be a maximum of 100MB.
-
                       * `DOC107` - Empty payload.
-
                       * `DOC108` - Maximum dimensions exceeded. Height and width must be less than 21 in x 21 in.
-
                       * `DOC201` - Upload server error.
-
                       * `DOC202` - Error during processing by upstream system. Processing failed and upload must be resubmitted. Detail field will provide additional details where available.
                     example: 500
                     type: string
@@ -1043,28 +823,18 @@ paths:
                     example: Internal server error
                     type: string
                   status:
-                    description: >
+                    description: |
                       Unambiguous status code. Only present if status = "error"
 
-
                       * `DOC101` - Invalid multipart payload provided - not a multipart, or missing one or more required parts.
-
                       * `DOC102` - Invalid metadata - not parseable as JSON, incorrect fields, etc.
-
                       * `DOC103` - Invalid content - not parseable as PDF. Detail field will indicate which document or attachment part was affected.
-
                       * `DOC104` - Upload rejected by upstream system. Processing failed and upload must be resubmitted. Detail field will indicate nature of rejection.
-
                       * `DOC105` - Invalid or unknown id
-
                       * `DOC106` - File size limit exceeded. Each document may be a maximum of 100MB.
-
                       * `DOC107` - Empty payload.
-
                       * `DOC108` - Maximum dimensions exceeded. Height and width must be less than 21 in x 21 in.
-
                       * `DOC201` - Upload server error.
-
                       * `DOC202` - Error during processing by upstream system. Processing failed and upload must be resubmitted. Detail field will provide additional details where available.
                     example: 500
                     type: string
@@ -1091,28 +861,18 @@ components:
     DocumentUploadAttributes:
       properties:
         code:
-          description: >
+          description: |
             Unambiguous status code. Only present if status = "error"
 
-
             * `DOC101` - Invalid multipart payload provided - not a multipart, or missing one or more required parts.
-
             * `DOC102` - Invalid metadata - not parseable as JSON, incorrect fields, etc.
-
             * `DOC103` - Invalid content - not parseable as PDF. Detail field will indicate which document or attachment part was affected.
-
             * `DOC104` - Upload rejected by upstream system. Processing failed and upload must be resubmitted. Detail field will indicate nature of rejection.
-
             * `DOC105` - Invalid or unknown id
-
             * `DOC106` - File size limit exceeded. Each document may be a maximum of 100MB.
-
             * `DOC107` - Empty payload.
-
             * `DOC108` - Maximum dimensions exceeded. Height and width must be less than 21 in x 21 in.
-
             * `DOC201` - Upload server error.
-
             * `DOC202` - Error during processing by upstream system. Processing failed and upload must be resubmitted. Detail field will provide additional details where available.
           type: string
         detail:
@@ -1129,36 +889,22 @@ components:
           format: uri
           type: string
         status:
-          description: >
+          description: |
             Document upload status. Note that until a document status of
-
             “received”, “processing”, “success”, or "vbms" is returned, a client
-
             cannot consider the document as received by VA. In particular a
-
             status of “uploaded” means that the document package has been
-
             transmitted, but possibly not validated. Any errors with the
-
             document package (unreadable PDF, etc) may cause the status to
-
             change to “error”.
 
-
             * `pending` - Initial status, indicates no document package has been uploaded yet
-
             * `uploaded` - Indicates document package has been successfully uploaded (PUT) from the vendor's application system to the API server but has not yet been validated. Date of Receipt is _not_ yet established with this status.
-
             * `received` - Indicates document package has been received upstream of the API, but is not yet in processing. <ins>Date of Receipt is set when this status is achieved.</ins> (This is also the final status in the sandbox environment unless further progress is simulated.)
-
             * `processing` - Indicates VBA Intake, Conversion and Mail Handling Services (ICMHS) is processing the document package.
-
             * `success` - Indicates document package has been received by Digital Mail Handling System (DHMS, aka the Centralized Mail portal).
-
             * `vbms` - Final status. Indicates document package has been received by Veterans Benefits Management System (VBMS).
-
             * `error` - Indicates that there was an error. See the `code` and `message` for further information.
-
             * `expired` - Indicates that the submission was not successfully uploaded via PUT request within the 15-minute window after the POST request. We recommend coding to retry unsuccessful uploads using the same GUID within 15 minutes in case of connection issues.
           enum:
             - pending
@@ -1190,8 +936,7 @@ components:
           type: string
         Message:
           description: Error detail
-          example: A client error (InvalidDigest) occurred when calling the PutObject
-            operation - The Content-MD5 you specified was invalid.
+          example: A client error (InvalidDigest) occurred when calling the PutObject operation - The Content-MD5 you specified was invalid.
           type: string
         RequestId:
           description: Identifier for debug purposes
@@ -1207,24 +952,15 @@ components:
       description: Identifying properties about the document payload being submitted
       properties:
         businessLine:
-          description: >
-            Optional parameter (can be missing or empty).  The values
-            are:<br><br>
-
+          description: |
+            Optional parameter (can be missing or empty).  The values are:<br><br>
             CMP - Compensation requests such as those related to disability, unemployment, and pandemic claims<br><br>
-
             PMC - Pension requests including survivor’s pension<br><br>
-
             INS - Insurance such as life insurance, disability insurance, and other health insurance<br><br>
-
             EDU - Education benefits, programs, and affiliations<br><br>
-
             VRE - Veteran Readiness & Employment such as employment questionnaires, employment discrimination, employment verification<br><br>
-
             BVA - Board of Veteran Appeals<br><br>
-
             FID - Fiduciary / financial appointee, including family member benefits<br><br>
-
             OTH - Other (this value if used, will be treated as CMP)<br>
           enum:
             - CMP
@@ -1242,13 +978,7 @@ components:
           example: 21-22
           type: string
         fileNumber:
-          description: The Veteran's file number is exactly 9 digits with no alpha
-            characters, hyphens, spaces or punctuation. In most cases, this is
-            the Veteran's SSN but may also be an 8 digit BIRL number. If no file
-            number has been established or if it is unknown, the application
-            should use the Veteran's SSN and the file number will be associated
-            with the submission later in the process. Incorrect file numbers can
-            cause delays.
+          description: The Veteran's file number is exactly 9 digits with no alpha characters, hyphens, spaces or punctuation. In most cases, this is the Veteran's SSN but may also be an 8 digit BIRL number. If no file number has been established or if it is unknown, the application should use the Veteran's SSN and the file number will be associated with the submission later in the process. Incorrect file numbers can cause delays.
           example: "999887777"
           pattern: ^\d{8,9}$
           type: string
@@ -1257,23 +987,17 @@ components:
           example: MyVSO
           type: string
         veteranFirstName:
-          description: Veteran first name. Cannot be missing or empty or longer than 50
-            characters. Only upper/lower case letters, hyphens(-), spaces and
-            forward-slash(/) allowed.
+          description: Veteran first name. Cannot be missing or empty or longer than 50 characters. Only upper/lower case letters, hyphens(-), spaces and forward-slash(/) allowed.
           example: Jane
           pattern: ^[a-zA-Z\-\/\s]{1,50}$
           type: string
         veteranLastName:
-          description: Veteran last name. Cannot be missing or empty or longer than 50
-            characters. Only upper/lower case letters, hyphens(-), spaces and
-            forward-slash(/) allowed.
+          description: Veteran last name. Cannot be missing or empty or longer than 50 characters. Only upper/lower case letters, hyphens(-), spaces and forward-slash(/) allowed.
           example: Doe-Smith
           pattern: ^[a-zA-Z\-\/\s]{1,50}$
           type: string
         zipCode:
-          description: Veteran zip code. Either five digits (XXXXX) or five digits then
-            four digits separated by a hyphen (XXXXX-XXXX). Use '00000' for
-            Veterans with non-US addresses.
+          description: Veteran zip code. Either five digits (XXXXX) or five digits then four digits separated by a hyphen (XXXXX-XXXX). Use '00000' for Veterans with non-US addresses.
           example: "20571"
           type: string
       required:
@@ -1322,28 +1046,18 @@ components:
     DocumentUploadStatusAttributes:
       properties:
         code:
-          description: >
+          description: |
             Unambiguous status code. Only present if status = "error"
 
-
             * `DOC101` - Invalid multipart payload provided - not a multipart, or missing one or more required parts.
-
             * `DOC102` - Invalid metadata - not parseable as JSON, incorrect fields, etc.
-
             * `DOC103` - Invalid content - not parseable as PDF. Detail field will indicate which document or attachment part was affected.
-
             * `DOC104` - Upload rejected by upstream system. Processing failed and upload must be resubmitted. Detail field will indicate nature of rejection.
-
             * `DOC105` - Invalid or unknown id
-
             * `DOC106` - File size limit exceeded. Each document may be a maximum of 100MB.
-
             * `DOC107` - Empty payload.
-
             * `DOC108` - Maximum dimensions exceeded. Height and width must be less than 21 in x 21 in.
-
             * `DOC201` - Upload server error.
-
             * `DOC202` - Error during processing by upstream system. Processing failed and upload must be resubmitted. Detail field will provide additional details where available.
           type: string
         detail:
@@ -1358,36 +1072,22 @@ components:
           description: Human readable error description. Only present if status = "error"
           type: string
         status:
-          description: >
+          description: |
             Document upload status. Note that until a document status of
-
             “received”, “processing”, “success”, or "vbms" is returned, a client
-
             cannot consider the document as received by VA. In particular a
-
             status of “uploaded” means that the document package has been
-
             transmitted, but possibly not validated. Any errors with the
-
             document package (unreadable PDF, etc) may cause the status to
-
             change to “error”.
 
-
             * `pending` - Initial status, indicates no document package has been uploaded yet
-
             * `uploaded` - Indicates document package has been successfully uploaded (PUT) from the vendor's application system to the API server but has not yet been validated. Date of Receipt is _not_ yet established with this status.
-
             * `received` - Indicates document package has been received upstream of the API, but is not yet in processing. <ins>Date of Receipt is set when this status is achieved.</ins> (This is also the final status in the sandbox environment unless further progress is simulated.)
-
             * `processing` - Indicates VBA Intake, Conversion and Mail Handling Services (ICMHS) is processing the document package.
-
             * `success` - Indicates document package has been received by Digital Mail Handling System (DHMS, aka the Centralized Mail portal).
-
             * `vbms` - Final status. Indicates document package has been received by Veterans Benefits Management System (VBMS).
-
             * `error` - Indicates that there was an error. See the `code` and `message` for further information.
-
             * `expired` - Indicates that the submission was not successfully uploaded via PUT request within the 15-minute window after the POST request. We recommend coding to retry unsuccessful uploads using the same GUID within 15 minutes in case of connection issues.
           enum:
             - pending
@@ -1428,8 +1128,7 @@ components:
         $ref: "#/components/schemas/DocumentUploadStatus"
       type: array
     DocumentUploadSubmission:
-      description: Record of requested document submission. Includes the location to
-        which the document payload is to be uploaded
+      description: Record of requested document submission. Includes the location to which the document payload is to be uploaded
       properties:
         attributes:
           $ref: "#/components/schemas/DocumentUploadSubmissionAttributes"
@@ -1463,8 +1162,7 @@ components:
       properties:
         detail:
           description: A more detailed message about why an error occurred
-          example: DOC104 - Upload rejected by upstream system. Processing failed and
-            upload must be resubmitted
+          example: DOC104 - Upload rejected by upstream system. Processing failed and upload must be resubmitted
           type: string
         status:
           description: Standard HTTP Status returned with Error

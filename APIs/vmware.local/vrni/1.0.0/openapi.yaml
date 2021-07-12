@@ -34,9 +34,8 @@ tags:
 paths:
   /auth/token:
     delete:
-      description: >-
+      description: |-
         Deletes the auth token provided in Authorization header.
-
         Deleting an expired or invalid token will result in 401 Unauthorized error.
       operationId: delete
       responses:
@@ -52,14 +51,7 @@ paths:
       tags:
         - Authentication
     post:
-      description: <html><body> vRealize Network Insight supports token based
-        authentication.Tokens are non-modifiable identifiers returned by the
-        system when the user has successfully authenticated using valid
-        credentials. Token expires after expiry time returned in the response.
-        All API requests must provide the auth token in Authorization header in
-        following format.<br> Authorization &#58; NetworkInsight {token} <br> If
-        a token is invalid or expired, 401-Unauthorized error gets returned in
-        the response of the API request. </body></html>
+      description: <html><body> vRealize Network Insight supports token based authentication.Tokens are non-modifiable identifiers returned by the system when the user has successfully authenticated using valid credentials. Token expires after expiry time returned in the response. All API requests must provide the auth token in Authorization header in following format.<br> Authorization &#58; NetworkInsight {token} <br> If a token is invalid or expired, 401-Unauthorized error gets returned in the response of the API request. </body></html>
       operationId: create
       requestBody:
         content:
@@ -435,8 +427,7 @@ paths:
       tags:
         - Data Sources
     put:
-      description: Update a brocade switch data source. Only credentials, nickname and
-        notes can be updated.
+      description: Update a brocade switch data source. Only credentials, nickname and notes can be updated.
       operationId: updateBrocadeSwitch
       parameters:
         - $ref: "#/components/parameters/Identifier"
@@ -775,10 +766,8 @@ paths:
       tags:
         - Data Sources
     post:
-      description: >-
-        Add cisco switch as data source. User must provide one of ip or
-        fqdn field in the request body.
-
+      description: |-
+        Add cisco switch as data source. User must provide one of ip or fqdn field in the request body.
         Appropriate proxy id is retrieved from infra/nodes URL to select the proxy node.
       operationId: addCiscoSwitch
       requestBody:
@@ -857,8 +846,7 @@ paths:
       tags:
         - Data Sources
     put:
-      description: Update a cisco switch data source. Only credentials, nickname and
-        notes can be updated.
+      description: Update a cisco switch data source. Only credentials, nickname and notes can be updated.
       operationId: updateCiscoSwitch
       parameters:
         - $ref: "#/components/parameters/Identifier"
@@ -1096,8 +1084,7 @@ paths:
       tags:
         - Data Sources
     put:
-      description: Update a dell switch data source. Only credentials, nickname and
-        notes can be updated
+      description: Update a dell switch data source. Only credentials, nickname and notes can be updated
       operationId: updateDellSwitch
       parameters:
         - $ref: "#/components/parameters/Identifier"
@@ -2519,10 +2506,8 @@ paths:
       tags:
         - Data Sources
     post:
-      description: >-
-        Add a vcenter data source. User must provide one of ip or fqdn
-        field in the request body.
-
+      description: |-
+        Add a vcenter data source. User must provide one of ip or fqdn field in the request body.
         Appropriate proxy id is retrieved from infra/nodes URL to select the proxy node.
       operationId: addVcenterDatasource
       requestBody:
@@ -2678,8 +2663,7 @@ paths:
       tags:
         - Data Sources
     put:
-      description: Update a vcenter data source. Only nickname, notes and credentials
-        can be updated.
+      description: Update a vcenter data source. Only nickname, notes and credentials can be updated.
       operationId: updateVcenter
       parameters:
         - $ref: "#/components/parameters/Identifier"
@@ -4523,8 +4507,7 @@ paths:
             message:
               examples:
                 response:
-                  value: The distributed firewall is configured to allow all traffic by default,
-                    which increases the potential attack surface of the network
+                  value: The distributed firewall is configured to allow all traffic by default, which increases the potential attack surface of the network
             name:
               examples:
                 response:
@@ -5801,10 +5784,8 @@ paths:
       tags:
         - Applications
     post:
-      description: >-
-        Application is a group of tiers. A tier is a group of virtual
-        machines based on membership criteria. Tiers are bound to single
-
+      description: |-
+        Application is a group of tiers. A tier is a group of virtual machines based on membership criteria. Tiers are bound to single
         application. An application name is unique and should not conflict with another application name.
       operationId: addApplication
       requestBody:
@@ -5865,8 +5846,7 @@ paths:
         - Applications
   "/groups/applications/{id}":
     delete:
-      description: Deleting an application deletes all the tiers of the application
-        along with the application
+      description: Deleting an application deletes all the tiers of the application along with the application
       operationId: deleteApplication
       parameters:
         - $ref: "#/components/parameters/Identifier"
@@ -5973,10 +5953,8 @@ paths:
       tags:
         - Applications
     post:
-      description: >-
-        Create a tier of an application by with specified membership
-        criteria. The membership criteria id defined in terms of
-
+      description: |-
+        Create a tier of an application by with specified membership criteria. The membership criteria id defined in terms of
         virtual machines or ip addresses/subnet. Please refer to API Guide on how to construct membership criteria.
       operationId: addTier
       parameters:
@@ -6197,8 +6175,7 @@ paths:
         - Info
   /infra/nodes:
     get:
-      description: Get list of infrastructure nodes. Only admin users can retrieve
-        this information.
+      description: Get list of infrastructure nodes. Only admin users can retrieve this information.
       operationId: listNodes
       responses:
         "200":
@@ -6232,10 +6209,8 @@ paths:
         - Infrastructure
   "/infra/nodes/{id}":
     get:
-      description: >-
-        Get details of infrastructure nodes. Only admin users can get this
-        information. The proxy id is
-
+      description: |-
+        Get details of infrastructure nodes. Only admin users can get this information. The proxy id is
         required for adding a data source for selecting appropriate proxy node to add the data source.
       operationId: getNode
       parameters:
@@ -6282,16 +6257,11 @@ paths:
         - Infrastructure
   /micro-seg/recommended-rules:
     post:
-      description: >-
-        Get recommended firewall rules based on the flow data gathered by
-        vRealize Network Insight.
-
+      description: |-
+        Get recommended firewall rules based on the flow data gathered by vRealize Network Insight.
         This API provides service to retrieve recommended rules based on flow traffic that is observed between
-
         two groups OR for a single group based on all the inbound and outboud traffic for that group.
-
         In case two groups are provided, both the groups should be of same type.
-
         Currently supported groups are Application, Tier, NSXSecurityGroup, EC2SecurityGroup.
       operationId: listRecommendedRules
       requestBody:
@@ -6348,10 +6318,8 @@ paths:
         - Microsegmentation
   /micro-seg/recommended-rules/nsx:
     post:
-      description: >-
-        Export recommended firewall rules based on the flow data gathered
-        by vRealize Network Insight in NSX-V compatible
-
+      description: |-
+        Export recommended firewall rules based on the flow data gathered by vRealize Network Insight in NSX-V compatible
         format
       operationId: exportNsxRecommendedRules
       requestBody:
@@ -6385,14 +6353,10 @@ paths:
         - Microsegmentation
   /search:
     post:
-      description: >-
-        Using search API you can search vRealize Network Insight entities
-        by specifying entity type and filter expression.
-
+      description: |-
+        Using search API you can search vRealize Network Insight entities by specifying entity type and filter expression.
         A filter expression is a predicate expression (similar to SQL where clause) used to define the search criteria.
-
         Please refer to API Guide on details of how to construct filter expression. A successful search request will return a
-
         list of entity ids that matches the search criteria.
       operationId: searchEntities
       requestBody:

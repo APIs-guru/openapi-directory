@@ -7,11 +7,7 @@ info:
   contact:
     name: The open API platform by Mercedes-Benz
     x-twitter: MercedesBenz
-  description: The vehicle images API offers access to original Mercedes-Benz
-    vehicle images.  It provides access to exterior and interior images with
-    parameters e.g. to modify the perspective and to display vehicles at
-    day/nighttime.  In addition you can request component images of a vehicle's
-    engine, paint, rim, trim, upholstery and equipments.
+  description: The vehicle images API offers access to original Mercedes-Benz vehicle images.  It provides access to exterior and interior images with parameters e.g. to modify the perspective and to display vehicles at day/nighttime.  In addition you can request component images of a vehicle's engine, paint, rim, trim, upholstery and equipments.
   title: Vehicle Image
   version: "1.0"
   x-apisguru-categories:
@@ -29,10 +25,8 @@ produces:
 parameters:
   finorvin:
     default: WDD1760421J123456
-    description: >-
-      The FIN or VIN of one specific vehicle. For testing purposes the
-      following sample FINs are available (please note that these FINs are NOT
-      available in the tryout): 
+    description: |-
+      The FIN or VIN of one specific vehicle. For testing purposes the following sample FINs are available (please note that these FINs are NOT available in the tryout): 
         * E 350 d: WDD2130331A123456
         * B 180: WDD2462421N123456
         * GLA 200: WDC1569431J123456
@@ -44,17 +38,15 @@ parameters:
     type: string
   night:
     default: false
-    description: Set 'true', if you are looking for images with a darker background
-      and the vehicle's headlights turned on. Default is 'false'.
+    description: Set 'true', if you are looking for images with a darker background and the vehicle's headlights turned on. Default is 'false'.
     in: query
     name: night
     required: false
     type: boolean
   perspectives:
     default: EXT020,INT1
-    description: >-
-      One or more perspectives as a comma separated String list e.g.
-      'EXT000,EXT010,INT1'.  The following perspectives are available:
+    description: |-
+      One or more perspectives as a comma separated String list e.g. 'EXT000,EXT010,INT1'.  The following perspectives are available:
         * EXT000-EXT350: EXT000 defines the front view, EXT010 defines a rotation of 10 degress and so forth.
         * INT1-INT4: These are the 4 available interior perspectives.
 
@@ -96,8 +88,7 @@ parameters:
     type: string
   roofOpen:
     default: false
-    description: Set 'true', if you are looking for images with the roof open. This
-      option is only valid for cabrios. Default is 'false'.
+    description: Set 'true', if you are looking for images with the roof open. This option is only valid for cabrios. Default is 'false'.
     in: query
     name: roofOpen
     required: false
@@ -108,9 +99,8 @@ tags:
 paths:
   "/{finorvin}/components":
     get:
-      description: >-
-        Returns URLs pointing to images in JPG format in the highest
-        available resolution (depending on the component) of the vehicle's:
+      description: |-
+        Returns URLs pointing to images in JPG format in the highest available resolution (depending on the component) of the vehicle's:
           * engine (1024x576 px), 
           * rim (710x710 px), 
           * trim (800x600 px), 
@@ -125,25 +115,19 @@ paths:
           description: Successful response
           headers:
             X-Request-Id:
-              description: "Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.              "
+              description: "Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.              "
               type: string
             cache-control:
               default: max-age=86400
-              description: Specifies the maximum amount of time (in seconds) an image is
-                considered to be up-to-date
+              description: Specifies the maximum amount of time (in seconds) an image is considered to be up-to-date
               type: string
           schema:
             $ref: "#/definitions/ComponentsResponse"
         "204":
-          description: No content could be found for your request. The FIN/VIN belongs to
-            a vehicle for which no images are available.
+          description: No content could be found for your request. The FIN/VIN belongs to a vehicle for which no images are available.
           headers:
             X-Request-Id:
-              description: Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.
+              description: Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.
               type: string
         "401":
           description: |-
@@ -151,22 +135,17 @@ paths:
               * Failed to resolve API Key query parameter 
               * Invalid API Key 
         "404":
-          description: The requested FIN/VIN could not be resolved. Please verify that
-            your FIN/VIN is correct.
+          description: The requested FIN/VIN could not be resolved. Please verify that your FIN/VIN is correct.
           headers:
             X-Request-Id:
-              description: "Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.            "
+              description: "Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.            "
               type: string
           schema:
             $ref: "#/definitions/Error"
         "429":
           description: Quota limit is exceeded
         "500":
-          description: The requested FIN/VIN could not be resolved because external
-            resources are not available or the server encountered an internal
-            error.
+          description: The requested FIN/VIN could not be resolved because external resources are not available or the server encountered an internal error.
           schema:
             $ref: "#/definitions/Error"
       tags:
@@ -174,8 +153,7 @@ paths:
     x-swagger-router-controller: images_components_finvin
   "/{finorvin}/components/engine":
     get:
-      description: Returns a URL pointing to an image of the vehicles engine.  These
-        images are available in the resolution 1024x576 px.
+      description: Returns a URL pointing to an image of the vehicles engine.  These images are available in the resolution 1024x576 px.
       operationId: imageComponentsEngineGET
       parameters:
         - $ref: "#/parameters/finorvin"
@@ -184,25 +162,19 @@ paths:
           description: Successful response
           headers:
             X-Request-Id:
-              description: Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.
+              description: Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.
               type: string
             cache-control:
               default: max-age=86400
-              description: Specifies the maximum amount of time (in seconds) an image is
-                considered to be up-to-date
+              description: Specifies the maximum amount of time (in seconds) an image is considered to be up-to-date
               type: string
           schema:
             $ref: "#/definitions/EngineResponse"
         "204":
-          description: No content could be found for your request. The FIN/VIN belongs to
-            a vehicle for which no images are available.
+          description: No content could be found for your request. The FIN/VIN belongs to a vehicle for which no images are available.
           headers:
             X-Request-Id:
-              description: Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.
+              description: Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.
               type: string
         "401":
           description: |-
@@ -210,22 +182,17 @@ paths:
               * Failed to resolve API Key query parameter 
               * Invalid API Key 
         "404":
-          description: The requested FIN/VIN could not be resolved. Please verify that
-            your FIN/VIN is correct.
+          description: The requested FIN/VIN could not be resolved. Please verify that your FIN/VIN is correct.
           headers:
             X-Request-Id:
-              description: Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.
+              description: Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.
               type: string
           schema:
             $ref: "#/definitions/Error"
         "429":
           description: Quota limit is exceeded
         "500":
-          description: The requested FIN/VIN could not be resolved because external
-            resources are not available or the server encountered an internal
-            error.
+          description: The requested FIN/VIN could not be resolved because external resources are not available or the server encountered an internal error.
           schema:
             $ref: "#/definitions/Error"
       tags:
@@ -233,9 +200,7 @@ paths:
     x-swagger-router-controller: images_components_finvin
   "/{finorvin}/components/equipments":
     get:
-      description: Returns URLs pointing to images of this vehicle's equipments. The
-        images are available in the highest possible resolution (usually 740x416
-        px).
+      description: Returns URLs pointing to images of this vehicle's equipments. The images are available in the highest possible resolution (usually 740x416 px).
       operationId: imageComponentsEquipmentsGET
       parameters:
         - $ref: "#/parameters/finorvin"
@@ -244,25 +209,19 @@ paths:
           description: Successful response
           headers:
             X-Request-Id:
-              description: "Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.              "
+              description: "Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.              "
               type: string
             cache-control:
               default: max-age=86400
-              description: Specifies the maximum amount of time (in seconds) an image is
-                considered to be up-to-date
+              description: Specifies the maximum amount of time (in seconds) an image is considered to be up-to-date
               type: string
           schema:
             $ref: "#/definitions/EquipmentResponse"
         "204":
-          description: No content could be found for your request. The FIN/VIN belongs to
-            a vehicle for which no images are available.
+          description: No content could be found for your request. The FIN/VIN belongs to a vehicle for which no images are available.
           headers:
             X-Request-Id:
-              description: Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.
+              description: Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.
               type: string
         "401":
           description: |-
@@ -270,22 +229,17 @@ paths:
               * Failed to resolve API Key query parameter 
               * Invalid API Key 
         "404":
-          description: The requested FIN/VIN could not be resolved. Please verify that
-            your FIN/VIN is correct.
+          description: The requested FIN/VIN could not be resolved. Please verify that your FIN/VIN is correct.
           headers:
             X-Request-Id:
-              description: Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.
+              description: Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.
               type: string
           schema:
             $ref: "#/definitions/Error"
         "429":
           description: Quota limit is exceeded
         "500":
-          description: The requested FIN/VIN could not be resolved because external
-            resources are not available or the server encountered an internal
-            error.
+          description: The requested FIN/VIN could not be resolved because external resources are not available or the server encountered an internal error.
           schema:
             $ref: "#/definitions/Error"
       tags:
@@ -293,10 +247,7 @@ paths:
     x-swagger-router-controller: images_components_finvin
   "/{finorvin}/components/paint":
     get:
-      description: Returns URLs pointing to images of this vehicles paint.  These
-        images are available in resolution 800x600 px.  Note there might be two
-        paints (e.g. Smart, 'paint' for body panel and 'paint2' for the tridion
-        cell)
+      description: Returns URLs pointing to images of this vehicles paint.  These images are available in resolution 800x600 px.  Note there might be two paints (e.g. Smart, 'paint' for body panel and 'paint2' for the tridion cell)
       operationId: imageComponentsPaintGET
       parameters:
         - $ref: "#/parameters/finorvin"
@@ -305,25 +256,19 @@ paths:
           description: Successful response
           headers:
             X-Request-Id:
-              description: "Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.              "
+              description: "Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.              "
               type: string
             cache-control:
               default: max-age=86400
-              description: Specifies the maximum amount of time (in seconds) an image is
-                considered to be up-to-date
+              description: Specifies the maximum amount of time (in seconds) an image is considered to be up-to-date
               type: string
           schema:
             $ref: "#/definitions/PaintResponse"
         "204":
-          description: No content could be found for your request. The FIN/VIN belongs to
-            a vehicle for which no images are available.
+          description: No content could be found for your request. The FIN/VIN belongs to a vehicle for which no images are available.
           headers:
             X-Request-Id:
-              description: Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.
+              description: Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.
               type: string
         "401":
           description: |-
@@ -331,22 +276,17 @@ paths:
               * Failed to resolve API Key query parameter 
               * Invalid API Key 
         "404":
-          description: The requested FIN/VIN could not be resolved. Please verify that
-            your FIN/VIN is correct.
+          description: The requested FIN/VIN could not be resolved. Please verify that your FIN/VIN is correct.
           headers:
             X-Request-Id:
-              description: Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.
+              description: Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.
               type: string
           schema:
             $ref: "#/definitions/Error"
         "429":
           description: Quota limit is exceeded
         "500":
-          description: The requested FIN/VIN could not be resolved because external
-            resources are not available or the server encountered an internal
-            error.
+          description: The requested FIN/VIN could not be resolved because external resources are not available or the server encountered an internal error.
           schema:
             $ref: "#/definitions/Error"
       tags:
@@ -354,8 +294,7 @@ paths:
     x-swagger-router-controller: images_components_finvin
   "/{finorvin}/components/rim":
     get:
-      description: Returns a URL pointing to an image of the vehicles rim.  These
-        images are available in the resolution 710x710 px.
+      description: Returns a URL pointing to an image of the vehicles rim.  These images are available in the resolution 710x710 px.
       operationId: imageComponentsRimGET
       parameters:
         - $ref: "#/parameters/finorvin"
@@ -364,25 +303,19 @@ paths:
           description: Successful response
           headers:
             X-Request-Id:
-              description: "Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.              "
+              description: "Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.              "
               type: string
             cache-control:
               default: max-age=86400
-              description: Specifies the maximum amount of time (in seconds) an image is
-                considered to be up-to-date
+              description: Specifies the maximum amount of time (in seconds) an image is considered to be up-to-date
               type: string
           schema:
             $ref: "#/definitions/RimResponse"
         "204":
-          description: No content could be found for your request. The FIN/VIN belongs to
-            a vehicle for which no images are available.
+          description: No content could be found for your request. The FIN/VIN belongs to a vehicle for which no images are available.
           headers:
             X-Request-Id:
-              description: Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.
+              description: Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.
               type: string
         "401":
           description: |-
@@ -390,22 +323,17 @@ paths:
               * Failed to resolve API Key query parameter 
               * Invalid API Key 
         "404":
-          description: The requested FIN/VIN could not be resolved. Please verify that
-            your FIN/VIN is correct.
+          description: The requested FIN/VIN could not be resolved. Please verify that your FIN/VIN is correct.
           headers:
             X-Request-Id:
-              description: Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.
+              description: Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.
               type: string
           schema:
             $ref: "#/definitions/Error"
         "429":
           description: Quota limit is exceeded
         "500":
-          description: The requested FIN/VIN could not be resolved because external
-            resources are not available or the server encountered an internal
-            error.
+          description: The requested FIN/VIN could not be resolved because external resources are not available or the server encountered an internal error.
           schema:
             $ref: "#/definitions/Error"
       tags:
@@ -413,8 +341,7 @@ paths:
     x-swagger-router-controller: images_components_finvin
   "/{finorvin}/components/trim":
     get:
-      description: Returns a URL pointing to an image of this vehicles trim.  These
-        images are available in resolution 800x600 px.
+      description: Returns a URL pointing to an image of this vehicles trim.  These images are available in resolution 800x600 px.
       operationId: imageComponentsTrimGET
       parameters:
         - $ref: "#/parameters/finorvin"
@@ -423,25 +350,19 @@ paths:
           description: Successful response
           headers:
             X-Request-Id:
-              description: "Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.              "
+              description: "Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.              "
               type: string
             cache-control:
               default: max-age=86400
-              description: Specifies the maximum amount of time (in seconds) an image is
-                considered to be up-to-date
+              description: Specifies the maximum amount of time (in seconds) an image is considered to be up-to-date
               type: string
           schema:
             $ref: "#/definitions/TrimResponse"
         "204":
-          description: No content could be found for your request. The FIN/VIN belongs to
-            a vehicle for which no images are available.
+          description: No content could be found for your request. The FIN/VIN belongs to a vehicle for which no images are available.
           headers:
             X-Request-Id:
-              description: Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.
+              description: Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.
               type: string
         "401":
           description: |-
@@ -449,22 +370,17 @@ paths:
               * Failed to resolve API Key query parameter 
               * Invalid API Key 
         "404":
-          description: The requested FIN/VIN could not be resolved. Please verify that
-            your FIN/VIN is correct.
+          description: The requested FIN/VIN could not be resolved. Please verify that your FIN/VIN is correct.
           headers:
             X-Request-Id:
-              description: Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.
+              description: Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.
               type: string
           schema:
             $ref: "#/definitions/Error"
         "429":
           description: Quota limit is exceeded
         "500":
-          description: The requested FIN/VIN could not be resolved because external
-            resources are not available or the server encountered an internal
-            error.
+          description: The requested FIN/VIN could not be resolved because external resources are not available or the server encountered an internal error.
           schema:
             $ref: "#/definitions/Error"
       tags:
@@ -472,9 +388,7 @@ paths:
     x-swagger-router-controller: images_components_finvin
   "/{finorvin}/components/upholstery":
     get:
-      description: Returns URLs pointing to images of the vehicle's upholsteries. Tge
-        images are available in the highest possible resolution (usually 800x600
-        px).
+      description: Returns URLs pointing to images of the vehicle's upholsteries. Tge images are available in the highest possible resolution (usually 800x600 px).
       operationId: imageComponentsUpholsteryGET
       parameters:
         - $ref: "#/parameters/finorvin"
@@ -483,25 +397,19 @@ paths:
           description: Successful response
           headers:
             X-Request-Id:
-              description: "Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.              "
+              description: "Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.              "
               type: string
             cache-control:
               default: max-age=86400
-              description: Specifies the maximum amount of time (in seconds) an image is
-                considered to be up-to-date
+              description: Specifies the maximum amount of time (in seconds) an image is considered to be up-to-date
               type: string
           schema:
             $ref: "#/definitions/UpholsteryResponse"
         "204":
-          description: No content could be found for your request. The FIN/VIN belongs to
-            a vehicle for which no images are available.
+          description: No content could be found for your request. The FIN/VIN belongs to a vehicle for which no images are available.
           headers:
             X-Request-Id:
-              description: Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.
+              description: Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.
               type: string
         "401":
           description: |-
@@ -509,22 +417,17 @@ paths:
               * Failed to resolve API Key query parameter 
               * Invalid API Key 
         "404":
-          description: The requested FIN/VIN could not be resolved. Please verify that
-            your FIN/VIN is correct.
+          description: The requested FIN/VIN could not be resolved. Please verify that your FIN/VIN is correct.
           headers:
             X-Request-Id:
-              description: Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.
+              description: Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.
               type: string
           schema:
             $ref: "#/definitions/Error"
         "429":
           description: Quota limit is exceeded
         "500":
-          description: The requested FIN/VIN could not be resolved because external
-            resources are not available or the server encountered an internal
-            error.
+          description: The requested FIN/VIN could not be resolved because external resources are not available or the server encountered an internal error.
           schema:
             $ref: "#/definitions/Error"
       tags:
@@ -532,8 +435,7 @@ paths:
     x-swagger-router-controller: images_components_finvin
   "/{finorvin}/vehicle":
     get:
-      description: Returns URLs pointing to PNG images of a vehicle with a transparent
-        background.
+      description: Returns URLs pointing to PNG images of a vehicle with a transparent background.
       operationId: imageVehicleGET
       parameters:
         - $ref: "#/parameters/finorvin"
@@ -545,35 +447,25 @@ paths:
           description: Successful response
           headers:
             X-Request-Id:
-              description: Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.
+              description: Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.
               type: string
             cache-control:
               default: max-age=86400
-              description: Specifies the maximum amount of time (in seconds) an image is
-                considered to be up-to-date
+              description: Specifies the maximum amount of time (in seconds) an image is considered to be up-to-date
               type: string
           schema:
             $ref: "#/definitions/VehicleResponse"
         "204":
-          description: No content could be found for your request. Try to use different
-            parameters instead.
+          description: No content could be found for your request. Try to use different parameters instead.
           headers:
             X-Request-Id:
-              description: Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.
+              description: Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.
               type: string
         "400":
-          description: One of the provided parameters was invalid. Verify your query and
-            inspect the global error object in the response for further
-            information.
+          description: One of the provided parameters was invalid. Verify your query and inspect the global error object in the response for further information.
           headers:
             X-Request-Id:
-              description: Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.
+              description: Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.
               type: string
           schema:
             $ref: "#/definitions/Error"
@@ -583,22 +475,17 @@ paths:
               * Failed to resolve API Key query parameter 
               * Invalid API Key 
         "404":
-          description: The requested FIN/VIN could not be resolved. Please verify that
-            your FIN/VIN is correct.
+          description: The requested FIN/VIN could not be resolved. Please verify that your FIN/VIN is correct.
           headers:
             X-Request-Id:
-              description: "Returns a randomly generated (unique) request id that was assigned
-                to the request for internal tracing and logging. Provide this
-                request id for troubleshooting in a support case.            "
+              description: "Returns a randomly generated (unique) request id that was assigned to the request for internal tracing and logging. Provide this request id for troubleshooting in a support case.            "
               type: string
           schema:
             $ref: "#/definitions/Error"
         "429":
           description: Quota limit is exceeded
         "500":
-          description: The requested FIN/VIN could not be resolved because external
-            resources are not available or the server encountered an internal
-            error.
+          description: The requested FIN/VIN could not be resolved because external resources are not available or the server encountered an internal error.
           schema:
             $ref: "#/definitions/Error"
       tags:
@@ -649,14 +536,10 @@ definitions:
   EquipmentMap:
     additionalProperties:
       $ref: "#/definitions/ImageUrlArray"
-    description: The map holds equipments objects with the equipment codes as map
-      keys and a corresponding list of image URLs for each code.
+    description: The map holds equipments objects with the equipment codes as map keys and a corresponding list of image URLs for each code.
     type: object
   EquipmentResponse:
-    description: The response object holds either an error object, in case that the
-      request was malformed, or an equipments object containing a map with all
-      equipment urls for the requested vehicle with the equipment codes as map
-      keys.
+    description: The response object holds either an error object, in case that the request was malformed, or an equipments object containing a map with all equipment urls for the requested vehicle with the equipment codes as map keys.
     properties:
       equipments:
         $ref: "#/definitions/EquipmentMap"
@@ -671,24 +554,19 @@ definitions:
         type: string
     type: object
   ImageUrl:
-    description: "An object describing an image URL that could be a vehicle image
-      for example. This includes the URL to the content.      "
+    description: "An object describing an image URL that could be a vehicle image for example. This includes the URL to the content.      "
     properties:
       url:
         type: string
   ImageUrlArray:
-    description: An object describing a list of image URLs that could be an vehicle
-      equipment images for example.
+    description: An object describing a list of image URLs that could be an vehicle equipment images for example.
     properties:
       urls:
         items:
           type: string
         type: array
   ImageUrlWithError:
-    description: An object describing an image URL that could be a vehicle image for
-      example. This includes the URL to the content. In case of an error that is
-      related to the requested image material (e.g. perspective), an error
-      object is present containing further information.
+    description: An object describing an image URL that could be a vehicle image for example. This includes the URL to the content. In case of an error that is related to the requested image material (e.g. perspective), an error object is present containing further information.
     properties:
       error:
         $ref: "#/definitions/Error"
@@ -727,15 +605,12 @@ definitions:
         $ref: "#/definitions/CodeImage"
     type: object
   VehicleResponse:
-    description: The response object holds either an error object, in case that the
-      request was malformed, or a vehicle object containing all urls for the
-      requested perspectives.
+    description: The response object holds either an error object, in case that the request was malformed, or a vehicle object containing all urls for the requested perspectives.
     properties:
       vehicle:
         additionalProperties:
           $ref: "#/definitions/ImageUrlWithError"
-        description: A map holding a vehicle image for each requested perspective, e.g.
-          EXT000.
+        description: A map holding a vehicle image for each requested perspective, e.g. EXT000.
         type: object
     required:
       - vehicle

@@ -27,8 +27,7 @@ paths:
             default: 2015-05-05T00:00:00.000Z
             pattern: date-time
             type: string
-        - description: "Limit the the number of items to be returned per page. For
-            example: 5."
+        - description: "Limit the the number of items to be returned per page. For example: 5."
           in: query
           name: limit
           required: false
@@ -49,7 +48,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                     	"hasNext": true,
                     	"limit": 2,
@@ -160,9 +159,7 @@ paths:
       description: Return the content of the selected asset.
       operationId: getAsset
       parameters:
-        - description: A asset ID filter for the schedule collection. This can be a
-            reference to any type of asset i.e. movie, season, series or
-            episode.
+        - description: A asset ID filter for the schedule collection. This can be a reference to any type of asset i.e. movie, season, series or episode.
           in: path
           name: assetId
           required: true
@@ -181,7 +178,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                     	"id": "5ad4cc44-3f18-52c5-8a3b-b65e791a25cf",
                     	"type": "movie",
@@ -254,9 +251,7 @@ paths:
       description: Return the contributors of the selected asset.
       operationId: getAssetContributors
       parameters:
-        - description: A asset ID filter for the schedule collection. This can be a
-            reference to any type of asset i.e. movie, season, series or
-            episode.
+        - description: A asset ID filter for the schedule collection. This can be a reference to any type of asset i.e. movie, season, series or episode.
           in: path
           name: assetId
           required: true
@@ -275,7 +270,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                     	"hasNext": false,
                     	"total": 12,
@@ -538,29 +533,22 @@ paths:
         - Asset
   /channel:
     get:
-      description: >-
-        If you are interested in a list of channels that have had there
-        schedule updated you can filter by the following query params.
+      description: |-
+        If you are interested in a list of channels that have had there schedule updated you can filter by the following query params.
          - scheduleStart
          - scheduleEnd
          - scheduleUpdatedSince
 
         adding these query params will filter the channel collection to only return channels that have been updated within the given range, updatedSince stores the state of your previous call.
 
-
         Example Usage: Every 10 minutes get me the channels that have updated schedules for the next 2 weeks.
 
-
         /channel?platform={uuid}&scheduleStart={today}&scheduleEnd={today + 2 weeks}&updatedSince={10 minutes ago}
-
 
         Also please note epg numbers are only exposed when a platform and region are passed to the query.
       operationId: listChannels
       parameters:
-        - description: The identifier for the selected platform. Multiple platforms can be
-            passed to the API without a region Id. Passing multiple platforms
-            without a region will not return epg numbers as these are linked to
-            a platform and region.
+        - description: The identifier for the selected platform. Multiple platforms can be passed to the API without a region Id. Passing multiple platforms without a region will not return epg numbers as these are linked to a platform and region.
           in: query
           name: platformId
           required: false
@@ -581,8 +569,7 @@ paths:
           schema:
             default: true
             type: boolean
-        - description: Date of the Channel State to select, this will display channel
-            names and attributes in the future or past.
+        - description: Date of the Channel State to select, this will display channel names and attributes in the future or past.
           in: query
           name: date
           required: false
@@ -620,7 +607,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                     	"hasNext": false,
                     	"total": 4,
@@ -754,7 +741,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                     	"id": "04498b90-567b-56f0-a4ee-793c4d5d1f40",
                     	"title": "BBC One HD",
@@ -807,8 +794,7 @@ paths:
             default: 2015-05-05T00:00:00.000Z
             pattern: date-time
             type: string
-        - description: "Limit the the number of items to be returned per page. For
-            example: 5."
+        - description: "Limit the the number of items to be returned per page. For example: 5."
           in: query
           name: limit
           required: false
@@ -987,7 +973,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                     	"id": "e315bafc-c277-5e83-a496-050920771a32",
                     	"name": "Stephen Merchant",
@@ -1059,7 +1045,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                     	"id": "98bfb7dc-2531-56b7-acb0-fdbe1b8c1e48",
                     	"start": "2018-08-31T23:00:00.000Z",
@@ -1255,7 +1241,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                     	"id": "98bfb7dc-2531-56b7-acb0-fdbe1b8c1e48",
                     	"start": "2018-08-31T23:00:00.000Z",
@@ -1631,9 +1617,8 @@ paths:
         - Platform
   /schedule:
     get:
-      description: >-
-        The schedule endpoint produces a linear TV schedule for a given
-        channel and date range.
+      description: |-
+        The schedule endpoint produces a linear TV schedule for a given channel and date range.
 
          - The date range supplied must be no larger than 21 days.
          - If no end data is passed the API will default to start date + 24 hours.
@@ -1674,7 +1659,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                     	"hasNext": false,
                     	"total": 3,

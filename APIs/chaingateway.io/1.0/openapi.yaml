@@ -4,23 +4,17 @@ servers:
     variables: {}
 info:
   contact: {}
-  description: >-
+  description: |-
     # Chaingateway.io
-
 
     REST API to build the bridge between Ethereum and the real world
 
-
     Please check out our [website](https://chaingateway.io?utm_source=postman) for detailed information about this API.
 
-
     To use our API, you need an API Key (Described as Authorization header in the examples below).
-
     To get one, please create an account on our [website](https://chaingateway.io/register?utm_source=postman).
 
-
     For our internal documentation, please check out our [Docs Site](https://chaingateway.io/docs?utm_source=postman).
-
 
     If you need help with integrating our API in your application, you can reach us via [email](mailto:support@chaingateway.io) or join our official [Telegram](https://t.me/chaingateway) group.
   title: Chaingateway.io
@@ -33,8 +27,7 @@ info:
       version: "3.0"
   x-providerName: chaingateway.io
 tags:
-  - description: Requests that return information on balances, transactions, gas
-      price, exchange rates, ...
+  - description: Requests that return information on balances, transactions, gas price, exchange rates, ...
     name: Info Requests
   - description: Requests to create, list and delete addresses
     name: Address Requests
@@ -46,8 +39,7 @@ paths:
   /clearAddress:
     post:
       deprecated: false
-      description: Sends all available ethereum funds of an address to a specified
-        receiver address.
+      description: Sends all available ethereum funds of an address to a specified receiver address.
       operationId: clearAddress
       parameters:
         - description: API Key
@@ -91,8 +83,7 @@ paths:
   /deleteAddress:
     post:
       deprecated: false
-      description: Deletes an existing ethereum address. Be careful when using this
-        function.
+      description: Deletes an existing ethereum address. Be careful when using this function.
       operationId: deleteAddress
       parameters:
         - description: API Key
@@ -156,14 +147,7 @@ paths:
           content:
             application/json:
               example:
-                content: "{'version':3,'id':'85b790ff-408e-42b8-b123-bec9523964dc','address':'7\
-                  1892889ed4d79d88ab6ea3783b571b8ece9bef4','crypto':{'ciphertex\
-                  t':'9d74262517b984f9b0560b8f23b5e3340f7be0f56b70cd91ff445dcaf\
-                  5b1968f','cipherparams':{'iv':'76e6f2497b9f2a8e024fc752a5418a\
-                  6d'},'cipher':'aes-128-ctr','kdf':'scrypt','kdfparams':{'dkle\
-                  n':32,'salt':'d11d996a7cc4bfad730d4c9b9057eff2c0fb3940b5bfc59\
-                  db62ae218c14a54f4','n':131072,'r':8,'p':1},'mac':'dcc342bbbbb\
-                  8eea97c89b47bafc23de568fc1a48e0bd21ae8d776a95c4704ac9'}}"
+                content: "{'version':3,'id':'85b790ff-408e-42b8-b123-bec9523964dc','address':'71892889ed4d79d88ab6ea3783b571b8ece9bef4','crypto':{'ciphertext':'9d74262517b984f9b0560b8f23b5e3340f7be0f56b70cd91ff445dcaf5b1968f','cipherparams':{'iv':'76e6f2497b9f2a8e024fc752a5418a6d'},'cipher':'aes-128-ctr','kdf':'scrypt','kdfparams':{'dklen':32,'salt':'d11d996a7cc4bfad730d4c9b9057eff2c0fb3940b5bfc59db62ae218c14a54f4','n':131072,'r':8,'p':1},'mac':'dcc342bbbbb8eea97c89b47bafc23de568fc1a48e0bd21ae8d776a95c4704ac9'}}"
                 filename: UTC--2020-09-19T10-42-26.196Z--71892889ed4d79d88ab6ea3783b571b8ece9bef4
                 ok: true
               schema:
@@ -208,8 +192,7 @@ paths:
                 hash: "0x7d5a4369273c723454ac137f48a4f142b097aa2779464e6505f1b1c5e37b5382"
                 miner: "0xb2930B35844a230f00E51431aCAe96Fe543a0347"
                 ok: true
-                parent_hash: "0xcae4df80f5862e4321690857eded0d8a40136dafb8155453920bade5bd0c46c\
-                  0"
+                parent_hash: "0xcae4df80f5862e4321690857eded0d8a40136dafb8155453920bade5bd0c46c0"
                 size_in_bytes: "24017"
                 time_stamp: 2018-01-30 14:41:33
                 transactions_count: "109"
@@ -372,8 +355,7 @@ paths:
   /getToken:
     post:
       deprecated: false
-      description: Returns information about a specific ERC20 token like name, symbol,
-        decimal places and total supply.
+      description: Returns information about a specific ERC20 token like name, symbol, decimal places and total supply.
       operationId: getToken
       parameters:
         - description: API Key
@@ -454,8 +436,7 @@ paths:
   /getTransactions:
     post:
       deprecated: false
-      description: Returns information like confirmations, token contract address,
-        amount, gas price and more of a given transaction.
+      description: Returns information like confirmations, token contract address, amount, gas price and more of a given transaction.
       operationId: getTransactions
       parameters:
         - description: API Key
@@ -680,9 +661,7 @@ paths:
   /newAddress:
     post:
       deprecated: false
-      description: Generates a new ethereum addresses you can use to send or receive
-        funds. Do not lose the password! We can't restore access to an address
-        if you lose it.
+      description: Generates a new ethereum addresses you can use to send or receive funds. Do not lose the password! We can't restore access to an address if you lose it.
       operationId: newAddress
       parameters:
         - description: API Key
@@ -757,8 +736,7 @@ paths:
   /sendEthereum:
     post:
       deprecated: false
-      description: Sends ethereum from an address controlled by the account to a
-        specified receiver address.
+      description: Sends ethereum from an address controlled by the account to a specified receiver address.
       operationId: sendEthereum
       parameters:
         - description: API Key
@@ -801,12 +779,7 @@ paths:
   /sendToken:
     post:
       deprecated: false
-      description: Sends ERC20 tokens from an address controlled by the account to a
-        specified receiver address. The token contract address is needed to
-        specify the token. The use of the identifier parameter is recommend and
-        awaits an unique string. Whenever a transaction is beeing sent, the
-        identifier is checked and the transaction gets dropped if there is one
-        with that identifier already.
+      description: Sends ERC20 tokens from an address controlled by the account to a specified receiver address. The token contract address is needed to specify the token. The use of the identifier parameter is recommend and awaits an unique string. Whenever a transaction is beeing sent, the identifier is checked and the transaction gets dropped if there is one with that identifier already.
       operationId: sendToken
       parameters:
         - description: API Key
@@ -853,10 +826,7 @@ paths:
   /subscribeAddress:
     post:
       deprecated: false
-      description: "Creates a new subscription/IPN for the given address (and
-        contractaddress). You will receive a notification to the given url every
-        time a deposit is received. Unsubscribe the address before sending
-        tokens/ETH from it or you won't get reliable notifications anymore.\r\n"
+      description: "Creates a new subscription/IPN for the given address (and contractaddress). You will receive a notification to the given url every time a deposit is received. Unsubscribe the address before sending tokens/ETH from it or you won't get reliable notifications anymore.\r\n"
       operationId: subscribeAddress
       parameters:
         - description: API Key
@@ -897,8 +867,7 @@ paths:
   /unsubscribeAddress:
     post:
       deprecated: false
-      description: Deletes an existing subscription/IPN for the given address (and
-        contractaddress).
+      description: Deletes an existing subscription/IPN for the given address (and contractaddress).
       operationId: unsubscribeAddress
       parameters:
         - description: API Key
@@ -1256,14 +1225,7 @@ components:
       type: object
     exportAddress:
       example:
-        content: "{'version':3,'id':'85b790ff-408e-42b8-b123-bec9523964dc','address':'7\
-          1892889ed4d79d88ab6ea3783b571b8ece9bef4','crypto':{'ciphertext':'9d74\
-          262517b984f9b0560b8f23b5e3340f7be0f56b70cd91ff445dcaf5b1968f','cipher\
-          params':{'iv':'76e6f2497b9f2a8e024fc752a5418a6d'},'cipher':'aes-128-c\
-          tr','kdf':'scrypt','kdfparams':{'dklen':32,'salt':'d11d996a7cc4bfad73\
-          0d4c9b9057eff2c0fb3940b5bfc59db62ae218c14a54f4','n':131072,'r':8,'p':\
-          1},'mac':'dcc342bbbbb8eea97c89b47bafc23de568fc1a48e0bd21ae8d776a95c47\
-          04ac9'}}"
+        content: "{'version':3,'id':'85b790ff-408e-42b8-b123-bec9523964dc','address':'71892889ed4d79d88ab6ea3783b571b8ece9bef4','crypto':{'ciphertext':'9d74262517b984f9b0560b8f23b5e3340f7be0f56b70cd91ff445dcaf5b1968f','cipherparams':{'iv':'76e6f2497b9f2a8e024fc752a5418a6d'},'cipher':'aes-128-ctr','kdf':'scrypt','kdfparams':{'dklen':32,'salt':'d11d996a7cc4bfad730d4c9b9057eff2c0fb3940b5bfc59db62ae218c14a54f4','n':131072,'r':8,'p':1},'mac':'dcc342bbbbb8eea97c89b47bafc23de568fc1a48e0bd21ae8d776a95c4704ac9'}}"
         filename: UTC--2020-09-19T10-42-26.196Z--71892889ed4d79d88ab6ea3783b571b8ece9bef4
         ok: true
       properties:

@@ -291,11 +291,7 @@ components:
           pattern: ^.{1,2097152}
           type: string
         size:
-          description: Size of the tensor in that dimension. This value must be >= -1, but
-            values of -1 are reserved for "unknown" shapes (values of -1 mean
-            "unknown" dimension).  Certain wrappers that work with
-            TensorShapeProto may fail at runtime when deserializing a
-            TensorShapeProto containing a dim value of -1.
+          description: Size of the tensor in that dimension. This value must be >= -1, but values of -1 are reserved for "unknown" shapes (values of -1 mean "unknown" dimension).  Certain wrappers that work with TensorShapeProto may fail at runtime when deserializing a TensorShapeProto containing a dim value of -1.
           format: int64
           maxLength: 2097152
           pattern: ^.{1,2097152}
@@ -303,11 +299,7 @@ components:
       type: object
     TensorflowDataType:
       default: DT_INVALID
-      description: "- DT_INVALID: Not a legal value for DataType.  Used to indicate a
-        DataType field has not been set. - DT_FLOAT: Data types that all
-        computation devices are expected to be capable to support. -
-        DT_FLOAT_REF: Do not use!  These are only for parameters.  Every enum
-        above should have a corresponding value below (verified by types_test)."
+      description: "- DT_INVALID: Not a legal value for DataType.  Used to indicate a DataType field has not been set. - DT_FLOAT: Data types that all computation devices are expected to be capable to support. - DT_FLOAT_REF: Do not use!  These are only for parameters.  Every enum above should have a corresponding value below (verified by types_test)."
       enum:
         - DT_INVALID
         - DT_FLOAT
@@ -362,9 +354,7 @@ components:
       type: string
     TensorflowResourceHandleProto:
       additionalProperties: false
-      description: Protocol buffer representing a handle to a tensorflow resource.
-        Handles are not valid across executions, but can be serialized back and
-        forth from within a single run.
+      description: Protocol buffer representing a handle to a tensorflow resource. Handles are not valid across executions, but can be serialized back and forth from within a single run.
       properties:
         container:
           description: Container in which this resource is placed.
@@ -377,15 +367,13 @@ components:
           pattern: ^.{1,2097152}
           type: string
         hash_code:
-          description: Hash code for the type of the resource. Is only valid in the same
-            device and in the same execution.
+          description: Hash code for the type of the resource. Is only valid in the same device and in the same execution.
           format: uint64
           maxLength: 2097152
           pattern: ^.{1,2097152}
           type: string
         maybe_type_name:
-          description: For debug-only, the name of the type pointed to by this handle, if
-            available.
+          description: For debug-only, the name of the type pointed to by this handle, if available.
           maxLength: 2097152
           pattern: ^.{1,2097152}
           type: string
@@ -407,8 +395,7 @@ components:
           title: DT_BOOL
           type: array
         dcomplex_val:
-          description: DT_COMPLEX128. dcomplex_val(2*i) and dcomplex_val(2*i+1) are real
-            and imaginary parts of i-th double precision complex.
+          description: DT_COMPLEX128. dcomplex_val(2*i) and dcomplex_val(2*i+1) are real and imaginary parts of i-th double precision complex.
           items:
             format: double
             type: number
@@ -431,8 +418,7 @@ components:
           maxItems: 2097152
           type: array
         half_val:
-          description: DT_HALF, DT_BFLOAT16. Note that since protobuf has no int16 type,
-            we'll have some pointless zero padding for each value here.
+          description: DT_HALF, DT_BFLOAT16. Note that since protobuf has no int16 type, we'll have some pointless zero padding for each value here.
           items:
             format: int32
             type: integer
@@ -461,8 +447,7 @@ components:
           title: DT_RESOURCE
           type: array
         scomplex_val:
-          description: DT_COMPLEX64. scomplex_val(2*i) and scomplex_val(2*i+1) are real
-            and imaginary parts of i-th single precision complex.
+          description: DT_COMPLEX64. scomplex_val(2*i) and scomplex_val(2*i+1) are real and imaginary parts of i-th single precision complex.
           items:
             format: float
             type: number
@@ -478,12 +463,7 @@ components:
           title: DT_STRING
           type: array
         tensor_content:
-          description: Serialized raw tensor content from either
-            Tensor::AsProtoTensorContent or memcpy in
-            tensorflow::grpc::EncodeTensorToByteBuffer. This representation can
-            be used for all tensor types. The purpose of this representation is
-            to reduce serialization overhead during RPC call by avoiding
-            serialization of many repeated small items.
+          description: Serialized raw tensor content from either Tensor::AsProtoTensorContent or memcpy in tensorflow::grpc::EncodeTensorToByteBuffer. This representation can be used for all tensor types. The purpose of this representation is to reduce serialization overhead during RPC call by avoiding serialization of many repeated small items.
           format: byte
           pattern: ".* maxLength: 2097152"
           type: string
@@ -513,9 +493,8 @@ components:
           title: DT_VARIANT
           type: array
         version_number:
-          description: >-
+          description: |-
             Version number.
-
             In version 0, if the "repeated xxx" representations contain only one element, that element is repeated to fill the shape.  This makes it easy to represent a constant Tensor with a single value.
           format: int32
           type: integer
@@ -525,15 +504,10 @@ components:
       description: Dimensions of a tensor.
       properties:
         dim:
-          description: >-
-            Dimensions of the tensor, such as {"input", 30}, {"output", 40} for
-            a 30 x 40 2D tensor.  If an entry has size -1, this corresponds to a
-            dimension of unknown size. The names are optional.
-
+          description: |-
+            Dimensions of the tensor, such as {"input", 30}, {"output", 40} for a 30 x 40 2D tensor.  If an entry has size -1, this corresponds to a dimension of unknown size. The names are optional.
             The order of entries in "dim" matters: It indicates the layout of the values in the tensor in-memory representation.
-
             The first entry in "dim" is the outermost dimension used to layout the values, the last entry is the innermost dimension.  This matches the in-memory layout of RowMajor Eigen tensors.
-
             If "dim.size()" > 0, "unknown_rank" must be false.
           items:
             $ref: "#/components/schemas/TensorShapeProtoDim"
@@ -548,8 +522,7 @@ components:
       type: object
     TensorflowVariantTensorDataProto:
       additionalProperties: false
-      description: Protocol buffer representing the serialization format of DT_VARIANT
-        tensors.
+      description: Protocol buffer representing the serialization format of DT_VARIANT tensors.
       properties:
         metadata:
           description: Portions of the object that are not Tensors.

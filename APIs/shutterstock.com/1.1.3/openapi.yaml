@@ -4,9 +4,7 @@ servers:
 info:
   contact:
     x-twitter: Shutterstock
-  description: The Shutterstock API provides access to Shutterstock's library of
-    media, as well as information about customers' accounts and the contributors
-    that provide the media.
+  description: The Shutterstock API provides access to Shutterstock's library of media, as well as information about customers' accounts and the contributors that provide the media.
   title: Shutterstock API Explorer
   version: 1.1.3
   x-apisguru-categories:
@@ -21,12 +19,10 @@ info:
 paths:
   /v2/ai/audio/descriptors:
     get:
-      description: This endpoint lists the descriptors that you can use in the audio
-        regions in an audio render.
+      description: This endpoint lists the descriptors that you can use in the audio regions in an audio render.
       operationId: listCustomDescriptors
       parameters:
-        - description: Show descriptors with an average render speed that is greater than
-            or equal to the specified value
+        - description: Show descriptors with an average render speed that is greater than or equal to the specified value
           example: 5
           in: query
           name: render_speed_over
@@ -82,22 +78,19 @@ paths:
           name: instrument_id
           schema:
             type: string
-        - description: Show descriptors whose tempo range includes the specified tempo in
-            beats per minute
+        - description: Show descriptors whose tempo range includes the specified tempo in beats per minute
           example: 90
           in: query
           name: tempo
           schema:
             type: number
-        - description: Show descriptors with a tempo that is less than or equal to the
-            specified number
+        - description: Show descriptors with a tempo that is less than or equal to the specified number
           example: 120
           in: query
           name: tempo_to
           schema:
             type: number
-        - description: Show descriptors that have a tempo range that includes the
-            specified tempo in beats per minute
+        - description: Show descriptors that have a tempo range that includes the specified tempo in beats per minute
           example: 60
           in: query
           name: tempo_from
@@ -109,8 +102,7 @@ paths:
           name: name
           schema:
             type: string
-        - description: Show descriptors with the specified tag, such as Cinematic or Roomy
-            (case-sensitive)
+        - description: Show descriptors with the specified tag, such as Cinematic or Roomy (case-sensitive)
           example: Cinematic
           in: query
           name: tag
@@ -187,7 +179,7 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/ai/audio/descriptors",
               CURLOPT_USERAGENT => "php/curl",
@@ -197,24 +189,16 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/ai/audio/instruments:
     get:
-      description: This endpoint lists the instruments that you can include in
-        computer audio. If you specify more than one search parameter, the API
-        uses an AND condition.
+      description: This endpoint lists the instruments that you can include in computer audio. If you specify more than one search parameter, the API uses an AND condition.
       operationId: listCustomInstruments
       parameters:
         - description: Show instruments with the specified ID
@@ -248,8 +232,7 @@ paths:
           name: name
           schema:
             type: string
-        - description: Show instruments with the specified tag, such as Percussion or
-            Strings (case-sensitive)
+        - description: Show instruments with the specified tag, such as Percussion or Strings (case-sensitive)
           example: Percussion
           in: query
           name: tag
@@ -314,7 +297,7 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/ai/audio/instruments",
               CURLOPT_USERAGENT => "php/curl",
@@ -324,23 +307,16 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/ai/audio/renders:
     get:
-      description: This endpoint shows the status of one or more audio renders,
-        including download links for completed audio.
+      description: This endpoint shows the status of one or more audio renders, including download links for completed audio.
       operationId: fetchRenders
       parameters:
         - description: One or more render IDs
@@ -431,7 +407,7 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/ai/audio/renders?id=L2w7h9VNFlkzpllSUunSYayenKjN&id=BeHx3UNXzMBB4dGsC9aa6VxnpcWl",
               CURLOPT_USERAGENT => "php/curl",
@@ -441,31 +417,22 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
     post:
-      description: This endpoint creates rendered audio from timeline data. It returns
-        a render ID that you can use to download the finished audio when it is
-        ready. The render ID is valid for up to 48 hours.
+      description: This endpoint creates rendered audio from timeline data. It returns a render ID that you can use to download the finished audio when it is ready. The render ID is valid for up to 48 hours.
       operationId: createAudioRenders
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/CreateAudioRendersRequest"
-        description: Parameters for the audio, including the timeline and information
-          about the output file
+        description: Parameters for the audio, including the timeline and information about the output file
         required: true
       responses:
         "200":
@@ -500,7 +467,7 @@ paths:
         - custom_music
       x-code-samples:
         - lang: shell
-          source: >
+          source: |
             DATA='{
               "audio_renders": [
                 {
@@ -611,26 +578,18 @@ paths:
               ]
             }'
 
-
             curl -X POST "https://api.shutterstock.com/v2/ai/audio/renders" \
-
             -d "$DATA" \
-
             -H "Content-Type: application/json" \
-
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
-          source: >
+          source: |
             const sstk = require("shutterstock-api");
-
 
             sstk.setAccessToken(process.env.SHUTTERSTOCK_API_TOKEN);
 
-
             const customMusicApi = new sstk.CustomMusicApi();
-
 
             const body = {
               "audio_renders": [
@@ -742,7 +701,6 @@ paths:
               ]
             };
 
-
             customMusicApi.createAudioRenders(body)
               .then(async (data) => {
                 const { id } = data.audio_renders[0];
@@ -752,7 +710,7 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $body = [
               "audio_renders" => [
                 [
@@ -862,9 +820,7 @@ paths:
                 ]
               ]
             ];
-
             $encodedBody = json_encode($body);
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/ai/audio/renders",
@@ -878,23 +834,16 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/audio:
     get:
-      description: This endpoint lists information about one or more audio tracks,
-        including the description and publication date.
+      description: This endpoint lists information about one or more audio tracks, including the description and publication date.
       operationId: getTrackList
       parameters:
         - description: One or more audio IDs
@@ -948,9 +897,7 @@ paths:
                         bpm: 100
                         contributor:
                           id: "2847971"
-                        description: Pulsing and feel-good, featuring slick electric guitar,
-                          synthesizer, bass, electronic drum pads and drums that
-                          create a positive, celebratory mood.
+                        description: Pulsing and feel-good, featuring slick electric guitar, synthesizer, bass, electronic drum pads and drums that create a positive, celebratory mood.
                         duration: 160
                         genres:
                           - Dance/Electronic
@@ -1016,8 +963,7 @@ paths:
         - audio
   /v2/audio/collections:
     get:
-      description: This endpoint lists your collections of audio tracks and their
-        basic attributes.
+      description: This endpoint lists your collections of audio tracks and their basic attributes.
       operationId: getTrackCollectionList
       parameters:
         - description: Page number
@@ -1086,8 +1032,7 @@ paths:
       tags:
         - audio
     post:
-      description: This endpoint creates one or more collections (soundboxes). To add
-        tracks, use `POST /v2/audio/collections/{id}/items`.
+      description: This endpoint creates one or more collections (soundboxes). To add tracks, use `POST /v2/audio/collections/{id}/items`.
       operationId: createTrackCollection
       requestBody:
         content:
@@ -1153,13 +1098,11 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >-
+          source: |-
             $body = [
               "name" => "Best rock music"
             ];
-
             $encodedBody = json_encode($body);
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/audio/collections",
@@ -1173,18 +1116,12 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   "/v2/audio/collections/{id}":
     delete:
@@ -1215,12 +1152,9 @@ paths:
         - audio
       x-code-samples:
         - lang: shell
-          source: >-
-            curl -X DELETE
-            https://api.shutterstock.com/v2/audio/collections/48433111 \
-
+          source: |-
+            curl -X DELETE https://api.shutterstock.com/v2/audio/collections/48433111 \
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
           source: |
@@ -1237,7 +1171,7 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >-
+          source: |-
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/audio/collections/48433111",
               CURLOPT_USERAGENT => "php/curl",
@@ -1248,23 +1182,15 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
     get:
-      description: This endpoint gets more detailed information about a collection,
-        including the number of items in it and when it was last updated. To get
-        the tracks in collections, use `GET /v2/audio/collections/{id}/items`.
+      description: This endpoint gets more detailed information about a collection, including the number of items in it and when it was last updated. To get the tracks in collections, use `GET /v2/audio/collections/{id}/items`.
       operationId: getTrackCollection
       parameters:
         - description: Collection ID
@@ -1342,20 +1268,15 @@ paths:
         - audio
       x-code-samples:
         - lang: shell
-          source: >-
+          source: |-
             DATA='{
               "name": "Best rock music"
             }'
 
-
             curl -X POST https://api.shutterstock.com/v2/audio/collections/48433107 \
-
             -d "$DATA" \
-
             -H "Content-Type: application/json" \
-
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
           source: |
@@ -1376,13 +1297,11 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >-
+          source: |-
             $body = [
               "name" => "Best rock music"
             ];
-
             $encodedBody = json_encode($body);
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/audio/collections/48433107",
@@ -1396,18 +1315,12 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   "/v2/audio/collections/{id}/items":
     delete:
@@ -1448,13 +1361,9 @@ paths:
         - audio
       x-code-samples:
         - lang: shell
-          source: >-
-            curl -X DELETE
-            https://api.shutterstock.com/v2/audio/collections/48433119/items?item_id=36345523
-            \
-
+          source: |-
+            curl -X DELETE https://api.shutterstock.com/v2/audio/collections/48433119/items?item_id=36345523 \
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
           source: |
@@ -1479,7 +1388,7 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >-
+          source: |-
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/audio/collections/48433119/items?item_id=495863218",
               CURLOPT_USERAGENT => "php/curl",
@@ -1490,22 +1399,15 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
     get:
-      description: This endpoint lists the IDs of tracks in a collection and the date
-        that each was added.
+      description: This endpoint lists the IDs of tracks in a collection and the date that each was added.
       operationId: getTrackCollectionItems
       parameters:
         - description: Collection ID
@@ -1612,7 +1514,7 @@ paths:
         - audio
       x-code-samples:
         - lang: shell
-          source: >-
+          source: |-
             DATA='{
               "items": [
                 {
@@ -1624,15 +1526,10 @@ paths:
               ]
             }'
 
-
             curl -X POST https://api.shutterstock.com/v2/audio/collections/48433115/items \
-
             -d "$DATA" \
-
             -H "Content-Type: application/json" \
-
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
           source: |
@@ -1660,7 +1557,7 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >-
+          source: |-
             $body = [
               "items" => [
                 [
@@ -1671,9 +1568,7 @@ paths:
                 ]
               ]
             ];
-
             $encodedBody = json_encode($body);
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/audio/collections/48433115/items",
@@ -1687,18 +1582,12 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/audio/genres:
     get:
@@ -1751,9 +1640,7 @@ paths:
         - audio
   /v2/audio/licenses:
     get:
-      description: This endpoint lists existing licenses. You can filter the results
-        according to the track ID to see if you have an existing license for a
-        specific track.
+      description: This endpoint lists existing licenses. You can filter the results according to the track ID to see if you have an existing license for a specific track.
       operationId: getTrackLicenseList
       parameters:
         - description: Show licenses for the specified track ID
@@ -1762,8 +1649,7 @@ paths:
           name: audio_id
           schema:
             type: string
-        - description: Restrict results by license. Prepending a `-` sign will exclude
-            results by license
+        - description: Restrict results by license. Prepending a `-` sign will exclude results by license
           example: "48433107"
           in: query
           name: license
@@ -1813,6 +1699,10 @@ paths:
           schema:
             format: date-time
             type: string
+          x-relationships:
+            - in: query
+              name: start_date
+              relationship: ">"
       responses:
         "200":
           content:
@@ -1862,12 +1752,11 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $queryFields = [
               "start_date" => "2016-10-03T01:25:13.521Z",
               "end_date" => "2016-10-04T13:25:13.521Z"
             ];
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/audio/licenses" . http_build_query($queryFields),
@@ -1878,18 +1767,12 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
     post:
       description: This endpoint gets licenses for one or more tracks.
@@ -2038,8 +1921,7 @@ paths:
             print_r($decodedResponse);
   "/v2/audio/licenses/{id}/downloads":
     post:
-      description: This endpoint redownloads tracks that you have already received a
-        license for.
+      description: This endpoint redownloads tracks that you have already received a license for.
       operationId: downloadTracks
       parameters:
         - description: License ID
@@ -2074,12 +1956,9 @@ paths:
         - audio
       x-code-samples:
         - lang: shell
-          source: >
-            curl -X POST
-            https://api.shutterstock.com/v2/audio/licenses/e123/downloads \
-
+          source: |
+            curl -X POST https://api.shutterstock.com/v2/audio/licenses/e123/downloads \
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
           source: |
@@ -2099,7 +1978,7 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/audio/licenses/e123/downloads",
               CURLOPT_USERAGENT => "php/curl",
@@ -2109,18 +1988,12 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/audio/moods:
     get:
@@ -2149,10 +2022,7 @@ paths:
         - audio
   /v2/audio/search:
     get:
-      description: This endpoint searches for tracks. If you specify more than one
-        search parameter, the API uses an AND condition. Array parameters can be
-        specified multiple times; in this case, the API uses an AND or an OR
-        condition with those values, depending on the parameter.
+      description: This endpoint searches for tracks. If you specify more than one search parameter, the API uses an AND condition. Array parameters can be specified multiple times; in this case, the API uses an AND or an OR condition with those values, depending on the parameter.
       operationId: searchTracks
       parameters:
         - description: Show tracks with one of the specified artist names or IDs
@@ -2164,8 +2034,7 @@ paths:
             type: array
             uniqueItems: false
         - deprecated: true
-          description: (Deprecated; use bpm_from and bpm_to instead) Show tracks with the
-            specified beats per minute
+          description: (Deprecated; use bpm_from and bpm_to instead) Show tracks with the specified beats per minute
           in: query
           name: bpm
           schema:
@@ -2206,8 +2075,7 @@ paths:
           schema:
             type: integer
             uniqueItems: true
-        - description: Show tracks with each of the specified genres; to get the list of
-            genres, use `GET /v2/audio/genres`
+        - description: Show tracks with each of the specified genres; to get the list of genres, use `GET /v2/audio/genres`
           example:
             - Classical
             - Holiday
@@ -2226,8 +2094,7 @@ paths:
           schema:
             type: boolean
             uniqueItems: true
-        - description: Show tracks with each of the specified instruments; to get the list
-            of instruments, use `GET /v2/audio/instruments`
+        - description: Show tracks with each of the specified instruments; to get the list of instruments, use `GET /v2/audio/instruments`
           example:
             - Trumpet
             - Percussion
@@ -2239,8 +2106,7 @@ paths:
               type: string
             type: array
             uniqueItems: false
-        - description: Show tracks with each of the specified moods; to get the list of
-            moods, use `GET /v2/audio/moods`
+        - description: Show tracks with each of the specified moods; to get the list of moods, use `GET /v2/audio/moods`
           example:
             - Confident
             - Playful
@@ -2320,8 +2186,7 @@ paths:
               - full
             type: string
             uniqueItems: true
-        - description: Fields to display in the response; see the documentation for the
-            fields parameter in the overview section
+        - description: Fields to display in the response; see the documentation for the fields parameter in the overview section
           in: query
           name: fields
           schema:
@@ -2372,9 +2237,7 @@ paths:
                         bpm: 110
                         contributor:
                           id: "2847971"
-                        description: Pulsing and feel-good, featuring soaring synthesizer, groovy synth
-                          bass drums and synth drums that create a euphoric,
-                          upbeat mood.
+                        description: Pulsing and feel-good, featuring soaring synthesizer, groovy synth bass drums and synth drums that create a euphoric, upbeat mood.
                         duration: 183
                         genres:
                           - Dance/Electronic
@@ -2471,13 +2334,12 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $queryFields = [
               "query" => "bluegrass",
               "duration_from" => 60,
               "moods" => "uplifting"
             ];
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/audio/search?" . http_build_query($queryFields),
@@ -2488,23 +2350,16 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   "/v2/audio/{id}":
     get:
-      description: This endpoint shows information about a track, including its
-        genres, instruments, and other attributes.
+      description: This endpoint shows information about a track, including its genres, instruments, and other attributes.
       operationId: getTrack
       parameters:
         - description: Audio track ID
@@ -2552,9 +2407,7 @@ paths:
                     bpm: 110
                     contributor:
                       id: "2847971"
-                    description: Pulsing and feel-good, featuring soaring synthesizer, groovy synth
-                      bass drums and synth drums that create a euphoric, upbeat
-                      mood.
+                    description: Pulsing and feel-good, featuring soaring synthesizer, groovy synth bass drums and synth drums that create a euphoric, upbeat mood.
                     duration: 183
                     genres:
                       - Dance/Electronic
@@ -2618,8 +2471,7 @@ paths:
         - audio
   /v2/contributors:
     get:
-      description: This endpoint lists information about one or more contributors,
-        including contributor type, equipment they use and other attributes.
+      description: This endpoint lists information about one or more contributors, including contributor type, equipment they use and other attributes.
       operationId: getContributorList
       parameters:
         - description: One or more contributor IDs
@@ -2641,9 +2493,7 @@ paths:
                 response:
                   value:
                     data:
-                      - about: Dave is a self confessed emotional photographer, capturing, keeping and
-                          sharing images for the stories of the wild that they
-                          convey.
+                      - about: Dave is a self confessed emotional photographer, capturing, keeping and sharing images for the stories of the wild that they convey.
                         contributor_type:
                           - illustrator
                           - videographer
@@ -2683,8 +2533,7 @@ paths:
         - contributors
   "/v2/contributors/{contributor_id}":
     get:
-      description: This endpoint shows information about a single contributor,
-        including contributor type, equipment they use, and other attributes.
+      description: This endpoint shows information about a single contributor, including contributor type, equipment they use, and other attributes.
       operationId: getContributor
       parameters:
         - description: Contributor ID
@@ -2801,10 +2650,7 @@ paths:
         - contributors
   "/v2/contributors/{contributor_id}/collections/{id}":
     get:
-      description: This endpoint gets more detailed information about a contributor's
-        collection, including its cover image, timestamps for its creation, and
-        most recent update. To get the items in collections, use GET
-        /v2/contributors/{contributor_id}/collections/{id}/items.
+      description: This endpoint gets more detailed information about a contributor's collection, including its cover image, timestamps for its creation, and most recent update. To get the items in collections, use GET /v2/contributors/{contributor_id}/collections/{id}/items.
       operationId: getContributorCollections
       parameters:
         - description: Contributor ID
@@ -2854,8 +2700,7 @@ paths:
         - contributors
   "/v2/contributors/{contributor_id}/collections/{id}/items":
     get:
-      description: This endpoint lists the IDs of items in a contributor's collection
-        and the date that each was added.
+      description: This endpoint lists the IDs of items in a contributor's collection and the date that each was added.
       operationId: getContributorCollectionItems
       parameters:
         - description: Contributor ID
@@ -2931,11 +2776,7 @@ paths:
         - contributors
   /v2/cv/images:
     post:
-      description: This endpoint uploads an image for reverse image or video search.
-        Images must be in JPEG or PNG format. To get the search results, pass
-        the upload ID that this endpoint returns to the GET
-        /v2/cv/similar/images or GET /v2/cv/similar/videos endpoints. Contact us
-        for access to this endpoint.
+      description: This endpoint uploads an image for reverse image or video search. Images must be in JPEG or PNG format. To get the search results, pass the upload ID that this endpoint returns to the GET /v2/cv/similar/images or GET /v2/cv/similar/videos endpoints. Contact us for access to this endpoint.
       operationId: uploadImage
       requestBody:
         content:
@@ -2946,8 +2787,7 @@ paths:
                   base64_image: R0lGODlhgACAAPcAAEwiBLyaLOzNUNmWFNjOrNSuN7x6PPzqeOTMgfKSDMyuTPzwsdi2dHwuBPzbVu
             schema:
               $ref: "#/components/schemas/ImageCreateRequest"
-        description: A Base 64 encoded jpeg or png; images can be no larger than 10mb
-          and can be no larger than 10,000 pixels in width or height
+        description: A Base 64 encoded jpeg or png; images can be no larger than 10mb and can be no larger than 10,000 pixels in width or height
         required: true
       responses:
         "201":
@@ -3031,8 +2871,7 @@ paths:
             print_r($uploadDecodedResponse->upload_id);
   /v2/cv/keywords:
     get:
-      description: This endpoint returns a list of suggested keywords for a media item
-        that you specify or upload.
+      description: This endpoint returns a list of suggested keywords for a media item that you specify or upload.
       operationId: getKeywords
       parameters:
         - description: The asset ID or upload ID to suggest keywords for
@@ -3082,30 +2921,20 @@ paths:
         - computer_vision
       x-code-samples:
         - lang: shell
-          source: >-
+          source: |-
             RESPONSE=$(curl -X POST 'https://api.shutterstock.com/v2/cv/images' \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN" \
-
             -H 'Content-Type: application/json' \
-
             -d "{\"base64_image\":\"`base64 myImage.jpg | tr -d '\n'`\"}")
-
 
             echo "The next step requires the jq program."
 
-
             UPLOAD_ID=$(jq -r .upload_id <<< $RESPONSE)
 
-
             curl -X GET https://api.shutterstock.com/v2/cv/keywords \
-
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN" \
-
             -G \
-
             --data-urlencode "asset_id=$UPLOAD_ID"
         - lang: javascript--nodejs
           source: |
@@ -3133,18 +2962,14 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >-
+          source: |-
             $imageData = file_get_contents("myImage.jpg");
-
             $encodedImageData = base64_encode($imageData);
-
 
             $uploadBody = [
               "base64_image" => $encodedImageData
             ];
-
             $uploadEncodedBody = json_encode($uploadBody);
-
 
             $uploadOptions = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/cv/images",
@@ -3158,25 +2983,17 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $uploadOptions);
-
             $uploadResponse = curl_exec($handle);
-
             curl_close($handle);
 
-
             $uploadDecodedResponse = json_decode($uploadResponse);
-
             print_r($uploadDecodedResponse->upload_id);
-
 
             $keywordsQuery = [
               "asset_id" => $uploadDecodedResponse->upload_id,
             ];
-
 
             $keywordsOptions = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/cv/keywords?" . http_build_query($keywordsQuery),
@@ -3187,21 +3004,15 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $keywordsOptions);
-
             $keywordsResponse = curl_exec($handle);
-
             curl_close($handle);
-
 
             print_r($keywordsResponse);
   /v2/cv/similar/images:
     get:
-      description: This endpoint returns images that are visually similar to an image
-        that you specify or upload.
+      description: This endpoint returns images that are visually similar to an image that you specify or upload.
       parameters:
         - description: The asset ID or upload ID to find similar images for
           example: U6ba16262e3bc2db470b8e3cfa8aaab25
@@ -3318,30 +3129,20 @@ paths:
         - computer_vision
       x-code-samples:
         - lang: shell
-          source: >
+          source: |
             RESPONSE=$(curl -X POST 'https://api.shutterstock.com/v2/cv/images' \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN" \
-
             -H 'Content-Type: application/json' \
-
             -d "{\"base64_image\":\"`base64 myImage.jpg | tr -d '\n'`\"}")
-
 
             echo "The next step requires the jq program."
 
-
             UPLOAD_ID=$(jq -r .upload_id <<< $RESPONSE)
 
-
             curl -X GET https://api.shutterstock.com/v2/cv/similar/images \
-
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN" \
-
             -G \
-
             --data-urlencode "asset_id=$UPLOAD_ID"
         - lang: javascript--nodejs
           source: |
@@ -3368,18 +3169,14 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $imageData = file_get_contents("myImage.jpg");
-
             $encodedImageData = base64_encode($imageData);
-
 
             $uploadBody = [
               "base64_image" => $encodedImageData
             ];
-
             $uploadEncodedBody = json_encode($uploadBody);
-
 
             $uploadOptions = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/cv/images",
@@ -3393,26 +3190,18 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $uploadOptions);
-
             $uploadResponse = curl_exec($handle);
-
             curl_close($handle);
 
-
             $uploadDecodedResponse = json_decode($uploadResponse);
-
             print_r($uploadDecodedResponse->upload_id);
-
 
             $similarQuery = [
               "asset_type" => "images",
               "asset_id" => $uploadDecodedResponse->upload_id,
             ];
-
 
             $similarOptions = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/cv/similar/images?" . http_build_query($similarQuery),
@@ -3423,21 +3212,15 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $similarOptions);
-
             $similarResponse = curl_exec($handle);
-
             curl_close($handle);
-
 
             print_r($similarResponse);
   /v2/cv/similar/videos:
     get:
-      description: This endpoint returns videos that are visually similar to an image
-        that you specify or upload.
+      description: This endpoint returns videos that are visually similar to an image that you specify or upload.
       parameters:
         - description: The asset ID or upload ID to find similar videos for
           example: U6ba16262e3bc2db470b8e3cfa8aaab25
@@ -3518,9 +3301,7 @@ paths:
                             url: https://ak8.picdn.net/shutterstock/videos/33248488/thumb/stock-footage-the-concept-of-digitalization-of-information-flow-moving-through-rack-servers-in-data-center-shot.webm
                         contributor:
                           id: "178456"
-                        description: "The Concept of: Digitalization of Information Flow Moving Through
-                          Rack Servers in Data Center. Shot on RED EPIC-W 8K
-                          Helium Cinema Camera."
+                        description: "The Concept of: Digitalization of Information Flow Moving Through Rack Servers in Data Center. Shot on RED EPIC-W 8K Helium Cinema Camera."
                         duration: 19
                         id: "33248488"
                         media_type: video
@@ -3546,30 +3327,20 @@ paths:
         - computer_vision
       x-code-samples:
         - lang: shell
-          source: >
+          source: |
             RESPONSE=$(curl -X POST 'https://api.shutterstock.com/v2/cv/images' \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN" \
-
             -H 'Content-Type: application/json' \
-
             -d "{\"base64_image\":\"`base64 myImage.jpg | tr -d '\n'`\"}")
-
 
             echo "The next step requires the jq program."
 
-
             UPLOAD_ID=$(jq -r .upload_id <<< $RESPONSE)
 
-
             curl -X GET https://api.shutterstock.com/v2/cv/similar/videos \
-
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN" \
-
             -G \
-
             --data-urlencode "asset_id=$UPLOAD_ID"
         - lang: javascript--nodejs
           source: |
@@ -3596,18 +3367,14 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $imageData = file_get_contents("myImage.jpg");
-
             $encodedImageData = base64_encode($imageData);
-
 
             $uploadBody = [
               "base64_image" => $encodedImageData
             ];
-
             $uploadEncodedBody = json_encode($uploadBody);
-
 
             $uploadOptions = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/cv/images",
@@ -3621,26 +3388,18 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $uploadOptions);
-
             $uploadResponse = curl_exec($handle);
-
             curl_close($handle);
 
-
             $uploadDecodedResponse = json_decode($uploadResponse);
-
             print_r($uploadDecodedResponse->upload_id);
-
 
             $similarQuery = [
               "asset_type" => "images",
               "asset_id" => $uploadDecodedResponse->upload_id,
             ];
-
 
             $similarOptions = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/cv/similar/videos?" . http_build_query($similarQuery),
@@ -3651,24 +3410,16 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $similarOptions);
-
             $similarResponse = curl_exec($handle);
-
             curl_close($handle);
-
 
             print_r($similarResponse);
   /v2/editorial/categories:
     get:
       deprecated: true
-      description: Deprecated; use `GET /v2/editorial/images/categories` instead. This
-        endpoint lists the categories that editorial images can belong to, which
-        are separate from the categories that other types of assets can belong
-        to.
+      description: Deprecated; use `GET /v2/editorial/images/categories` instead. This endpoint lists the categories that editorial images can belong to, which are separate from the categories that other types of assets can belong to.
       operationId: getEditorialCategories
       responses:
         "200":
@@ -3699,9 +3450,7 @@ paths:
         - editorial_images
   /v2/editorial/images/categories:
     get:
-      description: This endpoint lists the categories that editorial images can belong
-        to, which are separate from the categories that other types of assets
-        can belong to.
+      description: This endpoint lists the categories that editorial images can belong to, which are separate from the categories that other types of assets can belong to.
       operationId: listEditorialImageCategories
       responses:
         "200":
@@ -3741,8 +3490,7 @@ paths:
           name: image_id
           schema:
             type: string
-        - description: Show editorial images that are available with the specified license
-            name
+        - description: Show editorial images that are available with the specified license name
           example: premier_editorial_all_digital
           in: query
           name: license
@@ -3850,8 +3598,7 @@ paths:
       tags:
         - editorial_images
     post:
-      description: This endpoint gets licenses for one or more editorial images. You
-        must specify the country and one or more editorial images to license.
+      description: This endpoint gets licenses for one or more editorial images. You must specify the country and one or more editorial images to license.
       operationId: licenseEditorialImages
       requestBody:
         content:
@@ -3896,7 +3643,7 @@ paths:
         - editorial_images
       x-code-samples:
         - lang: shell
-          source: >
+          source: |
             DATA='{
               "editorial": [
                 {
@@ -3907,15 +3654,10 @@ paths:
               "country": "USA"
             }'
 
-
             curl -X POST https://api.shutterstock.com/v2/editorial/images/licenses \
-
             -d "$DATA" \
-
             -H "Content-Type: application/json" \
-
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
           source: |
@@ -3943,7 +3685,7 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $body = [
               "editorial" => [
                 [
@@ -3953,9 +3695,7 @@ paths:
               ],
               "country" => "USA"
             ];
-
             $encodedBody = json_encode($body);
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/editorial/images/licenses",
@@ -3969,25 +3709,18 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/editorial/images/livefeeds:
     get:
       operationId: getEditorialImageLivefeedList
       parameters:
-        - description: Returns only livefeeds that are available for distribution in a
-            certain country
+        - description: Returns only livefeeds that are available for distribution in a certain country
           example: USA
           in: query
           name: country
@@ -4058,8 +3791,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Returns only if the livefeed is available for distribution in a
-            certain country
+        - description: Returns only if the livefeed is available for distribution in a certain country
           example: USA
           in: query
           name: country
@@ -4110,8 +3842,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Returns only if the livefeed items are available for distribution
-            in a certain country
+        - description: Returns only if the livefeed items are available for distribution in a certain country
           example: USA
           in: query
           name: country
@@ -4170,8 +3901,7 @@ paths:
                         description: Christian Marazziti and Ariadna Romero
                         id: 9938573m
                         keywords: []
-                        title: "'The House with a Clock in Its Walls' premiere, Rome Film Festival,
-                          Italy - 19 Oct 2018"
+                        title: "'The House with a Clock in Its Walls' premiere, Rome Film Festival, Italy - 19 Oct 2018"
               schema:
                 $ref: "#/components/schemas/EditorialImageContentDataList"
           description: OK
@@ -4191,12 +3921,7 @@ paths:
         - editorial_images
   /v2/editorial/images/search:
     get:
-      description: This endpoint searches for editorial images. If you specify more
-        than one search parameter, the API uses an AND condition. Array
-        parameters can be specified multiple times; in this case, the API uses
-        an AND or an OR condition with those values, depending on the parameter.
-        You can also filter search terms out in the `query` parameter by
-        prefixing the term with NOT.
+      description: This endpoint searches for editorial images. If you specify more than one search parameter, the API uses an AND condition. Array parameters can be specified multiple times; in this case, the API uses an AND or an OR condition with those values, depending on the parameter. You can also filter search terms out in the `query` parameter by prefixing the term with NOT.
       operationId: searchEditorialImages
       parameters:
         - description: One or more search terms separated by spaces
@@ -4215,14 +3940,12 @@ paths:
               - newest
               - oldest
             type: string
-        - description: Show editorial content within a certain editorial category; specify
-            by category name
+        - description: Show editorial content within a certain editorial category; specify by category name
           in: query
           name: category
           schema:
             type: string
-        - description: Show only editorial content that is available for distribution in a
-            certain country
+        - description: Show only editorial content that is available for distribution in a certain country
           example: USA
           in: query
           name: country
@@ -4259,8 +3982,7 @@ paths:
             maximum: 50
             minimum: 1
             type: integer
-        - description: The cursor of the page with which to start fetching results; this
-            cursor is returned from previous requests
+        - description: The cursor of the page with which to start fetching results; this cursor is returned from previous requests
           example: eyJ2IjoxLCJzIjoxfQ==
           in: query
           name: cursor
@@ -4311,17 +4033,10 @@ paths:
                         caption: ""
                         categories: []
                         date_taken: 2018-08-24
-                        description: Members of the TyLoo e-Sports team from China prepare to face off
-                          against the Kinguin e-Sports team from Poland at the
-                          ICBC (Asia) e-Sports and Music Festival Hong Kong
-                          2018, Hong Kong, China, 24 August 2018. The festival
-                          runs from 24 to 26 August with professional gamers
-                          from around the world competing in international
-                          e-sports tournaments.
+                        description: Members of the TyLoo e-Sports team from China prepare to face off against the Kinguin e-Sports team from Poland at the ICBC (Asia) e-Sports and Music Festival Hong Kong 2018, Hong Kong, China, 24 August 2018. The festival runs from 24 to 26 August with professional gamers from around the world competing in international e-sports tournaments.
                         id: 9804979n
                         keywords: []
-                        title: Hong Kong kicks off international e-Sports competition, China - 24 Aug
-                          2018
+                        title: Hong Kong kicks off international e-Sports competition, China - 24 Aug 2018
                     next: eyJ2IjoxLCJzIjoxfQ==
                     per_page: 1
                     prev: ""
@@ -4346,21 +4061,14 @@ paths:
         - editorial_images
       x-code-samples:
         - lang: shell
-          source: >
+          source: |
             curl -X GET https://api.shutterstock.com/v2/editorial/images/search \
-
             -H "Accept: application/json" \
-
             -G \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN" \
-
             --data-urlencode "query=football" \
-
             --data-urlencode "country=USA" \
-
             --data-urlencode "sort=newest" \
-
             --data-urlencode "date_start=2018-10-23"
         - lang: javascript--nodejs
           source: |
@@ -4387,14 +4095,13 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $queryFields = [
               "query" => "football",
               "country" => "USA",
               "date_start" => "2018-10-23",
               "sort" => "newest"
             ];
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/editorial/images/search?" . http_build_query($queryFields),
@@ -4405,32 +4112,19 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/editorial/images/updated:
     get:
-      description: This endpoint lists editorial images that have been updated in the
-        specified time period to update content management systems (CMS) or
-        digital asset management (DAM) systems. In most cases, use the
-        date_updated_start and date_updated_end parameters to specify a range
-        updates based on when the updates happened. You can also use the
-        date_taken_start and date_taken_end parameters to specify a range of
-        updates based on when the image was taken.
+      description: This endpoint lists editorial images that have been updated in the specified time period to update content management systems (CMS) or digital asset management (DAM) systems. In most cases, use the date_updated_start and date_updated_end parameters to specify a range updates based on when the updates happened. You can also use the date_taken_start and date_taken_end parameters to specify a range of updates based on when the image was taken.
       operationId: getUpdatedEditorialImages
       parameters:
-        - description: Specify `addition` to return only images that were added or `edit`
-            to return only images that were edited or deleted
+        - description: Specify `addition` to return only images that were added or `edit` to return only images that were edited or deleted
           example: edit
           in: query
           name: type
@@ -4440,9 +4134,7 @@ paths:
               - edit
               - addition
             type: string
-        - description: Show images images added, edited, or deleted after the specified
-            date. Acceptable range is 1970-01-01T00:00:01 to
-            2038-01-19T00:00:00.
+        - description: Show images images added, edited, or deleted after the specified date. Acceptable range is 1970-01-01T00:00:01 to 2038-01-19T00:00:00.
           example: 2021-03-29T13:25:13.521Z
           in: query
           name: date_updated_start
@@ -4450,9 +4142,7 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: Show images images added, edited, or deleted before the specified
-            date. Acceptable range is 1970-01-01T00:00:01 to
-            2038-01-19T00:00:00.
+        - description: Show images images added, edited, or deleted before the specified date. Acceptable range is 1970-01-01T00:00:01 to 2038-01-19T00:00:00.
           example: 2021-03-29T13:25:13.521Z
           in: query
           name: date_updated_end
@@ -4460,9 +4150,7 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: Show images that were taken on or after the specified date; use
-            this parameter if you want recently created images from the
-            collection instead of updated older assets
+        - description: Show images that were taken on or after the specified date; use this parameter if you want recently created images from the collection instead of updated older assets
           example: 2020-02-04
           in: query
           name: date_taken_start
@@ -4476,8 +4164,7 @@ paths:
           schema:
             pattern: ^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$
             type: string
-        - description: The cursor of the page with which to start fetching results; this
-            cursor is returned from previous requests
+        - description: The cursor of the page with which to start fetching results; this cursor is returned from previous requests
           example: eyJ2IjoxLCJzIjoyfQ==
           in: query
           name: cursor
@@ -4502,8 +4189,7 @@ paths:
               maxLength: 5
               type: string
             type: array
-        - description: Show only editorial content that is available for distribution in a
-            certain country
+        - description: Show only editorial content that is available for distribution in a certain country
           example: USA
           in: query
           name: country
@@ -4567,20 +4253,13 @@ paths:
                         commercial_status:
                           status: available
                         date_taken: 2018-08-24
-                        description: Members of the TyLoo e-Sports team from China prepare to face off
-                          against the Kinguin e-Sports team from Poland at the
-                          ICBC (Asia) e-Sports and Music Festival Hong Kong
-                          2018, Hong Kong, China, 24 August 2018. The festival
-                          runs from 24 to 26 August with professional gamers
-                          from around the world competing in international
-                          e-sports tournaments.
+                        description: Members of the TyLoo e-Sports team from China prepare to face off against the Kinguin e-Sports team from Poland at the ICBC (Asia) e-Sports and Music Festival Hong Kong 2018, Hong Kong, China, 24 August 2018. The festival runs from 24 to 26 August with professional gamers from around the world competing in international e-sports tournaments.
                         id: 9804979n
                         keywords: []
                         rights:
                           countries: CAN,+DEU,+GBR,+USA,-*
                         supplier_code: EPA
-                        title: Hong Kong kicks off international e-Sports competition, China - 24 Aug
-                          2018
+                        title: Hong Kong kicks off international e-Sports competition, China - 24 Aug 2018
                         updated_time: 2019-07-15T20:04:44-04:00
                         updates:
                           - addition
@@ -4606,41 +4285,27 @@ paths:
         - editorial_images
       x-code-samples:
         - lang: shell
-          source: >
+          source: |
             curl -X GET https://api.shutterstock.com/v2/editorial/images/updated \
-
             -H "Accept: application/json" \
-
             -G \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN" \
-
             --data-urlencode "type=edit" \
-
             --data-urlencode "country=USA" \
-
             --data-urlencode "date_updated_start=2020-02-02T13:00:00Z" \
-
             --data-urlencode "date_updated_end=2020-02-02T15:00:00Z"
         - lang: javascript--nodejs
-          source: >
+          source: |
             const sstk = require("shutterstock-api");
-
 
             sstk.setAccessToken(process.env.SHUTTERSTOCK_API_TOKEN);
 
-
             const editorialApi = new sstk.EditorialApi();
 
-
             const type = "edit";
-
             const dateUpdatedStart = "2020-02-02T13:00:00Z";
-
             const dateUpdatedEnd = "2020-02-02T15:00:00Z";
-
             const country = "USA";
-
 
             editorialApi.getUpdatedImages(type, dateUpdatedStart, dateUpdatedEnd, country)
               .then((data) => {
@@ -4650,14 +4315,13 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $queryFields = [
               "type" => "edit",
               "country" => "USA",
               "date_updated_start" => "2020-02-02T13:00:00Z",
               "date_updated_end" => "2020-02-02T15:00:00Z",
             ];
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/editorial/images/updated?" . http_build_query($queryFields),
@@ -4668,23 +4332,16 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   "/v2/editorial/images/{id}":
     get:
-      description: This endpoint shows information about an editorial image, including
-        a URL to a preview image and the sizes that it is available in.
+      description: This endpoint shows information about an editorial image, including a URL to a preview image and the sizes that it is available in.
       operationId: getEditorialImage
       parameters:
         - description: Editorial ID
@@ -4694,8 +4351,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Returns only if the content is available for distribution in a
-            certain country
+        - description: Returns only if the content is available for distribution in a certain country
           example: USA
           in: query
           name: country
@@ -4747,17 +4403,11 @@ paths:
                     caption: ""
                     categories: []
                     date_taken: 2018-07-22
-                    description: Tokyo 2020 Olympics mascot Miraitowa greets with former Japanese
-                      prime minister Yoshiko Mori, President of Tokyo 2020
-                      Olympics Committee, as mascots of Tokyo 2020 Olympics and
-                      Paralympics debut in Tokyo, Japan, 22 July 2018. Tokyo
-                      2020 Olympics will start on 24 July 2020 and run until 09
-                      August 2020.
+                    description: Tokyo 2020 Olympics mascot Miraitowa greets with former Japanese prime minister Yoshiko Mori, President of Tokyo 2020 Olympics Committee, as mascots of Tokyo 2020 Olympics and Paralympics debut in Tokyo, Japan, 22 July 2018. Tokyo 2020 Olympics will start on 24 July 2020 and run until 09 August 2020.
                     id: 9767412v
                     keywords: []
                     special_instructions: MINIMUM FEE $250 per image.
-                    title: Tokyo 2020 Olympics mascot Miraitowa and Paralympics mascot Someity
-                      debut, Japan - 22 Jul 2018
+                    title: Tokyo 2020 Olympics mascot Miraitowa and Paralympics mascot Someity debut, Japan - 22 Jul 2018
               schema:
                 $ref: "#/components/schemas/EditorialContent"
           description: OK
@@ -4778,9 +4428,7 @@ paths:
   /v2/editorial/licenses:
     post:
       deprecated: true
-      description: Deprecated; use `POST /v2/editorial/images/licenses` instead to get
-        licenses for one or more editorial images. You must specify the country
-        and one or more editorial images to license.
+      description: Deprecated; use `POST /v2/editorial/images/licenses` instead to get licenses for one or more editorial images. You must specify the country and one or more editorial images to license.
       operationId: licenseEditorialImage
       requestBody:
         content:
@@ -4868,7 +4516,7 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >-
+          source: |-
             $body = [
               "editorial" => [
                 [
@@ -4878,9 +4526,7 @@ paths:
               ],
               "country" => "USA"
             ];
-
             $encodedBody = json_encode($body);
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/editorial/licenses",
@@ -4894,28 +4540,20 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/editorial/livefeeds:
     get:
       deprecated: true
-      description: Deprecated; use `GET /v2/editorial/images/livefeeds` instead to get
-        a list of editorial livefeeds.
+      description: Deprecated; use `GET /v2/editorial/images/livefeeds` instead to get a list of editorial livefeeds.
       operationId: getEditorialLivefeedList
       parameters:
-        - description: Returns only livefeeds that are available for distribution in a
-            certain country
+        - description: Returns only livefeeds that are available for distribution in a certain country
           example: USA
           in: query
           name: country
@@ -4978,8 +4616,7 @@ paths:
   "/v2/editorial/livefeeds/{id}":
     get:
       deprecated: true
-      description: "Deprecated: use `GET /v2/editorial/images/livefeeds/{id}` instead
-        to get an editorial livefeed."
+      description: "Deprecated: use `GET /v2/editorial/images/livefeeds/{id}` instead to get an editorial livefeed."
       operationId: getEditorialLivefeed
       parameters:
         - description: Editorial livefeed ID; must be an URI encoded string
@@ -4989,8 +4626,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Returns only if the livefeed is available for distribution in a
-            certain country
+        - description: Returns only if the livefeed is available for distribution in a certain country
           example: USA
           in: query
           name: country
@@ -5033,8 +4669,7 @@ paths:
   "/v2/editorial/livefeeds/{id}/items":
     get:
       deprecated: true
-      description: Deprecated; use `GET /v2/editorial/images/livefeeds/{id}/items`
-        instead to get editorial livefeed items.
+      description: Deprecated; use `GET /v2/editorial/images/livefeeds/{id}/items` instead to get editorial livefeed items.
       operationId: getEditorialLivefeedItems
       parameters:
         - description: Editorial livefeed ID; must be an URI encoded string
@@ -5044,8 +4679,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Returns only if the livefeed items are available for distribution
-            in a certain country
+        - description: Returns only if the livefeed items are available for distribution in a certain country
           example: USA
           in: query
           name: country
@@ -5104,8 +4738,7 @@ paths:
                         description: Christian Marazziti and Ariadna Romero
                         id: 9938573m
                         keywords: []
-                        title: "'The House with a Clock in Its Walls' premiere, Rome Film Festival,
-                          Italy - 19 Oct 2018"
+                        title: "'The House with a Clock in Its Walls' premiere, Rome Film Festival, Italy - 19 Oct 2018"
               schema:
                 $ref: "#/components/schemas/EditorialContentDataList"
           description: OK
@@ -5126,8 +4759,7 @@ paths:
   /v2/editorial/search:
     get:
       deprecated: true
-      description: Deprecated; use `GET /v2/editorial/images/search` instead to search
-        for editorial images.
+      description: Deprecated; use `GET /v2/editorial/images/search` instead to search for editorial images.
       operationId: searchEditorial
       parameters:
         - description: One or more search terms separated by spaces
@@ -5145,14 +4777,12 @@ paths:
               - newest
               - oldest
             type: string
-        - description: Show editorial content within a certain editorial category; specify
-            by category name
+        - description: Show editorial content within a certain editorial category; specify by category name
           in: query
           name: category
           schema:
             type: string
-        - description: Show only editorial content that is available for distribution in a
-            certain country
+        - description: Show only editorial content that is available for distribution in a certain country
           example: USA
           in: query
           name: country
@@ -5187,8 +4817,7 @@ paths:
             maximum: 50
             minimum: 1
             type: integer
-        - description: The cursor of the page with which to start fetching results; this
-            cursor is returned from previous requests
+        - description: The cursor of the page with which to start fetching results; this cursor is returned from previous requests
           in: query
           name: cursor
           schema:
@@ -5238,17 +4867,10 @@ paths:
                         caption: ""
                         categories: []
                         date_taken: 2018-08-24
-                        description: Members of the TyLoo e-Sports team from China prepare to face off
-                          against the Kinguin e-Sports team from Poland at the
-                          ICBC (Asia) e-Sports and Music Festival Hong Kong
-                          2018, Hong Kong, China, 24 August 2018. The festival
-                          runs from 24 to 26 August with professional gamers
-                          from around the world competing in international
-                          e-sports tournaments.
+                        description: Members of the TyLoo e-Sports team from China prepare to face off against the Kinguin e-Sports team from Poland at the ICBC (Asia) e-Sports and Music Festival Hong Kong 2018, Hong Kong, China, 24 August 2018. The festival runs from 24 to 26 August with professional gamers from around the world competing in international e-sports tournaments.
                         id: 9804979n
                         keywords: []
-                        title: Hong Kong kicks off international e-Sports competition, China - 24 Aug
-                          2018
+                        title: Hong Kong kicks off international e-Sports competition, China - 24 Aug 2018
                     next: eyJ2IjoxLCJzIjoxfQ==
                     per_page: 1
                     prev: ""
@@ -5307,14 +4929,13 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $queryFields = [
               "query" => "football",
               "country" => "USA",
               "date_start" => "2018-10-23",
               "sort" => "newest"
             ];
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/editorial/search?" . http_build_query($queryFields),
@@ -5325,27 +4946,19 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/editorial/updated:
     get:
       deprecated: true
-      description: Deprecated; use `GET /v2/editorial/images/updated` instead to get
-        recently updated items.
+      description: Deprecated; use `GET /v2/editorial/images/updated` instead to get recently updated items.
       parameters:
-        - description: Specify `addition` to return only images that were added or `edit`
-            to return only images that were edited or deleted
+        - description: Specify `addition` to return only images that were added or `edit` to return only images that were edited or deleted
           example: edit
           in: query
           name: type
@@ -5355,9 +4968,7 @@ paths:
               - edit
               - addition
             type: string
-        - description: Show images images added, edited, or deleted after the specified
-            date. Acceptable range is 1970-01-01T00:00:01 to
-            2038-01-19T00:00:00.
+        - description: Show images images added, edited, or deleted after the specified date. Acceptable range is 1970-01-01T00:00:01 to 2038-01-19T00:00:00.
           example: 2021-03-29T13:25:13.521Z
           in: query
           name: date_updated_start
@@ -5365,9 +4976,7 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: Show images images added, edited, or deleted before the specified
-            date. Acceptable range is 1970-01-01T00:00:01 to
-            2038-01-19T00:00:00.
+        - description: Show images images added, edited, or deleted before the specified date. Acceptable range is 1970-01-01T00:00:01 to 2038-01-19T00:00:00.
           example: 2021-03-29T13:25:13.521Z
           in: query
           name: date_updated_end
@@ -5375,9 +4984,7 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: Show images that were taken on or after the specified date; use
-            this parameter if you want recently created images from the
-            collection instead of updated older assets
+        - description: Show images that were taken on or after the specified date; use this parameter if you want recently created images from the collection instead of updated older assets
           example: 2020-02-04
           in: query
           name: date_taken_start
@@ -5391,8 +4998,7 @@ paths:
           schema:
             pattern: ^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$
             type: string
-        - description: The cursor of the page with which to start fetching results; this
-            cursor is returned from previous requests
+        - description: The cursor of the page with which to start fetching results; this cursor is returned from previous requests
           example: eyJ2IjoxLCJzIjoyfQ==
           in: query
           name: cursor
@@ -5417,8 +5023,7 @@ paths:
               maxLength: 5
               type: string
             type: array
-        - description: Show only editorial content that is available for distribution in a
-            certain country
+        - description: Show only editorial content that is available for distribution in a certain country
           example: USA
           in: query
           name: country
@@ -5482,20 +5087,13 @@ paths:
                         commercial_status:
                           status: available
                         date_taken: 2018-08-24
-                        description: Members of the TyLoo e-Sports team from China prepare to face off
-                          against the Kinguin e-Sports team from Poland at the
-                          ICBC (Asia) e-Sports and Music Festival Hong Kong
-                          2018, Hong Kong, China, 24 August 2018. The festival
-                          runs from 24 to 26 August with professional gamers
-                          from around the world competing in international
-                          e-sports tournaments.
+                        description: Members of the TyLoo e-Sports team from China prepare to face off against the Kinguin e-Sports team from Poland at the ICBC (Asia) e-Sports and Music Festival Hong Kong 2018, Hong Kong, China, 24 August 2018. The festival runs from 24 to 26 August with professional gamers from around the world competing in international e-sports tournaments.
                         id: 9804979n
                         keywords: []
                         rights:
                           countries: CAN,+DEU,+GBR,+USA,-*
                         supplier_code: EPA
-                        title: Hong Kong kicks off international e-Sports competition, China - 24 Aug
-                          2018
+                        title: Hong Kong kicks off international e-Sports competition, China - 24 Aug 2018
                         updated_time: 2019-07-15T20:04:44-04:00
                         updates:
                           - addition
@@ -5531,24 +5129,17 @@ paths:
             --data-urlencode "date_updated_start=2020-02-02T13:00:00Z" \
             --data-urlencode "date_updated_end=2020-02-02T15:00:00Z"
         - lang: javascript--nodejs
-          source: >
+          source: |
             const sstk = require("shutterstock-api");
-
 
             sstk.setAccessToken(process.env.SHUTTERSTOCK_API_TOKEN);
 
-
             const editorialApi = new sstk.EditorialApi();
 
-
             const type = "edit";
-
             const dateUpdatedStart = "2020-02-02T13:00:00Z";
-
             const dateUpdatedEnd = "2020-02-02T15:00:00Z";
-
             const country = "USA";
-
 
             editorialApi.getUpdatedImages(type, dateUpdatedStart, dateUpdatedEnd, country)
               .then((data) => {
@@ -5558,14 +5149,13 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $queryFields = [
               "type" => "edit",
               "country" => "USA",
               "date_updated_start" => "2020-02-02T13:00:00Z",
               "date_updated_end" => "2020-02-02T15:00:00Z",
             ];
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/editorial/updated?" . http_build_query($queryFields),
@@ -5576,24 +5166,16 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/editorial/videos/categories:
     get:
-      description: This endpoint lists the categories that editorial videos can belong
-        to, which are separate from the categories that other types of assets
-        can belong to.
+      description: This endpoint lists the categories that editorial videos can belong to, which are separate from the categories that other types of assets can belong to.
       operationId: listEditorialVideoCategories
       responses:
         "200":
@@ -5633,8 +5215,7 @@ paths:
           name: video_id
           schema:
             type: string
-        - description: Show editorial videos that are available with the specified license
-            name
+        - description: Show editorial videos that are available with the specified license name
           example: premier_editorial_all_media
           in: query
           name: license
@@ -5742,8 +5323,7 @@ paths:
       tags:
         - editorial_video
     post:
-      description: This endpoint gets licenses for one or more editorial videos. You
-        must specify the country and one or more editorial videos to license.
+      description: This endpoint gets licenses for one or more editorial videos. You must specify the country and one or more editorial videos to license.
       operationId: licenseEditorialVideo
       requestBody:
         content:
@@ -5788,7 +5368,7 @@ paths:
         - editorial_video
       x-code-samples:
         - lang: shell
-          source: >-
+          source: |-
             DATA='{
               "editorial": [
                 {
@@ -5799,15 +5379,10 @@ paths:
               "country": "USA"
             }'
 
-
             curl -X POST https://api.shutterstock.com/v2/editorial/videos/licenses \
-
             -d "$DATA" \
-
             -H "Content-Type: application/json" \
-
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
           source: |
@@ -5835,7 +5410,7 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >-
+          source: |-
             $body = [
               "editorial" => [
                 [
@@ -5845,9 +5420,7 @@ paths:
               ],
               "country" => "USA"
             ];
-
             $encodedBody = json_encode($body);
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/editorial/videos/licenses",
@@ -5861,27 +5434,16 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/editorial/videos/search:
     get:
-      description: This endpoint searches for editorial videos. If you specify more
-        than one search parameter, the API uses an AND condition. Array
-        parameters can be specified multiple times; in this case, the API uses
-        an AND or an OR condition with those values, depending on the parameter.
-        You can also filter search terms out in the `query` parameter by
-        prefixing the term with NOT.
+      description: This endpoint searches for editorial videos. If you specify more than one search parameter, the API uses an AND condition. Array parameters can be specified multiple times; in this case, the API uses an AND or an OR condition with those values, depending on the parameter. You can also filter search terms out in the `query` parameter by prefixing the term with NOT.
       operationId: searchEditorialVideos
       parameters:
         - description: One or more search terms separated by spaces
@@ -5900,14 +5462,12 @@ paths:
               - newest
               - oldest
             type: string
-        - description: Show editorial video content within a certain editorial category;
-            specify by category name
+        - description: Show editorial video content within a certain editorial category; specify by category name
           in: query
           name: category
           schema:
             type: string
-        - description: Show only editorial video content that is available for
-            distribution in a certain country
+        - description: Show only editorial video content that is available for distribution in a certain country
           example: USA
           in: query
           name: country
@@ -5922,16 +5482,14 @@ paths:
             items:
               type: string
             type: array
-        - description: Show only editorial video content generated on or after a specific
-            date
+        - description: Show only editorial video content generated on or after a specific date
           example: 2020-05-29
           in: query
           name: date_start
           schema:
             format: date
             type: string
-        - description: Show only editorial video content generated on or before a specific
-            date
+        - description: Show only editorial video content generated on or before a specific date
           example: 2021-05-29
           in: query
           name: date_end
@@ -5948,8 +5506,7 @@ paths:
               - high_definition
               - standard_definition
             type: string
-        - description: Show only editorial video content generated with specific frames
-            per second
+        - description: Show only editorial video content generated with specific frames per second
           example: 24
           in: query
           name: fps
@@ -5963,8 +5520,7 @@ paths:
             maximum: 50
             minimum: 1
             type: integer
-        - description: The cursor of the page with which to start fetching results; this
-            cursor is returned from previous requests
+        - description: The cursor of the page with which to start fetching results; this cursor is returned from previous requests
           example: eyJ2IjoxLCJzIjoxfQ==
           in: query
           name: cursor
@@ -5998,15 +5554,7 @@ paths:
                         caption: ""
                         categories: []
                         date_taken: 2020-10-28
-                        description: 'Info from Licensor: "In June, we rescued this 2 year old male
-                          boxer from spending most of his days in a crate. Our 2
-                          adult female boxers helped him adjust to living a good
-                          boxer life with our family. He "thanked" us with this
-                          surprise litter of 8 puppies! He has really done
-                          amazingly well with playing with all the puppies, and
-                          I think he will miss them when they go to their
-                          "fur-ever" homes. It was a perfect day of playing in
-                          the backyard at the end of October 2020."'
+                        description: 'Info from Licensor: "In June, we rescued this 2 year old male boxer from spending most of his days in a crate. Our 2 adult female boxers helped him adjust to living a good boxer life with our family. He "thanked" us with this surprise litter of 8 puppies! He has really done amazingly well with playing with all the puppies, and I think he will miss them when they go to their "fur-ever" homes. It was a perfect day of playing in the backyard at the end of October 2020."'
                         id: 10679336a
                         keywords:
                           - adorable
@@ -6032,8 +5580,7 @@ paths:
                           - viralhog
                           - virals
                           - yard
-                        title: Proud Papa Playing with His Puppies, New Oxford, Pennsylvania, USA - 28
-                          Oct 2020
+                        title: Proud Papa Playing with His Puppies, New Oxford, Pennsylvania, USA - 28 Oct 2020
                     next: eyJ2IjoxLCJzIjoxfQ==
                     per_page: 1
                     prev: ""
@@ -6058,21 +5605,14 @@ paths:
         - editorial_video
       x-code-samples:
         - lang: shell
-          source: >
+          source: |
             curl -X GET https://api.shutterstock.com/v2/editorial/videos/search \
-
             -H "Accept: application/json" \
-
             -G \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN" \
-
             --data-urlencode "query=football" \
-
             --data-urlencode "country=USA" \
-
             --data-urlencode "sort=newest" \
-
             --data-urlencode "date_start=2018-10-23"
         - lang: javascript--nodejs
           source: |
@@ -6099,14 +5639,13 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $queryFields = [
               "query" => "football",
               "country" => "USA",
               "date_start" => "2018-10-23",
               "sort" => "newest"
             ];
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/editorial/videos/search?" . http_build_query($queryFields),
@@ -6117,23 +5656,16 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   "/v2/editorial/videos/{id}":
     get:
-      description: This endpoint shows information about an editorial image, including
-        a URL to a preview image and the sizes that it is available in.
+      description: This endpoint shows information about an editorial image, including a URL to a preview image and the sizes that it is available in.
       operationId: getEditorialVideo
       parameters:
         - description: Editorial ID
@@ -6143,8 +5675,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Returns only if the content is available for distribution in a
-            certain country
+        - description: Returns only if the content is available for distribution in a certain country
           example: USA
           in: query
           name: country
@@ -6179,15 +5710,7 @@ paths:
                     caption: ""
                     categories: []
                     date_taken: 2020-10-28
-                    description: 'Info from Licensor: "In June, we rescued this 2 year old male
-                      boxer from spending most of his days in a crate. Our 2
-                      adult female boxers helped him adjust to living a good
-                      boxer life with our family. He "thanked" us with this
-                      surprise litter of 8 puppies! He has really done amazingly
-                      well with playing with all the puppies, and I think he
-                      will miss them when they go to their "fur-ever" homes. It
-                      was a perfect day of playing in the backyard at the end of
-                      October 2020."'
+                    description: 'Info from Licensor: "In June, we rescued this 2 year old male boxer from spending most of his days in a crate. Our 2 adult female boxers helped him adjust to living a good boxer life with our family. He "thanked" us with this surprise litter of 8 puppies! He has really done amazingly well with playing with all the puppies, and I think he will miss them when they go to their "fur-ever" homes. It was a perfect day of playing in the backyard at the end of October 2020."'
                     id: 10679336a
                     keywords:
                       - adorable
@@ -6213,8 +5736,7 @@ paths:
                       - viralhog
                       - virals
                       - yard
-                    title: Proud Papa Playing with His Puppies, New Oxford, Pennsylvania, USA - 28
-                      Oct 2020
+                    title: Proud Papa Playing with His Puppies, New Oxford, Pennsylvania, USA - 28 Oct 2020
               schema:
                 $ref: "#/components/schemas/EditorialVideoContent"
           description: OK
@@ -6235,9 +5757,7 @@ paths:
   "/v2/editorial/{id}":
     get:
       deprecated: true
-      description: Deprecated; use `GET /v2/editorial/images/{id}` instead to show
-        information about an editorial image, including a URL to a preview image
-        and the sizes that it is available in.
+      description: Deprecated; use `GET /v2/editorial/images/{id}` instead to show information about an editorial image, including a URL to a preview image and the sizes that it is available in.
       parameters:
         - description: Editorial ID
           example: 9926131a
@@ -6246,8 +5766,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Returns only if the content is available for distribution in a
-            certain country
+        - description: Returns only if the content is available for distribution in a certain country
           example: USA
           in: query
           name: country
@@ -6299,16 +5818,10 @@ paths:
                     caption: ""
                     categories: []
                     date_taken: 2018-07-22
-                    description: Tokyo 2020 Olympics mascot Miraitowa greets with former Japanese
-                      prime minister Yoshiko Mori, President of Tokyo 2020
-                      Olympics Committee, as mascots of Tokyo 2020 Olympics and
-                      Paralympics debut in Tokyo, Japan, 22 July 2018. Tokyo
-                      2020 Olympics will start on 24 July 2020 and run until 09
-                      August 2020.
+                    description: Tokyo 2020 Olympics mascot Miraitowa greets with former Japanese prime minister Yoshiko Mori, President of Tokyo 2020 Olympics Committee, as mascots of Tokyo 2020 Olympics and Paralympics debut in Tokyo, Japan, 22 July 2018. Tokyo 2020 Olympics will start on 24 July 2020 and run until 09 August 2020.
                     id: 9767412v
                     keywords: []
-                    title: Tokyo 2020 Olympics mascot Miraitowa and Paralympics mascot Someity
-                      debut, Japan - 22 Jul 2018
+                    title: Tokyo 2020 Olympics mascot Miraitowa and Paralympics mascot Someity debut, Japan - 22 Jul 2018
               schema:
                 $ref: "#/components/schemas/EditorialContent"
           description: OK
@@ -6328,8 +5841,7 @@ paths:
         - editorial_images
   /v2/images:
     get:
-      description: This endpoint lists information about one or more images, including
-        the available sizes.
+      description: This endpoint lists information about one or more images, including the available sizes.
       operationId: getImageList
       parameters:
         - description: One or more image IDs
@@ -6389,8 +5901,7 @@ paths:
                             width: 85
                         contributor:
                           id: "1384888"
-                        description: Happy Mid Autumn Festival background with golden glitter Moon and
-                          hand drawn Moon Rabbits. Vector illustration
+                        description: Happy Mid Autumn Festival background with golden glitter Moon and hand drawn Moon Rabbits. Vector illustration
                         has_model_release: false
                         has_property_release: true
                         id: "465011609"
@@ -6417,10 +5928,7 @@ paths:
         - images
     post:
       deprecated: true
-      description: Deprecated; use `POST /v2/cv/images` instead. This endpoint uploads
-        an image for reverse image search. The image must be in JPEG or PNG
-        format. To get the search results, pass the ID that this endpoint
-        returns to the `GET /v2/images/{id}/similar` endpoint.
+      description: Deprecated; use `POST /v2/cv/images` instead. This endpoint uploads an image for reverse image search. The image must be in JPEG or PNG format. To get the search results, pass the ID that this endpoint returns to the `GET /v2/images/{id}/similar` endpoint.
       operationId: uploadEphemeralImage
       requestBody:
         content:
@@ -6526,8 +6034,7 @@ paths:
             print_r($decodedResponse);
   /v2/images/categories:
     get:
-      description: This endpoint lists the categories (Shutterstock-assigned genres)
-        that images can belong to.
+      description: This endpoint lists the categories (Shutterstock-assigned genres) that images can belong to.
       operationId: listImageCategories
       parameters:
         - description: Language for the keywords and categories in the response
@@ -6571,12 +6078,10 @@ paths:
         - images
   /v2/images/collections:
     get:
-      description: This endpoint lists your collections of images and their basic
-        attributes.
+      description: This endpoint lists your collections of images and their basic attributes.
       operationId: getImageCollectionList
       parameters:
-        - description: Which sharing information to include in the response, such as a URL
-            to the collection
+        - description: Which sharing information to include in the response, such as a URL to the collection
           example: share_code
           in: query
           name: embed
@@ -6636,9 +6141,7 @@ paths:
       tags:
         - images
     post:
-      description: This endpoint creates one or more image collections (lightboxes).
-        To add images to the collections, use `POST
-        /v2/images/collections/{id}/items`.
+      description: This endpoint creates one or more image collections (lightboxes). To add images to the collections, use `POST /v2/images/collections/{id}/items`.
       operationId: createImageCollection
       requestBody:
         content:
@@ -6703,13 +6206,11 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >-
+          source: |-
             $body = [
               "name" => "My collection"
             ];
-
             $encodedBody = json_encode($body);
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/images/collections",
@@ -6723,27 +6224,19 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/images/collections/featured:
     get:
-      description: This endpoint lists featured collections of specific types and a
-        name and cover image for each collection.
+      description: This endpoint lists featured collections of specific types and a name and cover image for each collection.
       operationId: getFeaturedImageCollectionList
       parameters:
-        - description: Which sharing information to include in the response, such as a URL
-            to the collection
+        - description: Which sharing information to include in the response, such as a URL to the collection
           example: share_url
           in: query
           name: embed
@@ -6816,10 +6309,7 @@ paths:
         - images
   "/v2/images/collections/featured/{id}":
     get:
-      description: This endpoint gets more detailed information about a featured
-        collection, including its cover image and timestamps for its creation
-        and most recent update. To get the images, use `GET
-        /v2/images/collections/featured/{id}/items`.
+      description: This endpoint gets more detailed information about a featured collection, including its cover image and timestamps for its creation and most recent update. To get the images, use `GET /v2/images/collections/featured/{id}/items`.
       operationId: getFeaturedImageCollection
       parameters:
         - description: Collection ID
@@ -6829,8 +6319,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Which sharing information to include in the response, such as a URL
-            to the collection
+        - description: Which sharing information to include in the response, such as a URL to the collection
           in: query
           name: embed
           schema:
@@ -6880,8 +6369,7 @@ paths:
         - images
   "/v2/images/collections/featured/{id}/items":
     get:
-      description: This endpoint lists the IDs of images in a featured collection and
-        the date that each was added.
+      description: This endpoint lists the IDs of images in a featured collection and the date that each was added.
       operationId: getFeaturedImageCollectionItems
       parameters:
         - description: Collection ID
@@ -6968,12 +6456,9 @@ paths:
         - images
       x-code-samples:
         - lang: shell
-          source: >-
-            curl -X DELETE
-            https://api.shutterstock.com/v2/images/collections/136351027 \
-
+          source: |-
+            curl -X DELETE https://api.shutterstock.com/v2/images/collections/136351027 \
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
           source: |
@@ -6990,7 +6475,7 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >-
+          source: |-
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/images/collections/136351027",
               CURLOPT_USERAGENT => "php/curl",
@@ -7001,24 +6486,15 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
     get:
-      description: This endpoint gets more detailed information about a collection,
-        including its cover image and timestamps for its creation and most
-        recent update. To get the images in collections, use `GET
-        /v2/images/collections/{id}/items`.
+      description: This endpoint gets more detailed information about a collection, including its cover image and timestamps for its creation and most recent update. To get the images in collections, use `GET /v2/images/collections/{id}/items`.
       operationId: getImageCollection
       parameters:
         - description: Collection ID
@@ -7028,8 +6504,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Which sharing information to include in the response, such as a URL
-            to the collection
+        - description: Which sharing information to include in the response, such as a URL to the collection
           in: query
           name: embed
           schema:
@@ -7111,20 +6586,15 @@ paths:
         - images
       x-code-samples:
         - lang: shell
-          source: >-
+          source: |-
             DATA='{
               "name": "My new collection name"
             }'
 
-
             curl -X POST https://api.shutterstock.com/v2/images/collections/126351027 \
-
             -d "$DATA" \
-
             -H "Content-Type: application/json" \
-
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
           source: |
@@ -7145,13 +6615,11 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >-
+          source: |-
             $body = [
               "name" => "My new collection name"
             ];
-
             $encodedBody = json_encode($body);
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/images/collections/126351027",
@@ -7165,18 +6633,12 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   "/v2/images/collections/{id}/items":
     delete:
@@ -7214,13 +6676,9 @@ paths:
         - images
       x-code-samples:
         - lang: shell
-          source: >-
-            curl -X DELETE
-            https://api.shutterstock.com/v2/images/collections/186726599/items?item_id=495863218
-            \
-
+          source: |-
+            curl -X DELETE https://api.shutterstock.com/v2/images/collections/186726599/items?item_id=495863218 \
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
           source: |
@@ -7244,7 +6702,7 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >-
+          source: |-
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/images/collections/126351027/items?item_id=495863218",
               CURLOPT_USERAGENT => "php/curl",
@@ -7255,22 +6713,15 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
     get:
-      description: This endpoint lists the IDs of images in a collection and the date
-        that each was added.
+      description: This endpoint lists the IDs of images in a collection and the date that each was added.
       operationId: getImageCollectionItems
       parameters:
         - description: Collection ID
@@ -7376,7 +6827,7 @@ paths:
         - images
       x-code-samples:
         - lang: shell
-          source: >-
+          source: |-
             DATA='{
               "items": [
                 {
@@ -7386,15 +6837,10 @@ paths:
               ]
             }'
 
-
             curl -X POST https://api.shutterstock.com/v2/images/collections/126351027/items \
-
             -d "$DATA" \
-
             -H "Content-Type: application/json" \
-
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
           source: |
@@ -7420,7 +6866,7 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >-
+          source: |-
             $body = [
               "items" => [
                 [
@@ -7429,9 +6875,7 @@ paths:
                 ]
               ]
             ];
-
             $encodedBody = json_encode($body);
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/images/collections/126351027/items",
@@ -7445,18 +6889,12 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/images/licenses:
     get:
@@ -7470,9 +6908,7 @@ paths:
           schema:
             pattern: ^[1-9]\d*$
             type: string
-        - description: Show images that are available with the specified license, such as
-            `standard` or `enhanced`; prepending a `-` sign excludes results
-            from that license
+        - description: Show images that are available with the specified license, such as `standard` or `enhanced`; prepending a `-` sign excludes results from that license
           example: standard
           in: query
           name: license
@@ -7523,6 +6959,10 @@ paths:
           schema:
             format: date-time
             type: string
+          x-relationships:
+            - in: query
+              name: start_date
+              relationship: ">"
       responses:
         "200":
           content:
@@ -7623,12 +7063,11 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $queryFields = [
               "start_date" => "2016-10-03T01:25:13.521Z",
               "end_date" => "2016-10-04T13:25:13.521Z"
             ];
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/images/licenses" . http_build_query($queryFields),
@@ -7639,25 +7078,15 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
     post:
-      description: This endpoint gets licenses for one or more images. You must
-        specify the image IDs in the body parameter and other details like the
-        format, size, and subscription ID either in the query parameter or with
-        each image ID in the body parameter. Values in the body parameter
-        override values in the query parameters.
+      description: This endpoint gets licenses for one or more images. You must specify the image IDs in the body parameter and other details like the format, size, and subscription ID either in the query parameter or with each image ID in the body parameter. Values in the body parameter override values in the query parameters.
       operationId: licenseImages
       parameters:
         - description: Subscription ID to use to license the image
@@ -7715,9 +7144,7 @@ paths:
                         search_term: dog
             schema:
               $ref: "#/components/schemas/LicenseImageRequest"
-        description: List of images to request licenses for and information about each
-          license transaction; these values override the defaults in the query
-          parameters
+        description: List of images to request licenses for and information about each license transaction; these values override the defaults in the query parameters
         required: true
       responses:
         "200":
@@ -7749,7 +7176,7 @@ paths:
         - images
       x-code-samples:
         - lang: shell
-          source: >
+          source: |
             DATA='{
               "images": [
                 {
@@ -7762,13 +7189,9 @@ paths:
               ]
             }'
 
-
             curl -X POST "https://api.shutterstock.com/v2/images/licenses?subscription_id=$SUBSCRIPTION_ID" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN" \
-
             -H 'Content-Type: application/json' \
-
             -d "$DATA"
         - lang: javascript--nodejs
           source: |
@@ -7804,7 +7227,7 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $body = [
               "images" => [
                 [
@@ -7816,9 +7239,7 @@ paths:
                 ]
               ]
             ];
-
             $encodedBody = json_encode($body);
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/images/licenses?subscription_id=$SUBSCRIPTION_ID",
@@ -7832,23 +7253,16 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   "/v2/images/licenses/{id}/downloads":
     post:
-      description: This endpoint redownloads images that you have already received a
-        license for.
+      description: This endpoint redownloads images that you have already received a license for.
       operationId: downloadImage
       parameters:
         - description: License ID
@@ -7892,20 +7306,15 @@ paths:
         - images
       x-code-samples:
         - lang: shell
-          source: >
+          source: |
             DATA='{
               "size": "huge"
             }'
 
-
             curl -X POST https://api.shutterstock.com/v2/images/licenses/e123/downloads \
-
             -d "$DATA" \
-
             -H "Content-Type: application/json" \
-
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
           source: |
@@ -7929,13 +7338,11 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $body = [
               "size" => "huge"
             ];
-
             $encodedBody = json_encode($body);
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/images/licenses/e123/downloads",
@@ -7949,23 +7356,16 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/images/recommendations:
     get:
-      description: This endpoint returns images that customers put in the same
-        collection as the specified image IDs.
+      description: This endpoint returns images that customers put in the same collection as the specified image IDs.
       operationId: getImageRecommendations
       parameters:
         - description: Image IDs
@@ -8022,14 +7422,7 @@ paths:
         - images
   /v2/images/search:
     get:
-      description: This endpoint searches for images. If you specify more than one
-        search parameter, the API uses an AND condition. Array parameters can be
-        specified multiple times; in this case, the API uses an AND or an OR
-        condition with those values, depending on the parameter. You can also
-        filter search terms out in the `query` parameter by prefixing the term
-        with NOT. Free API accounts show results only from a limited library of
-        media, not the full Shutterstock media library. Also, the number of
-        search fields they can use in a request is limited.
+      description: This endpoint searches for images. If you specify more than one search parameter, the API uses an AND condition. Array parameters can be specified multiple times; in this case, the API uses an AND or an OR condition with those values, depending on the parameter. You can also filter search terms out in the `query` parameter by prefixing the term with NOT. Free API accounts show results only from a limited library of media, not the full Shutterstock media library. Also, the number of search fields they can use in a request is limited.
       operationId: searchImages
       parameters:
         - description: Show images added on the specified date
@@ -8046,9 +7439,7 @@ paths:
           schema:
             format: date
             type: string
-        - description: Show images with the specified aspect ratio or higher, using a
-            positive decimal of the width divided by the height, such as 1.7778
-            for a 16:9 image
+        - description: Show images with the specified aspect ratio or higher, using a positive decimal of the width divided by the height, such as 1.7778 for a 16:9 image
           example: 1.7778
           in: query
           name: aspect_ratio_min
@@ -8056,9 +7447,7 @@ paths:
             exclusiveMinimum: true
             minimum: 0
             type: number
-        - description: Show images with the specified aspect ratio or lower, using a
-            positive decimal of the width divided by the height, such as 1.7778
-            for a 16:9 image
+        - description: Show images with the specified aspect ratio or lower, using a positive decimal of the width divided by the height, such as 1.7778 for a 16:9 image
           example: 1.7778
           in: query
           name: aspect_ratio_max
@@ -8066,9 +7455,7 @@ paths:
             exclusiveMinimum: true
             minimum: 0
             type: number
-        - description: Show images with the specified aspect ratio, using a positive
-            decimal of the width divided by the height, such as 1.7778 for a
-            16:9 image
+        - description: Show images with the specified aspect ratio, using a positive decimal of the width divided by the height, such as 1.7778 for a 16:9 image
           example: 1.7778
           in: query
           name: aspect_ratio
@@ -8083,21 +7470,18 @@ paths:
           schema:
             format: date
             type: string
-        - description: Show images with the specified Shutterstock-defined category;
-            specify a category name or ID
+        - description: Show images with the specified Shutterstock-defined category; specify a category name or ID
           in: query
           name: category
           schema:
             type: string
-        - description: Specify either a hexadecimal color in the format '4F21EA' or
-            'grayscale'; the API returns images that use similar colors
+        - description: Specify either a hexadecimal color in the format '4F21EA' or 'grayscale'; the API returns images that use similar colors
           example: 4F21EA
           in: query
           name: color
           schema:
             type: string
-        - description: Show images with the specified contributor names or IDs, allows
-            multiple
+        - description: Show images with the specified contributor names or IDs, allows multiple
           example:
             - "123456"
           in: query
@@ -8106,8 +7490,7 @@ paths:
             items:
               type: string
             type: array
-        - description: Show images from contributors in one or more specified countries,
-            or start with NOT to exclude a country from the search
+        - description: Show images from contributors in one or more specified countries, or start with NOT to exclude a country from the search
           example: US
           in: query
           name: contributor_country
@@ -8121,16 +7504,14 @@ paths:
                   format: negated-country-code-2
                   type: string
                 type: array
-        - description: Fields to display in the response; see the documentation for the
-            fields parameter in the overview section
+        - description: Fields to display in the response; see the documentation for the fields parameter in the overview section
           in: query
           name: fields
           schema:
             type: string
             uniqueItems: true
         - deprecated: true
-          description: (Deprecated; use height_from and height_to instead) Show images
-            with the specified height
+          description: (Deprecated; use height_from and height_to instead) Show images with the specified height
           in: query
           name: height
           schema:
@@ -8165,8 +7546,7 @@ paths:
           schema:
             default: true
             type: boolean
-        - description: Set query and result language (uses Accept-Language header if not
-            set)
+        - description: Set query and result language (uses Accept-Language header if not set)
           example: fr
           in: query
           name: language
@@ -8284,16 +7664,13 @@ paths:
             maximum: 4
             minimum: 0
             type: integer
-        - description: One or more search terms separated by spaces; you can use NOT to
-            filter out images that match a term
+        - description: One or more search terms separated by spaces; you can use NOT to filter out images that match a term
           example: dogs on the beach
           in: query
           name: query
           schema:
             type: string
-        - description: Raise or lower search result rankings based on the result's
-            relevance to a specified region; you can provide a country code or
-            an IP address from which the API infers a country
+        - description: Raise or lower search result rankings based on the result's relevance to a specified region; you can provide a country code or an IP address from which the API infers a country
           example: US
           in: query
           name: region
@@ -8336,8 +7713,7 @@ paths:
               - full
             type: string
         - deprecated: true
-          description: (Deprecated; use width_from and width_to instead) Show images with
-            the specified width
+          description: (Deprecated; use width_from and width_to instead) Show images with the specified width
           in: query
           name: width
           schema:
@@ -8390,8 +7766,7 @@ paths:
                             width: 100
                         contributor:
                           id: "3673637"
-                        description: Minimal geometric background. Dynamic shapes composition. Eps10
-                          vector.
+                        description: Minimal geometric background. Dynamic shapes composition. Eps10 vector.
                         has_model_release: false
                         id: "1120280123"
                         image_type: vector
@@ -8448,13 +7823,12 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $queryFields = [
               "query" => "New York",
               "sort" => "popular",
               "orientation" => "horizontal"
             ];
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/images/search?" . http_build_query($queryFields),
@@ -8465,18 +7839,12 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/images/search/suggestions:
     get:
@@ -8527,15 +7895,13 @@ paths:
       tags:
         - images
     post:
-      description: This endpoint returns up to 10 important keywords from a block of
-        plain text.
+      description: This endpoint returns up to 10 important keywords from a block of plain text.
       operationId: getImageKeywordSuggestions
       requestBody:
         content:
           application/json:
             example:
-              text: The beach is a wonderful place to visit. It has beautiful sand and ocean
-                waves.
+              text: The beach is a wonderful place to visit. It has beautiful sand and ocean waves.
             schema:
               $ref: "#/components/schemas/SearchEntitiesRequest"
         description: Plain text to extract keywords from
@@ -8569,35 +7935,25 @@ paths:
         - images
       x-code-samples:
         - lang: shell
-          source: >
-            DATA='{"text": "The beach is a wonderful place to visit. It has
-            beautiful sand and ocean waves."}'
-
+          source: |
+            DATA='{"text": "The beach is a wonderful place to visit. It has beautiful sand and ocean waves."}'
 
             curl -X POST https://api.shutterstock.com/v2/images/search/suggestions \
-
             -d "$DATA" \
-
             -H "Content-Type: application/json" \
-
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
-          source: >
+          source: |
             const sstk = require("shutterstock-api");
-
 
             sstk.setAccessToken(process.env.SHUTTERSTOCK_API_TOKEN);
 
-
             const imagesApi = new sstk.ImagesApi();
-
 
             const body = {
               "text": "The beach is a wonderful place to visit. It has beautiful sand and ocean waves."
             };
-
 
             imagesApi.getImageKeywordSuggestions(body)
               .then((data) => {
@@ -8607,13 +7963,11 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $body = [
               "text" => "The beach is a wonderful place to visit. It has beautiful sand and ocean waves."
             ];
-
             $encodedBody = json_encode($body);
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/images/search/suggestions",
@@ -8627,32 +7981,19 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/images/updated:
     get:
-      description: This endpoint lists images that have been updated in the specified
-        time period to update content management systems (CMS) or digital asset
-        management (DAM) systems. In most cases, use the `interval` parameter to
-        show images that were updated recently, but you can also use the
-        `start_date` and `end_date` parameters to specify a range of no more
-        than three days. Do not use the `interval` parameter with either
-        `start_date` or `end_date`.
+      description: This endpoint lists images that have been updated in the specified time period to update content management systems (CMS) or digital asset management (DAM) systems. In most cases, use the `interval` parameter to show images that were updated recently, but you can also use the `start_date` and `end_date` parameters to specify a range of no more than three days. Do not use the `interval` parameter with either `start_date` or `end_date`.
       operationId: getUpdatedImages
       parameters:
-        - description: Show images that were added, deleted, or edited; by default, the
-            endpoint returns images that were updated in any of these ways
+        - description: Show images that were added, deleted, or edited; by default, the endpoint returns images that were updated in any of these ways
           example: addition
           in: query
           name: type
@@ -8678,10 +8019,7 @@ paths:
           schema:
             format: date
             type: string
-        - description: Show images updated in the specified time period, where the time
-            period is an interval (like SQL INTERVAL) such as 1 DAY, 6 HOUR, or
-            30 MINUTE; the default is 1 HOUR, which shows images that were
-            updated in the hour preceding the request
+        - description: Show images updated in the specified time period, where the time period is an interval (like SQL INTERVAL) such as 1 DAY, 6 HOUR, or 30 MINUTE; the default is 1 HOUR, which shows images that were updated in the hour preceding the request
           in: query
           name: interval
           schema:
@@ -8768,11 +8106,10 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $queryFields = [
               "interval" => "30 MINUTE"
             ];
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/images/updated?" . http_build_query($queryFields),
@@ -8783,23 +8120,16 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   "/v2/images/{id}":
     get:
-      description: This endpoint shows information about an image, including a URL to
-        a preview image and the sizes that it is available in.
+      description: This endpoint shows information about an image, including a URL to a preview image and the sizes that it is available in.
       operationId: getImage
       parameters:
         - description: Image ID
@@ -8877,8 +8207,7 @@ paths:
                         name: The Arts
                     contributor:
                       id: "1384888"
-                    description: Happy Mid Autumn Festival background with golden glitter Moon and
-                      hand drawn Moon Rabbits. Vector illustration
+                    description: Happy Mid Autumn Festival background with golden glitter Moon and hand drawn Moon Rabbits. Vector illustration
                     has_model_release: false
                     has_property_release: true
                     id: "465011609"
@@ -8916,8 +8245,7 @@ paths:
         - images
   "/v2/images/{id}/similar":
     get:
-      description: This endpoint returns images that are visually similar to an image
-        that you specify.
+      description: This endpoint returns images that are visually similar to an image that you specify.
       operationId: getSimilarImages
       parameters:
         - description: Image ID
@@ -9018,10 +8346,7 @@ paths:
         - images
   /v2/oauth/access_token:
     post:
-      description: This endpoint returns an access token for the specified user and
-        with the specified scopes. The token does not expire until the user
-        changes their password. The body parameters must be encoded as form
-        data.
+      description: This endpoint returns an access token for the specified user and with the specified scopes. The token does not expire until the user changes their password. The body parameters must be encoded as form data.
       operationId: createAccessToken
       requestBody:
         content:
@@ -9039,17 +8364,14 @@ paths:
                   description: Client Secret (Consumer Secret) of your application
                   type: string
                 code:
-                  description: Response code from the /oauth/authorize flow; required if
-                    grant_type=authorization_code
+                  description: Response code from the /oauth/authorize flow; required if grant_type=authorization_code
                   type: string
                 expires:
                   default: false
-                  description: Whether or not the token expires, expiring tokens come with a
-                    refresh_token to renew the access_token
+                  description: Whether or not the token expires, expiring tokens come with a refresh_token to renew the access_token
                   type: boolean
                 grant_type:
-                  description: "Grant type: authorization_code generates user tokens,
-                    client_credentials generates short-lived client grants"
+                  description: "Grant type: authorization_code generates user tokens, client_credentials generates short-lived client grants"
                   enum:
                     - authorization_code
                     - client_credentials
@@ -9063,8 +8385,7 @@ paths:
                     - contributor
                   type: string
                 refresh_token:
-                  description: Pass this along with grant_type=refresh_token to get a fresh access
-                    token
+                  description: Pass this along with grant_type=refresh_token to get a fresh access token
                   type: string
               required:
                 - client_id
@@ -9084,20 +8405,17 @@ paths:
                   description: Client Secret (Consumer Secret) of your application
                   type: string
                 code:
-                  description: Response code from the /oauth/authorize flow; required if
-                    grant_type=authorization_code
+                  description: Response code from the /oauth/authorize flow; required if grant_type=authorization_code
                   type: string
                 expires:
                   default: "false"
-                  description: Whether or not the token expires, expiring tokens come with a
-                    refresh_token to renew the access_token
+                  description: Whether or not the token expires, expiring tokens come with a refresh_token to renew the access_token
                   enum:
                     - "true"
                     - "false"
                   type: string
                 grant_type:
-                  description: "Grant type: authorization_code generates user tokens,
-                    client_credentials generates short-lived client grants"
+                  description: "Grant type: authorization_code generates user tokens, client_credentials generates short-lived client grants"
                   enum:
                     - authorization_code
                     - client_credentials
@@ -9111,8 +8429,7 @@ paths:
                     - contributor
                   type: string
                 refresh_token:
-                  description: Pass this along with grant_type=refresh_token to get a fresh access
-                    token
+                  description: Pass this along with grant_type=refresh_token to get a fresh access token
                   type: string
               required:
                 - client_id
@@ -9149,9 +8466,8 @@ paths:
             --data-urlencode "grant_type=authorization_code" \
             --data-urlencode "code=$CODE"
         - lang: javascript--nodejs
-          source: >
+          source: |
             const axios = require("axios");
-
 
             const body = {
               "client_id": clientId,
@@ -9160,22 +8476,19 @@ paths:
               "code": code,
             };
 
-
             axios.post("https://api.shutterstock.com/v2/oauth/access_token", body)
               .then((res) => {
                 console.log(res);
               });
         - lang: php
-          source: >
+          source: |
             $body = [
               "client_id" => $clientId,
               "client_secret" => $clientSecret,
               "grant_type" => "authorization_code",
               "code" => $code
             ];
-
             $encodedBody = json_encode($body);
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/oauth/access_token",
@@ -9188,25 +8501,16 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/oauth/authorize:
     get:
-      description: This endpoint returns a redirect URI (in the 'Location' header)
-        that the customer uses to authorize your application and, together with
-        POST /v2/oauth/access_token, generate an access token that represents
-        that authorization.
+      description: This endpoint returns a redirect URI (in the 'Location' header) that the customer uses to authorize your application and, together with POST /v2/oauth/access_token, generate an access token that represents that authorization.
       operationId: authorize
       parameters:
         - description: Client ID (Consumer Key) of your application
@@ -9226,16 +8530,14 @@ paths:
               - customer
               - contributor
             type: string
-        - description: The callback URI to send the request to after authorization; must
-            use a host name that is registered with your application
+        - description: The callback URI to send the request to after authorization; must use a host name that is registered with your application
           example: localhost
           in: query
           name: redirect_uri
           required: true
           schema:
             type: string
-        - description: Type of temporary authorization code that will be used to generate
-            an access code; the only valid value is 'code'
+        - description: Type of temporary authorization code that will be used to generate an access code; the only valid value is 'code'
           example: code
           in: query
           name: response_type
@@ -9282,26 +8584,18 @@ paths:
         - oauth
       x-code-samples:
         - lang: shell
-          source: >-
+          source: |-
             curl "https://api.shutterstock.com/v2/oauth/authorize" \
-
             -X GET \
-
             -G \
-
             --data-urlencode "scope=licenses.create licenses.view purchases.view" \
-
             --data-urlencode "state=demo_`date +%s`" \
-
             --data-urlencode "response_type=code" \
-
             --data-urlencode "redirect_uri=http://localhost:3000/callback" \
-
             --data-urlencode "client_id=$CLIENT_ID"
         - lang: javascript--nodejs
-          source: >
+          source: |
             const axios = require("axios");
-
 
             axios.get("https://api.shutterstock.com/v2/oauth/authorize", {
               "params": {
@@ -9319,16 +8613,10 @@ paths:
                 console.log(response.data);
               });
         - lang: php
-          source: >-
-            $queryFields = [ "client_id" => $clientId, "redirect_uri" =>
-            "http://localhost:3000/callback", "response_type" => "code", "scope"
-            => "licenses.create licenses.view purchases.view", "state" => time()
-            ];
-
+          source: |-
+            $queryFields = [ "client_id" => $clientId, "redirect_uri" => "http://localhost:3000/callback", "response_type" => "code", "scope" => "licenses.create licenses.view purchases.view", "state" => time() ];
             $options = [ CURLOPT_URL => "https://api.shutterstock.com/v2/oauth/authorize?" . http_build_query($queryFields), CURLOPT_USERAGENT => "php/curl", CURLOPT_RETURNTRANSFER => 1 ];
-
             $handle = curl_init(); curl_setopt_array($handle, $options); $response = curl_exec($handle); curl_close($handle);
-
             $decodedResponse = json_decode($response); print_r($decodedResponse);
   /v2/test:
     get:
@@ -9529,8 +8817,7 @@ paths:
         - users
   /v2/videos:
     get:
-      description: This endpoint lists information about one or more videos, including
-        the aspect ratio and URLs to previews.
+      description: This endpoint lists information about one or more videos, including the aspect ratio and URLs to previews.
       operationId: getVideoList
       parameters:
         - description: One or more video IDs
@@ -9578,8 +8865,7 @@ paths:
                             url: https://ak3.picdn.net/shutterstock/videos/639703/thumb/stock-footage-a-family-of-african-forest-elephants-play-in-the-mud-in-the-jungle-of-the-congo-river-basin.webm
                         contributor:
                           id: "335419"
-                        description: A family of African Forest Elephants play in the mud in the jungle
-                          of the Congo River basin.
+                        description: A family of African Forest Elephants play in the mud in the jungle of the Congo River basin.
                         duration: 11
                         has_model_release: false
                         id: "639703"
@@ -9602,8 +8888,7 @@ paths:
         - videos
   /v2/videos/categories:
     get:
-      description: This endpoint lists the categories (Shutterstock-assigned genres)
-        that videos can belong to.
+      description: This endpoint lists the categories (Shutterstock-assigned genres) that videos can belong to.
       operationId: listVideoCategories
       parameters:
         - description: Language for the keywords and categories in the response
@@ -9647,8 +8932,7 @@ paths:
         - videos
   /v2/videos/collections:
     get:
-      description: This endpoint lists your collections of videos and their basic
-        attributes.
+      description: This endpoint lists your collections of videos and their basic attributes.
       operationId: getVideoCollectionList
       parameters:
         - description: Page number
@@ -9710,8 +8994,7 @@ paths:
       tags:
         - videos
     post:
-      description: This endpoint creates one or more collections (clipboxes). To add
-        videos to collections, use `POST /v2/videos/collections/{id}/items`.
+      description: This endpoint creates one or more collections (clipboxes). To add videos to collections, use `POST /v2/videos/collections/{id}/items`.
       operationId: createVideoCollection
       requestBody:
         content:
@@ -9776,13 +9059,11 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >-
+          source: |-
             $body = [
               "name" => "New collection name"
             ];
-
             $encodedBody = json_encode($body);
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/videos/collections",
@@ -9796,27 +9077,19 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/videos/collections/featured:
     get:
-      description: This endpoint lists featured video collections and a name and cover
-        video for each collection.
+      description: This endpoint lists featured video collections and a name and cover video for each collection.
       operationId: getFeaturedVideoCollectionList
       parameters:
-        - description: What information to include in the response, such as a URL to the
-            collection
+        - description: What information to include in the response, such as a URL to the collection
           example: share_url
           in: query
           name: embed
@@ -9867,10 +9140,7 @@ paths:
         - videos
   "/v2/videos/collections/featured/{id}":
     get:
-      description: This endpoint gets more detailed information about a featured video
-        collection, including its cover video and timestamps for its creation
-        and most recent update. To get the videos, use `GET
-        /v2/videos/collections/featured/{id}/items`.
+      description: This endpoint gets more detailed information about a featured video collection, including its cover video and timestamps for its creation and most recent update. To get the videos, use `GET /v2/videos/collections/featured/{id}/items`.
       operationId: getFeaturedVideoCollection
       parameters:
         - description: Collection ID
@@ -9880,8 +9150,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: What information to include in the response, such as a URL to the
-            collection
+        - description: What information to include in the response, such as a URL to the collection
           in: query
           name: embed
           schema:
@@ -9922,8 +9191,7 @@ paths:
         - videos
   "/v2/videos/collections/featured/{id}/items":
     get:
-      description: This endpoint lists the IDs of videos in a featured collection and
-        the date that each was added.
+      description: This endpoint lists the IDs of videos in a featured collection and the date that each was added.
       operationId: getFeaturedVideoCollectionItems
       parameters:
         - description: Collection ID
@@ -10010,12 +9278,9 @@ paths:
         - videos
       x-code-samples:
         - lang: shell
-          source: >-
-            curl -X DELETE
-            https://api.shutterstock.com/v2/videos/collections/17555176 \
-
+          source: |-
+            curl -X DELETE https://api.shutterstock.com/v2/videos/collections/17555176 \
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
           source: |
@@ -10032,7 +9297,7 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >-
+          source: |-
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/videos/collections/17555176",
               CURLOPT_USERAGENT => "php/curl",
@@ -10042,24 +9307,15 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
     get:
-      description: This endpoint gets more detailed information about a collection,
-        including the timestamp for its creation and the number of videos in it.
-        To get the videos in collections, use GET
-        /v2/videos/collections/{id}/items.
+      description: This endpoint gets more detailed information about a collection, including the timestamp for its creation and the number of videos in it. To get the videos in collections, use GET /v2/videos/collections/{id}/items.
       operationId: getVideoCollection
       parameters:
         - description: The ID of the collection to return
@@ -10134,20 +9390,15 @@ paths:
         - videos
       x-code-samples:
         - lang: shell
-          source: >-
+          source: |-
             DATA='{
               "name": "Updated collection name"
             }'
 
-
             curl -X POST https://api.shutterstock.com/v2/videos/collections/17555176 \
-
             -d "$DATA" \
-
             -H "Content-Type: application/json" \
-
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
           source: |
@@ -10168,13 +9419,11 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >-
+          source: |-
             $body = [
               "name" => "Updated collection name"
             ];
-
             $encodedBody = json_encode($body);
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/videos/collections/17555176",
@@ -10188,18 +9437,12 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   "/v2/videos/collections/{id}/items":
     delete:
@@ -10237,13 +9480,9 @@ paths:
         - videos
       x-code-samples:
         - lang: shell
-          source: >-
-            curl -X DELETE
-            https://api.shutterstock.com/v2/videos/collections/17555176/items?item_id=495863218
-            \
-
+          source: |-
+            curl -X DELETE https://api.shutterstock.com/v2/videos/collections/17555176/items?item_id=495863218 \
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
           source: |
@@ -10267,7 +9506,7 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >-
+          source: |-
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/videos/collections/17555176/items?item_id=495863218",
               CURLOPT_USERAGENT => "php/curl",
@@ -10278,22 +9517,15 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
     get:
-      description: This endpoint lists the IDs of videos in a collection and the date
-        that each was added.
+      description: This endpoint lists the IDs of videos in a collection and the date that each was added.
       operationId: getVideoCollectionItems
       parameters:
         - description: The ID of the Collection whose items are to be returned
@@ -10399,7 +9631,7 @@ paths:
         - videos
       x-code-samples:
         - lang: shell
-          source: >-
+          source: |-
             DATA='{
               "items": [
                 {
@@ -10411,15 +9643,10 @@ paths:
               ]
             }'
 
-
             curl -X POST https://api.shutterstock.com/v2/videos/collections/17555176/items \
-
             -d "$DATA" \
-
             -H "Content-Type: application/json" \
-
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
           source: |
@@ -10446,7 +9673,7 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >-
+          source: |-
             $body = [
               "items" => [
                 [
@@ -10457,9 +9684,7 @@ paths:
                 ]
               ]
             ];
-
             $encodedBody = json_encode($body);
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/videos/collections/17555176/items",
@@ -10473,18 +9698,12 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/videos/licenses:
     get:
@@ -10498,9 +9717,7 @@ paths:
           schema:
             pattern: ^[1-9]\d*$
             type: string
-        - description: Show videos that are available with the specified license, such as
-            `standard` or `enhanced`; prepending a `-` sign excludes results
-            from that license
+        - description: Show videos that are available with the specified license, such as `standard` or `enhanced`; prepending a `-` sign excludes results from that license
           example: standard
           in: query
           name: license
@@ -10551,6 +9768,10 @@ paths:
           schema:
             format: date-time
             type: string
+          x-relationships:
+            - in: query
+              name: start_date
+              relationship: ">"
       responses:
         "200":
           content:
@@ -10756,12 +9977,11 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $queryFields = [
               "start_date" => "2016-10-03T01:25:13.521Z",
               "end_date" => "2016-10-04T13:25:13.521Z"
             ];
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/videos/licenses" . http_build_query($queryFields),
@@ -10772,25 +9992,15 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
     post:
-      description: This endpoint gets licenses for one or more videos. You must
-        specify the video IDs in the body parameter and the size and
-        subscription ID either in the query parameter or with each video ID in
-        the body parameter. Values in the body parameter override values in the
-        query parameters.
+      description: This endpoint gets licenses for one or more videos. You must specify the video IDs in the body parameter and the size and subscription ID either in the query parameter or with each video ID in the body parameter. Values in the body parameter override values in the query parameters.
       operationId: licenseVideos
       parameters:
         - description: The subscription ID to use for licensing
@@ -10830,9 +10040,7 @@ paths:
                       video_id: "5613314"
             schema:
               $ref: "#/components/schemas/LicenseVideoRequest"
-        description: List of videos to request licenses for and information about each
-          license transaction; these values override the defaults in the query
-          parameters
+        description: List of videos to request licenses for and information about each license transaction; these values override the defaults in the query parameters
         required: true
       responses:
         "200":
@@ -10864,7 +10072,7 @@ paths:
         - videos
       x-code-samples:
         - lang: shell
-          source: >
+          source: |
             DATA='{
               "videos": [
                 {
@@ -10878,15 +10086,10 @@ paths:
               ]
             }'
 
-
             curl -X POST 'https://api.shutterstock.com/v2/videos/licenses?subscription_id='$SUBSCRIPTION_ID \
-
             -d "$DATA" \
-
             -H "Content-Type: application/json" \
-
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
           source: |
@@ -10920,7 +10123,7 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $body = [
               "videos" => [
                 [
@@ -10933,9 +10136,7 @@ paths:
                 ]
               ]
             ];
-
             $encodedBody = json_encode($body);
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/videos/licenses?subscription_id=$SUBSCRIPTION_ID",
@@ -10949,23 +10150,16 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   "/v2/videos/licenses/{id}/downloads":
     post:
-      description: This endpoint redownloads videos that you have already received a
-        license for.
+      description: This endpoint redownloads videos that you have already received a license for.
       operationId: downloadVideos
       parameters:
         - description: The license ID of the item to (re)download
@@ -11009,18 +10203,13 @@ paths:
         - videos
       x-code-samples:
         - lang: shell
-          source: >
+          source: |
             DATA='{}'
 
-
             curl -X POST https://api.shutterstock.com/v2/videos/licenses/e123/downloads \
-
             -d "$DATA" \
-
             -H "Content-Type: application/json" \
-
             -H "Accept: application/json" \
-
             -H "Authorization: Bearer $SHUTTERSTOCK_API_TOKEN"
         - lang: javascript--nodejs
           source: |
@@ -11042,11 +10231,9 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $body = [];
-
             $encodedBody = json_encode($body);
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/videos/licenses/e123/downloads",
@@ -11060,27 +10247,16 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/videos/search:
     get:
-      description: This endpoint searches for videos. If you specify more than one
-        search parameter, the API uses an AND condition. Array parameters can be
-        specified multiple times; in this case, the API uses an AND or an OR
-        condition with those values, depending on the parameter. You can also
-        filter search terms out in the `query` parameter by prefixing the term
-        with NOT.
+      description: This endpoint searches for videos. If you specify more than one search parameter, the API uses an AND condition. Array parameters can be specified multiple times; in this case, the API uses an AND or an OR condition with those values, depending on the parameter. You can also filter search terms out in the `query` parameter by prefixing the term with NOT.
       operationId: searchVideos
       parameters:
         - description: Show videos added on the specified date
@@ -11114,8 +10290,7 @@ paths:
               - 16_9
               - nonstandard
             type: string
-        - description: Show videos with the specified Shutterstock-defined category;
-            specify a category name or ID
+        - description: Show videos with the specified Shutterstock-defined category; specify a category name or ID
           in: query
           name: category
           schema:
@@ -11138,8 +10313,7 @@ paths:
               type: string
             type: array
         - deprecated: true
-          description: (Deprecated; use duration_from and duration_to instead) Show videos
-            with the specified duration in seconds
+          description: (Deprecated; use duration_from and duration_to instead) Show videos with the specified duration in seconds
           in: query
           name: duration
           schema:
@@ -11157,8 +10331,7 @@ paths:
           schema:
             type: integer
         - deprecated: true
-          description: (Deprecated; use fps_from and fps_to instead) Show videos with the
-            specified frames per second
+          description: (Deprecated; use fps_from and fps_to instead) Show videos with the specified frames per second
           in: query
           name: fps
           schema:
@@ -11181,8 +10354,7 @@ paths:
           schema:
             default: true
             type: boolean
-        - description: Set query and result language (uses Accept-Language header if not
-            set)
+        - description: Set query and result language (uses Accept-Language header if not set)
           in: query
           name: language
           schema:
@@ -11292,8 +10464,7 @@ paths:
           name: people_model_released
           schema:
             type: boolean
-        - description: One or more search terms separated by spaces; you can use NOT to
-            filter out videos that match a term
+        - description: One or more search terms separated by spaces; you can use NOT to filter out videos that match a term
           example: dogs running on the beach
           in: query
           name: query
@@ -11360,9 +10531,7 @@ paths:
                             url: https://ak8.picdn.net/shutterstock/videos/33248488/thumb/stock-footage-the-concept-of-digitalization-of-information-flow-moving-through-rack-servers-in-data-center-shot.webm
                         contributor:
                           id: "178456"
-                        description: "The Concept of: Digitalization of Information Flow Moving Through
-                          Rack Servers in Data Center. Shot on RED EPIC-W 8K
-                          Helium Cinema Camera."
+                        description: "The Concept of: Digitalization of Information Flow Moving Through Rack Servers in Data Center. Shot on RED EPIC-W 8K Helium Cinema Camera."
                         duration: 19
                         has_model_release: false
                         id: "33248488"
@@ -11420,13 +10589,12 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $queryFields = [
               "query" => "hot air balloon",
               "duration_from" => 30,
               "sort" => "popular"
             ];
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/videos/search?" . http_build_query($queryFields),
@@ -11437,18 +10605,12 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   /v2/videos/search/suggestions:
     get:
@@ -11505,13 +10667,7 @@ paths:
         - videos
   /v2/videos/updated:
     get:
-      description: This endpoint lists videos that have been updated in the specified
-        time period to update content management systems (CMS) or digital asset
-        management (DAM) systems. In most cases, use the `interval` parameter to
-        show videos that were updated recently, but you can also use the
-        `start_date` and `end_date` parameters to specify a range of no more
-        than three days. Do not use the `interval` parameter with either
-        `start_date` or `end_date`.
+      description: This endpoint lists videos that have been updated in the specified time period to update content management systems (CMS) or digital asset management (DAM) systems. In most cases, use the `interval` parameter to show videos that were updated recently, but you can also use the `start_date` and `end_date` parameters to specify a range of no more than three days. Do not use the `interval` parameter with either `start_date` or `end_date`.
       operationId: getUpdatedVideos
       parameters:
         - description: Show videos updated on or after the specified date
@@ -11528,10 +10684,7 @@ paths:
           schema:
             format: date
             type: string
-        - description: Show videos updated in the specified time period, where the time
-            period is an interval (like SQL INTERVAL) such as 1 DAY, 6 HOUR, or
-            30 MINUTE; the default is 1 HOUR, which shows videos that were
-            updated in the hour preceding the request
+        - description: Show videos updated in the specified time period, where the time period is an interval (like SQL INTERVAL) such as 1 DAY, 6 HOUR, or 30 MINUTE; the default is 1 HOUR, which shows videos that were updated in the hour preceding the request
           in: query
           name: interval
           schema:
@@ -11621,11 +10774,10 @@ paths:
                 console.error(error);
               });
         - lang: php
-          source: >
+          source: |
             $queryFields = [
               "interval" => "30 MINUTE"
             ];
-
 
             $options = [
               CURLOPT_URL => "https://api.shutterstock.com/v2/videos/updated?" . http_build_query($queryFields),
@@ -11636,23 +10788,16 @@ paths:
               CURLOPT_RETURNTRANSFER => 1
             ];
 
-
             $handle = curl_init();
-
             curl_setopt_array($handle, $options);
-
             $response = curl_exec($handle);
-
             curl_close($handle);
 
-
             $decodedResponse = json_decode($response);
-
             print_r($decodedResponse);
   "/v2/videos/{id}":
     get:
-      description: This endpoint shows information about a video, including URLs to
-        previews and the sizes that it is available in.
+      description: This endpoint shows information about a video, including URLs to previews and the sizes that it is available in.
       operationId: getVideo
       parameters:
         - description: Video ID
@@ -11745,8 +10890,7 @@ paths:
                         name: Sports/Recreation
                     contributor:
                       id: "907171"
-                    description: Fans cheering for sports team on the bleachers of a professional
-                      stadium
+                    description: Fans cheering for sports team on the bleachers of a professional stadium
                     duration: 19
                     has_model_release: true
                     has_property_release: true
@@ -11782,8 +10926,7 @@ paths:
         - videos
   "/v2/videos/{id}/similar":
     get:
-      description: This endpoint searches for videos that are similar to a video that
-        you specify.
+      description: This endpoint searches for videos that are similar to a video that you specify.
       operationId: getSimilarVideos
       parameters:
         - description: The ID of a video for which similar videos should be returned
@@ -11848,9 +10991,7 @@ paths:
                             url: https://ak8.picdn.net/shutterstock/videos/6658088/thumb/stock-footage-caucasian-parents-wearing-casual-clothes-standing-watching-ocean-waves-summer-daughters-carrying.webm
                         contributor:
                           id: "87721"
-                        description: Caucasian parents wearing casual clothes standing watching ocean
-                          waves summer daughters carrying bodyboards surfboards
-                          slow motion
+                        description: Caucasian parents wearing casual clothes standing watching ocean waves summer daughters carrying bodyboards surfboards slow motion
                         duration: 23
                         id: "6658088"
                         media_type: video
@@ -11888,8 +11029,7 @@ components:
           description: Customer ID that is associated with the user
           type: string
         expires_in:
-          description: Number of seconds until the access token expires; no expiration if
-            this value is null
+          description: Number of seconds until the access token expires; no expiration if this value is null
           type: integer
         organization_id:
           description: Organization ID that is associated with the user
@@ -11980,8 +11120,7 @@ components:
         bpm: 110
         contributor:
           id: "2847971"
-        description: Pulsing and feel-good, featuring soaring synthesizer, groovy synth
-          bass drums and synth drums that create a euphoric, upbeat mood.
+        description: Pulsing and feel-good, featuring soaring synthesizer, groovy synth bass drums and synth drums that create a euphoric, upbeat mood.
         duration: 183
         genres:
           - Dance/Electronic
@@ -12034,8 +11173,7 @@ components:
           format: date
           type: string
         affiliate_url:
-          description: Affiliate referral link; appears only for registered affiliate
-            partners
+          description: Affiliate referral link; appears only for registered affiliate partners
           type: string
         album:
           $ref: "#/components/schemas/Album"
@@ -12201,9 +11339,7 @@ components:
             bpm: 100
             contributor:
               id: "2847971"
-            description: Pulsing and feel-good, featuring slick electric guitar,
-              synthesizer, bass, electronic drum pads and drums that create a
-              positive, celebratory mood.
+            description: Pulsing and feel-good, featuring slick electric guitar, synthesizer, bass, electronic drum pads and drums that create a positive, celebratory mood.
             duration: 160
             genres:
               - Dance/Electronic
@@ -12321,12 +11457,10 @@ components:
         - status
       type: object
     AudioRenderTimeline:
-      description: A timeline object that represents either a request for music to be
-        created or an entire music composition
+      description: A timeline object that represents either a request for music to be created or an entire music composition
       properties:
         spans:
-          description: A span object that represents the beginning of a period of absolute
-            time
+          description: A span object that represents the beginning of a period of absolute time
           items:
             $ref: "#/components/schemas/AudioRenderTimelineSpan"
           type: array
@@ -12348,20 +11482,16 @@ components:
             $ref: "#/components/schemas/AudioRenderTimelineSpanRegion"
           type: array
         span_type:
-          description: Type of span; metered spans represent a pariod of time with music,
-            and unmetered spans denote the end of the prior metered span
+          description: Type of span; metered spans represent a pariod of time with music, and unmetered spans denote the end of the prior metered span
           enum:
             - metered
             - unmetered
           type: string
         tempo:
-          description: The tempo, in beats per minute, at the start of the span; if not
-            provided, the API selects a random tempo
+          description: The tempo, in beats per minute, at the start of the span; if not provided, the API selects a random tempo
           type: integer
         tempo_changes:
-          description: Two or more inflection points in a tempo curve; the API creates a
-            smoothly changing tempo by using a linear interpolation of the time
-            between each tempo change
+          description: Two or more inflection points in a tempo curve; the API creates a smoothly changing tempo by using a linear interpolation of the time between each tempo change
           items:
             $ref: "#/components/schemas/AudioRenderTimelineSpanTempoChanges"
           type: array
@@ -12373,8 +11503,7 @@ components:
         - time
       type: object
     AudioRenderTimelineSpanInstrumentGroup:
-      description: An instrument and the status objects that specify when that
-        instrument plays
+      description: An instrument and the status objects that specify when that instrument plays
       properties:
         instrument_group:
           description: The instrument ID
@@ -12407,8 +11536,7 @@ components:
       description: A period of music or silence, measured in beats
       properties:
         beat:
-          description: The beat, relative to the span, at which the region object's music
-            begins
+          description: The beat, relative to the span, at which the region object's music begins
           type: integer
         descriptor:
           description: The descriptor ID needed to compose the music
@@ -12417,9 +11545,7 @@ components:
           description: A high-level description of how a region ends
           properties:
             beat:
-              description: The beat, relative to the start of the active region, at which the
-                end_type begins; in other words, the ending starts on this beat
-                of the region
+              description: The beat, relative to the start of the active region, at which the end_type begins; in other words, the ending starts on this beat of the region
               type: number
             event:
               description: The type of event
@@ -12428,9 +11554,7 @@ components:
                 - transition
               type: string
             type:
-              description: The specific action to perform; if the event type is "ending" then
-                this must be "ringout" and if event type is "transition" this
-                must be "cut"
+              description: The specific action to perform; if the event type is "ending" then this must be "ringout" and if event type is "transition" this must be "cut"
               enum:
                 - ringout
                 - cut
@@ -12447,8 +11571,7 @@ components:
           description: The key signature active at the beginning of the region
           properties:
             tonic_accidental:
-              description: A text representation of the accidental; if this field is
-                specified, the tonic_note field should also be specified
+              description: A text representation of the accidental; if this field is specified, the tonic_note field should also be specified
               enum:
                 - double flat
                 - flat
@@ -12457,8 +11580,7 @@ components:
                 - double sharp
               type: string
             tonic_note:
-              description: A text representation of the musical note; if this field is
-                specified, the tonic_accidental field should also be specified
+              description: A text representation of the musical note; if this field is specified, the tonic_accidental field should also be specified
               enum:
                 - c
                 - d
@@ -12469,8 +11591,7 @@ components:
                 - b
               type: string
             tonic_quality:
-              description: The scale quality; if this field is not specified, the API selects
-                the quality automatically
+              description: The scale quality; if this field is not specified, the API selects the quality automatically
               enum:
                 - major
                 - natural_minor
@@ -12499,9 +11620,7 @@ components:
         - beat
       type: object
     AudioRenderTimelineSpanTempoChanges:
-      description: An inflection point in a tempo curve; the API creates the overall
-        tempo by using a linear interpolation of the time between each tempo
-        change
+      description: An inflection point in a tempo curve; the API creates the overall tempo by using a linear interpolation of the time between each tempo change
       properties:
         tempo:
           description: The tempo, in beats per minute, active at this time
@@ -12523,14 +11642,10 @@ components:
           description: The content-type of the file
           type: string
         download_url:
-          description: The internet-accessible URL from which the file can be downloaded.
-            Any redirects encountered when using this URL must be followed
+          description: The internet-accessible URL from which the file can be downloaded. Any redirects encountered when using this URL must be followed
           type: string
         filename:
-          description: The user-specified file name suggestion from the render request;
-            this file name becomes the filename property of the
-            Content-Disposition header when the user downloads the rendered
-            audio file
+          description: The user-specified file name suggestion from the render request; this file name becomes the filename property of the Content-Disposition header when the user downloads the rendered audio file
           type: string
         frequency_hz:
           description: The Sample rate of the audio files in Hertz (Hz)
@@ -12678,8 +11793,7 @@ components:
           description: The number of items in the collection
           type: integer
         updated_time:
-          description: The last time the collection was update (other than changes to the
-            items in it)
+          description: The last time the collection was update (other than changes to the items in it)
           format: date-time
           type: string
       required:
@@ -12858,8 +11972,7 @@ components:
           description: Short description of the contributors' library
           type: string
         contributor_type:
-          description: Type of content that the contributor specializes in (photographer,
-            illustrator, etc)
+          description: Type of content that the contributor specializes in (photographer, illustrator, etc)
           items:
             type: string
           type: array
@@ -12884,14 +11997,12 @@ components:
         social_media:
           $ref: "#/components/schemas/ContributorProfileSocialMedia"
         styles:
-          description: List of styles that the contributor specializes in (lifestyle,
-            mixed media, etc)
+          description: List of styles that the contributor specializes in (lifestyle, mixed media, etc)
           items:
             type: string
           type: array
         subjects:
-          description: Generic list of subjects for contributors' work (food_and_drink,
-            holiday, people, etc)
+          description: Generic list of subjects for contributors' work (food_and_drink, holiday, people, etc)
           items:
             type: string
           type: array
@@ -12965,14 +12076,11 @@ components:
       description: Data required to create an audio render
       properties:
         filename:
-          description: A user-specified file name suggestion; this file name becomes the
-            filename property of the Content-Disposition header when the user
-            downloads the rendered audio file
+          description: A user-specified file name suggestion; this file name becomes the filename property of the Content-Disposition header when the user downloads the rendered audio file
           example: My Project.mp3
           type: string
         preset:
-          description: File format, such as MP3 file, combined WAV file, or individual
-            track WAV files
+          description: File format, such as MP3 file, combined WAV file, or individual track WAV files
           enum:
             - MASTER_MP3
             - MASTER_WAV
@@ -12999,8 +12107,7 @@ components:
         - audio_renders
       type: object
     CustomSizeDimensions:
-      description: A custom height or a custom width to resize the image to, but not
-        both (experimental)
+      description: A custom height or a custom width to resize the image to, but not both (experimental)
       properties:
         height:
           description: Custom height to resize the image to
@@ -13015,9 +12122,7 @@ components:
       description: Information about a descriptor
       properties:
         average_render_speed:
-          description: The average ratio of the length of the music to the time it takes
-            to render; for example, a render speed of 3.0 generates 30 seconds
-            of music in about 10 seconds
+          description: The average ratio of the length of the music to the time it takes to render; for example, a render speed of 3.0 generates 30 seconds of music in about 10 seconds
           type: number
         bands:
           description: The bands that are available to use this descriptor
@@ -13033,12 +12138,10 @@ components:
             $ref: "#/components/schemas/Instruments"
           type: array
         max_tempo:
-          description: The maximum beats per minute that the descriptor is intended to be
-            used with
+          description: The maximum beats per minute that the descriptor is intended to be used with
           type: number
         min_tempo:
-          description: The minimum beats per minute that the descriptor is intended to be
-            used with
+          description: The minimum beats per minute that the descriptor is intended to be used with
           type: number
         name:
           description: The name of the descriptor
@@ -13070,9 +12173,7 @@ components:
           type: integer
       type: object
     DownloadHistory:
-      description: Information about a downloaded media item. Applicable for all media
-        types, only one of 'audio', 'image' or 'video' will be in a single
-        DownloadHistory object
+      description: Information about a downloaded media item. Applicable for all media types, only one of 'audio', 'image' or 'video' will be in a single DownloadHistory object
       properties:
         audio:
           $ref: "#/components/schemas/DownloadHistoryMediaDetails"
@@ -13086,8 +12187,7 @@ components:
         image:
           $ref: "#/components/schemas/DownloadHistoryMediaDetails"
         is_downloadable:
-          description: Specifies if the media is downloadable via its respective downloads
-            endpoint
+          description: Specifies if the media is downloadable via its respective downloads endpoint
           type: boolean
         license:
           description: The name of the license of this download
@@ -13623,8 +12723,7 @@ components:
           type: string
         hero_item:
           $ref: "#/components/schemas/FeaturedCollectionCoverItem"
-          description: Top-level item that is meant as a cover asset, as the first asset
-            seen to represent the collection
+          description: Top-level item that is meant as a cover asset, as the first asset seen to represent the collection
         id:
           description: Collection ID
           type: string
@@ -13707,8 +12806,7 @@ components:
           format: date
           type: string
         affiliate_url:
-          description: Affiliate referral link; appears only for registered affiliate
-            partners
+          description: Affiliate referral link; appears only for registered affiliate partners
           format: uri
           type: string
         aspect:
@@ -13809,8 +12907,7 @@ components:
       description: Request to upload an image
       properties:
         base64_image:
-          description: A Base 64 encoded jpeg or png; images can be no larger than 10mb
-            and can be no larger than 10,000 pixels in width or height
+          description: A Base 64 encoded jpeg or png; images can be no larger than 10mb and can be no larger than 10,000 pixels in width or height
           type: string
       required:
         - base64_image
@@ -13869,8 +12966,7 @@ components:
           description: Unique identifier for the search request
           type: string
         spellcheck_info:
-          description: Returns information if search phrase has potentially been mistyped
-            or another query would lead to better search results
+          description: Returns information if search phrase has potentially been mistyped or another query would lead to better search results
           type: object
         total_count:
           description: Total count of all results across all pages
@@ -14122,8 +13218,7 @@ components:
               type: string
             - format: country-code-2
               type: string
-          description: Mandatory country code for where the editorial content will be
-            distributed; this value is used for rights checks
+          description: Mandatory country code for where the editorial content will be distributed; this value is used for rights checks
           example: USA
         editorial:
           description: Editorial content to license
@@ -14211,8 +13306,7 @@ components:
               type: string
             - format: country-code-2
               type: string
-          description: Mandatory country code for where the editorial content will be
-            distributed; this value is used for rights checks
+          description: Mandatory country code for where the editorial content will be distributed; this value is used for rights checks
           example: USA
         editorial:
           description: Editorial content to license
@@ -14230,8 +13324,7 @@ components:
           description: Description of the license
           type: string
         format:
-          description: Format or extension of the media, such as mpeg for videos or jpeg
-            for images
+          description: Format or extension of the media, such as mpeg for videos or jpeg for images
           type: string
         media_type:
           description: Media type of the license
@@ -14245,8 +13338,7 @@ components:
           description: Width of the media, in pixels, allowed by this license
           type: integer
         size:
-          description: Keyword that details the size of the media, such as hd or sd for
-            video, huge or vector for images
+          description: Keyword that details the size of the media, such as hd or sd for video, huge or vector for images
           type: string
       type: object
     LicenseImage:
@@ -14272,9 +13364,7 @@ components:
         metadata:
           $ref: "#/components/schemas/LicenseRequestMetadata"
         price:
-          description: For revenue-sharing transactions, the final cost to the end
-            customer as a floating-point number in the transaction currency,
-            such as 12.34
+          description: For revenue-sharing transactions, the final cost to the end customer as a floating-point number in the transaction currency, such as 12.34
           type: number
         search_id:
           description: ID of the search that led to this licensing transaction
@@ -14359,9 +13449,7 @@ components:
           description: Total count of all results across all pages
           type: integer
     LicenseRequestMetadata:
-      description: Additional information for license requests for enterprise accounts
-        and API subscriptions, 4 fields maximum; which fields are required is
-        set by the account holder
+      description: Additional information for license requests for enterprise accounts and API subscriptions, 4 fields maximum; which fields are required is set by the account holder
       example:
         customer_id: "12345"
         geo_location: US
@@ -14385,8 +13473,7 @@ components:
         metadata:
           $ref: "#/components/schemas/LicenseRequestMetadata"
         price:
-          description: Retail price amount as a floating-point number in the transaction
-            currency, such as 12.34; only for rev-share partners
+          description: Retail price amount as a floating-point number in the transaction currency, such as 12.34; only for rev-share partners
           type: number
         search_id:
           description: ID of the search that led to this licensing event
@@ -14469,8 +13556,7 @@ components:
           description: Total count of all results across all pages
           type: integer
     Model:
-      description: Information about a human model or property that appears in media;
-        used to search for assets that this model is in
+      description: Information about a human model or property that appears in media; used to search for assets that this model is in
       properties:
         id:
           description: ID of the model
@@ -14507,12 +13593,10 @@ components:
           description: Access token that can be used for future requests
           type: string
         expires_in:
-          description: Number of seconds before token expires, only present for expiring
-            tokens
+          description: Number of seconds before token expires, only present for expiring tokens
           type: integer
         refresh_token:
-          description: A refresh token that can be used to renew the access_token when it
-            expires, only present for expiring tokens
+          description: A refresh token that can be used to renew the access_token when it expires, only present for expiring tokens
           type: string
         token_type:
           default: Bearer
@@ -14541,8 +13625,7 @@ components:
       description: Price
       properties:
         local_amount:
-          description: Floating-point amount of the calculated rev-share price in the
-            currency local_currency
+          description: Floating-point amount of the calculated rev-share price in the currency local_currency
           type: number
         local_currency:
           description: Currency of the rev-share price that was calculated
@@ -14662,8 +13745,7 @@ components:
         allotment:
           $ref: "#/components/schemas/Allotment"
         asset_type:
-          description: Identifier for the type of assets associated with this subscription
-            (images, videos, audio, editorial)
+          description: Identifier for the type of assets associated with this subscription (images, videos, audio, editorial)
           type: string
         description:
           description: Description of the subscription
@@ -14865,16 +13947,13 @@ components:
           description: Full name including first, middle, and last name of the user
           type: string
         id:
-          description: Unique internal identifier for the user, not tied to contributor or
-            purchasing customer
+          description: Unique internal identifier for the user, not tied to contributor or purchasing customer
           type: string
         is_premier:
-          description: True if the user has access to the Premier collection, false
-            otherwise
+          description: True if the user has access to the Premier collection, false otherwise
           type: boolean
         is_premier_parent:
-          description: True if the user has access to the Premier collection and also has
-            child users
+          description: True if the user has access to the Premier collection and also has child users
           type: boolean
         language:
           description: Main language of the user account
@@ -14889,8 +13968,7 @@ components:
           description: True if the user has access to sensitive use only, false otherwise
           type: boolean
         organization_id:
-          description: Unique internal identifier for the user's organization, specific to
-            Premier users
+          description: Unique internal identifier for the user's organization, specific to Premier users
           type: string
         premier_permissions:
           description: List of permissions allowed through the Premier client
@@ -14909,8 +13987,7 @@ components:
           format: date
           type: string
         affiliate_url:
-          description: Affiliate referral link; appears only for registered affiliate
-            partners
+          description: Affiliate referral link; appears only for registered affiliate partners
           format: uri
           type: string
         aspect:
@@ -14935,12 +14012,10 @@ components:
           description: Duration of this video, in seconds
           type: number
         has_model_release:
-          description: Whether or not this video has been released for use by the model
-            appearing in it
+          description: Whether or not this video has been released for use by the model appearing in it
           type: boolean
         has_property_release:
-          description: Whether or not this video has received a release to show the
-            landmark or property appearing in it
+          description: Whether or not this video has received a release to show the landmark or property appearing in it
           type: boolean
         id:
           description: ID of the video
@@ -15129,11 +14204,9 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.shutterstock.com/oauth/authorize
           scopes:
-            collections.edit: Grant the ability to create new collections, edit a
-              collection, and modify the contents of a collection
+            collections.edit: Grant the ability to create new collections, edit a collection, and modify the contents of a collection
             collections.view: Grant read-only access to a collection and its contents.
-            licenses.create: Grant the ability to download and license media on behalf of
-              the user.
+            licenses.create: Grant the ability to download and license media on behalf of the user.
             licenses.view: Grant read-only access to a user's licenses.
             purchases.view: Grant read-only access to a user's purchase history.
             user.view: "*Originally missing*"

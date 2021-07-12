@@ -4,8 +4,7 @@ servers:
 info:
   contact:
     email: support@cloudrf.com
-  description: Use this JSON API to build and test radio links for any radio,
-    anywhere. Authenticate with your API2.0 key in the request header as key
+  description: Use this JSON API to build and test radio links for any radio, anywhere. Authenticate with your API2.0 key in the request header as key
   termsOfService: https://cloudrf.com/terms-and-conditions/
   title: Cloud-RF API
   version: 2.0.0
@@ -30,10 +29,7 @@ tags:
 paths:
   /archive/delete:
     get:
-      description: Warning! you could lose data. This function will delete the entry
-        from the database and the file from the disk. Accidental deletion can be
-        reversed by contacting support with biscuits who maintain an offsite
-        backup.
+      description: Warning! you could lose data. This function will delete the entry from the database and the file from the disk. Accidental deletion can be reversed by contacting support with biscuits who maintain an offsite backup.
       operationId: delete
       parameters:
         - description: Unique calculation ID number
@@ -53,10 +49,7 @@ paths:
         - Manage
   /archive/delete/network:
     get:
-      description: Warning! you could lose data. This function will delete the entry
-        from the database and the file from the disk. Accidental deletion can be
-        reversed by contacting support with biscuits who maintain an offsite
-        backup.
+      description: Warning! you could lose data. This function will delete the entry from the database and the file from the disk. Accidental deletion can be reversed by contacting support with biscuits who maintain an offsite backup.
       operationId: deleteNetwork
       parameters:
         - description: Network name
@@ -76,8 +69,7 @@ paths:
         - Manage
   /archive/export:
     get:
-      description: Download your data in a format suitable for a third party viewer
-        like Google Earth or ESRI Arcmap.
+      description: Download your data in a format suitable for a third party viewer like Google Earth or ESRI Arcmap.
       operationId: export
       parameters:
         - description: Calculation file name
@@ -109,9 +101,7 @@ paths:
         - Manage
   /archive/list:
     get:
-      description: List your area and path calculations, sorted by time and limited to
-        the last few hundred. To fetch all for a given network append a 'net'
-        filter with the network name.
+      description: List your area and path calculations, sorted by time and limited to the last few hundred. To fetch all for a given network append a 'net' filter with the network name.
       operationId: list
       parameters:
         - description: North bounding box
@@ -153,12 +143,7 @@ paths:
         - Manage
   /area:
     post:
-      description: An area coverage assumes the same receiver height at all locations
-        out to fixed radius (maximum 300km). Due to it's exhaustive processing
-        it is the slowest of all the API calls. Speed can be improved
-        significantly by adjusting the resolution 'res' parameter. A basic
-        request needs transmitter, receiver, antenna and output objects defined
-        as a minimum. Model and environment options will enhance accuracy.
+      description: An area coverage assumes the same receiver height at all locations out to fixed radius (maximum 300km). Due to it's exhaustive processing it is the slowest of all the API calls. Speed can be improved significantly by adjusting the resolution 'res' parameter. A basic request needs transmitter, receiver, antenna and output objects defined as a minimum. Model and environment options will enhance accuracy.
       operationId: area
       requestBody:
         content:
@@ -190,9 +175,7 @@ paths:
                 transmitter:
                   $ref: "#/components/schemas/Transmitter"
               type: object
-        description: A basic request needs transmitter, receiver, antenna and output
-          objects defined as a minimum. Model and environment options will
-          enhance accuracy.
+        description: A basic request needs transmitter, receiver, antenna and output objects defined as a minimum. Model and environment options will enhance accuracy.
         required: true
       responses:
         "200":
@@ -205,10 +188,7 @@ paths:
         - Create
   /clutter/add:
     post:
-      description: Upload GeoJSON lineString and polygon features to your account. The
-        height property is in metres and the material code / type / attenuation
-        are.. 1	Trees –	0.25,2Trees +	0.5,3	Timber –	1.0,4	Timber +	1.5,5	Brick
-        – 	1.5,6	Brick +	2.0,7	Concrete –	3.0,8	Concrete +	4.0,9	Metal	6.0
+      description: Upload GeoJSON lineString and polygon features to your account. The height property is in metres and the material code / type / attenuation are.. 1	Trees –	0.25,2Trees +	0.5,3	Timber –	1.0,4	Timber +	1.5,5	Brick – 	1.5,6	Brick +	2.0,7	Concrete –	3.0,8	Concrete +	4.0,9	Metal	6.0
       operationId: addClutter
       requestBody:
         content:
@@ -238,10 +218,7 @@ paths:
         - Manage
   /interference:
     get:
-      description: Merge and analyse sites within a network channel to determine the
-        best server at a given location. Each site will be dynamically allocated
-        a monochrome colour from a palette and the strongest signal promoted at
-        a given location.
+      description: Merge and analyse sites within a network channel to determine the best server at a given location. Each site will be dynamically allocated a monochrome colour from a palette and the strongest signal promoted at a given location.
       operationId: interference
       parameters:
         - description: Network name eg. Overlapping broadcast stations
@@ -267,9 +244,7 @@ paths:
         - Analyse
   /mesh:
     get:
-      description: A merge of 'area' calculations for a network to create a single
-        super layer. Stronger signals are promoted over weaker ones. The same
-        colour key must be used.
+      description: A merge of 'area' calculations for a network to create a single super layer. Stronger signals are promoted over weaker ones. The same colour key must be used.
       operationId: mesh
       parameters:
         - description: Network name eg. 100_BLUE_repeaters_nationwide
@@ -295,8 +270,7 @@ paths:
         - Analyse
   /network:
     get:
-      description: Query your network to find the best server(s) for a given
-        receiver/customer location. A previously generated network is required.
+      description: Query your network to find the best server(s) for a given receiver/customer location. A previously generated network is required.
       operationId: network
       parameters:
         - description: Network name
@@ -350,10 +324,7 @@ paths:
         - Analyse
   /path:
     post:
-      description: A path profile is a single link from A to B. It is much faster than
-        an area calculation and can be used out to 300km. A basic request needs
-        transmitter, receiver, antenna and output objects defined as a minimum.
-        Model and environment options will enhance accuracy.
+      description: A path profile is a single link from A to B. It is much faster than an area calculation and can be used out to 300km. A basic request needs transmitter, receiver, antenna and output objects defined as a minimum. Model and environment options will enhance accuracy.
       operationId: path
       requestBody:
         content:
@@ -385,9 +356,7 @@ paths:
                 transmitter:
                   $ref: "#/components/schemas/Transmitter"
               type: object
-        description: A basic request needs transmitter, receiver, antenna and output
-          objects defined as a minimum. Model and environment options will
-          enhance accuracy.
+        description: A basic request needs transmitter, receiver, antenna and output objects defined as a minimum. Model and environment options will enhance accuracy.
         required: true
       responses:
         "200":
@@ -400,11 +369,7 @@ paths:
         - Create
   /points:
     post:
-      description: The points function tests many transmitters and one receiver and is
-        designed for route analysis. A minimal request needs a transmitters
-        array of (latitude,longitude,altitude) locations, antenna, receiver and
-        output objects defined as a minimum. Model and environment options will
-        enhance accuracy.
+      description: The points function tests many transmitters and one receiver and is designed for route analysis. A minimal request needs a transmitters array of (latitude,longitude,altitude) locations, antenna, receiver and output objects defined as a minimum. Model and environment options will enhance accuracy.
       operationId: points
       requestBody:
         content:
@@ -440,10 +405,7 @@ paths:
                 transmitter:
                   $ref: "#/components/schemas/Transmitter"
               type: object
-        description: A minimal request needs a transmitters array of
-          (latitude,longitude,altitude) locations, antenna, receiver and output
-          objects defined as a minimum. Model and environment options will
-          enhance accuracy.
+        description: A minimal request needs a transmitters array of (latitude,longitude,altitude) locations, antenna, receiver and output objects defined as a minimum. Model and environment options will enhance accuracy.
         required: true
       responses:
         "200":
@@ -472,8 +434,7 @@ components:
           type: integer
         hbw:
           default: 0
-          description: Custom antenna horizontal beamwidth in degrees. For use only with
-            ant=0
+          description: Custom antenna horizontal beamwidth in degrees. For use only with ant=0
           format: int32
           maximum: 360
           minimum: 0
@@ -525,17 +486,14 @@ components:
           type: integer
         clm:
           default: 1
-          description: Clutter mode. 0=None/DSM only, 1=System & custom clutter, 2=Custom
-            clutter only
+          description: Clutter mode. 0=None/DSM only, 1=System & custom clutter, 2=Custom clutter only
           format: int32
           maximum: 2
           minimum: 1
           type: integer
         mat:
           default: 0.25
-          description: Clutter attenuation override in dB/m based on a tree block OR
-            hollow building. Light foliage=0.1dB/m, brick=1.0dB/m,
-            concrete=5dB/m
+          description: Clutter attenuation override in dB/m based on a tree block OR hollow building. Light foliage=0.1dB/m, brick=1.0dB/m, concrete=5dB/m
           format: float
           maximum: 9
           minimum: 0.1
@@ -557,35 +515,27 @@ components:
       properties:
         cli:
           default: 6
-          description: "Radio climate for ITM model (1). 1: Equatorial (Congo) 2:
-            Continental Subtropical (Sudan) 3: Maritime Subtropical (West coast
-            of Africa) 4: Desert (Sahara) 5: Continental Temperate 6: Maritime
-            Temperate, over land (UK and west coasts of US & EU) 7: Maritime
-            Temperate, over sea"
+          description: "Radio climate for ITM model (1). 1: Equatorial (Congo) 2: Continental Subtropical (Sudan) 3: Maritime Subtropical (West coast of Africa) 4: Desert (Sahara) 5: Continental Temperate 6: Maritime Temperate, over land (UK and west coasts of US & EU) 7: Maritime Temperate, over sea"
           format: int32
           maximum: 7
           minimum: 1
           type: integer
         ked:
           default: 0
-          description: Knife edge diffraction for enhancing basic empirical models
-            (Already in ITM)
+          description: Knife edge diffraction for enhancing basic empirical models (Already in ITM)
           maximum: 1
           minimum: 0
           type: integer
         pe:
           default: 2
-          description: Propagation model subtype/environment.
-            1=Conservative/Urban,2=Average/Suburban,3=Optimistic/rural
+          description: Propagation model subtype/environment. 1=Conservative/Urban,2=Average/Suburban,3=Optimistic/rural
           format: int32
           maximum: 3
           minimum: 1
           type: integer
         pm:
           default: 1
-          description: Propagation model. 1=Irregular Terrain Model, 2=Line of Sight
-            (LOS), 3=Hata, 4=ECC33, 5=SUI Microwave, 6=COST231, 7=Free space
-            path loss, 9=Ericsson9999, 10=Plane earth loss, 11=Egli.
+          description: Propagation model. 1=Irregular Terrain Model, 2=Line of Sight (LOS), 3=Hata, 4=ECC33, 5=SUI Microwave, 6=COST231, 7=Free space path loss, 9=Ericsson9999, 10=Plane earth loss, 11=Egli.
           format: int32
           maximum: 20
           minimum: 1
@@ -599,9 +549,7 @@ components:
           type: integer
         ter:
           default: 4
-          description: Terrain code for ITM model (1). 1=Water,2=Wet
-            ground,3=Farmland,4=Forest/Average,5=Mountain/Sand,6=City/Poor
-            ground
+          description: Terrain code for ITM model (1). 1=Water,2=Wet ground,3=Farmland,4=Forest/Average,5=Mountain/Sand,6=City/Poor ground
           format: int32
           maximum: 6
           minimum: 1
@@ -611,25 +559,18 @@ components:
       properties:
         ber:
           default: 0
-          description: "Bit error rate. 1=0.1, 2=0.01, 3=0.001,
-            4=0.0001,5=0.00001,6=0.000001. >6=Lora:
-            7=SF7,8=SF8,9=SF9,10=SF10,11=SF11,12=SF12"
+          description: "Bit error rate. 1=0.1, 2=0.01, 3=0.001, 4=0.0001,5=0.00001,6=0.000001. >6=Lora: 7=SF7,8=SF8,9=SF9,10=SF10,11=SF11,12=SF12"
           format: int32
           maximum: 10
           minimum: 0
           type: integer
         col:
           default: RAINBOW.dBm
-          description: Colour schema code OR filename. 1 = Cellular (5), 2=Red, 3=Green,
-            4=Blue, 5=Microwave(7), 7=Custom RGB, 8=Automatic by frequency,
-            9=Greyscale / GIS, 10=Rainbow(24), 11=Green/Blue/Red, 13=Sub noise
-            floor (10), 14=TV broadcasting (4), 15=Red threshold, 16=Green
-            threshold, 17=Blue threshold. RAINBOW.dBm, CUSTOMSCHEMA.dBm..
+          description: Colour schema code OR filename. 1 = Cellular (5), 2=Red, 3=Green, 4=Blue, 5=Microwave(7), 7=Custom RGB, 8=Automatic by frequency, 9=Greyscale / GIS, 10=Rainbow(24), 11=Green/Blue/Red, 13=Sub noise floor (10), 14=TV broadcasting (4), 15=Red threshold, 16=Green threshold, 17=Blue threshold. RAINBOW.dBm, CUSTOMSCHEMA.dBm..
           type: string
         mod:
           default: 0
-          description: Modulation.
-            1=4QAM,2=16QAM,3=64QAM,4=256QAM,5=1024QAM,6=BPSK,7=QPSK,8=8PSK,9=16PSK,10=32PSK,11=LoRa
+          description: Modulation. 1=4QAM,2=16QAM,3=64QAM,4=256QAM,5=1024QAM,6=BPSK,7=QPSK,8=8PSK,9=16PSK,10=32PSK,11=LoRa
           format: int32
           maximum: 11
           minimum: 1
@@ -664,8 +605,7 @@ components:
           type: integer
         units:
           default: metric
-          description: Distance units in either metres/kilometres (metric) or feet/miles
-            (imperial)
+          description: Distance units in either metres/kilometres (metric) or feet/miles (imperial)
           enum:
             - metric
             - imperial
@@ -727,8 +667,7 @@ components:
           type: number
         rxs:
           default: -90
-          description: Receiver sensitivity/threshold in measured units defined by 'out'
-            param
+          description: Receiver sensitivity/threshold in measured units defined by 'out' param
           format: float
           maximum: 200
           minimum: -140
@@ -745,8 +684,7 @@ components:
           type: number
         bwi:
           default: 0.1
-          description: Bandwidth in MHz. 1MHz has a noise floor of -114dBm. 10MHz =
-            -104dBm, 20MHz = -101dBm
+          description: Bandwidth in MHz. 1MHz has a noise floor of -114dBm. 10MHz = -104dBm, 20MHz = -101dBm
           format: float
           maximum: 100
           minimum: 0.1

@@ -29,13 +29,10 @@ security:
 paths:
   /v1/companies:
     get:
-      description: >
-        Get a list of the traded companies that polygon.io streams. Company
-        includes some details about the company which we hope to add more to
-        soon.
+      description: |
+        Get a list of the traded companies that polygon.io streams. Company includes some details about the company which we hope to add more to soon.
       parameters:
-        - description: Which field to sort by. For desc place a `-` in front of the field
-            name. eg `?sort=-marketcap`
+        - description: Which field to sort by. For desc place a `-` in front of the field name. eg `?sort=-marketcap`
           in: query
           name: sort
           required: false
@@ -150,10 +147,8 @@ paths:
         - Stocks
   "/v1/historic/forex/{from}/{to}/{date}":
     get:
-      description: >
-        Get historic ticks for a currency pair. Example for **USD/JPY** the
-        from would be **USD** and to would be **JPY**. The date formatted like
-        **2017-6-22**
+      description: |
+        Get historic ticks for a currency pair. Example for **USD/JPY** the from would be **USD** and to would be **JPY**. The date formatted like **2017-6-22**
       parameters:
         - description: From Symbol of the currency pair
           in: path

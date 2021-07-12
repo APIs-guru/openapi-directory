@@ -7,11 +7,8 @@ info:
   contact:
     name: Fun Generators
     url: http://fungenerators.com/
-  description: >
-    Fungenerators taunt generation API generates random taunts /
-    insults,  relevant to the given category. Many categories are supported and
-    new ones are added very frequently. [Click here to
-    subscribe](http://fungenerators.com/api/taunt/)
+  description: |
+    Fungenerators taunt generation API generates random taunts / insults,  relevant to the given category. Many categories are supported and new ones are added very frequently. [Click here to subscribe](http://fungenerators.com/api/taunt/)
   termsOfService: https://fungenerators.com/terms
   title: Taunt as a service
   version: "1.5"
@@ -65,7 +62,7 @@ paths:
         "200":
           description: 200  response
           examples:
-            application/json: >-
+            application/json: |-
               {
                 "success": {
                   "total": "7",
@@ -136,8 +133,7 @@ paths:
           name: category
           required: true
           type: string
-        - description: Limit. Controls number of taunts generated. Max of 5-10 based on
-            the plan
+        - description: Limit. Controls number of taunts generated. Max of 5-10 based on the plan
           format: integer
           in: query
           name: limit

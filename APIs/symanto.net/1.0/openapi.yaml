@@ -25,21 +25,15 @@ security:
 paths:
   /communication:
     post:
-      description: >-
+      description: |-
         Identify the purpose and writing style of a written text.
-
 
         Supported Languages: [`ar`, `de`, `en`, `es`, `fr`, `it`, `nl`, `pt`, `ru`, `tr`, `zh`]
 
-
         Returned labels:
-
         * action-seeking
-
         * fact-oriented
-
         * information-seeking
-
         * self-revealing
       operationId: communication
       parameters:
@@ -165,13 +159,10 @@ paths:
         - Text Analysis
   /language-detection:
     post:
-      description: >-
-        Identifies what language a text is written in. Only languages that
-        our API supports can be analyzed.
-
+      description: |-
+        Identifies what language a text is written in. Only languages that our API supports can be analyzed.
 
         Returned labels:
-
         * language_code of the detected language
       operationId: language-detection
       requestBody:
@@ -197,18 +188,14 @@ paths:
         - Text Analysis
   /personality:
     post:
-      description: >-
+      description: |-
         Predict the personality trait of author of any written text.
-
 
         Supported Languages: [`ar`, `de`, `en`, `es`, `fr`, `it`, `nl`, `pt`, `ru`, `tr`, `zh`]
 
-
         Returned labels:
 
-
         * emotional
-
         * rational
       operationId: personality
       parameters:

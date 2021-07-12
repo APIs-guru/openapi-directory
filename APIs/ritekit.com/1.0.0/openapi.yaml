@@ -2,36 +2,26 @@ openapi: 3.0.0
 servers:
   - url: https://api.ritekit.com
 info:
-  description: >-
+  description: |-
     RiteKit API is based on REST principles.
-
 
     Authentication uses standard OAuth 2.0 process
 
-
     ##Getting started
-
 
     1. Sign up for [RiteKit](https://ritekit.com/)
 
-
     1. Go to [developer dashboard](https://ritekit.com/developer/dashboard/)
-
 
     1. Click "Create a token" button to get your **Client ID** and **Client secret**
 
-
     1. When you reach your free limit of calls per month, [upgrade to paid tiers](https://ritekit.com/developer/)
-
 
     ## Options for authorizing API Calls
 
-
     #### Using Client ID directly
 
-
     You can directly connect to our API using your **client ID** by sending it as a GET query parameter. This option is simple (no need for oAuth) but it should be used only in case the Client ID is not exposed publicly.
-
 
     GET  https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&client_id=292c6912e7710c838347ae178b4a
   title: RiteKit API
@@ -56,8 +46,7 @@ paths:
       operationId: Auto-Emojify
       parameters:
         - description: Text of the post
-          example: Why robots may soon steal all manufacturing jobs – but it’s not all bad
-            news
+          example: Why robots may soon steal all manufacturing jobs – but it’s not all bad news
           in: query
           name: text
           required: true
@@ -73,8 +62,7 @@ paths:
                     code: 200
                     message: OK
                     result: true
-                    text: Why robots may soon steal all manufacturing jobs – but it’s not all bad
-                      news 🤖🗞❓
+                    text: Why robots may soon steal all manufacturing jobs – but it’s not all bad news 🤖🗞❓
           description: OK
           headers: {}
       summary: Auto-Emojify
@@ -85,8 +73,7 @@ paths:
       operationId: Emoji Suggestions
       parameters:
         - description: Text of the post
-          example: Why robots may soon steal all manufacturing jobs – but it’s not all bad
-            news
+          example: Why robots may soon steal all manufacturing jobs – but it’s not all bad news
           in: query
           name: text
           required: true
@@ -142,12 +129,8 @@ paths:
       tags: []
   /v1/images/logo:
     get:
-      description: >-
-        Returns a company logo based on website domain. If the logo is not
-        in our database yet, it will be extracted from the site on the fly.
-        White logo background is automatically removed to make the logo look
-        better on color backgrounds.
-
+      description: |-
+        Returns a company logo based on website domain. If the logo is not in our database yet, it will be extracted from the site on the fly. White logo background is automatically removed to make the logo look better on color backgrounds.
 
         Note: It is not possible to access our company logo API publicly without authentication. If you wish to do so, you have to create proxy on your own server that calls our API from the server side.
       operationId: Company Logo
@@ -172,8 +155,7 @@ paths:
       tags: []
   /v1/images/quote:
     get:
-      description: Returns URL of an image created from text according to given style
-        parameters
+      description: Returns URL of an image created from text according to given style parameters
       operationId: Text to Image
       parameters:
         - description: Text of the quote
@@ -190,8 +172,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Font size for the quote (author font size is calculated
-            automatically)
+        - description: Font size for the quote (author font size is calculated automatically)
           example: "60"
           in: query
           name: fontSize
@@ -310,8 +291,7 @@ paths:
       tags: []
   /v1/link/cta:
     get:
-      description: Returns list of available CTA for current user. Requires each user
-        to authenticate with RiteKit
+      description: Returns list of available CTA for current user. Requires each user to authenticate with RiteKit
       operationId: List of CTAs
       responses:
         "200":
@@ -376,8 +356,7 @@ paths:
       description: Returns list of hashtags currently trending on Twitter
       operationId: Trending Hashtags
       parameters:
-        - description: Restrict results only to green hashtags. Hides overused (red)
-            hashtags.
+        - description: Restrict results only to green hashtags. Hides overused (red) hashtags.
           in: query
           name: green
           required: false
@@ -601,9 +580,7 @@ paths:
       tags: []
   /v1/stats/hashtag-suggestions:
     get:
-      description: Returns list of hashtag suggestions for a single-word topic or a
-        shorter text up to 1000 characters. Takes into account both semantic
-        relevancy and real-time hashtag popularity.
+      description: Returns list of hashtag suggestions for a single-word topic or a shorter text up to 1000 characters. Takes into account both semantic relevancy and real-time hashtag popularity.
       operationId: Hashtag Suggestions
       parameters:
         - description: Topic
@@ -1003,10 +980,7 @@ paths:
       operationId: Hashtags cleaner
       parameters:
         - description: post
-          example: "#instaphotography #instabeauty #instagirls #instanature #instagirl
-            #photography #beauty #girls #nature #girl #sky #water #lady #ladies
-            #woman #women #photograph #photographs #beauties #sunlight #sitting
-            #waters #skies #sit #photographies"
+          example: "#instaphotography #instabeauty #instagirls #instanature #instagirl #photography #beauty #girls #nature #girl #sky #water #lady #ladies #woman #women #photograph #photographs #beauties #sunlight #sitting #waters #skies #sit #photographies"
           in: query
           name: post
           required: true
@@ -1024,10 +998,7 @@ paths:
                       - "#woman"
                       - "#women"
                     message: OK
-                    post: "#instaphotography #instabeauty #instagirls #instanature #photography
-                      #beauty #girls #nature #girl #sky #water #lady #ladies
-                      #photograph #photographs #beauties #sunlight #sitting
-                      #waters #skies #sit #photographies"
+                    post: "#instaphotography #instabeauty #instagirls #instanature #photography #beauty #girls #nature #girl #sky #water #lady #ladies #photograph #photographs #beauties #sunlight #sitting #waters #skies #sit #photographies"
                     result: true
           description: OK
           headers: {}

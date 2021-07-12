@@ -2,8 +2,7 @@ openapi: 3.0.1
 servers:
   - url: https://api.presalytics.io/ooxml-automation
 info:
-  description: This API helps users convert Excel and Powerpoint documents into
-    rich, live dashboards and stories.
+  description: This API helps users convert Excel and Powerpoint documents into rich, live dashboards and stories.
   title: OOXML Automation
   version: 0.1.0
   x-apisguru-categories:
@@ -140,8 +139,7 @@ tags:
 paths:
   "/Charts/Axes/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Axes object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Axes object by its primary key (id)"
       operationId: chart_axes_get_id
       parameters:
         - in: path
@@ -164,9 +162,7 @@ paths:
         - Charts/Axes
   /Charts/AxisDataTypes:
     get:
-      description: "List Types: Use this method to retreive a list of possible options
-        for the AxisDataTypes type. Use the Id from oneof the returned elements
-        on to make changes to elements in the Chart object space."
+      description: "List Types: Use this method to retreive a list of possible options for the AxisDataTypes type. Use the Id from oneof the returned elements on to make changes to elements in the Chart object space."
       operationId: chart_axisdatatypes_get
       responses:
         "200":
@@ -197,8 +193,7 @@ paths:
       x-operationName: list
   "/Charts/AxisDataTypes/TypeId/{type_id}":
     get:
-      description: This endpoint returns Type metadata from an integer type_id that
-        can found on objects throughout the api.
+      description: This endpoint returns Type metadata from an integer type_id that can found on objects throughout the api.
       operationId: chart_axisdatatypes_typeid_get_type_id
       parameters:
         - in: path
@@ -234,8 +229,7 @@ paths:
       x-operationName: type-id
   "/Charts/AxisDataTypes/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a AxisDataTypes object by
-        its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a AxisDataTypes object by its primary key (id)"
       operationId: chart_axisdatatypes_get_id
       parameters:
         - description: ""
@@ -272,8 +266,7 @@ paths:
         - Charts/AxisDataTypes
   "/Charts/ChartData/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a ChartData object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a ChartData object by its primary key (id)"
       operationId: chart_chartdata_get_id
       parameters:
         - in: path
@@ -296,8 +289,7 @@ paths:
         - Charts/ChartData
   "/Charts/ChartUpdate/{id}":
     get:
-      description: Gets a ChartDataDTO object, usually used for downstream analytics
-        and chart updates
+      description: Gets a ChartDataDTO object, usually used for downstream analytics and chart updates
       operationId: charts_charts_chartupdate_get_id
       parameters:
         - description: ""
@@ -367,10 +359,7 @@ paths:
         - Charts
   "/Charts/ChildObjects/{id}":
     get:
-      description: This endpoint is helpful for helping users and bots identify
-        dependent objects to this Chart and retreive their corresponding
-        metadata in order to make modifications to those objects in downstream
-        operations.
+      description: This endpoint is helpful for helping users and bots identify dependent objects to this Chart and retreive their corresponding metadata in order to make modifications to those objects in downstream operations.
       operationId: charts_charts_childobjects_get_id
       parameters:
         - in: path
@@ -412,8 +401,7 @@ paths:
       x-operationName: get-obj-tree
   "/Charts/ColumnCollections/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a ColumnCollections object
-        by its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a ColumnCollections object by its primary key (id)"
       operationId: chart_columncollections_get_id
       parameters:
         - in: path
@@ -436,8 +424,7 @@ paths:
         - Charts/ColumnCollections
   "/Charts/Columns/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Columns object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Columns object by its primary key (id)"
       operationId: chart_columns_get_id
       parameters:
         - in: path
@@ -460,8 +447,7 @@ paths:
         - Charts/Columns
   "/Charts/DataPoints/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a DataPoints object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a DataPoints object by its primary key (id)"
       operationId: chart_datapoints_get_id
       parameters:
         - in: path
@@ -484,8 +470,7 @@ paths:
         - Charts/DataPoints
   "/Charts/Details/{id}":
     get:
-      description: "Returns object metadata and information about relative dependent
-        objects "
+      description: "Returns object metadata and information about relative dependent objects "
       operationId: charts_charts_details_get_id
       parameters:
         - in: path
@@ -509,12 +494,7 @@ paths:
       x-operationName: details
   "/Charts/OpenOfficeXml/{id}":
     get:
-      description: Return the subset of the xml content from within the latest edited
-        version of the OpenXmlDocument from this Chart object.  The returned xml
-        data conforms to the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use
-        this endpoint a starting point for building client-side extensions that
-        modify Presalytics widgets containing Chart objects.
+      description: Return the subset of the xml content from within the latest edited version of the OpenXmlDocument from this Chart object.  The returned xml data conforms to the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use this endpoint a starting point for building client-side extensions that modify Presalytics widgets containing Chart objects.
       operationId: charts_charts_openofficexml_get_id_updated
       parameters:
         - in: path
@@ -523,8 +503,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should return the orginal uploaded xml
-            (false) or the actively updated version (true, default)
+        - description: Indicates whether API should return the orginal uploaded xml (false) or the actively updated version (true, default)
           in: query
           name: updated
           schema:
@@ -548,14 +527,7 @@ paths:
         - Charts
       x-operationName: get-xml
     put:
-      description: Directly eidt the underlying xml of a Chart object within an
-        OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will
-        validatate the submitted xml against the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm)
-        prior to saving modification.  Invalid xml will rejected by this
-        endpoint and a (hopefully) helpful error message will be returned.  Use
-        this endpoint for client-side automation of modifications ot Chart
-        objects.
+      description: Directly eidt the underlying xml of a Chart object within an OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will validatate the submitted xml against the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm) prior to saving modification.  Invalid xml will rejected by this endpoint and a (hopefully) helpful error message will be returned.  Use this endpoint for client-side automation of modifications ot Chart objects.
       operationId: charts_charts_openofficexml_put_id
       parameters:
         - in: path
@@ -592,9 +564,7 @@ paths:
       x-operationName: put-xml
   /Charts/PlotType:
     get:
-      description: "List Types: Use this method to retreive a list of possible options
-        for the PlotType type. Use the Id from oneof the returned elements on to
-        make changes to elements in the Chart object space."
+      description: "List Types: Use this method to retreive a list of possible options for the PlotType type. Use the Id from oneof the returned elements on to make changes to elements in the Chart object space."
       operationId: chart_plottype_get
       responses:
         "200":
@@ -625,8 +595,7 @@ paths:
       x-operationName: list
   "/Charts/PlotType/TypeId/{type_id}":
     get:
-      description: This endpoint returns Type metadata from an integer type_id that
-        can found on objects throughout the api.
+      description: This endpoint returns Type metadata from an integer type_id that can found on objects throughout the api.
       operationId: chart_plottype_typeid_get_type_id
       parameters:
         - in: path
@@ -662,8 +631,7 @@ paths:
       x-operationName: type-id
   "/Charts/PlotType/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a PlotType object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a PlotType object by its primary key (id)"
       operationId: chart_plottype_get_id
       parameters:
         - description: ""
@@ -700,9 +668,7 @@ paths:
         - Charts/PlotType
   /Charts/RowCol:
     get:
-      description: "List Types: Use this method to retreive a list of possible options
-        for the RowCol type. Use the Id from oneof the returned elements on to
-        make changes to elements in the Chart object space."
+      description: "List Types: Use this method to retreive a list of possible options for the RowCol type. Use the Id from oneof the returned elements on to make changes to elements in the Chart object space."
       operationId: chart_rowcol_get
       responses:
         "200":
@@ -733,8 +699,7 @@ paths:
       x-operationName: list
   "/Charts/RowCol/TypeId/{type_id}":
     get:
-      description: This endpoint returns Type metadata from an integer type_id that
-        can found on objects throughout the api.
+      description: This endpoint returns Type metadata from an integer type_id that can found on objects throughout the api.
       operationId: chart_rowcol_typeid_get_type_id
       parameters:
         - in: path
@@ -770,8 +735,7 @@ paths:
       x-operationName: type-id
   "/Charts/RowCol/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a RowCol object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a RowCol object by its primary key (id)"
       operationId: chart_rowcol_get_id
       parameters:
         - description: ""
@@ -808,8 +772,7 @@ paths:
         - Charts/RowCol
   "/Charts/RowCollections/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a RowCollections object by
-        its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a RowCollections object by its primary key (id)"
       operationId: chart_rowcollections_get_id
       parameters:
         - in: path
@@ -832,9 +795,7 @@ paths:
         - Charts/RowCollections
   /Charts/RowNameFormatTypes:
     get:
-      description: "List Types: Use this method to retreive a list of possible options
-        for the RowNameFormatTypes type. Use the Id from oneof the returned
-        elements on to make changes to elements in the Chart object space."
+      description: "List Types: Use this method to retreive a list of possible options for the RowNameFormatTypes type. Use the Id from oneof the returned elements on to make changes to elements in the Chart object space."
       operationId: chart_rownameformattypes_get
       responses:
         "200":
@@ -865,8 +826,7 @@ paths:
       x-operationName: list
   "/Charts/RowNameFormatTypes/TypeId/{type_id}":
     get:
-      description: This endpoint returns Type metadata from an integer type_id that
-        can found on objects throughout the api.
+      description: This endpoint returns Type metadata from an integer type_id that can found on objects throughout the api.
       operationId: chart_rownameformattypes_typeid_get_type_id
       parameters:
         - in: path
@@ -902,8 +862,7 @@ paths:
       x-operationName: type-id
   "/Charts/RowNameFormatTypes/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a RowNameFormatTypes object
-        by its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a RowNameFormatTypes object by its primary key (id)"
       operationId: chart_rownameformattypes_get_id
       parameters:
         - description: ""
@@ -940,8 +899,7 @@ paths:
         - Charts/RowNameFormatTypes
   "/Charts/Rows/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Rows object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Rows object by its primary key (id)"
       operationId: chart_rows_get_id
       parameters:
         - in: path
@@ -964,8 +922,7 @@ paths:
         - Charts/Rows
   "/Charts/Svg/{id}":
     get:
-      description: This endpoint is helpful for rending this Chart as an svg or image
-        object that can then be rendered in a story, dashboard or website.
+      description: This endpoint is helpful for rending this Chart as an svg or image object that can then be rendered in a story, dashboard or website.
       operationId: charts_charts_svg_get_id_use_cache
       parameters:
         - in: path
@@ -974,8 +931,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should retrieve content from a cache if
-            aviable (true, default), or force an update (false)
+        - description: Indicates whether API should retrieve content from a cache if aviable (true, default), or force an update (false)
           in: query
           name: use_cache
           schema:
@@ -1003,8 +959,7 @@ paths:
       x-operationName: get-svg
   "/Charts/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Charts object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Charts object by its primary key (id)"
       operationId: charts_charts_get_id
       parameters:
         - description: An Id of the respository DTO elemennt
@@ -1029,10 +984,7 @@ paths:
         - Charts
   "/ConnectionShapes/ChildObjects/{id}":
     get:
-      description: This endpoint is helpful for helping users and bots identify
-        dependent objects to this Slide and retreive their corresponding
-        metadata in order to make modifications to those objects in downstream
-        operations.
+      description: This endpoint is helpful for helping users and bots identify dependent objects to this Slide and retreive their corresponding metadata in order to make modifications to those objects in downstream operations.
       operationId: slides_connectionshapes_childobjects_get_id
       parameters:
         - in: path
@@ -1074,8 +1026,7 @@ paths:
       x-operationName: get-obj-tree
   "/ConnectionShapes/Details/{id}":
     get:
-      description: "Returns object metadata and information about relative dependent
-        objects "
+      description: "Returns object metadata and information about relative dependent objects "
       operationId: slides_connectionshapes_details_get_id
       parameters:
         - in: path
@@ -1099,12 +1050,7 @@ paths:
       x-operationName: details
   "/ConnectionShapes/OpenOfficeXml/{id}":
     get:
-      description: Return the subset of the xml content from within the latest edited
-        version of the OpenXmlDocument from this Slide object.  The returned xml
-        data conforms to the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use
-        this endpoint a starting point for building client-side extensions that
-        modify Presalytics widgets containing Slide objects.
+      description: Return the subset of the xml content from within the latest edited version of the OpenXmlDocument from this Slide object.  The returned xml data conforms to the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use this endpoint a starting point for building client-side extensions that modify Presalytics widgets containing Slide objects.
       operationId: slides_connectionshapes_openofficexml_get_id_updated
       parameters:
         - in: path
@@ -1113,8 +1059,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should return the orginal uploaded xml
-            (false) or the actively updated version (true, default)
+        - description: Indicates whether API should return the orginal uploaded xml (false) or the actively updated version (true, default)
           in: query
           name: updated
           schema:
@@ -1138,14 +1083,7 @@ paths:
         - ConnectionShapes
       x-operationName: get-xml
     put:
-      description: Directly eidt the underlying xml of a Slide object within an
-        OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will
-        validatate the submitted xml against the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm)
-        prior to saving modification.  Invalid xml will rejected by this
-        endpoint and a (hopefully) helpful error message will be returned.  Use
-        this endpoint for client-side automation of modifications ot Slide
-        objects.
+      description: Directly eidt the underlying xml of a Slide object within an OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will validatate the submitted xml against the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm) prior to saving modification.  Invalid xml will rejected by this endpoint and a (hopefully) helpful error message will be returned.  Use this endpoint for client-side automation of modifications ot Slide objects.
       operationId: slides_connectionshapes_openofficexml_put_id
       parameters:
         - in: path
@@ -1182,8 +1120,7 @@ paths:
       x-operationName: put-xml
   "/ConnectionShapes/Svg/{id}":
     get:
-      description: This endpoint is helpful for rending this Slide as an svg or image
-        object that can then be rendered in a story, dashboard or website.
+      description: This endpoint is helpful for rending this Slide as an svg or image object that can then be rendered in a story, dashboard or website.
       operationId: slides_connectionshapes_svg_get_id_use_cache
       parameters:
         - in: path
@@ -1192,8 +1129,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should retrieve content from a cache if
-            aviable (true, default), or force an update (false)
+        - description: Indicates whether API should retrieve content from a cache if aviable (true, default), or force an update (false)
           in: query
           name: use_cache
           schema:
@@ -1221,8 +1157,7 @@ paths:
       x-operationName: get-svg
   "/ConnectionShapes/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a ConnectionShapes object
-        by its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a ConnectionShapes object by its primary key (id)"
       operationId: slides_connectionshapes_get_id
       parameters:
         - description: An Id of the respository DTO elemennt
@@ -1247,8 +1182,7 @@ paths:
         - ConnectionShapes
   /Documents:
     post:
-      description: Upload an OpenOfficeXml document (e.g., .xlsx, .pptx) for
-        processing by the API.
+      description: Upload an OpenOfficeXml document (e.g., .xlsx, .pptx) for processing by the API.
       operationId: documents_post
       requestBody:
         content:
@@ -1296,10 +1230,7 @@ paths:
         - Documents
   "/Documents/ChildObjects/{id}":
     get:
-      description: This endpoint is helpful for helping users and bots identify
-        dependent objects to this DocumentsController and retreive their
-        corresponding metadata in order to make modifications to those objects
-        in downstream operations.
+      description: This endpoint is helpful for helping users and bots identify dependent objects to this DocumentsController and retreive their corresponding metadata in order to make modifications to those objects in downstream operations.
       operationId: documents_childobjects_get_id
       parameters:
         - description: ""
@@ -1355,8 +1286,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/DocumentCloneDTO"
-        description: A DocumentCloneDto object with containing information required for
-          cloning the document
+        description: A DocumentCloneDto object with containing information required for cloning the document
       responses:
         "200":
           content:
@@ -1377,9 +1307,7 @@ paths:
         - Documents
   /Documents/DocumentType:
     get:
-      description: "List Types: Use this method to retreive a list of possible options
-        for the DocumentType type. Use the Id from oneof the returned elements
-        on to make changes to elements in the Documents object space."
+      description: "List Types: Use this method to retreive a list of possible options for the DocumentType type. Use the Id from oneof the returned elements on to make changes to elements in the Documents object space."
       operationId: documents_documenttype_get
       responses:
         "200":
@@ -1410,8 +1338,7 @@ paths:
       x-operationName: list
   "/Documents/DocumentType/TypeId/{type_id}":
     get:
-      description: This endpoint returns Type metadata from an integer type_id that
-        can found on objects throughout the api.
+      description: This endpoint returns Type metadata from an integer type_id that can found on objects throughout the api.
       operationId: documents_documenttype_typeid_get_type_id
       parameters:
         - in: path
@@ -1447,8 +1374,7 @@ paths:
       x-operationName: type-id
   "/Documents/DocumentType/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a DocumentType object by
-        its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a DocumentType object by its primary key (id)"
       operationId: documents_documenttype_get_id
       parameters:
         - description: ""
@@ -1518,12 +1444,9 @@ paths:
       x-operationName: download
   "/Documents/{id}":
     delete:
-      description: "Permantly delete a document from the Ooxml Automation API. Note
-        that is does not make changes to the related Presalytics APIs.\r
+      description: "Permantly delete a document from the Ooxml Automation API. Note that is does not make changes to the related Presalytics APIs.\r
 
-        Please use the delete endpoint in the story API to ensure that
-        stories are not left with orphaned references to the Ooxml Automation
-        API."
+        Please use the delete endpoint in the story API to ensure that stories are not left with orphaned references to the Ooxml Automation API."
       operationId: documents_delete_id
       parameters:
         - description: ""
@@ -1545,8 +1468,7 @@ paths:
       tags:
         - Documents
     get:
-      description: "Get by Id: Use this method to retrieve a Documents object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Documents object by its primary key (id)"
       operationId: documents_get_id
       parameters:
         - description: ""
@@ -1581,10 +1503,7 @@ paths:
         - Documents
   "/Groups/ChildObjects/{id}":
     get:
-      description: This endpoint is helpful for helping users and bots identify
-        dependent objects to this Slide and retreive their corresponding
-        metadata in order to make modifications to those objects in downstream
-        operations.
+      description: This endpoint is helpful for helping users and bots identify dependent objects to this Slide and retreive their corresponding metadata in order to make modifications to those objects in downstream operations.
       operationId: slides_groups_childobjects_get_id
       parameters:
         - in: path
@@ -1626,8 +1545,7 @@ paths:
       x-operationName: get-obj-tree
   "/Groups/Details/{id}":
     get:
-      description: "Returns object metadata and information about relative dependent
-        objects "
+      description: "Returns object metadata and information about relative dependent objects "
       operationId: slides_groups_details_get_id
       parameters:
         - in: path
@@ -1651,12 +1569,7 @@ paths:
       x-operationName: details
   "/Groups/OpenOfficeXml/{id}":
     get:
-      description: Return the subset of the xml content from within the latest edited
-        version of the OpenXmlDocument from this Slide object.  The returned xml
-        data conforms to the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use
-        this endpoint a starting point for building client-side extensions that
-        modify Presalytics widgets containing Slide objects.
+      description: Return the subset of the xml content from within the latest edited version of the OpenXmlDocument from this Slide object.  The returned xml data conforms to the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use this endpoint a starting point for building client-side extensions that modify Presalytics widgets containing Slide objects.
       operationId: slides_groups_openofficexml_get_id_updated
       parameters:
         - in: path
@@ -1665,8 +1578,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should return the orginal uploaded xml
-            (false) or the actively updated version (true, default)
+        - description: Indicates whether API should return the orginal uploaded xml (false) or the actively updated version (true, default)
           in: query
           name: updated
           schema:
@@ -1690,14 +1602,7 @@ paths:
         - Groups
       x-operationName: get-xml
     put:
-      description: Directly eidt the underlying xml of a Slide object within an
-        OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will
-        validatate the submitted xml against the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm)
-        prior to saving modification.  Invalid xml will rejected by this
-        endpoint and a (hopefully) helpful error message will be returned.  Use
-        this endpoint for client-side automation of modifications ot Slide
-        objects.
+      description: Directly eidt the underlying xml of a Slide object within an OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will validatate the submitted xml against the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm) prior to saving modification.  Invalid xml will rejected by this endpoint and a (hopefully) helpful error message will be returned.  Use this endpoint for client-side automation of modifications ot Slide objects.
       operationId: slides_groups_openofficexml_put_id
       parameters:
         - in: path
@@ -1734,8 +1639,7 @@ paths:
       x-operationName: put-xml
   "/Groups/Svg/{id}":
     get:
-      description: This endpoint is helpful for rending this Slide as an svg or image
-        object that can then be rendered in a story, dashboard or website.
+      description: This endpoint is helpful for rending this Slide as an svg or image object that can then be rendered in a story, dashboard or website.
       operationId: slides_groups_svg_get_id_use_cache
       parameters:
         - in: path
@@ -1744,8 +1648,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should retrieve content from a cache if
-            aviable (true, default), or force an update (false)
+        - description: Indicates whether API should retrieve content from a cache if aviable (true, default), or force an update (false)
           in: query
           name: use_cache
           schema:
@@ -1773,8 +1676,7 @@ paths:
       x-operationName: get-svg
   "/Groups/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Groups object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Groups object by its primary key (id)"
       operationId: slides_groups_get_id
       parameters:
         - description: An Id of the respository DTO elemennt
@@ -1799,10 +1701,7 @@ paths:
         - Groups
   "/Images/ChildObjects/{id}":
     get:
-      description: This endpoint is helpful for helping users and bots identify
-        dependent objects to this Shared and retreive their corresponding
-        metadata in order to make modifications to those objects in downstream
-        operations.
+      description: This endpoint is helpful for helping users and bots identify dependent objects to this Shared and retreive their corresponding metadata in order to make modifications to those objects in downstream operations.
       operationId: shared_images_childobjects_get_id
       parameters:
         - in: path
@@ -1844,8 +1743,7 @@ paths:
       x-operationName: get-obj-tree
   "/Images/Details/{id}":
     get:
-      description: "Returns object metadata and information about relative dependent
-        objects "
+      description: "Returns object metadata and information about relative dependent objects "
       operationId: shared_images_details_get_id
       parameters:
         - in: path
@@ -1896,12 +1794,7 @@ paths:
         - Images
   "/Images/OpenOfficeXml/{id}":
     get:
-      description: Return the subset of the xml content from within the latest edited
-        version of the OpenXmlDocument from this Shared object.  The returned
-        xml data conforms to the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use
-        this endpoint a starting point for building client-side extensions that
-        modify Presalytics widgets containing Shared objects.
+      description: Return the subset of the xml content from within the latest edited version of the OpenXmlDocument from this Shared object.  The returned xml data conforms to the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use this endpoint a starting point for building client-side extensions that modify Presalytics widgets containing Shared objects.
       operationId: shared_images_openofficexml_get_id_updated
       parameters:
         - in: path
@@ -1910,8 +1803,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should return the orginal uploaded xml
-            (false) or the actively updated version (true, default)
+        - description: Indicates whether API should return the orginal uploaded xml (false) or the actively updated version (true, default)
           in: query
           name: updated
           schema:
@@ -1935,14 +1827,7 @@ paths:
         - Images
       x-operationName: get-xml
     put:
-      description: Directly eidt the underlying xml of a Shared object within an
-        OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will
-        validatate the submitted xml against the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm)
-        prior to saving modification.  Invalid xml will rejected by this
-        endpoint and a (hopefully) helpful error message will be returned.  Use
-        this endpoint for client-side automation of modifications ot Shared
-        objects.
+      description: Directly eidt the underlying xml of a Shared object within an OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will validatate the submitted xml against the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm) prior to saving modification.  Invalid xml will rejected by this endpoint and a (hopefully) helpful error message will be returned.  Use this endpoint for client-side automation of modifications ot Shared objects.
       operationId: shared_images_openofficexml_put_id
       parameters:
         - in: path
@@ -1979,8 +1864,7 @@ paths:
       x-operationName: put-xml
   "/Images/Svg/{id}":
     get:
-      description: This endpoint is helpful for rending this Shared as an svg or image
-        object that can then be rendered in a story, dashboard or website.
+      description: This endpoint is helpful for rending this Shared as an svg or image object that can then be rendered in a story, dashboard or website.
       operationId: shared_images_svg_get_id_use_cache
       parameters:
         - in: path
@@ -1989,8 +1873,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should retrieve content from a cache if
-            aviable (true, default), or force an update (false)
+        - description: Indicates whether API should retrieve content from a cache if aviable (true, default), or force an update (false)
           in: query
           name: use_cache
           schema:
@@ -2018,8 +1901,7 @@ paths:
       x-operationName: get-svg
   "/Images/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Images object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Images object by its primary key (id)"
       operationId: shared_images_get_id
       parameters:
         - description: An Id of the respository DTO elemennt
@@ -2044,10 +1926,7 @@ paths:
         - Images
   "/ShapeTrees/ChildObjects/{id}":
     get:
-      description: This endpoint is helpful for helping users and bots identify
-        dependent objects to this Slide and retreive their corresponding
-        metadata in order to make modifications to those objects in downstream
-        operations.
+      description: This endpoint is helpful for helping users and bots identify dependent objects to this Slide and retreive their corresponding metadata in order to make modifications to those objects in downstream operations.
       operationId: slides_shapetrees_childobjects_get_id
       parameters:
         - in: path
@@ -2089,8 +1968,7 @@ paths:
       x-operationName: get-obj-tree
   "/ShapeTrees/Details/{id}":
     get:
-      description: "Returns object metadata and information about relative dependent
-        objects "
+      description: "Returns object metadata and information about relative dependent objects "
       operationId: slides_shapetrees_details_get_id
       parameters:
         - in: path
@@ -2114,12 +1992,7 @@ paths:
       x-operationName: details
   "/ShapeTrees/OpenOfficeXml/{id}":
     get:
-      description: Return the subset of the xml content from within the latest edited
-        version of the OpenXmlDocument from this Slide object.  The returned xml
-        data conforms to the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use
-        this endpoint a starting point for building client-side extensions that
-        modify Presalytics widgets containing Slide objects.
+      description: Return the subset of the xml content from within the latest edited version of the OpenXmlDocument from this Slide object.  The returned xml data conforms to the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use this endpoint a starting point for building client-side extensions that modify Presalytics widgets containing Slide objects.
       operationId: slides_shapetrees_openofficexml_get_id_updated
       parameters:
         - in: path
@@ -2128,8 +2001,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should return the orginal uploaded xml
-            (false) or the actively updated version (true, default)
+        - description: Indicates whether API should return the orginal uploaded xml (false) or the actively updated version (true, default)
           in: query
           name: updated
           schema:
@@ -2153,14 +2025,7 @@ paths:
         - ShapeTrees
       x-operationName: get-xml
     put:
-      description: Directly eidt the underlying xml of a Slide object within an
-        OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will
-        validatate the submitted xml against the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm)
-        prior to saving modification.  Invalid xml will rejected by this
-        endpoint and a (hopefully) helpful error message will be returned.  Use
-        this endpoint for client-side automation of modifications ot Slide
-        objects.
+      description: Directly eidt the underlying xml of a Slide object within an OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will validatate the submitted xml against the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm) prior to saving modification.  Invalid xml will rejected by this endpoint and a (hopefully) helpful error message will be returned.  Use this endpoint for client-side automation of modifications ot Slide objects.
       operationId: slides_shapetrees_openofficexml_put_id
       parameters:
         - in: path
@@ -2197,8 +2062,7 @@ paths:
       x-operationName: put-xml
   "/ShapeTrees/Svg/{id}":
     get:
-      description: This endpoint is helpful for rending this Slide as an svg or image
-        object that can then be rendered in a story, dashboard or website.
+      description: This endpoint is helpful for rending this Slide as an svg or image object that can then be rendered in a story, dashboard or website.
       operationId: slides_shapetrees_svg_get_id_use_cache
       parameters:
         - in: path
@@ -2207,8 +2071,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should retrieve content from a cache if
-            aviable (true, default), or force an update (false)
+        - description: Indicates whether API should retrieve content from a cache if aviable (true, default), or force an update (false)
           in: query
           name: use_cache
           schema:
@@ -2236,8 +2099,7 @@ paths:
       x-operationName: get-svg
   "/ShapeTrees/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a ShapeTrees object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a ShapeTrees object by its primary key (id)"
       operationId: slides_shapetrees_get_id
       parameters:
         - description: An Id of the respository DTO elemennt
@@ -2262,10 +2124,7 @@ paths:
         - ShapeTrees
   "/Shapes/ChildObjects/{id}":
     get:
-      description: This endpoint is helpful for helping users and bots identify
-        dependent objects to this Slide and retreive their corresponding
-        metadata in order to make modifications to those objects in downstream
-        operations.
+      description: This endpoint is helpful for helping users and bots identify dependent objects to this Slide and retreive their corresponding metadata in order to make modifications to those objects in downstream operations.
       operationId: slides_shapes_childobjects_get_id
       parameters:
         - in: path
@@ -2307,8 +2166,7 @@ paths:
       x-operationName: get-obj-tree
   "/Shapes/Details/{id}":
     get:
-      description: "Returns object metadata and information about relative dependent
-        objects "
+      description: "Returns object metadata and information about relative dependent objects "
       operationId: slides_shapes_details_get_id
       parameters:
         - in: path
@@ -2332,12 +2190,7 @@ paths:
       x-operationName: details
   "/Shapes/OpenOfficeXml/{id}":
     get:
-      description: Return the subset of the xml content from within the latest edited
-        version of the OpenXmlDocument from this Slide object.  The returned xml
-        data conforms to the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use
-        this endpoint a starting point for building client-side extensions that
-        modify Presalytics widgets containing Slide objects.
+      description: Return the subset of the xml content from within the latest edited version of the OpenXmlDocument from this Slide object.  The returned xml data conforms to the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use this endpoint a starting point for building client-side extensions that modify Presalytics widgets containing Slide objects.
       operationId: slides_shapes_openofficexml_get_id_updated
       parameters:
         - in: path
@@ -2346,8 +2199,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should return the orginal uploaded xml
-            (false) or the actively updated version (true, default)
+        - description: Indicates whether API should return the orginal uploaded xml (false) or the actively updated version (true, default)
           in: query
           name: updated
           schema:
@@ -2371,14 +2223,7 @@ paths:
         - Shapes
       x-operationName: get-xml
     put:
-      description: Directly eidt the underlying xml of a Slide object within an
-        OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will
-        validatate the submitted xml against the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm)
-        prior to saving modification.  Invalid xml will rejected by this
-        endpoint and a (hopefully) helpful error message will be returned.  Use
-        this endpoint for client-side automation of modifications ot Slide
-        objects.
+      description: Directly eidt the underlying xml of a Slide object within an OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will validatate the submitted xml against the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm) prior to saving modification.  Invalid xml will rejected by this endpoint and a (hopefully) helpful error message will be returned.  Use this endpoint for client-side automation of modifications ot Slide objects.
       operationId: slides_shapes_openofficexml_put_id
       parameters:
         - in: path
@@ -2415,8 +2260,7 @@ paths:
       x-operationName: put-xml
   "/Shapes/Svg/{id}":
     get:
-      description: This endpoint is helpful for rending this Slide as an svg or image
-        object that can then be rendered in a story, dashboard or website.
+      description: This endpoint is helpful for rending this Slide as an svg or image object that can then be rendered in a story, dashboard or website.
       operationId: slides_shapes_svg_get_id_use_cache
       parameters:
         - in: path
@@ -2425,8 +2269,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should retrieve content from a cache if
-            aviable (true, default), or force an update (false)
+        - description: Indicates whether API should retrieve content from a cache if aviable (true, default), or force an update (false)
           in: query
           name: use_cache
           schema:
@@ -2454,8 +2297,7 @@ paths:
       x-operationName: get-svg
   "/Shapes/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Shapes object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Shapes object by its primary key (id)"
       operationId: slides_shapes_get_id
       parameters:
         - description: An Id of the respository DTO elemennt
@@ -2480,8 +2322,7 @@ paths:
         - Shapes
   "/Shared/ColorTransformationAttributes/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a
-        ColorTransformationAttributes object by its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a ColorTransformationAttributes object by its primary key (id)"
       operationId: shared_colortransformationattributes_get_id
       parameters:
         - in: path
@@ -2504,8 +2345,7 @@ paths:
         - Shared/ColorTransformationAttributes
   "/Shared/ColorTransformations/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a ColorTransformations
-        object by its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a ColorTransformations object by its primary key (id)"
       operationId: shared_colortransformations_get_id
       parameters:
         - in: path
@@ -2528,9 +2368,7 @@ paths:
         - Shared/ColorTransformations
   /Shared/ColorTypes:
     get:
-      description: "List Types: Use this method to retreive a list of possible options
-        for the ColorTypes type. Use the Id from oneof the returned elements on
-        to make changes to elements in the Shared object space."
+      description: "List Types: Use this method to retreive a list of possible options for the ColorTypes type. Use the Id from oneof the returned elements on to make changes to elements in the Shared object space."
       operationId: shared_colortypes_get
       responses:
         "200":
@@ -2561,8 +2399,7 @@ paths:
       x-operationName: list
   "/Shared/ColorTypes/TypeId/{type_id}":
     get:
-      description: This endpoint returns Type metadata from an integer type_id that
-        can found on objects throughout the api.
+      description: This endpoint returns Type metadata from an integer type_id that can found on objects throughout the api.
       operationId: shared_colortypes_typeid_get_type_id
       parameters:
         - in: path
@@ -2598,8 +2435,7 @@ paths:
       x-operationName: type-id
   "/Shared/ColorTypes/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a ColorTypes object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a ColorTypes object by its primary key (id)"
       operationId: shared_colortypes_get_id
       parameters:
         - description: ""
@@ -2636,9 +2472,7 @@ paths:
         - Shared/ColorTypes
   /Shared/DashTypes:
     get:
-      description: "List Types: Use this method to retreive a list of possible options
-        for the DashTypes type. Use the Id from oneof the returned elements on
-        to make changes to elements in the Shared object space."
+      description: "List Types: Use this method to retreive a list of possible options for the DashTypes type. Use the Id from oneof the returned elements on to make changes to elements in the Shared object space."
       operationId: shared_dashtypes_get
       responses:
         "200":
@@ -2669,8 +2503,7 @@ paths:
       x-operationName: list
   "/Shared/DashTypes/TypeId/{type_id}":
     get:
-      description: This endpoint returns Type metadata from an integer type_id that
-        can found on objects throughout the api.
+      description: This endpoint returns Type metadata from an integer type_id that can found on objects throughout the api.
       operationId: shared_dashtypes_typeid_get_type_id
       parameters:
         - in: path
@@ -2706,8 +2539,7 @@ paths:
       x-operationName: type-id
   "/Shared/DashTypes/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a DashTypes object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a DashTypes object by its primary key (id)"
       operationId: shared_dashtypes_get_id
       parameters:
         - description: ""
@@ -2744,8 +2576,7 @@ paths:
         - Shared/DashTypes
   "/Shared/EffectAttributes/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a EffectAttributes object
-        by its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a EffectAttributes object by its primary key (id)"
       operationId: shared_effectattributes_get_id
       parameters:
         - in: path
@@ -2768,9 +2599,7 @@ paths:
         - Shared/EffectAttributes
   /Shared/EffectTypes:
     get:
-      description: "List Types: Use this method to retreive a list of possible options
-        for the EffectTypes type. Use the Id from oneof the returned elements on
-        to make changes to elements in the Shared object space."
+      description: "List Types: Use this method to retreive a list of possible options for the EffectTypes type. Use the Id from oneof the returned elements on to make changes to elements in the Shared object space."
       operationId: shared_effecttypes_get
       responses:
         "200":
@@ -2801,8 +2630,7 @@ paths:
       x-operationName: list
   "/Shared/EffectTypes/TypeId/{type_id}":
     get:
-      description: This endpoint returns Type metadata from an integer type_id that
-        can found on objects throughout the api.
+      description: This endpoint returns Type metadata from an integer type_id that can found on objects throughout the api.
       operationId: shared_effecttypes_typeid_get_type_id
       parameters:
         - in: path
@@ -2838,8 +2666,7 @@ paths:
       x-operationName: type-id
   "/Shared/EffectTypes/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a EffectTypes object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a EffectTypes object by its primary key (id)"
       operationId: shared_effecttypes_get_id
       parameters:
         - description: ""
@@ -2876,8 +2703,7 @@ paths:
         - Shared/EffectTypes
   "/Shared/Effects/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Effects object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Effects object by its primary key (id)"
       operationId: shared_effects_get_id
       parameters:
         - in: path
@@ -2900,8 +2726,7 @@ paths:
         - Shared/Effects
   "/Shared/FillMap/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a FillMap object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a FillMap object by its primary key (id)"
       operationId: shared_fillmap_get_id
       parameters:
         - in: path
@@ -2924,9 +2749,7 @@ paths:
         - Shared/FillMap
   /Shared/FillTypes:
     get:
-      description: "List Types: Use this method to retreive a list of possible options
-        for the FillTypes type. Use the Id from oneof the returned elements on
-        to make changes to elements in the Shared object space."
+      description: "List Types: Use this method to retreive a list of possible options for the FillTypes type. Use the Id from oneof the returned elements on to make changes to elements in the Shared object space."
       operationId: shared_filltypes_get
       responses:
         "200":
@@ -2957,8 +2780,7 @@ paths:
       x-operationName: list
   "/Shared/FillTypes/TypeId/{type_id}":
     get:
-      description: This endpoint returns Type metadata from an integer type_id that
-        can found on objects throughout the api.
+      description: This endpoint returns Type metadata from an integer type_id that can found on objects throughout the api.
       operationId: shared_filltypes_typeid_get_type_id
       parameters:
         - in: path
@@ -2994,8 +2816,7 @@ paths:
       x-operationName: type-id
   "/Shared/FillTypes/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a FillTypes object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a FillTypes object by its primary key (id)"
       operationId: shared_filltypes_get_id
       parameters:
         - description: ""
@@ -3032,8 +2853,7 @@ paths:
         - Shared/FillTypes
   "/Shared/GradientFills/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a GradientFills object by
-        its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a GradientFills object by its primary key (id)"
       operationId: shared_gradientfills_get_id
       parameters:
         - in: path
@@ -3056,8 +2876,7 @@ paths:
         - Shared/GradientFills
   "/Shared/GradientStops/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a GradientStops object by
-        its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a GradientStops object by its primary key (id)"
       operationId: shared_gradientstops_get_id
       parameters:
         - in: path
@@ -3080,8 +2899,7 @@ paths:
         - Shared/GradientStops
   "/Shared/ImageFills/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a ImageFills object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a ImageFills object by its primary key (id)"
       operationId: shared_imagefills_get_id
       parameters:
         - in: path
@@ -3104,9 +2922,7 @@ paths:
         - Shared/ImageFills
   /Shared/LineEndSizes:
     get:
-      description: "List Types: Use this method to retreive a list of possible options
-        for the LineEndSizes type. Use the Id from oneof the returned elements
-        on to make changes to elements in the Shared object space."
+      description: "List Types: Use this method to retreive a list of possible options for the LineEndSizes type. Use the Id from oneof the returned elements on to make changes to elements in the Shared object space."
       operationId: shared_lineendsizes_get
       responses:
         "200":
@@ -3137,8 +2953,7 @@ paths:
       x-operationName: list
   "/Shared/LineEndSizes/TypeId/{type_id}":
     get:
-      description: This endpoint returns Type metadata from an integer type_id that
-        can found on objects throughout the api.
+      description: This endpoint returns Type metadata from an integer type_id that can found on objects throughout the api.
       operationId: shared_lineendsizes_typeid_get_type_id
       parameters:
         - in: path
@@ -3174,8 +2989,7 @@ paths:
       x-operationName: type-id
   "/Shared/LineEndSizes/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a LineEndSizes object by
-        its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a LineEndSizes object by its primary key (id)"
       operationId: shared_lineendsizes_get_id
       parameters:
         - description: ""
@@ -3212,9 +3026,7 @@ paths:
         - Shared/LineEndSizes
   /Shared/LineEndTypes:
     get:
-      description: "List Types: Use this method to retreive a list of possible options
-        for the LineEndTypes type. Use the Id from oneof the returned elements
-        on to make changes to elements in the Shared object space."
+      description: "List Types: Use this method to retreive a list of possible options for the LineEndTypes type. Use the Id from oneof the returned elements on to make changes to elements in the Shared object space."
       operationId: shared_lineendtypes_get
       responses:
         "200":
@@ -3245,8 +3057,7 @@ paths:
       x-operationName: list
   "/Shared/LineEndTypes/TypeId/{type_id}":
     get:
-      description: This endpoint returns Type metadata from an integer type_id that
-        can found on objects throughout the api.
+      description: This endpoint returns Type metadata from an integer type_id that can found on objects throughout the api.
       operationId: shared_lineendtypes_typeid_get_type_id
       parameters:
         - in: path
@@ -3282,8 +3093,7 @@ paths:
       x-operationName: type-id
   "/Shared/LineEndTypes/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a LineEndTypes object by
-        its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a LineEndTypes object by its primary key (id)"
       operationId: shared_lineendtypes_get_id
       parameters:
         - description: ""
@@ -3320,8 +3130,7 @@ paths:
         - Shared/LineEndTypes
   "/Shared/Lines/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Lines object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Lines object by its primary key (id)"
       operationId: shared_lines_get_id
       parameters:
         - in: path
@@ -3344,8 +3153,7 @@ paths:
         - Shared/Lines
   "/Shared/Paragraph/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Paragraph object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Paragraph object by its primary key (id)"
       operationId: shared_paragraph_get_id
       parameters:
         - in: path
@@ -3368,8 +3176,7 @@ paths:
         - Shared/Paragraph
   "/Shared/SolidFills/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a SolidFills object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a SolidFills object by its primary key (id)"
       operationId: shared_solidfills_get_id
       parameters:
         - in: path
@@ -3392,8 +3199,7 @@ paths:
         - Shared/SolidFills
   "/Shared/Text/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Text object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Text object by its primary key (id)"
       operationId: shared_text_get_id
       parameters:
         - in: path
@@ -3416,8 +3222,7 @@ paths:
         - Shared/Text
   "/Shared/TextContainer/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a TextContainer object by
-        its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a TextContainer object by its primary key (id)"
       operationId: shared_textcontainer_get_id
       parameters:
         - in: path
@@ -3440,10 +3245,7 @@ paths:
         - Shared/TextContainer
   "/Slides/ChildObjects/{id}":
     get:
-      description: This endpoint is helpful for helping users and bots identify
-        dependent objects to this Slide and retreive their corresponding
-        metadata in order to make modifications to those objects in downstream
-        operations.
+      description: This endpoint is helpful for helping users and bots identify dependent objects to this Slide and retreive their corresponding metadata in order to make modifications to those objects in downstream operations.
       operationId: slides_slides_childobjects_get_id
       parameters:
         - in: path
@@ -3485,8 +3287,7 @@ paths:
       x-operationName: get-obj-tree
   "/Slides/ColorMaps/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a ColorMaps object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a ColorMaps object by its primary key (id)"
       operationId: slides_colormaps_get_id
       parameters:
         - in: path
@@ -3509,8 +3310,7 @@ paths:
         - Slides/ColorMaps
   "/Slides/Details/{id}":
     get:
-      description: "Returns object metadata and information about relative dependent
-        objects "
+      description: "Returns object metadata and information about relative dependent objects "
       operationId: slides_slides_details_get_id
       parameters:
         - in: path
@@ -3534,9 +3334,7 @@ paths:
       x-operationName: details
   /Slides/GraphicTypes:
     get:
-      description: "List Types: Use this method to retreive a list of possible options
-        for the GraphicTypes type. Use the Id from oneof the returned elements
-        on to make changes to elements in the Slides object space."
+      description: "List Types: Use this method to retreive a list of possible options for the GraphicTypes type. Use the Id from oneof the returned elements on to make changes to elements in the Slides object space."
       operationId: slides_graphictypes_get
       responses:
         "200":
@@ -3567,8 +3365,7 @@ paths:
       x-operationName: list
   "/Slides/GraphicTypes/TypeId/{type_id}":
     get:
-      description: This endpoint returns Type metadata from an integer type_id that
-        can found on objects throughout the api.
+      description: This endpoint returns Type metadata from an integer type_id that can found on objects throughout the api.
       operationId: slides_graphictypes_typeid_get_type_id
       parameters:
         - in: path
@@ -3604,8 +3401,7 @@ paths:
       x-operationName: type-id
   "/Slides/GraphicTypes/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a GraphicTypes object by
-        its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a GraphicTypes object by its primary key (id)"
       operationId: slides_graphictypes_get_id
       parameters:
         - description: ""
@@ -3642,8 +3438,7 @@ paths:
         - Slides/GraphicTypes
   "/Slides/Graphics/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Graphics object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Graphics object by its primary key (id)"
       operationId: slides_graphics_get_id
       parameters:
         - in: path
@@ -3666,9 +3461,7 @@ paths:
         - Slides/Graphics
   /Slides/GroupElementTypes:
     get:
-      description: "List Types: Use this method to retreive a list of possible options
-        for the GroupElementTypes type. Use the Id from oneof the returned
-        elements on to make changes to elements in the Slides object space."
+      description: "List Types: Use this method to retreive a list of possible options for the GroupElementTypes type. Use the Id from oneof the returned elements on to make changes to elements in the Slides object space."
       operationId: slides_groupelementtypes_get
       responses:
         "200":
@@ -3699,8 +3492,7 @@ paths:
       x-operationName: list
   "/Slides/GroupElementTypes/TypeId/{type_id}":
     get:
-      description: This endpoint returns Type metadata from an integer type_id that
-        can found on objects throughout the api.
+      description: This endpoint returns Type metadata from an integer type_id that can found on objects throughout the api.
       operationId: slides_groupelementtypes_typeid_get_type_id
       parameters:
         - in: path
@@ -3736,8 +3528,7 @@ paths:
       x-operationName: type-id
   "/Slides/GroupElementTypes/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a GroupElementTypes object
-        by its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a GroupElementTypes object by its primary key (id)"
       operationId: slides_groupelementtypes_get_id
       parameters:
         - description: ""
@@ -3774,8 +3565,7 @@ paths:
         - Slides/GroupElementTypes
   "/Slides/GroupElements/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a GroupElements object by
-        its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a GroupElements object by its primary key (id)"
       operationId: slides_groupelements_get_id
       parameters:
         - in: path
@@ -3798,12 +3588,7 @@ paths:
         - Slides/GroupElements
   "/Slides/OpenOfficeXml/{id}":
     get:
-      description: Return the subset of the xml content from within the latest edited
-        version of the OpenXmlDocument from this Slide object.  The returned xml
-        data conforms to the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use
-        this endpoint a starting point for building client-side extensions that
-        modify Presalytics widgets containing Slide objects.
+      description: Return the subset of the xml content from within the latest edited version of the OpenXmlDocument from this Slide object.  The returned xml data conforms to the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use this endpoint a starting point for building client-side extensions that modify Presalytics widgets containing Slide objects.
       operationId: slides_slides_openofficexml_get_id_updated
       parameters:
         - in: path
@@ -3812,8 +3597,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should return the orginal uploaded xml
-            (false) or the actively updated version (true, default)
+        - description: Indicates whether API should return the orginal uploaded xml (false) or the actively updated version (true, default)
           in: query
           name: updated
           schema:
@@ -3837,14 +3621,7 @@ paths:
         - Slides
       x-operationName: get-xml
     put:
-      description: Directly eidt the underlying xml of a Slide object within an
-        OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will
-        validatate the submitted xml against the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm)
-        prior to saving modification.  Invalid xml will rejected by this
-        endpoint and a (hopefully) helpful error message will be returned.  Use
-        this endpoint for client-side automation of modifications ot Slide
-        objects.
+      description: Directly eidt the underlying xml of a Slide object within an OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will validatate the submitted xml against the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm) prior to saving modification.  Invalid xml will rejected by this endpoint and a (hopefully) helpful error message will be returned.  Use this endpoint for client-side automation of modifications ot Slide objects.
       operationId: slides_slides_openofficexml_put_id
       parameters:
         - in: path
@@ -3881,8 +3658,7 @@ paths:
       x-operationName: put-xml
   "/Slides/SlideMasters/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a SlideMasters object by
-        its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a SlideMasters object by its primary key (id)"
       operationId: slides_slidemasters_get_id
       parameters:
         - in: path
@@ -3905,8 +3681,7 @@ paths:
         - Slides/SlideMasters
   "/Slides/Svg/{id}":
     get:
-      description: This endpoint is helpful for rending this Slide as an svg or image
-        object that can then be rendered in a story, dashboard or website.
+      description: This endpoint is helpful for rending this Slide as an svg or image object that can then be rendered in a story, dashboard or website.
       operationId: slides_slides_svg_get_id_use_cache
       parameters:
         - in: path
@@ -3915,8 +3690,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should retrieve content from a cache if
-            aviable (true, default), or force an update (false)
+        - description: Indicates whether API should retrieve content from a cache if aviable (true, default), or force an update (false)
           in: query
           name: use_cache
           schema:
@@ -3944,8 +3718,7 @@ paths:
       x-operationName: get-svg
   "/Slides/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Slides object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Slides object by its primary key (id)"
       operationId: slides_slides_get_id
       parameters:
         - description: An Id of the respository DTO elemennt
@@ -3970,10 +3743,7 @@ paths:
         - Slides
   "/SmartArts/ChildObjects/{id}":
     get:
-      description: This endpoint is helpful for helping users and bots identify
-        dependent objects to this Slide and retreive their corresponding
-        metadata in order to make modifications to those objects in downstream
-        operations.
+      description: This endpoint is helpful for helping users and bots identify dependent objects to this Slide and retreive their corresponding metadata in order to make modifications to those objects in downstream operations.
       operationId: slides_smartarts_childobjects_get_id
       parameters:
         - in: path
@@ -4015,8 +3785,7 @@ paths:
       x-operationName: get-obj-tree
   "/SmartArts/Details/{id}":
     get:
-      description: "Returns object metadata and information about relative dependent
-        objects "
+      description: "Returns object metadata and information about relative dependent objects "
       operationId: slides_smartarts_details_get_id
       parameters:
         - in: path
@@ -4040,12 +3809,7 @@ paths:
       x-operationName: details
   "/SmartArts/OpenOfficeXml/{id}":
     get:
-      description: Return the subset of the xml content from within the latest edited
-        version of the OpenXmlDocument from this Slide object.  The returned xml
-        data conforms to the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use
-        this endpoint a starting point for building client-side extensions that
-        modify Presalytics widgets containing Slide objects.
+      description: Return the subset of the xml content from within the latest edited version of the OpenXmlDocument from this Slide object.  The returned xml data conforms to the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use this endpoint a starting point for building client-side extensions that modify Presalytics widgets containing Slide objects.
       operationId: slides_smartarts_openofficexml_get_id_updated
       parameters:
         - in: path
@@ -4054,8 +3818,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should return the orginal uploaded xml
-            (false) or the actively updated version (true, default)
+        - description: Indicates whether API should return the orginal uploaded xml (false) or the actively updated version (true, default)
           in: query
           name: updated
           schema:
@@ -4079,14 +3842,7 @@ paths:
         - SmartArts
       x-operationName: get-xml
     put:
-      description: Directly eidt the underlying xml of a Slide object within an
-        OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will
-        validatate the submitted xml against the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm)
-        prior to saving modification.  Invalid xml will rejected by this
-        endpoint and a (hopefully) helpful error message will be returned.  Use
-        this endpoint for client-side automation of modifications ot Slide
-        objects.
+      description: Directly eidt the underlying xml of a Slide object within an OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will validatate the submitted xml against the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm) prior to saving modification.  Invalid xml will rejected by this endpoint and a (hopefully) helpful error message will be returned.  Use this endpoint for client-side automation of modifications ot Slide objects.
       operationId: slides_smartarts_openofficexml_put_id
       parameters:
         - in: path
@@ -4123,8 +3879,7 @@ paths:
       x-operationName: put-xml
   "/SmartArts/Svg/{id}":
     get:
-      description: This endpoint is helpful for rending this Slide as an svg or image
-        object that can then be rendered in a story, dashboard or website.
+      description: This endpoint is helpful for rending this Slide as an svg or image object that can then be rendered in a story, dashboard or website.
       operationId: slides_smartarts_svg_get_id_use_cache
       parameters:
         - in: path
@@ -4133,8 +3888,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should retrieve content from a cache if
-            aviable (true, default), or force an update (false)
+        - description: Indicates whether API should retrieve content from a cache if aviable (true, default), or force an update (false)
           in: query
           name: use_cache
           schema:
@@ -4162,8 +3916,7 @@ paths:
       x-operationName: get-svg
   "/SmartArts/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a SmartArts object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a SmartArts object by its primary key (id)"
       operationId: slides_smartarts_get_id
       parameters:
         - description: An Id of the respository DTO elemennt
@@ -4188,8 +3941,7 @@ paths:
         - SmartArts
   "/Tables/Borders/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Borders object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Borders object by its primary key (id)"
       operationId: tables_borders_get_id
       parameters:
         - in: path
@@ -4212,8 +3964,7 @@ paths:
         - Tables/Borders
   "/Tables/Cells/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Cells object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Cells object by its primary key (id)"
       operationId: tables_cells_get_id
       parameters:
         - in: path
@@ -4236,10 +3987,7 @@ paths:
         - Tables/Cells
   "/Tables/ChildObjects/{id}":
     get:
-      description: This endpoint is helpful for helping users and bots identify
-        dependent objects to this Table and retreive their corresponding
-        metadata in order to make modifications to those objects in downstream
-        operations.
+      description: This endpoint is helpful for helping users and bots identify dependent objects to this Table and retreive their corresponding metadata in order to make modifications to those objects in downstream operations.
       operationId: tables_tables_childobjects_get_id
       parameters:
         - in: path
@@ -4281,8 +4029,7 @@ paths:
       x-operationName: get-obj-tree
   "/Tables/Columns/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Columns object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Columns object by its primary key (id)"
       operationId: tables_columns_get_id
       parameters:
         - in: path
@@ -4305,8 +4052,7 @@ paths:
         - Tables/Columns
   "/Tables/Details/{id}":
     get:
-      description: "Returns object metadata and information about relative dependent
-        objects "
+      description: "Returns object metadata and information about relative dependent objects "
       operationId: tables_tables_details_get_id
       parameters:
         - in: path
@@ -4330,12 +4076,7 @@ paths:
       x-operationName: details
   "/Tables/OpenOfficeXml/{id}":
     get:
-      description: Return the subset of the xml content from within the latest edited
-        version of the OpenXmlDocument from this Table object.  The returned xml
-        data conforms to the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use
-        this endpoint a starting point for building client-side extensions that
-        modify Presalytics widgets containing Table objects.
+      description: Return the subset of the xml content from within the latest edited version of the OpenXmlDocument from this Table object.  The returned xml data conforms to the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use this endpoint a starting point for building client-side extensions that modify Presalytics widgets containing Table objects.
       operationId: tables_tables_openofficexml_get_id_updated
       parameters:
         - in: path
@@ -4344,8 +4085,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should return the orginal uploaded xml
-            (false) or the actively updated version (true, default)
+        - description: Indicates whether API should return the orginal uploaded xml (false) or the actively updated version (true, default)
           in: query
           name: updated
           schema:
@@ -4369,14 +4109,7 @@ paths:
         - Tables
       x-operationName: get-xml
     put:
-      description: Directly eidt the underlying xml of a Table object within an
-        OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will
-        validatate the submitted xml against the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm)
-        prior to saving modification.  Invalid xml will rejected by this
-        endpoint and a (hopefully) helpful error message will be returned.  Use
-        this endpoint for client-side automation of modifications ot Table
-        objects.
+      description: Directly eidt the underlying xml of a Table object within an OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will validatate the submitted xml against the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm) prior to saving modification.  Invalid xml will rejected by this endpoint and a (hopefully) helpful error message will be returned.  Use this endpoint for client-side automation of modifications ot Table objects.
       operationId: tables_tables_openofficexml_put_id
       parameters:
         - in: path
@@ -4413,8 +4146,7 @@ paths:
       x-operationName: put-xml
   "/Tables/Rows/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Rows object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Rows object by its primary key (id)"
       operationId: tables_rows_get_id
       parameters:
         - in: path
@@ -4437,8 +4169,7 @@ paths:
         - Tables/Rows
   "/Tables/Svg/{id}":
     get:
-      description: This endpoint is helpful for rending this Table as an svg or image
-        object that can then be rendered in a story, dashboard or website.
+      description: This endpoint is helpful for rending this Table as an svg or image object that can then be rendered in a story, dashboard or website.
       operationId: tables_tables_svg_get_id_use_cache
       parameters:
         - in: path
@@ -4447,8 +4178,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should retrieve content from a cache if
-            aviable (true, default), or force an update (false)
+        - description: Indicates whether API should retrieve content from a cache if aviable (true, default), or force an update (false)
           in: query
           name: use_cache
           schema:
@@ -4476,8 +4206,7 @@ paths:
       x-operationName: get-svg
   "/Tables/TableUpdate/{id}":
     get:
-      description: Gets a TabletDataDTO object, usually used for downstream updates to
-        table content
+      description: Gets a TabletDataDTO object, usually used for downstream updates to table content
       operationId: tables_tables_tableupdate_get_id
       parameters:
         - description: ""
@@ -4507,8 +4236,7 @@ paths:
       tags:
         - Tables
     put:
-      description: Simplifies table update by allowing users to supply strings to
-        table cells  via TableDataDTO
+      description: Simplifies table update by allowing users to supply strings to table cells  via TableDataDTO
       operationId: tables_tables_tableupdate_put_id
       parameters:
         - in: path
@@ -4545,8 +4273,7 @@ paths:
         - Tables
   "/Tables/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Tables object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Tables object by its primary key (id)"
       operationId: tables_tables_get_id
       parameters:
         - description: An Id of the respository DTO elemennt
@@ -4571,8 +4298,7 @@ paths:
         - Tables
   "/Themes/BackgroundFills/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a BackgroundFills object by
-        its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a BackgroundFills object by its primary key (id)"
       operationId: themes_backgroundfills_get_id
       parameters:
         - in: path
@@ -4595,10 +4321,7 @@ paths:
         - Themes/BackgroundFills
   "/Themes/ChildObjects/{id}":
     get:
-      description: This endpoint is helpful for helping users and bots identify
-        dependent objects to this Theme and retreive their corresponding
-        metadata in order to make modifications to those objects in downstream
-        operations.
+      description: This endpoint is helpful for helping users and bots identify dependent objects to this Theme and retreive their corresponding metadata in order to make modifications to those objects in downstream operations.
       operationId: theme_themes_childobjects_get_id
       parameters:
         - in: path
@@ -4640,8 +4363,7 @@ paths:
       x-operationName: get-obj-tree
   "/Themes/Colors/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Colors object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Colors object by its primary key (id)"
       operationId: themes_colors_get_id
       parameters:
         - in: path
@@ -4664,8 +4386,7 @@ paths:
         - Themes/Colors
   "/Themes/CustomColors/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a CustomColors object by
-        its primary key (id)"
+      description: "Get by Id: Use this method to retrieve a CustomColors object by its primary key (id)"
       operationId: themes_customcolors_get_id
       parameters:
         - in: path
@@ -4688,8 +4409,7 @@ paths:
         - Themes/CustomColors
   "/Themes/Details/{id}":
     get:
-      description: "Returns object metadata and information about relative dependent
-        objects "
+      description: "Returns object metadata and information about relative dependent objects "
       operationId: theme_themes_details_get_id
       parameters:
         - in: path
@@ -4713,8 +4433,7 @@ paths:
       x-operationName: details
   "/Themes/EffectMap/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a EffectMap object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a EffectMap object by its primary key (id)"
       operationId: themes_effectmap_get_id
       parameters:
         - in: path
@@ -4737,8 +4456,7 @@ paths:
         - Themes/EffectMap
   "/Themes/Fills/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Fills object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Fills object by its primary key (id)"
       operationId: themes_fills_get_id
       parameters:
         - in: path
@@ -4761,8 +4479,7 @@ paths:
         - Themes/Fills
   "/Themes/Fonts/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Fonts object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Fonts object by its primary key (id)"
       operationId: themes_fonts_get_id
       parameters:
         - in: path
@@ -4785,9 +4502,7 @@ paths:
         - Themes/Fonts
   /Themes/Intensity:
     get:
-      description: "List Types: Use this method to retreive a list of possible options
-        for the Intensity type. Use the Id from oneof the returned elements on
-        to make changes to elements in the Themes object space."
+      description: "List Types: Use this method to retreive a list of possible options for the Intensity type. Use the Id from oneof the returned elements on to make changes to elements in the Themes object space."
       operationId: themes_intensity_get
       responses:
         "200":
@@ -4818,8 +4533,7 @@ paths:
       x-operationName: list
   "/Themes/Intensity/TypeId/{type_id}":
     get:
-      description: This endpoint returns Type metadata from an integer type_id that
-        can found on objects throughout the api.
+      description: This endpoint returns Type metadata from an integer type_id that can found on objects throughout the api.
       operationId: themes_intensity_typeid_get_type_id
       parameters:
         - in: path
@@ -4855,8 +4569,7 @@ paths:
       x-operationName: type-id
   "/Themes/Intensity/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Intensity object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Intensity object by its primary key (id)"
       operationId: themes_intensity_get_id
       parameters:
         - description: ""
@@ -4893,8 +4606,7 @@ paths:
         - Themes/Intensity
   "/Themes/LineMap/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a LineMap object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a LineMap object by its primary key (id)"
       operationId: themes_linemap_get_id
       parameters:
         - in: path
@@ -4917,12 +4629,7 @@ paths:
         - Themes/LineMap
   "/Themes/OpenOfficeXml/{id}":
     get:
-      description: Return the subset of the xml content from within the latest edited
-        version of the OpenXmlDocument from this Theme object.  The returned xml
-        data conforms to the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use
-        this endpoint a starting point for building client-side extensions that
-        modify Presalytics widgets containing Theme objects.
+      description: Return the subset of the xml content from within the latest edited version of the OpenXmlDocument from this Theme object.  The returned xml data conforms to the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm).  Use this endpoint a starting point for building client-side extensions that modify Presalytics widgets containing Theme objects.
       operationId: theme_themes_openofficexml_get_id_updated
       parameters:
         - in: path
@@ -4931,8 +4638,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should return the orginal uploaded xml
-            (false) or the actively updated version (true, default)
+        - description: Indicates whether API should return the orginal uploaded xml (false) or the actively updated version (true, default)
           in: query
           name: updated
           schema:
@@ -4956,14 +4662,7 @@ paths:
         - Themes
       x-operationName: get-xml
     put:
-      description: Directly eidt the underlying xml of a Theme object within an
-        OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will
-        validatate the submitted xml against the [Ecma-376
-        standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm)
-        prior to saving modification.  Invalid xml will rejected by this
-        endpoint and a (hopefully) helpful error message will be returned.  Use
-        this endpoint for client-side automation of modifications ot Theme
-        objects.
+      description: Directly eidt the underlying xml of a Theme object within an OpenOpenXml (e.g. Excel, Powerpoint) document. This endpoint will validatate the submitted xml against the [Ecma-376 standard](http://www.ecma-international.org/publications/standards/Ecma-376.htm) prior to saving modification.  Invalid xml will rejected by this endpoint and a (hopefully) helpful error message will be returned.  Use this endpoint for client-side automation of modifications ot Theme objects.
       operationId: theme_themes_openofficexml_put_id
       parameters:
         - in: path
@@ -5000,8 +4699,7 @@ paths:
       x-operationName: put-xml
   "/Themes/Svg/{id}":
     get:
-      description: This endpoint is helpful for rending this Theme as an svg or image
-        object that can then be rendered in a story, dashboard or website.
+      description: This endpoint is helpful for rending this Theme as an svg or image object that can then be rendered in a story, dashboard or website.
       operationId: theme_themes_svg_get_id_use_cache
       parameters:
         - in: path
@@ -5010,8 +4708,7 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: Indicates whether API should retrieve content from a cache if
-            aviable (true, default), or force an update (false)
+        - description: Indicates whether API should retrieve content from a cache if aviable (true, default), or force an update (false)
           in: query
           name: use_cache
           schema:
@@ -5039,8 +4736,7 @@ paths:
       x-operationName: get-svg
   "/Themes/{id}":
     get:
-      description: "Get by Id: Use this method to retrieve a Themes object by its
-        primary key (id)"
+      description: "Get by Id: Use this method to retrieve a Themes object by its primary key (id)"
       operationId: theme_themes_get_id
       parameters:
         - description: An Id of the respository DTO elemennt
@@ -7716,8 +7412,7 @@ components:
     Slide.Graphics.Details:
       description: "The graphics class provides a bridge between the Slides and \r
 
-        lower level models including Charts, Tables, Pictures, and
-        SmartArts"
+        lower level models including Charts, Tables, Pictures, and SmartArts"
       properties:
         chart:
           $ref: "#/components/schemas/Chart.Charts.Details"

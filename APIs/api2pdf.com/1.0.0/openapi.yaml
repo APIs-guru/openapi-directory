@@ -7,46 +7,28 @@ info:
     email: support@api2pdf.com
     name: Support
     x-twitter: api2pdf_status
-  description: >
+  description: |
     
     # Introduction
-
     [Api2Pdf](https://www.api2pdf.com) is a powerful PDF generation API with no rate limits or file size constraints. Api2Pdf runs on AWS Lambda, a serverless architecture powered by Amazon to scale to millions of requests while being up to 90% cheaper than alternatives. **Supports wkhtmltopdf, Headless Chrome, LibreOffice, and PDF Merge.** You can also generate barcodes with ZXING (Zebra Crossing).
-
     # SDKs & Client Libraries
-
     We've made a number of open source libraries available for the API
-
     - Python: [https://github.com/api2pdf/api2pdf.python](https://github.com/api2pdf/api2pdf.python)
-
     - .NET: [https://github.com/api2pdf/api2pdf.dotnet](https://github.com/api2pdf/api2pdf.dotnet)
-
     - Nodejs: [https://github.com/api2pdf/api2pdf.node](https://github.com/api2pdf/api2pdf.node)
-
     - PHP: [https://github.com/Api2Pdf/api2pdf.php](https://github.com/Api2Pdf/api2pdf.php)
-
     - Ruby: (Coming soon)
-
     # Authorization
-
     Create an account at [portal.api2pdf.com](https://portal.api2pdf.com/register) to get an API key.
 
-
     **Authorize your API calls**
-
     - GET requests, include apikey=YOUR-API-KEY as a query string parameter
-
     - POST requests, add **Authorization** to your header.
-
     ``` Authorization: YOUR-API-KEY ```
 
-
     # Quickstart
-
     If you are looking for just a quick call to grab PDFs of a URL, you can do a GET request like:
-
     ``` https://v2018.api2pdf.com/chrome/url?url={UrlToConvert}&apikey={YourApiKey} ```
-
 
     For more advanced usage and settings, see the API specification below.
   license:
@@ -84,17 +66,11 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ChromeHtmlToPdfRequest"
-        description: >-
-          A JSON object as a payload is required within the body of the
-          request. The following attributes of the JSON object are detailed
-          below:
-
+        description: |-
+          A JSON object as a payload is required within the body of the request. The following attributes of the JSON object are detailed below:
           - `html` *(string, required)* - raw HTML to convert to PDF
-
           - `inlinePdf` *(boolean, optional)* - Open the PDF in a browser window. Default to false.
-
           - `fileName` *(string, optional)* - Specify a file name for the output PDF. Random name if not specified.
-
           - `options` *(object, optional)* - Include advanced Headless Chrome options like margins, headers, and footers. [See full list of advanced options here](https://www.api2pdf.com/documentation/advanced-options-headless-chrome/).
       responses:
         "200":
@@ -114,22 +90,15 @@ paths:
         - Headless Chrome
   /chrome/url:
     get:
-      description: >-
-        Convert a URL or Web Page to PDF using Headless Chrome on AWS
-        Lambda. This GET request is for convenience and does not support
-        advanced options. Use the POST request for more flexibility.
-
+      description: |-
+        Convert a URL or Web Page to PDF using Headless Chrome on AWS Lambda. This GET request is for convenience and does not support advanced options. Use the POST request for more flexibility.
         ### Authorize via Query String Parameter
-
         **apikey=YOUR-API-KEY**
-
         ### Example
-
         ``` https://v2018.api2pdf.com/chrome/url?url={UrlToConvert}&apikey={YourApiKey} ``` 
       operationId: chromeFromUrlGET
       parameters:
-        - description: Url of the page to convert to PDF. Must start with http:// or
-            https://.
+        - description: Url of the page to convert to PDF. Must start with http:// or https://.
           in: query
           name: url
           required: true
@@ -173,17 +142,11 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ChromeUrlToPdfRequest"
-        description: >-
-          A JSON object as a payload is required within the body of the
-          request. The following attributes of the JSON object are detailed
-          below:
-
+        description: |-
+          A JSON object as a payload is required within the body of the request. The following attributes of the JSON object are detailed below:
           - `url` *(string, required)* - Url to the web page to convert to PDF
-
           - `inlinePdf` *(boolean, optional)* - Open the PDF in a browser window. Default to false.
-
           - `fileName` *(string, optional)* - Specify a file name for the output PDF. Random name if not specified.
-
           - `options` *(object, optional)* - Include advanced Headless Chrome options like margins, headers, and footers. [See full list of advanced options here](https://www.api2pdf.com/documentation/advanced-options-headless-chrome/).
       responses:
         "200":
@@ -203,12 +166,9 @@ paths:
         - Headless Chrome
   /libreoffice/convert:
     post:
-      description: >-
-        Convert an office document (Word, Excel, Powerpoint) or an image
-        (jpg, gif, png) to a PDF using LibreOffice on AWS Lambda.
-
+      description: |-
+        Convert an office document (Word, Excel, Powerpoint) or an image (jpg, gif, png) to a PDF using LibreOffice on AWS Lambda.
         ### Authorize via Header of Request
-
         **Authorization: YOUR-API-KEY**
       operationId: libreConvertPost
       requestBody:
@@ -216,15 +176,10 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/LibreOfficeConvertRequest"
-        description: >-
-          A JSON object as a payload is required within the body of the
-          request. The following attributes of the JSON object are detailed
-          below:
-
+        description: |-
+          A JSON object as a payload is required within the body of the request. The following attributes of the JSON object are detailed below:
           - `url` *(string, required)* - A direct URL to the file. Api2Pdf will consume the file at that URL and then convert it.
-
           - `inlinePdf` *(boolean, optional)* - Open the PDF in a browser window. Default to false.
-
           - `fileName` *(string, optional)* - Specify a file name for the output PDF. Random name if not specified. 
       responses:
         "200":
@@ -254,15 +209,10 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MergeRequest"
-        description: >-
-          A JSON object as a payload is required within the body of the
-          request. The following attributes of the JSON object are detailed
-          below:
-
+        description: |-
+          A JSON object as a payload is required within the body of the request. The following attributes of the JSON object are detailed below:
           - `urls` *(array of urls, required)* - A JSON array of direct URLs to PDFs. Api2Pdf will consume the PDF files in the list and then merge them all together..
-
           - `inlinePdf` *(boolean, optional)* - Open the PDF in a browser window. Default to false.
-
           - `fileName` *(string, optional)* - Specify a file name for the output PDF. Random name if not specified. 
       responses:
         "200":
@@ -292,17 +242,11 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WkHtmlToPdfHtmlToPdfRequest"
-        description: >-
-          A JSON object as a payload is required within the body of the
-          request. The following attributes of the JSON object are detailed
-          below:
-
+        description: |-
+          A JSON object as a payload is required within the body of the request. The following attributes of the JSON object are detailed below:
           - `html` *(string, required)* - raw HTML to convert to PDF
-
           - `inlinePdf` *(boolean, optional)* - Open the PDF in a browser window. Default to false.
-
           - `fileName` *(string, optional)* - Specify a file name for the output PDF. Random name if not specified.
-
           - `options` *(object, optional)* - Include advanced WkHtmlToPdf options like margins, headers, and footers. [See full list of advanced options here](https://www.api2pdf.com/documentation/advanced-options-wkhtmltopdf/).
       responses:
         "200":
@@ -322,22 +266,15 @@ paths:
         - wkhtmltopdf
   /wkhtmltopdf/url:
     get:
-      description: >-
-        Convert a URL or Web Page to PDF using WkHtmlToPdf on AWS Lambda.
-        This GET request is for convenience and does not support advanced
-        options. Use the POST request for more flexibility.
-
+      description: |-
+        Convert a URL or Web Page to PDF using WkHtmlToPdf on AWS Lambda. This GET request is for convenience and does not support advanced options. Use the POST request for more flexibility.
         ### Authorize via Query String Parameter
-
         **apikey=YOUR-API-KEY**
-
         ### Example
-
         ``` https://v2018.api2pdf.com/wkhtmltopdf/url?url={UrlToConvert}&apikey={YourApiKey} ``` 
       operationId: wkhtmltopdfFromUrlGET
       parameters:
-        - description: Url of the page to convert to PDF. Must start with http:// or
-            https://.
+        - description: Url of the page to convert to PDF. Must start with http:// or https://.
           in: query
           name: url
           required: true
@@ -381,17 +318,11 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WkHtmlToPdfUrlToPdfRequest"
-        description: >-
-          A JSON object as a payload is required within the body of the
-          request. The following attributes of the JSON object are detailed
-          below:
-
+        description: |-
+          A JSON object as a payload is required within the body of the request. The following attributes of the JSON object are detailed below:
           - `url` *(string, required)* - Url to the web page to convert to PDF
-
           - `inlinePdf` *(boolean, optional)* - Open the PDF in a browser window. Default to false.
-
           - `fileName` *(string, optional)* - Specify a file name for the output PDF. Random name if not specified.
-
           - `options` *(object, optional)* - Include advanced WkHtmlToPdf options like margins, headers, and footers. [See full list of advanced options here](https://www.api2pdf.com/documentation/advanced-options-wkhtmltopdf/).
       responses:
         "200":
@@ -411,16 +342,11 @@ paths:
         - wkhtmltopdf
   /zebra:
     get:
-      description: >-
-        See full list of options and documentation
-        [here](https://www.api2pdf.com/documentation/advanced-options-zxing-zebra-crossing-barcodes/)
-
+      description: |-
+        See full list of options and documentation [here](https://www.api2pdf.com/documentation/advanced-options-zxing-zebra-crossing-barcodes/)
         ### Authorize via Query String Parameter
-
         **apikey=YOUR-API-KEY**
-
         ### Example
-
         ``` https://v2018.api2pdf.com/zebra?format={format}&apikey={YourApiKey}&value={YourText} ``` 
       operationId: zebraGET
       parameters:

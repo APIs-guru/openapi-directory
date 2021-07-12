@@ -13,67 +13,43 @@ servers:
 info:
   contact:
     name: developer.va.gov
-  description: >-
+  description: |-
     ## Background
 
-
     This RESTful API provides information about physical VA facilities. Information available includes
-
     geographic location, address, phone, hours of operation, and available services.
 
-
     VA operates several different types of facilities, the types represented in this API include:
-
     - Health Facilities (vha)
-
     - Benefits Facilities (vba)
-
     - Cemeteries (nca)
-
     - Vet Centers (vc)
-
 
     To read an FAQ on how wait times are calculated, click the "For more information" link on [this page](https://www.accesstocare.va.gov/PWT/SearchWaitTimes).
 
-
     ## Getting Started
-
 
     ### Base URLs
 
-
     The base URLs for the VA Facilities API in the various environments are:
-
     - Sandbox: `https://sandbox-api.va.gov/services/va_facilities/v0`
-
     - Production: `https://api.va.gov/services/va_facilities/v0`
-
 
     ### Authorization
 
-
     API requests are authorized through a symmetric API token, provided in an HTTP header with name `apikey`.
-
 
     ### Response Formats
 
-
     Clients may request several response formats by setting the `Accept` header.
-
     - `application/json` - The default JSON response format complies with JSON API. This media type is *not* available for bulk requests using the `/facilities/all` endpoint. It will return `406 Not Acceptable`.
-
     - `application/geo+json` - GeoJSON-compliant format, representing each facility as a feature with a point geometry.
-
     - `application/vnd.geo+json` - Deprecated. Prefer application/geo+json.
-
     - `text/csv` - Available for the bulk download operation only. Some structured fields are omitted from the CSV response.
-
 
     ### Response Elements
 
-
     Some data elements within the response are only present for facilities of a given type:
-
     - The patient satisfaction scores contained in the `satisfaction` element are only applicable
       to VA health facilities.
     - The patient wait time values contained in the `wait_times` element are only applicable to
@@ -82,46 +58,30 @@ info:
       benefits facilities.
     - The operational hours special instructions contained in the `operational_hours_special_instructions` element is only applicable to VA health and Vet Center facilities.
 
-
     ### Facility ID Formats and Constraints
 
-
     A facility ID has the format `prefix_stationNumber`. The prefix is one of nca, vc, vba, or vha. Cemeteries may be national (VA) or non-national; non-national cemeteries have the station number prefixed with an `s`. There are no other constraints on the format. Examples:
-
     - Health: `vha_402GA`
-
     - Benefits: `vba_539GB`
-
     - National cemetery: `nca_063`
-
     - Non-national cemetery: `nca_s1082`
-
     - Vet center: `vc_0872MVC`
-
 
 
     ### Mobile Facilities
 
-
     The mobile health facilities move regularly within a region. If a facility comes back from this API with `"mobile": "true"`, the latitude/longitude and address could be inaccurate. To get the exact current location, please call the number listed.
-
 
     ## Deprecations
 
-
     - `active_status` field is deprecated and replaced with `operating_status`.
-
     - `application/vnd.geo+json` media type is deprecated and replaced by `application/geo+json`
-
 
 
     ## Reference
 
-
     - [Raw VA Facilities Open API Spec](https://api.va.gov/services/va_facilities/docs/v0/api)
-
     - [GeoJSON Format](https://tools.ietf.org/html/rfc7946)
-
     - [JSON API Format](https://jsonapi.org/format/)
   title: VA Facilities
   version: 0.0.1
@@ -141,52 +101,36 @@ tags:
 paths:
   /facilities:
     get:
-      description: >-
-        Query facilities by bounding box, latitude and longitude, state,
-        visn, or zip code. Bounding box is specified as four `bbox[]`
-        parameters, long1, lat1, long2, lat2. (Relative order is unimportant.)
-
+      description: |-
+        Query facilities by bounding box, latitude and longitude, state, visn, or zip code. Bounding box is specified as four `bbox[]` parameters, long1, lat1, long2, lat2. (Relative order is unimportant.)
 
         A query by latitude and longitude returns all facilities in the system, sorted by distance from that location.
 
-
         All location queries support filtering by facility type, available services, and mobile status.
-
 
         One can also retrieve facilities by ID using a comma-separated list like `?ids=id1,id2`. When requesting multiple facilities by ID, the API will return as many results as it can find matches for, omitting IDs where there is no match. It will not return an HTTP error code if it is unable to match a requested ID. Clients may supply IDs up to the limit their HTTP client enforces for URI path lengths. (Usually 2048 characters.)
 
-
         Results are paginated. JSON responses include pagination information in the standard JSON API "links" and "meta" elements. 
 
-
         ### Parameter combinations
-
         You may optionally specify `page` and `per_page` with any query. You must specify one of the following parameter combinations: 
-
 
         - `bbox[]`, with the option of any combination of `type`, `services[]`, or `mobile`
 
-
         - `ids`
-
 
         - `lat` and `long`, with the option of any combination of `ids`, `type`, `services[]`, or `mobile`
 
-
         - `state`, with the option of any combination of `type`, `services[]`, or `mobile`
 
-
         - `visn`
-
 
         - `zip`, with the option of any combination of `type`, `services[]`, or `mobile`
 
          Invalid combinations will return `400 Bad Request`.
       operationId: getFacilitiesByLocation
       parameters:
-        - description: List of comma-separated facility IDs to retrieve in a single
-            request. Can be combined with lat and long parameters to retrieve
-            facilities sorted by distance from a location.
+        - description: List of comma-separated facility IDs to retrieve in a single request. Can be combined with lat and long parameters to retrieve facilities sorted by distance from a location.
           examples:
             ids:
               description: ids
@@ -200,9 +144,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Zip code to search for facilities. More detailed zip codes can be
-            passed in, but only the first five digits are used to determine
-            facilities to return.
+        - description: Zip code to search for facilities. More detailed zip codes can be passed in, but only the first five digits are used to determine facilities to return.
           examples:
             zip:
               description: zip
@@ -212,8 +154,7 @@ paths:
           schema:
             format: "##### or #####-####"
             type: string
-        - description: State in which to search for facilities. Except in rare cases, this
-            is two characters.
+        - description: State in which to search for facilities. Except in rare cases, this is two characters.
           examples:
             state:
               description: state
@@ -223,8 +164,7 @@ paths:
           schema:
             format: XX
             type: string
-        - description: Latitude of point to search for facilities, in WGS84 coordinate
-            reference system.
+        - description: Latitude of point to search for facilities, in WGS84 coordinate reference system.
           examples:
             coordinates:
               description: coordinates
@@ -234,8 +174,7 @@ paths:
           schema:
             format: float
             type: number
-        - description: Longitude of point to search for facilities, in WGS84 coordinate
-            reference system.
+        - description: Longitude of point to search for facilities, in WGS84 coordinate reference system.
           examples:
             coordinates:
               description: coordinates
@@ -246,9 +185,7 @@ paths:
             format: float
             type: number
           style: form
-        - description: Bounding box (longitude, latitude, longitude, latitude) within
-            which facilities will be returned. (WGS84 coordinate reference
-            system)
+        - description: Bounding box (longitude, latitude, longitude, latitude) within which facilities will be returned. (WGS84 coordinate reference system)
           examples:
             bbox:
               description: bbox
@@ -353,11 +290,7 @@ paths:
         - facilities
   /facilities/all:
     get:
-      description: Retrieve all available facilities in a single operation, formatted
-        as either a GeoJSON FeatureCollection or as a CSV. Due to the complexity
-        of the facility resource type, the CSV response contains a subset of
-        available facility data - specifically it omits the available services,
-        patient satisfaction, and patient wait time data.
+      description: Retrieve all available facilities in a single operation, formatted as either a GeoJSON FeatureCollection or as a CSV. Due to the complexity of the facility resource type, the CSV response contains a subset of available facility data - specifically it omits the available services, patient satisfaction, and patient wait time data.
       operationId: getAllFacilities
       parameters:
         - example: application/geo+json
@@ -384,13 +317,10 @@ paths:
                 $ref: "#/components/schemas/GeoFacilitiesResponse"
             text/csv:
               schema:
-                example: >-
+                example: |-
                   id,name,station_id,latitude,longitude,facility_type,classification,website,physical_address_1,physical_address_2,physical_address_3,physical_city,physical_state,physical_zip,mailing_address_1,mailing_address_2,mailing_address_3,mailing_city,mailing_state,mailing_zip,phone_main,phone_fax,phone_mental_health_clinic,phone_pharmacy,phone_after_hours,phone_patient_advocate,phone_enrollment_coordinator,hours_monday,hours_tuesay,hours_wednesday,hours_thursday,hours_friday,hours_saturday,hours_sunday,mobile,active_status,visn
-
                   vc_0101V,Boston Vet Center,0101V,42.3445959000001,-71.0361051099999,vet_center,,,7 Drydock Avenue,Suite 2070,,Boston,MA,2210,,,,,,,857-203-6461 x,,,,,,,800AM-700PM,800AM-800PM,800AM-700PM,800AM-800PM,800AM-600PM,-,-,,,
-
                   vba_362b,Houston Regional Benefit Office at Frank Tejeda Outpatient Clinic,362b,29.51690196,-98.59601936,va_benefits_facility,Outbased,NULL,5788 Eckhert Road,,,San Antonio,TX,78240,,,,,,,210-699-5040,210-699-5079,,,,,,,,,,,,,,,
-
                   vha_459GH,Saipan VA Clinic,459GH,15.216794,145.729385,va_health_facility,Other Outpatient Services (OOS),,Marina Heights Business Park - Garapan,Medical Associates of the Pacific,MH-II Building Suite 100 and 206,Saipan,MP,96950-9998,,,,,,,670-322-0035 x,670-322-0038 x,"",800-465-8387 x,800-214-1306 x,670-322-0035 x,808-433-7600 x,,,,,,,,false,A,21
                 type: string
           description: Success
@@ -427,9 +357,7 @@ paths:
     get:
       operationId: getFacilityById
       parameters:
-        - description: Facility ID, in the form `<prefix>_<station>`, where prefix is one
-            of "vha", "vba", "nca", or "vc", for health facility, benefits,
-            cemetery, or vet center, respectively.
+        - description: Facility ID, in the form `<prefix>_<station>`, where prefix is one of "vha", "vba", "nca", or "vc", for health facility, benefits, cemetery, or vet center, respectively.
           example: vha_688
           in: path
           name: id
@@ -543,25 +471,17 @@ paths:
         - facilities
   /nearby:
     get:
-      description: >-
-        Retrieve all VA health facilities that are located within a
-        specified drive time from a specified location based on address
-        (`street_address`, `city`, `state`, and `zip`) or coordinates (`lat` and
-        `lng`). Optional filter parameters include `drive_time` and
-        `services[]`. 
-
+      description: |-
+        Retrieve all VA health facilities that are located within a specified drive time from a specified location based on address (`street_address`, `city`, `state`, and `zip`) or coordinates (`lat` and `lng`). Optional filter parameters include `drive_time` and `services[]`. 
 
         Results of this operation are paginated. Responses include pagination information in the standard JSON API "links" and "meta" elements. 
 
-
         The "attributes" element has information about the drive-time band that contains the requested location for each facility in the response. The values of `min_time` and `max_time` are in minutes. For example, a facility returned with a matched `min_time` of 10 and `max_time` of 20 is a 10 to 20 minute drive from the requested location.
-
 
         To retrieve full details for nearby facilities, see the documentation for `/facilities?ids`.
       operationId: getNearbyFacilities
       parameters:
-        - description: Street address of the location from which drive time will be
-            calculated.
+        - description: Street address of the location from which drive time will be calculated.
           examples:
             address:
               description: address
@@ -579,8 +499,7 @@ paths:
           name: city
           schema:
             type: string
-        - description: Two character state code of the location from which drive time will
-            be calculated.
+        - description: Two character state code of the location from which drive time will be calculated.
           examples:
             address:
               description: address
@@ -620,8 +539,7 @@ paths:
             format: float
             type: number
           style: form
-        - description: Filter to only include facilities that are within the specified
-            number of drive time minutes from the requested location.
+        - description: Filter to only include facilities that are within the specified number of drive time minutes from the requested location.
           in: query
           name: drive_time
           schema:
@@ -699,8 +617,7 @@ paths:
           description: API rate limit exceeded
       security:
         - apikey: []
-      summary: Retrieve all VA health facilities reachable by driving within the
-        specified time period
+      summary: Retrieve all VA health facilities reachable by driving within the specified time period
       tags:
         - facilities
 components:
@@ -777,16 +694,12 @@ components:
       nullable: true
       properties:
         appointment_leadin:
-          description: Additional appointment information. May contain html / string
-            formatting characters.
-          example: Your VA health care team will contact you if you???re eligible to get a
-            vaccine during this time. As the supply of vaccine increases, we'll
-            work with our care teams to let Veterans know their options.
+          description: Additional appointment information. May contain html / string formatting characters.
+          example: Your VA health care team will contact you if you???re eligible to get a vaccine during this time. As the supply of vaccine increases, we'll work with our care teams to let Veterans know their options.
           nullable: true
           type: string
         appointment_phones:
-          description: List of phone numbers related to scheduling appointments for this
-            service.
+          description: List of phone numbers related to scheduling appointments for this service.
           items:
             $ref: "#/components/schemas/AppointmentPhoneNumber"
           nullable: true
@@ -807,8 +720,7 @@ components:
           nullable: true
           type: string
         path:
-          description: URL to a page with additional details for this service within the
-            associated facility's health care system.
+          description: URL to a page with additional details for this service within the associated facility's health care system.
           example: https://www.boston.va.gov/services/covid-19-vaccines.asp
           nullable: true
           type: string
@@ -886,9 +798,7 @@ components:
           type: string
       type: object
     DetailedServiceHours:
-      description: Standard hours of operation. Currently formatted as descriptive
-        text suitable for display, with no guarantee of a standard parseable
-        format. Hours of operation may vary due to holidays or other events.
+      description: Standard hours of operation. Currently formatted as descriptive text suitable for display, with no guarantee of a standard parseable format. Hours of operation may vary due to holidays or other events.
       nullable: true
       properties:
         Friday:
@@ -1114,8 +1024,7 @@ components:
         - data
       type: object
     GenericError:
-      description: A general error json response for things like Authorization Errors
-        or Bad Requests (ex. invalid parameter values).
+      description: A general error json response for things like Authorization Errors or Bad Requests (ex. invalid parameter values).
       properties:
         message:
           example: Detailed Error Message
@@ -1191,9 +1100,7 @@ components:
         - type
       type: object
     Hours:
-      description: Standard hours of operation. Currently formatted as descriptive
-        text suitable for display, with no guarantee of a standard parseable
-        format. Hours of operation may vary due to holidays or other events.
+      description: Standard hours of operation. Currently formatted as descriptive text suitable for display, with no guarantee of a standard parseable format. Hours of operation may vary due to holidays or other events.
       nullable: true
       properties:
         friday:
@@ -1280,24 +1187,18 @@ components:
         - data
       type: object
     OperatingStatus:
-      description: "Current status of facility operations. The overall status of the
-        facility, which can be: Normal Hours and Services, Facility Notice,
-        Limited Hours and/or Services, or Closed. This field replaces
-        active_status."
+      description: "Current status of facility operations. The overall status of the facility, which can be: Normal Hours and Services, Facility Notice, Limited Hours and/or Services, or Closed. This field replaces active_status."
       example: NORMAL
       nullable: true
       properties:
         additional_info:
-          description: Details of facility notices for visitors, such as messages about
-            parking lot closures or floor visitation information.
+          description: Details of facility notices for visitors, such as messages about parking lot closures or floor visitation information.
           maxLength: 300
           minLength: 0
           nullable: true
           type: string
         code:
-          description: Status codes indicate normal hours/services, limited
-            hours/services, closed operations, or published facility notices for
-            visitors.
+          description: Status codes indicate normal hours/services, limited hours/services, closed operations, or published facility notices for visitors.
           enum:
             - NORMAL
             - NOTICE
@@ -1361,48 +1262,41 @@ components:
       nullable: true
       properties:
         primary_care_routine:
-          description: "% of Veterans who say they usually or always get an appointment
-            when they need it at a primary care location."
+          description: "% of Veterans who say they usually or always get an appointment when they need it at a primary care location."
           example: 0.85
           format: float
           nullable: true
           type: number
         primary_care_urgent:
-          description: "% of Veterans who say they usually or always get an appointment
-            when they need care right away at a primary care location."
+          description: "% of Veterans who say they usually or always get an appointment when they need care right away at a primary care location."
           example: 0.85
           format: float
           nullable: true
           type: number
         specialty_care_routine:
-          description: "% of Veterans who say they usually or always get an appointment
-            when they need it at a specialty location."
+          description: "% of Veterans who say they usually or always get an appointment when they need it at a specialty location."
           example: 0.85
           format: float
           nullable: true
           type: number
         specialty_care_urgent:
-          description: "% of Veterans who say they usually or always get an appointment
-            when they need care right away at a specialty location."
+          description: "% of Veterans who say they usually or always get an appointment when they need care right away at a specialty location."
           example: 0.85
           format: float
           nullable: true
           type: number
       type: object
     PatientWaitTime:
-      description: Expected wait times for new and established patients for a given
-        health care service
+      description: Expected wait times for new and established patients for a given health care service
       nullable: true
       properties:
         established:
-          description: Average number of days a patient who has already been to this
-            location has to wait for a non-urgent appointment.
+          description: Average number of days a patient who has already been to this location has to wait for a non-urgent appointment.
           example: 5
           nullable: true
           type: number
         new:
-          description: Average number of days a Veteran who hasn't been to this location
-            has to wait for a non-urgent appointment.
+          description: Average number of days a Veteran who hasn't been to this location has to wait for a non-urgent appointment.
           example: 10
           nullable: true
           type: number

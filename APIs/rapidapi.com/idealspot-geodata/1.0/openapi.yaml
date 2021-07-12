@@ -4,92 +4,55 @@ servers:
 info:
   contact:
     x-twitter: Rapid_API
-  description: >-
-    Hyperlocal Demographics, Vehicle Traffic, Economic, Market Signals,
-    and More. Use this API to request IdealSpot hyperlocal geospatial market
-    insight and geometry data. 
-
+  description: |-
+    Hyperlocal Demographics, Vehicle Traffic, Economic, Market Signals, and More. Use this API to request IdealSpot hyperlocal geospatial market insight and geometry data. 
 
     ## Detailed Description
 
-
     Use this API as your **local economy microscope** by querying [IdealSpot](https://www.idealspot.com) hyperlocal market insight and geometry data. We offer the most precise, extensive, and frequently-updated local market data in the US. Our data is available across the entire US and can be queried at geographic scales ranging from the micro (Census block) through the macro (nation).
-
 
     Better data and analysis leads to a better understanding of local market opportunities and risks. Integrate with your commercial real estate and marketing applications, machine learning workflows, and other investment analytics.
 
-
     Our goal is to offer the most complete snapshot of the geographically distributed consumer and retail economy. We start with the fundamentals of consumers and business establishments. To connect retailers with consumers, we provide mobility data like vehicle traffic and mobile device data. To describe consumer intent, we provide geolocated digital marketing data. 
-
 
     We believe that accurate capital allocation through reliable local market data is foundational to creating robust, healthy, and livable communities for all. We hope you and your clients find tremendous value in this service.
 
-
     ## Features
-
 
     Query data and GeoJSON geometries at these scales for any US latitude and longitude:
 
-
     * Rings (0.5 km+)
-
     * Drive time (1-60 minutes)
-
     * Bike time (3-60 minutes)
-
     * Walk time (5-60 minutes)
-
     * Public transit time (5-60 minutes)
-
     * Administrative region (US, states, core-based statistical areas, counties, Census-designated places, Census tracts, zipcodes, Census block groups, opportunity zones)
 
-
     | Data Feature | Description |
-
     | ------- | ------------------------------|
-
     | Demographics, Housing, Spending | *Updated Quarterly*.  Current and historical market data including population, spending, and housing. Vendor (PopStats) is relied upon by Walgreens, Ulta Beauty, Blackstone, etc |
-
     | Labor, Business Establishments, Economic Conditions | *Updated Quarterly*.  Traditional market data including workforce, business establishment counts, and economic conditions like local GDP, unemployment rates. Vendor (PopStats) is relied upon by Walgreens, Ulta Beauty, Blackstone, etc |
-
     | Consumer segmentation	| *Updated Annually*. Demographics grouped into narrative-oriented segments. |
-
     | Vehicle Traffic |	*Updated semi-annually*. Gold standard in vehicle traffic data from INRIX. Counts by day of week, time of day and side of street. |
-
     | Rings and Travel time polygons | *Estimate in Real-time*. Rings alongside drive time, walk time, bike time, and public transit time polygons. Request as GeoJSON geometries for mapping or use with data queries |
-
     | Administrative region polygons | *Updated Annually*. GeoJSON administrative regions from US Census Bureau: block groups, tracts, counties, CBSAs, states, opportunity zones, USPS zipcodes |
-
     | Internet Search Volumes | 30 day rolling averages for geolocated advertising potential across 450 business categories from major search engines |
-
     | Social Media Interest	| 30 day rolling average for geolocated advertising potential across 450 business categories from major social networks |
-
 
     ### Coming Soon!
 
-
     This API powers our local market research platform at [IdealSpot.com](https://www.idealspot.com). The functionality exposed so far is only a portion of our current capabilities. We will be exposing additional API features in time so watch this space!
 
-
     | Data Feature | Description |
-
     | ------- | ------------------------------|
-
     Mobile device visit counts, points of interest, brands | Fresh point of interest data across 3000+ brands, millions of POI, and historical foot traffic counts using mobile data for those points of interest
-
     Origin/destination trips from mobile devices | Map origins and destinations of devices visiting an arbitrary catchment area
-
     Competition search | Search all major point-of-interest aggregators in one query
-
     Environment/climate | Expected weather patterns like temperature and precipitation
-
     Filter search API | Query data for all counties in state, all tracts in MSA, etc
-
     Road segment tiles | Plot road segments on maps in interactive applications
 
-
     ## Developer Website
-
 
     For more detail see https://developer.idealspot.com/
   title: IdealSpot GeoData
@@ -105,12 +68,10 @@ info:
   x-providerName: rapidapi.com
   x-serviceName: idealspot-geodata
 tags:
-  - description: >-
+  - description: |-
       # Insights API
 
-
       To query demographics, spending, and other retail market insights, use the endpoints under the "Geodata" heading. "Insights" can be thought of as a unique dataset you can query. ie., residential population counts, avg. household incomes, home values, mortgage risk, and languages spoken.
-
 
       To see the full list of Insights currently available to query, visit: https://developer.idealspot.com/data
     name: Insights API
@@ -120,13 +81,10 @@ paths:
   /data/insights:
     get:
       deprecated: false
-      description: List all insights that the user has access to. This includes
-        population, household income, crime statistics, walking traffic, vehicle
-        traffic counts, employment, and much more,
+      description: List all insights that the user has access to. This includes population, household income, crime statistics, walking traffic, vehicle traffic counts, employment, and much more,
       operationId: FetchAvailableInsights
       parameters:
-        - description: (Required) Rapid API Key. See
-            https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
+        - description: (Required) Rapid API Key. See https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
           in: header
           name: X-RapidAPI-Key
           required: true
@@ -166,11 +124,7 @@ paths:
                         id: crime
                         name: Crime
                         version: v1
-                      - description: Conventionally, daytime population is equated to the number of the
-                          employees in an area. However, that number does not
-                          capture stay-at-home parents, students, and retired or
-                          unemployed individuals. This insight provides that
-                          detail.
+                      - description: Conventionally, daytime population is equated to the number of the employees in an area. However, that number does not capture stay-at-home parents, students, and retired or unemployed individuals. This insight provides that detail.
                         id: daytime-population
                         name: Daytime Population
                         version: v2
@@ -182,8 +136,7 @@ paths:
                         id: employee-categories
                         name: Employee Categories
                         version: v2
-                      - description: Quarterly historical total number of employees (often referred to
-                          as daytime population).
+                      - description: Quarterly historical total number of employees (often referred to as daytime population).
                         id: employees
                         name: Daytime Population
                         version: v4
@@ -251,8 +204,7 @@ paths:
                         id: occupation
                         name: Occupation
                         version: v2
-                      - description: Historical, current and forecasted number of people living in
-                          houses and apartments within a trade area.
+                      - description: Historical, current and forecasted number of people living in houses and apartments within a trade area.
                         id: residential-population
                         name: Residential Population
                         version: v3
@@ -260,14 +212,11 @@ paths:
                         id: salaries
                         name: Salaries
                         version: v2
-                      - description: Population residing in a housing unit specifically designated as
-                          seasonal housing, like a summer cottage or winter
-                          chalet.
+                      - description: Population residing in a housing unit specifically designated as seasonal housing, like a summer cottage or winter chalet.
                         id: seasonal-population
                         name: Seasonal Population
                         version: v3
-                      - description: Expressed interest on social media within the location's trade area
-                          by business category.
+                      - description: Expressed interest on social media within the location's trade area by business category.
                         id: social
                         name: Social Media Interest
                         version: v3
@@ -275,8 +224,7 @@ paths:
                         id: spending
                         name: Spending
                         version: v2
-                      - description: Population residing in a hotel or RV (Recreational Vehicle) for at
-                          least 1 night.
+                      - description: Population residing in a hotel or RV (Recreational Vehicle) for at least 1 night.
                         id: transient-population
                         name: Transient Population
                         version: v3
@@ -288,8 +236,7 @@ paths:
                         id: youth-age
                         name: Youth Age
                         version: v2
-                      - description: Search engine searches within a location's trade area by business
-                          category.
+                      - description: Search engine searches within a location's trade area by business category.
                         id: search
                         name: Search Engine Demand
                         version: v3
@@ -356,12 +303,7 @@ paths:
   "/data/insights/{insight_id:}":
     get:
       deprecated: false
-      description: "Fetch request/response structure metadata for a given Insight.
-        This provides you the periods of data available as well as any other
-        parameters you may want to query the Insight by. Example Insights
-        include population and market data such as: age, daytime population,
-        avg. home value, crime indexes, foot traffic, employment, income,
-        occupation, etc.  For the full-list see the developer documentation."
+      description: "Fetch request/response structure metadata for a given Insight. This provides you the periods of data available as well as any other parameters you may want to query the Insight by. Example Insights include population and market data such as: age, daytime population, avg. home value, crime indexes, foot traffic, employment, income, occupation, etc.  For the full-list see the developer documentation."
       operationId: FetchInsightQueryParameters
       parameters:
         - description: Insight ID. See developer documentation for full list.
@@ -370,8 +312,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: (Required) Rapid API Key. See
-            https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
+        - description: (Required) Rapid API Key. See https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
           in: header
           name: X-RapidAPI-Key
           required: true
@@ -396,8 +337,7 @@ paths:
                         - White Collar
                         - Management occupations
                         - Top executives
-                        - Advertising, marketing, promotions, public relations,
-                          and sales managers
+                        - Advertising, marketing, promotions, public relations, and sales managers
                         - Operations specialties managers
                         - Other management occupations
                         - Business and financial operations occupations
@@ -416,8 +356,7 @@ paths:
                         - Social scientists and related occupations
                         - Life, physical, and social science technicians
                         - Community and social services occupations
-                        - Counselors, social workers, and other community and
-                          social service specialists
+                        - Counselors, social workers, and other community and social service specialists
                         - Religious workers
                         - All other counselors, social, and religious workers
                         - Legal occupations
@@ -430,27 +369,22 @@ paths:
                         - Other teachers and instructors
                         - Librarians, curators, and archivists
                         - Other education, training, and library occupations
-                        - Arts, design, entertainment, sports, and media
-                          occupations
+                        - Arts, design, entertainment, sports, and media occupations
                         - Art and design occupations
-                        - Entertainers and performers, sports and related
-                          occupations
+                        - Entertainers and performers, sports and related occupations
                         - Media and communication occupations
                         - Media and communication equipment occupations
                         - Healthcare practitioners and technical occupations
                         - Health diagnosing and treating practitioners
                         - Health technologists and technicians
-                        - Other healthcare practitioners and technical
-                          occupations
+                        - Other healthcare practitioners and technical occupations
                         - Healthcare support occupations
                         - Nursing, psychiatric, and home health aides
-                        - Occupational and physical therapist assistants and
-                          aides
+                        - Occupational and physical therapist assistants and aides
                         - Other healthcare support occupations
                         - Blue Collar
                         - Protective service occupations
-                        - First-line supervisors/managers, protective service
-                          workers
+                        - First-line supervisors/managers, protective service workers
                         - Fire fighting and prevention workers
                         - Law enforcement workers
                         - Other protective service workers
@@ -459,14 +393,11 @@ paths:
                         - Cooks and food preparation workers
                         - Food and beverage serving workers
                         - Other food preparation and serving related workers
-                        - Building and grounds cleaning and maintenance
-                          occupations
-                        - Supervisors, building and grounds cleaning and
-                          maintenance workers
+                        - Building and grounds cleaning and maintenance occupations
+                        - Supervisors, building and grounds cleaning and maintenance workers
                         - Building cleaning and pest control workers
                         - Grounds maintenance workers
-                        - All other building and grounds cleaning and
-                          maintenance workers
+                        - All other building and grounds cleaning and maintenance workers
                         - Personal care and service occupations
                         - Supervisors, personal care and service workers
                         - Animal care and service workers
@@ -486,8 +417,7 @@ paths:
                         - Communications equipment operators
                         - Financial clerks
                         - Information and record clerks
-                        - Material recording, scheduling, dispatching, and
-                          distributing occupations
+                        - Material recording, scheduling, dispatching, and distributing occupations
                         - Secretaries and administrative assistants
                         - Other office and administrative support workers
                         - Farming, fishing, and forestry occupations
@@ -502,12 +432,9 @@ paths:
                         - Other construction and related workers
                         - Extraction workers
                         - Installation, maintenance, and repair occupations
-                        - Supervisors of installation, maintenance, and repair
-                          workers
-                        - Electrical and electronic equipment mechanics,
-                          installers, and repairers
-                        - And mobile equipment mechanics, installers, and
-                          repairers
+                        - Supervisors of installation, maintenance, and repair workers
+                        - Electrical and electronic equipment mechanics, installers, and repairers
+                        - And mobile equipment mechanics, installers, and repairers
                         - Other installation, maintenance, and repair occupations
                         - Production occupations
                         - Supervisors, production workers
@@ -625,8 +552,7 @@ paths:
                             parent_id: null
                           - description: null
                             id: 2491
-                            label: Counselors, social workers, and other community and social service
-                              specialists
+                            label: Counselors, social workers, and other community and social service specialists
                             parent_id: null
                           - description: null
                             id: 2492
@@ -1091,33 +1017,19 @@ paths:
   "/data/insights/{insight_id:}/query":
     get:
       deprecated: false
-      description: >-
-        Execute a query for a given insight and location(s). Some Insights
-        may require you to provide required options. ie., when querying
-        `occupation` for White-Collar Workers, you can filter by
-        opt=`{"data":{"category":[2469]}}`
-
+      description: |-
+        Execute a query for a given insight and location(s). Some Insights may require you to provide required options. ie., when querying `occupation` for White-Collar Workers, you can filter by opt=`{"data":{"category":[2469]}}`
 
         For examples of `locations`, please see [Location API Documentation](https://idealspot.gitlab.io/developer-docs/#location)
       operationId: QueryInsightatLocation
       parameters:
-        - description: (Required) Insight version. Insight versions are incremented when a
-            response format changes in any way, including the addition of new
-            groups. Old versions are retained, unmodified, for backwards
-            compatibility.
+        - description: (Required) Insight version. Insight versions are incremented when a response format changes in any way, including the addition of new groups. Old versions are retained, unmodified, for backwards compatibility.
           in: query
           name: version
           required: true
           schema:
             type: string
-        - description: "(Required) Represents a buffer, region, or custom polygon
-            specification. Accepts the `Location` model (as a `Buffer`,
-            `Region`, or `Custom Polygon`) formatted as a JSON string. Multiple
-            `location` query parameters are allowed. NOTE: When requesting
-            multiple locations, you must include brackets(i.e.
-            `?location[]=...&location[]=...`). If not included, only the last
-            location will be used. For more detail, see
-            https://idealspot.gitlab.io/developer-docs/#location"
+        - description: "(Required) Represents a buffer, region, or custom polygon specification. Accepts the `Location` model (as a `Buffer`, `Region`, or `Custom Polygon`) formatted as a JSON string. Multiple `location` query parameters are allowed. NOTE: When requesting multiple locations, you must include brackets(i.e. `?location[]=...&location[]=...`). If not included, only the last location will be used. For more detail, see https://idealspot.gitlab.io/developer-docs/#location"
           in: query
           name: location[]
           required: true
@@ -1129,8 +1041,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: (Required) Rapid API Key. See
-            https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
+        - description: (Required) Rapid API Key. See https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
           in: header
           name: X-RapidAPI-Key
           required: true
@@ -1212,20 +1123,13 @@ paths:
       description: Fetch location GeoJSON
       operationId: FetchGeometries
       parameters:
-        - description: "(Required) Represents a buffer, region, or custom polygon
-            specification. Accepts the `Location` model (as a `Buffer`,
-            `Region`, or `Custom Polygon`) formatted as a JSON string. Multiple
-            `location` query parameters are allowed. NOTE: When requesting
-            multiple locations, you must include brackets(i.e.
-            `?location[]=...&location[]=...`). If not included, only the last
-            location will be used."
+        - description: "(Required) Represents a buffer, region, or custom polygon specification. Accepts the `Location` model (as a `Buffer`, `Region`, or `Custom Polygon`) formatted as a JSON string. Multiple `location` query parameters are allowed. NOTE: When requesting multiple locations, you must include brackets(i.e. `?location[]=...&location[]=...`). If not included, only the last location will be used."
           in: query
           name: location[]
           required: true
           schema:
             type: string
-        - description: (Required) Rapid API Key. See
-            https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
+        - description: (Required) Rapid API Key. See https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
           in: header
           name: X-RapidAPI-Key
           required: true
@@ -1242,8 +1146,7 @@ paths:
           content:
             application/json; charset=utf-8:
               schema:
-                $ref: "#/components/schemas/Describetheregionwithin5minutedrive-timeofageograph\
-                  icpoint"
+                $ref: "#/components/schemas/Describetheregionwithin5minutedrive-timeofageographicpoint"
           description: ""
           headers:
             Connection:
@@ -1305,8 +1208,7 @@ paths:
   "/geometries/regions/intersecting/{latitude}/{longitude}":
     get:
       deprecated: false
-      description: For given latitude and longitude, find intersecting administrative
-        regions. Region polygons are simplified for web mapping.
+      description: For given latitude and longitude, find intersecting administrative regions. Region polygons are simplified for web mapping.
       operationId: FetchAdministrativeRegionsusingLat/Lng
       parameters:
         - description: (Required) Search coordinate latitude
@@ -1323,8 +1225,7 @@ paths:
           schema:
             format: double
             type: number
-        - description: (Required) Rapid API Key. See
-            https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
+        - description: (Required) Rapid API Key. See https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
           in: header
           name: X-RapidAPI-Key
           required: true
@@ -1413,8 +1314,7 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: (Required) Rapid API Key. See
-            https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
+        - description: (Required) Rapid API Key. See https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
           in: header
           name: X-RapidAPI-Key
           required: true
@@ -1973,8 +1873,7 @@ paths:
           schema:
             format: double
             type: number
-        - description: (Required) Rapid API Key. See
-            https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
+        - description: (Required) Rapid API Key. See https://rapidapi.com/idealspot-inc-idealspot-inc-default/api/idealspot-geodata
           in: header
           name: X-RapidAPI-Key
           required: true
@@ -2158,8 +2057,7 @@ components:
           - White Collar
           - Management occupations
           - Top executives
-          - Advertising, marketing, promotions, public relations, and sales
-            managers
+          - Advertising, marketing, promotions, public relations, and sales managers
           - Operations specialties managers
           - Other management occupations
           - Business and financial operations occupations
@@ -2178,8 +2076,7 @@ components:
           - Social scientists and related occupations
           - Life, physical, and social science technicians
           - Community and social services occupations
-          - Counselors, social workers, and other community and social service
-            specialists
+          - Counselors, social workers, and other community and social service specialists
           - Religious workers
           - All other counselors, social, and religious workers
           - Legal occupations
@@ -2240,8 +2137,7 @@ components:
           - Communications equipment operators
           - Financial clerks
           - Information and record clerks
-          - Material recording, scheduling, dispatching, and distributing
-            occupations
+          - Material recording, scheduling, dispatching, and distributing occupations
           - Secretaries and administrative assistants
           - Other office and administrative support workers
           - Farming, fishing, and forestry occupations
@@ -2257,8 +2153,7 @@ components:
           - Extraction workers
           - Installation, maintenance, and repair occupations
           - Supervisors of installation, maintenance, and repair workers
-          - Electrical and electronic equipment mechanics, installers, and
-            repairers
+          - Electrical and electronic equipment mechanics, installers, and repairers
           - And mobile equipment mechanics, installers, and repairers
           - Other installation, maintenance, and repair occupations
           - Production occupations
@@ -2377,8 +2272,7 @@ components:
               parent_id: null
             - description: null
               id: 2491
-              label: Counselors, social workers, and other community and social service
-                specialists
+              label: Counselors, social workers, and other community and social service specialists
               parent_id: null
             - description: null
               id: 2492
@@ -3200,8 +3094,7 @@ components:
             - White Collar
             - Management occupations
             - Top executives
-            - Advertising, marketing, promotions, public relations, and sales
-              managers
+            - Advertising, marketing, promotions, public relations, and sales managers
             - Operations specialties managers
             - Other management occupations
             - Business and financial operations occupations
@@ -3220,8 +3113,7 @@ components:
             - Social scientists and related occupations
             - Life, physical, and social science technicians
             - Community and social services occupations
-            - Counselors, social workers, and other community and social service
-              specialists
+            - Counselors, social workers, and other community and social service specialists
             - Religious workers
             - All other counselors, social, and religious workers
             - Legal occupations
@@ -3282,8 +3174,7 @@ components:
             - Communications equipment operators
             - Financial clerks
             - Information and record clerks
-            - Material recording, scheduling, dispatching, and distributing
-              occupations
+            - Material recording, scheduling, dispatching, and distributing occupations
             - Secretaries and administrative assistants
             - Other office and administrative support workers
             - Farming, fishing, and forestry occupations
@@ -3299,8 +3190,7 @@ components:
             - Extraction workers
             - Installation, maintenance, and repair occupations
             - Supervisors of installation, maintenance, and repair workers
-            - Electrical and electronic equipment mechanics, installers, and
-              repairers
+            - Electrical and electronic equipment mechanics, installers, and repairers
             - And mobile equipment mechanics, installers, and repairers
             - Other installation, maintenance, and repair occupations
             - Production occupations
@@ -3419,8 +3309,7 @@ components:
                 parent_id: null
               - description: null
                 id: 2491
-                label: Counselors, social workers, and other community and social service
-                  specialists
+                label: Counselors, social workers, and other community and social service specialists
                 parent_id: null
               - description: null
                 id: 2492
@@ -3962,10 +3851,7 @@ components:
             id: crime
             name: Crime
             version: v1
-          - description: Conventionally, daytime population is equated to the number of the
-              employees in an area. However, that number does not capture
-              stay-at-home parents, students, and retired or unemployed
-              individuals. This insight provides that detail.
+          - description: Conventionally, daytime population is equated to the number of the employees in an area. However, that number does not capture stay-at-home parents, students, and retired or unemployed individuals. This insight provides that detail.
             id: daytime-population
             name: Daytime Population
             version: v2
@@ -3977,8 +3863,7 @@ components:
             id: employee-categories
             name: Employee Categories
             version: v2
-          - description: Quarterly historical total number of employees (often referred to
-              as daytime population).
+          - description: Quarterly historical total number of employees (often referred to as daytime population).
             id: employees
             name: Daytime Population
             version: v4
@@ -4046,8 +3931,7 @@ components:
             id: occupation
             name: Occupation
             version: v2
-          - description: Historical, current and forecasted number of people living in
-              houses and apartments within a trade area.
+          - description: Historical, current and forecasted number of people living in houses and apartments within a trade area.
             id: residential-population
             name: Residential Population
             version: v3
@@ -4055,13 +3939,11 @@ components:
             id: salaries
             name: Salaries
             version: v2
-          - description: Population residing in a housing unit specifically designated as
-              seasonal housing, like a summer cottage or winter chalet.
+          - description: Population residing in a housing unit specifically designated as seasonal housing, like a summer cottage or winter chalet.
             id: seasonal-population
             name: Seasonal Population
             version: v3
-          - description: Expressed interest on social media within the location's trade area
-              by business category.
+          - description: Expressed interest on social media within the location's trade area by business category.
             id: social
             name: Social Media Interest
             version: v3
@@ -4069,8 +3951,7 @@ components:
             id: spending
             name: Spending
             version: v2
-          - description: Population residing in a hotel or RV (Recreational Vehicle) for at
-              least 1 night.
+          - description: Population residing in a hotel or RV (Recreational Vehicle) for at least 1 night.
             id: transient-population
             name: Transient Population
             version: v3
@@ -4082,8 +3963,7 @@ components:
             id: youth-age
             name: Youth Age
             version: v2
-          - description: Search engine searches within a location's trade area by business
-              category.
+          - description: Search engine searches within a location's trade area by business category.
             id: search
             name: Search Engine Demand
             version: v3
@@ -4341,8 +4221,7 @@ components:
             parent_id: null
           - description: null
             id: 2491
-            label: Counselors, social workers, and other community and social service
-              specialists
+            label: Counselors, social workers, and other community and social service specialists
             parent_id: null
           - description: null
             id: 2492

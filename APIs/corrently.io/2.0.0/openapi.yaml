@@ -5,15 +5,11 @@ info:
   contact:
     email: dev@stromdao.com
     url: https://stromdao.de/kontakt
-  description: >
+  description: |
     *Corrently - from italian corrente, which is energy*
-
     # Introduction
-
     The Corrently ecosystem gets maintained by [STROMDAO GmbH](https://www.stromdao.de/) to support green energy services for prosumers, grid operators, regulators, integrators or any other party with an emerging need of consensus driven management.
-
     As the [energy product Corrently](https://www.corrently.de/) got first launched in Germany parts of this documentation provide simple translations for better understanding.
-
     [Released SKDs for Download](https://github.com/energychain/corrently-api/releases)
   license:
     name: Apache 2.0
@@ -31,44 +27,22 @@ info:
       version: "3.0"
   x-providerName: corrently.io
 tags:
-  - description: >
-      Managing accounts and balances for market partners (eq. households,
-      grid operators, traders,..) Stromkonto is based on distributed ledger
-      technology (AKA Blockchain). Instead of using the REST Api to access any
-      energy ledger, you might act as a blockchain node and use the published
-      ABI definitions to get the same results and/or run transactions directly.
+  - description: |
+      Managing accounts and balances for market partners (eq. households, grid operators, traders,..) Stromkonto is based on distributed ledger technology (AKA Blockchain). Instead of using the REST Api to access any energy ledger, you might act as a blockchain node and use the published ABI definitions to get the same results and/or run transactions directly.
     name: Stromkonto (Ledger)
-  - description: >
-      Green Power Index (GrünstromIndex), an AI based service to forecast
-      energy sources in the grid (regionale Stromherkunft).
-
+  - description: |
+      Green Power Index (GrünstromIndex), an AI based service to forecast energy sources in the grid (regionale Stromherkunft).
       Further Details and sample implementation is available at [gruenstromindex.de](https://www.gruenstromindex.de/).
     name: GreenPowerIndex (GrünstromIndex)
-  - description: >
-      Provides latest dispatch information of green energy at a specific
-      location in Germany (Herkunft/GrünstromMix). It allows to do schedule
-      management (Fahrplanmanagement) of green energy generation facilities,
-      demand and resilience management for grid operators. The public version
-      (OpenAPI) is always post fact. If you are interessted in pre fact
-      (forecast) data, you might get in contact with STROMDAO GmbH.
+  - description: |
+      Provides latest dispatch information of green energy at a specific location in Germany (Herkunft/GrünstromMix). It allows to do schedule management (Fahrplanmanagement) of green energy generation facilities, demand and resilience management for grid operators. The public version (OpenAPI) is always post fact. If you are interessted in pre fact (forecast) data, you might get in contact with STROMDAO GmbH.
     name: Dispatch (Green Energy Distribution API)
-  - description: >
-      Allows to virtualy act as an Meter Point Operator by decorating
-      meter readings with GreenPowerIndex (GrünstromIndex) handles. In principal
-      this service decorates meter [OBIS
-      Code](https://de.wikipedia.org/wiki/OBIS-Kennzahlen) 1.8.0 values to 1.8.1
-      and 1.8.2 according to the local and actual GSI value. A signature gets
-      applied to the reading and all three OBIS values get hashed into the
-      Energychain for consensus (e.q. creating balancing groups). CO2 footprint
-      of a meter gets provided (as of first reading pushed).This works in
-      conjunction with German Smart Meter Gateways (as of March 2020).
+  - description: |
+      Allows to virtualy act as an Meter Point Operator by decorating meter readings with GreenPowerIndex (GrünstromIndex) handles. In principal this service decorates meter [OBIS Code](https://de.wikipedia.org/wiki/OBIS-Kennzahlen) 1.8.0 values to 1.8.1 and 1.8.2 according to the local and actual GSI value. A signature gets applied to the reading and all three OBIS values get hashed into the Energychain for consensus (e.q. creating balancing groups). CO2 footprint of a meter gets provided (as of first reading pushed).This works in conjunction with German Smart Meter Gateways (as of March 2020).
     name: Metering (Decorator)
-  - description: Tariff information for the German market region. Provides base
-      price and energy price information for private households
-      (Standardlastprofil H0, SLP H0 Tarifinformation).
+  - description: Tariff information for the German market region. Provides base price and energy price information for private households (Standardlastprofil H0, SLP H0 Tarifinformation).
     name: Tariff (Price API)
-  - description: Access to status information of an existing metering change and
-      allocation process.
+  - description: Access to status information of an existing metering change and allocation process.
     name: WiM (Wechselprozesse im Messwesen Strom - Status API)
   - description: Helper services and endpoints for smarthome and home automation systems.
     name: SmartHome
@@ -78,10 +52,8 @@ tags:
     name: easee
   - description: Alternative access to Corrently OCPP Data (hosted cloud backend).
     name: OCPP
-  - description: >
-      Self-Service to create a full receipt (Quittung) for energy
-      delivery in case of submetering. Please refer to
-      [Strom-Quittung](http://strom-quittung.de) for a sample usage.
+  - description: |
+      Self-Service to create a full receipt (Quittung) for energy delivery in case of submetering. Please refer to [Strom-Quittung](http://strom-quittung.de) for a sample usage.
     name: Strom-Quittung
 paths:
   /alternative/easee/lastSessions:
@@ -109,17 +81,13 @@ paths:
                   $ref: "#/components/schemas/easee-charger"
                 type: array
           description: Success
-      summary: Returns lastSession info for all easee wallboxes (chargers) given user
-        has access to.
+      summary: Returns lastSession info for all easee wallboxes (chargers) given user has access to.
       tags:
         - easee
   /alternative/ocpp/lastSessions:
     get:
-      description: >
-        Returns lastSession info of OCCP Cloud service for clearing in
-        corrently ecosystem. Might be tested via [OCPP cloud
-        simulator](https://ocpp.corrently.cloud).
-
+      description: |
+        Returns lastSession info of OCCP Cloud service for clearing in corrently ecosystem. Might be tested via [OCPP cloud simulator](https://ocpp.corrently.cloud).
         Last session Info of managed EV charging stations connected to the correnty ecosystem.
       operationId: ocppSessions
       responses:
@@ -136,10 +104,8 @@ paths:
         - OCPP
   /alternative/openmeter/activities:
     get:
-      description: >
-        Provides a list of available meterrs in the OpenMETER project (
-        https://www.openmeter.de/ ) which grants access for analytics as data
-        discovery.
+      description: |
+        Provides a list of available meterrs in the OpenMETER project ( https://www.openmeter.de/ ) which grants access for analytics as data discovery.
       operationId: omActivities
       responses:
         "200":
@@ -150,16 +116,13 @@ paths:
                   $ref: "#/components/schemas/ommeters"
                 type: array
           description: Success
-      summary: Public shared smart meters installed in Germany and available for
-        subservices and exploration.
+      summary: Public shared smart meters installed in Germany and available for subservices and exploration.
       tags:
         - OpenMETER
   /alternative/openmeter/meters:
     get:
-      description: >
-        Provides a list of available meterrs in the OpenMETER project (
-        https://www.openmeter.de/ ) which grants access for analytics as data
-        discovery.
+      description: |
+        Provides a list of available meterrs in the OpenMETER project ( https://www.openmeter.de/ ) which grants access for analytics as data discovery.
       operationId: omMeters
       responses:
         "200":
@@ -170,16 +133,13 @@ paths:
                   $ref: "#/components/schemas/ommeters"
                 type: array
           description: Success
-      summary: Public shared smart meters installed in Germany and available for
-        subservices and exploration.
+      summary: Public shared smart meters installed in Germany and available for subservices and exploration.
       tags:
         - OpenMETER
   /alternative/openmeter/readings:
     get:
-      description: >
-        Provides a list of available meterrs in the OpenMETER project (
-        https://www.openmeter.de/ ) which grants access for analytics as data
-        discovery.
+      description: |
+        Provides a list of available meterrs in the OpenMETER project ( https://www.openmeter.de/ ) which grants access for analytics as data discovery.
       operationId: omReadings
       responses:
         "200":
@@ -190,17 +150,13 @@ paths:
                   $ref: "#/components/schemas/ommeters"
                 type: array
           description: Success
-      summary: Public shared smart meters installed in Germany and available for
-        subservices and exploration.
+      summary: Public shared smart meters installed in Germany and available for subservices and exploration.
       tags:
         - OpenMETER
   /gsi/bestHour:
     get:
-      description: >
-        Simple Wrapper around the GreenPowerIndex for easy integration into
-        almost any SmartHome system that allows access to a JSON/REST Service
-        This endpoint is designed to indicate if a device should be turned on or
-        off. (Switch state).
+      description: |
+        Simple Wrapper around the GreenPowerIndex for easy integration into almost any SmartHome system that allows access to a JSON/REST Service This endpoint is designed to indicate if a device should be turned on or off. (Switch state).
       operationId: gsiBesthour
       parameters:
         - description: Zipcode (Postleitzahl) of a city in Germany.
@@ -237,7 +193,7 @@ paths:
         - SmartHome
   /gsi/dispatch:
     get:
-      description: >
+      description: |
         Dispatch of green energy has two aspects to consider:
           - Availability of gerneration facility (depends on weather and installed capacity)
           - Demand of energy
@@ -261,8 +217,7 @@ paths:
               schema:
                 properties:
                   avg_distance_km:
-                    description: Averaged geospatial distance in kilometers between energy
-                      generation and usage at requested location.
+                    description: Averaged geospatial distance in kilometers between energy generation and usage at requested location.
                     type: number
                   dispatch_from:
                     description: List of current sources of green energy (into requested location)
@@ -298,9 +253,8 @@ paths:
         - Dispatch (Green Energy Distribution API)
   /gsi/marketdata:
     get:
-      description: >
-        Compatible to awattar (https://api.awattar.de/v1/marketdata) API
-        interface but data comes from GreenPowerIndex instead of EPEXSpot.
+      description: |
+        Compatible to awattar (https://api.awattar.de/v1/marketdata) API interface but data comes from GreenPowerIndex instead of EPEXSpot.
       operationId: gsiMarketdata
       parameters:
         - description: Zipcode (Postleitzahl) of a city in Germany.
@@ -326,9 +280,8 @@ paths:
         - GreenPowerIndex (GrünstromIndex)
   /gsi/prediction:
     get:
-      description: >
-        Retrieval the GreenPowerIndex (GrünstromIndex) for a given city (by
-        zipcode) in Germany.
+      description: |
+        Retrieval the GreenPowerIndex (GrünstromIndex) for a given city (by zipcode) in Germany.
       operationId: gsiPrediction
       parameters:
         - description: Zipcode (Postleitzahl) of a city in Germany.
@@ -405,36 +358,30 @@ paths:
                     description: Reading as provided as input in Wh
                     type: integer
                   1.8.1:
-                    description: Green energy calculated using Green Power Index (GrünstromIndex) in
-                      Wh
+                    description: Green energy calculated using Green Power Index (GrünstromIndex) in Wh
                     type: integer
                   1.8.2:
-                    description: Grey energy calculated using Green Power Index (GrünstromIndex) in
-                      Wh
+                    description: Grey energy calculated using Green Power Index (GrünstromIndex) in Wh
                     type: integer
                   _processingTime:
-                    description: Time this reading got imported into consensus (e.q. signed
-                      timestamp).
+                    description: Time this reading got imported into consensus (e.q. signed timestamp).
                     type: integer
                   account:
                     description: Stromkonto/Metering address allocated (this is not the MELOID!)
                     type: string
                   co2_g_oekostrom:
-                    description: CO2 Emission of metered energy in a green energy mix (e.q.
-                      Ökostromtarif)
+                    description: CO2 Emission of metered energy in a green energy mix (e.q. Ökostromtarif)
                     type: integer
                   co2_g_standard:
                     description: CO2 Emission of metered energy in a standard mix
                     type: integer
                   credits:
-                    description: Update credits this meter has. Gets refilled automtically to
-                      prevent too frequent updates
+                    description: Update credits this meter has. Gets refilled automtically to prevent too frequent updates
                   timeStamp:
                     description: API Consensus time this reading was fully received
                     type: integer
                   ttl:
-                    description: Time to Live for this reader. If no update is provided it gets
-                      decommissioned.
+                    description: Time to Live for this reader. If no update is provided it gets decommissioned.
                     type: integer
                 type: object
           description: Success
@@ -442,11 +389,8 @@ paths:
       tags:
         - Metering (Decorator)
     post:
-      description: >
-        Post meter reading and get it decorated. Best practice is to first
-        create a new Stromkonto with the register method and choose a nice
-        secret to protect updates. Now regularly send updates to get readings
-        (consumption) split into green power (1.8.1) and grey power (1.8.2).
+      description: |
+        Post meter reading and get it decorated. Best practice is to first create a new Stromkonto with the register method and choose a nice secret to protect updates. Now regularly send updates to get readings (consumption) split into green power (1.8.1) and grey power (1.8.2).
       operationId: meteringPost
       requestBody:
         content:
@@ -463,8 +407,7 @@ paths:
                   description: Alias for 1.8.0
                   type: integer
                 secret:
-                  description: Some private password you might choose on first update. However you
-                    need to use the same secret on every further posts.
+                  description: Some private password you might choose on first update. However you need to use the same secret on every further posts.
                   type: string
                 value:
                   description: Alias for 1.8.0
@@ -484,23 +427,19 @@ paths:
                     description: Reading as provided as input in Wh
                     type: integer
                   1.8.1:
-                    description: Green energy calculated using Green Power Index (GrünstromIndex) in
-                      Wh
+                    description: Green energy calculated using Green Power Index (GrünstromIndex) in Wh
                     type: integer
                   1.8.2:
-                    description: Grey energy calculated using Green Power Index (GrünstromIndex) in
-                      Wh
+                    description: Grey energy calculated using Green Power Index (GrünstromIndex) in Wh
                     type: integer
                   _processingTime:
-                    description: Time this reading got imported into consensus (e.q. signed
-                      timestamp).
+                    description: Time this reading got imported into consensus (e.q. signed timestamp).
                     type: integer
                   account:
                     description: Stromkonto/Metering address allocated (this is not the MELOID!)
                     type: string
                   co2_g_oekostrom:
-                    description: CO2 Emission of metered energy in a green energy mix (e.q.
-                      Ökostromtarif)
+                    description: CO2 Emission of metered energy in a green energy mix (e.q. Ökostromtarif)
                     type: integer
                   co2_g_standard:
                     description: CO2 Emission of metered energy in a standard mix
@@ -515,10 +454,8 @@ paths:
         - Metering (Decorator)
   /quittung/create:
     post:
-      description: >
-        Creates a full featured receipt (Quittung) for an energy delivery
-        as it appears on a charging session or similar events. Allows to embed
-        receipt generation directly into external services.
+      description: |
+        Creates a full featured receipt (Quittung) for an energy delivery as it appears on a charging session or similar events. Allows to embed receipt generation directly into external services.
       operationId: quittungCreate
       requestBody:
         content:
@@ -534,9 +471,7 @@ paths:
           content:
             application/json:
               schema:
-                description: Token for this receipt. It might be extended as 'token' parameter
-                  to retrieve actual receipt
-                  [sample](https://corrently.de/service/quittung.html?token=0x3C4750bf93aa96e55A0d60be334B6b6E14DCe5bc)
+                description: Token for this receipt. It might be extended as 'token' parameter to retrieve actual receipt [sample](https://corrently.de/service/quittung.html?token=0x3C4750bf93aa96e55A0d60be334B6b6E14DCe5bc)
                 type: string
           description: Success
       summary: Create a receipt for an energy delivery (only valid in Germany).
@@ -544,15 +479,8 @@ paths:
         - Strom-Quittung
   /stromkonto/balances:
     get:
-      description: >
-        Stromkonto represents a core component of the Corrently Ecosystem.
-        It is a ledger for green energy related transactions and gets heavily
-        used by the public Web-UI on www.stromkonto.net . Beside of some
-        decoration and reformating operations all data is backed by the
-        [Energychain blockchain](https://github.com/energychain/) to provide
-        consensus of balances and transactions. Use this API Endppoint if you
-        prefere not to work with low level Distributed Ledger Technology
-        (Blockchain).
+      description: |
+        Stromkonto represents a core component of the Corrently Ecosystem. It is a ledger for green energy related transactions and gets heavily used by the public Web-UI on www.stromkonto.net . Beside of some decoration and reformating operations all data is backed by the [Energychain blockchain](https://github.com/energychain/) to provide consensus of balances and transactions. Use this API Endppoint if you prefere not to work with low level Distributed Ledger Technology (Blockchain).
       operationId: stromkontoBalances
       parameters:
         - description: Ethereum style address referencing a valid account (AKA Stromkonto).
@@ -578,8 +506,7 @@ paths:
         Signable choices (contract changes) for customer.
       operationId: stromkontoChoices
       parameters:
-        - description: Ethereum style address referencing a valid account alias (never use
-            Stromkonto directly!).
+        - description: Ethereum style address referencing a valid account alias (never use Stromkonto directly!).
           in: query
           name: account
           schema:
@@ -598,16 +525,8 @@ paths:
         - Stromkonto (Ledger)
   /stromkonto/login:
     post:
-      description: >
-        Sends a mail to a given email address to login this user. This
-        function makes life a bit easier in order to not having to deal with
-        private key protection on the user side as a shared key is used to sign
-        transactions onbehalf of a particular account.  However viewing
-        consensus information (balances) are public and *might move* from
-        account to account without prior notification. Best practice for third
-        party uses is to always start a session with the login RESP call and
-        only create a user in case the response indicates an `unregistered`
-        status.
+      description: |
+        Sends a mail to a given email address to login this user. This function makes life a bit easier in order to not having to deal with private key protection on the user side as a shared key is used to sign transactions onbehalf of a particular account.  However viewing consensus information (balances) are public and *might move* from account to account without prior notification. Best practice for third party uses is to always start a session with the login RESP call and only create a user in case the response indicates an `unregistered` status.
       operationId: stromkontoLogin
       requestBody:
         content:
@@ -625,8 +544,7 @@ paths:
               schema:
                 properties:
                   status:
-                    description: Registration status of a user. In case unregistered gets returned
-                      use the `register` endpoint to (re-)register.
+                    description: Registration status of a user. In case unregistered gets returned use the `register` endpoint to (re-)register.
                     enum:
                       - registered
                       - unregistered
@@ -638,15 +556,8 @@ paths:
         - Stromkonto (Ledger)
   /stromkonto/prepareTransaction:
     post:
-      description: >
-        Prepares and inques a transaction (transfer) between two accounts
-        (Stromkonten). This might be used to send any balanced entity. Using
-        this endpoint will only prepare the transaction and enques it for
-        signing and countersigning. This is done from within the user UI using
-        validation process. Note: This API method does not validate any
-        transations. In other words authentication, authorization, validation
-        and actual transfer of value is done using a smart contract during
-        processing in the energy blockchain.
+      description: |
+        Prepares and inques a transaction (transfer) between two accounts (Stromkonten). This might be used to send any balanced entity. Using this endpoint will only prepare the transaction and enques it for signing and countersigning. This is done from within the user UI using validation process. Note: This API method does not validate any transations. In other words authentication, authorization, validation and actual transfer of value is done using a smart contract during processing in the energy blockchain.
       operationId: prepareTransaction
       requestBody:
         content:
@@ -657,8 +568,7 @@ paths:
                   description: Stromkonto account address of sender
                   type: string
                 signature:
-                  description: Signature per Stromkonto setting (might be simple email
-                    confirmation link)
+                  description: Signature per Stromkonto setting (might be simple email confirmation link)
                   type: string
                 to:
                   description: Stromkonto account address of reciever
@@ -684,11 +594,8 @@ paths:
         - Stromkonto (Ledger)
   /stromkonto/register:
     post:
-      description: >
-        Calling this method with an unregistered (new) email will create a
-        new account (Stromkonto) with all balances having a value of `0` and no
-        transaction history. In addition some basic properties like region and
-        zipcode are set to allow further operation of account.
+      description: |
+        Calling this method with an unregistered (new) email will create a new account (Stromkonto) with all balances having a value of `0` and no transaction history. In addition some basic properties like region and zipcode are set to allow further operation of account.
       operationId: stromkontoRegister
       requestBody:
         content:
@@ -713,10 +620,8 @@ paths:
         - Stromkonto (Ledger)
   /tariff/components:
     get:
-      description: >
-        Provides insides into the different cost components of energy for a
-        private household.
-
+      description: |
+        Provides insides into the different cost components of energy for a private household.
         Sample Request: https://api.corrently.io/v2.0/tariff/components?email=demo%40corrently.io&zip=69168&kwha=3300
       operationId: tariffcomponents
       parameters:
@@ -725,8 +630,7 @@ paths:
           name: zipcode
           schema:
             type: string
-        - description: Valid email address to assign request to (pre offer generation).
-            Ensure GDPR (DSGVO) at any time
+        - description: Valid email address to assign request to (pre offer generation). Ensure GDPR (DSGVO) at any time
           in: query
           name: email
           schema:
@@ -741,8 +645,7 @@ paths:
           name: milliseconds
           schema:
             type: integer
-        - description: If provided together with milliseconds, a cost component stament
-            for a particular event (like charging a car) will be created.
+        - description: If provided together with milliseconds, a cost component stament for a particular event (like charging a car) will be created.
           in: query
           name: wh
           schema:
@@ -760,9 +663,8 @@ paths:
         - Tariff (Price API)
   /tariff/slph0:
     get:
-      description: >
-        Provides pricing data for private households with standard load
-        profiles (Standardlastprofil H0).
+      description: |
+        Provides pricing data for private households with standard load profiles (Standardlastprofil H0).
       operationId: tariffSLPH0
       parameters:
         - description: Zipcode (Postzleitzahl) of a city in Germany.
@@ -784,9 +686,8 @@ paths:
         - Tariff (Price API)
   /wim/status:
     get:
-      description: >
-        Access to status information of an existing metering change and
-        allocation process.
+      description: |
+        Access to status information of an existing metering change and allocation process.
       operationId: wimstatus
       parameters:
         - description: VID key of the process.
@@ -860,8 +761,7 @@ components:
           example: 23
           type: integer
         energyprice:
-          description: Local/regional energyprice modification (cent per kWh or euro per
-            MWh).
+          description: Local/regional energyprice modification (cent per kWh or euro per MWh).
           example: -0.219
           type: number
         epochtime:
@@ -902,13 +802,11 @@ components:
     Tariffh0:
       properties:
         ap:
-          description: Energy price in cent per kwh. (Arbeitspreis) including all taxes
-            and fees.
+          description: Energy price in cent per kwh. (Arbeitspreis) including all taxes and fees.
           example: 22.12
           type: integer
         gp:
-          description: Base price in euro per montah (Grundpreis) including all taxes and
-            fees.
+          description: Base price in euro per montah (Grundpreis) including all taxes and fees.
           example: 7.5
           type: integer
       type: object

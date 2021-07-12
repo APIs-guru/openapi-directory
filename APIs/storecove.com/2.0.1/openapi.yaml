@@ -64,9 +64,7 @@ paths:
         - Discovery
   /document_submissions:
     post:
-      description: Submit a document for delivery. This endpoint will replace the
-        /invoice_submissions endpoint, but for now should only be used to send
-        Invoice Response doucments.
+      description: Submit a document for delivery. This endpoint will replace the /invoice_submissions endpoint, but for now should only be used to send Invoice Response doucments.
       operationId: create_document_submission
       requestBody:
         content:
@@ -94,8 +92,7 @@ paths:
                   $ref: "#/components/schemas/ErrorModel"
                 type: array
           description: Unprocessable Entity
-      summary: "*** NOTE: Experimental. Only to be used for sending Invoice Response
-        documents. *** Submit a new document."
+      summary: "*** NOTE: Experimental. Only to be used for sending Invoice Response documents. *** Submit a new document."
       tags:
         - DocumentSubmissions
   /invoice_submissions:
@@ -320,8 +317,7 @@ paths:
         - LegalEntities
   "/legal_entities/{legal_entity_id}/administrations":
     post:
-      description: Create a new Administration. An Administration is an email
-        destination for purchase invoices.
+      description: Create a new Administration. An Administration is an email destination for purchase invoices.
       operationId: create_administration
       parameters:
         - description: The id of the LegalEntity for which to create the Administration
@@ -523,15 +519,13 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: The superscheme of the identifier. Should always be
-            "iso6523-actorid-upis".
+        - description: The superscheme of the identifier. Should always be "iso6523-actorid-upis".
           in: path
           name: superscheme
           required: true
           schema:
             type: string
-        - description: PEPPOL identifier scheme id, e.g. "DE:VAT". For a full list see
-            <<_peppol_participant_identifier_list>>.
+        - description: PEPPOL identifier scheme id, e.g. "DE:VAT". For a full list see <<_peppol_participant_identifier_list>>.
           in: path
           name: scheme
           required: true
@@ -557,18 +551,25 @@ paths:
         - PeppolIdentifiers
   "/purchase_invoices/{guid}":
     get:
-      description: Get a specific PurchaseInvoice, in JSON format. Recommended way of
-        getting a PurchaseInvoice, since it provides the data in a JSON object
-        and the JSON format is the richest we have that supports all features a
-        PurchaseInvoice can have.
+      description: Get a specific PurchaseInvoice, in JSON format. Recommended way of getting a PurchaseInvoice, since it provides the data in a JSON object and the JSON format is the richest we have that supports all features a PurchaseInvoice can have.
       operationId: get_invoice_json
       parameters:
-        - description: purchase invoice guid
+        - description: The guid of the purchase invoice, from the webhook.
           in: path
           name: guid
           required: true
           schema:
             format: uuid
+            type: string
+        - description: |-
+            The PaymentMeans version. The default (and deprecated) version 1.0 will give BankPaymentMean, DirectDebitPaymentMean, CardPaymentMean, NppPaymentMean, SeBankGiroPaymentMean, SePlusGiroPaymentMean, SgCardPaymentMean, SgGiroPaymentMean, SgPaynowPaymentMean.
+
+            Version 2.0 deprecates BankPaymentMean (now CreditTransferPaymentMean), CardPaymentMean (now CreditCardPaymentMean), NppPaymentMean (now AunzNppPayidPaymentMean), SeBankGiroPaymentMean (now SeBankgiroPaymentMean  -- note the lower 'g' in 'bankgiro'). It also adds OnlinePaymentServicePaymentMean, StandingAgreementPaymentMean, AunzNppPaytoPaymentMean, AunzBpayPaymentMean, AunzPostbillpayPaymentMean, AunzUriPaymentMean.
+          in: query
+          name: pmv
+          required: false
+          schema:
+            default: "1.0"
             type: string
       responses:
         "200":
@@ -588,10 +589,7 @@ paths:
         - PurchaseInvoices
   "/purchase_invoices/{guid}/{packaging}":
     get:
-      description: Get a specific PurchaseInvoice. Using /json as {packaging} is
-        recommended (in which case you can just omit it), however, this endpoint
-        allows getting the invoice in a differently serialized format such as
-        UBL.
+      description: Get a specific PurchaseInvoice. Using /json as {packaging} is recommended (in which case you can just omit it), however, this endpoint allows getting the invoice in a differently serialized format such as UBL.
       operationId: get_invoice_ubl
       parameters:
         - description: purchase invoice guid
@@ -629,8 +627,7 @@ paths:
         - PurchaseInvoices
   "/purchase_invoices/{guid}/{packaging}/{package_version}":
     get:
-      description: Get a specific PurchaseInvoice in a non-JSON serialized format with
-        version.
+      description: Get a specific PurchaseInvoice in a non-JSON serialized format with version.
       operationId: get_invoice_ubl_versioned
       parameters:
         - description: purchase invoice guid
@@ -676,15 +673,12 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Get Purchase invoice data as JSON with a Base64-encoded UBL string in
-        the specified version
+      summary: Get Purchase invoice data as JSON with a Base64-encoded UBL string in the specified version
       tags:
         - PurchaseInvoices
   /webhook_instances/:
     get:
-      description: GET a WebhookInstance from the queue. After processing it
-        successfully, DELETE it and GET the next one. When a 204 is received,
-        the queue is empty and the polling process can sleep for a while.
+      description: GET a WebhookInstance from the queue. After processing it successfully, DELETE it and GET the next one. When a 204 is received, the queue is empty and the polling process can sleep for a while.
       operationId: get_webhook_instances
       responses:
         "200":
@@ -750,11 +744,7 @@ components:
       title: Customer
       type: object
     AccountingSupplierParty:
-      description: The party sending the invoice. Most data for the
-        AccountingSupplierParty is taken from the Storecove database, where your
-        sender identity resides and has been validated. However, we provide a
-        limited number of fields here that you can specify on an
-        invoice-by-invoice basis.
+      description: The party sending the invoice. Most data for the AccountingSupplierParty is taken from the Storecove database, where your sender identity resides and has been validated. However, we provide a limited number of fields here that you can specify on an invoice-by-invoice basis.
       properties:
         party:
           $ref: "#/components/schemas/SupplierParty"
@@ -797,13 +787,11 @@ components:
           title: Street 1
           type: string
         street2:
-          description: The second street field. Use this if you used the first field for
-            the building name.
+          description: The second street field. Use this if you used the first field for the building name.
           title: Street 2
           type: string
         zip:
-          description: The zipcode/postalzone. Mandatory unless the country does not have
-            zip codes.
+          description: The zipcode/postalzone. Mandatory unless the country does not have zip codes.
           minLength: 2
           title: Zipcode
           type: string
@@ -842,8 +830,7 @@ components:
           title: Packaging
           type: string
         sender_email_identity_id:
-          description: The id of the SenderEmailIdentity. If not provided, the Storecove
-            default sender will be used
+          description: The id of the SenderEmailIdentity. If not provided, the Storecove default sender will be used
           format: int64
           title: Sender email identity
           type: integer
@@ -875,8 +862,7 @@ components:
           title: Packaging
           type: string
         sender_email_identity_id:
-          description: The id of the SenderEmailIdentity. If not provided, the Storecove
-            default sender will be used
+          description: The id of the SenderEmailIdentity. If not provided, the Storecove default sender will be used
           format: int64
           title: Sender email identity
           type: integer
@@ -901,8 +887,7 @@ components:
           title: Packaging
           type: string
         sender_email_identity_id:
-          description: The id of the SenderEmailIdentity. If not provided, the Storecove
-            default sender will be used
+          description: The id of the SenderEmailIdentity. If not provided, the Storecove default sender will be used
           format: int64
           title: Sender email identity
           type: integer
@@ -924,9 +909,7 @@ components:
         tax:
           $ref: "#/components/schemas/Tax"
         taxes_duties_fees:
-          description: An array of taxes, duties and fees for this allowance or charge. At
-            this moment, only a single Tax item is allowed. When used, the 'tax'
-            element must be empty.
+          description: An array of taxes, duties and fees for this allowance or charge. At this moment, only a single Tax item is allowed. When used, the 'tax' element must be empty.
           items:
             $ref: "#/components/schemas/Tax"
           maxItems: 1
@@ -952,16 +935,14 @@ components:
           title: Filename
           type: string
         mimeType:
-          description: The document attachment mime type. Currently only application/pdf
-            is allowed.
+          description: The document attachment mime type. Currently only application/pdf is allowed.
           enum:
             - application/pdf
           title: Mime Type
           type: string
         primaryImage:
           default: false
-          description: Whether or not this document is a visual representation of the
-            invoice data.
+          description: Whether or not this document is a visual representation of the invoice data.
           title: Primary Image
           type: boolean
       required:
@@ -1465,8 +1446,7 @@ components:
       description: A participant to be discovered.
       properties:
         documentTypes:
-          description: An array of document types to discover. The default is '["invoice",
-            "creditnote"]'
+          description: An array of document types to discover. The default is '["invoice", "creditnote"]'
           items:
             enum:
               - invoice
@@ -1486,8 +1466,7 @@ components:
           type: string
         metaScheme:
           default: iso6523-actorid-upis
-          description: The meta scheme of the identifier. For Peppol this is always
-            'iso6523-actorid-upis'.
+          description: The meta scheme of the identifier. For Peppol this is always 'iso6523-actorid-upis'.
           minLength: 3
           title: Meta Scheme
           type: string
@@ -1498,8 +1477,7 @@ components:
           title: Network
           type: string
         scheme:
-          description: The scheme of the identifier. See
-            <<_peppol_participant_identifier_list>> for a list.
+          description: The scheme of the identifier. See <<_peppol_participant_identifier_list>> for a list.
           minLength: 3
           title: Scheme
           type: string
@@ -1519,13 +1497,7 @@ components:
           title: Code
           type: string
         email:
-          description: Whether or not an 'OK' response means the document will be sent via
-            Peppol, but delivered by email. This happens in the Belgian Hermes
-            system where all identifiers have been registered, but if the
-            receiver hasn't registered with a service provider, the Hermes
-            system will send a PDF created from the electronic invoice and email
-            that. The electronic document will itself not be emailed. Also see
-            https://einvoice.belgium.be/en/article/send-structured-invoices-all-your-customers-hermes[Hermes^].
+          description: Whether or not an 'OK' response means the document will be sent via Peppol, but delivered by email. This happens in the Belgian Hermes system where all identifiers have been registered, but if the receiver hasn't registered with a service provider, the Hermes system will send a PDF created from the electronic invoice and email that. The electronic document will itself not be emailed. Also see https://einvoice.belgium.be/en/article/send-structured-invoices-all-your-customers-hermes[Hermes^].
           title: Email
           type: boolean
       title: Discovered Participant
@@ -1534,8 +1506,7 @@ components:
       description: The invoice response to send.
       properties:
         clarifications:
-          description: A list of clarifications why a received invoice was rejected (RE)
-            or under query (UQ) and what action to take.
+          description: A list of clarifications why a received invoice was rejected (RE) or under query (UQ) and what action to take.
           items:
             $ref: "#/components/schemas/InvoiceResponseClarification"
           minItems: 0
@@ -1551,8 +1522,7 @@ components:
           title: Note
           type: string
         responseCode:
-          description: The response code. For details see
-            https://docs.peppol.eu/poacc/upgrade-3/codelist/UNCL4343-T111/
+          description: The response code. For details see https://docs.peppol.eu/poacc/upgrade-3/codelist/UNCL4343-T111/
           enum:
             - AB
             - IP
@@ -1571,8 +1541,7 @@ components:
       description: The document you want Storecove to send, with some meta-data.
       properties:
         attachments:
-          description: An array of attachments. You may provide up to 10 attchments, but
-            the total size must not exceed 10MB after Base64 encoding.
+          description: An array of attachments. You may provide up to 10 attchments, but the total size must not exceed 10MB after Base64 encoding.
           items:
             $ref: "#/components/schemas/Attachment"
           maxItems: 10
@@ -1580,30 +1549,23 @@ components:
           type: array
         createPrimaryImage:
           default: true
-          description: Whether or not to create a primary image (PDF) if one is not
-            provided.
+          description: Whether or not to create a primary image (PDF) if one is not provided.
           title: Create Primary Image
           type: boolean
         document:
           $ref: "#/components/schemas/SendableDocument"
         idempotencyGuid:
-          description: A guid that you generated for this DocumentSubmission to achieve
-            idempotency. If you submit multiple documents with the same
-            idempotencyGuid, only the first one will be processed and any
-            subsequent ones will trigger an HTTP 422 Unprocessable Entity
-            response.
+          description: A guid that you generated for this DocumentSubmission to achieve idempotency. If you submit multiple documents with the same idempotencyGuid, only the first one will be processed and any subsequent ones will trigger an HTTP 422 Unprocessable Entity response.
           maxLength: 36
           minLength: 36
           title: Idempotency GUID
           type: string
         legalEntityId:
-          description: The id of the LegalEntity this document should be sent on behalf
-            of. Either legalEntityId or receiveGuid is mandatory.
+          description: The id of the LegalEntity this document should be sent on behalf of. Either legalEntityId or receiveGuid is mandatory.
           title: LegalEntity Id
           type: integer
         receiveGuid:
-          description: The GUID that was in the received_invoice webhook. Either
-            legalEntityId or receiveGuid is mandatory.
+          description: The GUID that was in the received_invoice webhook. Either legalEntityId or receiveGuid is mandatory.
           title: Receive GUID
           type: string
         routing:
@@ -1620,8 +1582,7 @@ components:
       title: Document submission result
       type: object
     EIdentifiers:
-      description: A list of electronic routing identifiers. These are the identifiers
-        used on the Peppol network or for other destinations.
+      description: A list of electronic routing identifiers. These are the identifiers used on the Peppol network or for other destinations.
       items:
         $ref: "#/components/schemas/RoutingIdentifier"
       title: Electronic identifiers
@@ -1633,12 +1594,10 @@ components:
         source:
           type: string
     Invoice:
-      description: The invoice to send.  Provide either invoice, or invoiceData, but
-        not both.
+      description: The invoice to send.  Provide either invoice, or invoiceData, but not both.
       properties:
         accountingCost:
-          description: The buyer's accounting cost centre for this invoice, expressed as
-            text.
+          description: The buyer's accounting cost centre for this invoice, expressed as text.
           minLength: 1
           title: Accounting Cost
           type: string
@@ -1654,40 +1613,24 @@ components:
           title: Allowance Charges
           type: array
         amountIncludingVat:
-          description: amountIncludingVat is important because of rounding differences. In
-            many invoices, the sum of the line item amounts excluding VAT and
-            the VAT amounts is not equal to first summing the line items without
-            VAT, and then applying VAT. The difference is automatically
-            calculated and included in the electronic invoice, so the receiving
-            accounting package can process the electronic invoice without
-            problems.
+          description: amountIncludingVat is important because of rounding differences. In many invoices, the sum of the line item amounts excluding VAT and the VAT amounts is not equal to first summing the line items without VAT, and then applying VAT. The difference is automatically calculated and included in the electronic invoice, so the receiving accounting package can process the electronic invoice without problems.
           title: Amount including VAT
           type: number
         billingReference:
-          description: A reference to a commercial invoice or corrective invoice of which
-            the current invoice is a correction. This field is mandatory when
-            sending invoiceType 384.
+          description: A reference to a commercial invoice or corrective invoice of which the current invoice is a correction. This field is mandatory when sending invoiceType 384.
           title: Billing reference
           type: string
         buyerReference:
-          description: A reference provided by the buyer used for internal routing of the
-            document.
+          description: A reference provided by the buyer used for internal routing of the document.
           title: Buyer reference
           type: string
         consumerTaxMode:
           default: false
-          description: Whether or not to process the invoice in consumer tax mode. In this
-            mode, the VAT identifier of the sender will not be the default VAT
-            identifier, but the one that matches with the country of the
-            receiving consumer, if that additional VAT identifier for that
-            country is available. These additional VAT identifiers need to be
-            added to the sending LegalEntity by Storecove, so if you need to
-            send invoices in this mode, please contact us.
+          description: Whether or not to process the invoice in consumer tax mode. In this mode, the VAT identifier of the sender will not be the default VAT identifier, but the one that matches with the country of the receiving consumer, if that additional VAT identifier for that country is available. These additional VAT identifiers need to be added to the sending LegalEntity by Storecove, so if you need to send invoices in this mode, please contact us.
           title: Consumer Tax Mode
           type: boolean
         contractDocumentReference:
-          description: A reference to a contract or framework agreement that this invoice
-            relates to.
+          description: A reference to a contract or framework agreement that this invoice relates to.
           title: Contract document reference
           type: string
         delivery:
@@ -1707,30 +1650,18 @@ components:
           title: Invoice lines
           type: array
         invoiceNumber:
-          description: The invoice number you assigned to the invoice. The invoiceNumber
-            should be unique for the legalEntityId and year of the issueDate.
-            This means invoice numbers can be reused in different years, as is
-            customary in some countries.
+          description: The invoice number you assigned to the invoice. The invoiceNumber should be unique for the legalEntityId and year of the issueDate. This means invoice numbers can be reused in different years, as is customary in some countries.
           minLength: 1
           title: Invoice number
           type: string
         invoicePeriod:
-          description: "The period (or specific date) to which the invoice applies.
-            Format: yyyy-mm-dd - yyyy-mm-dd."
+          description: "The period (or specific date) to which the invoice applies. Format: yyyy-mm-dd - yyyy-mm-dd."
           pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2} - [0-9]{4}-[0-9]{2}-[0-9]{2}$
           title: Invoice period
           type: string
         invoiceType:
           default: "380"
-          description: Do not use. This field is available for legacy reasons only. If you
-            want to send a regular invoice (aka UBL type '380'), make sure you
-            have a positive invoice amount. For a credit note (aka UBL type
-            '381'), simply provide a negative invoice amount. If you, in
-            addition to a negative invoice amount, also specify a
-            billingReferences, your invoice will become a corrective invoice
-            (aka UBL type '384'). If your invoice is not sent in the UBL syntax,
-            Storecove will provide the appropriate type for the syntax the
-            invoice is sent in.
+          description: Do not use. This field is available for legacy reasons only. If you want to send a regular invoice (aka UBL type '380'), make sure you have a positive invoice amount. For a credit note (aka UBL type '381'), simply provide a negative invoice amount. If you, in addition to a negative invoice amount, also specify a billingReferences, your invoice will become a corrective invoice (aka UBL type '384'). If your invoice is not sent in the UBL syntax, Storecove will provide the appropriate type for the syntax the invoice is sent in.
           enum:
             - "380"
             - "381"
@@ -1747,12 +1678,7 @@ components:
           title: Note
           type: string
         orderReference:
-          description: A reference to an order for this invoice, assigned by the buyer.
-            Note that this often is a key field, since many receivers of
-            invoices will use this field to automatically match the invoice to
-            an order they placed. Many receivers refuse invoices that cannot be
-            automatically matched, in particular government agencies. So it is
-            highly recommended to fill this field whenever possible.
+          description: A reference to an order for this invoice, assigned by the buyer. Note that this often is a key field, since many receivers of invoices will use this field to automatically match the invoice to an order they placed. Many receivers refuse invoices that cannot be automatically matched, in particular government agencies. So it is highly recommended to fill this field whenever possible.
           title: Order reference
           type: string
         paymentMeansArray:
@@ -1762,20 +1688,12 @@ components:
           title: Payment Means Array
           type: array
         paymentMeansBic:
-          description: DEPRECATED. Use paymentMeansArray. The BIC (Swift) of the bank
-            where the amount payable should be transferred to
+          description: DEPRECATED. Use paymentMeansArray. The BIC (Swift) of the bank where the amount payable should be transferred to
           pattern: ^[A-Z]{6}[2-9A-Z][0-9A-NP-Z]([A-Z0-9]{3}|X{3})?$
           title: BIC
           type: string
         paymentMeansCode:
-          description: DEPRECATED. Use paymentMeansArray. How the invoice has been / will
-            be paid. Use only online_payment_service (payment will be made or
-            has been made by an online payment service), bank_card (e.g. debit
-            card, credit card), direct_debit (the amount has been / will be
-            taken out of the client's bank account), standing_agreement (an
-            unspecified payment means known to both buyer and seller) or
-            credit_transfer (the buyer will do / has done a bank transfer). The
-            numeric codes are for legacy purposes, they should not be used.
+          description: DEPRECATED. Use paymentMeansArray. How the invoice has been / will be paid. Use only online_payment_service (payment will be made or has been made by an online payment service), bank_card (e.g. debit card, credit card), direct_debit (the amount has been / will be taken out of the client's bank account), standing_agreement (an unspecified payment means known to both buyer and seller) or credit_transfer (the buyer will do / has done a bank transfer). The numeric codes are for legacy purposes, they should not be used.
           enum:
             - online_payment_service
             - bank_card
@@ -1797,13 +1715,11 @@ components:
           title: Payment Means Code
           type: string
         paymentMeansIban:
-          description: DEPRECATED. Use paymentMeansArray. The IBAN the amount payable
-            should be transferred to
+          description: DEPRECATED. Use paymentMeansArray. The IBAN the amount payable should be transferred to
           title: IBAN
           type: string
         paymentMeansPaymentId:
-          description: The payment id that you will use to match the payment against the
-            invoice.
+          description: DEPRECATED. Use the paymentId in the individual PaymentMeans object. The payment id that you will use to match the payment against the invoice.
           title: Payment Id
           type: string
         paymentTerms:
@@ -1828,13 +1744,7 @@ components:
           title: Sales Order Id
           type: string
         taxExemptReason:
-          description: DEPRECATED. Use Tax/category and specify this per invoice line. If
-            you do specify this field, it will be applied to all invoice lines
-            and it is an error to specify a Tax/category at the invoice line
-            level. This field holds the reason no tax is present in the invoice.
-            Note that this is an invoice level field and you cannot specify it
-            per invoice line. This field is mandatory unless tax is present in
-            the invoice.
+          description: DEPRECATED. Use Tax/category and specify this per invoice line. If you do specify this field, it will be applied to all invoice lines and it is an error to specify a Tax/category at the invoice line level. This field holds the reason no tax is present in the invoice. Note that this is an invoice level field and you cannot specify it per invoice line. This field is mandatory unless tax is present in the invoice.
           enum:
             - export
             - reverse_charge
@@ -1844,18 +1754,12 @@ components:
             - intra_community
           type: string
         taxPointDate:
-          description: "The tax date is the date on which the supply of goods or of
-            services was made or completed or the date on which the payment on
-            account was made insofar as that date can be determined and differs
-            from the date of the issue of the invoice. EU 2006-112 Article 226
-            Point 7. Note: For the Dutch TAX authorities the tac date should be
-            the same as the issue date."
+          description: "The tax date is the date on which the supply of goods or of services was made or completed or the date on which the payment on account was made insofar as that date can be determined and differs from the date of the issue of the invoice. EU 2006-112 Article 226 Point 7. Note: For the Dutch TAX authorities the tac date should be the same as the issue date."
           pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
           title: Tax date
           type: string
         taxSubtotals:
-          description: An array of tax subtotals. This element is mandatory for taxSystem
-            'tax_line_percentages'.
+          description: An array of tax subtotals. This element is mandatory for taxSystem 'tax_line_percentages'.
           items:
             $ref: "#/components/schemas/TaxSubtotal"
           minItems: 0
@@ -1863,12 +1767,7 @@ components:
           type: array
         taxSystem:
           default: tax_line_amounts
-          description: The tax system used for the invoice. The system
-            'tax_line_percentages' is preferred, but for historic purposes
-            'tax_line_amounts is supported and default. Since not all invoice
-            formats that we are required to send support 'tax_line_amounts' we
-            will need to convert the invoice to the 'tax_line_percentags' system
-            if we are forced to send the invoice in that tax system.
+          description: The tax system used for the invoice. The system 'tax_line_percentages' is preferred, but for historic purposes 'tax_line_amounts is supported and default. Since not all invoice formats that we are required to send support 'tax_line_amounts' we will need to convert the invoice to the 'tax_line_percentags' system if we are forced to send the invoice in that tax system.
           enum:
             - tax_line_amounts
             - tax_line_percentages
@@ -1894,8 +1793,7 @@ components:
       title: Invoice
       type: object
     InvoiceData:
-      description: The invoice to send, in base64 encoded format. Provide either
-        invoice, or invoiceData, but not both.
+      description: The invoice to send, in base64 encoded format. Provide either invoice, or invoiceData, but not both.
       properties:
         conversionStrategy:
           description: How to interpret the document.
@@ -1915,8 +1813,7 @@ components:
     InvoiceLine:
       properties:
         accountingCost:
-          description: The buyer's accounting cost centre for this invoice line, expressed
-            as text.
+          description: The buyer's accounting cost centre for this invoice line, expressed as text.
           minLength: 1
           title: Accounting Cost
           type: string
@@ -1928,13 +1825,11 @@ components:
           title: Additional Item Properties
           type: array
         allowanceCharge:
-          description: The discount or surcharge on this item. Should be negative for
-            discounts
+          description: The discount or surcharge on this item. Should be negative for discounts
           title: allowanceCharge
           type: number
         amountExcludingVat:
-          description: The amount excluding VAT. Should equal quantity x itemPrice +
-            allowanceCharge.
+          description: The amount excluding VAT. Should equal quantity x itemPrice + allowanceCharge.
           title: amountExcludingVat
           type: number
         buyersItemIdentification:
@@ -1950,8 +1845,7 @@ components:
           title: Description
           type: string
         invoicePeriod:
-          description: "The period (or specific date) to which the invoice line applies.
-            Format: yyyy-mm-dd - yyyy-mm-dd."
+          description: "The period (or specific date) to which the invoice line applies. Format: yyyy-mm-dd - yyyy-mm-dd."
           pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2} - [0-9]{4}-[0-9]{2}-[0-9]{2}$
           title: Invoice period
           type: string
@@ -1966,17 +1860,12 @@ components:
           title: Invoice Line ID
           type: string
         name:
-          description: A short name for this invoice line. If not provided, it will be
-            taken from description and description will be set to an emtpy
-            string.
+          description: A short name for this invoice line. If not provided, it will be taken from description and description will be set to an emtpy string.
           minLength: 1
           title: Name
           type: string
         orderLineReferenceLineId:
-          description: A reference to the ID of the order. The order is specified as the
-            orderReference at the invoice level. It is not possible to specify
-            an orderReference at the invoice line level. An invoice MUST at this
-            time be for a single order only.
+          description: A reference to the ID of the order. The order is specified as the orderReference at the invoice level. It is not possible to specify an orderReference at the invoice line level. An invoice MUST at this time be for a single order only.
           minLength: 1
           title: orderLineReferenceLineId
           type: string
@@ -1987,39 +1876,7 @@ components:
           type: number
         quantityUnitCode:
           default: C62
-          description: 'The unit of measure that applies to the invoiced quantity. Codes
-            for unit of packaging from UNECE Recommendation No. 21 can be used
-            in accordance with the descriptions in the "Intro" section of UN/ECE
-            Recommendation 20, Revision 11 (2015): The 2 character alphanumeric
-            code values in UNECE Recommendation 21 shall be used. To avoid
-            duplication with existing code values in UNECE Recommendation No.
-            20, each code value from UNECE Recommendation 21 shall be prefixed
-            with an “X”, resulting in a 3 alphanumeric code when used as a unit
-            of measure. Note that the following additionally allowed codes are
-            deprecated and will be converted to C62: 04, 05, 08, 16, 17, 18, 19,
-            26, 29, 30, 31, 32, 36, 43, 44, 45, 46, 47, 48, 53, 54, 62, 63, 64,
-            66, 69, 71, 72, 73, 76, 78, 84, 90, 92, 93, 94, 95, 96, 97, 98, 1A,
-            1B, 1C, 1D, 1E, 1F, 1G, 1H, 1J, 1K, 1L, 1M, 1X, 2V, 2W, 3E, 3G, 3H,
-            3I, 4A, 4B, 4E, 5C, 5F, 5G, 5H, 5I, 5K, 5P, 5Q, A1, A25, A50, A51,
-            A52, A57, A58, A60, A61, A62, A63, A64, A65, A66, A67, A77, A78,
-            A79, A80, A81, A82, A83, AJ, AM, AP, AR, ARE, ATT, AV, AW, B0, B2,
-            B36, B37, B38, B39, B40, B5, B51, B6, B65, B9, BD, BE, BG, BH, BJ,
-            BK, BL, BO, BR, BT, BW, BX, BZ, C1, C2, C4, C5, C6, C77, C98, CA,
-            CH, CJ, CK, CL, CO, CQ, CR, CS, CT, CU, CV, CY, CZ, D14, D28, D35,
-            D37, D38, D39, D40, D64, D66, D67, D7, D70, D71, D72, D75, D76, D79,
-            D8, D9, D90, D92, D96, D97, D98, D99, DC, DE, DI, DQ, DR, DRM, DS,
-            DU, DX, DY, E2, E3, E5, EC, EP, EV, F1, F9, FB, FD, FE, FG, FM, G7,
-            GC, GD, GH, GK, GN, GRT, GT, GW, GY, GZ, H1, H2, HAR, HD, HE, HF,
-            HI, HJ, HK, HL, HN, HO, HP, HS, HT, HY, IC, IF, II, IL, IM, IP, IT,
-            JB, JG, JO, JR, K5, KD, KF, KG, KS, KTM, LC, LE, LI, LJ, LX, M0, MA,
-            MF, MK, MQ, MT, MV, N2, NB, NBB, NC, ND, NE, NG, NH, NI, NJ, NN,
-            NPL, NPR, NQ, NR, NRL, NTT, NV, NY, OP, OZ, P0, P3, P4, P6, P7, P8,
-            P9, PA, PB, PE, PF, PG, PK, PL, PM, PN, PT, PU, PV, PW, PY, PZ, QD,
-            QH, QK, QT, R4, RA, RD, RG, RK, RL, RN, RO, RS, RU, S5, S6, S7, S8,
-            SA, SD, SE, SHT, SK, SL, SN, SO, SP, SS, SST, ST, SV, T1, T4, T5,
-            T6, T7, T8, TA, TC, TD, TE, TF, TJ, TK, TL, TN, TQ, TR, TS, TSD,
-            TSH, TT, TU, TV, TW, TY, UA, UD, UE, UF, UH, UM, VI, VQ, VS, W4, WH,
-            WI, WR, WW, YL, YT, Z1, Z2, Z3, Z4, Z5, Z6, Z8'
+          description: 'The unit of measure that applies to the invoiced quantity. Codes for unit of packaging from UNECE Recommendation No. 21 can be used in accordance with the descriptions in the "Intro" section of UN/ECE Recommendation 20, Revision 11 (2015): The 2 character alphanumeric code values in UNECE Recommendation 21 shall be used. To avoid duplication with existing code values in UNECE Recommendation No. 20, each code value from UNECE Recommendation 21 shall be prefixed with an “X”, resulting in a 3 alphanumeric code when used as a unit of measure. Note that the following additionally allowed codes are deprecated and will be converted to C62: 04, 05, 08, 16, 17, 18, 19, 26, 29, 30, 31, 32, 36, 43, 44, 45, 46, 47, 48, 53, 54, 62, 63, 64, 66, 69, 71, 72, 73, 76, 78, 84, 90, 92, 93, 94, 95, 96, 97, 98, 1A, 1B, 1C, 1D, 1E, 1F, 1G, 1H, 1J, 1K, 1L, 1M, 1X, 2V, 2W, 3E, 3G, 3H, 3I, 4A, 4B, 4E, 5C, 5F, 5G, 5H, 5I, 5K, 5P, 5Q, A1, A25, A50, A51, A52, A57, A58, A60, A61, A62, A63, A64, A65, A66, A67, A77, A78, A79, A80, A81, A82, A83, AJ, AM, AP, AR, ARE, ATT, AV, AW, B0, B2, B36, B37, B38, B39, B40, B5, B51, B6, B65, B9, BD, BE, BG, BH, BJ, BK, BL, BO, BR, BT, BW, BX, BZ, C1, C2, C4, C5, C6, C77, C98, CA, CH, CJ, CK, CL, CO, CQ, CR, CS, CT, CU, CV, CY, CZ, D14, D28, D35, D37, D38, D39, D40, D64, D66, D67, D7, D70, D71, D72, D75, D76, D79, D8, D9, D90, D92, D96, D97, D98, D99, DC, DE, DI, DQ, DR, DRM, DS, DU, DX, DY, E2, E3, E5, EC, EP, EV, F1, F9, FB, FD, FE, FG, FM, G7, GC, GD, GH, GK, GN, GRT, GT, GW, GY, GZ, H1, H2, HAR, HD, HE, HF, HI, HJ, HK, HL, HN, HO, HP, HS, HT, HY, IC, IF, II, IL, IM, IP, IT, JB, JG, JO, JR, K5, KD, KF, KG, KS, KTM, LC, LE, LI, LJ, LX, M0, MA, MF, MK, MQ, MT, MV, N2, NB, NBB, NC, ND, NE, NG, NH, NI, NJ, NN, NPL, NPR, NQ, NR, NRL, NTT, NV, NY, OP, OZ, P0, P3, P4, P6, P7, P8, P9, PA, PB, PE, PF, PG, PK, PL, PM, PN, PT, PU, PV, PW, PY, PZ, QD, QH, QK, QT, R4, RA, RD, RG, RK, RL, RN, RO, RS, RU, S5, S6, S7, S8, SA, SD, SE, SHT, SK, SL, SN, SO, SP, SS, SST, ST, SV, T1, T4, T5, T6, T7, T8, TA, TC, TD, TE, TF, TJ, TK, TL, TN, TQ, TR, TS, TSD, TSH, TT, TU, TV, TW, TY, UA, UD, UE, UF, UH, UM, VI, VQ, VS, W4, WH, WI, WR, WW, YL, YT, Z1, Z2, Z3, Z4, Z5, Z6, Z8'
           enum:
             - "10"
             - "11"
@@ -4525,9 +4382,7 @@ components:
         tax:
           $ref: "#/components/schemas/Tax"
         taxes_duties_fees:
-          description: An array of taxes, duties and fees for this invoice line. At this
-            moment, only a single Tax item is allowed. When used, the 'tax'
-            element must be empty.
+          description: An array of taxes, duties and fees for this invoice line. At this moment, only a single Tax item is allowed. When used, the 'tax' element must be empty.
           items:
             $ref: "#/components/schemas/Tax"
           maxItems: 1
@@ -4539,20 +4394,10 @@ components:
       title: Invoice line
       type: object
     InvoiceRecipient:
-      description: The different ways to send the invoice to the recipient. The
-        publicIdentifiers are used to send via the Peppol network, if the
-        recipient is not registered on the Peppol network, the invoice will be
-        sent to the email addresses in the emails property. This property is
-        only mandatory when sending the invoice data using the
-        <<_openapi_invoice>> property, not when sending using the
-        <<_openapi_invoicedata>> property, in which case this information will
-        be extracted from the <<_openapi_invoicedata>> object. If you do specify
-        an <<_openapi_invoicerecipient>> object and an <<_openapi_invoicedata>>
-        object, the data from the two will be merged.
+      description: The different ways to send the invoice to the recipient. The publicIdentifiers are used to send via the Peppol network, if the recipient is not registered on the Peppol network, the invoice will be sent to the email addresses in the emails property. This property is only mandatory when sending the invoice data using the <<_openapi_invoice>> property, not when sending using the <<_openapi_invoicedata>> property, in which case this information will be extracted from the <<_openapi_invoicedata>> object. If you do specify an <<_openapi_invoicerecipient>> object and an <<_openapi_invoicedata>> object, the data from the two will be merged.
       properties:
         emails:
-          description: The email addresses the invoice should be sent to if none of the
-            other identifiers can be used
+          description: The email addresses the invoice should be sent to if none of the other identifiers can be used
           items:
             description: The email address the invoice should be sent to
             format: email
@@ -4572,17 +4417,14 @@ components:
       title: Invoice recipient preflight
       type: object
     InvoiceResponseClarification:
-      description: A clarification for why a received invoice was rejected (RE) or
-        under query (UQ) and what action to take.
+      description: A clarification for why a received invoice was rejected (RE) or under query (UQ) and what action to take.
       properties:
         clarification:
           description: A textual description of the clarification
           title: Clarification
           type: string
         clarificationCode:
-          description: The code for the clarification. For details see
-            https://docs.peppol.eu/poacc/upgrade-3/codelist/OPStatusReason/ and
-            https://docs.peppol.eu/poacc/upgrade-3/codelist/OPStatusAction/
+          description: The code for the clarification. For details see https://docs.peppol.eu/poacc/upgrade-3/codelist/OPStatusReason/ and https://docs.peppol.eu/poacc/upgrade-3/codelist/OPStatusAction/
           enum:
             - REF
             - LEG
@@ -4619,8 +4461,7 @@ components:
       description: The invoice you want Storecove to process, with some meta-data.
       properties:
         attachments:
-          description: An array of attachments. You may provide up to 10 attchments, but
-            the total size must not exceed 10MB after Base64 encoding.
+          description: An array of attachments. You may provide up to 10 attchments, but the total size must not exceed 10MB after Base64 encoding.
           items:
             $ref: "#/components/schemas/Attachment"
           maxItems: 10
@@ -4628,8 +4469,7 @@ components:
           type: array
         createPrimaryImage:
           default: true
-          description: Whether or not to create a primary image (PDF) if one is not
-            provided.
+          description: Whether or not to create a primary image (PDF) if one is not provided.
           title: Create Primary Image
           type: boolean
         document:
@@ -4642,9 +4482,7 @@ components:
           title: Document Url
           type: string
         idempotencyGuid:
-          description: A guid that you generated for this InvoiceSubmission to achieve
-            idempotency. If you submit multiple documents with the same
-            idempotencyGuid, only the first one will be processed.
+          description: A guid that you generated for this InvoiceSubmission to achieve idempotency. If you submit multiple documents with the same idempotencyGuid, only the first one will be processed.
           maxLength: 36
           minLength: 36
           title: Idempotency GUID
@@ -4684,8 +4522,7 @@ components:
           title: Receiver Response
           type: string
         transmission_datetime:
-          description: The DateTime of the transmission, as defined by RFC 3339, section
-            5.6, for example, 2017-07-21T17:32:28Z.
+          description: The DateTime of the transmission, as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z.
           title: Transmission DateTime
           type: string
         transmission_result:
@@ -4750,8 +4587,7 @@ components:
         advertisements:
           default:
             - invoice
-          description: A list of document types to advertise. Use if this LegalEntity
-            needs the ability to receive more than only invoice documents.
+          description: A list of document types to advertise. Use if this LegalEntity needs the ability to receive more than only invoice documents.
           items:
             description: A document type to advertise.
             enum:
@@ -4793,13 +4629,11 @@ components:
           type: string
         public:
           default: true
-          description: Whether or not this LegalEntity is public. Public means it will be
-            entered into the PEPPOL directory at https://directory.peppol.eu/
+          description: Whether or not this LegalEntity is public. Public means it will be entered into the PEPPOL directory at https://directory.peppol.eu/
           title: Public
           type: boolean
         tenant_id:
-          description: The id of the tenant, to be used in case of multi-tenant solutions.
-            This property will included in webhook events.
+          description: The id of the tenant, to be used in case of multi-tenant solutions. This property will included in webhook events.
           maxLength: 64
           title: Tenant Id
           type: string
@@ -4820,8 +4654,7 @@ components:
         advertisements:
           default:
             - invoice
-          description: A list of document types to advertise. Use if this LegalEntity
-            needs the ability to receive more than only invoice documents.
+          description: A list of document types to advertise. Use if this LegalEntity needs the ability to receive more than only invoice documents.
           items:
             description: A document type to advertise.
             enum:
@@ -4868,16 +4701,11 @@ components:
           type: string
         public:
           default: true
-          description: Whether or not this LegalEntity is public. Public means it will be
-            listed in the PEPPOL directory at https://directory.peppol.eu/ which
-            is normally what you want. If you have a good reason to not want the
-            LegalEntity listed, provide false. This property is ignored when for
-            country SG, where it is always true.
+          description: Whether or not this LegalEntity is public. Public means it will be listed in the PEPPOL directory at https://directory.peppol.eu/ which is normally what you want. If you have a good reason to not want the LegalEntity listed, provide false. This property is ignored when for country SG, where it is always true.
           title: Public
           type: boolean
         tenant_id:
-          description: The id of the tenant, to be used in case of multi-tenant solutions.
-            This property will included in webhook events.
+          description: The id of the tenant, to be used in case of multi-tenant solutions. This property will included in webhook events.
           maxLength: 64
           title: Tenant Id
           type: string
@@ -4912,29 +4740,30 @@ components:
           title: Account number
           type: string
         branche_code:
-          description: The bank branch code. Not required for IBAN numbers. Often referred
-            to as Swift or Bic code.
+          description: The bank branch code. Not required for IBAN numbers. Often referred to as Swift or Bic code.
           title: Branch code
           type: string
         code:
-          description: >
-            How the invoice has been / will be paid. The code determines which
-            type of PaymentMeans is used and which fields are mandatory.
-
+          description: |
+            How the invoice has been / will be paid. The code determines which type of PaymentMeans is used and which fields are mandatory.
             ++++
-
-            <ul><li>online_payment_service, bank_card: Provide the last four digits of the card and optionally the account holder and network.</li><li>standing_agreement, credit_transfer: Provide the account number and optionally the account holder and branche_code.</li><li>direct_debit: SEPA direct debit. Provide the account number and optionally the mandate.</li><li>se_bankgiro, se_plusgiro: Swedish Bankgiro or Plusgiro. Provide account number and optionally the account holder.</li><li>aunz_npp: New Payments Platform. Provide account number and optionally the account holder.</li><li>sg_giro: Singapore GIRO-system (direct debit). Do not provide any fields.</li><li>sg_card: Singapore CreditCard payment. Do not provide any fields.</li><li>sg_paynow: Singapore PayNow Corporate. Provide the UEN in the account field.</li></ul>
-
+            <ul>    <li>        <strong>credit_transfer</strong><br/>        The amount is to be transfered into a bank account. Relevant additional fields:<br/>        <ul>            <li>                <strong>account</strong><br/>                The account number. For New Zealand, this should hold the full 16 digit bank account number. <strong>Mandatory</strong>.            </li>            <li>                <strong>branche_code</strong><br/>                In case of an IBAN, the account alone number is sufficient. In other cases, like a BBAN, a BIC code or other additional identifier is required. For Australia, the BSB goes here. Optional.            </li>            <li>                <strong>holder</strong><br/>                The account holder name. Optional.            </li>        </ul>    </li>    <br/>    <li>        <strong>direct_debit</strong><br/>        Direct debit. Relevant additional fields:<br/>        <ul>            <li>                <strong>account</strong><br/>                The account number from which the funds will be debited. <strong>Mandatory</strong>.            </li>            <li>                <strong>mandate</strong><br/>                The direct debit mandate id. Optional.            </li>            <li>                <strong>holder</strong><br/>                The account holder name. Optional.            </li>        </ul>    </li>    <br/>    <li>        <strong>card, bank_card (bank_card is deprecated)</strong><br/>        E.g. credit or debit card. Relevant additional fields:<br/>        <ul>            <li>                <strong>account</strong><br/>                The card number, but never more than the last four digits. <strong>Mandatory</strong>.            </li>            <li>                <strong>holder</strong><br/>                The account holder name. Optional.            </li>            <li>                <strong>network</strong><br/>                The payment network, e.g. VISA, SEPA. Optional, but recommended since a default of "N/A" may be used if not provided.            </li>        </ul>    </li>    <br/>    <li>        <strong>online_payment_service</strong><br/>        E.g. Paypal. The invoice will have been prepaid. Relevant additional fields:<br/>        <ul>            <li>                <strong>network</strong><br/>                The payment network, e.g. PayPal. <strong>Mandatory</strong>.            </li>        </ul>    </li>    <br/>    <li>        <strong>standing_agreement</strong><br/>        The payment means has been agreed out of band. Relevant additional fields: none.    </li>    <br/>    <li>        <strong>aunz_npp_payid, aunz_npp (aunz_npp is deprecated)</strong><br/>        Australia/New Zealand New Payments Platform. Relevant additional fields:<br/>        <ul>            <li>                <strong>account</strong><br/>                PayID. May be an email address, ABN, mobile phone number etc. <strong>Mandatory</strong>.            </li>        </ul>    </li>    <br/>    <li>        <strong>aunz_npp_payto</strong><br/>        Australia/New Zealand New Payments Platform. Relevant additional fields:<br/>        <ul>            <li>                <strong>account</strong><br/>                Account number. <strong>Mandatory</strong>.            </li>            <li>                <strong>mandate</strong><br/>                Mandate/direct debit authority reference/PayTo Agreement. <strong>Mandatory</strong>.            </li>        </ul>    </li>    <br/>    <li>        <strong>aunz_bpay</strong><br/>        Australia/New Zealand New Payments Platform. Relevant additional fields:<br/>        <ul>            <li>                <strong>account</strong><br/>                Biller code. <strong>Mandatory</strong>.            </li>            <li>                <strong>holder</strong><br/>                The account holder name. Optional.            </li>        </ul>    </li>    <br/>    <li>        <strong>aunz_postbillpay</strong><br/>        Australia/New Zealand New Payments Platform. Relevant additional fields:<br/>        <ul>            <li>                <strong>account</strong><br/>                Biller code. <strong>Mandatory.</strong>.            </li>            <li>                <strong>holder</strong><br/>                The account holder name. Optional.            </li>        </ul>    </li>    <br/>    <li>        <strong>aunz_uri</strong><br/>        Australia/New Zealand URI. Relevant additional fields:<br/>        <ul>            <li>                <strong>account</strong><br/>                Payment URI. <strong>Mandatory.</strong>.            </li>            <li>                <strong>holder</strong><br/>                The account holder name. Optional.            </li>        </ul>    </li>    <br/>    <li>        <strong>se_bankgiro</strong><br/>        Swedish Bankgiro. Relevant additional fields:<br/>        <ul>            <li>                <strong>account</strong><br/>                The account number from which the funds will be debited, 7 or 8 digits. <strong>Mandatory</strong>.            </li>            <li>                <strong>holder</strong><br/>                The account holder name. Optional.            </li>        </ul>        <br/>    </li>    <br/>    <li>        <strong>se_plusgiro</strong><br/>        Swedish Plusgiro. Relevant additional fields:<br/>        <ul>            <li>                <strong>account</strong><br/>                The account number from which the funds will be debited, 2 - 8 digits. <strong>Mandatory</strong>.            </li>            <li>                <strong>holder</strong><br/>                The account holder name. Optional.            </li>        </ul>        <br/>    </li>    <br/>    <li>        <strong>sg_giro</strong><br/>        Singapore GIRO-system (direct debit). Relevant additional fields: none.    </li>    <br/>    <li>        <strong>sg_card</strong><br/>        Singapore CreditCard payment. Relevant additional fields: none.    </li>    <br/>    <li>        <strong>sg_paynow</strong><br/>        Singapore PayNow Corporate.  Relevant additional fields:<br/>        <ul>            <li>                <strong>account</strong><br/>                The UEN, format: UENxxxxxxxxxx. <strong>Mandatory</strong>.            </li>        </ul>    </li></ul>
             ++++
           enum:
-            - online_payment_service
-            - bank_card
-            - standing_agreement
             - credit_transfer
             - direct_debit
+            - bank_card
+            - credit_card
+            - online_payment_service
+            - standing_agreement
+            - aunz_npp
+            - aunz_npp_payid
+            - aunz_npp_payto
+            - aunz_bpay
+            - aunz_postbillpay
+            - aunz_uri
             - se_bankgiro
             - se_plusgiro
-            - aunz_npp
             - sg_giro
             - sg_card
             - sg_paynow
@@ -4952,6 +4781,10 @@ components:
           description: The name of the card network, e.g. VISA.
           title: Network
           type: string
+        paymentId:
+          description: The payment id that you will use to match the payment against the invoice.
+          title: Payment Id
+          type: string
       required:
         - code
       title: PaymentMeans
@@ -4965,15 +4798,13 @@ components:
           title: Identifier
           type: string
         scheme:
-          description: The scheme of the identifier. See
-            <<_peppol_participant_identifier_list>> for a list.
+          description: The scheme of the identifier. See <<_peppol_participant_identifier_list>> for a list.
           maxLength: 64
           minLength: 2
           title: Type
           type: string
         superscheme:
-          description: The superscheme of the identifier. Should always be
-            "iso6523-actorid-upis".
+          description: The superscheme of the identifier. Should always be "iso6523-actorid-upis".
           maxLength: 64
           minLength: 2
           title: Type
@@ -4987,15 +4818,13 @@ components:
           title: Identifier
           type: string
         scheme:
-          description: The scheme of the identifier. See
-            <<_peppol_participant_identifier_list>> for a list.
+          description: The scheme of the identifier. See <<_peppol_participant_identifier_list>> for a list.
           maxLength: 64
           minLength: 2
           title: Type
           type: string
         superscheme:
-          description: The superscheme of the identifier. Should always be
-            "iso6523-actorid-upis".
+          description: The superscheme of the identifier. Should always be "iso6523-actorid-upis".
           maxLength: 64
           minLength: 2
           title: Type
@@ -5025,8 +4854,7 @@ components:
           title: Identifier
           type: string
         scheme:
-          description: The scheme of the identifier. See
-            <<_peppol_participant_identifier_list>> for a list.
+          description: The scheme of the identifier. See <<_peppol_participant_identifier_list>> for a list.
           minLength: 3
           title: Scheme
           type: string
@@ -5058,8 +4886,7 @@ components:
             $ref: "#/components/schemas/PurchaseInvoiceAllowanceCharge"
           type: array
         amount_including_tax:
-          description: The total invoice amount payable, including tax. This is equal to
-            the sum of the invoice_lines (amount_excluding_tax + tax.amount)
+          description: The total invoice amount payable, including tax. This is equal to the sum of the invoice_lines (amount_excluding_tax + tax.amount)
           title: Amount Including Tax
           type: number
         amount_including_vat:
@@ -5158,8 +4985,7 @@ components:
           title: External key
           type: string
         external_user_id:
-          description: Used for the embedded portal retrieval service. The
-            external_user_id you provided when the ShopAccount was created.
+          description: Used for the embedded portal retrieval service. The external_user_id you provided when the ShopAccount was created.
           title: External user id
           type: string
         guid:
@@ -5201,16 +5027,11 @@ components:
           title: Order Reference
           type: string
         payable_amount:
-          description: The total invoice amount payable including tax. This is equal to
-            amount_including_tax + allowance_charge + payable_rounding_amount.
-            This property is redundant and provided only to make invoice
-            processing easier. You can also choose to only store this property,
-            instead of the underlying fields.
+          description: The total invoice amount payable including tax. This is equal to amount_including_tax + allowance_charge + payable_rounding_amount. This property is redundant and provided only to make invoice processing easier. You can also choose to only store this property, instead of the underlying fields.
           title: Amount to Pay Including Tax
           type: number
         payable_rounding_amount:
-          description: The difference between the invoice total and the sum of the invoice
-            lines.
+          description: The difference between the invoice total and the sum of the invoice lines.
           title: Payable Rounding Amount
           type: number
         payment_means:
@@ -5241,13 +5062,11 @@ components:
           title: Payment Terms Note
           type: string
         period_end:
-          description: The end date of the period this invoice relates to. Format
-            "YYYY-MM-DD".
+          description: The end date of the period this invoice relates to. Format "YYYY-MM-DD".
           title: End of Period
           type: string
         period_start:
-          description: The start date of the period this invoice relates to. Format
-            "YYYY-MM-DD".
+          description: The start date of the period this invoice relates to. Format "YYYY-MM-DD".
           title: Start of Period
           type: string
         prepaid_amount:
@@ -5270,16 +5089,11 @@ components:
           title: Invoice Source
           type: string
         system_generated_primary_image:
-          description: Whether or not the document image (PDF) was generated by Storecove.
-            If true, it means the invoice was received without any attachments
-            and Storecove generated one for you. If false, the invoice will
-            contain at least one attachment, which was received from the invoice
-            sender..
+          description: Whether or not the document image (PDF) was generated by Storecove. If true, it means the invoice was received without any attachments and Storecove generated one for you. If false, the invoice will contain at least one attachment, which was received from the invoice sender..
           title: System Generated Primary Image
           type: boolean
         tax_point_date:
-          description: The date the invoice was issued for tax purposes. In most countries
-            MUST match the issue_date. Format "YYYY-MM-DD".
+          description: The date the invoice was issued for tax purposes. In most countries MUST match the issue_date. Format "YYYY-MM-DD".
           title: Tax Point Date
           type: string
         tax_subtotals:
@@ -5287,16 +5101,7 @@ components:
             $ref: "#/components/schemas/PurchaseInvoiceTaxSubtotal"
           type: array
         tax_system:
-          description: The tax system of the invoice. Either tax_line_percentages or
-            tax_line_amounts. The first tax system means the invoice lines
-            contain only the tax percentages and the tax amounts are included
-            only in the tax subtotals at the invoice level and so are only
-            calculated at the invoice level. The tax system tax_line_amounts
-            means that in addition to the percentage, each invoice line also
-            contains the tax amount. The tax subtotals at the invoice level are
-            calculated as the sum of the tax of the invoice lines. The
-            distinction between the two tax systems has has implications for
-            rounding.
+          description: The tax system of the invoice. Either tax_line_percentages or tax_line_amounts. The first tax system means the invoice lines contain only the tax percentages and the tax amounts are included only in the tax subtotals at the invoice level and so are only calculated at the invoice level. The tax system tax_line_amounts means that in addition to the percentage, each invoice line also contains the tax amount. The tax subtotals at the invoice level are calculated as the sum of the tax of the invoice lines. The distinction between the two tax systems has has implications for rounding.
           title: Tax System
           type: string
         vat_reverse_charge:
@@ -5362,8 +5167,7 @@ components:
             $ref: "#/components/schemas/PurchaseInvoiceInvoiceLineAllowanceCharge"
           type: array
         amount_excluding_tax:
-          description: The amount excluding Tax. This is equal to quantity x price_amount
-            + ∑ allowance_charges.
+          description: The amount excluding Tax. This is equal to quantity x price_amount + ∑ allowance_charges.
           title: Amount Excluding Tax
           type: number
         amount_excluding_vat:
@@ -5412,9 +5216,7 @@ components:
           title: Account Number
           type: string
         branch_code:
-          description: The code identifying the bank branch. May contain a BIC/SWIFT or
-            something appropriate for the payment method, such as "NPP" for type
-            NppPaymentMean.
+          description: The code identifying the bank branch. May contain a BIC/SWIFT or something appropriate for the payment method, such as "NPP" for type NppPaymentMean.
           title: Branch code
           type: string
         holder:
@@ -5430,22 +5232,31 @@ components:
           title: Network
           type: string
         payment_id:
-          description: The payment id to use when making the payment. The invoice sender
-            will use this to match the received funds to the invoice.
+          description: The payment id to use when making the payment. The invoice sender will use this to match the received funds to the invoice.
           title: Id
           type: string
         type:
-          description: The type of payment means.
+          description: The type of payment means. Which type are returned is determined by the &pmv= query parameter. For details see documentation for that field.
           enum:
             - BankPaymentMean
-            - CardPaymentMean
             - DirectDebitPaymentMean
+            - CardPaymentMean
             - NppPaymentMean
-            - SeBankgiroPaymentMean
-            - SePlusGiroPaymentMean
+            - SeBankGiroPaymentMean
+            - SePlusgiroPaymentMean
             - SgCardPaymentMean
             - SgGiroPaymentMean
             - SgPaynowPaymentMean
+            - CreditTransferPaymentMean
+            - CreditCardPaymentMean
+            - SeBankgiroPaymentMean
+            - AunzNppPayidPaymentMean
+            - OnlinePaymentServicePaymentMean
+            - StandingAgreementPaymentMean
+            - AunzNppPaytoPaymentMean
+            - AunzBpayPaymentMean
+            - AunzPostbillpayPaymentMean
+            - AunzUriPaymentMean
           title: Type
     PurchaseInvoiceSender:
       properties:
@@ -5553,8 +5364,7 @@ components:
           title: External key
           type: string
         external_user_id:
-          description: Used for the embedded portal retrieval service. The
-            external_user_id you provided when the ShopAccount was created.
+          description: Used for the embedded portal retrieval service. The external_user_id you provided when the ShopAccount was created.
           title: External user id
           type: string
         guid:
@@ -5568,21 +5378,11 @@ components:
           title: LegalEntity id
           type: integer
         system_generated_primary_image:
-          description: Whether or not the document image (PDF) was generated by Storecove.
-            If true, it means the invoice was received without any attachments
-            and Storecove generated one for you. If false, the invoice will
-            contain at least one attachment, which was received from the invoice
-            sender.
+          description: Whether or not the document image (PDF) was generated by Storecove. If true, it means the invoice was received without any attachments and Storecove generated one for you. If false, the invoice will contain at least one attachment, which was received from the invoice sender.
           title: System Generated Primary Image
           type: boolean
         tax_system:
-          description: The tax system of the invoice. Either tax_line_percentages or
-            tax_line_amounts. The first tax system means the invoice lines
-            contain only the tax percentages and the tax amounts are included
-            only in the tax subtotals at the invoice level and so are only
-            calculated at the invoice level. The tax system tax_line_amounts
-            means that in addition to the percentage, each invoice line also
-            contains the tax amount.
+          description: The tax system of the invoice. Either tax_line_percentages or tax_line_amounts. The first tax system means the invoice lines contain only the tax percentages and the tax amounts are included only in the tax subtotals at the invoice level and so are only calculated at the invoice level. The tax system tax_line_amounts means that in addition to the percentage, each invoice line also contains the tax amount.
           title: Tax System
           type: string
         ubl:
@@ -5616,20 +5416,7 @@ components:
           type: string
         parse:
           default: true
-          description: "*** NOTE: only parse == true is currently supported *** *** NOTE:
-            parsing is only supported for documentType == 'invoice' *** Whether
-            or not to parse the document. If true, the data will be extracted
-            from the document and used to construct a new document. If false,
-            the document will be sent as is. In this case, you must ensure the
-            document validates without any errors against the relevant
-            validation artifacts for that processId/documentTypeId. We
-            automatically apply updates of the validation artificats, respecting
-            the grace period provided by the issuer. During that period,
-            documents that validate against either the old as well as against
-            the new artifacts are accepted. After the grace period, your
-            document must validate against the new artifacts. You are also
-            responsible for making sure your receiver is able to receive the
-            updated document."
+          description: "*** NOTE: only parse == true is currently supported *** *** NOTE: parsing is only supported for documentType == 'invoice' *** Whether or not to parse the document. If true, the data will be extracted from the document and used to construct a new document. If false, the document will be sent as is. In this case, you must ensure the document validates without any errors against the relevant validation artifacts for that processId/documentTypeId. We automatically apply updates of the validation artificats, respecting the grace period provided by the issuer. During that period, documents that validate against either the old as well as against the new artifacts are accepted. After the grace period, your document must validate against the new artifacts. You are also responsible for making sure your receiver is able to receive the updated document."
           title: Parse
           type: boolean
         parseStrategy:
@@ -5649,22 +5436,12 @@ components:
       title: Raw Document Data
       type: object
     Routing:
-      description: The different ways to send the invoice to the recipient. The
-        publicIdentifiers are used to send via the Peppol network, if the
-        recipient is not registered on the Peppol network, the invoice will be
-        sent to the email addresses in the emails property. This property is
-        only mandatory when sending the invoice data using the
-        <<_openapi_invoice>> property, not when sending using the
-        <<_openapi_invoicedata>> property, in which case this information will
-        be extracted from the <<_openapi_invoicedata>> object. If you do specify
-        an <<_openapi_invoicerecipient>> object and an <<_openapi_invoicedata>>
-        object, the data from the two will be merged.
+      description: The different ways to send the invoice to the recipient. The publicIdentifiers are used to send via the Peppol network, if the recipient is not registered on the Peppol network, the invoice will be sent to the email addresses in the emails property. This property is only mandatory when sending the invoice data using the <<_openapi_invoice>> property, not when sending using the <<_openapi_invoicedata>> property, in which case this information will be extracted from the <<_openapi_invoicedata>> object. If you do specify an <<_openapi_invoicerecipient>> object and an <<_openapi_invoicedata>> object, the data from the two will be merged.
       properties:
         eIdentifiers:
           $ref: "#/components/schemas/EIdentifiers"
         emails:
-          description: The email addresses the invoice should be sent to if none of the
-            other identifiers can be used
+          description: The email addresses the invoice should be sent to if none of the other identifiers can be used
           items:
             description: The email address the invoice should be sent to
             format: email
@@ -5683,8 +5460,7 @@ components:
           title: Identifier
           type: string
         scheme:
-          description: The scheme of the identifier. See
-            <<_peppol_participant_identifier_list>> for a list.
+          description: The scheme of the identifier. See <<_peppol_participant_identifier_list>> for a list.
           minLength: 3
           title: Scheme
           type: string
@@ -5720,27 +5496,14 @@ components:
     Tax:
       properties:
         amount:
-          description: The amount of tax. Mandatory if taxSystem == 'tax_line_amounts'.
-            However, it is best to use taxSystem tax_line_percentages and
-            provide only the percentage, not the actual amount. The amount is
-            then provided at the invoice level, in the taxSubtotals element.
+          description: The amount of tax. Mandatory if taxSystem == 'tax_line_amounts'. However, it is best to use taxSystem tax_line_percentages and provide only the percentage, not the actual amount. The amount is then provided at the invoice level, in the taxSubtotals element.
           title: Amount of Tax
           type: number
         category:
-          description: >-
-            The optional category code for the tax. This is not mandatory, but
-            highly recommended. If not provided, it will be automatically
-            derived from the country/percentage in combination with the invoice
-            taxPointDate (which defaults to the issueDate), but there are
-            situations in which this fails and the category needs to be
-            specified explicitly. In particular, there are multiple categories
-            available for 0%. The allowed values depend on the country of the
-            tax.
-
+          description: |-
+            The optional category code for the tax. This is not mandatory, but highly recommended. If not provided, it will be automatically derived from the country/percentage in combination with the invoice taxPointDate (which defaults to the issueDate), but there are situations in which this fails and the category needs to be specified explicitly. In particular, there are multiple categories available for 0%. The allowed values depend on the country of the tax.
             ++++
-
             <ul><li>AU/NZ:<ul><li>standard (S)</li><li>zero_rated (Z - 0%)</li><li>exempt (E - 0%)</li><li>export (G - 0%)</li><li>outside_scope (O - 0%)</li></ul></li><li>EU:<ul><li>standard (S)</li><li>zero_rated (Z - 0%)</li><li>reverse_charge (AE - 0%)</li><li>intra_community (K - 0%)</li><li>exempt (E - 0%)</li><li>export (G - 0%)</li><li>outside_scope (O - 0%)</li></ul></li><li>SG:<ul><li>standard (SR)</li><li>deemed_supply (DS)</li><li>srca_s (SRCA-S)</li><li>srca_c (SRCA-C - 0%)</li><li>zero_rated (ZR - 0%)</li><li>regulation33_exempt (ES33 - 0%)</li><li>nonregulation33_exempt (ESN33 - 0%)</li><li>outside_scope (OS - 0%)</li><li>not_registered (NG - 0%)</li></ul></li><li>MY:<ul><li>sales_tax (S), also 0%</li><li>sales_tax_work (SW)</li><li>service_tax (SV), also 0%</li><li>service_tax_import (SVI)</li><li>sales_export_market (EEM)</li><li>sales_special_area (ESP)</li><li>sales_designated_area (EDA)</li><li>exemption_schedule_a (ESA)</li><li>exemption_schedule_b (ESB)</li><li>exemption_schedule_c_a (ESC-A)</li><li>exemption_schedule_c_b (ESC-B)</li><li>exemption_schedule_c_c (ESC-C)</li><li>exemption_service_tax (ESV)</li></ul></li></ul>
-
             ++++
           enum:
             - standard
@@ -5774,9 +5537,7 @@ components:
         country:
           $ref: "#/components/schemas/Country"
         percentage:
-          description: The percentage Tax. This should be a valid Tax percentage in the
-            country at the time of the issueDate of this invoice. Mandatory if
-            taxSystem == 'tax_line_percentages'
+          description: The percentage Tax. This should be a valid Tax percentage in the country at the time of the issueDate of this invoice. Mandatory if taxSystem == 'tax_line_percentages'
           title: Percentage Tax
           type: number
       required:
@@ -5818,9 +5579,7 @@ components:
         country:
           $ref: "#/components/schemas/Country"
         percentage:
-          description: The tax percentage. This should be a valid tax percentage in the
-            country at the time of the taxpointDate of this invoice. Required
-            unless taxAmount is provided.
+          description: The tax percentage. This should be a valid tax percentage in the country at the time of the taxpointDate of this invoice. Required unless taxAmount is provided.
           title: Percentage Tax
           type: number
         taxAmount:
@@ -5828,8 +5587,7 @@ components:
           title: The amount of tax levied
           type: number
         taxableAmount:
-          description: The amount on which the tax is levied. Required unless percentage
-            is provided.
+          description: The amount on which the tax is levied. Required unless percentage is provided.
           title: Taxable Amount
           type: number
       required:
@@ -5839,8 +5597,7 @@ components:
     WebhookInstance:
       properties:
         body:
-          description: The webhook body that would have been pushed if this were a
-            push-mode webhook.
+          description: The webhook body that would have been pushed if this were a push-mode webhook.
           title: Body
           type: string
         guid:

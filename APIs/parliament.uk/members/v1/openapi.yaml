@@ -412,8 +412,7 @@ paths:
           description: Bad Request
         "404":
           description: Not Found
-      summary: Return members by ID with list of their historical names, parties and
-        memberships
+      summary: Return members by ID with list of their historical names, parties and memberships
       tags:
         - Members
   /api/Members/Search:
@@ -424,8 +423,7 @@ paths:
           name: Name
           schema:
             type: string
-        - description: Members where postcode or geographical location matches the term
-            specified
+        - description: Members where postcode or geographical location matches the term specified
           in: query
           name: Location
           schema:
@@ -559,8 +557,7 @@ paths:
           name: name
           schema:
             type: string
-        - description: Members that were an active member of the Commons or Lords on the
-            date specified
+        - description: Members that were an active member of the Commons or Lords on the date specified
           in: query
           name: dateToSearchFor
           schema:

@@ -6,12 +6,8 @@ info:
   contact:
     name: National Health Authority
     url: https://ndhm.gov.in/
-  description: >
-    Gateway is the hub that routes/orchestrates the interaction between
-    consent managers and API bridges. There are 5 categories of APIs; discovery,
-    link, consent flow, data flow and  monitoring. To reflect the consumers of
-    APIs, the above apis are also categorized under cm facing, hiu facing and
-    hip facing 
+  description: |
+    Gateway is the hub that routes/orchestrates the interaction between consent managers and API bridges. There are 5 categories of APIs; discovery, link, consent flow, data flow and  monitoring. To reflect the consumers of APIs, the above apis are also categorized under cm facing, hiu facing and hip facing 
   title: Gateway
   version: "0.5"
   x-apisguru-categories:
@@ -78,11 +74,8 @@ paths:
         - sessions
   /v0.5/care-contexts/discover:
     post:
-      description: >
-        Request for patient care context discover, made by CM for a
-        specific HIP. It is expected that HIP will subsequently return either
-        zero or one patient record with (potentially masked) associated care
-        contexts
+      description: |
+        Request for patient care context discover, made by CM for a specific HIP. It is expected that HIP will subsequently return either zero or one patient record with (potentially masked) associated care contexts
           1. **At least one of the verified identifier matches**
           2. **Name (fuzzy), gender matches**
           3. **If YoB was given, age band(+-2) matches**
@@ -148,12 +141,8 @@ paths:
         - cm facing
   /v0.5/care-contexts/on-discover:
     post:
-      description: >
-        Result of patient care-context discovery request at HIP end. If a
-        matching patient found with zero or more care contexts associated, it is
-        specified as result attribute. If the prior discovery request, resulted
-        in errors then it is specified in the error attribute. Reasons of errors
-        can be 
+      description: |
+        Result of patient care-context discovery request at HIP end. If a matching patient found with zero or more care contexts associated, it is specified as result attribute. If the prior discovery request, resulted in errors then it is specified in the error attribute. Reasons of errors can be 
           1. **more than one definitive match for the given request** 
           2. **no verified identifer was specified**
       parameters:
@@ -303,11 +292,8 @@ paths:
         - hiu facing
   /v0.5/consent-requests/on-init:
     post:
-      description: >
-        Result of consent request creation for a patient.
-        **consentRequest.id** represents the consentrequest id created by CM.
-        The result must contain either **consentRequest** or the **error**
-        caused. <br/>
+      description: |
+        Result of consent request creation for a patient. **consentRequest.id** represents the consentrequest id created by CM. The result must contain either **consentRequest** or the **error** caused. <br/>
           Reasons for error may be
           * Invalid references (e.g patient id, hiu id), purpose, hiTypes, ranges, persmission
       parameters:
@@ -365,9 +351,8 @@ paths:
         - cm facing
   /v0.5/consent-requests/on-status:
     post:
-      description: >
-        Result of consent request done previously. Status of request can be
-        GRANTED,  DENIED, EXPIRED. If the request was GRANTED, then 
+      description: |
+        Result of consent request done previously. Status of request can be GRANTED,  DENIED, EXPIRED. If the request was GRANTED, then 
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-HIU-ID"
@@ -531,10 +516,8 @@ paths:
         - hiu facing
   /v0.5/consents/hip/notify:
     post:
-      description: >
-        Notification of consents to health information providers consent
-        request granted, consent revoked, consent expired. Only the GRANTED,
-        REVOKED and EXPIRED status notifications will be sent to HIP.
+      description: |
+        Notification of consents to health information providers consent request granted, consent revoked, consent expired. Only the GRANTED, REVOKED and EXPIRED status notifications will be sent to HIP.
           1. If consent is granted, status=GRANTED, then consentDetail contains the consent artefact details and signature is available. 
           2. If consent is revoked, then status=REVOKED, and consentId specifes which consent artefact is revoked. 
           3. If the consent has expired, then status=EXPIRED, and consentId specifies which consent artefact has expired. Note, this is also responsibility of the HIP to keep track of consent expiry. Any data request on expired consent artefact must not be done. 
@@ -581,9 +564,8 @@ paths:
         - cm facing
   /v0.5/consents/hip/on-notify:
     post:
-      description: >
-        This API is called by HIP as acknowledgement to notification of
-        consents, in cases of consent revocation and expiration. 
+      description: |
+        This API is called by HIP as acknowledgement to notification of consents, in cases of consent revocation and expiration. 
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-CM-ID"
@@ -627,16 +609,11 @@ paths:
         - hip facing
   /v0.5/consents/hiu/notify:
     post:
-      description: >
-        Health information user will get notified about the consent request
-        granted or denied, consent revoked, consent expired. 
-
+      description: |
+        Health information user will get notified about the consent request granted or denied, consent revoked, consent expired. 
         1. For consent request grant, status=GRANTED, consentRequestId=<consent-request-id>, and consentArtefacts is an array of generated consent artefact Ids.
-
         2. For consent request expiry, status=EXPIRED, consentRequestId=<consent-request-id>
-
         3. For consent request denied, status=DENIED, consentRequestId=<consent-request-id>
-
         4. For consent revocation, status=REVOKED, consentArtefacts is an array of revoked consent artefact ids
       parameters:
         - $ref: "#/components/parameters/authorization"
@@ -678,10 +655,8 @@ paths:
         - cm facing
   /v0.5/consents/hiu/on-notify:
     post:
-      description: >
-        This API is called by HIU as acknowledgement to consent
-        notifications, specifically for cases when consent is REVOKED or
-        EXPIRED.
+      description: |
+        This API is called by HIU as acknowledgement to consent notifications, specifically for cases when consent is REVOKED or EXPIRED.
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-CM-ID"
@@ -722,10 +697,8 @@ paths:
         - hiu facing
   /v0.5/consents/on-fetch:
     post:
-      description: >
-        Must contain either consentDetail or error. Possible reason of
-        errors are 
-
+      description: |
+        Must contain either consentDetail or error. Possible reason of errors are 
         1. consentId passed through /fetch is invalid
       parameters:
         - $ref: "#/components/parameters/authorization"
@@ -782,14 +755,8 @@ paths:
         - cm facing
   /v0.5/health-information/cm/on-request:
     post:
-      description: >
-        Callback API for acknowledgement of Health information request of
-        HIU. CM calls this API when it has validated the Health Information
-        request given the consent id. Either the **hiRequest** or **error**
-        would need to be specified. If the health info request was valid, then
-        the ***hiRequest.transactionId*** specifies the transaction context
-        against which HIP would send over the data.  Possible cases of errors
-        are
+      description: |
+        Callback API for acknowledgement of Health information request of HIU. CM calls this API when it has validated the Health Information request given the consent id. Either the **hiRequest** or **error** would need to be specified. If the health info request was valid, then the ***hiRequest.transactionId*** specifies the transaction context against which HIP would send over the data.  Possible cases of errors are
           1. **Invalid consent artefact id**
           2. **Consent has expired**
           3. **Date ranges are invalid**
@@ -848,11 +815,8 @@ paths:
         - cm facing
   /v0.5/health-information/cm/request:
     post:
-      description: >
-        Request for Health information against a consent id. CM would
-        generate a transactionId against each consent and pass it as trnasaction
-        context / correlation id to the HIP and also return the same to HIU via
-        /on-request. 
+      description: |
+        Request for Health information against a consent id. CM would generate a transactionId against each consent and pass it as trnasaction context / correlation id to the HIP and also return the same to HIU via /on-request. 
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-CM-ID"
@@ -908,11 +872,8 @@ paths:
         - hiu facing
   /v0.5/health-information/hip/on-request:
     post:
-      description: >
-        API called by HIP to acknowledge Health information request
-        receipt. Either the **hiRequest** or **error** must be specified.
-        **hiRequest** element returns the same transactionId as before with a
-        status indicating that the request is acknowledged.  
+      description: |
+        API called by HIP to acknowledge Health information request receipt. Either the **hiRequest** or **error** must be specified. **hiRequest** element returns the same transactionId as before with a status indicating that the request is acknowledged.  
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-CM-ID"
@@ -968,10 +929,8 @@ paths:
         - hip facing
   /v0.5/health-information/hip/request:
     post:
-      description: >
-        API called by CM to request Health information from HIP against a
-        validated consent artefact. The transactionId is the correlation id that
-        HIP should use use when pushing data to the **dataPushUrl**. 
+      description: |
+        API called by CM to request Health information from HIP against a validated consent artefact. The transactionId is the correlation id that HIP should use use when pushing data to the **dataPushUrl**. 
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-HIP-ID"
@@ -1027,15 +986,11 @@ paths:
         - cm facing
   /v0.5/health-information/notify:
     post:
-      description: >
+      description: |
         API called by HIU and HIP during data-transfer. 
-
         1. HIP on transfer of data would send **sessionStatus** - one of [TRANSFERRED, FAILED]
-
         2. HIP would also send **hiStatus** for each *careContextReference* - on of [DELIVERED, ERRORED]
-
         3. HIU on receipt of data would send **sessionStatus** - one of [TRANSFERRED, FAILED]. For example, FAILED when if data was not sent or if invalid data was sent
-
         4. HIU would also send **hiStatus** for each *careContextReference* - one of [OK, ERRORED] 
       parameters:
         - $ref: "#/components/parameters/authorization"
@@ -1108,9 +1063,8 @@ paths:
         - monitoring
   "/v0.5/hi-services/{service-id}":
     get:
-      description: >
-        This API is meant for displaying the bridge service details by the
-        serviceId provided .
+      description: |
+        This API is meant for displaying the bridge service details by the serviceId provided .
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/service-id"
@@ -1161,9 +1115,8 @@ paths:
         - services
   /v0.5/links/link/add-contexts:
     post:
-      description: >
-        API to submit care-context to CM for HIP initiated linking. The API
-        must accompany the "accessToken" fetched in the users/auth process.  
+      description: |
+        API to submit care-context to CM for HIP initiated linking. The API must accompany the "accessToken" fetched in the users/auth process.  
           1. subsequent usage for accessToken may be invalid if it was meant for one-time usage or if it expired
       parameters:
         - $ref: "#/components/parameters/authorization"
@@ -1277,9 +1230,8 @@ paths:
         - cm facing
   /v0.5/links/link/init:
     post:
-      description: >
-        Request from CM to links care contexts associated with only one
-        patient
+      description: |
+        Request from CM to links care contexts associated with only one patient
           1. **Validate account reference number and care context reference number**
           2. **Validate transactionId in the request with discovery request entry to check whether there was a discovery
               and were these care contexts discovered or not for a given patient**
@@ -1342,12 +1294,8 @@ paths:
         - cm facing
   /v0.5/links/link/on-add-contexts:
     post:
-      description: >
-        If the accessToken is valid for purpose of linking, and specified
-        details provided, CM will send "acknoweldgement.status" as SUCCESS. If
-        any error occcurred, for example invalid token, or other required
-        patient or care-context information not provided, then "error" attribute
-        conveys so. 
+      description: |
+        If the accessToken is valid for purpose of linking, and specified details provided, CM will send "acknoweldgement.status" as SUCCESS. If any error occcurred, for example invalid token, or other required patient or care-context information not provided, then "error" attribute conveys so. 
           1. **accessToken must be valid and must be for the purpose of linking**
       parameters:
         - $ref: "#/components/parameters/authorization"
@@ -1405,9 +1353,8 @@ paths:
         - cm facing
   /v0.5/links/link/on-confirm:
     post:
-      description: >
-        Returns a list of linked care contexts with patient reference
-        number.
+      description: |
+        Returns a list of linked care contexts with patient reference number.
           1. **Validated and linked account reference number**
           2. **Validated that the token sent from Consent Manager is same as the one generated by HIP**
           3. **Verified that same Consent Manager which made the link request is sending the token**
@@ -1462,20 +1409,14 @@ paths:
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
-      summary: Token authenticated by HIP, indicating completion of linkage of
-        care-contexts
+      summary: Token authenticated by HIP, indicating completion of linkage of care-contexts
       tags:
         - link
         - hip facing
   /v0.5/links/link/on-init:
     post:
-      description: >
-        Result of patient care-context link request from HIP end. This
-        happens in context of previous discovery of patient found at HIP end,
-        therefore the link requests ought to be in reference to the patient
-        reference and care-context references previously returned by the HIP.
-        The correlation of discovery and link request is maintained through the
-        transactionId. HIP should have
+      description: |
+        Result of patient care-context link request from HIP end. This happens in context of previous discovery of patient found at HIP end, therefore the link requests ought to be in reference to the patient reference and care-context references previously returned by the HIP. The correlation of discovery and link request is maintained through the transactionId. HIP should have
           1. **Validated transactionId in the request to check whether there was a discovery done previously, and the link request corresponds to returned patient care care context references**
           2. **Before returning the response, HIP should have sent an authentication request to the patient(eg: OTP verification)**
           3. **HIP should communicate the mode of authentication of a successful request**
@@ -1556,9 +1497,8 @@ paths:
         - hip facing
   /v0.5/patients/find:
     post:
-      description: >
-        This API is meant for identify to patient given her
-        consent-manager-user-id
+      description: |
+        This API is meant for identify to patient given her consent-manager-user-id
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-CM-ID"
@@ -1610,16 +1550,11 @@ paths:
         - hiu facing
   /v0.5/patients/on-find:
     post:
-      description: >
-        If a patient is found then patient.name contains the patients
-        name. 
-
+      description: |
+        If a patient is found then patient.name contains the patients name. 
         Otherwise, patient is not provided, and possibly error is raised for invalid requests
-
         Note in addition to the "Authorization" header, one of the following headers must be specified
-
         1. specify **X-HIU-ID** if the requester is HIU (identified from /find requester.id)
-
         2. specify **X-HIP-ID** if the requester is HIP (identified from /find requester.id)
       parameters:
         - $ref: "#/components/parameters/authorization"
@@ -1837,10 +1772,8 @@ paths:
         - patient notification
   /v0.5/patients/sms/on-notify:
     post:
-      description: >
-        If the SMS notification is successfully sent to patient then
-        "status" will be "ACKNOWLEDGED" with no error.
-
+      description: |
+        If the SMS notification is successfully sent to patient then "status" will be "ACKNOWLEDGED" with no error.
         If the SMS notification is failed then "status" will be "ERRORED" with error.
       parameters:
         - $ref: "#/components/parameters/authorization"
@@ -1951,9 +1884,7 @@ paths:
         - sessions
   /v0.5/subscription-requests/cm/init:
     post:
-      description: creates a request for subscription. The subscription categories can
-        be for care-contexts linkages or availability of data against existing
-        care-contexts. Note that the requester must have HIU role
+      description: creates a request for subscription. The subscription categories can be for care-contexts linkages or availability of data against existing care-contexts. Note that the requester must have HIU role
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-CM-ID"
@@ -2010,10 +1941,8 @@ paths:
         - hiu facing
   /v0.5/subscription-requests/cm/on-init:
     post:
-      description: >
-        This callback API acknowledges the request for subscription from a
-        HIU, and sends back a "id" that will be used when the patient/user
-        approves or denies the subscription. 
+      description: |
+        This callback API acknowledges the request for subscription from a HIU, and sends back a "id" that will be used when the patient/user approves or denies the subscription. 
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-HIU-ID"
@@ -2048,19 +1977,14 @@ paths:
           description: |
             **Causes:**
               * Downstream services are down
-      summary: callback API for the /subscription-requests/cm/init to notify a HIU on
-        acceptance/acknowledgement of the request for subscription.
+      summary: callback API for the /subscription-requests/cm/init to notify a HIU on acceptance/acknowledgement of the request for subscription.
       tags:
         - subscriptions
         - cm facing
   /v0.5/subscription-requests/hiu/notify:
     post:
-      description: >
-        This API is used by CM to notify a HIU to grant or deny a request
-        for subscription, and also to notify that in case an existing
-        subscription is revoked or expired. For notifying that a particular
-        subscription request was GRANTED or DENIED, the
-        **subscriptionRequestId** is passed. 
+      description: |
+        This API is used by CM to notify a HIU to grant or deny a request for subscription, and also to notify that in case an existing subscription is revoked or expired. For notifying that a particular subscription request was GRANTED or DENIED, the **subscriptionRequestId** is passed. 
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-HIU-ID"
@@ -2117,9 +2041,8 @@ paths:
         - cm facing
   /v0.5/subscription-requests/hiu/on-notify:
     post:
-      description: >
-        This API is called by HIU as acknowledgement to subscription
-        request relevant notifications. 
+      description: |
+        This API is called by HIU as acknowledgement to subscription request relevant notifications. 
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-CM-ID"
@@ -2154,21 +2077,15 @@ paths:
           description: |
             **Causes:**
               * Downstream services are down
-      summary: Callback API for /subscription-requests/hiu/notify to acknowledge
-        receipt of notification.
+      summary: Callback API for /subscription-requests/hiu/notify to acknowledge receipt of notification.
       tags:
         - subscriptions
         - hiu facing
   /v0.5/subscriptions/hiu/notify:
     post:
-      description: >
-        This API is used by CM to notify a HIU for notification relevant to
-        subscription. Notifications are sent to subscribed HIUs whenever a new
-        care-context is linked or new data is available on an existing linked
-        care-context. 
-
+      description: |
+        This API is used by CM to notify a HIU for notification relevant to subscription. Notifications are sent to subscribed HIUs whenever a new care-context is linked or new data is available on an existing linked care-context. 
         1. if event.category = LINK, then only care-contexts are passed when new care-contexts are linked for patient. 
-
         2. If event.category = DATA, then hiTypes are passed. Care-context is passed only if the subscribed HIU has any valid consent for that care-context
       parameters:
         - $ref: "#/components/parameters/authorization"
@@ -2226,10 +2143,8 @@ paths:
         - cm facing
   /v0.5/subscriptions/hiu/on-notify:
     post:
-      description: >
-        This API is called by HIU as acknowledgement to consent
-        notifications, specifically for cases when consent is REVOKED or
-        EXPIRED.
+      description: |
+        This API is called by HIU as acknowledgement to consent notifications, specifically for cases when consent is REVOKED or EXPIRED.
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-CM-ID"
@@ -2264,20 +2179,14 @@ paths:
           description: |
             **Causes:**
               * Downstream services are down
-      summary: Callback API for /subscriptions/hiu/notify to acknowledge receipt of
-        notification.
+      summary: Callback API for /subscriptions/hiu/notify to acknowledge receipt of notification.
       tags:
         - subscriptions
         - hiu facing
   /v0.5/users/auth/confirm:
     post:
-      description: >
-        This API is called by HIP/HIUs to confirm authentication of users.
-        The transactionId returned by the previous callback API
-        /users/auth/on-init must be sent. If Authentication is successful the
-        callback API will send an "access token" for subsequent purpose specific
-        API calls. Note only **credential.authCode** or
-        **credential.demographic** should be sent
+      description: |
+        This API is called by HIP/HIUs to confirm authentication of users. The transactionId returned by the previous callback API /users/auth/on-init must be sent. If Authentication is successful the callback API will send an "access token" for subsequent purpose specific API calls. Note only **credential.authCode** or **credential.demographic** should be sent
           1. demographic details are only required for  demographic auth as of now. 
           2. demographic details are required only in MEDIATED cases and if the **auth.mode** so demands. e.g. if **auth.mode** is DEMOGRAPHICS. Usually for demographic authentication, the name, gender and DOB must be exactly as specified in User Account.
           3. demographic.identifier is optional, however maybe required if authentication so mandates. 
@@ -2332,17 +2241,15 @@ paths:
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
-      summary: Confirmation request sending token, otp or other authentication details
-        from HIP/HIU for confirmation
+      summary: Confirmation request sending token, otp or other authentication details from HIP/HIU for confirmation
       tags:
         - user auth
         - hip facing
         - hiu facing
   /v0.5/users/auth/fetch-modes:
     post:
-      description: >
-        This API is meant for identify supported authentication modes for a
-        patient given a specific purpose
+      description: |
+        This API is meant for identify supported authentication modes for a patient given a specific purpose
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-CM-ID"
@@ -2395,10 +2302,8 @@ paths:
         - hiu facing
   /v0.5/users/auth/init:
     post:
-      description: >
-        This API is called by HIPs to initiate authentication of users. A
-        transactionId is retuned by the corresponding callback API for
-        confirmation of user auth.
+      description: |
+        This API is called by HIPs to initiate authentication of users. A transactionId is retuned by the corresponding callback API for confirmation of user auth.
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-CM-ID"
@@ -2455,10 +2360,8 @@ paths:
         - hiu facing
   /v0.5/users/auth/notify:
     post:
-      description: >
-        This API is called by CM to confirm authentication of users. The
-        transactionId returned is same as that passed in /auth/on-init. The
-        "auth.status" conveys whether the request was GRANTED or DENIED.
+      description: |
+        This API is called by CM to confirm authentication of users. The transactionId returned is same as that passed in /auth/on-init. The "auth.status" conveys whether the request was GRANTED or DENIED.
 
           1. **auth.accessToken** - is specific to the purpose mentioned in the /auth/init. This token needs to be used for initiating the intended action. For example for HIP initiated linking of care-contexts
           2. **NOTE**, only one of **X-HIP-ID** or **X-HIU-ID** will be sent as part of header, not both.
@@ -2520,7 +2423,7 @@ paths:
         - cm facing
   /v0.5/users/auth/on-confirm:
     post:
-      description: >
+      description: |
         This API is called by CM to confirm authentication of users.
 
           1. **auth.accessToken** - is specific to the purpose mentioned in the /auth/init. This token needs to be used for initiating the intended action. For example for HIP initiated linking of care-contexts
@@ -2576,23 +2479,17 @@ paths:
             **Causes:**
               * Downstream system(s) is down.
               * Unhandled exceptions.
-      summary: callback API for /auth/confirm (in case of MEDIATED auth) to confirm
-        user authentication or not
+      summary: callback API for /auth/confirm (in case of MEDIATED auth) to confirm user authentication or not
       tags:
         - user auth
         - cm facing
   /v0.5/users/auth/on-fetch-modes:
     post:
-      description: >
-        If a patient is found then **auth** attribute contains the
-        supported modes for the specified purpose. 
-
+      description: |
+        If a patient is found then **auth** attribute contains the supported modes for the specified purpose. 
         Otherwise, error is raised for invalid requests or for non-existent id.
-
         Note in addition to the "Authorization" header, one of the following headers must be specified
-
         1. **X-HIU-ID** if the requester is HIU (identified from /auth/fetch-modes requester.id)
-
         2. **X-HIP-ID** if the requester is HIP (identified from /auth/fetch-modes requester.id)
       parameters:
         - $ref: "#/components/parameters/authorization"
@@ -2646,14 +2543,8 @@ paths:
         - cm facing
   /v0.5/users/auth/on-init:
     post:
-      description: >
-        If the patient's id is valid, CM will return a transactionId as
-        initialization of user auth. If the request is valid, then 'auth.mode'
-        will convey how the authentication should be done. The authentication
-        can be *mediated* or *direct*. For mediated authentication modes, HIP or
-        HIU is epected to send over relevant code (OTP/token) or demographic
-        info via subsequent API call to /auth/confirm. for direct authentication
-        case, CM will notify requester through/users/auth/notify API. 
+      description: |
+        If the patient's id is valid, CM will return a transactionId as initialization of user auth. If the request is valid, then 'auth.mode' will convey how the authentication should be done. The authentication can be *mediated* or *direct*. For mediated authentication modes, HIP or HIU is epected to send over relevant code (OTP/token) or demographic info via subsequent API call to /auth/confirm. for direct authentication case, CM will notify requester through/users/auth/notify API. 
 
           1. **auth.mode** conveys whats the mode of authentication is, and what is expected from HIP/HIU in the subsequent /auth/confirm API call. Possible values 
               1. MOBILE_OTP - auth via OTP to registered mobile. Mediated. 
@@ -2742,9 +2633,8 @@ paths:
         - cm facing
   /v0.5/users/auth/on-notify:
     post:
-      description: >
-        This API is called by HIU/HIPs to confirm acknowledgement for
-        receipt of auth notification is case of DIRECT authentication. 
+      description: |
+        This API is called by HIU/HIPs to confirm acknowledgement for receipt of auth notification is case of DIRECT authentication. 
       parameters:
         - $ref: "#/components/parameters/authorization"
         - $ref: "#/components/parameters/X-CM-ID"
@@ -2833,24 +2723,21 @@ components:
       schema:
         type: string
     X-HIP-ID:
-      description: Identifier of the health information provider to which the request
-        was intended.
+      description: Identifier of the health information provider to which the request was intended.
       in: header
       name: X-HIP-ID
       required: true
       schema:
         type: string
     X-HIU-ID:
-      description: Identifier of the health information user to which the request was
-        intended.
+      description: Identifier of the health information user to which the request was intended.
       in: header
       name: X-HIU-ID
       required: true
       schema:
         type: string
     authorization:
-      description: Access token which was issued after successful login with gateway
-        auth server.
+      description: Access token which was issued after successful login with gateway auth server.
       in: header
       name: Authorization
       required: true
@@ -2909,7 +2796,7 @@ components:
       xml:
         name: Meta
     AuthenticationMode:
-      description: >
+      description: |
         Subjected to CM specific capability
          1. MOBILE_OTP - for SMS OTP
          2. DIRECT - for authentication directly with the patient. e.g. Mobile App, SMS
@@ -3490,8 +3377,7 @@ components:
         notification:
           properties:
             consentArtefacts:
-              description: if the status is GRANTED or REVOKED, then the consentArtefact
-                references (Ids) must be specified.
+              description: if the status is GRANTED or REVOKED, then the consentArtefact references (Ids) must be specified.
               items:
                 $ref: "#/components/schemas/ConsentArtefactReference"
               type: array
@@ -3967,8 +3853,7 @@ components:
     PatientAuthConfirmRequest:
       properties:
         credential:
-          description: note, demographic details are only required for demographic auth at
-            this point.
+          description: note, demographic details are only required for demographic auth at this point.
           properties:
             authCode:
               type: string
@@ -3993,9 +3878,8 @@ components:
     PatientAuthConfirmResponse:
       properties:
         auth:
-          description: >
-            depending on the purpose of auth, as specified in /auth/init, the
-            response may include the following 
+          description: |
+            depending on the purpose of auth, as specified in /auth/init, the response may include the following 
               1. LINK - only returns **accessToken**
               2. KYC - only returns **patient**
               3. KYC_AND_LINK - returns both **accessToken** and **patient**
@@ -4158,9 +4042,8 @@ components:
     PatientAuthNotification:
       properties:
         auth:
-          description: >
-            depending on the purpose of auth, as specified in /auth/init, the
-            response may include the following 
+          description: |
+            depending on the purpose of auth, as specified in /auth/init, the response may include the following 
               1. LINK - only returns **accessToken**
               2. KYC - only returns **patient**
               3. KYC_AND_LINK - returns both **accessToken** and **patient**
@@ -4248,8 +4131,7 @@ components:
     PatientCareContextLink:
       properties:
         accessToken:
-          description: AccessToken fetched in the user auth process for the purpose
-            specified
+          description: AccessToken fetched in the user auth process for the purpose specified
           type: string
         patient:
           properties:
@@ -4319,8 +4201,7 @@ components:
         - resp
       type: object
     PatientDemographic:
-      description: Demographic details are only required for demographic auth at this
-        point. Demographic details must be same as registered
+      description: Demographic details are only required for demographic auth at this point. Demographic details must be same as registered
       properties:
         dateOfBirth:
           description: date of birth in YYYY-MM-DD format.
@@ -4412,8 +4293,7 @@ components:
         timestamp:
           $ref: "#/components/schemas/TimestampSchema"
         transactionId:
-          description: correlation-Id for patient discovery and subsequent care context
-            linkage
+          description: correlation-Id for patient discovery and subsequent care context linkage
           format: uuid
           type: string
       required:
@@ -4659,13 +4539,11 @@ components:
         notification:
           properties:
             careContextInfo:
-              description: Information about care context or visit for which the SMS is being
-                sent.
+              description: Information about care context or visit for which the SMS is being sent.
               example: X-Ray on 22nd Dec
               type: string
             deeplinkUrl:
-              description: A link pointing to digital health records of the patient. PHR App's
-                deeplink will be sent in SMS if this field is not provided.
+              description: A link pointing to digital health records of the patient. PHR App's deeplink will be sent in SMS if this field is not provided.
               example: https://link.to.health.records/ (Optional)
               format: uri
               type: string
@@ -4676,8 +4554,7 @@ components:
                   example: HIP_001
                   type: string
                 name:
-                  description: Name of the HIP(Hospital). Hospital's name will be fetched from
-                    registry if not provided.
+                  description: Name of the HIP(Hospital). Hospital's name will be fetched from registry if not provided.
                   example: Max Healthcare (Optional)
                   type: string
               required:
@@ -4688,8 +4565,7 @@ components:
               example: +91-9999999999
               type: string
             receiverName:
-              description: Name of the reciever/patient. Receiver's name will not be sent if
-                not provided.
+              description: Name of the reciever/patient. Receiver's name will not be sent if not provided.
               example: Ramesh Singh (Optional)
               type: string
           required:

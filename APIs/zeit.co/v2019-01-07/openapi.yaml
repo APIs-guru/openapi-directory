@@ -210,8 +210,7 @@ paths:
                     items:
                       properties:
                         boughtAt:
-                          description: A timestamp to tell when the domain was purchase if it was
-                            purchased with ZEIT
+                          description: A timestamp to tell when the domain was purchase if it was purchased with ZEIT
                           nullable: true
                           type: integer
                         cdnEnabled:
@@ -229,8 +228,7 @@ paths:
                           description: The unique identifier of the domain.
                           type: string
                         intendedNameservers:
-                          description: The set of nameservers ZEIT requires the user to set to verify the
-                            domain with Nameservers
+                          description: The set of nameservers ZEIT requires the user to set to verify the domain with Nameservers
                           items:
                             description: An intended nameserver for the domain
                             type: string
@@ -245,13 +243,11 @@ paths:
                             type: string
                           type: array
                         nsVerifiedAt:
-                          description: The timestamp of the last time the domain was verified using
-                            Nameservers
+                          description: The timestamp of the last time the domain was verified using Nameservers
                           nullable: true
                           type: integer
                         orderedAt:
-                          description: A timestamp indicating when the domain was ordered if it was
-                            purchased with ZEIT
+                          description: A timestamp indicating when the domain was ordered if it was purchased with ZEIT
                           nullable: true
                           type: integer
                         serviceType:
@@ -262,18 +258,15 @@ paths:
                             - na
                           type: string
                         transferredAt:
-                          description: If the domain was transferred to ZEIT, it indicates the timestamp
-                            for when the transfer was started
+                          description: If the domain was transferred to ZEIT, it indicates the timestamp for when the transfer was started
                           nullable: true
                           type: integer
                         txtVerifiedAt:
-                          description: The timestamp of the last time the domain was verified using a TXT
-                            record
+                          description: The timestamp of the last time the domain was verified using a TXT record
                           nullable: true
                           type: integer
                         verificationRecord:
-                          description: Indicates the verification record that should be used to verify the
-                            domain using a TXT record
+                          description: Indicates the verification record that should be used to verify the domain using a TXT record
                           type: string
                         verified:
                           description: Indicates if the domain ownership was already verified
@@ -372,8 +365,7 @@ paths:
                           type: object
                         type: array
                       boughtAt:
-                        description: A timestamp to tell when the domain was purchase if it was
-                          purchased with ZEIT
+                        description: A timestamp to tell when the domain was purchase if it was purchased with ZEIT
                         nullable: true
                         type: integer
                       cdnEnabled:
@@ -427,8 +419,7 @@ paths:
                         description: The unique identifier of the domain.
                         type: string
                       intendedNameservers:
-                        description: The set of nameservers ZEIT requires the user to set to verify the
-                          domain with Nameservers
+                        description: The set of nameservers ZEIT requires the user to set to verify the domain with Nameservers
                         items:
                           description: An intended nameserver for the domain
                           type: string
@@ -443,13 +434,11 @@ paths:
                           type: string
                         type: array
                       nsVerifiedAt:
-                        description: The timestamp of the last time the domain was verified using
-                          Nameservers
+                        description: The timestamp of the last time the domain was verified using Nameservers
                         nullable: true
                         type: integer
                       orderedAt:
-                        description: A timestamp indicating when the domain was ordered if it was
-                          purchased with ZEIT
+                        description: A timestamp indicating when the domain was ordered if it was purchased with ZEIT
                         nullable: true
                         type: integer
                       serviceType:
@@ -460,22 +449,18 @@ paths:
                           - na
                         type: string
                       suffix:
-                        description: Tells if the domain is being used as a custom suffix for the user
-                          or team
+                        description: Tells if the domain is being used as a custom suffix for the user or team
                         type: boolean
                       transferredAt:
-                        description: If the domain was transferred to ZEIT, it indicates the timestamp
-                          for when the transfer was started
+                        description: If the domain was transferred to ZEIT, it indicates the timestamp for when the transfer was started
                         nullable: true
                         type: integer
                       txtVerifiedAt:
-                        description: The timestamp of the last time the domain was verified using a TXT
-                          record
+                        description: The timestamp of the last time the domain was verified using a TXT record
                         nullable: true
                         type: integer
                       verificationRecord:
-                        description: Indicates the verification record that should be used to verify the
-                          domain using a TXT record
+                        description: Indicates the verification record that should be used to verify the domain using a TXT record
                         type: string
                       verified:
                         description: Indicates if the domain ownership was already verified
@@ -947,8 +932,7 @@ components:
       description: A webhook subscription with an URL where ZEIT will POST events.
       properties:
         configurationId:
-          description: An id that corresponds to the configuration that generated the
-            token that was used to create the webhook
+          description: An id that corresponds to the configuration that generated the token that was used to create the webhook
           type: string
         createdAt:
           description: Timestamp that tells when was the webhook created

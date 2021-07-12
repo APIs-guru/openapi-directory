@@ -168,9 +168,7 @@ components:
           type: string
       type: object
     MappingJob:
-      description: "For V3: securityType2 is required when idType is BASE_TICKER or
-        ID_EXCH_SYMBOL.  expiration is required when securityType2 is Option or
-        Warrant.  maturity is required when securityType2 is Pool."
+      description: "For V3: securityType2 is required when idType is BASE_TICKER or ID_EXCH_SYMBOL.  expiration is required when securityType2 is Option or Warrant.  maturity is required when securityType2 is Pool."
       properties:
         contractSize:
           $ref: "#/components/schemas/NullableNumberInterval"

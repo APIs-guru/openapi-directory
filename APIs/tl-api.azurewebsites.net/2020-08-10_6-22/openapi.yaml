@@ -358,8 +358,7 @@ paths:
             nullable: true
             type: string
           x-position: 4
-        - description: number of recode in result and default is 100. use negative numbers
-            to order by desc
+        - description: number of recode in result and default is 100. use negative numbers to order by desc
           in: query
           name: limit
           schema:
@@ -615,8 +614,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DefaultResponseDTOOfBoolean"
-          description: "status 1  : success, status 404 : package not found, status -2:
-            package already in use "
+          description: "status 1  : success, status 404 : package not found, status -2: package already in use "
         "400":
           content:
             application/json:
@@ -765,8 +763,7 @@ paths:
             nullable: true
             type: string
           x-position: 4
-        - description: number of recode in result and default is 100. use negative numbers
-            to order by desc
+        - description: number of recode in result and default is 100. use negative numbers to order by desc
           in: query
           name: limit
           schema:
@@ -879,8 +876,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/DefaultResponseDTOOfBoolean"
-          description: "status 1 : success, status 404 : package not found, status -2:
-            package already in use "
+          description: "status 1 : success, status 404 : package not found, status -2: package already in use "
         "400":
           content:
             application/json:
@@ -919,8 +915,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/MessageStatus"
-          description: same response result will retrun with different status and
-            messageText
+          description: same response result will retrun with different status and messageText
         "404":
           content:
             application/json:
@@ -966,8 +961,7 @@ paths:
     post:
       operationId: User_registerUser
       parameters:
-        - description: "Indentity number(primary key) for user object. Generated in DB
-            table when inserting a record.
+        - description: "Indentity number(primary key) for user object. Generated in DB table when inserting a record.
 
             \            "
           in: query
@@ -976,8 +970,7 @@ paths:
             format: int32
             type: integer
           x-position: 1
-        - description: "Account number of the user.It can be any stakeholder of the
-            application.even can be a gym.
+        - description: "Account number of the user.It can be any stakeholder of the application.even can be a gym.
 
             \            "
           in: query
@@ -1020,8 +1013,7 @@ paths:
             nullable: true
             type: string
           x-position: 6
-        - description: "If Someone introduced this user to the system, then that user's
-            UserId.
+        - description: "If Someone introduced this user to the system, then that user's UserId.
 
             \            "
           in: query
@@ -1058,8 +1050,7 @@ paths:
     put:
       operationId: User_updateUser
       parameters:
-        - description: "Indentity number(primary key) for user object. Generated in DB
-            table when inserting a record.
+        - description: "Indentity number(primary key) for user object. Generated in DB table when inserting a record.
 
             \            "
           in: query
@@ -1068,8 +1059,7 @@ paths:
             format: int32
             type: integer
           x-position: 1
-        - description: "Account number of the user.It can be any stakeholder of the
-            application.even can be a gym.
+        - description: "Account number of the user.It can be any stakeholder of the application.even can be a gym.
 
             \            "
           in: query
@@ -1112,8 +1102,7 @@ paths:
             nullable: true
             type: string
           x-position: 6
-        - description: "If Someone introduced this user to the system, then that user's
-            UserId.
+        - description: "If Someone introduced this user to the system, then that user's UserId.
 
             \            "
           in: query
@@ -1199,8 +1188,7 @@ components:
       additionalProperties: false
       description: "The ArticleDTO Class.
 
-        Contains relevant fields of Article DTO by masking actual
-        Article entity's fields in application.
+        Contains relevant fields of Article DTO by masking actual Article entity's fields in application.
 
         \            "
       properties:
@@ -1323,8 +1311,7 @@ components:
       additionalProperties: false
       description: "The ArticleSearchDTO Class.
 
-        Contains relevant fields of ArticleSearch DTO by masking actual
-        Article entity's fields in application.
+        Contains relevant fields of ArticleSearch DTO by masking actual Article entity's fields in application.
 
         \            "
       properties:
@@ -1659,8 +1646,7 @@ components:
       additionalProperties: false
       description: "The GymDTO Class.
 
-        Contains relevant fields of Gym DTO by masking actual Gym
-        entity's fields in application.
+        Contains relevant fields of Gym DTO by masking actual Gym entity's fields in application.
 
         \            "
       properties:
@@ -1715,8 +1701,7 @@ components:
       additionalProperties: false
       description: "The MemeberDTO Class.
 
-        Contains relevant fields of Member DTO by masking actual Member
-        entity's fields in application.
+        Contains relevant fields of Member DTO by masking actual Member entity's fields in application.
 
         \            "
       properties:
@@ -1746,8 +1731,7 @@ components:
       additionalProperties: false
       description: "The PackageDTO Class.
 
-        Contains relevant fields of Package DTO by masking actual
-        Package entity's fields in application.
+        Contains relevant fields of Package DTO by masking actual Package entity's fields in application.
 
         \            "
       properties:
@@ -1768,8 +1752,7 @@ components:
           format: decimal
           type: number
         applyForAllGyms:
-          description: "Boolean value to indicate wheather package is available in all the
-            gyms.
+          description: "Boolean value to indicate wheather package is available in all the gyms.
 
             \            "
           type: boolean
@@ -1782,8 +1765,7 @@ components:
           nullable: true
           type: array
         bindingPeriod:
-          description: "Range of period a member is bound to the contract if he/she choose
-            this package.
+          description: "Range of period a member is bound to the contract if he/she choose this package.
 
             \            "
           format: int32
@@ -1835,8 +1817,7 @@ components:
         instructionsToGymUsers:
           description: "Instruction to the gym members relevant to the package.
 
-            \             If there are more instructions can be
-            stored as comma seperated values.
+            \             If there are more instructions can be stored as comma seperated values.
 
             \            "
           nullable: true
@@ -1844,8 +1825,7 @@ components:
         instructionsToWebUsers:
           description: "Instruction to the MRM members relevant to the package.
 
-            \             If there are more instructions can be
-            stored as comma seperated values.
+            \             If there are more instructions can be stored as comma seperated values.
 
             \            "
           nullable: true
@@ -1856,14 +1836,12 @@ components:
             \            "
           type: boolean
         isAtg:
-          description: "Boolean value to indicate ATG transaction from bank is applicable
-            or not.
+          description: "Boolean value to indicate ATG transaction from bank is applicable or not.
 
             \            "
           type: boolean
         isAutoRenew:
-          description: "Boolean value to indicate the contract will auto renew after
-            expiration\ 
+          description: "Boolean value to indicate the contract will auto renew after expiration\ 
 
             \             if this package would be chosen.
 
@@ -1875,8 +1853,7 @@ components:
             \            "
           type: boolean
         isRegistrationFee:
-          description: "Boolean value to indicate this package has registration fee or
-            not.
+          description: "Boolean value to indicate this package has registration fee or not.
 
             \            "
           type: boolean
@@ -1891,37 +1868,32 @@ components:
             \            "
           type: boolean
         isSponsorPackage:
-          description: "Boolean value to indicate package can be sponsored or not by other
-            party.
+          description: "Boolean value to indicate package can be sponsored or not by other party.
 
             \            "
           type: boolean
         maximumGiveAwayRestAmount:
           description: "If a member join the gym middle of a month via this package,\ 
 
-            \             what is the maximum amount of price can be
-            neglected from payment from the member.
+            \             what is the maximum amount of price can be neglected from payment from the member.
 
             \            "
           format: decimal
           type: number
         memberCanAddAddOns:
-          description: "Boolean value to indicate member can add extra addons he wish if
-            he choose this package.
+          description: "Boolean value to indicate member can add extra addons he wish if he choose this package.
 
             \            "
           type: boolean
         memberCanLeaveWithinFreePeriod:
-          description: "Boolean value to indicate if member can leave from contract
-            within\ 
+          description: "Boolean value to indicate if member can leave from contract within\ 
 
             \             free period if he/she choose this package.
 
             \            "
           type: boolean
         memberCanRemoveAddOns:
-          description: "Boolean value to indicate member can remove already added addons
-            if he choose this package.
+          description: "Boolean value to indicate member can remove already added addons if he choose this package.
 
             \            "
           type: boolean
@@ -1940,8 +1912,7 @@ components:
         monthlyFee:
           description: "Monthly installment fee if package is not fixed visit.
 
-            addition of the servicefee and addon fees divided by
-            binding period.
+            addition of the servicefee and addon fees divided by binding period.
 
             \             read only
 
@@ -1949,22 +1920,19 @@ components:
           format: decimal
           type: number
         nextPackageNumber:
-          description: "Next Package the contract continue after the binding period of
-            this package.
+          description: "Next Package the contract continue after the binding period of this package.
 
             \            "
           format: int32
           type: integer
         numberOfInstallments:
-          description: "Maximum Number of installment a member can divide the package
-            price/cost to pay.
+          description: "Maximum Number of installment a member can divide the package price/cost to pay.
 
             \            "
           format: int32
           type: integer
         numberOfVisits:
-          description: "If package is fixed visit type, then how many visits are available
-            for this package.
+          description: "If package is fixed visit type, then how many visits are available for this package.
 
             \            "
           format: int32
@@ -2017,8 +1985,7 @@ components:
           format: date-time
           type: string
         tags:
-          description: "Comma separated string values in case of need of maintain some
-            labels kind of\ 
+          description: "Comma separated string values in case of need of maintain some labels kind of\ 
 
             \             stuff relevant to the package.
 
@@ -2026,8 +1993,7 @@ components:
           nullable: true
           type: string
         totalPrice:
-          description: "total price for the package including Addon fees, service fee and
-            registration fee.
+          description: "total price for the package including Addon fees, service fee and registration fee.
 
             incoming values for this field will ignore.
 
@@ -2044,8 +2010,7 @@ components:
       additionalProperties: false
       description: "The PackageItemDTO Class.
 
-        Contains relevant fields of PackageItem DTO by masking actual
-        Package entity's fields in application.
+        Contains relevant fields of PackageItem DTO by masking actual Package entity's fields in application.
 
         \            "
       properties:
@@ -2074,8 +2039,7 @@ components:
         articlePrice:
           description: "Price of the article determined from that package.
 
-            Price of a same article can be varied from package to
-            package.
+            Price of a same article can be varied from package to package.
 
             \            "
           format: decimal
@@ -2093,8 +2057,7 @@ components:
           nullable: true
           type: string
         numberOfItems:
-          description: "How many article(Addon) is available for that package from that
-            type.
+          description: "How many article(Addon) is available for that package from that type.
 
             \            "
           format: decimal
@@ -2112,8 +2075,7 @@ components:
       additionalProperties: false
       description: "The PackageSearchDTO Class.
 
-        Contains relevant fields of PackageSearch DTO by masking actual
-        Package entity's fields in application.
+        Contains relevant fields of PackageSearch DTO by masking actual Package entity's fields in application.
 
         \               "
       properties:
@@ -2129,14 +2091,12 @@ components:
           format: decimal
           type: number
         applyForAllGyms:
-          description: "Boolean value to indicate wheather package is available in all the
-            gyms.
+          description: "Boolean value to indicate wheather package is available in all the gyms.
 
             \            "
           type: boolean
         bindingPeriod:
-          description: "Range of period a member is bound to the contract if he/she choose
-            this package.
+          description: "Range of period a member is bound to the contract if he/she choose this package.
 
             \            "
           format: int32
@@ -2152,15 +2112,13 @@ components:
           nullable: true
           type: string
         description:
-          description: "Common descriptions about package.If there are more instructions
-            can be stored as comma separated values.
+          description: "Common descriptions about package.If there are more instructions can be stored as comma separated values.
 
             \            "
           nullable: true
           type: string
         features:
-          description: "What are the facilities, features available for package.ex:- wifi,
-            ACm etc.Can be stored as comma seperated values.
+          description: "What are the facilities, features available for package.ex:- wifi, ACm etc.Can be stored as comma seperated values.
 
             \            "
           nullable: true
@@ -2172,8 +2130,7 @@ components:
           format: int32
           type: integer
         memberCanRemoveAddOns:
-          description: "Boolean value to indicate member can remove already added addons
-            if he choose this package.
+          description: "Boolean value to indicate member can remove already added addons if he choose this package.
 
             \            "
           type: boolean
@@ -2192,8 +2149,7 @@ components:
         monthlyFee:
           description: "Monthly installment fee if package is not fixed visit.
 
-            addition of the servicefee and addon fees divided by
-            binding period.
+            addition of the servicefee and addon fees divided by binding period.
 
             \            "
           format: decimal
@@ -2230,8 +2186,7 @@ components:
           format: decimal
           type: number
         tags:
-          description: "Comma separated string values in case of need of maintain some
-            labels kind of stuff relevant to the package.
+          description: "Comma separated string values in case of need of maintain some labels kind of stuff relevant to the package.
 
             \            "
           nullable: true
@@ -2241,8 +2196,7 @@ components:
           format: int32
           type: integer
         totalPrice:
-          description: "total price for the package including Addon fees, service fee and
-            registration fee.
+          description: "total price for the package including Addon fees, service fee and registration fee.
 
             incoming values for this field will ignore.
 
@@ -2301,8 +2255,7 @@ components:
       additionalProperties: false
       description: "The TestDTO Class.
 
-        Contains relevant fields of Test DTO by masking actual Test
-        entity's fields in application.
+        Contains relevant fields of Test DTO by masking actual Test entity's fields in application.
 
         \            "
       properties:
@@ -2315,14 +2268,12 @@ components:
       additionalProperties: false
       description: "The UserDTO Class.
 
-        Contains relevant fields of User DTO by masking actual User
-        entity's fields in application.
+        Contains relevant fields of User DTO by masking actual User entity's fields in application.
 
         \            "
       properties:
         accountNumber:
-          description: "Account number of the user.It can be any stakeholder of the
-            application.even can be a gym.
+          description: "Account number of the user.It can be any stakeholder of the application.even can be a gym.
 
             \            "
           nullable: true
@@ -2346,8 +2297,7 @@ components:
           nullable: true
           type: string
         introduceBy:
-          description: "If Someone introduced this user to the system, then that user's
-            UserId.
+          description: "If Someone introduced this user to the system, then that user's UserId.
 
             \            "
           format: int32
@@ -2367,8 +2317,7 @@ components:
           format: int32
           type: integer
         userId:
-          description: "Indentity number(primary key) for user object. Generated in DB
-            table when inserting a record.
+          description: "Indentity number(primary key) for user object. Generated in DB table when inserting a record.
 
             \            "
           format: int32

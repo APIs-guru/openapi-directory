@@ -26,8 +26,7 @@ tags:
       description: User documentation
       url: http://wiremock.org/docs/verifying/
     name: Requests
-  - description: Near misses allow querying of received requests or request patterns
-      according to similarity
+  - description: Near misses allow querying of received requests or request patterns according to similarity
     externalDocs:
       description: User documentation
       url: http://wiremock.org/docs/verifying/#near-misses
@@ -108,23 +107,19 @@ paths:
                           description: This stub mapping's unique identifier
                           type: string
                         metadata:
-                          description: Arbitrary metadata to be used for e.g. tagging, documentation. Can
-                            also be used to find and remove stubs.
+                          description: Arbitrary metadata to be used for e.g. tagging, documentation. Can also be used to find and remove stubs.
                           type: object
                         name:
                           description: The stub mapping's name
                           type: string
                         newScenarioState:
-                          description: The new state for the scenario to be updated to after this stub is
-                            served.
+                          description: The new state for the scenario to be updated to after this stub is served.
                           type: string
                         persistent:
-                          description: Indicates that the stub mapping should be persisted immediately on
-                            create/update/delete and survive resets to default.
+                          description: Indicates that the stub mapping should be persisted immediately on create/update/delete and survive resets to default.
                           type: boolean
                         postServeActions:
-                          description: A map of the names of post serve action extensions to trigger and
-                            their parameters.
+                          description: A map of the names of post serve action extensions to trigger and their parameters.
                           type: object
                         priority:
                           description: This stub mapping's priority relative to others. 1 is highest.
@@ -152,48 +147,37 @@ paths:
                                 - password
                               type: object
                             bodyPatterns:
-                              description: 'Request body patterns to match against in the <key>: {
-                                "<predicate>": "<value>" } form'
+                              description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               items:
                                 type: object
                               type: array
                             cookies:
-                              description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                                "<value>" } form'
+                              description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               type: object
                             headers:
-                              description: 'Header patterns to match against in the <key>: { "<predicate>":
-                                "<value>" } form'
+                              description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               type: object
                             method:
                               description: The HTTP request method e.g. GET
                               type: string
                             queryParameters:
-                              description: 'Query parameter patterns to match against in the <key>: {
-                                "<predicate>": "<value>" } form'
+                              description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               type: object
                             url:
-                              description: The path and query to match exactly against. Only one of url,
-                                urlPattern, urlPath or urlPathPattern may be
-                                specified.
+                              description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                             urlPath:
-                              description: The path to match exactly against. Only one of url, urlPattern,
-                                urlPath or urlPathPattern may be specified.
+                              description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                             urlPathPattern:
-                              description: The path regex to match against. Only one of url, urlPattern,
-                                urlPath or urlPathPattern may be specified.
+                              description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                             urlPattern:
-                              description: The path and query regex to match against. Only one of url,
-                                urlPattern, urlPath or urlPathPattern may be
-                                specified.
+                              description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                           type: object
                         requiredScenarioState:
-                          description: The required state of the scenario in order for this stub to be
-                            matched.
+                          description: The required state of the scenario in order for this stub to be matched.
                           type: string
                         response:
                           allOf:
@@ -227,19 +211,13 @@ paths:
                                   description: Extra request headers to send when proxying to another host.
                                   type: object
                                 base64Body:
-                                  description: The response body as a base64 encoded string (useful for binary
-                                    content). Only one of body, base64Body,
-                                    jsonBody or bodyFileName may be specified.
+                                  description: The response body as a base64 encoded string (useful for binary content). Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                                   type: string
                                 body:
-                                  description: The response body as a string. Only one of body, base64Body,
-                                    jsonBody or bodyFileName may be specified.
+                                  description: The response body as a string. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                                   type: string
                                 bodyFileName:
-                                  description: The path to the file containing the response body, relative to the
-                                    configured file root. Only one of body,
-                                    base64Body, jsonBody or bodyFileName may be
-                                    specified.
+                                  description: The path to the file containing the response body, relative to the configured file root. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                                   type: string
                                 fault:
                                   description: The fault to apply (instead of a full, valid response).
@@ -253,15 +231,13 @@ paths:
                                   description: Number of milliseconds to delay be before sending the response.
                                   type: integer
                                 fromConfiguredStub:
-                                  description: Read-only flag indicating false if this was the default, unmatched
-                                    response. Not present otherwise.
+                                  description: Read-only flag indicating false if this was the default, unmatched response. Not present otherwise.
                                   type: boolean
                                 headers:
                                   description: Map of response headers to send
                                   type: object
                                 jsonBody:
-                                  description: The response body as a JSON object. Only one of body, base64Body,
-                                    jsonBody or bodyFileName may be specified.
+                                  description: The response body as a JSON object. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                                   type: object
                                 proxyBaseUrl:
                                   description: The base URL of the target to proxy matching requests to.
@@ -321,23 +297,19 @@ paths:
                   description: This stub mapping's unique identifier
                   type: string
                 metadata:
-                  description: Arbitrary metadata to be used for e.g. tagging, documentation. Can
-                    also be used to find and remove stubs.
+                  description: Arbitrary metadata to be used for e.g. tagging, documentation. Can also be used to find and remove stubs.
                   type: object
                 name:
                   description: The stub mapping's name
                   type: string
                 newScenarioState:
-                  description: The new state for the scenario to be updated to after this stub is
-                    served.
+                  description: The new state for the scenario to be updated to after this stub is served.
                   type: string
                 persistent:
-                  description: Indicates that the stub mapping should be persisted immediately on
-                    create/update/delete and survive resets to default.
+                  description: Indicates that the stub mapping should be persisted immediately on create/update/delete and survive resets to default.
                   type: boolean
                 postServeActions:
-                  description: A map of the names of post serve action extensions to trigger and
-                    their parameters.
+                  description: A map of the names of post serve action extensions to trigger and their parameters.
                   type: object
                 priority:
                   description: This stub mapping's priority relative to others. 1 is highest.
@@ -365,46 +337,37 @@ paths:
                         - password
                       type: object
                     bodyPatterns:
-                      description: 'Request body patterns to match against in the <key>: {
-                        "<predicate>": "<value>" } form'
+                      description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                       items:
                         type: object
                       type: array
                     cookies:
-                      description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                        "<value>" } form'
+                      description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                       type: object
                     headers:
-                      description: 'Header patterns to match against in the <key>: { "<predicate>":
-                        "<value>" } form'
+                      description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                       type: object
                     method:
                       description: The HTTP request method e.g. GET
                       type: string
                     queryParameters:
-                      description: 'Query parameter patterns to match against in the <key>: {
-                        "<predicate>": "<value>" } form'
+                      description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                       type: object
                     url:
-                      description: The path and query to match exactly against. Only one of url,
-                        urlPattern, urlPath or urlPathPattern may be specified.
+                      description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                       type: string
                     urlPath:
-                      description: The path to match exactly against. Only one of url, urlPattern,
-                        urlPath or urlPathPattern may be specified.
+                      description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                       type: string
                     urlPathPattern:
-                      description: The path regex to match against. Only one of url, urlPattern,
-                        urlPath or urlPathPattern may be specified.
+                      description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                       type: string
                     urlPattern:
-                      description: The path and query regex to match against. Only one of url,
-                        urlPattern, urlPath or urlPathPattern may be specified.
+                      description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                       type: string
                   type: object
                 requiredScenarioState:
-                  description: The required state of the scenario in order for this stub to be
-                    matched.
+                  description: The required state of the scenario in order for this stub to be matched.
                   type: string
                 response:
                   allOf:
@@ -438,18 +401,13 @@ paths:
                           description: Extra request headers to send when proxying to another host.
                           type: object
                         base64Body:
-                          description: The response body as a base64 encoded string (useful for binary
-                            content). Only one of body, base64Body, jsonBody or
-                            bodyFileName may be specified.
+                          description: The response body as a base64 encoded string (useful for binary content). Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                           type: string
                         body:
-                          description: The response body as a string. Only one of body, base64Body,
-                            jsonBody or bodyFileName may be specified.
+                          description: The response body as a string. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                           type: string
                         bodyFileName:
-                          description: The path to the file containing the response body, relative to the
-                            configured file root. Only one of body, base64Body,
-                            jsonBody or bodyFileName may be specified.
+                          description: The path to the file containing the response body, relative to the configured file root. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                           type: string
                         fault:
                           description: The fault to apply (instead of a full, valid response).
@@ -463,15 +421,13 @@ paths:
                           description: Number of milliseconds to delay be before sending the response.
                           type: integer
                         fromConfiguredStub:
-                          description: Read-only flag indicating false if this was the default, unmatched
-                            response. Not present otherwise.
+                          description: Read-only flag indicating false if this was the default, unmatched response. Not present otherwise.
                           type: boolean
                         headers:
                           description: Map of response headers to send
                           type: object
                         jsonBody:
-                          description: The response body as a JSON object. Only one of body, base64Body,
-                            jsonBody or bodyFileName may be specified.
+                          description: The response body as a JSON object. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                           type: object
                         proxyBaseUrl:
                           description: The base URL of the target to proxy matching requests to.
@@ -522,23 +478,19 @@ paths:
                     description: This stub mapping's unique identifier
                     type: string
                   metadata:
-                    description: Arbitrary metadata to be used for e.g. tagging, documentation. Can
-                      also be used to find and remove stubs.
+                    description: Arbitrary metadata to be used for e.g. tagging, documentation. Can also be used to find and remove stubs.
                     type: object
                   name:
                     description: The stub mapping's name
                     type: string
                   newScenarioState:
-                    description: The new state for the scenario to be updated to after this stub is
-                      served.
+                    description: The new state for the scenario to be updated to after this stub is served.
                     type: string
                   persistent:
-                    description: Indicates that the stub mapping should be persisted immediately on
-                      create/update/delete and survive resets to default.
+                    description: Indicates that the stub mapping should be persisted immediately on create/update/delete and survive resets to default.
                     type: boolean
                   postServeActions:
-                    description: A map of the names of post serve action extensions to trigger and
-                      their parameters.
+                    description: A map of the names of post serve action extensions to trigger and their parameters.
                     type: object
                   priority:
                     description: This stub mapping's priority relative to others. 1 is highest.
@@ -566,48 +518,37 @@ paths:
                           - password
                         type: object
                       bodyPatterns:
-                        description: 'Request body patterns to match against in the <key>: {
-                          "<predicate>": "<value>" } form'
+                        description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                         items:
                           type: object
                         type: array
                       cookies:
-                        description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                          "<value>" } form'
+                        description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                         type: object
                       headers:
-                        description: 'Header patterns to match against in the <key>: { "<predicate>":
-                          "<value>" } form'
+                        description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                         type: object
                       method:
                         description: The HTTP request method e.g. GET
                         type: string
                       queryParameters:
-                        description: 'Query parameter patterns to match against in the <key>: {
-                          "<predicate>": "<value>" } form'
+                        description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                         type: object
                       url:
-                        description: The path and query to match exactly against. Only one of url,
-                          urlPattern, urlPath or urlPathPattern may be
-                          specified.
+                        description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                         type: string
                       urlPath:
-                        description: The path to match exactly against. Only one of url, urlPattern,
-                          urlPath or urlPathPattern may be specified.
+                        description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                         type: string
                       urlPathPattern:
-                        description: The path regex to match against. Only one of url, urlPattern,
-                          urlPath or urlPathPattern may be specified.
+                        description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                         type: string
                       urlPattern:
-                        description: The path and query regex to match against. Only one of url,
-                          urlPattern, urlPath or urlPathPattern may be
-                          specified.
+                        description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                         type: string
                     type: object
                   requiredScenarioState:
-                    description: The required state of the scenario in order for this stub to be
-                      matched.
+                    description: The required state of the scenario in order for this stub to be matched.
                     type: string
                   response:
                     allOf:
@@ -641,19 +582,13 @@ paths:
                             description: Extra request headers to send when proxying to another host.
                             type: object
                           base64Body:
-                            description: The response body as a base64 encoded string (useful for binary
-                              content). Only one of body, base64Body, jsonBody
-                              or bodyFileName may be specified.
+                            description: The response body as a base64 encoded string (useful for binary content). Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                             type: string
                           body:
-                            description: The response body as a string. Only one of body, base64Body,
-                              jsonBody or bodyFileName may be specified.
+                            description: The response body as a string. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                             type: string
                           bodyFileName:
-                            description: The path to the file containing the response body, relative to the
-                              configured file root. Only one of body,
-                              base64Body, jsonBody or bodyFileName may be
-                              specified.
+                            description: The path to the file containing the response body, relative to the configured file root. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                             type: string
                           fault:
                             description: The fault to apply (instead of a full, valid response).
@@ -667,15 +602,13 @@ paths:
                             description: Number of milliseconds to delay be before sending the response.
                             type: integer
                           fromConfiguredStub:
-                            description: Read-only flag indicating false if this was the default, unmatched
-                              response. Not present otherwise.
+                            description: Read-only flag indicating false if this was the default, unmatched response. Not present otherwise.
                             type: boolean
                           headers:
                             description: Map of response headers to send
                             type: object
                           jsonBody:
-                            description: The response body as a JSON object. Only one of body, base64Body,
-                              jsonBody or bodyFileName may be specified.
+                            description: The response body as a JSON object. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                             type: object
                           proxyBaseUrl:
                             description: The base URL of the target to proxy matching requests to.
@@ -824,23 +757,19 @@ paths:
                           description: This stub mapping's unique identifier
                           type: string
                         metadata:
-                          description: Arbitrary metadata to be used for e.g. tagging, documentation. Can
-                            also be used to find and remove stubs.
+                          description: Arbitrary metadata to be used for e.g. tagging, documentation. Can also be used to find and remove stubs.
                           type: object
                         name:
                           description: The stub mapping's name
                           type: string
                         newScenarioState:
-                          description: The new state for the scenario to be updated to after this stub is
-                            served.
+                          description: The new state for the scenario to be updated to after this stub is served.
                           type: string
                         persistent:
-                          description: Indicates that the stub mapping should be persisted immediately on
-                            create/update/delete and survive resets to default.
+                          description: Indicates that the stub mapping should be persisted immediately on create/update/delete and survive resets to default.
                           type: boolean
                         postServeActions:
-                          description: A map of the names of post serve action extensions to trigger and
-                            their parameters.
+                          description: A map of the names of post serve action extensions to trigger and their parameters.
                           type: object
                         priority:
                           description: This stub mapping's priority relative to others. 1 is highest.
@@ -868,48 +797,37 @@ paths:
                                 - password
                               type: object
                             bodyPatterns:
-                              description: 'Request body patterns to match against in the <key>: {
-                                "<predicate>": "<value>" } form'
+                              description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               items:
                                 type: object
                               type: array
                             cookies:
-                              description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                                "<value>" } form'
+                              description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               type: object
                             headers:
-                              description: 'Header patterns to match against in the <key>: { "<predicate>":
-                                "<value>" } form'
+                              description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               type: object
                             method:
                               description: The HTTP request method e.g. GET
                               type: string
                             queryParameters:
-                              description: 'Query parameter patterns to match against in the <key>: {
-                                "<predicate>": "<value>" } form'
+                              description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               type: object
                             url:
-                              description: The path and query to match exactly against. Only one of url,
-                                urlPattern, urlPath or urlPathPattern may be
-                                specified.
+                              description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                             urlPath:
-                              description: The path to match exactly against. Only one of url, urlPattern,
-                                urlPath or urlPathPattern may be specified.
+                              description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                             urlPathPattern:
-                              description: The path regex to match against. Only one of url, urlPattern,
-                                urlPath or urlPathPattern may be specified.
+                              description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                             urlPattern:
-                              description: The path and query regex to match against. Only one of url,
-                                urlPattern, urlPath or urlPathPattern may be
-                                specified.
+                              description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                           type: object
                         requiredScenarioState:
-                          description: The required state of the scenario in order for this stub to be
-                            matched.
+                          description: The required state of the scenario in order for this stub to be matched.
                           type: string
                         response:
                           allOf:
@@ -943,19 +861,13 @@ paths:
                                   description: Extra request headers to send when proxying to another host.
                                   type: object
                                 base64Body:
-                                  description: The response body as a base64 encoded string (useful for binary
-                                    content). Only one of body, base64Body,
-                                    jsonBody or bodyFileName may be specified.
+                                  description: The response body as a base64 encoded string (useful for binary content). Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                                   type: string
                                 body:
-                                  description: The response body as a string. Only one of body, base64Body,
-                                    jsonBody or bodyFileName may be specified.
+                                  description: The response body as a string. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                                   type: string
                                 bodyFileName:
-                                  description: The path to the file containing the response body, relative to the
-                                    configured file root. Only one of body,
-                                    base64Body, jsonBody or bodyFileName may be
-                                    specified.
+                                  description: The path to the file containing the response body, relative to the configured file root. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                                   type: string
                                 fault:
                                   description: The fault to apply (instead of a full, valid response).
@@ -969,15 +881,13 @@ paths:
                                   description: Number of milliseconds to delay be before sending the response.
                                   type: integer
                                 fromConfiguredStub:
-                                  description: Read-only flag indicating false if this was the default, unmatched
-                                    response. Not present otherwise.
+                                  description: Read-only flag indicating false if this was the default, unmatched response. Not present otherwise.
                                   type: boolean
                                 headers:
                                   description: Map of response headers to send
                                   type: object
                                 jsonBody:
-                                  description: The response body as a JSON object. Only one of body, base64Body,
-                                    jsonBody or bodyFileName may be specified.
+                                  description: The response body as a JSON object. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                                   type: object
                                 proxyBaseUrl:
                                   description: The base URL of the target to proxy matching requests to.
@@ -1153,23 +1063,19 @@ paths:
                     description: This stub mapping's unique identifier
                     type: string
                   metadata:
-                    description: Arbitrary metadata to be used for e.g. tagging, documentation. Can
-                      also be used to find and remove stubs.
+                    description: Arbitrary metadata to be used for e.g. tagging, documentation. Can also be used to find and remove stubs.
                     type: object
                   name:
                     description: The stub mapping's name
                     type: string
                   newScenarioState:
-                    description: The new state for the scenario to be updated to after this stub is
-                      served.
+                    description: The new state for the scenario to be updated to after this stub is served.
                     type: string
                   persistent:
-                    description: Indicates that the stub mapping should be persisted immediately on
-                      create/update/delete and survive resets to default.
+                    description: Indicates that the stub mapping should be persisted immediately on create/update/delete and survive resets to default.
                     type: boolean
                   postServeActions:
-                    description: A map of the names of post serve action extensions to trigger and
-                      their parameters.
+                    description: A map of the names of post serve action extensions to trigger and their parameters.
                     type: object
                   priority:
                     description: This stub mapping's priority relative to others. 1 is highest.
@@ -1197,48 +1103,37 @@ paths:
                           - password
                         type: object
                       bodyPatterns:
-                        description: 'Request body patterns to match against in the <key>: {
-                          "<predicate>": "<value>" } form'
+                        description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                         items:
                           type: object
                         type: array
                       cookies:
-                        description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                          "<value>" } form'
+                        description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                         type: object
                       headers:
-                        description: 'Header patterns to match against in the <key>: { "<predicate>":
-                          "<value>" } form'
+                        description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                         type: object
                       method:
                         description: The HTTP request method e.g. GET
                         type: string
                       queryParameters:
-                        description: 'Query parameter patterns to match against in the <key>: {
-                          "<predicate>": "<value>" } form'
+                        description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                         type: object
                       url:
-                        description: The path and query to match exactly against. Only one of url,
-                          urlPattern, urlPath or urlPathPattern may be
-                          specified.
+                        description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                         type: string
                       urlPath:
-                        description: The path to match exactly against. Only one of url, urlPattern,
-                          urlPath or urlPathPattern may be specified.
+                        description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                         type: string
                       urlPathPattern:
-                        description: The path regex to match against. Only one of url, urlPattern,
-                          urlPath or urlPathPattern may be specified.
+                        description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                         type: string
                       urlPattern:
-                        description: The path and query regex to match against. Only one of url,
-                          urlPattern, urlPath or urlPathPattern may be
-                          specified.
+                        description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                         type: string
                     type: object
                   requiredScenarioState:
-                    description: The required state of the scenario in order for this stub to be
-                      matched.
+                    description: The required state of the scenario in order for this stub to be matched.
                     type: string
                   response:
                     allOf:
@@ -1272,19 +1167,13 @@ paths:
                             description: Extra request headers to send when proxying to another host.
                             type: object
                           base64Body:
-                            description: The response body as a base64 encoded string (useful for binary
-                              content). Only one of body, base64Body, jsonBody
-                              or bodyFileName may be specified.
+                            description: The response body as a base64 encoded string (useful for binary content). Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                             type: string
                           body:
-                            description: The response body as a string. Only one of body, base64Body,
-                              jsonBody or bodyFileName may be specified.
+                            description: The response body as a string. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                             type: string
                           bodyFileName:
-                            description: The path to the file containing the response body, relative to the
-                              configured file root. Only one of body,
-                              base64Body, jsonBody or bodyFileName may be
-                              specified.
+                            description: The path to the file containing the response body, relative to the configured file root. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                             type: string
                           fault:
                             description: The fault to apply (instead of a full, valid response).
@@ -1298,15 +1187,13 @@ paths:
                             description: Number of milliseconds to delay be before sending the response.
                             type: integer
                           fromConfiguredStub:
-                            description: Read-only flag indicating false if this was the default, unmatched
-                              response. Not present otherwise.
+                            description: Read-only flag indicating false if this was the default, unmatched response. Not present otherwise.
                             type: boolean
                           headers:
                             description: Map of response headers to send
                             type: object
                           jsonBody:
-                            description: The response body as a JSON object. Only one of body, base64Body,
-                              jsonBody or bodyFileName may be specified.
+                            description: The response body as a JSON object. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                             type: object
                           proxyBaseUrl:
                             description: The base URL of the target to proxy matching requests to.
@@ -1366,23 +1253,19 @@ paths:
                   description: This stub mapping's unique identifier
                   type: string
                 metadata:
-                  description: Arbitrary metadata to be used for e.g. tagging, documentation. Can
-                    also be used to find and remove stubs.
+                  description: Arbitrary metadata to be used for e.g. tagging, documentation. Can also be used to find and remove stubs.
                   type: object
                 name:
                   description: The stub mapping's name
                   type: string
                 newScenarioState:
-                  description: The new state for the scenario to be updated to after this stub is
-                    served.
+                  description: The new state for the scenario to be updated to after this stub is served.
                   type: string
                 persistent:
-                  description: Indicates that the stub mapping should be persisted immediately on
-                    create/update/delete and survive resets to default.
+                  description: Indicates that the stub mapping should be persisted immediately on create/update/delete and survive resets to default.
                   type: boolean
                 postServeActions:
-                  description: A map of the names of post serve action extensions to trigger and
-                    their parameters.
+                  description: A map of the names of post serve action extensions to trigger and their parameters.
                   type: object
                 priority:
                   description: This stub mapping's priority relative to others. 1 is highest.
@@ -1410,46 +1293,37 @@ paths:
                         - password
                       type: object
                     bodyPatterns:
-                      description: 'Request body patterns to match against in the <key>: {
-                        "<predicate>": "<value>" } form'
+                      description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                       items:
                         type: object
                       type: array
                     cookies:
-                      description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                        "<value>" } form'
+                      description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                       type: object
                     headers:
-                      description: 'Header patterns to match against in the <key>: { "<predicate>":
-                        "<value>" } form'
+                      description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                       type: object
                     method:
                       description: The HTTP request method e.g. GET
                       type: string
                     queryParameters:
-                      description: 'Query parameter patterns to match against in the <key>: {
-                        "<predicate>": "<value>" } form'
+                      description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                       type: object
                     url:
-                      description: The path and query to match exactly against. Only one of url,
-                        urlPattern, urlPath or urlPathPattern may be specified.
+                      description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                       type: string
                     urlPath:
-                      description: The path to match exactly against. Only one of url, urlPattern,
-                        urlPath or urlPathPattern may be specified.
+                      description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                       type: string
                     urlPathPattern:
-                      description: The path regex to match against. Only one of url, urlPattern,
-                        urlPath or urlPathPattern may be specified.
+                      description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                       type: string
                     urlPattern:
-                      description: The path and query regex to match against. Only one of url,
-                        urlPattern, urlPath or urlPathPattern may be specified.
+                      description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                       type: string
                   type: object
                 requiredScenarioState:
-                  description: The required state of the scenario in order for this stub to be
-                    matched.
+                  description: The required state of the scenario in order for this stub to be matched.
                   type: string
                 response:
                   allOf:
@@ -1483,18 +1357,13 @@ paths:
                           description: Extra request headers to send when proxying to another host.
                           type: object
                         base64Body:
-                          description: The response body as a base64 encoded string (useful for binary
-                            content). Only one of body, base64Body, jsonBody or
-                            bodyFileName may be specified.
+                          description: The response body as a base64 encoded string (useful for binary content). Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                           type: string
                         body:
-                          description: The response body as a string. Only one of body, base64Body,
-                            jsonBody or bodyFileName may be specified.
+                          description: The response body as a string. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                           type: string
                         bodyFileName:
-                          description: The path to the file containing the response body, relative to the
-                            configured file root. Only one of body, base64Body,
-                            jsonBody or bodyFileName may be specified.
+                          description: The path to the file containing the response body, relative to the configured file root. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                           type: string
                         fault:
                           description: The fault to apply (instead of a full, valid response).
@@ -1508,15 +1377,13 @@ paths:
                           description: Number of milliseconds to delay be before sending the response.
                           type: integer
                         fromConfiguredStub:
-                          description: Read-only flag indicating false if this was the default, unmatched
-                            response. Not present otherwise.
+                          description: Read-only flag indicating false if this was the default, unmatched response. Not present otherwise.
                           type: boolean
                         headers:
                           description: Map of response headers to send
                           type: object
                         jsonBody:
-                          description: The response body as a JSON object. Only one of body, base64Body,
-                            jsonBody or bodyFileName may be specified.
+                          description: The response body as a JSON object. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                           type: object
                         proxyBaseUrl:
                           description: The base URL of the target to proxy matching requests to.
@@ -1567,23 +1434,19 @@ paths:
                     description: This stub mapping's unique identifier
                     type: string
                   metadata:
-                    description: Arbitrary metadata to be used for e.g. tagging, documentation. Can
-                      also be used to find and remove stubs.
+                    description: Arbitrary metadata to be used for e.g. tagging, documentation. Can also be used to find and remove stubs.
                     type: object
                   name:
                     description: The stub mapping's name
                     type: string
                   newScenarioState:
-                    description: The new state for the scenario to be updated to after this stub is
-                      served.
+                    description: The new state for the scenario to be updated to after this stub is served.
                     type: string
                   persistent:
-                    description: Indicates that the stub mapping should be persisted immediately on
-                      create/update/delete and survive resets to default.
+                    description: Indicates that the stub mapping should be persisted immediately on create/update/delete and survive resets to default.
                     type: boolean
                   postServeActions:
-                    description: A map of the names of post serve action extensions to trigger and
-                      their parameters.
+                    description: A map of the names of post serve action extensions to trigger and their parameters.
                     type: object
                   priority:
                     description: This stub mapping's priority relative to others. 1 is highest.
@@ -1611,48 +1474,37 @@ paths:
                           - password
                         type: object
                       bodyPatterns:
-                        description: 'Request body patterns to match against in the <key>: {
-                          "<predicate>": "<value>" } form'
+                        description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                         items:
                           type: object
                         type: array
                       cookies:
-                        description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                          "<value>" } form'
+                        description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                         type: object
                       headers:
-                        description: 'Header patterns to match against in the <key>: { "<predicate>":
-                          "<value>" } form'
+                        description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                         type: object
                       method:
                         description: The HTTP request method e.g. GET
                         type: string
                       queryParameters:
-                        description: 'Query parameter patterns to match against in the <key>: {
-                          "<predicate>": "<value>" } form'
+                        description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                         type: object
                       url:
-                        description: The path and query to match exactly against. Only one of url,
-                          urlPattern, urlPath or urlPathPattern may be
-                          specified.
+                        description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                         type: string
                       urlPath:
-                        description: The path to match exactly against. Only one of url, urlPattern,
-                          urlPath or urlPathPattern may be specified.
+                        description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                         type: string
                       urlPathPattern:
-                        description: The path regex to match against. Only one of url, urlPattern,
-                          urlPath or urlPathPattern may be specified.
+                        description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                         type: string
                       urlPattern:
-                        description: The path and query regex to match against. Only one of url,
-                          urlPattern, urlPath or urlPathPattern may be
-                          specified.
+                        description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                         type: string
                     type: object
                   requiredScenarioState:
-                    description: The required state of the scenario in order for this stub to be
-                      matched.
+                    description: The required state of the scenario in order for this stub to be matched.
                     type: string
                   response:
                     allOf:
@@ -1686,19 +1538,13 @@ paths:
                             description: Extra request headers to send when proxying to another host.
                             type: object
                           base64Body:
-                            description: The response body as a base64 encoded string (useful for binary
-                              content). Only one of body, base64Body, jsonBody
-                              or bodyFileName may be specified.
+                            description: The response body as a base64 encoded string (useful for binary content). Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                             type: string
                           body:
-                            description: The response body as a string. Only one of body, base64Body,
-                              jsonBody or bodyFileName may be specified.
+                            description: The response body as a string. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                             type: string
                           bodyFileName:
-                            description: The path to the file containing the response body, relative to the
-                              configured file root. Only one of body,
-                              base64Body, jsonBody or bodyFileName may be
-                              specified.
+                            description: The path to the file containing the response body, relative to the configured file root. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                             type: string
                           fault:
                             description: The fault to apply (instead of a full, valid response).
@@ -1712,15 +1558,13 @@ paths:
                             description: Number of milliseconds to delay be before sending the response.
                             type: integer
                           fromConfiguredStub:
-                            description: Read-only flag indicating false if this was the default, unmatched
-                              response. Not present otherwise.
+                            description: Read-only flag indicating false if this was the default, unmatched response. Not present otherwise.
                             type: boolean
                           headers:
                             description: Map of response headers to send
                             type: object
                           jsonBody:
-                            description: The response body as a JSON object. Only one of body, base64Body,
-                              jsonBody or bodyFileName may be specified.
+                            description: The response body as a JSON object. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                             type: object
                           proxyBaseUrl:
                             description: The base URL of the target to proxy matching requests to.
@@ -1755,8 +1599,7 @@ paths:
         - Stub Mappings
   /__admin/near-misses/request:
     post:
-      description: Find at most 3 near misses for closest stub mappings to the
-        specified request
+      description: Find at most 3 near misses for closest stub mappings to the specified request
       requestBody:
         content:
           application/json:
@@ -1786,13 +1629,11 @@ paths:
                   example: Hello world
                   type: string
                 cookies:
-                  description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                    "<value>" } form'
+                  description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                   example: {}
                   type: object
                 headers:
-                  description: 'Header patterns to match against in the <key>: { "<predicate>":
-                    "<value>" } form'
+                  description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                   example:
                     Connection: keep-alive
                     Host: localhost:56738
@@ -1848,13 +1689,11 @@ paths:
                           example: Hello world
                           type: string
                         cookies:
-                          description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                            "<value>" } form'
+                          description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                           example: {}
                           type: object
                         headers:
-                          description: 'Header patterns to match against in the <key>: { "<predicate>":
-                            "<value>" } form'
+                          description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                           example:
                             Connection: keep-alive
                             Host: localhost:56738
@@ -1877,8 +1716,7 @@ paths:
         - Near Misses
   /__admin/near-misses/request-pattern:
     post:
-      description: Find at most 3 near misses for closest logged requests to the
-        specified request pattern
+      description: Find at most 3 near misses for closest logged requests to the specified request pattern
       requestBody:
         content:
           application/json:
@@ -1910,41 +1748,33 @@ paths:
                     - password
                   type: object
                 bodyPatterns:
-                  description: 'Request body patterns to match against in the <key>: {
-                    "<predicate>": "<value>" } form'
+                  description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                   items:
                     type: object
                   type: array
                 cookies:
-                  description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                    "<value>" } form'
+                  description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                   type: object
                 headers:
-                  description: 'Header patterns to match against in the <key>: { "<predicate>":
-                    "<value>" } form'
+                  description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                   type: object
                 method:
                   description: The HTTP request method e.g. GET
                   type: string
                 queryParameters:
-                  description: 'Query parameter patterns to match against in the <key>: {
-                    "<predicate>": "<value>" } form'
+                  description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                   type: object
                 url:
-                  description: The path and query to match exactly against. Only one of url,
-                    urlPattern, urlPath or urlPathPattern may be specified.
+                  description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                   type: string
                 urlPath:
-                  description: The path to match exactly against. Only one of url, urlPattern,
-                    urlPath or urlPathPattern may be specified.
+                  description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                   type: string
                 urlPathPattern:
-                  description: The path regex to match against. Only one of url, urlPattern,
-                    urlPath or urlPathPattern may be specified.
+                  description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                   type: string
                 urlPattern:
-                  description: The path and query regex to match against. Only one of url,
-                    urlPattern, urlPath or urlPathPattern may be specified.
+                  description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                   type: string
               type: object
         required: true
@@ -1988,13 +1818,11 @@ paths:
                           example: Hello world
                           type: string
                         cookies:
-                          description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                            "<value>" } form'
+                          description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                           example: {}
                           type: object
                         headers:
-                          description: 'Header patterns to match against in the <key>: { "<predicate>":
-                            "<value>" } form'
+                          description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                           example:
                             Connection: keep-alive
                             Host: localhost:56738
@@ -2054,45 +1882,36 @@ paths:
                           caseInsensitive:
                             type: boolean
                         type: object
-                      description: Headers from the request to include in the generated stub mappings,
-                        mapped to parameter objects. The only parameter
-                        available is "caseInsensitive", which defaults to false
+                      description: Headers from the request to include in the generated stub mappings, mapped to parameter objects. The only parameter available is "caseInsensitive", which defaults to false
                       example:
                         Accept: {}
                         Content-Type:
                           caseInsensitive: true
                       type: object
                     extractBodyCriteria:
-                      description: Criteria for extracting response bodies to a separate file instead
-                        of including it in the stub mapping
+                      description: Criteria for extracting response bodies to a separate file instead of including it in the stub mapping
                       example:
                         - binarySizeThreshold: 1 Mb
                           textSizeThreshold: 2 kb
                       properties:
                         binarySizeThreshold:
                           default: "0"
-                          description: Size threshold for extracting binary response bodies. Supports
-                            humanized size strings, e.g. "56 Mb". Default unit
-                            is bytes.
+                          description: Size threshold for extracting binary response bodies. Supports humanized size strings, e.g. "56 Mb". Default unit is bytes.
                           example: 18.2 GB
                           type: string
                         textSizeThreshold:
                           default: "0"
-                          description: Size threshold for extracting binary response bodies. Supports
-                            humanized size strings, e.g. "56 Mb". Default unit
-                            is bytes.
+                          description: Size threshold for extracting binary response bodies. Supports humanized size strings, e.g. "56 Mb". Default unit is bytes.
                           example: 18.2 GB
                           type: string
                       type: object
                     persist:
                       default: true
-                      description: Whether to save stub mappings to the file system or just return
-                        them
+                      description: Whether to save stub mappings to the file system or just return them
                       type: boolean
                     repeatsAsScenarios:
                       default: true
-                      description: When true, duplicate requests will be added to a Scenario. When
-                        false, duplicates are discarded
+                      description: When true, duplicate requests will be added to a Scenario. When false, duplicates are discarded
                       type: boolean
                     requestBodyPattern:
                       description: Control the request body matcher used in generated stub mappings
@@ -2101,8 +1920,7 @@ paths:
                           properties:
                             caseInsensitive:
                               default: false
-                              description: If equalTo is used, match body use case-insensitive string
-                                comparison
+                              description: If equalTo is used, match body use case-insensitive string comparison
                               type: boolean
                             ignoreArrayOrder:
                               default: true
@@ -2152,8 +1970,7 @@ paths:
                           type: object
                       type: object
                     transformerParameters:
-                      description: List of names of stub mappings transformers to apply to generated
-                        stubs
+                      description: List of names of stub mappings transformers to apply to generated stubs
                       type: object
                     transformers:
                       description: Parameters to pass to stub mapping transformers
@@ -2192,43 +2009,33 @@ paths:
                                 - password
                               type: object
                             bodyPatterns:
-                              description: 'Request body patterns to match against in the <key>: {
-                                "<predicate>": "<value>" } form'
+                              description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               items:
                                 type: object
                               type: array
                             cookies:
-                              description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                                "<value>" } form'
+                              description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               type: object
                             headers:
-                              description: 'Header patterns to match against in the <key>: { "<predicate>":
-                                "<value>" } form'
+                              description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               type: object
                             method:
                               description: The HTTP request method e.g. GET
                               type: string
                             queryParameters:
-                              description: 'Query parameter patterns to match against in the <key>: {
-                                "<predicate>": "<value>" } form'
+                              description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               type: object
                             url:
-                              description: The path and query to match exactly against. Only one of url,
-                                urlPattern, urlPath or urlPathPattern may be
-                                specified.
+                              description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                             urlPath:
-                              description: The path to match exactly against. Only one of url, urlPattern,
-                                urlPath or urlPathPattern may be specified.
+                              description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                             urlPathPattern:
-                              description: The path regex to match against. Only one of url, urlPattern,
-                                urlPath or urlPathPattern may be specified.
+                              description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                             urlPattern:
-                              description: The path and query regex to match against. Only one of url,
-                                urlPattern, urlPath or urlPathPattern may be
-                                specified.
+                              description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                           type: object
                       type: object
@@ -2264,23 +2071,19 @@ paths:
                           description: This stub mapping's unique identifier
                           type: string
                         metadata:
-                          description: Arbitrary metadata to be used for e.g. tagging, documentation. Can
-                            also be used to find and remove stubs.
+                          description: Arbitrary metadata to be used for e.g. tagging, documentation. Can also be used to find and remove stubs.
                           type: object
                         name:
                           description: The stub mapping's name
                           type: string
                         newScenarioState:
-                          description: The new state for the scenario to be updated to after this stub is
-                            served.
+                          description: The new state for the scenario to be updated to after this stub is served.
                           type: string
                         persistent:
-                          description: Indicates that the stub mapping should be persisted immediately on
-                            create/update/delete and survive resets to default.
+                          description: Indicates that the stub mapping should be persisted immediately on create/update/delete and survive resets to default.
                           type: boolean
                         postServeActions:
-                          description: A map of the names of post serve action extensions to trigger and
-                            their parameters.
+                          description: A map of the names of post serve action extensions to trigger and their parameters.
                           type: object
                         priority:
                           description: This stub mapping's priority relative to others. 1 is highest.
@@ -2308,48 +2111,37 @@ paths:
                                 - password
                               type: object
                             bodyPatterns:
-                              description: 'Request body patterns to match against in the <key>: {
-                                "<predicate>": "<value>" } form'
+                              description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               items:
                                 type: object
                               type: array
                             cookies:
-                              description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                                "<value>" } form'
+                              description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               type: object
                             headers:
-                              description: 'Header patterns to match against in the <key>: { "<predicate>":
-                                "<value>" } form'
+                              description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               type: object
                             method:
                               description: The HTTP request method e.g. GET
                               type: string
                             queryParameters:
-                              description: 'Query parameter patterns to match against in the <key>: {
-                                "<predicate>": "<value>" } form'
+                              description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               type: object
                             url:
-                              description: The path and query to match exactly against. Only one of url,
-                                urlPattern, urlPath or urlPathPattern may be
-                                specified.
+                              description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                             urlPath:
-                              description: The path to match exactly against. Only one of url, urlPattern,
-                                urlPath or urlPathPattern may be specified.
+                              description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                             urlPathPattern:
-                              description: The path regex to match against. Only one of url, urlPattern,
-                                urlPath or urlPathPattern may be specified.
+                              description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                             urlPattern:
-                              description: The path and query regex to match against. Only one of url,
-                                urlPattern, urlPath or urlPathPattern may be
-                                specified.
+                              description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                           type: object
                         requiredScenarioState:
-                          description: The required state of the scenario in order for this stub to be
-                            matched.
+                          description: The required state of the scenario in order for this stub to be matched.
                           type: string
                         response:
                           allOf:
@@ -2383,19 +2175,13 @@ paths:
                                   description: Extra request headers to send when proxying to another host.
                                   type: object
                                 base64Body:
-                                  description: The response body as a base64 encoded string (useful for binary
-                                    content). Only one of body, base64Body,
-                                    jsonBody or bodyFileName may be specified.
+                                  description: The response body as a base64 encoded string (useful for binary content). Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                                   type: string
                                 body:
-                                  description: The response body as a string. Only one of body, base64Body,
-                                    jsonBody or bodyFileName may be specified.
+                                  description: The response body as a string. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                                   type: string
                                 bodyFileName:
-                                  description: The path to the file containing the response body, relative to the
-                                    configured file root. Only one of body,
-                                    base64Body, jsonBody or bodyFileName may be
-                                    specified.
+                                  description: The path to the file containing the response body, relative to the configured file root. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                                   type: string
                                 fault:
                                   description: The fault to apply (instead of a full, valid response).
@@ -2409,15 +2195,13 @@ paths:
                                   description: Number of milliseconds to delay be before sending the response.
                                   type: integer
                                 fromConfiguredStub:
-                                  description: Read-only flag indicating false if this was the default, unmatched
-                                    response. Not present otherwise.
+                                  description: Read-only flag indicating false if this was the default, unmatched response. Not present otherwise.
                                   type: boolean
                                 headers:
                                   description: Map of response headers to send
                                   type: object
                                 jsonBody:
-                                  description: The response body as a JSON object. Only one of body, base64Body,
-                                    jsonBody or bodyFileName may be specified.
+                                  description: The response body as a JSON object. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                                   type: object
                                 proxyBaseUrl:
                                   description: The base URL of the target to proxy matching requests to.
@@ -2496,45 +2280,36 @@ paths:
                           caseInsensitive:
                             type: boolean
                         type: object
-                      description: Headers from the request to include in the generated stub mappings,
-                        mapped to parameter objects. The only parameter
-                        available is "caseInsensitive", which defaults to false
+                      description: Headers from the request to include in the generated stub mappings, mapped to parameter objects. The only parameter available is "caseInsensitive", which defaults to false
                       example:
                         Accept: {}
                         Content-Type:
                           caseInsensitive: true
                       type: object
                     extractBodyCriteria:
-                      description: Criteria for extracting response bodies to a separate file instead
-                        of including it in the stub mapping
+                      description: Criteria for extracting response bodies to a separate file instead of including it in the stub mapping
                       example:
                         - binarySizeThreshold: 1 Mb
                           textSizeThreshold: 2 kb
                       properties:
                         binarySizeThreshold:
                           default: "0"
-                          description: Size threshold for extracting binary response bodies. Supports
-                            humanized size strings, e.g. "56 Mb". Default unit
-                            is bytes.
+                          description: Size threshold for extracting binary response bodies. Supports humanized size strings, e.g. "56 Mb". Default unit is bytes.
                           example: 18.2 GB
                           type: string
                         textSizeThreshold:
                           default: "0"
-                          description: Size threshold for extracting binary response bodies. Supports
-                            humanized size strings, e.g. "56 Mb". Default unit
-                            is bytes.
+                          description: Size threshold for extracting binary response bodies. Supports humanized size strings, e.g. "56 Mb". Default unit is bytes.
                           example: 18.2 GB
                           type: string
                       type: object
                     persist:
                       default: true
-                      description: Whether to save stub mappings to the file system or just return
-                        them
+                      description: Whether to save stub mappings to the file system or just return them
                       type: boolean
                     repeatsAsScenarios:
                       default: true
-                      description: When true, duplicate requests will be added to a Scenario. When
-                        false, duplicates are discarded
+                      description: When true, duplicate requests will be added to a Scenario. When false, duplicates are discarded
                       type: boolean
                     requestBodyPattern:
                       description: Control the request body matcher used in generated stub mappings
@@ -2543,8 +2318,7 @@ paths:
                           properties:
                             caseInsensitive:
                               default: false
-                              description: If equalTo is used, match body use case-insensitive string
-                                comparison
+                              description: If equalTo is used, match body use case-insensitive string comparison
                               type: boolean
                             ignoreArrayOrder:
                               default: true
@@ -2594,8 +2368,7 @@ paths:
                           type: object
                       type: object
                     transformerParameters:
-                      description: List of names of stub mappings transformers to apply to generated
-                        stubs
+                      description: List of names of stub mappings transformers to apply to generated stubs
                       type: object
                     transformers:
                       description: Parameters to pass to stub mapping transformers
@@ -2627,43 +2400,33 @@ paths:
                                 - password
                               type: object
                             bodyPatterns:
-                              description: 'Request body patterns to match against in the <key>: {
-                                "<predicate>": "<value>" } form'
+                              description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               items:
                                 type: object
                               type: array
                             cookies:
-                              description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                                "<value>" } form'
+                              description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               type: object
                             headers:
-                              description: 'Header patterns to match against in the <key>: { "<predicate>":
-                                "<value>" } form'
+                              description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               type: object
                             method:
                               description: The HTTP request method e.g. GET
                               type: string
                             queryParameters:
-                              description: 'Query parameter patterns to match against in the <key>: {
-                                "<predicate>": "<value>" } form'
+                              description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               type: object
                             url:
-                              description: The path and query to match exactly against. Only one of url,
-                                urlPattern, urlPath or urlPathPattern may be
-                                specified.
+                              description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                             urlPath:
-                              description: The path to match exactly against. Only one of url, urlPattern,
-                                urlPath or urlPathPattern may be specified.
+                              description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                             urlPathPattern:
-                              description: The path regex to match against. Only one of url, urlPattern,
-                                urlPath or urlPathPattern may be specified.
+                              description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                             urlPattern:
-                              description: The path and query regex to match against. Only one of url,
-                                urlPattern, urlPath or urlPathPattern may be
-                                specified.
+                              description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                           type: object
                         - description: Filter requests for which to create stub mapping
@@ -2731,23 +2494,19 @@ paths:
                           description: This stub mapping's unique identifier
                           type: string
                         metadata:
-                          description: Arbitrary metadata to be used for e.g. tagging, documentation. Can
-                            also be used to find and remove stubs.
+                          description: Arbitrary metadata to be used for e.g. tagging, documentation. Can also be used to find and remove stubs.
                           type: object
                         name:
                           description: The stub mapping's name
                           type: string
                         newScenarioState:
-                          description: The new state for the scenario to be updated to after this stub is
-                            served.
+                          description: The new state for the scenario to be updated to after this stub is served.
                           type: string
                         persistent:
-                          description: Indicates that the stub mapping should be persisted immediately on
-                            create/update/delete and survive resets to default.
+                          description: Indicates that the stub mapping should be persisted immediately on create/update/delete and survive resets to default.
                           type: boolean
                         postServeActions:
-                          description: A map of the names of post serve action extensions to trigger and
-                            their parameters.
+                          description: A map of the names of post serve action extensions to trigger and their parameters.
                           type: object
                         priority:
                           description: This stub mapping's priority relative to others. 1 is highest.
@@ -2775,48 +2534,37 @@ paths:
                                 - password
                               type: object
                             bodyPatterns:
-                              description: 'Request body patterns to match against in the <key>: {
-                                "<predicate>": "<value>" } form'
+                              description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               items:
                                 type: object
                               type: array
                             cookies:
-                              description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                                "<value>" } form'
+                              description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               type: object
                             headers:
-                              description: 'Header patterns to match against in the <key>: { "<predicate>":
-                                "<value>" } form'
+                              description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               type: object
                             method:
                               description: The HTTP request method e.g. GET
                               type: string
                             queryParameters:
-                              description: 'Query parameter patterns to match against in the <key>: {
-                                "<predicate>": "<value>" } form'
+                              description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                               type: object
                             url:
-                              description: The path and query to match exactly against. Only one of url,
-                                urlPattern, urlPath or urlPathPattern may be
-                                specified.
+                              description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                             urlPath:
-                              description: The path to match exactly against. Only one of url, urlPattern,
-                                urlPath or urlPathPattern may be specified.
+                              description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                             urlPathPattern:
-                              description: The path regex to match against. Only one of url, urlPattern,
-                                urlPath or urlPathPattern may be specified.
+                              description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                             urlPattern:
-                              description: The path and query regex to match against. Only one of url,
-                                urlPattern, urlPath or urlPathPattern may be
-                                specified.
+                              description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                               type: string
                           type: object
                         requiredScenarioState:
-                          description: The required state of the scenario in order for this stub to be
-                            matched.
+                          description: The required state of the scenario in order for this stub to be matched.
                           type: string
                         response:
                           allOf:
@@ -2850,19 +2598,13 @@ paths:
                                   description: Extra request headers to send when proxying to another host.
                                   type: object
                                 base64Body:
-                                  description: The response body as a base64 encoded string (useful for binary
-                                    content). Only one of body, base64Body,
-                                    jsonBody or bodyFileName may be specified.
+                                  description: The response body as a base64 encoded string (useful for binary content). Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                                   type: string
                                 body:
-                                  description: The response body as a string. Only one of body, base64Body,
-                                    jsonBody or bodyFileName may be specified.
+                                  description: The response body as a string. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                                   type: string
                                 bodyFileName:
-                                  description: The path to the file containing the response body, relative to the
-                                    configured file root. Only one of body,
-                                    base64Body, jsonBody or bodyFileName may be
-                                    specified.
+                                  description: The path to the file containing the response body, relative to the configured file root. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                                   type: string
                                 fault:
                                   description: The fault to apply (instead of a full, valid response).
@@ -2876,15 +2618,13 @@ paths:
                                   description: Number of milliseconds to delay be before sending the response.
                                   type: integer
                                 fromConfiguredStub:
-                                  description: Read-only flag indicating false if this was the default, unmatched
-                                    response. Not present otherwise.
+                                  description: Read-only flag indicating false if this was the default, unmatched response. Not present otherwise.
                                   type: boolean
                                 headers:
                                   description: Map of response headers to send
                                   type: object
                                 jsonBody:
-                                  description: The response body as a JSON object. Only one of body, base64Body,
-                                    jsonBody or bodyFileName may be specified.
+                                  description: The response body as a JSON object. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                                   type: object
                                 proxyBaseUrl:
                                   description: The base URL of the target to proxy matching requests to.
@@ -3057,41 +2797,33 @@ paths:
                     - password
                   type: object
                 bodyPatterns:
-                  description: 'Request body patterns to match against in the <key>: {
-                    "<predicate>": "<value>" } form'
+                  description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                   items:
                     type: object
                   type: array
                 cookies:
-                  description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                    "<value>" } form'
+                  description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                   type: object
                 headers:
-                  description: 'Header patterns to match against in the <key>: { "<predicate>":
-                    "<value>" } form'
+                  description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                   type: object
                 method:
                   description: The HTTP request method e.g. GET
                   type: string
                 queryParameters:
-                  description: 'Query parameter patterns to match against in the <key>: {
-                    "<predicate>": "<value>" } form'
+                  description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                   type: object
                 url:
-                  description: The path and query to match exactly against. Only one of url,
-                    urlPattern, urlPath or urlPathPattern may be specified.
+                  description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                   type: string
                 urlPath:
-                  description: The path to match exactly against. Only one of url, urlPattern,
-                    urlPath or urlPathPattern may be specified.
+                  description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                   type: string
                 urlPathPattern:
-                  description: The path regex to match against. Only one of url, urlPattern,
-                    urlPath or urlPathPattern may be specified.
+                  description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                   type: string
                 urlPattern:
-                  description: The path and query regex to match against. Only one of url,
-                    urlPattern, urlPath or urlPathPattern may be specified.
+                  description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                   type: string
               type: object
         required: true
@@ -3111,8 +2843,7 @@ paths:
         - Requests
   /__admin/requests/find:
     post:
-      description: Retrieve details of requests logged in the journal matching the
-        specified criteria
+      description: Retrieve details of requests logged in the journal matching the specified criteria
       requestBody:
         content:
           application/json:
@@ -3144,41 +2875,33 @@ paths:
                     - password
                   type: object
                 bodyPatterns:
-                  description: 'Request body patterns to match against in the <key>: {
-                    "<predicate>": "<value>" } form'
+                  description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                   items:
                     type: object
                   type: array
                 cookies:
-                  description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                    "<value>" } form'
+                  description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                   type: object
                 headers:
-                  description: 'Header patterns to match against in the <key>: { "<predicate>":
-                    "<value>" } form'
+                  description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                   type: object
                 method:
                   description: The HTTP request method e.g. GET
                   type: string
                 queryParameters:
-                  description: 'Query parameter patterns to match against in the <key>: {
-                    "<predicate>": "<value>" } form'
+                  description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                   type: object
                 url:
-                  description: The path and query to match exactly against. Only one of url,
-                    urlPattern, urlPath or urlPathPattern may be specified.
+                  description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                   type: string
                 urlPath:
-                  description: The path to match exactly against. Only one of url, urlPattern,
-                    urlPath or urlPathPattern may be specified.
+                  description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                   type: string
                 urlPathPattern:
-                  description: The path regex to match against. Only one of url, urlPattern,
-                    urlPath or urlPathPattern may be specified.
+                  description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                   type: string
                 urlPattern:
-                  description: The path and query regex to match against. Only one of url,
-                    urlPattern, urlPath or urlPathPattern may be specified.
+                  description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                   type: string
               type: object
         required: true
@@ -3194,8 +2917,7 @@ paths:
                     headers:
                       Accept: image/png,image/*;q=0.8,*/*;q=0.5
                       Accept-Language: en-us,en;q=0.5
-                      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0) Gecko/20100101
-                        Firefox/9.0
+                      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0) Gecko/20100101 Firefox/9.0
                     loggedDate: 1339083581823
                     loggedDateString: 2012-06-07 16:39:41
                     method: GET
@@ -3248,41 +2970,33 @@ paths:
                     - password
                   type: object
                 bodyPatterns:
-                  description: 'Request body patterns to match against in the <key>: {
-                    "<predicate>": "<value>" } form'
+                  description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                   items:
                     type: object
                   type: array
                 cookies:
-                  description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                    "<value>" } form'
+                  description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                   type: object
                 headers:
-                  description: 'Header patterns to match against in the <key>: { "<predicate>":
-                    "<value>" } form'
+                  description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                   type: object
                 method:
                   description: The HTTP request method e.g. GET
                   type: string
                 queryParameters:
-                  description: 'Query parameter patterns to match against in the <key>: {
-                    "<predicate>": "<value>" } form'
+                  description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                   type: object
                 url:
-                  description: The path and query to match exactly against. Only one of url,
-                    urlPattern, urlPath or urlPathPattern may be specified.
+                  description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                   type: string
                 urlPath:
-                  description: The path to match exactly against. Only one of url, urlPattern,
-                    urlPath or urlPathPattern may be specified.
+                  description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                   type: string
                 urlPathPattern:
-                  description: The path regex to match against. Only one of url, urlPattern,
-                    urlPath or urlPathPattern may be specified.
+                  description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                   type: string
                 urlPattern:
-                  description: The path and query regex to match against. Only one of url,
-                    urlPattern, urlPath or urlPathPattern may be specified.
+                  description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                   type: string
               type: object
         required: true
@@ -3298,8 +3012,7 @@ paths:
                     headers:
                       Accept: image/png,image/*;q=0.8,*/*;q=0.5
                       Accept-Language: en-us,en;q=0.5
-                      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0) Gecko/20100101
-                        Firefox/9.0
+                      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0) Gecko/20100101 Firefox/9.0
                     loggedDate: 1339083581823
                     loggedDateString: 2012-06-07 16:39:41
                     method: GET
@@ -3407,8 +3120,7 @@ paths:
                     headers:
                       Accept: image/png,image/*;q=0.8,*/*;q=0.5
                       Accept-Language: en-us,en;q=0.5
-                      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0) Gecko/20100101
-                        Firefox/9.0
+                      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0) Gecko/20100101 Firefox/9.0
                     loggedDate: 1339083581823
                     loggedDateString: 2012-06-07 16:39:41
                     method: GET
@@ -3451,8 +3163,7 @@ paths:
                     headers:
                       Accept: image/png,image/*;q=0.8,*/*;q=0.5
                       Accept-Language: en-us,en;q=0.5
-                      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0) Gecko/20100101
-                        Firefox/9.0
+                      User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0) Gecko/20100101 Firefox/9.0
                     loggedDate: 1339083581823
                     loggedDateString: 2012-06-07 16:39:41
                     method: GET
@@ -3514,13 +3225,11 @@ paths:
                           example: Hello world
                           type: string
                         cookies:
-                          description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                            "<value>" } form'
+                          description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                           example: {}
                           type: object
                         headers:
-                          description: 'Header patterns to match against in the <key>: { "<predicate>":
-                            "<value>" } form'
+                          description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                           example:
                             Connection: keep-alive
                             Host: localhost:56738
@@ -3741,41 +3450,33 @@ components:
                   - password
                 type: object
               bodyPatterns:
-                description: 'Request body patterns to match against in the <key>: {
-                  "<predicate>": "<value>" } form'
+                description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                 items:
                   type: object
                 type: array
               cookies:
-                description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                  "<value>" } form'
+                description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                 type: object
               headers:
-                description: 'Header patterns to match against in the <key>: { "<predicate>":
-                  "<value>" } form'
+                description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                 type: object
               method:
                 description: The HTTP request method e.g. GET
                 type: string
               queryParameters:
-                description: 'Query parameter patterns to match against in the <key>: {
-                  "<predicate>": "<value>" } form'
+                description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                 type: object
               url:
-                description: The path and query to match exactly against. Only one of url,
-                  urlPattern, urlPath or urlPathPattern may be specified.
+                description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                 type: string
               urlPath:
-                description: The path to match exactly against. Only one of url, urlPattern,
-                  urlPath or urlPathPattern may be specified.
+                description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                 type: string
               urlPathPattern:
-                description: The path regex to match against. Only one of url, urlPattern,
-                  urlPath or urlPathPattern may be specified.
+                description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                 type: string
               urlPattern:
-                description: The path and query regex to match against. Only one of url,
-                  urlPattern, urlPath or urlPathPattern may be specified.
+                description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                 type: string
             type: object
       required: true
@@ -3816,45 +3517,36 @@ components:
                         caseInsensitive:
                           type: boolean
                       type: object
-                    description: Headers from the request to include in the generated stub mappings,
-                      mapped to parameter objects. The only parameter available
-                      is "caseInsensitive", which defaults to false
+                    description: Headers from the request to include in the generated stub mappings, mapped to parameter objects. The only parameter available is "caseInsensitive", which defaults to false
                     example:
                       Accept: {}
                       Content-Type:
                         caseInsensitive: true
                     type: object
                   extractBodyCriteria:
-                    description: Criteria for extracting response bodies to a separate file instead
-                      of including it in the stub mapping
+                    description: Criteria for extracting response bodies to a separate file instead of including it in the stub mapping
                     example:
                       - binarySizeThreshold: 1 Mb
                         textSizeThreshold: 2 kb
                     properties:
                       binarySizeThreshold:
                         default: "0"
-                        description: Size threshold for extracting binary response bodies. Supports
-                          humanized size strings, e.g. "56 Mb". Default unit is
-                          bytes.
+                        description: Size threshold for extracting binary response bodies. Supports humanized size strings, e.g. "56 Mb". Default unit is bytes.
                         example: 18.2 GB
                         type: string
                       textSizeThreshold:
                         default: "0"
-                        description: Size threshold for extracting binary response bodies. Supports
-                          humanized size strings, e.g. "56 Mb". Default unit is
-                          bytes.
+                        description: Size threshold for extracting binary response bodies. Supports humanized size strings, e.g. "56 Mb". Default unit is bytes.
                         example: 18.2 GB
                         type: string
                     type: object
                   persist:
                     default: true
-                    description: Whether to save stub mappings to the file system or just return
-                      them
+                    description: Whether to save stub mappings to the file system or just return them
                     type: boolean
                   repeatsAsScenarios:
                     default: true
-                    description: When true, duplicate requests will be added to a Scenario. When
-                      false, duplicates are discarded
+                    description: When true, duplicate requests will be added to a Scenario. When false, duplicates are discarded
                     type: boolean
                   requestBodyPattern:
                     description: Control the request body matcher used in generated stub mappings
@@ -3863,8 +3555,7 @@ components:
                         properties:
                           caseInsensitive:
                             default: false
-                            description: If equalTo is used, match body use case-insensitive string
-                              comparison
+                            description: If equalTo is used, match body use case-insensitive string comparison
                             type: boolean
                           ignoreArrayOrder:
                             default: true
@@ -3914,8 +3605,7 @@ components:
                         type: object
                     type: object
                   transformerParameters:
-                    description: List of names of stub mappings transformers to apply to generated
-                      stubs
+                    description: List of names of stub mappings transformers to apply to generated stubs
                     type: object
                   transformers:
                     description: Parameters to pass to stub mapping transformers
@@ -3954,43 +3644,33 @@ components:
                               - password
                             type: object
                           bodyPatterns:
-                            description: 'Request body patterns to match against in the <key>: {
-                              "<predicate>": "<value>" } form'
+                            description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                             items:
                               type: object
                             type: array
                           cookies:
-                            description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                              "<value>" } form'
+                            description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                             type: object
                           headers:
-                            description: 'Header patterns to match against in the <key>: { "<predicate>":
-                              "<value>" } form'
+                            description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                             type: object
                           method:
                             description: The HTTP request method e.g. GET
                             type: string
                           queryParameters:
-                            description: 'Query parameter patterns to match against in the <key>: {
-                              "<predicate>": "<value>" } form'
+                            description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                             type: object
                           url:
-                            description: The path and query to match exactly against. Only one of url,
-                              urlPattern, urlPath or urlPathPattern may be
-                              specified.
+                            description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                             type: string
                           urlPath:
-                            description: The path to match exactly against. Only one of url, urlPattern,
-                              urlPath or urlPathPattern may be specified.
+                            description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                             type: string
                           urlPathPattern:
-                            description: The path regex to match against. Only one of url, urlPattern,
-                              urlPath or urlPathPattern may be specified.
+                            description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                             type: string
                           urlPattern:
-                            description: The path and query regex to match against. Only one of url,
-                              urlPattern, urlPath or urlPathPattern may be
-                              specified.
+                            description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                             type: string
                         type: object
                     type: object
@@ -4031,45 +3711,36 @@ components:
                         caseInsensitive:
                           type: boolean
                       type: object
-                    description: Headers from the request to include in the generated stub mappings,
-                      mapped to parameter objects. The only parameter available
-                      is "caseInsensitive", which defaults to false
+                    description: Headers from the request to include in the generated stub mappings, mapped to parameter objects. The only parameter available is "caseInsensitive", which defaults to false
                     example:
                       Accept: {}
                       Content-Type:
                         caseInsensitive: true
                     type: object
                   extractBodyCriteria:
-                    description: Criteria for extracting response bodies to a separate file instead
-                      of including it in the stub mapping
+                    description: Criteria for extracting response bodies to a separate file instead of including it in the stub mapping
                     example:
                       - binarySizeThreshold: 1 Mb
                         textSizeThreshold: 2 kb
                     properties:
                       binarySizeThreshold:
                         default: "0"
-                        description: Size threshold for extracting binary response bodies. Supports
-                          humanized size strings, e.g. "56 Mb". Default unit is
-                          bytes.
+                        description: Size threshold for extracting binary response bodies. Supports humanized size strings, e.g. "56 Mb". Default unit is bytes.
                         example: 18.2 GB
                         type: string
                       textSizeThreshold:
                         default: "0"
-                        description: Size threshold for extracting binary response bodies. Supports
-                          humanized size strings, e.g. "56 Mb". Default unit is
-                          bytes.
+                        description: Size threshold for extracting binary response bodies. Supports humanized size strings, e.g. "56 Mb". Default unit is bytes.
                         example: 18.2 GB
                         type: string
                     type: object
                   persist:
                     default: true
-                    description: Whether to save stub mappings to the file system or just return
-                      them
+                    description: Whether to save stub mappings to the file system or just return them
                     type: boolean
                   repeatsAsScenarios:
                     default: true
-                    description: When true, duplicate requests will be added to a Scenario. When
-                      false, duplicates are discarded
+                    description: When true, duplicate requests will be added to a Scenario. When false, duplicates are discarded
                     type: boolean
                   requestBodyPattern:
                     description: Control the request body matcher used in generated stub mappings
@@ -4078,8 +3749,7 @@ components:
                         properties:
                           caseInsensitive:
                             default: false
-                            description: If equalTo is used, match body use case-insensitive string
-                              comparison
+                            description: If equalTo is used, match body use case-insensitive string comparison
                             type: boolean
                           ignoreArrayOrder:
                             default: true
@@ -4129,8 +3799,7 @@ components:
                         type: object
                     type: object
                   transformerParameters:
-                    description: List of names of stub mappings transformers to apply to generated
-                      stubs
+                    description: List of names of stub mappings transformers to apply to generated stubs
                     type: object
                   transformers:
                     description: Parameters to pass to stub mapping transformers
@@ -4162,43 +3831,33 @@ components:
                               - password
                             type: object
                           bodyPatterns:
-                            description: 'Request body patterns to match against in the <key>: {
-                              "<predicate>": "<value>" } form'
+                            description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                             items:
                               type: object
                             type: array
                           cookies:
-                            description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                              "<value>" } form'
+                            description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                             type: object
                           headers:
-                            description: 'Header patterns to match against in the <key>: { "<predicate>":
-                              "<value>" } form'
+                            description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                             type: object
                           method:
                             description: The HTTP request method e.g. GET
                             type: string
                           queryParameters:
-                            description: 'Query parameter patterns to match against in the <key>: {
-                              "<predicate>": "<value>" } form'
+                            description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                             type: object
                           url:
-                            description: The path and query to match exactly against. Only one of url,
-                              urlPattern, urlPath or urlPathPattern may be
-                              specified.
+                            description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                             type: string
                           urlPath:
-                            description: The path to match exactly against. Only one of url, urlPattern,
-                              urlPath or urlPathPattern may be specified.
+                            description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                             type: string
                           urlPathPattern:
-                            description: The path regex to match against. Only one of url, urlPattern,
-                              urlPath or urlPathPattern may be specified.
+                            description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                             type: string
                           urlPattern:
-                            description: The path and query regex to match against. Only one of url,
-                              urlPattern, urlPath or urlPathPattern may be
-                              specified.
+                            description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                             type: string
                         type: object
                       - description: Filter requests for which to create stub mapping
@@ -4225,23 +3884,19 @@ components:
                 description: This stub mapping's unique identifier
                 type: string
               metadata:
-                description: Arbitrary metadata to be used for e.g. tagging, documentation. Can
-                  also be used to find and remove stubs.
+                description: Arbitrary metadata to be used for e.g. tagging, documentation. Can also be used to find and remove stubs.
                 type: object
               name:
                 description: The stub mapping's name
                 type: string
               newScenarioState:
-                description: The new state for the scenario to be updated to after this stub is
-                  served.
+                description: The new state for the scenario to be updated to after this stub is served.
                 type: string
               persistent:
-                description: Indicates that the stub mapping should be persisted immediately on
-                  create/update/delete and survive resets to default.
+                description: Indicates that the stub mapping should be persisted immediately on create/update/delete and survive resets to default.
                 type: boolean
               postServeActions:
-                description: A map of the names of post serve action extensions to trigger and
-                  their parameters.
+                description: A map of the names of post serve action extensions to trigger and their parameters.
                 type: object
               priority:
                 description: This stub mapping's priority relative to others. 1 is highest.
@@ -4269,46 +3924,37 @@ components:
                       - password
                     type: object
                   bodyPatterns:
-                    description: 'Request body patterns to match against in the <key>: {
-                      "<predicate>": "<value>" } form'
+                    description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                     items:
                       type: object
                     type: array
                   cookies:
-                    description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                      "<value>" } form'
+                    description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                     type: object
                   headers:
-                    description: 'Header patterns to match against in the <key>: { "<predicate>":
-                      "<value>" } form'
+                    description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                     type: object
                   method:
                     description: The HTTP request method e.g. GET
                     type: string
                   queryParameters:
-                    description: 'Query parameter patterns to match against in the <key>: {
-                      "<predicate>": "<value>" } form'
+                    description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                     type: object
                   url:
-                    description: The path and query to match exactly against. Only one of url,
-                      urlPattern, urlPath or urlPathPattern may be specified.
+                    description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                     type: string
                   urlPath:
-                    description: The path to match exactly against. Only one of url, urlPattern,
-                      urlPath or urlPathPattern may be specified.
+                    description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                     type: string
                   urlPathPattern:
-                    description: The path regex to match against. Only one of url, urlPattern,
-                      urlPath or urlPathPattern may be specified.
+                    description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                     type: string
                   urlPattern:
-                    description: The path and query regex to match against. Only one of url,
-                      urlPattern, urlPath or urlPathPattern may be specified.
+                    description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                     type: string
                 type: object
               requiredScenarioState:
-                description: The required state of the scenario in order for this stub to be
-                  matched.
+                description: The required state of the scenario in order for this stub to be matched.
                 type: string
               response:
                 allOf:
@@ -4342,18 +3988,13 @@ components:
                         description: Extra request headers to send when proxying to another host.
                         type: object
                       base64Body:
-                        description: The response body as a base64 encoded string (useful for binary
-                          content). Only one of body, base64Body, jsonBody or
-                          bodyFileName may be specified.
+                        description: The response body as a base64 encoded string (useful for binary content). Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                         type: string
                       body:
-                        description: The response body as a string. Only one of body, base64Body,
-                          jsonBody or bodyFileName may be specified.
+                        description: The response body as a string. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                         type: string
                       bodyFileName:
-                        description: The path to the file containing the response body, relative to the
-                          configured file root. Only one of body, base64Body,
-                          jsonBody or bodyFileName may be specified.
+                        description: The path to the file containing the response body, relative to the configured file root. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                         type: string
                       fault:
                         description: The fault to apply (instead of a full, valid response).
@@ -4367,15 +4008,13 @@ components:
                         description: Number of milliseconds to delay be before sending the response.
                         type: integer
                       fromConfiguredStub:
-                        description: Read-only flag indicating false if this was the default, unmatched
-                          response. Not present otherwise.
+                        description: Read-only flag indicating false if this was the default, unmatched response. Not present otherwise.
                         type: boolean
                       headers:
                         description: Map of response headers to send
                         type: object
                       jsonBody:
-                        description: The response body as a JSON object. Only one of body, base64Body,
-                          jsonBody or bodyFileName may be specified.
+                        description: The response body as a JSON object. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                         type: object
                       proxyBaseUrl:
                         description: The base URL of the target to proxy matching requests to.
@@ -4442,13 +4081,11 @@ components:
                       example: Hello world
                       type: string
                     cookies:
-                      description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                        "<value>" } form'
+                      description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                       example: {}
                       type: object
                     headers:
-                      description: 'Header patterns to match against in the <key>: { "<predicate>":
-                        "<value>" } form'
+                      description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                       example:
                         Connection: keep-alive
                         Host: localhost:56738
@@ -4489,23 +4126,19 @@ components:
                 description: This stub mapping's unique identifier
                 type: string
               metadata:
-                description: Arbitrary metadata to be used for e.g. tagging, documentation. Can
-                  also be used to find and remove stubs.
+                description: Arbitrary metadata to be used for e.g. tagging, documentation. Can also be used to find and remove stubs.
                 type: object
               name:
                 description: The stub mapping's name
                 type: string
               newScenarioState:
-                description: The new state for the scenario to be updated to after this stub is
-                  served.
+                description: The new state for the scenario to be updated to after this stub is served.
                 type: string
               persistent:
-                description: Indicates that the stub mapping should be persisted immediately on
-                  create/update/delete and survive resets to default.
+                description: Indicates that the stub mapping should be persisted immediately on create/update/delete and survive resets to default.
                 type: boolean
               postServeActions:
-                description: A map of the names of post serve action extensions to trigger and
-                  their parameters.
+                description: A map of the names of post serve action extensions to trigger and their parameters.
                 type: object
               priority:
                 description: This stub mapping's priority relative to others. 1 is highest.
@@ -4533,46 +4166,37 @@ components:
                       - password
                     type: object
                   bodyPatterns:
-                    description: 'Request body patterns to match against in the <key>: {
-                      "<predicate>": "<value>" } form'
+                    description: 'Request body patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                     items:
                       type: object
                     type: array
                   cookies:
-                    description: 'Cookie patterns to match against in the <key>: { "<predicate>":
-                      "<value>" } form'
+                    description: 'Cookie patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                     type: object
                   headers:
-                    description: 'Header patterns to match against in the <key>: { "<predicate>":
-                      "<value>" } form'
+                    description: 'Header patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                     type: object
                   method:
                     description: The HTTP request method e.g. GET
                     type: string
                   queryParameters:
-                    description: 'Query parameter patterns to match against in the <key>: {
-                      "<predicate>": "<value>" } form'
+                    description: 'Query parameter patterns to match against in the <key>: { "<predicate>": "<value>" } form'
                     type: object
                   url:
-                    description: The path and query to match exactly against. Only one of url,
-                      urlPattern, urlPath or urlPathPattern may be specified.
+                    description: The path and query to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                     type: string
                   urlPath:
-                    description: The path to match exactly against. Only one of url, urlPattern,
-                      urlPath or urlPathPattern may be specified.
+                    description: The path to match exactly against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                     type: string
                   urlPathPattern:
-                    description: The path regex to match against. Only one of url, urlPattern,
-                      urlPath or urlPathPattern may be specified.
+                    description: The path regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                     type: string
                   urlPattern:
-                    description: The path and query regex to match against. Only one of url,
-                      urlPattern, urlPath or urlPathPattern may be specified.
+                    description: The path and query regex to match against. Only one of url, urlPattern, urlPath or urlPathPattern may be specified.
                     type: string
                 type: object
               requiredScenarioState:
-                description: The required state of the scenario in order for this stub to be
-                  matched.
+                description: The required state of the scenario in order for this stub to be matched.
                 type: string
               response:
                 allOf:
@@ -4606,18 +4230,13 @@ components:
                         description: Extra request headers to send when proxying to another host.
                         type: object
                       base64Body:
-                        description: The response body as a base64 encoded string (useful for binary
-                          content). Only one of body, base64Body, jsonBody or
-                          bodyFileName may be specified.
+                        description: The response body as a base64 encoded string (useful for binary content). Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                         type: string
                       body:
-                        description: The response body as a string. Only one of body, base64Body,
-                          jsonBody or bodyFileName may be specified.
+                        description: The response body as a string. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                         type: string
                       bodyFileName:
-                        description: The path to the file containing the response body, relative to the
-                          configured file root. Only one of body, base64Body,
-                          jsonBody or bodyFileName may be specified.
+                        description: The path to the file containing the response body, relative to the configured file root. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                         type: string
                       fault:
                         description: The fault to apply (instead of a full, valid response).
@@ -4631,15 +4250,13 @@ components:
                         description: Number of milliseconds to delay be before sending the response.
                         type: integer
                       fromConfiguredStub:
-                        description: Read-only flag indicating false if this was the default, unmatched
-                          response. Not present otherwise.
+                        description: Read-only flag indicating false if this was the default, unmatched response. Not present otherwise.
                         type: boolean
                       headers:
                         description: Map of response headers to send
                         type: object
                       jsonBody:
-                        description: The response body as a JSON object. Only one of body, base64Body,
-                          jsonBody or bodyFileName may be specified.
+                        description: The response body as a JSON object. Only one of body, base64Body, jsonBody or bodyFileName may be specified.
                         type: object
                       proxyBaseUrl:
                         description: The base URL of the target to proxy matching requests to.

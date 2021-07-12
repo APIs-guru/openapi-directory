@@ -4,14 +4,11 @@ servers:
 info:
   contact:
     x-twitter: envoicein
-  description: "[![Run in
-    Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-c\
-    ollection/80638214aa04722c9203)\r
+  description: "[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/80638214aa04722c9203)\r
 
     <span style='margin-left: 0.5em;'>or</span>\r
 
-    <a href='https://documenter.getpostman.com/view/3559821/TVeqcn2L'
-    class='openapi-button' _ngcontent-c6>View Postman docs</a>\r
+    <a href='https://documenter.getpostman.com/view/3559821/TVeqcn2L' class='openapi-button' _ngcontent-c6>View Postman docs</a>\r
 
     \r
 
@@ -19,8 +16,7 @@ info:
 
     \r
 
-    Visit [github](https://github.com/EmitKnowledge/Envoice) to view the
-    quickstart tutorial.\r
+    Visit [github](https://github.com/EmitKnowledge/Envoice) to view the quickstart tutorial.\r
 
     \r
 
@@ -36,8 +32,7 @@ info:
 
     <br /><br />\r
 
-    ![postman - tutorial -
-    1](/Assets/images/api/postman-tutorial/postman-tutorial-1.png)\r
+    ![postman - tutorial - 1](/Assets/images/api/postman-tutorial/postman-tutorial-1.png)\r
 
     \r
 
@@ -49,14 +44,11 @@ info:
 
     Click the \"\"Postman for windows\"\" to run postman as a desktop app.\r
 
-    Make sure you have already
-    [installed](https://www.getpostman.com/docs/postman/launching_postman/insta\
-    llation_and_updates) Postman.\r
+    Make sure you have already [installed](https://www.getpostman.com/docs/postman/launching_postman/installation_and_updates) Postman.\r
 
     <br /><br />\r
 
-    ![postman - tutorial -
-    2](/Assets/images/api/postman-tutorial/postman-tutorial-2.png)\r
+    ![postman - tutorial - 2](/Assets/images/api/postman-tutorial/postman-tutorial-2.png)\r
 
     \r
 
@@ -64,13 +56,11 @@ info:
 
     \r
 
-    In chrome an alert might show up to set a default app for opening
-    postman links. Click on \"\"Open Postman\"\".\r
+    In chrome an alert might show up to set a default app for opening postman links. Click on \"\"Open Postman\"\".\r
 
     <br /><br />\r
 
-    ![postman - tutorial -
-    3](/Assets/images/api/postman-tutorial/postman-tutorial-3.png)\r
+    ![postman - tutorial - 3](/Assets/images/api/postman-tutorial/postman-tutorial-3.png)\r
 
     \r
 
@@ -78,13 +68,11 @@ info:
 
     \r
 
-    The OpenAPI specification will be imported in Postman as a new
-    collection named \"\"Envoice api\"\"\r
+    The OpenAPI specification will be imported in Postman as a new collection named \"\"Envoice api\"\"\r
 
     <br /><br />\r
 
-    ![postman - tutorial -
-    4](/Assets/images/api/postman-tutorial/postman-tutorial-4.png)\r
+    ![postman - tutorial - 4](/Assets/images/api/postman-tutorial/postman-tutorial-4.png)\r
 
     \r
 
@@ -92,21 +80,17 @@ info:
 
     \r
 
-    When testing be sure to check and modify the environment variables to
-    suit your api key and secret. The domain is set to envoice's endpoint so you
-    don't really need to change that.  \r
+    When testing be sure to check and modify the environment variables to suit your api key and secret. The domain is set to envoice's endpoint so you don't really need to change that.  \r
 
     <sub>\\*Eye button in top right corner </sub>\r
 
     <br /><br /> \r
 
-    ![postman - tutorial -
-    5](/Assets/images/api/postman-tutorial/postman-tutorial-5.png)\r
+    ![postman - tutorial - 5](/Assets/images/api/postman-tutorial/postman-tutorial-5.png)\r
 
     <br /><br /> \r
 
-    ![postman - tutorial -
-    6](/Assets/images/api/postman-tutorial/postman-tutorial-6.png)\r
+    ![postman - tutorial - 6](/Assets/images/api/postman-tutorial/postman-tutorial-6.png)\r
 
     \r
 
@@ -114,14 +98,11 @@ info:
 
     \r
 
-    You don't need to change the values of the header parameters, because
-    they will be replaced automatically when you send a request with real values
-    from the environment configured in the previous step.\r
+    You don't need to change the values of the header parameters, because they will be replaced automatically when you send a request with real values from the environment configured in the previous step.\r
 
     <br /><br />\r
 
-    ![postman - tutorial -
-    7](/Assets/images/api/postman-tutorial/postman-tutorial-7.png)\r
+    ![postman - tutorial - 7](/Assets/images/api/postman-tutorial/postman-tutorial-7.png)\r
 
     \r
 
@@ -133,8 +114,7 @@ info:
 
     <br /><br />\r
 
-    ![postman - tutorial -
-    8](/Assets/images/api/postman-tutorial/postman-tutorial-8.png)\r
+    ![postman - tutorial - 8](/Assets/images/api/postman-tutorial/postman-tutorial-8.png)\r
 
     </div>\r
 
@@ -144,25 +124,19 @@ info:
 
     \r
 
-    Webhooks allow you to build or set up Envoice Apps which subscribe to
-    invoice activities. \r
+    Webhooks allow you to build or set up Envoice Apps which subscribe to invoice activities. \r
 
-    When one of those events is triggered, we'll send a HTTP POST payload to
-    the webhook's configured URL. \r
+    When one of those events is triggered, we'll send a HTTP POST payload to the webhook's configured URL. \r
 
     Webhooks can be used to update an external invoice data storage.\r
 
     \r
 
-    In order to use webhooks visit [this link](/account/settings#api-tab)
-    and add upto 10 webhook urls that will return status `200` in order to
-    signal that the webhook is working.\r
+    In order to use webhooks visit [this link](/account/settings#api-tab) and add upto 10 webhook urls that will return status `200` in order to signal that the webhook is working.\r
 
-    All nonworking webhooks will be ignored after a certain period of time
-    and several retry attempts.\r
+    All nonworking webhooks will be ignored after a certain period of time and several retry attempts.\r
 
-    If after several attempts the webhook starts to work, we will send you
-    all activities, both past and present, in chronological order.\r
+    If after several attempts the webhook starts to work, we will send you all activities, both past and present, in chronological order.\r
 
     \r
 
@@ -2531,8 +2505,7 @@ paths:
                   $ref: "#/components/schemas/PaymentGatewayDetailsApiModel"
                 type: array
           description: OK
-      summary: Return all supported payment gateways (no currencies means all are
-        supported)
+      summary: Return all supported payment gateways (no currencies means all are supported)
       tags:
         - Payment
   /api/paymentlink/all:
@@ -3997,8 +3970,7 @@ components:
           format: int32
           type: integer
         Link:
-          description: "Url which point out to a certain activity action. Ex: Click to
-            view the payment"
+          description: "Url which point out to a certain activity action. Ex: Click to view the payment"
           type: string
         Message:
           description: Message associated with the activity
@@ -4679,8 +4651,7 @@ components:
           description: Indicates to which invoice this activity refers to
           type: string
         Link:
-          description: "Url which point out to a certain activity action. Ex: Click to
-            view the payment"
+          description: "Url which point out to a certain activity action. Ex: Click to view the payment"
           type: string
         Message:
           description: Message associated with the activity
@@ -4972,8 +4943,7 @@ components:
           format: date-time
           type: string
         EnablePartialPayments:
-          description: Indicate that the invoice allows the user to pay the invoice
-            partially
+          description: Indicate that the invoice allows the user to pay the invoice partially
           type: boolean
         Id:
           description: Invoice id
@@ -5062,8 +5032,7 @@ components:
           format: date-time
           type: string
         EnablePartialPayments:
-          description: Indicate that the invoice allows the user to pay the invoice
-            partially
+          description: Indicate that the invoice allows the user to pay the invoice partially
           type: boolean
         Id:
           description: Invoice id
@@ -5322,8 +5291,7 @@ components:
             - Saturday
           type: string
         DueDateInDays:
-          description: Total number of days for the client to pay the invoice after
-            issuing it
+          description: Total number of days for the client to pay the invoice after issuing it
           format: int32
           type: integer
         EndOfRecurrance:
@@ -7227,14 +7195,12 @@ components:
       type: object
   securitySchemes:
     x-auth-key:
-      description: Your account API key. Can be retrieved from your [account
-        settings](/account/settings#api-tab).
+      description: Your account API key. Can be retrieved from your [account settings](/account/settings#api-tab).
       in: header
       name: x-auth-key
       type: apiKey
     x-auth-secret:
-      description: Your account API secret. Can be retrieved from your [account
-        settings](/account/settings#api-tab). Keep it hidden.
+      description: Your account API secret. Can be retrieved from your [account settings](/account/settings#api-tab). Keep it hidden.
       in: header
       name: x-auth-secret
       type: apiKey

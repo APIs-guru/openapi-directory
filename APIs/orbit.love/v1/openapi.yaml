@@ -2,8 +2,7 @@ openapi: 3.0.1
 servers:
   - url: https://app.orbit.love/api/v1
 info:
-  description: Please see the complete Orbit API documentation at
-    [https://docs.orbit.love/reference](https://docs.orbit.love/reference).
+  description: Please see the complete Orbit API documentation at [https://docs.orbit.love/reference](https://docs.orbit.love/reference).
   title: Orbit API
   version: v1
   x-apisguru-categories:
@@ -541,9 +540,7 @@ paths:
       tags:
         - Activities
     post:
-      description: Use this method when you know an identity of the member (github,
-        email, twitter, etc.) but not their Orbit ID. Pass fields in the member
-        object to update the member in addition to creating the activity.
+      description: Use this method when you know an identity of the member (github, email, twitter, etc.) but not their Orbit ID. Pass fields in the member object to update the member in addition to creating the activity.
       parameters:
         - in: path
           name: workspace_id
@@ -644,9 +641,7 @@ paths:
                   - attributes:
                       activities_count: 0
                       avatar_url: https://d1ts43dypk8bqh.cloudfront.net/v1/avatars/6ea4f872-04b6-4752-8a90-db508525135a
-                      bio: "Co-founder & CTO @OrbitModel - we're hiring! · advocate for dev advocates
-                        🥑 · Rails · JAMstack · DevRel · he/him ·
-                        #BlackLivesMatter"
+                      bio: "Co-founder & CTO @OrbitModel - we're hiring! · advocate for dev advocates 🥑 · Rails · JAMstack · DevRel · he/him · #BlackLivesMatter"
                       birthday: null
                       company: Orbit
                       created: true
@@ -714,8 +709,7 @@ paths:
               example:
                 errors:
                   base:
-                    - Either identity or member name, email, GitHub, Twitter or
-                      Discourse is required
+                    - Either identity or member name, email, GitHub, Twitter or Discourse is required
                   email:
                     - is invalid
                   name:
@@ -1067,11 +1061,7 @@ paths:
       tags:
         - Members
     post:
-      description: This method is useful when you know a member's identity in another
-        system and want to create or update the corresponding Orbit member.
-        Identities can be specified in the identity object or member attributes
-        like member.github. If no member exists, a new member will be created
-        and linked to any provided identities.
+      description: This method is useful when you know a member's identity in another system and want to create or update the corresponding Orbit member. Identities can be specified in the identity object or member attributes like member.github. If no member exists, a new member will be created and linked to any provided identities.
       parameters:
         - in: path
           name: workspace_id
@@ -1092,8 +1082,7 @@ paths:
                   attributes:
                     activities_count: 0
                     avatar_url: http://github.com/avatar.png
-                    bio: Co-founder & CTO @orbit-love · Developer Advocate · formerly @algolia and
-                      @keen
+                    bio: Co-founder & CTO @orbit-love · Developer Advocate · formerly @algolia and @keen
                     birthday: null
                     company: "@orbit-love"
                     created: false
@@ -1172,8 +1161,7 @@ paths:
                   attributes:
                     activities_count: 0
                     avatar_url: https://avatars2.githubusercontent.com/u/174777?u=79e423dd07c19122115f52a1c97727ca193e6253&v=4
-                    bio: Co-founder & CTO @orbit-love · Developer Advocate · formerly @algolia and
-                      @keen
+                    bio: Co-founder & CTO @orbit-love · Developer Advocate · formerly @algolia and @keen
                     birthday: null
                     company: "@orbit-love"
                     created: true
@@ -1257,8 +1245,7 @@ paths:
               example:
                 errors:
                   base:
-                    - Either identity or member name, email, GitHub, Twitter or
-                      Discourse is required
+                    - Either identity or member name, email, GitHub, Twitter or Discourse is required
                   email:
                     - is invalid
                   name:
@@ -1273,9 +1260,7 @@ paths:
         - Members
   "/{workspace_id}/members/find":
     get:
-      description: Provide a source and one of username/uid/email params to return a
-        member with that identity, if one exists. Common values for source
-        include github, twitter, and email.
+      description: Provide a source and one of username/uid/email params to return a member with that identity, if one exists. Common values for source include github, twitter, and email.
       parameters:
         - in: path
           name: workspace_id
@@ -2197,8 +2182,7 @@ components:
           description: A description of the activity; displayed in the timeline
           type: string
         key:
-          description: Supply a key that must be unique or leave blank to have one
-            generated.
+          description: Supply a key that must be unique or leave blank to have one generated.
           type: string
         link:
           description: A URL for the activity; displayed in the timeline
@@ -2210,8 +2194,7 @@ components:
           description: The date and time the activity occurred; defaults to now
           type: string
         tags:
-          description: "[EXPERIMENTAL] Capture facets of the activity to group by later
-            e.g. locations or channels; replaces existing value"
+          description: "[EXPERIMENTAL] Capture facets of the activity to group by later e.g. locations or channels; replaces existing value"
           items:
             type: string
           type: array
@@ -2247,8 +2230,7 @@ components:
         - $ref: "#/components/schemas/activity"
         - $ref: "#/components/schemas/post_activity"
     identity:
-      description: Represents an email address, a profile on networks like github and
-        twitter, or a record in another system.
+      description: Represents an email address, a profile on networks like github and twitter, or a record in another system.
       properties:
         email:
           description: The email of the person in the source system
@@ -2257,19 +2239,16 @@ components:
           description: The name of the person in the source system
           type: string
         source:
-          description: "The type of source: known values include github, twitter,
-            discourse, email, linkedin, devto. Custom values can also be used"
+          description: "The type of source: known values include github, twitter, discourse, email, linkedin, devto. Custom values can also be used"
           type: string
         source_host:
-          description: Specifies the location of the source, such as the host of a
-            Discourse instance
+          description: Specifies the location of the source, such as the host of a Discourse instance
           type: string
         uid:
           description: The uid of the person in the source system
           type: string
         url:
-          description: For custom identities, an optional link to the profile on the
-            source system
+          description: For custom identities, an optional link to the profile on the source system
           type: string
         username:
           description: The username of the person in the source system
@@ -2369,15 +2348,12 @@ components:
       title: Content Activity
   securitySchemes:
     api_key:
-      description: Provide the API key in a query param called api_key. This is the
-        least secure method, please use only for testing.
+      description: Provide the API key in a query param called api_key. This is the least secure method, please use only for testing.
       in: query
       name: api_key
       type: apiKey
     bearer:
-      description: Provide a Authorization header with format 'Bearer <api_key>'. This
-        is the recommended approach. Make sure to include the 'Bearer' part in
-        the text box here.
+      description: Provide a Authorization header with format 'Bearer <api_key>'. This is the recommended approach. Make sure to include the 'Bearer' part in the text box here.
       in: header
       name: Authorization
       type: apiKey

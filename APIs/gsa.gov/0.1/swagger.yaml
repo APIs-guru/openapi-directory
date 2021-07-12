@@ -6,18 +6,12 @@ basePath: /
 info:
   contact:
     email: discovery-18f@gsa.gov
-  description: >-
-    <p>This API drives the <a
-    href="https://discovery.gsa.gov">Discovery Market Research Tool</a>.
-
+  description: |-
+    <p>This API drives the <a href="https://discovery.gsa.gov">Discovery Market Research Tool</a>.
     It contains information on the vendors that are part of the OASIS and OASIS Small Business contracting vehicles, such as their contracting history, their elligibility for contract awards, and their small business designations.
-
     To learn more about the tool, please visit <a href="https://discovery.gsa.gov">Discovery</a> or see the README on our <a href="https://github.com/PSHCDevOps/discovery">GitHub repository</a>.</p>
-
     <p><strong>Please note that the base path for this API is <code>https://api.data.gov/gsa/discovery/</code></strong></p>
-
     <p>It requires an API key, obtainable at <a href="http://api.data.gov/">api.data.gov</a>.
-
     It must be passed in the <code>api_key</code> parameter with each request.</p>
   title: Discovery Market Research
   version: "0.1"
@@ -38,10 +32,7 @@ tags:
 paths:
   /api/contracts/:
     get:
-      description: <p>This endpoint returns contract history from FPDS for a specific
-        vendor. The vendor's DUNS number is a required parameter. You can also
-        filter contracts by their NAICS code to find contracts relevant to a
-        particular category.</p>
+      description: <p>This endpoint returns contract history from FPDS for a specific vendor. The vendor's DUNS number is a required parameter. You can also filter contracts by their NAICS code to find contracts relevant to a particular category.</p>
       operationId: List_Contracts_GET
       parameters:
         - description: A 9-digit DUNS number that uniquely identifies a vendor (required).
@@ -49,8 +40,7 @@ paths:
           name: duns
           required: true
           type: string
-        - description: a six digit NAICS code used to filter by contracts with a certain
-            NAICS
+        - description: a six digit NAICS code used to filter by contracts with a certain NAICS
           in: query
           name: naics
           required: false
@@ -65,8 +55,7 @@ paths:
           name: direction
           required: false
           type: string
-        - description: the page to start on. Results are paginated in increments of 100.
-            Begins at page=1.
+        - description: the page to start on. Results are paginated in increments of 100. Begins at page=1.
           in: query
           name: page
           required: false
@@ -81,42 +70,34 @@ paths:
         - contracts
   /api/metadata/:
     get:
-      description: <p>This endpoint returns metadata for the most recent data loads of
-        SAM and FPDS data. It takes no parameters.</p>
+      description: <p>This endpoint returns metadata for the most recent data loads of SAM and FPDS data. It takes no parameters.</p>
       operationId: Metadata_GET
       responses:
         "200":
           description: No response was specified
           schema:
             type: object
-      summary: This endpoint returns metadata for the most recent data loads of SAM
-        and FPDS data
+      summary: This endpoint returns metadata for the most recent data loads of SAM and FPDS data
       tags:
         - metadata
   /api/naics/:
     get:
-      description: <p>This endpoint lists all of the NAICS codes that are relevant to
-        the OASIS family of vehicles. It takes no parameters.</p>
+      description: <p>This endpoint lists all of the NAICS codes that are relevant to the OASIS family of vehicles. It takes no parameters.</p>
       operationId: List_Naics_GET
       responses:
         "200":
           description: No response was specified
           schema:
             type: object
-      summary: This endpoint lists all of the NAICS codes that are relevant to the
-        OASIS family of vehicles
+      summary: This endpoint lists all of the NAICS codes that are relevant to the OASIS family of vehicles
       tags:
         - naics
   "/api/vendor/{duns}":
     get:
-      description: <p>This endpoint returns a single vendor by their 9 digit DUNS
-        number. DUNS numbers can be looked up in the <a
-        href="https://www.sam.gov">System for Award Management</a> by vendor
-        name.</p>
+      description: <p>This endpoint returns a single vendor by their 9 digit DUNS number. DUNS numbers can be looked up in the <a href="https://www.sam.gov">System for Award Management</a> by vendor name.</p>
       operationId: Get_Vendor_GET
       parameters:
-        - description: a nine digit DUNS number that uniquely identifies the vendor
-            (required)
+        - description: a nine digit DUNS number that uniquely identifies the vendor (required)
           in: path
           name: duns
           required: true
@@ -131,29 +112,17 @@ paths:
         - vendor
   /api/vendors/:
     get:
-      description: >-
-        <p>This endpoint returns a list of vendors filtered by a NAICS
-        code. The NAICS code maps to an OASIS pool and is used to retrieve
-        vendors in that pool only.</p>
-
+      description: |-
+        <p>This endpoint returns a list of vendors filtered by a NAICS code. The NAICS code maps to an OASIS pool and is used to retrieve vendors in that pool only.</p>
         <p>OASIS pools are groupings of NAICS codes that have the same small business size standard. Because contracts solicited to OASIS vendors can only be issued to one pool, much of the data is presented as part of a pool grouping. Using the NAICS code is a shortcut, so that you don't have to explicitly map the NAICS code to a pool in OASIS yourself.</p>
-
         <p>Vendors can also be filtered by a particular setaside. Valid values for the setasides are two-character codes which include:</p>
-
         <ul>
-
         <li>A6 (8(a))</li>
-
         <li>XX (Hubzone)</li>
-
         <li>QF (service disabled veteran owned)</li>
-
         <li>A2 (women owned)</li>
-
         <li>A5 (veteran owned)</li>
-
         <li>27 (small disadvantaged business).</li>
-
         </ul>
       operationId: List_Vendors_GET
       parameters:
@@ -162,18 +131,14 @@ paths:
           name: naics
           required: true
           type: string
-        - description: a comma delimited list of two character setaside codes to filter
-            by.  Ex. setasides=A6,A5  will filter by 8a and veteran owned
-            business.
+        - description: a comma delimited list of two character setaside codes to filter by.  Ex. setasides=A6,A5  will filter by 8a and veteran owned business.
           in: query
           items:
             type: string
           name: setasides
           required: false
           type: array
-        - description: Choices are either oasis or oasissb. Will filter vendors by their
-            presence in either the OASIS unrestricted vehicle or the OASIS Small
-            Business vehicle.
+        - description: Choices are either oasis or oasissb. Will filter vendors by their presence in either the OASIS unrestricted vehicle or the OASIS Small Business vehicle.
           in: query
           name: vehicle
           required: false

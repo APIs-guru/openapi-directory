@@ -6,11 +6,7 @@ basePath: /sociodemo/sandbox/api
 info:
   contact:
     name: libertyapi@o2.cz
-  description: Socio-demo API can be used to obtain time-aggregated data
-    representing groups of people on the given location in the Czech Republic.
-    Having a location, the API can return count of people belonging to age group
-    or gender aggregated by hours. The socio-demo data is based on presence of
-    mobile stations in O2 mobile network.
+  description: Socio-demo API can be used to obtain time-aggregated data representing groups of people on the given location in the Czech Republic. Having a location, the API can return count of people belonging to age group or gender aggregated by hours. The socio-demo data is based on presence of mobile stations in O2 mobile network.
   license:
     name: O2 Czech Republic a.s.
     url: https://developer.o2.cz/portal/vop
@@ -42,8 +38,7 @@ paths:
           required: true
           type: string
           x-example: "127752"
-        - description: "age-group specification (1: 8-18, 2: 19-25, 3: 26-35, 4: 36-55, 5:
-            56+)"
+        - description: "age-group specification (1: 8-18, 2: 19-25, 3: 26-35, 4: 36-55, 5: 56+)"
           in: query
           name: ageGroup
           required: true
@@ -69,9 +64,7 @@ paths:
           schema:
             $ref: "#/definitions/CountResult"
         "204":
-          description: The request is valid, but the platform is not able to serve the
-            data. The reason may be restriction (e.g. differential privacy) or
-            no data were found.
+          description: The request is valid, but the platform is not able to serve the data. The reason may be restriction (e.g. differential privacy) or no data were found.
         "400":
           description: Invalid request provided, missing or invalid parameter.
           schema:
@@ -85,8 +78,7 @@ paths:
         - sociodemo
   "/gender/{location}":
     get:
-      description: Get count of people in a given location and an hour, aggregated by
-        gender.
+      description: Get count of people in a given location and an hour, aggregated by gender.
       operationId: gender
       parameters:
         - description: basic residential unit
@@ -121,9 +113,7 @@ paths:
           schema:
             $ref: "#/definitions/CountResult"
         "204":
-          description: The request is valid, but the platform is not able to serve the
-            data. The reason may be restriction (e.g. differential privacy) or
-            no data were found.
+          description: The request is valid, but the platform is not able to serve the data. The reason may be restriction (e.g. differential privacy) or no data were found.
         "400":
           description: Invalid request provided, missing or invalid parameter.
           schema:

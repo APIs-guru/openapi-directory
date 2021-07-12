@@ -7,12 +7,7 @@ info:
   contact:
     name: The open API platform by Mercedes-Benz
     x-twitter: MercedesBenz
-  description: The Car Configurator API offers access to the Mercedes-Benz car
-    configuration functions. It provides required reference data such as the
-    masterdata of all Mercedes-Benz vehicles as well as functions to retrieve
-    initial and changed configurations. In addition to that is is possible to
-    save a newly created configuration so that it can be easily restored or
-    shared with others.
+  description: The Car Configurator API offers access to the Mercedes-Benz car configuration functions. It provides required reference data such as the masterdata of all Mercedes-Benz vehicles as well as functions to retrieve initial and changed configurations. In addition to that is is possible to save a newly created configuration so that it can be easily restored or shared with others.
   title: Car Configurator
   version: "1.0"
   x-apisguru-categories:
@@ -31,8 +26,7 @@ produces:
   - application/json
 parameters:
   baumuster4prefixParam:
-    description: The first four digits of a baumuster are called baumuster4prefix
-      e.g. '1760' for 'Berline' in France.
+    description: The first four digits of a baumuster are called baumuster4prefix e.g. '1760' for 'Berline' in France.
     in: query
     name: baumuster4prefix
     required: false
@@ -80,20 +74,14 @@ parameters:
     type: string
   componentList:
     default: +L-197_P-518,-L-040_P-501
-    description: A string representing the changes, in other words a list of
-      components that will be added and removed. The following syntax is used
-      for the components to be added and the components to be removed. The added
-      components e.g. '+I-950_L-890' and the removed components e.g.
-      '-I-953_L-696' and the delimiter between the added and removed components
-      is ','. In one components string '+I-950_L-890,-I-953_L-696'.
+    description: A string representing the changes, in other words a list of components that will be added and removed. The following syntax is used for the components to be added and the components to be removed. The added components e.g. '+I-950_L-890' and the removed components e.g. '-I-953_L-696' and the delimiter between the added and removed components is ','. In one components string '+I-950_L-890,-I-953_L-696'.
     in: path
     name: componentList
     required: true
     type: string
   componentTypes:
-    description: >-
-      A list of component types separated by a comma case insensitive. If
-      nothing is defined all component types are returned. Allowed values are:
+    description: |-
+      A list of component types separated by a comma case insensitive. If nothing is defined all component types are returned. Allowed values are:
         - WHEELS
         - PAINTS
         - UPHOLSTERIES
@@ -119,12 +107,7 @@ parameters:
     type: array
   configurationId:
     default: E-AB5-D09-D14-D53-D71-D80-L06-L19-M69-M70-M88-M94-N63-O16-O92-Q31-Q56-S09-S16_L-040_P-501_S-08U-09U-11R-12U-14U-160-16U-17U-223-231-233-235-23P-249-266-275-276-290-293-297-299-351-360-401-402-413-427-432-436-439-441-443-448-452-453-463-470-471-475-487-503-518-531-538-540-551-581-582-596-61U-628-642-70B-735-808-810-840-871-874-877-881-882-883-889-897-8U0-902-B59-H29-L2B-P07-P09-P17-P21-P34-P35-P47-P54-P64-R66-SZ4-U10-U12-U25
-    description: Minimal string that identifies a configuration e.g.
-      'E-D15-D18-D41-D46-D49-D52-D53-D54-D59-D60-D71-F32-F36-F88-F98-G03-G05-G36-G56-I61-J53-J67-L08-M23-M70-N18-N62-N92-O76-Q29-Q56-Q79-Q92-S01-S05-S08-S63-S92-T05-T07-T62-T84-T88_I-953_L-696_P-001_S-152-160-161-171-258-290-292-294-351-360-411-440-442-470-472-475-485-520-533-538-560-570-573-580-584-58U-591-620-70B-808-888-893-B03-B16-K11-L18-R43-U60'.
-      A codeType is only once within the configurationId e.g 'S-152-160-161'
-      stands for the components with the componentId 'S-152', 'S-160' and
-      'S-161'. A new codeType is divided from the codes with a underscore e.g
-      'S-152-160-161_I-953_L-696'.
+    description: Minimal string that identifies a configuration e.g. 'E-D15-D18-D41-D46-D49-D52-D53-D54-D59-D60-D71-F32-F36-F88-F98-G03-G05-G36-G56-I61-J53-J67-L08-M23-M70-N18-N62-N92-O76-Q29-Q56-Q79-Q92-S01-S05-S08-S63-S92-T05-T07-T62-T84-T88_I-953_L-696_P-001_S-152-160-161-171-258-290-292-294-351-360-411-440-442-470-472-475-485-520-533-538-560-570-573-580-584-58U-591-620-70B-808-888-893-B03-B16-K11-L18-R43-U60'. A codeType is only once within the configurationId e.g 'S-152-160-161' stands for the components with the componentId 'S-152', 'S-160' and 'S-161'. A new codeType is divided from the codes with a underscore e.g 'S-152-160-161_I-953_L-696'.
     in: path
     name: configurationId
     required: true
@@ -136,8 +119,7 @@ parameters:
     required: false
     type: string
   fieldsFilter:
-    description: Specifies which fields should be included in the result. If this
-      filter is not used, per default all fields are returned.
+    description: Specifies which fields should be included in the result. If this filter is not used, per default all fields are returned.
     in: query
     items:
       type: string
@@ -146,8 +128,7 @@ parameters:
     type: array
   languageParam:
     default: de
-    description: This is a ISO language string e.g. 'de' and is spoken in Austria
-      'AT', Germany 'DE' and Swiss 'CH'.
+    description: This is a ISO language string e.g. 'de' and is spoken in Austria 'AT', Germany 'DE' and Swiss 'CH'.
     in: query
     name: language
     required: false
@@ -162,27 +143,20 @@ parameters:
     type: string
   modelId:
     default: 222980_000
-    description: Minimal string that identifies a model e.g. '176042_002'. If no
-      nationalSalesType is available, the modelId only consists of the baumuster
-      e.g. '176042'.
+    description: Minimal string that identifies a model e.g. '176042_002'. If no nationalSalesType is available, the modelId only consists of the baumuster e.g. '176042'.
     in: path
     name: modelId
     required: true
     type: string
   nationalSalesTypeParam:
-    description: This is the national sales type (NST) of a distinct baumuster.
-      There is no predefined pattern for the NST, each market defines its NST.
-      e.g. 'E07' in France, 0001 in Germany and ZA1 in South Africa Using the
-      NST markets can define market specific conditions. e.g. different initial
-      configuration, etc.
+    description: This is the national sales type (NST) of a distinct baumuster. There is no predefined pattern for the NST, each market defines its NST. e.g. 'E07' in France, 0001 in Germany and ZA1 in South Africa Using the NST markets can define market specific conditions. e.g. different initial configuration, etc.
     in: query
     name: nationalSalesType
     required: false
     type: string
   night:
     default: false
-    description: Set 'true', if you are looking for images with a darker background
-      and the vehicle's headlights turned on. Default is 'false'.
+    description: Set 'true', if you are looking for images with a darker background and the vehicle's headlights turned on. Default is 'false'.
     in: query
     name: night
     required: false
@@ -195,10 +169,7 @@ parameters:
     required: true
     type: string
   onlineCodeRequestBody:
-    description: JSON object containing the modelId and the configurationId. ModelId
-      is a minimal string that identifies a model e.g. '176042_002'.
-      ConfigurationId is a minimal string that identifies a configuration e.g.
-      'E-D15-D18-...-R43-U60'
+    description: JSON object containing the modelId and the configurationId. ModelId is a minimal string that identifies a model e.g. '176042_002'. ConfigurationId is a minimal string that identifies a configuration e.g. 'E-D15-D18-...-R43-U60'
     in: body
     name: body
     required: true
@@ -206,9 +177,8 @@ parameters:
       $ref: "#/definitions/OnlineCodeRequestBody"
   perspectives:
     default: EXT020,INT1
-    description: >-
-      One or more perspectives as a comma separated String list e.g.
-      'EXT000,EXT010,INT1'.  The following perspectives are available:
+    description: |-
+      One or more perspectives as a comma separated String list e.g. 'EXT000,EXT010,INT1'.  The following perspectives are available:
         * EXT000-EXT350: EXT000 defines the front view, EXT010 defines a rotation of 10 degress and so forth.
         * INT1-INT4: These are the 4 available interior perspectives.
 
@@ -218,10 +188,8 @@ parameters:
     required: false
     type: string
   productGroups:
-    description: >-
-      Specifies to which product groups the vehicles belong which should
-      be returned. The product groups are separated from each other by a comma
-      and are case sensitive. Allowed values are:
+    description: |-
+      Specifies to which product groups the vehicles belong which should be returned. The product groups are separated from each other by a comma and are case sensitive. Allowed values are:
         * PKW
         * VAN
         * SMART
@@ -237,15 +205,13 @@ parameters:
     type: array
   roofOpen:
     default: false
-    description: Set 'true', if you are looking for images with the roof open. This
-      option is only valid for cabrios. Default is 'false'.
+    description: Set 'true', if you are looking for images with the roof open. This option is only valid for cabrios. Default is 'false'.
     in: query
     name: roofOpen
     required: false
     type: boolean
 tags:
-  - description: Provide static reference data about cars like markets, bodies,
-      classes, etc.
+  - description: Provide static reference data about cars like markets, bodies, classes, etc.
     name: References
   - description: Select equipment and configure a car
     name: Configurations
@@ -256,8 +222,7 @@ tags:
 paths:
   /markets:
     get:
-      description: Get all available `Markets`. Optional query params **language** or
-        **country** may be used to filter the result.
+      description: Get all available `Markets`. Optional query params **language** or **country** may be used to filter the result.
       operationId: marketsGET
       parameters:
         - $ref: "#/parameters/languageParam"
@@ -293,8 +258,7 @@ paths:
     x-swagger-router-controller: References
   "/markets/{marketId}":
     get:
-      description: Gets the `Market` for the given **marketId**. There are no query
-        parameters to filter the result.
+      description: Gets the `Market` for the given **marketId**. There are no query parameters to filter the result.
       operationId: marketGET
       parameters:
         - $ref: "#/parameters/marketId"
@@ -323,9 +287,7 @@ paths:
     x-swagger-router-controller: References
   "/markets/{marketId}/bodies":
     get:
-      description: Get all available `VehicleBodies` for the given **marketId**.
-        Optional query params **classId** **bodyId** or **productGroups** may be
-        used to filter the result and must conform to the pattern [0-9A-Z_-]+.
+      description: Get all available `VehicleBodies` for the given **marketId**. Optional query params **classId** **bodyId** or **productGroups** may be used to filter the result and must conform to the pattern [0-9A-Z_-]+.
       operationId: bodiesGET
       parameters:
         - $ref: "#/parameters/marketId"
@@ -342,8 +304,7 @@ paths:
             title: VehicleBodies
             type: array
         "204":
-          description: No content found for requested parameters classId, bodyId and/or
-            productGroups
+          description: No content found for requested parameters classId, bodyId and/or productGroups
         "400":
           description: |-
             Invalid parameter was specified:
@@ -401,10 +362,7 @@ paths:
     x-swagger-router-controller: References
   "/markets/{marketId}/classes":
     get:
-      description: Get all available `VehicleClasses` objects for the given
-        **marketId**. Optional query params **classId**, **bodyId** or
-        **productGroups** may be used to filter the result and must conform to
-        the pattern [0-9A-Z_-]+.
+      description: Get all available `VehicleClasses` objects for the given **marketId**. Optional query params **classId**, **bodyId** or **productGroups** may be used to filter the result and must conform to the pattern [0-9A-Z_-]+.
       operationId: classesGET
       parameters:
         - $ref: "#/parameters/marketId"
@@ -421,8 +379,7 @@ paths:
             title: VehicleClasses
             type: array
         "204":
-          description: No content found for requested parameters classId, bodyId and/or
-            productGroups
+          description: No content found for requested parameters classId, bodyId and/or productGroups
         "400":
           description: |-
             Invalid parameter was specified:
@@ -480,11 +437,7 @@ paths:
     x-swagger-router-controller: References
   "/markets/{marketId}/models":
     get:
-      description: Get the available `VehicleModels` for the given **marketId**.
-        Optional query params **classId**, **bodyId**, **baumuster4prefix**,
-        **baumuster**, **nationalSalesType** or **productGroups** maybe used to
-        filter the result. The baumuster4prefix must conform to the pattern
-        [0-9]{4}.
+      description: Get the available `VehicleModels` for the given **marketId**. Optional query params **classId**, **bodyId**, **baumuster4prefix**, **baumuster**, **nationalSalesType** or **productGroups** maybe used to filter the result. The baumuster4prefix must conform to the pattern [0-9]{4}.
       operationId: modelsGET
       parameters:
         - $ref: "#/parameters/marketId"
@@ -504,8 +457,7 @@ paths:
             title: VehicleModels
             type: array
         "204":
-          description: No content found for requested parameters classId, bodyId,
-            baumuster4prefix, baumuster, nationalSalesType and/or productGroups
+          description: No content found for requested parameters classId, bodyId, baumuster4prefix, baumuster, nationalSalesType and/or productGroups
         "400":
           description: |-
             Invalid parameter was specified:
@@ -564,8 +516,7 @@ paths:
     x-swagger-router-controller: References
   "/markets/{marketId}/models/{modelId}/configurations/initial":
     get:
-      description: Get the initial `VehicleConfiguration` for the given **marketId**
-        and **modelId**.
+      description: Get the initial `VehicleConfiguration` for the given **marketId** and **modelId**.
       operationId: modelConfigurationsGET
       parameters:
         - $ref: "#/parameters/marketId"
@@ -598,8 +549,7 @@ paths:
     x-swagger-router-controller: Configurations
   "/markets/{marketId}/models/{modelId}/configurations/{configurationId}":
     get:
-      description: Get the `VehicleConfiguration` for the given **marketId**,
-        **modelId** and **configurationId**.
+      description: Get the `VehicleConfiguration` for the given **marketId**, **modelId** and **configurationId**.
       operationId: modelConfigurationGET
       parameters:
         - $ref: "#/parameters/marketId"
@@ -628,16 +578,13 @@ paths:
           description: Quota limit is exceeded
         "500":
           description: An Error occurred on the server side
-      summary: Get the configuration for the given marketId, modelId and
-        configurationId.
+      summary: Get the configuration for the given marketId, modelId and configurationId.
       tags:
         - Configurations
     x-swagger-router-controller: Configurations
   "/markets/{marketId}/models/{modelId}/configurations/{configurationId}/alternatives/{componentList}":
     get:
-      description: Get the `VehicleAlternatives` for the given **marketId**,
-        **modelId** and **configurationId** and the given **componentList** of
-        changes.
+      description: Get the `VehicleAlternatives` for the given **marketId**, **modelId** and **configurationId** and the given **componentList** of changes.
       operationId: modelConfigurationAlternativesGET
       parameters:
         - $ref: "#/parameters/marketId"
@@ -671,16 +618,14 @@ paths:
           description: Quota limit is exceeded
         "500":
           description: An Error occurred on the server side
-      summary: Get the alternatives for the given marketId, modelId, configurationId
-        and componentList.
+      summary: Get the alternatives for the given marketId, modelId, configurationId and componentList.
       tags:
         - Configurations
     x-swagger-router-controller: configurations176042_002
   "/markets/{marketId}/models/{modelId}/configurations/{configurationId}/images/components":
     get:
-      description: >-
-        Returns URLs pointing to images in JPG format in the highest
-        available resolution (depending on the component) of the vehicle's:
+      description: |-
+        Returns URLs pointing to images in JPG format in the highest available resolution (depending on the component) of the vehicle's:
           * engine (1024x576 px),
           * rim (710x710 px),
           * trim (800x600 px),
@@ -698,8 +643,7 @@ paths:
           headers:
             cache-control:
               default: max-age=86400
-              description: Specifies the maximum amount of time (in seconds) an image is
-                considered to be up-to-date
+              description: Specifies the maximum amount of time (in seconds) an image is considered to be up-to-date
               type: string
           schema:
             $ref: "#/definitions/ComponentsImagesResponse"
@@ -725,8 +669,7 @@ paths:
     x-swagger-router-controller: images_components
   "/markets/{marketId}/models/{modelId}/configurations/{configurationId}/images/components/engine":
     get:
-      description: Returns a URL pointing to an image of the vehicles engine.  These
-        images are available in the resolution 1024x576 px.
+      description: Returns a URL pointing to an image of the vehicles engine.  These images are available in the resolution 1024x576 px.
       operationId: imageComponentsEngineGET
       parameters:
         - $ref: "#/parameters/marketId"
@@ -738,8 +681,7 @@ paths:
           headers:
             cache-control:
               default: max-age=86400
-              description: Specifies the maximum amount of time (in seconds) an image is
-                considered to be up-to-date
+              description: Specifies the maximum amount of time (in seconds) an image is considered to be up-to-date
               type: string
           schema:
             $ref: "#/definitions/EngineImageResponse"
@@ -765,9 +707,7 @@ paths:
     x-swagger-router-controller: images_components
   "/markets/{marketId}/models/{modelId}/configurations/{configurationId}/images/components/equipments":
     get:
-      description: Returns URLs pointing to images of this vehicle's equipments. The
-        images are available in the highest possible resolution (usually 740x416
-        px).
+      description: Returns URLs pointing to images of this vehicle's equipments. The images are available in the highest possible resolution (usually 740x416 px).
       operationId: imageComponentsEquipmentsGET
       parameters:
         - $ref: "#/parameters/marketId"
@@ -779,8 +719,7 @@ paths:
           headers:
             cache-control:
               default: max-age=86400
-              description: Specifies the maximum amount of time (in seconds) an image is
-                considered to be up-to-date
+              description: Specifies the maximum amount of time (in seconds) an image is considered to be up-to-date
               type: string
           schema:
             $ref: "#/definitions/AllEquipmentImagesResponse"
@@ -806,9 +745,7 @@ paths:
     x-swagger-router-controller: images_components
   "/markets/{marketId}/models/{modelId}/configurations/{configurationId}/images/components/equipments/{componentCode}":
     get:
-      description: Returns URLs pointing to images of this vehicle's equipments. The
-        images are available in the highest possible resolution (usually 740x416
-        px).
+      description: Returns URLs pointing to images of this vehicle's equipments. The images are available in the highest possible resolution (usually 740x416 px).
       operationId: imageComponentsEquipmentsByCodeGET
       parameters:
         - $ref: "#/parameters/marketId"
@@ -821,8 +758,7 @@ paths:
           headers:
             cache-control:
               default: max-age=86400
-              description: Specifies the maximum amount of time (in seconds) an image is
-                considered to be up-to-date
+              description: Specifies the maximum amount of time (in seconds) an image is considered to be up-to-date
               type: string
           schema:
             $ref: "#/definitions/EquipmentImageResponse"
@@ -848,10 +784,7 @@ paths:
     x-swagger-router-controller: images_components
   "/markets/{marketId}/models/{modelId}/configurations/{configurationId}/images/components/paint":
     get:
-      description: Returns URLs pointing to images of this vehicles paint.  These
-        images are available in resolution 800x600 px.  Note there might be two
-        paints (e.g. Smart, 'paint' for body panel and 'paint2' for the tridion
-        cell)
+      description: Returns URLs pointing to images of this vehicles paint.  These images are available in resolution 800x600 px.  Note there might be two paints (e.g. Smart, 'paint' for body panel and 'paint2' for the tridion cell)
       operationId: imageComponentsPaintGET
       parameters:
         - $ref: "#/parameters/marketId"
@@ -863,8 +796,7 @@ paths:
           headers:
             cache-control:
               default: max-age=86400
-              description: Specifies the maximum amount of time (in seconds) an image is
-                considered to be up-to-date
+              description: Specifies the maximum amount of time (in seconds) an image is considered to be up-to-date
               type: string
           schema:
             $ref: "#/definitions/PaintImageResponse"
@@ -890,8 +822,7 @@ paths:
     x-swagger-router-controller: images_components
   "/markets/{marketId}/models/{modelId}/configurations/{configurationId}/images/components/rim":
     get:
-      description: Returns a URL pointing to an image of the vehicles rim.  These
-        images are available in the resolution 710x710 px.
+      description: Returns a URL pointing to an image of the vehicles rim.  These images are available in the resolution 710x710 px.
       operationId: imageComponentsRimGET
       parameters:
         - $ref: "#/parameters/marketId"
@@ -903,8 +834,7 @@ paths:
           headers:
             cache-control:
               default: max-age=86400
-              description: Specifies the maximum amount of time (in seconds) an image is
-                considered to be up-to-date
+              description: Specifies the maximum amount of time (in seconds) an image is considered to be up-to-date
               type: string
           schema:
             $ref: "#/definitions/RimImageResponse"
@@ -930,8 +860,7 @@ paths:
     x-swagger-router-controller: images_components
   "/markets/{marketId}/models/{modelId}/configurations/{configurationId}/images/components/trim":
     get:
-      description: Returns a URL pointing to an image of this vehicles trim.  These
-        images are available in resolution 800x600 px.
+      description: Returns a URL pointing to an image of this vehicles trim.  These images are available in resolution 800x600 px.
       operationId: imageComponentsTrimGET
       parameters:
         - $ref: "#/parameters/marketId"
@@ -943,8 +872,7 @@ paths:
           headers:
             cache-control:
               default: max-age=86400
-              description: Specifies the maximum amount of time (in seconds) an image is
-                considered to be up-to-date
+              description: Specifies the maximum amount of time (in seconds) an image is considered to be up-to-date
               type: string
           schema:
             $ref: "#/definitions/TrimImageResponse"
@@ -970,9 +898,7 @@ paths:
     x-swagger-router-controller: images_components
   "/markets/{marketId}/models/{modelId}/configurations/{configurationId}/images/components/upholstery":
     get:
-      description: Returns URLs pointing to images of the vehicle's upholsteries. Tge
-        images are available in the highest possible resolution (usually 800x600
-        px).
+      description: Returns URLs pointing to images of the vehicle's upholsteries. Tge images are available in the highest possible resolution (usually 800x600 px).
       operationId: imageComponentsUpholsteryGET
       parameters:
         - $ref: "#/parameters/marketId"
@@ -984,8 +910,7 @@ paths:
           headers:
             cache-control:
               default: max-age=86400
-              description: Specifies the maximum amount of time (in seconds) an image is
-                considered to be up-to-date
+              description: Specifies the maximum amount of time (in seconds) an image is considered to be up-to-date
               type: string
           schema:
             $ref: "#/definitions/UpholsteryImageResponse"
@@ -1026,17 +951,14 @@ paths:
           headers:
             cache-control:
               default: max-age=86400
-              description: Specifies the maximum amount of time (in seconds) an image is
-                considered to be up-to-date.
+              description: Specifies the maximum amount of time (in seconds) an image is considered to be up-to-date.
               type: string
           schema:
             $ref: "#/definitions/VehicleImageResponse"
         "204":
           description: No content could be found for your request.
         "400":
-          description: One of the provided parameters was invalid. Verify your query and
-            inspect the global error object in the response for further
-            information.
+          description: One of the provided parameters was invalid. Verify your query and inspect the global error object in the response for further information.
           schema:
             $ref: "#/definitions/ImageError"
         "401":
@@ -1059,10 +981,7 @@ paths:
     x-swagger-router-controller: images_vehicle_configuration
   "/markets/{marketId}/models/{modelId}/configurations/{configurationId}/selectables":
     get:
-      description: Get the selectable `VehicleComponents` and the
-        `ComponentCategories` of the `VehicleConfiguration` for the given
-        **marketId**, **modelId** and **configurationId**. Optional query param
-        **componentType** may be used to filter the result.
+      description: Get the selectable `VehicleComponents` and the `ComponentCategories` of the `VehicleConfiguration` for the given **marketId**, **modelId** and **configurationId**. Optional query param **componentType** may be used to filter the result.
       operationId: modelConfigurationSelectablesGET
       parameters:
         - $ref: "#/parameters/marketId"
@@ -1095,8 +1014,7 @@ paths:
           description: Quota limit is exceeded
         "500":
           description: An Error occurred on the server side
-      summary: Get the selectable components for the given marketId, modelId and
-        configurationId.
+      summary: Get the selectable components for the given marketId, modelId and configurationId.
       tags:
         - Configurations
     x-swagger-router-controller: Configurations
@@ -1198,10 +1116,7 @@ paths:
     x-swagger-router-controller: References
 definitions:
   AllEquipmentImagesResponse:
-    description: The response object holds either an error object, in case that the
-      request was malformed, or an equipments object containing a map with all
-      equipment urls for the requested vehicle with the equipment codes as map
-      keys.
+    description: The response object holds either an error object, in case that the request was malformed, or an equipments object containing a map with all equipment urls for the requested vehicle with the equipment codes as map keys.
     properties:
       equipments:
         $ref: "#/definitions/EquipmentImageMap"
@@ -1252,8 +1167,7 @@ definitions:
         $ref: "#/definitions/ComponentsImages"
     type: object
   DriveConcept:
-    description: The kind of drive concept of a vehicle. Where UNDEFINED is used as
-      the default and/or error case.
+    description: The kind of drive concept of a vehicle. Where UNDEFINED is used as the default and/or error case.
     enum:
       - COMBUSTOR
       - HYBRID
@@ -1291,8 +1205,7 @@ definitions:
     required:
       - fuelType
   EngineConcept:
-    description: The kind of fuel used by an engine of a vehicle determines the
-      engine type. Where UNDEFINED is used as the default and/or error case.
+    description: The kind of fuel used by an engine of a vehicle determines the engine type. Where UNDEFINED is used as the default and/or error case.
     enum:
       - MONO_REGULAR
       - MONO_DIESEL
@@ -1318,9 +1231,7 @@ definitions:
   EquipmentImageMap:
     additionalProperties:
       $ref: "#/definitions/ImageUrl"
-    description: The map holds either an error object, in case that the request was
-      malformed, or an equipments object containing a map with all equipment
-      image urls for the requested vehicle with the equipment codes as map keys.
+    description: The map holds either an error object, in case that the request was malformed, or an equipments object containing a map with all equipment image urls for the requested vehicle with the equipment codes as map keys.
     type: object
   EquipmentImageResponse:
     description: An equipment image object
@@ -1354,8 +1265,7 @@ definitions:
       fuelConsumptionOverlandMin:
         $ref: "#/definitions/Amount"
   FuelType:
-    description: The kind of fuel used by an engine of a vehicle. Where UNDEFINED is
-      used as the default and/or error case.
+    description: The kind of fuel used by an engine of a vehicle. Where UNDEFINED is used as the default and/or error case.
     enum:
       - NORMAL
       - SUPER
@@ -1394,16 +1304,12 @@ definitions:
         type: string
     type: object
   ImageUrl:
-    description: An object describing an image URL that could be a vehicle image for
-      example. This includes the URL to the content.
+    description: An object describing an image URL that could be a vehicle image for example. This includes the URL to the content.
     properties:
       url:
         type: string
   ImageUrlWithError:
-    description: An object describing an image URL that could be a vehicle image for
-      example. This includes the URL to the content. In case of an error that is
-      related to the requested image material (e.g. perspective), an error
-      object is present containing further information.
+    description: An object describing an image URL that could be a vehicle image for example. This includes the URL to the content. In case of an error that is related to the requested image material (e.g. perspective), an error object is present containing further information.
     properties:
       error:
         $ref: "#/definitions/ImageError"
@@ -1438,8 +1344,7 @@ definitions:
       weight:
         $ref: "#/definitions/NedcAmount"
   NedcAmount:
-    description: The Nedc 'New European Drive Cycle' specific amount holds the nedc
-      specific values.
+    description: The Nedc 'New European Drive Cycle' specific amount holds the nedc specific values.
     properties:
       individual:
         $ref: "#/definitions/Amount"
@@ -1493,8 +1398,7 @@ definitions:
       modelId: 222980_000
     properties:
       configurationId:
-        description: String that identifies a configuration. e.g.
-          E-D15-D18-D41-D46-D49-D52-D53-D54-D59-D60-D71-F32-F36-F88-F98-G03-G05-G36-G56-I61-J67-M23-M70-N18-N25-N62-N92-O76-Q29-Q56-Q79-Q92-S01-S05-S08-S63-S92-T05-T07-T62-T84-T88_I-953_L-696_P-001_S-152-160-161-171-258-290-292-294-411-442-470-472-475-485-516-533-538-560-570-573-580-584-58U-591-620-70B-807-888-B03-B16-B51-K11-L18-R43-U60
+        description: String that identifies a configuration. e.g. E-D15-D18-D41-D46-D49-D52-D53-D54-D59-D60-D71-F32-F36-F88-F98-G03-G05-G36-G56-I61-J67-M23-M70-N18-N25-N62-N92-O76-Q29-Q56-Q79-Q92-S01-S05-S08-S63-S92-T05-T07-T62-T84-T88_I-953_L-696_P-001_S-152-160-161-171-258-290-292-294-411-442-470-472-475-485-516-533-538-560-570-573-580-584-58U-591-620-70B-807-888-B03-B16-B51-K11-L18-R43-U60
         type: string
       modelId:
         description: String that identifies a model. e.g. '176042_002'
@@ -1797,8 +1701,7 @@ definitions:
         description: Cannot changed by the customer
         type: boolean
       hidden:
-        description: Hidden, should not be displayed to the customer, not relevant for
-          the customer
+        description: Hidden, should not be displayed to the customer, not relevant for the customer
         type: boolean
       id:
         type: string
@@ -1873,8 +1776,7 @@ definitions:
     required:
       - componentId
   VehicleComponentTree:
-    description: Contains the vehicle components and the structure with component
-      categories.
+    description: Contains the vehicle components and the structure with component categories.
     properties:
       _links:
         $ref: "#/definitions/SelfLink"
@@ -1947,15 +1849,12 @@ definitions:
       - _links
     type: object
   VehicleImageResponse:
-    description: The response object holds either an error object, in case that the
-      request was malformed, or a vehicle object containing all urls for the
-      requested perspectives.
+    description: The response object holds either an error object, in case that the request was malformed, or a vehicle object containing all urls for the requested perspectives.
     properties:
       vehicle:
         additionalProperties:
           $ref: "#/definitions/ImageUrlWithError"
-        description: A map holding a vehicle image for each requested perspective, e.g.
-          EXT000.
+        description: A map holding a vehicle image for each requested perspective, e.g. EXT000.
         type: object
     required:
       - vehicle
@@ -1995,16 +1894,14 @@ definitions:
       - _links
     type: object
   Wltp:
-    description: Holds all relevant informations for the Wltp 'Worldwide harmonized
-      Light vehicles Test Procedure' drive cycle.
+    description: Holds all relevant informations for the Wltp 'Worldwide harmonized Light vehicles Test Procedure' drive cycle.
     properties:
       consumption:
         $ref: "#/definitions/WltpConsumption"
       emission:
         $ref: "#/definitions/WltpEmission"
   WltpAmount:
-    description: The Wltp 'Worldwide harmonized Light vehicles Test Procedure' drive
-      cycle specific amount holds the wltp specific values.
+    description: The Wltp 'Worldwide harmonized Light vehicles Test Procedure' drive cycle specific amount holds the wltp specific values.
     properties:
       individual:
         $ref: "#/definitions/Amount"
@@ -2038,8 +1935,7 @@ definitions:
         $ref: "#/definitions/WltpGear"
     type: object
   WltpElectricRange:
-    description: The allElectric and equivalentAllElectric range that a vehicle
-      (pure-electic or hybrid) can reach
+    description: The allElectric and equivalentAllElectric range that a vehicle (pure-electic or hybrid) can reach
     properties:
       all:
         $ref: "#/definitions/WltpAmount"

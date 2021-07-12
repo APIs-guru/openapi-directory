@@ -9,9 +9,7 @@ info:
     email: bfritz@fadingsignal.com
     name: Open Movie Database
     url: http://omdbapi.com
-  description: The Open Movie Database. The OMDb API is a free web service to
-    obtain movie information, all content and images on the site are contributed
-    and maintained by our users.
+  description: The Open Movie Database. The OMDb API is a free web service to obtain movie information, all content and images on the site are contributed and maintained by our users.
   license:
     name: CC BY-NC 4.0
     url: https://creativecommons.org/licenses/by-nc/4.0/
@@ -42,8 +40,7 @@ securityDefinitions: {}
 paths:
   /:
     get:
-      description: Find a movie, series or episode from the OMDb by title, IMDb-id or
-        by free-text search
+      description: Find a movie, series or episode from the OMDb by title, IMDb-id or by free-text search
       operationId: Get_OMDb Search
       parameters:
         - description: Movie title to search for. One of t, i or s is required.

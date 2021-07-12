@@ -3,8 +3,7 @@ schemes:
   - https
 basePath: /BDSS-API
 info:
-  description: Bulk Data Storage System (BDSS) allows the public to discover,
-    search, and download patent and trademark data in bulk form.
+  description: Bulk Data Storage System (BDSS) allows the public to discover, search, and download patent and trademark data in bulk form.
   title: Bulk Data Storage System Services
   version: 1.0.0
   x-origin:
@@ -20,9 +19,7 @@ tags:
 paths:
   /products/all/latest:
     get:
-      description: Use this GET to retrieve latest released bulk data products. Note
-        that there is one file per product. The response includes product fields
-        such as title, description, frequency, and level.
+      description: Use this GET to retrieve latest released bulk data products. Note that there is one file per product. The response includes product fields such as title, description, frequency, and level.
       operationId: getProductsWithLatestProductFiles
       parameters: []
       produces:
@@ -39,23 +36,13 @@ paths:
         - products
   "/products/byname/{productName}":
     get:
-      description: >-
-        Use this GET to search for bulk data services by product name or
-        description. An error message will be returned if the product cannot be
-        found by name. Note that product name is not case sensitive. You can
-        enter full or partial name of an existing product to receive bulk data
-        services. Default values for field names are as follows
-
+      description: |-
+        Use this GET to search for bulk data services by product name or description. An error message will be returned if the product cannot be found by name. Note that product name is not case sensitive. You can enter full or partial name of an existing product to receive bulk data services. Default values for field names are as follows
         - if both years are not defined, toYear will be set equal to current year, fromYear will be set equal to previous year
-
         - if fromYear is defined, toYear will be set equal to fromYear+1
-
         - if fromMonth not defined, current month will be used
-
         - if toMonth not defined, it will be set equal to fromMonth
-
         - if fromDay is not defined, it will be set equal to current day (today)
-
         - if toDay is not defined, it will be set to the last day of toMonth/toYear
       operationId: getProductsByName
       parameters:
@@ -101,16 +88,13 @@ paths:
           required: false
           type: integer
         - default: "false"
-          description: Boolean flag to indicate if product hierarchy needs to be return in
-            the response. By default it doesn't return the hierarchy in the
-            response.
+          description: Boolean flag to indicate if product hierarchy needs to be return in the response. By default it doesn't return the hierarchy in the response.
           in: query
           name: hierarchy
           required: false
           type: string
         - default: 20
-          description: Max. number of files to retrieve, per product. Set value to -1 to
-            get all files
+          description: Max. number of files to retrieve, per product. Set value to -1 to get all files
           format: int32
           in: query
           name: maxFiles
@@ -125,15 +109,12 @@ paths:
           description: Unexpected error accessing metadata.
         "500":
           description: Internal server error.
-      summary: Returns files associated with products (of level PRODUCT) based on
-        their full or partial names.
+      summary: Returns files associated with products (of level PRODUCT) based on their full or partial names.
       tags:
         - products
   /products/popular:
     get:
-      description: Use this GET to retrieve these bulk data files by their popularity.
-        The response includes product fields such as title, description,
-        frequency, and level.
+      description: Use this GET to retrieve these bulk data files by their popularity. The response includes product fields such as title, description, frequency, and level.
       operationId: getPopulartProducts
       parameters: []
       produces:
@@ -150,13 +131,9 @@ paths:
         - products
   /products/tree:
     get:
-      description: >-
-        Use this GET to retrieve short name and parent/child relationships
-        for bulk data products. Short names are unique IDs of the products and
-        should be used in other GETs where {shortName} parameter is required
-
+      description: |-
+        Use this GET to retrieve short name and parent/child relationships for bulk data products. Short names are unique IDs of the products and should be used in other GETs where {shortName} parameter is required
         Use this GET to perform initial exploration of the existing products hierarchy
-
         Short names are unique IDs of the products and should be used in other GETs where {shortName} parameter is required
       operationId: getProductsTree
       parameters: []
@@ -174,12 +151,7 @@ paths:
         - products
   "/products/tree/{shortName}":
     get:
-      description: Use this GET to search for bulk data products by their short names.
-        This works almost like products/tree GET, the difference is that it
-        returns subtree data starting from a particular tree node (i.e. the GET
-        returns all children if parent short name is entered). If a product
-        cannot be found by its short name (has to be exact match and is not case
-        sensitive), then an error message will appear in response body.
+      description: Use this GET to search for bulk data products by their short names. This works almost like products/tree GET, the difference is that it returns subtree data starting from a particular tree node (i.e. the GET returns all children if parent short name is entered). If a product cannot be found by its short name (has to be exact match and is not case sensitive), then an error message will appear in response body.
       operationId: getProductSubTree
       parameters:
         - description: Short name of the product, for example, "PTISSD"
@@ -201,14 +173,9 @@ paths:
         - products
   "/products/{shortName}":
     get:
-      description: >-
-        Use this GET to search for bulk data products by their short names
-        and description. Note that "From" and "To" dates can be inputted
-        separately as year/month/day values or as a single date string in format
-        "YYYY-MM-DD".
-
+      description: |-
+        Use this GET to search for bulk data products by their short names and description. Note that "From" and "To" dates can be inputted separately as year/month/day values or as a single date string in format "YYYY-MM-DD".
         If all values are entered, single date strings have a higher priority
-
         For the list of default values rules, see GET /products/byname/{productName} above
       operationId: getProductsByShortName
       parameters:
@@ -258,16 +225,13 @@ paths:
           name: fromDate
           required: false
           type: string
-        - description: Year until when the product files are needed, for example,
-            2001-12-31.
+        - description: Year until when the product files are needed, for example, 2001-12-31.
           in: query
           name: toDate
           required: false
           type: string
         - default: "false"
-          description: "Boolean flag (possible values: true and false) to indicate if
-            product hierarchy needs to be return in the response. By default it
-            doesn't return the hierarchy in the response."
+          description: "Boolean flag (possible values: true and false) to indicate if product hierarchy needs to be return in the response. By default it doesn't return the hierarchy in the response."
           in: query
           name: hierarchy
           required: false
@@ -286,10 +250,7 @@ paths:
         - products
   "/products/{shortName}/latest":
     get:
-      description: Use this GET to search for latest released bulk data products by
-        their short names and release year. The return response will include the
-        latest files within the year specified.  An error message will be
-        returned if product(s) cannot be found for the year specified
+      description: Use this GET to search for latest released bulk data products by their short names and release year. The return response will include the latest files within the year specified.  An error message will be returned if product(s) cannot be found for the year specified
       operationId: getLatestProductFilesByProductIdAndTime
       parameters:
         - description: Short name of the product, for example, "PTGRSP"
@@ -304,9 +265,7 @@ paths:
           required: false
           type: integer
         - default: "false"
-          description: "Boolean flag (possible values: true and false) to indicate if
-            product hierarchy needs to be return in the response. By default it
-            doesn't return the hierarchy in the response."
+          description: "Boolean flag (possible values: true and false) to indicate if product hierarchy needs to be return in the response. By default it doesn't return the hierarchy in the response."
           in: query
           name: hierarchy
           required: false

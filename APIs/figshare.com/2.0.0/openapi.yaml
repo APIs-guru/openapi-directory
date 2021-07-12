@@ -55,8 +55,7 @@ paths:
             maximum: 5000
             minimum: 1
             type: integer
-        - description: The number of results included on a page. Used for pagination with
-            page
+        - description: The number of results included on a page. Used for pagination with page
           in: query
           name: page_size
           required: false
@@ -75,8 +74,7 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Where to start the listing(the offset of the first result). Used
-            for pagination with limit
+        - description: Where to start the listing(the offset of the first result). Used for pagination with limit
           in: query
           name: offset
           required: false
@@ -141,8 +139,7 @@ paths:
       x-subcategory: Private Article
   /account/articles/export:
     get:
-      description: Return status on all reports generated for the account from the
-        oauth credentials
+      description: Return status on all reports generated for the account from the oauth credentials
       operationId: account_article_report
       parameters:
         - description: A group ID to filter by
@@ -365,8 +362,7 @@ paths:
           minimum: 1
           type: integer
     post:
-      description: Associate new authors with the article. This will add new authors
-        to the list of already associated authors
+      description: Associate new authors with the article. This will add new authors to the list of already associated authors
       operationId: private_article_authors_add
       requestBody:
         $ref: "#/components/requestBodies/AuthorsCreator"
@@ -399,8 +395,7 @@ paths:
         - articles
       x-subcategory: Private Article Authors
     put:
-      description: Associate new authors with the article. This will remove all
-        already associated authors and add these new ones
+      description: Associate new authors with the article. This will remove all already associated authors and add these new ones
       operationId: private_article_authors_replace
       requestBody:
         $ref: "#/components/requestBodies/AuthorsCreator"
@@ -414,8 +409,7 @@ paths:
                 format: url
                 type: string
         "400":
-          description: Bad Request. Article ID must be an integer and bigger than 0.
-            Author with ID Not Found.
+          description: Bad Request. Article ID must be an integer and bigger than 0. Author with ID Not Found.
         "403":
           content:
             application/json:
@@ -516,8 +510,7 @@ paths:
           minimum: 1
           type: integer
     post:
-      description: Associate new categories with the article. This will add new
-        categories to the list of already associated categories
+      description: Associate new categories with the article. This will add new categories to the list of already associated categories
       operationId: private_article_categories_add
       requestBody:
         $ref: "#/components/requestBodies/CategoriesCreator"
@@ -544,8 +537,7 @@ paths:
         - articles
       x-subcategory: Private Article Categories
     put:
-      description: Associate new categories with the article. This will remove all
-        already associated categories and add these new ones
+      description: Associate new categories with the article. This will remove all already associated categories and add these new ones
       operationId: private_article_categories_replace
       requestBody:
         $ref: "#/components/requestBodies/CategoriesCreator"
@@ -614,12 +606,7 @@ paths:
       x-subcategory: Private Article Categories
   "/account/articles/{article_id}/confidentiality":
     delete:
-      description: Delete confidentiality settings. The confidentiality feature is now
-        deprecated. This has been replaced by the new extended embargo
-        functionality and all items that used to be confidential have now been
-        migrated to items with a permanent embargo on files. All API endpoints
-        related to this functionality will remain for backwards compatibility,
-        but will now be attached to the new extended embargo workflows.
+      description: Delete confidentiality settings. The confidentiality feature is now deprecated. This has been replaced by the new extended embargo functionality and all items that used to be confidential have now been migrated to items with a permanent embargo on files. All API endpoints related to this functionality will remain for backwards compatibility, but will now be attached to the new extended embargo workflows.
       operationId: private_article_confidentiality_delete
       responses:
         "204":
@@ -644,12 +631,7 @@ paths:
         - articles
       x-subcategory: Private Article Confidentiality - DEPRECATED
     get:
-      description: View confidentiality settings. The confidentiality feature is now
-        deprecated. This has been replaced by the new extended embargo
-        functionality and all items that used to be confidential have now been
-        migrated to items with a permanent embargo on files. All API endpoints
-        related to this functionality will remain for backwards compatibility,
-        but will now be attached to the new extended embargo workflows.
+      description: View confidentiality settings. The confidentiality feature is now deprecated. This has been replaced by the new extended embargo functionality and all items that used to be confidential have now been migrated to items with a permanent embargo on files. All API endpoints related to this functionality will remain for backwards compatibility, but will now be attached to the new extended embargo workflows.
       operationId: private_article_confidentiality_details
       responses:
         "200":
@@ -687,12 +669,7 @@ paths:
           minimum: 1
           type: integer
     put:
-      description: Update confidentiality settings. The confidentiality feature is now
-        deprecated. This has been replaced by the new extended embargo
-        functionality and all items that used to be confidential have now been
-        migrated to items with a permanent embargo on files. All API endpoints
-        related to this functionality will remain for backwards compatibility,
-        but will now be attached to the new extended embargo workflows.
+      description: Update confidentiality settings. The confidentiality feature is now deprecated. This has been replaced by the new extended embargo functionality and all items that used to be confidential have now been migrated to items with a permanent embargo on files. All API endpoints related to this functionality will remain for backwards compatibility, but will now be attached to the new extended embargo workflows.
       operationId: private_article_confidentiality_update
       requestBody:
         content:
@@ -785,9 +762,7 @@ paths:
           minimum: 1
           type: integer
     put:
-      description: "Note: setting an article under whole embargo does not imply that
-        the article will be published when the embargo will expire. You must
-        explicitly call the publish endpoint to enable this functionality."
+      description: "Note: setting an article under whole embargo does not imply that the article will be published when the embargo will expire. You must explicitly call the publish endpoint to enable this functionality."
       operationId: private_article_embargo_update
       requestBody:
         content:
@@ -866,9 +841,7 @@ paths:
           minimum: 1
           type: integer
     post:
-      description: Initiate new file upload within the article. Either use link to
-        provide only an existing file that will not be uploaded on figshare or
-        use the other 3 parameters(md5, name, size)
+      description: Initiate new file upload within the article. Either use link to provide only an existing file that will not be uploaded on figshare or use the other 3 parameters(md5, name, size)
       operationId: private_article_upload_initiate
       requestBody:
         content:
@@ -1165,10 +1138,8 @@ paths:
       x-subcategory: Private Article Private Links
   "/account/articles/{article_id}/publish":
     post:
-      description: >-
-        - If the whole article is under embargo, it will not be published
-        immediatly, but when the embargo expires or is lifted.
-
+      description: |-
+        - If the whole article is under embargo, it will not be published immediatly, but when the embargo expires or is lifted.
         - When an article is published, a new public version will be generated. Any further updates to the article will affect the private article data. In order to make these changes publicly visible, an explicit publish operation is needed.
       operationId: private_article_publish
       parameters:
@@ -1289,8 +1260,7 @@ paths:
         - articles
   "/account/articles/{article_id}/versions/{version_id}/update_thumb":
     put:
-      description: For a given public article version update the article thumb by
-        choosing one of the associated files
+      description: For a given public article version update the article thumb by choosing one of the associated files
       operationId: article_version_update_thumb
       parameters:
         - description: Article unique identifier
@@ -1457,8 +1427,7 @@ paths:
             maximum: 5000
             minimum: 1
             type: integer
-        - description: The number of results included on a page. Used for pagination with
-            page
+        - description: The number of results included on a page. Used for pagination with page
           in: query
           name: page_size
           required: false
@@ -1477,8 +1446,7 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Where to start the listing(the offset of the first result). Used
-            for pagination with limit
+        - description: Where to start the listing(the offset of the first result). Used for pagination with limit
           in: query
           name: offset
           required: false
@@ -1742,8 +1710,7 @@ paths:
           minimum: 1
           type: integer
     post:
-      description: Associate new articles with the collection. This will add new
-        articles to the list of already associated articles
+      description: Associate new articles with the collection. This will add new articles to the list of already associated articles
       operationId: private_collection_articles_add
       requestBody:
         content:
@@ -1785,8 +1752,7 @@ paths:
         - collections
       x-subcategory: Private Collection Articles
     put:
-      description: Associate new articles with the collection. This will remove all
-        already associated articles and add these new ones
+      description: Associate new articles with the collection. This will remove all already associated articles and add these new ones
       operationId: private_collection_articles_replace
       requestBody:
         content:
@@ -1906,8 +1872,7 @@ paths:
           minimum: 1
           type: integer
     post:
-      description: Associate new authors with the collection. This will add new
-        authors to the list of already associated authors
+      description: Associate new authors with the collection. This will add new authors to the list of already associated authors
       operationId: private_collection_authors_add
       requestBody:
         $ref: "#/components/requestBodies/AuthorsCreator2"
@@ -1944,8 +1909,7 @@ paths:
         - collections
       x-subcategory: Private Collection Authors
     put:
-      description: Associate new authors with the collection. This will remove all
-        already associated authors and add these new ones
+      description: Associate new authors with the collection. This will remove all already associated authors and add these new ones
       operationId: private_collection_authors_replace
       requestBody:
         $ref: "#/components/requestBodies/AuthorsCreator2"
@@ -2060,8 +2024,7 @@ paths:
           minimum: 1
           type: integer
     post:
-      description: Associate new categories with the collection. This will add new
-        categories to the list of already associated categories
+      description: Associate new categories with the collection. This will add new categories to the list of already associated categories
       operationId: private_collection_categories_add
       requestBody:
         $ref: "#/components/requestBodies/CategoriesCreator2"
@@ -2098,8 +2061,7 @@ paths:
         - collections
       x-subcategory: Private Collection Categories
     put:
-      description: Associate new categories with the collection. This will remove all
-        already associated categories and add these new ones
+      description: Associate new categories with the collection. This will remove all already associated categories and add these new ones
       operationId: private_collection_categories_replace
       requestBody:
         $ref: "#/components/requestBodies/CategoriesCreator2"
@@ -2328,10 +2290,7 @@ paths:
       x-subcategory: Private Collection Private Links
   "/account/collections/{collection_id}/publish":
     post:
-      description: When a collection is published, a new public version will be
-        generated. Any further updates to the collection will affect the private
-        collection data. In order to make these changes publicly visible, an
-        explicit publish operation is needed.
+      description: When a collection is published, a new public version will be generated. Any further updates to the collection will affect the private collection data. In order to make these changes publicly visible, an explicit publish operation is needed.
       operationId: private_collection_publish
       parameters:
         - description: Collection Unique identifier
@@ -2507,8 +2466,7 @@ paths:
         - institutions
   /account/institution/accounts:
     get:
-      description: Returns the accounts for which the account has administrative
-        privileges (assigned and inherited).
+      description: Returns the accounts for which the account has administrative privileges (assigned and inherited).
       operationId: private_institution_accounts_list
       parameters:
         - description: Page number. Used for pagination with page_size
@@ -2520,8 +2478,7 @@ paths:
             maximum: 5000
             minimum: 1
             type: integer
-        - description: The number of results included on a page. Used for pagination with
-            page
+        - description: The number of results included on a page. Used for pagination with page
           in: query
           name: page_size
           required: false
@@ -2540,8 +2497,7 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Where to start the listing(the offset of the first result). Used
-            for pagination with limit
+        - description: Where to start the listing(the offset of the first result). Used for pagination with limit
           in: query
           name: offset
           required: false
@@ -2627,8 +2583,7 @@ paths:
         - institutions
   /account/institution/accounts/search:
     post:
-      description: Returns the accounts for which the account has administrative
-        privileges (assigned and inherited).
+      description: Returns the accounts for which the account has administrative privileges (assigned and inherited).
       operationId: private_institution_accounts_search
       requestBody:
         content:
@@ -2711,8 +2666,7 @@ paths:
         - institutions
   /account/institution/articles:
     get:
-      description: Get Articles from own institution. User must be administrator of
-        the institution
+      description: Get Articles from own institution. User must be administrator of the institution
       operationId: private_institution_articles
       parameters:
         - description: Page number. Used for pagination with page_size
@@ -2724,8 +2678,7 @@ paths:
             maximum: 5000
             minimum: 1
             type: integer
-        - description: The number of results included on a page. Used for pagination with
-            page
+        - description: The number of results included on a page. Used for pagination with page
           in: query
           name: page_size
           required: false
@@ -2744,8 +2697,7 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Where to start the listing(the offset of the first result). Used
-            for pagination with limit
+        - description: Where to start the listing(the offset of the first result). Used for pagination with limit
           in: query
           name: offset
           required: false
@@ -2777,15 +2729,13 @@ paths:
               - asc
               - desc
             type: string
-        - description: Filter by article publishing date. Will only return articles
-            published after the date. date(ISO 8601) YYYY-MM-DD
+        - description: Filter by article publishing date. Will only return articles published after the date. date(ISO 8601) YYYY-MM-DD
           in: query
           name: published_since
           required: false
           schema:
             type: string
-        - description: Filter by article modified date. Will only return articles
-            published after the date. date(ISO 8601) YYYY-MM-DD
+        - description: Filter by article modified date. Will only return articles published after the date. date(ISO 8601) YYYY-MM-DD
           in: query
           name: modified_since
           required: false
@@ -2804,15 +2754,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: "Only return articles with the respective type. Mapping for
-            item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 5 - Poster, 6 -
-            Journal contribution, 7 - Presentation, 8 - Thesis, 9 - Software, 11
-            - Online resource, 12 - Preprint, 13 - Book, 14 - Conference
-            contribution, 15 - Chapter, 16 - Peer review, 17 - Educational
-            resource, 18 - Report, 19 - Standard, 20 - Composition, 21 -
-            Funding, 22 - Physical object, 23 - Data management plan, 24 -
-            Workflow, 25 - Monograph, 26 - Performance, 27 - Event, 28 -
-            Service, 29 - Model"
+        - description: "Only return articles with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 5 - Poster, 6 - Journal contribution, 7 - Presentation, 8 - Thesis, 9 - Software, 11 - Online resource, 12 - Preprint, 13 - Book, 14 - Conference contribution, 15 - Chapter, 16 - Peer review, 17 - Educational resource, 18 - Report, 19 - Standard, 20 - Composition, 21 - Funding, 22 - Physical object, 23 - Data management plan, 24 - Workflow, 25 - Monograph, 26 - Performance, 27 - Event, 28 - Service, 29 - Model"
           in: query
           name: item_type
           required: false
@@ -2875,8 +2817,7 @@ paths:
         - institutions
   /account/institution/groups:
     get:
-      description: Returns the groups for which the account has administrative
-        privileges (assigned and inherited).
+      description: Returns the groups for which the account has administrative privileges (assigned and inherited).
       operationId: private_institution_groups_list
       responses:
         "200":
@@ -2993,8 +2934,7 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Where to start the listing(the offset of the first result). Used
-            for pagination with limit
+        - description: Where to start the listing(the offset of the first result). Used for pagination with limit
           in: query
           name: offset
           required: false
@@ -3108,8 +3048,7 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Where to start the listing(the offset of the first result). Used
-            for pagination with limit
+        - description: Where to start the listing(the offset of the first result). Used for pagination with limit
           in: query
           name: offset
           required: false
@@ -3329,9 +3268,7 @@ paths:
         - institutions
   /account/licenses:
     get:
-      description: This is a private endpoint that requires OAuth. It will return a
-        list with figshare public licenses AND licenses defined for account's
-        institution.
+      description: This is a private endpoint that requires OAuth. It will return a list with figshare public licenses AND licenses defined for account's institution.
       operationId: private_licenses_list
       responses:
         "200":
@@ -3372,8 +3309,7 @@ paths:
             maximum: 5000
             minimum: 1
             type: integer
-        - description: The number of results included on a page. Used for pagination with
-            page
+        - description: The number of results included on a page. Used for pagination with page
           in: query
           name: page_size
           required: false
@@ -3392,8 +3328,7 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Where to start the listing(the offset of the first result). Used
-            for pagination with limit
+        - description: Where to start the listing(the offset of the first result). Used for pagination with limit
           in: query
           name: offset
           required: false
@@ -3431,8 +3366,7 @@ paths:
               - group
               - individual
             type: string
-        - description: 'Any combination of owner, collaborator, viewer separated by comma.
-            Examples: "owner" or "owner,collaborator".'
+        - description: 'Any combination of owner, collaborator, viewer separated by comma. Examples: "owner" or "owner,collaborator".'
           in: query
           name: roles
           required: false
@@ -3524,13 +3458,10 @@ paths:
         - projects
   "/account/projects/{project_id}":
     delete:
-      description: >
-        A project can be deleted only if: - it is not public - it does not
-        have public articles.
-
+      description: |
+        A project can be deleted only if: - it is not public - it does not have public articles.
 
         When an individual project is deleted, all the articles are moved to my data of each owner.
-
 
         When a group project is deleted, all the articles and files are deleted as well. Only project owner, group admin and above can delete a project.
       operationId: private_project_delete
@@ -3697,8 +3628,7 @@ paths:
           maximum: 1000
           minimum: 1
           type: integer
-      - description: Where to start the listing(the offset of the first result). Used
-          for pagination with limit
+      - description: Where to start the listing(the offset of the first result). Used for pagination with limit
         in: query
         name: offset
         required: false
@@ -4089,8 +4019,7 @@ paths:
             maximum: 5000
             minimum: 1
             type: integer
-        - description: The number of results included on a page. Used for pagination with
-            page
+        - description: The number of results included on a page. Used for pagination with page
           in: query
           name: page_size
           required: false
@@ -4109,8 +4038,7 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Where to start the listing(the offset of the first result). Used
-            for pagination with limit
+        - description: Where to start the listing(the offset of the first result). Used for pagination with limit
           in: query
           name: offset
           required: false
@@ -4345,8 +4273,7 @@ paths:
             maximum: 5000
             minimum: 1
             type: integer
-        - description: The number of results included on a page. Used for pagination with
-            page
+        - description: The number of results included on a page. Used for pagination with page
           in: query
           name: page_size
           required: false
@@ -4365,8 +4292,7 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Where to start the listing(the offset of the first result). Used
-            for pagination with limit
+        - description: Where to start the listing(the offset of the first result). Used for pagination with limit
           in: query
           name: offset
           required: false
@@ -4405,15 +4331,13 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Filter by article publishing date. Will only return articles
-            published after the date. date(ISO 8601) YYYY-MM-DD
+        - description: Filter by article publishing date. Will only return articles published after the date. date(ISO 8601) YYYY-MM-DD
           in: query
           name: published_since
           required: false
           schema:
             type: string
-        - description: Filter by article modified date. Will only return articles
-            published after the date. date(ISO 8601) YYYY-MM-DD
+        - description: Filter by article modified date. Will only return articles published after the date. date(ISO 8601) YYYY-MM-DD
           in: query
           name: modified_since
           required: false
@@ -4432,15 +4356,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: "Only return articles with the respective type. Mapping for
-            item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 5 - Poster, 6 -
-            Journal contribution, 7 - Presentation, 8 - Thesis, 9 - Software, 11
-            - Online resource, 12 - Preprint, 13 - Book, 14 - Conference
-            contribution, 15 - Chapter, 16 - Peer review, 17 - Educational
-            resource, 18 - Report, 19 - Standard, 20 - Composition, 21 -
-            Funding, 22 - Physical object, 23 - Data management plan, 24 -
-            Workflow, 25 - Monograph, 26 - Performance, 27 - Event, 28 -
-            Service, 29 - Model"
+        - description: "Only return articles with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 5 - Poster, 6 - Journal contribution, 7 - Presentation, 8 - Thesis, 9 - Software, 11 - Online resource, 12 - Preprint, 13 - Book, 14 - Conference contribution, 15 - Chapter, 16 - Peer review, 17 - Educational resource, 18 - Report, 19 - Standard, 20 - Composition, 21 - Funding, 22 - Physical object, 23 - Data management plan, 24 - Workflow, 25 - Monograph, 26 - Performance, 27 - Event, 28 - Service, 29 - Model"
           in: query
           name: item_type
           required: false
@@ -4471,8 +4387,7 @@ paths:
         "400":
           description: Bad Request
         "422":
-          description: Unprocessable Entity. Syntax is correct but one of the parameters
-            isn't correctly processed
+          description: Unprocessable Entity. Syntax is correct but one of the parameters isn't correctly processed
         "500":
           description: Internal Server Error
       security: []
@@ -4501,8 +4416,7 @@ paths:
         "400":
           description: Bad Request
         "422":
-          description: Unprocessable Entity. Syntax is correct but one of the parameters
-            isn't correctly processed
+          description: Unprocessable Entity. Syntax is correct but one of the parameters isn't correctly processed
         "500":
           description: Internal Server Error
       security: []
@@ -4686,12 +4600,7 @@ paths:
       x-subcategory: Public Article
   "/articles/{article_id}/versions/{v_number}/confidentiality":
     get:
-      description: Confidentiality for article version. The confidentiality feature is
-        now deprecated. This has been replaced by the new extended embargo
-        functionality and all items that used to be confidential have now been
-        migrated to items with a permanent embargo on files. All API endpoints
-        related to this functionality will remain for backwards compatibility,
-        but will now be attached to the new extended embargo workflows.
+      description: Confidentiality for article version. The confidentiality feature is now deprecated. This has been replaced by the new extended embargo functionality and all items that used to be confidential have now been migrated to items with a permanent embargo on files. All API endpoints related to this functionality will remain for backwards compatibility, but will now be attached to the new extended embargo workflows.
       operationId: article_version_confidentiality
       parameters:
         - description: Article Unique identifier
@@ -4798,8 +4707,7 @@ paths:
             maximum: 5000
             minimum: 1
             type: integer
-        - description: The number of results included on a page. Used for pagination with
-            page
+        - description: The number of results included on a page. Used for pagination with page
           in: query
           name: page_size
           required: false
@@ -4818,8 +4726,7 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Where to start the listing(the offset of the first result). Used
-            for pagination with limit
+        - description: Where to start the listing(the offset of the first result). Used for pagination with limit
           in: query
           name: offset
           required: false
@@ -4857,15 +4764,13 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Filter by collection publishing date. Will only return collections
-            published after the date. date(ISO 8601) YYYY-MM-DD
+        - description: Filter by collection publishing date. Will only return collections published after the date. date(ISO 8601) YYYY-MM-DD
           in: query
           name: published_since
           required: false
           schema:
             type: string
-        - description: Filter by collection modified date. Will only return collections
-            published after the date. date(ISO 8601) YYYY-MM-DD
+        - description: Filter by collection modified date. Will only return collections published after the date. date(ISO 8601) YYYY-MM-DD
           in: query
           name: modified_since
           required: false
@@ -4997,8 +4902,7 @@ paths:
             maximum: 5000
             minimum: 1
             type: integer
-        - description: The number of results included on a page. Used for pagination with
-            page
+        - description: The number of results included on a page. Used for pagination with page
           in: query
           name: page_size
           required: false
@@ -5017,8 +4921,7 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Where to start the listing(the offset of the first result). Used
-            for pagination with limit
+        - description: Where to start the listing(the offset of the first result). Used for pagination with limit
           in: query
           name: offset
           required: false
@@ -5245,8 +5148,7 @@ paths:
             maximum: 5000
             minimum: 1
             type: integer
-        - description: The number of results included on a page. Used for pagination with
-            page
+        - description: The number of results included on a page. Used for pagination with page
           in: query
           name: page_size
           required: false
@@ -5265,8 +5167,7 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Where to start the listing(the offset of the first result). Used
-            for pagination with limit
+        - description: Where to start the listing(the offset of the first result). Used for pagination with limit
           in: query
           name: offset
           required: false
@@ -5302,8 +5203,7 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Filter by article publishing date. Will only return articles
-            published after the date. date(ISO 8601) YYYY-MM-DD
+        - description: Filter by article publishing date. Will only return articles published after the date. date(ISO 8601) YYYY-MM-DD
           in: query
           name: published_since
           required: false
@@ -5574,8 +5474,7 @@ components:
           maxLength: 30
           type: string
         group_id:
-          description: Not applicable to regular users. This field is reserved to
-            institutions/publishers with access to assign to specific groups
+          description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
           format: int64
           type: integer
         institution_user_id:
@@ -5663,8 +5562,7 @@ components:
     AccountUpdate:
       properties:
         group_id:
-          description: Not applicable to regular users. This field is reserved to
-            institutions/publishers with access to assign to specific groups
+          description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
           format: int64
           type: integer
         is_active:
@@ -5812,11 +5710,7 @@ components:
       properties:
         authors:
           default: []
-          description: "List of authors to be associated with the article. The list can
-            contain the following fields: id, name, first_name, last_name,
-            email, orcid_id. If an id is supplied, it will take priority and
-            everything else will be ignored. No more than 10 authors. For adding
-            more authors use the specific authors endpoint."
+          description: "List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint."
           example:
             - name: John Doe
             - id: 1000008
@@ -5825,8 +5719,7 @@ components:
           type: array
         categories:
           default: []
-          description: List of category ids to be associated with the article(e.g [1, 23,
-            33, 66])
+          description: List of category ids to be associated with the article(e.g [1, 23, 33, 66])
           example:
             - 1
             - 10
@@ -5841,25 +5734,18 @@ components:
             defined_key: value for it
           type: object
         defined_type:
-          description: <b>One of:</b> <code>figure</code> <code>online resource</code>
-            <code>preprint</code> <code>book</code> <code>conference
-            contribution</code> <code>media</code> <code>dataset</code>
-            <code>poster</code> <code>journal contribution</code>
-            <code>presentation</code> <code>thesis</code> <code>software</code>
+          description: <b>One of:</b> <code>figure</code> <code>online resource</code> <code>preprint</code> <code>book</code> <code>conference contribution</code> <code>media</code> <code>dataset</code> <code>poster</code> <code>journal contribution</code> <code>presentation</code> <code>thesis</code> <code>software</code>
           example: media
           type: string
         description:
           default: ""
-          description: The article description. In a publisher case, usually this is the
-            remote article description
+          description: The article description. In a publisher case, usually this is the remote article description
           example: Test description of article
           maxLength: 10000
           type: string
         doi:
           default: ""
-          description: Not applicable for regular users. In an institutional case, make
-            sure your group supports setting DOIs. This setting is applied by
-            figshare via opening a ticket through our support/helpdesk system.
+          description: Not applicable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
           type: string
         funding:
           default: ""
@@ -5871,20 +5757,16 @@ components:
             $ref: "#/components/schemas/FundingCreate"
           type: array
         group_id:
-          description: Not applicable to regular users. This field is reserved to
-            institutions/publishers with access to assign to specific groups
+          description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
           format: int64
           type: integer
         handle:
           default: ""
-          description: Not applicable for regular users. In an institutional case, make
-            sure your group supports setting Handles. This setting is applied by
-            figshare via opening a ticket through our support/helpdesk system.
+          description: Not applicable for regular users. In an institutional case, make sure your group supports setting Handles. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
           type: string
         keywords:
           default: []
-          description: List of tags to be associated with the article. Tags can be used
-            instead
+          description: List of tags to be associated with the article. Tags can be used instead
           example:
             - tag1
             - tag2
@@ -5899,8 +5781,7 @@ components:
           type: integer
         references:
           default: []
-          description: List of links to be associated with the article (e.g
-            ["http://link1", "http://link2", "http://link3"])
+          description: List of links to be associated with the article (e.g ["http://link1", "http://link2", "http://link3"])
           example:
             - http://figshare.com
             - http://api.figshare.com
@@ -5910,18 +5791,15 @@ components:
           type: array
         resource_doi:
           default: ""
-          description: Not applicable to regular users. In a publisher case, this is the
-            publisher article DOI.
+          description: Not applicable to regular users. In a publisher case, this is the publisher article DOI.
           type: string
         resource_title:
           default: ""
-          description: Not applicable to regular users. In a publisher case, this is the
-            publisher article title.
+          description: Not applicable to regular users. In a publisher case, this is the publisher article title.
           type: string
         tags:
           default: []
-          description: List of tags to be associated with the article. Keywords can be
-            used instead
+          description: List of tags to be associated with the article. Keywords can be used instead
           example:
             - tag1
             - tag2
@@ -5956,11 +5834,7 @@ components:
           nullable: true
           type: string
         embargo_options:
-          description: List of embargo permissions that are associated with the article.
-            If the type is logged_in and the group_ids list is empty, then the
-            whole institution can see the article; if there are multiple
-            group_ids, then only users that are under those groups can see the
-            article.
+          description: List of embargo permissions that are associated with the article. If the type is logged_in and the group_ids list is empty, then the whole institution can see the article; if there are multiple group_ids, then only users that are under those groups can see the article.
           example:
             - group_ids: []
               id: 13
@@ -5997,17 +5871,11 @@ components:
     ArticleEmbargoUpdater:
       properties:
         embargo_date:
-          description: Date when the embargo expires and the article gets published, '0'
-            value will set up permanent embargo
+          description: Date when the embargo expires and the article gets published, '0' value will set up permanent embargo
           example: 2018-05-22T04:04:04
           type: string
         embargo_options:
-          description: List of embargo permissions to be associated with the article. The
-            list must contain `id` and can also contain `group_ids`(a field that
-            only applies to 'logged_in' permissions). The new list replaces old
-            options in the database, and an empty list removes all permissions
-            for this article. Administration permission has to be set up alone
-            but logged in and IP range permissions can be set up together.
+          description: List of embargo permissions to be associated with the article. The list must contain `id` and can also contain `group_ids`(a field that only applies to 'logged_in' permissions). The new list replaces old options in the database, and an empty list removes all permissions for this article. Administration permission has to be set up alone but logged in and IP range permissions can be set up together.
           example:
             - id: 1321
             - id: 3345
@@ -6028,8 +5896,7 @@ components:
           example: File(s) under embargo
           type: string
         embargo_type:
-          description: "Embargo can be enabled at the article or the file level. Possible
-            values: article, file"
+          description: "Embargo can be enabled at the article or the file level. Possible values: article, file"
           enum:
             - article
             - file
@@ -6066,15 +5933,7 @@ components:
           example: 111084/m9.figshare.14074
           type: string
         item_type:
-          description: "Only return articles with the respective type. Mapping for
-            item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 5 - Poster, 6 -
-            Journal contribution, 7 - Presentation, 8 - Thesis, 9 - Software, 11
-            - Online resource, 12 - Preprint, 13 - Book, 14 - Conference
-            contribution, 15 - Chapter, 16 - Peer review, 17 - Educational
-            resource, 18 - Report, 19 - Standard, 20 - Composition, 21 -
-            Funding, 22 - Physical object, 23 - Data management plan, 24 -
-            Workflow, 25 - Monograph, 26 - Performance, 27 - Event, 28 -
-            Service, 29 - Model"
+          description: "Only return articles with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 5 - Poster, 6 - Journal contribution, 7 - Presentation, 8 - Thesis, 9 - Software, 11 - Online resource, 12 - Preprint, 13 - Book, 14 - Conference contribution, 15 - Chapter, 16 - Peer review, 17 - Educational resource, 18 - Report, 19 - Standard, 20 - Composition, 21 - Funding, 22 - Physical object, 23 - Data management plan, 24 - Workflow, 25 - Monograph, 26 - Performance, 27 - Event, 28 - Service, 29 - Model"
           example: 1
           format: int64
           type: integer
@@ -6100,11 +5959,7 @@ components:
       properties:
         authors:
           default: []
-          description: "List of authors to be associated with the article. The list can
-            contain the following fields: id, name, first_name, last_name,
-            email, orcid_id. If an id is supplied, it will take priority and
-            everything else will be ignored. No more than 10 authors. For adding
-            more authors use the specific authors endpoint."
+          description: "List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint."
           example:
             - name: John Doe
             - id: 1000008
@@ -6113,8 +5968,7 @@ components:
           type: array
         categories:
           default: []
-          description: List of category ids to be associated with the article(e.g [1, 23,
-            33, 66])
+          description: List of category ids to be associated with the article(e.g [1, 23, 33, 66])
           example:
             - 1
             - 10
@@ -6129,25 +5983,18 @@ components:
             defined_key: value for it
           type: object
         defined_type:
-          description: <b>One of:</b> <code>figure</code> <code>online resource</code>
-            <code>preprint</code> <code>book</code> <code>conference
-            contribution</code> <code>media</code> <code>dataset</code>
-            <code>poster</code> <code>journal contribution</code>
-            <code>presentation</code> <code>thesis</code> <code>software</code>
+          description: <b>One of:</b> <code>figure</code> <code>online resource</code> <code>preprint</code> <code>book</code> <code>conference contribution</code> <code>media</code> <code>dataset</code> <code>poster</code> <code>journal contribution</code> <code>presentation</code> <code>thesis</code> <code>software</code>
           example: media
           type: string
         description:
           default: ""
-          description: The article description. In a publisher case, usually this is the
-            remote article description
+          description: The article description. In a publisher case, usually this is the remote article description
           example: Test description of article
           maxLength: 10000
           type: string
         doi:
           default: ""
-          description: Not appliable for regular users. In an institutional case, make
-            sure your group supports setting DOIs. This setting is applied by
-            figshare via opening a ticket through our support/helpdesk system.
+          description: Not appliable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
           type: string
         funding:
           default: ""
@@ -6159,20 +6006,16 @@ components:
             $ref: "#/components/schemas/FundingCreate"
           type: array
         group_id:
-          description: Not applicable to regular users. This field is reserved to
-            institutions/publishers with access to assign to specific groups
+          description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
           format: int64
           type: integer
         handle:
           default: ""
-          description: Not appliable for regular users. In an institutional case, make
-            sure your group supports setting Handles. This setting is applied by
-            figshare via opening a ticket through our support/helpdesk system.
+          description: Not appliable for regular users. In an institutional case, make sure your group supports setting Handles. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
           type: string
         keywords:
           default: []
-          description: List of tags to be associated with the article. Tags can be used
-            instead
+          description: List of tags to be associated with the article. Tags can be used instead
           example:
             - tag1
             - tag2
@@ -6187,8 +6030,7 @@ components:
           type: integer
         references:
           default: []
-          description: List of links to be associated with the article (e.g
-            ["http://link1", "http://link2", "http://link3"])
+          description: List of links to be associated with the article (e.g ["http://link1", "http://link2", "http://link3"])
           example:
             - http://figshare.com
             - http://api.figshare.com
@@ -6198,18 +6040,15 @@ components:
           type: array
         resource_doi:
           default: ""
-          description: Not applicable to regular users. In a publisher case, this is the
-            publisher article DOI.
+          description: Not applicable to regular users. In a publisher case, this is the publisher article DOI.
           type: string
         resource_title:
           default: ""
-          description: Not applicable to regular users. In a publisher case, this is the
-            publisher article title.
+          description: Not applicable to regular users. In a publisher case, this is the publisher article title.
           type: string
         tags:
           default: []
-          description: List of tags to be associated with the article. Keywords can be
-            used instead
+          description: List of tags to be associated with the article. Keywords can be used instead
           example:
             - tag1
             - tag2
@@ -6311,11 +6150,7 @@ components:
     AuthorsCreator:
       properties:
         authors:
-          description: "List of authors to be associated with the article. The list can
-            contain the following fields: id, name, first_name, last_name,
-            email, orcid_id. If an id is supplied, it will take priority and
-            everything else will be ignored. No more than 10 authors. For adding
-            more authors use the specific authors endpoint."
+          description: "List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint."
           example:
             - id: 12121
             - id: 34345
@@ -6530,11 +6365,7 @@ components:
           type: array
         authors:
           default: []
-          description: "List of authors to be associated with the article. The list can
-            contain the following fields: id, name, first_name, last_name,
-            email, orcid_id. If an id is supplied, it will take priority and
-            everything else will be ignored. No more than 10 authors. For adding
-            more authors use the specific authors endpoint."
+          description: "List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint."
           example:
             - name: John Doe
             - id: 20005
@@ -6543,8 +6374,7 @@ components:
           type: array
         categories:
           default: []
-          description: List of category ids to be associated with the article(e.g [1, 23,
-            33, 66])
+          description: List of category ids to be associated with the article(e.g [1, 23, 33, 66])
           example:
             - 1
             - 10
@@ -6560,16 +6390,13 @@ components:
           type: object
         description:
           default: ""
-          description: The article description. In a publisher case, usually this is the
-            remote article description
+          description: The article description. In a publisher case, usually this is the remote article description
           example: Test description of article
           maxLength: 10000
           type: string
         doi:
           default: ""
-          description: Not applicable for regular users. In an institutional case, make
-            sure your group supports setting DOIs. This setting is applied by
-            figshare via opening a ticket through our support/helpdesk system.
+          description: Not applicable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
           type: string
         funding:
           default: ""
@@ -6581,20 +6408,16 @@ components:
             $ref: "#/components/schemas/FundingCreate"
           type: array
         group_id:
-          description: Not applicable to regular users. This field is reserved to
-            institutions/publishers with access to assign to specific groups
+          description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
           format: int64
           type: integer
         handle:
           default: ""
-          description: Not applicable for regular users. In an institutional case, make
-            sure your group supports setting Handles. This setting is applied by
-            figshare via opening a ticket through our support/helpdesk system.
+          description: Not applicable for regular users. In an institutional case, make sure your group supports setting Handles. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
           type: string
         keywords:
           default: []
-          description: List of tags to be associated with the article. Tags can be used
-            instead
+          description: List of tags to be associated with the article. Tags can be used instead
           example:
             - tag1
             - tag2
@@ -6603,8 +6426,7 @@ components:
           type: array
         references:
           default: []
-          description: List of links to be associated with the article (e.g
-            ["http://link1", "http://link2", "http://link3"])
+          description: List of links to be associated with the article (e.g ["http://link1", "http://link2", "http://link3"])
           example:
             - http://figshare.com
             - http://api.figshare.com
@@ -6614,30 +6436,24 @@ components:
           type: array
         resource_doi:
           default: ""
-          description: Not applicable to regular users. In a publisher case, this is the
-            publisher article DOI.
+          description: Not applicable to regular users. In a publisher case, this is the publisher article DOI.
           type: string
         resource_id:
-          description: Not applicable to regular users. In a publisher case, this is the
-            publisher article id
+          description: Not applicable to regular users. In a publisher case, this is the publisher article id
           type: string
         resource_link:
-          description: Not applicable to regular users. In a publisher case, this is the
-            publisher article link
+          description: Not applicable to regular users. In a publisher case, this is the publisher article link
           type: string
         resource_title:
           default: ""
-          description: Not applicable to regular users. In a publisher case, this is the
-            publisher article title.
+          description: Not applicable to regular users. In a publisher case, this is the publisher article title.
           type: string
         resource_version:
-          description: Not applicable to regular users. In a publisher case, this is the
-            publisher article version
+          description: Not applicable to regular users. In a publisher case, this is the publisher article version
           type: integer
         tags:
           default: []
-          description: List of tags to be associated with the article. Keywords can be
-            used instead
+          description: List of tags to be associated with the article. Keywords can be used instead
           example:
             - tag1
             - tag2
@@ -6675,13 +6491,11 @@ components:
     CollectionPrivateLinkCreator:
       properties:
         expires_date:
-          description: Date when this private link should expire - optional. By default
-            private links expire in 365 days.
+          description: Date when this private link should expire - optional. By default private links expire in 365 days.
           example: 2018-02-22 22:22:22
           type: string
         read_only:
-          description: Optional, default true. Set to false to give private link users
-            editing rights for this collection.
+          description: Optional, default true. Set to false to give private link users editing rights for this collection.
           example: true
           type: boolean
       type: object
@@ -6727,11 +6541,7 @@ components:
           type: array
         authors:
           default: []
-          description: "List of authors to be associated with the article. The list can
-            contain the following fields: id, name, first_name, last_name,
-            email, orcid_id. If an id is supplied, it will take priority and
-            everything else will be ignored. No more than 10 authors. For adding
-            more authors use the specific authors endpoint."
+          description: "List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint."
           example:
             - name: John Doe
             - id: 20005
@@ -6740,8 +6550,7 @@ components:
           type: array
         categories:
           default: []
-          description: List of category ids to be associated with the article(e.g [1, 23,
-            33, 66])
+          description: List of category ids to be associated with the article(e.g [1, 23, 33, 66])
           example:
             - 1
             - 10
@@ -6757,16 +6566,13 @@ components:
           type: object
         description:
           default: ""
-          description: The article description. In a publisher case, usually this is the
-            remote article description
+          description: The article description. In a publisher case, usually this is the remote article description
           example: Test description of article
           maxLength: 10000
           type: string
         doi:
           default: ""
-          description: Not applicable for regular users. In an institutional case, make
-            sure your group supports setting DOIs. This setting is applied by
-            figshare via opening a ticket through our support/helpdesk system.
+          description: Not applicable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
           type: string
         funding:
           default: ""
@@ -6778,20 +6584,16 @@ components:
             $ref: "#/components/schemas/FundingCreate"
           type: array
         group_id:
-          description: Not applicable to regular users. This field is reserved to
-            institutions/publishers with access to assign to specific groups
+          description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
           format: int64
           type: integer
         handle:
           default: ""
-          description: Not applicable for regular users. In an institutional case, make
-            sure your group supports setting Handles. This setting is applied by
-            figshare via opening a ticket through our support/helpdesk system.
+          description: Not applicable for regular users. In an institutional case, make sure your group supports setting Handles. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
           type: string
         keywords:
           default: []
-          description: List of tags to be associated with the article. Tags can be used
-            instead
+          description: List of tags to be associated with the article. Tags can be used instead
           example:
             - tag1
             - tag2
@@ -6800,8 +6602,7 @@ components:
           type: array
         references:
           default: []
-          description: List of links to be associated with the article (e.g
-            ["http://link1", "http://link2", "http://link3"])
+          description: List of links to be associated with the article (e.g ["http://link1", "http://link2", "http://link3"])
           example:
             - http://figshare.com
             - http://api.figshare.com
@@ -6811,30 +6612,24 @@ components:
           type: array
         resource_doi:
           default: ""
-          description: Not applicable to regular users. In a publisher case, this is the
-            publisher article DOI.
+          description: Not applicable to regular users. In a publisher case, this is the publisher article DOI.
           type: string
         resource_id:
-          description: Not applicable to regular users. In a publisher case, this is the
-            publisher article id
+          description: Not applicable to regular users. In a publisher case, this is the publisher article id
           type: string
         resource_link:
-          description: Not applicable to regular users. In a publisher case, this is the
-            publisher article link
+          description: Not applicable to regular users. In a publisher case, this is the publisher article link
           type: string
         resource_title:
           default: ""
-          description: Not applicable to regular users. In a publisher case, this is the
-            publisher article title.
+          description: Not applicable to regular users. In a publisher case, this is the publisher article title.
           type: string
         resource_version:
-          description: Not applicable to regular users. In a publisher case, this is the
-            publisher article version
+          description: Not applicable to regular users. In a publisher case, this is the publisher article version
           type: integer
         tags:
           default: []
-          description: List of tags to be associated with the article. Keywords can be
-            used instead
+          description: List of tags to be associated with the article. Keywords can be used instead
           example:
             - tag1
             - tag2
@@ -6885,13 +6680,11 @@ components:
           minimum: 1
           type: integer
         modified_since:
-          description: Filter by article modified date. Will only return articles
-            published after the date. date(ISO 8601) YYYY-MM-DD
+          description: Filter by article modified date. Will only return articles published after the date. date(ISO 8601) YYYY-MM-DD
           example: 2017-12-22
           type: string
         offset:
-          description: Where to start the listing(the offset of the first result). Used
-            for pagination with limit
+          description: Where to start the listing(the offset of the first result). Used for pagination with limit
           example: 0
           format: int64
           maximum: 5000
@@ -6914,16 +6707,14 @@ components:
           type: integer
         page_size:
           default: 10
-          description: The number of results included on a page. Used for pagination with
-            page
+          description: The number of results included on a page. Used for pagination with page
           example: 10
           format: int64
           maximum: 1000
           minimum: 1
           type: integer
         published_since:
-          description: Filter by article publishing date. Will only return articles
-            published after the date. date(ISO 8601) YYYY-MM-DD
+          description: Filter by article publishing date. Will only return articles published after the date. date(ISO 8601) YYYY-MM-DD
           example: 2017-12-22
           type: string
         search_for:
@@ -7050,8 +6841,7 @@ components:
     ErrorMessage:
       properties:
         code:
-          description: A machine friendly error code, used by the dev team to identify the
-            error.
+          description: A machine friendly error code, used by the dev team to identify the error.
           format: int64
           type: integer
         message:
@@ -7070,8 +6860,7 @@ components:
           example: 6c16e6e7d7587bd078e5117dda01d565
           type: string
         name:
-          description: File name including the extension; can be omitted only for linked
-            files.
+          description: File name including the extension; can be omitted only for linked files.
           example: test.py
           type: string
         size:
@@ -7224,8 +7013,7 @@ components:
           minimum: 1
           type: integer
         offset:
-          description: Where to start the listing(the offset of the first result). Used
-            for pagination with limit
+          description: Where to start the listing(the offset of the first result). Used for pagination with limit
           example: 0
           format: int64
           maximum: 5000
@@ -7240,8 +7028,7 @@ components:
           type: integer
         page_size:
           default: 10
-          description: The number of results included on a page. Used for pagination with
-            page
+          description: The number of results included on a page. Used for pagination with page
           example: 10
           format: int64
           maximum: 1000
@@ -7314,8 +7101,7 @@ components:
           minimum: 1
           type: integer
         offset:
-          description: Where to start the listing(the offset of the first result). Used
-            for pagination with limit
+          description: Where to start the listing(the offset of the first result). Used for pagination with limit
           example: 0
           format: int64
           maximum: 5000
@@ -7353,8 +7139,7 @@ components:
           type: integer
         page_size:
           default: 10
-          description: The number of results included on a page. Used for pagination with
-            page
+          description: The number of results included on a page. Used for pagination with page
           example: 10
           format: int64
           maximum: 1000
@@ -7422,8 +7207,7 @@ components:
     PrivateLinkCreator:
       properties:
         expires_date:
-          description: Date when this private link should expire - optional. By default
-            private links expire in 365 days.
+          description: Date when this private link should expire - optional. By default private links expire in 365 days.
           example: 2018-02-22 22:22:22
           type: string
       type: object
@@ -7718,8 +7502,7 @@ components:
           maxLength: 10000
           type: string
         funding:
-          description: Grant number or organization(s) that funded this project. Up to
-            2000 characters permitted.
+          description: Grant number or organization(s) that funded this project. Up to 2000 characters permitted.
           example: ""
           type: string
         funding_list:
@@ -7822,8 +7605,7 @@ components:
           maxLength: 10000
           type: string
         funding:
-          description: Grant number or organization(s) that funded this project. Up to
-            2000 characters permitted.
+          description: Grant number or organization(s) that funded this project. Up to 2000 characters permitted.
           example: ""
           type: string
         funding_list:
@@ -7997,9 +7779,7 @@ components:
           format: int64
           type: integer
         locked:
-          description: When a part is being uploaded it is being locked, by setting the
-            locked flag to true. No changes/uploads can happen on this part from
-            other requests.
+          description: When a part is being uploaded it is being locked, by setting the locked flag to true. No changes/uploads can happen on this part from other requests.
           type: boolean
         partNo:
           description: File part id

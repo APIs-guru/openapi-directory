@@ -21,9 +21,8 @@ produces:
   - application/json
 securityDefinitions:
   ApiKeyAuth:
-    description: >
-      For accessing the API a valid API Key must be passed in all the
-      queries in the 'X-API-KEY' header.
+    description: |
+      For accessing the API a valid API Key must be passed in all the queries in the 'X-API-KEY' header.
     in: header
     name: X-API-Key
     type: apiKey

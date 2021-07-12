@@ -2,9 +2,8 @@ openapi: 3.0.0
 servers:
   - url: http://www.neowsapp.com/
 info:
-  description: >-
-    A web service for near earth objects. All the data is from the <a
-    href="http://neo.jpl.nasa.gov/" target="_blank">NASA JPL Asteroid team</a>. 
+  description: |-
+    A web service for near earth objects. All the data is from the <a href="http://neo.jpl.nasa.gov/" target="_blank">NASA JPL Asteroid team</a>. 
 
      
 
@@ -36,8 +35,7 @@ paths:
   /rest/v1/feed:
     get:
       deprecated: false
-      description: Get a list of Near Earth Objects within a date range, The max range
-        in one query is 7 days
+      description: Get a list of Near Earth Objects within a date range, The max range in one query is 7 days
       operationId: retrieveNearEarthObjectFeed
       parameters:
         - description: "Start of date range search, format: yyyy-MM-dd - (ex: 2015-04-28)"
@@ -46,8 +44,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: "End of date range search, format: yyyy-MM-dd - (ex: 2015-04-28).
-            If left off search will extends 7 days from start_date"
+        - description: "End of date range search, format: yyyy-MM-dd - (ex: 2015-04-28). If left off search will extends 7 days from start_date"
           in: query
           name: end_date
           required: false
@@ -192,8 +189,7 @@ paths:
       description: Retrieves Sentry Near Earth Object by ID
       operationId: retrieveSentryRiskDataById
       parameters:
-        - description: ID of NearEarth object.  ID can be SPK_ID, Asteroid des
-            (designation) or Sentry ID
+        - description: ID of NearEarth object.  ID can be SPK_ID, Asteroid des (designation) or Sentry ID
           in: path
           name: asteroid_id
           required: true
@@ -285,13 +281,11 @@ components:
     EstimatedDiameter:
       properties:
         estimated_diameter_max:
-          description: An estimate of the maximum size of the Asteroid - bases on the
-            abosolute magnitude
+          description: An estimate of the maximum size of the Asteroid - bases on the abosolute magnitude
           format: double
           type: number
         estimated_diameter_min:
-          description: An estimate of the minimum size of the Asteroid - bases on the
-            abosolute magnitude
+          description: An estimate of the minimum size of the Asteroid - bases on the abosolute magnitude
           format: double
           type: number
       type: object
@@ -350,8 +344,7 @@ components:
           description: A Link to the NASA JPL Small-Body Database website
           type: string
         neo_reference_id:
-          description: The reference ID of the Asteroid - This correlates to the SPK ID
-            for the JPL NEO data
+          description: The reference ID of the Asteroid - This correlates to the SPK ID for the JPL NEO data
           type: string
         orbital_data:
           $ref: "#/components/schemas/OrbitalData"

@@ -5,8 +5,7 @@ schemes:
 host: api.wmata.com
 basePath: /Rail.svc
 info:
-  description: Rail line and station information, including locations, fares,
-    times, and parking.
+  description: Rail line and station information, including locations, fares, times, and parking.
   title: Rail Station Information
   version: "1.0"
   x-apisguru-categories:
@@ -75,8 +74,7 @@ paths:
 
         <td>\r
 
-        Array containing line information (<a
-        href=\"#Line\">Line</a>).\r
+        Array containing line information (<a href=\"#Line\">Line</a>).\r
 
         </td>\r
 
@@ -118,11 +116,9 @@ paths:
 
         \r
 
-        <td>End station code. For example, will be E10 (Greenbelt) for
-        the\r
+        <td>End station code. For example, will be E10 (Greenbelt) for the\r
 
-        Green Line, B11 (Glenmont) for the Red Line, etc. Use this value
-        in\r
+        Green Line, B11 (Glenmont) for the Red Line, etc. Use this value in\r
 
         other rail-related APIs to retrieve data about a station.</td>\r
 
@@ -136,13 +132,11 @@ paths:
 
         \r
 
-        <td>Intermediate terminal station code. During normal service,
-        some\r
+        <td>Intermediate terminal station code. During normal service, some\r
 
         trains on some lines might end their trip prior to the\r
 
-        StartStationCode or EndStationCode. A good example is on the
-        Red\r
+        StartStationCode or EndStationCode. A good example is on the Red\r
 
         Line where some trains stop at A11 (Grosvenor) or B08 (Silver\r
 
@@ -170,8 +164,7 @@ paths:
 
         \r
 
-        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR,
-        GR,\r
+        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r
 
         or SV).</td>\r
 
@@ -185,11 +178,9 @@ paths:
 
         \r
 
-        <td>Start station code. For example, will be F11 (Branch
-        Avenue)\r
+        <td>Start station code. For example, will be F11 (Branch Avenue)\r
 
-        for the Green Line, A15 (Shady Grove) for the Red Line, etc.
-        Use\r
+        for the Green Line, A15 (Shady Grove) for the Red Line, etc. Use\r
 
         this value in other rail-related APIs to retrieve data about a\r
 
@@ -207,9 +198,8 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/xml: >-
-              <LinesResp xmlns="http://www.wmata.com"
-              xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+            application/xml: |-
+              <LinesResp xmlns="http://www.wmata.com" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
                   <Lines>
                       <Line>
                           <DisplayName>Green</DisplayName>
@@ -268,15 +258,13 @@ paths:
 
         \r
 
-        <p>Returns a set of ordered stations and distances between two
-        stations on the\r
+        <p>Returns a set of ordered stations and distances between two stations on the\r
 
         <em>same line</em>.</p>\r
 
         \r
 
-        <p>Note that this method is not suitable on its own as a
-        pathfinding solution\r
+        <p>Note that this method is not suitable on its own as a pathfinding solution\r
 
         between stations.</p>\r
 
@@ -360,8 +348,7 @@ paths:
 
         \r
 
-        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR,
-        GR,\r
+        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r
 
         or SV) this station's platform is on.</td>\r
 
@@ -401,8 +388,7 @@ paths:
 
         \r
 
-        <td>Full name for this station, as shown on the WMATA
-        website.</td>\r
+        <td>Full name for this station, as shown on the WMATA website.</td>\r
 
         </tr>\r
 
@@ -412,8 +398,7 @@ paths:
       operationId: 5476364f031f5909e4fe3316
       parameters:
         - default: N06
-          description: Station code for the origin station.  Use the Station List method
-            to return a list of all station codes.
+          description: Station code for the origin station.  Use the Station List method to return a list of all station codes.
           enum:
             - N06
           in: query
@@ -421,8 +406,7 @@ paths:
           required: true
           type: string
         - default: G05
-          description: Station code for the origin station.  Use the Station List method
-            to return a list of all station codes.
+          description: Station code for the origin station.  Use the Station List method to return a list of all station codes.
           enum:
             - G05
           in: query
@@ -643,203 +627,122 @@ paths:
       summary: XML - Path Between Stations
   /SrcStationToDstStationInfo:
     get:
-      description: >-
+      description: |-
         <h4 class="text-primary">Description</h4>
 
-
         <p>Returns a distance, fare information, and estimated travel time between any
-
         two stations, including those on different lines. Omit both parameters to
-
         retrieve data for all stations.</p>
-
 
         <h4 class="text-primary">Response Elements</h4>
 
-
         <table class="table table-condensed table-hover">
-
         <thead>
-
         <tr>
-
         <th class="col-md-3">Element</th>
 
-
         <th>Description</th>
-
         </tr>
-
         </thead>
 
-
         <tbody>
-
         <tr>
-
         <td>StationToStationInfos</td>
 
-
         <td>
-
         Array containing station to station information (<a href=
-
         "#StationToStationInfo">StationToStationInfo</a>).
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a id="StationToStationInfo" name=
-
         "StationToStationInfo">StationToStationInfo Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>CompositeMiles</td>
 
-
         <td>Average of distance traveled between two stations and straight-line distance (as used for WMATA fare calculations).  For more details, please refer to WMATA's <a href="https://www.wmata.com/about/records/public_docs/upload/Tariff-on-Fares-Annotated-2-12-18.pdf#page=6" target="_blank" rel="noopener noreferrer">Tariff on Fares</a>.</td>
-
         </tr>
 
-
         <tr>
-
         <td>DestinationStation</td>
 
-
         <td>Destination station code. Use this value in other rail-related
-
         APIs to retrieve data about a station.</td>
-
         </tr>
 
-
         <tr>
-
         <td>RailFare</td>
 
-
         <td>
-
         Structure containing <a href="#RailFare">fare</a> information.
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>RailTime</td>
 
-
         <td>Estimated travel time (schedule time) in minutes between the source and
-
         destination station. This is not correlated to minutes <span class="text-info">(Min)</span> in Real-Time Rail Predictions.</td>
-
         </tr>
 
-
         <tr>
-
         <td>SourceStation</td>
 
-
         <td>Origin station code. Use this value in other rail-related APIs
-
         to retrieve data about a station.</td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a id="RailFare" name="RailFare">RailFare Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>OffPeakTime</td>
 
-
         <td>Fare during off-peak times (times other than the ones described
-
         below).</td>
-
         </tr>
 
-
         <tr>
-
         <td>PeakTime</td>
 
-
         <td>Fare during peak times (weekdays from opening to 9:30 AM and
-
         3-7 PM, and weekends from midnight to closing).</td>
-
         </tr>
-
 
         <tr>
-
         <td>SeniorDisabled</td>
 
-
         <td>
-
         Reduced fare for <a href=
-
         "http://www.wmata.com/fares/reduced.cfm">senior citizens or
-
         people with disabilities</a>.
-
         </td>
-
         </tr>
-
         </tbody>
-
         </table>
       operationId: 5476364f031f5909e4fe331b
       parameters:
         - default: E10
-          description: Station code for the origin station.  Use the Station List method
-            to return a list of all station codes.
+          description: Station code for the origin station.  Use the Station List method to return a list of all station codes.
           enum:
             - E10
           in: query
           name: FromStationCode
           type: string
         - default: J03
-          description: Station code for the destination station.  Use the Station List
-            method to return a list of all station codes.
+          description: Station code for the destination station.  Use the Station List method to return a list of all station codes.
           enum:
             - J03
           in: query
@@ -851,9 +754,8 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/xml: >-
-              <StationToStationInfoResp xmlns="http://www.wmata.com"
-              xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+            application/xml: |-
+              <StationToStationInfoResp xmlns="http://www.wmata.com" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
                   <StationToStationInfos>
                       <StationToStationInfo>
                           <CompositeMiles>25.41</CompositeMiles>
@@ -875,11 +777,9 @@ paths:
 
         \r
 
-        <p>Returns a list of nearby station entrances based on latitude,
-        longitude, and\r
+        <p>Returns a list of nearby station entrances based on latitude, longitude, and\r
 
-        radius (meters). Omit search parameters to return all station
-        entrances.</p>\r
+        radius (meters). Omit search parameters to return all station entrances.</p>\r
 
         \r
 
@@ -951,8 +851,7 @@ paths:
 
         <td>Additional information for the entrance, if available.\r
 
-        Currently available data usually shows the same value as the
-        Name\r
+        Currently available data usually shows the same value as the Name\r
 
         element.</td>\r
 
@@ -1016,11 +915,9 @@ paths:
 
         \r
 
-        <td>The station code associated with this entrance. Use this
-        value\r
+        <td>The station code associated with this entrance. Use this value\r
 
-        in other rail-related APIs to retrieve data about a
-        station.</td>\r
+        in other rail-related APIs to retrieve data about a station.</td>\r
 
         </tr>\r
 
@@ -1034,8 +931,7 @@ paths:
 
         <td>For stations containing multiple platforms (e.g.: Gallery\r
 
-        Place, Fort Totten, L'Enfant Plaza, and Metro Center), the
-        other\r
+        Place, Fort Totten, L'Enfant Plaza, and Metro Center), the other\r
 
         station code.</td>\r
 
@@ -1047,24 +943,21 @@ paths:
       operationId: 5476364f031f5909e4fe3317
       parameters:
         - default: 38.8978168
-          description: Center point Latitude, required if Longitude and Radius are
-            specified.
+          description: Center point Latitude, required if Longitude and Radius are specified.
           enum:
             - 38.8978168
           in: query
           name: Lat
           type: number
         - default: -77.0404246
-          description: Center point Longitude, required if Latitude and Radius are
-            specified.
+          description: Center point Longitude, required if Latitude and Radius are specified.
           enum:
             - -77.0404246
           in: query
           name: Lon
           type: number
         - default: 500
-          description: Radius (meters) to include in the search area, required if Latitude
-            and Longitude are specified.
+          description: Radius (meters) to include in the search area, required if Latitude and Longitude are specified.
           enum:
             - 500
           in: query
@@ -1076,7 +969,7 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/xml: >-
+            application/xml: |-
               <StationEntrancesResp
                   xmlns="http://www.wmata.com"
                   xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
@@ -1104,216 +997,131 @@ paths:
       summary: XML - Station Entrances
   /StationInfo:
     get:
-      description: >-
+      description: |-
         <h4 class="text-primary">Description</h4>
 
-
         <p>Returns station location and address information based on a given
-
         StationCode.</p>
-
 
         <h4 class="text-primary">Response Elements</h4>
 
-
         <table class="table table-condensed table-hover">
-
         <thead>
-
         <tr>
-
         <th class="col-md-3">Element</th>
 
-
         <th>Description</th>
-
         </tr>
-
         </thead>
 
-
         <tbody>
-
         <tr>
-
         <td>Address</td>
 
-
         <td>
-
         Structure describing <a href="#Address">address</a> information.
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>Code</td>
 
-
         <td>Station code. Repeated from input.</td>
-
         </tr>
 
-
         <tr>
-
         <td>Lat</td>
 
-
         <td>Latitude.</td>
-
         </tr>
 
-
         <tr>
-
         <td>LineCode1</td>
 
-
         <td>Two-letter abbreviation for one line (e.g.: RD, BL, YL, OR, GR, or SV) served by this station. If the station has an additional platform, the lines served by the other platform are listed in the LineCodeX values for the record associated with the StationCode found in StationTogether1.</td>
-
         </tr>
 
-
         <tr>
-
         <td>LineCode2</td>
 
-
         <td>Additional line served by this station, if applicable.</td>
-
         </tr>
 
-
         <tr>
-
         <td>LineCode3</td>
 
-
         <td>Additional line served by this station, if applicable.</td>
-
         </tr>
-
 
         <tr>
-
         <td>LineCode4</td>
 
-
         <td>Additional line served by this station, if applicable. Currently not in use.</td>
-
         </tr>
-
 
         <td>Lon</td>
 
-
         <td>Longitude.</td>
-
         </tr>
 
-
         <tr>
-
         <td>Name</td>
 
-
         <td>Station name.</td>
-
         </tr>
 
-
         <tr>
-
         <td>StationTogether1</td>
 
-
         <td>For stations with multiple platforms (e.g.: Gallery Place, Fort
-
         Totten, L'Enfant Plaza, and Metro Center), the additional
-
         StationCode will be listed here.</td>
-
         </tr>
 
-
         <tr>
-
         <td>StationTogether2</td>
 
-
         <td>Similar in function to StationTogether2. Currently not in
-
         use.</td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a name="Address">Address Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>City</td>
 
-
         <td>City.</td>
-
         </tr>
 
-
         <tr>
-
         <td>State</td>
 
-
         <td>State (abbreviated).</td>
-
         </tr>
 
-
         <tr>
-
         <td>Street</td>
 
-
         <td>Street address (for GPS use).</td>
-
         </tr>
-
 
         <tr>
-
         <td>Zip</td>
 
-
         <td>Zip code.</td>
-
         </tr>
-
         </tbody>
-
         </table>
       operationId: 5476364f031f5909e4fe3318
       parameters:
         - default: A01
-          description: Station code.  Use the Station List method to return a list of all
-            station codes.
+          description: Station code.  Use the Station List method to return a list of all station codes.
           enum:
             - A01
           in: query
@@ -1350,268 +1158,155 @@ paths:
       summary: XML - Station Information
   /StationParking:
     get:
-      description: >-
+      description: |-
         <h4 class="text-primary">Description</h4>
 
-
         <p>Returns parking information at a station based on a given StationCode. Omit
-
         the StationCode to return parking information for all stations.</p>
 
-
         <p>If a station has no parking, the StationsParking element will contain no
-
         child elements.</p>
-
 
         <h4 class="text-primary">Response Elements</h4>
 
-
         <table class="table table-condensed table-hover">
-
         <thead>
-
         <tr>
-
         <th class="col-md-3">Element</th>
 
-
         <th>Description</th>
-
         </tr>
-
         </thead>
 
-
         <tbody>
-
         <tr>
-
         <td>StationsParking</td>
 
-
         <td>
-
         Array containing station parking information (<a href=
-
         "#StationParking">StationParking</a>).
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a id="StationParking" name="StationParking">StationParking
-
         Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>Code</td>
 
-
         <td>Station code. Useful when returning parking information for all
-
         stations. Use this value in other rail-related APIs to retrieve
-
         data about a station.</td>
-
         </tr>
 
-
         <tr>
-
         <td>Notes</td>
-
 
         <td>When not NULL, provides additional parking resources such as
-
         nearby lots.</td>
-
         </tr>
 
-
         <tr>
-
         <td>AllDayParking</td>
 
-
         <td>
-
         Structure describing <a href="#AllDayParking">all-day
-
         parking</a> options.
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>ShortTermParking</td>
 
-
         <td>
-
         Structure describing <a href="#ShortTermParking">short-term
-
         parking</a> options.
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a id="AllDayParking" name="AllDayParking">AllDayParking
-
         Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>TotalCount</td>
-
 
         <td>Number of all-day parking spots available at a station.</td>
-
         </tr>
 
-
         <tr>
-
         <td>RiderCost</td>
 
-
         <td>All-day cost per day (weekday) for Metro riders. NULL when no all-day
-
         spots are available. For most stations, this value is identical to
-
         the NonRiderCost.<br>
-
         <br>
-
         For cases where the NonRiderCost is different, the lower cost per
-
         day requires a valid rail trip using a SmarTrip&reg; card
-
         originating from a station other than the one where the patron
-
         parked. To receive this lower rate, patrons must pay for their
-
         parking with the same SmarTrip&reg; card used to enter/exit
-
         Metrorail, and must exit the parking lot within two hours of
-
         exiting Metrorail.</td>
-
         </tr>
 
-
         <tr>
-
         <td>NonRiderCost</td>
 
-
         <td>All-day cost per day (weekday) for non-Metro riders. NULL when no all-day
-
         spots are available.</td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a id="ShortTermParking" name=
-
         "ShortTermParking">ShortTermParking Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>SaturdayRiderCost</td>
 
-
         <td>Similar to RiderCost, except denoting Saturday prices.</td>
-
         </tr>
 
-
         <tr>
-
         <td>SaturdayNonRiderCost</td>
 
-
         <td>Similar to NonRiderCost, except denoting Saturday prices.</td>
-
         </tr>
 
-
         <tr>
-
         <td>TotalCount</td>
 
-
         <td>Number of short-term parking spots available at a station
-
         (parking meters).</td>
-
         </tr>
-
 
         <tr>
-
         <td>Notes</td>
 
-
         <td>Misc. information relating to short-term parking. NULL when no
-
         short-term spots are available.</td>
-
         </tr>
-
         </tbody>
-
         </table>
       operationId: 5476364f031f5909e4fe3315
       parameters:
-        - description: Station code.  Use the Station List method to return a list of all
-            station codes.
+        - description: Station code.  Use the Station List method to return a list of all station codes.
           enum:
             - E08
             - F06
@@ -1624,7 +1319,7 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/xml: >-
+            application/xml: |-
               <StationParkingResp
                   xmlns="http://www.wmata.com"
                   xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
@@ -1653,21 +1348,17 @@ paths:
 
         \r
 
-        <p>Returns opening and scheduled first/last train times based on
-        a given\r
+        <p>Returns opening and scheduled first/last train times based on a given\r
 
-        StationCode. Omit the StationCode to return timing information
-        for all\r
+        StationCode. Omit the StationCode to return timing information for all\r
 
         stations.</p>\r
 
         \r
 
-        <p>Note that for stations with multiple platforms (e.g.: Metro
-        Center, L'Enfant\r
+        <p>Note that for stations with multiple platforms (e.g.: Metro Center, L'Enfant\r
 
-        Plaza, etc.), a distinct call is required for each StationCode
-        to retrieve the\r
+        Plaza, etc.), a distinct call is required for each StationCode to retrieve the\r
 
         full set of train times at such stations.</p>\r
 
@@ -1879,8 +1570,7 @@ paths:
 
         \r
 
-        <td>Station code for the train's destination. Use this value
-        in\r
+        <td>Station code for the train's destination. Use this value in\r
 
         other rail-related APIs to retrieve data about a station.</td>\r
 
@@ -1910,13 +1600,11 @@ paths:
 
         \r
 
-        <td>Last train leaves the station at this time. Format is
-        HH:mm.\r
+        <td>Last train leaves the station at this time. Format is HH:mm.\r
 
         Note that when the time is AM, it signifies the next day. For\r
 
-        example, a value of 02:30 under a Saturday element means the
-        last\r
+        example, a value of 02:30 under a Saturday element means the last\r
 
         train leaves on Sunday at 2:30 AM.</td>\r
 
@@ -1930,8 +1618,7 @@ paths:
 
         \r
 
-        <td>Station code for the train's destination. Use this value
-        in\r
+        <td>Station code for the train's destination. Use this value in\r
 
         other rail-related APIs to retrieve data about a station.</td>\r
 
@@ -1943,8 +1630,7 @@ paths:
       operationId: 5476364f031f5909e4fe331a
       parameters:
         - default: E10
-          description: Station code.  Use the Station List method to return a list of all
-            station codes.
+          description: Station code.  Use the Station List method to return a list of all station codes.
           enum:
             - E10
           in: query
@@ -1956,7 +1642,7 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/xml: >-
+            application/xml: |-
               <StationTimeResp
                   xmlns="http://www.wmata.com"
                   xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
@@ -2075,245 +1761,145 @@ paths:
       summary: XML - Station Timings
   /Stations:
     get:
-      description: >-
+      description: |-
         <h4 class="text-primary">Description</h4>
 
-
         <p>Returns a list of station location and address information based on a given
-
         LineCode. Omit the LineCode to return all stations. The response is an array of
-
         objects identical to those returned in the Station Information method.</p>
-
 
         <h4 class="text-primary">Response Elements</h4>
 
-
         <table class="table table-condensed table-hover">
-
         <thead>
-
         <tr>
-
         <th class="col-md-3">Element</th>
 
-
         <th>Description</th>
-
         </tr>
-
         </thead>
 
-
         <tbody>
-
         <tr>
-
         <td>Stations</td>
 
-
         <td>
-
         Array containing station information (<a href=
-
         "#Station">Station</a>).
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a id="Station" name="Station">Station Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>Address</td>
 
-
         <td>
-
         Structure describing <a href="#Address">address</a> information.
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>Code</td>
 
-
         <td>Station code. Repeated from input.</td>
-
         </tr>
 
-
         <tr>
-
         <td>Lat</td>
 
-
         <td>Latitude.</td>
-
         </tr>
 
-
         <tr>
-
         <td>LineCode1</td>
 
-
         <td>Two-letter abbreviation for one line (e.g.: RD, BL, YL, OR, GR, or SV) served by this station. If the station has an additional platform, the lines served by the other platform are listed in the LineCodeX values for the record associated with the StationCode found in StationTogether1.</td>
-
         </tr>
 
-
         <tr>
-
         <td>LineCode2</td>
 
-
         <td>Additional line served by this station, if applicable.</td>
-
         </tr>
 
-
         <tr>
-
         <td>LineCode3</td>
 
-
         <td>Additional line served by this station, if applicable.</td>
-
         </tr>
 
-
         <tr>
-
         <td>LineCode4</td>
 
-
         <td>Additional line served by this station, if applicable. Currently not in use.</td>
-
         </tr>
 
-
         <tr>
-
         <td>Lon</td>
 
-
         <td>Longitude.</td>
-
         </tr>
 
-
         <tr>
-
         <td>Name</td>
 
-
         <td>Station name.</td>
-
         </tr>
 
-
         <tr>
-
         <td>StationTogether1</td>
 
-
         <td>For stations with multiple platforms (e.g.: Gallery Place, Fort
-
         Totten, L'Enfant Plaza, and Metro Center), the additional
-
         StationCode will be listed here.</td>
-
         </tr>
 
-
         <tr>
-
         <td>StationTogether2</td>
 
-
         <td>Similar in function to StationTogether2. Currently not in
-
         use.</td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a id="Address" name="Address">Address Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>City</td>
 
-
         <td>City.</td>
-
         </tr>
 
-
         <tr>
-
         <td>State</td>
 
-
         <td>State (abbreviated).</td>
-
         </tr>
 
-
         <tr>
-
         <td>Street</td>
 
-
         <td>Street address (for GPS use).</td>
-
         </tr>
-
 
         <tr>
-
         <td>Zip</td>
 
-
         <td>Zip code.</td>
-
         </tr>
-
         </tbody>
-
         </table>
       operationId: 5476364f031f5909e4fe3319
       parameters:
@@ -2882,8 +2468,7 @@ paths:
 
         <td>\r
 
-        Array containing line information (<a
-        href=\"#Line\">Line</a>).\r
+        Array containing line information (<a href=\"#Line\">Line</a>).\r
 
         </td>\r
 
@@ -2925,11 +2510,9 @@ paths:
 
         \r
 
-        <td>End station code. For example, will be E10 (Greenbelt) for
-        the\r
+        <td>End station code. For example, will be E10 (Greenbelt) for the\r
 
-        Green Line, B11 (Glenmont) for the Red Line, etc. Use this value
-        in\r
+        Green Line, B11 (Glenmont) for the Red Line, etc. Use this value in\r
 
         other rail-related APIs to retrieve data about a station.</td>\r
 
@@ -2943,13 +2526,11 @@ paths:
 
         \r
 
-        <td>Intermediate terminal station code. During normal service,
-        some\r
+        <td>Intermediate terminal station code. During normal service, some\r
 
         trains on some lines might end their trip prior to the\r
 
-        StartStationCode or EndStationCode. A good example is on the
-        Red\r
+        StartStationCode or EndStationCode. A good example is on the Red\r
 
         Line where some trains stop at A11 (Grosvenor) or B08 (Silver\r
 
@@ -2977,8 +2558,7 @@ paths:
 
         \r
 
-        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR,
-        GR,\r
+        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r
 
         or SV).</td>\r
 
@@ -2992,11 +2572,9 @@ paths:
 
         \r
 
-        <td>Start station code. For example, will be F11 (Branch
-        Avenue)\r
+        <td>Start station code. For example, will be F11 (Branch Avenue)\r
 
-        for the Green Line, A15 (Shady Grove) for the Red Line, etc.
-        Use\r
+        for the Green Line, A15 (Shady Grove) for the Red Line, etc. Use\r
 
         this value in other rail-related APIs to retrieve data about a\r
 
@@ -3074,15 +2652,13 @@ paths:
 
         \r
 
-        <p>Returns a set of ordered stations and distances between two
-        stations on the\r
+        <p>Returns a set of ordered stations and distances between two stations on the\r
 
         <em>same line</em>.</p>\r
 
         \r
 
-        <p>Note that this method is not suitable on its own as a
-        pathfinding solution\r
+        <p>Note that this method is not suitable on its own as a pathfinding solution\r
 
         between stations.</p>\r
 
@@ -3166,8 +2742,7 @@ paths:
 
         \r
 
-        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR,
-        GR,\r
+        <td>Two-letter abbreviation for the line (e.g.: RD, BL, YL, OR, GR,\r
 
         or SV) this station's platform is on.</td>\r
 
@@ -3207,8 +2782,7 @@ paths:
 
         \r
 
-        <td>Full name for this station, as shown on the WMATA
-        website.</td>\r
+        <td>Full name for this station, as shown on the WMATA website.</td>\r
 
         </tr>\r
 
@@ -3218,8 +2792,7 @@ paths:
       operationId: 5476364f031f5909e4fe330e
       parameters:
         - default: N06
-          description: Station code for the origin station.  Use the Station List method
-            to return a list of all station codes.
+          description: Station code for the origin station.  Use the Station List method to return a list of all station codes.
           enum:
             - N06
           in: query
@@ -3227,8 +2800,7 @@ paths:
           required: true
           type: string
         - default: G05
-          description: Station code for the destination station.  Use the Station List
-            method to return a list of all station codes.
+          description: Station code for the destination station.  Use the Station List method to return a list of all station codes.
           enum:
             - G05
           in: query
@@ -3445,203 +3017,122 @@ paths:
       summary: JSON - Path Between Stations
   /json/jSrcStationToDstStationInfo:
     get:
-      description: >-
+      description: |-
         <h4 class="text-primary">Description</h4>
 
-
         <p>Returns a distance, fare information, and estimated travel time between any
-
         two stations, including those on different lines. Omit both parameters to
-
         retrieve data for all stations.</p>
-
 
         <h4 class="text-primary">Response Elements</h4>
 
-
         <table class="table table-condensed table-hover">
-
         <thead>
-
         <tr>
-
         <th class="col-md-3">Element</th>
 
-
         <th>Description</th>
-
         </tr>
-
         </thead>
 
-
         <tbody>
-
         <tr>
-
         <td>StationToStationInfos</td>
 
-
         <td>
-
         Array containing station to station information (<a href=
-
         "#StationToStationInfo">StationToStationInfo</a>).
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a id="StationToStationInfo" name=
-
         "StationToStationInfo">StationToStationInfo Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>CompositeMiles</td>
 
-
         <td>Average of distance traveled between two stations and straight-line distance (as used for WMATA fare calculations).  For more details, please refer to WMATA's <a href="https://www.wmata.com/about/records/public_docs/upload/Tariff-on-Fares-Annotated-2-12-18.pdf#page=6" target="_blank" rel="noopener noreferrer">Tariff on Fares</a>.</td>
-
         </tr>
 
-
         <tr>
-
         <td>DestinationStation</td>
 
-
         <td>Destination station code. Use this value in other rail-related
-
         APIs to retrieve data about a station.</td>
-
         </tr>
 
-
         <tr>
-
         <td>RailFare</td>
 
-
         <td>
-
         Structure containing <a href="#RailFare">fare</a> information.
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>RailTime</td>
 
-
         <td>Estimated travel time (schedule time) in minutes between the source and
-
         destination station. This is not correlated to minutes <span class="text-info">(Min)</span> in Real-Time Rail Predictions.</td>
-
         </tr>
 
-
         <tr>
-
         <td>SourceStation</td>
 
-
         <td>Origin station code. Use this value in other rail-related APIs
-
         to retrieve data about a station.</td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a id="RailFare" name="RailFare">RailFare Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>OffPeakTime</td>
 
-
         <td>Fare during off-peak times (times other than the ones described
-
         below).</td>
-
         </tr>
 
-
         <tr>
-
         <td>PeakTime</td>
 
-
         <td>Fare during peak times (weekdays from opening to 9:30 AM and
-
         3-7 PM, and weekends from midnight to closing).</td>
-
         </tr>
-
 
         <tr>
-
         <td>SeniorDisabled</td>
 
-
         <td>
-
         Reduced fare for <a href=
-
         "http://www.wmata.com/fares/reduced.cfm">senior citizens or
-
         people with disabilities</a>.
-
         </td>
-
         </tr>
-
         </tbody>
-
         </table>
       operationId: 5476364f031f5909e4fe3313
       parameters:
         - default: E10
-          description: Station code for the origin station.  Use the Station List method
-            to return a list of all station codes.
+          description: Station code for the origin station.  Use the Station List method to return a list of all station codes.
           enum:
             - E10
           in: query
           name: FromStationCode
           type: string
         - default: J03
-          description: Station code for the destination station.  Use the Station List
-            method to return a list of all station codes.
+          description: Station code for the destination station.  Use the Station List method to return a list of all station codes.
           enum:
             - J03
           in: query
@@ -3676,11 +3167,9 @@ paths:
 
         \r
 
-        <p>Returns a list of nearby station entrances based on latitude,
-        longitude, and\r
+        <p>Returns a list of nearby station entrances based on latitude, longitude, and\r
 
-        radius (meters). Omit search parameters to return all station
-        entrances.</p>\r
+        radius (meters). Omit search parameters to return all station entrances.</p>\r
 
         \r
 
@@ -3752,8 +3241,7 @@ paths:
 
         <td>Additional information for the entrance, if available.\r
 
-        Currently available data usually shows the same value as the
-        Name\r
+        Currently available data usually shows the same value as the Name\r
 
         element.</td>\r
 
@@ -3817,11 +3305,9 @@ paths:
 
         \r
 
-        <td>The station code associated with this entrance. Use this
-        value\r
+        <td>The station code associated with this entrance. Use this value\r
 
-        in other rail-related APIs to retrieve data about a
-        station.</td>\r
+        in other rail-related APIs to retrieve data about a station.</td>\r
 
         </tr>\r
 
@@ -3835,8 +3321,7 @@ paths:
 
         <td>For stations containing multiple platforms (e.g.: Gallery\r
 
-        Place, Fort Totten, L'Enfant Plaza, and Metro Center), the
-        other\r
+        Place, Fort Totten, L'Enfant Plaza, and Metro Center), the other\r
 
         station code.</td>\r
 
@@ -3848,24 +3333,21 @@ paths:
       operationId: 5476364f031f5909e4fe330f
       parameters:
         - default: 38.8978168
-          description: Center point Latitude, required if Longitude and Radius are
-            specified.
+          description: Center point Latitude, required if Longitude and Radius are specified.
           enum:
             - 38.8978168
           in: query
           name: Lat
           type: number
         - default: -77.0404246
-          description: Center point Longitude, required if Latitude and Radius are
-            specified.
+          description: Center point Longitude, required if Latitude and Radius are specified.
           enum:
             - -77.0404246
           in: query
           name: Lon
           type: number
         - default: 500
-          description: Radius (meters) to include in the search area, required if Latitude
-            and Longitude are specified.
+          description: Radius (meters) to include in the search area, required if Latitude and Longitude are specified.
           enum:
             - 500
           in: query
@@ -3903,218 +3385,132 @@ paths:
       summary: JSON - Station Entrances
   /json/jStationInfo:
     get:
-      description: >-
+      description: |-
         <h4 class="text-primary">Description</h4>
 
-
         <p>Returns station location and address information based on a given
-
         StationCode.</p>
-
 
         <h4 class="text-primary">Response Elements</h4>
 
-
         <table class="table table-condensed table-hover">
-
         <thead>
-
         <tr>
-
         <th class="col-md-3">Element</th>
 
-
         <th>Description</th>
-
         </tr>
-
         </thead>
 
-
         <tbody>
-
         <tr>
-
         <td>Address</td>
 
-
         <td>
-
         Structure describing <a href="#Address">address</a> information.
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>Code</td>
 
-
         <td>Station code. Repeated from input.</td>
-
         </tr>
 
-
         <tr>
-
         <td>Lat</td>
 
-
         <td>Latitude.</td>
-
         </tr>
 
-
         <tr>
-
         <td>LineCode1</td>
 
-
         <td>Two-letter abbreviation for one line (e.g.: RD, BL, YL, OR, GR, or SV) served by this station. If the station has an additional platform, the lines served by the other platform are listed in the LineCodeX values for the record associated with the StationCode found in StationTogether1.</td>
-
         </tr>
 
-
         <tr>
-
         <td>LineCode2</td>
 
-
         <td>Additional line served by this station, if applicable.</td>
-
         </tr>
 
-
         <tr>
-
         <td>LineCode3</td>
 
-
         <td>Additional line served by this station, if applicable.</td>
-
         </tr>
 
-
         <tr>
-
         <td>LineCode4</td>
 
-
         <td>Additional line served by this station, if applicable. Currently not in use.</td>
-
         </tr>
 
-
         <tr>
-
         <td>Lon</td>
 
-
         <td>Longitude.</td>
-
         </tr>
 
-
         <tr>
-
         <td>Name</td>
 
-
         <td>Station name.</td>
-
         </tr>
 
-
         <tr>
-
         <td>StationTogether1</td>
 
-
         <td>For stations with multiple platforms (e.g.: Gallery Place, Fort
-
         Totten, L'Enfant Plaza, and Metro Center), the additional
-
         StationCode will be listed here.</td>
-
         </tr>
 
-
         <tr>
-
         <td>StationTogether2</td>
 
-
         <td>Similar in function to StationTogether2. Currently not in
-
         use.</td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a name="Address">Address Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>City</td>
 
-
         <td>City.</td>
-
         </tr>
 
-
         <tr>
-
         <td>State</td>
 
-
         <td>State (abbreviated).</td>
-
         </tr>
 
-
         <tr>
-
         <td>Street</td>
 
-
         <td>Street address (for GPS use).</td>
-
         </tr>
-
 
         <tr>
-
         <td>Zip</td>
 
-
         <td>Zip code.</td>
-
         </tr>
-
         </tbody>
-
         </table>
       operationId: 5476364f031f5909e4fe3310
       parameters:
         - default: A01
-          description: Station code.  Use the Station List method to return a list of all
-            station codes.
+          description: Station code.  Use the Station List method to return a list of all station codes.
           enum:
             - A01
           in: query
@@ -4149,268 +3545,155 @@ paths:
       summary: JSON - Station Information
   /json/jStationParking:
     get:
-      description: >-
+      description: |-
         <h4 class="text-primary">Description</h4>
 
-
         <p>Returns parking information at a station based on a given StationCode. Omit
-
         the StationCode to return parking information for all stations.</p>
 
-
         <p>If a station has no parking, the StationsParking element will contain no
-
         child elements.</p>
-
 
         <h4 class="text-primary">Response Elements</h4>
 
-
         <table class="table table-condensed table-hover">
-
         <thead>
-
         <tr>
-
         <th class="col-md-3">Element</th>
 
-
         <th>Description</th>
-
         </tr>
-
         </thead>
 
-
         <tbody>
-
         <tr>
-
         <td>StationsParking</td>
 
-
         <td>
-
         Array containing station parking information (<a href=
-
         "#StationParking">StationParking</a>).
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a id="StationParking" name="StationParking">StationParking
-
         Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>Code</td>
 
-
         <td>Station code. Useful when returning parking information for all
-
         stations. Use this value in other rail-related APIs to retrieve
-
         data about a station.</td>
-
         </tr>
 
-
         <tr>
-
         <td>Notes</td>
-
 
         <td>When not NULL, provides additional parking resources such as
-
         nearby lots.</td>
-
         </tr>
 
-
         <tr>
-
         <td>AllDayParking</td>
 
-
         <td>
-
         Structure describing <a href="#AllDayParking">all-day
-
         parking</a> options.
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>ShortTermParking</td>
 
-
         <td>
-
         Structure describing <a href="#ShortTermParking">short-term
-
         parking</a> options.
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a id="AllDayParking" name="AllDayParking">AllDayParking
-
         Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>TotalCount</td>
-
 
         <td>Number of all-day parking spots available at a station.</td>
-
         </tr>
 
-
         <tr>
-
         <td>RiderCost</td>
 
-
         <td>All-day cost per day (weekday) for Metro riders. NULL when no all-day
-
         spots are available. For most stations, this value is identical to
-
         the NonRiderCost.<br>
-
         <br>
-
         For cases where the NonRiderCost is different, the lower cost per
-
         day requires a valid rail trip using a SmarTrip&reg; card
-
         originating from a station other than the one where the patron
-
         parked. To receive this lower rate, patrons must pay for their
-
         parking with the same SmarTrip&reg; card used to enter/exit
-
         Metrorail, and must exit the parking lot within two hours of
-
         exiting Metrorail.</td>
-
         </tr>
 
-
         <tr>
-
         <td>NonRiderCost</td>
 
-
         <td>All-day cost per day (weekday) for non-Metro riders. NULL when no all-day
-
         spots are available.</td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a id="ShortTermParking" name=
-
         "ShortTermParking">ShortTermParking Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>SaturdayRiderCost</td>
 
-
         <td>Similar to RiderCost, except denoting Saturday prices.</td>
-
         </tr>
 
-
         <tr>
-
         <td>SaturdayNonRiderCost</td>
 
-
         <td>Similar to NonRiderCost, except denoting Saturday prices.</td>
-
         </tr>
 
-
         <tr>
-
         <td>TotalCount</td>
 
-
         <td>Number of short-term parking spots available at a station
-
         (parking meters).</td>
-
         </tr>
-
 
         <tr>
-
         <td>Notes</td>
 
-
         <td>Misc. information relating to short-term parking. NULL when no
-
         short-term spots are available.</td>
-
         </tr>
-
         </tbody>
-
         </table>
       operationId: 5476364f031f5909e4fe330d
       parameters:
-        - description: Station code.  Use the Station List method to return a list of all
-            station codes.
+        - description: Station code.  Use the Station List method to return a list of all station codes.
           enum:
             - E08
             - F06
@@ -4423,7 +3706,7 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "StationsParking": [
                       {
@@ -4450,21 +3733,17 @@ paths:
 
         \r
 
-        <p>Returns opening and scheduled first/last train times based on
-        a given\r
+        <p>Returns opening and scheduled first/last train times based on a given\r
 
-        StationCode. Omit the StationCode to return timing information
-        for all\r
+        StationCode. Omit the StationCode to return timing information for all\r
 
         stations.</p>\r
 
         \r
 
-        <p>Note that for stations with multiple platforms (e.g.: Metro
-        Center, L'Enfant\r
+        <p>Note that for stations with multiple platforms (e.g.: Metro Center, L'Enfant\r
 
-        Plaza, etc.), a distinct call is required for each StationCode
-        to retrieve the\r
+        Plaza, etc.), a distinct call is required for each StationCode to retrieve the\r
 
         full set of train times at such stations.</p>\r
 
@@ -4676,8 +3955,7 @@ paths:
 
         \r
 
-        <td>Station code for the train's destination. Use this value
-        in\r
+        <td>Station code for the train's destination. Use this value in\r
 
         other rail-related APIs to retrieve data about a station.</td>\r
 
@@ -4707,13 +3985,11 @@ paths:
 
         \r
 
-        <td>Last train leaves the station at this time. Format is
-        HH:mm.\r
+        <td>Last train leaves the station at this time. Format is HH:mm.\r
 
         Note that when the time is AM, it signifies the next day. For\r
 
-        example, a value of 02:30 under a Saturday element means the
-        last\r
+        example, a value of 02:30 under a Saturday element means the last\r
 
         train leaves on Sunday at 2:30 AM.</td>\r
 
@@ -4727,8 +4003,7 @@ paths:
 
         \r
 
-        <td>Station code for the train's destination. Use this value
-        in\r
+        <td>Station code for the train's destination. Use this value in\r
 
         other rail-related APIs to retrieve data about a station.</td>\r
 
@@ -4740,8 +4015,7 @@ paths:
       operationId: 5476364f031f5909e4fe3312
       parameters:
         - default: E10
-          description: Station code.  Use the Station List method to return a list of all
-            station codes.
+          description: Station code.  Use the Station List method to return a list of all station codes.
           enum:
             - E10
           in: query
@@ -4870,245 +4144,145 @@ paths:
       summary: JSON - Station Timings
   /json/jStations:
     get:
-      description: >-
+      description: |-
         <h4 class="text-primary">Description</h4>
 
-
         <p>Returns a list of station location and address information based on a given
-
         LineCode. Omit the LineCode to return all stations. The response is an array of
-
         objects identical to those returned in the Station Information method.</p>
-
 
         <h4 class="text-primary">Response Elements</h4>
 
-
         <table class="table table-condensed table-hover">
-
         <thead>
-
         <tr>
-
         <th class="col-md-3">Element</th>
 
-
         <th>Description</th>
-
         </tr>
-
         </thead>
 
-
         <tbody>
-
         <tr>
-
         <td>Stations</td>
 
-
         <td>
-
         Array containing station information (<a href=
-
         "#Station">Station</a>).
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a id="Station" name="Station">Station Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>Address</td>
 
-
         <td>
-
         Structure describing <a href="#Address">address</a> information.
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>Code</td>
 
-
         <td>Station code. Repeated from input.</td>
-
         </tr>
 
-
         <tr>
-
         <td>Lat</td>
 
-
         <td>Latitude.</td>
-
         </tr>
 
-
         <tr>
-
         <td>LineCode1</td>
 
-
         <td>Two-letter abbreviation for one line (e.g.: RD, BL, YL, OR, GR, or SV) served by this station. If the station has an additional platform, the lines served by the other platform are listed in the LineCodeX values for the record associated with the StationCode found in StationTogether1.</td>
-
         </tr>
 
-
         <tr>
-
         <td>LineCode2</td>
 
-
         <td>Additional line served by this station, if applicable.</td>
-
         </tr>
 
-
         <tr>
-
         <td>LineCode3</td>
 
-
         <td>Additional line served by this station, if applicable.</td>
-
         </tr>
 
-
         <tr>
-
         <td>LineCode4</td>
 
-
         <td>Additional line served by this station, if applicable. Currently not in use.</td>
-
         </tr>
 
-
         <tr>
-
         <td>Lon</td>
 
-
         <td>Longitude.</td>
-
         </tr>
 
-
         <tr>
-
         <td>Name</td>
 
-
         <td>Station name.</td>
-
         </tr>
 
-
         <tr>
-
         <td>StationTogether1</td>
 
-
         <td>For stations with multiple platforms (e.g.: Gallery Place, Fort
-
         Totten, L'Enfant Plaza, and Metro Center), the additional
-
         StationCode will be listed here.</td>
-
         </tr>
 
-
         <tr>
-
         <td>StationTogether2</td>
 
-
         <td>Similar in function to StationTogether2. Currently not in
-
         use.</td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a id="Address" name="Address">Address Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>City</td>
 
-
         <td>City.</td>
-
         </tr>
 
-
         <tr>
-
         <td>State</td>
 
-
         <td>State (abbreviated).</td>
-
         </tr>
 
-
         <tr>
-
         <td>Street</td>
 
-
         <td>Street address (for GPS use).</td>
-
         </tr>
-
 
         <tr>
-
         <td>Zip</td>
 
-
         <td>Zip code.</td>
-
         </tr>
-
         </tbody>
-
         </table>
       operationId: 5476364f031f5909e4fe3311
       parameters:

@@ -7,147 +7,89 @@ info:
     email: contact@portfoliooptimizer.io
     name: Support
     url: https://portfoliooptimizer.io/
-  description: >
-    Portfolio Optimizer is a [Web
-    API](https://en.wikipedia.org/wiki/Web_API) to optimize the composition of
-    investment portfolios (collection of financial assets such as stocks, bonds,
-    ETFs, crypto-currencies) using modern portfolio theory-like algorithms
-    (mean-variance, etc.).
-
+  description: |
+    Portfolio Optimizer is a [Web API](https://en.wikipedia.org/wiki/Web_API) to optimize the composition of investment portfolios (collection of financial assets such as stocks, bonds, ETFs, crypto-currencies) using modern portfolio theory-like algorithms (mean-variance, etc.).
 
     # API General Information
 
-
     Portfolio Optimizer is based on [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) for easy integration, uses [JSON](https://en.wikipedia.org/wiki/JSON) for the exchange of data and uses the two most common [HTTP verbs](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) (`GET`, `POST`) to represent the actions.
 
-
     Portfolio Optimizer is also as secured as a Web API could be: 
-
     * [256-bit HTTPS Encryption](https://en.wikipedia.org/wiki/HTTPS)
-
     * No usage of cookies
-
     * No usage of personal data  
 
-
     ## API Headers 
-
     The following HTTP header(s) are required when calling Portfolio Optimizer endpoints:
-
     * `Content-type: application/json`  
       This header specifies that the data provided in input to the endpoint is in JSON format
 
     The following HTTP header(s) are optional when calling Portfolio Optimizer endpoints:
-
     * `X-API-Key: <private API key>`  
       This header enables [authenticated users](#auth) to provide their private [API key](#overview--api-key) in order to [benefit from higher API limits](#overview--api-limits)
 
     ## API Key
-
     Portfolio Optimizer is free to use, but not free to run.
-
 
     In order to obtain an API key and benefit from [higher API limits](#overview--api-limits), a *small* participation to Portfolio Optimizer running costs is required.
 
-
     This participation takes the form of coffee(s), with one coffee = one month of usage.
-
 
     <p><a href="https://www.buymeacoffee.com/portfolioopt"><img alt='Buy a Coffee at buymeacoffee.com' src="https://img.buymeacoffee.com/button-api/?text=Buymeacoffee.com&emoji=&slug=portfolioopt&button_colour=000000&font_colour=ffffff&font_family=Cookie&outline_colour=ffffff&coffee_colour=FFDD00"></a></p>
 
 
-
     > **Notes:** 
-
     > * Please make sure not to expose your API key publicly!
-
 
     ## API Limits 
 
-
     Portfolio Optimizer comes with *fairly reasonable* API limits.
 
-
     For anonymous users:  
-
     * The API requests are restricted to a subset of all the available endpoints and/or endpoints features  
-
     * The API requests are limited to 1 request per second for all the anonymous users combined, with concurrent requests rejected 
-
     * The API requests are limited to 1 second of execution time
-
     * The API requests are limited to 20 assets, 100 portfolios, 500 series data points
 
-
     For authenticated users with an [API key](#overview--api-key):  
-
     * The API requests have access to all the available endpoints and endpoints features
-
     * The API requests are limited to 10000 requests per 24 hour per API key, with concurrent requests queued
-
     * The API requests are limited to 2.5 seconds of execution time
-
     * The API requests are limited to 100 assets, 500 portfolios, 2500 series data points
 
-
     > **Notes:** 
-
     > * It is possible to further relax the API limits, or to disable the API limits alltogether; please [contact the support](https://portfoliooptimizer.io/contact/) for more details.
-
     > * Information on the API rate limits are provided in response messages HTTP headers `x-ratelimit-*`:  
-
     >   * `x-ratelimit-limit-second`, the limit on the number of API requests per second
-
     >   * `x-ratelimit-remaining-second`, the number of remaining API requests in the current second    
-
     >   * `x-ratelimit-limit-minute`, the limit on the number of API requests per minute
-
     >   * ...
 
-
     ## API Regions
-
     Portfolio Optimizer servers are located in Western Europe.
 
-
     > **Notes:** 
-
     > * It is possible to deploy Portfolio Optimizer in other geographical regions, for example to improve the API latency; please [contact the support](https://portfoliooptimizer.io/contact/) for more details. 
-
 
     ## API Response Codes       
 
-
     Standard [HTTP response codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) are used by Portfolio Optimizer to provide details on the status of API requests.
 
-
     | HTTP Code | Description | Notes |
-
     | --------- | ----------- | ----- |
-
     | 200 | Request successfully processed | - |
-
     | 400 | Request failed to be processed because of incorrect content | The response message body contains information on the incorrect content |
-
     | 401 | Request failed to be processed because of invalid API key | - |
-
     | 404 | Request failed to be processed because of non existing endpoint | The requested endpoint might exist, but needs to be accessed with another HTTP method (e.g., `POST` instead of `GET`) |
-
     | 429 | Request failed to be processed because of API limits violated | The response message HTTP headers `x-ratelimit-*` contain information on the [API limits](#overview--api-limits) |
-
     | 500 | Request failed to be processed because of an internal error | Something went wrong on Portfolio Optimizer side, do not hesitate to [report the issue](#overview--support) |
-
     | 502 | Request failed to be processed because of a temporary connectivity error | Something went wrong on Portfolio Optimizer side, please check the [API status](#overview--api-status) and do not hesitate to [report the issue](#overview--support) |
-
 
     ## API Status  
 
-
     Portfolio Optimizer is monitored 24/7 by [UptimeRobot](https://stats.uptimerobot.com/wgW71SL1AW).
 
-
     # Support
-
 
     For any issue or question about Portfolio Optimizer, please do not hesitate to [contact the support](https://portfoliooptimizer.io/contact/).
   license:
@@ -174,8 +116,8 @@ tags:
   - name: Assets Correlation Matrix
   - name: Assets Covariance Matrix
   - name: Assets Returns
-  - name: Assets Variances
-  - name: Assets Volatilities
+  - name: Assets Variance
+  - name: Assets Volatility
   - name: Portfolio Analysis
   - name: Portfolio Construction
   - name: Portfolio Generation
@@ -183,24 +125,19 @@ tags:
 paths:
   /assets/correlation/matrix:
     post:
-      description: >
+      description: |
         Compute the Pearson correlation matrix of assets from either:  
-
         * The assets returns
-
         * The assets covariance matrix
 
-
         References
-
         * [Wikipedia, Correlation and Dependence](https://en.wikipedia.org/wiki/Correlation_and_dependence#Correlation_matrices)
       requestBody:
         content:
           application/json:
             examples:
               From covariance matrix:
-                description: Computes the correlation matrix of 2 assets based on their
-                  covariance matrix
+                description: Computes the correlation matrix of 2 assets based on their covariance matrix
                 value:
                   assets: 2
                   assetsCovarianceMatrix:
@@ -209,8 +146,7 @@ paths:
                     - - -0.0025
                       - 0.0025
               From returns:
-                description: Computes the correlation matrix of 2 assets based on 4 returns per
-                  asset
+                description: Computes the correlation matrix of 2 assets based on 4 returns per asset
                 value:
                   assets:
                     - assetReturns:
@@ -230,9 +166,7 @@ paths:
                       items:
                         properties:
                           assetReturns:
-                            description: assetReturns[t] is the return of the asset from the time t to the
-                              time t+1, in percentage; all the assetReturns
-                              arrays must have the same length
+                            description: assetReturns[t] is the return of the asset from the time t to the time t+1, in percentage; all the assetReturns arrays must have the same length
                             items:
                               type: number
                             minItems: 2
@@ -251,8 +185,7 @@ paths:
                       minimum: 2
                       type: integer
                     assetsCovarianceMatrix:
-                      description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                        and the asset j
+                      description: assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j
                       items:
                         items:
                           type: number
@@ -281,8 +214,7 @@ paths:
               schema:
                 properties:
                   assetsCorrelationMatrix:
-                    description: assetsCorrelationMatrix[i][j] is the correlation between the asset
-                      i and the asset j
+                    description: assetsCorrelationMatrix[i][j] is the correlation between the asset i and the asset j
                     items:
                       items:
                         type: number
@@ -300,23 +232,17 @@ paths:
       x-codegen-request-body-name: body
   /assets/correlation/matrix/nearest:
     post:
-      description: >
-        Compute the _closest_ correlation matrix to an approximate
-        correlation matrix, optionally keeping a selected number of correlations
-        fixed, _closest_ being defined in terms of [the Frobenius
-        norm](https://en.wikipedia.org/wiki/Matrix_norm#Frobenius_norm).
-
+      description: |
+        Compute the _closest_ correlation matrix to an approximate correlation matrix, optionally keeping a selected number of correlations fixed, _closest_ being defined in terms of [the Frobenius norm](https://en.wikipedia.org/wiki/Matrix_norm#Frobenius_norm).
 
         References
-
         * [Nicholas J. Higham, Computing the Nearest Correlation Matrix—A Problem from Finance, IMA J. Numer. Anal. 22, 329–343, 2002.](http://www.maths.manchester.ac.uk/~higham/narep/narep369.pdf)
       requestBody:
         content:
           application/json:
             examples:
               Nearest correlation matrix:
-                description: Compute the nearest correlation matrix to an approximate
-                  correlation matrix
+                description: Compute the nearest correlation matrix to an approximate correlation matrix
                 value:
                   assets: 3
                   assetsApproximateCorrelationMatrix:
@@ -330,8 +256,7 @@ paths:
                       - 1
                       - 1
               Nearest correlation matrix with fixed a correlation:
-                description: Compute the nearest correlation matrix to an approximate
-                  correlation matrix, keeping one correlation coefficient fixed
+                description: Compute the nearest correlation matrix to an approximate correlation matrix, keeping one correlation coefficient fixed
                 value:
                   assets: 3
                   assetsApproximateCorrelationMatrix:
@@ -353,8 +278,7 @@ paths:
                   minimum: 2
                   type: integer
                 assetsApproximateCorrelationMatrix:
-                  description: assetsApproximateCorrelationMatrix[i][i] is the approximate
-                    correlation between the asset i and the asset j
+                  description: assetsApproximateCorrelationMatrix[i][i] is the approximate correlation between the asset i and the asset j
                   items:
                     items:
                       type: number
@@ -363,9 +287,7 @@ paths:
                   minItems: 2
                   type: array
                 assetsFixedCorrelations:
-                  description: assetsFixedCorrelations[k] is the couple of indices (i,j) of the
-                    assets i and j for which to keep the approximate correlation
-                    assetsApproximateCorrelationMatrix[i][j] fixed
+                  description: assetsFixedCorrelations[k] is the couple of indices (i,j) of the assets i and j for which to keep the approximate correlation assetsApproximateCorrelationMatrix[i][j] fixed
                   items:
                     items:
                       type: integer
@@ -397,8 +319,7 @@ paths:
                         - 0.7606306078350177
                         - 1
                 Nearest correlation matrix with fixed a correlation:
-                  description: Computed nearest correlation matrix keeping one correlation
-                    coefficient fixed
+                  description: Computed nearest correlation matrix keeping one correlation coefficient fixed
                   value:
                     assetsCorrelationMatrix:
                       - - 1
@@ -413,8 +334,7 @@ paths:
               schema:
                 properties:
                   assetsCorrelationMatrix:
-                    description: assetsCorrelationMatrix[i][j] is the correlation between the asset
-                      i and the asset j
+                    description: assetsCorrelationMatrix[i][j] is the correlation between the asset i and the asset j
                     items:
                       items:
                         type: number
@@ -432,12 +352,10 @@ paths:
       x-codegen-request-body-name: body
   /assets/correlation/matrix/validation:
     post:
-      description: >
+      description: |
         Validate whether a matrix is a correlation matrix.
 
-
         References
-
         * [Wikipedia, Correlation and Dependence](https://en.wikipedia.org/wiki/Correlation_and_dependence#Correlation_matrices)
       requestBody:
         content:
@@ -458,8 +376,7 @@ paths:
                   minimum: 2
                   type: integer
                 assetsCorrelationMatrix:
-                  description: assetsCorrelationMatrix[i][j] is the correlation between the asset
-                    i and the asset j
+                  description: assetsCorrelationMatrix[i][j] is the correlation between the asset i and the asset j
                   items:
                     items:
                       type: number
@@ -488,10 +405,8 @@ paths:
                     enum:
                       - valid correlation matrix
                       - invalid correlation matrix - non symmetric matrix
-                      - invalid correlation matrix - non positive diagonal
-                        elements
-                      - invalid correlation matrix - non positive semi-definite
-                        matrix
+                      - invalid correlation matrix - non positive diagonal elements
+                      - invalid correlation matrix - non positive semi-definite matrix
                     type: string
                 required:
                   - message
@@ -503,26 +418,20 @@ paths:
       x-codegen-request-body-name: body
   /assets/covariance/matrix:
     post:
-      description: >
+      description: |
         Compute the covariance matrix of assets from either:  
-
         * The assets correlation matrix and their volatilities (i.e., standard deviations)
-
         * The assets correlation matrix and their variances
-
         * The assets returns
 
-
         References
-
         * [Wikipedia, Covariance Matrix](https://en.wikipedia.org/wiki/Covariance_matrix)
       requestBody:
         content:
           application/json:
             examples:
               From assets correlation matrix and standard deviations:
-                description: Compute the covariance matrix of 2 assets based on their
-                  correlation matrix and their standard deviations
+                description: Compute the covariance matrix of 2 assets based on their correlation matrix and their standard deviations
                 value:
                   assets: 2
                   assetsCorrelationMatrix:
@@ -534,8 +443,7 @@ paths:
                     - 0.1
                     - 0.05
               From assets correlation matrix and variances:
-                description: Compute the covariance matrix of 2 assets based on their
-                  correlation matrix and their variances
+                description: Compute the covariance matrix of 2 assets based on their correlation matrix and their variances
                 value:
                   assets: 2
                   assetsCorrelationMatrix:
@@ -547,8 +455,7 @@ paths:
                     - 0.01
                     - 0.0025
               From assets returns:
-                description: Compute the covariance matrix of 2 assets based on 4 returns per
-                  asset
+                description: Compute the covariance matrix of 2 assets based on 4 returns per asset
                 value:
                   assets:
                     - assetReturns:
@@ -568,9 +475,7 @@ paths:
                       items:
                         properties:
                           assetReturns:
-                            description: assetReturns[t] is the return of the asset from the time t to the
-                              time t+1, in percentage; all the assetReturns
-                              arrays must have the same length
+                            description: assetReturns[t] is the return of the asset from the time t to the time t+1, in percentage; all the assetReturns arrays must have the same length
                             items:
                               type: number
                             minItems: 2
@@ -589,8 +494,7 @@ paths:
                       minimum: 2
                       type: integer
                     assetsCorrelationMatrix:
-                      description: assetsCorrelationMatrix[i][j] is the correlation between the asset
-                        i and the asset j
+                      description: assetsCorrelationMatrix[i][j] is the correlation between the asset i and the asset j
                       items:
                         items:
                           type: number
@@ -616,8 +520,7 @@ paths:
                       minimum: 2
                       type: integer
                     assetsCorrelationMatrix:
-                      description: assetsCorrelationMatrix[i][j] is the correlation between the asset
-                        i and the asset j
+                      description: assetsCorrelationMatrix[i][j] is the correlation between the asset i and the asset j
                       items:
                         items:
                           type: number
@@ -670,8 +573,7 @@ paths:
               schema:
                 properties:
                   assetsCovarianceMatrix:
-                    description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                      and the asset j
+                    description: assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j
                     items:
                       items:
                         type: number
@@ -689,23 +591,19 @@ paths:
       x-codegen-request-body-name: body
   /assets/covariance/matrix/sample:
     post:
-      description: >
+      description: |
         Compute the sample covariance matrix of assets returns.
-
 
         > This endpoint is similar to the endpoint [`/assets/covariance/matrix`](#post-/assets/covariance/matrix), but uses [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction) to compute the covariance matrix.
 
-
         References
-
         * [Wikipedia, Sample Mean and Covariance](https://en.wikipedia.org/wiki/Sample_mean_and_covariance)
       requestBody:
         content:
           application/json:
             examples:
               Example:
-                description: Computes the sample covariance matrix of 2 assets based on 4
-                  returns per asset
+                description: Computes the sample covariance matrix of 2 assets based on 4 returns per asset
                 value:
                   assets:
                     - assetReturns:
@@ -724,9 +622,7 @@ paths:
                   items:
                     properties:
                       assetReturns:
-                        description: assetReturns[t] is the return of the asset from the time t to the
-                          time t+1, in percentage; all the assetReturns arrays
-                          must have the same length
+                        description: assetReturns[t] is the return of the asset from the time t to the time t+1, in percentage; all the assetReturns arrays must have the same length
                         items:
                           type: number
                         minItems: 2
@@ -756,8 +652,7 @@ paths:
               schema:
                 properties:
                   assetsCovarianceMatrix:
-                    description: assetsCovarianceMatrix[i][j] is the sample covariance between the
-                      asset i returns and the asset j returns
+                    description: assetsCovarianceMatrix[i][j] is the sample covariance between the asset i returns and the asset j returns
                     items:
                       items:
                         type: number
@@ -775,12 +670,10 @@ paths:
       x-codegen-request-body-name: body
   /assets/covariance/matrix/validation:
     post:
-      description: >
+      description: |
         Validate whether a matrix is a covariance matrix.
 
-
         References
-
         * [Wikipedia, Covariance Matrix](https://en.wikipedia.org/wiki/Covariance_matrix)
       requestBody:
         content:
@@ -802,8 +695,7 @@ paths:
                   minimum: 2
                   type: integer
                 assetsCovarianceMatrix:
-                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                    and the asset j
+                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j
                   items:
                     items:
                       type: number
@@ -832,10 +724,8 @@ paths:
                     enum:
                       - valid covariance matrix
                       - invalid covariance matrix - non symmetric matrix
-                      - invalid covariance matrix - non positive diagonal
-                        elements
-                      - invalid covariance matrix - non positive semi-definite
-                        matrix
+                      - invalid covariance matrix - non positive diagonal elements
+                      - invalid covariance matrix - non positive semi-definite matrix
                     type: string
                 required:
                   - message
@@ -847,21 +737,17 @@ paths:
       x-codegen-request-body-name: body
   /assets/returns:
     post:
-      description: >
-        Compute the arithmetic return(s) of one or several asset(s) for one
-        or several time period(s).
-
+      description: |
+        Compute the arithmetic return(s) of one or several asset(s) for one or several time period(s).
 
         References
-
         * [Wikipedia, Rate of Return](https://en.wikipedia.org/wiki/Rate_of_return#Return)
       requestBody:
         content:
           application/json:
             examples:
               Example:
-                description: Compute the arithmetic returns of 2 assets, one with prices 1,2 and
-                  the other with prices 2,3,6
+                description: Compute the arithmetic returns of 2 assets, one with prices 1,2 and the other with prices 2,3,6
                 value:
                   assets:
                     - assetPrices:
@@ -899,9 +785,7 @@ paths:
             application/json:
               examples:
                 Example:
-                  description: Computed an arithmetic return of 100% for the first asset and
-                    arithmetic returns of respectively 50% and 100% for the
-                    second asset
+                  description: Computed an arithmetic return of 100% for the first asset and arithmetic returns of respectively 50% and 100% for the second asset
                   value:
                     assets:
                       - assetReturns:
@@ -915,8 +799,7 @@ paths:
                     items:
                       properties:
                         assetReturns:
-                          description: assetReturns[t] is the arithmetic return of the asset from the time
-                            t to the time t+1, in percentage
+                          description: assetReturns[t] is the arithmetic return of the asset from the time t to the time t+1, in percentage
                           items:
                             type: number
                           type: array
@@ -934,21 +817,17 @@ paths:
       x-codegen-request-body-name: body
   /assets/returns/average:
     post:
-      description: >
-        Compute the arithmetic average of the return(s) of one or several
-        asset(s).
-
+      description: |
+        Compute the arithmetic average of the return(s) of one or several asset(s).
 
         References
-
         * [Wikipedia, Arithmetic Average Rate of Return](https://en.wikipedia.org/wiki/Rate_of_return#Arithmetic_average_rate_of_return)
       requestBody:
         content:
           application/json:
             examples:
               Example:
-                description: Compute the arithmetic average return of 2 assets, one with returns
-                  10%, -5% and the other with returns 0%,-1%,1%
+                description: Compute the arithmetic average return of 2 assets, one with returns 10%, -5% and the other with returns 0%,-1%,1%
                 value:
                   assets:
                     - assetReturns:
@@ -964,8 +843,7 @@ paths:
                   items:
                     properties:
                       assetReturns:
-                        description: assetReturns[t] is the return of the asset from the time t to the
-                          time t+1, in percentage
+                        description: assetReturns[t] is the return of the asset from the time t to the time t+1, in percentage
                         items:
                           type: number
                         minItems: 1
@@ -985,8 +863,7 @@ paths:
             application/json:
               examples:
                 Example:
-                  description: Computed average arithmetic return of 2.5% for the first asset, and
-                    average arithmetic return of 0% for the second asset
+                  description: Computed average arithmetic return of 2.5% for the first asset, and average arithmetic return of 0% for the second asset
                   value:
                     assets:
                       - assetAverageReturn: 0.025
@@ -1061,8 +938,7 @@ paths:
                       items:
                         properties:
                           assetReturns:
-                            description: assetReturns[t] is the return of the asset from the time t to the
-                              time t+1, in percentage
+                            description: assetReturns[t] is the return of the asset from the time t to the time t+1, in percentage
                             items:
                               type: number
                             minItems: 2
@@ -1081,8 +957,7 @@ paths:
                       minimum: 2
                       type: integer
                     assetsCovarianceMatrix:
-                      description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                        and the asset j
+                      description: assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j
                       items:
                         items:
                           type: number
@@ -1157,15 +1032,12 @@ paths:
       x-codegen-request-body-name: body
   /assets/variance/sample:
     post:
-      description: >
-        Compute the sample variance of one or several asset(s) from the
-        asset(s) returns.
+      description: |
+        Compute the sample variance of one or several asset(s) from the asset(s) returns.
                 
         > This endpoint is similar to the endpoint [`/assets/variance`](#post-/assets/variance), but uses [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction) to compute the variance.
 
-
         References
-
         * [Wikipedia, Variance](https://en.wikipedia.org/wiki/Variance)        
       requestBody:
         content:
@@ -1190,8 +1062,7 @@ paths:
                   items:
                     properties:
                       assetReturns:
-                        description: assetReturns[t] is the return of the asset from the time t to the
-                          time t+1, in percentage
+                        description: assetReturns[t] is the return of the asset from the time t to the time t+1, in percentage
                         items:
                           type: number
                         minItems: 2
@@ -1239,19 +1110,13 @@ paths:
       x-codegen-request-body-name: body
   /assets/volatility:
     post:
-      description: >
-        Compute the volatility (i.e., standard deviation) of one or several
-        asset(s) from either:  
-
+      description: |
+        Compute the volatility (i.e., standard deviation) of one or several asset(s) from either:  
         * The asset(s) returns
-
         * The assets covariance matrix
-
         * The asset(s) variance
 
-
         References
-
         * [Wikipedia, Standard Deviation](https://en.wikipedia.org/wiki/Standard_deviation)
       requestBody:
         content:
@@ -1293,8 +1158,7 @@ paths:
                       items:
                         properties:
                           assetReturns:
-                            description: assetReturns[t] is the return of the asset from the time t to the
-                              time t+1, in percentage
+                            description: assetReturns[t] is the return of the asset from the time t to the time t+1, in percentage
                             items:
                               type: number
                             minItems: 2
@@ -1313,8 +1177,7 @@ paths:
                       minimum: 2
                       type: integer
                     assetsCovarianceMatrix:
-                      description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                        and the asset j
+                      description: assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j
                       items:
                         items:
                           type: number
@@ -1389,16 +1252,12 @@ paths:
       x-codegen-request-body-name: body
   /assets/volatility/sample:
     post:
-      description: >
-        Compute the sample volatility (i.e., sample standard deviation) of
-        one or several asset(s) from the asset(s) returns.
-
+      description: |
+        Compute the sample volatility (i.e., sample standard deviation) of one or several asset(s) from the asset(s) returns.
 
         > This endpoint is similar to the endpoint [`/assets/volatility`](#post-/assets/volatility), but uses [Bessel's correction](https://en.wikipedia.org/wiki/Bessel%27s_correction) to compute the volatility.
 
-
         References
-
         * [Wikipedia, Standard Deviation](https://en.wikipedia.org/wiki/Standard_deviation)
       requestBody:
         content:
@@ -1423,8 +1282,7 @@ paths:
                   items:
                     properties:
                       assetReturns:
-                        description: assetReturns[t] is the return of the asset from the time t to the
-                          time t+1, in percentage
+                        description: assetReturns[t] is the return of the asset from the time t to the time t+1, in percentage
                         items:
                           type: number
                         minItems: 2
@@ -1473,32 +1331,28 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/analysis/contributions/return:
     post:
-      description: >
-        Perform a return contribution analysis of one or several
-        portfolio(s), optionally using groups of assets.
-
+      description: |
+        Perform a return contribution analysis of one or several portfolio(s), optionally using groups of assets.
 
         References
-
         * Carl R. Bacon, Practical Portfolio Performance Measurement and Attribution
       requestBody:
         content:
           application/json:
             examples:
               Example:
-                description: Perform a return contributions analysis of a portfolio made of 3
-                  assets with the first 2 assets grouped together
+                description: Perform a return contributions analysis of a portfolio made of 3 assets with the first 2 assets grouped together
                 value:
                   assets: 3
+                  assetsGroups:
+                    - - 1
+                      - 2
                   assetsReturns:
                     - 0.01
                     - -0.01
                     - 0.025
                   portfolios:
-                    - assetsGroups:
-                        - - 1
-                          - 2
-                      assetsWeights:
+                    - assetsWeights:
                         - 0.5
                         - 0.25
                         - 0.25
@@ -1508,6 +1362,17 @@ paths:
                   description: The number of assets
                   minimum: 1
                   type: integer
+                assetsGroups:
+                  items:
+                    description: assetsGroups[k] is the indexes of the assets belonging to the assets group k
+                    items:
+                      minimum: 1
+                      type: integer
+                    minItems: 2
+                    type: array
+                    uniqueItems: true
+                  minItems: 1
+                  type: array
                 assetsReturns:
                   description: assetsReturns[i] is the arithmetic return of asset i
                   items:
@@ -1517,21 +1382,8 @@ paths:
                 portfolios:
                   items:
                     properties:
-                      assetsGroups:
-                        items:
-                          description: assetsGroups[k] is the indexes of the assets belonging to the
-                            assets group k in the portfolio
-                          items:
-                            minimum: 1
-                            type: integer
-                          minItems: 2
-                          type: array
-                          uniqueItems: true
-                        minItems: 1
-                        type: array
                       assetsWeights:
-                        description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                          percentage
+                        description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                         items:
                           maximum: 1
                           minimum: 0
@@ -1555,8 +1407,7 @@ paths:
             application/json:
               examples:
                 Example:
-                  description: Computed the return contributions of 3 assets and 2 groups of
-                    assets
+                  description: Computed the return contributions of 3 assets and 2 groups of assets
                   value:
                     portfolios:
                       - assetsGroupsReturnContributions:
@@ -1572,15 +1423,13 @@ paths:
                     items:
                       properties:
                         assetsGroupsReturnContributions:
-                          description: assetsGroupsReturnContributions[k] is the return contribution of
-                            the group of assets k to the return of the portfolio
+                          description: assetsGroupsReturnContributions[k] is the return contribution of the group of assets k to the return of the portfolio
                           items:
                             type: number
                           minItems: 1
                           type: array
                         assetsReturnContributions:
-                          description: assetsReturnContributions[i] is the return contribution of the
-                            asset i to the return of the portfolio
+                          description: assetsReturnContributions[i] is the return contribution of the asset i to the return of the portfolio
                           items:
                             type: number
                           minItems: 1
@@ -1599,21 +1448,17 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/analysis/contributions/risk:
     post:
-      description: >
-        Perform a risk contribution analysis of one or several
-        portfolio(s), optionally using groups of assets.
-
+      description: |
+        Perform a risk contribution analysis of one or several portfolio(s), optionally using groups of assets.
 
         References
-
         * Carl R. Bacon, Practical Portfolio Performance Measurement and Attribution
       requestBody:
         content:
           application/json:
             examples:
               Example:
-                description: Perform a risk contributions analysis of a portfolio made of 3
-                  assets
+                description: Perform a risk contributions analysis of a portfolio made of 3 assets
                 value:
                   assets: 3
                   assetsCovarianceMatrix:
@@ -1638,8 +1483,7 @@ paths:
                   minimum: 1
                   type: integer
                 assetsCovarianceMatrix:
-                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                    and the asset j
+                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j
                   items:
                     items:
                       type: number
@@ -1647,24 +1491,22 @@ paths:
                     type: array
                   minItems: 2
                   type: array
+                assetsGroups:
+                  items:
+                    description: assetsGroups[k] is the indexes of the assets belonging to the assets group k
+                    items:
+                      minimum: 1
+                      type: integer
+                    minItems: 2
+                    type: array
+                    uniqueItems: true
+                  minItems: 1
+                  type: array
                 portfolios:
                   items:
                     properties:
-                      assetsGroups:
-                        items:
-                          description: assetsGroups[k] is the indexes of the assets belonging to the
-                            assets group k in the portfolio
-                          items:
-                            minimum: 1
-                            type: integer
-                          minItems: 2
-                          type: array
-                          uniqueItems: true
-                        minItems: 1
-                        type: array
                       assetsWeights:
-                        description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                          percentage
+                        description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                         items:
                           maximum: 1
                           minimum: 0
@@ -1701,15 +1543,13 @@ paths:
                     items:
                       properties:
                         assetsGroupsRiskContributions:
-                          description: assetsGroupsRiskContributions[k] is the risk contribution of the
-                            group of assets k to the risk of the portfolio
+                          description: assetsGroupsRiskContributions[k] is the risk contribution of the group of assets k to the risk of the portfolio
                           items:
                             type: number
                           minItems: 1
                           type: array
                         assetsRiskContributions:
-                          description: assetsRiskContributions[i] is the risk contribution of the asset i
-                            to the risk of the portfolio
+                          description: assetsRiskContributions[i] is the risk contribution of the asset i to the risk of the portfolio
                           items:
                             type: number
                           minItems: 1
@@ -1728,12 +1568,10 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/analysis/diversification-ratio:
     post:
-      description: >
+      description: |
         Compute the diversification ratio of one or several portfolio(s).
 
-
         References
-
         * [Yves Choueifaty and Yves Coignard, Toward Maximum Diversification, The Journal of Portfolio Management Fall 2008, 35 (1) 40-51](https://doi.org/10.3905/JPM.2008.35.1.40)
       requestBody:
         content:
@@ -1759,8 +1597,7 @@ paths:
                   minimum: 2
                   type: integer
                 assetsCovarianceMatrix:
-                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                    and the asset j
+                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j
                   items:
                     items:
                       type: number
@@ -1772,8 +1609,7 @@ paths:
                   items:
                     properties:
                       assetsWeights:
-                        description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                          percentage
+                        description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                         items:
                           maximum: 1
                           minimum: 0
@@ -1824,22 +1660,17 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/analysis/drawdowns:
     post:
-      description: >
-        Compute the drawdown function - also called the underwater equity
-        curve -, as well as the worst 10 drawdowns of one or several
-        portfolio(s).
-
+      description: |
+        Compute the drawdown function - also called the underwater equity curve -, as well as the worst 10 drawdowns of one or several portfolio(s).
 
         References
-
         * [Wikipedia, Drawdown](https://en.wikipedia.org/wiki/Drawdown_(economics))        
       requestBody:
         content:
           application/json:
             examples:
               Example:
-                description: Computes the drawdown (underwater) curve and the worst 10 drawdowns
-                  of 1 portfolio
+                description: Computes the drawdown (underwater) curve and the worst 10 drawdowns of 1 portfolio
                 value:
                   portfolios:
                     - portfolioValues:
@@ -1876,9 +1707,7 @@ paths:
             application/json:
               examples:
                 Example:
-                  description: Computed a maximum drawdown of 30%, which began in the third
-                    period, which reached its bottom in the sixth period, and
-                    which is not ended yet
+                  description: Computed a maximum drawdown of 30%, which began in the third period, which reached its bottom in the sixth period, and which is not ended yet
                   value:
                     portfolios:
                       - portfolioDrawdowns:
@@ -1903,8 +1732,7 @@ paths:
                     items:
                       properties:
                         portfolioDrawdowns:
-                          description: portfolioDrawdowns[t] is the value of the drawdown function at the
-                            time t
+                          description: portfolioDrawdowns[t] is the value of the drawdown function at the time t
                           items:
                             minimum: 0
                             type: number
@@ -1948,16 +1776,11 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/analysis/mean-variance/efficient-frontier:
     post:
-      description: >
-        Compute the discretized mean-variance efficient frontier associated
-        to a list of assets, optionally subject to:
-
+      description: |
+        Compute the discretized mean-variance efficient frontier associated to a list of assets, optionally subject to:
         * Minimum and maximum weights constraints
-
         * Maximum group weights constraints
-
         * Minimum and maximum portfolio exposure constraint
-
 
         References
          * Harry M. Markowitz, Portfolio Selection, Efficient Diversification of Investments, Second edition, Blackwell Publishers Inc.
@@ -1966,8 +1789,7 @@ paths:
           application/json:
             examples:
               Example:
-                description: Compute 3 portfolios belonging to the mean-variance efficient
-                  frontier
+                description: Compute 3 portfolios belonging to the mean-variance efficient frontier
                 value:
                   assets: 2
                   assetsCovarianceMatrix:
@@ -1990,8 +1812,7 @@ paths:
                   minimum: 2
                   type: integer
                 assetsCovarianceMatrix:
-                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                    and the asset j
+                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j
                   items:
                     items:
                       type: number
@@ -2009,9 +1830,7 @@ paths:
                   properties:
                     assetsGroups:
                       items:
-                        description: assetsGroups[k] is the indexes of the assets belonging to the
-                          assets group k in the portfolio; exclusive with
-                          assetsGroupsMatrix
+                        description: assetsGroups[k] is the indexes of the assets belonging to the assets group k in the portfolio; exclusive with assetsGroupsMatrix
                         items:
                           minimum: 1
                           type: integer
@@ -2021,8 +1840,7 @@ paths:
                       minItems: 1
                       type: array
                     assetsGroupsMatrix:
-                      description: assetsGroupsMatrix[k][i] is the weight of the asset i in the group
-                        of assets k; exclusive with assetsGroups
+                      description: assetsGroupsMatrix[k][i] is the weight of the asset i in the group of assets k; exclusive with assetsGroups
                       items:
                         items:
                           type: number
@@ -2031,15 +1849,12 @@ paths:
                       minItems: 1
                       type: array
                     maximumAssetsGroupsWeights:
-                      description: maximumAssetsGroupsWeights[k] is the maximum weight of the assets
-                        group k in the portfolio, in percentage between 0 and 1
-                        if assetsGroups is provided
+                      description: maximumAssetsGroupsWeights[k] is the maximum weight of the assets group k in the portfolio, in percentage between 0 and 1 if assetsGroups is provided
                       items:
                         type: number
                       type: array
                     maximumAssetsWeights:
-                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the
-                        portfolio, in percentage
+                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -2047,14 +1862,12 @@ paths:
                       type: array
                     maximumPortfolioExposure:
                       default: 1
-                      description: The maximum portfolio exposure; must be higher than or equal to
-                        minimumPortfolioExposure
+                      description: The maximum portfolio exposure; must be higher than or equal to minimumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
                     minimumAssetsWeights:
-                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the
-                        portfolio, in percentage
+                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -2062,16 +1875,14 @@ paths:
                       type: array
                     minimumPortfolioExposure:
                       default: 1
-                      description: The minimum portfolio exposure; must be lower than or equal to
-                        maximumPortfolioExposure
+                      description: The minimum portfolio exposure; must be lower than or equal to maximumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
                   type: object
                 portfolios:
                   default: 25
-                  description: The number of portfolios to compute on the mean-variance efficient
-                    frontier
+                  description: The number of portfolios to compute on the mean-variance efficient frontier
                   minimum: 2
                   type: integer
               required:
@@ -2110,8 +1921,7 @@ paths:
                     items:
                       properties:
                         assetsWeights:
-                          description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                            percentage
+                          description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                           items:
                             maximum: 1
                             minimum: 0
@@ -2142,19 +1952,13 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/analysis/mean-variance/minimum-variance-frontier:
     post:
-      description: >
-        Compute the discretized mean-variance minimum variance frontier
-        associated to a list of assets, optionally subject to:
-
+      description: |
+        Compute the discretized mean-variance minimum variance frontier associated to a list of assets, optionally subject to:
         * Minimum and maximum weights constraints
-
         * Maximum group weights constraints
-
         * Minimum and maximum portfolio exposure constraint
 
-
         > This endpoint is similar to the endpoint [`/portfolio/analysis/mean-variance/efficient-frontier`](#post-/portfolio/analysis/mean-variance/efficient-frontier), because the mean-variance efficient frontier is the "top" portion of the mean-variance minimum variance frontier.
-
 
         References
          * Harry M. Markowitz, Portfolio Selection, Efficient Diversification of Investments, Second edition, Blackwell Publishers Inc.
@@ -2163,8 +1967,7 @@ paths:
           application/json:
             examples:
               Example:
-                description: Compute 4 portfolios belonging to the mean-variance minimum
-                  variance frontier
+                description: Compute 4 portfolios belonging to the mean-variance minimum variance frontier
                 value:
                   assets: 2
                   assetsCovarianceMatrix:
@@ -2187,8 +1990,7 @@ paths:
                   minimum: 2
                   type: integer
                 assetsCovarianceMatrix:
-                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                    and the asset j
+                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j
                   items:
                     items:
                       type: number
@@ -2206,9 +2008,7 @@ paths:
                   properties:
                     assetsGroups:
                       items:
-                        description: assetsGroups[k] is the indexes of the assets belonging to the
-                          assets group k in the portfolio; exclusive with
-                          assetsGroupsMatrix
+                        description: assetsGroups[k] is the indexes of the assets belonging to the assets group k in the portfolio; exclusive with assetsGroupsMatrix
                         items:
                           minimum: 1
                           type: integer
@@ -2218,8 +2018,7 @@ paths:
                       minItems: 1
                       type: array
                     assetsGroupsMatrix:
-                      description: assetsGroupsMatrix[k][i] is the weight of the asset i in the group
-                        of assets k; exclusive with assetsGroups
+                      description: assetsGroupsMatrix[k][i] is the weight of the asset i in the group of assets k; exclusive with assetsGroups
                       items:
                         items:
                           type: number
@@ -2228,15 +2027,12 @@ paths:
                       minItems: 1
                       type: array
                     maximumAssetsGroupsWeights:
-                      description: maximumAssetsGroupsWeights[k] is the maximum weight of the assets
-                        group k in the portfolio, in percentage between 0 and 1
-                        if assetsGroups is provided
+                      description: maximumAssetsGroupsWeights[k] is the maximum weight of the assets group k in the portfolio, in percentage between 0 and 1 if assetsGroups is provided
                       items:
                         type: number
                       type: array
                     maximumAssetsWeights:
-                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the
-                        portfolio, in percentage
+                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -2244,14 +2040,12 @@ paths:
                       type: array
                     maximumPortfolioExposure:
                       default: 1
-                      description: The maximum portfolio exposure; must be higher than or equal to
-                        minimumPortfolioExposure
+                      description: The maximum portfolio exposure; must be higher than or equal to minimumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
                     minimumAssetsWeights:
-                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the
-                        portfolio, in percentage
+                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -2259,16 +2053,14 @@ paths:
                       type: array
                     minimumPortfolioExposure:
                       default: 1
-                      description: The minimum portfolio exposure; must be lower than or equal to
-                        maximumPortfolioExposure
+                      description: The minimum portfolio exposure; must be lower than or equal to maximumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
                   type: object
                 portfolios:
                   default: 25
-                  description: The number of portfolios to compute on the mean-variance minimum
-                    variance frontier
+                  description: The number of portfolios to compute on the mean-variance minimum variance frontier
                   minimum: 2
                   type: integer
               required:
@@ -2312,8 +2104,7 @@ paths:
                     items:
                       properties:
                         assetsWeights:
-                          description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                            percentage
+                          description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                           items:
                             maximum: 1
                             minimum: 0
@@ -2344,27 +2135,20 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/analysis/return:
     post:
-      description: >
-        Compute the arithmetic return of one or several portfolio(s) from
-        either:  
-
+      description: |
+        Compute the arithmetic return of one or several portfolio(s) from either:  
         * Portfolio assets arithmetic returns
-
         * Portfolio values
 
-
         References
-
         * [Wikipedia, Rate of Return](https://en.wikipedia.org/wiki/Rate_of_return#Return)
-
         * Harry M. Markowitz, Portfolio Selection, Efficient Diversification of Investments, Second edition, Blackwell Publishers Inc.
       requestBody:
         content:
           application/json:
             examples:
               From assets arithmetic returns:
-                description: Compute the arithmetic return of 2 portfolios based on the assets
-                  arithmetic returns
+                description: Compute the arithmetic return of 2 portfolios based on the assets arithmetic returns
                 value:
                   assets: 2
                   assetsReturns:
@@ -2378,8 +2162,7 @@ paths:
                         - 0
                         - 1
               From portfolio values:
-                description: Compute the arithmetic return of 1 portfolio based on portfolio
-                  values
+                description: Compute the arithmetic return of 1 portfolio based on portfolio values
                 value:
                   portfolios:
                     - portfolioValues:
@@ -2406,8 +2189,7 @@ paths:
                       items:
                         properties:
                           assetsWeights:
-                            description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                              percentage
+                            description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                             items:
                               maximum: 1
                               minimum: 0
@@ -2480,13 +2262,10 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/analysis/returns/average:
     post:
-      description: >
-        Compute the arithmetic average of the arithmetic return(s) of one
-        or several portfolio(s).
-
+      description: |
+        Compute the arithmetic average of the arithmetic return(s) of one or several portfolio(s).
 
         References
-
         * [Wikipedia, Arithmetic Average Rate of Return](https://en.wikipedia.org/wiki/Rate_of_return#Arithmetic_average_rate_of_return)
       requestBody:
         content:
@@ -2556,27 +2335,20 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/analysis/sharpe-ratio:
     post:
-      description: >
-        Compute the Sharpe ratio of one or several portfolio(s) from
-        either:
-
+      description: |
+        Compute the Sharpe ratio of one or several portfolio(s) from either:
         * Portfolio assets arithmetic returns and assets covariance matrix
-
         * Portfolio values
 
-
         References
-
         * Carl R. Bacon, Practical Portfolio Performance Measurement and Attribution
-
         * Harry M. Markowitz, Portfolio Selection, Efficient Diversification of Investments, Second edition, Blackwell Publishers Inc.
       requestBody:
         content:
           application/json:
             examples:
               From assets arithmetic returns and assets covariance matrix:
-                description: Compute the Sharpe ratio of 2 portfolios based on the assets
-                  arithmetic returns and covariance matrix
+                description: Compute the Sharpe ratio of 2 portfolios based on the assets arithmetic returns and covariance matrix
                 value:
                   assets: 2
                   assetsCovarianceMatrix:
@@ -2615,8 +2387,7 @@ paths:
                       minimum: 2
                       type: integer
                     assetsCovarianceMatrix:
-                      description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                        and the asset j
+                      description: assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j
                       items:
                         items:
                           type: number
@@ -2634,8 +2405,7 @@ paths:
                       items:
                         properties:
                           assetsWeights:
-                            description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                              percentage
+                            description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                             items:
                               maximum: 1
                               minimum: 0
@@ -2715,15 +2485,11 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/analysis/tracking-error:
     post:
-      description: >
-        Compute the tracking error between a benchmark and one or several
-        portfolio(s).
-
+      description: |
+        Compute the tracking error between a benchmark and one or several portfolio(s).
 
         References
-
         * [Wikipedia, Tracking error](https://en.wikipedia.org/wiki/Tracking_error) 
-
         * Carl R. Bacon, Practical Portfolio Performance Measurement and Attribution 
       requestBody:
         content:
@@ -2786,9 +2552,7 @@ paths:
             schema:
               properties:
                 benchmarkReturns:
-                  description: benchmarkReturns[t] is the return of the benchmark from the time t
-                    to the time t+1; the benchmarkReturns array must have the
-                    same length as all the portfolioReturns arrays
+                  description: benchmarkReturns[t] is the return of the benchmark from the time t to the time t+1; the benchmarkReturns array must have the same length as all the portfolioReturns arrays
                   items:
                     type: number
                   minItems: 2
@@ -2797,9 +2561,7 @@ paths:
                   items:
                     properties:
                       portfolioReturns:
-                        description: portfolioReturns[t] is the return of the portfolio from the time t
-                          to the time t+1, the portfolioReturns must have the
-                          same length as the benchmarkReturns array
+                        description: portfolioReturns[t] is the return of the portfolio from the time t to the time t+1, the portfolioReturns must have the same length as the benchmarkReturns array
                         items:
                           type: number
                         minItems: 2
@@ -2848,29 +2610,21 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/analysis/volatility:
     post:
-      description: >
-        Compute the volatility (i.e., standard deviation) of one or several
-        portfolio(s) from either:  
-
+      description: |
+        Compute the volatility (i.e., standard deviation) of one or several portfolio(s) from either:  
         * Portfolio assets covariance matrix
-
         * Portfolio values
 
-
         References
-
         * [Wikipedia, Standard Deviation](https://en.wikipedia.org/wiki/Standard_deviation#Finance)
-
         * Carl R. Bacon, Practical Portfolio Performance Measurement and Attribution
-
         * Harry M. Markowitz, Portfolio Selection, Efficient Diversification of Investments, Second edition, Blackwell Publishers Inc.
       requestBody:
         content:
           application/json:
             examples:
               From assets covariance matrix:
-                description: Compute the volatility of 2 portfolios based on the assets
-                  covariance matrix
+                description: Compute the volatility of 2 portfolios based on the assets covariance matrix
                 value:
                   assets: 2
                   assetsCovarianceMatrix:
@@ -2904,8 +2658,7 @@ paths:
                       minimum: 2
                       type: integer
                     assetsCovarianceMatrix:
-                      description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                        and the asset j
+                      description: assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j
                       items:
                         items:
                           type: number
@@ -2917,8 +2670,7 @@ paths:
                       items:
                         properties:
                           assetsWeights:
-                            description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                              percentage
+                            description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                             items:
                               maximum: 1
                               minimum: 0
@@ -2992,37 +2744,25 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/construction/investable:
     post:
-      description: >
-        Compute an investable portfolio as close as possible, in terms of
-        assets weights, to a desired portfolio, taking into account:
-
+      description: |
+        Compute an investable portfolio as close as possible, in terms of assets weights, to a desired portfolio, taking into account:
         * The desired assets weights
-
         * The desired assets groups weights
-
         * The desired maximum assets groups weights
-
         * The prices of the assets
-
         * The portfolio value
-
         * The requirement to purchase some assets by round lots or by odd lots
-
         * The possibility to purchase some assets by a fractional quantity of shares
-
         * The requirement to purchase a minimum number of shares, or a minimum monetary value, for some assets
 
-
         References
-
         * [Steiner, Andreas, Accuracy and Rounding in Portfolio Construction](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2261131)
       requestBody:
         content:
           application/json:
             examples:
               Example (groups weights):
-                description: Construct an investable portfolio of 10,000$ made of 4 assets with
-                  assets groups weights
+                description: Construct an investable portfolio of 10,000$ made of 4 assets with assets groups weights
                 value:
                   assets: 4
                   assetsGroups:
@@ -3065,10 +2805,7 @@ paths:
                   type: integer
                 assetsGroups:
                   items:
-                    description: assetsGroups[k] is the indexes of the assets belonging to the
-                      assets group k in the portfolio; requires either
-                      assetsGroupsWeights or maximumAssetsGroupsWeights to be
-                      present
+                    description: assetsGroups[k] is the indexes of the assets belonging to the assets group k in the portfolio; requires either assetsGroupsWeights or maximumAssetsGroupsWeights to be present
                     items:
                       minimum: 1
                       type: integer
@@ -3078,9 +2815,7 @@ paths:
                   minItems: 1
                   type: array
                 assetsGroupsWeights:
-                  description: assetsGroupsWeights[i] is the desired weight of the assets group k
-                    in the portfolio, in percentage (can be null to indicate no
-                    specific desire); requires assetsGroups to be present
+                  description: assetsGroupsWeights[i] is the desired weight of the assets group k in the portfolio, in percentage (can be null to indicate no specific desire); requires assetsGroups to be present
                   items:
                     maximum: 1
                     minimum: 0
@@ -3088,9 +2823,7 @@ paths:
                   minItems: 1
                   type: array
                 assetsMinimumNotionalValues:
-                  description: assetsMinimumNotionalValues[i] is the minimum monetary value that
-                    the position in the asset i is required to represent when
-                    the asset i is included in the portfolio
+                  description: assetsMinimumNotionalValues[i] is the minimum monetary value that the position in the asset i is required to represent when the asset i is included in the portfolio
                   items:
                     default: 0
                     minimum: 0
@@ -3098,10 +2831,7 @@ paths:
                   minItems: 2
                   type: array
                 assetsMinimumPositions:
-                  description: assetsMinimumPositions[i] is the minimum number of shares of the
-                    asset i that is required to purchase when the asset i is
-                    included in the portfolio (usual values are the same as for
-                    assetsSizeLots)
+                  description: assetsMinimumPositions[i] is the minimum number of shares of the asset i that is required to purchase when the asset i is included in the portfolio (usual values are the same as for assetsSizeLots)
                   items:
                     default: 1
                     exclusiveMinimum: true
@@ -3118,12 +2848,7 @@ paths:
                   minItems: 2
                   type: array
                 assetsSizeLots:
-                  description: assetsSizeLots[i] is the number of shares by which it is required
-                    to purchase the asset i (usual values are 1 if the asset
-                    needs to be purchased share by share, 100 if the asset needs
-                    to be purchased by an integer multiple of 100 shares, and
-                    1/1000000 - e.g. for Robinhood broker - if the asset can be
-                    purchased by fractional shares)
+                  description: assetsSizeLots[i] is the number of shares by which it is required to purchase the asset i (usual values are 1 if the asset needs to be purchased share by share, 100 if the asset needs to be purchased by an integer multiple of 100 shares, and 1/1000000 - e.g. for Robinhood broker - if the asset can be purchased by fractional shares)
                   items:
                     default: 1
                     exclusiveMinimum: true
@@ -3132,9 +2857,7 @@ paths:
                   minItems: 2
                   type: array
                 assetsWeights:
-                  description: assetsWeights[i] is the desired weight of the asset i in the
-                    portfolio, in percentage (can be null to indicate no
-                    specific desire)
+                  description: assetsWeights[i] is the desired weight of the asset i in the portfolio, in percentage (can be null to indicate no specific desire)
                   items:
                     maximum: 1
                     minimum: 0
@@ -3142,10 +2865,7 @@ paths:
                   minItems: 2
                   type: array
                 maximumAssetsGroupsWeights:
-                  description: maximumAssetsGroupsWeights[k] is the maximum desired weight of the
-                    assets group k in the portfolio, in percentage (can be null
-                    to indicate no specific desire); requires assetsGroups to be
-                    present
+                  description: maximumAssetsGroupsWeights[k] is the maximum desired weight of the assets group k in the portfolio, in percentage (can be null to indicate no specific desire); requires assetsGroups to be present
                   items:
                     maximum: 1
                     minimum: 0
@@ -3195,16 +2915,14 @@ paths:
               schema:
                 properties:
                   assetsPositions:
-                    description: assetsPositions[i] is the number of shares of the asset i in the
-                      portfolio
+                    description: assetsPositions[i] is the number of shares of the asset i in the portfolio
                     items:
                       minimum: 0
                       type: number
                     minItems: 2
                     type: array
                   assetsWeights:
-                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                      percentage
+                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                     items:
                       maximum: 1
                       minimum: 0
@@ -3222,27 +2940,20 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/construction/mimicking:
     post:
-      description: >
-        Construct a portfolio as close as possible, in terms of returns, to
-        a benchmark, optionally subject to:
-
+      description: |
+        Construct a portfolio as close as possible, in terms of returns, to a benchmark, optionally subject to:
         * Minimum and maximum weights constraints
-
         * Maximum group weights constraints
-
         * Minimum and maximum portfolio exposure constraints
 
-
         References 
-
         * Konstantinos Benidis, Yiyong Feng, Daniel P. Palomar, Optimization Methods for Financial Index Tracking: From Theory to Practice, now publishers Inc (7 juin 2018)
       requestBody:
         content:
           application/json:
             examples:
               Example:
-                description: Construct a portfolio mimicking a benchmark with null returns,
-                  using 2 assets with opposite returns
+                description: Construct a portfolio mimicking a benchmark with null returns, using 2 assets with opposite returns
                 value:
                   assets:
                     - assetReturns:
@@ -3258,9 +2969,7 @@ paths:
                     - 0
                     - 0
               Example with group constraints:
-                description: Construct a portfolio mimicking a benchmark using 3 assets and the
-                  constraint that the first two assets taken together cannot
-                  represent more than 35% of the portfolio
+                description: Construct a portfolio mimicking a benchmark using 3 assets and the constraint that the first two assets taken together cannot represent more than 35% of the portfolio
                 value:
                   assets:
                     - assetReturns:
@@ -3291,9 +3000,7 @@ paths:
                   items:
                     properties:
                       assetReturns:
-                        description: assetReturns[t] is the return of the asset from the time t to the
-                          time t+1, in percentage; all the assetReturns arrays
-                          must have the same length
+                        description: assetReturns[t] is the return of the asset from the time t to the time t+1, in percentage; all the assetReturns arrays must have the same length
                         items:
                           type: number
                         minItems: 2
@@ -3304,9 +3011,7 @@ paths:
                   minItems: 2
                   type: array
                 benchmarkReturns:
-                  description: benchmarkReturns[t] is the return of the benchmark from the time t
-                    to the time t+1; the benchmarkReturns array must have the
-                    same length as all the assetReturns arrays
+                  description: benchmarkReturns[t] is the return of the benchmark from the time t to the time t+1; the benchmarkReturns array must have the same length as all the assetReturns arrays
                   items:
                     type: number
                   minItems: 2
@@ -3315,9 +3020,7 @@ paths:
                   properties:
                     assetsGroups:
                       items:
-                        description: assetsGroups[k] is the indexes of the assets belonging to the
-                          assets group k in the portfolio; exclusive with
-                          assetsGroupsMatrix
+                        description: assetsGroups[k] is the indexes of the assets belonging to the assets group k in the portfolio; exclusive with assetsGroupsMatrix
                         items:
                           minimum: 1
                           type: integer
@@ -3327,8 +3030,7 @@ paths:
                       minItems: 1
                       type: array
                     assetsGroupsMatrix:
-                      description: assetsGroupsMatrix[k][i] is the weight of the asset i in the group
-                        of assets k; exclusive with assetsGroups
+                      description: assetsGroupsMatrix[k][i] is the weight of the asset i in the group of assets k; exclusive with assetsGroups
                       items:
                         items:
                           type: number
@@ -3337,15 +3039,12 @@ paths:
                       minItems: 1
                       type: array
                     maximumAssetsGroupsWeights:
-                      description: maximumAssetsGroupsWeights[k] is the maximum weight of the assets
-                        group k in the portfolio, in percentage between 0 and 1
-                        if assetsGroups is provided
+                      description: maximumAssetsGroupsWeights[k] is the maximum weight of the assets group k in the portfolio, in percentage between 0 and 1 if assetsGroups is provided
                       items:
                         type: number
                       type: array
                     maximumAssetsWeights:
-                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the
-                        portfolio, in percentage
+                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -3353,14 +3052,12 @@ paths:
                       type: array
                     maximumPortfolioExposure:
                       default: 1
-                      description: The maximum portfolio exposure; must be higher than or equal to
-                        minimumPortfolioExposure
+                      description: The maximum portfolio exposure; must be higher than or equal to minimumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
                     minimumAssetsWeights:
-                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the
-                        portfolio, in percentage
+                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -3368,8 +3065,7 @@ paths:
                       type: array
                     minimumPortfolioExposure:
                       default: 1
-                      description: The minimum portfolio exposure; must be lower than or equal to
-                        maximumPortfolioExposure
+                      description: The minimum portfolio exposure; must be lower than or equal to maximumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
@@ -3393,8 +3089,7 @@ paths:
               schema:
                 properties:
                   assetsWeights:
-                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                      percentage
+                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                     items:
                       maximum: 1
                       minimum: 0
@@ -3411,20 +3106,14 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/construction/random:
     post:
-      description: >
-        Construct one or several random portfolio(s), optionally subject
-        to:       
-
+      description: |
+        Construct one or several random portfolio(s), optionally subject to:       
         * Minimum and maximum weights constraints
-
         * Minimum and maximum portfolio exposure constraints
-
 
         > Because of the nature of the endpoint, subsequent calls with the same input data will result in different output data.
 
-
         References
-
         * [William Thornton Shaw, Monte Carlo Portfolio Optimization for General Investor Risk-Return Objectives and Arbitrary Return Distributions: A Solution for Long-Only Portfolios](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1680224)
       requestBody:
         content:
@@ -3444,8 +3133,7 @@ paths:
                 constraints:
                   properties:
                     maximumAssetsWeights:
-                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the
-                        portfolio, in percentage
+                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -3453,14 +3141,12 @@ paths:
                       type: array
                     maximumPortfolioExposure:
                       default: 1
-                      description: The maximum portfolio exposure; must be higher than or equal to
-                        minimumPortfolioExposure
+                      description: The maximum portfolio exposure; must be higher than or equal to minimumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
                     minimumAssetsWeights:
-                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the
-                        portfolio, in percentage
+                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -3468,8 +3154,7 @@ paths:
                       type: array
                     minimumPortfolioExposure:
                       default: 1
-                      description: The minimum portfolio exposure; must be lower than or equal to
-                        maximumPortfolioExposure
+                      description: The minimum portfolio exposure; must be lower than or equal to maximumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
@@ -3506,8 +3191,7 @@ paths:
                     items:
                       properties:
                         assetsWeights:
-                          description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                            percentage
+                          description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                           items:
                             maximum: 1
                             minimum: 0
@@ -3529,12 +3213,9 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/equal-risk-contributions:
     post:
-      description: >
-        Compute the assets weights of the equal risk contributions
-        portfolio, optionally subject to:  
-
+      description: |
+        Compute the assets weights of the equal risk contributions portfolio, optionally subject to:  
         * Minimum and maximum weights constraints  
-
 
         References
          * [Richard, Jean-Charles and Roncalli, Thierry, Constrained Risk Budgeting Portfolios: Theory, Algorithms, Applications & Puzzles](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3331184)
@@ -3543,8 +3224,7 @@ paths:
           application/json:
             examples:
               Example:
-                description: Compute the portfolio weights for 2 assets, with maximum assets
-                  weights constraints
+                description: Compute the portfolio weights for 2 assets, with maximum assets weights constraints
                 value:
                   assets: 2
                   assetsCovarianceMatrix:
@@ -3563,8 +3243,7 @@ paths:
                   minimum: 2
                   type: integer
                 assetsCovarianceMatrix:
-                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                    and the asset j
+                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j
                   items:
                     items:
                       type: number
@@ -3575,16 +3254,14 @@ paths:
                 constraints:
                   properties:
                     maximumAssetsWeights:
-                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the
-                        portfolio, in percentage
+                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
                         type: number
                       type: array
                     minimumAssetsWeights:
-                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the
-                        portfolio, in percentage
+                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -3610,8 +3287,7 @@ paths:
               schema:
                 properties:
                   assetsWeights:
-                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                      percentage
+                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                     items:
                       maximum: 1
                       minimum: 0
@@ -3628,10 +3304,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/equal-sharpe-ratio-contributions:
     post:
-      description: >
-        Compute the assets weights of the equal Sharpe Ratio contributions
-        portfolio.
-
+      description: |
+        Compute the assets weights of the equal Sharpe Ratio contributions portfolio.
 
         References
          * [Andreas Steiner, Sharpe Ratio Contribution and Attribution Analysis](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1839166")
@@ -3659,8 +3333,7 @@ paths:
                   minimum: 2
                   type: integer
                 assetsCovarianceMatrix:
-                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                    and the asset j
+                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j
                   items:
                     items:
                       type: number
@@ -3698,8 +3371,7 @@ paths:
               schema:
                 properties:
                   assetsWeights:
-                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                      percentage
+                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                     items:
                       maximum: 1
                       minimum: 0
@@ -3716,9 +3388,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/equal-weighted:
     post:
-      description: >
+      description: |
         Compute the assets weights of the equal-weighted portfolio.
-
 
         References
          * [Victor DeMiguel and al., Optimal Versus Naive Diversification: How Inefficient is the 1/N Portfolio Strategy?](https://academic.oup.com/rfs/article-abstract/22/5/1915/1592901?redirectedFrom=fulltext)
@@ -3754,8 +3425,7 @@ paths:
               schema:
                 properties:
                   assetsWeights:
-                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                      percentage
+                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                     items:
                       maximum: 1
                       minimum: 0
@@ -3772,10 +3442,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/inverse-variance-weighted:
     post:
-      description: >
-        Compute the assets weights of the inverse variance-weighted
-        portfolio.
-
+      description: |
+        Compute the assets weights of the inverse variance-weighted portfolio.
 
         References
          * [Raul Leote de Carvalho and al., Demystifying Equity Risk-Based Strategies: A Simple Alpha Plus Beta Description](https://doi.org/10.3905/jpm.2012.38.3.056)
@@ -3784,8 +3452,7 @@ paths:
           application/json:
             examples:
               Example:
-                description: Compute the portfolio weights for 2 assets with variances equal to
-                  1 and 0.5
+                description: Compute the portfolio weights for 2 assets with variances equal to 1 and 0.5
                 value:
                   assets: 2
                   assetsVariances:
@@ -3823,8 +3490,7 @@ paths:
               schema:
                 properties:
                   assetsWeights:
-                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                      percentage
+                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                     items:
                       maximum: 1
                       minimum: 0
@@ -3841,10 +3507,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/inverse-volatility-weighted:
     post:
-      description: >
-        Compute the assets weights of the inverse volatility-weighted
-        portfolio, also known as the naive-risk parity portfolio.
-
+      description: |
+        Compute the assets weights of the inverse volatility-weighted portfolio, also known as the naive-risk parity portfolio.
 
         References
          * [Raul Leote de Carvalho and al., Demystifying Equity Risk-Based Strategies: A Simple Alpha Plus Beta Description](https://doi.org/10.3905/jpm.2012.38.3.056)
@@ -3853,8 +3517,7 @@ paths:
           application/json:
             examples:
               Example:
-                description: Compute the portfolio weights for 2 assets with volatilities equal
-                  to 0.05 and 0.1
+                description: Compute the portfolio weights for 2 assets with volatilities equal to 0.05 and 0.1
                 value:
                   assets: 2
                   assetsVolatilities:
@@ -3892,8 +3555,7 @@ paths:
               schema:
                 properties:
                   assetsWeights:
-                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                      percentage
+                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                     items:
                       maximum: 1
                       minimum: 0
@@ -3910,10 +3572,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/market-capitalization-weighted:
     post:
-      description: >
-        Compute the assets weights of the market capitalization-weighted
-        portfolio.
-
+      description: |
+        Compute the assets weights of the market capitalization-weighted portfolio.
 
         References
          * [Wikipedia, Capitalization-weighted Index](https://en.wikipedia.org/wiki/Capitalization-weighted_index)
@@ -3922,8 +3582,7 @@ paths:
           application/json:
             examples:
               Example:
-                description: Compute the portfolio weights for 2 assets with market
-                  capitalizations equal to 1 and 2
+                description: Compute the portfolio weights for 2 assets with market capitalizations equal to 1 and 2
                 value:
                   assets: 2
                   assetsMarketCapitalizations:
@@ -3936,8 +3595,7 @@ paths:
                   minimum: 2
                   type: integer
                 assetsMarketCapitalizations:
-                  description: assetsMarketCapitalizations[i] is the market capitalization of the
-                    asset i
+                  description: assetsMarketCapitalizations[i] is the market capitalization of the asset i
                   items:
                     minimum: 0
                     type: number
@@ -3962,8 +3620,7 @@ paths:
               schema:
                 properties:
                   assetsWeights:
-                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                      percentage
+                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                     items:
                       maximum: 1
                       minimum: 0
@@ -3980,16 +3637,11 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/maximum-decorrelation:
     post:
-      description: >
-        Compute the assets weights of the maximum decorrelation portfolio,
-        optionally subject to:  
-
+      description: |
+        Compute the assets weights of the maximum decorrelation portfolio, optionally subject to:  
         * Minimum and maximum weights constraints
-
         * Maximum group weights constraints
-
         * Minimum and maximum portfolio exposure constraints
-
 
         References
          * [F. Goltz, S. Sivasubramanian, Scientific Beta Maximum Decorrelation Indices](http://www.scientificbeta.com/download/file/scientific-beta-max-decorrelation-indices)
@@ -4020,8 +3672,7 @@ paths:
                   minimum: 2
                   type: integer
                 assetsCorrelationMatrix:
-                  description: assetsCorrelationMatrix[i][j] is the correlation between the asset
-                    i and the asset j
+                  description: assetsCorrelationMatrix[i][j] is the correlation between the asset i and the asset j
                   items:
                     items:
                       type: number
@@ -4039,9 +3690,7 @@ paths:
                   properties:
                     assetsGroups:
                       items:
-                        description: assetsGroups[k] is the indexes of the assets belonging to the
-                          assets group k in the portfolio; exclusive with
-                          assetsGroupsMatrix
+                        description: assetsGroups[k] is the indexes of the assets belonging to the assets group k in the portfolio; exclusive with assetsGroupsMatrix
                         items:
                           minimum: 1
                           type: integer
@@ -4051,8 +3700,7 @@ paths:
                       minItems: 1
                       type: array
                     assetsGroupsMatrix:
-                      description: assetsGroupsMatrix[k][i] is the weight of the asset i in the group
-                        of assets k; exclusive with assetsGroups
+                      description: assetsGroupsMatrix[k][i] is the weight of the asset i in the group of assets k; exclusive with assetsGroups
                       items:
                         items:
                           type: number
@@ -4061,15 +3709,12 @@ paths:
                       minItems: 1
                       type: array
                     maximumAssetsGroupsWeights:
-                      description: maximumAssetsGroupsWeights[k] is the maximum weight of the assets
-                        group k in the portfolio, in percentage between 0 and 1
-                        if assetsGroups is provided
+                      description: maximumAssetsGroupsWeights[k] is the maximum weight of the assets group k in the portfolio, in percentage between 0 and 1 if assetsGroups is provided
                       items:
                         type: number
                       type: array
                     maximumAssetsWeights:
-                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the
-                        portfolio, in percentage
+                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -4077,14 +3722,12 @@ paths:
                       type: array
                     maximumPortfolioExposure:
                       default: 1
-                      description: The maximum portfolio exposure; must be higher than or equal to
-                        minimumPortfolioExposure
+                      description: The maximum portfolio exposure; must be higher than or equal to minimumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
                     minimumAssetsWeights:
-                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the
-                        portfolio, in percentage
+                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -4092,8 +3735,7 @@ paths:
                       type: array
                     minimumPortfolioExposure:
                       default: 1
-                      description: The minimum portfolio exposure; must be lower than or equal to
-                        maximumPortfolioExposure
+                      description: The minimum portfolio exposure; must be lower than or equal to maximumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
@@ -4118,8 +3760,7 @@ paths:
               schema:
                 properties:
                   assetsWeights:
-                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                      percentage
+                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                     items:
                       maximum: 1
                       minimum: 0
@@ -4136,16 +3777,11 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/maximum-return:
     post:
-      description: >
-        Compute the assets weights of the maximum return portfolio,
-        optionally subject to:  
-
+      description: |
+        Compute the assets weights of the maximum return portfolio, optionally subject to:  
         * Minimum and maximum weights constraints
-
         * Maximum group weights constraints
-
         * Minimum and maximum portfolio exposure constraints
-
 
         References
          * Harry M. Markowitz, Portfolio Selection, Efficient Diversification of Investments, Second edition, Blackwell Publishers Inc.
@@ -4154,8 +3790,7 @@ paths:
           application/json:
             examples:
               Example:
-                description: Compute the portfolio weights for 2 assets, with maximum assets
-                  weights constraints
+                description: Compute the portfolio weights for 2 assets, with maximum assets weights constraints
                 value:
                   assets: 2
                   assetsReturns:
@@ -4172,8 +3807,7 @@ paths:
                   minimum: 2
                   type: integer
                 assetsCovarianceMatrix:
-                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                    and the asset j
+                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j
                   items:
                     items:
                       type: number
@@ -4191,9 +3825,7 @@ paths:
                   properties:
                     assetsGroups:
                       items:
-                        description: assetsGroups[k] is the indexes of the assets belonging to the
-                          assets group k in the portfolio; exclusive with
-                          assetsGroupsMatrix
+                        description: assetsGroups[k] is the indexes of the assets belonging to the assets group k in the portfolio; exclusive with assetsGroupsMatrix
                         items:
                           minimum: 1
                           type: integer
@@ -4203,8 +3835,7 @@ paths:
                       minItems: 1
                       type: array
                     assetsGroupsMatrix:
-                      description: assetsGroupsMatrix[k][i] is the weight of the asset i in the group
-                        of assets k; exclusive with assetsGroups
+                      description: assetsGroupsMatrix[k][i] is the weight of the asset i in the group of assets k; exclusive with assetsGroups
                       items:
                         items:
                           type: number
@@ -4213,15 +3844,12 @@ paths:
                       minItems: 1
                       type: array
                     maximumAssetsGroupsWeights:
-                      description: maximumAssetsGroupsWeights[k] is the maximum weight of the assets
-                        group k in the portfolio, in percentage between 0 and 1
-                        if assetsGroups is provided
+                      description: maximumAssetsGroupsWeights[k] is the maximum weight of the assets group k in the portfolio, in percentage between 0 and 1 if assetsGroups is provided
                       items:
                         type: number
                       type: array
                     maximumAssetsWeights:
-                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the
-                        portfolio, in percentage
+                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -4229,14 +3857,12 @@ paths:
                       type: array
                     maximumPortfolioExposure:
                       default: 1
-                      description: The maximum portfolio exposure; must be higher than or equal to
-                        minimumPortfolioExposure
+                      description: The maximum portfolio exposure; must be higher than or equal to minimumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
                     minimumAssetsWeights:
-                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the
-                        portfolio, in percentage
+                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -4244,8 +3870,7 @@ paths:
                       type: array
                     minimumPortfolioExposure:
                       default: 1
-                      description: The minimum portfolio exposure; must be lower than or equal to
-                        maximumPortfolioExposure
+                      description: The minimum portfolio exposure; must be lower than or equal to maximumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
@@ -4269,8 +3894,7 @@ paths:
               schema:
                 properties:
                   assetsWeights:
-                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                      percentage
+                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                     items:
                       maximum: 1
                       minimum: 0
@@ -4287,16 +3911,11 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/maximum-sharpe-ratio:
     post:
-      description: >
-        Compute the assets weights of the maximum Sharpe ratio portfolio,
-        optionally subject to:  
-
+      description: |
+        Compute the assets weights of the maximum Sharpe ratio portfolio, optionally subject to:  
         * Minimum and maximum weights constraints
-
         * Maximum group weights constraints
-
         * Minimum and maximum portfolio exposure constraints
-
 
         References
          * Harry M. Markowitz, Portfolio Selection, Efficient Diversification of Investments, Second edition, Blackwell Publishers Inc.
@@ -4305,8 +3924,7 @@ paths:
           application/json:
             examples:
               Example:
-                description: Compute the portfolio weights for 2 assets with a risk free rate of
-                  0%
+                description: Compute the portfolio weights for 2 assets with a risk free rate of 0%
                 value:
                   assets: 2
                   assetsCovarianceMatrix:
@@ -4325,8 +3943,7 @@ paths:
                   minimum: 2
                   type: integer
                 assetsCovarianceMatrix:
-                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                    and the asset j
+                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j
                   items:
                     items:
                       type: number
@@ -4344,9 +3961,7 @@ paths:
                   properties:
                     assetsGroups:
                       items:
-                        description: assetsGroups[k] is the indexes of the assets belonging to the
-                          assets group k in the portfolio; exclusive with
-                          assetsGroupsMatrix
+                        description: assetsGroups[k] is the indexes of the assets belonging to the assets group k in the portfolio; exclusive with assetsGroupsMatrix
                         items:
                           minimum: 1
                           type: integer
@@ -4356,8 +3971,7 @@ paths:
                       minItems: 1
                       type: array
                     assetsGroupsMatrix:
-                      description: assetsGroupsMatrix[k][i] is the weight of the asset i in the group
-                        of assets k; exclusive with assetsGroups
+                      description: assetsGroupsMatrix[k][i] is the weight of the asset i in the group of assets k; exclusive with assetsGroups
                       items:
                         items:
                           type: number
@@ -4366,15 +3980,12 @@ paths:
                       minItems: 1
                       type: array
                     maximumAssetsGroupsWeights:
-                      description: maximumAssetsGroupsWeights[k] is the maximum weight of the assets
-                        group k in the portfolio, in percentage between 0 and 1
-                        if assetsGroups is provided
+                      description: maximumAssetsGroupsWeights[k] is the maximum weight of the assets group k in the portfolio, in percentage between 0 and 1 if assetsGroups is provided
                       items:
                         type: number
                       type: array
                     maximumAssetsWeights:
-                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the
-                        portfolio, in percentage
+                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -4382,14 +3993,12 @@ paths:
                       type: array
                     maximumPortfolioExposure:
                       default: 1
-                      description: The maximum portfolio exposure; must be higher than or equal to
-                        minimumPortfolioExposure
+                      description: The maximum portfolio exposure; must be higher than or equal to minimumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
                     minimumAssetsWeights:
-                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the
-                        portfolio, in percentage
+                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -4397,8 +4006,7 @@ paths:
                       type: array
                     minimumPortfolioExposure:
                       default: 1
-                      description: The minimum portfolio exposure; must be lower than or equal to
-                        maximumPortfolioExposure
+                      description: The minimum portfolio exposure; must be lower than or equal to maximumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
@@ -4427,8 +4035,7 @@ paths:
               schema:
                 properties:
                   assetsWeights:
-                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                      percentage
+                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                     items:
                       maximum: 1
                       minimum: 0
@@ -4445,19 +4052,13 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/mean-variance-efficient:
     post:
-      description: >
-        Compute the assets weights of a mean-variance efficient portfolio,
-        optionally subject to:  
-
+      description: |
+        Compute the assets weights of a mean-variance efficient portfolio, optionally subject to:  
         * Minimum and maximum weights constraints
-
         * Maximum group weights constraints
-
         * Minimum and maximum portfolio exposure constraints
 
-
         > A mean-variance efficient portfolio is a portfolio belonging to [the mean-variance efficient frontier](#post-/portfolio/analysis/mean-variance/efficient-frontier).
-
 
         References
          * Harry M. Markowitz, Portfolio Selection, Efficient Diversification of Investments, Second edition, Blackwell Publishers Inc.
@@ -4466,8 +4067,7 @@ paths:
           application/json:
             examples:
               Example:
-                description: Compute the portfolio weights for 2 assets with a portfolio return
-                  constraint of 15%
+                description: Compute the portfolio weights for 2 assets with a portfolio return constraint of 15%
                 value:
                   assets: 2
                   assetsCovarianceMatrix:
@@ -4481,8 +4081,7 @@ paths:
                   constraints:
                     portfolioReturn: 0.15
               Example with group constraints:
-                description: Compute the portfolio weights for 3 assets with a maximum group
-                  weights constraint and a portfolio return constraint of 15%
+                description: Compute the portfolio weights for 3 assets with a maximum group weights constraint and a portfolio return constraint of 15%
                 value:
                   assets: 3
                   assetsCovarianceMatrix:
@@ -4513,8 +4112,7 @@ paths:
                   minimum: 2
                   type: integer
                 assetsCovarianceMatrix:
-                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                    and the asset j
+                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j
                   items:
                     items:
                       type: number
@@ -4532,9 +4130,7 @@ paths:
                   properties:
                     assetsGroups:
                       items:
-                        description: assetsGroups[k] is the indexes of the assets belonging to the
-                          assets group k in the portfolio; exclusive with
-                          assetsGroupsMatrix
+                        description: assetsGroups[k] is the indexes of the assets belonging to the assets group k in the portfolio; exclusive with assetsGroupsMatrix
                         items:
                           minimum: 1
                           type: integer
@@ -4544,8 +4140,7 @@ paths:
                       minItems: 1
                       type: array
                     assetsGroupsMatrix:
-                      description: assetsGroupsMatrix[k][i] is the weight of the asset i in the group
-                        of assets k; exclusive with assetsGroups
+                      description: assetsGroupsMatrix[k][i] is the weight of the asset i in the group of assets k; exclusive with assetsGroups
                       items:
                         items:
                           type: number
@@ -4554,15 +4149,12 @@ paths:
                       minItems: 1
                       type: array
                     maximumAssetsGroupsWeights:
-                      description: maximumAssetsGroupsWeights[k] is the maximum weight of the assets
-                        group k in the portfolio, in percentage between 0 and 1
-                        if assetsGroups is provided
+                      description: maximumAssetsGroupsWeights[k] is the maximum weight of the assets group k in the portfolio, in percentage between 0 and 1 if assetsGroups is provided
                       items:
                         type: number
                       type: array
                     maximumAssetsWeights:
-                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the
-                        portfolio, in percentage
+                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -4570,14 +4162,12 @@ paths:
                       type: array
                     maximumPortfolioExposure:
                       default: 1
-                      description: The maximum portfolio exposure; must be higher than or equal to
-                        minimumPortfolioExposure
+                      description: The maximum portfolio exposure; must be higher than or equal to minimumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
                     minimumAssetsWeights:
-                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the
-                        portfolio, in percentage
+                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -4585,23 +4175,19 @@ paths:
                       type: array
                     minimumPortfolioExposure:
                       default: 1
-                      description: The minimum portfolio exposure; must be lower than or equal to
-                        maximumPortfolioExposure
+                      description: The minimum portfolio exposure; must be lower than or equal to maximumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
                     portfolioReturn:
-                      description: The portfolio return; exclusive with portfolioVolatility and
-                        riskTolerance
+                      description: The portfolio return; exclusive with portfolioVolatility and riskTolerance
                       type: number
                     portfolioVolatility:
-                      description: The portfolio volatility; exclusive with portfolioReturn and
-                        riskTolerance
+                      description: The portfolio volatility; exclusive with portfolioReturn and riskTolerance
                       minimum: 0
                       type: number
                     riskTolerance:
-                      description: The portfolio risk tolerance; exclusive with portfolioReturn and
-                        portfolioVolatility
+                      description: The portfolio risk tolerance; exclusive with portfolioReturn and portfolioVolatility
                       minimum: 0
                       type: number
                   type: object
@@ -4626,8 +4212,7 @@ paths:
               schema:
                 properties:
                   assetsWeights:
-                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                      percentage
+                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                     items:
                       maximum: 1
                       minimum: 0
@@ -4644,12 +4229,8 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/minimum-correlation:
     post:
-      description: >
-        Compute the assets weights of the (heuristic) minimum correlation
-        portfolio, which is a portfolio built using the Minimum Correlation
-        Algorithm discovered by [David
-        Varadi](https://cssanalytics.wordpress.com/).
-
+      description: |
+        Compute the assets weights of the (heuristic) minimum correlation portfolio, which is a portfolio built using the Minimum Correlation Algorithm discovered by [David Varadi](https://cssanalytics.wordpress.com/).
 
         References
          * [CSSA, Minimum Correlation Algorithm Paper Release](https://cssanalytics.wordpress.com/2012/09/21/minimum-correlation-algorithm-paper-release/)
@@ -4681,8 +4262,7 @@ paths:
                   minimum: 2
                   type: integer
                 assetsCorrelationMatrix:
-                  description: assetsCorrelationMatrix[i][j] is the correlation between the asset
-                    i and the asset j; required if assetsReturns is not provided
+                  description: assetsCorrelationMatrix[i][j] is the correlation between the asset i and the asset j; required if assetsReturns is not provided
                   items:
                     items:
                       type: number
@@ -4691,9 +4271,7 @@ paths:
                   minItems: 2
                   type: array
                 assetsVolatilities:
-                  description: assetsVariances[i] is the volatility of the asset i; required if
-                    assetsCorrelationMatrix is provided and assetsVariances is
-                    not provided
+                  description: assetsVariances[i] is the volatility of the asset i; required if assetsCorrelationMatrix is provided and assetsVariances is not provided
                   items:
                     minimum: 0
                     type: number
@@ -4720,8 +4298,7 @@ paths:
               schema:
                 properties:
                   assetsWeights:
-                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                      percentage
+                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                     items:
                       maximum: 1
                       minimum: 0
@@ -4738,16 +4315,11 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/minimum-variance:
     post:
-      description: >
-        Compute the assets weights of the minimum variance portfolio,
-        optionally subject to:  
-
+      description: |
+        Compute the assets weights of the minimum variance portfolio, optionally subject to:  
         * Minimum and maximum weights constraints
-
         * Maximum group weights constraints
-
         * Minimum and maximum portfolio exposure constraints
-
 
         References
          * Harry M. Markowitz, Portfolio Selection, Efficient Diversification of Investments, Second edition, Blackwell Publishers Inc.
@@ -4756,8 +4328,7 @@ paths:
           application/json:
             examples:
               Example:
-                description: Compute the portfolio weights for 2 assets, with maximum assets
-                  weights and portfolio exposure constraints
+                description: Compute the portfolio weights for 2 assets, with maximum assets weights and portfolio exposure constraints
                 value:
                   assets: 2
                   assetsCovarianceMatrix:
@@ -4778,8 +4349,7 @@ paths:
                   minimum: 2
                   type: integer
                 assetsCovarianceMatrix:
-                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                    and the asset j
+                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j
                   items:
                     items:
                       type: number
@@ -4797,9 +4367,7 @@ paths:
                   properties:
                     assetsGroups:
                       items:
-                        description: assetsGroups[k] is the indexes of the assets belonging to the
-                          assets group k in the portfolio; exclusive with
-                          assetsGroupsMatrix
+                        description: assetsGroups[k] is the indexes of the assets belonging to the assets group k in the portfolio; exclusive with assetsGroupsMatrix
                         items:
                           minimum: 1
                           type: integer
@@ -4809,8 +4377,7 @@ paths:
                       minItems: 1
                       type: array
                     assetsGroupsMatrix:
-                      description: assetsGroupsMatrix[k][i] is the weight of the asset i in the group
-                        of assets k; exclusive with assetsGroups
+                      description: assetsGroupsMatrix[k][i] is the weight of the asset i in the group of assets k; exclusive with assetsGroups
                       items:
                         items:
                           type: number
@@ -4819,15 +4386,12 @@ paths:
                       minItems: 1
                       type: array
                     maximumAssetsGroupsWeights:
-                      description: maximumAssetsGroupsWeights[k] is the maximum weight of the assets
-                        group k in the portfolio, in percentage between 0 and 1
-                        if assetsGroups is provided
+                      description: maximumAssetsGroupsWeights[k] is the maximum weight of the assets group k in the portfolio, in percentage between 0 and 1 if assetsGroups is provided
                       items:
                         type: number
                       type: array
                     maximumAssetsWeights:
-                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the
-                        portfolio, in percentage
+                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -4835,14 +4399,12 @@ paths:
                       type: array
                     maximumPortfolioExposure:
                       default: 1
-                      description: The maximum portfolio exposure; must be higher than or equal to
-                        minimumPortfolioExposure
+                      description: The maximum portfolio exposure; must be higher than or equal to minimumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
                     minimumAssetsWeights:
-                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the
-                        portfolio, in percentage
+                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -4850,8 +4412,7 @@ paths:
                       type: array
                     minimumPortfolioExposure:
                       default: 1
-                      description: The minimum portfolio exposure; must be lower than or equal to
-                        maximumPortfolioExposure
+                      description: The minimum portfolio exposure; must be lower than or equal to maximumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
@@ -4875,8 +4436,7 @@ paths:
               schema:
                 properties:
                   assetsWeights:
-                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                      percentage
+                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                     items:
                       maximum: 1
                       minimum: 0
@@ -4893,16 +4453,11 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/optimization/most-diversified:
     post:
-      description: >
-        Compute the assets weights of the most diversified portfolio,
-        optionally subject to:  
-
+      description: |
+        Compute the assets weights of the most diversified portfolio, optionally subject to:  
         * Minimum and maximum weights constraints
-
         * Maximum group weights constraints
-
         * Minimum and maximum portfolio exposure constraints
-
 
         References
          * [Yves Choueifaty and Yves Coignard, Toward Maximum Diversification, The Journal of Portfolio Management Fall 2008, 35 (1) 40-51](https://doi.org/10.3905/JPM.2008.35.1.40)
@@ -4926,8 +4481,7 @@ paths:
                   minimum: 2
                   type: integer
                 assetsCovarianceMatrix:
-                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i
-                    and the asset j
+                  description: assetsCovarianceMatrix[i][j] is the covariance between the asset i and the asset j
                   items:
                     items:
                       type: number
@@ -4939,9 +4493,7 @@ paths:
                   properties:
                     assetsGroups:
                       items:
-                        description: assetsGroups[k] is the indexes of the assets belonging to the
-                          assets group k in the portfolio; exclusive with
-                          assetsGroupsMatrix
+                        description: assetsGroups[k] is the indexes of the assets belonging to the assets group k in the portfolio; exclusive with assetsGroupsMatrix
                         items:
                           minimum: 1
                           type: integer
@@ -4951,8 +4503,7 @@ paths:
                       minItems: 1
                       type: array
                     assetsGroupsMatrix:
-                      description: assetsGroupsMatrix[k][i] is the weight of the asset i in the group
-                        of assets k; exclusive with assetsGroups
+                      description: assetsGroupsMatrix[k][i] is the weight of the asset i in the group of assets k; exclusive with assetsGroups
                       items:
                         items:
                           type: number
@@ -4961,15 +4512,12 @@ paths:
                       minItems: 1
                       type: array
                     maximumAssetsGroupsWeights:
-                      description: maximumAssetsGroupsWeights[k] is the maximum weight of the assets
-                        group k in the portfolio, in percentage between 0 and 1
-                        if assetsGroups is provided
+                      description: maximumAssetsGroupsWeights[k] is the maximum weight of the assets group k in the portfolio, in percentage between 0 and 1 if assetsGroups is provided
                       items:
                         type: number
                       type: array
                     maximumAssetsWeights:
-                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the
-                        portfolio, in percentage
+                      description: maximumAssetsWeights[i] is the maximum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -4977,14 +4525,12 @@ paths:
                       type: array
                     maximumPortfolioExposure:
                       default: 1
-                      description: The maximum portfolio exposure; must be higher than or equal to
-                        minimumPortfolioExposure
+                      description: The maximum portfolio exposure; must be higher than or equal to minimumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
                     minimumAssetsWeights:
-                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the
-                        portfolio, in percentage
+                      description: minimumAssetsWeights[i] is the minimum weight of the asset i in the portfolio, in percentage
                       items:
                         maximum: 1
                         minimum: 0
@@ -4992,8 +4538,7 @@ paths:
                       type: array
                     minimumPortfolioExposure:
                       default: 1
-                      description: The minimum portfolio exposure; must be lower than or equal to
-                        maximumPortfolioExposure
+                      description: The minimum portfolio exposure; must be lower than or equal to maximumPortfolioExposure
                       maximum: 1
                       minimum: 0
                       type: number
@@ -5017,8 +4562,7 @@ paths:
               schema:
                 properties:
                   assetsWeights:
-                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                      percentage
+                    description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                     items:
                       maximum: 1
                       minimum: 0
@@ -5035,34 +4579,31 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/simulation/rebalancing/drift-weight:
     post:
-      description: >
-        Simulate the evolution of one or several portfolio(s) over one or
-        several time period(s), the portfolio(s) being never rebalanced (a.k.a.
-        buy and hold).
-
+      description: |
+        Simulate the evolution of one or several portfolio(s) over one or several time period(s), the portfolio(s) being never rebalanced (a.k.a. buy and hold).
 
         References
-
         * [Hillion, Pierre, The Ex-Ante Rebalancing Premium (March 11, 2016). INSEAD Working Paper No. 2016/15/FIN](https://ssrn.com/abstract=2746471)
       requestBody:
         content:
           application/json:
             examples:
               Example:
-                description: Simulate 3 buy and hold portfolios, each made of 3 assets with only
-                  one asset invested
+                description: Simulate 3 buy and hold portfolios, each made of 3 assets with only one asset invested
                 value:
-                  assets: 3
-                  assetsPrices:
-                    - - 100
-                      - 105
-                      - 110
-                    - - 15
-                      - 12.5
-                      - 11.25
-                    - - 0.5
-                      - 0.51
-                      - 0.49
+                  assets:
+                    - assetPrices:
+                        - 100
+                        - 105
+                        - 110
+                    - assetPrices:
+                        - 15
+                        - 12.5
+                        - 11.25
+                    - assetPrices:
+                        - 0.5
+                        - 0.51
+                        - 0.49
                   portfolios:
                     - assetsWeights:
                         - 1
@@ -5079,26 +4620,26 @@ paths:
             schema:
               properties:
                 assets:
-                  description: The number of assets
-                  minimum: 1
-                  type: integer
-                assetsPrices:
-                  description: assetsPrices[i][t] is the price of the asset i at the time t
                   items:
-                    items:
-                      exclusiveMinimum: true
-                      minimum: 0
-                      type: number
-                    minItems: 2
-                    type: array
+                    properties:
+                      assetPrices:
+                        description: assetPrices[t] is the price of the asset at the time t
+                        items:
+                          exclusiveMinimum: true
+                          minimum: 0
+                          type: number
+                        minItems: 2
+                        type: array
+                    required:
+                      - assetPrices
+                    type: object
                   minItems: 1
                   type: array
                 portfolios:
                   items:
                     properties:
                       assetsWeights:
-                        description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                          percentage
+                        description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                         items:
                           maximum: 1
                           minimum: 0
@@ -5162,34 +4703,31 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/simulation/rebalancing/fixed-weight:
     post:
-      description: >
-        Simulate the evolution of one or several portfolio(s) over one or
-        several time period(s), the portfolio(s) being rebalanced toward fixed
-        weights at the beginning of each time period.
-
+      description: |
+        Simulate the evolution of one or several portfolio(s) over one or several time period(s), the portfolio(s) being rebalanced toward fixed weights at the beginning of each time period.
 
         References
-
         * [Hillion, Pierre, The Ex-Ante Rebalancing Premium (March 11, 2016). INSEAD Working Paper No. 2016/15/FIN](https://ssrn.com/abstract=2746471)        
       requestBody:
         content:
           application/json:
             examples:
               Example:
-                description: Simulate 3 portfolios, each rebalanced toward the provided assets
-                  weights at the beginning of each of the 2 time periods
+                description: Simulate 3 portfolios, each rebalanced toward the provided assets weights at the beginning of each of the 2 time periods
                 value:
-                  assets: 3
-                  assetsPrices:
-                    - - 100
-                      - 105
-                      - 110
-                    - - 15
-                      - 12.5
-                      - 11.25
-                    - - 0.5
-                      - 0.51
-                      - 0.49
+                  assets:
+                    - assetPrices:
+                        - 100
+                        - 105
+                        - 110
+                    - assetPrices:
+                        - 15
+                        - 12.5
+                        - 11.25
+                    - assetPrices:
+                        - 0.5
+                        - 0.51
+                        - 0.49
                   portfolios:
                     - assetsWeights:
                         - 0.5
@@ -5206,26 +4744,26 @@ paths:
             schema:
               properties:
                 assets:
-                  description: The number of assets
-                  minimum: 1
-                  type: integer
-                assetsPrices:
-                  description: assetsPrices[i][t] is the price of the asset i at the time t
                   items:
-                    items:
-                      exclusiveMinimum: true
-                      minimum: 0
-                      type: number
-                    minItems: 2
-                    type: array
+                    properties:
+                      assetPrices:
+                        description: assetPrices[t] is the price of the asset at the time t
+                        items:
+                          exclusiveMinimum: true
+                          minimum: 0
+                          type: number
+                        minItems: 2
+                        type: array
+                    required:
+                      - assetPrices
+                    type: object
                   minItems: 1
                   type: array
                 portfolios:
                   items:
                     properties:
                       assetsWeights:
-                        description: assetsWeights[i] is the weight of the asset i in the portfolio, in
-                          percentage
+                        description: assetsWeights[i] is the weight of the asset i in the portfolio, in percentage
                         items:
                           maximum: 1
                           minimum: 0
@@ -5289,50 +4827,48 @@ paths:
       x-codegen-request-body-name: body
   /portfolio/simulation/rebalancing/random-weight:
     post:
-      description: >
-        Simulate the evolution of one or several portfolio(s) over one or
-        several time period(s), the portfolio(s) being rebalanced toward random
-        weights at the beginning of each time period.
-
+      description: |
+        Simulate the evolution of one or several portfolio(s) over one or several time period(s), the portfolio(s) being rebalanced toward random weights at the beginning of each time period.
 
         References
-
         * [R Stein, Not fooled by randomness: Using random portfolios to analyse investment funds, Investment Analysts Journal, 43:79, 1-15, DOI: 10.1080/10293523.2014.11082564](https://www.tandfonline.com/doi/abs/10.1080/10293523.2014.11082564)
       requestBody:
         content:
           application/json:
             examples:
               Example:
-                description: Simulate 2 portfolios each rebalanced toward random assets weights
-                  at the beginning of each of the 2 time periods
+                description: Simulate 2 portfolios each rebalanced toward random assets weights at the beginning of each of the 2 time periods
                 value:
-                  assets: 3
-                  assetsPrices:
-                    - - 100
-                      - 105
-                      - 110
-                    - - 15
-                      - 12.5
-                      - 11.25
-                    - - 0.5
-                      - 0.51
-                      - 0.49
+                  assets:
+                    - assetPrices:
+                        - 100
+                        - 105
+                        - 110
+                    - assetPrices:
+                        - 15
+                        - 12.5
+                        - 11.25
+                    - assetPrices:
+                        - 0.5
+                        - 0.51
+                        - 0.49
                   portfolios: 2
             schema:
               properties:
                 assets:
-                  description: The number of assets
-                  minimum: 1
-                  type: integer
-                assetsPrices:
-                  description: assetsPrices[i][t] is the price of the asset i at the time t
                   items:
-                    items:
-                      exclusiveMinimum: true
-                      minimum: 0
-                      type: number
-                    minItems: 2
-                    type: array
+                    properties:
+                      assetPrices:
+                        description: assetPrices[t] is the price of the asset at the time t
+                        items:
+                          exclusiveMinimum: true
+                          minimum: 0
+                          type: number
+                        minItems: 2
+                        type: array
+                    required:
+                      - assetPrices
+                    type: object
                   minItems: 1
                   type: array
                 portfolios:
@@ -5388,9 +4924,8 @@ paths:
 components:
   securitySchemes:
     ApiKeyAuth:
-      description: >
-        An [API key](#overview--api-key) is required to benefit from
-        [higher API limits](#overview--api-limits).
+      description: |
+        An [API key](#overview--api-key) is required to benefit from [higher API limits](#overview--api-limits).
       in: header
       name: X-API-Key
       type: apiKey

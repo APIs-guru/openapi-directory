@@ -6,8 +6,7 @@ basePath: /
 info:
   contact:
     email: support@solarvps.com
-  description: This is the Solar VPS Public API. You can find more at
-    http://www.solarvps.com
+  description: This is the Solar VPS Public API. You can find more at http://www.solarvps.com
   title: Solar VPS
   version: 1.0.0
   x-logo:
@@ -53,8 +52,7 @@ paths:
         - contacts
   "/dns/{domain}":
     get:
-      description: Shows all your records for a specific domain. You can try
-        example.com below.
+      description: Shows all your records for a specific domain. You can try example.com below.
       parameters:
         - description: Domain name you want to get records for
           in: path
@@ -71,8 +69,7 @@ paths:
         - dns
   "/dns/{domain}/add":
     post:
-      description: "You can try example.com below. Types allowed are: A CNAME NS TXT
-        MX SRV SPF"
+      description: "You can try example.com below. Types allowed are: A CNAME NS TXT MX SRV SPF"
       parameters:
         - description: Domain you want to add records for
           in: path
@@ -114,8 +111,7 @@ paths:
         - dns
   "/dns/{domain}/delete":
     post:
-      description: Shows all your records for a specific domain. You can try
-        example.com below.
+      description: Shows all your records for a specific domain. You can try example.com below.
       parameters:
         - description: Domain name you want to get records for
           in: path

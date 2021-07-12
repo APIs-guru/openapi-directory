@@ -196,9 +196,7 @@ paths:
         - APIs
       x-swagger-router-controller: space.routes.apis
     post:
-      description: Saves the provided Swagger definition; the owner must match the
-        token owner. The version will be extracted from the Swagger definitions
-        itself.
+      description: Saves the provided Swagger definition; the owner must match the token owner. The version will be extracted from the Swagger definitions itself.
       operationId: save_definition
       parameters:
         - description: API owner identifier
@@ -353,8 +351,7 @@ paths:
           description: specified API not found
       security:
         - AuthToken: []
-      summary: Retrieves the Swagger definition for the specified API and version in
-        JSON format
+      summary: Retrieves the Swagger definition for the specified API and version in JSON format
       tags:
         - APIs
       x-swagger-router-controller: space.routes.apis
@@ -392,8 +389,7 @@ paths:
           description: specified API not found
       security:
         - AuthToken: []
-      summary: Retrieves the Swagger definition for the specified API and version in
-        YAML format
+      summary: Retrieves the Swagger definition for the specified API and version in YAML format
       tags:
         - APIs
       x-swagger-router-controller: space.routes.apis

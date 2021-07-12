@@ -7,13 +7,11 @@ info:
     name: Nexmo.com
     url: https://developer.nexmo.com/
     x-twitter: Nexmo
-  description: >-
-    <div class="Vlt-callout Vlt-callout--critical"> <i></i> <div
-    class="Vlt-callout__content">
+  description: |-
+    <div class="Vlt-callout Vlt-callout--critical"> <i></i> <div class="Vlt-callout__content">
       <h4>Applications V1 is deprecated</h4>
       This version of the API has been deprecated. Please use <a href="/api/application.v2">version 2</a> going forwards
     </div> </div>
-
     A Nexmo application contains the security and configuration information you need to connect to Nexmo endpoints and easily use our products.
   license:
     name: The MIT License (MIT)
@@ -36,14 +34,12 @@ externalDocs:
 paths:
   /:
     get:
-      description: You use a `GET` request to retrieve details of all applications
-        associated with your account.
+      description: You use a `GET` request to retrieve details of all applications associated with your account.
       operationId: retrieveApplications
       parameters:
         - $ref: "#/components/parameters/apiKeyQueryString"
         - $ref: "#/components/parameters/apiSecretQueryString"
-        - description: Set the number of items returned on each call to this endpoint. The
-            default is 10 records.
+        - description: Set the number of items returned on each call to this endpoint. The default is 10 records.
           example: 10
           in: query
           name: page_size
@@ -76,15 +72,11 @@ paths:
             schema:
               properties:
                 answer_method:
-                  description: The HTTP method used to make the request to `answer_url`. The
-                    default value is `GET`.
+                  description: The HTTP method used to make the request to `answer_url`. The default value is `GET`.
                   example: GET
                   type: string
                 answer_url:
-                  description: The URL where your webhook delivers the Nexmo Call Control Object
-                    that governs this call. As soon as your user answers a call
-                    Nexmo makes a request to `answer_url`. Required for inbound
-                    calls only.
+                  description: The URL where your webhook delivers the Nexmo Call Control Object that governs this call. As soon as your user answers a call Nexmo makes a request to `answer_url`. Required for inbound calls only.
                   example: https://example.com/webhooks/answer
                   type: string
                 api_key:
@@ -92,25 +84,19 @@ paths:
                 api_secret:
                   $ref: "#/components/schemas/apiSecret"
                 event_method:
-                  description: The HTTP method used to send event information to `event_url`. The
-                    default value is `POST`. For `voice` type applications only.
+                  description: The HTTP method used to send event information to `event_url`. The default value is `POST`. For `voice` type applications only.
                   example: POST
                   type: string
                 event_url:
-                  description: Nexmo sends event information asynchronously to this URL when
-                    status changes for `voice` applications. Always required for
-                    `voice` applications.
+                  description: Nexmo sends event information asynchronously to this URL when status changes for `voice` applications. Always required for `voice` applications.
                   example: https://example.com/webhooks/event
                   type: string
                 inbound_method:
-                  description: The HTTP method used to send event information to `inbound_url`.
-                    The default value is `POST`. For `messages` type
-                    applications only.
+                  description: The HTTP method used to send event information to `inbound_url`. The default value is `POST`. For `messages` type applications only.
                   example: POST
                   type: string
                 inbound_url:
-                  description: Nexmo sends a request to this URL when an inbound message is
-                    received. Required for `messages` type applications only.
+                  description: Nexmo sends a request to this URL when an inbound message is received. Required for `messages` type applications only.
                   example: https://example.com/webhooks/inbound
                   type: string
                 name:
@@ -118,21 +104,15 @@ paths:
                   example: My Application
                   type: string
                 status_method:
-                  description: The HTTP method used to send event information to `status_url`. The
-                    default value is `POST`. For `messages` type applications
-                    only.
+                  description: The HTTP method used to send event information to `status_url`. The default value is `POST`. For `messages` type applications only.
                   example: POST
                   type: string
                 status_url:
-                  description: Nexmo sends event information asynchronously to this URL when
-                    status changes. Required for `messages` type applications
-                    only.
+                  description: Nexmo sends event information asynchronously to this URL when status changes. Required for `messages` type applications only.
                   example: https://example.com/webhooks/status
                   type: string
                 type:
-                  description: The Nexmo product or products that you access with this
-                    application. Currently `voice` and `messages` application
-                    types are supported.
+                  description: The Nexmo product or products that you access with this application. Currently `voice` and `messages` application types are supported.
                   enum:
                     - voice
                     - messages
@@ -189,14 +169,11 @@ paths:
               properties:
                 answer_method:
                   default: GET
-                  description: The HTTP method used to make the request to `answer_url`. The
-                    default value is `GET`.
+                  description: The HTTP method used to make the request to `answer_url`. The default value is `GET`.
                   example: GET
                   type: string
                 answer_url:
-                  description: The URL where your webhook delivers the Nexmo Call Control Object
-                    that governs this call. As soon as your user answers a call
-                    Nexmo makes a request to `answer_url`.
+                  description: The URL where your webhook delivers the Nexmo Call Control Object that governs this call. As soon as your user answers a call Nexmo makes a request to `answer_url`.
                   example: https://example.com/webhooks/answer
                   format: url
                   type: string
@@ -206,13 +183,11 @@ paths:
                   $ref: "#/components/schemas/apiSecret"
                 event_method:
                   default: POST
-                  description: The HTTP method used to send event information to `event_url`. The
-                    default value is POST.
+                  description: The HTTP method used to send event information to `event_url`. The default value is POST.
                   example: POST
                   type: string
                 event_url:
-                  description: Nexmo sends event information asynchronously to this URL when
-                    status changes.
+                  description: Nexmo sends event information asynchronously to this URL when status changes.
                   example: https://example.com/webhooks/event
                   format: url
                   type: string
@@ -221,10 +196,7 @@ paths:
                   example: UpdatedApplication
                   type: string
                 type:
-                  description: The Nexmo product or products that you access with this
-                    application. Currently `voice` and `messages` application
-                    types are supported. You  can't change the type of
-                    application.
+                  description: The Nexmo product or products that you access with this application. Currently `voice` and `messages` application types are supported. You  can't change the type of application.
                   enum:
                     - voice
                     - messages
@@ -247,16 +219,14 @@ paths:
 components:
   parameters:
     apiKeyQueryString:
-      description: You can find your API key in your [account
-        overview](https://dashboard.nexmo.com/account-overview)
+      description: You can find your API key in your [account overview](https://dashboard.nexmo.com/account-overview)
       in: query
       name: api_key
       required: true
       schema:
         type: string
     apiSecretQueryString:
-      description: You can find your API secret in your [account
-        overview](https://dashboard.nexmo.com/account-overview)
+      description: You can find your API secret in your [account overview](https://dashboard.nexmo.com/account-overview)
       in: query
       name: api_secret
       required: true
@@ -272,13 +242,11 @@ components:
         type: string
   schemas:
     apiKey:
-      description: You can find your API key in your [account
-        overview](https://dashboard.nexmo.com/account-overview)
+      description: You can find your API key in your [account overview](https://dashboard.nexmo.com/account-overview)
       example: ap1k3y
       type: string
     apiSecret:
-      description: You can find your API secret in your [account
-        overview](https://dashboard.nexmo.com/account-overview)
+      description: You can find your API secret in your [account overview](https://dashboard.nexmo.com/account-overview)
       example: 230e6cf0709417176df1b4fc1e083adc
       type: string
     application:
@@ -341,9 +309,7 @@ components:
         _embedded:
           properties:
             applications:
-              description: The collection of your applications. Each object contains
-                information about an an individual application. The public_key
-                is not included in the application information.
+              description: The collection of your applications. Each object contains information about an an individual application. The public_key is not included in the application information.
               items:
                 $ref: "#/components/schemas/application"
               type: array
@@ -357,16 +323,14 @@ components:
           example: 1
           type: integer
         page_size:
-          description: The number of items returned on each call to this endpoint. The
-            default is 10 records.
+          description: The number of items returned on each call to this endpoint. The default is 10 records.
           example: 10
           type: integer
     keys:
       description: The Nexmo product that you access with this application.
       properties:
         public_key:
-          description: The public key used to validate the
-            [JWT](https://en.wikipedia.org/wiki/JSON_Web_Token).
+          description: The public key used to validate the [JWT](https://en.wikipedia.org/wiki/JSON_Web_Token).
           example: PUBLIC_KEY
           type: string
       type: object
@@ -375,13 +339,11 @@ components:
         - $ref: "#/components/schemas/keys"
         - properties:
             private_key:
-              description: The private key you use to generate the JSON Web Token (JWT) that
-                authenticates your requests to Messages API.
+              description: The private key you use to generate the JSON Web Token (JWT) that authenticates your requests to Messages API.
               example: PRIVATE_KEY
               type: string
     links:
-      description: A series of links between resources in this API in the following
-        [HAL specification](http://stateless.co/hal_specification.html).
+      description: A series of links between resources in this API in the following [HAL specification](http://stateless.co/hal_specification.html).
       properties:
         href:
           description: The link URL.
@@ -396,8 +358,7 @@ components:
           items:
             properties:
               endpoint:
-                description: "`inbound_url`: The URL where inbound messages are delivered.
-                  `status_url`: The URL where message status is delivered."
+                description: "`inbound_url`: The URL where inbound messages are delivered. `status_url`: The URL where message status is delivered."
                 example: https://example.com/webhooks/status
                 format: url
                 type: string
@@ -408,8 +369,7 @@ components:
                 example: status_url
                 type: string
               http_method:
-                description: The HTTP method used to send data to the `inbound_url` or
-                  `status_url`. Default is POST.
+                description: The HTTP method used to send data to the `inbound_url` or `status_url`. Default is POST.
                 enum:
                   - GET
                   - POST
@@ -429,11 +389,7 @@ components:
           items:
             properties:
               endpoint:
-                description: "`answer_url`: The URL where your webhook delivers the Nexmo Call
-                  Control Object that governs this call. As soon as your user
-                  answers a call Nexmo makes a request to answer_url.
-                  `event_url`: Nexmo sends event information asynchronously to
-                  this URL when status changes."
+                description: "`answer_url`: The URL where your webhook delivers the Nexmo Call Control Object that governs this call. As soon as your user answers a call Nexmo makes a request to answer_url. `event_url`: Nexmo sends event information asynchronously to this URL when status changes."
                 example: https://example.com/webhooks/answer
                 format: url
                 type: string
@@ -444,8 +400,7 @@ components:
                 example: answer_url
                 type: string
               http_method:
-                description: The HTTP method used to send event information to the `event_url`
-                  or `answer_url`.
+                description: The HTTP method used to send event information to the `event_url` or `answer_url`.
                 enum:
                   - GET
                   - POST

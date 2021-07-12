@@ -6,9 +6,7 @@ info:
     email: devrel@vonage.com
     name: Vonage DevRel
     url: https://developer.nexmo.com
-  description: "The Numbers API enables you to manage your existing numbers and
-    buy new virtual numbers for use with the Vonage APIs. Further information is
-    here: <https://developer.nexmo.com/numbers/overview>"
+  description: "The Numbers API enables you to manage your existing numbers and buy new virtual numbers for use with the Vonage APIs. Further information is here: <https://developer.nexmo.com/numbers/overview>"
   license:
     name: The MIT License (MIT)
     url: https://opensource.org/licenses/MIT
@@ -145,9 +143,7 @@ paths:
         - $ref: "#/components/parameters/type"
         - $ref: "#/components/parameters/pattern"
         - $ref: "#/components/parameters/search_pattern"
-        - description: "Available features are `SMS`, `VOICE` and `MMS`. To look for
-            numbers that support multiple features, use a comma-separated value:
-            `SMS,MMS,VOICE`."
+        - description: "Available features are `SMS`, `VOICE` and `MMS`. To look for numbers that support multiple features, use a comma-separated value: `SMS,MMS,VOICE`."
           example: SMS
           in: query
           name: features
@@ -226,8 +222,7 @@ components:
       schema:
         type: string
     country:
-      description: The two character country code to filter on (in ISO 3166-1 alpha-2
-        format)
+      description: The two character country code to filter on (in ISO 3166-1 alpha-2 format)
       in: query
       name: country
       required: true
@@ -256,8 +251,7 @@ components:
         default: 1
         type: integer
     msisdn:
-      description: The inbound number you want to cancel, in [E.164 international
-        format](/concepts/guides/glossary#e-164-format)
+      description: The inbound number you want to cancel, in [E.164 international format](/concepts/guides/glossary#e-164-format)
       example: "447700900000"
       in: query
       name: msisdn
@@ -265,8 +259,7 @@ components:
       schema:
         type: string
     pattern:
-      description: The number pattern you want to search for. Use in conjunction with
-        `search_pattern`.
+      description: The number pattern you want to search for. Use in conjunction with `search_pattern`.
       example: "12345"
       in: query
       name: pattern
@@ -274,15 +267,12 @@ components:
       schema:
         type: string
     search_pattern:
-      description: >
+      description: |
         The strategy you want to use for matching:
 
 
-
         * `0` - Search for numbers that start with `pattern` (Note: all numbers are in E.164 format, so the starting pattern includes the country code, such as 1 for USA)
-
         * `1` - Search for numbers that contain `pattern`
-
         * `2` - Search for numbers that end with `pattern`
       example: 1
       in: query
@@ -306,8 +296,7 @@ components:
         maximum: 100
         type: integer
     type:
-      description: Set this parameter to filter the type of number, such as mobile or
-        landline
+      description: Set this parameter to filter the type of number, such as mobile or landline
       example: mobile-lvn
       in: query
       name: type
@@ -322,8 +311,7 @@ components:
     account-unauthorized:
       properties:
         error-code:
-          description: The status code of the response. `200` indicates a successful
-            request.
+          description: The status code of the response. `200` indicates a successful request.
           example: "401"
           type: string
         error-code-label:
@@ -356,8 +344,7 @@ components:
         country:
           $ref: "#/components/schemas/country"
         features:
-          description: "The capabilities of the number: `SMS` or `VOICE` or `SMS,VOICE` or
-            `SMS,MMS` or `VOICE,MMS` or `SMS,MMS,VOICE`"
+          description: "The capabilities of the number: `SMS` or `VOICE` or `SMS,VOICE` or `SMS,MMS` or `VOICE,MMS` or `SMS,MMS,VOICE`"
           example:
             - VOICE
             - SMS
@@ -370,8 +357,7 @@ components:
           example: "447700900000"
           type: string
         type:
-          description: "The type of number: `landline`, `landline-toll-free` or
-            `mobile-lvn`"
+          description: "The type of number: `landline`, `landline-toll-free` or `mobile-lvn`"
           example: mobile-lvn
           type: string
       type: object
@@ -404,9 +390,7 @@ components:
           example: "447700900000"
           type: string
         target_api_key:
-          description: If you’d like to perform an action on a subaccount, provide the
-            `api_key` of that account here. If you’d like to perform an action
-            on your own account, you do not need to provide this field.
+          description: If you’d like to perform an action on a subaccount, provide the `api_key` of that account here. If you’d like to perform an action on your own account, you do not need to provide this field.
           example: 1a2345b7
           type: string
       required:
@@ -423,13 +407,10 @@ components:
           $ref: "#/components/schemas/country"
         messagesCallbackType:
           deprecated: true
-          description: >
-            <strong>DEPRECATED</strong> - We recommend that you use `app_id`
-            instead.
-
+          description: |
+            <strong>DEPRECATED</strong> - We recommend that you use `app_id` instead.
 
             Specifies the Messages webhook type (always `app`) associated with this
-
             number and must be used with the `messagesCallbackValue` parameter.
           enum:
             - app
@@ -437,22 +418,15 @@ components:
           type: string
         messagesCallbackValue:
           deprecated: true
-          description: >
-            <strong>DEPRECATED</strong> - We recommend that you use `app_id`
-            instead.
-
+          description: |
+            <strong>DEPRECATED</strong> - We recommend that you use `app_id` instead.
 
             Specifies the Application ID of your Messages application.
-
             It must be used with the `messagesCallbackType` parameter.
           example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
           type: string
         moHttpUrl:
-          description: An URL-encoded URI to the webhook endpoint that handles inbound
-            messages. Your webhook endpoint must be active before you make this
-            request. Vonage makes a `GET` request to the endpoint and checks
-            that it returns a `200 OK` response. Set this parameter's value to
-            an empty string to remove the webhook.
+          description: An URL-encoded URI to the webhook endpoint that handles inbound messages. Your webhook endpoint must be active before you make this request. Vonage makes a `GET` request to the endpoint and checks that it returns a `200 OK` response. Set this parameter's value to an empty string to remove the webhook.
           example: https://example.com/webhooks/inbound-sms
           type: string
         moSmppSysType:
@@ -478,8 +452,7 @@ components:
           example: tel
           type: string
         voiceCallbackValue:
-          description: A SIP URI or telephone number. Must be used with the
-            `voiceCallbackType` parameter.
+          description: A SIP URI or telephone number. Must be used with the `voiceCallbackType` parameter.
           example: "447700900000"
           type: string
         voiceStatusCallback:
@@ -495,8 +468,7 @@ components:
         country:
           $ref: "#/components/schemas/country"
         features:
-          description: "The capabilities of the number: `SMS` or `VOICE` or `SMS,VOICE` or
-            `SMS,MMS` or `VOICE,MMS` or `SMS,MMS,VOICE`"
+          description: "The capabilities of the number: `SMS` or `VOICE` or `SMS,VOICE` or `SMS,MMS` or `VOICE,MMS` or `SMS,MMS,VOICE`"
           example:
             - VOICE
             - SMS
@@ -522,8 +494,7 @@ components:
           example: "447700900000"
           type: string
         type:
-          description: "The type of number: `landline`, `landline-toll-free` or
-            `mobile-lvn`"
+          description: "The type of number: `landline`, `landline-toll-free` or `mobile-lvn`"
           example: mobile-lvn
           type: string
         voiceCallbackType:
@@ -538,8 +509,7 @@ components:
     response:
       properties:
         error-code:
-          description: The status code of the response. `200` indicates a successful
-            request.
+          description: The status code of the response. `200` indicates a successful request.
           example: "200"
           type: string
         error-code-label:
@@ -552,17 +522,12 @@ components:
     response420:
       properties:
         error-code:
-          description: The status code of the response. `200` indicates a successful
-            request.
+          description: The status code of the response. `200` indicates a successful request.
           example: "420"
           type: string
         error-code-label:
-          description: More detail about what happened. For example you may need to
-            request the number via the dashboard, or you may already own this
-            number.
-          example: Numbers from this country can be requested from the Dashboard
-            (https://dashboard.nexmo.com/buy-numbers) as they require a valid
-            local address to be provided before being purchased.
+          description: More detail about what happened. For example you may need to request the number via the dashboard, or you may already own this number.
+          example: Numbers from this country can be requested from the Dashboard (https://dashboard.nexmo.com/buy-numbers) as they require a valid local address to be provided before being purchased.
           type: string
       type: object
       xml:
@@ -570,8 +535,7 @@ components:
     unauthorized:
       properties:
         error-code:
-          description: The status code of the response. `200` indicates a successful
-            request.
+          description: The status code of the response. `200` indicates a successful request.
           example: "401"
           type: string
         error-code-label:
@@ -583,14 +547,12 @@ components:
         name: response
   securitySchemes:
     apiKey:
-      description: You can find your API key in the [developer
-        dashboard](https://dashboard.nexmo.com)
+      description: You can find your API key in the [developer dashboard](https://dashboard.nexmo.com)
       in: query
       name: api_key
       type: apiKey
     apiSecret:
-      description: You can find your API secret in the [developer
-        dashboard](https://dashboard.nexmo.com)
+      description: You can find your API secret in the [developer dashboard](https://dashboard.nexmo.com)
       in: query
       name: api_secret
       type: apiKey

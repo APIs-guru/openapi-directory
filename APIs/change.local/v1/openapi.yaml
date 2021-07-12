@@ -18,17 +18,9 @@ info:
 paths:
   /api/v1/donations/carbon_calculate:
     get:
-      description: Calculates the donation amount (to CarbonFund 501\(c\)3) needed to
-        offset a physical shipment. This calculation depends on the weight,
-        primary transportation method, and distance of the shipment. Provide the
-        distance of the shipment using the origin and destination address, or
-        directly with the number of miles. For convenience, this endpoint also
-        returns the id of the nonprofit CarbonFund, for making a subsequent
-        donation to. See the [Carbon offsets guide](/recipes/carbon-offsets/)
-        for more on using this endpoint.
+      description: Calculates the donation amount (to CarbonFund 501\(c\)3) needed to offset a physical shipment. This calculation depends on the weight, primary transportation method, and distance of the shipment. Provide the distance of the shipment using the origin and destination address, or directly with the number of miles. For convenience, this endpoint also returns the id of the nonprofit CarbonFund, for making a subsequent donation to. See the [Carbon offsets guide](/recipes/carbon-offsets/) for more on using this endpoint.
       parameters:
-        - description: The origin zip code (US only) of the shipment. If you send this
-            parameter, also send `destination_address`.
+        - description: The origin zip code (US only) of the shipment. If you send this parameter, also send `destination_address`.
           examples:
             illinois:
               summary: An Illinois zip code.
@@ -37,8 +29,7 @@ paths:
           name: origin_address
           schema:
             type: number
-        - description: The destination zip code (US only) of the shipment. If you send
-            this parameter, also send `origin_address`.
+        - description: The destination zip code (US only) of the shipment. If you send this parameter, also send `origin_address`.
           examples:
             california:
               summary: A California zip code.
@@ -47,8 +38,7 @@ paths:
           name: destination_address
           schema:
             type: number
-        - description: The total distance (in miles) of the shipment. You can use this
-            parameter in place of `origin_address` and `destination_address`.
+        - description: The total distance (in miles) of the shipment. You can use this parameter in place of `origin_address` and `destination_address`.
           in: query
           name: distance_mi
           schema:
@@ -90,14 +80,9 @@ paths:
       summary: Calculate shipping carbon offset
   /api/v1/donations/carbon_stats:
     get:
-      description: Measures your carbon offset impact in relatable terms. Provide the
-        id of a donation to CarbonFund to see stats about that specific
-        donation. If you omit the donation id, this endpoint returns aggregate
-        stats for all of your CarbonFund donations.
+      description: Measures your carbon offset impact in relatable terms. Provide the id of a donation to CarbonFund to see stats about that specific donation. If you omit the donation id, this endpoint returns aggregate stats for all of your CarbonFund donations.
       parameters:
-        - description: The id of a donation to the CarbonFund nonprofit. Ids are returned
-            when a donation is created. If an ID is not provided, the total
-            stats for all donations to CarbonFund are returned.
+        - description: The id of a donation to the CarbonFund nonprofit. Ids are returned when a donation is created. If an ID is not provided, the total stats for all donations to CarbonFund are returned.
           examples:
             donation:
               summary: A donation id.
@@ -120,9 +105,7 @@ paths:
       summary: Retrieve carbon offset stats
   /api/v1/donations/create:
     post:
-      description: Creates a donation to any nonprofit. CHANGE keeps track of your
-        donations, bills you at the end of the month, and handles the nonprofit
-        payouts for you.
+      description: Creates a donation to any nonprofit. CHANGE keeps track of your donations, bills you at the end of the month, and handles the nonprofit payouts for you.
       parameters:
         - description: The amount of the donation in cents.
           examples:
@@ -144,8 +127,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Source of the donation funds. If you are collecting payment from
-            your customer for the donation, use `customer`.
+        - description: Source of the donation funds. If you are collecting payment from your customer for the donation, use `customer`.
           examples:
             customer:
               summary: A customer-funded donation.
@@ -188,19 +170,14 @@ paths:
                 code: nonprofit_invalid
                 detail: nonprofit_id n_invalid is invalid.
                 status: 400
-                title: The nonprofit is invalid. Please reference a nonprofit in the CHANGE
-                  network.
+                title: The nonprofit is invalid. Please reference a nonprofit in the CHANGE network.
           description: Param `nonprofit_id` invalid
       security:
         - basic_auth: []
       summary: Create a donation
   /api/v1/donations/crypto_calculate:
     get:
-      description: Calculates the donation amount (to CarbonFund 501\(c\)3) needed to
-        offset a cryptocurrency transaction. For convenience, this endpoint also
-        returns the id of the nonprofit CarbonFund, for making a subsequent
-        donation to. See the [Carbon offsets guide](/recipes/carbon-offsets/)
-        for more on using this endpoint.
+      description: Calculates the donation amount (to CarbonFund 501\(c\)3) needed to offset a cryptocurrency transaction. For convenience, this endpoint also returns the id of the nonprofit CarbonFund, for making a subsequent donation to. See the [Carbon offsets guide](/recipes/carbon-offsets/) for more on using this endpoint.
       parameters:
         - description: The number of transactions to offset.
           examples:
@@ -237,12 +214,9 @@ paths:
       summary: Calculate crypto carbon offset
   /api/v1/donations/index:
     get:
-      description: Retrieves a list of donations you've previously made. The donations
-        are returned in order of creation, with the most recent donations
-        appearing first. This endpoint is paginated.
+      description: Retrieves a list of donations you've previously made. The donations are returned in order of creation, with the most recent donations appearing first. This endpoint is paginated.
       parameters:
-        - description: Which page to return. This endpoint is paginated, and returns
-            maximum 30 donations per page.
+        - description: Which page to return. This endpoint is paginated, and returns maximum 30 donations per page.
           examples:
             page 1:
               summary: The first 30 donations.
@@ -323,8 +297,7 @@ paths:
       summary: Retrieve a donation
   /api/v1/nonprofits/list:
     get:
-      description: Retrieves a list of nonprofits whose names match the provided name.
-        This endpoint is paginated.
+      description: Retrieves a list of nonprofits whose names match the provided name. This endpoint is paginated.
       parameters:
         - description: A string to search.
           examples:
@@ -335,8 +308,7 @@ paths:
           name: name
           schema:
             type: string
-        - description: The page to return. This endpoint is paginated, and returns up to
-            30 nonprofits at a time.
+        - description: The page to return. This endpoint is paginated, and returns up to 30 nonprofits at a time.
           examples:
             page 1:
               summary: The first 30 nonprofits.

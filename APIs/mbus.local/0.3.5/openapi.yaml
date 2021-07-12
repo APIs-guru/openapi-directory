@@ -36,8 +36,7 @@ paths:
       description: Gets data from the slave identified by {address}
       operationId: get
       parameters:
-        - description: The serial device to scan - /dev/ is pre-pended to {device} by
-            M-Bus HTTPD before scanning
+        - description: The serial device to scan - /dev/ is pre-pended to {device} by M-Bus HTTPD before scanning
           example: ttyAMA0
           explode: false
           in: path
@@ -84,16 +83,13 @@ paths:
               example: Slave {address} not responding
               schema:
                 $ref: "#/components/schemas/textError"
-          description: Not found (or M-Bus HTTPD is unauthorized to access it, or to
-            change baud rate to that specified, etc)
+          description: Not found (or M-Bus HTTPD is unauthorized to access it, or to change baud rate to that specified, etc)
   "/mbus/getMulti/{device}/{baudrate}/{address}/{maxframes}":
     post:
-      description: Gets data from the slave identified by {address}, and supports
-        multiple responses from the slave
+      description: Gets data from the slave identified by {address}, and supports multiple responses from the slave
       operationId: getMulti
       parameters:
-        - description: The serial device to scan - /dev/ is pre-pended to {device} by
-            M-Bus HTTPD before scanning
+        - description: The serial device to scan - /dev/ is pre-pended to {device} by M-Bus HTTPD before scanning
           example: ttyAMA0
           explode: false
           in: path
@@ -149,8 +145,7 @@ paths:
               example: Slave {address} not responding
               schema:
                 $ref: "#/components/schemas/textError"
-          description: Not found (or M-Bus HTTPD is unauthorized to access it, or to
-            change baud rate to that specified, etc)
+          description: Not found (or M-Bus HTTPD is unauthorized to access it, or to change baud rate to that specified, etc)
   /mbus/hat:
     get:
       description: Gets Raspberry Pi Hat information
@@ -202,8 +197,7 @@ paths:
       description: Scan the specified device for slaves
       operationId: scan
       parameters:
-        - description: The serial device to scan - /dev/ is pre-pended to {device} by
-            M-Bus HTTPD before scanning
+        - description: The serial device to scan - /dev/ is pre-pended to {device} by M-Bus HTTPD before scanning
           example: ttyAMA0
           explode: false
           in: path
@@ -242,9 +236,7 @@ paths:
               example: Device /dev/{device} does not exist
               schema:
                 $ref: "#/components/schemas/textError"
-          description: Not found (e.g. device not found, or M-Bus HTTPD is unauthorized to
-            access it, or to change baud rate to that specified, device not
-            responding etc)
+          description: Not found (e.g. device not found, or M-Bus HTTPD is unauthorized to access it, or to change baud rate to that specified, device not responding etc)
 components:
   schemas:
     address:
@@ -255,8 +247,7 @@ components:
       minLength: 1
       type: string
     baudrate:
-      description: Baudrate to use for the communication - valid values 300, 600,
-        1200, 2400, 4800, 9600
+      description: Baudrate to use for the communication - valid values 300, 600, 1200, 2400, 4800, 9600
       enum:
         - 300
         - 600
@@ -268,8 +259,7 @@ components:
       format: int32
       type: integer
     device:
-      description: The device the M-Bus is connected to - /dev/ is prepended to
-        {device} by M-Bus HTTPD
+      description: The device the M-Bus is connected to - /dev/ is prepended to {device} by M-Bus HTTPD
       example: ttyAMA0
       type: string
     hat:

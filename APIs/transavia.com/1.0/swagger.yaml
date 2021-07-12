@@ -59,8 +59,7 @@ paths:
       description: Retrieve airports by country code.
       operationId: 58d8bcb8a9e6240e200cff26
       parameters:
-        - description: Comma-separated list of country codes (2-character ISO 3166-1).
-            More than 3 country codes is not allowed.
+        - description: Comma-separated list of country codes (2-character ISO 3166-1). More than 3 country codes is not allowed.
           in: path
           name: countryCode
           required: true
@@ -84,23 +83,19 @@ paths:
       description: Retrieve nearest airports by geo coordinates (latitude/longitude).
       operationId: 58d8bcb8a9e6240e200cff27
       parameters:
-        - description: Latitude in decimals, lower than -90.0 and higher than 90.0 is not
-            allowed.
+        - description: Latitude in decimals, lower than -90.0 and higher than 90.0 is not allowed.
           in: query
           name: latitude
           type: string
-        - description: Longitude in decimals, lower than -180.0 and higher than 180.0 is
-            not allowed.
+        - description: Longitude in decimals, lower than -180.0 and higher than 180.0 is not allowed.
           in: query
           name: longitude
           type: string
-        - description: Maximum distance in kilometers, lower than 1 and higher than 500 is
-            not allowed. If not set, max value is applied.
+        - description: Maximum distance in kilometers, lower than 1 and higher than 500 is not allowed. If not set, max value is applied.
           in: query
           name: maxDistanceInKm
           type: string
-        - description: Limits the result, lower than 0 is not allowed. If not set, the
-            result is not limited.
+        - description: Limits the result, lower than 0 is not allowed. If not set, the result is not limited.
           in: query
           name: limit
           type: string
@@ -128,13 +123,11 @@ paths:
           name: id
           required: true
           type: string
-        - description: Maximum distance in kilometers, lower than 1 and higher than 500 is
-            not allowed. If not set, max value is applied.
+        - description: Maximum distance in kilometers, lower than 1 and higher than 500 is not allowed. If not set, max value is applied.
           in: query
           name: maxDistanceInKm
           type: string
-        - description: Limits the result, lower than 0 is not allowed. If not set, the
-            result is not limited.
+        - description: Limits the result, lower than 0 is not allowed. If not set, the result is not limited.
           in: query
           name: limit
           type: string

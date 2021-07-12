@@ -264,8 +264,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Only include results with `status` value in any of the specified
-            groups
+        - description: Only include results with `status` value in any of the specified groups
           explode: false
           in: query
           name: statusGroups
@@ -461,8 +460,7 @@ paths:
     get:
       operationId: getAgreement
       parameters:
-        - description: Unique identifier of the Market used to retrieve/translate Legal
-            Agreements
+        - description: Unique identifier of the Market used to retrieve/translate Legal Agreements
           in: header
           name: X-Market-Id
           required: false
@@ -629,8 +627,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: Internal server error
-      summary: Retrieve the legal agreement(s) required to purchase the specified TLD
-        and add-ons
+      summary: Retrieve the legal agreement(s) required to purchase the specified TLD and add-ons
       tags:
         - v1
   /v1/domains/available:
@@ -655,8 +652,7 @@ paths:
               - fast
               - full
             type: string
-        - description: Whether or not to include domains available for transfer. If set to
-            True, checkType is ignored
+        - description: Whether or not to include domains available for transfer. If set to True, checkType is ignored
           in: query
           name: forTransfer
           required: false
@@ -753,12 +749,7 @@ paths:
             text/xml:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: Cannot convert domain label error<br>Domain is missing IDN
-            script<br>Domain segment ends with dash<br>Domain starts with
-            dashbr>Domain uses unsupported IDN script<br>FQDN fails generic
-            validity regex<br>Invalid character(s) error<br>Invalid tld
-            error<br>Non-IDN domain name must not have dashes at the third and
-            fourth position<br>Reserved name error<br>domain must be specified
+          description: Cannot convert domain label error<br>Domain is missing IDN script<br>Domain segment ends with dash<br>Domain starts with dashbr>Domain uses unsupported IDN script<br>FQDN fails generic validity regex<br>Invalid character(s) error<br>Invalid tld error<br>Non-IDN domain name must not have dashes at the third and fourth position<br>Reserved name error<br>domain must be specified
         "429":
           content:
             application/javascript:
@@ -943,13 +934,7 @@ paths:
             text/xml:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: Cannot convert domain label error<br>Domain is missing IDN
-            script<br>Domain segment ends with dash<br>Domain starts with
-            dash<br>Domain uses unsupported IDN script<br>FQDN fails generic
-            validity regex<br>Invalid character(s) error<br>Invalid tld
-            error<br>Non-IDN domain name must not have dashes at the third and
-            fourth position<br>Reserved name error<br>Reserved name
-            error<br>domain must be specified
+          description: Cannot convert domain label error<br>Domain is missing IDN script<br>Domain segment ends with dash<br>Domain starts with dash<br>Domain uses unsupported IDN script<br>FQDN fails generic validity regex<br>Invalid character(s) error<br>Invalid tld error<br>Non-IDN domain name must not have dashes at the third and fourth position<br>Reserved name error<br>Reserved name error<br>domain must be specified
         "429":
           content:
             application/javascript:
@@ -991,9 +976,7 @@ paths:
         - v1
   /v1/domains/contacts/validate:
     post:
-      description: All contacts specified in request will be validated against all
-        domains specifed in "domains". As an alternative, you can also pass in
-        tlds, with the exception of `uk`, which requires full domain names
+      description: All contacts specified in request will be validated against all domains specifed in "domains". As an alternative, you can also pass in tlds, with the exception of `uk`, which requires full domain names
       operationId: ContactsValidate
       parameters:
         - description: PrivateLabelId to operate as, if different from JWT
@@ -1003,8 +986,7 @@ paths:
           schema:
             default: 1
             type: integer
-        - description: MarketId in which the request is being made, and for which
-            responses should be localized
+        - description: MarketId in which the request is being made, and for which responses should be localized
           in: query
           name: marketId
           required: false
@@ -1102,8 +1084,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: Internal server error
-      summary: Validate the request body using the Domain Contact Validation Schema
-        for specified domains.
+      summary: Validate the request body using the Domain Contact Validation Schema for specified domains.
       tags:
         - v1
   /v1/domains/purchase:
@@ -1226,14 +1207,7 @@ paths:
             text/xml:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: domain must be specified<br>Based on restrictions declared in JSON
-            schema returned by `./schema/{tld}`<br>Cannot convert domain label
-            error<br>Domain is missing IDN script<br>Domain segment ends with
-            dash<br>Domain starts with dash<br>Domain uses unsupported IDN
-            script<br>FQDN fails generic validity regex<br>Invalid character(s)
-            error<br>Invalid tld error<br>Non-IDN domain name must not have
-            dashes at the third and fourth position<br>Reserved name
-            error<br>`body` must be specified
+          description: domain must be specified<br>Based on restrictions declared in JSON schema returned by `./schema/{tld}`<br>Cannot convert domain label error<br>Domain is missing IDN script<br>Domain segment ends with dash<br>Domain starts with dash<br>Domain uses unsupported IDN script<br>FQDN fails generic validity regex<br>Invalid character(s) error<br>Invalid tld error<br>Non-IDN domain name must not have dashes at the third and fourth position<br>Reserved name error<br>`body` must be specified
         "429":
           content:
             application/javascript:
@@ -1428,8 +1402,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: Internal server error
-      summary: Retrieve the schema to be submitted when registering a Domain for the
-        specified TLD
+      summary: Retrieve the schema to be submitted when registering a Domain for the specified TLD
       tags:
         - v1
   /v1/domains/purchase/validate:
@@ -1529,8 +1502,7 @@ paths:
             text/xml:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: Based on restrictions declared in JSON schema returned by
-            `./schema/{tld}`
+          description: Based on restrictions declared in JSON schema returned by `./schema/{tld}`
         "429":
           content:
             application/javascript:
@@ -1567,8 +1539,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: Internal server error
-      summary: Validate the request body using the Domain Purchase Schema for the
-        specified TLD
+      summary: Validate the request body using the Domain Purchase Schema for the specified TLD
       tags:
         - v1
   /v1/domains/suggest:
@@ -1581,19 +1552,15 @@ paths:
           required: false
           schema:
             type: string
-        - description: Domain name or set of keywords for which alternative domain names
-            will be suggested
+        - description: Domain name or set of keywords for which alternative domain names will be suggested
           in: query
           name: query
           required: false
           schema:
             type: string
-        - description: >-
-            Two-letter ISO country code to be used as a hint for target
-            region<br/><br/>
-
+        - description: |-
+            Two-letter ISO country code to be used as a hint for target region<br/><br/>
             NOTE: These are sample values, there are many
-
             <a href="http://www.iso.org/iso/country_codes.htm">more</a>
           in: query
           name: country
@@ -1853,15 +1820,11 @@ paths:
           schema:
             format: city-name
             type: string
-        - description: >-
+        - description: |-
             Sources to be queried<br/><br/><ul>
-
             <li><strong>CC_TLD</strong> - Varies the TLD using Country Codes</li>
-
             <li><strong>EXTENSION</strong> - Varies the TLD</li>
-
             <li><strong>KEYWORD_SPIN</strong> - Identifies keywords and then rotates each one</li>
-
             <li><strong>PREMIUM</strong> - Includes variations with premium prices</li></ul>
           explode: false
           in: query
@@ -1881,11 +1844,9 @@ paths:
               type: string
             type: array
           style: form
-        - description: >-
+        - description: |-
             Top-level domains to be included in suggestions<br/><br/>
-
             NOTE: These are sample values, there are many
-
             <a href="http://www.godaddy.com/tlds/gtld.aspx#domain_search_form">more</a>
           explode: false
           in: query
@@ -2097,8 +2058,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: Gateway timeout
-      summary: Suggest alternate Domain names based on a seed Domain, a set of
-        keywords, or the shopper's purchase history
+      summary: Suggest alternate Domain names based on a seed Domain, a set of keywords, or the shopper's purchase history
       tags:
         - v1
   /v1/domains/tlds:
@@ -2328,8 +2288,7 @@ paths:
             text/xml:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: Unknown domain error<br>At least two apex (aka @) `nameServers`
-            must be specified
+          description: Unknown domain error<br>At least two apex (aka @) `nameServers` must be specified
         "429":
           content:
             application/javascript:
@@ -2420,8 +2379,7 @@ paths:
             text/xml:
               schema:
                 $ref: "#/components/schemas/DomainDetail"
-          description: Request was partially successful, see verifications.status for
-            further detail
+          description: Request was partially successful, see verifications.status for further detail
         "400":
           content:
             application/javascript:
@@ -2560,10 +2518,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Shopper for whom Domain is to be updated. NOTE: This is only
-            required if you are a Reseller managing a domain purchased outside
-            the scope of your reseller account. For instance, if you're a
-            Reseller, but purchased a Domain via http://www.godaddy.com"
+        - description: "Shopper for whom Domain is to be updated. NOTE: This is only required if you are a Reseller managing a domain purchased outside the scope of your reseller account. For instance, if you're a Reseller, but purchased a Domain via http://www.godaddy.com"
           in: header
           name: X-Shopper-Id
           required: false
@@ -2692,8 +2647,7 @@ paths:
             text/xml:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: At least two apex (aka @) `nameServers` must be specified<br>Failed
-            to update nameservers
+          description: At least two apex (aka @) `nameServers` must be specified<br>Failed to update nameservers
         "429":
           content:
             application/javascript:
@@ -2737,10 +2691,7 @@ paths:
     patch:
       operationId: updateContacts
       parameters:
-        - description: "Shopper for whom domain contacts are to be updated. NOTE: This is
-            only required if you are a Reseller managing a domain purchased
-            outside the scope of your reseller account. For instance, if you're
-            a Reseller, but purchased a Domain via http://www.godaddy.com"
+        - description: "Shopper for whom domain contacts are to be updated. NOTE: This is only required if you are a Reseller managing a domain purchased outside the scope of your reseller account. For instance, if you're a Reseller, but purchased a Domain via http://www.godaddy.com"
           in: header
           name: X-Shopper-Id
           required: false
@@ -3025,9 +2976,7 @@ paths:
             text/xml:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: Customer has purchased Domain Ownership Protection and the domain
-            has expired<br>The domain status does not allow performing the
-            operation<br>Unknown domain error
+          description: Customer has purchased Domain Ownership Protection and the domain has expired<br>The domain status does not allow performing the operation<br>Unknown domain error
         "429":
           content:
             application/javascript:
@@ -3222,8 +3171,7 @@ paths:
             text/xml:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: End-user must read and consent to all of the following legal
-            agreements<br>`domain` must match `sld.tld`
+          description: End-user must read and consent to all of the following legal agreements<br>`domain` must match `sld.tld`
         "429":
           content:
             application/javascript:
@@ -3267,10 +3215,7 @@ paths:
     patch:
       operationId: recordAdd
       parameters:
-        - description: "Shopper ID which owns the domain. NOTE: This is only required if
-            you are a Reseller managing a domain purchased outside the scope of
-            your reseller account. For instance, if you're a Reseller, but
-            purchased a Domain via http://www.godaddy.com"
+        - description: "Shopper ID which owns the domain. NOTE: This is only required if you are a Reseller managing a domain purchased outside the scope of your reseller account. For instance, if you're a Reseller, but purchased a Domain via http://www.godaddy.com"
           in: header
           name: X-Shopper-Id
           required: false
@@ -3448,10 +3393,7 @@ paths:
     put:
       operationId: recordReplace
       parameters:
-        - description: "Shopper ID which owns the domain. NOTE: This is only required if
-            you are a Reseller managing a domain purchased outside the scope of
-            your reseller account. For instance, if you're a Reseller, but
-            purchased a Domain via http://www.godaddy.com"
+        - description: "Shopper ID which owns the domain. NOTE: This is only required if you are a Reseller managing a domain purchased outside the scope of your reseller account. For instance, if you're a Reseller, but purchased a Domain via http://www.godaddy.com"
           in: header
           name: X-Shopper-Id
           required: false
@@ -3574,8 +3516,7 @@ paths:
             text/xml:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: "`domain` is not a valid Domain name<br>`record` does not fulfill
-            the schema"
+          description: "`domain` is not a valid Domain name<br>`record` does not fulfill the schema"
         "429":
           content:
             application/javascript:
@@ -3637,10 +3578,7 @@ paths:
     put:
       operationId: recordReplaceType
       parameters:
-        - description: "Shopper ID which owns the domain. NOTE: This is only required if
-            you are a Reseller managing a domain purchased outside the scope of
-            your reseller account. For instance, if you're a Reseller, but
-            purchased a Domain via http://www.godaddy.com"
+        - description: "Shopper ID which owns the domain. NOTE: This is only required if you are a Reseller managing a domain purchased outside the scope of your reseller account. For instance, if you're a Reseller, but purchased a Domain via http://www.godaddy.com"
           in: header
           name: X-Shopper-Id
           required: false
@@ -3840,10 +3778,7 @@ paths:
     delete:
       operationId: recordDeleteTypeName
       parameters:
-        - description: "Shopper ID which owns the domain. NOTE: This is only required if
-            you are a Reseller managing a domain purchased outside the scope of
-            your reseller account. For instance, if you're a Reseller, but
-            purchased a Domain via http://www.godaddy.com"
+        - description: "Shopper ID which owns the domain. NOTE: This is only required if you are a Reseller managing a domain purchased outside the scope of your reseller account. For instance, if you're a Reseller, but purchased a Domain via http://www.godaddy.com"
           in: header
           name: X-Shopper-Id
           required: false
@@ -4039,17 +3974,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: Gateway timeout
-      summary: Delete all DNS Records for the specified Domain with the specified Type
-        and Name
+      summary: Delete all DNS Records for the specified Domain with the specified Type and Name
       tags:
         - v1
     get:
       operationId: recordGet
       parameters:
-        - description: "Shopper ID which owns the domain. NOTE: This is only required if
-            you are a Reseller managing a domain purchased outside the scope of
-            your reseller account. For instance, if you're a Reseller, but
-            purchased a Domain via http://www.godaddy.com"
+        - description: "Shopper ID which owns the domain. NOTE: This is only required if you are a Reseller managing a domain purchased outside the scope of your reseller account. For instance, if you're a Reseller, but purchased a Domain via http://www.godaddy.com"
           in: header
           name: X-Shopper-Id
           required: false
@@ -4212,8 +4143,7 @@ paths:
             text/xml:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: "`record` does not fulfill the schema<br>`domain` is not a valid
-            Domain name"
+          description: "`record` does not fulfill the schema<br>`domain` is not a valid Domain name"
         "429":
           content:
             application/javascript:
@@ -4268,17 +4198,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: Gateway timeout
-      summary: Retrieve DNS Records for the specified Domain, optionally with the
-        specified Type and/or Name
+      summary: Retrieve DNS Records for the specified Domain, optionally with the specified Type and/or Name
       tags:
         - v1
     put:
       operationId: recordReplaceTypeName
       parameters:
-        - description: "Shopper ID which owns the domain. NOTE: This is only required if
-            you are a Reseller managing a domain purchased outside the scope of
-            your reseller account. For instance, if you're a Reseller, but
-            purchased a Domain via http://www.godaddy.com"
+        - description: "Shopper ID which owns the domain. NOTE: This is only required if you are a Reseller managing a domain purchased outside the scope of your reseller account. For instance, if you're a Reseller, but purchased a Domain via http://www.godaddy.com"
           in: header
           name: X-Shopper-Id
           required: false
@@ -4477,18 +4403,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
           description: Gateway timeout
-      summary: Replace all DNS Records for the specified Domain with the specified
-        Type and Name
+      summary: Replace all DNS Records for the specified Domain with the specified Type and Name
       tags:
         - v1
   "/v1/domains/{domain}/renew":
     post:
       operationId: renew
       parameters:
-        - description: "Shopper for whom Domain is to be renewed. NOTE: This is only
-            required if you are a Reseller managing a domain purchased outside
-            the scope of your reseller account. For instance, if you're a
-            Reseller, but purchased a Domain via http://www.godaddy.com"
+        - description: "Shopper for whom Domain is to be renewed. NOTE: This is only required if you are a Reseller managing a domain purchased outside the scope of your reseller account. For instance, if you're a Reseller, but purchased a Domain via http://www.godaddy.com"
           in: header
           name: X-Shopper-Id
           required: false
@@ -4638,8 +4560,7 @@ paths:
             text/xml:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: End-user must read and consent to all of the following legal
-            agreements<br>`domain` must match `sld.tld`
+          description: End-user must read and consent to all of the following legal agreements<br>`domain` must match `sld.tld`
         "429":
           content:
             application/javascript:
@@ -4816,16 +4737,7 @@ paths:
             text/xml:
               schema:
                 $ref: "#/components/schemas/Error"
-          description: Based on restrictions declared in JSON schema returned by
-            `./schema/{tld}`<br>Cannot convert domain label error<br>Domain is
-            missing IDN script<br>Domain segment ends with dash<br>Domain starts
-            with dash<br>Domain uses unsupported IDN script<br>End-user must
-            read and consent to all of the following legal agreements<br>FQDN
-            fails generic validity regex<br>Invalid character(s)
-            error<br>Invalid period range<br>Invalid tld error<br>Non-IDN domain
-            name must not have dashes at the third and fourth
-            position<br>Reserved name error<br>`authCode` cannot be
-            empty<br>`domain` must match `sld.tld`<br>domain must be specified
+          description: Based on restrictions declared in JSON schema returned by `./schema/{tld}`<br>Cannot convert domain label error<br>Domain is missing IDN script<br>Domain segment ends with dash<br>Domain starts with dash<br>Domain uses unsupported IDN script<br>End-user must read and consent to all of the following legal agreements<br>FQDN fails generic validity regex<br>Invalid character(s) error<br>Invalid period range<br>Invalid tld error<br>Non-IDN domain name must not have dashes at the third and fourth position<br>Reserved name error<br>`authCode` cannot be empty<br>`domain` must match `sld.tld`<br>domain must be specified
         "429":
           content:
             application/javascript:
@@ -4869,11 +4781,7 @@ paths:
     post:
       operationId: verifyEmail
       parameters:
-        - description: "Shopper for whom domain contact e-mail should be verified. NOTE:
-            This is only required if you are a Reseller managing a domain
-            purchased outside the scope of your reseller account. For instance,
-            if you're a Reseller, but purchased a Domain via
-            http://www.godaddy.com"
+        - description: "Shopper for whom domain contact e-mail should be verified. NOTE: This is only required if you are a Reseller managing a domain purchased outside the scope of your reseller account. For instance, if you're a Reseller, but purchased a Domain via http://www.godaddy.com"
           in: header
           name: X-Shopper-Id
           required: false
@@ -5037,23 +4945,16 @@ paths:
         - v1
   "/v2/customers/{customerId}/domains/forwards/{fqdn}":
     delete:
-      description: <strong>Notes:</strong><ul><li>**shopperId** is **not the same** as
-        **customerId**.  **shopperId** is a number of max length 10 digits
-        (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:*
-        295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
+      description: <strong>Notes:</strong><ul><li>**shopperId** is **not the same** as **customerId**.  **shopperId** is a number of max length 10 digits (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:* 295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
       operationId: domainsForwardsDelete
       parameters:
-        - description: "The Customer identifier<br/> Note: For API Resellers, performing
-            actions on behalf of your customers, you need to specify the
-            Subaccount you're operating on behalf of; otherwise use your shopper
-            id."
+        - description: "The Customer identifier<br/> Note: For API Resellers, performing actions on behalf of your customers, you need to specify the Subaccount you're operating on behalf of; otherwise use your shopper id."
           in: path
           name: customerId
           required: true
           schema:
             type: string
-        - description: The fully qualified domain name whose forwarding details are to be
-            deleted.
+        - description: The fully qualified domain name whose forwarding details are to be deleted.
           in: path
           name: fqdn
           required: true
@@ -5108,30 +5009,22 @@ paths:
       tags:
         - v2
     get:
-      description: <strong>Notes:</strong><ul><li>**shopperId** is **not the same** as
-        **customerId**.  **shopperId** is a number of max length 10 digits
-        (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:*
-        295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
+      description: <strong>Notes:</strong><ul><li>**shopperId** is **not the same** as **customerId**.  **shopperId** is a number of max length 10 digits (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:* 295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
       operationId: domainsForwardsGet
       parameters:
-        - description: "The Customer identifier<br/> Note: For API Resellers, performing
-            actions on behalf of your customers, you need to specify the
-            Subaccount you're operating on behalf of; otherwise use your shopper
-            id."
+        - description: "The Customer identifier<br/> Note: For API Resellers, performing actions on behalf of your customers, you need to specify the Subaccount you're operating on behalf of; otherwise use your shopper id."
           in: path
           name: customerId
           required: true
           schema:
             type: string
-        - description: The fully qualified domain name whose forwarding details are to be
-            retrieved.
+        - description: The fully qualified domain name whose forwarding details are to be retrieved.
           in: path
           name: fqdn
           required: true
           schema:
             type: string
-        - description: Optionally include all sub domains if the fqdn specified is a
-            domain and not a sub domain.
+        - description: Optionally include all sub domains if the fqdn specified is a domain and not a sub domain.
           in: query
           name: includeSubs
           required: false
@@ -5186,23 +5079,16 @@ paths:
       tags:
         - v2
     put:
-      description: <strong>Notes:</strong><ul><li>**shopperId** is **not the same** as
-        **customerId**.  **shopperId** is a number of max length 10 digits
-        (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:*
-        295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
+      description: <strong>Notes:</strong><ul><li>**shopperId** is **not the same** as **customerId**.  **shopperId** is a number of max length 10 digits (*ex:* 1234567890) whereas **customerId** is a UUIDv4 (*ex:* 295e3bc3-b3b9-4d95-aae5-ede41a994d13)</li></ul>
       operationId: domainsForwardsPut
       parameters:
-        - description: "The Customer identifier<br/> Note: For API Resellers, performing
-            actions on behalf of your customers, you need to specify the
-            Subaccount you're operating on behalf of; otherwise use your shopper
-            id."
+        - description: "The Customer identifier<br/> Note: For API Resellers, performing actions on behalf of your customers, you need to specify the Subaccount you're operating on behalf of; otherwise use your shopper id."
           in: path
           name: customerId
           required: true
           schema:
             type: string
-        - description: The fully qualified domain name whose forwarding details are to be
-            modified.
+        - description: The fully qualified domain name whose forwarding details are to be modified.
           in: path
           name: fqdn
           required: true
@@ -5276,8 +5162,7 @@ components:
         text/xml:
           schema:
             $ref: "#/components/schemas/DomainPurchase"
-      description: An instance document expected to match the JSON schema returned by
-        `./schema/{tld}`
+      description: An instance document expected to match the JSON schema returned by `./schema/{tld}`
       required: true
   schemas:
     Address:
@@ -5293,12 +5178,9 @@ components:
           type: string
         country:
           default: US
-          description: >-
-            Two-letter ISO country code to be used as a hint for target
-            region<br/><br/>
-
+          description: |-
+            Two-letter ISO country code to be used as a hint for target region<br/><br/>
             NOTE: These are sample values, there are many
-
             <a href='http://www.iso.org/iso/country_codes.htm'>more</a>
           enum:
             - AC
@@ -5568,17 +5450,14 @@ components:
     Consent:
       properties:
         agreedAt:
-          description: Timestamp indicating when the end-user consented to these legal
-            agreements
+          description: Timestamp indicating when the end-user consented to these legal agreements
           format: iso-datetime
           type: string
         agreedBy:
-          description: Originating client IP address of the end-user's computer when they
-            consented to these legal agreements
+          description: Originating client IP address of the end-user's computer when they consented to these legal agreements
           type: string
         agreementKeys:
-          description: Unique identifiers of the legal agreements to which the end-user
-            has agreed, as returned from the/domains/agreements endpoint
+          description: Unique identifiers of the legal agreements to which the end-user has agreed, as returned from the/domains/agreements endpoint
           items:
             type: string
           type: array
@@ -5593,15 +5472,10 @@ components:
           format: iso-datetime
           type: string
         agreedBy:
-          description: Originating client IP address of the end-user's computer when they
-            consented to the agreements
+          description: Originating client IP address of the end-user's computer when they consented to the agreements
           type: string
         agreementKeys:
-          description: "Unique identifiers of the agreements to which the end-user has
-            agreed, as required by the elements being
-            updated<br/><ul><li><strong style='margin-left:
-            12px;'>EXPOSE_WHOIS</strong> - Required when the exposeWhois field
-            is updated to true</li></ul>"
+          description: "Unique identifiers of the agreements to which the end-user has agreed, as required by the elements being updated<br/><ul><li><strong style='margin-left: 12px;'>EXPOSE_WHOIS</strong> - Required when the exposeWhois field is updated to true</li></ul>"
           items:
             enum:
               - EXPOSE_WHOIS
@@ -5773,8 +5647,7 @@ components:
     DomainAvailableError:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the
-            specific error within client code
+          description: Short identifier for the error, suitable for indicating the specific error within client code
           format: constant
           type: string
         domain:
@@ -5784,15 +5657,11 @@ components:
           description: Human-readable, English description of the error
           type: string
         path:
-          description: >-
+          description: |-
             <ul>
-
             <li style='margin-left: 12px;'>JSONPath referring to a field containing an error</li>
-
             <strong style='margin-left: 12px;'>OR</strong>
-
             <li style='margin-left: 12px;'>JSONPath referring to a field that refers to an object containing an error, with more detail in `pathRelated`</li>
-
             </ul>
           format: json-path
           type: string
@@ -5811,25 +5680,21 @@ components:
           type: boolean
         currency:
           default: USD
-          description: Currency in which the `price` is listed. Only returned if tld is
-            offered
+          description: Currency in which the `price` is listed. Only returned if tld is offered
           format: iso-currency-code
           type: string
         definitive:
-          description: Whether or not the `available` answer has been definitively
-            verified with the registry
+          description: Whether or not the `available` answer has been definitively verified with the registry
           type: boolean
         domain:
           description: Domain name
           type: string
         period:
-          description: Number of years included in the price. Only returned if tld is
-            offered
+          description: Number of years included in the price. Only returned if tld is offered
           format: integer-positive
           type: integer
         price:
-          description: Price of the domain excluding taxes or fees. Only returned if tld
-            is offered
+          description: Price of the domain excluding taxes or fees. Only returned if tld is offered
           format: currency-micro-unit
           type: integer
       required:
@@ -5884,8 +5749,7 @@ components:
           format: date-time
           type: string
         exposeWhois:
-          description: Whether or not the domain contact details should be shown in the
-            WHOIS
+          description: Whether or not the domain contact details should be shown in the WHOIS
           type: boolean
         holdRegistrar:
           description: Whether or not the domain is on-hold by the registrar
@@ -5910,49 +5774,28 @@ components:
           format: date-time
           type: string
         status:
-          description: >-
+          description: |-
             Processing status of the domain<br/><ul>
-
             <li><strong style='margin-left: 12px;'>ACTIVE</strong> - All is well</li>
-
             <li><strong style='margin-left: 12px;'>AWAITING*</strong> - System is waiting for the end-user to complete an action</li>
-
             <li><strong style='margin-left: 12px;'>CANCELLED*</strong> - Domain has been cancelled, and may or may not be reclaimable</li>
-
             <li><strong style='margin-left: 12px;'>CONFISCATED</strong> - Domain has been confiscated, usually for abuse, chargeback, or fraud</li>
-
             <li><strong style='margin-left: 12px;'>DISABLED*</strong> - Domain has been disabled</li>
-
             <li><strong style='margin-left: 12px;'>EXCLUDED*</strong> - Domain has been excluded from Firehose registration</li>
-
             <li><strong style='margin-left: 12px;'>EXPIRED*</strong> - Domain has expired</li>
-
             <li><strong style='margin-left: 12px;'>FAILED*</strong> - Domain has failed a required action, and the system is no longer retrying</li>
-
             <li><strong style='margin-left: 12px;'>HELD*</strong> - Domain has been placed on hold, and likely requires intervention from Support</li>
-
             <li><strong style='margin-left: 12px;'>LOCKED*</strong> - Domain has been locked, and likely requires intervention from Support</li>
-
             <li><strong style='margin-left: 12px;'>PARKED*</strong> - Domain has been parked, and likely requires intervention from Support</li>
-
             <li><strong style='margin-left: 12px;'>PENDING*</strong> - Domain is working its way through an automated workflow</li>
-
             <li><strong style='margin-left: 12px;'>RESERVED*</strong> - Domain is reserved, and likely requires intervention from Support</li>
-
             <li><strong style='margin-left: 12px;'>REVERTED</strong> - Domain has been reverted, and likely requires intervention from Support</li>
-
             <li><strong style='margin-left: 12px;'>SUSPENDED*</strong> - Domain has been suspended, and likely requires intervention from Support</li>
-
             <li><strong style='margin-left: 12px;'>TRANSFERRED*</strong> - Domain has been transferred out</li>
-
             <li><strong style='margin-left: 12px;'>UNKNOWN</strong> - Domain is in an unknown state</li>
-
             <li><strong style='margin-left: 12px;'>UNLOCKED*</strong> - Domain has been unlocked, and likely requires intervention from Support</li>
-
             <li><strong style='margin-left: 12px;'>UNPARKED*</strong> - Domain has been unparked, and likely requires intervention from Support</li>
-
             <li><strong style='margin-left: 12px;'>UPDATED*</strong> - Domain ownership has been transferred to another account</li>
-
             </ul>
           type: string
         subaccountId:
@@ -5988,34 +5831,20 @@ components:
     DomainForwarding:
       properties:
         fqdn:
-          description: The fqdn (domain or sub domain) to forward (ex somedomain.com or
-            sub.somedomain.com)
+          description: The fqdn (domain or sub domain) to forward (ex somedomain.com or sub.somedomain.com)
           type: string
         mask:
           $ref: "#/components/schemas/DomainForwardingMask"
         type:
           default: REDIRECT_PERMANENT
-          description: "The type of fowarding to implement<br/><ul><li><strong
-            style='margin-left: 12px;'>MASKED</strong> - Prevents the forwarded
-            domain or subdomain URL from displaying in the browser's address
-            bar.</li><li><strong style='margin-left:
-            12px;'>REDIRECT_PERMANENT*</strong> - Redirects to the url you
-            specified in the forwardTo field using a `301 Moved Permanently`
-            HTTP response. The HTTP 301 response code tells user-agents
-            (including search engines) that the location has permanently
-            moved.</li><li><strong style='margin-left:
-            12px;'>REDIRECT_TEMPORARY</strong> - Redirects to the url you
-            specified in the forwardTo field using a `302 Found` HTTP response.
-            The HTTP 302 response code tells user-agents (including search
-            engines) that the location has temporarily moved.</li></ul>"
+          description: "The type of fowarding to implement<br/><ul><li><strong style='margin-left: 12px;'>MASKED</strong> - Prevents the forwarded domain or subdomain URL from displaying in the browser's address bar.</li><li><strong style='margin-left: 12px;'>REDIRECT_PERMANENT*</strong> - Redirects to the url you specified in the forwardTo field using a `301 Moved Permanently` HTTP response. The HTTP 301 response code tells user-agents (including search engines) that the location has permanently moved.</li><li><strong style='margin-left: 12px;'>REDIRECT_TEMPORARY</strong> - Redirects to the url you specified in the forwardTo field using a `302 Found` HTTP response. The HTTP 302 response code tells user-agents (including search engines) that the location has temporarily moved.</li></ul>"
           enum:
             - MASKED
             - REDIRECT_PERMANENT
             - REDIRECT_TEMPORARY
           type: string
         url:
-          description: Forwards http(s) traffic to this destination url (ex.
-            http://www.somedomain.com/)
+          description: Forwards http(s) traffic to this destination url (ex. http://www.somedomain.com/)
           format: url
           type: string
       required:
@@ -6028,27 +5857,14 @@ components:
           $ref: "#/components/schemas/DomainForwardingMask"
         type:
           default: REDIRECT_PERMANENT
-          description: "The type of fowarding to implement<br/><ul><li><strong
-            style='margin-left: 12px;'>MASKED</strong> - Prevents the forwarded
-            domain or subdomain URL from displaying in the browser's address
-            bar.</li><li><strong style='margin-left:
-            12px;'>REDIRECT_PERMANENT*</strong> - Redirects to the url you
-            specified in the forwardTo field using a `301 Moved Permanently`
-            HTTP response. The HTTP 301 response code tells user-agents
-            (including search engines) that the location has permanently
-            moved.</li><li><strong style='margin-left:
-            12px;'>REDIRECT_TEMPORARY</strong> - Redirects to the url you
-            specified in the forwardTo field using a `302 Found` HTTP response.
-            The HTTP 302 response code tells user-agents (including search
-            engines) that the location has temporarily moved.</li></ul>"
+          description: "The type of fowarding to implement<br/><ul><li><strong style='margin-left: 12px;'>MASKED</strong> - Prevents the forwarded domain or subdomain URL from displaying in the browser's address bar.</li><li><strong style='margin-left: 12px;'>REDIRECT_PERMANENT*</strong> - Redirects to the url you specified in the forwardTo field using a `301 Moved Permanently` HTTP response. The HTTP 301 response code tells user-agents (including search engines) that the location has permanently moved.</li><li><strong style='margin-left: 12px;'>REDIRECT_TEMPORARY</strong> - Redirects to the url you specified in the forwardTo field using a `302 Found` HTTP response. The HTTP 302 response code tells user-agents (including search engines) that the location has temporarily moved.</li></ul>"
           enum:
             - MASKED
             - REDIRECT_PERMANENT
             - REDIRECT_TEMPORARY
           type: string
         url:
-          description: Forwards http(s) traffic to this destination url (ex.
-            http://www.somedomain.com/)
+          description: Forwards http(s) traffic to this destination url (ex. http://www.somedomain.com/)
           format: url
           type: string
       required:
@@ -6057,12 +5873,10 @@ components:
     DomainForwardingMask:
       properties:
         description:
-          description: A short description of your website to display in search engine
-            results.
+          description: A short description of your website to display in search engine results.
           type: string
         keywords:
-          description: A list of comma-separated keywords that describes the content and
-            purpose of your website.
+          description: A list of comma-separated keywords that describes the content and purpose of your website.
           type: string
         title:
           description: Displays at the top of the browser window and in search results.
@@ -6080,9 +5894,7 @@ components:
         contactTech:
           $ref: "#/components/schemas/Contact"
         domain:
-          description: For internationalized domain names with non-ascii characters, the
-            domain name is converted to punycode before format and pattern
-            validation rules are checked
+          description: For internationalized domain names with non-ascii characters, the domain name is converted to punycode before format and pattern validation rules are checked
           format: domain
           type: string
         nameServers:
@@ -6131,9 +5943,7 @@ components:
     DomainRenew:
       properties:
         period:
-          description: Number of years to extend the Domain. Must not exceed maximum for
-            TLD. When omitted, defaults to `period` specified during original
-            purchase
+          description: Number of years to extend the Domain. Must not exceed maximum for TLD. When omitted, defaults to `period` specified during original purchase
           format: integer-positive
           maximum: 10
           minimum: 1
@@ -6181,8 +5991,7 @@ components:
           format: date-time
           type: string
         exposeWhois:
-          description: Whether or not the domain contact details should be shown in the
-            WHOIS
+          description: Whether or not the domain contact details should be shown in the WHOIS
           type: boolean
         holdRegistrar:
           description: Whether or not the domain is on-hold by the registrar
@@ -6210,49 +6019,28 @@ components:
           description: Whether or not the domain is eligble for renewal based on status
           type: boolean
         status:
-          description: >-
+          description: |-
             Processing status of the domain<br/><ul>
-
             <li><strong style='margin-left: 12px;'>ACTIVE</strong> - All is well</li>
-
             <li><strong style='margin-left: 12px;'>AWAITING*</strong> - System is waiting for the end-user to complete an action</li>
-
             <li><strong style='margin-left: 12px;'>CANCELLED*</strong> - Domain has been cancelled, and may or may not be reclaimable</li>
-
             <li><strong style='margin-left: 12px;'>CONFISCATED</strong> - Domain has been confiscated, usually for abuse, chargeback, or fraud</li>
-
             <li><strong style='margin-left: 12px;'>DISABLED*</strong> - Domain has been disabled</li>
-
             <li><strong style='margin-left: 12px;'>EXCLUDED*</strong> - Domain has been excluded from Firehose registration</li>
-
             <li><strong style='margin-left: 12px;'>EXPIRED*</strong> - Domain has expired</li>
-
             <li><strong style='margin-left: 12px;'>FAILED*</strong> - Domain has failed a required action, and the system is no longer retrying</li>
-
             <li><strong style='margin-left: 12px;'>HELD*</strong> - Domain has been placed on hold, and likely requires intervention from Support</li>
-
             <li><strong style='margin-left: 12px;'>LOCKED*</strong> - Domain has been locked, and likely requires intervention from Support</li>
-
             <li><strong style='margin-left: 12px;'>PARKED*</strong> - Domain has been parked, and likely requires intervention from Support</li>
-
             <li><strong style='margin-left: 12px;'>PENDING*</strong> - Domain is working its way through an automated workflow</li>
-
             <li><strong style='margin-left: 12px;'>RESERVED*</strong> - Domain is reserved, and likely requires intervention from Support</li>
-
             <li><strong style='margin-left: 12px;'>REVERTED</strong> - Domain has been reverted, and likely requires intervention from Support</li>
-
             <li><strong style='margin-left: 12px;'>SUSPENDED*</strong> - Domain has been suspended, and likely requires intervention from Support</li>
-
             <li><strong style='margin-left: 12px;'>TRANSFERRED*</strong> - Domain has been transferred out</li>
-
             <li><strong style='margin-left: 12px;'>UNKNOWN</strong> - Domain is in an unknown state</li>
-
             <li><strong style='margin-left: 12px;'>UNLOCKED*</strong> - Domain has been unlocked, and likely requires intervention from Support</li>
-
             <li><strong style='margin-left: 12px;'>UNPARKED*</strong> - Domain has been unparked, and likely requires intervention from Support</li>
-
             <li><strong style='margin-left: 12px;'>UPDATED*</strong> - Domain ownership has been transferred to another account</li>
-
             </ul>
           type: string
         transferAwayEligibleAt:
@@ -6292,8 +6080,7 @@ components:
           $ref: "#/components/schemas/Contact"
         period:
           default: 1
-          description: Can be more than 1 but no more than 10 years total including
-            current registration length
+          description: Can be more than 1 but no more than 10 years total including current registration length
           format: integer-positive
           maximum: 10
           minimum: 1
@@ -6314,15 +6101,13 @@ components:
         consent:
           $ref: "#/components/schemas/ConsentDomainUpdate"
         exposeWhois:
-          description: Whether or not the domain contact details should be shown in the
-            WHOIS
+          description: Whether or not the domain contact details should be shown in the WHOIS
           type: boolean
         locked:
           description: Whether or not the domain should be locked to prevent transfers
           type: boolean
         nameServers:
-          description: Fully-qualified domain names for Name Servers to associate with the
-            domain
+          description: Fully-qualified domain names for Name Servers to associate with the domain
           items:
             format: host-name
           type: array
@@ -6345,9 +6130,7 @@ components:
         contactTech:
           $ref: "#/components/schemas/Contact"
         domains:
-          description: An array of domain names to be validated against. Alternatively,
-            you can specify the extracted tlds. However, full domain names are
-            required if the tld is `uk`
+          description: An array of domain names to be validated against. Alternatively, you can specify the extracted tlds. However, full domain names are required if the tld is `uk`
           items:
             format: domain
             type: string
@@ -6378,8 +6161,7 @@ components:
     Error:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the
-            specific error within client code
+          description: Short identifier for the error, suitable for indicating the specific error within client code
           format: constant
           type: string
         fields:
@@ -6395,8 +6177,7 @@ components:
     ErrorDomainContactsValidate:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the
-            specific error within client code
+          description: Short identifier for the error, suitable for indicating the specific error within client code
           format: constant
           type: string
         fields:
@@ -6408,10 +6189,7 @@ components:
           description: Human-readable, English description of the error
           type: string
         stack:
-          description: "Stack trace indicating where the error occurred.<br/>NOTE: This
-            attribute <strong>MAY</strong> be included for Development and Test
-            environments. However, it <strong>MUST NOT</strong> be exposed from
-            OTE nor Production systems"
+          description: "Stack trace indicating where the error occurred.<br/>NOTE: This attribute <strong>MAY</strong> be included for Development and Test environments. However, it <strong>MUST NOT</strong> be exposed from OTE nor Production systems"
           items:
             type: string
           type: array
@@ -6420,30 +6198,23 @@ components:
     ErrorField:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the
-            specific error within client code
+          description: Short identifier for the error, suitable for indicating the specific error within client code
           format: constant
           type: string
         message:
-          description: Human-readable, English description of the problem with the
-            contents of the field
+          description: Human-readable, English description of the problem with the contents of the field
           type: string
         path:
-          description: >-
+          description: |-
             <ul>
-
             <li style='margin-left: 12px;'>JSONPath referring to a field containing an error</li>
-
             <strong style='margin-left: 12px;'>OR</strong>
-
             <li style='margin-left: 12px;'>JSONPath referring to a field that refers to an object containing an error, with more detail in `pathRelated`</li>
-
             </ul>
           format: json-path
           type: string
         pathRelated:
-          description: JSONPath referring to a field containing an error, which is
-            referenced by `path`
+          description: JSONPath referring to a field containing an error, which is referenced by `path`
           format: json-path
           type: string
       required:
@@ -6452,32 +6223,23 @@ components:
     ErrorFieldDomainContactsValidate:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the
-            specific error within client code
+          description: Short identifier for the error, suitable for indicating the specific error within client code
           format: constant
           type: string
         domains:
-          description: An array of domain names the error is for. If tlds are specified in
-            the request, `domains` will contain tlds. For example, if `domains`
-            in request is ["test1.com", "test2.uk", "net"], and the field is
-            invalid for com and net, then one of the `fields` in response will
-            have ["test1.com", "net"] as `domains`
+          description: An array of domain names the error is for. If tlds are specified in the request, `domains` will contain tlds. For example, if `domains` in request is ["test1.com", "test2.uk", "net"], and the field is invalid for com and net, then one of the `fields` in response will have ["test1.com", "net"] as `domains`
           items:
             type: string
           type: array
         message:
-          description: Human-readable, English description of the problem with the
-            contents of the field
+          description: Human-readable, English description of the problem with the contents of the field
           type: string
         path:
-          description: 1) JSONPath referring to the field within the data containing an
-            error<br/>or<br/>2) JSONPath referring to an object containing an
-            error
+          description: 1) JSONPath referring to the field within the data containing an error<br/>or<br/>2) JSONPath referring to an object containing an error
           format: json-path
           type: string
         pathRelated:
-          description: JSONPath referring to the field on the object referenced by `path`
-            containing an error
+          description: JSONPath referring to the field on the object referenced by `path` containing an error
           format: json-path
           type: string
       required:
@@ -6487,8 +6249,7 @@ components:
     ErrorLimit:
       properties:
         code:
-          description: Short identifier for the error, suitable for indicating the
-            specific error within client code
+          description: Short identifier for the error, suitable for indicating the specific error within client code
           format: constant
           type: string
         fields:
@@ -6636,80 +6397,7 @@ components:
     VerificationRealName:
       properties:
         status:
-          description: "Status of the real name verification<br/><ul> <li><strong
-            style='margin-left: 12px;'>APPROVED</strong> - All is well</li>
-            <li><strong style='margin-left: 12px;'>PENDING</strong> - Real name
-            verification is working its way through the workflow</li>
-            <li><strong style='margin-left:
-            12px;'>REJECTED_DOCUMENT_OUTDATED</strong> - Local government
-            verification shows there is a newer version of your
-            document.  Upload the latest version of the document and retry real
-            name verification</li> <li><strong style='margin-left:
-            12px;'>REJECTED_EXPIRED_BUSINESS_LICENSE</strong> - Business license
-            is expired</li> <li><strong style='margin-left:
-            12px;'>REJECTED_EXPIRED_ORGANIZATION_CODE</strong> - Organization
-            code certificate number has expired</li> <li><strong
-            style='margin-left: 12px;'>REJECTED_ILLEGIBLE_DOCUMENT_NAME</strong>
-            - There isn’t a clear name on your uploaded document, please upload
-            a different document to retry real name verification</li>
-            <li><strong style='margin-left:
-            12px;'>REJECTED_ILLEGIBLE_IDENTIFICATION</strong> - Registrant
-            identification is not clear.  Upload a better image to retry</li>
-            <li><strong style='margin-left:
-            12px;'>REJECTED_INCOMPLETE_IDENTIFICATION</strong> - Registrant
-            identification is incomplete</li> <li><strong style='margin-left:
-            12px;'>REJECTED_INCOMPLETE_REGISTRATION_LETTER</strong> -
-            Registration letter is incomplete</li> <li><strong
-            style='margin-left:
-            12px;'>REJECTED_INCONSISTENT_IDENTITY_CARD</strong> - Provided
-            identity card is inconsistent with the identity card on record</li>
-            <li><strong style='margin-left:
-            12px;'>REJECTED_INCONSISTENT_ORGANIZATION_CODE</strong> - Provided
-            organization information is inconsistent with the results obtained
-            using the submitted organization code</li> <li><strong
-            style='margin-left:
-            12px;'>REJECTED_INCONSISTENT_REGISTRANT_NAME</strong> - Name on the
-            registrant identification does not match the name in the system</li>
-            <li><strong style='margin-left:
-            12px;'>REJECTED_INVALID_BUSINESS_LICENSE_OR_ORGANIZATION_CODE</stro\
-            ng> - Your document contains an invalid business license or
-            organization code certificate number</li> <li><strong
-            style='margin-left: 12px;'>REJECTED_INVALID_DOCUMENT</strong> -
-            Document is invalid.  Please upload another document to retry real
-            name verification</li> <li><strong style='margin-left:
-            12px;'>REJECTED_MISMATCH_BUSINESS_ID</strong> - Business id does not
-            match the business id in the document</li> <li><strong
-            style='margin-left: 12px;'>REJECTED_MISMATCH_BUSINESS_NAME</strong>
-            - Business name does not match the business name in the
-            document</li> <li><strong style='margin-left:
-            12px;'>REJECTED_MISMATCH_DOCUMENT_ID</strong> - Document id does not
-            match the id in the document</li> <li><strong style='margin-left:
-            12px;'>REJECTED_MISMATCH_DOCUMENT_NAME</strong> - Document name does
-            not match the name in the document</li> <li><strong
-            style='margin-left: 12px;'>REJECTED_MISMATCH_DOCUMENT_TYPE</strong>
-            - Document type does not match the document</li> <li><strong
-            style='margin-left:
-            12px;'>REJECTED_MISMATCH_REGISTRANT_INFO</strong> - The information
-            provided for the registrant does not match the document</li>
-            <li><strong style='margin-left:
-            12px;'>REJECTED_MISMATCH_REGISTRANT_LOCALITY</strong> - Registrant
-            region is overseas, but a local identity document was provided</li>
-            <li><strong style='margin-left:
-            12px;'>REJECTED_MISMATCH_REGISTRANT_NAME</strong> - Registrant name
-            has been changed, so the request must be resubmitted</li>
-            <li><strong style='margin-left:
-            12px;'>REJECTED_UNABLE_TO_OPEN</strong> - Registrant identification
-            could not be opened.  Please upload the document again to retry real
-            name verification</li> <li><strong style='margin-left:
-            12px;'>REJECTED_UNABLE_TO_VERIFY</strong> - Unable to initiate
-            verification.  Please upload the document again to retry real name
-            verification</li> <li><strong style='margin-left:
-            12px;'>REJECTED_UNKNOWN_ERROR</strong> - Document was rejected due
-            to an unknown error. For more information, contact customer
-            support</li> <li><strong style='margin-left:
-            12px;'>UNABLE_TO_RETRIEVE_STATUS</strong> - Unable to retrieve
-            status for the real name verification process.  Retry, if this
-            status persists, contact customer support</li> </ul>"
+          description: "Status of the real name verification<br/><ul> <li><strong style='margin-left: 12px;'>APPROVED</strong> - All is well</li> <li><strong style='margin-left: 12px;'>PENDING</strong> - Real name verification is working its way through the workflow</li> <li><strong style='margin-left: 12px;'>REJECTED_DOCUMENT_OUTDATED</strong> - Local government verification shows there is a newer version of your document.  Upload the latest version of the document and retry real name verification</li> <li><strong style='margin-left: 12px;'>REJECTED_EXPIRED_BUSINESS_LICENSE</strong> - Business license is expired</li> <li><strong style='margin-left: 12px;'>REJECTED_EXPIRED_ORGANIZATION_CODE</strong> - Organization code certificate number has expired</li> <li><strong style='margin-left: 12px;'>REJECTED_ILLEGIBLE_DOCUMENT_NAME</strong> - There isn’t a clear name on your uploaded document, please upload a different document to retry real name verification</li> <li><strong style='margin-left: 12px;'>REJECTED_ILLEGIBLE_IDENTIFICATION</strong> - Registrant identification is not clear.  Upload a better image to retry</li> <li><strong style='margin-left: 12px;'>REJECTED_INCOMPLETE_IDENTIFICATION</strong> - Registrant identification is incomplete</li> <li><strong style='margin-left: 12px;'>REJECTED_INCOMPLETE_REGISTRATION_LETTER</strong> - Registration letter is incomplete</li> <li><strong style='margin-left: 12px;'>REJECTED_INCONSISTENT_IDENTITY_CARD</strong> - Provided identity card is inconsistent with the identity card on record</li> <li><strong style='margin-left: 12px;'>REJECTED_INCONSISTENT_ORGANIZATION_CODE</strong> - Provided organization information is inconsistent with the results obtained using the submitted organization code</li> <li><strong style='margin-left: 12px;'>REJECTED_INCONSISTENT_REGISTRANT_NAME</strong> - Name on the registrant identification does not match the name in the system</li> <li><strong style='margin-left: 12px;'>REJECTED_INVALID_BUSINESS_LICENSE_OR_ORGANIZATION_CODE</strong> - Your document contains an invalid business license or organization code certificate number</li> <li><strong style='margin-left: 12px;'>REJECTED_INVALID_DOCUMENT</strong> - Document is invalid.  Please upload another document to retry real name verification</li> <li><strong style='margin-left: 12px;'>REJECTED_MISMATCH_BUSINESS_ID</strong> - Business id does not match the business id in the document</li> <li><strong style='margin-left: 12px;'>REJECTED_MISMATCH_BUSINESS_NAME</strong> - Business name does not match the business name in the document</li> <li><strong style='margin-left: 12px;'>REJECTED_MISMATCH_DOCUMENT_ID</strong> - Document id does not match the id in the document</li> <li><strong style='margin-left: 12px;'>REJECTED_MISMATCH_DOCUMENT_NAME</strong> - Document name does not match the name in the document</li> <li><strong style='margin-left: 12px;'>REJECTED_MISMATCH_DOCUMENT_TYPE</strong> - Document type does not match the document</li> <li><strong style='margin-left: 12px;'>REJECTED_MISMATCH_REGISTRANT_INFO</strong> - The information provided for the registrant does not match the document</li> <li><strong style='margin-left: 12px;'>REJECTED_MISMATCH_REGISTRANT_LOCALITY</strong> - Registrant region is overseas, but a local identity document was provided</li> <li><strong style='margin-left: 12px;'>REJECTED_MISMATCH_REGISTRANT_NAME</strong> - Registrant name has been changed, so the request must be resubmitted</li> <li><strong style='margin-left: 12px;'>REJECTED_UNABLE_TO_OPEN</strong> - Registrant identification could not be opened.  Please upload the document again to retry real name verification</li> <li><strong style='margin-left: 12px;'>REJECTED_UNABLE_TO_VERIFY</strong> - Unable to initiate verification.  Please upload the document again to retry real name verification</li> <li><strong style='margin-left: 12px;'>REJECTED_UNKNOWN_ERROR</strong> - Document was rejected due to an unknown error. For more information, contact customer support</li> <li><strong style='margin-left: 12px;'>UNABLE_TO_RETRIEVE_STATUS</strong> - Unable to retrieve status for the real name verification process.  Retry, if this status persists, contact customer support</li> </ul>"
           enum:
             - APPROVED
             - PENDING

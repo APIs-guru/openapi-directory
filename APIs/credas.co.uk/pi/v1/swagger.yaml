@@ -76,8 +76,7 @@ paths:
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "402":
-          description: Error code meaning that the operation was aborted due to
-            insufficient credits.
+          description: Error code meaning that the operation was aborted due to insufficient credits.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "500":
@@ -90,19 +89,14 @@ paths:
   /api/companies:
     post:
       consumes: []
-      description: "If a company appears multiple times within the structure, it will
-        only be detailed in full (i.e. with significant ownership details) in
-        its first instance. Subsequent instances will be \r
+      description: "If a company appears multiple times within the structure, it will only be detailed in full (i.e. with significant ownership details) in its first instance. Subsequent instances will be \r
 
         \            marked as duplicates.\r
 
-        \            Whilst duplicate instances of companies can and
-        will be identified, it is not possible to categorically identify
-        duplicated people."
+        \            Whilst duplicate instances of companies can and will be identified, it is not possible to categorically identify duplicated people."
       operationId: SearchCompany
       parameters:
-        - description: The company registration number of the company that should be
-            searched.
+        - description: The company registration number of the company that should be searched.
           in: query
           name: companyNumber
           required: false
@@ -189,16 +183,14 @@ paths:
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "402":
-          description: If the consumer doesn't have the required permission to use the
-            endpoint.
+          description: If the consumer doesn't have the required permission to use the endpoint.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "500":
           description: If an unexpected exception occurred whilst processing the request.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
-      summary: Searches for a company based on its Company Number and returns its
-        details.
+      summary: Searches for a company based on its Company Number and returns its details.
       tags:
         - Companies
   "/api/companies/{companyId}":
@@ -293,8 +285,7 @@ paths:
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "402":
-          description: If the consumer doesn't have the required permission to use the
-            endpoint.
+          description: If the consumer doesn't have the required permission to use the endpoint.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "500":
@@ -411,16 +402,14 @@ paths:
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "402":
-          description: Error code meaning that the operation was aborted due to
-            insufficient credits.
+          description: Error code meaning that the operation was aborted due to insufficient credits.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "500":
           description: If an unexpected exception occurred whilst processing the request.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
-      summary: Check includes identifying bankruptcy, insolvency, CCJ's or Company
-        Directorship.
+      summary: Check includes identifying bankruptcy, insolvency, CCJ's or Company Directorship.
       tags:
         - CreditStatus
   /api/datachecks:
@@ -469,8 +458,7 @@ paths:
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "402":
-          description: Error code meaning that the operation was aborted due to
-            insufficient credits.
+          description: Error code meaning that the operation was aborted due to insufficient credits.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "500":
@@ -529,8 +517,7 @@ paths:
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "402":
-          description: Error code meaning that the operation was aborted due to
-            insufficient credits.
+          description: Error code meaning that the operation was aborted due to insufficient credits.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "500":
@@ -947,8 +934,7 @@ paths:
           name: request
           required: false
           schema:
-            $ref: "#/definitions/Credas.Api.Models.PropertyRegister.PropertyRegisterCheckRe\
-              quest"
+            $ref: "#/definitions/Credas.Api.Models.PropertyRegister.PropertyRegisterCheckRequest"
         - description: ApiKey supplied.
           in: header
           name: apikey
@@ -972,8 +958,7 @@ paths:
               propertyOwnershipText: Joint Ownership
               titleNumber: TMP123456
           schema:
-            $ref: "#/definitions/Credas.Api.Models.PropertyRegister.PropertyRegisterCheckRe\
-              sponse"
+            $ref: "#/definitions/Credas.Api.Models.PropertyRegister.PropertyRegisterCheckResponse"
         "400":
           description: If the service was supplied invalid data.
           schema:
@@ -983,8 +968,7 @@ paths:
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "402":
-          description: Error code meaning that the operation was aborted due to
-            insufficient credits.
+          description: Error code meaning that the operation was aborted due to insufficient credits.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "500":
@@ -1028,8 +1012,7 @@ paths:
               propertyOwnershipText: Joint Ownership
               titleNumber: TMP123456
           schema:
-            $ref: "#/definitions/Credas.Api.Models.PropertyRegister.PropertyRegisterCheckRe\
-              sponse"
+            $ref: "#/definitions/Credas.Api.Models.PropertyRegister.PropertyRegisterCheckResponse"
         "400":
           description: If the service was supplied invalid data.
           schema:
@@ -1124,7 +1107,7 @@ paths:
               regCode: QX92TAG7
               webJourneyUrl:
                 url: https://pi-verify.credas.co.uk/link/f7ec8ac1-d935-413b-9100-c7b9b498ca1d
-                validUntil: 2021-07-05T15:28:23.4914003Z
+                validUntil: 2021-07-12T10:58:00.5873181Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.Registrations.AddRegistrationResponse"
         "400":
@@ -1136,8 +1119,7 @@ paths:
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "402":
-          description: Error code meaning that the operation was aborted due to
-            insufficient credits.
+          description: Error code meaning that the operation was aborted due to insufficient credits.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
         "500":
@@ -1157,18 +1139,15 @@ paths:
         - application/xml
         - text/xml
         - application/*+xml
-      description: It's designed to provide a quick integration path for external
-        systems which capture these details.
+      description: It's designed to provide a quick integration path for external systems which capture these details.
       operationId: AddInstantRegistration
       parameters:
-        - description: The Credas.Api.Models.Registrations.AddInstantRegistrationRequest
-            object containing required data.
+        - description: The Credas.Api.Models.Registrations.AddInstantRegistrationRequest object containing required data.
           in: body
           name: request
           required: false
           schema:
-            $ref: "#/definitions/Credas.Api.Models.Registrations.AddInstantRegistrationRequ\
-              est"
+            $ref: "#/definitions/Credas.Api.Models.Registrations.AddInstantRegistrationRequest"
         - description: ApiKey supplied.
           in: header
           name: apikey
@@ -1190,8 +1169,7 @@ paths:
               id: abcdef12-abcd-abcd-beef-ab123cd12345
               regCode: QX92TAG7
           schema:
-            $ref: "#/definitions/Credas.Api.Models.Registrations.AddInstantRegistrationResp\
-              onse"
+            $ref: "#/definitions/Credas.Api.Models.Registrations.AddInstantRegistrationResponse"
         "400":
           description: If the service was supplied invalid data.
           schema:
@@ -1204,8 +1182,7 @@ paths:
           description: If an unexpected exception occurred whilst processing the request.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
-      summary: Creates new registration record, adds an ID document and optional
-        selfie image in one go.
+      summary: Creates new registration record, adds an ID document and optional selfie image in one go.
       tags:
         - Registrations
   "/api/registrations/referenceid/{referenceId}/summary":
@@ -1921,8 +1898,7 @@ paths:
           description: If an unexpected exception occurred whilst processing the request.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
-      summary: "Gets paged registration list by search criteria or nothing if there
-        are no matching fields.\r
+      summary: "Gets paged registration list by search criteria or nothing if there are no matching fields.\r
 
         Optional parameters may be appended to the query string.\r
 
@@ -1958,8 +1934,7 @@ paths:
               checkCode: 3
               message: Please provide proof of address.
           schema:
-            $ref: "#/definitions/Credas.Api.Models.Registrations.CheckSubmittedIdDocumentsR\
-              esponse"
+            $ref: "#/definitions/Credas.Api.Models.Registrations.CheckSubmittedIdDocumentsResponse"
         "400":
           description: If the service was supplied invalid data.
           schema:
@@ -1998,8 +1973,7 @@ paths:
           name: details
           required: false
           schema:
-            $ref: "#/definitions/Credas.Api.Models.Registrations.UpdateContactDetailsReques\
-              t"
+            $ref: "#/definitions/Credas.Api.Models.Registrations.UpdateContactDetailsRequest"
         - description: ApiKey supplied.
           in: header
           name: apikey
@@ -2059,8 +2033,7 @@ paths:
           name: request
           required: false
           schema:
-            $ref: "#/definitions/Credas.Api.Models.StatusOverrides.OverrideCheckStatusReque\
-              st"
+            $ref: "#/definitions/Credas.Api.Models.StatusOverrides.OverrideCheckStatusRequest"
         - description: ApiKey supplied.
           in: header
           name: apikey
@@ -2240,8 +2213,7 @@ paths:
           description: If an unexpected exception occurred whilst processing the request.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
-      summary: Gets registration settings or nothing if there are no settings
-        associated with the registration.
+      summary: Gets registration settings or nothing if there are no settings associated with the registration.
       tags:
         - Registrations
     put:
@@ -2326,8 +2298,7 @@ paths:
           name: request
           required: false
           schema:
-            $ref: "#/definitions/Credas.Api.Models.Registrations.UpdateRegistrationStatusRe\
-              quest"
+            $ref: "#/definitions/Credas.Api.Models.Registrations.UpdateRegistrationStatusRequest"
         - description: ApiKey supplied.
           in: header
           name: apikey
@@ -2754,9 +2725,7 @@ paths:
         - application/*+xml
       description: "It may return none, one or many (up to 20) matching results.\r
 
-        Each result contains a secure url; UTC date/time of when the
-        link expires; name details of a person associated with the
-        registration."
+        Each result contains a secure url; UTC date/time of when the link expires; name details of a person associated with the registration."
       operationId: GetReportViewByReferenceId
       parameters:
         - description: Request object
@@ -2764,8 +2733,7 @@ paths:
           name: request
           required: false
           schema:
-            $ref: "#/definitions/Credas.Api.Models.ReportView.GetReportViewByReferenceIdReq\
-              uest"
+            $ref: "#/definitions/Credas.Api.Models.ReportView.GetReportViewByReferenceIdRequest"
         - description: ApiKey supplied.
           in: header
           name: apikey
@@ -2785,7 +2753,7 @@ paths:
                 - forename: Edward
                   surname: Roberts
                   url: https://report.credas.co.uk/link/f7ec8ac1-d935-413b-9100-c7b9b498ca1d
-                  validUntil: 2021-07-05T15:28:23.5074646Z
+                  validUntil: 2021-07-12T10:58:00.609138Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.ReportView.GetReportViewResponse"
         "400":
@@ -2800,8 +2768,7 @@ paths:
           description: If an unexpected exception occurred whilst processing the request.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
-      summary: Retrieves secure links to registration details pages searching by the
-        Reference Id.
+      summary: Retrieves secure links to registration details pages searching by the Reference Id.
       tags:
         - ReportView
   /api/report-view/by-registrationid:
@@ -2816,9 +2783,7 @@ paths:
         - application/*+xml
       description: "It may return none or one matching result.\r
 
-        Each result contains a secure url; UTC date/time of when the
-        link expires; name details of a person associated with the
-        registration."
+        Each result contains a secure url; UTC date/time of when the link expires; name details of a person associated with the registration."
       operationId: GetReportViewByRegistrationId
       parameters:
         - description: Request object
@@ -2826,8 +2791,7 @@ paths:
           name: request
           required: false
           schema:
-            $ref: "#/definitions/Credas.Api.Models.ReportView.GetReportViewByRegistrationId\
-              Request"
+            $ref: "#/definitions/Credas.Api.Models.ReportView.GetReportViewByRegistrationIdRequest"
         - description: ApiKey supplied.
           in: header
           name: apikey
@@ -2847,7 +2811,7 @@ paths:
                 - forename: Mike
                   surname: Jones
                   url: https://report.credas.co.uk/link/66ddf7c2-d3b1-4db3-ac13-2ef44d99da74
-                  validUntil: 2021-07-05T15:28:23.5083123Z
+                  validUntil: 2021-07-12T10:58:00.6103046Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.ReportView.GetReportViewResponse"
         "400":
@@ -2862,8 +2826,7 @@ paths:
           description: If an unexpected exception occurred whilst processing the request.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
-      summary: Retrieves secure link to registration details page searching by the
-        Registration Id.
+      summary: Retrieves secure link to registration details page searching by the Registration Id.
       tags:
         - ReportView
   /api/web-verifications/by-referenceid:
@@ -2878,17 +2841,14 @@ paths:
         - application/*+xml
       description: "It may return none, one or many (up to 20) matching results.\r
 
-        Each result contains a secure url; UTC date/time of when the
-        link expires; name details of a person associated with the
-        registration."
+        Each result contains a secure url; UTC date/time of when the link expires; name details of a person associated with the registration."
       operationId: GetWebVerificationsByReferenceId
       parameters:
         - in: body
           name: request
           required: false
           schema:
-            $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsByRe\
-              ferenceIdRequest"
+            $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsByReferenceIdRequest"
         - description: ApiKey supplied.
           in: header
           name: apikey
@@ -2907,10 +2867,9 @@ paths:
               results:
                 - journeyUrl:
                     url: https://pi-verify.credas.co.uk/link/f7ec8ac1-d935-413b-9100-c7b9b498ca1d
-                    validUntil: 2021-07-05T15:28:23.5091736Z
+                    validUntil: 2021-07-12T10:58:00.6116015Z
           schema:
-            $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsResp\
-              onse"
+            $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsResponse"
         "400":
           description: If the service was supplied invalid data.
           schema:
@@ -2923,8 +2882,7 @@ paths:
           description: If an unexpected exception occurred whilst processing the request.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
-      summary: Retrieves secure links to web verification pages searching by the
-        Reference Id.
+      summary: Retrieves secure links to web verification pages searching by the Reference Id.
       tags:
         - WebVerifications
   /api/web-verifications/by-registrationid:
@@ -2939,17 +2897,14 @@ paths:
         - application/*+xml
       description: "It may return none or one matching result.\r
 
-        Each result contains a secure url; UTC date/time of when the
-        link expires; name details of a person associated with the
-        registration."
+        Each result contains a secure url; UTC date/time of when the link expires; name details of a person associated with the registration."
       operationId: GetWebVerificationsByRegistrationId
       parameters:
         - in: body
           name: request
           required: false
           schema:
-            $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsByRe\
-              gistrationIdRequest"
+            $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsByRegistrationIdRequest"
         - description: ApiKey supplied.
           in: header
           name: apikey
@@ -2968,10 +2923,9 @@ paths:
               results:
                 - journeyUrl:
                     url: https://verify.credas.co.uk/link/66ddf7c2-d3b1-4db3-ac13-2ef44d99da74
-                    validUntil: 2021-07-05T15:28:23.5099493Z
+                    validUntil: 2021-07-12T10:58:00.6124796Z
           schema:
-            $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsResp\
-              onse"
+            $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsResponse"
         "400":
           description: If the service was supplied invalid data.
           schema:
@@ -2984,8 +2938,7 @@ paths:
           description: If an unexpected exception occurred whilst processing the request.
           schema:
             $ref: "#/definitions/Credas.Api.Models.Errors.ErrorResponse"
-      summary: Retrieves secure link to web verification page searching by the
-        Registration Id.
+      summary: Retrieves secure link to web verification page searching by the Registration Id.
       tags:
         - WebVerifications
 definitions:
@@ -3038,8 +2991,7 @@ definitions:
       accountNumber:
         type: string
       accountNumberValidation:
-        description: Unknown = 0, NoMatch = 1, Valid = 2, Invalid = 3,
-          SevenDigitsMatched = 4, SixDigitsMatched = 5
+        description: Unknown = 0, NoMatch = 1, Valid = 2, Invalid = 3, SevenDigitsMatched = 4, SixDigitsMatched = 5
         enum:
           - 0
           - 1
@@ -3067,8 +3019,7 @@ definitions:
       accountValid:
         type: boolean
       addressValidation:
-        description: Unknown = 0, NoMatch = 1, CurrentAddress = 2, PreviousAddress = 3,
-          ForwardingAddress = 4
+        description: Unknown = 0, NoMatch = 1, CurrentAddress = 2, PreviousAddress = 3, ForwardingAddress = 4
         enum:
           - 0
           - 1
@@ -3205,8 +3156,7 @@ definitions:
       regEntryId: 141dbb24-c4ff-4658-9556-15ea25428d48
     properties:
       checkType:
-        description: None = 0, StandardAml = 1, EnhancedAml = 2,
-          InternationalPepSanctions = 3
+        description: The value of checkType dictates what checks are performed. <br/>The StandardAml check (value = 1) will check DOB & Mortality. <br/>The InternationalPepSanctions check (value = 3) will check just International PEP & Sanctions. <br/>The EnhancedAml check (value = 2) will perform both these checks and is equivalent to making two calls with values of 1 then 3 and will be charged accordingly. <br />  values=> None = 0, StandardAml = 1, EnhancedAml = 2, InternationalPepSanctions = 3
         enum:
           - 0
           - 1
@@ -3391,9 +3341,7 @@ definitions:
         type: array
         uniqueItems: false
       documentType:
-        description: Other = 0, Passport = 1, DrivingLicence = 2, Visa = 3, CscsCard =
-          4, HomeOfficeLetter = 5, BirthCertificate = 6, NationalIdCard = 7,
-          ResidencePermit = 9, UtilityBill = 11
+        description: Other = 0, Passport = 1, DrivingLicence = 2, Visa = 3, CscsCard = 4, HomeOfficeLetter = 5, BirthCertificate = 6, NationalIdCard = 7, ResidencePermit = 9, UtilityBill = 11
         enum:
           - 0
           - 1
@@ -3429,27 +3377,7 @@ definitions:
         format: int32
         type: integer
       documentType:
-        description: Unknown = 0, Passport = 1, DrivingLicense = 2, IdentificationCard =
-          3, TaxLetter = 4, NIC_Letter = 5, TV_Licence = 6, UtilityBill = 7,
-          HighRiskWorkLicence = 8, TravelPermit = 9, BankLetter = 10,
-          BenefitLetter = 11, BankStatement = 12, NINO_Letter = 13, CouncilTax =
-          14, ResidentPermit = 15, PhotoCard = 16, RepaymentLetter = 17, Invoice
-          = 18, Visa = 19, AgeIdentificationCard = 20, MedicareCard = 21,
-          MilitaryIdentificationCard = 22, UtilityLetter = 23, CouncilDocument =
-          24, JobLicence = 25, MembershipIDCard = 26, MilitaryIDCard = 27,
-          ProofOfAgeCard = 28, TravelPermitNew = 29, WeaponsLicence = 30,
-          AccountStatement = 41, TenancyAgreement = 42, BankDocument = 43,
-          BankLetterNew = 44, BankStatementNew = 45, BenefitLetterNew = 46,
-          CouncilDocumentNew = 48, CouncilLetter = 49, CouncilTaxNew = 50,
-          DWPDocument = 51, HMRCDocument = 52, InformationSheet = 53,
-          InsuranceDocument = 54, InsuranceLetter = 55, InvoiceNew = 56,
-          NICLetter = 57, NINOLetter = 58, OfficialDocument = 59, OfficialLetter
-          = 60, RepaymentLetterNew = 61, TaxLetterNew = 62, TaxStatement = 63,
-          TelBill = 64, TelLetter = 65, TelecommunicationDocument = 66,
-          TVLicence = 67, UniversityLetter = 68, UtilityBillNew = 69,
-          UtilityDocument = 70, UtilityLetterNew = 71, WaterBill = 72,
-          WaterDocument = 73, HighRiskWorkLicenceNew = 74, PhotoCardNew = 75,
-          MedicareCardNew = 76, Certificate = 77
+        description: Unknown = 0, Passport = 1, DrivingLicense = 2, IdentificationCard = 3, TaxLetter = 4, NIC_Letter = 5, TV_Licence = 6, UtilityBill = 7, HighRiskWorkLicence = 8, TravelPermit = 9, BankLetter = 10, BenefitLetter = 11, BankStatement = 12, NINO_Letter = 13, CouncilTax = 14, ResidentPermit = 15, PhotoCard = 16, RepaymentLetter = 17, Invoice = 18, Visa = 19, AgeIdentificationCard = 20, MedicareCard = 21, MilitaryIdentificationCard = 22, UtilityLetter = 23, CouncilDocument = 24, JobLicence = 25, MembershipIDCard = 26, MilitaryIDCard = 27, ProofOfAgeCard = 28, TravelPermitNew = 29, WeaponsLicence = 30, AccountStatement = 41, TenancyAgreement = 42, BankDocument = 43, BankLetterNew = 44, BankStatementNew = 45, BenefitLetterNew = 46, CouncilDocumentNew = 48, CouncilLetter = 49, CouncilTaxNew = 50, DWPDocument = 51, HMRCDocument = 52, InformationSheet = 53, InsuranceDocument = 54, InsuranceLetter = 55, InvoiceNew = 56, NICLetter = 57, NINOLetter = 58, OfficialDocument = 59, OfficialLetter = 60, RepaymentLetterNew = 61, TaxLetterNew = 62, TaxStatement = 63, TelBill = 64, TelLetter = 65, TelecommunicationDocument = 66, TVLicence = 67, UniversityLetter = 68, UtilityBillNew = 69, UtilityDocument = 70, UtilityLetterNew = 71, WaterBill = 72, WaterDocument = 73, HighRiskWorkLicenceNew = 74, PhotoCardNew = 75, MedicareCardNew = 76, Certificate = 77
         enum:
           - 0
           - 1
@@ -3590,8 +3518,7 @@ definitions:
       description:
         type: string
       documentAnalysisResult:
-        description: Unknown = 0, Passed = 1, Refer = 2, Expired = 3, NotSupported = 4,
-          Undefined = 5, Fail = 10, NotPerformed = 11
+        description: Unknown = 0, Passed = 1, Refer = 2, Expired = 3, NotSupported = 4, Undefined = 5, Fail = 10, NotPerformed = 11
         enum:
           - 0
           - 1
@@ -3654,9 +3581,7 @@ definitions:
       nfcFacialUrl:
         type: string
       nfcReadStatus:
-        description: Unknown = 0, Passed = 1, Failed = 2, NotAttempted = 3, Skipped = 4,
-          Unavailable = 5, NotAllowed = 6, NotTrusted = 7, NotApplicable = 8,
-          Expired = 9
+        description: Unknown = 0, Passed = 1, Failed = 2, NotAttempted = 3, Skipped = 4, Unavailable = 5, NotAllowed = 6, NotTrusted = 7, NotApplicable = 8, Expired = 9
         enum:
           - 0
           - 1
@@ -3795,9 +3720,7 @@ definitions:
       hasBeenOverridden:
         type: boolean
       matchResult:
-        description: Unknown = 0, FullNameMatch = 1, SurnameMatch = 2, NoNameMatch = 3,
-          NoAddressMatch = 4, TitleNotRegistered = 5, Unavailable = 6,
-          OutOfHours = 7
+        description: Unknown = 0, FullNameMatch = 1, SurnameMatch = 2, NoNameMatch = 3, NoAddressMatch = 4, TitleNotRegistered = 5, Unavailable = 6, OutOfHours = 7
         enum:
           - 0
           - 1
@@ -3859,9 +3782,7 @@ definitions:
         type: array
         uniqueItems: false
       documentType:
-        description: Other = 0, Passport = 1, DrivingLicence = 2, Visa = 3, CscsCard =
-          4, HomeOfficeLetter = 5, BirthCertificate = 6, NationalIdCard = 7,
-          ResidencePermit = 9, UtilityBill = 11
+        description: Other = 0, Passport = 1, DrivingLicence = 2, Visa = 3, CscsCard = 4, HomeOfficeLetter = 5, BirthCertificate = 6, NationalIdCard = 7, ResidencePermit = 9, UtilityBill = 11
         enum:
           - 0
           - 1
@@ -3919,27 +3840,7 @@ definitions:
         format: int32
         type: integer
       documentType:
-        description: Unknown = 0, Passport = 1, DrivingLicense = 2, IdentificationCard =
-          3, TaxLetter = 4, NIC_Letter = 5, TV_Licence = 6, UtilityBill = 7,
-          HighRiskWorkLicence = 8, TravelPermit = 9, BankLetter = 10,
-          BenefitLetter = 11, BankStatement = 12, NINO_Letter = 13, CouncilTax =
-          14, ResidentPermit = 15, PhotoCard = 16, RepaymentLetter = 17, Invoice
-          = 18, Visa = 19, AgeIdentificationCard = 20, MedicareCard = 21,
-          MilitaryIdentificationCard = 22, UtilityLetter = 23, CouncilDocument =
-          24, JobLicence = 25, MembershipIDCard = 26, MilitaryIDCard = 27,
-          ProofOfAgeCard = 28, TravelPermitNew = 29, WeaponsLicence = 30,
-          AccountStatement = 41, TenancyAgreement = 42, BankDocument = 43,
-          BankLetterNew = 44, BankStatementNew = 45, BenefitLetterNew = 46,
-          CouncilDocumentNew = 48, CouncilLetter = 49, CouncilTaxNew = 50,
-          DWPDocument = 51, HMRCDocument = 52, InformationSheet = 53,
-          InsuranceDocument = 54, InsuranceLetter = 55, InvoiceNew = 56,
-          NICLetter = 57, NINOLetter = 58, OfficialDocument = 59, OfficialLetter
-          = 60, RepaymentLetterNew = 61, TaxLetterNew = 62, TaxStatement = 63,
-          TelBill = 64, TelLetter = 65, TelecommunicationDocument = 66,
-          TVLicence = 67, UniversityLetter = 68, UtilityBillNew = 69,
-          UtilityDocument = 70, UtilityLetterNew = 71, WaterBill = 72,
-          WaterDocument = 73, HighRiskWorkLicenceNew = 74, PhotoCardNew = 75,
-          MedicareCardNew = 76, Certificate = 77
+        description: Unknown = 0, Passport = 1, DrivingLicense = 2, IdentificationCard = 3, TaxLetter = 4, NIC_Letter = 5, TV_Licence = 6, UtilityBill = 7, HighRiskWorkLicence = 8, TravelPermit = 9, BankLetter = 10, BenefitLetter = 11, BankStatement = 12, NINO_Letter = 13, CouncilTax = 14, ResidentPermit = 15, PhotoCard = 16, RepaymentLetter = 17, Invoice = 18, Visa = 19, AgeIdentificationCard = 20, MedicareCard = 21, MilitaryIdentificationCard = 22, UtilityLetter = 23, CouncilDocument = 24, JobLicence = 25, MembershipIDCard = 26, MilitaryIDCard = 27, ProofOfAgeCard = 28, TravelPermitNew = 29, WeaponsLicence = 30, AccountStatement = 41, TenancyAgreement = 42, BankDocument = 43, BankLetterNew = 44, BankStatementNew = 45, BenefitLetterNew = 46, CouncilDocumentNew = 48, CouncilLetter = 49, CouncilTaxNew = 50, DWPDocument = 51, HMRCDocument = 52, InformationSheet = 53, InsuranceDocument = 54, InsuranceLetter = 55, InvoiceNew = 56, NICLetter = 57, NINOLetter = 58, OfficialDocument = 59, OfficialLetter = 60, RepaymentLetterNew = 61, TaxLetterNew = 62, TaxStatement = 63, TelBill = 64, TelLetter = 65, TelecommunicationDocument = 66, TVLicence = 67, UniversityLetter = 68, UtilityBillNew = 69, UtilityDocument = 70, UtilityLetterNew = 71, WaterBill = 72, WaterDocument = 73, HighRiskWorkLicenceNew = 74, PhotoCardNew = 75, MedicareCardNew = 76, Certificate = 77
         enum:
           - 0
           - 1
@@ -4157,11 +4058,7 @@ definitions:
         type: array
         uniqueItems: false
       sourceType:
-        description: Unknown = 0, EditedElectoralRollUk = 1, LandlineAppendUk = 2,
-          MortalityUk = 3, CreaditHeaderAmlUk = 4, NcoaAlertFlagUk = 5,
-          NcoaAlertFullUk = 6, SanctionsEnhancedInternational = 7,
-          PepEnhancedInternational = 8, NationalIdentityRegisterUk = 9,
-          LandRegistry = 10
+        description: Unknown = 0, EditedElectoralRollUk = 1, LandlineAppendUk = 2, MortalityUk = 3, CreaditHeaderAmlUk = 4, NcoaAlertFlagUk = 5, NcoaAlertFullUk = 6, SanctionsEnhancedInternational = 7, PepEnhancedInternational = 8, NationalIdentityRegisterUk = 9, LandRegistry = 10
         enum:
           - 0
           - 1
@@ -4207,8 +4104,7 @@ definitions:
       description:
         type: string
       documentAnalysisResult:
-        description: Unknown = 0, Passed = 1, Refer = 2, Expired = 3, NotSupported = 4,
-          Undefined = 5, Fail = 10, NotPerformed = 11
+        description: Unknown = 0, Passed = 1, Refer = 2, Expired = 3, NotSupported = 4, Undefined = 5, Fail = 10, NotPerformed = 11
         enum:
           - 0
           - 1
@@ -4267,9 +4163,7 @@ definitions:
       nfcCheck:
         type: boolean
       nfcReadStatus:
-        description: Unknown = 0, Passed = 1, Failed = 2, NotAttempted = 3, Skipped = 4,
-          Unavailable = 5, NotAllowed = 6, NotTrusted = 7, NotApplicable = 8,
-          Expired = 9
+        description: Unknown = 0, Passed = 1, Failed = 2, NotAttempted = 3, Skipped = 4, Unavailable = 5, NotAllowed = 6, NotTrusted = 7, NotApplicable = 8, Expired = 9
         enum:
           - 0
           - 1
@@ -4365,8 +4259,7 @@ definitions:
       capturePersonalDetails:
         type: boolean
       checkProfile:
-        description: None = 0, StandardAml = 1, EnhancedAml = 2,
-          InternationalPepSanctions = 3
+        description: None = 0, StandardAml = 1, EnhancedAml = 2, InternationalPepSanctions = 3
         enum:
           - 0
           - 1
@@ -4375,13 +4268,7 @@ definitions:
         format: int32
         type: integer
       legislation:
-        description: NotSet = 0, RightToRent = 1, RightToWork = 2, AntiMoneyLaundering =
-          3, KnowYourCustomer = 4, AntiMoneyLaunderingTwoDocuments = 5,
-          AntiMoneyLaunderingOneIdTwoAddressDocuments = 6,
-          AntiMoneyLaunderingOneIdOneAddressOneBankStatement = 7,
-          AntiMoneyLaunderingOneIdOneBankStatement = 8,
-          DisclosureAndBarringService = 9, OnePassportOneDrivingLicence = 10,
-          RightToRentWithAddress = 11, RightToWorkStrict = 12
+        description: NotSet = 0, RightToRent = 1, RightToWork = 2, AntiMoneyLaundering = 3, KnowYourCustomer = 4, AntiMoneyLaunderingTwoDocuments = 5, AntiMoneyLaunderingOneIdTwoAddressDocuments = 6, AntiMoneyLaunderingOneIdOneAddressOneBankStatement = 7, AntiMoneyLaunderingOneIdOneBankStatement = 8, DisclosureAndBarringService = 9, OnePassportOneDrivingLicence = 10, RightToRentWithAddress = 11, RightToWorkStrict = 12
         enum:
           - 0
           - 1
@@ -4483,8 +4370,7 @@ definitions:
         format: int32
         type: integer
       livenessStatus:
-        description: NotSubmitted = 0, Verified = 1, Unverified = 2, Unknown = 3,
-          RetakeRequested = 4
+        description: NotSubmitted = 0, Verified = 1, Unverified = 2, Unknown = 3, RetakeRequested = 4
         enum:
           - 0
           - 1
@@ -4500,8 +4386,7 @@ definitions:
       phoneNumber:
         type: string
       proofOfOwnershipCheck:
-        $ref: "#/definitions/Credas.Api.Models.PropertyRegister.PropertyRegisterCheckRe\
-          sponse"
+        $ref: "#/definitions/Credas.Api.Models.PropertyRegister.PropertyRegisterCheckResponse"
       referenceId:
         maxLength: 255
         minLength: 0
@@ -4512,12 +4397,7 @@ definitions:
         format: uuid
         type: string
       rightToWorkDocumentsProvided:
-        description: Indicates whether sufficient right to work documents have been
-          provided and validated. <br />This relies on the registration being
-          submitted and the subject's liveness being confirmed. To check whether
-          documents have been submitted, regardless of validation, please use
-          the /api/registrations/{id}/check-submitted-id-documents endpoint.<br
-          />  values=> Pending = 0, Pass = 1, Fail = 2
+        description: Indicates whether sufficient right to work documents have been provided and validated. <br />This relies on the registration being submitted and the subject's liveness being confirmed. To check whether documents have been submitted, regardless of validation, please use the /api/registrations/{id}/check-submitted-id-documents endpoint.<br />  values=> Pending = 0, Pass = 1, Fail = 2
         enum:
           - 0
           - 1
@@ -4525,8 +4405,7 @@ definitions:
         format: int32
         type: integer
       status:
-        description: Unknown = 0, Submitted = 1, Approved = 2, Rejected = 3, Exported =
-          4, Invited = 6
+        description: Unknown = 0, Submitted = 1, Approved = 2, Rejected = 3, Exported = 4, Invited = 6
         enum:
           - 0
           - 1
@@ -4562,9 +4441,7 @@ definitions:
       name:
         type: string
       type:
-        description: Passport = 1, DrivingLicence = 2, NationalIdCard = 3, CscsCard = 4,
-          ResidencePermit = 5, Visa = 6, BirthCertificate = 7, HomeOfficeLetter
-          = 8, Other = 9
+        description: Passport = 1, DrivingLicence = 2, NationalIdCard = 3, CscsCard = 4, ResidencePermit = 5, Visa = 6, BirthCertificate = 7, HomeOfficeLetter = 8, Other = 9
         enum:
           - 0
           - 1
@@ -4625,8 +4502,7 @@ definitions:
       status: 2
     properties:
       status:
-        description: Unknown = 0, Submitted = 1, Approved = 2, Rejected = 3, Exported =
-          4, Invited = 6
+        description: Unknown = 0, Submitted = 1, Approved = 2, Rejected = 3, Exported = 4, Invited = 6
         enum:
           - 0
           - 1
@@ -4731,8 +4607,7 @@ definitions:
         format: date-time
         type: string
       judgementType:
-        description: Unknown = 0, Judgement = 1, Satisfaction = 2, Revocation = 3,
-          SetAside = 4, AdministrationOrder = 5
+        description: Unknown = 0, Judgement = 1, Satisfaction = 2, Revocation = 3, SetAside = 4, AdministrationOrder = 5
         enum:
           - 0
           - 1
@@ -4775,8 +4650,7 @@ definitions:
     properties:
       companyAppointments:
         items:
-          $ref: "#/definitions/Credas.Api.Models.StatusChecks.CompanyDirector.CompanyAppo\
-            intment"
+          $ref: "#/definitions/Credas.Api.Models.StatusChecks.CompanyDirector.CompanyAppointment"
         type: array
         uniqueItems: false
       companyName:
@@ -4787,8 +4661,7 @@ definitions:
         format: date-time
         type: string
       matchType:
-        description: Unknown = 0, NameAndDateOfBirth = 1, NameAndAddress = 2,
-          NameAndAddressAndDateOfBirth = 3
+        description: Unknown = 0, NameAndDateOfBirth = 1, NameAndAddress = 2, NameAndAddressAndDateOfBirth = 3
         enum:
           - 0
           - 1
@@ -4864,9 +4737,7 @@ definitions:
       tradingNames:
         type: string
       type:
-        description: Unknown = 0, NorthernIrelandBankruptcy = 1,
-          ScottishSequestrationBankruptcy = 2, EnglandAndWalesIVA = 3,
-          EnglandAndWalesDRO = 4, EnglandAndWalesBankruptcy = 5
+        description: Unknown = 0, NorthernIrelandBankruptcy = 1, ScottishSequestrationBankruptcy = 2, EnglandAndWalesIVA = 3, EnglandAndWalesDRO = 4, EnglandAndWalesBankruptcy = 5
         enum:
           - 0
           - 1
@@ -4892,8 +4763,7 @@ definitions:
         type: string
       companyDirector:
         items:
-          $ref: "#/definitions/Credas.Api.Models.StatusChecks.CompanyDirector.CompanyDire\
-            ctorResult"
+          $ref: "#/definitions/Credas.Api.Models.StatusChecks.CompanyDirector.CompanyDirectorResult"
         type: array
         uniqueItems: false
       hasBeenOverridden:
@@ -4934,8 +4804,7 @@ definitions:
       status: 1
     properties:
       checkType:
-        description: IdDocuments = 1, StandardChecks = 2, InternationalSanctionsAndPep =
-          3, CreditStatusCheck = 4, BankAccountCheck = 5, ProofOfOwnership = 6
+        description: IdDocuments = 1, StandardChecks = 2, InternationalSanctionsAndPep = 3, CreditStatusCheck = 4, BankAccountCheck = 5, ProofOfOwnership = 6
         enum:
           - 0
           - 1

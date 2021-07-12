@@ -5,12 +5,8 @@ info:
   contact:
     name: National Health Authority
     url: https://ndhm.gov.in/
-  description: >-
-    It is important to standardize the process of identification of an
-    individual across healthcare providers, to ensure that the created medical
-    records are issued to the right individual or accessed by a Health
-    Information User through appropriate consent. 
-
+  description: |-
+    It is important to standardize the process of identification of an individual across healthcare providers, to ensure that the created medical records are issued to the right individual or accessed by a Health Information User through appropriate consent. 
     In order to issue a Health ID to an individual, one only needs basic demographic details like Name, Year of Birth, Gender. In addition, citizens should be able to update contact information easily.
   title: Health ID Service
   version: "1.0"
@@ -822,8 +818,7 @@ paths:
       security:
         - Authorization: []
         - X-HIP-ID: []
-      summary: Authenticate request to generate Mobile OTP using Health ID number /
-        Health ID
+      summary: Authenticate request to generate Mobile OTP using Health ID number / Health ID
       tags:
         - Authentication
       x-codegen-request-body-name: authRequest
@@ -3002,8 +2997,7 @@ paths:
   /v1/registration/mobile/resendOtp:
     post:
       deprecated: false
-      description: Resend Mobile OTP in an existing transaction in case previous OTP
-        is not received.
+      description: Resend Mobile OTP in an existing transaction in case previous OTP is not received.
       operationId: resentOtpUsingPOST
       parameters:
         - in: header

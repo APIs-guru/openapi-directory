@@ -5,11 +5,7 @@ host: productapi.intel.com
 info:
   contact:
     email: pim.360.team@intel.com
-  description: "This is the documentation for PIM Micro services. In order to use
-    this tool you need to have Basic Auth credentials and a client id. If you
-    dont have one, please make sure to request one by sending an email to the
-    PIM MS team:
-    [pim.360.team@intel.com](mailto:pim.360.team@intel.com?subject=PIMServices)"
+  description: "This is the documentation for PIM Micro services. In order to use this tool you need to have Basic Auth credentials and a client id. If you dont have one, please make sure to request one by sending an email to the PIM MS team: [pim.360.team@intel.com](mailto:pim.360.team@intel.com?subject=PIMServices)"
   termsOfService: http://www.intel.com/content/www/us/en/legal/terms-of-use.html
   title: Intel Product Catalogue Service
   version: 0.1.0
@@ -39,8 +35,7 @@ tags:
 paths:
   /api/products/get-codename:
     get:
-      description: Use this to get codename details for Intel products. No pagination
-        supported.
+      description: Use this to get codename details for Intel products. No pagination supported.
       operationId: getCodeName
       parameters:
         - description: Locale and Geo code used to get localised data.<br/><br/>
@@ -142,14 +137,10 @@ paths:
         - products
   /api/products/get-ordering-info:
     get:
-      description: Use this to fetch ordering info details for Intel products. No
-        pagination supported.
+      description: Use this to fetch ordering info details for Intel products. No pagination supported.
       operationId: getorderinginfo
       parameters:
-        - description: "Filter ordering info details based on one or multiple product
-            id's. Values must be enclosed in [ square brackets ] and each value
-            must be in \"double quotes\". Use comma to add multiple values.
-            <br/><br/>Example: [\"123003\"]"
+        - description: "Filter ordering info details based on one or multiple product id's. Values must be enclosed in [ square brackets ] and each value must be in \"double quotes\". Use comma to add multiple values. <br/><br/>Example: [\"123003\"]"
           in: query
           name: product_id
           required: true
@@ -264,8 +255,7 @@ paths:
         - products
   /api/products/get-products:
     get:
-      description: Use this to get basic details of products with pagination. Can be
-        used to generate listing page for products.
+      description: Use this to get basic details of products with pagination. Can be used to generate listing page for products.
       operationId: getProductList
       parameters:
         - description: Locale and Geo code used to get localised data.<br/><br/>
@@ -320,54 +310,27 @@ paths:
           name: locale_geo_id
           required: true
           type: string
-        - description: "Filter products based on one or multiple category id. Either
-            category id or product id is mandatory for any request. Values must
-            be enclosed in [ square brackets ] and each value must be in
-            \"double quotes\". Use comma to add multiple values.
-            <br/><br/>Example: [\"873\"]<br/><br/>Categories Available:<br/>
-            Processors = 873, Server Products = 1201, Mini PC's = 98414,
-            Wireless Networking = 59485, Ethernet Products = 36773, Fabric
-            products = 70021, Memory and Storage = 35125, Chipsets = 53,
-            Graphics Drivers = 80939 <br/><br/>"
+        - description: "Filter products based on one or multiple category id. Either category id or product id is mandatory for any request. Values must be enclosed in [ square brackets ] and each value must be in \"double quotes\". Use comma to add multiple values. <br/><br/>Example: [\"873\"]<br/><br/>Categories Available:<br/> Processors = 873, Server Products = 1201, Mini PC's = 98414, Wireless Networking = 59485, Ethernet Products = 36773, Fabric products = 70021, Memory and Storage = 35125, Chipsets = 53, Graphics Drivers = 80939 <br/><br/>"
           in: query
           name: category_id
           required: false
           type: string
-        - description: 'Filter products based on one or multiple product id. Either
-            category id or product id is mandatory for any request. Values must
-            be enclosed in [ square brackets ] and each value must be in "double
-            quotes". Use comma to add multiple values. <br/><br/>Example:
-            ["123003"]<br/><br/>'
+        - description: 'Filter products based on one or multiple product id. Either category id or product id is mandatory for any request. Values must be enclosed in [ square brackets ] and each value must be in "double quotes". Use comma to add multiple values. <br/><br/>Example: ["123003"]<br/><br/>'
           in: query
           name: product_id
           required: false
           type: string
-        - description: 'Specification values which needs to be pulled from product data.
-            Values must be enclosed in [ square brackets ] and each value must
-            be in "double quotes". Use comma to add multiple values.
-            <br/><br/>Example: ["CoreCount", "StatusCodeText"]<br/><br/>'
+        - description: 'Specification values which needs to be pulled from product data. Values must be enclosed in [ square brackets ] and each value must be in "double quotes". Use comma to add multiple values. <br/><br/>Example: ["CoreCount", "StatusCodeText"]<br/><br/>'
           in: query
           name: highlights
           required: false
           type: string
-        - description: 'Indicates sorting fields. Accepts array of objects in format like:
-            [{"field":"name","order":"ASC"}].<br/><br/>Any specification that we
-            get from get-product-info can be used to sort result. Other generic
-            sort field is "name".<br/><br/>'
+        - description: 'Indicates sorting fields. Accepts array of objects in format like: [{"field":"name","order":"ASC"}].<br/><br/>Any specification that we get from get-product-info can be used to sort result. Other generic sort field is "name".<br/><br/>'
           in: query
           name: sort
           required: false
           type: string
-        - description: 'Allows to filter data.<br/><br/>Format of filter:
-            [{"type":"specvalue","name":"ThreadCount","gteq":"4"}]<br/><br/><b>Available
-            operators are:</b> "eq": equal to, "neq": not equal to, "lteq": less
-            than or equal to, "gteq": greater than or equal to, "swc": starts
-            with characters, "nswc": not starting with characters, "cts":
-            contains, "ncts": not contains<br/><br/><b>Conditions:</b> By
-            default all objects works on an AND condition. But inside an object
-            we have the capability to put an "OR" or "AND"
-            condition.<br/>Example conditions:
-            [{"type":"specvalue","name":"ThreadCount","ncts":"4,5","cond":"AND"}]<br/><br/><br/>'
+        - description: 'Allows to filter data.<br/><br/>Format of filter: [{"type":"specvalue","name":"ThreadCount","gteq":"4"}]<br/><br/><b>Available operators are:</b> "eq": equal to, "neq": not equal to, "lteq": less than or equal to, "gteq": greater than or equal to, "swc": starts with characters, "nswc": not starting with characters, "cts": contains, "ncts": not contains<br/><br/><b>Conditions:</b> By default all objects works on an AND condition. But inside an object we have the capability to put an "OR" or "AND" condition.<br/>Example conditions: [{"type":"specvalue","name":"ThreadCount","ncts":"4,5","cond":"AND"}]<br/><br/><br/>'
           in: query
           name: filters
           required: false
@@ -547,16 +510,12 @@ paths:
           name: locale_geo_id
           required: true
           type: string
-        - description: "Product id's that needs to be filtered. Only max of 40 products
-            are supported now. Values must be enclosed in [ square brackets ]
-            and each value must be in \"double quotes\". Use comma to add
-            multiple values.<br/><br/>Example: [\"223\",\"224\"]"
+        - description: "Product id's that needs to be filtered. Only max of 40 products are supported now. Values must be enclosed in [ square brackets ] and each value must be in \"double quotes\". Use comma to add multiple values.<br/><br/>Example: [\"223\",\"224\"]"
           in: query
           name: product_id
           required: true
           type: string
-        - description: If send "true", this will fetch variant/compatible info into result
-            set. Default is false.
+        - description: If send "true", this will fetch variant/compatible info into result set. Default is false.
           in: query
           name: include_reference
           required: false
@@ -645,11 +604,7 @@ paths:
                           items:
                             properties:
                               disclaimer:
-                                example: Max Turbo Frequency refers to the maximum single-core processor
-                                  frequency that can be achieved with Intel®
-                                  Turbo Boost Technology.  See <a
-                                  href="http://www.intel.com/technology/turboboost/">www.intel.com/technology/turboboost/</a>
-                                  for more information.
+                                example: Max Turbo Frequency refers to the maximum single-core processor frequency that can be achieved with Intel® Turbo Boost Technology.  See <a href="http://www.intel.com/technology/turboboost/">www.intel.com/technology/turboboost/</a> for more information.
                                 type: string
                               highlight_key:
                                 example: TBTVersion
@@ -661,11 +616,7 @@ paths:
                                 example: "2"
                                 type: string
                               tool_tip:
-                                example: Intel® Turbo Boost Technology dynamically increases the processor's
-                                  frequency as needed by taking advantage of
-                                  thermal and power headroom to give you a burst
-                                  of speed when you need it, and increased
-                                  energy efficiency when you don’t.
+                                example: Intel® Turbo Boost Technology dynamically increases the processor's frequency as needed by taking advantage of thermal and power headroom to give you a burst of speed when you need it, and increased energy efficiency when you don’t.
                                 type: string
                               value:
                                 example: "2.0"

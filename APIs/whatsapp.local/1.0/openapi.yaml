@@ -54,16 +54,13 @@ paths:
         required: true
       responses:
         "201":
-          description: "Created: the account already exists. You are already registered,
-            so you do not need to do anything else."
+          description: "Created: the account already exists. You are already registered, so you do not need to do anything else."
         "202":
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Request-Code-Response"
-          description: "Created: the account does not exist. Depending on the method
-            selected in the request, check your SMS or voice number for the
-            registration code."
+          description: "Created: the account does not exist. Depending on the method selected in the request, check your SMS or voice number for the registration code."
       summary: Request-Code
       tags:
         - Registration
@@ -779,9 +776,7 @@ paths:
                 "200":
                   description: OK
       deprecated: false
-      description: If a field is not present in the request, no change is made to that
-        setting. For example, if on_call_pager is not sent with the request, the
-        existing configuration for on_call_pager is unchanged.
+      description: If a field is not present in the request, no change is made to that setting. For example, if on_call_pager is not sent with the request, the existing configuration for on_call_pager is unchanged.
       operationId: UpdateApplicationSettings
       requestBody:
         content:
@@ -1279,20 +1274,17 @@ components:
       properties:
         callback_backoff_delay_ms:
           default: "3000"
-          description: >-
+          description: |-
             Backoff delay for a failed callback in milliseconds
-
             This setting is used to configure the amount of time the backoff delays before retrying a failed callback. The backoff delay increases linearly by this value each time a callback fails to get a HTTPS 200 OK response. The backoff delay is capped by the max_callback_backoff_delay_ms setting.
           type: string
         callback_persist:
           default: true
-          description: Stores callbacks on disk until they are successfully acknowledged
-            by the Webhook or not. Restart required.
+          description: Stores callbacks on disk until they are successfully acknowledged by the Webhook or not. Restart required.
           type: boolean
         heartbeat_interval:
           default: 5
-          description: "Multiconnect: Interval of the Master node monitoring of Coreapp
-            nodes in seconds"
+          description: "Multiconnect: Interval of the Master node monitoring of Coreapp nodes in seconds"
           type: integer
         max_callback_backoff_delay_ms:
           default: "900000"
@@ -1301,29 +1293,21 @@ components:
         media:
           $ref: "#/components/schemas/Media"
         on_call_pager:
-          description: Set to valid WhatsApp Group with users who wish to see alerts for
-            critical errors and messages.
+          description: Set to valid WhatsApp Group with users who wish to see alerts for critical errors and messages.
           type: string
         pass_through:
           default: true
-          description: >-
-            When true, removes messages from the local database after they are
-            delivered to or read by the recipient. When false, saves all
-            messages on local storage until they are explicitly deleted.
-
+          description: |-
+            When true, removes messages from the local database after they are delivered to or read by the recipient. When false, saves all messages on local storage until they are explicitly deleted.
             When messages are sent, they are stored in a local database. This database is used as the application's history. Since the business keeps its own history, you can specify whether you want message pass_through or not. Restart required.
           type: boolean
         sent_status:
           default: false
-          description: Receive a notification that a message is sent to server. When true,
-            you will receive a message indicating that a message has been sent.
-            If false (default), you will not receive notification.
+          description: Receive a notification that a message is sent to server. When true, you will receive a message indicating that a message has been sent. If false (default), you will not receive notification.
           type: boolean
         unhealthy_interval:
           default: 30
-          description: "Multiconnect: Maximum amount of seconds a Master node waits for a
-            Coreapp node to respond to a heartbeat before considering it
-            unhealthy and starting the failover process."
+          description: "Multiconnect: Maximum amount of seconds a Master node waits for a Coreapp node to respond to a heartbeat before considering it unhealthy and starting the failover process."
           type: integer
         webhooks:
           $ref: "#/components/schemas/Webhooks"
@@ -1383,8 +1367,7 @@ components:
       title: Backup-Settings-Request
       type: object
     Backup-Settings-Response:
-      description: Save the data value as that will be used along with your password
-        to restore the information.
+      description: Save the data value as that will be used along with your password to restore the information.
       example:
         settings:
           data: encrypted-backup-data
@@ -1436,10 +1419,8 @@ components:
             Maximum of 128 characters
           type: string
         websites:
-          description: >-
-            URLs associated with business (e.g., website, Facebook page,
-            Instagram)
-
+          description: |-
+            URLs associated with business (e.g., website, Facebook page, Instagram)
             Maximum of 2 websites with a maximum of 256 characters each
           items:
             type: string
@@ -1505,11 +1486,9 @@ components:
           x-enum-descriptions:
             - "processing: Input is still being processed."
             - "valid: Input determined to be a valid WhatsApp user."
-            - "invalid: Input determined to not be a valid WhatsApp user or the
-              phone number is in a bad format."
+            - "invalid: Input determined to not be a valid WhatsApp user or the phone number is in a bad format."
         wa_id:
-          description: WhatsApp user identifier that can be used in other API calls. Only
-            returned if the status is valid.
+          description: WhatsApp user identifier that can be used in other API calls. Only returned if the status is valid.
           type: string
       title: Check-Contact
       type: object
@@ -1521,15 +1500,13 @@ components:
       properties:
         blocking:
           default: no_wait
-          description: Blocking determines whether the request should wait for the
-            processing to complete (synchronous) or not (asynchronous).
+          description: Blocking determines whether the request should wait for the processing to complete (synchronous) or not (asynchronous).
           enum:
             - no_wait
             - wait
           type: string
         contacts:
-          description: Array of contact phone numbers. The numbers can be in any standard
-            telephone number format.
+          description: Array of contact phone numbers. The numbers can be in any standard telephone number format.
           items:
             type: string
           type: array
@@ -1736,8 +1713,7 @@ components:
           format: int32
           type: integer
         day_of_week:
-          description: Both strings and numbers are accepted. If different from the value
-            derived from the date (if specified), use the derived value.
+          description: Both strings and numbers are accepted. If different from the value derived from the date (if specified), use the derived value.
           enum:
             - "1"
             - "2"
@@ -1783,8 +1759,7 @@ components:
       title: Date-Time-Component
       type: object
     Date-Time-Object:
-      description: The Whatsapp Business API Client will attempt to format the
-        date/time based on a specified localization.
+      description: The Whatsapp Business API Client will attempt to format the date/time based on a specified localization.
       example:
         component:
           day_of_month: 25
@@ -1919,8 +1894,7 @@ components:
         title: error-code-title
       properties:
         code:
-          description: See the https://developers.facebook.com/docs/whatsapp/api/errors
-            for more information.
+          description: See the https://developers.facebook.com/docs/whatsapp/api/errors for more information.
           format: int32
           type: integer
         details:
@@ -2086,9 +2060,8 @@ components:
           description: ID of the creator of this group
           type: string
         participants:
-          description: >-
+          description: |-
             Participants of the group
-
             This is an array of all the IDs of the participants in the group. Initially, this will be the creator of the group.
           items:
             type: string
@@ -2163,9 +2136,7 @@ components:
       title: GroupsResponse
       type: object
     Hsm:
-      description: The containing element for the message content — Indicates that the
-        message is highly structured. Parameters contained within provide the
-        structure.
+      description: The containing element for the message content — Indicates that the message is highly structured. Parameters contained within provide the structure.
       example:
         element_name: hello_world
         language:
@@ -2176,14 +2147,12 @@ components:
         namespace: business_a_namespace
       properties:
         element_name:
-          description: The element name that indicates which template to use within the
-            namespace
+          description: The element name that indicates which template to use within the namespace
           type: string
         language:
           $ref: "#/components/schemas/Language"
         localizable_params:
-          description: This field is an array of values to apply to variables in the
-            template
+          description: This field is an array of values to apply to variables in the template
           items:
             $ref: "#/components/schemas/LocalizableParam"
           type: array
@@ -2243,8 +2212,7 @@ components:
         policy: deterministic
       properties:
         code:
-          description: The code of the language or locale to use — Accepts both language
-            and language_locale formats (e.g., en and en_US).
+          description: The code of the language or locale to use — Accepts both language and language_locale formats (e.g., en and en_US).
           type: string
         policy:
           description: The language policy the message should follow
@@ -2486,8 +2454,7 @@ components:
         - unknown
       type: string
     Meta:
-      description: Contains generic information such as WhatsApp Business API Client
-        version.
+      description: Contains generic information such as WhatsApp Business API Client version.
       example:
         api_status: stable
         version: whatsapp-business-api-client-version
@@ -2698,12 +2665,10 @@ components:
             - voice
           type: string
         phone_number:
-          description: Phone number you are registering, without the country code or plus
-            symbol (+)
+          description: Phone number you are registering, without the country code or plus symbol (+)
           type: string
         pin:
-          description: Existing 6-digit PIN — This is only required when two-factor
-            verification is enabled on this account.
+          description: Existing 6-digit PIN — This is only required when two-factor verification is enabled on this account.
           type: string
       required:
         - cc
@@ -2736,8 +2701,7 @@ components:
           version: whatsapp-business-api-client-version
       properties:
         errors:
-          description: "Only returned with a failed request. Contains an array of error
-            objects that are present when there is an error. "
+          description: "Only returned with a failed request. Contains an array of error objects that are present when there is an error. "
           items:
             $ref: "#/components/schemas/Error"
           type: array
@@ -2754,8 +2718,7 @@ components:
           description: The data that was returned by the /v1/settings/backup API call
           type: string
         password:
-          description: The password you used in the /v1/settings/backup API call to
-            encrypt the backup data
+          description: The password you used in the /v1/settings/backup API call to encrypt the backup data
           type: string
       required:
         - password
@@ -2787,19 +2750,15 @@ components:
         location:
           $ref: "#/components/schemas/Location"
         preview_url:
-          description: >-
-            Specifying preview_url in the request is optional when not
-            including a URL in your message.
-
+          description: |-
+            Specifying preview_url in the request is optional when not including a URL in your message.
             To include a URL preview, set preview_url to true in the message body and make sure the URL begins with http:// or https://. For more information, see the Sending URLs in Text Messages section.
           type: boolean
         recipient_type:
           default: individual
-          description: >-
+          description: |-
             Determines whether the recipient is an individual or a group
-
             Specifying recipient_type in the request is optional when the value is individual.
-
             However, recipient_type is required when using group. If sending a text message to a group, see the Sending Group Messages documentation.
           enum:
             - individual
@@ -2808,9 +2767,7 @@ components:
         text:
           $ref: "#/components/schemas/Text"
         to:
-          description: When recipient_type is individual, this field is the WhatsApp ID
-            (phone number) returned from contacts endpoint. When recipient_type
-            is group, this field is the WhatsApp group ID.
+          description: When recipient_type is individual, this field is the WhatsApp ID (phone number) returned from contacts endpoint. When recipient_type is group, this field is the WhatsApp group ID.
           type: string
         ttl:
           type: object
@@ -2948,11 +2905,8 @@ components:
           format: date-time
           type: string
         token:
-          description: >-
-            Authentication token to be used for all other WhatsApp Business API
-            calls. The token must be sent in the authorization header in the
-            format:
-
+          description: |-
+            Authentication token to be used for all other WhatsApp Business API calls. The token must be sent in the authorization header in the format:
             Authorization: Bearer <authentication-token>
           type: string
       title: UserLoginResponseItem
@@ -3041,16 +2995,13 @@ components:
           type: string
         file:
           deprecated: true
-          description: Absolute filename and location on media volume. This parameter is
-            deprecated.
+          description: Absolute filename and location on media volume. This parameter is deprecated.
           type: string
         filename:
-          description: Filename on the sender's device. This will only be present in audio
-            and document media messages.
+          description: Filename on the sender's device. This will only be present in audio and document media messages.
           type: string
         id:
-          description: ID of the media. Can be used to delete the media if stored locally
-            on the client.
+          description: ID of the media. Can be used to delete the media if stored locally on the client.
           type: string
         link:
           type: string
@@ -3100,16 +3051,13 @@ components:
           type: string
         file:
           deprecated: true
-          description: Absolute filename and location on media volume. This parameter is
-            deprecated.
+          description: Absolute filename and location on media volume. This parameter is deprecated.
           type: string
         filename:
-          description: Filename on the sender's device. This will only be present in audio
-            and document media messages.
+          description: Filename on the sender's device. This will only be present in audio and document media messages.
           type: string
         id:
-          description: ID of the media. Can be used to delete the media if stored locally
-            on the client.
+          description: ID of the media. Can be used to delete the media if stored locally on the client.
           type: string
         link:
           type: string
@@ -3168,12 +3116,10 @@ components:
           type: string
         file:
           deprecated: true
-          description: Absolute filename and location on media volume. This parameter is
-            deprecated.
+          description: Absolute filename and location on media volume. This parameter is deprecated.
           type: string
         id:
-          description: ID of the media. Can be used to delete the media if stored locally
-            on the client.
+          description: ID of the media. Can be used to delete the media if stored locally on the client.
           type: string
         link:
           type: string
@@ -3209,8 +3155,7 @@ components:
           description: Name of the location
           type: string
         url:
-          description: URL for the website where the user downloaded the location
-            information
+          description: URL for the website where the user downloaded the location information
           type: string
       title: Root Type for Webhook-Location
       type: object
@@ -3271,9 +3216,7 @@ components:
       example:
         errors:
           - code: 470
-            title: Failed to send message because you are outside the support window for
-              freeform messages to this user. Please use a valid HSM
-              notification or reconsider.
+            title: Failed to send message because you are outside the support window for freeform messages to this user. Please use a valid HSM notification or reconsider.
         id: gBGGEgZHMlEfAgkM1RBkhDRr7t8
         recipient_id: "12064001000"
         status: failed
@@ -3299,8 +3242,7 @@ components:
             - deleted
           type: string
           x-enum-descriptions:
-            - Message received by WhatsApp server (One checkmark in WhatsApp
-              Mobile)
+            - Message received by WhatsApp server (One checkmark in WhatsApp Mobile)
             - Message delivered to recipient (Two checkmarks in WhatsApp Mobile)
             - Message read by recipient (Two blue checkmarks in WhatsApp Mobile)
             - Message failed to send (Red error triangle in WhatsApp Mobile)
@@ -3393,12 +3335,10 @@ components:
           type: string
         file:
           deprecated: true
-          description: Absolute filename and location on media volume. This parameter is
-            deprecated.
+          description: Absolute filename and location on media volume. This parameter is deprecated.
           type: string
         id:
-          description: ID of the media. Can be used to delete the media if stored locally
-            on the client.
+          description: ID of the media. Can be used to delete the media if stored locally on the client.
           type: string
         link:
           type: string
@@ -3423,12 +3363,10 @@ components:
           type: string
         file:
           deprecated: true
-          description: Absolute filename and location on media volume. This parameter is
-            deprecated.
+          description: Absolute filename and location on media volume. This parameter is deprecated.
           type: string
         id:
-          description: ID of the media. Can be used to delete the media if stored locally
-            on the client.
+          description: ID of the media. Can be used to delete the media if stored locally on the client.
           type: string
         link:
           type: string
@@ -3447,8 +3385,7 @@ components:
       properties:
         max_concurrent_requests:
           default: 6
-          description: Configures the maximum number of inflight callback requests that
-            are sent out. Can be set to 6 (default), 12, 18, or 24.
+          description: Configures the maximum number of inflight callback requests that are sent out. Can be set to 6 (default), 12, 18, or 24.
           enum:
             - "6"
             - "12"
@@ -3457,8 +3394,7 @@ components:
           format: int32
           type: integer
         url:
-          description: Inbound and outbound notifications are routed to this URL. A
-            HTTPS-based endpoint is required; HTTP will not work.
+          description: Inbound and outbound notifications are routed to this URL. A HTTPS-based endpoint is required; HTTP will not work.
           type: string
       title: Webhooks
       type: object

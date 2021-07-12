@@ -22,8 +22,7 @@ securityDefinitions:
 
       \r
 
-      Enter 'Bearer' [space] and then your token in the text input
-      below.\r
+      Enter 'Bearer' [space] and then your token in the text input below.\r
 
       \r
 
@@ -33,10 +32,7 @@ securityDefinitions:
     type: apiKey
 parameters:
   documentType:
-    description: Document generation mode. When documentType is set to
-      "postageLabel" the additional parameters below must be used. These
-      additional parameters will be ignored when documentType is not set to
-      "postageLabel"
+    description: Document generation mode. When documentType is set to "postageLabel" the additional parameters below must be used. These additional parameters will be ignored when documentType is not set to "postageLabel"
     enum:
       - postageLabel
       - despatchNote
@@ -47,9 +43,7 @@ parameters:
     required: true
     type: string
   includeCN:
-    description: Include CN22/CN23 with label. Optional parameter. If this parameter
-      is used the setting will override the default account behaviour specified
-      in the "Label format" setting "Generate customs declarations with orders"
+    description: Include CN22/CN23 with label. Optional parameter. If this parameter is used the setting will override the default account behaviour specified in the "Label format" setting "Generate customs declarations with orders"
     in: query
     name: includeCN
     required: false
@@ -67,12 +61,7 @@ parameters:
     required: true
     type: string
 tags:
-  - description: <p>Exceeding the following rate limits will result in a 429
-      error:</p><table class='security-details'><tbody><tr><td>Click &amp; Drop
-      customers</td><td>1 call per second</td></tr><tr><td>ChannelShipper*
-      customers</td><td>5 calls per second</td></tr></tbody></table><p><b>*
-      Please visit <a href='https://channelshipper.com/'
-      target='_self'>ChannelShipper.com</a> for more information</b></p>
+  - description: <p>Exceeding the following rate limits will result in a 429 error:</p><table class='security-details'><tbody><tr><td>Click &amp; Drop customers</td><td>1 call per second</td></tr><tr><td>ChannelShipper* customers</td><td>5 calls per second</td></tr></tbody></table><p><b>* Please visit <a href='https://channelshipper.com/' target='_self'>ChannelShipper.com</a> for more information</b></p>
     name: Rate Limits
   - name: Version
   - name: Orders
@@ -93,8 +82,7 @@ paths:
           schema:
             $ref: "#/definitions/CreateOrdersResponse"
         "400":
-          description: Bad Request (Request has missing or invalid parameters and cannot
-            be parsed)
+          description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
           schema:
             $ref: "#/definitions/ErrorResponse"
         "401":
@@ -121,8 +109,7 @@ paths:
               $ref: "#/definitions/GetOrderInfoResource"
             type: array
         "400":
-          description: Bad Request (Request has missing or invalid parameters and cannot
-            be parsed)
+          description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
           schema:
             $ref: "#/definitions/ErrorResponse"
         "401":
@@ -140,9 +127,7 @@ paths:
         - Orders
   "/orders/{orderIdentifiers}/full":
     get:
-      description: <b>Reserved for ChannelShipper customers only - please visit <a
-        href="https://channelshipper.com/" target="_self">ChannelShipper.com</a>
-        for more information</b>
+      description: <b>Reserved for ChannelShipper customers only - please visit <a href="https://channelshipper.com/" target="_self">ChannelShipper.com</a> for more information</b>
       operationId: GetOrdersWithDetailsAsync
       parameters:
         - $ref: "#/parameters/orderIdentifiers"
@@ -154,8 +139,7 @@ paths:
               $ref: "#/definitions/GetOrderDetailsResource"
             type: array
         "400":
-          description: Bad Request (Request has missing or invalid parameters and cannot
-            be parsed)
+          description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
           schema:
             $ref: "#/definitions/ErrorResponse"
         "401":
@@ -175,14 +159,7 @@ paths:
         - Orders
   "/orders/{orderIdentifiers}/label":
     get:
-      description: <b>Reserved for ChannelShipper customers only - please visit <a
-        href="https://channelshipper.com/" target="_self">ChannelShipper.com</a>
-        for more information</b></br></br>The account "Label format" settings
-        page will control the page format settings used to print the postage
-        label and associated documents. Certain combinations of these settings
-        may prevent associated documents from being printed together with the
-        postage label within a single document. If this occurs the documentType
-        option can be used in a separate call to print missing documents.
+      description: <b>Reserved for ChannelShipper customers only - please visit <a href="https://channelshipper.com/" target="_self">ChannelShipper.com</a> for more information</b></br></br>The account "Label format" settings page will control the page format settings used to print the postage label and associated documents. Certain combinations of these settings may prevent associated documents from being printed together with the postage label within a single document. If this occurs the documentType option can be used in a separate call to print missing documents.
       operationId: GetOrdersLabelAsync
       parameters:
         - $ref: "#/parameters/orderIdentifiers"
@@ -198,8 +175,7 @@ paths:
           schema:
             type: file
         "400":
-          description: Bad Request (Request has missing or invalid parameters and cannot
-            be parsed)
+          description: Bad Request (Request has missing or invalid parameters and cannot be parsed)
           schema:
             $ref: "#/definitions/ErrorResponse"
         "401":
@@ -214,8 +190,7 @@ paths:
             $ref: "#/definitions/ErrorResponse"
       security:
         - Bearer: []
-      summary: Return a single PDF file with generated label and/or associated
-        document(s)
+      summary: Return a single PDF file with generated label and/or associated document(s)
       tags:
         - Labels
   /version:
@@ -269,10 +244,7 @@ definitions:
       - countryCode
     type: object
   BillingDetailsRequest:
-    description: <b>Billing</b> along with <b>billing.address</b> objects are
-      required in specific case when 'Use shipping address for billing address'
-      setting is set to 'false' and 'Recipient.AddressBookReference' is
-      provided.
+    description: <b>Billing</b> along with <b>billing.address</b> objects are required in specific case when 'Use shipping address for billing address' setting is set to 'false' and 'Recipient.AddressBookReference' is provided.
     properties:
       address:
         $ref: "#/definitions/AddressRequest"
@@ -307,8 +279,7 @@ definitions:
         maxLength: 3
         type: string
       customsDutyCosts:
-        description: Customs Duty Costs is only supported in DDP (Delivery Duty Paid)
-          services
+        description: Customs Duty Costs is only supported in DDP (Delivery Duty Paid) services
         type: number
       label:
         $ref: "#/definitions/LabelGenerationRequest"
@@ -415,9 +386,7 @@ definitions:
         type: integer
     type: object
   DimensionsRequest:
-    description: It is not mandatory to include the dimensions field. If the
-      dimensions field is included then the inner fields heightInMms, widthInMms
-      and depthInMms must be specified with non-zero values.
+    description: It is not mandatory to include the dimensions field. If the dimensions field is included then the inner fields heightInMms, widthInMms and depthInMms must be specified with non-zero values.
     properties:
       depthInMms:
         format: int32
@@ -671,9 +640,7 @@ definitions:
       - releaseDate
     type: object
   LabelGenerationRequest:
-    description: <span class='desc response'><b>Reserved for ChannelShipper
-      customers only - please visit <a href='https://channelshipper.com/'
-      target='_self'>ChannelShipper.com</a> for more information</b></span>
+    description: <span class='desc response'><b>Reserved for ChannelShipper customers only - please visit <a href='https://channelshipper.com/' target='_self'>ChannelShipper.com</a> for more information</b></span>
     properties:
       includeCN:
         type: boolean
@@ -741,21 +708,7 @@ definitions:
   ProductItemRequest:
     properties:
       SKU:
-        description: The presence or not of field <b>SKU</b> and other fields in the
-          request body will determine which of the following behaviours occur:-
-          <br>1) A minimum of <b>SKU</b>, <b>unitValue</b>,
-          <b>unitWeightInGrams</b> and <b>quantity</b> provided - In addition to
-          the provided product fields being used for the order creation, an
-          existing account Product with matching SKU will be overwritten with
-          all provided product parameters. If no existing account Product with
-          matching SKU can be found then a new product will be created with the
-          provided SKU and product parameters.<br>2) <b>SKU</b>, <b>quantity</b>
-          provided and <b>no other fields</b> provided - An account Product with
-          the provided SKU will be used for the order if it exists.<br>3) <b>SKU
-          not provided</b> and a minimum of <b>unitValue</b>,
-          <b>unitWeightInGrams</b> and <b>quantity</b> provided - All provided
-          product fields will be used for the order creation.<br>4) All other
-          scenarios will result in a validation error.
+        description: The presence or not of field <b>SKU</b> and other fields in the request body will determine which of the following behaviours occur:- <br>1) A minimum of <b>SKU</b>, <b>unitValue</b>, <b>unitWeightInGrams</b> and <b>quantity</b> provided - In addition to the provided product fields being used for the order creation, an existing account Product with matching SKU will be overwritten with all provided product parameters. If no existing account Product with matching SKU can be found then a new product will be created with the provided SKU and product parameters.<br>2) <b>SKU</b>, <b>quantity</b> provided and <b>no other fields</b> provided - An account Product with the provided SKU will be used for the order if it exists.<br>3) <b>SKU not provided</b> and a minimum of <b>unitValue</b>, <b>unitWeightInGrams</b> and <b>quantity</b> provided - All provided product fields will be used for the order creation.<br>4) All other scenarios will result in a validation error.
         maxLength: 100
         type: string
       customsCode:
@@ -807,25 +760,7 @@ definitions:
       address:
         $ref: "#/definitions/AddressRequest"
       addressBookReference:
-        description: The presence or not of <b>addressBookReference</b> and a valid
-          <b>recipient address object</b> in the request body will determine
-          which of the following behaviours occur:-</br></br>1)
-          addressBookReference <b>provided</b> and a valid recipient address
-          object <b>provided</b> - In addition to the provided recipient address
-          fields being used for the order creation, an existing account Address
-          Book Reference with matching addressBookReference will be overwritten
-          with all provided recipient address fields, including phone and email.
-          If no existing account Address Book Reference with matching
-          addressBookReference can be found then a new one will be created with
-          the provided addressBookReference and address fields, including phone
-          and email.</br>2) addressBookReference <b>provided</b> and a valid
-          recipient address object <b>not provided</b> - An account Address Book
-          Reference with the provided addressBookReference will be used for the
-          order if it exists.</br>3) addressBookReference <b>not provided</b>
-          and a valid recipient address object <b>provided</b> - All provided
-          recipient address fields, including phone and email, will be used for
-          the order creation.</br>4) All other scenarios will result in a
-          validation error.
+        description: The presence or not of <b>addressBookReference</b> and a valid <b>recipient address object</b> in the request body will determine which of the following behaviours occur:-</br></br>1) addressBookReference <b>provided</b> and a valid recipient address object <b>provided</b> - In addition to the provided recipient address fields being used for the order creation, an existing account Address Book Reference with matching addressBookReference will be overwritten with all provided recipient address fields, including phone and email. If no existing account Address Book Reference with matching addressBookReference can be found then a new one will be created with the provided addressBookReference and address fields, including phone and email.</br>2) addressBookReference <b>provided</b> and a valid recipient address object <b>not provided</b> - An account Address Book Reference with the provided addressBookReference will be used for the order if it exists.</br>3) addressBookReference <b>not provided</b> and a valid recipient address object <b>provided</b> - All provided recipient address fields, including phone and email, will be used for the order creation.</br>4) All other scenarios will result in a validation error.
         maxLength: 100
         type: string
       emailAddress:
@@ -856,17 +791,12 @@ definitions:
         type: array
         uniqueItems: false
       customPackageFormatIdentifier:
-        description: Is required if 'packageFormatIdentifier' is provided as 'custom'.
-          <b>Reserved for ChannelShipper customers only - please visit <a
-          href='https://channelshipper.com/'
-          target='_self'>ChannelShipper.com</a> for more information</b>.
+        description: Is required if 'packageFormatIdentifier' is provided as 'custom'. <b>Reserved for ChannelShipper customers only - please visit <a href='https://channelshipper.com/' target='_self'>ChannelShipper.com</a> for more information</b>.
         type: string
       dimensions:
         $ref: "#/definitions/DimensionsRequest"
       packageFormatIdentifier:
-        description: <b>Value 'custom' is reserved for ChannelShipper customers only -
-          please visit <a href='https://channelshipper.com/'
-          target='_self'>ChannelShipper.com</a> for more information</b>
+        description: <b>Value 'custom' is reserved for ChannelShipper customers only - please visit <a href='https://channelshipper.com/' target='_self'>ChannelShipper.com</a> for more information</b>
         enum:
           - undefined
           - letter

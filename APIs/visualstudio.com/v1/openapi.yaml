@@ -1886,16 +1886,11 @@ paths:
       tags:
         - Plans
   "/api/v1/Prebuilds/pools/{poolId}/instances":
-    put:
+    post:
       parameters:
         - in: path
           name: poolId
           required: true
-          schema:
-            nullable: true
-            type: string
-        - in: query
-          name: correlationId
           schema:
             nullable: true
             type: string
@@ -1942,7 +1937,58 @@ paths:
           description: Not Found
       tags:
         - Prebuilds
-  /api/v1/Prebuilds/template:
+    put:
+      parameters:
+        - in: path
+          name: poolId
+          required: true
+          schema:
+            nullable: true
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateEnvironmentPoolResourceBody"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateEnvironmentPoolResourceBody"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/CreateEnvironmentPoolResourceBody"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateEnvironmentPoolResourceBody"
+      responses:
+        "201":
+          description: Success
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Not Found
+      tags:
+        - Prebuilds
+  /api/v1/Prebuilds/templates:
     post:
       requestBody:
         content:
@@ -4748,6 +4794,8 @@ components:
     CreateEnvironmentPoolResourceBody:
       additionalProperties: false
       properties:
+        environmentOptions:
+          $ref: "#/components/schemas/PrebuildEnvironmentOptions"
         secrets:
           items:
             $ref: "#/components/schemas/SecretDataBody"
@@ -5076,6 +5124,7 @@ components:
         - 31 (ActionNotAllowedInThisState)
         - 32 (ExportRunningEnvironmentError)
         - 34 (EnvironmentCreationIsNotAllowed)
+        - 35 (GitHubProxyError)
       format: int32
       type: integer
     PersonalizationInfoBody:
@@ -5269,6 +5318,13 @@ components:
       required:
         - poolGroupName
         - vmSpecs
+      type: object
+    PrebuildEnvironmentOptions:
+      additionalProperties: false
+      properties:
+        correlationId:
+          nullable: true
+          type: string
       type: object
     ProblemDetails:
       additionalProperties: {}

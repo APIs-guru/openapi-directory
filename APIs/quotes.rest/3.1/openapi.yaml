@@ -8,13 +8,7 @@ info:
     name: They Said So
     url: https://theysaidso.com/api/quote
     x-twitter: theysaidso
-  description: " They Said So Quotes API offers a complete feature rich REST API
-    access to its quotes platform.  This is the documentation for the world
-    famous [quotes API](https://theysaidso.com/api).  If you are a subscriber
-    and you are trying this from a console add 'X-TheySaidSo-Api-Secret' header
-    and add your api key as the header value. You can test and play with the API
-    right here on this web page. For using the private end points and
-    subscribing to the API please visit https://theysaidso.com/api."
+  description: " They Said So Quotes API offers a complete feature rich REST API access to its quotes platform.  This is the documentation for the world famous [quotes API](https://theysaidso.com/api).  If you are a subscriber and you are trying this from a console add 'X-TheySaidSo-Api-Secret' header and add your api key as the header value. You can test and play with the API right here on this web page. For using the private end points and subscribing to the API please visit https://theysaidso.com/api."
   termsOfService: https://theysaidso.com/terms#api
   title: They Said So Quotes API
   version: "3.1"
@@ -28,36 +22,27 @@ info:
       version: "3.0"
   x-providerName: quotes.rest
 tags:
-  - description: Access quote of the day service. Use this to get the quote of the
-      day in various categories. This is a free API that is available to public.
-      You must credit They Said So if you are using the free version.
+  - description: Access quote of the day service. Use this to get the quote of the day in various categories. This is a free API that is available to public. You must credit They Said So if you are using the free version.
     externalDocs:
       description: Find out more
       url: https://theysaidso.com/api/quote#qod
     name: Quote of the day
-  - description: Access random quote service. Use this to get random quotes , quotes
-      filtered by authors or tags etc. You need an API key to access this
-      service.
+  - description: Access random quote service. Use this to get random quotes , quotes filtered by authors or tags etc. You need an API key to access this service.
     name: Quote
-  - description: Create and manage your own Quotes. You need an API key to access
-      this service.
+  - description: Create and manage your own Quotes. You need an API key to access this service.
     name: Private Quotes
-  - description: Create beatiful quote images or get one of the premade images. You
-      need an API key to access this service.
+  - description: Create beatiful quote images or get one of the premade images. You need an API key to access this service.
     externalDocs:
       description: Find out more about image
       url: https://theysaidso.com/api/quote#image
     name: Quote Images
-  - description: Access Qshow - quote collection service. Create curated quotes
-      collection. You can group quotes by any way you want and access them as a
-      single unit. You need an API key to access this service.
+  - description: Access Qshow - quote collection service. Create curated quotes collection. You can group quotes by any way you want and access them as a single unit. You need an API key to access this service.
     name: Qshow
 paths:
   /qod:
     get:
-      description: >
-        Gets `Quote of the Day`. Optional `category` param determines the
-        category of returned quote of the day
+      description: |
+        Gets `Quote of the Day`. Optional `category` param determines the category of returned quote of the day
       parameters:
         - description: QOD Category
           in: query
@@ -66,8 +51,7 @@ paths:
           schema:
             format: string
             type: string
-        - description: Language of the QOD. The language must be supported in our QOD
-            system.
+        - description: Language of the QOD. The language must be supported in our QOD system.
           in: query
           name: language
           required: false
@@ -81,7 +65,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "success": {
                             "total": 1
@@ -111,7 +95,7 @@ paths:
             application/xml:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     <?xml version="1.0"?> <response>
                       <success>
                         <total>1</total>
@@ -138,7 +122,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "error": {
                         "code": 400,
@@ -155,8 +139,7 @@ paths:
       description: |
         Gets a list of `Quote of the Day` Categories.
       parameters:
-        - description: Language of the QOD category. The language must be supported in our
-            QOD system.
+        - description: Language of the QOD category. The language must be supported in our QOD system.
           in: query
           name: language
           required: false
@@ -164,8 +147,7 @@ paths:
             default: en
             format: string
             type: string
-        - description: Return detailed information of the categories. Note the data format
-            changes between the two values of this switch.
+        - description: Return detailed information of the categories. Note the data format changes between the two values of this switch.
           in: query
           name: detailed
           required: false
@@ -204,7 +186,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "error": {
                         "code": 400,
@@ -313,7 +295,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "success": {
                             "total": 1
@@ -335,7 +317,7 @@ paths:
             application/xml:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     <?xml version="1.0"?> <response>
                       <success>
                         <total>1</total>
@@ -531,8 +513,7 @@ paths:
     get:
       description: Get the list of Qshows in They Said So platform.
       parameters:
-        - description: Response is paged. This parameter controls where response starts
-            the listing at
+        - description: Response is paged. This parameter controls where response starts the listing at
           in: query
           name: start
           required: false
@@ -554,7 +535,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "success": {
                             "total": "39",
@@ -640,7 +621,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "success": {
                             "total": 1
@@ -935,9 +916,8 @@ paths:
         - Qshow
   /quote:
     delete:
-      description: >
-        Delete a quote. The user needs to be the owner of the quote to be
-        able to delete it.
+      description: |
+        Delete a quote. The user needs to be the owner of the quote to be able to delete it.
       parameters:
         - description: Quote ID
           in: query
@@ -1000,7 +980,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "success": {
                         "total": 1
@@ -1026,7 +1006,7 @@ paths:
             application/xml:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     <?xml version="1.0"?> <response>
                       <success>
                         <total>1</total>
@@ -1090,8 +1070,7 @@ paths:
           schema:
             format: string
             type: string
-        - description: Language. If not supplied an auto detection mechanism will be used
-            to detect a language.
+        - description: Language. If not supplied an auto detection mechanism will be used to detect a language.
           in: query
           name: language
           required: false
@@ -1141,8 +1120,7 @@ paths:
       tags:
         - Private Quotes
     post:
-      description: Add a new quote to your private collection. Same as 'PUT' but added
-        since some clients don't handle PUT well.
+      description: Add a new quote to your private collection. Same as 'PUT' but added since some clients don't handle PUT well.
       parameters:
         - description: Quote
           in: query
@@ -1165,8 +1143,7 @@ paths:
           schema:
             format: string
             type: string
-        - description: Language. If not supplied an auto detection mechanism will be used
-            to detect a language.
+        - description: Language. If not supplied an auto detection mechanism will be used to detect a language.
           in: query
           name: language
           required: false
@@ -1233,8 +1210,7 @@ paths:
           schema:
             format: string
             type: string
-        - description: Language. If not supplied an auto detection mechanism will be used
-            to detect a language.
+        - description: Language. If not supplied an auto detection mechanism will be used to detect a language.
           in: query
           name: language
           required: false
@@ -1282,10 +1258,7 @@ paths:
       description: |
         Gets a list of popular author names in the system. 
       parameters:
-        - description: Language. A same author may have quotes in two or more different
-            languages. So for example 'Mahatma Gandhi' may be returned for
-            language "en"(English), and "மஹாத்மா காந்தி" may be returned when
-            the language is "ta" (Tamil).
+        - description: Language. A same author may have quotes in two or more different languages. So for example 'Mahatma Gandhi' may be returned for language "en"(English), and "மஹாத்மா காந்தி" may be returned when the language is "ta" (Tamil).
           in: query
           name: language
           required: false
@@ -1293,9 +1266,7 @@ paths:
             default: en
             format: string
             type: string
-        - description: Should return detailed author information such as `birthday`,
-            `death date`, `occupation`, `description` etc. Only available at
-            certain subscription levels.
+        - description: Should return detailed author information such as `birthday`, `death date`, `occupation`, `description` etc. Only available at certain subscription levels.
           in: query
           name: detailed
           required: false
@@ -1303,8 +1274,7 @@ paths:
             default: false
             format: boolean
             type: boolean
-        - description: Response is paged. This parameter controls where response starts
-            the listing at
+        - description: Response is paged. This parameter controls where response starts the listing at
           in: query
           name: start
           required: false
@@ -1312,8 +1282,7 @@ paths:
             default: 0
             format: int32
             type: integer
-        - description: Response is paged. This parameter controls how many is returned in
-            the result. The maximum depends on the subscription level.
+        - description: Response is paged. This parameter controls how many is returned in the result. The maximum depends on the subscription level.
           in: query
           name: limit
           required: false
@@ -1395,7 +1364,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "error": {
                         "code": 400,
@@ -1419,10 +1388,7 @@ paths:
           schema:
             format: string
             type: string
-        - description: Language. A same author may have quotes in two or more different
-            languages. So for example 'Mahatma Gandhi' may be returned for
-            language "en"(English), and "மஹாத்மா காந்தி" may be returned when
-            the language is "ta" (Tamil).
+        - description: Language. A same author may have quotes in two or more different languages. So for example 'Mahatma Gandhi' may be returned for language "en"(English), and "மஹாத்மா காந்தி" may be returned when the language is "ta" (Tamil).
           in: query
           name: language
           required: false
@@ -1430,9 +1396,7 @@ paths:
             default: en
             format: string
             type: string
-        - description: Should return detailed author information such as `birthday`,
-            `death date`, `occupation`, `description` etc. Only available at
-            certain subscription levels.
+        - description: Should return detailed author information such as `birthday`, `death date`, `occupation`, `description` etc. Only available at certain subscription levels.
           in: query
           name: detailed
           required: false
@@ -1440,8 +1404,7 @@ paths:
             default: false
             format: boolean
             type: boolean
-        - description: Response is paged. This parameter controls where response starts
-            the listing at
+        - description: Response is paged. This parameter controls where response starts the listing at
           in: query
           name: start
           required: false
@@ -1449,8 +1412,7 @@ paths:
             default: 0
             format: int32
             type: integer
-        - description: Response is paged. This parameter controls how many is returned in
-            the result. The maximum depends on the subscription level.
+        - description: Response is paged. This parameter controls how many is returned in the result. The maximum depends on the subscription level.
           in: query
           name: limit
           required: false
@@ -1532,7 +1494,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "error": {
                         "code": 400,
@@ -1549,8 +1511,7 @@ paths:
       description: |
         Gets a list of popular `Quote` Categories.
       parameters:
-        - description: Response is paged. This parameter controls where response starts
-            the listing at
+        - description: Response is paged. This parameter controls where response starts the listing at
           in: query
           name: start
           required: false
@@ -1558,8 +1519,7 @@ paths:
             default: 0
             format: int32
             type: integer
-        - description: Response is paged. This parameter controls how many is returned in
-            the result. The maximum depends on the subscription level.
+        - description: Response is paged. This parameter controls how many is returned in the result. The maximum depends on the subscription level.
           in: query
           name: limit
           required: false
@@ -1627,8 +1587,7 @@ paths:
             default: 0
             format: string
             type: string
-        - description: Response is paged. This parameter controls where response starts
-            the listing at
+        - description: Response is paged. This parameter controls where response starts the listing at
           in: query
           name: start
           required: false
@@ -1636,8 +1595,7 @@ paths:
             default: 0
             format: int32
             type: integer
-        - description: Response is paged. This parameter controls how many is returned in
-            the result. The maximum depends on the subscription level.
+        - description: Response is paged. This parameter controls how many is returned in the result. The maximum depends on the subscription level.
           in: query
           name: limit
           required: false
@@ -1748,8 +1706,7 @@ paths:
       tags:
         - Quote
     post:
-      description: Dislike the given Quote as a user of the API Key. Same as `put` but
-        a convenient alias for those clients that don't support `put` cleanly.
+      description: Dislike the given Quote as a user of the API Key. Same as `put` but a convenient alias for those clients that don't support `put` cleanly.
       parameters:
         - description: Quote ID
           in: query
@@ -1803,9 +1760,7 @@ paths:
       tags:
         - Quote
     put:
-      description: Dislike the given Quote as a user of the API Key. Some clients
-        don't cleanly support `PUT`, in such scenarios use the `POST` version of
-        this.
+      description: Dislike the given Quote as a user of the API Key. Some clients don't cleanly support `PUT`, in such scenarios use the `POST` version of this.
       parameters:
         - description: Quote ID
           in: query
@@ -1860,9 +1815,8 @@ paths:
         - Quote
   /quote/image:
     delete:
-      description: >
-        Delete a quote image. The user needs to be the owner of the quote
-        image to be able to delete it.
+      description: |
+        Delete a quote image. The user needs to be the owner of the quote image to be able to delete it.
       parameters:
         - description: Quote Image ID
           in: query
@@ -1910,9 +1864,8 @@ paths:
       tags:
         - Quote Images
     get:
-      description: >
-        Gets a Quote image for a given id. Response can be an image file as
-        a binary or a base64 encoded contents wrapped in json. `TODO`
+      description: |
+        Gets a Quote image for a given id. Response can be an image file as a binary or a base64 encoded contents wrapped in json. `TODO`
       parameters:
         - description: Quote Image id
           in: query
@@ -1921,8 +1874,7 @@ paths:
           schema:
             format: string
             type: string
-        - description: Should the response be a direct file download of the image or a
-            base64 encoded image file wrapped in json?
+        - description: Should the response be a direct file download of the image or a base64 encoded image file wrapped in json?
           in: query
           name: binary
           required: false
@@ -1936,7 +1888,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "success": {
                         "total": 1
@@ -1983,10 +1935,8 @@ paths:
       tags:
         - Quote Images
     put:
-      description: >
-        Create a new quote image for a given quote. Choose background
-        colors/images , choose different font styles and generate a beautiful
-        quote image. Did you just had a feeling of being a god or what?!
+      description: |
+        Create a new quote image for a given quote. Choose background colors/images , choose different font styles and generate a beautiful quote image. Did you just had a feeling of being a god or what?!
       parameters:
         - description: Quote id
           in: query
@@ -2055,16 +2005,14 @@ paths:
           schema:
             format: integer
             type: integer
-        - description: Image Height(By default this takes the height of the background
-            image)
+        - description: Image Height(By default this takes the height of the background image)
           in: query
           name: height
           required: false
           schema:
             format: integer
             type: integer
-        - description: Disable They Said So branding (Only available in certain
-            subscription levels. Ignored in other levels)
+        - description: Disable They Said So branding (Only available in certain subscription levels. Ignored in other levels)
           in: query
           name: branding
           required: false
@@ -2072,9 +2020,7 @@ paths:
             default: false
             format: boolean
             type: boolean
-        - description: Should include a transparent layer between the text and the
-            background image? This helps when the background image is bright and
-            obscures the text.
+        - description: Should include a transparent layer between the text and the background image? This helps when the background image is bright and obscures the text.
           in: query
           name: include_transparent_layer
           required: false
@@ -2131,9 +2077,8 @@ paths:
         - Quote Images
   /quote/image/background:
     delete:
-      description: >
-        Delete a background image file. The user needs to be the owner of
-        the background image to be able to delete it.
+      description: |
+        Delete a background image file. The user needs to be the owner of the background image to be able to delete it.
       parameters:
         - description: Font ID
           in: query
@@ -2242,8 +2187,7 @@ paths:
       description: |
         Lists background images in your private collection. 
       parameters:
-        - description: Response is paged. This parameter determines where the response
-            should start.
+        - description: Response is paged. This parameter determines where the response should start.
           in: query
           name: start
           required: false
@@ -2256,7 +2200,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "success": {
                         "total": 1
@@ -2290,7 +2234,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 404,
@@ -2320,7 +2264,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "success": {
                         "total": 1
@@ -2354,7 +2298,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 404,
@@ -2484,9 +2428,8 @@ paths:
         - Quote Images
   /quote/image/font:
     delete:
-      description: >
-        Delete a font file. The user needs to be the owner of the font to
-        be able to delete it.
+      description: |
+        Delete a font file. The user needs to be the owner of the font to be able to delete it.
       parameters:
         - description: Font ID
           in: query
@@ -2540,9 +2483,7 @@ paths:
       tags:
         - Quote Images
     post:
-      description: Add a font file for use later in creating a quote image. This is
-        essentially a `PUT` but not many clients handle PUT with binary stream
-        i.e. a file, gracefully.
+      description: Add a font file for use later in creating a quote image. This is essentially a `PUT` but not many clients handle PUT with binary stream i.e. a file, gracefully.
       requestBody:
         content:
           multipart/form-data:
@@ -2597,8 +2538,7 @@ paths:
       description: |
         Lists background images in your private collection. 
       parameters:
-        - description: Response is paged. This parameter determines where the response
-            should start.
+        - description: Response is paged. This parameter determines where the response should start.
           in: query
           name: start
           required: false
@@ -2611,7 +2551,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "success": {
                         "total": 1
@@ -2645,7 +2585,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 404,
@@ -2675,7 +2615,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "success": {
                         "total": 1
@@ -2709,7 +2649,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 404,
@@ -2839,10 +2779,8 @@ paths:
         - Quote Images
   /quote/image/search:
     get:
-      description: >
-        Gets a Random Quote image. Optional `category` param determines the
-        category of quote used in the image. Optional `author` param gets the
-        quote image of a given author. 
+      description: |
+        Gets a Random Quote image. Optional `category` param determines the category of quote used in the image. Optional `author` param gets the quote image of a given author. 
       parameters:
         - description: Quote Category
           in: query
@@ -2858,8 +2796,7 @@ paths:
           schema:
             format: string
             type: string
-        - description: Should search private collection. Default searches public image
-            collection.
+        - description: Should search private collection. Default searches public image collection.
           in: query
           name: private
           required: false
@@ -2873,7 +2810,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                       "success": {
                         "total": 1
@@ -2907,7 +2844,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 404,
@@ -2971,8 +2908,7 @@ paths:
       tags:
         - Quote
     post:
-      description: Like the given Quote as a user of the API Key. Same as `PUT` but a
-        convenient alias for those clients that don't support `PUT` cleanly.
+      description: Like the given Quote as a user of the API Key. Same as `PUT` but a convenient alias for those clients that don't support `PUT` cleanly.
       parameters:
         - description: Quote ID
           in: query
@@ -3028,8 +2964,7 @@ paths:
       tags:
         - Quote
     put:
-      description: Like the given Quote as a user of the API Key. Some clients don't
-        cleanly support `PUT`, in such scenarios use the `POST` version of this.
+      description: Like the given Quote as a user of the API Key. Some clients don't cleanly support `PUT`, in such scenarios use the `POST` version of this.
       parameters:
         - description: Quote ID
           in: query
@@ -3088,8 +3023,7 @@ paths:
     get:
       description: Get the list of quotes in your private collection.
       parameters:
-        - description: Response is paged. This parameter controls where response starts
-            the listing at
+        - description: Response is paged. This parameter controls where response starts the listing at
           in: query
           name: start
           required: false
@@ -3097,8 +3031,7 @@ paths:
             default: 0
             format: int32
             type: integer
-        - description: Response is paged. This parameter controls how many is returned in
-            the result.
+        - description: Response is paged. This parameter controls how many is returned in the result.
           in: query
           name: limit
           required: false
@@ -3112,7 +3045,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "success": {
                             "total": "263",
@@ -3191,8 +3124,7 @@ paths:
         - Private Quotes
   /quote/random:
     get:
-      description: Gets a `Random Quote`. When you are in a hurry this is what you
-        call to get a random famous quote.
+      description: Gets a `Random Quote`. When you are in a hurry this is what you call to get a random famous quote.
       parameters:
         - description: Language of the Quote. The language must be supported in our system.
           in: query
@@ -3202,8 +3134,7 @@ paths:
             default: en
             format: string
             type: string
-        - description: No of quotes to return. The max limit depends on the subscription
-            level.
+        - description: No of quotes to return. The max limit depends on the subscription level.
           in: query
           name: limit
           required: false
@@ -3217,7 +3148,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "success": {
                             "total": 1
@@ -3244,7 +3175,7 @@ paths:
             application/xml:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     <?xml version="1.0"?> <response>
                       <success>
                         <total>1</total>
@@ -3285,9 +3216,7 @@ paths:
         - Quote
   /quote/search:
     get:
-      description: "Search for a `Quote` in They Said So platform. Optional `category`
-        , `author`, `minlength`, `maxlength` params determines the filters
-        applied while searching for the quote. "
+      description: "Search for a `Quote` in They Said So platform. Optional `category` , `author`, `minlength`, `maxlength` params determines the filters applied while searching for the quote. "
       parameters:
         - description: Quote Category
           in: query
@@ -3342,8 +3271,7 @@ paths:
             default: en
             format: string
             type: string
-        - description: No of quotes to return. The max limit depends on the subscription
-            level.
+        - description: No of quotes to return. The max limit depends on the subscription level.
           in: query
           name: limit
           required: false
@@ -3365,7 +3293,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "success": {
                             "total": 1
@@ -3392,7 +3320,7 @@ paths:
             application/xml:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     <?xml version="1.0"?> <response>
                       <success>
                         <total>1</total>
@@ -3432,7 +3360,7 @@ paths:
             application/json:
               examples:
                 response:
-                  value: >-
+                  value: |-
                     {
                         "error": {
                             "code": 404,

@@ -31,17 +31,15 @@ paths:
           name: key
           required: false
           type: string
-        - description: >-
-            when fetching a list specifies the permission level of all items in
-            the list
+        - description: |-
+            when fetching a list specifies the permission level of all items in the list
                                     see {@link com.atlassian.jira.bc.admin.ApplicationPropertiesService.EditPermissionLevel}
           in: query
           name: permissionLevel
           required: false
           type: string
-        - description: >-
-            when fetching a list allows the list to be filtered by the
-            property's start of key
+        - description: |-
+            when fetching a list allows the list to be filtered by the property's start of key
                                     e.g. "jira.lf.*" whould fetch only those permissions that are editable and whose keys start with
                                     "jira.lf.". This is a regex.
           in: query
@@ -54,8 +52,7 @@ paths:
     parameters: []
   /api/2/application-properties/advanced-settings:
     get:
-      description: Returns the properties that are displayed on the "General
-        Configuration > Advanced Settings" page.
+      description: Returns the properties that are displayed on the "General Configuration > Advanced Settings" page.
       operationId: getAdvancedSettings
       responses:
         "200":
@@ -68,8 +65,7 @@ paths:
         required: true
         type: string
     put:
-      description: Modify an application property via PUT. The "value" field present
-        in the PUT will override the existing value.
+      description: Modify an application property via PUT. The "value" field present in the PUT will override the existing value.
       operationId: setPropertyViaRestfulTable
       parameters: []
       responses:
@@ -77,9 +73,8 @@ paths:
           description: Successful Response
   /api/2/applicationrole:
     get:
-      description: >-
-        Returns all ApplicationRoles in the system. Will also return an
-        ETag header containing a version hash of the
+      description: |-
+        Returns all ApplicationRoles in the system. Will also return an ETag header containing a version hash of the
          collection of ApplicationRoles.
       operationId: getAll
       responses:
@@ -87,9 +82,8 @@ paths:
           description: Successful Response
     parameters: []
     put:
-      description: >-
-        Updates the ApplicationRoles with the passed data if the version
-        hash is the same as the server.
+      description: |-
+        Updates the ApplicationRoles with the passed data if the version hash is the same as the server.
          Only the groups and default groups setting of the role may be updated. Requests to change the key
          or the name of the role will be silently ignored. It is acceptable to pass only the roles that are updated
          as roles that are present in the server but not in data to update with, will not be deleted.
@@ -116,9 +110,8 @@ paths:
         required: true
         type: string
     put:
-      description: >-
-        Updates the ApplicationRole with the passed data. Only the groups
-        and default groups setting of the
+      description: |-
+        Updates the ApplicationRole with the passed data. Only the groups and default groups setting of the
          role may be updated. Requests to change the key or the name of the role will be silently ignored.
          <p>
          Optional: If versionHash is passed through the If-Match header the request will be rejected if not the
@@ -135,9 +128,8 @@ paths:
           description: Successful Response
   /api/2/attachment/meta:
     get:
-      description: >-
-        Returns the meta information for an attachments, specifically if
-        they are enabled and the maximum upload size
+      description: |-
+        Returns the meta information for an attachments, specifically if they are enabled and the maximum upload size
          allowed.
       operationId: getAttachmentMeta
       responses:
@@ -152,8 +144,7 @@ paths:
         "200":
           description: Successful Response
     get:
-      description: Returns the meta-data for an attachment, including the URI of the
-        actual attached file.
+      description: Returns the meta-data for an attachment, including the URI of the actual attached file.
       operationId: getAttachment
       responses:
         "200":
@@ -166,8 +157,7 @@ paths:
         type: string
   "/api/2/attachment/{id}/expand/human":
     get:
-      description: Tries to expand an attachment. Output is human-readable and subject
-        to change.
+      description: Tries to expand an attachment. Output is human-readable and subject to change.
       operationId: expandForHumans
       responses:
         "200":
@@ -180,8 +170,7 @@ paths:
         type: string
   "/api/2/attachment/{id}/expand/raw":
     get:
-      description: Tries to expand an attachment. Output is raw and should be
-        backwards-compatible through the course of time.
+      description: Tries to expand an attachment. Output is raw and should be backwards-compatible through the course of time.
       operationId: expandForMachines
       responses:
         "200":
@@ -203,30 +192,26 @@ paths:
           name: offset
           required: false
           type: integer
-        - description: "- maximum number of returned results (if is limit is <= 0 or >
-            1000, it will be set do default value: 1000)"
+        - description: "- maximum number of returned results (if is limit is <= 0 or > 1000, it will be set do default value: 1000)"
           format: int32
           in: query
           name: limit
           required: false
           type: integer
-        - description: "- text query; each record that will be returned must contain the
-            provided text in one of its fields"
+        - description: "- text query; each record that will be returned must contain the provided text in one of its fields"
           in: query
           name: filter
           required: false
           type: string
-        - description: >-
-            - timestamp in past; 'from' must be less or equal 'to', otherwise
-            the result set will be empty
+        - description: |-
+            - timestamp in past; 'from' must be less or equal 'to', otherwise the result set will be empty
                            only records that where created in the same moment or after the 'from' timestamp will be provided in response
           in: query
           name: from
           required: false
           type: string
-        - description: >-
-            - timestamp in past; 'from' must be less or equal 'to', otherwise
-            the result set will be empty
+        - description: |-
+            - timestamp in past; 'from' must be less or equal 'to', otherwise the result set will be empty
                            only records that where created in the same moment or earlier than the 'to' timestamp will be provided in response
           in: query
           name: to
@@ -341,8 +326,7 @@ paths:
     parameters: []
   "/api/2/comment/{commentId}/properties":
     get:
-      description: Returns the keys of all properties for the comment identified by
-        the key or by the id.
+      description: Returns the keys of all properties for the comment identified by the key or by the id.
       responses:
         "200":
           description: Successful Response
@@ -354,17 +338,15 @@ paths:
         type: string
   "/api/2/comment/{commentId}/properties/{propertyKey}":
     delete:
-      description: >-
-        Removes the property from the comment identified by the key or by
-        the id. Ths user removing the property is required
+      description: |-
+        Removes the property from the comment identified by the key or by the id. Ths user removing the property is required
          to have permissions to administer the comment.
       responses:
         "200":
           description: Successful Response
     get:
-      description: >-
-        Returns the value of the property with a given key from the comment
-        identified by the key or by the id. The user who retrieves
+      description: |-
+        Returns the value of the property with a given key from the comment identified by the key or by the id. The user who retrieves
          the property is required to have permissions to read the comment.
       responses:
         "200":
@@ -381,7 +363,7 @@ paths:
         required: true
         type: string
     put:
-      description: >-
+      description: |-
         Sets the value of the specified comment's property.
          <p>
          You can use this resource to store a custom data against the comment identified by the key or by the id. The user
@@ -403,9 +385,8 @@ paths:
     delete:
       description: Delete a project component.
       parameters:
-        - description: >-
-            The new component applied to issues whose 'id' component will be
-            deleted.
+        - description: |-
+            The new component applied to issues whose 'id' component will be deleted.
                                  If this value is null, then the 'id' component is simply removed from the related isues.
           in: query
           name: moveIssuesTo
@@ -427,9 +408,8 @@ paths:
         required: true
         type: string
     put:
-      description: >-
-        Modify a component via PUT. Any fields present in the PUT will
-        override existing values. As a convenience, if a field
+      description: |-
+        Modify a component via PUT. Any fields present in the PUT will override existing values. As a convenience, if a field
          is not present, it is silently ignored.
          <p>
          If leadUserName is an empty string ("") the component lead will be removed.
@@ -453,9 +433,8 @@ paths:
         type: string
   /api/2/configuration:
     get:
-      description: >-
-        Returns the information if the optional features in JIRA are
-        enabled or disabled. If the time tracking is enabled,
+      description: |-
+        Returns the information if the optional features in JIRA are enabled or disabled. If the time tracking is enabled,
          it also returns the detailed information about time tracking configuration.
       operationId: getConfiguration
       responses:
@@ -464,8 +443,7 @@ paths:
     parameters: []
   "/api/2/customFieldOption/{id}":
     get:
-      description: Returns a full representation of the Custom Field Option that has
-        the given id.
+      description: Returns a full representation of the Custom Field Option that has the given id.
       operationId: getCustomFieldOption
       responses:
         "200":
@@ -481,27 +459,24 @@ paths:
       description: Returns a list of all dashboards, optionally filtering them.
       operationId: list
       parameters:
-        - description: >-
-            an optional filter that is applied to the list of dashboards. Valid
-            values include
+        - description: |-
+            an optional filter that is applied to the list of dashboards. Valid values include
                                     <code>"favourite"</code> for returning only favourite dashboards, and <code>"my"</code> for returning
                                     dashboards that are owned by the calling user.
           in: query
           name: filter
           required: false
           type: string
-        - description: >-
-            the index of the first dashboard to return (0-based). must be 0 or
-            a multiple of
+        - description: |-
+            the index of the first dashboard to return (0-based). must be 0 or a multiple of
                                     <code>maxResults</code>
           format: int32
           in: query
           name: startAt
           required: false
           type: integer
-        - description: >-
-            a hint as to the the maximum number of dashboards to return in each
-            call. Note that the
+        - description: |-
+            a hint as to the the maximum number of dashboards to return in each call. Note that the
                                     JIRA server reserves the right to impose a <code>maxResults</code> limit that is lower than the value that a
                                     client provides, dues to lack or resources or any other condition. When this happens, your results will be
                                     truncated. Callers should always check the returned <code>maxResults</code> to determine the value that is
@@ -517,8 +492,7 @@ paths:
     parameters: []
   "/api/2/dashboard/{dashboardId}/items/{itemId}/properties":
     get:
-      description: Returns the keys of all properties for the dashboard item
-        identified by the id.
+      description: Returns the keys of all properties for the dashboard item identified by the id.
       responses:
         "200":
           description: Successful Response
@@ -534,17 +508,15 @@ paths:
         type: string
   "/api/2/dashboard/{dashboardId}/items/{itemId}/properties/{propertyKey}":
     delete:
-      description: >-
-        Removes the property from the dashboard item identified by the key
-        or by the id. Ths user removing the property is required
+      description: |-
+        Removes the property from the dashboard item identified by the key or by the id. Ths user removing the property is required
          to have permissions to administer the dashboard item.
       responses:
         "200":
           description: Successful Response
     get:
-      description: >-
-        Returns the value of the property with a given key from the
-        dashboard item identified by the id.
+      description: |-
+        Returns the value of the property with a given key from the dashboard item identified by the id.
          The user who retrieves the property is required to have permissions to read the dashboard item.
       responses:
         "200":
@@ -565,7 +537,7 @@ paths:
         required: true
         type: string
     put:
-      description: >-
+      description: |-
         Sets the value of the specified dashboard item's property.
          <p>
          You can use this resource to store a custom data against the dashboard item identified by the id.
@@ -596,8 +568,7 @@ paths:
           description: Successful Response
     parameters: []
     post:
-      description: Creates a custom field using a definition (object encapsulating
-        custom field data)
+      description: Creates a custom field using a definition (object encapsulating custom field data)
       operationId: createCustomField
       parameters: []
       responses:
@@ -606,7 +577,7 @@ paths:
   /api/2/filter:
     parameters: []
     post:
-      description: >-
+      description: |-
         Creates a new filter, and returns newly created filter.
          Currently sets permissions just using the users default sharing permissions
       operationId: createFilter
@@ -628,8 +599,7 @@ paths:
           description: Successful Response
     parameters: []
     put:
-      description: Sets the default share scope of the logged-in user. Available
-        values are GLOBAL and PRIVATE.
+      description: Sets the default share scope of the logged-in user. Available values are GLOBAL and PRIVATE.
       operationId: setDefaultShareScope
       parameters: []
       responses:
@@ -701,15 +671,13 @@ paths:
           description: Successful Response
   "/api/2/filter/{id}/columns":
     delete:
-      description: Resets the columns for the given filter such that the filter no
-        longer has its own column config.
+      description: Resets the columns for the given filter such that the filter no longer has its own column config.
       responses:
         "200":
           description: Successful Response
     get:
-      description: >-
-        Returns the default columns for the given filter. Currently logged
-        in user will be used as
+      description: |-
+        Returns the default columns for the given filter. Currently logged in user will be used as
          the user making such request.
       responses:
         "200":
@@ -741,8 +709,7 @@ paths:
         required: true
         type: integer
     post:
-      description: Adds a share permissions to the given filter. Adding a global
-        permission removes all previous permissions from the filter.
+      description: Adds a share permissions to the given filter. Adding a global permission removes all previous permissions from the filter.
       operationId: addSharePermission
       parameters: []
       responses:
@@ -797,9 +764,8 @@ paths:
           name: groupname
           required: false
           type: string
-        - description: >-
-            If you delete a group and content is restricted to that group, the
-            content will be hidden from all users. 
+        - description: |-
+            If you delete a group and content is restricted to that group, the content will be hidden from all users. 
              To prevent this, use this parameter to specify a different group to transfer the restrictions (comments and worklogs only) to.
           in: query
           name: swapGroup
@@ -809,9 +775,8 @@ paths:
         "200":
           description: Successful Response
     get:
-      description: >-
-        Returns REST representation for the requested group. Allows to get
-        list of active users belonging to the
+      description: |-
+        Returns REST representation for the requested group. Allows to get list of active users belonging to the
          specified group and its subgroups if "users" expand option is provided. You can page through users list by using
          indexes in expand param. For example to get users from index 10 to index 15 use "users[10:15]" expand value. This
          will return 6 users (if there are at least 16 users in this group). Indexes are 0-based and inclusive.
@@ -845,9 +810,8 @@ paths:
           description: Successful Response
   /api/2/group/member:
     get:
-      description: >-
-        This resource returns a <a href="#pagination">paginated</a> list of
-        users who are members of the specified group and its subgroups.
+      description: |-
+        This resource returns a <a href="#pagination">paginated</a> list of users who are members of the specified group and its subgroups.
          Users in the page are ordered by user names. User of this resource is required to have sysadmin or admin permissions.
       operationId: getUsersFromGroup
       parameters:
@@ -919,9 +883,8 @@ paths:
           description: Successful Response
   /api/2/groups/picker:
     get:
-      description: >-
-        Returns groups with substrings matching a given query. This is
-        mainly for use with
+      description: |-
+        Returns groups with substrings matching a given query. This is mainly for use with
          the group picker, so the returned groups contain html to be used as picker suggestions.
          The groups are also wrapped in a single response object that also contains a header for
          use in the picker, specifically <i>Showing X of Y matching groups</i>.
@@ -955,9 +918,8 @@ paths:
     parameters: []
   /api/2/groupuserpicker:
     get:
-      description: >-
-        Returns a list of users and groups matching query with
-        highlighting. This resource cannot be accessed
+      description: |-
+        Returns a list of users and groups matching query with highlighting. This resource cannot be accessed
          anonymously.
       operationId: findUsersAndGroups
       parameters:
@@ -966,9 +928,8 @@ paths:
           name: query
           required: false
           type: string
-        - description: >-
-            the maximum number of users to return (defaults to 50). The maximum
-            allowed value is 1000. If
+        - description: |-
+            the maximum number of users to return (defaults to 50). The maximum allowed value is 1000. If
                                 you specify a value that is higher than this number, your search results will be truncated.
           format: int32
           in: query
@@ -979,13 +940,12 @@ paths:
           name: showAvatar
           required: false
           type: boolean
-        - description: The custom field id, if this request comes from a custom field,
-            such as a user picker. Optional.
+        - description: The custom field id, if this request comes from a custom field, such as a user picker. Optional.
           in: query
           name: fieldId
           required: false
           type: string
-        - description: >-
+        - description: |-
             The list of project ids to further restrict the search
                                 This parameter can occur multiple times to pass in multiple project ids.
                                 Comma separated value is not supported.
@@ -994,7 +954,7 @@ paths:
           name: projectId
           required: false
           type: string
-        - description: >-
+        - description: |-
             The list of issue type ids to further restrict the search.
                                 This parameter can occur multiple times to pass in multiple issue type ids.
                                 Comma separated value is not supported.
@@ -1010,7 +970,7 @@ paths:
     parameters: []
   /api/2/index/summary:
     get:
-      description: >-
+      description: |-
         Summarizes index condition of current node.
          <p/>
          Returned data consists of:
@@ -1051,7 +1011,7 @@ paths:
   /api/2/issue:
     parameters: []
     post:
-      description: >-
+      description: |-
         Creates an issue or a sub-task from a JSON representation.
          <p/>
          The fields that can be set on create, in either the fields parameter or the update parameter can be determined
@@ -1074,7 +1034,7 @@ paths:
   /api/2/issue/bulk:
     parameters: []
     post:
-      description: >-
+      description: |-
         Creates issues or sub-tasks from a JSON representation.
          <p/>
          Creates many issues in one bulk operation.
@@ -1088,9 +1048,8 @@ paths:
           description: Successful Response
   /api/2/issue/createmeta:
     get:
-      description: >-
-        Returns the meta data for creating issues. This includes the
-        available projects, issue types and fields,
+      description: |-
+        Returns the meta data for creating issues. This includes the available projects, issue types and fields,
          including field types and whether or not those fields are required.
          Projects will not be returned if the user does not have permission to create issues in that project.
          <p/>
@@ -1102,36 +1061,32 @@ paths:
          The results can be filtered by project and/or issue type, given by the query params.
       operationId: getCreateIssueMeta
       parameters:
-        - description: >-
-            combined with the projectKeys param, lists the projects with which
-            to filter the results. If absent, all projects are returned.
+        - description: |-
+            combined with the projectKeys param, lists the projects with which to filter the results. If absent, all projects are returned.
                                    This parameter can be specified multiple times, and/or be a comma-separated list.
                                    Specifiying a project that does not exist (or that you cannot create issues in) is not an error, but it will not be in the results.
           in: query
           name: projectIds
           required: false
           type: string
-        - description: >-
-            combined with the projectIds param, lists the projects with which
-            to filter the results. If null, all projects are returned.
+        - description: |-
+            combined with the projectIds param, lists the projects with which to filter the results. If null, all projects are returned.
                                    This parameter can be specified multiple times, and/or be a comma-separated list.
                                    Specifiying a project that does not exist (or that you cannot create issues in) is not an error, but it will not be in the results.
           in: query
           name: projectKeys
           required: false
           type: string
-        - description: >-
-            combinded with issuetypeNames, lists the issue types with which to
-            filter the results. If null, all issue types are returned.
+        - description: |-
+            combinded with issuetypeNames, lists the issue types with which to filter the results. If null, all issue types are returned.
                                    This parameter can be specified multiple times, and/or be a comma-separated list.
                                    Specifiying an issue type that does not exist is not an error.
           in: query
           name: issuetypeIds
           required: false
           type: string
-        - description: >-
-            combinded with issuetypeIds, lists the issue types with which to
-            filter the results. If null, all issue types are returned.
+        - description: |-
+            combinded with issuetypeIds, lists the issue types with which to filter the results. If null, all issue types are returned.
                                    This parameter can be specified multiple times, but is NOT interpreted as a comma-separated list.
                                    Specifiying an issue type that does not exist is not an error.
           in: query
@@ -1144,9 +1099,8 @@ paths:
     parameters: []
   /api/2/issue/picker:
     get:
-      description: >-
-        Returns suggested issues which match the auto-completion query for
-        the user which executes this request. This REST
+      description: |-
+        Returns suggested issues which match the auto-completion query for the user which executes this request. This REST
          method will check the user's history and the user's browsing context and select this issues, which match the query.
       operationId: getIssuePickerResource
       parameters:
@@ -1155,21 +1109,17 @@ paths:
           name: query
           required: false
           type: string
-        - description: the JQL in context of which the request is executed. Only issues
-            which match this JQL query will be included in results.
+        - description: the JQL in context of which the request is executed. Only issues which match this JQL query will be included in results.
           in: query
           name: currentJQL
           required: false
           type: string
-        - description: the key of the issue in context of which the request is executed.
-            The issue which is in context will not be included in the
-            auto-completion result, even if it matches the query.
+        - description: the key of the issue in context of which the request is executed. The issue which is in context will not be included in the auto-completion result, even if it matches the query.
           in: query
           name: currentIssueKey
           required: false
           type: string
-        - description: the id of the project in context of which the request is executed.
-            Suggested issues will be only from this project.
+        - description: the id of the project in context of which the request is executed. Suggested issues will be only from this project.
           in: query
           name: currentProjectId
           required: false
@@ -1179,9 +1129,7 @@ paths:
           name: showSubTasks
           required: false
           type: boolean
-        - description: if set to false and request is executed in context of a subtask,
-            the parent issue will not be included in the auto-completion result,
-            even if it matches the query.
+        - description: if set to false and request is executed in context of a subtask, the parent issue will not be included in the auto-completion result, even if it matches the query.
           in: query
           name: showSubTaskParent
           required: false
@@ -1192,16 +1140,15 @@ paths:
     parameters: []
   "/api/2/issue/{issueIdOrKey}":
     delete:
-      description: >-
+      description: |-
         Delete an issue.
          <p/>
          If the issue has subtasks you must set the parameter deleteSubtasks=true to delete the issue.
          You cannot delete an issue without its subtasks also being deleted.
       operationId: deleteIssue
       parameters:
-        - description: >-
-            a String of true or false indicating that any subtasks should also
-            be deleted.  If the
+        - description: |-
+            a String of true or false indicating that any subtasks should also be deleted.  If the
                                    issue has no subtasks this parameter is ignored.  If the issue has subtasks and this parameter is missing or false,
                                    then the issue will not be deleted and an error will be returned.
           in: query
@@ -1212,7 +1159,7 @@ paths:
         "200":
           description: Successful Response
     get:
-      description: >-
+      description: |-
         Returns a full representation of the issue for the given issue key.
          <p>
          An issue JSON consists of the issue key, a collection of fields,
@@ -1267,8 +1214,7 @@ paths:
          </ul>
       operationId: getIssue
       parameters:
-        - description: the list of fields to return for the issue. By default, all fields
-            are returned.
+        - description: the list of fields to return for the issue. By default, all fields are returned.
           in: query
           name: fields
           required: false
@@ -1277,8 +1223,7 @@ paths:
           name: expand
           required: false
           type: string
-        - description: the list of properties to return for the issue. By default no
-            properties are returned.
+        - description: the list of properties to return for the issue. By default no properties are returned.
           in: query
           name: properties
           required: false
@@ -1293,7 +1238,7 @@ paths:
         required: true
         type: string
     put:
-      description: >-
+      description: |-
         Edits an issue from a JSON representation.
          <p/>
          The issue can either be updated by setting explicit the field value(s)
@@ -1309,9 +1254,8 @@ paths:
       operationId: editIssue
       parameters:
         - default: true
-          description: >-
-            send the email with notification that the issue was updated to
-            users that watch it.
+          description: |-
+            send the email with notification that the issue was updated to users that watch it.
                                 Admin or project admin permissions are required to disable the notification.
           in: query
           name: notifyUsers
@@ -1328,7 +1272,7 @@ paths:
         required: true
         type: string
     put:
-      description: >-
+      description: |-
         Assigns an issue to a user.
          You can use this resource to assign issues when the user submitting the request has the assign permission but not the
          edit issue permission.
@@ -1346,7 +1290,7 @@ paths:
         required: true
         type: string
     post:
-      description: >-
+      description: |-
         Add one or more attachments to an issue.
          <p>
          This resource expects a multipart post. The media-type multipart/form-data is defined in RFC 1867. Most client
@@ -1369,7 +1313,7 @@ paths:
           description: Successful Response
   "/api/2/issue/{issueIdOrKey}/comment":
     get:
-      description: >-
+      description: |-
         Returns all comments for an issue.
          <p>
          Results can be ordered by the "created" field which means the date a comment was added.
@@ -1463,7 +1407,7 @@ paths:
           description: Successful Response
   "/api/2/issue/{issueIdOrKey}/editmeta":
     get:
-      description: >-
+      description: |-
         Returns the meta data for editing an issue.
          <p/>
          The fields in the editmeta correspond to the fields in the edit screen for the issue.
@@ -1486,8 +1430,7 @@ paths:
         required: true
         type: string
     post:
-      description: Sends a notification (email) to the list or recipients defined in
-        the request.
+      description: Sends a notification (email) to the list or recipients defined in the request.
       operationId: notify
       parameters: []
       responses:
@@ -1495,8 +1438,7 @@ paths:
           description: Successful Response
   "/api/2/issue/{issueIdOrKey}/properties":
     get:
-      description: Returns the keys of all properties for the issue identified by the
-        key or by the id.
+      description: Returns the keys of all properties for the issue identified by the key or by the id.
       responses:
         "200":
           description: Successful Response
@@ -1508,17 +1450,15 @@ paths:
         type: string
   "/api/2/issue/{issueIdOrKey}/properties/{propertyKey}":
     delete:
-      description: >-
-        Removes the property from the issue identified by the key or by the
-        id. Ths user removing the property is required
+      description: |-
+        Removes the property from the issue identified by the key or by the id. Ths user removing the property is required
          to have permissions to edit the issue.
       responses:
         "200":
           description: Successful Response
     get:
-      description: >-
-        Returns the value of the property with a given key from the issue
-        identified by the key or by the id. The user who retrieves
+      description: |-
+        Returns the value of the property with a given key from the issue identified by the key or by the id. The user who retrieves
          the property is required to have permissions to read the issue.
       responses:
         "200":
@@ -1535,7 +1475,7 @@ paths:
         required: true
         type: string
     put:
-      description: >-
+      description: |-
         Sets the value of the specified issue's property.
          <p>
          You can use this resource to store a custom data against the issue identified by the key or by the id. The user
@@ -1561,9 +1501,8 @@ paths:
       description: A REST sub-resource representing the remote issue links on the issue.
       operationId: getRemoteIssueLinks
       parameters:
-        - description: >-
-            The id of the remote issue link to be returned.  If null (not
-            provided) all remote links for the
+        - description: |-
+            The id of the remote issue link to be returned.  If null (not provided) all remote links for the
                                  issue are returned.
                                  <p>For a fullexplanation of Issue Link fields please refer to
                                  <a href="https://developer.atlassian.com/display/JIRADEV/Fields+in+Remote+Issue+Links">https://developer.atlassian.com/display/JIRADEV/Fields+in+Remote+Issue+Links</a></p>
@@ -1581,9 +1520,8 @@ paths:
         required: true
         type: string
     post:
-      description: >-
-        Creates or updates a remote issue link from a JSON representation.
-        If a globalId is provided and a remote issue link
+      description: |-
+        Creates or updates a remote issue link from a JSON representation. If a globalId is provided and a remote issue link
          exists with that globalId, the remote issue link is updated. Otherwise, the remote issue link is created.
       operationId: createOrUpdateRemoteIssueLink
       parameters: []
@@ -1615,8 +1553,7 @@ paths:
         required: true
         type: string
     put:
-      description: Updates a remote issue link from a JSON representation. Any fields
-        not provided are set to null.
+      description: Updates a remote issue link from a JSON representation. Any fields not provided are set to null.
       operationId: updateRemoteIssueLink
       parameters: []
       responses:
@@ -1658,9 +1595,8 @@ paths:
           description: Successful Response
   "/api/2/issue/{issueIdOrKey}/transitions":
     get:
-      description: >-
-        Get a list of the transitions possible for this issue by the
-        current user, along with fields that are required and their types.
+      description: |-
+        Get a list of the transitions possible for this issue by the current user, along with fields that are required and their types.
          <p/>
          Fields will only be returned if <code>expand=transitions.fields</code>.
          <p/>
@@ -1682,7 +1618,7 @@ paths:
         required: true
         type: string
     post:
-      description: >-
+      description: |-
         Perform a transition on an issue.
          When performing the transition you can update or set other issue fields.
          <p/>
@@ -1725,8 +1661,7 @@ paths:
       description: Removes a user from an issue's watcher list.
       operationId: removeWatcher
       parameters:
-        - description: a String containing the name of the user to remove from the watcher
-            list. Must not be null.
+        - description: a String containing the name of the user to remove from the watcher list. Must not be null.
           in: query
           name: username
           required: false
@@ -1755,7 +1690,7 @@ paths:
           description: Successful Response
   "/api/2/issue/{issueIdOrKey}/worklog":
     get:
-      description: >-
+      description: |-
         Returns all work logs for an issue. <br/>
          <strong>Note:</strong> Work logs won't be returned if the Log work field is hidden for the project.
       operationId: getIssueWorklog
@@ -1772,9 +1707,8 @@ paths:
       description: Adds a new worklog entry to an issue.
       operationId: addWorklog
       parameters:
-        - description: >-
-            (optional) allows you to provide specific instructions to update
-            the remaining time estimate of the issue.  Valid values are
+        - description: |-
+            (optional) allows you to provide specific instructions to update the remaining time estimate of the issue.  Valid values are
                                    <ul>
                                    <li>"new" - sets the estimate to a specific value</li>
                                    <li>"leave"- leaves the estimate as is</li>
@@ -1784,14 +1718,12 @@ paths:
           name: adjustEstimate
           required: false
           type: string
-        - description: (required when "new" is selected for adjustEstimate) the new value
-            for the remaining estimate field. e.g. "2d"
+        - description: (required when "new" is selected for adjustEstimate) the new value for the remaining estimate field. e.g. "2d"
           in: query
           name: newEstimate
           required: false
           type: string
-        - description: (required when "manual" is selected for adjustEstimate) the amount
-            to reduce the remaining estimate by e.g. "2d"
+        - description: (required when "manual" is selected for adjustEstimate) the amount to reduce the remaining estimate by e.g. "2d"
           in: query
           name: reduceBy
           required: false
@@ -1804,9 +1736,8 @@ paths:
       description: Deletes an existing worklog entry.
       operationId: deleteWorklog
       parameters:
-        - description: >-
-            (optional) allows you to provide specific instructions to update
-            the remaining time estimate of the issue.  Valid values are
+        - description: |-
+            (optional) allows you to provide specific instructions to update the remaining time estimate of the issue.  Valid values are
                                    <ul>
                                    <li>"new" - sets the estimate to a specific value</li>
                                    <li>"leave"- leaves the estimate as is</li>
@@ -1816,14 +1747,12 @@ paths:
           name: adjustEstimate
           required: false
           type: string
-        - description: (required when "new" is selected for adjustEstimate) the new value
-            for the remaining estimate field. e.g. "2d"
+        - description: (required when "new" is selected for adjustEstimate) the new value for the remaining estimate field. e.g. "2d"
           in: query
           name: newEstimate
           required: false
           type: string
-        - description: (required when "manual" is selected for adjustEstimate) the amount
-            to increase the remaining estimate by e.g. "2d"
+        - description: (required when "manual" is selected for adjustEstimate) the amount to increase the remaining estimate by e.g. "2d"
           in: query
           name: increaseBy
           required: false
@@ -1832,7 +1761,7 @@ paths:
         "200":
           description: Successful Response
     get:
-      description: >-
+      description: |-
         Returns a specific worklog. <br/>
          <strong>Note:</strong> The work log won't be returned if the Log work field is hidden for the project.
       operationId: getWorklog
@@ -1851,7 +1780,7 @@ paths:
         required: true
         type: string
     put:
-      description: >-
+      description: |-
         Updates an existing worklog entry.
          <p>Note that:</p>
           <ul>
@@ -1862,9 +1791,8 @@ paths:
           </ul>
       operationId: updateWorklog
       parameters:
-        - description: >-
-            (optional) allows you to provide specific instructions to update
-            the remaining time estimate of the issue.  Valid values are
+        - description: |-
+            (optional) allows you to provide specific instructions to update the remaining time estimate of the issue.  Valid values are
                                    <ul>
                                    <li>"new" - sets the estimate to a specific value</li>
                                    <li>"leave"- leaves the estimate as is</li>
@@ -1873,8 +1801,7 @@ paths:
           name: adjustEstimate
           required: false
           type: string
-        - description: (required when "new" is selected for adjustEstimate) the new value
-            for the remaining estimate field.
+        - description: (required when "new" is selected for adjustEstimate) the new value for the remaining estimate field.
           in: query
           name: newEstimate
           required: false
@@ -1885,7 +1812,7 @@ paths:
   /api/2/issueLink:
     parameters: []
     post:
-      description: >-
+      description: |-
         Creates an issue link between two issues.
          The user requires the link issue permission for the issue which will be linked to another issue.
          The specified link type in the request is used to create the link and will create a link from the first issue
@@ -1901,7 +1828,7 @@ paths:
           description: Successful Response
   "/api/2/issueLink/{linkId}":
     delete:
-      description: >-
+      description: |-
         Deletes an issue link with the specified id.
          To be able to delete an issue link you must be able to view both issues and must have the link issue permission
          for at least one of the issues.
@@ -1923,9 +1850,8 @@ paths:
         type: string
   /api/2/issueLinkType:
     get:
-      description: >-
-        Returns a list of available issue link types, if issue linking is
-        enabled.
+      description: |-
+        Returns a list of available issue link types, if issue linking is enabled.
          Each issue link type has an id, a name and a label for the outward and inward link relationship.
       operationId: getIssueLinkTypes
       responses:
@@ -1947,8 +1873,7 @@ paths:
         "200":
           description: Successful Response
     get:
-      description: Returns for a given issue link type id all information about this
-        issue link type.
+      description: Returns for a given issue link type id all information about this issue link type.
       operationId: getIssueLinkType
       responses:
         "200":
@@ -1994,9 +1919,8 @@ paths:
           description: Successful Response
     parameters: []
     post:
-      description: >-
-        Creates an issue type from a JSON representation and adds the issue
-        newly created issue type to the default issue
+      description: |-
+        Creates an issue type from a JSON representation and adds the issue newly created issue type to the default issue
          type scheme.
       operationId: createIssueType
       parameters: []
@@ -2005,14 +1929,12 @@ paths:
           description: Successful Response
   "/api/2/issuetype/{id}":
     delete:
-      description: >-
-        Deletes the specified issue type. If the issue type has any
-        associated issues, these issues will be migrated to
+      description: |-
+        Deletes the specified issue type. If the issue type has any associated issues, these issues will be migrated to
          the alternative issue type specified in the parameter. You can determine the alternative issue types by calling
          the <b>/rest/api/2/issuetype/{id}/alternatives</b> resource.
       parameters:
-        - description: the id of an issue type to which issues associated with the removed
-            issue type will be migrated.
+        - description: the id of an issue type to which issues associated with the removed issue type will be migrated.
           in: query
           name: alternativeIssueTypeId
           required: false
@@ -2040,9 +1962,8 @@ paths:
           description: Successful Response
   "/api/2/issuetype/{id}/alternatives":
     get:
-      description: >-
-        Returns a list of all alternative issue types for the given issue
-        type id. The list will contain these issues types, to which
+      description: |-
+        Returns a list of all alternative issue types for the given issue type id. The list will contain these issues types, to which
          issues assigned to the given issue type can be migrated. The suitable alternatives are issue types which are assigned
          to the same workflow, the same field configuration and the same screen scheme.
       operationId: getAlternativeIssueTypes
@@ -2075,9 +1996,8 @@ paths:
         required: true
         type: string
     post:
-      description: >-
-        Creates temporary avatar using multipart. The response is sent back
-        as JSON stored in a textarea. This is because
+      description: |-
+        Creates temporary avatar using multipart. The response is sent back as JSON stored in a textarea. This is because
          the client uses remote iframing to submit avatars using multipart. So we must send them a valid HTML page back from
          which the client parses the JSON from.
          <p>
@@ -2098,8 +2018,7 @@ paths:
           description: Successful Response
   "/api/2/issuetype/{issueTypeId}/properties":
     get:
-      description: Returns the keys of all properties for the issue type identified by
-        the id.
+      description: Returns the keys of all properties for the issue type identified by the id.
       operationId: getPropertyKeys
       responses:
         "200":
@@ -2112,17 +2031,15 @@ paths:
         type: string
   "/api/2/issuetype/{issueTypeId}/properties/{propertyKey}":
     delete:
-      description: >-
-        Removes the property from the issue type identified by the id. Ths
-        user removing the property is required
+      description: |-
+        Removes the property from the issue type identified by the id. Ths user removing the property is required
          to have permissions to edit the issue type.
       responses:
         "200":
           description: Successful Response
     get:
-      description: >-
-        Returns the value of the property with a given key from the issue
-        type identified by the id. The user who retrieves
+      description: |-
+        Returns the value of the property with a given key from the issue type identified by the id. The user who retrieves
          the property is required to have permissions to view the issue type.
       responses:
         "200":
@@ -2139,7 +2056,7 @@ paths:
         required: true
         type: string
     put:
-      description: >-
+      description: |-
         Sets the value of the specified issue type's property.
          <p>
          You can use this resource to store a custom data against an issue type identified by the id. The user
@@ -2166,20 +2083,17 @@ paths:
           name: fieldName
           required: false
           type: string
-        - description: the portion of the field value that has already been provided by
-            the user.
+        - description: the portion of the field value that has already been provided by the user.
           in: query
           name: fieldValue
           required: false
           type: string
-        - description: 'the predicate for which the suggestions are generated. Suggestions
-            are generated only for: "by", "from" and "to".'
+        - description: 'the predicate for which the suggestions are generated. Suggestions are generated only for: "by", "from" and "to".'
           in: query
           name: predicateName
           required: false
           type: string
-        - description: the portion of the predicate value that has already been provided
-            by the user.
+        - description: the portion of the predicate value that has already been provided by the user.
           in: query
           name: predicateValue
           required: false
@@ -2226,10 +2140,8 @@ paths:
     parameters: []
   /api/2/mypermissions:
     get:
-      description: >-
-        Returns all permissions in the system and whether the currently
-        logged in user has them. You can optionally provide a specific context
-        to get permissions for
+      description: |-
+        Returns all permissions in the system and whether the currently logged in user has them. You can optionally provide a specific context to get permissions for
          (projectKey OR projectId OR issueKey OR issueId)
          <ul>
          <li> When no context supplied the project related permissions will return true if the user has that permission in ANY project </li>
@@ -2279,9 +2191,8 @@ paths:
     parameters: []
   /api/2/mypreferences:
     delete:
-      description: >-
-        Removes preference of the currently logged in user. Preference key
-        must be provided as input parameters (key). If
+      description: |-
+        Removes preference of the currently logged in user. Preference key must be provided as input parameters (key). If
          key parameter is not provided or wrong - status code 404. If preference is unset - status code 204.
       operationId: removePreference
       parameters:
@@ -2294,9 +2205,8 @@ paths:
         "200":
           description: Successful Response
     get:
-      description: >-
-        Returns preference of the currently logged in user. Preference key
-        must be provided as input parameter (key). The
+      description: |-
+        Returns preference of the currently logged in user. Preference key must be provided as input parameter (key). The
          value is returned exactly as it is. If key parameter is not provided or wrong - status code 404. If value is
          found  - status code 200.
       operationId: getPreference
@@ -2311,9 +2221,8 @@ paths:
           description: Successful Response
     parameters: []
     put:
-      description: >-
-        Sets preference of the currently logged in user. Preference key
-        must be provided as input parameters (key). Value
+      description: |-
+        Sets preference of the currently logged in user. Preference key must be provided as input parameters (key). Value
          must be provided as post body. If key or value parameter is not provided - status code 404. If preference is set
          - status code 204.
       operationId: setPreference
@@ -2328,16 +2237,14 @@ paths:
           description: Successful Response
   /api/2/myself:
     get:
-      description: Returns currently logged user. This resource cannot be accessed
-        anonymously.
+      description: Returns currently logged user. This resource cannot be accessed anonymously.
       responses:
         "200":
           description: Successful Response
     parameters: []
     put:
-      description: >-
-        Modify currently logged user. The "value" fields present will
-        override the existing value.
+      description: |-
+        Modify currently logged user. The "value" fields present will override the existing value.
          Fields skipped in request will not be changed. Only email and display name can be change that way.
          Requires user password.
       parameters: []
@@ -2355,9 +2262,8 @@ paths:
           description: Successful Response
   /api/2/notificationscheme:
     get:
-      description: >-
-        Returns a <a href="#pagination">paginated</a> list of notification
-        schemes. In order to access notification scheme, the calling user is
+      description: |-
+        Returns a <a href="#pagination">paginated</a> list of notification schemes. In order to access notification scheme, the calling user is
          required to have permissions to administer at least one project associated with the requested notification scheme. Each scheme contains
          a list of events and recipient configured to receive notifications for these events. Consumer should allow events without recipients to appear in response.
          The list is ordered by the scheme's name.
@@ -2386,9 +2292,8 @@ paths:
     parameters: []
   "/api/2/notificationscheme/{id}":
     get:
-      description: >-
-        Returns a full representation of the notification scheme for the
-        given id. This resource will return a
+      description: |-
+        Returns a full representation of the notification scheme for the given id. This resource will return a
          notification scheme containing a list of events and recipient configured to receive notifications for these events. Consumer
          should allow events without recipients to appear in response. User accessing
          the data is required to have permissions to administer at least one project associated with the requested notification scheme.
@@ -2432,16 +2337,14 @@ paths:
         type: integer
   /api/2/password/policy:
     get:
-      description: >-
-        Returns the list of requirements for the current password policy.
-        For example, "The password must have at least 10 characters.",
+      description: |-
+        Returns the list of requirements for the current password policy. For example, "The password must have at least 10 characters.",
          "The password must not be similar to the user's name or email address.", etc.
       operationId: getPasswordPolicy
       parameters:
         - default: false
-          description: >-
-            whether or not the user will be required to enter their current
-            password.  Use
+          description: |-
+            whether or not the user will be required to enter their current password.  Use
                                    {@code false} (the default) if this is a new user or if an administrator is forcibly changing
                                    another user's password.
           in: query
@@ -2455,9 +2358,8 @@ paths:
   /api/2/password/policy/createUser:
     parameters: []
     post:
-      description: >-
-        Returns a list of statements explaining why the password policy
-        would disallow a proposed password for a new user.
+      description: |-
+        Returns a list of statements explaining why the password policy would disallow a proposed password for a new user.
          <p>
          You can use this method to test the password policy validation. This could be done prior to an action 
          where a new user and related password are created, using methods like the ones in 
@@ -2475,10 +2377,8 @@ paths:
   /api/2/password/policy/updateUser:
     parameters: []
     post:
-      description: >-
-        Returns a list of statements explaining why the password policy
-        would disallow a proposed new password for a user with an existing
-        password.
+      description: |-
+        Returns a list of statements explaining why the password policy would disallow a proposed new password for a user with an existing password.
          <p>
          You can use this method to test the password policy validation. This could be done prior to an action where the password 
          is actually updated, using methods like <a href="https://docs.atlassian.com/jira/latest/com/atlassian/jira/web/action/user/ChangePassword.html">ChangePassword</a>      
@@ -2495,8 +2395,7 @@ paths:
           description: Successful Response
   /api/2/permissions:
     get:
-      description: Returns all permissions that are present in the JIRA instance -
-        Global, Project and the global ones added by plugins
+      description: Returns all permissions that are present in the JIRA instance - Global, Project and the global ones added by plugins
       operationId: getAllPermissions
       responses:
         "200":
@@ -2504,7 +2403,7 @@ paths:
     parameters: []
   /api/2/permissionscheme:
     get:
-      description: >-
+      description: |-
         Returns a list of all permission schemes.
          <p>
          By default only shortened beans are returned. If you want to include permissions of all the schemes,
@@ -2522,7 +2421,7 @@ paths:
           description: Successful Response
     parameters: []
     post:
-      description: >-
+      description: |-
         Create a new permission scheme.
          This method can create schemes with a defined permission set, or without.
       operationId: createPermissionScheme
@@ -2566,9 +2465,8 @@ paths:
         required: true
         type: string
     put:
-      description: >-
-        Updates or inserts the attribute for a permission scheme specified
-        by permission scheme id.
+      description: |-
+        Updates or inserts the attribute for a permission scheme specified by permission scheme id.
          The attribute consists of the key and the value. The value will be converted to Boolean using Boolean#valueOf.
       operationId: setSchemeAttribute
       parameters: []
@@ -2600,7 +2498,7 @@ paths:
         required: true
         type: integer
     put:
-      description: >-
+      description: |-
         Updates a permission scheme.
          <p>
          If the permissions list is present then it will be set in the permission scheme, which basically means it will overwrite any permission grants that
@@ -2702,9 +2600,8 @@ paths:
         type: string
   /api/2/project:
     get:
-      description: >-
-        Returns all projects which are visible for the currently logged in
-        user. If no user is logged in, it returns the
+      description: |-
+        Returns all projects which are visible for the currently logged in user. If no user is logged in, it returns the
          list of projects that are visible when using anonymous access.
       operationId: getAllProjects
       parameters:
@@ -2713,10 +2610,7 @@ paths:
           name: expand
           required: false
           type: string
-        - description: if this parameter is set then only projects recently accessed by
-            the current user (if not logged in then based on HTTP session) will
-            be returned (maximum count limited to the specified number but no
-            more than 20).
+        - description: if this parameter is set then only projects recently accessed by the current user (if not logged in then based on HTTP session) will be returned (maximum count limited to the specified number but no more than 20).
           format: int32
           in: query
           name: recent
@@ -2735,9 +2629,8 @@ paths:
           description: Successful Response
   /api/2/project/type:
     get:
-      description: >-
-        Returns all the project types defined on the JIRA instance, not
-        taking into account whether
+      description: |-
+        Returns all the project types defined on the JIRA instance, not taking into account whether
          the license to use those project types is valid or not.
       operationId: getAllProjectTypes
       responses:
@@ -2758,9 +2651,8 @@ paths:
         type: string
   "/api/2/project/type/{projectTypeKey}/accessible":
     get:
-      description: >-
-        Returns the project type with the given key, if it is accessible to
-        the logged in user.
+      description: |-
+        Returns the project type with the given key, if it is accessible to the logged in user.
          This takes into account whether the user is licensed on the Application that defines the project type.
       operationId: getAccessibleProjectTypeByKey
       responses:
@@ -2779,7 +2671,7 @@ paths:
         "200":
           description: Successful Response
     get:
-      description: >-
+      description: |-
         Contains a full representation of a project in JSON format.
          <p>
          All project keys associated with the project will only be returned if <code>expand=projectKeys</code>.
@@ -2800,7 +2692,7 @@ paths:
         required: true
         type: string
     put:
-      description: >-
+      description: |-
         Updates a project.
          <p>
          Only non null values sent in JSON will be updated in the project.</p>
@@ -2841,9 +2733,8 @@ paths:
         required: true
         type: string
     post:
-      description: >-
-        Creates temporary avatar using multipart. The response is sent back
-        as JSON stored in a textarea. This is because
+      description: |-
+        Creates temporary avatar using multipart. The response is sent back as JSON stored in a textarea. This is because
          the client uses remote iframing to submit avatars using multipart. So we must send them a valid HTML page back from
          which the client parses the JSON.
       responses:
@@ -2869,9 +2760,8 @@ paths:
         type: integer
   "/api/2/project/{projectIdOrKey}/avatars":
     get:
-      description: >-
-        Returns all avatars which are visible for the currently logged in
-        user.  The avatars are grouped into
+      description: |-
+        Returns all avatars which are visible for the currently logged in user.  The avatars are grouped into
          system and custom.
       responses:
         "200":
@@ -2897,8 +2787,7 @@ paths:
         type: string
   "/api/2/project/{projectIdOrKey}/properties":
     get:
-      description: Returns the keys of all properties for the project identified by
-        the key or by the id.
+      description: Returns the keys of all properties for the project identified by the key or by the id.
       responses:
         "200":
           description: Successful Response
@@ -2910,17 +2799,15 @@ paths:
         type: string
   "/api/2/project/{projectIdOrKey}/properties/{propertyKey}":
     delete:
-      description: >-
-        Removes the property from the project identified by the key or by
-        the id. Ths user removing the property is required
+      description: |-
+        Removes the property from the project identified by the key or by the id. Ths user removing the property is required
          to have permissions to administer the project.
       responses:
         "200":
           description: Successful Response
     get:
-      description: >-
-        Returns the value of the property with a given key from the project
-        identified by the key or by the id. The user who retrieves
+      description: |-
+        Returns the value of the property with a given key from the project identified by the key or by the id. The user who retrieves
          the property is required to have permissions to read the project.
       responses:
         "200":
@@ -2937,7 +2824,7 @@ paths:
         required: true
         type: string
     put:
-      description: >-
+      description: |-
         Sets the value of the specified project's property.
          <p>
          You can use this resource to store a custom data against the project identified by the key or by the id. The user
@@ -2948,8 +2835,7 @@ paths:
           description: Successful Response
   "/api/2/project/{projectIdOrKey}/role":
     get:
-      description: Returns all roles in the given project Id or key, with links to
-        full details on each role.
+      description: Returns all roles in the given project Id or key, with links to full details on each role.
       responses:
         "200":
           description: Successful Response
@@ -2961,7 +2847,7 @@ paths:
         type: string
   "/api/2/project/{projectIdOrKey}/role/{id}":
     delete:
-      description: >-
+      description: |-
         Deletes actors (users or groups) from a project role.
          <p>
          <ul>
@@ -3048,9 +2934,8 @@ paths:
           description: Successful Response
   "/api/2/project/{projectIdOrKey}/version":
     get:
-      description: >-
-        Returns all versions for the specified project. Results are <a
-        href="#pagination">paginated</a>.
+      description: |-
+        Returns all versions for the specified project. Results are <a href="#pagination">paginated</a>.
          <p>
          Results can be ordered by the following fields:
          <ul>
@@ -3125,7 +3010,7 @@ paths:
         type: string
   "/api/2/project/{projectKeyOrId}/notificationscheme":
     get:
-      description: >-
+      description: |-
         Gets a notification scheme associated with the project.
          Follow the documentation of /notificationscheme/{id} resource for all details about returned value.
       parameters:
@@ -3173,9 +3058,8 @@ paths:
           description: Successful Response
   "/api/2/project/{projectKeyOrId}/securitylevel":
     get:
-      description: >-
-        Returns all security levels for the project that the current logged
-        in user has access to.
+      description: |-
+        Returns all security levels for the project that the current logged in user has access to.
          If the user does not have the Set Issue Security permission, the list will be empty.
       operationId: getSecurityLevelsForProject
       responses:
@@ -3222,9 +3106,8 @@ paths:
         required: true
         type: integer
     put:
-      description: >-
-        Modify a project category via PUT. Any fields present in the PUT
-        will override existing values. As a convenience, if a field
+      description: |-
+        Modify a project category via PUT. Any fields present in the PUT will override existing values. As a convenience, if a field
          is not present, it is silently ignored.
       operationId: updateProjectCategory
       parameters: []
@@ -3246,16 +3129,14 @@ paths:
     parameters: []
   /api/2/reindex:
     get:
-      description: >-
-        Returns information on the system reindexes.  If a reindex is
-        currently taking place then information about this reindex is returned.
+      description: |-
+        Returns information on the system reindexes.  If a reindex is currently taking place then information about this reindex is returned.
          If there is no active index task, then returns information about the latest reindex task run, otherwise returns a 404
          indicating that no reindex has taken place.
       operationId: getReindexInfo
       parameters:
-        - description: >-
-            the id of an indexing task you wish to obtain details on.  If
-            omitted, then defaults to the standard behaviour and
+        - description: |-
+            the id of an indexing task you wish to obtain details on.  If omitted, then defaults to the standard behaviour and
                            returns information on the active reindex task, or the last task to run if no reindex is taking place. .  If there is no
                            reindexing task with that id then a 404 is returned.
           format: int64
@@ -3271,29 +3152,25 @@ paths:
       description: Kicks off a reindex.  Need Admin permissions to perform this reindex.
       operationId: reindex
       parameters:
-        - description: Case insensitive String indicating type of reindex.  If omitted,
-            then defaults to BACKGROUND_PREFERRED.
+        - description: Case insensitive String indicating type of reindex.  If omitted, then defaults to BACKGROUND_PREFERRED.
           in: query
           name: type
           required: false
           type: string
         - default: false
-          description: Indicates that comments should also be reindexed. Not relevant for
-            foreground reindex, where comments are always reindexed.
+          description: Indicates that comments should also be reindexed. Not relevant for foreground reindex, where comments are always reindexed.
           in: query
           name: indexComments
           required: false
           type: boolean
         - default: false
-          description: Indicates that changeHistory should also be reindexed. Not relevant
-            for foreground reindex, where changeHistory is always reindexed.
+          description: Indicates that changeHistory should also be reindexed. Not relevant for foreground reindex, where changeHistory is always reindexed.
           in: query
           name: indexChangeHistory
           required: false
           type: boolean
         - default: false
-          description: Indicates that changeHistory should also be reindexed. Not relevant
-            for foreground reindex, where changeHistory is always reindexed.
+          description: Indicates that changeHistory should also be reindexed. Not relevant for foreground reindex, where changeHistory is always reindexed.
           in: query
           name: indexWorklogs
           required: false
@@ -3304,9 +3181,8 @@ paths:
   /api/2/reindex/issue:
     parameters: []
     post:
-      description: >-
-        Reindexes one or more individual issues.  Indexing is performed
-        synchronously - the call returns when indexing of
+      description: |-
+        Reindexes one or more individual issues.  Indexing is performed synchronously - the call returns when indexing of
          the issues has completed or a failure occurs.
          <p>
          Use either explicitly specified issue IDs or a JQL query to select issues to reindex.
@@ -3340,16 +3216,14 @@ paths:
           description: Successful Response
   /api/2/reindex/progress:
     get:
-      description: >-
-        Returns information on the system reindexes.  If a reindex is
-        currently taking place then information about this reindex is returned.
+      description: |-
+        Returns information on the system reindexes.  If a reindex is currently taking place then information about this reindex is returned.
          If there is no active index task, then returns information about the latest reindex task run, otherwise returns a 404
          indicating that no reindex has taken place.
       operationId: getReindexProgress
       parameters:
-        - description: >-
-            the id of an indexing task you wish to obtain details on.  If
-            omitted, then defaults to the standard behaviour and
+        - description: |-
+            the id of an indexing task you wish to obtain details on.  If omitted, then defaults to the standard behaviour and
                            returns information on the active reindex task, or the last task to run if no reindex is taking place. .  If there is no
                            reindexing task with that id then a 404 is returned.
           format: int64
@@ -3364,9 +3238,8 @@ paths:
   /api/2/reindex/request:
     parameters: []
     post:
-      description: >-
-        Executes any pending reindex requests.  Returns a JSON array
-        containing the IDs of the reindex requests
+      description: |-
+        Executes any pending reindex requests.  Returns a JSON array containing the IDs of the reindex requests
          that are being processed.  Execution is asynchronous - progress of the returned tasks can be monitored through
          other REST calls.
       operationId: processRequests
@@ -3375,9 +3248,8 @@ paths:
           description: Successful Response
   /api/2/reindex/request/bulk:
     get:
-      description: >-
-        Retrieves the progress of a multiple reindex requests.  Only
-        reindex requests that actually exist will be returned
+      description: |-
+        Retrieves the progress of a multiple reindex requests.  Only reindex requests that actually exist will be returned
          in the results.
       operationId: getProgressBulk
       parameters:
@@ -3427,8 +3299,7 @@ paths:
         type: string
   /api/2/role:
     get:
-      description: Get all the ProjectRoles available in JIRA. Currently this list is
-        global.
+      description: Get all the ProjectRoles available in JIRA. Currently this list is global.
       responses:
         "200":
           description: Successful Response
@@ -3447,8 +3318,7 @@ paths:
       description: Deletes a role. May return 403 in the future
       operationId: deleteProjectRole
       parameters:
-        - description: if given, removes a role even if it is used in scheme by replacing
-            the role with the given one
+        - description: if given, removes a role even if it is used in scheme by replacing the role with the given one
           format: int64
           in: query
           name: swap
@@ -3515,8 +3385,7 @@ paths:
         required: true
         type: integer
     post:
-      description: Adds default actors to the given role. The request data should
-        contain a list of usernames or a list of groups to add.
+      description: Adds default actors to the given role. The request data should contain a list of usernames or a list of groups to add.
       operationId: addProjectRoleActorsToRole
       parameters: []
       responses:
@@ -3537,8 +3406,7 @@ paths:
           description: Successful Response
   "/api/2/screens/{screenId}/availableFields":
     get:
-      description: Gets available fields for screen. i.e ones that haven't already
-        been added.
+      description: Gets available fields for screen. i.e ones that haven't already been added.
       operationId: getFieldsToAdd
       responses:
         "200":
@@ -3714,7 +3582,7 @@ paths:
           description: Successful Response
   /api/2/search:
     get:
-      description: >-
+      description: |-
         Searches for issues using JQL.
          <p>
          <b>Sorting</b>
@@ -3763,9 +3631,8 @@ paths:
           name: startAt
           required: false
           type: integer
-        - description: >-
-            the maximum number of issues to return (defaults to 50). The
-            maximum allowable value is
+        - description: |-
+            the maximum number of issues to return (defaults to 50). The maximum allowable value is
                                   dictated by the JIRA property 'jira.search.views.default.max'. If you specify a value that is higher than this
                                   number, your search results will be truncated.
           format: int32
@@ -3779,8 +3646,7 @@ paths:
           name: validateQuery
           required: false
           type: boolean
-        - description: the list of fields to return for each issue. By default, all
-            navigable fields are returned.
+        - description: the list of fields to return for each issue. By default, all navigable fields are returned.
           in: query
           name: fields
           required: false
@@ -3803,8 +3669,7 @@ paths:
           description: Successful Response
   "/api/2/securitylevel/{id}":
     get:
-      description: Returns a full representation of the security level that has the
-        given id.
+      description: Returns a full representation of the security level that has the given id.
       operationId: getIssuesecuritylevel
       responses:
         "200":
@@ -3839,16 +3704,14 @@ paths:
           description: Successful Response
   /api/2/settings/columns:
     get:
-      description: Returns the default system columns for issue navigator. Admin
-        permission will be required.
+      description: Returns the default system columns for issue navigator. Admin permission will be required.
       operationId: getIssueNavigatorDefaultColumns
       responses:
         "200":
           description: Successful Response
     parameters: []
     put:
-      description: Sets the default system columns for issue navigator. Admin
-        permission will be required.
+      description: Sets the default system columns for issue navigator. Admin permission will be required.
       operationId: setIssueNavigatorDefaultColumns
       parameters: []
       responses:
@@ -3885,8 +3748,7 @@ paths:
     parameters: []
   "/api/2/statuscategory/{idOrKey}":
     get:
-      description: Returns a full representation of the StatusCategory having the
-        given id or key
+      description: Returns a full representation of the StatusCategory having the given id or key
       operationId: getStatusCategory
       responses:
         "200":
@@ -3965,7 +3827,7 @@ paths:
           description: Successful Response
   /api/2/upgrade:
     get:
-      description: >-
+      description: |-
         Returns the result of the last upgrade task.
 
          Returns {@link javax.ws.rs.core.Response#seeOther(java.net.URI)} if still running.
@@ -3975,8 +3837,7 @@ paths:
           description: Successful Response
     parameters: []
     post:
-      description: Runs any pending delayed upgrade tasks.  Need Admin permissions to
-        do this.
+      description: Runs any pending delayed upgrade tasks.  Need Admin permissions to do this.
       operationId: runUpgradesNow
       responses:
         "200":
@@ -4026,9 +3887,8 @@ paths:
         "200":
           description: Successful Response
     put:
-      description: >-
-        Modify user. The "value" fields present will override the existing
-        value.
+      description: |-
+        Modify user. The "value" fields present will override the existing value.
          Fields skipped in request will not be changed.
       parameters:
         - description: the username
@@ -4046,8 +3906,7 @@ paths:
           description: Successful Response
   /api/2/user/application:
     delete:
-      description: Remove user from given application. Admin permission will be
-        required to perform this operation.
+      description: Remove user from given application. Admin permission will be required to perform this operation.
       operationId: removeUserFromApplication
       parameters:
         - description: username
@@ -4065,8 +3924,7 @@ paths:
           description: Successful Response
     parameters: []
     post:
-      description: Add user to given application. Admin permission will be required to
-        perform this operation.
+      description: Add user to given application. Admin permission will be required to perform this operation.
       operationId: addUserToApplication
       parameters:
         - description: username
@@ -4084,9 +3942,8 @@ paths:
           description: Successful Response
   /api/2/user/assignable/multiProjectSearch:
     get:
-      description: >-
-        Returns a list of users that match the search string and can be
-        assigned issues for all the given projects.
+      description: |-
+        Returns a list of users that match the search string and can be assigned issues for all the given projects.
          This resource cannot be accessed anonymously.
       operationId: findBulkAssignableUsers
       parameters:
@@ -4095,8 +3952,7 @@ paths:
           name: username
           required: false
           type: string
-        - description: the keys of the projects we are finding assignable users for,
-            comma-separated
+        - description: the keys of the projects we are finding assignable users for, comma-separated
           in: query
           name: projectKeys
           required: false
@@ -4107,9 +3963,8 @@ paths:
           name: startAt
           required: false
           type: integer
-        - description: >-
-            the maximum number of users to return (defaults to 50). The maximum
-            allowed value is 1000.
+        - description: |-
+            the maximum number of users to return (defaults to 50). The maximum allowed value is 1000.
                                    If you specify a value that is higher than this number, your search results will be truncated.
           format: int32
           in: query
@@ -4122,9 +3977,8 @@ paths:
     parameters: []
   /api/2/user/assignable/search:
     get:
-      description: >-
-        Returns a list of users that match the search string. This resource
-        cannot be accessed anonymously.
+      description: |-
+        Returns a list of users that match the search string. This resource cannot be accessed anonymously.
          Please note that this resource should be called with an issue key when a list of assignable users is retrieved
          for editing.  For create only a project key should be supplied.  The list of assignable users may be incorrect
          if it's called with the project key for editing.
@@ -4140,8 +3994,7 @@ paths:
           name: project
           required: false
           type: string
-        - description: the issue key for the issue being edited we need to find assignable
-            users for.
+        - description: the issue key for the issue being edited we need to find assignable users for.
           in: query
           name: issueKey
           required: false
@@ -4152,9 +4005,8 @@ paths:
           name: startAt
           required: false
           type: integer
-        - description: >-
-            the maximum number of users to return (defaults to 50). The maximum
-            allowed value is 1000.
+        - description: |-
+            the maximum number of users to return (defaults to 50). The maximum allowed value is 1000.
                                If you specify a value that is higher than this number, your search results will be truncated.
           format: int32
           in: query
@@ -4195,9 +4047,8 @@ paths:
   /api/2/user/avatar/temporary:
     parameters: []
     post:
-      description: >-
-        Creates temporary avatar using multipart. The response is sent back
-        as JSON stored in a textarea. This is because
+      description: |-
+        Creates temporary avatar using multipart. The response is sent back as JSON stored in a textarea. This is because
          the client uses remote iframing to submit avatars using multipart. So we must send them a valid HTML page back from
          which the client parses the JSON from.
          <p>
@@ -4256,9 +4107,8 @@ paths:
     parameters: []
   /api/2/user/columns:
     delete:
-      description: >-
-        Reset the default columns for the given user to the system default.
-        Admin permission will be required to get
+      description: |-
+        Reset the default columns for the given user to the system default. Admin permission will be required to get
          columns for a user other than the currently logged in user.
       parameters:
         - description: username
@@ -4270,9 +4120,8 @@ paths:
         "200":
           description: Successful Response
     get:
-      description: >-
-        Returns the default columns for the given user. Admin permission
-        will be required to get columns for a user
+      description: |-
+        Returns the default columns for the given user. Admin permission will be required to get columns for a user
          other than the currently logged in user.
       parameters:
         - description: username
@@ -4285,9 +4134,8 @@ paths:
           description: Successful Response
     parameters: []
     put:
-      description: >-
-        Sets the default columns for the given user.  Admin permission will
-        be required to get columns for a user
+      description: |-
+        Sets the default columns for the given user.  Admin permission will be required to get columns for a user
          other than the currently logged in user.
       parameters: []
       responses:
@@ -4314,9 +4162,8 @@ paths:
           description: Successful Response
   /api/2/user/permission/search:
     get:
-      description: >-
-        Returns a list of active users that match the search string and
-        have all specified permissions for the project or issue.<br>
+      description: |-
+        Returns a list of active users that match the search string and have all specified permissions for the project or issue.<br>
          This resource can be accessed by users with ADMINISTER_PROJECT permission for the project or global ADMIN or SYSADMIN rights.
       operationId: findUsersWithAllPermissions
       parameters:
@@ -4325,23 +4172,20 @@ paths:
           name: username
           required: false
           type: string
-        - description: >-
-            comma separated list of permissions for project or issue returned
-            users must have, see
+        - description: |-
+            comma separated list of permissions for project or issue returned users must have, see
                                 <a href="https://developer.atlassian.com/static/javadoc/jira/6.0/reference/com/atlassian/jira/security/Permissions.Permission.html">Permissions</a>
                                 JavaDoc for the list of all possible permissions.
           in: query
           name: permissions
           required: false
           type: string
-        - description: the issue key for the issue for which returned users have specified
-            permissions.
+        - description: the issue key for the issue for which returned users have specified permissions.
           in: query
           name: issueKey
           required: false
           type: string
-        - description: the optional project key to search for users with if no issueKey is
-            supplied.
+        - description: the optional project key to search for users with if no issueKey is supplied.
           in: query
           name: projectKey
           required: false
@@ -4352,9 +4196,8 @@ paths:
           name: startAt
           required: false
           type: integer
-        - description: >-
-            the maximum number of users to return (defaults to 50). The maximum
-            allowed value is 1000.
+        - description: |-
+            the maximum number of users to return (defaults to 50). The maximum allowed value is 1000.
                                 If you specify a value that is higher than this number, your search results will be truncated.
           format: int32
           in: query
@@ -4367,8 +4210,7 @@ paths:
     parameters: []
   /api/2/user/picker:
     get:
-      description: Returns a list of users matching query with highlighting. This
-        resource cannot be accessed anonymously.
+      description: Returns a list of users matching query with highlighting. This resource cannot be accessed anonymously.
       operationId: findUsersForPicker
       parameters:
         - description: A string used to search username, Name or e-mail address
@@ -4376,9 +4218,8 @@ paths:
           name: query
           required: false
           type: string
-        - description: >-
-            the maximum number of users to return (defaults to 50). The maximum
-            allowed value is 1000.
+        - description: |-
+            the maximum number of users to return (defaults to 50). The maximum allowed value is 1000.
                                If you specify a value that is higher than this number, your search results will be truncated.
           format: int32
           in: query
@@ -4399,8 +4240,7 @@ paths:
     parameters: []
   /api/2/user/properties/:
     get:
-      description: Returns the keys of all properties for the user identified by the
-        key or by the id.
+      description: Returns the keys of all properties for the user identified by the key or by the id.
       parameters:
         - description: key of the user whose properties are to be returned
           in: query
@@ -4418,9 +4258,8 @@ paths:
     parameters: []
   "/api/2/user/properties/{propertyKey}":
     delete:
-      description: >-
-        Removes the property from the user identified by the key or by the
-        id. Ths user removing the property is required
+      description: |-
+        Removes the property from the user identified by the key or by the id. Ths user removing the property is required
          to have permissions to administer the user.
       parameters:
         - description: key of the user whose property is to be removed
@@ -4437,9 +4276,8 @@ paths:
         "200":
           description: Successful Response
     get:
-      description: >-
-        Returns the value of the property with a given key from the user
-        identified by the key or by the id. The user who retrieves
+      description: |-
+        Returns the value of the property with a given key from the user identified by the key or by the id. The user who retrieves
          the property is required to have permissions to read the user.
       parameters:
         - description: key of the user whose property is to be returned
@@ -4461,7 +4299,7 @@ paths:
         required: true
         type: string
     put:
-      description: >-
+      description: |-
         Sets the value of the specified user's property.
          <p>
          You can use this resource to store a custom data against the user identified by the key or by the id. The user
@@ -4483,8 +4321,7 @@ paths:
           description: Successful Response
   /api/2/user/search:
     get:
-      description: Returns a list of users that match the search string. This resource
-        cannot be accessed anonymously.
+      description: Returns a list of users that match the search string. This resource cannot be accessed anonymously.
       operationId: findUsers
       parameters:
         - description: A query string used to search username, name or e-mail address
@@ -4498,9 +4335,8 @@ paths:
           name: startAt
           required: false
           type: integer
-        - description: >-
-            the maximum number of users to return (defaults to 50). The maximum
-            allowed value is 1000.
+        - description: |-
+            the maximum number of users to return (defaults to 50). The maximum allowed value is 1000.
                                     If you specify a value that is higher than this number, your search results will be truncated.
           format: int32
           in: query
@@ -4512,8 +4348,7 @@ paths:
           name: includeActive
           required: false
           type: boolean
-        - description: If true, then inactive users are included in the results (default
-            false)
+        - description: If true, then inactive users are included in the results (default false)
           in: query
           name: includeInactive
           required: false
@@ -4524,9 +4359,8 @@ paths:
     parameters: []
   /api/2/user/viewissue/search:
     get:
-      description: >-
-        Returns a list of active users that match the search string. This
-        resource cannot be accessed anonymously 
+      description: |-
+        Returns a list of active users that match the search string. This resource cannot be accessed anonymously 
          and requires the Browse Users global permission.
          Given an issue key this resource will provide a list of users that match the search string and have
          the browse issue permission for the issue provided.
@@ -4537,14 +4371,12 @@ paths:
           name: username
           required: false
           type: string
-        - description: the issue key for the issue being edited we need to find viewable
-            users for.
+        - description: the issue key for the issue being edited we need to find viewable users for.
           in: query
           name: issueKey
           required: false
           type: string
-        - description: the optional project key to search for users with if no issueKey is
-            supplied.
+        - description: the optional project key to search for users with if no issueKey is supplied.
           in: query
           name: projectKey
           required: false
@@ -4555,9 +4387,8 @@ paths:
           name: startAt
           required: false
           type: integer
-        - description: >-
-            the maximum number of users to return (defaults to 50). The maximum
-            allowed value is 1000.
+        - description: |-
+            the maximum number of users to return (defaults to 50). The maximum allowed value is 1000.
                                If you specify a value that is higher than this number, your search results will be truncated.
           format: int32
           in: query
@@ -4595,17 +4426,15 @@ paths:
     delete:
       description: Delete a project version.
       parameters:
-        - description: >-
-            The version to set fixVersion to on issues where the deleted
-            version is the fix version,
+        - description: |-
+            The version to set fixVersion to on issues where the deleted version is the fix version,
                                          If null then the fixVersion is removed.
           in: query
           name: moveFixIssuesTo
           required: false
           type: string
-        - description: >-
-            The version to set affectedVersion to on issues where the deleted
-            version is the affected version,
+        - description: |-
+            The version to set affectedVersion to on issues where the deleted version is the affected version,
                                          If null then the affectedVersion is removed.
           in: query
           name: moveAffectedIssuesTo
@@ -4632,9 +4461,8 @@ paths:
         required: true
         type: string
     put:
-      description: >-
-        Modify a version via PUT. Any fields present in the PUT will
-        override existing values. As a convenience, if a field
+      description: |-
+        Modify a version via PUT. Any fields present in the PUT will override existing values. As a convenience, if a field
          is not present, it is silently ignored.
       operationId: updateVersion
       parameters: []
@@ -4643,16 +4471,14 @@ paths:
           description: Successful Response
   "/api/2/version/{id}/mergeto/{moveIssuesTo}":
     parameters:
-      - description: >-
-          The version to set fixVersion to on issues where the deleted
-          version is the fix version,
+      - description: |-
+          The version to set fixVersion to on issues where the deleted version is the fix version,
                                If null then the fixVersion is removed.
         in: path
         name: moveIssuesTo
         required: true
         type: string
-      - description: The version that will be merged to version {@code moveIssuesTo} and
-          removed
+      - description: The version that will be merged to version {@code moveIssuesTo} and removed
         in: path
         name: id
         required: true
@@ -4671,7 +4497,7 @@ paths:
         required: true
         type: string
     post:
-      description: >-
+      description: |-
         Modify a version's sequence within a project.
          <p/>
          The move version bean has 2 alternative field value pairs:
@@ -4686,8 +4512,7 @@ paths:
           description: Successful Response
   "/api/2/version/{id}/relatedIssueCounts":
     get:
-      description: Returns a bean containing the number of fixed in and affected
-        issues for the given version.
+      description: Returns a bean containing the number of fixed in and affected issues for the given version.
       operationId: getVersionRelatedIssues
       responses:
         "200":
@@ -4744,9 +4569,8 @@ paths:
         required: true
         type: string
     post:
-      description: >-
-        Create a remote version link via POST.  The link's global ID will
-        be taken from the
+      description: |-
+        Create a remote version link via POST.  The link's global ID will be taken from the
          JSON payload if provided; otherwise, it will be generated.
       parameters: []
       responses:
@@ -4754,8 +4578,7 @@ paths:
           description: Successful Response
   "/api/2/version/{versionId}/remotelink/{globalId}":
     delete:
-      description: Delete a specific remote version link with the given version ID and
-        global ID.
+      description: Delete a specific remote version link with the given version ID and global ID.
       operationId: deleteRemoteVersionLink
       responses:
         "200":
@@ -4778,9 +4601,8 @@ paths:
         required: true
         type: string
     post:
-      description: >-
-        Create a remote version link via POST.  The link's global ID will
-        be taken from the
+      description: |-
+        Create a remote version link via POST.  The link's global ID will be taken from the
          JSON payload if provided; otherwise, it will be generated.
       parameters: []
       responses:
@@ -4801,9 +4623,8 @@ paths:
     parameters: []
   "/api/2/workflow/api/2/transitions/{id}/properties":
     delete:
-      description: >-
-        Delete a property from the passed transition on the passed
-        workflow. It is not an error to delete a property that
+      description: |-
+        Delete a property from the passed transition on the passed workflow. It is not an error to delete a property that
          does not exist.
       parameters:
         - description: the name of the property to add.
@@ -4828,16 +4649,14 @@ paths:
       description: Return the property or properties associated with a transition.
       operationId: getProperties
       parameters:
-        - description: >-
-            some keys under the "jira." prefix are editable, some are not. Set
-            this to true
+        - description: |-
+            some keys under the "jira." prefix are editable, some are not. Set this to true
                                         in order to include the non-editable keys in the response.
           in: query
           name: includeReservedKeys
           required: false
           type: boolean
-        - description: the name of the property key to query. Can be left off the query to
-            return all properties.
+        - description: the name of the property key to query. Can be left off the query to return all properties.
           in: query
           name: key
           required: false
@@ -4863,9 +4682,8 @@ paths:
         required: true
         type: integer
     post:
-      description: >-
-        Add a new property to a transition. Trying to add a property that
-        already
+      description: |-
+        Add a new property to a transition. Trying to add a property that already
          exists will fail.
       operationId: createProperty
       parameters:
@@ -4888,9 +4706,8 @@ paths:
         "200":
           description: Successful Response
     put:
-      description: >-
-        Update/add new property to a transition. Trying to update a
-        property that does
+      description: |-
+        Update/add new property to a transition. Trying to update a property that does
          not exist will result in a new property being added.
       operationId: updateProperty
       parameters:
@@ -4915,7 +4732,7 @@ paths:
   /api/2/workflowscheme:
     parameters: []
     post:
-      description: >-
+      description: |-
         Create a new workflow scheme.
          <p/>
          The body contains a representation of the new scheme. Values not passed are assumed to be set to their defaults.
@@ -4936,9 +4753,8 @@ paths:
       operationId: getById
       parameters:
         - default: false
-          description: >-
-            when true indicates that a scheme's draft, if it exists, should be
-            queried instead of
+          description: |-
+            when true indicates that a scheme's draft, if it exists, should be queried instead of
                                         the scheme itself.
           in: query
           name: returnDraftIfExists
@@ -4955,7 +4771,7 @@ paths:
         required: true
         type: integer
     put:
-      description: >-
+      description: |-
         Update the passed workflow scheme.
          <p/>
          The body of the request is a representation of the workflow scheme. Values not passed are assumed to indicate
@@ -4978,8 +4794,7 @@ paths:
         required: true
         type: integer
     post:
-      description: Create a draft for the passed scheme. The draft will be a copy of
-        the state of the parent.
+      description: Create a draft for the passed scheme. The draft will be a copy of the state of the parent.
       operationId: createDraftForParent
       responses:
         "200":
@@ -4989,9 +4804,8 @@ paths:
       description: Remove the default workflow from the passed workflow scheme.
       operationId: deleteDefault
       parameters:
-        - description: >-
-            when true will create and return a draft when the workflow scheme
-            cannot be edited
+        - description: |-
+            when true will create and return a draft when the workflow scheme cannot be edited
                                         (e.g. when it is being used by a project).
           in: query
           name: updateDraftIfNeeded
@@ -5005,9 +4819,8 @@ paths:
       operationId: getDefault
       parameters:
         - default: false
-          description: >-
-            when true indicates that a scheme's draft, if it exists, should be
-            queried instead of
+          description: |-
+            when true indicates that a scheme's draft, if it exists, should be queried instead of
                                         the scheme itself.
           in: query
           name: returnDraftIfExists
@@ -5024,7 +4837,7 @@ paths:
         required: true
         type: integer
     put:
-      description: >-
+      description: |-
         Set the default workflow for the passed workflow scheme.
          <p/>
          The passed representation can have its
@@ -5056,9 +4869,8 @@ paths:
         required: true
         type: integer
     put:
-      description: >-
-        Update a draft workflow scheme. The draft will created if
-        necessary.
+      description: |-
+        Update a draft workflow scheme. The draft will created if necessary.
          <p/>
          The body is a representation of the workflow scheme. Values not passed are assumed to indicate no change for that field.
       operationId: updateDraft
@@ -5074,8 +4886,7 @@ paths:
         "200":
           description: Successful Response
     get:
-      description: Return the default workflow from the passed draft workflow scheme
-        to the caller.
+      description: Return the default workflow from the passed draft workflow scheme to the caller.
       operationId: getDraftDefault
       responses:
         "200":
@@ -5120,7 +4931,7 @@ paths:
         required: true
         type: integer
     put:
-      description: >-
+      description: |-
         Set the issue type mapping for the passed draft scheme.
          <p/>
          The passed representation can have its updateDraftIfNeeded flag set to true to indicate that
@@ -5147,8 +4958,7 @@ paths:
       description: Returns the draft workflow mappings or requested mapping to the caller.
       operationId: getDraftWorkflow
       parameters:
-        - description: the workflow mapping to return. Null can be passed to return all
-            mappings. Must be a valid workflow name.
+        - description: the workflow mapping to return. Null can be passed to return all mappings. Must be a valid workflow name.
           in: query
           name: workflowName
           required: false
@@ -5183,9 +4993,8 @@ paths:
     delete:
       description: Remove the specified issue type mapping from the scheme.
       parameters:
-        - description: >-
-            when true will create and return a draft when the workflow scheme
-            cannot be edited
+        - description: |-
+            when true will create and return a draft when the workflow scheme cannot be edited
                                         (e.g. when it is being used by a project).
           in: query
           name: updateDraftIfNeeded
@@ -5198,9 +5007,8 @@ paths:
       description: Returns the issue type mapping for the passed workflow scheme.
       parameters:
         - default: false
-          description: >-
-            when true indicates that a scheme's draft, if it exists, should be
-            queried instead of
+          description: |-
+            when true indicates that a scheme's draft, if it exists, should be queried instead of
                                         the scheme itself.
           in: query
           name: returnDraftIfExists
@@ -5222,7 +5030,7 @@ paths:
         required: true
         type: integer
     put:
-      description: >-
+      description: |-
         Set the issue type mapping for the passed scheme.
          <p/>
          The passed representation can have its updateDraftIfNeeded flag set to true to indicate that
@@ -5242,9 +5050,8 @@ paths:
           name: workflowName
           required: false
           type: string
-        - description: >-
-            flag to indicate if a draft should be created if necessary to
-            delete the workflow
+        - description: |-
+            flag to indicate if a draft should be created if necessary to delete the workflow
                                         from the scheme.
           in: query
           name: updateDraftIfNeeded
@@ -5254,20 +5061,17 @@ paths:
         "200":
           description: Successful Response
     get:
-      description: Returns the workflow mappings or requested mapping to the caller
-        for the passed scheme.
+      description: Returns the workflow mappings or requested mapping to the caller for the passed scheme.
       operationId: getWorkflow
       parameters:
-        - description: the workflow mapping to return. Null can be passed to return all
-            mappings. Must be a valid workflow name.
+        - description: the workflow mapping to return. Null can be passed to return all mappings. Must be a valid workflow name.
           in: query
           name: workflowName
           required: false
           type: string
         - default: false
-          description: >-
-            when true indicates that a scheme's draft, if it exists, should be
-            queried instead of
+          description: |-
+            when true indicates that a scheme's draft, if it exists, should be queried instead of
                                         the scheme itself.
           in: query
           name: returnDraftIfExists
@@ -5284,7 +5088,7 @@ paths:
         required: true
         type: integer
     put:
-      description: >-
+      description: |-
         Update the scheme to include the passed mapping.
          <p/>
          The body is a representation of the workflow mapping.
@@ -5304,16 +5108,14 @@ paths:
           description: Successful Response
   /api/2/worklog/deleted:
     get:
-      description: >-
-        Returns worklogs id and delete time of worklogs that was deleted
-        since given time.
+      description: |-
+        Returns worklogs id and delete time of worklogs that was deleted since given time.
          The returns set of worklogs is limited to 1000 elements.
          This API will not return worklogs deleted during last minute.
       operationId: getIdsOfWorklogsDeletedSince
       parameters:
         - default: 0
-          description: a date time in unix timestamp format since when deleted worklogs
-            will be returned.
+          description: a date time in unix timestamp format since when deleted worklogs will be returned.
           format: int64
           in: query
           name: since
@@ -5326,9 +5128,8 @@ paths:
   /api/2/worklog/list:
     parameters: []
     post:
-      description: >-
-        Returns worklogs for given worklog ids. Only worklogs to which the
-        calling user has permissions, will be included in the result.
+      description: |-
+        Returns worklogs for given worklog ids. Only worklogs to which the calling user has permissions, will be included in the result.
          The returns set of worklogs is limited to 1000 elements.
       operationId: getWorklogsForIds
       parameters: []
@@ -5337,16 +5138,14 @@ paths:
           description: Successful Response
   /api/2/worklog/updated:
     get:
-      description: >-
-        Returns worklogs id and update time of worklogs that was updated
-        since given time.
+      description: |-
+        Returns worklogs id and update time of worklogs that was updated since given time.
          The returns set of worklogs is limited to 1000 elements.
          This API will not return worklogs updated during last minute.
       operationId: getIdsOfWorklogsModifiedSince
       parameters:
         - default: 0
-          description: a date time in unix timestamp format since when updated worklogs
-            will be returned.
+          description: a date time in unix timestamp format since when updated worklogs will be returned.
           format: int64
           in: query
           name: since
@@ -5358,16 +5157,14 @@ paths:
     parameters: []
   /auth/1/session:
     delete:
-      description: Logs the current user out of JIRA, destroying the existing session,
-        if any.
+      description: Logs the current user out of JIRA, destroying the existing session, if any.
       operationId: logout
       responses:
         "200":
           description: Successful Response
     get:
-      description: >-
-        Returns information about the currently authenticated user's
-        session. If the caller is not authenticated they
+      description: |-
+        Returns information about the currently authenticated user's session. If the caller is not authenticated they
          will get a 401 Unauthorized status code.
       operationId: currentUser
       responses:
@@ -5375,9 +5172,8 @@ paths:
           description: Successful Response
     parameters: []
     post:
-      description: >-
-        Creates a new session for a user in JIRA. Once a session has been
-        successfully created it can be used to access
+      description: |-
+        Creates a new session for a user in JIRA. Once a session has been successfully created it can be used to access
          any of JIRA's remote APIs and also the web UI by passing the appropriate HTTP Cookie header.
          <p>
          Note that it is generally preferrable to use HTTP BASIC authentication with the REST API. However, this resource

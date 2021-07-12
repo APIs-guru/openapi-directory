@@ -7,15 +7,7 @@ basePath: /v2.0
 info:
   contact:
     x-twitter: weatherbitio
-  description: This is the documentation for the Weatherbit Weather API.  The base
-    URL for the API is
-    [http://api.weatherbit.io/v2.0/](http://api.weatherbit.io/v2.0/) or
-    [https://api.weatherbit.io/v2.0/](http://api.weatherbit.io/v2.0/). Below is
-    the Swagger UI documentation for the API. All API requests require the `key`
-    parameter.        An Example for a 5 day forecast for London, UK would be
-    `http://api.weatherbit.io/v2.0/forecast/3hourly?city=London`&`country=UK`.
-    See our [Weather API description page](https://www.weatherbit.io/api) for
-    additional documentation.
+  description: This is the documentation for the Weatherbit Weather API.  The base URL for the API is [http://api.weatherbit.io/v2.0/](http://api.weatherbit.io/v2.0/) or [https://api.weatherbit.io/v2.0/](http://api.weatherbit.io/v2.0/). Below is the Swagger UI documentation for the API. All API requests require the `key` parameter.        An Example for a 5 day forecast for London, UK would be `http://api.weatherbit.io/v2.0/forecast/3hourly?city=London`&`country=UK`. See our [Weather API description page](https://www.weatherbit.io/api) for additional documentation.
   title: Weatherbit.io - Swagger UI Weather API documentation
   version: 2.0.0
   x-apisguru-categories:
@@ -32,8 +24,7 @@ produces:
 paths:
   "/alerts?lat={lat}&lon={lon}":
     get:
-      description: Returns severe weather alerts issued by meteorological agencies -
-        given a lat, and a lon.
+      description: Returns severe weather alerts issued by meteorological agencies - given a lat, and a lon.
       parameters:
         - description: Latitude component of location.
           format: double
@@ -68,15 +59,12 @@ paths:
           description: No Data.
           schema:
             $ref: "#/definitions/Error"
-      summary: Returns severe weather alerts issued by meteorological agencies - Given
-        a lat/lon.
+      summary: Returns severe weather alerts issued by meteorological agencies - Given a lat/lon.
       tags:
         - Alerts
   "/bulk/files/{file}":
     get:
-      description: "**(Advanceed/Enterprise plans only)** Downloads bulk data files -
-        OPTIONS: ( current.json.gz - Current observations for cities > 1000
-        population). Units are Metric (Celcius, m/s, etc)."
+      description: "**(Advanceed/Enterprise plans only)** Downloads bulk data files - OPTIONS: ( current.json.gz - Current observations for cities > 1000 population). Units are Metric (Celcius, m/s, etc)."
       parameters:
         - description: Filename (ie. current.json.gz)
           format: string
@@ -102,8 +90,7 @@ paths:
     get:
       description: Returns current air quality conditions.
       parameters:
-        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or
-            city=Paris&country=FR
+        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -142,8 +129,7 @@ paths:
           description: No Data.
           schema:
             $ref: "#/definitions/Error"
-      summary: Returns current air quality conditions - Given City and/or State,
-        Country.
+      summary: Returns current air quality conditions - Given City and/or State, Country.
       tags:
         - Current Air Quality
   "/current/airquality?city_id={city_id}":
@@ -264,15 +250,13 @@ paths:
     get:
       description: "Returns a group of Current Observations - Given a list of City IDs. "
       parameters:
-        - description: "Comma separated list of City ID's. Example: 4487042, 4494942,
-            4504871"
+        - description: "Comma separated list of City ID's. Example: 4487042, 4494942, 4504871"
           format: string
           in: path
           name: cities
           required: true
           type: string
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -289,8 +273,7 @@ paths:
           name: marine
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -356,12 +339,9 @@ paths:
         - Current Weather Data
   "/current?city={city}&country={country}":
     get:
-      description: Returns a Current Observation - Given a city in the format of
-        City,ST or City. The state, and country parameters can be provided to
-        make the search more accurate.
+      description: Returns a Current Observation - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate.
       parameters:
-        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or
-            city=Paris&country=FR
+        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -395,8 +375,7 @@ paths:
           name: marine
           required: false
           type: string
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -405,8 +384,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -480,8 +458,7 @@ paths:
           name: city_id
           required: true
           type: string
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -506,8 +483,7 @@ paths:
           name: marine
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -603,8 +579,7 @@ paths:
           name: marine
           required: false
           type: string
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -613,8 +588,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -710,8 +684,7 @@ paths:
           name: marine
           required: false
           type: string
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -720,8 +693,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -803,8 +775,7 @@ paths:
           name: include
           required: false
           type: string
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -813,8 +784,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -880,8 +850,7 @@ paths:
         - Current Weather Data
   "/current?stations={stations}":
     get:
-      description: "Returns a group of Current Observations - Given a list of Station
-        Call IDs. "
+      description: "Returns a group of Current Observations - Given a list of Station Call IDs. "
       parameters:
         - description: "Comma separated list of Station Call ID's. Example: KRDU,KBFI,KVNY"
           format: string
@@ -889,8 +858,7 @@ paths:
           name: stations
           required: true
           type: string
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -899,8 +867,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -966,13 +933,10 @@ paths:
         - Current Weather Data
   "/forecast/3hourly?city={city}&country={country}":
     get:
-      description: >
-        Returns a 3-hourly forecast, where each point represents a three
-        hour   period. Every point has a datetime string in the format
-        "YYYY-MM-DD:HH". Time is UTC.
+      description: |
+        Returns a 3-hourly forecast, where each point represents a three hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC.
       parameters:
-        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or
-            city=Paris&country=FR
+        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -996,8 +960,7 @@ paths:
           name: days
           required: false
           type: number
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -1006,8 +969,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -1073,10 +1035,8 @@ paths:
         - 5 day / 3 hour Forecast
   "/forecast/3hourly?city_id={city_id}":
     get:
-      description: >
-        Returns a 3-hourly forecast, where each point represents a three
-        hour   period. Every point has a datetime string in the format
-        "YYYY-MM-DD:HH". Time is UTC.
+      description: |
+        Returns a 3-hourly forecast, where each point represents a three hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC.
       parameters:
         - description: "City ID. Example: 4487042"
           format: integer
@@ -1090,8 +1050,7 @@ paths:
           name: days
           required: false
           type: number
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -1100,8 +1059,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -1167,10 +1125,8 @@ paths:
         - 5 day / 3 hour Forecast
   "/forecast/3hourly?lat={lat}&lon={lon}":
     get:
-      description: >
-        Returns a 3-hourly forecast, where each point represents a three
-        hour   period. Every point has a datetime string in the format
-        "YYYY-MM-DD:HH". Time is UTC.
+      description: |
+        Returns a 3-hourly forecast, where each point represents a three hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC.
       parameters:
         - description: Latitude component of location.
           format: double
@@ -1190,8 +1146,7 @@ paths:
           name: days
           required: false
           type: number
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -1200,8 +1155,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -1267,10 +1221,8 @@ paths:
         - 5 day / 3 hour Forecast
   "/forecast/3hourly?postal_code={postal_code}":
     get:
-      description: >
-        Returns a 3-hourly forecast, where each point represents a three
-        hour period. Every point has a datetime string in the format
-        "YYYY-MM-DD:HH". Time is UTC.
+      description: |
+        Returns a 3-hourly forecast, where each point represents a three hour period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC.
       parameters:
         - description: "Postal Code. Example: 28546"
           format: integer
@@ -1290,8 +1242,7 @@ paths:
           name: days
           required: false
           type: number
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -1300,8 +1251,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -1367,11 +1317,9 @@ paths:
         - 5 day / 3 hour Forecast
   "/forecast/airquality?city={city}&country={country}":
     get:
-      description: Returns 72 hour (hourly) Air Quality forecast, where each point
-        represents a one hour period.
+      description: Returns 72 hour (hourly) Air Quality forecast, where each point represents a one hour period.
       parameters:
-        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or
-            city=Paris&country=FR
+        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -1416,14 +1364,12 @@ paths:
           description: No Data.
           schema:
             $ref: "#/definitions/Error"
-      summary: Returns 72 hour (hourly) Air Quality forecast - Given City and/or
-        State, Country.
+      summary: Returns 72 hour (hourly) Air Quality forecast - Given City and/or State, Country.
       tags:
         - Air Quality Forecast
   "/forecast/airquality?city_id={city_id}":
     get:
-      description: Returns 72 hour (hourly) Air Quality forecast, where each point
-        represents a one hour period.
+      description: Returns 72 hour (hourly) Air Quality forecast, where each point represents a one hour period.
       parameters:
         - description: "City ID. Example: 4487042"
           format: integer
@@ -1463,8 +1409,7 @@ paths:
         - Air Quality Forecast
   "/forecast/airquality?lat={lat}&lon={lon}":
     get:
-      description: Returns 72 hour (hourly) Air Quality forecast, where each point
-        represents a one hour period.
+      description: Returns 72 hour (hourly) Air Quality forecast, where each point represents a one hour period.
       parameters:
         - description: Latitude component of location.
           format: double
@@ -1510,8 +1455,7 @@ paths:
         - Air Quality Forecast
   "/forecast/airquality?postal_code={postal_code}":
     get:
-      description: Returns 72 hour (hourly) Air Quality forecast, where each point
-        represents a one hour period.
+      description: Returns 72 hour (hourly) Air Quality forecast, where each point represents a one hour period.
       parameters:
         - description: "Postal Code. Example: 28546"
           format: integer
@@ -1557,15 +1501,10 @@ paths:
         - Air Quality Forecast
   "/forecast/daily?city={city}&country={country}":
     get:
-      description: >
-        Returns a daily forecast, where each point represents one day
-        (24hr) period. Every point has a datetime string in the format
-        "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC.
-        Accepts a city in the format of City,ST or City. The state, and country
-        parameters can be provided to make the search more accurate.
+      description: |
+        Returns a daily forecast, where each point represents one day (24hr) period. Every point has a datetime string in the format "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC. Accepts a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate.
       parameters:
-        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or
-            city=Paris&country=FR
+        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -1589,8 +1528,7 @@ paths:
           name: days
           required: false
           type: number
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -1599,8 +1537,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -1666,10 +1603,8 @@ paths:
         - 16 day / daily Forecast
   "/forecast/daily?city_id={city_id}":
     get:
-      description: >
-        Returns a daily forecast, where each point represents one day
-        (24hr) period. Every point has a datetime string in the format
-        "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC.
+      description: |
+        Returns a daily forecast, where each point represents one day (24hr) period. Every point has a datetime string in the format "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC.
       parameters:
         - description: "City ID. Example: 4487042"
           format: integer
@@ -1683,8 +1618,7 @@ paths:
           name: days
           required: false
           type: number
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -1693,8 +1627,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -1760,10 +1693,8 @@ paths:
         - 16 day / daily Forecast
   "/forecast/daily?lat={lat}&lon={lon}":
     get:
-      description: >
-        Returns a daily forecast, where each point represents one day
-        (24hr) period. Every point has a datetime string in the format
-        "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC. 
+      description: |
+        Returns a daily forecast, where each point represents one day (24hr) period. Every point has a datetime string in the format "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC. 
       parameters:
         - description: Latitude component of location.
           format: double
@@ -1783,8 +1714,7 @@ paths:
           name: days
           required: false
           type: number
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -1793,8 +1723,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -1860,10 +1789,8 @@ paths:
         - 16 day / daily Forecast
   "/forecast/daily?postal_code={postal_code}":
     get:
-      description: >
-        Returns a daily forecast, where each point represents one day
-        (24hr) period. Every point has a datetime string in the format
-        "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC.
+      description: |
+        Returns a daily forecast, where each point represents one day (24hr) period. Every point has a datetime string in the format "YYYY-MM-DD". One day begins at 00:00 UTC, and ends at 23:59 UTC.
       parameters:
         - description: "Postal Code. Example: 28546"
           format: integer
@@ -1883,8 +1810,7 @@ paths:
           name: days
           required: false
           type: number
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -1893,8 +1819,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -1960,8 +1885,7 @@ paths:
         - 16 day / daily Forecast
   "/forecast/energy?lat={lat}&lon={lon}":
     get:
-      description: Retrieve an 8 day forecast relevant to te Energy Sector (degree
-        days, solar radiation, precipitation, wind).
+      description: Retrieve an 8 day forecast relevant to te Energy Sector (degree days, solar radiation, precipitation, wind).
       parameters:
         - description: Latitude component of location.
           format: double
@@ -1975,15 +1899,13 @@ paths:
           name: lon
           required: true
           type: number
-        - description: "Temperature threshold to use to calculate degree days (default 18
-            C) "
+        - description: "Temperature threshold to use to calculate degree days (default 18 C) "
           format: double
           in: query
           name: threshold
           required: false
           type: number
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -2028,11 +1950,10 @@ paths:
         - Forecast Solar Irradiance API
   "/forecast/hourly?city={city}&country={country}":
     get:
-      description: >2
+      description: |2
          Returns an hourly forecast, where each point represents a one hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC. Accepts a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate.
       parameters:
-        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or
-            city=Paris&country=FR
+        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -2050,8 +1971,7 @@ paths:
           name: country
           required: true
           type: string
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -2060,8 +1980,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -2133,7 +2052,7 @@ paths:
         - 120 hour / hourly Forecast
   "/forecast/hourly?city_id={city_id}":
     get:
-      description: >2
+      description: |2
          Returns an hourly forecast, where each point represents a one hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC. 
       parameters:
         - description: "City ID. Example: 4487042"
@@ -2142,8 +2061,7 @@ paths:
           name: city_id
           required: true
           type: integer
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -2152,8 +2070,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -2225,10 +2142,8 @@ paths:
         - 120 hour / hourly Forecast
   "/forecast/hourly?lat={lat}&lon={lon}":
     get:
-      description: >
-        Returns an hourly forecast, where each point represents a one hour
-        period. Every point has a datetime string in the format "YYYY-MM-DD:HH".
-        Time is UTC. 
+      description: |
+        Returns an hourly forecast, where each point represents a one hour period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC. 
       parameters:
         - description: Latitude component of location.
           format: double
@@ -2242,8 +2157,7 @@ paths:
           name: lon
           required: true
           type: number
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -2252,8 +2166,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -2325,7 +2238,7 @@ paths:
         - 120 hour / hourly Forecast
   "/forecast/hourly?postal_code={postal_code}":
     get:
-      description: >2
+      description: |2
          Returns an hourly forecast, where each point represents a one hour   period. Every point has a datetime string in the format "YYYY-MM-DD:HH". Time is UTC. 
       parameters:
         - description: "Postal Code. Example: 28546"
@@ -2340,8 +2253,7 @@ paths:
           name: country
           required: false
           type: string
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -2350,8 +2262,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -2425,8 +2336,7 @@ paths:
     get:
       description: Returns historical air quality conditions.
       parameters:
-        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or
-            city=Paris&country=FR
+        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -2465,8 +2375,7 @@ paths:
           description: No Data.
           schema:
             $ref: "#/definitions/Error"
-      summary: Returns 72 hours of historical quality conditions - Given City and/or
-        State, Country.
+      summary: Returns 72 hours of historical quality conditions - Given City and/or State, Country.
       tags:
         - Historical Air Quality
   "/history/airquality?city_id={city_id}":
@@ -2580,19 +2489,14 @@ paths:
           description: No Data.
           schema:
             $ref: "#/definitions/Error"
-      summary: Returns 72 hours of historical air quality conditions - Given a Postal
-        Code.
+      summary: Returns 72 hours of historical air quality conditions - Given a Postal Code.
       tags:
         - Historical Air Quality
   "/history/daily?city={city}&country={country}":
     get:
-      description: Returns Historical Observations - Given a city in the format of
-        City,ST or City. The state, and country parameters can be provided to
-        make the search more accurate. **(LIMIT 1 day for Free plan. LIMIT 7
-        days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
-        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or
-            city=Paris&country=FR
+        - description: City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -2622,8 +2526,7 @@ paths:
           name: end_date
           required: true
           type: string
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -2632,8 +2535,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -2699,9 +2601,7 @@ paths:
         - Daily Historical Weather Data
   "/history/daily?city_id={city_id}":
     get:
-      description: Returns Historical Observations - Given a City ID. **(LIMIT 1 day
-        for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for
-        Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a City ID. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
         - description: "City ID. Example: 4487042"
           format: string
@@ -2721,8 +2621,7 @@ paths:
           name: end_date
           required: true
           type: string
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -2731,8 +2630,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -2798,9 +2696,7 @@ paths:
         - Daily Historical Weather Data
   "/history/daily?lat={lat}&lon={lon}":
     get:
-      description: Returns Historical Observations - Given a lat, and lon. **(LIMIT 1
-        day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for
-        Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a lat, and lon. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
         - description: Latitude component of location.
           format: double
@@ -2826,8 +2722,7 @@ paths:
           name: end_date
           required: true
           type: string
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -2836,8 +2731,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -2903,9 +2797,7 @@ paths:
         - Daily Historical Weather Data
   "/history/daily?postal_code={postal_code}":
     get:
-      description: Returns Historical Observations - Given a Postal Code. **(LIMIT 1
-        day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for
-        Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a Postal Code. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
         - description: "Postal Code. Example: 28546"
           format: string
@@ -2931,8 +2823,7 @@ paths:
           name: end_date
           required: true
           type: string
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -2941,8 +2832,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -3008,9 +2898,7 @@ paths:
         - Daily Historical Weather Data
   "/history/daily?station={station}":
     get:
-      description: Returns Historical Observations - Given a station ID. **(LIMIT 1
-        day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for
-        Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a station ID. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
         - description: Station ID.
           format: string
@@ -3030,8 +2918,7 @@ paths:
           name: end_date
           required: true
           type: string
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -3040,8 +2927,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -3107,11 +2993,7 @@ paths:
         - Daily Historical Weather Data
   "/history/energy/bbox?lat1={lat1}&lon1={lon1}&lat2={lat2}&lon2={lon2}":
     get:
-      description: "Returns aggregate energy specific historical weather fields, over
-        a specified time period. Supply a bounding box ex:
-        lat1=40&lon1=-78&lat2=38&lon2=-80. This API will return UP TO 150
-        stations, aggregated by the specified time period start_date to
-        end_date. "
+      description: "Returns aggregate energy specific historical weather fields, over a specified time period. Supply a bounding box ex: lat1=40&lon1=-78&lat2=38&lon2=-80. This API will return UP TO 150 stations, aggregated by the specified time period start_date to end_date. "
       parameters:
         - description: Latitude of upper left corner.
           format: double
@@ -3149,15 +3031,13 @@ paths:
           name: end_date
           required: true
           type: string
-        - description: "Temperature threshold to use to calculate degree days (default 18
-            C) "
+        - description: "Temperature threshold to use to calculate degree days (default 18 C) "
           format: double
           in: query
           name: threshold
           required: false
           type: number
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -3194,8 +3074,7 @@ paths:
         - Historical Weather Energy API
   "/history/energy?lat={lat}&lon={lon}":
     get:
-      description: Returns aggregate energy specific historical weather fields, over a
-        specified time period.
+      description: Returns aggregate energy specific historical weather fields, over a specified time period.
       parameters:
         - description: Latitude component of location.
           format: double
@@ -3231,15 +3110,13 @@ paths:
           name: tp
           required: false
           type: string
-        - description: "Temperature threshold to use to calculate degree days (default 18
-            C) "
+        - description: "Temperature threshold to use to calculate degree days (default 18 C) "
           format: double
           in: query
           name: threshold
           required: false
           type: number
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -3276,13 +3153,9 @@ paths:
         - Historical Weather Energy API
   "/history/hourly?city={city}&country={country}":
     get:
-      description: Returns Historical Observations - Given a city in the format of
-        City,ST or City. The state, and country parameters can be provided to
-        make the search more accurate. **(LIMIT 1 day for Free plan. LIMIT 7
-        days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
-        - description: City search. Example - &city=Raleigh,NC or &city=Berlin,DE or
-            city=Paris&country=FR
+        - description: City search. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR
           format: string
           in: path
           name: city
@@ -3312,8 +3185,7 @@ paths:
           name: end_date
           required: true
           type: string
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -3322,8 +3194,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -3398,9 +3269,7 @@ paths:
         - Hourly Historical Weather Data
   "/history/hourly?city_id={city_id}":
     get:
-      description: Returns Historical Observations - Given a City ID. **(LIMIT 1 day
-        for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for
-        Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a City ID. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
         - description: "City ID. Example: 4487042"
           format: string
@@ -3420,8 +3289,7 @@ paths:
           name: end_date
           required: true
           type: string
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -3430,8 +3298,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -3506,9 +3373,7 @@ paths:
         - Hourly Historical Weather Data
   "/history/hourly?lat={lat}&lon={lon}":
     get:
-      description: Returns Historical Observations - Given a lat, and lon. **(LIMIT 1
-        day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for
-        Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a lat, and lon. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
         - description: Latitude component of location.
           format: double
@@ -3534,8 +3399,7 @@ paths:
           name: end_date
           required: true
           type: string
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -3544,8 +3408,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -3620,9 +3483,7 @@ paths:
         - Hourly Historical Weather Data
   "/history/hourly?postal_code={postal_code}":
     get:
-      description: Returns Historical Observations - Given a Postal Code. **(LIMIT 1
-        day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for
-        Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a Postal Code. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
         - description: "Postal Code. Example: 28546"
           format: string
@@ -3648,8 +3509,7 @@ paths:
           name: end_date
           required: true
           type: string
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -3658,8 +3518,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -3734,9 +3593,7 @@ paths:
         - Hourly Historical Weather Data
   "/history/hourly?station={station}":
     get:
-      description: Returns Historical Observations - Given a station ID. **(LIMIT 1
-        day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for
-        Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a station ID. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
         - description: Station ID.
           format: string
@@ -3756,8 +3613,7 @@ paths:
           name: end_date
           required: true
           type: string
-        - description: Convert to units. Default Metric See <a target='blank'
-            href='/api/requests'>units field description</a>
+        - description: Convert to units. Default Metric See <a target='blank' href='/api/requests'>units field description</a>
           enum:
             - S
             - I
@@ -3766,8 +3622,7 @@ paths:
           name: units
           required: false
           type: string
-        - description: "Language (Default: English) See <a target='blank'
-            href='/api/requests'>language field description</a>"
+        - description: "Language (Default: English) See <a target='blank' href='/api/requests'>language field description</a>"
           enum:
             - ar
             - az
@@ -4196,8 +4051,7 @@ definitions:
         example: 12345-999999
         type: string
       sun_hours:
-        description: "Average number of daily sun hours - # hours where Solar GHI > 1000
-          W/m^2"
+        description: "Average number of daily sun hours - # hours where Solar GHI > 1000 W/m^2"
         example: 4.5
         type: number
       t_dhi:
@@ -4322,8 +4176,7 @@ definitions:
         example: 10
         type: number
       sun_hours:
-        description: "Average number of daily sun hours - # hours where Solar GHI > 1000
-          W/m^2"
+        description: "Average number of daily sun hours - # hours where Solar GHI > 1000 W/m^2"
         example: 4.5
         type: number
       t_dhi:
@@ -5115,8 +4968,7 @@ definitions:
         type: string
       title:
         description: Brief description of weather alert
-        example: Flood Warning issued February 8 at 8:51PM CST expiring February 12 at
-          8:24AM CST by NWS St Louis MO
+        example: Flood Warning issued February 8 at 8:51PM CST expiring February 12 at 8:24AM CST by NWS St Louis MO
         type: string
       uri:
         description: URI to weather alert

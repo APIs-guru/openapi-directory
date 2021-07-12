@@ -38,22 +38,19 @@ paths:
 
         \r
 
-        <p>Returns a set of reported bus incidents/delays for a given
-        Route. Omit the\r
+        <p>Returns a set of reported bus incidents/delays for a given Route. Omit the\r
 
         Route to return all reported items.</p>\r
 
         \r
 
-        <p>Note that the Route parameter accepts only base route names
-        and no\r
+        <p>Note that the Route parameter accepts only base route names and no\r
 
         variations, i.e.: use 10A instead of 10Av1 and 10Av2.</p>\r
 
         \r
 
-        <p>Bus incidents/delays are refreshed once every 20 to 30
-        seconds approximately.</p>\r
+        <p>Bus incidents/delays are refreshed once every 20 to 30 seconds approximately.</p>\r
 
         \r
 
@@ -123,11 +120,9 @@ paths:
 
         \r
 
-        <td>Date and time (Eastern Standard Time) of last update. Will
-        be\r
+        <td>Date and time (Eastern Standard Time) of last update. Will be\r
 
-        in YYYY-MM-DDTHH:mm:ss format (e.g.:
-        2014-10-28T08:13:03).</td>\r
+        in YYYY-MM-DDTHH:mm:ss format (e.g.: 2014-10-28T08:13:03).</td>\r
 
         </tr>\r
 
@@ -167,8 +162,7 @@ paths:
 
         <span class=\"text-info\">Delay</span> or <span class=\r
 
-        \"text-info\">Alert</span> but is subject to change at any
-        time.</td>\r
+        \"text-info\">Alert</span> but is subject to change at any time.</td>\r
 
         </tr>\r
 
@@ -180,11 +174,9 @@ paths:
 
         \r
 
-        <td>Array containing routes affected. Routes listed are
-        usually\r
+        <td>Array containing routes affected. Routes listed are usually\r
 
-        identical to base route names (i.e.: not 10Av1 or 10Av2, but
-        10A),\r
+        identical to base route names (i.e.: not 10Av1 or 10Av2, but 10A),\r
 
         but <em>may</em> differ from what our bus methods return.</td>\r
 
@@ -195,8 +187,7 @@ paths:
         </table>"
       operationId: 54763641281d830c946a3d78
       parameters:
-        - description: "Bus route.  Use full route code, i.e.: C2 instead of C2v1, C2v2,
-            etc."
+        - description: "Bus route.  Use full route code, i.e.: C2 instead of C2v1, C2v2, etc."
           enum:
             - "90"
             - X1
@@ -209,7 +200,7 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/xml: >-
+            application/xml: |-
               <BusIncidentsResp
                   xmlns="http://www.wmata.com"
                   xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
@@ -233,249 +224,147 @@ paths:
       summary: XML - Bus Incidents
   /ElevatorIncidents:
     get:
-      description: >-
+      description: |-
         <h4 class="text-primary">Description</h4>
 
-
         <p>Returns a list of <em>reported</em> elevator and escalator outages at a
-
         given station. Omit the StationCode parameter to return all reported
-
         outages.</p>
 
-
         <p>Note that for stations with multiple platforms and therefore StationCodes
-
         (e.g.: Metro Center, L'Enfant Plaza, etc.), a distinct call is required for
-
         each StationCode.</p>
-
 
         <p>Elevator and escalator outages are refreshed once every 20 to 30 seconds approximately.</p>
 
-
         <h4 class="text-primary">Response Elements</h4>
 
-
         <table class="table table-condensed table-hover">
-
         <thead>
-
         <tr>
-
         <th class="col-md-3">Element</th>
 
-
         <th>Description</th>
-
         </tr>
-
         </thead>
 
-
         <tbody>
-
         <tr>
-
         <td>ElevatorIncidents</td>
 
-
         <td>
-
         Array containing elevator/escalator outage information
-
         (<a href="#ElevatorIncident">ElevatorIncident</a>).
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a id="ElevatorIncident" name=
-
         "ElevatorIncident">ElevatorIncident Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>DateOutOfServ</td>
 
-
         <td>Date and time (Eastern Standard Time) unit was reported out of
-
         service. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:
-
         2014-10-27T15:17:00).</td>
-
         </tr>
 
-
         <tr>
-
         <td>DateUpdated</td>
 
-
         <td>Date and time (Eastern Standard Time) outage details was last
-
         updated. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:
-
         2014-10-27T15:17:00).</td>
-
         </tr>
 
-
         <tr>
-
         <td style="text-decoration: line-through">DisplayOrder</td>
 
-
         <td><span class="text-danger">Deprecated.</span></td>
-
         </tr>
 
-
         <tr>
-
         <td>EstimatedReturnToService</td>
 
-
         <td>Estimated date and time (Eastern Standard Time) by when unit is expected to return to normal service. May be NULL, otherwise will be in YYYY-MM-DDTHH:mm:ss format (e.g.:
-
         2014-10-27T23:59:59).</td>
-
         </tr>
 
-
         <tr>
-
         <td>LocationDescription</td>
 
-
         <td>Free-text description of the unit location within a station
-
         (e.g.: <span class="text-info">Escalator between mezzanine and
-
         platform</span>).</td>
-
         </tr>
 
-
         <tr>
-
         <td>StationCode</td>
 
-
         <td>Unit's station code. Use this value in other rail-related APIs
-
         to retrieve data about a station.</td>
-
         </tr>
 
-
         <tr>
-
         <td>StationName</td>
 
-
         <td>Full station name, may include entrance information (e.g.:
-
         <span class="text-info">Metro Center, G and 11th St
-
         Entrance</span>).</td>
-
         </tr>
 
-
         <tr>
-
         <td style="text-decoration: line-through">SymptomCode</td>
 
-
         <td><span class="text-danger">Deprecated.</span></td>
-
         </tr>
 
-
         <tr>
-
         <td>SymptomDescription</td>
 
-
         <td>Description for why the unit is out of service or otherwise in
-
         reduced operation.</td>
-
         </tr>
 
-
         <tr>
-
         <td style="text-decoration: line-through">TimeOutOfService</td>
 
-
         <td><span class="text-danger">Deprecated.</span> Use the time
-
         portion of the DateOutOfServ element.</td>
-
         </tr>
 
-
         <tr>
-
         <td>UnitName</td>
 
-
         <td>Unique identifier for unit, by type (a single elevator and
-
         escalator may have the same UnitName, but no two elevators or two
-
         escalators will have the same UnitName).</td>
-
         </tr>
 
-
         <tr>
-
         <td style="text-decoration: line-through">UnitStatus</td>
 
-
         <td><span class="text-danger">Deprecated.</span> If listed here,
-
         the unit is inoperational or otherwise impaired.</td>
-
         </tr>
-
 
         <tr>
-
         <td>UnitType</td>
 
-
         <td>Type of unit. Will be <span class="text-info">ELEVATOR</span>
-
         or <span class="text-info">ESCALATOR</span>.</td>
-
         </tr>
-
         </tbody>
-
         </table>
       operationId: 54763641281d830c946a3d79
       parameters:
-        - description: Two-letter station code.  Use the Station List method to return a
-            list of all station codes.
+        - description: Two-letter station code.  Use the Station List method to return a list of all station codes.
           enum:
             - A03
             - E09
@@ -488,7 +377,7 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/xml: >-
+            application/xml: |-
               <ElevatorIncidentsResp
                   xmlns="http://www.wmata.com"
                   xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
@@ -517,20 +406,17 @@ paths:
 
         \r
 
-        <p>Returns reported rail incidents (significant disruptions and
-        delays to\r
+        <p>Returns reported rail incidents (significant disruptions and delays to\r
 
         normal service). The data is identical to WMATA's <a href=\r
 
-        \"http://www.metroalerts.info/rss.aspx?rs\">Metrorail Service
-        Status\r
+        \"http://www.metroalerts.info/rss.aspx?rs\">Metrorail Service Status\r
 
         feed</a>.</p>\r
 
         \r
 
-        <p>Rail incidents are refreshed once every 20 to 30 seconds
-        approximately.</p>\r
+        <p>Rail incidents are refreshed once every 20 to 30 seconds approximately.</p>\r
 
         \r
 
@@ -598,11 +484,9 @@ paths:
 
         \r
 
-        <td>Date and time (Eastern Standard Time) of last update. Will
-        be\r
+        <td>Date and time (Eastern Standard Time) of last update. Will be\r
 
-        in YYYY-MM-DDTHH:mm:SS format (e.g.:
-        2010-07-29T14:21:28).</td>\r
+        in YYYY-MM-DDTHH:mm:SS format (e.g.: 2010-07-29T14:21:28).</td>\r
 
         </tr>\r
 
@@ -646,8 +530,7 @@ paths:
 
         <tr>\r
 
-        <td style=\"text-decoration:
-        line-through\">EndLocationFullName</td>\r
+        <td style=\"text-decoration: line-through\">EndLocationFullName</td>\r
 
         \r
 
@@ -675,8 +558,7 @@ paths:
 
         \r
 
-        <td>Free-text description of the incident type. Usually Delay
-        or\r
+        <td>Free-text description of the incident type. Usually Delay or\r
 
         Alert but is subject to change at any time.</td>\r
 
@@ -692,21 +574,17 @@ paths:
 
         <td>Semi-colon and space separated list of line codes (e.g.:\r
 
-        <span class=\"text-info\">RD;</span> or <span
-        class=\"text-info\">BL;\r
+        <span class=\"text-info\">RD;</span> or <span class=\"text-info\">BL;\r
 
-        OR;</span> or <span class=\"text-info\">BL; OR; RD;</span>). We
-        do\r
+        OR;</span> or <span class=\"text-info\">BL; OR; RD;</span>). We do\r
 
-        plan to update this to return something more reasonable like
-        an\r
+        plan to update this to return something more reasonable like an\r
 
         array, but until then, use code similar to the following:<br>\r
 
         <br>\r
 
-        <code>\"RD; GR; BL;\".split(/;[\\s]?/).filter(function(fn) {
-        return fn\r
+        <code>\"RD; GR; BL;\".split(/;[\\s]?/).filter(function(fn) { return fn\r
 
         !== ''; })</code></td>\r
 
@@ -716,8 +594,7 @@ paths:
 
         <tr>\r
 
-        <td style=\"text-decoration:
-        line-through\">PassengerDelay</td>\r
+        <td style=\"text-decoration: line-through\">PassengerDelay</td>\r
 
         \r
 
@@ -749,7 +626,7 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/xml: >-
+            application/xml: |-
               <IncidentsResp
                   xmlns="http://www.wmata.com"
                   xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
@@ -775,22 +652,19 @@ paths:
 
         \r
 
-        <p>Returns a set of reported bus incidents/delays for a given
-        Route. Omit the\r
+        <p>Returns a set of reported bus incidents/delays for a given Route. Omit the\r
 
         Route to return all reported items.</p>\r
 
         \r
 
-        <p>Note that the Route parameter accepts only base route names
-        and no\r
+        <p>Note that the Route parameter accepts only base route names and no\r
 
         variations, i.e.: use 10A instead of 10Av1 and 10Av2.</p>\r
 
         \r
 
-        <p>Bus incidents/delays are refreshed once every 20 to 30
-        seconds approximately.</p>\r
+        <p>Bus incidents/delays are refreshed once every 20 to 30 seconds approximately.</p>\r
 
         \r
 
@@ -860,11 +734,9 @@ paths:
 
         \r
 
-        <td>Date and time (Eastern Standard Time) of last update. Will
-        be\r
+        <td>Date and time (Eastern Standard Time) of last update. Will be\r
 
-        in YYYY-MM-DDTHH:mm:ss format (e.g.:
-        2014-10-28T08:13:03).</td>\r
+        in YYYY-MM-DDTHH:mm:ss format (e.g.: 2014-10-28T08:13:03).</td>\r
 
         </tr>\r
 
@@ -904,8 +776,7 @@ paths:
 
         <span class=\"text-info\">Delay</span> or <span class=\r
 
-        \"text-info\">Alert</span> but is subject to change at any
-        time.</td>\r
+        \"text-info\">Alert</span> but is subject to change at any time.</td>\r
 
         </tr>\r
 
@@ -917,11 +788,9 @@ paths:
 
         \r
 
-        <td>Array containing routes affected. Routes listed are
-        usually\r
+        <td>Array containing routes affected. Routes listed are usually\r
 
-        identical to base route names (i.e.: not 10Av1 or 10Av2, but
-        10A),\r
+        identical to base route names (i.e.: not 10Av1 or 10Av2, but 10A),\r
 
         but <em>may</em> differ from what our bus methods return.</td>\r
 
@@ -932,8 +801,7 @@ paths:
         </table>"
       operationId: 54763641281d830c946a3d75
       parameters:
-        - description: "Base bus route; variations are not recognized (i.e.: C2 instead of
-            C2v1, C2v2, etc.)."
+        - description: "Base bus route; variations are not recognized (i.e.: C2 instead of C2v1, C2v2, etc.)."
           enum:
             - "90"
             - X1
@@ -946,7 +814,7 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "BusIncidents": [
                       {
@@ -967,249 +835,147 @@ paths:
       summary: JSON - Bus Incidents
   /json/ElevatorIncidents:
     get:
-      description: >-
+      description: |-
         <h4 class="text-primary">Description</h4>
 
-
         <p>Returns a list of <em>reported</em> elevator and escalator outages at a
-
         given station. Omit the StationCode parameter to return all reported
-
         outages.</p>
 
-
         <p>Note that for stations with multiple platforms and therefore StationCodes
-
         (e.g.: Metro Center, L'Enfant Plaza, etc.), a distinct call is required for
-
         each StationCode.</p>
-
 
         <p>Elevator and escalator outages are refreshed once every 20 to 30 seconds approximately.</p>
 
-
         <h4 class="text-primary">Response Elements</h4>
 
-
         <table class="table table-condensed table-hover">
-
         <thead>
-
         <tr>
-
         <th class="col-md-3">Element</th>
 
-
         <th>Description</th>
-
         </tr>
-
         </thead>
 
-
         <tbody>
-
         <tr>
-
         <td>ElevatorIncidents</td>
 
-
         <td>
-
         Array containing elevator/escalator outage information
-
         (<a href="#ElevatorIncident">ElevatorIncident</a>).
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td colspan="2">
-
         <div class="text-primary" style="margin-top: 1em">
-
         <a id="ElevatorIncident" name=
-
         "ElevatorIncident">ElevatorIncident Elements</a>
-
         </div>
-
         </td>
-
         </tr>
 
-
         <tr>
-
         <td>DateOutOfServ</td>
 
-
         <td>Date and time (Eastern Standard Time) unit was reported out of
-
         service. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:
-
         2014-10-27T15:17:00).</td>
-
         </tr>
 
-
         <tr>
-
         <td>DateUpdated</td>
 
-
         <td>Date and time (Eastern Standard Time) outage details was last
-
         updated. Will be in YYYY-MM-DDTHH:mm:ss format (e.g.:
-
         2014-10-27T15:17:00).</td>
-
         </tr>
 
-
         <tr>
-
         <td style="text-decoration: line-through">DisplayOrder</td>
 
-
         <td><span class="text-danger">Deprecated.</span></td>
-
         </tr>
 
-
         <tr>
-
         <td>EstimatedReturnToService</td>
 
-
         <td>Estimated date and time (Eastern Standard Time) by when unit is expected to return to normal service. May be NULL, otherwise will be in YYYY-MM-DDTHH:mm:ss format (e.g.:
-
         2014-10-27T23:59:59).</td>
-
         </tr>
 
-
         <tr>
-
         <td>LocationDescription</td>
 
-
         <td>Free-text description of the unit location within a station
-
         (e.g.: <span class="text-info">Escalator between mezzanine and
-
         platform</span>).</td>
-
         </tr>
 
-
         <tr>
-
         <td>StationCode</td>
 
-
         <td>Unit's station code. Use this value in other rail-related APIs
-
         to retrieve data about a station.</td>
-
         </tr>
 
-
         <tr>
-
         <td>StationName</td>
 
-
         <td>Full station name, may include entrance information (e.g.:
-
         <span class="text-info">Metro Center, G and 11th St
-
         Entrance</span>).</td>
-
         </tr>
 
-
         <tr>
-
         <td style="text-decoration: line-through">SymptomCode</td>
 
-
         <td><span class="text-danger">Deprecated.</span></td>
-
         </tr>
 
-
         <tr>
-
         <td>SymptomDescription</td>
 
-
         <td>Description for why the unit is out of service or otherwise in
-
         reduced operation.</td>
-
         </tr>
 
-
         <tr>
-
         <td style="text-decoration: line-through">TimeOutOfService</td>
 
-
         <td><span class="text-danger">Deprecated.</span> Use the time
-
         portion of the DateOutOfServ element.</td>
-
         </tr>
 
-
         <tr>
-
         <td>UnitName</td>
 
-
         <td>Unique identifier for unit, by type (a single elevator and
-
         escalator may have the same UnitName, but no two elevators or two
-
         escalators will have the same UnitName).</td>
-
         </tr>
 
-
         <tr>
-
         <td style="text-decoration: line-through">UnitStatus</td>
 
-
         <td><span class="text-danger">Deprecated.</span> If listed here,
-
         the unit is inoperational or otherwise impaired.</td>
-
         </tr>
-
 
         <tr>
-
         <td>UnitType</td>
 
-
         <td>Type of unit. Will be <span class="text-info">ELEVATOR</span>
-
         or <span class="text-info">ESCALATOR</span>.</td>
-
         </tr>
-
         </tbody>
-
         </table>
       operationId: 54763641281d830c946a3d76
       parameters:
-        - description: Station code.  Use the Station List method to return a list of all
-            station codes.
+        - description: Station code.  Use the Station List method to return a list of all station codes.
           enum:
             - A03
             - E09
@@ -1222,7 +988,7 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "ElevatorIncidents": [
                       {
@@ -1249,20 +1015,17 @@ paths:
 
         \r
 
-        <p>Returns reported rail incidents (significant disruptions and
-        delays to\r
+        <p>Returns reported rail incidents (significant disruptions and delays to\r
 
         normal service). The data is identical to WMATA's <a href=\r
 
-        \"http://www.metroalerts.info/rss.aspx?rs\">Metrorail Service
-        Status\r
+        \"http://www.metroalerts.info/rss.aspx?rs\">Metrorail Service Status\r
 
         feed</a>.</p>\r
 
         \r
 
-        <p>Rail incidents are refreshed once every 20 to 30 seconds
-        approximately.</p>\r
+        <p>Rail incidents are refreshed once every 20 to 30 seconds approximately.</p>\r
 
         \r
 
@@ -1330,11 +1093,9 @@ paths:
 
         \r
 
-        <td>Date and time (Eastern Standard Time) of last update. Will
-        be\r
+        <td>Date and time (Eastern Standard Time) of last update. Will be\r
 
-        in YYYY-MM-DDTHH:mm:SS format (e.g.:
-        2010-07-29T14:21:28).</td>\r
+        in YYYY-MM-DDTHH:mm:SS format (e.g.: 2010-07-29T14:21:28).</td>\r
 
         </tr>\r
 
@@ -1378,8 +1139,7 @@ paths:
 
         <tr>\r
 
-        <td style=\"text-decoration:
-        line-through\">EndLocationFullName</td>\r
+        <td style=\"text-decoration: line-through\">EndLocationFullName</td>\r
 
         \r
 
@@ -1407,8 +1167,7 @@ paths:
 
         \r
 
-        <td>Free-text description of the incident type. Usually Delay
-        or\r
+        <td>Free-text description of the incident type. Usually Delay or\r
 
         Alert but is subject to change at any time.</td>\r
 
@@ -1424,21 +1183,17 @@ paths:
 
         <td>Semi-colon and space separated list of line codes (e.g.:\r
 
-        <span class=\"text-info\">RD;</span> or <span
-        class=\"text-info\">BL;\r
+        <span class=\"text-info\">RD;</span> or <span class=\"text-info\">BL;\r
 
-        OR;</span> or <span class=\"text-info\">BL; OR; RD;</span>). We
-        do\r
+        OR;</span> or <span class=\"text-info\">BL; OR; RD;</span>). We do\r
 
-        plan to update this to return something more reasonable like
-        an\r
+        plan to update this to return something more reasonable like an\r
 
         array, but until then, use code similar to the following:<br>\r
 
         <br>\r
 
-        <code>\"RD; GR; BL;\".split(/;[\\s]?/).filter(function(fn) {
-        return fn\r
+        <code>\"RD; GR; BL;\".split(/;[\\s]?/).filter(function(fn) { return fn\r
 
         !== ''; })</code></td>\r
 
@@ -1448,8 +1203,7 @@ paths:
 
         <tr>\r
 
-        <td style=\"text-decoration:
-        line-through\">PassengerDelay</td>\r
+        <td style=\"text-decoration: line-through\">PassengerDelay</td>\r
 
         \r
 
@@ -1481,7 +1235,7 @@ paths:
         "200":
           description: Default response code.
           examples:
-            application/json: >-
+            application/json: |-
               {
                   "Incidents": [
                       {

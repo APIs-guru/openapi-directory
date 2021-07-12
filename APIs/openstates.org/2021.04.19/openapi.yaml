@@ -1,9 +1,8 @@
 openapi: 3.0.2
 info:
-  description: >
+  description: |
     
     * [More documentation](https://docs.openstates.org/en/latest/api/v3/index.html)
-
     * [Register for an account](https://openstates.org/accounts/signup/)
   title: Open States API v3
   version: 2021.04.19
@@ -29,12 +28,10 @@ paths:
       summary: Read Typer
   /bills:
     get:
-      description: >-
+      description: |-
         Search for bills matching given criteria.
 
-
         Must either specify a jurisdiction or a full text query (q).  Additional parameters will
-
         futher restrict bills returned.
       operationId: bills_search_bills_get
       parameters:
@@ -119,18 +116,15 @@ paths:
           name: sponsor
           required: false
           schema:
-            description: Filter to only include bills sponsored by a given name or person
-              ID.
+            description: Filter to only include bills sponsored by a given name or person ID.
             title: Sponsor
             type: string
-        - description: Filter matched sponsors to only include particular types of
-            sponsorships.
+        - description: Filter matched sponsors to only include particular types of sponsorships.
           in: query
           name: sponsor_classification
           required: false
           schema:
-            description: Filter matched sponsors to only include particular types of
-              sponsorships.
+            description: Filter matched sponsors to only include particular types of sponsorships.
             title: Sponsor Classification
             type: string
         - description: Filter by full text search term.
@@ -301,8 +295,7 @@ paths:
         - bills
   /jurisdictions:
     get:
-      description: Get list of supported Jurisdictions, a Jurisdiction is a state or
-        municipality.
+      description: Get list of supported Jurisdictions, a Jurisdiction is a state or municipality.
       operationId: jurisdiction_list_jurisdictions_get
       parameters:
         - description: Filter returned jurisdictions by type.
@@ -416,9 +409,8 @@ paths:
         - jurisdictions
   /people:
     get:
-      description: >-
+      description: |-
         Get list of people matching selected criteria.
-
 
         Must provide either **jurisdiction**, **name**, or one or more **id** parameters.
       operationId: people_search_people_get
@@ -520,9 +512,8 @@ paths:
         - people
   /people.geo:
     get:
-      description: >-
+      description: |-
         Get list of people currently representing a given location.
-
 
         **Note:** Currently limited to state legislators.  Governors & mayors are not included.
       operationId: people_geo_people_geo_get

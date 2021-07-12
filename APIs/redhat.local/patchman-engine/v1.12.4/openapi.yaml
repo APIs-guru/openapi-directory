@@ -4,10 +4,8 @@ servers:
   - url: /
 info:
   contact: {}
-  description: >-
-    API of the Patch application on
-    [cloud.redhat.com](cloud.redhat.com)
-
+  description: |-
+    API of the Patch application on [cloud.redhat.com](cloud.redhat.com)
 
     Syntax of the `filter[name]` query parameters is described in  [Filters documentation](https://github.com/RedHatInsights/patchman-engine/wiki/API-custom-filters)
   license:
@@ -522,16 +520,6 @@ paths:
       description: Show me all my systems which have a package installed
       operationId: exportPackageSystems
       parameters:
-        - description: Limit for paging, set -1 to return all
-          in: query
-          name: limit
-          schema:
-            type: integer
-        - description: Offset for paging
-          in: query
-          name: offset
-          schema:
-            type: integer
         - description: Package name
           in: path
           name: package_name
@@ -733,16 +721,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: Limit for paging, set -1 to return all
-          in: query
-          name: limit
-          schema:
-            type: integer
-        - description: Offset for paging
-          in: query
-          name: offset
-          schema:
-            type: integer
         - description: Find matching text
           in: query
           name: search

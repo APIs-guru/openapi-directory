@@ -6,8 +6,7 @@ basePath: /
 info:
   contact:
     x-twitter: semantria
-  description: Semantria applies Text and Sentiment Analysis to tweets, facebook
-    posts, surveys, reviews or enterprise content.
+  description: Semantria applies Text and Sentiment Analysis to tweets, facebook posts, surveys, reviews or enterprise content.
   title: Semantria
   version: "4.0"
   x-apisguru-categories:
@@ -58,8 +57,7 @@ tags:
 paths:
   "/blacklist.{content_type}":
     delete:
-      description: This method removes certain blacklisted items by their values on
-        Semantria side.
+      description: This method removes certain blacklisted items by their values on Semantria side.
       operationId: deleteBlacklistItems
       parameters:
         - description: Identifier of configuration blacklist items linked to.
@@ -89,14 +87,11 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "403":
-          description: Forbidden. Server responds if client tries to remove primary
-            configuration.
+          description: Forbidden. Server responds if client tries to remove primary configuration.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Remove items from blacklist
       tags:
         - Blacklist
@@ -115,23 +110,19 @@ paths:
           type: string
       responses:
         "200":
-          description: Client request accepted and queued. Server responds with the
-            blacklist.
+          description: Client request accepted and queued. Server responds with the blacklist.
           schema:
             items:
               $ref: "#/definitions/BlacklistItem_ResponseVersion"
             type: array
         "202":
-          description: Client request accepted, no blacklist found. Server responds with
-            empty body.
+          description: Client request accepted, no blacklist found. Server responds with empty body.
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Retrieve blacklisted items
       tags:
         - Blacklist
@@ -168,19 +159,16 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "406":
           description: Number of allowed blacklisted items per configuration achieved.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Add items to blacklist
       tags:
         - Blacklist
     put:
-      description: This method updates existing items by unique IDs in the backlist on
-        Semantria side.
+      description: This method updates existing items by unique IDs in the backlist on Semantria side.
       operationId: updateBlacklist
       parameters:
         - description: Identifier of configuration blacklist linked to.
@@ -212,20 +200,17 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "406":
           description: Number of allowed blacklisted items per configuration achieved.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Update items in blacklist
       tags:
         - Blacklist
   "/categories.{content_type}":
     delete:
-      description: This method removes certain user categories by their IDs on
-        Semantria side.
+      description: This method removes certain user categories by their IDs on Semantria side.
       operationId: deleteCategories
       parameters:
         - description: Identifier of configuration user categories linked to.
@@ -255,20 +240,16 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "403":
-          description: Forbidden. Server responds if client tries to remove primary
-            configuration.
+          description: Forbidden. Server responds if client tries to remove primary configuration.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Remove user categories
       tags:
         - Categories
     get:
-      description: This method retrieves list of user categories available on
-        Semantria side.
+      description: This method retrieves list of user categories available on Semantria side.
       operationId: getCategories
       parameters:
         - description: Identifier of configuration user categories linked to.
@@ -282,23 +263,19 @@ paths:
           type: string
       responses:
         "200":
-          description: Client request accepted and queued. Server responds with the
-            categories list.
+          description: Client request accepted and queued. Server responds with the categories list.
           schema:
             items:
               $ref: "#/definitions/Category_ResponseVersion"
             type: array
         "202":
-          description: Client request accepted, no categories found. Server responds with
-            empty body.
+          description: Client request accepted, no categories found. Server responds with empty body.
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Retrieve user categories
       tags:
         - Categories
@@ -335,14 +312,11 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "406":
-          description: Number of allowed categories per configuration or samples per
-            category achieved.
+          description: Number of allowed categories per configuration or samples per category achieved.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Add user categories
       tags:
         - Categories
@@ -379,26 +353,17 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "406":
-          description: Number of allowed categories per configuration or samples per
-            category achieved.
+          description: Number of allowed categories per configuration or samples per category achieved.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Updates user categories
       tags:
         - Categories
   "/collection.{content_type}":
     post:
-      description: This method queues collection of documents onto the server for
-        analysis. Queued collection of documents analyzes in common context as
-        entire thing. If unique configuration ID provided, Semantria uses
-        settings of that configuration during analysis, in opposite the primary
-        configuration uses. Collection IDs are unique in scope of configuration.
-        If the same ID appears twice, Semantria overrides existing collection
-        with the new Data
+      description: This method queues collection of documents onto the server for analysis. Queued collection of documents analyzes in common context as entire thing. If unique configuration ID provided, Semantria uses settings of that configuration during analysis, in opposite the primary configuration uses. Collection IDs are unique in scope of configuration. If the same ID appears twice, Semantria overrides existing collection with the new Data
       operationId: queueCollection
       parameters:
         - description: Identifier of configuration used for analysis.
@@ -418,8 +383,7 @@ paths:
           type: string
       responses:
         "200":
-          description: Client request accepted and queued. Server responds with the
-            sentiment-bearing phrases list.
+          description: Client request accepted and queued. Server responds with the sentiment-bearing phrases list.
           schema:
             $ref: "#/definitions/Collection"
         "202":
@@ -427,26 +391,19 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "406":
           description: Documents limit per collection is achieved.
         "413":
           description: Characters limit for single document exceeded.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Queue collection for analysis
       tags:
         - ProcessingCollections
   "/collection/processed.{content_type}":
     get:
-      description: This method retrieves analysis results for processed collections
-        from Semantria. FAILED collections will have FAILED status in response.
-        Semantria responds with limited amount of results per API call. If
-        configuration ID provided, Semantria responds with the collections,
-        which were queued using the same configuration ID, in opposite Primary
-        configuration uses.
+      description: This method retrieves analysis results for processed collections from Semantria. FAILED collections will have FAILED status in response. Semantria responds with limited amount of results per API call. If configuration ID provided, Semantria responds with the collections, which were queued using the same configuration ID, in opposite Primary configuration uses.
       operationId: retrieveProcessedCollections
       parameters:
         - description: Identifier of configuration used for analysis.
@@ -460,28 +417,23 @@ paths:
           type: string
       responses:
         "200":
-          description: Client request accepted and queued. Server responds with processed
-            collections.
+          description: Client request accepted and queued. Server responds with processed collections.
           schema:
             $ref: "#/definitions/CollectionAnalyticData"
         "202":
-          description: Client request accepted, no processed collections found on the
-            server.
+          description: Client request accepted, no processed collections found on the server.
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Retrieve collections analysis
       tags:
         - ProcessingCollections
   "/collection/{collection_id}.{content_type}":
     delete:
-      description: This method cancels collection analysis by unique ID on Semantria
-        side if it is waiting for analysis in queue.
+      description: This method cancels collection analysis by unique ID on Semantria side if it is waiting for analysis in queue.
       operationId: cancelCollection
       parameters:
         - description: Identifier of configuration used for analysis.
@@ -500,26 +452,20 @@ paths:
           type: string
       responses:
         "200":
-          description: Client request accepted. Document canceled from processing on the
-            server.
+          description: Client request accepted. Document canceled from processing on the server.
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "404":
           description: No collections with provided ID found on server.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Cancel collection analysis
       tags:
         - ProcessingCollections
     get:
-      description: This method retrieves analysis results for documents collection by
-        its unique ID or the collection’s status in queue if it did not analyzed
-        yet. Semantria guarantees delivering of all collections back to the
-        client even if they FAILED on Semantria side due to some reason.
+      description: This method retrieves analysis results for documents collection by its unique ID or the collection’s status in queue if it did not analyzed yet. Semantria guarantees delivering of all collections back to the client even if they FAILED on Semantria side due to some reason.
       operationId: receiveCollectionAnalyticData
       parameters:
         - description: Identifier of configuration used for analysis.
@@ -538,20 +484,17 @@ paths:
           type: string
       responses:
         "200":
-          description: Client request accepted. Server responds with processed document or
-            its status.
+          description: Client request accepted. Server responds with processed document or its status.
           schema:
             $ref: "#/definitions/CollectionAnalyticData"
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "404":
           description: No collections with provided ID found on server.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Retrieve collection analysis or its status in queue
       tags:
         - ProcessingCollections
@@ -582,20 +525,16 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "403":
-          description: Forbidden. Server responds if client tries to remove primary
-            configuration.
+          description: Forbidden. Server responds if client tries to remove primary configuration.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Remove user configurations
       tags:
         - Configuration
     get:
-      description: This method retrieves all user configurations available on
-        Semantria side.
+      description: This method retrieves all user configurations available on Semantria side.
       operationId: getConfigurations
       parameters:
         - in: path
@@ -612,11 +551,9 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Retrieve user configurations
       tags:
         - Configuration
@@ -648,19 +585,16 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "406":
           description: Number of allowed configurations for user subscription is reached.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Create user configurations
       tags:
         - Configuration
     put:
-      description: This method updates specific configurations by unique IDs on
-        Semantria side.
+      description: This method updates specific configurations by unique IDs on Semantria side.
       operationId: updateConfigurations
       parameters:
         - description: List of parametrized JSON or XML objects.
@@ -687,24 +621,17 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "406":
           description: Number of allowed configurations for user subscription is reached.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Update user configurations
       tags:
         - Configuration
   "/document.{content_type}":
     post:
-      description: This method queues document onto the server for analysis. Queued
-        document analyzes individually and will have its own set of results. If
-        unique configuration ID provided, Semantria uses settings of that
-        configuration during analysis, in opposite the primary configuration
-        uses. Document IDs are unique in scope of configuration. If the same ID
-        appears twice, Semantria overrides existing document with the new Data.
+      description: This method queues document onto the server for analysis. Queued document analyzes individually and will have its own set of results. If unique configuration ID provided, Semantria uses settings of that configuration during analysis, in opposite the primary configuration uses. Document IDs are unique in scope of configuration. If the same ID appears twice, Semantria overrides existing document with the new Data.
       operationId: queueDocument
       parameters:
         - description: Identifier of configuration used for analysis.
@@ -724,8 +651,7 @@ paths:
           type: string
       responses:
         "200":
-          description: Client request accepted and queued. Server responds with the
-            sentiment-bearing phrases list.
+          description: Client request accepted and queued. Server responds with the sentiment-bearing phrases list.
           schema:
             $ref: "#/definitions/Document"
         "202":
@@ -733,21 +659,17 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "413":
           description: Characters limit for the document exceeded.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Queue document for analysis
       tags:
         - ProcessingDocuments
   "/document/batch.{content_type}":
     post:
-      description: This method queues batch of documents for analysis. The rules are
-        the same as for single document mode but here the documents ordered into
-        the batch.
+      description: This method queues batch of documents for analysis. The rules are the same as for single document mode but here the documents ordered into the batch.
       operationId: queueBatchOfDocuments
       parameters:
         - description: Identifier of configuration used for analysis.
@@ -767,8 +689,7 @@ paths:
           type: string
       responses:
         "200":
-          description: Client request accepted and queued. Server responds with the
-            sentiment-bearing phrases list.
+          description: Client request accepted and queued. Server responds with the sentiment-bearing phrases list.
           schema:
             $ref: "#/definitions/Document"
         "202":
@@ -776,8 +697,7 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "403":
           description: Request is forbidden for selected processing mode.
         "406":
@@ -785,18 +705,13 @@ paths:
         "413":
           description: Characters limit for the document exceeded.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Queue batch of documents for analysis
       tags:
         - ProcessingDocuments
   "/document/processed.{content_type}":
     get:
-      description: This method retrieves analysis results for processed documents from
-        Semantria. FAILED documents will have FAILED status in response.
-        Semantria responds with limited amount of results per API call. If
-        configuration ID provided, Semantria responds with the document, which
-        were queued using the same configuration ID, in opposite Primary.
+      description: This method retrieves analysis results for processed documents from Semantria. FAILED documents will have FAILED status in response. Semantria responds with limited amount of results per API call. If configuration ID provided, Semantria responds with the document, which were queued using the same configuration ID, in opposite Primary.
       operationId: retrieveProcessedDocuments
       parameters:
         - description: Identifier of configuration used for analysis.
@@ -810,8 +725,7 @@ paths:
           type: string
       responses:
         "200":
-          description: Client request accepted and queued. Server responds with processed
-            documents.
+          description: Client request accepted and queued. Server responds with processed documents.
           schema:
             $ref: "#/definitions/DocumentAnalyticData"
         "202":
@@ -819,18 +733,15 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Retrieve documents analysis
       tags:
         - ProcessingDocuments
   "/document/{document_id}.{content_type}":
     delete:
-      description: This method cancels document analysis by unique ID on Semantria
-        side if it is waiting for analysis in queue.
+      description: This method cancels document analysis by unique ID on Semantria side if it is waiting for analysis in queue.
       operationId: cancelDocument
       parameters:
         - description: Identifier of configuration used for analysis.
@@ -849,26 +760,20 @@ paths:
           type: string
       responses:
         "200":
-          description: Client request accepted. Document canceled from processing on the
-            server.
+          description: Client request accepted. Document canceled from processing on the server.
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "404":
           description: No documents with provided ID found on server.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Cancel document analysis
       tags:
         - ProcessingDocuments
     get:
-      description: This method retrieves analysis results for the single document by
-        its unique ID or the document’s status in queue if it did not analyzed
-        yet. Semantria guarantees delivering of all documents back to the client
-        even if they FAILED on Semantria side due to some reason.
+      description: This method retrieves analysis results for the single document by its unique ID or the document’s status in queue if it did not analyzed yet. Semantria guarantees delivering of all documents back to the client even if they FAILED on Semantria side due to some reason.
       operationId: receiveDocumentAnalyticData
       parameters:
         - description: Identifier of configuration used for analysis.
@@ -887,27 +792,23 @@ paths:
           type: string
       responses:
         "200":
-          description: Client request accepted. Server responds with processed document or
-            its status.
+          description: Client request accepted. Server responds with processed document or its status.
           schema:
             $ref: "#/definitions/DocumentAnalyticData"
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "404":
           description: No documents with provided ID found on server.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Retrieve document analysis or its status in queue
       tags:
         - ProcessingDocuments
   "/entities.{content_type}":
     delete:
-      description: This method removes certain user entities by their names on
-        Semantria side.
+      description: This method removes certain user entities by their names on Semantria side.
       operationId: deleteEntities
       parameters:
         - in: path
@@ -924,14 +825,11 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "403":
-          description: Forbidden. Server responds if client tries to remove primary
-            configuration.
+          description: Forbidden. Server responds if client tries to remove primary configuration.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Remove user entities
       tags:
         - Entities
@@ -950,23 +848,19 @@ paths:
           type: string
       responses:
         "200":
-          description: Client request accepted and queued. Server responds with the
-            entities list.
+          description: Client request accepted and queued. Server responds with the entities list.
           schema:
             items:
               $ref: "#/definitions/Entity_ResponseVersion"
             type: array
         "202":
-          description: Client request accepted and no entities found. Server responds with
-            empty body.
+          description: Client request accepted and no entities found. Server responds with empty body.
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Retrieve user entities
       tags:
         - Entities
@@ -1003,13 +897,11 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "406":
           description: Number of allowed entities per configuration achieved.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Add user entities
       tags:
         - Entities
@@ -1046,20 +938,17 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "406":
           description: Number of allowed entities per configuration achieved.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Update user entities
       tags:
         - Entities
   "/features.{content_type}":
     get:
-      description: This method returns list of supported features per languages
-        supported by Semantria API. Let the users know about API capabilities.
+      description: This method returns list of supported features per languages supported by Semantria API. Let the users know about API capabilities.
       operationId: getFeatures
       parameters:
         - description: Filter features by specified language
@@ -1073,8 +962,7 @@ paths:
           type: string
       responses:
         "200":
-          description: Client request accepted and queued. Server responds with
-            subscription details.
+          description: Client request accepted and queued. Server responds with subscription details.
           schema:
             items:
               $ref: "#/definitions/Feature"
@@ -1082,18 +970,15 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Retrieve supported features
       tags:
         - Features
   "/phrases.{content_type}":
     delete:
-      description: This method removes certain sentiment-bearing phrases by their
-        names on Semantria side.
+      description: This method removes certain sentiment-bearing phrases by their names on Semantria side.
       operationId: deletePhrases
       parameters:
         - description: Identifier of configuration phrases linked to.
@@ -1123,20 +1008,16 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "403":
-          description: Forbidden. Server responds if client tries to remove primary
-            configuration.
+          description: Forbidden. Server responds if client tries to remove primary configuration.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Remove sentiment-bearing phrases
       tags:
         - Phrases
     get:
-      description: This method retrieves list of sentiment-bearing phrases available
-        on Semantria side.
+      description: This method retrieves list of sentiment-bearing phrases available on Semantria side.
       operationId: getPhrases
       parameters:
         - description: Identifier of configuration phrases linked to.
@@ -1150,23 +1031,19 @@ paths:
           type: string
       responses:
         "200":
-          description: Client request accepted and queued. Server responds with the
-            sentiment-bearing phrases list.
+          description: Client request accepted and queued. Server responds with the sentiment-bearing phrases list.
           schema:
             items:
               $ref: "#/definitions/Phrase_ResponseVersion"
             type: array
         "202":
-          description: Client request accepted and no sentiment-bearing phrases found.
-            Server responds with empty body.
+          description: Client request accepted and no sentiment-bearing phrases found. Server responds with empty body.
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Retrieve sentiment-bearing phrases
       tags:
         - Phrases
@@ -1203,20 +1080,16 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "406":
-          description: Number of allowed sentiment-bearing phrases per configuration
-            achieved.
+          description: Number of allowed sentiment-bearing phrases per configuration achieved.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Add sentiment-bearing phrases
       tags:
         - Phrases
     put:
-      description: This method updates sentiment-bearing phrases by unique IDs on
-        Semantria side.
+      description: This method updates sentiment-bearing phrases by unique IDs on Semantria side.
       operationId: updatePhrases
       parameters:
         - description: Identifier of configuration phrases linked to.
@@ -1248,14 +1121,11 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "406":
-          description: Number of allowed sentiment-bearing phrases per configuration
-            achieved.
+          description: Number of allowed sentiment-bearing phrases per configuration achieved.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Updates sentiment-bearing phrases
       tags:
         - Phrases
@@ -1291,14 +1161,11 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "403":
-          description: Forbidden. Server responds if client tries to remove primary
-            configuration.
+          description: Forbidden. Server responds if client tries to remove primary configuration.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Remove queries
       tags:
         - Queries
@@ -1317,23 +1184,19 @@ paths:
           type: string
       responses:
         "200":
-          description: Client request accepted and queued. Server responds with the
-            queries list.
+          description: Client request accepted and queued. Server responds with the queries list.
           schema:
             items:
               $ref: "#/definitions/Query_ResponseVersion"
             type: array
         "202":
-          description: Client request accepted and no queries found. Server responds with
-            empty body.
+          description: Client request accepted and no queries found. Server responds with empty body.
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Retrieve queries
       tags:
         - Queries
@@ -1370,13 +1233,11 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "406":
           description: Number of allowed queries per configuration achieved.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Add or update queries
       tags:
         - Queries
@@ -1413,22 +1274,17 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "406":
           description: Number of allowed queries per configuration achieved.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Update queries
       tags:
         - Queries
   "/statistics.{content_type}":
     get:
-      description: This method retrieves overall and per configuration usage
-        statistics for specific timeframe. Statistics ordered per available
-        configurations. Available interval values are current <b>hour</b>,
-        <b>day</b>, <b>week</b>, <b>month</b> and <b>year</b>.
+      description: This method retrieves overall and per configuration usage statistics for specific timeframe. Statistics ordered per available configurations. Available interval values are current <b>hour</b>, <b>day</b>, <b>week</b>, <b>month</b> and <b>year</b>.
       operationId: getStatistic
       parameters:
         - description: Configuration identifier for usage statistics retrieving.
@@ -1453,19 +1309,15 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Retrieve usage statistics
       tags:
         - Statistics
   "/status.{content_type}":
     get:
-      description: This method retrieves API status information such as the app
-        version, current API version, supported languages and encodings, the
-        overall service status, etc.
+      description: This method retrieves API status information such as the app version, current API version, supported languages and encodings, the overall service status, etc.
       operationId: getStatus
       parameters:
         - in: path
@@ -1480,19 +1332,15 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Retrieve API status
       tags:
         - Status
   "/subscription.{content_type}":
     get:
-      description: This method retrieves user's subscription details that consist of
-        the list of allowed features, configured limits and options on Semantria
-        side.
+      description: This method retrieves user's subscription details that consist of the list of allowed features, configured limits and options on Semantria side.
       operationId: getSubscription
       parameters:
         - in: path
@@ -1501,25 +1349,21 @@ paths:
           type: string
       responses:
         "200":
-          description: Client request accepted and queued. Server responds with
-            subscription details.
+          description: Client request accepted and queued. Server responds with subscription details.
           schema:
             $ref: "#/definitions/Subscription"
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Retrieve subscription details
       tags:
         - Subscription
   "/taxonomy.{content_type}":
     delete:
-      description: This method removes certain taxonomy nodes by their IDs on
-        Semantria side.
+      description: This method removes certain taxonomy nodes by their IDs on Semantria side.
       operationId: deleteTaxonomy
       parameters:
         - description: Identifier of configuration queries linked to.
@@ -1549,14 +1393,11 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "403":
-          description: Forbidden. Server responds if client tries to remove primary
-            configuration.
+          description: Forbidden. Server responds if client tries to remove primary configuration.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Remove taxonomy nodes
       tags:
         - Taxonomy
@@ -1575,23 +1416,19 @@ paths:
           type: string
       responses:
         "200":
-          description: Client request accepted and queued. Server responds with the
-            taxonomy list.
+          description: Client request accepted and queued. Server responds with the taxonomy list.
           schema:
             items:
               $ref: "#/definitions/TaxonomyNode_ResponseVersion"
             type: array
         "202":
-          description: Client request accepted and no taxonomy found. Server responds with
-            empty body.
+          description: Client request accepted and no taxonomy found. Server responds with empty body.
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Retrieve taxonomy
       tags:
         - Taxonomy
@@ -1628,13 +1465,11 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "406":
           description: Number of allowed queries per configuration achieved.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Add taxonomy nodes
       tags:
         - Taxonomy
@@ -1671,13 +1506,11 @@ paths:
         "401":
           description: Authentication failed.
         "402":
-          description: Unauthorized. Limit of system calls is reached or subscription is
-            expired.
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
         "406":
           description: Number of allowed queries per configuration achieved.
         "500":
-          description: Server side issue. Server may respond with the details in response
-            body.
+          description: Server side issue. Server may respond with the details in response body.
       summary: Update taxonomy nodes
       tags:
         - Taxonomy
@@ -1708,8 +1541,7 @@ definitions:
           $ref: "#/definitions/SubCategory"
         type: array
       sentiment_polarity:
-        description: Verbal representation of sentiment score. Can be "negative",
-          "positive" or "neutral"
+        description: Verbal representation of sentiment score. Can be "negative", "positive" or "neutral"
         enum:
           - negative
           - positive
@@ -1727,8 +1559,7 @@ definitions:
         description: The category title, which is its label in the text
         type: string
       type:
-        description: Type of category; can be either "node" (root level) or "leaf"
-          (nested) value
+        description: Type of category; can be either "node" (root level) or "leaf" (nested) value
         type: string
     required:
       - categories
@@ -1750,8 +1581,7 @@ definitions:
         description: Unique blacklist item identifier
         type: string
       modified:
-        description: The timestamp of the latest update of the record. Creation date of
-          update didn't occur
+        description: The timestamp of the latest update of the record. Creation date of update didn't occur
         type: string
       name:
         description: Blacklist item name
@@ -1795,8 +1625,7 @@ definitions:
         description: Unique category identifier
         type: string
       modified:
-        description: The timestamp of the latest update of the record. Creation date of
-          update didn't occur
+        description: The timestamp of the latest update of the record. Creation date of update didn't occur
         type: string
       name:
         description: Category name
@@ -1846,12 +1675,10 @@ definitions:
           type: string
         type: array
       id:
-        description: Up to 32 symbols unique identifier of document assigned and tracked
-          by client
+        description: Up to 32 symbols unique identifier of document assigned and tracked by client
         type: string
       job_id:
-        description: Specific marker of incoming job that can be used then for
-          collections retrieving
+        description: Specific marker of incoming job that can be used then for collections retrieving
         type: string
       tag:
         description: Any text of up to 50 characters used like marker
@@ -1880,8 +1707,7 @@ definitions:
         description: Unique collection identifier. Can be up to 36 alphanumeric characters
         type: string
       job_id:
-        description: Specific marker of a job collection belongs to, can be used for
-          collections ordering on client side.
+        description: Specific marker of a job collection belongs to, can be used for collections ordering on client side.
         type: string
       status:
         description: Status of the collection
@@ -1922,56 +1748,47 @@ definitions:
   ConfigurationCollectionSection:
     properties:
       attribute_mentions_limit:
-        description: "Limits the number of mentions of attribute responded from the
-          server. Default: 0"
+        description: "Limits the number of mentions of attribute responded from the server. Default: 0"
         maximum: 20
         minimum: 0
         type: integer
       concept_topics_limit:
-        description: "Limits the number of concept topics responded from the service.
-          Default: 5"
+        description: "Limits the number of concept topics responded from the service. Default: 5"
         maximum: 20
         minimum: 0
         type: integer
       facet_atts_limit:
-        description: "Limits the number of facets which will be responded from the
-          server. Default: 5"
+        description: "Limits the number of facets which will be responded from the server. Default: 5"
         maximum: 20
         minimum: 0
         type: integer
       facet_mentions_limit:
-        description: "Limits the number of mentions of facet responded from the server.
-          Default: 0"
+        description: "Limits the number of mentions of facet responded from the server. Default: 0"
         maximum: 20
         minimum: 0
         type: integer
       facets_limit:
-        description: "Limits the number of facets which will be responded from the
-          server.  Default: 15"
+        description: "Limits the number of facets which will be responded from the server.  Default: 15"
         maximum: 20
         minimum: 0
         type: integer
       named_entities_limit:
-        description: "Limits the number of named entities responded from the service.
-          Default: 5"
+        description: "Limits the number of named entities responded from the service. Default: 5"
         maximum: 20
         minimum: 0
         type: integer
       named_mentions_limit:
-        description: "Limits the number of mentions of theme responded from the server.
-          Default: 0"
+        description: "Limits the number of mentions of theme responded from the server. Default: 0"
         maximum: 20
         minimum: 0
         type: integer
       query_topics_limit:
-        description: "Limits the number of query topics responded from the service.
-          Default: 5"
+        description: "Limits the number of query topics responded from the service. Default: 5"
         maximum: 20
         minimum: 0
         type: integer
       theme_mentions_limit:
-        description: "Limits the number of entity mentions responded from the server.
-          Default: 0"
+        description: "Limits the number of entity mentions responded from the server. Default: 0"
         maximum: 20
         minimum: 0
         type: integer
@@ -1986,8 +1803,7 @@ definitions:
         minimum: 0
         type: integer
       user_mentions_limit:
-        description: "Limits the number of user entity mentions the service responds.
-          Default: 0"
+        description: "Limits the number of user entity mentions the service responds. Default: 0"
         maximum: 20
         minimum: 0
         type: integer
@@ -2041,20 +1857,17 @@ definitions:
         minimum: 0
         type: integer
       named_opinions_limit:
-        description: "Limits the number of named entity opinions the service responds.
-          Default: 0"
+        description: "Limits the number of named entity opinions the service responds. Default: 0"
         maximum: 20
         minimum: 0
         type: integer
       named_relations_limit:
-        description: "Limits the number of named entity relations the service responds.
-          Default: 0"
+        description: "Limits the number of named entity relations the service responds. Default: 0"
         maximum: 20
         minimum: 0
         type: integer
       phrases_limit:
-        description: "Limits the number of responded sentiment-bearing phrases for
-          document. Default: 0"
+        description: "Limits the number of responded sentiment-bearing phrases for document. Default: 0"
         maximum: 20
         minimum: 0
         type: integer
@@ -2071,8 +1884,7 @@ definitions:
           - Chinese
         type: string
       possible_phrases_limit:
-        description: "Limits the number of responded possible phrases which may affect
-          on sentiment score extraction. Default: 0"
+        description: "Limits the number of responded possible phrases which may affect on sentiment score extraction. Default: 0"
         maximum: 20
         minimum: 0
         type: integer
@@ -2082,14 +1894,12 @@ definitions:
         minimum: 0
         type: integer
       summary_limit:
-        description: "Limits the number of sentences for the document summary feature.
-          Default: 3"
+        description: "Limits the number of sentences for the document summary feature. Default: 3"
         maximum: 20
         minimum: 0
         type: integer
       theme_mentions_limit:
-        description: "Limits the number of document and entity related theme mentions.
-          Default: 0"
+        description: "Limits the number of document and entity related theme mentions. Default: 0"
         maximum: 20
         minimum: 0
         type: integer
@@ -2114,8 +1924,7 @@ definitions:
         minimum: 0
         type: integer
       user_relations_limit:
-        description: "Limits the number of user entity relations the service responds.
-          Default: 0"
+        description: "Limits the number of user entity relations the service responds. Default: 0"
         maximum: 20
         minimum: 0
         type: integer
@@ -2144,20 +1953,17 @@ definitions:
   Configuration_InsertVersion:
     properties:
       auto_response:
-        description: "Defines whether or not the service should respond with processed
-          results automatically. Default: false"
+        description: "Defines whether or not the service should respond with processed results automatically. Default: false"
         type: boolean
       callback:
         description: Defines a callback URL for automatic data responding
         type: string
       categories_threshold:
-        description: "Defines low threshold for strength score of user categories to be
-          reported in the output. Default: 0.45"
+        description: "Defines low threshold for strength score of user categories to be reported in the output. Default: 0.45"
         format: double
         type: number
       chars_threshold:
-        description: "Defines the threshold for alphanumeric characters in the text in
-          percent. Default: 80"
+        description: "Defines the threshold for alphanumeric characters in the text in percent. Default: 80"
         maximum: 100
         minimum: 0
         type: integer
@@ -2168,27 +1974,22 @@ definitions:
         $ref: "#/definitions/ConfigurationDocumentSection"
         description: Includes options related to document processing mode
       entities_threshold:
-        description: Defines low threshold for evidence score of named and user entities
-          to be reported in the output.
+        description: Defines low threshold for evidence score of named and user entities to be reported in the output.
         type: integer
       is_primary:
-        description: "Identifies whether the current configuration is primary or not.
-          Default: false"
+        description: "Identifies whether the current configuration is primary or not. Default: false"
         type: boolean
       language:
-        description: "Defines target language that will be used for task processing.
-          Default: English"
+        description: "Defines target language that will be used for task processing. Default: English"
         type: string
       name:
         description: Configuration name
         type: string
       one_sentence:
-        description: "Leads the service to consider the entire document as single
-          sentence. Default: false"
+        description: "Leads the service to consider the entire document as single sentence. Default: false"
         type: boolean
       process_html:
-        description: "Leads the service to clean HTML tags before processing. Default:
-          false"
+        description: "Leads the service to clean HTML tags before processing. Default: false"
         type: boolean
     required:
       - auto_response
@@ -2206,20 +2007,17 @@ definitions:
   Configuration_ResponseVersion:
     properties:
       auto_response:
-        description: "Defines whether or not the service should respond with processed
-          results automatically. Default: false"
+        description: "Defines whether or not the service should respond with processed results automatically. Default: false"
         type: boolean
       callback:
         description: Defines a callback URL for automatic data responding
         type: string
       categories_threshold:
-        description: "Defines low threshold for strength score of user categories to be
-          reported in the output. Default: 0.45"
+        description: "Defines low threshold for strength score of user categories to be reported in the output. Default: 0.45"
         format: double
         type: number
       chars_threshold:
-        description: "Defines the threshold for alphanumeric characters in the text in
-          percent. Default: 80"
+        description: "Defines the threshold for alphanumeric characters in the text in percent. Default: 80"
         maximum: 100
         minimum: 0
         type: integer
@@ -2233,35 +2031,28 @@ definitions:
         $ref: "#/definitions/ConfigurationDocumentSection"
         description: Includes options related to document processing mode
       entities_threshold:
-        description: "Defines low threshold for evidence score of named and user
-          entities to be reported in the output. Default: 55"
+        description: "Defines low threshold for evidence score of named and user entities to be reported in the output. Default: 55"
         type: integer
       from_template_config_id:
-        description: Unique identifier of configuration (template) the current
-          configuration has been clonned from
+        description: Unique identifier of configuration (template) the current configuration has been clonned from
         type: string
       is_primary:
-        description: "Identifies whether the current configuration is primary or not.
-          Default: false"
+        description: "Identifies whether the current configuration is primary or not. Default: false"
         type: boolean
       language:
-        description: "Defines target language that will be used for task processing.
-          Default: English"
+        description: "Defines target language that will be used for task processing. Default: English"
         type: string
       modified:
-        description: The timestamp of the latest update of the record. Creation date of
-          update didn't occur
+        description: The timestamp of the latest update of the record. Creation date of update didn't occur
         type: string
       name:
         description: Configuration name
         type: string
       one_sentence:
-        description: "Leads the service to consider the entire document as single
-          sentence. Default: false"
+        description: "Leads the service to consider the entire document as single sentence. Default: false"
         type: boolean
       process_html:
-        description: "Leads the service to clean HTML tags before processing. Default:
-          false"
+        description: "Leads the service to clean HTML tags before processing. Default: false"
         type: boolean
       version:
         description: Version of the vertical pack, for versioning purposes
@@ -2286,20 +2077,17 @@ definitions:
   Configuration_UpdateVersion:
     properties:
       auto_response:
-        description: "Defines whether or not the service should respond with processed
-          results automatically. Default: false"
+        description: "Defines whether or not the service should respond with processed results automatically. Default: false"
         type: boolean
       callback:
         description: Defines a callback URL for automatic data responding
         type: string
       categories_threshold:
-        description: "Defines low threshold for strength score of user categories to be
-          reported in the output. Default: 0.45"
+        description: "Defines low threshold for strength score of user categories to be reported in the output. Default: 0.45"
         format: double
         type: number
       chars_threshold:
-        description: "Defines the threshold for alphanumeric characters in the text in
-          percent. Default: 80"
+        description: "Defines the threshold for alphanumeric characters in the text in percent. Default: 80"
         maximum: 100
         minimum: 0
         type: integer
@@ -2313,27 +2101,22 @@ definitions:
         $ref: "#/definitions/ConfigurationDocumentSection"
         description: Includes options related to document processing mode
       entities_threshold:
-        description: "Defines low threshold for evidence score of named and user
-          entities to be reported in the output. Default: 55"
+        description: "Defines low threshold for evidence score of named and user entities to be reported in the output. Default: 55"
         type: integer
       is_primary:
-        description: "Identifies whether the current configuration is primary or not.
-          Default: false"
+        description: "Identifies whether the current configuration is primary or not. Default: false"
         type: boolean
       language:
-        description: "Defines target language that will be used for task processing.
-          Default: English"
+        description: "Defines target language that will be used for task processing. Default: English"
         type: string
       name:
         description: Configuration name
         type: string
       one_sentence:
-        description: "Leads the service to consider the entire document as single
-          sentence. Default: false"
+        description: "Leads the service to consider the entire document as single sentence. Default: false"
         type: boolean
       process_html:
-        description: "Leads the service to clean HTML tags before processing. Default:
-          false"
+        description: "Leads the service to clean HTML tags before processing. Default: false"
         type: boolean
     required:
       - auto_response
@@ -2369,12 +2152,10 @@ definitions:
   Document:
     properties:
       id:
-        description: Up to 32 symbols unique identifier of document assigned and tracked
-          by client.
+        description: Up to 32 symbols unique identifier of document assigned and tracked by client.
         type: string
       job_id:
-        description: Specific marker of incoming job that can be used then for documents
-          retrieving
+        description: Specific marker of incoming job that can be used then for documents retrieving
         type: string
       tag:
         description: Any text of up to 50 characters used like marker.
@@ -2416,15 +2197,13 @@ definitions:
           $ref: "#/definitions/Intention"
         type: array
       job_id:
-        description: Specific marker of a job document belongs to, can be used for
-          documents ordering on client side
+        description: Specific marker of a job document belongs to, can be used for documents ordering on client side
         type: string
       language:
         description: Determined language of source text
         type: string
       language_score:
-        description: The percentage score of the best match of language among detected
-          languages
+        description: The percentage score of the best match of language among detected languages
         format: double
         type: number
       model_sentiment:
@@ -2441,14 +2220,12 @@ definitions:
           $ref: "#/definitions/Phrase"
         type: array
       relations:
-        description: Returns relations which represent a connection between one or more
-          Entity objects
+        description: Returns relations which represent a connection between one or more Entity objects
         items:
           $ref: "#/definitions/Relation"
         type: array
       sentiment_polarity:
-        description: Verbal representation of sentiment score. Can be "negative",
-          "positive" or "neutral"
+        description: Verbal representation of sentiment score. Can be "negative", "positive" or "neutral"
         enum:
           - negative
           - positive
@@ -2541,8 +2318,7 @@ definitions:
         description: Normalized form of the entity. It is the normalized entity title
         type: string
       type:
-        description: Type of the entity; can be either “named” or “user” (reserved for
-          future usage)
+        description: Type of the entity; can be either “named” or “user” (reserved for future usage)
         enum:
           - named
           - user
@@ -2585,8 +2361,7 @@ definitions:
         description: Descriptive label for the entity, e.g. Wikipedia URL
         type: string
       modified:
-        description: The timestamp of the latest update of the record. Creation date of
-          update didn't occur
+        description: The timestamp of the latest update of the record. Creation date of update didn't occur
         type: string
       name:
         description: Entity name
@@ -2675,8 +2450,7 @@ definitions:
         $ref: "#/definitions/FeatureDiscoveryModeSection"
         description: Includes discovery mode output for certain language
       html_processing:
-        description: Represents whether HTML processing supported for certain language
-          or not
+        description: Represents whether HTML processing supported for certain language or not
         type: boolean
       id:
         description: Unique language identifier
@@ -2685,8 +2459,7 @@ definitions:
         description: Represents language following options relevant to
         type: string
       one_sentence_mode:
-        description: Considers entire text as one sentence and uses optimized chunker
-          for short content like tweets.
+        description: Considers entire text as one sentence and uses optimized chunker for short content like tweets.
         type: boolean
       settings:
         $ref: "#/definitions/FeatureSettingsSection"
@@ -2706,77 +2479,61 @@ definitions:
   FeatureDetailedModeSection:
     properties:
       auto_categories:
-        description: Represents whether auto-categories of entities supported for
-          certain language or not
+        description: Represents whether auto-categories of entities supported for certain language or not
         type: boolean
       entity_mentions:
-        description: Represents whether mentions of entities supported for certain
-          language or not
+        description: Represents whether mentions of entities supported for certain language or not
         type: boolean
       entity_opinions:
-        description: Represents whether opinions of entities supported for certain
-          language or not
+        description: Represents whether opinions of entities supported for certain language or not
         type: boolean
       entity_relations:
-        description: Represents whether relations of entities supported for certain
-          language or not
+        description: Represents whether relations of entities supported for certain language or not
         type: boolean
       entity_themes:
-        description: Represents whether themes of entities supported for certain
-          language or not
+        description: Represents whether themes of entities supported for certain language or not
         type: boolean
       intentions:
-        description: Represents whether intentions detection supported for certain
-          language or not
+        description: Represents whether intentions detection supported for certain language or not
         type: boolean
       language_detection:
         description: Represents whether language detection feature supported or not
         type: boolean
       model_sentiment:
-        description: Represents whether model-based sentiment supported for certain
-          language or not
+        description: Represents whether model-based sentiment supported for certain language or not
         type: boolean
       named_entities:
-        description: Represents whether named entities extraction supported for certain
-          language or not
+        description: Represents whether named entities extraction supported for certain language or not
         type: boolean
       pos_tagging:
         description: Represents whether POS tagging supported for certain language or not
         type: boolean
       queries:
-        description: Represents whether queries of entities supported for certain
-          language or not
+        description: Represents whether queries of entities supported for certain language or not
         type: boolean
       sentiment:
-        description: Represents whether sentiment detection supported for certain
-          language or not
+        description: Represents whether sentiment detection supported for certain language or not
         type: boolean
       sentiment_phrases:
-        description: Represents whether sentiment phrases detection supported for
-          certain language or not
+        description: Represents whether sentiment phrases detection supported for certain language or not
         type: boolean
       summarization:
         description: Represents whether summarization supported for certain language or not
         type: boolean
       taxonomy:
-        description: Represents whether taxonomy feature supported for certain language
-          or not
+        description: Represents whether taxonomy feature supported for certain language or not
         type: boolean
       theme_mentions:
-        description: Represents whether mentions of themes supported for certain
-          language or not
+        description: Represents whether mentions of themes supported for certain language or not
         type: boolean
       themes:
-        description: Represents whether themes extraction supported for certain language
-          or not
+        description: Represents whether themes extraction supported for certain language or not
         type: boolean
       user_categories:
-        description: Represents whether user categories of entities supported for
-          certain language or not
+        description: Represents whether user categories of entities supported for certain language or not
         type: boolean
       user_entities:
-        description: Represents whether user entities extraction supported for certain
-          language or not
+        description: Represents whether user entities extraction supported for certain language or not
         type: boolean
     required:
       - auto_categories
@@ -2801,48 +2558,37 @@ definitions:
   FeatureDiscoveryModeSection:
     properties:
       entity_mentions:
-        description: Represents whether mentions of entities supported for certain
-          language or not
+        description: Represents whether mentions of entities supported for certain language or not
         type: boolean
       facet_attributes:
-        description: Represents whether attributes of facets supported for certain
-          language or not
+        description: Represents whether attributes of facets supported for certain language or not
         type: boolean
       facet_mentioins:
-        description: Represents whether mentions of facets supported for certain
-          language or not
+        description: Represents whether mentions of facets supported for certain language or not
         type: boolean
       facets:
-        description: Represents whether facets detection supported for certain language
-          or not
+        description: Represents whether facets detection supported for certain language or not
         type: boolean
       named_entities:
-        description: Represents whether named entities extraction supported for certain
-          language or not
+        description: Represents whether named entities extraction supported for certain language or not
         type: boolean
       queries:
-        description: Represents whether queries extraction supported for certain
-          language or not
+        description: Represents whether queries extraction supported for certain language or not
         type: boolean
       taxonomy:
-        description: Represents whether taxonomy feature supported for certain language
-          or not
+        description: Represents whether taxonomy feature supported for certain language or not
         type: boolean
       theme_mentions:
-        description: Represents whether mentions of themes supported for certain
-          language or not
+        description: Represents whether mentions of themes supported for certain language or not
         type: boolean
       themes:
-        description: Represents whether themes extraction supported for certain language
-          or not
+        description: Represents whether themes extraction supported for certain language or not
         type: boolean
       user_categories:
-        description: Represents whether user categories extraction supported for certain
-          language or not
+        description: Represents whether user categories extraction supported for certain language or not
         type: boolean
       user_entities:
-        description: Represents whether user entities extraction supported for certain
-          language or not
+        description: Represents whether user entities extraction supported for certain language or not
         type: boolean
     required:
       - entity_mentions
@@ -2859,28 +2605,22 @@ definitions:
   FeatureSettingsSection:
     properties:
       blacklist:
-        description: Represents whether blacklist feature supported for certain language
-          or not
+        description: Represents whether blacklist feature supported for certain language or not
         type: boolean
       queries:
-        description: Represents whether queries definition supported for certain
-          language or not
+        description: Represents whether queries definition supported for certain language or not
         type: boolean
       sentiment_phrases:
-        description: Represents whether sentiment-bearing phrases adjustmment supported
-          for certain language or not
+        description: Represents whether sentiment-bearing phrases adjustmment supported for certain language or not
         type: boolean
       taxonomy:
-        description: Represents whether taxonomy feature supported for certain language
-          or not
+        description: Represents whether taxonomy feature supported for certain language or not
         type: boolean
       user_categories:
-        description: Represents whether user categories definition supported for certain
-          language or not
+        description: Represents whether user categories definition supported for certain language or not
         type: boolean
       user_entities:
-        description: Represents whether user entities definition supported for certain
-          language or not
+        description: Represents whether user entities definition supported for certain language or not
         type: boolean
     required:
       - blacklist
@@ -2892,8 +2632,7 @@ definitions:
   FeatureTemplateSection:
     properties:
       config_id:
-        description: Unique identifier of configuration associated with the vertical
-          pack. Required for cloning
+        description: Unique identifier of configuration associated with the vertical pack. Required for cloning
         type: string
       description:
         description: Verbal description of template features, belonging to domain area, etc.
@@ -2911,8 +2650,7 @@ definitions:
         description: Name of the vertical pack
         type: string
       type:
-        description: The type of the vertical pack, can be either "vertical-pack" or
-          "language-default"
+        description: The type of the vertical pack, can be either "vertical-pack" or "language-default"
         enum:
           - language-default
           - vertical-pack
@@ -2958,8 +2696,7 @@ definitions:
         description: The length of the mention in bytes
         type: integer
       offset:
-        description: The amount of bytes offset in the original text before the start of
-          the mention
+        description: The amount of bytes offset in the original text before the start of the mention
         type: integer
     required:
       - index
@@ -2996,23 +2733,19 @@ definitions:
         description: Name of the sentiment model used for scoring
         type: string
       negative_score:
-        description: Negative (probable negative score) sentiment score associated with
-          the document
+        description: Negative (probable negative score) sentiment score associated with the document
         format: double
         type: number
       neutral_score:
-        description: Neutral (probable neutral score) sentiment score associated with
-          the document
+        description: Neutral (probable neutral score) sentiment score associated with the document
         format: double
         type: number
       positive_score:
-        description: Positive (probable positive score) sentiment score associated with
-          the document
+        description: Positive (probable positive score) sentiment score associated with the document
         format: double
         type: number
       sentiment_polarity:
-        description: Verbal representation of sentiment score that matches the best on
-          the document. Can be "negative", "positive" or "neutral"
+        description: Verbal representation of sentiment score that matches the best on the document. Can be "negative", "positive" or "neutral"
         enum:
           - negative
           - positive
@@ -3031,8 +2764,7 @@ definitions:
         description: The text of the expressed opinion
         type: string
       sentiment_polarity:
-        description: Verbal representation of sentiment score. Can be "negative",
-          "positive" or "neutral"
+        description: Verbal representation of sentiment score. Can be "negative", "positive" or "neutral"
         enum:
           - negative
           - positive
@@ -3077,8 +2809,7 @@ definitions:
         description: If the phrase has been negated, this gives the negating phrase
         type: string
       sentiment_polarity:
-        description: Verbal representation of sentiment score. Can be "negative",
-          "positive" or "neutral"
+        description: Verbal representation of sentiment score. Can be "negative", "positive" or "neutral"
         enum:
           - negative
           - positive
@@ -3121,8 +2852,7 @@ definitions:
         description: Unique sentiment-bearing phrase identifier
         type: string
       modified:
-        description: The timestamp of the latest update of the record. Creation date of
-          update didn't occur
+        description: The timestamp of the latest update of the record. Creation date of update didn't occur
         type: string
       name:
         description: Sentiment-bearing phrase name
@@ -3169,8 +2899,7 @@ definitions:
         description: Unique query identifier
         type: string
       modified:
-        description: The timestamp of the latest update of the record. Creation date of
-          update didn't occur
+        description: The timestamp of the latest update of the record. Creation date of update didn't occur
         type: string
       name:
         description: Query name
@@ -3251,8 +2980,7 @@ definitions:
         minimum: 0
         type: integer
       calls_settings:
-        description: Total number of settings API calls made. These do not affect API
-          balance
+        description: Total number of settings API calls made. These do not affect API balance
         minimum: 0
         type: integer
       colls_documents:
@@ -3268,8 +2996,7 @@ definitions:
         minimum: 0
         type: integer
       colls_responded:
-        description: Total number of successfully processed collections that have been
-          returned
+        description: Total number of successfully processed collections that have been returned
         minimum: 0
         type: integer
       configurations:
@@ -3286,8 +3013,7 @@ definitions:
         minimum: 0
         type: integer
       docs_responded:
-        description: Total number of successfully processed documents that have been
-          returned
+        description: Total number of successfully processed documents that have been returned
         minimum: 0
         type: integer
       latest_used_app:
@@ -3309,8 +3035,7 @@ definitions:
         minimum: 0
         type: integer
       overall_exceeded:
-        description: Total number of documents that have exceeded the favorable
-          (suggested) limit
+        description: Total number of documents that have exceeded the favorable (suggested) limit
         minimum: 0
         type: integer
       overall_texts:
@@ -3360,8 +3085,7 @@ definitions:
         minimum: 0
         type: integer
       calls_settings:
-        description: Total number of settings API calls made. These do not affect API
-          balance
+        description: Total number of settings API calls made. These do not affect API balance
         minimum: 0
         type: integer
       colls_failed:
@@ -3373,8 +3097,7 @@ definitions:
         minimum: 0
         type: integer
       colls_responded:
-        description: Total number of successfully processed collections that have been
-          returned
+        description: Total number of successfully processed collections that have been returned
         minimum: 0
         type: integer
       config_id:
@@ -3389,8 +3112,7 @@ definitions:
         minimum: 0
         type: integer
       docs_responded:
-        description: Total number of successfully processed documents that have been
-          returned
+        description: Total number of successfully processed documents that have been returned
         minimum: 0
         type: integer
       latest_used_app:
@@ -3412,8 +3134,7 @@ definitions:
         minimum: 0
         type: integer
       overall_exceeded:
-        description: Total number of documents that have exceeded the favorable
-          (suggested) limit
+        description: Total number of documents that have exceeded the favorable (suggested) limit
         minimum: 0
         type: integer
       overall_texts:
@@ -3463,8 +3184,7 @@ definitions:
         description: Represents current version of the Semantria service
         type: string
       supported_compression:
-        description: Exposes supported compression algorithms. Currently only gzip and
-          deflate are supported
+        description: Exposes supported compression algorithms. Currently only gzip and deflate are supported
         type: string
       supported_encoding:
         description: Exposes supported content encoding. Currently only UTF-8 is supported
@@ -3491,8 +3211,7 @@ definitions:
         description: The category title, which is its label in the text
         type: string
       type:
-        description: Type of category; can be either "node" (root level) or "leaf"
-          (nested) value
+        description: Type of category; can be either "node" (root level) or "leaf" (nested) value
         type: string
     required:
       - strength_score
@@ -3536,8 +3255,7 @@ definitions:
         minimum: 0
         type: integer
       callback_batch_limit:
-        description: Represents the maximum size of outgoing batch for callback data
-          retrieving mode
+        description: Represents the maximum size of outgoing batch for callback data retrieving mode
         minimum: 0
         type: integer
       categories_limit:
@@ -3569,8 +3287,7 @@ definitions:
         minimum: 0
         type: integer
       processed_batch_limit:
-        description: Represents the maximum size of outgoing batch for pulling data
-          retrieving mode
+        description: Represents the maximum size of outgoing batch for pulling data retrieving mode
         minimum: 0
         type: integer
       queries_limit:
@@ -3578,8 +3295,7 @@ definitions:
         minimum: 0
         type: integer
       return_source_text:
-        description: Indicates whether responding of source text along with the analysis
-          data is allowed or not
+        description: Indicates whether responding of source text along with the analysis data is allowed or not
         type: boolean
       sentiment_limit:
         description: Represents the maximum number of allowed sentiment-bearing phrases
@@ -3616,18 +3332,15 @@ definitions:
         minimum: 0
         type: integer
       data_calls_limit:
-        description: Represents the limit of data API calls per
-          "data_calls_limit_interval" value
+        description: Represents the limit of data API calls per "data_calls_limit_interval" value
         minimum: 0
         type: integer
       data_calls_limit_interval:
-        description: Represents an interval for the "data_calls_limit" value of current
-          subscription
+        description: Represents an interval for the "data_calls_limit" value of current subscription
         minimum: 0
         type: integer
       docs_balance:
-        description: Current transaction balance. Applicable for pay-as-you-go
-          subscriptions only
+        description: Current transaction balance. Applicable for pay-as-you-go subscriptions only
         minimum: 0
         type: integer
       docs_limit:
@@ -3635,18 +3348,15 @@ definitions:
         minimum: 0
         type: integer
       docs_limit_interval:
-        description: Represents the timeframe for the "docs_limit" value of current
-          subscription
+        description: Represents the timeframe for the "docs_limit" value of current subscription
         minimum: 0
         type: integer
       docs_suggested:
-        description: Represents the amount of favorable documents suggested for
-          throughput subscriptions
+        description: Represents the amount of favorable documents suggested for throughput subscriptions
         minimum: 0
         type: integer
       docs_suggested_interval:
-        description: Represents the timeframe for the “docs_suggested” value of the
-          current subscription
+        description: Represents the timeframe for the “docs_suggested” value of the current subscription
         minimum: 0
         type: integer
       expiration_date:
@@ -3660,31 +3370,26 @@ definitions:
         minimum: 0
         type: integer
       polling_calls_limit:
-        description: Represents the limit of polling API calls per
-          "polling_calls_limit_interval" value
+        description: Represents the limit of polling API calls per "polling_calls_limit_interval" value
         minimum: 0
         type: integer
       polling_calls_limit_interval:
-        description: Represents an interval for the "polling_calls_limit" value of
-          current subscription
+        description: Represents an interval for the "polling_calls_limit" value of current subscription
         minimum: 0
         type: integer
       priority:
-        description: Processing priority of current subscriber. Can have low, normal or
-          high value
+        description: Processing priority of current subscriber. Can have low, normal or high value
         type: string
       settings_calls_balance:
         description: Represents actual value of remained settings API calls
         minimum: 0
         type: integer
       settings_calls_limit:
-        description: Represents the limit of settings API calls per
-          "settings_calls_limit_interval" value
+        description: Represents the limit of settings API calls per "settings_calls_limit_interval" value
         minimum: 0
         type: integer
       settings_calls_limit_interval:
-        description: Represents an interval for the "settings_calls_limit" value of
-          current subscription
+        description: Represents an interval for the "settings_calls_limit" value of current subscription
         minimum: 0
         type: integer
     required:
@@ -3839,8 +3544,7 @@ definitions:
   SubscriptionFeatureSectionTemplate:
     properties:
       config_id:
-        description: Unique identifier of configuration associated with the vertical
-          pack. Required for cloning
+        description: Unique identifier of configuration associated with the vertical pack. Required for cloning
         type: string
       description:
         description: Verbal description of template features, belonging to domain area, etc.
@@ -3858,8 +3562,7 @@ definitions:
         description: Name of the vertical pack
         type: string
       type:
-        description: The type of the vertical pack, can be either "vertical-pack" or
-          "language-default"
+        description: The type of the vertical pack, can be either "vertical-pack" or "language-default"
         enum:
           - language-default
           - vertical-pack
@@ -3906,8 +3609,7 @@ definitions:
         description: Unique taxonomy node identifier
         type: string
       modified:
-        description: The timestamp of the latest update of the record. Creation date of
-          update didn't occur
+        description: The timestamp of the latest update of the record. Creation date of update didn't occur
         type: string
       name:
         description: Taxonomy name
@@ -3956,8 +3658,7 @@ definitions:
         description: Unique taxonomy topic identifier
         type: string
       type:
-        description: Type of the topic (category or query) associated with the certain
-          taxonomy node
+        description: Type of the topic (category or query) associated with the certain taxonomy node
         type: string
     required:
       - type
@@ -3972,13 +3673,11 @@ definitions:
         description: The normalized form of the theme
         type: string
       phrases_count:
-        description: Count of sentiment-bearing phrases was used in calculating theme's
-          sentiment
+        description: Count of sentiment-bearing phrases was used in calculating theme's sentiment
         minimum: 0
         type: integer
       sentiment_polarity:
-        description: Verbal representation of sentiment score. Can be "negative",
-          "positive" or "neutral"
+        description: Verbal representation of sentiment score. Can be "negative", "positive" or "neutral"
         enum:
           - negative
           - positive
@@ -4017,8 +3716,7 @@ definitions:
         description: Unique topic identifier
         type: string
       sentiment_polarity:
-        description: Verbal representation of sentiment score. Can be "negative",
-          "positive" or "neutral"
+        description: Verbal representation of sentiment score. Can be "negative", "positive" or "neutral"
         enum:
           - negative
           - positive
@@ -4047,8 +3745,7 @@ definitions:
   Word:
     properties:
       is_negated:
-        description: A flag indicating if the token is or is part of a sentiment
-          inverting construction
+        description: A flag indicating if the token is or is part of a sentiment inverting construction
         type: boolean
       sentiment_score:
         description: The sentiment score associated with the word

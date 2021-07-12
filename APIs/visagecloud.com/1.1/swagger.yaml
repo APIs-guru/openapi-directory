@@ -9,9 +9,7 @@ info:
     email: office@visagecloud.com
     name: VisageCloud
     url: https://visagecloud.com
-  description: Face search, recognition & classification API. Just make a call to
-    our REST API each time your app needs to access face recognition and
-    classification capabilities.
+  description: Face search, recognition & classification API. Just make a call to our REST API each time your app needs to access face recognition and classification capabilities.
   license:
     name: As per Developer Terms of Use
     url: https://visagecloud.com/developer-terms-of-use
@@ -192,8 +190,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Get account information including accessKey and secretKey by email and
-        password
+      summary: Get account information including accessKey and secretKey by email and password
       tags:
         - account-controller
   /rest/v1.1/analysis/compare:
@@ -239,8 +236,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Compare several faces identified by faceHash, without depending on
-        mapping faces to profiles
+      summary: Compare several faces identified by faceHash, without depending on mapping faces to profiles
       tags:
         - Analysis
   /rest/v1.1/analysis/detection:
@@ -260,22 +256,19 @@ paths:
           required: true
           type: string
         - default: true
-          description: Boolean value indicating whether you want the picture of the
-            analysis to be stored for later retrieval
+          description: Boolean value indicating whether you want the picture of the analysis to be stored for later retrieval
           in: query
           name: storeAnalysisPicture
           required: false
           type: boolean
         - default: true
-          description: Boolean value indicating whether you want the faces inside the
-            picture to be stored for later retrieval
+          description: Boolean value indicating whether you want the faces inside the picture to be stored for later retrieval
           in: query
           name: storeFacePictures
           required: false
           type: boolean
         - default: true
-          description: Boolean value indicating whether you want the result of the
-            analysis to be stored
+          description: Boolean value indicating whether you want the result of the analysis to be stored
           in: query
           name: storeResult
           required: false
@@ -286,16 +279,12 @@ paths:
           name: retentionTime
           required: false
           type: integer
-        - description: The URL of the picture, assuming it is served by a third party
-            server. Server should be accesible from the Internet or through
-            another netwoek by VisageCloud infrastructure
+        - description: The URL of the picture, assuming it is served by a third party server. Server should be accesible from the Internet or through another netwoek by VisageCloud infrastructure
           in: query
           name: pictureURL
           required: false
           type: string
-        - description: The multipart/form-data version of the image, in case a direct
-            upload is used. At least one of picture or pictureURL must be
-            present
+        - description: The multipart/form-data version of the image, in case a direct upload is used. At least one of picture or pictureURL must be present
           in: formData
           name: picture
           required: false
@@ -322,15 +311,13 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: Waits until the picture is successfully uploaded, before returning
-            the response back the the client
+          description: Waits until the picture is successfully uploaded, before returning the response back the the client
           in: query
           name: waitForPictureUpload
           required: false
           type: boolean
         - collectionFormat: multi
-          description: "[For advanced users only] Change feature filters for robustness of
-            feature extraction. Tweaking this parameter may affect per"
+          description: "[For advanced users only] Change feature filters for robustness of feature extraction. Tweaking this parameter may affect per"
           in: query
           items:
             type: string
@@ -416,22 +403,19 @@ paths:
           required: true
           type: string
         - default: true
-          description: Boolean value indicating whether you want the picture of the
-            analysis to be stored for later retrieval
+          description: Boolean value indicating whether you want the picture of the analysis to be stored for later retrieval
           in: query
           name: storeAnalysisPicture
           required: false
           type: boolean
         - default: true
-          description: Boolean value indicating whether you want the faces inside the
-            picture to be stored for later retrieval
+          description: Boolean value indicating whether you want the faces inside the picture to be stored for later retrieval
           in: query
           name: storeFacePictures
           required: false
           type: boolean
         - default: true
-          description: Boolean value indicating whether you want the result of the
-            analysis to be stored
+          description: Boolean value indicating whether you want the result of the analysis to be stored
           in: query
           name: storeResult
           required: false
@@ -503,15 +487,13 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: Waits until the picture is successfully uploaded, before returning
-            the response back the the client
+          description: Waits until the picture is successfully uploaded, before returning the response back the the client
           in: query
           name: waitForPictureUpload
           required: false
           type: boolean
         - collectionFormat: multi
-          description: "[For advanced users only] Change feature filters for robustness of
-            feature extraction. Tweaking this parameter may affect per"
+          description: "[For advanced users only] Change feature filters for robustness of feature extraction. Tweaking this parameter may affect per"
           in: query
           items:
             type: string
@@ -575,8 +557,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Retrieve a complete analysis object including both detection and
-        recognition information
+      summary: Retrieve a complete analysis object including both detection and recognition information
       tags:
         - Analysis
   /rest/v1.1/analytics/counting:
@@ -748,8 +729,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Show audience (based on number of occurrences of each person) breakdown
-        per declared attribute (age, gender).
+      summary: Show audience (based on number of occurrences of each person) breakdown per declared attribute (age, gender).
       tags:
         - Analytics for presence and audience
   /rest/v1.1/analytics/presence/total:
@@ -811,8 +791,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Show presence (based on number of occurences of each face) breakdown
-        per declared attribute (age, gender)
+      summary: Show presence (based on number of occurences of each face) breakdown per declared attribute (age, gender)
       tags:
         - Analytics for presence and audience
   /rest/v1.1/classifier/svm:
@@ -1824,8 +1803,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: "Gets the enrollment status of a profile: information on whether it is
-        suitable for authentication."
+      summary: "Gets the enrollment status of a profile: information on whether it is suitable for authentication."
       tags:
         - Profile
   /rest/v1.1/profile/map:
@@ -1872,8 +1850,7 @@ paths:
           description: Unauthorized
         "403":
           description: Forbidden
-      summary: Removes (unmaps) a list of faces, identified by faceHashes, from a
-        profile, identified by profileId
+      summary: Removes (unmaps) a list of faces, identified by faceHashes, from a profile, identified by profileId
       tags:
         - Profile
     get:
@@ -1962,8 +1939,7 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
-      summary: Adds (maps) a list of faces, identified by faceHashes, to a profile,
-        identified by profileId
+      summary: Adds (maps) a list of faces, identified by faceHashes, to a profile, identified by profileId
       tags:
         - Profile
   /rest/v1.1/profile/profile:
@@ -2029,8 +2005,7 @@ paths:
           name: collectionId
           required: true
           type: string
-        - description: External reference to additional information you don’t want to
-            share with VisageCloud
+        - description: External reference to additional information you don’t want to share with VisageCloud
           in: query
           name: externalId
           required: false
@@ -2190,8 +2165,7 @@ paths:
           name: collectionId
           required: true
           type: string
-        - description: External reference to additional information you don’t want to
-            share with VisageCloud
+        - description: External reference to additional information you don’t want to share with VisageCloud
           in: query
           name: externalId
           required: false
@@ -2597,8 +2571,7 @@ paths:
           required: false
           type: string
         - default: true
-          description: Boolean value indicating whether you want the original picture to
-            be stored for later retrieval
+          description: Boolean value indicating whether you want the original picture to be stored for later retrieval
           in: query
           name: skipFramesWithNoFaces
           required: false
@@ -2611,29 +2584,25 @@ paths:
           required: false
           type: integer
         - default: false
-          description: Boolean value indicating whether you want the original picture to
-            be stored for later retrieval
+          description: Boolean value indicating whether you want the original picture to be stored for later retrieval
           in: query
           name: storeOriginalFrames
           required: false
           type: boolean
         - default: false
-          description: Boolean value indicating whether you want to store permanently
-            store faces clippings of the recognized faces
+          description: Boolean value indicating whether you want to store permanently store faces clippings of the recognized faces
           in: query
           name: storeAttendanceFaces
           required: false
           type: boolean
         - default: false
-          description: Boolean value indicating whether you want to store permanently
-            store frames with a recognized face in them
+          description: Boolean value indicating whether you want to store permanently store frames with a recognized face in them
           in: query
           name: storeAttendanceFrames
           required: false
           type: boolean
         - default: false
-          description: Boolean value indicating whether the stream is currently active or
-            not
+          description: Boolean value indicating whether the stream is currently active or not
           in: query
           name: isActive
           required: false
@@ -2792,8 +2761,7 @@ paths:
           name: password
           required: false
           type: string
-        - description: Boolean value indicating whether you want the original picture to
-            be stored for later retrieval
+        - description: Boolean value indicating whether you want the original picture to be stored for later retrieval
           in: query
           name: skipFramesWithNoFaces
           required: false
@@ -2804,26 +2772,22 @@ paths:
           name: retentionTime
           required: false
           type: integer
-        - description: Boolean value indicating whether you want the original picture to
-            be stored for later retrieval
+        - description: Boolean value indicating whether you want the original picture to be stored for later retrieval
           in: query
           name: storeOriginalFrames
           required: false
           type: boolean
-        - description: Boolean value indicating whether you want to store permanently
-            store faces clippings of the recognized faces
+        - description: Boolean value indicating whether you want to store permanently store faces clippings of the recognized faces
           in: query
           name: storeAttendanceFaces
           required: false
           type: boolean
-        - description: Boolean value indicating whether you want to store permanently
-            store frames with a recognized face in them
+        - description: Boolean value indicating whether you want to store permanently store frames with a recognized face in them
           in: query
           name: storeAttendanceFrames
           required: false
           type: boolean
-        - description: Boolean value indicating whether the stream is currently active or
-            not
+        - description: Boolean value indicating whether the stream is currently active or not
           in: query
           name: isActive
           required: false

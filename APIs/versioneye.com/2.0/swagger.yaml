@@ -4,8 +4,7 @@ schemes:
 host: www.versioneye.com
 basePath: /api/v2
 info:
-  description: VersionEye is a cross-platform search engine for free/libre/open
-    source software libraries.
+  description: VersionEye is a cross-platform search engine for free/libre/open source software libraries.
   title: Available API endpoints
   version: "2.0"
   x-apisguru-categories:
@@ -42,20 +41,15 @@ tags:
 paths:
   /github:
     get:
-      description: >-
+      description: |-
         
         This endpoint shows all imported repositories from your Github account.
 
-
         This enpoint expects that you have a GitHub account connected and the token
-
         is still valid. If that is not the case please visit **https://www.versioneye.com/settings/connect**.
-
         to update your GitHub credentials.
 
-
         If it shows no or old data, then you can use the `github/sync` endpoint
-
         to update your account with the current meta data from GitHub.
       operationId: getGithub
       parameters:
@@ -100,8 +94,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: "This endpoint is registered as service hook on GitHub. It triggers
-        a project re-parse on each git push. "
+      description: "This endpoint is registered as service hook on GitHub. It triggers a project re-parse on each git push. "
       operationId: postGithubHookProjectId
       parameters:
         - description: Project ID
@@ -117,17 +110,13 @@ paths:
         - github
   /github/sync:
     get:
-      description: >-
+      description: |-
         
         Reimports ALL GitHub Repositories. This Endpoint fetches meta information to all
-
         repositories in your GitHub account. Meta information such as repo name, branches and
-
         supported project files.
 
-
         This endpoint works asynchronously and returns a status code. The status code is either
-
         **running** or **done**.
       operationId: getGithubSync
       responses:
@@ -138,20 +127,15 @@ paths:
         - github
   "/github/{repo_key}":
     delete:
-      description: >-
+      description: |-
         
         This Endpoint deletes a project on VersionEye!
 
-
         Due the limits of our current API framework, the repo key has to be
-
         encoded as url-safe string. That means all '/' has to be replaced with
-
         colons ':' and '.' has to be replaced with '~'.
 
-
         For example,  repository with fullname `versioneye/veye` has to transformed
-
         to `versioneye:veye`.
       operationId: deleteGithubRepoKey
       parameters:
@@ -173,20 +157,15 @@ paths:
       tags:
         - github
     get:
-      description: >-
+      description: |-
         
         This Endpoint returns detailed information about a GitHub repository.
 
-
         Due the limits of our current API framework, the repo key has to be
-
         encoded as url-safe string. That means all '/' has to be replaced with
-
         colons ':' and '.' has to be replaced with '~'.
 
-
         For example,  repository with fullname `versioneye/veye` has to transformed
-
         to `versioneye:veye`.
       operationId: getGithubRepoKey
       parameters:
@@ -204,20 +183,15 @@ paths:
     post:
       consumes:
         - application/json
-      description: >-
+      description: |-
         
         Use this Endpoint to import a project file from GitHub. This will create a new project on VersionEye.
 
-
         Due the limits of our current API framework, the repo key has to be
-
         encoded as url-safe string. That means all '/' has to be replaced with
-
         colons ':' and '.' has to be replaced with '~'.
 
-
         For example,  repository with fullname `versioneye/veye` has to transformed
-
         to `versioneye:veye`.
       operationId: postGithubRepoKey
       parameters:
@@ -246,8 +220,7 @@ paths:
         - github
   /me:
     get:
-      description: On Swagger, you can create session by adding additional parameter
-        :api_key.
+      description: On Swagger, you can create session by adding additional parameter :api_key.
       operationId: getMe
       responses:
         "200":
@@ -291,13 +264,11 @@ paths:
         - me
   /me/notifications:
     get:
-      description: >-
+      description: |-
         
         This Endpoint returns the 30 latest notifications.
 
-
         If there are new versions out there for software packages you follow directly on VersionEye, then
-
         each new version is a new **notification** for your account.
       operationId: getMeNotifications
       parameters:
@@ -315,7 +286,7 @@ paths:
         - me
   /organisations:
     get:
-      description: >-
+      description: |-
         
         This endpoint requires the API key from a user. The result is a set of organisations and their API keys.
       operationId: getOrganisations
@@ -327,7 +298,7 @@ paths:
         - organisations
   "/organisations/{orga_name}/inventory":
     get:
-      description: >-
+      description: |-
         
         Find a detailed description here: https://github.com/versioneye/versioneye-api/blob/master/docs/api/v2/organisation.md
       operationId: getOrganisationsOrgaNameInventory
@@ -347,8 +318,7 @@ paths:
           name: project_version
           required: false
           type: string
-        - description: Post processing filter. Possible values are 'ALL',
-            'duplicates_only', 'show_duplicates'
+        - description: Post processing filter. Possible values are 'ALL', 'duplicates_only', 'show_duplicates'
           in: query
           name: post_filter
           required: false
@@ -387,12 +357,10 @@ paths:
     post:
       consumes:
         - application/json
-      description: >-
+      description: |-
         
         This Endpoint takes 2 inventory filters and calculates the difference between them.
-
         The diff object contains wich items have been removed and/or added compared to the inventory1 filter.
-
         The response of this Endpoint is the ID of the diff object, which is calculated async in the background.
       operationId: postOrganisationsOrgaNameInventoryDiff
       parameters:
@@ -411,8 +379,7 @@ paths:
           name: f1_project_version
           required: false
           type: string
-        - description: Inventory1, post processing filter. Possible values are 'ALL',
-            'duplicates_only', 'show_duplicates'
+        - description: Inventory1, post processing filter. Possible values are 'ALL', 'duplicates_only', 'show_duplicates'
           in: formData
           name: f1_post_filter
           required: false
@@ -432,8 +399,7 @@ paths:
           name: f2_project_version
           required: false
           type: string
-        - description: Inventory2, post processing filter. Possible values are 'ALL',
-            'duplicates_only', 'show_duplicates'
+        - description: Inventory2, post processing filter. Possible values are 'ALL', 'duplicates_only', 'show_duplicates'
           in: formData
           name: f2_post_filter
           required: false
@@ -483,12 +449,10 @@ paths:
         - organisations
   "/products/search/{q}":
     get:
-      description: >-
+      description: |-
         
         This resource returns same results as our web application. But you get it as JSON objects -
-
         the result is an JSON array of product objects.
-
 
         When there's no match for the query, the result array will be empty.
       operationId: getProductsSearchQ
@@ -498,7 +462,7 @@ paths:
           name: q
           required: true
           type: string
-        - description: >-
+        - description: |-
             Filter results by programming languages;
                                               For filtering multiple languages submit a comma separated list of language strings.
           in: query
@@ -524,7 +488,7 @@ paths:
         - products
   "/products/sha/{sha}":
     get:
-      description: >-
+      description: |-
         
         This Endpoint expects a SHA value and returns the corresponding product to it, if available.
       operationId: getProductsShaSha
@@ -542,13 +506,11 @@ paths:
         - products
   "/products/{lang}/{prod_key}":
     get:
-      description: >-
+      description: |-
         
         Please replace all slashes `/` through colons `:` and all dots `.` through `~`!
 
-
         Example: The clojure package `yummy.json/json` has to be transformed to  `yummy~json:json`.
-
 
         #### Notes about status codes
 
@@ -580,13 +542,11 @@ paths:
         - products
   "/products/{lang}/{prod_key}/follow":
     delete:
-      description: >-
+      description: |-
         
         Please replace all slashes `/` through colons `:` and all dots `.` through `~`!
 
-
         Example: The clojure package `yummy.json/json` has to be transformed to  `yummy~json:json`.
-
 
         #### Response codes
 
@@ -612,19 +572,15 @@ paths:
       tags:
         - products
     get:
-      description: >-
+      description: |-
         
         Please replace all slashes `/` through colons `:` and all dots `.` through `~`!
 
-
         Example: The clojure package `yummy.json/json` has to be transformed to  `yummy~json:json`.
-
 
         #### Notes about status codes
 
-
         This resource will returns the status code 404 if there is no product
-
         for the given prod_key.
       operationId: getProductsLangProdKeyFollow
       parameters:
@@ -647,16 +603,13 @@ paths:
     post:
       consumes:
         - application/json
-      description: >-
+      description: |-
         
         Please replace all slashes `/` through colons `:` and all dots `.` through `~`!
 
-
         Example: The clojure package `yummy.json/json` has to be transformed to  `yummy~json:json`.
 
-
         #### Notes about status codes
-
 
         It will respond 404, when you are using wrong product key or encode it uncorrectly.
       operationId: postProductsLangProdKeyFollow
@@ -679,22 +632,17 @@ paths:
         - products
   "/products/{lang}/{prod_key}/references":
     get:
-      description: >-
+      description: |-
         
         It returns the references of a package.
 
-
         Please replace all slashes `/` through colons `:` and all dots `.` through `~`!
-
 
         Example: The clojure package `yummy.json/json` has to be transformed to  `yummy~json:json`.
 
-
         #### Notes about status codes
 
-
         This resource will return the status code 404 if there is no product for
-
         the given prod_key or the product has 0 references.
       operationId: getProductsLangProdKeyReferences
       parameters:
@@ -722,13 +670,11 @@ paths:
         - products
   "/products/{lang}/{prod_key}/versions":
     get:
-      description: >-
+      description: |-
         
         Please replace all slashes `/` through colons `:` and all dots `.` through `~`!
 
-
         Example: The clojure package `yummy.json/json` has to be transformed to  `yummy~json:json`.
-
 
         #### Notes about status codes
 
@@ -800,21 +746,16 @@ paths:
     post:
       consumes:
         - application/json
-      description: >-
+      description: |-
         
         This resource can parse a changelog.xml from the maven-changelog-plugin, assign
-
         it to a specific artifact and display the changelog infos on the product page.
-
 
         Please replace all slashes `/` through colons `:` and all dots `.` through `~`!
 
-
         Example: The clojure package `yummy.json/json` has to be transformed to  `yummy~json:json`.
 
-
         #### Notes about status codes
-
 
         It will respond 404, when you are using wrong product key or encode it uncorrectly.
       operationId: postProductsLangProdKeyProdVersionScmChanges
@@ -842,10 +783,9 @@ paths:
         - products
   /projects:
     get:
-      description: >-
+      description: |-
         
         To use this resource you need either an active session or you have to append
-
         your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
       operationId: getProjects
       parameters:
@@ -868,10 +808,9 @@ paths:
     post:
       consumes:
         - application/json
-      description: >-
+      description: |-
         
         To use this resource you need either an active session or you have to append
-
         your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
       operationId: postProjects
       parameters:
@@ -895,14 +834,12 @@ paths:
           name: orga_name
           required: false
           type: string
-        - description: The name of the team in the organisation this project should be
-            assigned to.
+        - description: The name of the team in the organisation this project should be assigned to.
           in: formData
           name: team_name
           required: false
           type: string
-        - description: If 'true' this project will not show up in the UI and gets removed
-            later.
+        - description: If 'true' this project will not show up in the UI and gets removed later.
           in: formData
           name: temp
           required: false
@@ -915,14 +852,11 @@ paths:
         - projects
   "/projects/{group_id}/{artifact_id}/merge_ga/{child_id}":
     get:
-      description: >-
+      description: |-
         
         This endpoint merges a project (child_id) into another project (group_id/artifact_id).
-
         This endpoint is specially for Maven based projects!
-
         To use this resource you need either an active session or you have to append
-
         your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
       operationId: getProjectsGroupIdArtifactIdMergeGaChildId
       parameters:
@@ -949,12 +883,10 @@ paths:
         - projects
   "/projects/{parent_id}/merge/{child_id}":
     get:
-      description: >-
+      description: |-
         
         This endpoint merges a project (child_id) into another project (parent_id).
-
         To use this resource you need either an active session or you have to append
-
         your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
       operationId: getProjectsParentIdMergeChildId
       parameters:
@@ -976,14 +908,11 @@ paths:
         - projects
   "/projects/{parent_id}/unmerge/{child_id}":
     get:
-      description: >-
+      description: |-
         
         This endpoint unmerges a project (child_id) from another project (parent_id). It makes the
-
         chilld again a separate project!
-
         To use this resource you need either an active session or you have to append
-
         your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
       operationId: getProjectsParentIdUnmergeChildId
       parameters:
@@ -1005,10 +934,9 @@ paths:
         - projects
   "/projects/{project_key}":
     delete:
-      description: >-
+      description: |-
         
         To use this resource you need either an active session or you have to append
-
         your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
       operationId: deleteProjectsProjectKey
       parameters:
@@ -1041,10 +969,9 @@ paths:
     post:
       consumes:
         - application/json
-      description: >-
+      description: |-
         
         To use this resource you need either an active session or you have to append
-
         your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
       operationId: postProjectsProjectKey
       parameters:
@@ -1067,20 +994,15 @@ paths:
     put:
       consumes:
         - application/json
-      description: >-
+      description: |-
         
         To use this resource you need either an active session or you have to append
-
         your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
 
-
         With this Endpoint an existing project can be updated. This are the fields which 
-
         can be updated: 
 
-
         ```
-
         {
           public: false,
           name: "toto",
@@ -1088,7 +1010,6 @@ paths:
           license: "Lizenz",
           version: "Versionio"
         }
-
         ```
       operationId: putProjectsProjectKey
       parameters:
@@ -1105,15 +1026,12 @@ paths:
         - projects
   "/projects/{project_key}/dependencies":
     get:
-      description: >-
+      description: |-
         
         This Endpoint returns a list of ALL dependencies of the project. This list includes
-
         dependencies of child projects as well.
 
-
         To use this resource you need either an active session or you have to append
-
         your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
       operationId: getProjectsProjectKeyDependencies
       parameters:
@@ -1130,10 +1048,9 @@ paths:
         - projects
   "/projects/{project_key}/licenses":
     get:
-      description: >-
+      description: |-
         
         To use this resource you need either an active session or you have to append
-
         your API Key to the URL as parameter. For example: "?api_key=666_your_api_key_666"
       operationId: getProjectsProjectKeyLicenses
       parameters:
@@ -1197,8 +1114,7 @@ paths:
         - services
   /sessions:
     delete:
-      description: Close current session. It's very handy method when you re-generated
-        your current API-key.
+      description: Close current session. It's very handy method when you re-generated your current API-key.
       operationId: deleteSessions
       responses:
         "204":

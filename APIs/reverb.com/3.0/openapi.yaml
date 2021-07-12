@@ -409,9 +409,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: "Condition:
-            all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,ver\
-            y-good,excellent,mint"
+        - description: "Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint"
           explode: false
           in: query
           name: conditions
@@ -463,8 +461,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: Make(s)/brand of item (e.g. Fender). Can take a single value or an
-            array.
+        - description: Make(s)/brand of item (e.g. Fender). Can take a single value or an array.
           explode: false
           in: query
           name: make
@@ -622,8 +619,7 @@ paths:
         - listing_conditions
   /listings:
     get:
-      description: Default search of listings includes only used & handmade. Add a
-        filter to view all listings or use the /listings/all endpoint.
+      description: Default search of listings includes only used & handmade. Add a filter to view all listings or use the /listings/all endpoint.
       parameters:
         - description: Search query.
           in: query
@@ -650,9 +646,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: "Condition:
-            all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,ver\
-            y-good,excellent,mint"
+        - description: "Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint"
           explode: false
           in: query
           name: conditions
@@ -704,8 +698,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: Make(s)/brand of item (e.g. Fender). Can take a single value or an
-            array.
+        - description: Make(s)/brand of item (e.g. Fender). Can take a single value or an array.
           explode: false
           in: query
           name: make
@@ -849,8 +842,7 @@ paths:
       responses:
         default:
           description: Unexpected error
-      summary: Default search of listings includes only used & handmade. Add a filter
-        to view all listings or use the /listings/all endpoint.
+      summary: Default search of listings includes only used & handmade. Add a filter to view all listings or use the /listings/all endpoint.
       tags:
         - listings
     post:
@@ -892,9 +884,7 @@ paths:
                   description: Product description. Please keep formatting to a minimum.
                   type: string
                 exclusive_channel:
-                  description: Currently for users of seller sites only, this allows you to have a
-                    listing available only to your seller site by setting this
-                    to 'seller_site'
+                  description: Currently for users of seller sites only, this allows you to have a listing available only to your seller site by setting this to 'seller_site'
                   enum:
                     - seller_site
                     - reverb
@@ -907,8 +897,7 @@ paths:
                   description: Set true if selling more than one
                   type: boolean
                 inventory:
-                  description: Number of items available for sale. Reverb will increment and
-                    decrement automatically.
+                  description: Number of items available for sale. Reverb will increment and decrement automatically.
                   type: integer
                 location:
                   properties:
@@ -943,16 +932,10 @@ paths:
                     type: string
                   type: array
                 preorder_info:
-                  description: Create or update a preorder listing. Requires opt-in. Please
-                    contact sales@reverb.com if you would like to activate this
-                    feature.
+                  description: Create or update a preorder listing. Requires opt-in. Please contact sales@reverb.com if you would like to activate this feature.
                   properties:
                     lead_time:
-                      description: The amount of time before the item will be ready to ship. When
-                        lead_time is submitted it is converted into days and
-                        added to the current date to produce
-                        `estimated_ship_date` in the response body of the
-                        request.
+                      description: The amount of time before the item will be ready to ship. When lead_time is submitted it is converted into days and added to the current date to produce `estimated_ship_date` in the response body of the request.
                       type: integer
                     lead_time_unit:
                       description: The unit of time which lead_time is measured in
@@ -961,10 +944,7 @@ paths:
                         - weeks
                       type: string
                     ship_date:
-                      description: "The date the item will be available to ship. In the response body
-                        of the request, `estimated_ship_date`, will be the same
-                        as ship_date. Date must be ISO8601 format - e.g:
-                        2015-04-09T10:52:23-00:00."
+                      description: "The date the item will be available to ship. In the response body of the request, `estimated_ship_date`, will be the same as ship_date. Date must be ISO8601 format - e.g: 2015-04-09T10:52:23-00:00."
                       type: string
                   required:
                     - lead_time_unit
@@ -972,8 +952,7 @@ paths:
                 price:
                   properties:
                     amount:
-                      description: The amount of money being expressed, as a POSIX-compliant decimal
-                        number
+                      description: The amount of money being expressed, as a POSIX-compliant decimal number
                       type: string
                     currency:
                       description: The currency the money will be expressed in
@@ -992,12 +971,7 @@ paths:
                     - currency
                   type: object
                 prop_65_warning:
-                  description: If your listing contains chemicals that are required to be reported
-                    under California Prop 65, please provide your warning
-                    statement. We will add the required 'Warning' label and link
-                    to California's information page, so you only need to
-                    provide the body of the warning. For more information, see
-                    https://www.p65warnings.ca.gov/new-proposition-65-warnings
+                  description: If your listing contains chemicals that are required to be reported under California Prop 65, please provide your warning statement. We will add the required 'Warning' label and link to California's information page, so you only need to provide the body of the warning. For more information, see https://www.p65warnings.ca.gov/new-proposition-65-warnings
                   type: string
                 publish:
                   description: Publish your listing if draft
@@ -1008,8 +982,7 @@ paths:
                       type: string
                   type: object
                 seller_cost:
-                  description: Cost of goods in your currency as a POSIX-compliant decimal number
-                    (internal use only, not shown to buyers)
+                  description: Cost of goods in your currency as a POSIX-compliant decimal number (internal use only, not shown to buyers)
                   type: string
                 shipping:
                   properties:
@@ -1023,8 +996,7 @@ paths:
                           rate:
                             properties:
                               amount:
-                                description: The amount of money being expressed, as a POSIX-compliant decimal
-                                  number
+                                description: The amount of money being expressed, as a POSIX-compliant decimal number
                                 type: string
                               currency:
                                 description: The currency the money will be expressed in
@@ -1043,8 +1015,7 @@ paths:
                               - currency
                             type: object
                           region_code:
-                            description: Country code or subregion/superregion code. Full list of codes at
-                              /api/shipping/regions
+                            description: Country code or subregion/superregion code. Full list of codes at /api/shipping/regions
                             type: string
                         type: object
                       type: array
@@ -1053,8 +1024,7 @@ paths:
                   description: id of a shop's shipping profile
                   type: string
                 shipping_profile_name:
-                  description: DEPRECATED, please use shipping_profile_id. Name of a shipping
-                    profile
+                  description: DEPRECATED, please use shipping_profile_id. Name of a shipping profile
                   type: string
                 sku:
                   description: Unique identifier for product
@@ -1063,8 +1033,7 @@ paths:
                   description: This item is sold As-Is and cannot be returned
                   type: boolean
                 storage_location:
-                  description: Internal note used by sellers to back reference their catalog
-                    system when entering a listing
+                  description: Internal note used by sellers to back reference their catalog system when entering a listing
                   type: string
                 tax_exempt:
                   description: Listing is exempt from taxes / VAT
@@ -1076,8 +1045,7 @@ paths:
                   description: Valid UPC code
                   type: string
                 upc_does_not_apply:
-                  description: True if a brand new product has no UPC code, ie for a handmade or
-                    custom item
+                  description: True if a brand new product has no UPC code, ie for a handmade or custom item
                   type: boolean
                 videos:
                   description: "List of YouTube video urls. Note: ONLY ONE ALLOWED"
@@ -1134,9 +1102,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: "Condition:
-            all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,ver\
-            y-good,excellent,mint"
+        - description: "Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint"
           explode: false
           in: query
           name: conditions
@@ -1188,8 +1154,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: Make(s)/brand of item (e.g. Fender). Can take a single value or an
-            array.
+        - description: Make(s)/brand of item (e.g. Fender). Can take a single value or an array.
           explode: false
           in: query
           name: make
@@ -1577,9 +1542,7 @@ paths:
                   description: Product description. Please keep formatting to a minimum.
                   type: string
                 exclusive_channel:
-                  description: Currently for users of seller sites only, this allows you to have a
-                    listing available only to your seller site by setting this
-                    to 'seller_site'
+                  description: Currently for users of seller sites only, this allows you to have a listing available only to your seller site by setting this to 'seller_site'
                   enum:
                     - seller_site
                     - reverb
@@ -1592,8 +1555,7 @@ paths:
                   description: Set true if selling more than one
                   type: boolean
                 inventory:
-                  description: Number of items available for sale. Reverb will increment and
-                    decrement automatically.
+                  description: Number of items available for sale. Reverb will increment and decrement automatically.
                   type: integer
                 location:
                   properties:
@@ -1628,16 +1590,10 @@ paths:
                     type: string
                   type: array
                 preorder_info:
-                  description: Create or update a preorder listing. Requires opt-in. Please
-                    contact sales@reverb.com if you would like to activate this
-                    feature.
+                  description: Create or update a preorder listing. Requires opt-in. Please contact sales@reverb.com if you would like to activate this feature.
                   properties:
                     lead_time:
-                      description: The amount of time before the item will be ready to ship. When
-                        lead_time is submitted it is converted into days and
-                        added to the current date to produce
-                        `estimated_ship_date` in the response body of the
-                        request.
+                      description: The amount of time before the item will be ready to ship. When lead_time is submitted it is converted into days and added to the current date to produce `estimated_ship_date` in the response body of the request.
                       type: integer
                     lead_time_unit:
                       description: The unit of time which lead_time is measured in
@@ -1646,10 +1602,7 @@ paths:
                         - weeks
                       type: string
                     ship_date:
-                      description: "The date the item will be available to ship. In the response body
-                        of the request, `estimated_ship_date`, will be the same
-                        as ship_date. Date must be ISO8601 format - e.g:
-                        2015-04-09T10:52:23-00:00."
+                      description: "The date the item will be available to ship. In the response body of the request, `estimated_ship_date`, will be the same as ship_date. Date must be ISO8601 format - e.g: 2015-04-09T10:52:23-00:00."
                       type: string
                   required:
                     - lead_time_unit
@@ -1657,8 +1610,7 @@ paths:
                 price:
                   properties:
                     amount:
-                      description: The amount of money being expressed, as a POSIX-compliant decimal
-                        number
+                      description: The amount of money being expressed, as a POSIX-compliant decimal number
                       type: string
                     currency:
                       description: The currency the money will be expressed in
@@ -1677,12 +1629,7 @@ paths:
                     - currency
                   type: object
                 prop_65_warning:
-                  description: If your listing contains chemicals that are required to be reported
-                    under California Prop 65, please provide your warning
-                    statement. We will add the required 'Warning' label and link
-                    to California's information page, so you only need to
-                    provide the body of the warning. For more information, see
-                    https://www.p65warnings.ca.gov/new-proposition-65-warnings
+                  description: If your listing contains chemicals that are required to be reported under California Prop 65, please provide your warning statement. We will add the required 'Warning' label and link to California's information page, so you only need to provide the body of the warning. For more information, see https://www.p65warnings.ca.gov/new-proposition-65-warnings
                   type: string
                 publish:
                   description: Publish your listing if draft
@@ -1693,8 +1640,7 @@ paths:
                       type: string
                   type: object
                 seller_cost:
-                  description: Cost of goods in your currency as a POSIX-compliant decimal number
-                    (internal use only, not shown to buyers)
+                  description: Cost of goods in your currency as a POSIX-compliant decimal number (internal use only, not shown to buyers)
                   type: string
                 shipping:
                   properties:
@@ -1708,8 +1654,7 @@ paths:
                           rate:
                             properties:
                               amount:
-                                description: The amount of money being expressed, as a POSIX-compliant decimal
-                                  number
+                                description: The amount of money being expressed, as a POSIX-compliant decimal number
                                 type: string
                               currency:
                                 description: The currency the money will be expressed in
@@ -1728,8 +1673,7 @@ paths:
                               - currency
                             type: object
                           region_code:
-                            description: Country code or subregion/superregion code. Full list of codes at
-                              /api/shipping/regions
+                            description: Country code or subregion/superregion code. Full list of codes at /api/shipping/regions
                             type: string
                         type: object
                       type: array
@@ -1738,8 +1682,7 @@ paths:
                   description: id of a shop's shipping profile
                   type: string
                 shipping_profile_name:
-                  description: DEPRECATED, please use shipping_profile_id. Name of a shipping
-                    profile
+                  description: DEPRECATED, please use shipping_profile_id. Name of a shipping profile
                   type: string
                 sku:
                   description: Unique identifier for product
@@ -1748,8 +1691,7 @@ paths:
                   description: This item is sold As-Is and cannot be returned
                   type: boolean
                 storage_location:
-                  description: Internal note used by sellers to back reference their catalog
-                    system when entering a listing
+                  description: Internal note used by sellers to back reference their catalog system when entering a listing
                   type: string
                 tax_exempt:
                   description: Listing is exempt from taxes / VAT
@@ -1761,8 +1703,7 @@ paths:
                   description: Valid UPC code
                   type: string
                 upc_does_not_apply:
-                  description: True if a brand new product has no UPC code, ie for a handmade or
-                    custom item
+                  description: True if a brand new product has no UPC code, ie for a handmade or custom item
                   type: boolean
                 videos:
                   description: "List of YouTube video urls. Note: ONLY ONE ALLOWED"
@@ -1822,13 +1763,10 @@ paths:
             schema:
               properties:
                 description:
-                  description: User input description specifying what is flag-worthy about this
-                    listing
+                  description: User input description specifying what is flag-worthy about this listing
                   type: string
                 reason:
-                  description: "Valid reasons: 'Sexuality/nudity', 'Hateful or inappropriate
-                    speech', 'Item not as described or potential fraud',
-                    'Trademark infringement', 'Other'"
+                  description: "Valid reasons: 'Sexuality/nudity', 'Hateful or inappropriate speech', 'Item not as described or potential fraud', 'Trademark infringement', 'Other'"
                   type: string
               required:
                 - reason
@@ -2097,8 +2035,7 @@ paths:
         - my
   "/my/conversations/{id}":
     get:
-      description: Display conversation details with messages in natural time order
-        (oldest to newest)
+      description: Display conversation details with messages in natural time order (oldest to newest)
       parameters:
         - in: path
           name: id
@@ -2111,8 +2048,7 @@ paths:
       security:
         - oauth2:
             - read_messages
-      summary: Display conversation details with messages in natural time order
-        (oldest to newest)
+      summary: Display conversation details with messages in natural time order (oldest to newest)
       tags:
         - my
     put:
@@ -2611,9 +2547,7 @@ paths:
                   description: Category slug from /api/categories
                   type: string
                 conditions:
-                  description: "Condition:
-                    all,new,b-stock,used,non-functioning,all-but-new,poor,fair,\
-                    good,very-good,excellent,mint"
+                  description: "Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint"
                   enum:
                     - all
                     - new
@@ -2686,8 +2620,7 @@ paths:
                   description: Only items that offer local pickup
                   type: boolean
                 make:
-                  description: Make(s)/brand of item (e.g. Fender). Can take a single value or an
-                    array.
+                  description: Make(s)/brand of item (e.g. Fender). Can take a single value or an array.
                   items:
                     type: string
                   type: array
@@ -2845,8 +2778,7 @@ paths:
         - my
   /my/listings:
     get:
-      description: Retrieve a list of live listings for the seller. To search all
-        listings specify state=all
+      description: Retrieve a list of live listings for the seller. To search all listings specify state=all
       parameters:
         - description: Search query.
           in: query
@@ -2873,9 +2805,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: "Condition:
-            all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,ver\
-            y-good,excellent,mint"
+        - description: "Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint"
           explode: false
           in: query
           name: conditions
@@ -2927,8 +2857,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: Make(s)/brand of item (e.g. Fender). Can take a single value or an
-            array.
+        - description: Make(s)/brand of item (e.g. Fender). Can take a single value or an array.
           explode: false
           in: query
           name: make
@@ -3052,9 +2981,7 @@ paths:
           required: false
           schema:
             type: boolean
-        - description: "Available: [\"all\", \"draft\", \"ended\", \"live\", \"ordered\",
-            \"sold_out\", \"suspended\", \"seller_unavailable\"]. Defaults to
-            'live'"
+        - description: "Available: [\"all\", \"draft\", \"ended\", \"live\", \"ordered\", \"sold_out\", \"suspended\", \"seller_unavailable\"]. Defaults to 'live'"
           in: query
           name: state
           required: false
@@ -3073,8 +3000,7 @@ paths:
       security:
         - oauth2:
             - read_listings
-      summary: Retrieve a list of live listings for the seller. To search all listings
-        specify state=all
+      summary: Retrieve a list of live listings for the seller. To search all listings specify state=all
       tags:
         - my
   /my/listings/drafts:
@@ -3106,9 +3032,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: "Condition:
-            all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,ver\
-            y-good,excellent,mint"
+        - description: "Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint"
           explode: false
           in: query
           name: conditions
@@ -3160,8 +3084,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: Make(s)/brand of item (e.g. Fender). Can take a single value or an
-            array.
+        - description: Make(s)/brand of item (e.g. Fender). Can take a single value or an array.
           explode: false
           in: query
           name: make
@@ -3339,8 +3262,7 @@ paths:
             schema:
               properties:
                 reason:
-                  description: 'The reason this listing is being ended. Valid reasons:
-                    ["not_sold", "reverb_sale"].'
+                  description: 'The reason this listing is being ended. Valid reasons: ["not_sold", "reverb_sale"].'
                   enum:
                     - not_sold
                     - reverb_sale
@@ -3697,12 +3619,7 @@ paths:
             schema:
               properties:
                 provider:
-                  description: "Shipping provider: One of UPS, USPS, FedEx, DHL Deutschland,
-                    DHLExpress, DHLGlobalMail, DHL, Canada Post, CanPar, Royal
-                    Mail, PostNL, Australia Post, EMS, La Poste - Colissimo,
-                    China Post, GLS, Parcelforce, Purolator, Interlogistica,
-                    Correos España, Ukraine Post, DPD Germany, DPD UK, DPD
-                    France, Hermes, TNT, Other"
+                  description: "Shipping provider: One of UPS, USPS, FedEx, DHL Deutschland, DHLExpress, DHLGlobalMail, DHL, Canada Post, CanPar, Royal Mail, PostNL, Australia Post, EMS, La Poste - Colissimo, China Post, GLS, Parcelforce, Purolator, Interlogistica, Correos España, Ukraine Post, DPD Germany, DPD UK, DPD France, Hermes, TNT, Other"
                   type: string
                 send_notification:
                   description: Should we send an email notification to the buyer
@@ -3764,29 +3681,25 @@ paths:
           required: false
           schema:
             type: integer
-        - description: "Filter by date created in ISO8601 format - e.g:
-            2015-04-09T10:52:23-00:00"
+        - description: "Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00"
           in: query
           name: created_start_date
           required: false
           schema:
             type: string
-        - description: "Filter by date created in ISO8601 format - e.g:
-            2015-04-09T10:52:23-00:00"
+        - description: "Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00"
           in: query
           name: created_end_date
           required: false
           schema:
             type: string
-        - description: "Filter by date modified in ISO8601 format - e.g:
-            2015-04-09T10:52:23-00:00"
+        - description: "Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00"
           in: query
           name: updated_start_date
           required: false
           schema:
             type: string
-        - description: "Filter by date modified in ISO8601 format - e.g:
-            2015-04-09T10:52:23-00:00"
+        - description: "Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00"
           in: query
           name: updated_end_date
           required: false
@@ -4586,16 +4499,14 @@ paths:
       tags:
         - shop
     post:
-      description: Enable vacation mode. All listings will be unavailable until
-        vacation mode is turned off.
+      description: Enable vacation mode. All listings will be unavailable until vacation mode is turned off.
       responses:
         default:
           description: Unexpected error
       security:
         - oauth2:
             - write_profile
-      summary: Enable vacation mode. All listings will be unavailable until vacation
-        mode is turned off.
+      summary: Enable vacation mode. All listings will be unavailable until vacation mode is turned off.
       tags:
         - shop
   "/shops/{id}/storefronts":
@@ -4761,9 +4672,7 @@ paths:
             schema:
               properties:
                 topic:
-                  description: "Valid values: listings/update, listings/publish,
-                    listings/bumps-ran-out, orders/create, orders/update,
-                    payments/create, payments/update, app/uninstalled"
+                  description: "Valid values: listings/update, listings/publish, listings/bumps-ran-out, orders/create, orders/update, payments/create, payments/update, app/uninstalled"
                   enum:
                     - listings/update
                     - listings/publish
@@ -4848,8 +4757,7 @@ components:
               price:
                 properties:
                   amount:
-                    description: The amount of money being expressed, as a POSIX-compliant decimal
-                      number
+                    description: The amount of money being expressed, as a POSIX-compliant decimal number
                     type: string
                   currency:
                     description: The currency the money will be expressed in
@@ -4870,8 +4778,7 @@ components:
               quantity:
                 type: string
               recipient_id:
-                description: ID of the recipient of the offer. Required if you are the seller
-                  pushing an offer to a buyer.
+                description: ID of the recipient of the offer. Required if you are the seller pushing an offer to a buyer.
                 type: string
               region_code:
                 type: string
@@ -4879,8 +4786,7 @@ components:
                 description: Shipping price (sellers only)
                 properties:
                   amount:
-                    description: The amount of money being expressed, as a POSIX-compliant decimal
-                      number
+                    description: The amount of money being expressed, as a POSIX-compliant decimal number
                     type: string
                   currency:
                     description: The currency the money will be expressed in

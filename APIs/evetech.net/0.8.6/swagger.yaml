@@ -109,8 +109,7 @@ parameters:
     name: Accept-Language
     type: string
   If-None-Match:
-    description: ETag from a previous request. A 304 will be returned if this
-      matches the current ETag
+    description: ETag from a previous request. A 304 will be returned if this matches the current ETag
     in: header
     name: If-None-Match
     type: string
@@ -347,8 +346,7 @@ paths:
                 title: get_alliances_alliance_id_executor_corporation_id
                 type: integer
               faction_id:
-                description: Faction ID this alliance is fighting for, if this alliance is
-                  enlisted in factional warfare
+                description: Faction ID this alliance is fighting for, if this alliance is enlisted in factional warfare
                 format: int32
                 title: get_alliances_alliance_id_faction_id
                 type: integer
@@ -985,8 +983,7 @@ paths:
         This route is cached for up to 3600 seconds
       operationId: post_characters_affiliation
       parameters:
-        - description: The character IDs to fetch affiliations for. All characters must
-            exist, or none will be returned
+        - description: The character IDs to fetch affiliations for. All characters must exist, or none will be returned
           in: body
           name: characters
           required: true
@@ -1177,8 +1174,7 @@ paths:
                 title: get_characters_character_id_description
                 type: string
               faction_id:
-                description: ID of the faction the character is fighting for, if the character
-                  is enlisted in Factional Warfare
+                description: ID of the faction the character is fighting for, if the character is enlisted in Factional Warfare
                 format: int32
                 title: get_characters_character_id_faction_id
                 type: integer
@@ -1287,26 +1283,17 @@ paths:
       x-cached-seconds: 3600
   "/characters/{character_id}/agents_research/":
     get:
-      description: >-
-        Return a list of agents research information for a character. The
-        formula for finding the current research points with an agent is:
-        currentPoints = remainderPoints + pointsPerDay * days(currentTime -
-        researchStartDate)
-
+      description: |-
+        Return a list of agents research information for a character. The formula for finding the current research points with an agent is: currentPoints = remainderPoints + pointsPerDay * days(currentTime - researchStartDate)
 
         ---
-
         Alternate route: `/dev/characters/{character_id}/agents_research/`
-
 
         Alternate route: `/legacy/characters/{character_id}/agents_research/`
 
-
         Alternate route: `/v1/characters/{character_id}/agents_research/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_characters_character_id_agents_research
       parameters:
@@ -1717,16 +1704,11 @@ paths:
       x-cached-seconds: 3600
   "/characters/{character_id}/assets/locations/":
     post:
-      description: >
-        Return locations for a set of item ids, which you can get from
-        character assets endpoint. Coordinates for items in hangars or stations
-        are set to (0,0,0)
-
+      description: |
+        Return locations for a set of item ids, which you can get from character assets endpoint. Coordinates for items in hangars or stations are set to (0,0,0)
 
         ---
-
         Alternate route: `/dev/characters/{character_id}/assets/locations/`
-
 
         Alternate route: `/v2/characters/{character_id}/assets/locations/`
       operationId: post_characters_character_id_assets_locations
@@ -1862,19 +1844,13 @@ paths:
         - v2
   "/characters/{character_id}/assets/names/":
     post:
-      description: >
-        Return names for a set of item ids, which you can get from
-        character assets endpoint. Typically used for items that can customize
-        names, like containers or ships.
-
+      description: |
+        Return names for a set of item ids, which you can get from character assets endpoint. Typically used for items that can customize names, like containers or ships.
 
         ---
-
         Alternate route: `/dev/characters/{character_id}/assets/names/`
 
-
         Alternate route: `/legacy/characters/{character_id}/assets/names/`
-
 
         Alternate route: `/v1/characters/{character_id}/assets/names/`
       operationId: post_characters_character_id_assets_names
@@ -2033,8 +2009,7 @@ paths:
             description: 200 ok object
             properties:
               accrued_remap_cooldown_date:
-                description: Neural remapping cooldown after a character uses remap accrued over
-                  time
+                description: Neural remapping cooldown after a character uses remap accrued over time
                 format: date-time
                 title: get_characters_character_id_attributes_accrued_remap_cooldown_date
                 type: string
@@ -2298,11 +2273,7 @@ paths:
                   title: get_characters_character_id_blueprints_location_flag
                   type: string
                 location_id:
-                  description: References a solar system, station or item_id if this blueprint is
-                    located within a container. If the return value is an
-                    item_id, then the Character AssetList API must be queried to
-                    find the container using the given item_id to determine the
-                    correct location of the Blueprint.
+                  description: References a solar system, station or item_id if this blueprint is located within a container. If the return value is an item_id, then the Character AssetList API must be queried to find the container using the given item_id to determine the correct location of the Blueprint.
                   format: int64
                   title: get_characters_character_id_blueprints_location_id
                   type: integer
@@ -2314,17 +2285,13 @@ paths:
                   title: get_characters_character_id_blueprints_material_efficiency
                   type: integer
                 quantity:
-                  description: A range of numbers with a minimum of -2 and no maximum value where
-                    -1 is an original and -2 is a copy. It can be a positive
-                    integer if it is a stack of blueprint originals fresh from
-                    the market (e.g. no activities performed on them yet).
+                  description: A range of numbers with a minimum of -2 and no maximum value where -1 is an original and -2 is a copy. It can be a positive integer if it is a stack of blueprint originals fresh from the market (e.g. no activities performed on them yet).
                   format: int32
                   minimum: -2
                   title: get_characters_character_id_blueprints_quantity
                   type: integer
                 runs:
-                  description: Number of runs remaining if the blueprint is a copy, -1 if it is an
-                    original.
+                  description: Number of runs remaining if the blueprint is a copy, -1 if it is an original.
                   format: int32
                   minimum: -1
                   title: get_characters_character_id_blueprints_runs
@@ -2503,8 +2470,7 @@ paths:
                   title: get_characters_character_id_bookmarks_bookmark_id
                   type: integer
                 coordinates:
-                  description: Optional object that is returned if a bookmark was made on a planet
-                    or a random location in space.
+                  description: Optional object that is returned if a bookmark was made on a planet or a random location in space.
                   properties:
                     x:
                       description: x number
@@ -2543,8 +2509,7 @@ paths:
                   title: get_characters_character_id_bookmarks_folder_id
                   type: integer
                 item:
-                  description: Optional object that is returned if a bookmark was made on a
-                    particular item.
+                  description: Optional object that is returned if a bookmark was made on a particular item.
                   properties:
                     item_id:
                       description: item_id integer
@@ -2802,26 +2767,17 @@ paths:
       x-cached-seconds: 3600
   "/characters/{character_id}/calendar/":
     get:
-      description: >-
-        Get 50 event summaries from the calendar. If no from_event ID is
-        given, the resource will return the next 50 chronological event
-        summaries from now. If a from_event ID is specified, it will return the
-        next 50 chronological event summaries from after that event
-
+      description: |-
+        Get 50 event summaries from the calendar. If no from_event ID is given, the resource will return the next 50 chronological event summaries from now. If a from_event ID is specified, it will return the next 50 chronological event summaries from after that event
 
         ---
-
         Alternate route: `/dev/characters/{character_id}/calendar/`
-
 
         Alternate route: `/legacy/characters/{character_id}/calendar/`
 
-
         Alternate route: `/v1/characters/{character_id}/calendar/`
 
-
         ---
-
         This route is cached for up to 5 seconds
       operationId: get_characters_character_id_calendar
       parameters:
@@ -3008,11 +2964,7 @@ paths:
               owner_name: EVE System
               owner_type: eve_server
               response: Undecided
-              text: "o7: The EVE Online Show features latest developer news, fast paced
-                action, community overviews and a lot more with CCP Guard and
-                CCP Mimic. Join the thrilling o7 live broadcast at 20:00 EVE
-                time (=UTC) on <a href=\"http://www.twitch.tv/ccp\">EVE TV</a>.
-                Don't miss it!"
+              text: "o7: The EVE Online Show features latest developer news, fast paced action, community overviews and a lot more with CCP Guard and CCP Mimic. Join the thrilling o7 live broadcast at 20:00 EVE time (=UTC) on <a href=\"http://www.twitch.tv/ccp\">EVE TV</a>. Don't miss it!"
               title: o7 The EVE Online Show
           headers:
             Cache-Control:
@@ -3283,23 +3235,17 @@ paths:
         - v3
   "/characters/{character_id}/calendar/{event_id}/attendees/":
     get:
-      description: >-
+      description: |-
         Get all invited attendees for a given event
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/calendar/{event_id}/attendees/`
-
 
         Alternate route: `/legacy/characters/{character_id}/calendar/{event_id}/attendees/`
 
-
         Alternate route: `/v1/characters/{character_id}/calendar/{event_id}/attendees/`
 
-
         ---
-
         This route is cached for up to 600 seconds
       operationId: get_characters_character_id_calendar_event_id_attendees
       parameters:
@@ -3798,8 +3744,7 @@ paths:
                   title: get_characters_character_id_contacts_contact_type
                   type: string
                 is_blocked:
-                  description: Whether this contact is in the blocked list. Note a missing value
-                    denotes unknown, not true or false
+                  description: Whether this contact is in the blocked list. Note a missing value denotes unknown, not true or false
                   title: get_characters_character_id_contacts_is_blocked
                   type: boolean
                 is_watched:
@@ -3950,8 +3895,7 @@ paths:
           type: number
         - $ref: "#/parameters/token"
         - default: false
-          description: Whether the contact should be watched, note this is only effective
-            on characters
+          description: Whether the contact should be watched, note this is only effective on characters
           in: query
           name: watched
           required: false
@@ -4091,8 +4035,7 @@ paths:
           type: number
         - $ref: "#/parameters/token"
         - default: false
-          description: Whether the contact should be watched, note this is only effective
-            on characters
+          description: Whether the contact should be watched, note this is only effective on characters
           in: query
           name: watched
           required: false
@@ -4297,25 +4240,17 @@ paths:
       x-cached-seconds: 300
   "/characters/{character_id}/contracts/":
     get:
-      description: >-
-        Returns contracts available to a character, only if the character
-        is issuer, acceptor or assignee. Only returns contracts no older than 30
-        days, or if the status is "in_progress".
-
+      description: |-
+        Returns contracts available to a character, only if the character is issuer, acceptor or assignee. Only returns contracts no older than 30 days, or if the status is "in_progress".
 
         ---
-
         Alternate route: `/dev/characters/{character_id}/contracts/`
-
 
         Alternate route: `/legacy/characters/{character_id}/contracts/`
 
-
         Alternate route: `/v1/characters/{character_id}/contracts/`
 
-
         ---
-
         This route is cached for up to 300 seconds
       operationId: get_characters_character_id_contracts
       parameters:
@@ -4378,8 +4313,7 @@ paths:
                   title: get_characters_character_id_contracts_acceptor_id
                   type: integer
                 assignee_id:
-                  description: ID to whom the contract is assigned, can be corporation or
-                    character ID
+                  description: ID to whom the contract is assigned, can be corporation or character ID
                   format: int32
                   title: get_characters_character_id_contracts_assignee_id
                   type: integer
@@ -4438,8 +4372,7 @@ paths:
                   title: get_characters_character_id_contracts_end_location_id
                   type: integer
                 for_corporation:
-                  description: true if the contract was issued on behalf of the issuer's
-                    corporation
+                  description: true if the contract was issued on behalf of the issuer's corporation
                   title: get_characters_character_id_contracts_for_corporation
                   type: boolean
                 issuer_corporation_id:
@@ -4595,23 +4528,17 @@ paths:
       x-cached-seconds: 300
   "/characters/{character_id}/contracts/{contract_id}/bids/":
     get:
-      description: >-
+      description: |-
         Lists bids on a particular auction contract
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/contracts/{contract_id}/bids/`
-
 
         Alternate route: `/legacy/characters/{character_id}/contracts/{contract_id}/bids/`
 
-
         Alternate route: `/v1/characters/{character_id}/contracts/{contract_id}/bids/`
 
-
         ---
-
         This route is cached for up to 300 seconds
       operationId: get_characters_character_id_contracts_contract_id_bids
       parameters:
@@ -4773,23 +4700,17 @@ paths:
       x-cached-seconds: 300
   "/characters/{character_id}/contracts/{contract_id}/items/":
     get:
-      description: >-
+      description: |-
         Lists items of a particular contract
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/contracts/{contract_id}/items/`
-
 
         Alternate route: `/legacy/characters/{character_id}/contracts/{contract_id}/items/`
 
-
         Alternate route: `/v1/characters/{character_id}/contracts/{contract_id}/items/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_characters_character_id_contracts_contract_id_items
       parameters:
@@ -4832,9 +4753,7 @@ paths:
               description: 200 ok object
               properties:
                 is_included:
-                  description: true if the contract issuer has submitted this item with the
-                    contract, false if the isser is asking for this item in the
-                    contract
+                  description: true if the contract issuer has submitted this item with the contract, false if the isser is asking for this item in the contract
                   title: get_characters_character_id_contracts_contract_id_items_is_included
                   type: boolean
                 is_singleton:
@@ -4847,9 +4766,7 @@ paths:
                   title: get_characters_character_id_contracts_contract_id_items_quantity
                   type: integer
                 raw_quantity:
-                  description: -1 indicates that the item is a singleton (non-stackable). If the
-                    item happens to be a Blueprint, -1 is an Original and -2 is
-                    a Blueprint Copy
+                  description: -1 indicates that the item is a singleton (non-stackable). If the item happens to be a Blueprint, -1 is an Original and -2 is a Blueprint Copy
                   format: int32
                   title: get_characters_character_id_contracts_contract_id_items_raw_quantity
                   type: integer
@@ -5022,8 +4939,7 @@ paths:
                   title: get_characters_character_id_corporationhistory_is_deleted
                   type: boolean
                 record_id:
-                  description: An incrementing ID that can be used to canonically establish order
-                    of records in cases where dates may be ambiguous
+                  description: An incrementing ID that can be used to canonically establish order of records in cases where dates may be ambiguous
                   format: int32
                   title: get_characters_character_id_corporationhistory_record_id
                   type: integer
@@ -5101,15 +5017,11 @@ paths:
       x-cached-seconds: 3600
   "/characters/{character_id}/cspa/":
     post:
-      description: >
-        Takes a source character ID in the url and a set of target
-        character ID's in the body, returns a CSPA charge cost
-
+      description: |
+        Takes a source character ID in the url and a set of target character ID's in the body, returns a CSPA charge cost
 
         ---
-
         Alternate route: `/dev/characters/{character_id}/cspa/`
-
 
         Alternate route: `/v4/characters/{character_id}/cspa/`
       operationId: post_characters_character_id_cspa
@@ -5135,8 +5047,7 @@ paths:
         - $ref: "#/parameters/token"
       responses:
         "201":
-          description: Aggregate cost of sending a mail from the source character to the
-            target characters, in ISK
+          description: Aggregate cost of sending a mail from the source character to the target characters, in ISK
           examples:
             application/json: 2950
           schema:
@@ -5677,17 +5588,13 @@ paths:
         - v1
   "/characters/{character_id}/fittings/{fitting_id}/":
     delete:
-      description: >
+      description: |
         Delete a fitting from a character
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/fittings/{fitting_id}/`
 
-
         Alternate route: `/legacy/characters/{character_id}/fittings/{fitting_id}/`
-
 
         Alternate route: `/v1/characters/{character_id}/fittings/{fitting_id}/`
       operationId: delete_characters_character_id_fittings_fitting_id
@@ -5823,14 +5730,12 @@ paths:
                 title: get_characters_character_id_fleet_role
                 type: string
               squad_id:
-                description: ID of the squad the member is in. If not applicable, will be set to
-                  -1
+                description: ID of the squad the member is in. If not applicable, will be set to -1
                 format: int64
                 title: get_characters_character_id_fleet_squad_id
                 type: integer
               wing_id:
-                description: ID of the wing the member is in. If not applicable, will be set to
-                  -1
+                description: ID of the wing the member is in. If not applicable, will be set to -1
                 format: int64
                 title: get_characters_character_id_fleet_wing_id
                 type: integer
@@ -5989,15 +5894,12 @@ paths:
                 title: get_characters_character_id_fw_stats_current_rank
                 type: integer
               enlisted_on:
-                description: The enlistment date of the given character into faction warfare.
-                  Will not be included if character is not enlisted in faction
-                  warfare
+                description: The enlistment date of the given character into faction warfare. Will not be included if character is not enlisted in faction warfare
                 format: date-time
                 title: get_characters_character_id_fw_stats_enlisted_on
                 type: string
               faction_id:
-                description: The faction the given character is enlisted to fight for. Will not
-                  be included if character is not enlisted in faction warfare
+                description: The faction the given character is enlisted to fight for. Will not be included if character is not enlisted in faction warfare
                 format: int32
                 title: get_characters_character_id_fw_stats_faction_id
                 type: integer
@@ -6012,20 +5914,17 @@ paths:
                 description: Summary of kills done by the given character against enemy factions
                 properties:
                   last_week:
-                    description: Last week's total number of kills by a given character against
-                      enemy factions
+                    description: Last week's total number of kills by a given character against enemy factions
                     format: int32
                     title: get_characters_character_id_fw_stats_last_week
                     type: integer
                   total:
-                    description: Total number of kills by a given character against enemy factions
-                      since the character enlisted
+                    description: Total number of kills by a given character against enemy factions since the character enlisted
                     format: int32
                     title: get_characters_character_id_fw_stats_total
                     type: integer
                   yesterday:
-                    description: Yesterday's total number of kills by a given character against
-                      enemy factions
+                    description: Yesterday's total number of kills by a given character against enemy factions
                     format: int32
                     title: get_characters_character_id_fw_stats_yesterday
                     type: integer
@@ -6036,8 +5935,7 @@ paths:
                 title: get_characters_character_id_fw_stats_kills
                 type: object
               victory_points:
-                description: Summary of victory points gained by the given character for the
-                  enlisted faction
+                description: Summary of victory points gained by the given character for the enlisted faction
                 properties:
                   last_week:
                     description: Last week's victory points gained by the given character
@@ -6284,8 +6182,7 @@ paths:
         - $ref: "#/parameters/character_id"
         - $ref: "#/parameters/datasource"
         - $ref: "#/parameters/If-None-Match"
-        - description: Whether to retrieve completed character industry jobs. Only
-            includes jobs from the past 90 days
+        - description: Whether to retrieve completed character industry jobs. Only includes jobs from the past 90 days
           in: query
           name: include_completed
           required: false
@@ -6341,9 +6238,7 @@ paths:
                   title: get_characters_character_id_industry_jobs_blueprint_id
                   type: integer
                 blueprint_location_id:
-                  description: Location ID of the location from which the blueprint was installed.
-                    Normally a station ID, but can also be an asset (e.g.
-                    container) or corporation facility
+                  description: Location ID of the location from which the blueprint was installed. Normally a station ID, but can also be an asset (e.g. container) or corporation facility
                   format: int64
                   title: get_characters_character_id_industry_jobs_blueprint_location_id
                   type: integer
@@ -6398,15 +6293,12 @@ paths:
                   title: get_characters_character_id_industry_jobs_licensed_runs
                   type: integer
                 output_location_id:
-                  description: Location ID of the location to which the output of the job will be
-                    delivered. Normally a station ID, but can also be a
-                    corporation facility
+                  description: Location ID of the location to which the output of the job will be delivered. Normally a station ID, but can also be a corporation facility
                   format: int64
                   title: get_characters_character_id_industry_jobs_output_location_id
                   type: integer
                 pause_date:
-                  description: Date and time when this job was paused (i.e. time when the facility
-                    where this job was installed went offline)
+                  description: Date and time when this job was paused (i.e. time when the facility where this job was installed went offline)
                   format: date-time
                   title: get_characters_character_id_industry_jobs_pause_date
                   type: string
@@ -6421,8 +6313,7 @@ paths:
                   title: get_characters_character_id_industry_jobs_product_type_id
                   type: integer
                 runs:
-                  description: Number of runs for a manufacturing job, or number of copies to make
-                    for a blueprint copy
+                  description: Number of runs for a manufacturing job, or number of copies to make for a blueprint copy
                   format: int32
                   title: get_characters_character_id_industry_jobs_runs
                   type: integer
@@ -6448,8 +6339,7 @@ paths:
                   title: get_characters_character_id_industry_jobs_status
                   type: string
                 successful_runs:
-                  description: Number of successful runs for this job. Equal to runs unless this
-                    is an invention job
+                  description: Number of successful runs for this job. Equal to runs unless this is an invention job
                   format: int32
                   title: get_characters_character_id_industry_jobs_successful_runs
                   type: integer
@@ -6695,25 +6585,17 @@ paths:
       x-cached-seconds: 300
   "/characters/{character_id}/location/":
     get:
-      description: >-
-        Information about the characters current location. Returns the
-        current solar system id, and also the current station or structure ID if
-        applicable
-
+      description: |-
+        Information about the characters current location. Returns the current solar system id, and also the current station or structure ID if applicable
 
         ---
-
         Alternate route: `/dev/characters/{character_id}/location/`
-
 
         Alternate route: `/legacy/characters/{character_id}/location/`
 
-
         Alternate route: `/v1/characters/{character_id}/location/`
 
-
         ---
-
         This route is cached for up to 5 seconds
       operationId: get_characters_character_id_location
       parameters:
@@ -6723,9 +6605,7 @@ paths:
         - $ref: "#/parameters/token"
       responses:
         "200":
-          description: Information about the characters current location. Returns the
-            current solar system id, and also the current station or structure
-            ID if applicable
+          description: Information about the characters current location. Returns the current solar system id, and also the current station or structure ID if applicable
           examples:
             application/json:
               solar_system_id: 30002505
@@ -6842,24 +6722,17 @@ paths:
       x-cached-seconds: 5
   "/characters/{character_id}/loyalty/points/":
     get:
-      description: >-
-        Return a list of loyalty points for all corporations the character
-        has worked for
-
+      description: |-
+        Return a list of loyalty points for all corporations the character has worked for
 
         ---
-
         Alternate route: `/dev/characters/{character_id}/loyalty/points/`
-
 
         Alternate route: `/legacy/characters/{character_id}/loyalty/points/`
 
-
         Alternate route: `/v1/characters/{character_id}/loyalty/points/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_characters_character_id_loyalty_points
       parameters:
@@ -6987,25 +6860,17 @@ paths:
       x-cached-seconds: 3600
   "/characters/{character_id}/mail/":
     get:
-      description: >-
-        Return the 50 most recent mail headers belonging to the character
-        that match the query criteria. Queries can be filtered by label, and
-        last_mail_id can be used to paginate backwards
-
+      description: |-
+        Return the 50 most recent mail headers belonging to the character that match the query criteria. Queries can be filtered by label, and last_mail_id can be used to paginate backwards
 
         ---
-
         Alternate route: `/dev/characters/{character_id}/mail/`
-
 
         Alternate route: `/legacy/characters/{character_id}/mail/`
 
-
         Alternate route: `/v1/characters/{character_id}/mail/`
 
-
         ---
-
         This route is cached for up to 30 seconds
       operationId: get_characters_character_id_mail
       parameters:
@@ -7339,8 +7204,7 @@ paths:
           schema:
             $ref: "#/definitions/gateway_timeout"
         "520":
-          description: Internal error thrown from the EVE server. Most of the time this
-            means you have hit an EVE server rate limit
+          description: Internal error thrown from the EVE server. Most of the time this means you have hit an EVE server rate limit
           examples:
             application/json:
               error: Error 520 message
@@ -7365,21 +7229,15 @@ paths:
         - v1
   "/characters/{character_id}/mail/labels/":
     get:
-      description: >-
-        Return a list of the users mail labels, unread counts for each
-        label and a total unread count.
-
+      description: |-
+        Return a list of the users mail labels, unread counts for each label and a total unread count.
 
         ---
-
         Alternate route: `/dev/characters/{character_id}/mail/labels/`
-
 
         Alternate route: `/v3/characters/{character_id}/mail/labels/`
 
-
         ---
-
         This route is cached for up to 30 seconds
       operationId: get_characters_character_id_mail_labels
       parameters:
@@ -7678,17 +7536,13 @@ paths:
         - v2
   "/characters/{character_id}/mail/labels/{label_id}/":
     delete:
-      description: >
+      description: |
         Delete a mail label
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/mail/labels/{label_id}/`
 
-
         Alternate route: `/legacy/characters/{character_id}/mail/labels/{label_id}/`
-
 
         Alternate route: `/v1/characters/{character_id}/mail/labels/{label_id}/`
       operationId: delete_characters_character_id_mail_labels_label_id
@@ -9062,24 +8916,17 @@ paths:
       x-cached-seconds: 600
   "/characters/{character_id}/notifications/contacts/":
     get:
-      description: >-
-        Return notifications about having been added to someone's contact
-        list
-
+      description: |-
+        Return notifications about having been added to someone's contact list
 
         ---
-
         Alternate route: `/dev/characters/{character_id}/notifications/contacts/`
-
 
         Alternate route: `/legacy/characters/{character_id}/notifications/contacts/`
 
-
         Alternate route: `/v1/characters/{character_id}/notifications/contacts/`
 
-
         ---
-
         This route is cached for up to 600 seconds
       operationId: get_characters_character_id_notifications_contacts
       parameters:
@@ -9135,10 +8982,7 @@ paths:
                   title: get_characters_character_id_notifications_contacts_sender_character_id
                   type: integer
                 standing_level:
-                  description: "A number representing the standing level the receiver has been
-                    added at by the sender. The standing levels are as follows:
-                    -10 -> Terrible | -5 -> Bad |  0 -> Neutral |  5 -> Good
-                    |  10 -> Excellent"
+                  description: "A number representing the standing level the receiver has been added at by the sender. The standing levels are as follows: -10 -> Terrible | -5 -> Bad |  0 -> Neutral |  5 -> Good |  10 -> Excellent"
                   format: float
                   title: get_characters_character_id_notifications_contacts_standing_level
                   type: number
@@ -9562,8 +9406,7 @@ paths:
               description: 200 ok object
               properties:
                 duration:
-                  description: Number of days for which order is valid (starting from the issued
-                    date). An order expires at time issued + duration
+                  description: Number of days for which order is valid (starting from the issued date). An order expires at time issued + duration
                   format: int32
                   title: get_characters_character_id_orders_duration
                   type: integer
@@ -9577,8 +9420,7 @@ paths:
                   title: get_characters_character_id_orders_is_buy_order
                   type: boolean
                 is_corporation:
-                  description: Signifies whether the buy/sell order was placed on behalf of a
-                    corporation.
+                  description: Signifies whether the buy/sell order was placed on behalf of a corporation.
                   title: get_characters_character_id_orders_is_corporation
                   type: boolean
                 issued:
@@ -9592,8 +9434,7 @@ paths:
                   title: get_characters_character_id_orders_location_id
                   type: integer
                 min_volume:
-                  description: For buy orders, the minimum quantity that will be accepted in a
-                    matching sell order
+                  description: For buy orders, the minimum quantity that will be accepted in a matching sell order
                   format: int32
                   title: get_characters_character_id_orders_min_volume
                   type: integer
@@ -9737,24 +9578,17 @@ paths:
       x-cached-seconds: 1200
   "/characters/{character_id}/orders/history/":
     get:
-      description: >-
-        List cancelled and expired market orders placed by a character up
-        to 90 days in the past.
-
+      description: |-
+        List cancelled and expired market orders placed by a character up to 90 days in the past.
 
         ---
-
         Alternate route: `/dev/characters/{character_id}/orders/history/`
-
 
         Alternate route: `/legacy/characters/{character_id}/orders/history/`
 
-
         Alternate route: `/v1/characters/{character_id}/orders/history/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_characters_character_id_orders_history
       parameters:
@@ -9807,8 +9641,7 @@ paths:
               description: 200 ok object
               properties:
                 duration:
-                  description: Number of days the order was valid for (starting from the issued
-                    date). An order expires at time issued + duration
+                  description: Number of days the order was valid for (starting from the issued date). An order expires at time issued + duration
                   format: int32
                   title: get_characters_character_id_orders_history_duration
                   type: integer
@@ -9822,8 +9655,7 @@ paths:
                   title: get_characters_character_id_orders_history_is_buy_order
                   type: boolean
                 is_corporation:
-                  description: Signifies whether the buy/sell order was placed on behalf of a
-                    corporation.
+                  description: Signifies whether the buy/sell order was placed on behalf of a corporation.
                   title: get_characters_character_id_orders_history_is_corporation
                   type: boolean
                 issued:
@@ -9837,8 +9669,7 @@ paths:
                   title: get_characters_character_id_orders_history_location_id
                   type: integer
                 min_volume:
-                  description: For buy orders, the minimum quantity that will be accepted in a
-                    matching sell order
+                  description: For buy orders, the minimum quantity that will be accepted in a matching sell order
                   format: int32
                   title: get_characters_character_id_orders_history_min_volume
                   type: integer
@@ -10182,23 +10013,15 @@ paths:
       x-cached-seconds: 600
   "/characters/{character_id}/planets/{planet_id}/":
     get:
-      description: >-
-        Returns full details on the layout of a single planetary colony,
-        including links, pins and routes. Note: Planetary information is only
-        recalculated when the colony is viewed through the client. Information
-        will not update until this criteria is met.
-
+      description: |-
+        Returns full details on the layout of a single planetary colony, including links, pins and routes. Note: Planetary information is only recalculated when the colony is viewed through the client. Information will not update until this criteria is met.
 
         ---
-
         Alternate route: `/dev/characters/{character_id}/planets/{planet_id}/`
-
 
         Alternate route: `/v3/characters/{character_id}/planets/{planet_id}/`
 
-
         ---
-
         This route is cached for up to 600 seconds
       operationId: get_characters_character_id_planets_planet_id
       parameters:
@@ -11393,10 +11216,7 @@ paths:
             description: 200 ok object
             properties:
               ship_item_id:
-                description: Item id's are unique to a ship and persist until it is repackaged.
-                  This value can be used to track repeated uses of a ship, or
-                  detect when a pilot changes into a different instance of the
-                  same ship type.
+                description: Item id's are unique to a ship and persist until it is repackaged. This value can be used to track repeated uses of a ship, or detect when a pilot changes into a different instance of the same ship type.
                 format: int64
                 title: get_characters_character_id_ship_ship_item_id
                 type: integer
@@ -11566,9 +11386,7 @@ paths:
                   title: get_characters_character_id_skillqueue_level_end_sp
                   type: integer
                 level_start_sp:
-                  description: Amount of SP that was in the skill when it started training it's
-                    current level. Used to calculate % of current level
-                    complete.
+                  description: Amount of SP that was in the skill when it started training it's current level. Used to calculate % of current level complete.
                   format: int32
                   title: get_characters_character_id_skillqueue_level_start_sp
                   type: integer
@@ -13913,30 +13731,21 @@ paths:
       x-cached-seconds: 120
   "/characters/{character_id}/wallet/journal/":
     get:
-      description: >-
+      description: |-
         Retrieve the given character's wallet journal going 30 days back
 
-
         ---
-
         Alternate route: `/legacy/characters/{character_id}/wallet/journal/`
-
 
         Alternate route: `/v4/characters/{character_id}/wallet/journal/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Warning: This route has an upgrade available
 
-
         ---
-
         [Diff of the upcoming changes](https://esi.evetech.net/diff/latest/dev/#GET-/characters/{character_id}/wallet/journal/)
       operationId: get_characters_character_id_wallet_journal
       parameters:
@@ -13984,9 +13793,7 @@ paths:
               description: 200 ok object
               properties:
                 amount:
-                  description: The amount of ISK given or taken from the wallet as a result of the
-                    given transaction. Positive when ISK is deposited into the
-                    wallet and negative when ISK is withdrawn
+                  description: The amount of ISK given or taken from the wallet as a result of the given transaction. Positive when ISK is deposited into the wallet and negative when ISK is withdrawn
                   format: double
                   title: get_characters_character_id_wallet_journal_amount
                   type: number
@@ -13996,10 +13803,7 @@ paths:
                   title: get_characters_character_id_wallet_journal_balance
                   type: number
                 context_id:
-                  description: An ID that gives extra context to the particular transaction.
-                    Because of legacy reasons the context is completely
-                    different per ref_type and means different things. It is
-                    also possible to not have a context_id
+                  description: An ID that gives extra context to the particular transaction. Because of legacy reasons the context is completely different per ref_type and means different things. It is also possible to not have a context_id
                   format: int64
                   title: get_characters_character_id_wallet_journal_context_id
                   type: integer
@@ -14030,12 +13834,7 @@ paths:
                   title: get_characters_character_id_wallet_journal_description
                   type: string
                 first_party_id:
-                  description: The id of the first party involved in the transaction. This
-                    attribute has no consistency and is different or non
-                    existant for particular ref_types. The description attribute
-                    will help make sense of what this attribute means. For more
-                    info about the given ID it can be dropped into the
-                    /universe/names/ ESI route to determine its type and name
+                  description: The id of the first party involved in the transaction. This attribute has no consistency and is different or non existant for particular ref_types. The description attribute will help make sense of what this attribute means. For more info about the given ID it can be dropped into the /universe/names/ ESI route to determine its type and name
                   format: int32
                   title: get_characters_character_id_wallet_journal_first_party_id
                   type: integer
@@ -14045,18 +13844,11 @@ paths:
                   title: get_characters_character_id_wallet_journal_id
                   type: integer
                 reason:
-                  description: The user stated reason for the transaction. Only applies to some
-                    ref_types
+                  description: The user stated reason for the transaction. Only applies to some ref_types
                   title: get_characters_character_id_wallet_journal_reason
                   type: string
                 ref_type:
-                  description: '"The transaction type for the given. transaction. Different
-                    transaction types will populate different attributes. Note:
-                    If you have an existing XML API application that is using
-                    ref_types, you will need to know which string ESI ref_type
-                    maps to which integer. You can look at the following file to
-                    see string->int mappings:
-                    https://github.com/ccpgames/eve-glue/blob/master/eve_glue/wallet_journal_ref.py"'
+                  description: '"The transaction type for the given. transaction. Different transaction types will populate different attributes. Note: If you have an existing XML API application that is using ref_types, you will need to know which string ESI ref_type maps to which integer. You can look at the following file to see string->int mappings: https://github.com/ccpgames/eve-glue/blob/master/eve_glue/wallet_journal_ref.py"'
                   enum:
                     - acceleration_gate_fee
                     - advertisement_listing_fee
@@ -14178,12 +13970,7 @@ paths:
                   title: get_characters_character_id_wallet_journal_ref_type
                   type: string
                 second_party_id:
-                  description: The id of the second party involved in the transaction. This
-                    attribute has no consistency and is different or non
-                    existant for particular ref_types. The description attribute
-                    will help make sense of what this attribute means. For more
-                    info about the given ID it can be dropped into the
-                    /universe/names/ ESI route to determine its type and name
+                  description: The id of the second party involved in the transaction. This attribute has no consistency and is different or non existant for particular ref_types. The description attribute will help make sense of what this attribute means. For more info about the given ID it can be dropped into the /universe/names/ ESI route to determine its type and name
                   format: int32
                   title: get_characters_character_id_wallet_journal_second_party_id
                   type: integer
@@ -14193,8 +13980,7 @@ paths:
                   title: get_characters_character_id_wallet_journal_tax
                   type: number
                 tax_receiver_id:
-                  description: The corporation ID receiving any tax paid. Only applies to tax
-                    related transactions
+                  description: The corporation ID receiving any tax paid. Only applies to tax related transactions
                   format: int32
                   title: get_characters_character_id_wallet_journal_tax_receiver_id
                   type: integer
@@ -14284,23 +14070,17 @@ paths:
       x-cached-seconds: 3600
   "/characters/{character_id}/wallet/transactions/":
     get:
-      description: >-
+      description: |-
         Get wallet transactions of a character
 
-
         ---
-
         Alternate route: `/dev/characters/{character_id}/wallet/transactions/`
-
 
         Alternate route: `/legacy/characters/{character_id}/wallet/transactions/`
 
-
         Alternate route: `/v1/characters/{character_id}/wallet/transactions/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_characters_character_id_wallet_transactions
       parameters:
@@ -14730,14 +14510,11 @@ paths:
                   title: get_contracts_public_items_contract_id_is_blueprint_copy
                   type: boolean
                 is_included:
-                  description: true if the contract issuer has submitted this item with the
-                    contract, false if the isser is asking for this item in the
-                    contract
+                  description: true if the contract issuer has submitted this item with the contract, false if the isser is asking for this item in the contract
                   title: get_contracts_public_items_contract_id_is_included
                   type: boolean
                 item_id:
-                  description: Unique ID for the item being sold. Not present if item is being
-                    requested by contract rather than sold with contract
+                  description: Unique ID for the item being sold. Not present if item is being requested by contract rather than sold with contract
                   format: int64
                   title: get_contracts_public_items_contract_id_item_id
                   type: integer
@@ -14759,8 +14536,7 @@ paths:
                   title: get_contracts_public_items_contract_id_record_id
                   type: integer
                 runs:
-                  description: Number of runs remaining if the blueprint is a copy, -1 if it is an
-                    original
+                  description: Number of runs remaining if the blueprint is a copy, -1 if it is an original
                   format: int32
                   minimum: -1
                   title: get_contracts_public_items_contract_id_runs
@@ -14991,8 +14767,7 @@ paths:
                   title: get_contracts_public_region_id_end_location_id
                   type: integer
                 for_corporation:
-                  description: true if the contract was issued on behalf of the issuer's
-                    corporation
+                  description: true if the contract was issued on behalf of the issuer's corporation
                   title: get_contracts_public_region_id_for_corporation
                   type: boolean
                 issuer_corporation_id:
@@ -15125,30 +14900,21 @@ paths:
       x-cached-seconds: 1800
   "/corporation/{corporation_id}/mining/extractions/":
     get:
-      description: >
-        Extraction timers for all moon chunks being extracted by refineries
-        belonging to a corporation.
-
+      description: |
+        Extraction timers for all moon chunks being extracted by refineries belonging to a corporation.
 
 
         ---
-
         Alternate route: `/dev/corporation/{corporation_id}/mining/extractions/`
-
 
         Alternate route: `/legacy/corporation/{corporation_id}/mining/extractions/`
 
-
         Alternate route: `/v1/corporation/{corporation_id}/mining/extractions/`
 
-
         ---
-
         This route is cached for up to 1800 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Station_Manager
       operationId: get_corporation_corporation_id_mining_extractions
       parameters:
@@ -15191,9 +14957,8 @@ paths:
               description: 200 ok object
               properties:
                 chunk_arrival_time:
-                  description: >
-                    The time at which the chunk being extracted will arrive and can be
-                    fractured by the moon mining drill.
+                  description: |
+                    The time at which the chunk being extracted will arrive and can be fractured by the moon mining drill.
                   format: date-time
                   title: get_corporation_corporation_id_mining_extractions_chunk_arrival_time
                   type: string
@@ -15209,9 +14974,8 @@ paths:
                   title: get_corporation_corporation_id_mining_extractions_moon_id
                   type: integer
                 natural_decay_time:
-                  description: >
-                    The time at which the chunk being extracted will naturally fracture
-                    if it is not first fractured by the moon mining drill.
+                  description: |
+                    The time at which the chunk being extracted will naturally fracture if it is not first fractured by the moon mining drill.
                   format: date-time
                   title: get_corporation_corporation_id_mining_extractions_natural_decay_time
                   type: string
@@ -15310,30 +15074,21 @@ paths:
         - Station_Manager
   "/corporation/{corporation_id}/mining/observers/":
     get:
-      description: >
-        Paginated list of all entities capable of observing and recording
-        mining for a corporation
-
+      description: |
+        Paginated list of all entities capable of observing and recording mining for a corporation
 
 
         ---
-
         Alternate route: `/dev/corporation/{corporation_id}/mining/observers/`
-
 
         Alternate route: `/legacy/corporation/{corporation_id}/mining/observers/`
 
-
         Alternate route: `/v1/corporation/{corporation_id}/mining/observers/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Accountant
       operationId: get_corporation_corporation_id_mining_observers
       parameters:
@@ -15379,7 +15134,7 @@ paths:
                   title: get_corporation_corporation_id_mining_observers_last_updated
                   type: string
                 observer_id:
-                  description: >
+                  description: |
                     The entity that was observing the asteroid field when it was mined.
                   format: int64
                   title: get_corporation_corporation_id_mining_observers_observer_id
@@ -15478,29 +15233,21 @@ paths:
         - Accountant
   "/corporation/{corporation_id}/mining/observers/{observer_id}/":
     get:
-      description: >
+      description: |
         Paginated record of all mining seen by an observer
 
 
-
         ---
-
         Alternate route: `/dev/corporation/{corporation_id}/mining/observers/{observer_id}/`
-
 
         Alternate route: `/legacy/corporation/{corporation_id}/mining/observers/{observer_id}/`
 
-
         Alternate route: `/v1/corporation/{corporation_id}/mining/observers/{observer_id}/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Accountant
       operationId: get_corporation_corporation_id_mining_observers_observer_id
       parameters:
@@ -15565,7 +15312,7 @@ paths:
                   title: get_corporation_corporation_id_mining_observers_observer_id_quantity
                   type: integer
                 recorded_corporation_id:
-                  description: >
+                  description: |
                     The corporation id of the character at the time data was recorded.
                   format: int32
                   title: get_corporation_corporation_id_mining_observers_observer_id_recorded_corporation_id
@@ -16020,8 +15767,7 @@ paths:
                   title: get_corporations_corporation_id_alliancehistory_is_deleted
                   type: boolean
                 record_id:
-                  description: An incrementing ID that can be used to canonically establish order
-                    of records in cases where dates may be ambiguous
+                  description: An incrementing ID that can be used to canonically establish order of records in cases where dates may be ambiguous
                   format: int32
                   title: get_corporations_corporation_id_alliancehistory_record_id
                   type: integer
@@ -16400,23 +16146,16 @@ paths:
         - Director
   "/corporations/{corporation_id}/assets/locations/":
     post:
-      description: >
-        Return locations for a set of item ids, which you can get from
-        corporation assets endpoint. Coordinates for items in hangars or
-        stations are set to (0,0,0)
-
+      description: |
+        Return locations for a set of item ids, which you can get from corporation assets endpoint. Coordinates for items in hangars or stations are set to (0,0,0)
 
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/assets/locations/`
-
 
         Alternate route: `/v2/corporations/{corporation_id}/assets/locations/`
 
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Director
       operationId: post_corporations_corporation_id_assets_locations
       parameters:
@@ -16567,26 +16306,18 @@ paths:
         - Director
   "/corporations/{corporation_id}/assets/names/":
     post:
-      description: >
-        Return names for a set of item ids, which you can get from
-        corporation assets endpoint. Only valid for items that can customize
-        names, like containers or ships
-
+      description: |
+        Return names for a set of item ids, which you can get from corporation assets endpoint. Only valid for items that can customize names, like containers or ships
 
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/assets/names/`
 
-
         Alternate route: `/legacy/corporations/{corporation_id}/assets/names/`
-
 
         Alternate route: `/v1/corporations/{corporation_id}/assets/names/`
 
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Director
       operationId: post_corporations_corporation_id_assets_names
       parameters:
@@ -16897,8 +16628,7 @@ paths:
                   title: get_corporations_corporation_id_blueprints_location_flag
                   type: string
                 location_id:
-                  description: References a solar system, station or item_id if this blueprint is
-                    located within a container.
+                  description: References a solar system, station or item_id if this blueprint is located within a container.
                   format: int64
                   title: get_corporations_corporation_id_blueprints_location_id
                   type: integer
@@ -16910,17 +16640,13 @@ paths:
                   title: get_corporations_corporation_id_blueprints_material_efficiency
                   type: integer
                 quantity:
-                  description: A range of numbers with a minimum of -2 and no maximum value where
-                    -1 is an original and -2 is a copy. It can be a positive
-                    integer if it is a stack of blueprint originals fresh from
-                    the market (e.g. no activities performed on them yet).
+                  description: A range of numbers with a minimum of -2 and no maximum value where -1 is an original and -2 is a copy. It can be a positive integer if it is a stack of blueprint originals fresh from the market (e.g. no activities performed on them yet).
                   format: int32
                   minimum: -2
                   title: get_corporations_corporation_id_blueprints_quantity
                   type: integer
                 runs:
-                  description: Number of runs remaining if the blueprint is a copy, -1 if it is an
-                    original.
+                  description: Number of runs remaining if the blueprint is a copy, -1 if it is an original.
                   format: int32
                   minimum: -1
                   title: get_corporations_corporation_id_blueprints_runs
@@ -17103,8 +16829,7 @@ paths:
                   title: get_corporations_corporation_id_bookmarks_bookmark_id
                   type: integer
                 coordinates:
-                  description: Optional object that is returned if a bookmark was made on a planet
-                    or a random location in space.
+                  description: Optional object that is returned if a bookmark was made on a planet or a random location in space.
                   properties:
                     x:
                       description: x number
@@ -17143,8 +16868,7 @@ paths:
                   title: get_corporations_corporation_id_bookmarks_folder_id
                   type: integer
                 item:
-                  description: Optional object that is returned if a bookmark was made on a
-                    particular item.
+                  description: Optional object that is returned if a bookmark was made on a particular item.
                   properties:
                     item_id:
                       description: item_id integer
@@ -17263,23 +16987,17 @@ paths:
       x-cached-seconds: 3600
   "/corporations/{corporation_id}/bookmarks/folders/":
     get:
-      description: >-
+      description: |-
         A list of your corporation's bookmark folders
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/bookmarks/folders/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/bookmarks/folders/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/bookmarks/folders/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_corporations_corporation_id_bookmarks_folders
       parameters:
@@ -17585,23 +17303,17 @@ paths:
       x-required-roles: []
   "/corporations/{corporation_id}/contacts/labels/":
     get:
-      description: >-
+      description: |-
         Return custom labels for a corporation's contacts
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/contacts/labels/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/contacts/labels/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/contacts/labels/`
 
-
         ---
-
         This route is cached for up to 300 seconds
       operationId: get_corporations_corporation_id_contacts_labels
       parameters:
@@ -17729,26 +17441,18 @@ paths:
       x-required-roles: []
   "/corporations/{corporation_id}/containers/logs/":
     get:
-      description: >
-        Returns logs recorded in the past seven days from all audit log
-        secure containers (ALSC) owned by a given corporation
-
+      description: |
+        Returns logs recorded in the past seven days from all audit log secure containers (ALSC) owned by a given corporation
 
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/containers/logs/`
-
 
         Alternate route: `/v2/corporations/{corporation_id}/containers/logs/`
 
-
         ---
-
         This route is cached for up to 600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Director
       operationId: get_corporations_corporation_id_containers_logs
       parameters:
@@ -17982,8 +17686,7 @@ paths:
                   title: get_corporations_corporation_id_containers_logs_old_config_bitmask
                   type: integer
                 password_type:
-                  description: Type of password set if action is of type SetPassword or
-                    EnterPassword
+                  description: Type of password set if action is of type SetPassword or EnterPassword
                   enum:
                     - config
                     - general
@@ -18090,25 +17793,17 @@ paths:
         - Director
   "/corporations/{corporation_id}/contracts/":
     get:
-      description: >-
-        Returns contracts available to a corporation, only if the
-        corporation is issuer, acceptor or assignee. Only returns contracts no
-        older than 30 days, or if the status is "in_progress".
-
+      description: |-
+        Returns contracts available to a corporation, only if the corporation is issuer, acceptor or assignee. Only returns contracts no older than 30 days, or if the status is "in_progress".
 
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/contracts/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/contracts/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/contracts/`
 
-
         ---
-
         This route is cached for up to 300 seconds
       operationId: get_corporations_corporation_id_contracts
       parameters:
@@ -18169,8 +17864,7 @@ paths:
                   title: get_corporations_corporation_id_contracts_acceptor_id
                   type: integer
                 assignee_id:
-                  description: ID to whom the contract is assigned, can be corporation or
-                    character ID
+                  description: ID to whom the contract is assigned, can be corporation or character ID
                   format: int32
                   title: get_corporations_corporation_id_contracts_assignee_id
                   type: integer
@@ -18229,8 +17923,7 @@ paths:
                   title: get_corporations_corporation_id_contracts_end_location_id
                   type: integer
                 for_corporation:
-                  description: true if the contract was issued on behalf of the issuer's
-                    corporation
+                  description: true if the contract was issued on behalf of the issuer's corporation
                   title: get_corporations_corporation_id_contracts_for_corporation
                   type: boolean
                 issuer_corporation_id:
@@ -18387,23 +18080,17 @@ paths:
       x-required-roles: []
   "/corporations/{corporation_id}/contracts/{contract_id}/bids/":
     get:
-      description: >-
+      description: |-
         Lists bids on a particular auction contract
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/contracts/{contract_id}/bids/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/contracts/{contract_id}/bids/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/contracts/{contract_id}/bids/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_corporations_corporation_id_contracts_contract_id_bids
       parameters:
@@ -18572,23 +18259,17 @@ paths:
       x-required-roles: []
   "/corporations/{corporation_id}/contracts/{contract_id}/items/":
     get:
-      description: >-
+      description: |-
         Lists items of a particular contract
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/contracts/{contract_id}/items/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/contracts/{contract_id}/items/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/contracts/{contract_id}/items/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_corporations_corporation_id_contracts_contract_id_items
       parameters:
@@ -18631,9 +18312,7 @@ paths:
               description: 200 ok object
               properties:
                 is_included:
-                  description: true if the contract issuer has submitted this item with the
-                    contract, false if the isser is asking for this item in the
-                    contract
+                  description: true if the contract issuer has submitted this item with the contract, false if the isser is asking for this item in the contract
                   title: get_corporations_corporation_id_contracts_contract_id_items_is_included
                   type: boolean
                 is_singleton:
@@ -18646,9 +18325,7 @@ paths:
                   title: get_corporations_corporation_id_contracts_contract_id_items_quantity
                   type: integer
                 raw_quantity:
-                  description: -1 indicates that the item is a singleton (non-stackable). If the
-                    item happens to be a Blueprint, -1 is an Original and -2 is
-                    a Blueprint Copy
+                  description: -1 indicates that the item is a singleton (non-stackable). If the item happens to be a Blueprint, -1 is an Original and -2 is a Blueprint Copy
                   format: int32
                   title: get_corporations_corporation_id_contracts_contract_id_items_raw_quantity
                   type: integer
@@ -18752,8 +18429,7 @@ paths:
           schema:
             $ref: "#/definitions/gateway_timeout"
         "520":
-          description: Internal error thrown from the EVE server. Most of the time this
-            means you have hit an EVE server rate limit
+          description: Internal error thrown from the EVE server. Most of the time this means you have hit an EVE server rate limit
           examples:
             application/json:
               error: Error 520 message
@@ -18780,28 +18456,20 @@ paths:
       x-required-roles: []
   "/corporations/{corporation_id}/customs_offices/":
     get:
-      description: >
+      description: |
         List customs offices owned by a corporation
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/customs_offices/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/customs_offices/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/customs_offices/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Director
       operationId: get_corporations_corporation_id_customs_offices
       parameters:
@@ -18856,8 +18524,7 @@ paths:
                   title: get_corporations_corporation_id_customs_offices_alliance_tax_rate
                   type: number
                 allow_access_with_standings:
-                  description: standing_level and any standing related tax rate only present when
-                    this is true
+                  description: standing_level and any standing related tax rate only present when this is true
                   title: get_corporations_corporation_id_customs_offices_allow_access_with_standings
                   type: boolean
                 allow_alliance_access:
@@ -18875,9 +18542,7 @@ paths:
                   title: get_corporations_corporation_id_customs_offices_corporation_tax_rate
                   type: number
                 excellent_standing_tax_rate:
-                  description: Tax rate for entities with excellent level of standing, only
-                    present if this level is allowed, same for all other
-                    standing related tax rates
+                  description: Tax rate for entities with excellent level of standing, only present if this level is allowed, same for all other standing related tax rates
                   format: float
                   title: get_corporations_corporation_id_customs_offices_excellent_standing_tax_rate
                   type: number
@@ -18904,17 +18569,14 @@ paths:
                   title: get_corporations_corporation_id_customs_offices_reinforce_exit_end
                   type: integer
                 reinforce_exit_start:
-                  description: Together with reinforce_exit_end, marks a 2-hour period where this
-                    customs office could exit reinforcement mode during the day
-                    after initial attack
+                  description: Together with reinforce_exit_end, marks a 2-hour period where this customs office could exit reinforcement mode during the day after initial attack
                   format: int32
                   maximum: 23
                   minimum: 0
                   title: get_corporations_corporation_id_customs_offices_reinforce_exit_start
                   type: integer
                 standing_level:
-                  description: Access is allowed only for entities with this level of standing or
-                    better
+                  description: Access is allowed only for entities with this level of standing or better
                   enum:
                     - bad
                     - excellent
@@ -19024,29 +18686,20 @@ paths:
         - Director
   "/corporations/{corporation_id}/divisions/":
     get:
-      description: >
-        Return corporation hangar and wallet division names, only show if a
-        division is not using the default name
-
+      description: |
+        Return corporation hangar and wallet division names, only show if a division is not using the default name
 
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/divisions/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/divisions/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/divisions/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Director
       operationId: get_corporations_corporation_id_divisions
       parameters:
@@ -19407,38 +19060,30 @@ paths:
             description: 200 ok object
             properties:
               enlisted_on:
-                description: The enlistment date of the given corporation into faction warfare.
-                  Will not be included if corporation is not enlisted in faction
-                  warfare
+                description: The enlistment date of the given corporation into faction warfare. Will not be included if corporation is not enlisted in faction warfare
                 format: date-time
                 title: get_corporations_corporation_id_fw_stats_enlisted_on
                 type: string
               faction_id:
-                description: The faction the given corporation is enlisted to fight for. Will
-                  not be included if corporation is not enlisted in faction
-                  warfare
+                description: The faction the given corporation is enlisted to fight for. Will not be included if corporation is not enlisted in faction warfare
                 format: int32
                 title: get_corporations_corporation_id_fw_stats_faction_id
                 type: integer
               kills:
-                description: Summary of kills done by the given corporation against enemy
-                  factions
+                description: Summary of kills done by the given corporation against enemy factions
                 properties:
                   last_week:
-                    description: Last week's total number of kills by members of the given
-                      corporation against enemy factions
+                    description: Last week's total number of kills by members of the given corporation against enemy factions
                     format: int32
                     title: get_corporations_corporation_id_fw_stats_last_week
                     type: integer
                   total:
-                    description: Total number of kills by members of the given corporation against
-                      enemy factions since the corporation enlisted
+                    description: Total number of kills by members of the given corporation against enemy factions since the corporation enlisted
                     format: int32
                     title: get_corporations_corporation_id_fw_stats_total
                     type: integer
                   yesterday:
-                    description: Yesterday's total number of kills by members of the given
-                      corporation against enemy factions
+                    description: Yesterday's total number of kills by members of the given corporation against enemy factions
                     format: int32
                     title: get_corporations_corporation_id_fw_stats_yesterday
                     type: integer
@@ -19449,18 +19094,15 @@ paths:
                 title: get_corporations_corporation_id_fw_stats_kills
                 type: object
               pilots:
-                description: How many pilots the enlisted corporation has. Will not be included
-                  if corporation is not enlisted in faction warfare
+                description: How many pilots the enlisted corporation has. Will not be included if corporation is not enlisted in faction warfare
                 format: int32
                 title: get_corporations_corporation_id_fw_stats_pilots
                 type: integer
               victory_points:
-                description: Summary of victory points gained by the given corporation for the
-                  enlisted faction
+                description: Summary of victory points gained by the given corporation for the enlisted faction
                 properties:
                   last_week:
-                    description: Last week's victory points gained by members of the given
-                      corporation
+                    description: Last week's victory points gained by members of the given corporation
                     format: int32
                     title: get_corporations_corporation_id_fw_stats_victory_points_last_week
                     type: integer
@@ -19470,8 +19112,7 @@ paths:
                     title: get_corporations_corporation_id_fw_stats_victory_points_total
                     type: integer
                   yesterday:
-                    description: Yesterday's victory points gained by members of the given
-                      corporation
+                    description: Yesterday's victory points gained by members of the given corporation
                     format: int32
                     title: get_corporations_corporation_id_fw_stats_victory_points_yesterday
                     type: integer
@@ -19713,8 +19354,7 @@ paths:
         - $ref: "#/parameters/datasource"
         - $ref: "#/parameters/If-None-Match"
         - default: false
-          description: Whether to retrieve completed corporation industry jobs. Only
-            includes jobs from the past 90 days
+          description: Whether to retrieve completed corporation industry jobs. Only includes jobs from the past 90 days
           in: query
           name: include_completed
           required: false
@@ -19776,9 +19416,7 @@ paths:
                   title: get_corporations_corporation_id_industry_jobs_blueprint_id
                   type: integer
                 blueprint_location_id:
-                  description: Location ID of the location from which the blueprint was installed.
-                    Normally a station ID, but can also be an asset (e.g.
-                    container) or corporation facility
+                  description: Location ID of the location from which the blueprint was installed. Normally a station ID, but can also be an asset (e.g. container) or corporation facility
                   format: int64
                   title: get_corporations_corporation_id_industry_jobs_blueprint_location_id
                   type: integer
@@ -19838,15 +19476,12 @@ paths:
                   title: get_corporations_corporation_id_industry_jobs_location_id
                   type: integer
                 output_location_id:
-                  description: Location ID of the location to which the output of the job will be
-                    delivered. Normally a station ID, but can also be a
-                    corporation facility
+                  description: Location ID of the location to which the output of the job will be delivered. Normally a station ID, but can also be a corporation facility
                   format: int64
                   title: get_corporations_corporation_id_industry_jobs_output_location_id
                   type: integer
                 pause_date:
-                  description: Date and time when this job was paused (i.e. time when the facility
-                    where this job was installed went offline)
+                  description: Date and time when this job was paused (i.e. time when the facility where this job was installed went offline)
                   format: date-time
                   title: get_corporations_corporation_id_industry_jobs_pause_date
                   type: string
@@ -19861,8 +19496,7 @@ paths:
                   title: get_corporations_corporation_id_industry_jobs_product_type_id
                   type: integer
                 runs:
-                  description: Number of runs for a manufacturing job, or number of copies to make
-                    for a blueprint copy
+                  description: Number of runs for a manufacturing job, or number of copies to make for a blueprint copy
                   format: int32
                   title: get_corporations_corporation_id_industry_jobs_runs
                   type: integer
@@ -19883,8 +19517,7 @@ paths:
                   title: get_corporations_corporation_id_industry_jobs_status
                   type: string
                 successful_runs:
-                  description: Number of successful runs for this job. Equal to runs unless this
-                    is an invention job
+                  description: Number of successful runs for this job. Equal to runs unless this is an invention job
                   format: int32
                   title: get_corporations_corporation_id_industry_jobs_successful_runs
                   type: integer
@@ -19987,28 +19620,20 @@ paths:
         - Factory_Manager
   "/corporations/{corporation_id}/killmails/recent/":
     get:
-      description: >
+      description: |
         Get a list of a corporation's kills and losses going back 90 days
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/killmails/recent/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/killmails/recent/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/killmails/recent/`
 
-
         ---
-
         This route is cached for up to 300 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Director
       operationId: get_corporations_corporation_id_killmails_recent
       parameters:
@@ -20490,21 +20115,15 @@ paths:
         - Director
   "/corporations/{corporation_id}/members/":
     get:
-      description: >-
-        Return the current member list of a corporation, the token's
-        character need to be a member of the corporation.
-
+      description: |-
+        Return the current member list of a corporation, the token's character need to be a member of the corporation.
 
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/members/`
-
 
         Alternate route: `/v3/corporations/{corporation_id}/members/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_corporations_corporation_id_members
       parameters:
@@ -20889,29 +20508,20 @@ paths:
         - Director
   "/corporations/{corporation_id}/membertracking/":
     get:
-      description: >
-        Returns additional information about a corporation's members which
-        helps tracking their activities
-
+      description: |
+        Returns additional information about a corporation's members which helps tracking their activities
 
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/membertracking/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/membertracking/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/membertracking/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Director
       operationId: get_corporations_corporation_id_membertracking
       parameters:
@@ -21075,25 +20685,18 @@ paths:
         - Director
   "/corporations/{corporation_id}/orders/":
     get:
-      description: >
+      description: |
         List open market orders placed on behalf of a corporation
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/orders/`
-
 
         Alternate route: `/v3/corporations/{corporation_id}/orders/`
 
-
         ---
-
         This route is cached for up to 1200 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Accountant, Trader
       operationId: get_corporations_corporation_id_orders
       parameters:
@@ -21146,8 +20749,7 @@ paths:
               description: 200 ok object
               properties:
                 duration:
-                  description: Number of days for which order is valid (starting from the issued
-                    date). An order expires at time issued + duration
+                  description: Number of days for which order is valid (starting from the issued date). An order expires at time issued + duration
                   format: int32
                   title: get_corporations_corporation_id_orders_duration
                   type: integer
@@ -21176,8 +20778,7 @@ paths:
                   title: get_corporations_corporation_id_orders_location_id
                   type: integer
                 min_volume:
-                  description: For buy orders, the minimum quantity that will be accepted in a
-                    matching sell order
+                  description: For buy orders, the minimum quantity that will be accepted in a matching sell order
                   format: int32
                   title: get_corporations_corporation_id_orders_min_volume
                   type: integer
@@ -21332,26 +20933,18 @@ paths:
         - Trader
   "/corporations/{corporation_id}/orders/history/":
     get:
-      description: >
-        List cancelled and expired market orders placed on behalf of a
-        corporation up to 90 days in the past.
-
+      description: |
+        List cancelled and expired market orders placed on behalf of a corporation up to 90 days in the past.
 
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/orders/history/`
-
 
         Alternate route: `/v2/corporations/{corporation_id}/orders/history/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Accountant, Trader
       operationId: get_corporations_corporation_id_orders_history
       parameters:
@@ -21405,8 +20998,7 @@ paths:
               description: 200 ok object
               properties:
                 duration:
-                  description: Number of days the order was valid for (starting from the issued
-                    date). An order expires at time issued + duration
+                  description: Number of days the order was valid for (starting from the issued date). An order expires at time issued + duration
                   format: int32
                   title: get_corporations_corporation_id_orders_history_duration
                   type: integer
@@ -21435,8 +21027,7 @@ paths:
                   title: get_corporations_corporation_id_orders_history_location_id
                   type: integer
                 min_volume:
-                  description: For buy orders, the minimum quantity that will be accepted in a
-                    matching sell order
+                  description: For buy orders, the minimum quantity that will be accepted in a matching sell order
                   format: int32
                   title: get_corporations_corporation_id_orders_history_min_volume
                   type: integer
@@ -21598,24 +21189,17 @@ paths:
         - Trader
   "/corporations/{corporation_id}/roles/":
     get:
-      description: >-
-        Return the roles of all members if the character has the personnel
-        manager role or any grantable role.
-
+      description: |-
+        Return the roles of all members if the character has the personnel manager role or any grantable role.
 
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/roles/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/roles/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/roles/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_corporations_corporation_id_roles
       parameters:
@@ -22908,8 +22492,7 @@ paths:
               description: 200 ok object
               properties:
                 moon_id:
-                  description: The moon this starbase (POS) is anchored on, unanchored POSes do
-                    not have this information
+                  description: The moon this starbase (POS) is anchored on, unanchored POSes do not have this information
                   format: int32
                   title: get_corporations_corporation_id_starbases_moon_id
                   type: integer
@@ -22919,8 +22502,7 @@ paths:
                   title: get_corporations_corporation_id_starbases_onlined_since
                   type: string
                 reinforced_until:
-                  description: When the POS will be out of reinforcement, for starbases (POSes) in
-                    reinforced state
+                  description: When the POS will be out of reinforcement, for starbases (POSes) in reinforced state
                   format: date-time
                   title: get_corporations_corporation_id_starbases_reinforced_until
                   type: string
@@ -22940,8 +22522,7 @@ paths:
                   title: get_corporations_corporation_id_starbases_state
                   type: string
                 system_id:
-                  description: The solar system this starbase (POS) is in, unanchored POSes have
-                    this information
+                  description: The solar system this starbase (POS) is in, unanchored POSes have this information
                   format: int32
                   title: get_corporations_corporation_id_starbases_system_id
                   type: integer
@@ -22951,8 +22532,7 @@ paths:
                   title: get_corporations_corporation_id_starbases_type_id
                   type: integer
                 unanchor_at:
-                  description: When the POS started unanchoring, for starbases (POSes) in
-                    unanchoring state
+                  description: When the POS started unanchoring, for starbases (POSes) in unanchoring state
                   format: date-time
                   title: get_corporations_corporation_id_starbases_unanchor_at
                   type: string
@@ -23044,28 +22624,20 @@ paths:
         - Director
   "/corporations/{corporation_id}/starbases/{starbase_id}/":
     get:
-      description: >
+      description: |
         Returns various settings and fuels of a starbase (POS)
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/starbases/{starbase_id}/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/starbases/{starbase_id}/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/starbases/{starbase_id}/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Director
       operationId: get_corporations_corporation_id_starbases_starbase_id
       parameters:
@@ -23143,14 +22715,12 @@ paths:
                 title: get_corporations_corporation_id_starbases_starbase_id_attack_if_other_security_status_dropping
                 type: boolean
               attack_security_status_threshold:
-                description: Starbase (POS) will attack if target's security standing is lower
-                  than this value
+                description: Starbase (POS) will attack if target's security standing is lower than this value
                 format: float
                 title: get_corporations_corporation_id_starbases_starbase_id_attack_security_status_threshold
                 type: number
               attack_standing_threshold:
-                description: Starbase (POS) will attack if target's standing is lower than this
-                  value
+                description: Starbase (POS) will attack if target's standing is lower than this value
                 format: float
                 title: get_corporations_corporation_id_starbases_starbase_id_attack_standing_threshold
                 type: number
@@ -23164,10 +22734,7 @@ paths:
                 title: get_corporations_corporation_id_starbases_starbase_id_fuel_bay_take
                 type: string
               fuel_bay_view:
-                description: Who can view the starbase (POS)'s fule bay. Characters either need
-                  to have required role or belong to the starbase (POS) owner's
-                  corporation or alliance, as described by the enum, all other
-                  access settings follows the same scheme
+                description: Who can view the starbase (POS)'s fule bay. Characters either need to have required role or belong to the starbase (POS) owner's corporation or alliance, as described by the enum, all other access settings follows the same scheme
                 enum:
                   - alliance_member
                   - config_starbase_equipment_role
@@ -23176,8 +22743,7 @@ paths:
                 title: get_corporations_corporation_id_starbases_starbase_id_fuel_bay_view
                 type: string
               fuels:
-                description: Fuel blocks and other things that will be consumed when operating a
-                  starbase (POS)
+                description: Fuel blocks and other things that will be consumed when operating a starbase (POS)
                 items:
                   description: fuel object
                   properties:
@@ -23227,8 +22793,7 @@ paths:
                 title: get_corporations_corporation_id_starbases_starbase_id_unanchor
                 type: string
               use_alliance_standings:
-                description: True if the starbase (POS) is using alliance standings, otherwise
-                  using corporation's
+                description: True if the starbase (POS) is using alliance standings, otherwise using corporation's
                 title: get_corporations_corporation_id_starbases_starbase_id_use_alliance_standings
                 type: boolean
             required:
@@ -23324,39 +22889,23 @@ paths:
         - Director
   "/corporations/{corporation_id}/structures/":
     get:
-      description: >-
-        Get a list of corporation structures. This route's version includes
-        the changes to structures detailed in this blog:
-        https://www.eveonline.com/article/upwell-2.0-structures-changes-coming-on-february-13th
-        Note: this route will not return any flex structures owned by a
-        corporation, use the v3 route to have those included in the response. A
-        list of FLEX structures can be found here:
-        https://support.eveonline.com/hc/en-us/articles/213021829-Upwell-Structures
-
+      description: |-
+        Get a list of corporation structures. This route's version includes the changes to structures detailed in this blog: https://www.eveonline.com/article/upwell-2.0-structures-changes-coming-on-february-13th Note: this route will not return any flex structures owned by a corporation, use the v3 route to have those included in the response. A list of FLEX structures can be found here: https://support.eveonline.com/hc/en-us/articles/213021829-Upwell-Structures
 
         ---
-
         Alternate route: `/v2/corporations/{corporation_id}/structures/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Station_Manager
 
 
-
         ---
-
         Warning: This route has an upgrade available
 
-
         ---
-
         [Diff of the upcoming changes](https://esi.evetech.net/diff/latest/dev/#GET-/corporations/{corporation_id}/structures/)
       operationId: get_corporations_corporation_id_structures
       parameters:
@@ -23424,23 +22973,19 @@ paths:
                   title: get_corporations_corporation_id_structures_fuel_expires
                   type: string
                 next_reinforce_apply:
-                  description: The date and time when the structure's newly requested
-                    reinforcement times (e.g. next_reinforce_hour and
-                    next_reinforce_day) will take effect
+                  description: The date and time when the structure's newly requested reinforcement times (e.g. next_reinforce_hour and next_reinforce_day) will take effect
                   format: date-time
                   title: get_corporations_corporation_id_structures_next_reinforce_apply
                   type: string
                 next_reinforce_hour:
-                  description: The requested change to reinforce_hour that will take effect at the
-                    time shown by next_reinforce_apply
+                  description: The requested change to reinforce_hour that will take effect at the time shown by next_reinforce_apply
                   format: int32
                   maximum: 23
                   minimum: 0
                   title: get_corporations_corporation_id_structures_next_reinforce_hour
                   type: integer
                 next_reinforce_weekday:
-                  description: The requested change to reinforce_weekday that will take effect at
-                    the time shown by next_reinforce_apply
+                  description: The requested change to reinforce_weekday that will take effect at the time shown by next_reinforce_apply
                   format: int32
                   maximum: 6
                   minimum: 0
@@ -23452,20 +22997,14 @@ paths:
                   title: get_corporations_corporation_id_structures_profile_id
                   type: integer
                 reinforce_hour:
-                  description: The hour of day that determines the four hour window when the
-                    structure will randomly exit its reinforcement periods and
-                    become vulnerable to attack against its armor and/or hull.
-                    The structure will become vulnerable at a random time that
-                    is +/- 2 hours centered on the value of this property
+                  description: The hour of day that determines the four hour window when the structure will randomly exit its reinforcement periods and become vulnerable to attack against its armor and/or hull. The structure will become vulnerable at a random time that is +/- 2 hours centered on the value of this property
                   format: int32
                   maximum: 23
                   minimum: 0
                   title: get_corporations_corporation_id_structures_reinforce_hour
                   type: integer
                 reinforce_weekday:
-                  description: The day of the week when the structure exits its final
-                    reinforcement period and becomes vulnerable to attack
-                    against its hull. Monday is 0 and Sunday is 6
+                  description: The day of the week when the structure exits its final reinforcement period and becomes vulnerable to attack against its hull. Monday is 0 and Sunday is 6
                   format: int32
                   maximum: 6
                   minimum: 0
@@ -24264,28 +23803,20 @@ paths:
         - Director
   "/corporations/{corporation_id}/wallets/":
     get:
-      description: >
+      description: |
         Get a corporation's wallets
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/wallets/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/wallets/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/wallets/`
 
-
         ---
-
         This route is cached for up to 300 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Accountant, Junior_Accountant
       operationId: get_corporations_corporation_id_wallets
       parameters:
@@ -24430,39 +23961,25 @@ paths:
         - Junior_Accountant
   "/corporations/{corporation_id}/wallets/{division}/journal/":
     get:
-      description: >-
-        Retrieve the given corporation's wallet journal for the given
-        division going 30 days back. Note: any journal records having to do with
-        the new navigation structures from the release of Onslaught will not
-        show up in this version. To see those, use the v4 version of this route.
-
+      description: |-
+        Retrieve the given corporation's wallet journal for the given division going 30 days back. Note: any journal records having to do with the new navigation structures from the release of Onslaught will not show up in this version. To see those, use the v4 version of this route.
 
         ---
-
         Alternate route: `/legacy/corporations/{corporation_id}/wallets/{division}/journal/`
-
 
         Alternate route: `/v3/corporations/{corporation_id}/wallets/{division}/journal/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Accountant, Junior_Accountant
 
 
-
         ---
-
         Warning: This route has an upgrade available
 
-
         ---
-
         [Diff of the upcoming changes](https://esi.evetech.net/diff/latest/dev/#GET-/corporations/{corporation_id}/wallets/{division}/journal/)
       operationId: get_corporations_corporation_id_wallets_division_journal
       parameters:
@@ -24489,8 +24006,7 @@ paths:
                 context_id: 2112625428
                 context_id_type: character_id
                 date: 2016-10-24T09:00:00Z
-                description: CCP Zoetrope transferred cash from C C P's corporate account to CCP
-                  SnowedIn's account
+                description: CCP Zoetrope transferred cash from C C P's corporate account to CCP SnowedIn's account
                 first_party_id: 109299958
                 id: 1234567890
                 ref_type: corporation_account_withdrawal
@@ -24519,9 +24035,7 @@ paths:
               description: 200 ok object
               properties:
                 amount:
-                  description: The amount of ISK given or taken from the wallet as a result of the
-                    given transaction. Positive when ISK is deposited into the
-                    wallet and negative when ISK is withdrawn
+                  description: The amount of ISK given or taken from the wallet as a result of the given transaction. Positive when ISK is deposited into the wallet and negative when ISK is withdrawn
                   format: double
                   title: get_corporations_corporation_id_wallets_division_journal_amount
                   type: number
@@ -24531,10 +24045,7 @@ paths:
                   title: get_corporations_corporation_id_wallets_division_journal_balance
                   type: number
                 context_id:
-                  description: An ID that gives extra context to the particular transaction.
-                    Because of legacy reasons the context is completely
-                    different per ref_type and means different things. It is
-                    also possible to not have a context_id
+                  description: An ID that gives extra context to the particular transaction. Because of legacy reasons the context is completely different per ref_type and means different things. It is also possible to not have a context_id
                   format: int64
                   title: get_corporations_corporation_id_wallets_division_journal_context_id
                   type: integer
@@ -24565,12 +24076,7 @@ paths:
                   title: get_corporations_corporation_id_wallets_division_journal_description
                   type: string
                 first_party_id:
-                  description: The id of the first party involved in the transaction. This
-                    attribute has no consistency and is different or non
-                    existant for particular ref_types. The description attribute
-                    will help make sense of what this attribute means. For more
-                    info about the given ID it can be dropped into the
-                    /universe/names/ ESI route to determine its type and name
+                  description: The id of the first party involved in the transaction. This attribute has no consistency and is different or non existant for particular ref_types. The description attribute will help make sense of what this attribute means. For more info about the given ID it can be dropped into the /universe/names/ ESI route to determine its type and name
                   format: int32
                   title: get_corporations_corporation_id_wallets_division_journal_first_party_id
                   type: integer
@@ -24580,18 +24086,11 @@ paths:
                   title: get_corporations_corporation_id_wallets_division_journal_id
                   type: integer
                 reason:
-                  description: The user stated reason for the transaction. Only applies to some
-                    ref_types
+                  description: The user stated reason for the transaction. Only applies to some ref_types
                   title: get_corporations_corporation_id_wallets_division_journal_reason
                   type: string
                 ref_type:
-                  description: '"The transaction type for the given. transaction. Different
-                    transaction types will populate different attributes. Note:
-                    If you have an existing XML API application that is using
-                    ref_types, you will need to know which string ESI ref_type
-                    maps to which integer. You can look at the following file to
-                    see string->int mappings:
-                    https://github.com/ccpgames/eve-glue/blob/master/eve_glue/wallet_journal_ref.py"'
+                  description: '"The transaction type for the given. transaction. Different transaction types will populate different attributes. Note: If you have an existing XML API application that is using ref_types, you will need to know which string ESI ref_type maps to which integer. You can look at the following file to see string->int mappings: https://github.com/ccpgames/eve-glue/blob/master/eve_glue/wallet_journal_ref.py"'
                   enum:
                     - acceleration_gate_fee
                     - advertisement_listing_fee
@@ -24713,12 +24212,7 @@ paths:
                   title: get_corporations_corporation_id_wallets_division_journal_ref_type
                   type: string
                 second_party_id:
-                  description: The id of the second party involved in the transaction. This
-                    attribute has no consistency and is different or non
-                    existant for particular ref_types. The description attribute
-                    will help make sense of what this attribute means. For more
-                    info about the given ID it can be dropped into the
-                    /universe/names/ ESI route to determine its type and name
+                  description: The id of the second party involved in the transaction. This attribute has no consistency and is different or non existant for particular ref_types. The description attribute will help make sense of what this attribute means. For more info about the given ID it can be dropped into the /universe/names/ ESI route to determine its type and name
                   format: int32
                   title: get_corporations_corporation_id_wallets_division_journal_second_party_id
                   type: integer
@@ -24728,8 +24222,7 @@ paths:
                   title: get_corporations_corporation_id_wallets_division_journal_tax
                   type: number
                 tax_receiver_id:
-                  description: The corporation ID receiving any tax paid. Only applies to tax
-                    related transactions
+                  description: The corporation ID receiving any tax paid. Only applies to tax related transactions
                   format: int32
                   title: get_corporations_corporation_id_wallets_division_journal_tax_receiver_id
                   type: integer
@@ -24822,28 +24315,20 @@ paths:
         - Junior_Accountant
   "/corporations/{corporation_id}/wallets/{division}/transactions/":
     get:
-      description: >
+      description: |
         Get wallet transactions of a corporation
 
-
         ---
-
         Alternate route: `/dev/corporations/{corporation_id}/wallets/{division}/transactions/`
-
 
         Alternate route: `/legacy/corporations/{corporation_id}/wallets/{division}/transactions/`
 
-
         Alternate route: `/v1/corporations/{corporation_id}/wallets/{division}/transactions/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
 
-
         ---
-
         Requires one of the following EVE corporation role(s): Accountant, Junior_Accountant
       operationId: get_corporations_corporation_id_wallets_division_transactions
       parameters:
@@ -24857,8 +24342,7 @@ paths:
           name: division
           required: true
           type: integer
-        - description: Only show journal entries happened before the transaction
-            referenced by this id
+        - description: Only show journal entries happened before the transaction referenced by this id
           format: int64
           in: query
           name: from_id
@@ -25316,24 +24800,17 @@ paths:
         - v1
   "/dogma/dynamic/items/{type_id}/{item_id}/":
     get:
-      description: >-
-        Returns info about a dynamic item resulting from mutation with a
-        mutaplasmid.
-
+      description: |-
+        Returns info about a dynamic item resulting from mutation with a mutaplasmid.
 
         ---
-
         Alternate route: `/dev/dogma/dynamic/items/{type_id}/{item_id}/`
-
 
         Alternate route: `/legacy/dogma/dynamic/items/{type_id}/{item_id}/`
 
-
         Alternate route: `/v1/dogma/dynamic/items/{type_id}/{item_id}/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_dogma_dynamic_items_type_id_item_id
       parameters:
@@ -25437,8 +24914,7 @@ paths:
                 title: get_dogma_dynamic_items_type_id_item_id_mutator_type_id
                 type: integer
               source_type_id:
-                description: The type ID of the source item the mutator was applied to create
-                  the dynamic item.
+                description: The type ID of the source item the mutator was applied to create the dynamic item.
                 format: int32
                 title: get_dogma_dynamic_items_type_id_item_id_source_type_id
                 type: integer
@@ -26262,8 +25738,7 @@ paths:
                   title: get_fleets_fleet_id_members_solar_system_id
                   type: integer
                 squad_id:
-                  description: ID of the squad the member is in. If not applicable, will be set to
-                    -1
+                  description: ID of the squad the member is in. If not applicable, will be set to -1
                   format: int64
                   title: get_fleets_fleet_id_members_squad_id
                   type: integer
@@ -26277,8 +25752,7 @@ paths:
                   title: get_fleets_fleet_id_members_takes_fleet_warp
                   type: boolean
                 wing_id:
-                  description: ID of the wing the member is in. If not applicable, will be set to
-                    -1
+                  description: ID of the wing the member is in. If not applicable, will be set to -1
                   format: int64
                   title: get_fleets_fleet_id_members_wing_id
                   type: integer
@@ -26387,18 +25861,13 @@ paths:
         - v1
       x-cached-seconds: 5
     post:
-      description: >
-        Invite a character into the fleet. If a character has a CSPA charge
-        set it is not possible to invite them to the fleet using ESI
-
+      description: |
+        Invite a character into the fleet. If a character has a CSPA charge set it is not possible to invite them to the fleet using ESI
 
         ---
-
         Alternate route: `/dev/fleets/{fleet_id}/members/`
 
-
         Alternate route: `/legacy/fleets/{fleet_id}/members/`
-
 
         Alternate route: `/v1/fleets/{fleet_id}/members/`
       operationId: post_fleets_fleet_id_members
@@ -26423,16 +25892,7 @@ paths:
                 title: post_fleets_fleet_id_members_character_id
                 type: integer
               role:
-                description: If a character is invited with the `fleet_commander` role, neither
-                  `wing_id` or `squad_id` should be specified. If a character is
-                  invited with the `wing_commander` role, only `wing_id` should
-                  be specified. If a character is invited with the
-                  `squad_commander` role, both `wing_id` and `squad_id` should
-                  be specified. If a character is invited with the
-                  `squad_member` role, `wing_id` and `squad_id` should either
-                  both be specified or not specified at all. If they aren’t
-                  specified, the invited character will join any squad with
-                  available positions.
+                description: If a character is invited with the `fleet_commander` role, neither `wing_id` or `squad_id` should be specified. If a character is invited with the `wing_commander` role, only `wing_id` should be specified. If a character is invited with the `squad_commander` role, both `wing_id` and `squad_id` should be specified. If a character is invited with the `squad_member` role, `wing_id` and `squad_id` should either both be specified or not specified at all. If they aren’t specified, the invited character will join any squad with available positions.
                 enum:
                   - fleet_commander
                   - wing_commander
@@ -26684,13 +26144,7 @@ paths:
             description: movement object
             properties:
               role:
-                description: If a character is moved to the `fleet_commander` role, neither
-                  `wing_id` or `squad_id` should be specified. If a character is
-                  moved to the `wing_commander` role, only `wing_id` should be
-                  specified. If a character is moved to the `squad_commander`
-                  role, both `wing_id` and `squad_id` should be specified. If a
-                  character is moved to the `squad_member` role, both `wing_id`
-                  and `squad_id` should be specified.
+                description: If a character is moved to the `fleet_commander` role, neither `wing_id` or `squad_id` should be specified. If a character is moved to the `wing_commander` role, only `wing_id` should be specified. If a character is moved to the `squad_commander` role, both `wing_id` and `squad_id` should be specified. If a character is moved to the `squad_member` role, both `wing_id` and `squad_id` should be specified.
                 enum:
                   - fleet_commander
                   - wing_commander
@@ -27333,18 +26787,13 @@ paths:
         - v1
   "/fleets/{fleet_id}/wings/{wing_id}/":
     delete:
-      description: >
-        Delete a fleet wing, only empty wings can be deleted. The wing may
-        contain squads, but the squads must be empty
-
+      description: |
+        Delete a fleet wing, only empty wings can be deleted. The wing may contain squads, but the squads must be empty
 
         ---
-
         Alternate route: `/dev/fleets/{fleet_id}/wings/{wing_id}/`
 
-
         Alternate route: `/legacy/fleets/{fleet_id}/wings/{wing_id}/`
-
 
         Alternate route: `/v1/fleets/{fleet_id}/wings/{wing_id}/`
       operationId: delete_fleets_fleet_id_wings_wing_id
@@ -27677,24 +27126,17 @@ paths:
         - v1
   /fw/leaderboards/:
     get:
-      description: >-
-        Top 4 leaderboard of factions for kills and victory points
-        separated by total, last week and yesterday
-
+      description: |-
+        Top 4 leaderboard of factions for kills and victory points separated by total, last week and yesterday
 
         ---
-
         Alternate route: `/dev/fw/leaderboards/`
-
 
         Alternate route: `/legacy/fw/leaderboards/`
 
-
         Alternate route: `/v1/fw/leaderboards/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_fw_leaderboards
       parameters:
@@ -27702,8 +27144,7 @@ paths:
         - $ref: "#/parameters/If-None-Match"
       responses:
         "200":
-          description: Corporation leaderboard of kills and victory points within faction
-            warfare
+          description: Corporation leaderboard of kills and victory points within faction warfare
           examples:
             application/json:
               kills:
@@ -27755,13 +27196,10 @@ paths:
             description: 200 ok object
             properties:
               kills:
-                description: Top 4 rankings of factions by number of kills from yesterday, last
-                  week and in total
+                description: Top 4 rankings of factions by number of kills from yesterday, last week and in total
                 properties:
                   active_total:
-                    description: Top 4 ranking of factions active in faction warfare by total kills.
-                      A faction is considered "active" if they have participated
-                      in faction warfare in the past 14 days
+                    description: Top 4 ranking of factions active in faction warfare by total kills. A faction is considered "active" if they have participated in faction warfare in the past 14 days
                     items:
                       description: active_total object
                       properties:
@@ -27827,13 +27265,10 @@ paths:
                 title: get_fw_leaderboards_kills
                 type: object
               victory_points:
-                description: Top 4 rankings of factions by victory points from yesterday, last
-                  week and in total
+                description: Top 4 rankings of factions by victory points from yesterday, last week and in total
                 properties:
                   active_total:
-                    description: Top 4 ranking of factions active in faction warfare by total
-                      victory points. A faction is considered "active" if they
-                      have participated in faction warfare in the past 14 days
+                    description: Top 4 ranking of factions active in faction warfare by total victory points. A faction is considered "active" if they have participated in faction warfare in the past 14 days
                     items:
                       description: active_total object
                       properties:
@@ -27962,24 +27397,17 @@ paths:
         - v1
   /fw/leaderboards/characters/:
     get:
-      description: >-
-        Top 100 leaderboard of pilots for kills and victory points
-        separated by total, last week and yesterday
-
+      description: |-
+        Top 100 leaderboard of pilots for kills and victory points separated by total, last week and yesterday
 
         ---
-
         Alternate route: `/dev/fw/leaderboards/characters/`
-
 
         Alternate route: `/legacy/fw/leaderboards/characters/`
 
-
         Alternate route: `/v1/fw/leaderboards/characters/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_fw_leaderboards_characters
       parameters:
@@ -27987,8 +27415,7 @@ paths:
         - $ref: "#/parameters/If-None-Match"
       responses:
         "200":
-          description: Character leaderboard of kills and victory points within faction
-            warfare
+          description: Character leaderboard of kills and victory points within faction warfare
           examples:
             application/json:
               kills:
@@ -28040,13 +27467,10 @@ paths:
             description: 200 ok object
             properties:
               kills:
-                description: Top 100 rankings of pilots by number of kills from yesterday, last
-                  week and in total
+                description: Top 100 rankings of pilots by number of kills from yesterday, last week and in total
                 properties:
                   active_total:
-                    description: Top 100 ranking of pilots active in faction warfare by total kills.
-                      A pilot is considered "active" if they have participated
-                      in faction warfare in the past 14 days
+                    description: Top 100 ranking of pilots active in faction warfare by total kills. A pilot is considered "active" if they have participated in faction warfare in the past 14 days
                     items:
                       description: active_total object
                       properties:
@@ -28112,13 +27536,10 @@ paths:
                 title: get_fw_leaderboards_characters_kills
                 type: object
               victory_points:
-                description: Top 100 rankings of pilots by victory points from yesterday, last
-                  week and in total
+                description: Top 100 rankings of pilots by victory points from yesterday, last week and in total
                 properties:
                   active_total:
-                    description: Top 100 ranking of pilots active in faction warfare by total
-                      victory points. A pilot is considered "active" if they
-                      have participated in faction warfare in the past 14 days
+                    description: Top 100 ranking of pilots active in faction warfare by total victory points. A pilot is considered "active" if they have participated in faction warfare in the past 14 days
                     items:
                       description: active_total object
                       properties:
@@ -28247,24 +27668,17 @@ paths:
         - v1
   /fw/leaderboards/corporations/:
     get:
-      description: >-
-        Top 10 leaderboard of corporations for kills and victory points
-        separated by total, last week and yesterday
-
+      description: |-
+        Top 10 leaderboard of corporations for kills and victory points separated by total, last week and yesterday
 
         ---
-
         Alternate route: `/dev/fw/leaderboards/corporations/`
-
 
         Alternate route: `/legacy/fw/leaderboards/corporations/`
 
-
         Alternate route: `/v1/fw/leaderboards/corporations/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_fw_leaderboards_corporations
       parameters:
@@ -28272,8 +27686,7 @@ paths:
         - $ref: "#/parameters/If-None-Match"
       responses:
         "200":
-          description: Corporation leaderboard of kills and victory points within faction
-            warfare
+          description: Corporation leaderboard of kills and victory points within faction warfare
           examples:
             application/json:
               kills:
@@ -28325,13 +27738,10 @@ paths:
             description: 200 ok object
             properties:
               kills:
-                description: Top 10 rankings of corporations by number of kills from yesterday,
-                  last week and in total
+                description: Top 10 rankings of corporations by number of kills from yesterday, last week and in total
                 properties:
                   active_total:
-                    description: Top 10 ranking of corporations active in faction warfare by total
-                      kills. A corporation is considered "active" if they have
-                      participated in faction warfare in the past 14 days
+                    description: Top 10 ranking of corporations active in faction warfare by total kills. A corporation is considered "active" if they have participated in faction warfare in the past 14 days
                     items:
                       description: active_total object
                       properties:
@@ -28397,14 +27807,10 @@ paths:
                 title: get_fw_leaderboards_corporations_kills
                 type: object
               victory_points:
-                description: Top 10 rankings of corporations by victory points from yesterday,
-                  last week and in total
+                description: Top 10 rankings of corporations by victory points from yesterday, last week and in total
                 properties:
                   active_total:
-                    description: Top 10 ranking of corporations active in faction warfare by total
-                      victory points. A corporation is considered "active" if
-                      they have participated in faction warfare in the past 14
-                      days
+                    description: Top 10 ranking of corporations active in faction warfare by total victory points. A corporation is considered "active" if they have participated in faction warfare in the past 14 days
                     items:
                       description: active_total object
                       properties:
@@ -28597,8 +28003,7 @@ paths:
                       title: get_fw_stats_last_week
                       type: integer
                     total:
-                      description: Total number of kills against enemy factions since faction warfare
-                        began
+                      description: Total number of kills against enemy factions since faction warfare began
                       format: int32
                       title: get_fw_stats_total
                       type: integer
@@ -29052,8 +28457,7 @@ paths:
                   title: get_incursions_has_boss
                   type: boolean
                 infested_solar_systems:
-                  description: A list of infested solar system ids that are a part of this
-                    incursion
+                  description: A list of infested solar system ids that are a part of this incursion
                   items:
                     description: infested_solar_system integer
                     format: int32
@@ -29880,7 +29284,7 @@ paths:
                     title: get_killmails_killmail_id_killmail_hash_items
                     type: array
                   position:
-                    description: >
+                    description: |
                       Coordinates of the victim in Cartesian space relative to the Sun
                     properties:
                       x:
@@ -29916,7 +29320,7 @@ paths:
                 title: get_killmails_killmail_id_killmail_hash_victim
                 type: object
               war_id:
-                description: >
+                description: |
                   War if the killmail is generated in relation to an official war
                 format: int32
                 title: get_killmails_killmail_id_killmail_hash_war_id
@@ -30819,24 +30223,17 @@ paths:
       x-cached-seconds: 300
   "/markets/{region_id}/history/":
     get:
-      description: >-
-        Return a list of historical market statistics for the specified
-        type in a region
-
+      description: |-
+        Return a list of historical market statistics for the specified type in a region
 
         ---
-
         Alternate route: `/dev/markets/{region_id}/history/`
-
 
         Alternate route: `/legacy/markets/{region_id}/history/`
 
-
         Alternate route: `/v1/markets/{region_id}/history/`
 
-
         ---
-
         This route expires daily at 11:05
       operationId: get_markets_region_id_history
       parameters:
@@ -31043,8 +30440,7 @@ paths:
         - $ref: "#/parameters/datasource"
         - $ref: "#/parameters/If-None-Match"
         - default: all
-          description: Filter buy/sell orders, return all orders by default. If you query
-            without type_id, we always return both buy and sell orders
+          description: Filter buy/sell orders, return all orders by default. If you query without type_id, we always return both buy and sell orders
           enum:
             - buy
             - sell
@@ -31283,24 +30679,17 @@ paths:
       x-cached-seconds: 300
   "/markets/{region_id}/types/":
     get:
-      description: >-
-        Return a list of type IDs that have active orders in the region,
-        for efficient market indexing.
-
+      description: |-
+        Return a list of type IDs that have active orders in the region, for efficient market indexing.
 
         ---
-
         Alternate route: `/dev/markets/{region_id}/types/`
-
 
         Alternate route: `/legacy/markets/{region_id}/types/`
 
-
         Alternate route: `/v1/markets/{region_id}/types/`
 
-
         ---
-
         This route is cached for up to 600 seconds
       operationId: get_markets_region_id_types
       parameters:
@@ -31580,8 +30969,7 @@ paths:
             description: 200 ok object
             properties:
               connected_groups:
-                description: The groups that are connected to this group on the opportunities
-                  map
+                description: The groups that are connected to this group on the opportunities map
                 items:
                   description: connected_group integer
                   format: int32
@@ -32388,7 +31776,7 @@ paths:
               description: 200 ok object
               properties:
                 attackers_score:
-                  description: >
+                  description: |
                     Score for all attacking parties, only present in Defense Events.
                   format: float
                   title: get_sovereignty_campaigns_attackers_score
@@ -32411,16 +31799,14 @@ paths:
                   title: get_sovereignty_campaigns_defender_id
                   type: integer
                 defender_score:
-                  description: >
+                  description: |
                     Score for the defending alliance, only present in Defense Events.
                   format: float
                   title: get_sovereignty_campaigns_defender_score
                   type: number
                 event_type:
-                  description: >
-                    Type of event this campaign is for. tcu_defense, ihub_defense and
-                    station_defense are referred to as "Defense Events",
-                    station_freeport as "Freeport Events".
+                  description: |
+                    Type of event this campaign is for. tcu_defense, ihub_defense and station_defense are referred to as "Defense Events", station_freeport as "Freeport Events".
                   enum:
                     - tcu_defense
                     - ihub_defense
@@ -32429,9 +31815,8 @@ paths:
                   title: get_sovereignty_campaigns_event_type
                   type: string
                 participants:
-                  description: >
-                    Alliance participating and their respective scores, only present in
-                    Freeport Events.
+                  description: |
+                    Alliance participating and their respective scores, only present in Freeport Events.
                   items:
                     description: participant object
                     properties:
@@ -32741,34 +32126,20 @@ paths:
                   title: get_sovereignty_structures_structure_type_id
                   type: integer
                 vulnerability_occupancy_level:
-                  description: >
-                    The occupancy level for the next or current vulnerability window.
-                    This takes into account all development indexes and capital
-                    system bonuses. Also known as Activity Defense Multiplier
-                    from in the client. It increases the time that attackers
-                    must spend using their entosis links on the structure.
+                  description: |
+                    The occupancy level for the next or current vulnerability window. This takes into account all development indexes and capital system bonuses. Also known as Activity Defense Multiplier from in the client. It increases the time that attackers must spend using their entosis links on the structure.
                   format: float
                   title: get_sovereignty_structures_vulnerability_occupancy_level
                   type: number
                 vulnerable_end_time:
-                  description: >
-                    The time at which the next or current vulnerability window ends. At
-                    the end of a vulnerability window the next window is
-                    recalculated and locked in along with the
-                    vulnerabilityOccupancyLevel. If the structure is not in 100%
-                    entosis control of the defender, it will go in to 'overtime'
-                    and stay vulnerable for as long as that situation persists.
-                    Only once the defenders have 100% entosis control and has
-                    the vulnerableEndTime passed does the vulnerability interval
-                    expire and a new one is calculated.
+                  description: |
+                    The time at which the next or current vulnerability window ends. At the end of a vulnerability window the next window is recalculated and locked in along with the vulnerabilityOccupancyLevel. If the structure is not in 100% entosis control of the defender, it will go in to 'overtime' and stay vulnerable for as long as that situation persists. Only once the defenders have 100% entosis control and has the vulnerableEndTime passed does the vulnerability interval expire and a new one is calculated.
                   format: date-time
                   title: get_sovereignty_structures_vulnerable_end_time
                   type: string
                 vulnerable_start_time:
-                  description: >
-                    The next time at which the structure will become vulnerable. Or the
-                    start time of the current window if current time is between
-                    this and vulnerableEndTime.
+                  description: |
+                    The next time at which the structure will become vulnerable. Or the start time of the current window if current time is between this and vulnerableEndTime.
                   format: date-time
                   title: get_sovereignty_structures_vulnerable_start_time
                   type: string
@@ -32975,8 +32346,7 @@ paths:
       operationId: post_ui_autopilot_waypoint
       parameters:
         - default: false
-          description: Whether this solar system should be added to the beginning of all
-            waypoints
+          description: Whether this solar system should be added to the beginning of all waypoints
           in: query
           name: add_to_beginning
           required: true
@@ -32988,8 +32358,7 @@ paths:
           required: true
           type: boolean
         - $ref: "#/parameters/datasource"
-        - description: The destination to travel to, can be solar system, station or
-            structure's id
+        - description: The destination to travel to, can be solar system, station or structure's id
           format: int64
           in: query
           name: destination_id
@@ -33142,18 +32511,13 @@ paths:
         - v1
   /ui/openwindow/information/:
     post:
-      description: >
-        Open the information window for a character, corporation or
-        alliance inside the client
-
+      description: |
+        Open the information window for a character, corporation or alliance inside the client
 
         ---
-
         Alternate route: `/dev/ui/openwindow/information/`
 
-
         Alternate route: `/legacy/ui/openwindow/information/`
-
 
         Alternate route: `/v1/ui/openwindow/information/`
       operationId: post_ui_openwindow_information
@@ -33313,18 +32677,13 @@ paths:
         - v1
   /ui/openwindow/newmail/:
     post:
-      description: >
-        Open the New Mail window, according to settings from the request if
-        applicable
-
+      description: |
+        Open the New Mail window, according to settings from the request if applicable
 
         ---
-
         Alternate route: `/dev/ui/openwindow/newmail/`
 
-
         Alternate route: `/legacy/ui/openwindow/newmail/`
-
 
         Alternate route: `/v1/ui/openwindow/newmail/`
       operationId: post_ui_openwindow_newmail
@@ -33364,10 +32723,7 @@ paths:
                 title: post_ui_openwindow_newmail_to_corp_or_alliance_id
                 type: integer
               to_mailing_list_id:
-                description: Corporations, alliances and mailing lists are all types of mailing
-                  groups. You may only send to one mailing group, at a time, so
-                  you may fill out either this field or the
-                  to_corp_or_alliance_ids field
+                description: Corporations, alliances and mailing lists are all types of mailing groups. You may only send to one mailing group, at a time, so you may fill out either this field or the to_corp_or_alliance_ids field
                 format: int32
                 title: post_ui_openwindow_newmail_to_mailing_list_id
                 type: integer
@@ -35250,20 +34606,13 @@ paths:
         - v1
   /universe/ids/:
     post:
-      description: >
-        Resolve a set of names to IDs in the following categories: agents,
-        alliances, characters, constellations, corporations factions,
-        inventory_types, regions, stations, and systems. Only exact matches will
-        be returned. All names searched for are cached for 12 hours
-
+      description: |
+        Resolve a set of names to IDs in the following categories: agents, alliances, characters, constellations, corporations factions, inventory_types, regions, stations, and systems. Only exact matches will be returned. All names searched for are cached for 12 hours
 
         ---
-
         Alternate route: `/dev/universe/ids/`
 
-
         Alternate route: `/legacy/universe/ids/`
-
 
         Alternate route: `/v1/universe/ids/`
       operationId: post_universe_ids
@@ -35292,9 +34641,7 @@ paths:
             uniqueItems: true
       responses:
         "200":
-          description: List of id/name associations for a set of names divided by
-            category. Any name passed in that did not have a match will be
-            ommitted
+          description: List of id/name associations for a set of names divided by category. Any name passed in that did not have a match will be ommitted
           examples:
             application/json:
               characters:
@@ -35723,16 +35070,11 @@ paths:
         - v1
   /universe/names/:
     post:
-      description: >
-        Resolve a set of IDs to names and categories. Supported ID's for
-        resolving are: Characters, Corporations, Alliances, Stations, Solar
-        Systems, Constellations, Regions, Types
-
+      description: |
+        Resolve a set of IDs to names and categories. Supported ID's for resolving are: Characters, Corporations, Alliances, Stations, Solar Systems, Constellations, Regions, Types
 
         ---
-
         Alternate route: `/dev/universe/names/`
-
 
         Alternate route: `/v2/universe/names/`
       operationId: post_universe_names
@@ -35759,8 +35101,7 @@ paths:
             uniqueItems: true
       responses:
         "200":
-          description: List of id/name associations for a set of ID's. All ID's must
-            resolve to a name, or nothing will be returned
+          description: List of id/name associations for a set of ID's. All ID's must resolve to a name, or nothing will be returned
           examples:
             application/json:
               - category: character
@@ -37405,21 +36746,15 @@ paths:
       x-cached-seconds: 3600
   "/universe/structures/{structure_id}/":
     get:
-      description: >-
-        Returns information on requested structure if you are on the ACL.
-        Otherwise, returns "Forbidden" for all inputs.
-
+      description: |-
+        Returns information on requested structure if you are on the ACL. Otherwise, returns "Forbidden" for all inputs.
 
         ---
-
         Alternate route: `/dev/universe/structures/{structure_id}/`
-
 
         Alternate route: `/v2/universe/structures/{structure_id}/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_universe_structures_structure_id
       parameters:
@@ -37466,9 +36801,8 @@ paths:
                 title: get_universe_structures_structure_id_owner_id
                 type: integer
               position:
-                description: >
-                  Coordinates of the structure in Cartesian space relative to the
-                  Sun, in metres.
+                description: |
+                  Coordinates of the structure in Cartesian space relative to the Sun, in metres.
                 properties:
                   x:
                     description: x number
@@ -37597,25 +36931,17 @@ paths:
       x-cached-seconds: 3600
   /universe/system_jumps/:
     get:
-      description: >-
-        Get the number of jumps in solar systems within the last hour
-        ending at the timestamp of the Last-Modified header, excluding wormhole
-        space. Only systems with jumps will be listed
-
+      description: |-
+        Get the number of jumps in solar systems within the last hour ending at the timestamp of the Last-Modified header, excluding wormhole space. Only systems with jumps will be listed
 
         ---
-
         Alternate route: `/dev/universe/system_jumps/`
-
 
         Alternate route: `/legacy/universe/system_jumps/`
 
-
         Alternate route: `/v1/universe/system_jumps/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_universe_system_jumps
       parameters:
@@ -37724,22 +37050,15 @@ paths:
       x-cached-seconds: 3600
   /universe/system_kills/:
     get:
-      description: >-
-        Get the number of ship, pod and NPC kills per solar system within
-        the last hour ending at the timestamp of the Last-Modified header,
-        excluding wormhole space. Only systems with kills will be listed
-
+      description: |-
+        Get the number of ship, pod and NPC kills per solar system within the last hour ending at the timestamp of the Last-Modified header, excluding wormhole space. Only systems with kills will be listed
 
         ---
-
         Alternate route: `/dev/universe/system_kills/`
-
 
         Alternate route: `/v2/universe/system_kills/`
 
-
         ---
-
         This route is cached for up to 3600 seconds
       operationId: get_universe_system_kills
       parameters:
@@ -38757,8 +38076,7 @@ paths:
             description: 200 ok object
             properties:
               aggressor:
-                description: The aggressor corporation or alliance that declared this war, only
-                  contains either corporation_id or alliance_id
+                description: The aggressor corporation or alliance that declared this war, only contains either corporation_id or alliance_id
                 properties:
                   alliance_id:
                     description: Alliance ID if and only if the aggressor is an alliance
@@ -38786,8 +38104,7 @@ paths:
                 title: get_wars_war_id_aggressor
                 type: object
               allies:
-                description: allied corporations or alliances, each object contains either
-                  corporation_id or alliance_id
+                description: allied corporations or alliances, each object contains either corporation_id or alliance_id
                 items:
                   description: ally object
                   properties:
@@ -38812,8 +38129,7 @@ paths:
                 title: get_wars_war_id_declared
                 type: string
               defender:
-                description: The defending corporation or alliance that declared this war, only
-                  contains either corporation_id or alliance_id
+                description: The defending corporation or alliance that declared this war, only contains either corporation_id or alliance_id
                 properties:
                   alliance_id:
                     description: Alliance ID if and only if the defender is an alliance
@@ -38859,8 +38175,7 @@ paths:
                 title: get_wars_war_id_open_for_allies
                 type: boolean
               retracted:
-                description: Time the war was retracted but both sides could still shoot each
-                  other
+                description: Time the war was retracted but both sides could still shoot each other
                 format: date-time
                 title: get_wars_war_id_retracted
                 type: string

@@ -2,8 +2,7 @@ openapi: 3.0.0
 servers:
   - url: https://www.patientview.org/
 info:
-  description: The recommended REST API endpoints to be used when integrating with
-    PatientView
+  description: The recommended REST API endpoints to be used when integrating with PatientView
   termsOfService: https://www.patientview.org/#/terms
   title: PatientView
   version: "1.0"
@@ -32,8 +31,7 @@ paths:
   /auth/login:
     post:
       deprecated: false
-      description: Authenticate using username and password, returns token, which must
-        be added to X-Auth-Token in header of all future requests
+      description: Authenticate using username and password, returns token, which must be added to X-Auth-Token in header of all future requests
       operationId: logIn
       requestBody:
         content:
@@ -86,8 +84,7 @@ paths:
   "/auth/{token}/basicuserinformation":
     get:
       deprecated: false
-      description: Once logged in and have a token, get basic user information
-        including group role membership
+      description: Once logged in and have a token, get basic user information including group role membership
       operationId: getBasicUserInformation
       parameters:
         - description: token
@@ -115,8 +112,7 @@ paths:
   "/patient/{userId}/basic":
     get:
       deprecated: false
-      description: Given a User ID, get basic patient information for a user from
-        clinical data stored in FHIR
+      description: Given a User ID, get basic patient information for a user from clinical data stored in FHIR
       operationId: getBasicPatientDetails
       parameters:
         - description: userId
@@ -353,8 +349,7 @@ paths:
   "/user/{userId}/availableobservationheadings":
     get:
       deprecated: false
-      description: Given a User ID retrieve a list of available observation types for
-        that user (where they have observation data).
+      description: Given a User ID retrieve a list of available observation types for that user (where they have observation data).
       operationId: getAvailableObservationHeadings
       parameters:
         - description: userId
@@ -482,8 +477,7 @@ paths:
   "/user/{userId}/observations/{code}/patiententered":
     get:
       deprecated: false
-      description: Given a User ID and observation code, retrieve patient entered
-        observations.
+      description: Given a User ID and observation code, retrieve patient entered observations.
       operationId: getPatientEnteredObservationsByCode
       parameters:
         - description: userId
@@ -521,8 +515,7 @@ paths:
   "/user/{userId}/patiententeredobservationheadings":
     get:
       deprecated: false
-      description: Given a User ID retrieve a list of available observation types for
-        that user (where they have patient entered observation data).
+      description: Given a User ID retrieve a list of available observation types for that user (where they have patient entered observation data).
       operationId: getPatientEnteredObservationHeadings
       parameters:
         - description: userId

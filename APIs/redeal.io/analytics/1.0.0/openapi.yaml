@@ -27,10 +27,8 @@ tags:
 paths:
   /events:
     get:
-      description: >
-        By passing in the company, site or deal Id a set of user
-        interaction event records is returned. For pagination of a large result
-        set use queryexecutionid and nexttoken instead.
+      description: |
+        By passing in the company, site or deal Id a set of user interaction event records is returned. For pagination of a large result set use queryexecutionid and nexttoken instead.
       operationId: getEvents
       parameters:
         - description: pass an optional company Id
@@ -92,9 +90,7 @@ components:
     EventRecord:
       properties:
         agent:
-          example: Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X)
-            AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3
-            Mobile/15E148 Safari/604.1
+          example: Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1
           type: string
         browsertype:
           example: Chrome

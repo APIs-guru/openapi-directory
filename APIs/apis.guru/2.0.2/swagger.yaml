@@ -8,13 +8,10 @@ info:
     email: mike.ralphson@gmail.com
     name: APIs.guru
     url: https://APIs.guru
-  description: >
-    Wikipedia for Web APIs. Repository of API specs in OpenAPI 3.0
-    format.
-
+  description: |
+    Wikipedia for Web APIs. Repository of API specs in OpenAPI 3.0 format.
 
     **Warning**: If you want to be notified about changes in advance please join our [Slack channel](https://join.slack.com/t/mermade/shared_invite/zt-g78g7xir-MLE_CTCcXCdfJfG3CJe9qA).
-
 
     Client sample: [[Demo]](https://apis.guru/simple-ui) [[Repo]](https://github.com/APIs-guru/simple-ui)
   license:
@@ -51,16 +48,12 @@ tags:
 paths:
   /list.json:
     get:
-      description: >
+      description: |
         List all APIs in the directory.
-
         Returns links to OpenAPI specification for each API in the directory.
-
         If API exist in multiple versions `preferred` one is explicitly marked.
 
-
         Some basic info from OpenAPI spec is cached inside each object.
-
         This allows to generate some simple views without need to fetch OpenAPI spec for each API.
       operationId: listAPIs
       responses:
@@ -73,9 +66,8 @@ paths:
         - APIs
   /metrics.json:
     get:
-      description: >
+      description: |
         Some basic metrics for the entire directory.
-
         Just stunning numbers to put on a front page and are intended purely for WoW effect :)
       operationId: getMetrics
       responses:
@@ -211,8 +203,7 @@ definitions:
         minimum: 1
         type: integer
       numSpecs:
-        description: Number of API specifications including different versions of the
-          same API
+        description: Number of API specifications including different versions of the same API
         minimum: 1
         type: integer
     required:

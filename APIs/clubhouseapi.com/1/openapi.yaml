@@ -57,8 +57,7 @@ paths:
                     has_update: false
                     success: true
           description: successful response
-      summary: Clubhouse uses this to check for updates when app is not installed from
-        App Store (eg TestFlight)
+      summary: Clubhouse uses this to check for updates when app is not installed from App Store (eg TestFlight)
   /check_waitlist_status:
     post:
       responses:
@@ -145,8 +144,7 @@ paths:
               examples:
                 waitlisted:
                   value:
-                    error_message: Your account is waitlisted. Please contact us if this is in
-                      error.
+                    error_message: Your account is waitlisted. Please contact us if this is in error.
                     success: false
           description: waitlisted
       summary: creates a channel
@@ -168,8 +166,7 @@ paths:
               examples:
                 waitlisted:
                   value:
-                    error_message: Your account is waitlisted. Please contact us if this is in
-                      error.
+                    error_message: Your account is waitlisted. Please contact us if this is in error.
                     success: false
           description: waitlisted
       summary: follows a user
@@ -352,8 +349,7 @@ paths:
               examples:
                 waitlisted:
                   value:
-                    error_message: Your account is waitlisted. Please contact us if this is in
-                      error.
+                    error_message: Your account is waitlisted. Please contact us if this is in error.
                     success: false
           description: waitlisted
       summary: is fetched when you tap Create Room
@@ -428,8 +424,7 @@ paths:
                         user_id: 12345
                         username: johnsmith
           description: returns list of users and clubs
-      summary: get a list of the users and clubs that this user is following. Returned
-        users have bios truncated to ~80 characters.
+      summary: get a list of the users and clubs that this user is following. Returned users have bios truncated to ~80 characters.
   /get_notifications:
     get:
       parameters:
@@ -690,9 +685,7 @@ paths:
       summary: find similar users. (The Sparkles button on Clubhouse's profile page)
   /get_suggested_invites:
     post:
-      description: (also see
-        https://zerforschung.org/posts/clubhouse-telefonnummern-en/ for
-        @zerforschung's analysis of the privacy implications of this API)
+      description: (also see https://zerforschung.org/posts/clubhouse-telefonnummern-en/ for @zerforschung's analysis of the privacy implications of this API)
       requestBody:
         content:
           application/json:
@@ -845,8 +838,7 @@ paths:
                     success: false
                 waitlisted:
                   value:
-                    error_message: Your account is waitlisted. Please contact us if this is in
-                      error.
+                    error_message: Your account is waitlisted. Please contact us if this is in error.
                     success: false
           description: your own account is waitlisted, or some other error occurred
       summary: wave to another user on the waitlist to give them access
@@ -870,8 +862,7 @@ paths:
               examples:
                 waitlisted:
                   value:
-                    error_message: Your account is waitlisted. Please contact us if this is in
-                      error.
+                    error_message: Your account is waitlisted. Please contact us if this is in error.
                     success: false
           description: your own account doesn't have an invite either
       summary: invite a user to the app, using one of your invites
@@ -1228,8 +1219,7 @@ paths:
                     success: true
                 throttled:
                   value:
-                    error_message: Our systems have detected high usage of this feature from your
-                      account. Please try again later.
+                    error_message: Our systems have detected high usage of this feature from your account. Please try again later.
                     success: false
           description: success
       summary: Starts phone number auth.
@@ -1256,8 +1246,7 @@ paths:
               examples:
                 waitlisted:
                   value:
-                    error_message: Your account is waitlisted. Please contact us if this is in
-                      error.
+                    error_message: Your account is waitlisted. Please contact us if this is in error.
                     success: false
           description: waitlisted
       summary: updates notification during signup.

@@ -39,11 +39,9 @@ tags:
 paths:
   /connect:
     get:
-      description: >
+      description: |
         <h3>Security Advice</h3>
-
         * Using the [implicit OAuth authorization flow](https://tools.ietf.org/html/draft-ietf-oauth-security-topics-16#section-2.1.2) (`response_type=token`)  is **not recommended**. It can suffer from access token leakage and access token replay attacks. Use `response_type=code` instead.
-
         * Use the `state` parameter for [CSRF protection](https://tools.ietf.org/html/draft-ietf-oauth-security-topics-16#section-4.7). Pass a sufficient  random nonce here and verify this nonce again after retrieving the token.
       parameters:
         - $ref: "#/components/parameters/client_id"
@@ -59,8 +57,7 @@ paths:
       security:
         - AuthHeader: []
           ClientId: []
-      summary: The OAuth2 authorization endpoint. Your app redirects a user to this
-        endpoint, allowing them to delegate access to their account.
+      summary: The OAuth2 authorization endpoint. Your app redirects a user to this endpoint, allowing them to delegate access to their account.
       tags:
         - oauth
   "/likes/playlists/{playlist_id}":
@@ -235,8 +232,7 @@ paths:
           description: The user could not be found
       security:
         - AuthHeader: []
-      summary: Returns user’s favorites ids. (use /me/likes/tracks instead to fetch
-        the authenticated user's likes)
+      summary: Returns user’s favorites ids. (use /me/likes/tracks instead to fetch the authenticated user's likes)
       tags:
         - me
   /me/followers:
@@ -265,8 +261,7 @@ paths:
           $ref: "#/components/responses/Unauthorized"
       security:
         - AuthHeader: []
-      summary: Returns a user who is following the authenticated user. (use
-        /users/{user_id} instead, to fetch the user details)
+      summary: Returns a user who is following the authenticated user. (use /users/{user_id} instead, to fetch the user details)
       tags:
         - me
   /me/followings:
@@ -297,8 +292,7 @@ paths:
           $ref: "#/components/responses/Unauthorized"
       security:
         - AuthHeader: []
-      summary: Returns a list of recent tracks from users followed by the
-        authenticated user.
+      summary: Returns a list of recent tracks from users followed by the authenticated user.
       tags:
         - me
   "/me/followings/{user_id}":
@@ -337,8 +331,7 @@ paths:
           $ref: "#/components/responses/NotFound"
       security:
         - AuthHeader: []
-      summary: Returns a user who is followed by the authenticated user. (use
-        /users/{user_id} instead, to fetch the user details)
+      summary: Returns a user who is followed by the authenticated user. (use /users/{user_id} instead, to fetch the user details)
       tags:
         - me
     put:
@@ -400,8 +393,7 @@ paths:
           $ref: "#/components/responses/Playlist"
       security:
         - AuthHeader: []
-      summary: Returns playlist. (use /playlists/{playlist_id} instead, to fetch the
-        playlist details)
+      summary: Returns playlist. (use /playlists/{playlist_id} instead, to fetch the playlist details)
       tags:
         - me
   /me/tracks:
@@ -429,8 +421,7 @@ paths:
           $ref: "#/components/responses/Track"
       security:
         - AuthHeader: []
-      summary: Returns a specified track. (use /tracks/{track_id} instead, to fetch
-        the track details)
+      summary: Returns a specified track. (use /tracks/{track_id} instead, to fetch the track details)
       tags:
         - me
   /oauth2/token:
@@ -480,8 +471,7 @@ paths:
           $ref: "#/components/responses/Unauthorized"
       security:
         - ClientId: []
-      summary: This endpoint accepts POST requests and is used to provision access
-        tokens once a user has authorized your application.
+      summary: This endpoint accepts POST requests and is used to provision access tokens once a user has authorized your application.
       tags:
         - oauth
   /playlists:
@@ -1015,8 +1005,7 @@ paths:
       security:
         - AuthHeader: []
           ClientId: []
-      summary: Returns a list of user's favorited or liked tracks. (use
-        /users/:userId/likes/tracks instead, to fetch a user's likes)
+      summary: Returns a list of user's favorited or liked tracks. (use /users/:userId/likes/tracks instead, to fetch a user's likes)
       tags:
         - users
   "/users/{user_id}/followers":
@@ -1070,8 +1059,7 @@ paths:
       security:
         - AuthHeader: []
           ClientId: []
-      summary: Returns a user's following. (use /users/{user_id} instead, to fetch the
-        user details)
+      summary: Returns a user's following. (use /users/{user_id} instead, to fetch the user details)
       tags:
         - users
   "/users/{user_id}/likes/tracks":
@@ -1147,8 +1135,7 @@ paths:
       security:
         - AuthHeader: []
           ClientId: []
-      summary: Returns list of user's links added to their profile (website, facebook,
-        instagram).
+      summary: Returns list of user's links added to their profile (website, facebook, instagram).
       tags:
         - users
 components:
@@ -1554,11 +1541,8 @@ components:
           username: username
   parameters:
     access:
-      description: >
-        Filters content by level of access the user (logged in or
-        anonymous) has to the track. The result list will include only tracks
-        with the specified access. Include all options if you'd like to see all
-        possible tracks. See `Track#access` schema for more details.
+      description: |
+        Filters content by level of access the user (logged in or anonymous) has to the track. The result list will include only tracks with the specified access. Include all options if you'd like to see all possible tracks. See `Track#access` schema for more details.
       explode: false
       in: query
       name: access
@@ -1699,8 +1683,7 @@ components:
         minimum: 1
         type: integer
     linked_partitioning:
-      description: Returns paginated collection of items (recommended, returning a
-        list without pagination is deprecated and should not be used)
+      description: Returns paginated collection of items (recommended, returning a list without pagination is deprecated and should not be used)
       example: true
       in: query
       name: linked_partitioning
@@ -1777,8 +1760,7 @@ components:
       schema:
         type: string
     state:
-      description: Any value included here will be appended to the redirect URI. Use
-        this for CSRF protection.
+      description: Any value included here will be appended to the redirect URI. Use this for CSRF protection.
       example: encrypted_session_info
       in: query
       name: state
@@ -2931,7 +2913,7 @@ components:
       description: Soundcloud Track object.
       properties:
         access:
-          description: >
+          description: |
             Level of access the user (logged in or anonymous) has to the track.
               * `playable` - user is allowed to listen to a full track.
               * `preview` - user is allowed to preview a track, meaning a snippet is available
@@ -3097,8 +3079,7 @@ components:
         "track[label_name]":
           type: string
         "track[license]":
-          description: "Possible values: no-rights-reserved, all-rights-reserved, cc-by,
-            cc-by-nc, cc-by-nd, cc-by-sa, cc-by-nc-nd, cc-by-nc-sa"
+          description: "Possible values: no-rights-reserved, all-rights-reserved, cc-by, cc-by-nc, cc-by-nd, cc-by-sa, cc-by-nc-nd, cc-by-nc-sa"
           enum:
             - no-rights-reserved
             - all-rights-reserved
@@ -3129,11 +3110,7 @@ components:
           default: true
           type: boolean
         "track[tag_list]":
-          description: "The tag_list property contains a list of tags separated by spaces.
-            Multiword tags are quoted in double quotes. We also support machine
-            tags that follow the pattern NAMESPACE:KEY=VALUE. For example:
-            geo:lat=43.555 camel:size=medium “machine:tag=with space” Machine
-            tags are not revealed to the user on the track pages."
+          description: "The tag_list property contains a list of tags separated by spaces. Multiword tags are quoted in double quotes. We also support machine tags that follow the pattern NAMESPACE:KEY=VALUE. For example: geo:lat=43.555 camel:size=medium “machine:tag=with space” Machine tags are not revealed to the user on the track pages."
           type: string
         "track[title]":
           type: string
@@ -3164,8 +3141,7 @@ components:
             label_name:
               type: string
             license:
-              description: "Possible values: no-rights-reserved, all-rights-reserved, cc-by,
-                cc-by-nc, cc-by-nd, cc-by-sa, cc-by-nc-nd, cc-by-nc-sa"
+              description: "Possible values: no-rights-reserved, all-rights-reserved, cc-by, cc-by-nc, cc-by-nd, cc-by-sa, cc-by-nc-nd, cc-by-nc-sa"
               enum:
                 - no-rights-reserved
                 - all-rights-reserved
@@ -3196,12 +3172,7 @@ components:
               default: true
               type: boolean
             tag_list:
-              description: "The tag_list property contains a list of tags separated by spaces.
-                Multiword tags are quoted in double quotes. We also support
-                machine tags that follow the pattern NAMESPACE:KEY=VALUE. For
-                example: geo:lat=43.555 camel:size=medium “machine:tag=with
-                space” Machine tags are not revealed to the user on the track
-                pages."
+              description: "The tag_list property contains a list of tags separated by spaces. Multiword tags are quoted in double quotes. We also support machine tags that follow the pattern NAMESPACE:KEY=VALUE. For example: geo:lat=43.555 camel:size=medium “machine:tag=with space” Machine tags are not revealed to the user on the track pages."
               type: string
             title:
               type: string
@@ -3479,8 +3450,7 @@ components:
       name: Authorization
       type: apiKey
     ClientId:
-      description: Your product key. This is not the same as the API key used for most
-        requests
+      description: Your product key. This is not the same as the API key used for most requests
       in: query
       name: client_id
       type: apiKey

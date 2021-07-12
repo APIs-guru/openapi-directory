@@ -91,8 +91,7 @@ paths:
           required: false
           type: string
         - default: us
-          description: Provides localized data for the selected country (ISO 3166-1
-            alpha-2) if available. Otherwise, returns US data.
+          description: Provides localized data for the selected country (ISO 3166-1 alpha-2) if available. Otherwise, returns US data.
           in: query
           name: country
           required: false
@@ -124,8 +123,7 @@ paths:
           required: false
           type: string
         - default: us
-          description: Provides localized data for the selected country (ISO 3166-1
-            alpha-2) if available. Otherwise, returns US data.
+          description: Provides localized data for the selected country (ISO 3166-1 alpha-2) if available. Otherwise, returns US data.
           in: query
           name: country
           required: false
@@ -151,8 +149,7 @@ paths:
           required: false
           type: string
         - default: us
-          description: Provides localized data for the selected country (ISO 3166-1
-            alpha-2) if available. Otherwise, returns US data.
+          description: Provides localized data for the selected country (ISO 3166-1 alpha-2) if available. Otherwise, returns US data.
           in: query
           name: country
           required: false
@@ -184,8 +181,7 @@ paths:
           required: false
           type: string
         - default: us
-          description: Provides localized data for the selected country (ISO 3166-1
-            alpha-2) if available. Otherwise, returns US data.
+          description: Provides localized data for the selected country (ISO 3166-1 alpha-2) if available. Otherwise, returns US data.
           in: query
           name: country
           required: false
@@ -225,8 +221,7 @@ paths:
           required: false
           type: string
         - default: us
-          description: Provides localized data for the selected country (ISO 3166-1
-            alpha-2) if available. Otherwise, returns US data.
+          description: Provides localized data for the selected country (ISO 3166-1 alpha-2) if available. Otherwise, returns US data.
           in: query
           name: country
           required: false
@@ -258,8 +253,7 @@ paths:
           required: false
           type: string
         - default: us
-          description: Provides localized data for the selected country (ISO 3166-1
-            alpha-2) if available. Otherwise, returns US data.
+          description: Provides localized data for the selected country (ISO 3166-1 alpha-2) if available. Otherwise, returns US data.
           in: query
           name: country
           required: false
@@ -285,8 +279,7 @@ paths:
           required: false
           type: string
         - default: us
-          description: Provides localized data for the selected country (ISO 3166-1
-            alpha-2) if available. Otherwise, returns US data.
+          description: Provides localized data for the selected country (ISO 3166-1 alpha-2) if available. Otherwise, returns US data.
           in: query
           name: country
           required: false
@@ -318,8 +311,7 @@ paths:
           required: false
           type: string
         - default: us
-          description: Provides localized data for the selected country (ISO 3166-1
-            alpha-2) if available. Otherwise, returns US data.
+          description: Provides localized data for the selected country (ISO 3166-1 alpha-2) if available. Otherwise, returns US data.
           in: query
           name: country
           required: false
@@ -339,8 +331,7 @@ paths:
       operationId: MoviesAliasDetailedInfo
       parameters:
         - default: "0031381"
-          description: Movie ID. You can use the movies search endpoint or peruse the
-            lists of movies/dvds to get the Movie ID
+          description: Movie ID. You can use the movies search endpoint or peruse the lists of movies/dvds to get the Movie ID
           in: query
           name: id
           required: false
@@ -365,8 +356,7 @@ paths:
     get:
       operationId: MoviesSearchSearch
       parameters:
-        - description: The plain text search query to search for a movie. Remember to URI
-            encode this!
+        - description: The plain text search query to search for a movie. Remember to URI encode this!
           in: query
           name: q
           required: false
@@ -398,8 +388,7 @@ paths:
       operationId: MoviesInfoDetailedInfo
       parameters:
         - default: "770672122"
-          description: Movie ID. You can use the movies search endpoint or peruse the
-            lists of movies/dvds to get the Movie ID
+          description: Movie ID. You can use the movies search endpoint or peruse the lists of movies/dvds to get the Movie ID
           in: path
           name: id
           required: true
@@ -419,8 +408,7 @@ paths:
       operationId: CastInfoDetailedInfo
       parameters:
         - default: "770672122"
-          description: Movie ID. You can use the movies search endpoint or peruse the
-            lists of movies/dvds to get the Movie ID
+          description: Movie ID. You can use the movies search endpoint or peruse the lists of movies/dvds to get the Movie ID
           in: path
           name: id
           required: true
@@ -440,8 +428,7 @@ paths:
       operationId: MovieClipsDetailedInfo
       parameters:
         - default: "770672122"
-          description: Movie ID. You can use the movies search endpoint or peruse the
-            lists of movies/dvds to get the Movie ID
+          description: Movie ID. You can use the movies search endpoint or peruse the lists of movies/dvds to get the Movie ID
           in: path
           name: id
           required: true
@@ -461,17 +448,13 @@ paths:
       operationId: MoviesReviewsDetailedInfo
       parameters:
         - default: "770672122"
-          description: Movie ID. You can use the movies search endpoint or peruse the
-            lists of movies/dvds to get the Movie ID
+          description: Movie ID. You can use the movies search endpoint or peruse the lists of movies/dvds to get the Movie ID
           in: path
           name: id
           required: true
           type: string
         - default: top_critic
-          description: "3 different review types are possible: 'all', 'top_critic' and
-            'dvd'. 'top_critic' shows all the Rotten Tomatoes designated top
-            critics. 'dvd' pulls the reviews given on the DVD of the movie.
-            'all' as the name implies retrieves all reviews."
+          description: "3 different review types are possible: 'all', 'top_critic' and 'dvd'. 'top_critic' shows all the Rotten Tomatoes designated top critics. 'dvd' pulls the reviews given on the DVD of the movie. 'all' as the name implies retrieves all reviews."
           in: query
           name: review_type
           required: false
@@ -489,8 +472,7 @@ paths:
           required: false
           type: string
         - default: us
-          description: Provides localized data for the selected country (ISO 3166-1
-            alpha-2) if available. Otherwise, returns US data.
+          description: Provides localized data for the selected country (ISO 3166-1 alpha-2) if available. Otherwise, returns US data.
           in: query
           name: country
           required: false
@@ -510,8 +492,7 @@ paths:
       operationId: MoviesSimilarDetailedInfo
       parameters:
         - default: "770672122"
-          description: Movie ID. You can use the movies search endpoint or peruse the
-            lists of movies/dvds to get the Movie ID
+          description: Movie ID. You can use the movies search endpoint or peruse the lists of movies/dvds to get the Movie ID
           in: path
           name: id
           required: true

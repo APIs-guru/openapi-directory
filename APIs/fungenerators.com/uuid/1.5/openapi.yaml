@@ -5,10 +5,8 @@ info:
   contact:
     name: Fun Generators
     url: https://fungenerators.com/
-  description: >
-    A full featured, REST based UUID generator with json/xml/jsonp
-    result support. You can try them out right here. [Click here to
-    subscribe](http://fungenerators.com/api/uuid/)
+  description: |
+    A full featured, REST based UUID generator with json/xml/jsonp result support. You can try them out right here. [Click here to subscribe](http://fungenerators.com/api/uuid/)
   termsOfService: https://fungenerators.com/terms
   title: UUID Generation API
   version: "1.5"
@@ -161,25 +159,21 @@ paths:
           schema:
             format: integer
             type: integer
-        - description: Version of the UUID spec to use. (0-5), Use '0' for nil
-            (00000000-0000-0000-0000-000000000000) UUID.
+        - description: Version of the UUID spec to use. (0-5), Use '0' for nil (00000000-0000-0000-0000-000000000000) UUID.
           in: path
           name: version
           required: true
           schema:
             format: integer
             type: integer
-        - description: For v3 and v5 of UUID Spec you can supply the type
-            (dns/url/oid/x500/nil).
+        - description: For v3 and v5 of UUID Spec you can supply the type (dns/url/oid/x500/nil).
           in: query
           name: type
           required: false
           schema:
             format: string
             type: string
-        - description: For v3 and v5 of UUID Spec supply the text value for the type
-            specified dns/url/oid/x500/nil. For example specify a dns/domain
-            string if the type is "dns"
+        - description: For v3 and v5 of UUID Spec supply the text value for the type specified dns/url/oid/x500/nil. For example specify a dns/domain string if the type is "dns"
           in: query
           name: text
           required: false

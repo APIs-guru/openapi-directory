@@ -19,11 +19,9 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "With the addons request you can get a list of offers for addon
-        services available for a specific rate, room type\r
+      description: "With the addons request you can get a list of offers for addon services available for a specific rate, room type\r
 
-        \            and guest stay details.The channel code will define
-        which rates will be returned based on the access control \r
+        \            and guest stay details.The channel code will define which rates will be returned based on the access control \r
 
         \            configuration for related rates."
       operationId: Addons_Get
@@ -46,18 +44,15 @@ paths:
           name: hotelId
           required: true
           type: integer
-        - description: Date from when the addon service will be booked to the reservation
-            in the ISO-8601 format "YYYY-MM-DD".
+        - description: Date from when the addon service will be booked to the reservation in the ISO-8601 format "YYYY-MM-DD".
           format: date-time
           in: query
           name: arrivalDate
           required: true
           type: string
-        - description: "Date until when the addon service will be booked to the
-            reservation in the ISO-8601 format \"YYYY-MM-DD\".\r
+        - description: "Date until when the addon service will be booked to the reservation in the ISO-8601 format \"YYYY-MM-DD\".\r
 
-            \            This is usually the departure date of the
-            reservation."
+            \            This is usually the departure date of the reservation."
           format: date-time
           in: query
           name: departureDate
@@ -115,29 +110,23 @@ paths:
         "403":
           description: The application does not have access to the requested resource.
         "404":
-          description: Not Found. The server has not found anything matching the
-            Request-URI.
+          description: Not Found. The server has not found anything matching the Request-URI.
         "422":
-          description: "The request failed to validate. Either a mandatory parameter was
-            missing or no offers for \r
+          description: "The request failed to validate. Either a mandatory parameter was missing or no offers for \r
 
             \            the requested stay details"
         "500":
-          description: We caught an unexpected error on our side. Please report with
-            providing the Hetras-Tracking-Id from the response headers and we
-            will check the logfiles.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         "503":
           description: The server is currently unavailable. Please try later.
-      summary: Get a list of offers for addon services for the specified guest stay
-        details.
+      summary: Get a list of offers for addon services for the specified guest stay details.
       tags:
         - Addons
   /api/booking/v0/availability:
     get:
       consumes: []
       deprecated: false
-      description: Read past occupancy and future availability for a specific hotel.
-        You can also request the breakdown per room type.
+      description: Read past occupancy and future availability for a specific hotel. You can also request the breakdown per room type.
       operationId: Availability_Get
       parameters:
         - description: Application identifier
@@ -158,16 +147,13 @@ paths:
           name: hotelId
           required: true
           type: integer
-        - description: Defines the first business day you would like to get availability
-            numbers for.
+        - description: Defines the first business day you would like to get availability numbers for.
           format: date-time
           in: query
           name: from
           required: true
           type: string
-        - description: "Defines the last business day you would like to get availability
-            numbers for. The maximum time span between <i>from</i>´and
-            <i>to</i>\r
+        - description: "Defines the last business day you would like to get availability numbers for. The maximum time span between <i>from</i>´and <i>to</i>\r
 
             \            is limited to 365 days."
           format: date-time
@@ -175,8 +161,7 @@ paths:
           name: to
           required: true
           type: string
-        - description: You can expand the room types breakdown per business day for the
-            availibility numbers if need be.
+        - description: You can expand the room types breakdown per business day for the availibility numbers if need be.
           enum:
             - RoomTypes
           in: query
@@ -218,12 +203,9 @@ paths:
         "403":
           description: The application does not have access to the requested resource.
         "404":
-          description: Not Found. The server has not found anything matching the
-            Request-URI.
+          description: Not Found. The server has not found anything matching the Request-URI.
         "500":
-          description: We caught an unexpected error on our side. Please report with
-            providing the Hetras-Tracking-Id from the response headers and we
-            will check the logfiles.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
       summary: Gets the availability and occupancy for a specific hotel and timespan.
       tags:
         - Availability
@@ -231,11 +213,9 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "With this endpoint you can request a list of blocks for the hotel
-        chain. Currently we only support to optionally\r
+      description: "With this endpoint you can request a list of blocks for the hotel chain. Currently we only support to optionally\r
 
-        \            filter by the group code linked to the block.
-        Additional filters will be available soon."
+        \            filter by the group code linked to the block. Additional filters will be available soon."
       operationId: Blocks_GetBlocksAsync
       parameters:
         - description: Application identifier
@@ -266,22 +246,19 @@ paths:
           name: groupCode
           required: false
           type: string
-        - description: Return all blocks where the block's last_departure is greater than
-            specified date.
+        - description: Return all blocks where the block's last_departure is greater than specified date.
           format: date-time
           in: query
           name: from
           required: false
           type: string
-        - description: Return all blocks where the block's last_departure is less than
-            specified date.
+        - description: Return all blocks where the block's last_departure is less than specified date.
           format: date-time
           in: query
           name: to
           required: false
           type: string
-        - description: Return all blocks where the block status is one of the specified
-            values.
+        - description: Return all blocks where the block status is one of the specified values.
           enum:
             - Cancelled
             - Tentative
@@ -291,16 +268,14 @@ paths:
           required: false
           type: string
         - collectionFormat: csv
-          description: Return all blocks that have related the specified comma-separated
-            rate plans.
+          description: Return all blocks that have related the specified comma-separated rate plans.
           in: query
           items:
             type: string
           name: ratePlanCodes
           required: false
           type: array
-        - description: If true it will include also details of block count per each room
-            type.
+        - description: If true it will include also details of block count per each room type.
           in: query
           name: countDetails
           required: false
@@ -342,12 +317,9 @@ paths:
         "403":
           description: The application does not have access to the requested resource.
         "404":
-          description: Not Found. The server has not found anything matching the
-            Request-URI.
+          description: Not Found. The server has not found anything matching the Request-URI.
         "500":
-          description: We caught an unexpected error on our side. Please report with
-            providing the Hetras-Tracking-Id from the response headers and we
-            will check the logfiles.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         "503":
           description: The server is currently unavailable. Please try later.
       summary: Gets a list of blocks.
@@ -387,22 +359,19 @@ paths:
           name: groupCode
           required: false
           type: string
-        - description: Return all blocks where the block's last_departure is greater than
-            specified date.
+        - description: Return all blocks where the block's last_departure is greater than specified date.
           format: date-time
           in: query
           name: from
           required: false
           type: string
-        - description: Return all blocks where the block's last_departure is less than
-            specified date.
+        - description: Return all blocks where the block's last_departure is less than specified date.
           format: date-time
           in: query
           name: to
           required: false
           type: string
-        - description: Return all blocks where the block status is one of the specified
-            values.
+        - description: Return all blocks where the block status is one of the specified values.
           enum:
             - Cancelled
             - Tentative
@@ -412,16 +381,14 @@ paths:
           required: false
           type: string
         - collectionFormat: csv
-          description: Return all blocks that have related the specified comma-separated
-            rate plans.
+          description: Return all blocks that have related the specified comma-separated rate plans.
           in: query
           items:
             type: string
           name: ratePlanCodes
           required: false
           type: array
-        - description: If true it will include also details of block count per each room
-            type.
+        - description: If true it will include also details of block count per each room type.
           in: query
           name: countDetails
           required: false
@@ -439,8 +406,7 @@ paths:
         "403":
           description: The application does not have access to the requested resource.
         "500":
-          description: We couldn't return the representation due to an internal server
-            error.
+          description: We couldn't return the representation due to an internal server error.
         "503":
           description: The server is currently unavailable. Please try later.
       summary: Get total blocks count that match the given filter criteria.
@@ -450,8 +416,7 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: Read all informationen about a block including the numbers of
-        blocked rooms per room type and business day.
+      description: Read all informationen about a block including the numbers of blocked rooms per room type and business day.
       operationId: Blocks_GetSingleBlockAsync
       parameters:
         - description: Application identifier
@@ -466,8 +431,7 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-        - description: "Specifies the block code. The block code is composed of the hotel
-            code, a dash and the block code \r
+        - description: "Specifies the block code. The block code is composed of the hotel code, a dash and the block code \r
 
             \            as shown in the hetras UI."
           in: path
@@ -495,12 +459,9 @@ paths:
         "403":
           description: The application does not have access to the requested resource.
         "404":
-          description: Not Found. The server has not found anything matching the
-            Request-URI.
+          description: Not Found. The server has not found anything matching the Request-URI.
         "500":
-          description: We caught an unexpected error on our side. Please report with
-            providing the Hetras-Tracking-Id from the response headers and we
-            will check the logfiles.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         "503":
           description: The server is currently unavailable. Please try later.
       summary: Gets the details for a specific block.
@@ -510,19 +471,13 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "Here you can easily find bookings matching various criteria. The
-        booking you are looking for has to fullfill all the specified criteria\r
+      description: "Here you can easily find bookings matching various criteria. The booking you are looking for has to fullfill all the specified criteria\r
 
-        \            at the same time. So if you specify a customer name
-        and a channel code you will get all bookings where the firstname or
-        lastname of a guest or a \r
+        \            at the same time. So if you specify a customer name and a channel code you will get all bookings where the firstname or lastname of a guest or a \r
 
-        \            contact contains the specified value and that have
-        been done through the defined channel.\r
+        \            contact contains the specified value and that have been done through the defined channel.\r
 
-        \            A booking can consist of multiple reservations, so
-        even if you are looking for a specific reservation which is part of a
-        multi-room booking you will get\r
+        \            A booking can consist of multiple reservations, so even if you are looking for a specific reservation which is part of a multi-room booking you will get\r
 
         \            all reservations for this booking returned."
       operationId: Bookings_GetBookings
@@ -550,36 +505,29 @@ paths:
           name: cancellationId
           required: false
           type: string
-        - description: "Return bookings matching this reservation number. Please note that
-            reservation numbers are only unique within a hotel. If you\r
+        - description: "Return bookings matching this reservation number. Please note that reservation numbers are only unique within a hotel. If you\r
 
-            \            don´t specify a hotel filter at the same
-            time you could get back multiple bookings from different hotels."
+            \            don´t specify a hotel filter at the same time you could get back multiple bookings from different hotels."
           format: int32
           in: query
           name: reservationNumber
           required: false
           type: integer
-        - description: "Return all bookings where the first or lastname of one of the
-            guests or the contact contains the specified value. The search is
-            executed case insensitive\r
+        - description: "Return all bookings where the first or lastname of one of the guests or the contact contains the specified value. The search is executed case insensitive\r
 
             \            and also stripping of any whitespaces."
           in: query
           name: customerName
           required: false
           type: string
-        - description: "Return all bookings where the primary email address of one of the
-            guests or the contact contains the specified value. The search is
-            executed case insensitive\r
+        - description: "Return all bookings where the primary email address of one of the guests or the contact contains the specified value. The search is executed case insensitive\r
 
             \            and also stripping of any whitespaces."
           in: query
           name: customerEmail
           required: false
           type: string
-        - description: Return all bookings the id of one of the guests or the contact
-            matches the specified value.
+        - description: Return all bookings the id of one of the guests or the contact matches the specified value.
           in: query
           name: customerId
           required: false
@@ -589,30 +537,24 @@ paths:
           name: roomNumber
           required: false
           type: string
-        - description: Return all bookings exactly matching the specified external id.
-            This filter is case sensitive.
+        - description: Return all bookings exactly matching the specified external id. This filter is case sensitive.
           in: query
           name: externalId
           required: false
           type: string
-        - description: "Return all bookings where the name of the linked company or travel
-            agent profile contains the specified value. The search is executed
-            case insensitive\r
+        - description: "Return all bookings where the name of the linked company or travel agent profile contains the specified value. The search is executed case insensitive\r
 
             \            and also stripping of any whitespaces."
           in: query
           name: companyName
           required: false
           type: string
-        - description: Return all bookings the id of the company or travel agent profile
-            matches the specified value.
+        - description: Return all bookings the id of the company or travel agent profile matches the specified value.
           in: query
           name: companyId
           required: false
           type: string
-        - description: "Return all bookings where the primary email address of the company
-            or the travel agent profile contains the specified value. The search
-            is executed case insensitive\r
+        - description: "Return all bookings where the primary email address of the company or the travel agent profile contains the specified value. The search is executed case insensitive\r
 
             \            and also stripping of any whitespaces."
           in: query
@@ -625,8 +567,7 @@ paths:
           required: false
           type: string
         - collectionFormat: csv
-          description: Return all bookings where the reservation status is one of the
-            specified values.
+          description: Return all bookings where the reservation status is one of the specified values.
           in: query
           items:
             enum:
@@ -650,8 +591,7 @@ paths:
           required: false
           type: array
         - collectionFormat: csv
-          description: Return all bookings where the market code is one of the specified
-            values.
+          description: Return all bookings where the market code is one of the specified values.
           in: query
           items:
             type: string
@@ -659,8 +599,7 @@ paths:
           required: false
           type: array
         - collectionFormat: csv
-          description: Return all bookings where the channel code is one of the specified
-            values.
+          description: Return all bookings where the channel code is one of the specified values.
           in: query
           items:
             type: string
@@ -668,8 +607,7 @@ paths:
           required: false
           type: array
         - collectionFormat: csv
-          description: Return all bookings where the subchannel code is one of the
-            specified values.
+          description: Return all bookings where the subchannel code is one of the specified values.
           in: query
           items:
             type: string
@@ -677,8 +615,7 @@ paths:
           required: false
           type: array
         - collectionFormat: csv
-          description: Return all bookings where the room type is one of the specified
-            values.
+          description: Return all bookings where the room type is one of the specified values.
           in: query
           items:
             type: string
@@ -686,8 +623,7 @@ paths:
           required: false
           type: array
         - collectionFormat: csv
-          description: Return all bookings where the rate plan code is one of the
-            specified values.
+          description: Return all bookings where the rate plan code is one of the specified values.
           in: query
           items:
             type: string
@@ -702,28 +638,23 @@ paths:
           name: labels
           required: false
           type: array
-        - description: "Start date for the selected date filter. If you select arrival
-            date as date filter the bookings returned will have at least\r
+        - description: "Start date for the selected date filter. If you select arrival date as date filter the bookings returned will have at least\r
 
-            \            one reservation arriving on the specified
-            date or later."
+            \            one reservation arriving on the specified date or later."
           format: date-time
           in: query
           name: from
           required: false
           type: string
-        - description: "End date for the selected date filter. If you select arrival date
-            as date filter the bookings returned will have at least\r
+        - description: "End date for the selected date filter. If you select arrival date as date filter the bookings returned will have at least\r
 
-            \            one reservation arriving on the specified
-            date or earlier."
+            \            one reservation arriving on the specified date or earlier."
           format: date-time
           in: query
           name: to
           required: false
           type: string
-        - description: "Select a date field you want to filter bookings by. Only one
-            filter at a time can be applied. The to and from dates\r
+        - description: "Select a date field you want to filter bookings by. Only one filter at a time can be applied. The to and from dates\r
 
             \            will then define the time range."
           enum:
@@ -736,8 +667,7 @@ paths:
           name: dateFilter
           required: false
           type: string
-        - description: To be able to request reservations without personal data based on
-            GDPR.
+        - description: To be able to request reservations without personal data based on GDPR.
           enum:
             - Customers
           in: query
@@ -779,14 +709,11 @@ paths:
         "403":
           description: The application does not have access to the requested resource.
         "404":
-          description: Not Found. The server has not found anything matching the
-            Request-URI.
+          description: Not Found. The server has not found anything matching the Request-URI.
         "422":
           description: The request failed to validate.
         "500":
-          description: We caught an unexpected error on our side. Please report with
-            providing the Hetras-Tracking-Id from the response headers and we
-            will check the logfiles.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         "503":
           description: The server is currently unavailable. Please try later.
       summary: Find bookings matching the given filter criteria.
@@ -797,22 +724,15 @@ paths:
         - application/json
         - text/json
       deprecated: false
-      description: "Create a new booking as defined in the requests payload. You can
-        get more information about the payload if you check out the\r
+      description: "Create a new booking as defined in the requests payload. You can get more information about the payload if you check out the\r
 
-        \            documentation for the reservation request model.<br
-        />\r
+        \            documentation for the reservation request model.<br />\r
 
-        \            Please also have a look at the <a
-        href=\"https://developer.hetras.com/docs/tutorials\"
-        onfocus=\"this.blur()\">Tutorials</a>.<br />\r
+        \            Please also have a look at the <a href=\"https://developer.hetras.com/docs/tutorials\" onfocus=\"this.blur()\">Tutorials</a>.<br />\r
 
-        \            For more details on how the API responds to errors
-        please check our documentation on \r
+        \            For more details on how the API responds to errors please check our documentation on \r
 
-        \            <a
-        href=\"https://developer.hetras.com/docs/errors/\"
-        onfocus=\"this.blur()\">Error Handling</a>."
+        \            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
       operationId: Bookings_CreateBooking
       parameters:
         - description: Application identifier
@@ -843,8 +763,7 @@ paths:
         - text/json
       responses:
         "201":
-          description: "The creation of the booking was successful. You will get back the
-            confirmation id and maybe warnings, if\r
+          description: "The creation of the booking was successful. You will get back the confirmation id and maybe warnings, if\r
 
             \            e.g. the prepayment could not be captured."
           schema:
@@ -856,14 +775,11 @@ paths:
         "403":
           description: The application does not have access to the requested resource.
         "404":
-          description: Not Found. The server has not found anything matching the
-            Request-URI.
+          description: Not Found. The server has not found anything matching the Request-URI.
         "422":
           description: The request failed to validate.
         "500":
-          description: We caught an unexpected error on our side. Please report with
-            providing the Hetras-Tracking-Id from the response headers and we
-            will check the logfiles.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         "503":
           description: The server is currently unavailable. Please try later.
       summary: Create a new booking.
@@ -873,15 +789,11 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "Get the count of all bookings matching your criteria. The bookings
-        have to fullfill all the specified criteria\r
+      description: "Get the count of all bookings matching your criteria. The bookings have to fullfill all the specified criteria\r
 
-        \            at the same time. So if you specify a customer name
-        and a channel code you will get the count for all bookings where the
-        firstname or lastname \r
+        \            at the same time. So if you specify a customer name and a channel code you will get the count for all bookings where the firstname or lastname \r
 
-        \            of a guest or a contact contains the specified
-        value and that have been done through the defined channel."
+        \            of a guest or a contact contains the specified value and that have been done through the defined channel."
       operationId: Bookings_GetBookingsCount
       parameters:
         - description: Application identifier
@@ -907,36 +819,29 @@ paths:
           name: cancellationId
           required: false
           type: string
-        - description: "Return bookings matching this reservation number. Please note that
-            reservation numbers are only unique within a hotel. If you\r
+        - description: "Return bookings matching this reservation number. Please note that reservation numbers are only unique within a hotel. If you\r
 
-            \            don´t specify a hotel filter at the same
-            time you could get back multiple bookings from different hotels."
+            \            don´t specify a hotel filter at the same time you could get back multiple bookings from different hotels."
           format: int32
           in: query
           name: reservationNumber
           required: false
           type: integer
-        - description: "Return all bookings where the first or lastname of one of the
-            guests or the contact contains the specified value. The search is
-            executed case insensitive\r
+        - description: "Return all bookings where the first or lastname of one of the guests or the contact contains the specified value. The search is executed case insensitive\r
 
             \            and also stripping of any whitespaces."
           in: query
           name: customerName
           required: false
           type: string
-        - description: "Return all bookings where the primary email address of one of the
-            guests or the contact contains the specified value. The search is
-            executed case insensitive\r
+        - description: "Return all bookings where the primary email address of one of the guests or the contact contains the specified value. The search is executed case insensitive\r
 
             \            and also stripping of any whitespaces."
           in: query
           name: customerEmail
           required: false
           type: string
-        - description: Return all bookings the id of one of the guests or the contact
-            matches the specified value.
+        - description: Return all bookings the id of one of the guests or the contact matches the specified value.
           in: query
           name: customerId
           required: false
@@ -946,30 +851,24 @@ paths:
           name: roomNumber
           required: false
           type: string
-        - description: Return all bookings exactly matching the specified external id.
-            This filter is case sensitive.
+        - description: Return all bookings exactly matching the specified external id. This filter is case sensitive.
           in: query
           name: externalId
           required: false
           type: string
-        - description: "Return all bookings where the name of the linked company or travel
-            agent profile contains the specified value. The search is executed
-            case insensitive\r
+        - description: "Return all bookings where the name of the linked company or travel agent profile contains the specified value. The search is executed case insensitive\r
 
             \            and also stripping of any whitespaces."
           in: query
           name: companyName
           required: false
           type: string
-        - description: Return all bookings the id of the company or travel agent profile
-            matches the specified value.
+        - description: Return all bookings the id of the company or travel agent profile matches the specified value.
           in: query
           name: companyId
           required: false
           type: string
-        - description: "Return all bookings where the primary email address of the company
-            or the travel agent profile contains the specified value. The search
-            is executed case insensitive\r
+        - description: "Return all bookings where the primary email address of the company or the travel agent profile contains the specified value. The search is executed case insensitive\r
 
             \            and also stripping of any whitespaces."
           in: query
@@ -982,8 +881,7 @@ paths:
           required: false
           type: string
         - collectionFormat: csv
-          description: Return all bookings where the reservation status is one of the
-            specified values.
+          description: Return all bookings where the reservation status is one of the specified values.
           in: query
           items:
             enum:
@@ -1007,8 +905,7 @@ paths:
           required: false
           type: array
         - collectionFormat: csv
-          description: Return all bookings where the market code is one of the specified
-            values.
+          description: Return all bookings where the market code is one of the specified values.
           in: query
           items:
             type: string
@@ -1016,8 +913,7 @@ paths:
           required: false
           type: array
         - collectionFormat: csv
-          description: Return all bookings where the channel code is one of the specified
-            values.
+          description: Return all bookings where the channel code is one of the specified values.
           in: query
           items:
             type: string
@@ -1025,8 +921,7 @@ paths:
           required: false
           type: array
         - collectionFormat: csv
-          description: Return all bookings where the subchannel code is one of the
-            specified values.
+          description: Return all bookings where the subchannel code is one of the specified values.
           in: query
           items:
             type: string
@@ -1034,8 +929,7 @@ paths:
           required: false
           type: array
         - collectionFormat: csv
-          description: Return all bookings where the room type is one of the specified
-            values.
+          description: Return all bookings where the room type is one of the specified values.
           in: query
           items:
             type: string
@@ -1043,8 +937,7 @@ paths:
           required: false
           type: array
         - collectionFormat: csv
-          description: Return all bookings where the rate plan code is one of the
-            specified values.
+          description: Return all bookings where the rate plan code is one of the specified values.
           in: query
           items:
             type: string
@@ -1059,28 +952,23 @@ paths:
           name: labels
           required: false
           type: array
-        - description: "Start date for the selected date filter. If you select arrival
-            date as date filter the bookings returned will have at least\r
+        - description: "Start date for the selected date filter. If you select arrival date as date filter the bookings returned will have at least\r
 
-            \            one reservation arriving on the specified
-            date or later."
+            \            one reservation arriving on the specified date or later."
           format: date-time
           in: query
           name: from
           required: false
           type: string
-        - description: "End date for the selected date filter. If you select arrival date
-            as date filter the bookings returned will have at least\r
+        - description: "End date for the selected date filter. If you select arrival date as date filter the bookings returned will have at least\r
 
-            \            one reservation arriving on the specified
-            date or earlier."
+            \            one reservation arriving on the specified date or earlier."
           format: date-time
           in: query
           name: to
           required: false
           type: string
-        - description: "Select a date field you want to filter bookings by. Only one
-            filter at a time can be applied. The to and from dates\r
+        - description: "Select a date field you want to filter bookings by. Only one filter at a time can be applied. The to and from dates\r
 
             \            will then define the time range."
           enum:
@@ -1093,8 +981,7 @@ paths:
           name: dateFilter
           required: false
           type: string
-        - description: To be able to request reservations without personal data based on
-            GDPR.
+        - description: To be able to request reservations without personal data based on GDPR.
           enum:
             - Customers
           in: query
@@ -1114,9 +1001,7 @@ paths:
         "403":
           description: The application does not have access to the requested resource.
         "500":
-          description: We caught an unexpected error on our side. Please report with
-            providing the Hetras-Tracking-Id from the response headers and we
-            will check the logfiles.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         "503":
           description: The server is currently unavailable. Please try later.
       summary: Get total count of bookings matchung the given filter criteria.
@@ -1126,14 +1011,11 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "A booking groups all reservations done in one single request and
-        can be identified by the confirmation id.\r
+      description: "A booking groups all reservations done in one single request and can be identified by the confirmation id.\r
 
-        \            Guests usually use the confirmation id to check in
-        at the kiosk, on the website or mobile device. In hetras\r
+        \            Guests usually use the confirmation id to check in at the kiosk, on the website or mobile device. In hetras\r
 
-        \            all reservations of one booking share the room
-        type, rate plan and number of guests per room."
+        \            all reservations of one booking share the room type, rate plan and number of guests per room."
       operationId: Bookings_GetBooking
       parameters:
         - description: Application identifier
@@ -1182,12 +1064,9 @@ paths:
         "403":
           description: The application does not have access to the requested resource.
         "404":
-          description: Not Found. The server has not found anything matching the
-            Request-URI.
+          description: Not Found. The server has not found anything matching the Request-URI.
         "500":
-          description: We caught an unexpected error on our side. Please report with
-            providing the Hetras-Tracking-Id from the response headers and we
-            will check the logfiles.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         "503":
           description: The server is currently unavailable. Please try later.
       summary: Load all reservations for one booking by confirmation id.
@@ -1197,8 +1076,7 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: With this request you can load one specific reservation done with
-        one booking request.
+      description: With this request you can load one specific reservation done with one booking request.
       operationId: Bookings_GetReservation
       parameters:
         - description: Application identifier
@@ -1253,12 +1131,9 @@ paths:
         "403":
           description: The application does not have access to the requested resource.
         "404":
-          description: Not Found. The server has not found anything matching the
-            Request-URI.
+          description: Not Found. The server has not found anything matching the Request-URI.
         "500":
-          description: We caught an unexpected error on our side. Please report with
-            providing the Hetras-Tracking-Id from the response headers and we
-            will check the logfiles.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         "503":
           description: The server is currently unavailable. Please try later.
       summary: Load a specific reservation from a booking.
@@ -1269,16 +1144,11 @@ paths:
         - application/json
         - text/json
       deprecated: false
-      description: "The hetras API is using this <a
-        href=\"https://developer.hetras.com/docs/patch\" onfocus=\"this.blur()\"
-        target=\"_blank\">Patch Specification</a>\r
+      description: "The hetras API is using this <a href=\"https://developer.hetras.com/docs/patch\" onfocus=\"this.blur()\" target=\"_blank\">Patch Specification</a>\r
 
-        \            to partially update an existing resource. Currently
-        this call allows to update the following fields:\r
+        \            to partially update an existing resource. Currently this call allows to update the following fields:\r
 
-        \            external_id, market_code, channel_code,
-        subchannel_code, guarantee_type, comment, addon_services, labels,
-        guests, contact and company.\r
+        \            external_id, market_code, channel_code, subchannel_code, guarantee_type, comment, addon_services, labels, guests, contact and company.\r
 
         \            <br /><br />\r
 
@@ -1288,30 +1158,25 @@ paths:
 
         \              {\r
 
-        \                \"op\": \"replace\", \"path\":
-        \"/addon_services\", \"value\": [\"BREAKFAST\", \"PARKING\"]\r
+        \                \"op\": \"replace\", \"path\": \"/addon_services\", \"value\": [\"BREAKFAST\", \"PARKING\"]\r
 
         \              },\r
 
         \              {\r
 
-        \                \"op\": \"add\", \"path\": \"/labels/-\",
-        \"value\": \"MOBILE\"\r
+        \                \"op\": \"add\", \"path\": \"/labels/-\", \"value\": \"MOBILE\"\r
 
         \              },\r
 
         \              {\r
 
-        \                \"op\": \"replace\", \"path\":
-        \"/guests/SHOW-1234\", \"value\": { \"customer_id\": \"SHOW-1234\",
-        \"primary\": false }\r
+        \                \"op\": \"replace\", \"path\": \"/guests/SHOW-1234\", \"value\": { \"customer_id\": \"SHOW-1234\", \"primary\": false }\r
 
         \              },\r
 
         \              {\r
 
-        \                \"op\": \"add\", \"path\": \"/guests/-\",
-        \"value\": { \"customer_id\": \"SHOW-5678\", \"primary\": true }\r
+        \                \"op\": \"add\", \"path\": \"/guests/-\", \"value\": { \"customer_id\": \"SHOW-5678\", \"primary\": true }\r
 
         \              }\r
 
@@ -1319,12 +1184,9 @@ paths:
 
         \            </pre><br />\r
 
-        \            For more details on how the API responds to errors
-        please check our documentation on \r
+        \            For more details on how the API responds to errors please check our documentation on \r
 
-        \            <a
-        href=\"https://developer.hetras.com/docs/errors/\"
-        onfocus=\"this.blur()\">Error Handling</a>."
+        \            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
       operationId: Bookings_Patch
       parameters:
         - description: Application identifier
@@ -1344,8 +1206,7 @@ paths:
           name: confirmationId
           required: true
           type: string
-        - description: Specifies the reservation number for the reservation that has to be
-            updated.
+        - description: Specifies the reservation number for the reservation that has to be updated.
           format: int32
           in: path
           name: reservationNumber
@@ -1362,8 +1223,7 @@ paths:
         - text/json
       responses:
         "200":
-          description: The update was successful. Reponse would contain a referer to the
-            updated reservation.
+          description: The update was successful. Reponse would contain a referer to the updated reservation.
           schema:
             $ref: "#/definitions/Object"
         "400":
@@ -1373,14 +1233,11 @@ paths:
         "403":
           description: The application does not have access to the requested resource.
         "404":
-          description: Not Found. The server has not found anything matching the
-            Request-URI.
+          description: Not Found. The server has not found anything matching the Request-URI.
         "422":
           description: The request failed to validate.
         "500":
-          description: We caught an unexpected error on our side. Please report with
-            providing the Hetras-Tracking-Id from the response headers and we
-            will check the logfiles.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         "503":
           description: The server is currently unavailable. Please try later.
       summary: Partially updates a reservation.
@@ -1392,31 +1249,21 @@ paths:
         - application/json
         - text/json
       deprecated: false
-      description: "By default this API call assigns a random room, which has the
-        proper room type, is not already assigned\r
+      description: "By default this API call assigns a random room, which has the proper room type, is not already assigned\r
 
-        \            to another reservation or has any maintenance
-        status set for the stay period of the underlying reservation. If the\r
+        \            to another reservation or has any maintenance status set for the stay period of the underlying reservation. If the\r
 
-        \            arrival date for the underlying reservation is the
-        current business day dirty rooms are excluded by default. For
-        reservation\r
+        \            arrival date for the underlying reservation is the current business day dirty rooms are excluded by default. For reservation\r
 
-        \            arriving on any latter day the room condition is
-        not taken into account.<br />\r
+        \            arriving on any latter day the room condition is not taken into account.<br />\r
 
-        \            By specifiying the room selection criteria in the
-        request body you can influence which room will be assigned. See the
-        request model\r
+        \            By specifiying the room selection criteria in the request body you can influence which room will be assigned. See the request model\r
 
         \            for further details.<br />\r
 
-        \            For more details on how the API responds to errors
-        please check our documentation on \r
+        \            For more details on how the API responds to errors please check our documentation on \r
 
-        \            <a
-        href=\"https://developer.hetras.com/docs/errors/\"
-        onfocus=\"this.blur()\">Error Handling</a>."
+        \            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
       operationId: Bookings_PostRoomAssignment
       parameters:
         - description: Application identifier
@@ -1436,8 +1283,7 @@ paths:
           name: confirmationId
           required: true
           type: string
-        - description: Specifies the reservation number for the reservation the room
-            should be assigned to.
+        - description: Specifies the reservation number for the reservation the room should be assigned to.
           format: int32
           in: path
           name: reservationNumber
@@ -1454,8 +1300,7 @@ paths:
         - text/json
       responses:
         "200":
-          description: The room assignment was successful. The Reponse would contain the
-            room number assigned.
+          description: The room assignment was successful. The Reponse would contain the room number assigned.
           schema:
             $ref: "#/definitions/AssignRoomResponse"
         "400":
@@ -1465,15 +1310,11 @@ paths:
         "403":
           description: The application does not have access to the requested resource.
         "404":
-          description: Not Found. The server has not found anything matching the
-            Request-URI.
+          description: Not Found. The server has not found anything matching the Request-URI.
         "422":
-          description: The request failed to validate. The reason could be no available
-            rooms or a mismatch of room types etc.
+          description: The request failed to validate. The reason could be no available rooms or a mismatch of room types etc.
         "500":
-          description: We caught an unexpected error on our side. Please report with
-            providing the Hetras-Tracking-Id from the response headers and we
-            will check the logfiles.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         "503":
           description: The server is currently unavailable. Please try later.
       summary: Assign a room to a reservation.
@@ -1483,18 +1324,13 @@ paths:
     post:
       consumes: []
       deprecated: false
-      description: "This request will cancel one specific reservation. It will show up
-        in the hetras UI in the Cancellation and NoShow\r
+      description: "This request will cancel one specific reservation. It will show up in the hetras UI in the Cancellation and NoShow\r
 
-        \            processing screen and it will be up to the hotel
-        staff to either charge or waive the cancellation fee.<br />\r
+        \            processing screen and it will be up to the hotel staff to either charge or waive the cancellation fee.<br />\r
 
-        \            For more details on how the API responds to errors
-        please check our documentation on \r
+        \            For more details on how the API responds to errors please check our documentation on \r
 
-        \            <a
-        href=\"https://developer.hetras.com/docs/errors/\"
-        onfocus=\"this.blur()\">Error Handling</a>."
+        \            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
       operationId: Bookings_CancelReservation
       parameters:
         - description: Application identifier
@@ -1530,8 +1366,7 @@ paths:
         - text/json
       responses:
         "200":
-          description: Returns the cancellation id and the cancellation fee that will be
-            charged to the folio of the reservation.
+          description: Returns the cancellation id and the cancellation fee that will be charged to the folio of the reservation.
           schema:
             $ref: "#/definitions/CancellationResponse"
         "400":
@@ -1541,12 +1376,9 @@ paths:
         "403":
           description: The application does not have access to the requested resource.
         "404":
-          description: Not Found. The server has not found anything matching the
-            Request-URI.
+          description: Not Found. The server has not found anything matching the Request-URI.
         "500":
-          description: We caught an unexpected error on our side. Please report with
-            providing the Hetras-Tracking-Id from the response headers and we
-            will check the logfiles.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         "503":
           description: The server is currently unavailable. Please try later.
       summary: Cancel one reservation.
@@ -1558,18 +1390,13 @@ paths:
         - application/json
         - text/json
       deprecated: false
-      description: "With this call you can set a reservation to the status inhouse. It
-        allows only single room reservations to be checked in.\r
+      description: "With this call you can set a reservation to the status inhouse. It allows only single room reservations to be checked in.\r
 
-        \            The reservation must have assigned a vacant and
-        clean room.<br />\r
+        \            The reservation must have assigned a vacant and clean room.<br />\r
 
-        \            For more details on how the API responds to errors
-        please check our documentation on \r
+        \            For more details on how the API responds to errors please check our documentation on \r
 
-        \            <a
-        href=\"https://developer.hetras.com/docs/errors/\"
-        onfocus=\"this.blur()\">Error Handling</a>."
+        \            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
       operationId: Bookings_CheckIn
       parameters:
         - description: Application identifier
@@ -1589,8 +1416,7 @@ paths:
           name: confirmationId
           required: true
           type: string
-        - description: Specifies the reservation number for the reservation to be checked
-            in.
+        - description: Specifies the reservation number for the reservation to be checked in.
           format: int32
           in: path
           name: reservationNumber
@@ -1615,15 +1441,11 @@ paths:
         "403":
           description: The application does not have access to the requested resource.
         "404":
-          description: Not Found. The server has not found anything matching the
-            Request-URI.
+          description: Not Found. The server has not found anything matching the Request-URI.
         "422":
-          description: The request failed to validate. The reason could be wrong room or
-            reservation status, wrong start date of reservation etc.
+          description: The request failed to validate. The reason could be wrong room or reservation status, wrong start date of reservation etc.
         "500":
-          description: We caught an unexpected error on our side. Please report with
-            providing the Hetras-Tracking-Id from the response headers and we
-            will check the logfiles.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         "503":
           description: The server is currently unavailable. Please try later.
       summary: Performs a check in operation for a reservation.
@@ -1633,15 +1455,11 @@ paths:
     post:
       consumes: []
       deprecated: false
-      description: "With this call you can set a reservation to the checkout status.
-        It allows only single room reservations to be checked out.\r
+      description: "With this call you can set a reservation to the checkout status. It allows only single room reservations to be checked out.\r
 
-        \            For more details on how the API responds to errors
-        please check our documentation on \r
+        \            For more details on how the API responds to errors please check our documentation on \r
 
-        \            <a
-        href=\"https://developer.hetras.com/docs/errors/\"
-        onfocus=\"this.blur()\">Error Handling</a>."
+        \            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
       operationId: Bookings_CheckOut
       parameters:
         - description: Application identifier
@@ -1661,8 +1479,7 @@ paths:
           name: confirmationId
           required: true
           type: string
-        - description: Specifies the reservation number for the reservation to be checked
-            out.
+        - description: Specifies the reservation number for the reservation to be checked out.
           format: int32
           in: path
           name: reservationNumber
@@ -1681,15 +1498,11 @@ paths:
         "403":
           description: The application does not have access to the requested resource.
         "404":
-          description: Not Found. The server has not found anything matching the
-            Request-URI.
+          description: Not Found. The server has not found anything matching the Request-URI.
         "422":
-          description: The request failed to validate. The reason could be wrong
-            reservation status, such as it was already checked out.
+          description: The request failed to validate. The reason could be wrong reservation status, such as it was already checked out.
         "500":
-          description: We caught an unexpected error on our side. Please report with
-            providing the Hetras-Tracking-Id from the response headers and we
-            will check the logfiles.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         "503":
           description: The server is currently unavailable. Please try later.
       summary: Performs a check out operation for a reservation.
@@ -1703,12 +1516,9 @@ paths:
       deprecated: false
       description: "TBD.<br />\r
 
-        \            For more details on how the API responds to errors
-        please check our documentation on \r
+        \            For more details on how the API responds to errors please check our documentation on \r
 
-        \            <a
-        href=\"https://developer.hetras.com/docs/errors/\"
-        onfocus=\"this.blur()\">Error Handling</a>."
+        \            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
       operationId: Bookings_PaymentToken
       parameters:
         - description: Application identifier
@@ -1728,8 +1538,7 @@ paths:
           name: confirmationId
           required: true
           type: string
-        - description: Specifies the reservation number for the reservation to be checked
-            in.
+        - description: Specifies the reservation number for the reservation to be checked in.
           format: int32
           in: path
           name: reservationNumber
@@ -1754,15 +1563,11 @@ paths:
         "403":
           description: The application does not have access to the requested resource.
         "404":
-          description: Not Found. The server has not found anything matching the
-            Request-URI.
+          description: Not Found. The server has not found anything matching the Request-URI.
         "422":
-          description: The request failed to validate. The reason could be wrong room or
-            reservation status, wrong start date of reservation etc.
+          description: The request failed to validate. The reason could be wrong room or reservation status, wrong start date of reservation etc.
         "500":
-          description: We caught an unexpected error on our side. Please report with
-            providing the Hetras-Tracking-Id from the response headers and we
-            will check the logfiles.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         "503":
           description: The server is currently unavailable. Please try later.
       summary: Post a payment token for a reservation.
@@ -1774,15 +1579,11 @@ paths:
         - application/json
         - text/json
       deprecated: false
-      description: "With this call you can trigger a terminal authorization prompt for
-        a reservation guest. \r
+      description: "With this call you can trigger a terminal authorization prompt for a reservation guest. \r
 
-        \            For more details on how the API responds to errors
-        please check our documentation on \r
+        \            For more details on how the API responds to errors please check our documentation on \r
 
-        \            <a
-        href=\"https://developer.hetras.com/docs/errors/\"
-        onfocus=\"this.blur()\">Error Handling</a>."
+        \            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
       operationId: Bookings_TerminalAuthorization
       parameters:
         - description: Application identifier
@@ -1802,8 +1603,7 @@ paths:
           name: confirmationId
           required: true
           type: string
-        - description: Specifies the reservation number for the reservation to be checked
-            in.
+        - description: Specifies the reservation number for the reservation to be checked in.
           format: int32
           in: path
           name: reservationNumber
@@ -1828,15 +1628,11 @@ paths:
         "403":
           description: The application does not have access to the requested resource.
         "404":
-          description: Not Found. The server has not found anything matching the
-            Request-URI.
+          description: Not Found. The server has not found anything matching the Request-URI.
         "422":
-          description: The request failed to validate. The reason could be wrong room or
-            reservation status, wrong start date of reservation etc.
+          description: The request failed to validate. The reason could be wrong room or reservation status, wrong start date of reservation etc.
         "500":
-          description: We caught an unexpected error on our side. Please report with
-            providing the Hetras-Tracking-Id from the response headers and we
-            will check the logfiles.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         "503":
           description: The server is currently unavailable. Please try later.
       summary: Performs a chip and pin credit card authorization for a reservation.
@@ -1846,21 +1642,15 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "With the rates request you can get a list of different daily
-        rates. You will have to at least \r
+      description: "With the rates request you can get a list of different daily rates. You will have to at least \r
 
-        \            specify the hotel, the channel code, and a calendar
-        range. The channel code will define which rates will be \r
+        \            specify the hotel, the channel code, and a calendar range. The channel code will define which rates will be \r
 
-        \            returned based on the access control configuration
-        for the rates. Additionally rate plan codes may be specified in\r
+        \            returned based on the access control configuration for the rates. Additionally rate plan codes may be specified in\r
 
-        \            the request in order to limit only those rates of
-        the given plans, if they are not specified, it will return all the
-        public rate plans.\r
+        \            the request in order to limit only those rates of the given plans, if they are not specified, it will return all the public rate plans.\r
 
-        \            If requested the caller may specify whether he
-        wants policies or not."
+        \            If requested the caller may specify whether he wants policies or not."
       operationId: DailyRates_GetDailyRates
       parameters:
         - description: Application identifier
@@ -1881,19 +1671,15 @@ paths:
           name: hotelId
           required: true
           type: integer
-        - description: Define the first business day you would like to get availability
-            numbers for. The day should not be in the past.
+        - description: Define the first business day you would like to get availability numbers for. The day should not be in the past.
           format: date-time
           in: query
           name: from
           required: true
           type: string
-        - description: "Define the last business day you would like to get rates for
-            (inclusive). The maximum time span between <i>'From'</i> and
-            <i>'To'</i>\r
+        - description: "Define the last business day you would like to get rates for (inclusive). The maximum time span between <i>'From'</i> and <i>'To'</i>\r
 
-            \            is limited to 365 days. This can't be less
-            than the 'From' date."
+            \            is limited to 365 days. This can't be less than the 'From' date."
           format: date-time
           in: query
           name: to
@@ -1905,8 +1691,7 @@ paths:
           required: true
           type: string
         - collectionFormat: csv
-          description: Define the sections you want to expand and get informed about rates
-            for.
+          description: Define the sections you want to expand and get informed about rates for.
           in: query
           items:
             enum:
@@ -1918,8 +1703,7 @@ paths:
           required: false
           type: array
         - collectionFormat: csv
-          description: Define the codes of rate plans to show in the response. A list of
-            comma ',' separated rate plan codes.
+          description: Define the codes of rate plans to show in the response. A list of comma ',' separated rate plan codes.
           in: query
           items:
             type: string
@@ -1957,41 +1741,31 @@ paths:
         "204":
           description: When there are no data to return.
         "400":
-          description: The request failed to validate. One of the missing request
-            parameters was missing or their value was wrong.
+          description: The request failed to validate. One of the missing request parameters was missing or their value was wrong.
         "401":
           description: You provided wrong credentials, or you reached your API limit.
         "403":
           description: The application does not have access to the requested resource.
         "404":
-          description: Not Found. The server has not found anything matching the
-            Request-URI. This code will not be returned when there are no data
-            to return for (please see 204).
+          description: Not Found. The server has not found anything matching the Request-URI. This code will not be returned when there are no data to return for (please see 204).
         "409":
-          description: When an error occurs which prevent the API to return a response and
-            is normally cause by bad input.
+          description: When an error occurs which prevent the API to return a response and is normally cause by bad input.
         "500":
-          description: We caught an unexpected error on our side. Please report with
-            providing the Hetras-Tracking-Id from the response headers and we
-            will check the logfiles.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         "503":
           description: The server is currently unavailable. Please try later.
-      summary: Get a list of daily rates given a hotel Id, a channel code and a date
-        range.
+      summary: Get a list of daily rates given a hotel Id, a channel code and a date range.
       tags:
         - DailyRates
   /api/booking/v0/rates:
     get:
       consumes: []
       deprecated: false
-      description: "With the rates request you can get a list of different rate offers
-        per room type. You will have to at least \r
+      description: "With the rates request you can get a list of different rate offers per room type. You will have to at least \r
 
-        \            specify the hotel, the arrival and departure date,
-        number of adults per room and the channel code. The channel code\r
+        \            specify the hotel, the arrival and departure date, number of adults per room and the channel code. The channel code\r
 
-        \            will define which rates will be returned based on
-        the access control configuration for the rates."
+        \            will define which rates will be returned based on the access control configuration for the rates."
       operationId: Rates_Get
       parameters:
         - description: Application identifier
@@ -2079,18 +1853,13 @@ paths:
         "403":
           description: The application does not have access to the requested resource.
         "404":
-          description: Not Found. The server has not found anything matching the
-            Request-URI. It is also used if there are no rates available for the
-            specified guest stay details.
+          description: Not Found. The server has not found anything matching the Request-URI. It is also used if there are no rates available for the specified guest stay details.
         "422":
-          description: "The request failed to validate. Either a mandatory parameter was
-            missing or no offers for \r
+          description: "The request failed to validate. Either a mandatory parameter was missing or no offers for \r
 
             \            the requested stay details"
         "500":
-          description: We caught an unexpected error on our side. Please report with
-            providing the Hetras-Tracking-Id from the response headers and we
-            will check the logfiles.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         "503":
           description: The server is currently unavailable. Please try later.
       summary: Get a list of room offers for the specified guest stay details.
@@ -2100,8 +1869,7 @@ definitions:
   AcceptedGuaranteeTypes:
     properties:
       accepted:
-        description: "In this list you find all the accepted guarantee types for this
-          offer. They are sorted in ascending\r
+        description: "In this list you find all the accepted guarantee types for this offer. They are sorted in ascending\r
 
           \            order."
         items:
@@ -2121,17 +1889,13 @@ definitions:
           type: string
         type: array
       minimum:
-        description: "Based on the rateplan a reservation does need to have a minimum
-          guarantee. When you create a new booking you\r
+        description: "Based on the rateplan a reservation does need to have a minimum guarantee. When you create a new booking you\r
 
-          \            can always use a higher guarantee type starting
-          from the minimum. If you do not specify a guarantee when creating\r
+          \            can always use a higher guarantee type starting from the minimum. If you do not specify a guarantee when creating\r
 
-          \            a new booking using this offer this guarantee
-          type will be used by default. See \r
+          \            a new booking using this offer this guarantee type will be used by default. See \r
 
-          \            https://developer.hetras.com/docs/tutorials#pa\
-          yment for information about guarantee types and payment details"
+          \            https://developer.hetras.com/docs/tutorials#payment for information about guarantee types and payment details"
         enum:
           - PM4Hold
           - PM6Hold
@@ -2150,11 +1914,9 @@ definitions:
   AddonOffer:
     properties:
       breakdown:
-        description: "In this collection you will get an entry with price information
-          for every day the addon service will be charged\r
+        description: "In this collection you will get an entry with price information for every day the addon service will be charged\r
 
-          \            to the folio of the reservation if the addon
-          service is booked."
+          \            to the folio of the reservation if the addon service is booked."
         items:
           $ref: "#/definitions/AddonOfferBreakdown"
         type: array
@@ -2165,8 +1927,7 @@ definitions:
         description: The description of the addon service
         type: string
       frequency:
-        description: "The frequency this addon service will be charged to the
-          reservation. This field is a string that can be displayed,\r
+        description: "The frequency this addon service will be charged to the reservation. This field is a string that can be displayed,\r
 
           \            but is not supposed to be used for computation"
         type: string
@@ -2174,45 +1935,38 @@ definitions:
         description: The name of the addon service
         type: string
       rate_mode:
-        description: "The price for an addon service can be per person or per room. All
-          the prices in an offer are already calculated\r
+        description: "The price for an addon service can be per person or per room. All the prices in an offer are already calculated\r
 
-          \            for all rooms and number of persons per room.
-          Based on this attribute you will be able to know how to calculate\r
+          \            for all rooms and number of persons per room. Based on this attribute you will be able to know how to calculate\r
 
-          \            the price per person and room, per room or per
-          person depending on your needs."
+          \            the price per person and room, per room or per person depending on your needs."
         enum:
           - PerRoom
           - PerPerson
         type: string
       total_stay:
         $ref: "#/definitions/AddonOfferRate"
-        description: "This object gives you the price information if this addon service
-          is booked for the total stay defined in your\r
+        description: "This object gives you the price information if this addon service is booked for the total stay defined in your\r
 
           \            request by arrivalDate and departureDate"
     type: object
   AddonOfferBreakdown:
     properties:
       business_day:
-        description: The business day the price for the addon service will be posted to
-          the folio of the reservation
+        description: The business day the price for the addon service will be posted to the folio of the reservation
         format: date-time
         type: string
       currency:
         description: The currency the addon service will be charged in.
         type: string
       included_tax:
-        description: "The amount of taxes already included in the gross rate of the
-          addon service also calculated for all rooms and\r
+        description: "The amount of taxes already included in the gross rate of the addon service also calculated for all rooms and\r
 
           \            all persons."
         format: double
         type: number
       rate:
-        description: The gross rate of the addon service. It is the price calculated for
-          all rooms and all persons.
+        description: The gross rate of the addon service. It is the price calculated for all rooms and all persons.
         format: double
         type: number
     type: object
@@ -2222,15 +1976,13 @@ definitions:
         description: The currency the addon service will be charged in.
         type: string
       included_tax:
-        description: "The amount of taxes already included in the gross rate of the
-          addon service also calculated for all rooms and\r
+        description: "The amount of taxes already included in the gross rate of the addon service also calculated for all rooms and\r
 
           \            all persons."
         format: double
         type: number
       rate:
-        description: The gross rate of the addon service. It is the price calculated for
-          all rooms and all persons.
+        description: The gross rate of the addon service. It is the price calculated for all rooms and all persons.
         format: double
         type: number
     type: object
@@ -2256,18 +2008,15 @@ definitions:
           $ref: "#/definitions/AddonOffer"
         type: array
       adults:
-        description: The number of adults per room the addon offers are requested for.
-          The rates will then already reflects this.
+        description: The number of adults per room the addon offers are requested for. The rates will then already reflects this.
         format: int32
         type: integer
       arrival_date:
-        description: The arrival date of the reservation the addon offers are supposed
-          to be booked on.
+        description: The arrival date of the reservation the addon offers are supposed to be booked on.
         format: date-time
         type: string
       departure_date:
-        description: The departure date of the reservation the addon offers are supposed
-          to be booked on.
+        description: The departure date of the reservation the addon offers are supposed to be booked on.
         format: date-time
         type: string
       hotel_id:
@@ -2279,21 +2028,16 @@ definitions:
         type: string
       rate_plan:
         $ref: "#/definitions/RatePlan"
-        description: "The rate plan all the addon offers are valid for. The reservation
-          you want to book this addons for needs\r
+        description: "The rate plan all the addon offers are valid for. The reservation you want to book this addons for needs\r
 
-          \            to have the same rate plan otherwise you might
-          see different prices on the target reservation."
+          \            to have the same rate plan otherwise you might see different prices on the target reservation."
       room:
         $ref: "#/definitions/ReservationRoom"
-        description: "The room type all the addon offers are valid for. The reservation
-          you want to book this addons for needs\r
+        description: "The room type all the addon offers are valid for. The reservation you want to book this addons for needs\r
 
-          \            to have the same room type otherwise you might
-          see different prices on the target reservation."
+          \            to have the same room type otherwise you might see different prices on the target reservation."
       rooms:
-        description: The number of rooms the addon offers are requested for. The rates
-          will then already reflects this.
+        description: The number of rooms the addon offers are requested for. The rates will then already reflects this.
         format: int32
         type: integer
     type: object
@@ -2301,18 +2045,14 @@ definitions:
     description: Represents a set of criteria for assigning a room
     properties:
       amenities:
-        description: Ensure the assigned room will have all the amenities specified. You
-          can provide a comma seperated list of amenity codes.
+        description: Ensure the assigned room will have all the amenities specified. You can provide a comma seperated list of amenity codes.
         items:
           type: string
         type: array
       condition:
-        description: "Here you can define to limit the list of assignable rooms based on
-          their current condition. This is only applicable if the underlying
-          reservation\r
+        description: "Here you can define to limit the list of assignable rooms based on their current condition. This is only applicable if the underlying reservation\r
 
-          \            is due to arrive on the current business day.
-          If not set by default only clean rooms will be assigned."
+          \            is due to arrive on the current business day. If not set by default only clean rooms will be assigned."
         enum:
           - CleanNotInspected
           - Clean
@@ -2320,39 +2060,27 @@ definitions:
           - Any
         type: string
       include_out_of_service:
-        description: "Sometimes you might want to assign rooms which are out of service
-          (small repair needed) if no other rooms are available anymore. If you
-          set\r
+        description: "Sometimes you might want to assign rooms which are out of service (small repair needed) if no other rooms are available anymore. If you set\r
 
-          \            include_out_of_service to true even those rooms
-          will be considered. The default is false."
+          \            include_out_of_service to true even those rooms will be considered. The default is false."
         type: boolean
       locations:
-        description: Ensure the assigned room will have at least one of the specified
-          locations. You can provide a comma seperated list of location codes.
+        description: Ensure the assigned room will have at least one of the specified locations. You can provide a comma seperated list of location codes.
         items:
           type: string
         type: array
       respect_guest_preferences:
-        description: "Defines if the preferences for locations, amenities and views of
-          the primary guest should be taken into account. All defined
-          preferences in the guest\r
+        description: "Defines if the preferences for locations, amenities and views of the primary guest should be taken into account. All defined preferences in the guest\r
 
-          \            profile override any of the criteria defined in
-          the request body. The default is false."
+          \            profile override any of the criteria defined in the request body. The default is false."
         type: boolean
       room_number:
-        description: "If you define a specific room number this room will be assigned if
-          not assigned to another reservation, has proper room type and is not
-          OutOfOrder \r
+        description: "If you define a specific room number this room will be assigned if not assigned to another reservation, has proper room type and is not OutOfOrder \r
 
-          \            or OutOfInventory for the stay duration of the
-          underlying reservaton. If set all other filter criteria will be
-          ignored."
+          \            or OutOfInventory for the stay duration of the underlying reservaton. If set all other filter criteria will be ignored."
         type: string
       views:
-        description: Ensure the assigned room will have at least one of the specified
-          views. You can provide a comma seperated list of view codes.
+        description: Ensure the assigned room will have at least one of the specified views. You can provide a comma seperated list of view codes.
         items:
           type: string
         type: array
@@ -2361,8 +2089,7 @@ definitions:
     description: Defines the response for room assignment operation
     properties:
       _warnings:
-        description: "Warnings that came up when your request was processed. Your
-          request will still be processed successfull when\r
+        description: "Warnings that came up when your request was processed. Your request will still be processed successfull when\r
 
           \            you see such warnings in your response"
         items:
@@ -2408,8 +2135,7 @@ definitions:
         $ref: "#/definitions/AuthorizationDetails"
         description: Authorization Details
       no_authorization_required:
-        description: "Whether hetras should skip authorization using the provided token
-          when no authorization details are supplied.\r
+        description: "Whether hetras should skip authorization using the provided token when no authorization details are supplied.\r
 
           \            Optional flag, defaults to false."
         type: boolean
@@ -2429,11 +2155,9 @@ definitions:
         description: Collection of links to related resources
         type: object
       available:
-        description: "The number of rooms that were originally available to sell. This
-          is the the house count reduced by rooms set\r
+        description: "The number of rooms that were originally available to sell. This is the the house count reduced by rooms set\r
 
-          \            to OutOfOrder but increased by the set
-          overbooking"
+          \            to OutOfOrder but increased by the set overbooking"
         format: int32
         type: integer
       blocked:
@@ -2444,8 +2168,7 @@ definitions:
         format: int32
         type: integer
       house_count:
-        description: The total count of physical rooms reduced by the number of rooms
-          set to OutOfInventory
+        description: The total count of physical rooms reduced by the number of rooms set to OutOfInventory
         format: int32
         type: integer
       maintenance:
@@ -2460,13 +2183,11 @@ definitions:
         format: int32
         type: integer
       sold:
-        description: The count of rooms sold. It sums up the rooms sold through
-          individual reservations plus rooms blocked definitely
+        description: The count of rooms sold. It sums up the rooms sold through individual reservations plus rooms blocked definitely
         format: int32
         type: integer
       to_sell:
-        description: The number of rooms still available to sell. It is available
-          reduced by the already sold rooms
+        description: The number of rooms still available to sell. It is available reduced by the already sold rooms
         format: int32
         type: integer
     type: object
@@ -2493,8 +2214,7 @@ definitions:
   BaseResponse:
     properties:
       _warnings:
-        description: "Warnings that came up when your request was processed. Your
-          request will still be processed successfull when\r
+        description: "Warnings that came up when your request was processed. Your request will still be processed successfull when\r
 
           \            you see such warnings in your response"
         items:
@@ -2509,11 +2229,9 @@ definitions:
         description: Collection of links to related resources
         type: object
       code:
-        description: "The code is composed of the hotel code a dash and the block code
-          shown in the hetras UI. An \r
+        description: "The code is composed of the hotel code a dash and the block code shown in the hetras UI. An \r
 
-          \            example block code on the API for a block with
-          code TRAVEL1 defined for the hotel with code ABC would \r
+          \            example block code on the API for a block with code TRAVEL1 defined for the hotel with code ABC would \r
 
           \            be ABC-TRAVEL1"
         type: string
@@ -2527,8 +2245,7 @@ definitions:
         description: If true it will include also details of block count per each room type.
         type: boolean
       from:
-        description: Return all blocks where the block's last_departure is greater than
-          specified date.
+        description: Return all blocks where the block's last_departure is greater than specified date.
         format: date-time
         type: string
       groupCode:
@@ -2539,22 +2256,19 @@ definitions:
         format: int32
         type: integer
       ratePlanCodes:
-        description: Return all blocks that have related the specified comma-separated
-          rate plans.
+        description: Return all blocks that have related the specified comma-separated rate plans.
         items:
           type: string
         type: array
       status:
-        description: Return all blocks where the block status is one of the specified
-          values.
+        description: Return all blocks where the block status is one of the specified values.
         enum:
           - Cancelled
           - Tentative
           - Definite
         type: string
       to:
-        description: Return all blocks where the block's last_departure is less than
-          specified date.
+        description: Return all blocks where the block's last_departure is less than specified date.
         format: date-time
         type: string
     type: object
@@ -2581,11 +2295,9 @@ definitions:
         description: Collection of links to related resources
         type: object
       confirmation_id:
-        description: "The confirmation id for the booking which the guest can use to
-          check in on the kiosk, add the\r
+        description: "The confirmation id for the booking which the guest can use to check in on the kiosk, add the\r
 
-          \            booking to the mobile app etc. It is used as
-          identifier for all reservations done with the same\r
+          \            booking to the mobile app etc. It is used as identifier for all reservations done with the same\r
 
           \            booking request."
         type: string
@@ -2612,50 +2324,38 @@ definitions:
         description: Return bookings for this cancellation id.
         type: string
       channelCodes:
-        description: Return all bookings where the channel code is one of the specified
-          values.
+        description: Return all bookings where the channel code is one of the specified values.
         items:
           type: string
         type: array
       companyEmail:
-        description: "Return all bookings where the primary email address of the company
-          or the travel agent profile contains the specified value. The search
-          is executed case insensitive\r
+        description: "Return all bookings where the primary email address of the company or the travel agent profile contains the specified value. The search is executed case insensitive\r
 
           \            and also stripping of any whitespaces."
         type: string
       companyId:
-        description: Return all bookings the id of the company or travel agent profile
-          matches the specified value.
+        description: Return all bookings the id of the company or travel agent profile matches the specified value.
         type: string
       companyName:
-        description: "Return all bookings where the name of the linked company or travel
-          agent profile contains the specified value. The search is executed
-          case insensitive\r
+        description: "Return all bookings where the name of the linked company or travel agent profile contains the specified value. The search is executed case insensitive\r
 
           \            and also stripping of any whitespaces."
         type: string
       customerEmail:
-        description: "Return all bookings where the primary email address of one of the
-          guests or the contact contains the specified value. The search is
-          executed case insensitive\r
+        description: "Return all bookings where the primary email address of one of the guests or the contact contains the specified value. The search is executed case insensitive\r
 
           \            and also stripping of any whitespaces."
         type: string
       customerId:
-        description: Return all bookings the id of one of the guests or the contact
-          matches the specified value.
+        description: Return all bookings the id of one of the guests or the contact matches the specified value.
         type: string
       customerName:
-        description: "Return all bookings where the first or lastname of one of the
-          guests or the contact contains the specified value. The search is
-          executed case insensitive\r
+        description: "Return all bookings where the first or lastname of one of the guests or the contact contains the specified value. The search is executed case insensitive\r
 
           \            and also stripping of any whitespaces."
         type: string
       dateFilter:
-        description: "Select a date field you want to filter bookings by. Only one
-          filter at a time can be applied. The to and from dates\r
+        description: "Select a date field you want to filter bookings by. Only one filter at a time can be applied. The to and from dates\r
 
           \            will then define the time range."
         enum:
@@ -2671,15 +2371,12 @@ definitions:
           - Customers
         type: string
       externalId:
-        description: Return all bookings exactly matching the specified external id.
-          This filter is case sensitive.
+        description: Return all bookings exactly matching the specified external id. This filter is case sensitive.
         type: string
       from:
-        description: "Start date for the selected date filter. If you select arrival
-          date as date filter the bookings returned will have at least\r
+        description: "Start date for the selected date filter. If you select arrival date as date filter the bookings returned will have at least\r
 
-          \            one reservation arriving on the specified date
-          or later."
+          \            one reservation arriving on the specified date or later."
         format: date-time
         type: string
       hotelId:
@@ -2692,28 +2389,23 @@ definitions:
           type: string
         type: array
       marketCodes:
-        description: Return all bookings where the market code is one of the specified
-          values.
+        description: Return all bookings where the market code is one of the specified values.
         items:
           type: string
         type: array
       ratePlanCodes:
-        description: Return all bookings where the rate plan code is one of the
-          specified values.
+        description: Return all bookings where the rate plan code is one of the specified values.
         items:
           type: string
         type: array
       reservationNumber:
-        description: "Return bookings matching this reservation number. Please note that
-          reservation numbers are only unique within a hotel. If you\r
+        description: "Return bookings matching this reservation number. Please note that reservation numbers are only unique within a hotel. If you\r
 
-          \            don´t specify a hotel filter at the same time
-          you could get back multiple bookings from different hotels."
+          \            don´t specify a hotel filter at the same time you could get back multiple bookings from different hotels."
         format: int32
         type: integer
       reservationStatuses:
-        description: Return all bookings where the reservation status is one of the
-          specified values.
+        description: Return all bookings where the reservation status is one of the specified values.
         items:
           enum:
             - Tentative
@@ -2742,17 +2434,14 @@ definitions:
           type: string
         type: array
       subChannelCodes:
-        description: Return all bookings where the subchannel code is one of the
-          specified values.
+        description: Return all bookings where the subchannel code is one of the specified values.
         items:
           type: string
         type: array
       to:
-        description: "End date for the selected date filter. If you select arrival date
-          as date filter the bookings returned will have at least\r
+        description: "End date for the selected date filter. If you select arrival date as date filter the bookings returned will have at least\r
 
-          \            one reservation arriving on the specified date
-          or earlier."
+          \            one reservation arriving on the specified date or earlier."
         format: date-time
         type: string
     type: object
@@ -2772,29 +2461,23 @@ definitions:
         format: date-time
         type: string
       balance:
-        description: "The balance for all folios of this reservartion. It is calculated
-          by all already charged room and service rates plus manual charges \r
+        description: "The balance for all folios of this reservartion. It is calculated by all already charged room and service rates plus manual charges \r
 
-          \            or charges from other systems like POS minus
-          all payments. A negative balance indicates the reservation is
-          overpaid, a positive balance \r
+          \            or charges from other systems like POS minus all payments. A negative balance indicates the reservation is overpaid, a positive balance \r
 
           \            that the guest owes the hotel money"
         format: double
         type: number
       block_code:
-        description: If this reservation is a pick-up from a block you will see the
-          appropriate block code here
+        description: If this reservation is a pick-up from a block you will see the appropriate block code here
         type: string
       cancellation_id:
         description: The cancellation id if the reservation has been cancelled
         type: string
       channel_code:
-        description: "The code of the channel that was used when the booking has been
-          created. It is also known as source. \r
+        description: "The code of the channel that was used when the booking has been created. It is also known as source. \r
 
-          \            Possible values can be OTA, GDS or DIRECT, but
-          it is configurable per hotel"
+          \            Possible values can be OTA, GDS or DIRECT, but it is configurable per hotel"
         type: string
       companies:
         $ref: "#/definitions/CompaniesInfo"
@@ -2811,12 +2494,9 @@ definitions:
         format: date-time
         type: string
       external_id:
-        description: "The external id for this reservation is the unique identifier from
-          the system that created the booking in hetras. It could be the id of
-          an\r
+        description: "The external id for this reservation is the unique identifier from the system that created the booking in hetras. It could be the id of an\r
 
-          \            OTA like Expedia or booking.com or one of the
-          GDS systems like Amadeus or Galileo"
+          \            OTA like Expedia or booking.com or one of the GDS systems like Amadeus or Galileo"
         type: string
       hotel:
         $ref: "#/definitions/HotelInfo"
@@ -2827,8 +2507,7 @@ definitions:
           type: string
         type: array
       market_code:
-        description: The code of the market segment the rate plan for this reservation
-          is linked to
+        description: The code of the market segment the rate plan for this reservation is linked to
         type: string
       rate_plan:
         $ref: "#/definitions/RatePlan"
@@ -2858,27 +2537,21 @@ definitions:
         type: string
       room:
         $ref: "#/definitions/RoomInfo"
-        description: "The room type this reservation is related to and if applicable the
-          already assigned specific room for \r
+        description: "The room type this reservation is related to and if applicable the already assigned specific room for \r
 
           \            this reservation"
       rooms:
-        description: "The number of rooms this reservation is valid for. After a
-          multi-room booking is done there will be \r
+        description: "The number of rooms this reservation is valid for. After a multi-room booking is done there will be \r
 
-          \            one reservation in hetras for this booking for
-          all rooms. The hotel staff then will split this reservation into\r
+          \            one reservation in hetras for this booking for all rooms. The hotel staff then will split this reservation into\r
 
-          \            one reservation per room to be able to check in
-          the guests"
+          \            one reservation per room to be able to check in the guests"
         format: int32
         type: integer
       subchannel_code:
-        description: "The code of the subchannel that was used when the booking has been
-          created. Possible values can be \r
+        description: "The code of the subchannel that was used when the booking has been created. Possible values can be \r
 
-          \            BOOKING, EXPEDIA or WALKIN, but it is
-          configurable per hotel"
+          \            BOOKING, EXPEDIA or WALKIN, but it is configurable per hotel"
         type: string
       updated:
         description: Timestamp of when the reservation was changed the last time
@@ -2905,16 +2578,14 @@ definitions:
   CancellationPolicy:
     properties:
       description:
-        description: Description of the cancellation policy suitable for displaying to
-          customers
+        description: Description of the cancellation policy suitable for displaying to customers
         type: string
       fee:
         description: The fee a guest has to pay when cancelling the reservation
         format: double
         type: number
       fee_date:
-        description: The date and time in UTC from when the fee has to be paid in case
-          of cancellation
+        description: The date and time in UTC from when the fee has to be paid in case of cancellation
         format: date-time
         type: string
     type: object
@@ -2922,31 +2593,26 @@ definitions:
     description: Result of cancel operation
     properties:
       _warnings:
-        description: "Warnings that came up when your request was processed. Your
-          request will still be processed successfull when\r
+        description: "Warnings that came up when your request was processed. Your request will still be processed successfull when\r
 
           \            you see such warnings in your response"
         items:
           type: string
         type: array
       balance:
-        description: The current balance on the reservations folio without the
-          cancellation fee
+        description: The current balance on the reservations folio without the cancellation fee
         format: double
         type: number
       cancellation_fee:
-        description: "The fee that might be charged to the folio of the reservation. The
-          cancelled reservation will\r
+        description: "The fee that might be charged to the folio of the reservation. The cancelled reservation will\r
 
-          \            show up in the cancellation and no show
-          processing screen and the hotel staff will either charge\r
+          \            show up in the cancellation and no show processing screen and the hotel staff will either charge\r
 
           \            the fee or waive it."
         format: double
         type: number
       cancellation_id:
-        description: The id of the successful cancellation. With this id the hotel staff
-          will be able to find the reservation
+        description: The id of the successful cancellation. With this id the hotel staff will be able to find the reservation
         type: string
     type: object
   CancellationToken:
@@ -2984,11 +2650,9 @@ definitions:
   Company:
     properties:
       company_id:
-        description: "The id of a company profile. The id is build out of the Supplier
-          Code a dash and the profile id\r
+        description: "The id of a company profile. The id is build out of the Supplier Code a dash and the profile id\r
 
-          \            shown in the hetras UI. An example id on the
-          API for a profile with id 12345 on the level of supplier ABC \r
+          \            shown in the hetras UI. An example id on the API for a profile with id 12345 on the level of supplier ABC \r
 
           \            would be ABC-12345"
         type: string
@@ -2996,11 +2660,9 @@ definitions:
   Contact:
     properties:
       customer_id:
-        description: "The id of a customer profile. The id is build out of the Supplier
-          Code a dash and the profile id\r
+        description: "The id of a customer profile. The id is build out of the Supplier Code a dash and the profile id\r
 
-          \            shown in the hetras UI. An example id on the
-          API for a profile with id 12345 on the level of supplier ABC \r
+          \            shown in the hetras UI. An example id on the API for a profile with id 12345 on the level of supplier ABC \r
 
           \            would be ABC-12345"
         type: string
@@ -3013,11 +2675,9 @@ definitions:
         description: Collection of links to related resources
         type: object
       customer_id:
-        description: "The id of a customer profile. The id is build out of the Supplier
-          Code a dash and the profile id\r
+        description: "The id of a customer profile. The id is build out of the Supplier Code a dash and the profile id\r
 
-          \            shown in the hetras UI. An example id on the
-          API for a profile with id 12345 on the level of supplier ABC \r
+          \            shown in the hetras UI. An example id on the API for a profile with id 12345 on the level of supplier ABC \r
 
           \            would be ABC-12345"
         type: string
@@ -3035,11 +2695,9 @@ definitions:
           type: string
         type: array
       customer_id:
-        description: "The id of a customer profile. The id is build out of the Supplier
-          Code a dash and the profile id\r
+        description: "The id of a customer profile. The id is build out of the Supplier Code a dash and the profile id\r
 
-          \            shown in the hetras UI. An example id on the
-          API for a profile with id 12345 on the level of supplier ABC \r
+          \            shown in the hetras UI. An example id on the API for a profile with id 12345 on the level of supplier ABC \r
 
           \            would be ABC-12345"
         type: string
@@ -3061,17 +2719,13 @@ definitions:
         type: string
       mailing_address:
         $ref: "#/definitions/MailingAddress"
-        description: "The home mailing address of the guest or if no home mailing
-          address is specified it will\r
+        description: "The home mailing address of the guest or if no home mailing address is specified it will\r
 
-          \            give you the first address found on the guest
-          profile."
+          \            give you the first address found on the guest profile."
       nationality:
         description: "The nationality of the guest in ISO 3166-1 alpha-2 format\r
 
-          \            (see:
-          http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_name\
-          s_and_code_elements.htm)"
+          \            (see: http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm)"
         type: string
       phone:
         description: The primary phone number of the guest
@@ -3080,8 +2734,7 @@ definitions:
         description: Defines if the guest is the primary guest of the reservation
         type: boolean
       title:
-        description: Title of the guest. Needs to be taken from the available titles
-          defined in the codes
+        description: Title of the guest. Needs to be taken from the available titles defined in the codes
         type: string
     type: object
   CustomerResponse:
@@ -3092,11 +2745,9 @@ definitions:
         description: Collection of links to related resources
         type: object
       customer_id:
-        description: "The id of a customer profile. The id is build out of the Supplier
-          Code a dash and the profile id\r
+        description: "The id of a customer profile. The id is build out of the Supplier Code a dash and the profile id\r
 
-          \            shown in the hetras UI. An example id on the
-          API for a profile with id 12345 on the level of supplier ABC \r
+          \            shown in the hetras UI. An example id on the API for a profile with id 12345 on the level of supplier ABC \r
 
           \            would be ABC-12345"
         type: string
@@ -3118,17 +2769,13 @@ definitions:
         type: string
       mailing_address:
         $ref: "#/definitions/MailingAddress"
-        description: "The home mailing address of the guest or if no home mailing
-          address is specified it will\r
+        description: "The home mailing address of the guest or if no home mailing address is specified it will\r
 
-          \            give you the first address found on the guest
-          profile."
+          \            give you the first address found on the guest profile."
       nationality:
         description: "The nationality of the guest in ISO 3166-1 alpha-2 format\r
 
-          \            (see:
-          http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_name\
-          s_and_code_elements.htm)"
+          \            (see: http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm)"
         type: string
       phone:
         description: The primary phone number of the guest
@@ -3142,8 +2789,7 @@ definitions:
           type: string
         type: array
       title:
-        description: Title of the guest. Needs to be taken from the available titles
-          defined in the codes
+        description: Title of the guest. Needs to be taken from the available titles defined in the codes
         type: string
     type: object
   CustomersInfo:
@@ -3167,8 +2813,7 @@ definitions:
         $ref: "#/definitions/AvailabilityDetail"
         description: The availability numbers for the house level
       room_types:
-        description: The availability numbers for all room types if the expand parameter
-          is set appropriately
+        description: The availability numbers for all room types if the expand parameter is set appropriately
         items:
           $ref: "#/definitions/RoomAvailabilityDetail"
         type: array
@@ -3195,8 +2840,7 @@ definitions:
         format: date-time
         type: string
       excluded_tax:
-        description: The amount of extra taxes also calculated for all rooms and all
-          persons per room.
+        description: The amount of extra taxes also calculated for all rooms and all persons per room.
         format: double
         type: number
       included_services:
@@ -3205,15 +2849,13 @@ definitions:
           type: string
         type: array
       included_tax:
-        description: "The amount of taxes already included in the gross nightly rate
-          also calculated for all rooms and\r
+        description: "The amount of taxes already included in the gross nightly rate also calculated for all rooms and\r
 
           \            all persons per room."
         format: double
         type: number
       rate:
-        description: The gross room rate. It is the price calculated for all rooms and
-          all persons per room.
+        description: The gross room rate. It is the price calculated for all rooms and all persons per room.
         format: double
         type: number
       room_type:
@@ -3301,8 +2943,7 @@ definitions:
       room_type_code:
         type: string
       unavailable_reason:
-        description: If there is an issue and this room offer is unavailable
-          (IsAvailable=false) this message may be not empty.
+        description: If there is an issue and this room offer is unavailable (IsAvailable=false) this message may be not empty.
         type: string
     type: object
   DailyRatesResponse:
@@ -3370,8 +3011,7 @@ definitions:
         type: string
     type: object
   EmbeddedRoom:
-    description: "Represents a short version of room information. To get the full
-      version\r
+    description: "Represents a short version of room information. To get the full version\r
 
       \            please follow the self link from the links collection"
     properties:
@@ -3391,12 +3031,10 @@ definitions:
         type: string
       room_type:
         $ref: "#/definitions/EmbeddedRoomType"
-        description: Room type of the room. Contains only the basic properties of the
-          room type
+        description: Room type of the room. Contains only the basic properties of the room type
     type: object
   EmbeddedRoomType:
-    description: "Basic data for a room type. To get the full details please follow
-      the self link\r
+    description: "Basic data for a room type. To get the full details please follow the self link\r
 
       \            from the links collection"
     properties:
@@ -3433,19 +3071,16 @@ definitions:
         minimum: 1
         type: string
       arrivalDate:
-        description: Date from when the addon service will be booked to the reservation
-          in the ISO-8601 format "YYYY-MM-DD".
+        description: Date from when the addon service will be booked to the reservation in the ISO-8601 format "YYYY-MM-DD".
         format: date-time
         type: string
       channelCode:
         description: Channel Code the rate plan needs to be configured for.
         type: string
       departureDate:
-        description: "Date until when the addon service will be booked to the
-          reservation in the ISO-8601 format \"YYYY-MM-DD\".\r
+        description: "Date until when the addon service will be booked to the reservation in the ISO-8601 format \"YYYY-MM-DD\".\r
 
-          \            This is usually the departure date of the
-          reservation."
+          \            This is usually the departure date of the reservation."
         format: date-time
         type: string
       expand:
@@ -3483,14 +3118,12 @@ definitions:
   GetAvailabilityRequest:
     properties:
       expand:
-        description: You can expand the room types breakdown per business day for the
-          availibility numbers if need be.
+        description: You can expand the room types breakdown per business day for the availibility numbers if need be.
         enum:
           - RoomTypes
         type: string
       from:
-        description: Defines the first business day you would like to get availability
-          numbers for.
+        description: Defines the first business day you would like to get availability numbers for.
         format: date-time
         type: string
       hotelId:
@@ -3498,8 +3131,7 @@ definitions:
         format: int32
         type: integer
       to:
-        description: "Defines the last business day you would like to get availability
-          numbers for. The maximum time span between <i>from</i>´and <i>to</i>\r
+        description: "Defines the last business day you would like to get availability numbers for. The maximum time span between <i>from</i>´and <i>to</i>\r
 
           \            is limited to 365 days."
         format: date-time
@@ -3522,8 +3154,7 @@ definitions:
         description: Define the channel code in order to look up the rates for.
         type: string
       expand:
-        description: Define the sections you want to expand and get informed about rates
-          for.
+        description: Define the sections you want to expand and get informed about rates for.
         items:
           enum:
             - None
@@ -3532,8 +3163,7 @@ definitions:
           type: string
         type: array
       from:
-        description: Define the first business day you would like to get availability
-          numbers for. The day should not be in the past.
+        description: Define the first business day you would like to get availability numbers for. The day should not be in the past.
         format: date-time
         type: string
       hotelId:
@@ -3541,18 +3171,14 @@ definitions:
         format: int32
         type: integer
       ratePlanCodes:
-        description: Define the codes of rate plans to show in the response. A list of
-          comma ',' separated rate plan codes.
+        description: Define the codes of rate plans to show in the response. A list of comma ',' separated rate plan codes.
         items:
           type: string
         type: array
       to:
-        description: "Define the last business day you would like to get rates for
-          (inclusive). The maximum time span between <i>'From'</i> and
-          <i>'To'</i>\r
+        description: "Define the last business day you would like to get rates for (inclusive). The maximum time span between <i>'From'</i> and <i>'To'</i>\r
 
-          \            is limited to 365 days. This can't be less than
-          the 'From' date."
+          \            is limited to 365 days. This can't be less than the 'From' date."
         format: date-time
         type: string
     required:
@@ -3564,8 +3190,7 @@ definitions:
   Guarantee:
     properties:
       guarantee_type:
-        description: One of the accepted guarantee types from the offer you selected out
-          of the rates response
+        description: One of the accepted guarantee types from the offer you selected out of the rates response
         enum:
           - PM4Hold
           - PM6Hold
@@ -3582,8 +3207,7 @@ definitions:
         type: string
       token:
         $ref: "#/definitions/Token"
-        description: The token to be used for capturing the reservations amount or to
-          guarantee for the reservation
+        description: The token to be used for capturing the reservations amount or to guarantee for the reservation
     type: object
   GuaranteeResponse:
     properties:
@@ -3604,11 +3228,9 @@ definitions:
           - Waitlist
         type: string
       valid_token:
-        description: "Tells you if there is a token for a valid creadit card on the
-          reservation that can be used to\r
+        description: "Tells you if there is a token for a valid creadit card on the reservation that can be used to\r
 
-          \            capture the reservations amount or to guarantee
-          for the reservation"
+          \            capture the reservations amount or to guarantee for the reservation"
         type: boolean
     type: object
   GuaranteeTypes:
@@ -3653,25 +3275,19 @@ definitions:
 
           <para> </para>\r
 
-          <para>Its presence indicates that the link is to be
-          deprecated (i.e.\r
+          <para>Its presence indicates that the link is to be deprecated (i.e.\r
 
-          \            removed) at a future date.  Its value is a URL
-          that SHOULD provide\r
+          \            removed) at a future date.  Its value is a URL that SHOULD provide\r
 
           \            further information about the deprecation.\r
 
-          \            A client SHOULD provide some notification (for
-          example, by logging a\r
+          \            A client SHOULD provide some notification (for example, by logging a\r
 
-          \            warning message) whenever it traverses over a
-          link that has this\r
+          \            warning message) whenever it traverses over a link that has this\r
 
-          \            property.  The notification SHOULD include the
-          deprecation property's\r
+          \            property.  The notification SHOULD include the deprecation property's\r
 
-          \            value so that a client maintainer can easily
-          find information about\r
+          \            value so that a client maintainer can easily find information about\r
 
           \            the deprecation.</para>"
         type: string
@@ -3680,33 +3296,27 @@ definitions:
 
           <para> </para>\r
 
-          <para>Its value is either a URI [RFC3986] or a URI Template
-          [RFC6570].\r
+          <para>Its value is either a URI [RFC3986] or a URI Template [RFC6570].\r
 
-          \            If the value is a URI Template then the Link
-          Object SHOULD have a\r
+          \            If the value is a URI Template then the Link Object SHOULD have a\r
 
-          \            \"templated\" attribute whose value is
-          true.</para>"
+          \            \"templated\" attribute whose value is true.</para>"
         type: string
       hreflang:
         description: "<para>The \"hreflang\" property is OPTIONAL.</para>\r
 
           <para> </para>\r
 
-          <para>Its value is a string and is intended for indicating
-          the language of\r
+          <para>Its value is a string and is intended for indicating the language of\r
 
-          \            the target resource (as defined by
-          [RFC5988]).</para>"
+          \            the target resource (as defined by [RFC5988]).</para>"
         type: string
       name:
         description: "<para>The \"name\" property is OPTIONAL.</para>\r
 
           <para> </para>\r
 
-          <para>Its value MAY be used as a secondary key for selecting
-          Link Objects\r
+          <para>Its value MAY be used as a secondary key for selecting Link Objects\r
 
           \            which share the same relation type.</para>"
         type: string
@@ -3715,21 +3325,18 @@ definitions:
 
           <para> </para>\r
 
-          <para>Its value is a string which is a URI that hints about
-          the profile.</para>"
+          <para>Its value is a string which is a URI that hints about the profile.</para>"
         type: string
       templated:
         description: "<para>The \"templated\" property is OPTIONAL.</para>\r
 
           <para> </para>\r
 
-          <para>Its value is boolean and SHOULD be true when the Link
-          Object's \"href\"\r
+          <para>Its value is boolean and SHOULD be true when the Link Object's \"href\"\r
 
           \            property is a URI Template.\r
 
-          \            Its value SHOULD be considered false if it is
-          undefined or any other\r
+          \            Its value SHOULD be considered false if it is undefined or any other\r
 
           \            value than true.</para>"
         type: boolean
@@ -3738,22 +3345,18 @@ definitions:
 
           <para> </para>\r
 
-          <para>Its value is a string and is intended for labelling
-          the link with a\r
+          <para>Its value is a string and is intended for labelling the link with a\r
 
-          \            human-readable identifier (as defined by
-          [RFC5988]).</para>"
+          \            human-readable identifier (as defined by [RFC5988]).</para>"
         type: string
       type:
         description: "<para>The \"type\" property is OPTIONAL.</para>\r
 
           <para> </para>\r
 
-          <para>Its value is a string used as a hint to indicate the
-          media type\r
+          <para>Its value is a string used as a hint to indicate the media type\r
 
-          \            expected when dereferencing the target
-          resource.</para>"
+          \            expected when dereferencing the target resource.</para>"
         type: string
     required:
       - href
@@ -3777,11 +3380,7 @@ definitions:
       country:
         description: "The country code for this address in ISO 3166-1 alpha-2 format\r
 
-          \            (see: <a
-          href=\"http://www.iso.org/iso/country_codes/iso_3166_code_lists/count\
-          ry_names_and_code_elements.htm\" onfocus=\"this.blur()\"
-          target=\"_blank\">http://www.iso.org/iso/country_codes/iso_3166_code_\
-          lists/country_names_and_code_elements.htm</a>)"
+          \            (see: <a href=\"http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm\" onfocus=\"this.blur()\" target=\"_blank\">http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm</a>)"
         type: string
       postal_code:
         description: The postal code for this address
@@ -3808,8 +3407,7 @@ definitions:
         description: Description of the noshow policy suitable for displaying to customers
         type: string
       fee:
-        description: The fee that will be charged to the reservations folio in case the
-          guest does not show up
+        description: The fee that will be charged to the reservations folio in case the guest does not show up
         format: double
         type: number
     type: object
@@ -3832,8 +3430,7 @@ definitions:
         format: int32
         type: integer
       breakdown:
-        description: In this collection you will get an entry with price information for
-          every day.
+        description: In this collection you will get an entry with price information for every day.
         items:
           $ref: "#/definitions/RoomOfferDailyRate"
         type: array
@@ -3857,8 +3454,7 @@ definitions:
         type: array
       guarantee_types:
         $ref: "#/definitions/AcceptedGuaranteeTypes"
-        description: Accepted guarantee types and the minimum guarantee type defined for
-          that rate
+        description: Accepted guarantee types and the minimum guarantee type defined for that rate
       included_services:
         description: A list of  of services included already in the rate for this offer
         items:
@@ -3934,8 +3530,7 @@ definitions:
           $ref: "#/definitions/ServiceRate"
         type: array
       excluded_tax:
-        description: The amount of extra taxes also calculated for all rooms and all
-          persons per room.
+        description: The amount of extra taxes also calculated for all rooms and all persons per room.
         format: double
         type: number
       included_services:
@@ -3944,15 +3539,13 @@ definitions:
           type: string
         type: array
       included_tax:
-        description: "The amount of taxes already included in the gross nightly rate
-          also calculated for all rooms and\r
+        description: "The amount of taxes already included in the gross nightly rate also calculated for all rooms and\r
 
           \            all persons per room."
         format: double
         type: number
       rate:
-        description: The gross room rate. It is the price calculated for all rooms and
-          all persons per room.
+        description: The gross room rate. It is the price calculated for all rooms and all persons per room.
         format: double
         type: number
     type: object
@@ -3986,8 +3579,7 @@ definitions:
         description: The name of the hotel the rate offers will be valid for
         type: string
       rate_plans:
-        description: List of rate plans details for rates you can find offers in the
-          room_offers
+        description: List of rate plans details for rates you can find offers in the room_offers
         items:
           $ref: "#/definitions/RatePlan"
         type: array
@@ -3997,14 +3589,12 @@ definitions:
           $ref: "#/definitions/RoomOffer"
         type: array
       rooms:
-        description: List of room type details for room types you can find offers in the
-          room_offers
+        description: List of room type details for room types you can find offers in the room_offers
         items:
           $ref: "#/definitions/ReservationRoom"
         type: array
       services:
-        description: List of service details for included services in offers you can
-          find in the room_offers
+        description: List of service details for included services in offers you can find in the room_offers
         items:
           $ref: "#/definitions/Service"
         type: array
@@ -4061,8 +3651,7 @@ definitions:
   Reservation:
     properties:
       addons:
-        description: A list of addon service codes that should be booked for all
-          reservations of this booking
+        description: A list of addon service codes that should be booked for all reservations of this booking
         items:
           type: string
         type: array
@@ -4075,8 +3664,7 @@ definitions:
         format: date-time
         type: string
       channel_code:
-        description: The channel code for this reservation. You can find available
-          channels in the codes for the hotel.
+        description: The channel code for this reservation. You can find available channels in the codes for the hotel.
         type: string
       comment:
         description: The comment you want to add for this reservation
@@ -4092,8 +3680,7 @@ definitions:
         format: date-time
         type: string
       external_id:
-        description: "The external id for this reservation. You can put here your own id
-          used by you or the external system\r
+        description: "The external id for this reservation. You can put here your own id used by you or the external system\r
 
           \            you integrate hetras with"
         type: string
@@ -4102,9 +3689,7 @@ definitions:
         type: string
       guarantee:
         $ref: "#/definitions/Guarantee"
-        description: "The guarantee for this reservation. See
-          https://developer.hetras.com/docs/tutorials#payment for information
-          about\r
+        description: "The guarantee for this reservation. See https://developer.hetras.com/docs/tutorials#payment for information about\r
 
           \            how to fill out the guarantee object"
       guests:
@@ -4132,14 +3717,11 @@ definitions:
           - DigitalPayment
         type: string
       prepay_discount:
-        description: "If you create a booking for a rateplan requiring prepayment this
-          amount will be deducted from the booking value before\r
+        description: "If you create a booking for a rateplan requiring prepayment this amount will be deducted from the booking value before\r
 
-          \            the prepayment will be taken. This feature is
-          useful when the booker redeems a gift voucher and you want to \r
+          \            the prepayment will be taken. This feature is useful when the booker redeems a gift voucher and you want to \r
 
-          \            only capture the remaining amount from the
-          guest´s credit card"
+          \            only capture the remaining amount from the guest´s credit card"
         format: double
         type: number
       rate_plan:
@@ -4149,14 +3731,11 @@ definitions:
         description: The room type code this reservation is related to
         type: string
       rooms:
-        description: "The number of rooms this reservation is for. After a multi-room
-          booking is done there will be \r
+        description: "The number of rooms this reservation is for. After a multi-room booking is done there will be \r
 
-          \            one reservation in hetras for all rooms. The
-          hotel staff then will split this reservation into\r
+          \            one reservation in hetras for all rooms. The hotel staff then will split this reservation into\r
 
-          \            one reservation per room to be able to check in
-          the guests"
+          \            one reservation per room to be able to check in the guests"
         format: int32
         type: integer
       travel_agent:
@@ -4168,16 +3747,14 @@ definitions:
   ReservationConfirmation:
     properties:
       _warnings:
-        description: "Warnings that came up when your request was processed. Your
-          request will still be processed successfull when\r
+        description: "Warnings that came up when your request was processed. Your request will still be processed successfull when\r
 
           \            you see such warnings in your response"
         items:
           type: string
         type: array
       confirmation_id:
-        description: "The confirmation id for the newly created booking which the guest
-          can use to check in on the kiosk, add the\r
+        description: "The confirmation id for the newly created booking which the guest can use to check in on the kiosk, add the\r
 
           \            booking to the mobile app etc."
         type: string
@@ -4202,8 +3779,7 @@ definitions:
         format: date-time
         type: string
       channel_code:
-        description: The channel code for this reservation. You can find available
-          channels in the codes for the hotel.
+        description: The channel code for this reservation. You can find available channels in the codes for the hotel.
         type: string
       comment:
         description: The comment you want to add for this reservation
@@ -4219,8 +3795,7 @@ definitions:
         format: date-time
         type: string
       external_id:
-        description: "The external id for this reservation. You can put here your own id
-          used by you or the external system\r
+        description: "The external id for this reservation. You can put here your own id used by you or the external system\r
 
           \            you integrate hetras with"
         type: string
@@ -4229,9 +3804,7 @@ definitions:
         type: string
       guarantee:
         $ref: "#/definitions/Guarantee"
-        description: "The guarantee for this reservation. See
-          https://developer.hetras.com/docs/tutorials#payment for information
-          about\r
+        description: "The guarantee for this reservation. See https://developer.hetras.com/docs/tutorials#payment for information about\r
 
           \            how to fill out the guarantee object"
       guests:
@@ -4259,14 +3832,11 @@ definitions:
           - DigitalPayment
         type: string
       prepay_discount:
-        description: "If you create a booking for a rateplan requiring prepayment this
-          amount will be deducted from the booking value before\r
+        description: "If you create a booking for a rateplan requiring prepayment this amount will be deducted from the booking value before\r
 
-          \            the prepayment will be taken. This feature is
-          useful when the booker redeems a gift voucher and you want to \r
+          \            the prepayment will be taken. This feature is useful when the booker redeems a gift voucher and you want to \r
 
-          \            only capture the remaining amount from the
-          guest´s credit card"
+          \            only capture the remaining amount from the guest´s credit card"
         format: double
         type: number
       room_rates:
@@ -4275,14 +3845,11 @@ definitions:
           $ref: "#/definitions/RoomRate"
         type: array
       rooms:
-        description: "The number of rooms this reservation is for. After a multi-room
-          booking is done there will be \r
+        description: "The number of rooms this reservation is for. After a multi-room booking is done there will be \r
 
-          \            one reservation in hetras for all rooms. The
-          hotel staff then will split this reservation into\r
+          \            one reservation in hetras for all rooms. The hotel staff then will split this reservation into\r
 
-          \            one reservation per room to be able to check in
-          the guests"
+          \            one reservation per room to be able to check in the guests"
         format: int32
         type: integer
       travel_agent:
@@ -4300,19 +3867,16 @@ definitions:
   ReservationResponse:
     properties:
       _warnings:
-        description: "Warnings that came up when your request was processed. Your
-          request will still be processed successfull when\r
+        description: "Warnings that came up when your request was processed. Your request will still be processed successfull when\r
 
           \            you see such warnings in your response"
         items:
           type: string
         type: array
       addon_services:
-        description: "A list of addon service codes that are currently booked on the
-          reservation. Services which are charged\r
+        description: "A list of addon service codes that are currently booked on the reservation. Services which are charged\r
 
-          \            once per stay are only visible before and on
-          the day they are booked for."
+          \            once per stay are only visible before and on the day they are booked for."
         items:
           type: string
         type: array
@@ -4325,45 +3889,35 @@ definitions:
         format: date-time
         type: string
       balance:
-        description: "The balance for all folios of this reservartion. It is calculated
-          by all already charged room and service\r
+        description: "The balance for all folios of this reservartion. It is calculated by all already charged room and service\r
 
-          \            rates plus manual charges or charges from other
-          systems like POS minus all payments. A negative balance\r
+          \            rates plus manual charges or charges from other systems like POS minus all payments. A negative balance\r
 
-          \            indicates the reservation is overpaid, a
-          positive balance that the guest owes the hotel money"
+          \            indicates the reservation is overpaid, a positive balance that the guest owes the hotel money"
         format: double
         type: number
       block:
         $ref: "#/definitions/BlockInfo"
-        description: If this reservation is a pick-up from a block you will see the
-          appropriate block here
+        description: If this reservation is a pick-up from a block you will see the appropriate block here
       cancellation_id:
-        description: Given the reservation was cancelled, this field contains the
-          cancellation id
+        description: Given the reservation was cancelled, this field contains the cancellation id
         type: string
       cancellation_policies:
-        description: The cancellation policies that were applicable on the date the
-          booking was done
+        description: The cancellation policies that were applicable on the date the booking was done
         items:
           $ref: "#/definitions/CancellationPolicy"
         type: array
       channel_code:
-        description: "The code of the channel that was used when the booking has been
-          created. It is also known as source. \r
+        description: "The code of the channel that was used when the booking has been created. It is also known as source. \r
 
-          \            Possible values can be OTA, GDS or DIRECT, but
-          it is configurable per hotel"
+          \            Possible values can be OTA, GDS or DIRECT, but it is configurable per hotel"
         type: string
       checkin_time:
-        description: The real checkin time of the guests. It will be set after the
-          checkin has been performed
+        description: The real checkin time of the guests. It will be set after the checkin has been performed
         format: date-time
         type: string
       checkout_time:
-        description: The real checkout time of the guests. It will be set after the
-          checkout has been performed
+        description: The real checkout time of the guests. It will be set after the checkout has been performed
         format: date-time
         type: string
       comment:
@@ -4373,11 +3927,9 @@ definitions:
         $ref: "#/definitions/Company"
         description: The company linked to this reservation
       confirmation_id:
-        description: "The confirmation id for the booking which the guest can use to
-          check in on the kiosk, add the\r
+        description: "The confirmation id for the booking which the guest can use to check in on the kiosk, add the\r
 
-          \            booking to the mobile app etc. It is used as
-          identifier for all reservations done with the same\r
+          \            booking to the mobile app etc. It is used as identifier for all reservations done with the same\r
 
           \            booking request"
         type: string
@@ -4396,16 +3948,12 @@ definitions:
         format: date-time
         type: string
       external_id:
-        description: "The external id for this reservation is the unique identifier from
-          the system that created the booking in hetras. It could be the id of
-          an\r
+        description: "The external id for this reservation is the unique identifier from the system that created the booking in hetras. It could be the id of an\r
 
-          \            OTA like Expedia or booking.com or one of the
-          GDS systems like Amadeus or Galileo"
+          \            OTA like Expedia or booking.com or one of the GDS systems like Amadeus or Galileo"
         type: string
       general_policies:
-        description: The general policies that were applicable on the date the booking
-          was done
+        description: The general policies that were applicable on the date the booking was done
         items:
           $ref: "#/definitions/GeneralPolicy"
         type: array
@@ -4427,8 +3975,7 @@ definitions:
           type: string
         type: array
       market_code:
-        description: The code of the market segment the rate plan for this reservation
-          is linked to
+        description: The code of the market segment the rate plan for this reservation is linked to
         type: string
       noshow_policy:
         $ref: "#/definitions/NoShowPolicy"
@@ -4476,39 +4023,31 @@ definitions:
         type: string
       room:
         $ref: "#/definitions/EmbeddedRoom"
-        description: "The room type this reservation is related to and if applicable the
-          already assigned specific room for \r
+        description: "The room type this reservation is related to and if applicable the already assigned specific room for \r
 
           \            this reservation"
       room_rates:
-        description: The breakdown for all daily room rates and service charges for this
-          reservation
+        description: The breakdown for all daily room rates and service charges for this reservation
         items:
           $ref: "#/definitions/DailyRate"
         type: array
       rooms:
-        description: "The number of rooms this reservation is valid for. After a
-          multi-room booking is done there will be \r
+        description: "The number of rooms this reservation is valid for. After a multi-room booking is done there will be \r
 
-          \            one reservation in hetras for this booking for
-          all rooms. The hotel staff then will split this reservation into\r
+          \            one reservation in hetras for this booking for all rooms. The hotel staff then will split this reservation into\r
 
-          \            one reservation per room to be able to check in
-          the guests"
+          \            one reservation per room to be able to check in the guests"
         format: int32
         type: integer
       services:
-        description: A list of details for all services included and addon service
-          booked on this reservation
+        description: A list of details for all services included and addon service booked on this reservation
         items:
           $ref: "#/definitions/Service"
         type: array
       subchannel_code:
-        description: "The code of the subchannel that was used when the booking has been
-          created. Possible values can be \r
+        description: "The code of the subchannel that was used when the booking has been created. Possible values can be \r
 
-          \            BOOKING, EXPEDIA or WALKIN, but it is
-          configurable per hotel"
+          \            BOOKING, EXPEDIA or WALKIN, but it is configurable per hotel"
         type: string
       total_stay:
         $ref: "#/definitions/Rate"
@@ -4569,11 +4108,9 @@ definitions:
         description: Collection of links to related resources
         type: object
       available:
-        description: "The number of rooms that were originally available to sell. This
-          is the the house count reduced by rooms set\r
+        description: "The number of rooms that were originally available to sell. This is the the house count reduced by rooms set\r
 
-          \            to OutOfOrder but increased by the set
-          overbooking"
+          \            to OutOfOrder but increased by the set overbooking"
         format: int32
         type: integer
       blocked:
@@ -4590,8 +4127,7 @@ definitions:
         description: Specifies if the room type is the default room type of the hotel
         type: boolean
       house_count:
-        description: The total count of physical rooms reduced by the number of rooms
-          set to OutOfInventory
+        description: The total count of physical rooms reduced by the number of rooms set to OutOfInventory
         format: int32
         type: integer
       maintenance:
@@ -4606,13 +4142,11 @@ definitions:
         format: int32
         type: integer
       sold:
-        description: The count of rooms sold. It sums up the rooms sold through
-          individual reservations plus rooms blocked definitely
+        description: The count of rooms sold. It sums up the rooms sold through individual reservations plus rooms blocked definitely
         format: int32
         type: integer
       to_sell:
-        description: The number of rooms still available to sell. It is available
-          reduced by the already sold rooms
+        description: The number of rooms still available to sell. It is available reduced by the already sold rooms
         format: int32
         type: integer
     type: object
@@ -4628,8 +4162,7 @@ definitions:
   RoomOffer:
     properties:
       offers:
-        description: A list of rate offers for the appropriate room type ordered by
-          amount ascending
+        description: A list of rate offers for the appropriate room type ordered by amount ascending
         items:
           $ref: "#/definitions/Offer"
         type: array
@@ -4640,29 +4173,23 @@ definitions:
   RoomOfferDailyRate:
     properties:
       business_day:
-        description: The business day the prize for the daily rate and all included
-          services will be posted to the folio of the reservation
+        description: The business day the prize for the daily rate and all included services will be posted to the folio of the reservation
         format: date-time
         type: string
       excluded_tax:
-        description: "The amount of taxes that are not included in the gross rate of the
-          room offer and will be charged separately for\r
+        description: "The amount of taxes that are not included in the gross rate of the room offer and will be charged separately for\r
 
-          \            that business day. It is also calculated for
-          all rooms and all persons per room"
+          \            that business day. It is also calculated for all rooms and all persons per room"
         format: double
         type: number
       included_tax:
-        description: "The amount of taxes already included in the gross rate of the room
-          and all included services for this business day.\r
+        description: "The amount of taxes already included in the gross rate of the room and all included services for this business day.\r
 
-          \            The prize is calculated for all rooms and all
-          persons per room"
+          \            The prize is calculated for all rooms and all persons per room"
         format: double
         type: number
       rate:
-        description: "The gross rate for this day for the room and all included
-          services. The prize is calculated for all rooms and all \r
+        description: "The gross rate for this day for the room and all included services. The prize is calculated for all rooms and all \r
 
           \            persons per room"
         format: double
@@ -4675,8 +4202,7 @@ definitions:
         format: date-time
         type: string
       rate:
-        description: "Total gross amount to be charged for the rate including all
-          services of a package. Only extra taxes might\r
+        description: "Total gross amount to be charged for the rate including all services of a package. Only extra taxes might\r
 
           \            be added to the booking on top"
         format: double
@@ -4724,18 +4250,15 @@ definitions:
         description: The code of the service
         type: string
       description:
-        description: The description of the service which is suitable for displaying to
-          customers
+        description: The description of the service which is suitable for displaying to customers
         type: string
       frequency:
-        description: "The frequency for charging the service to the guests folio. It is
-          a free text and only suitable for \r
+        description: "The frequency for charging the service to the guests folio. It is a free text and only suitable for \r
 
           \            displaying to customers"
         type: string
       is_addon:
-        description: This flag indicates if a service is an addon or is included already
-          in the room rate
+        description: This flag indicates if a service is an addon or is included already in the room rate
         type: boolean
       name:
         description: The name of the service
@@ -4747,8 +4270,7 @@ definitions:
         description: The code of the service
         type: string
       included_tax:
-        description: The included taxes in the gross rate of the service calculated for
-          all rooms and all persons
+        description: The included taxes in the gross rate of the service calculated for all rooms and all persons
         format: double
         type: number
       rate:
@@ -4769,16 +4291,13 @@ definitions:
   Token:
     properties:
       authorization_expiry_date:
-        description: The authorization expiry date you got back from the payment service
-          provider
+        description: The authorization expiry date you got back from the payment service provider
         format: date-time
         type: string
       authorization_reference:
-        description: "The authorization reference. This value is specific for different
-          payment service providers. There will be\r
+        description: "The authorization reference. This value is specific for different payment service providers. There will be\r
 
-          \            a page on the developer portal explaining the
-          pattern on how to fill this value for the payment service\r
+          \            a page on the developer portal explaining the pattern on how to fill this value for the payment service\r
 
           \            provider hetras is integrated with"
         type: string
@@ -4797,16 +4316,13 @@ definitions:
         format: double
         type: number
       merchant_reference:
-        description: The merchant reference you used when requesting the token from the
-          payment service provider
+        description: The merchant reference you used when requesting the token from the payment service provider
         type: string
       shopper_email:
-        description: The shopper email you used when requesting the token from the
-          payment service provider
+        description: The shopper email you used when requesting the token from the payment service provider
         type: string
       shopper_reference:
-        description: "The shopper reference you used when requesting the token from the
-          payment service provider. It can\r
+        description: "The shopper reference you used when requesting the token from the payment service provider. It can\r
 
           \            be the same as the merchant reference"
         type: string
@@ -4817,8 +4333,7 @@ definitions:
   TotalCountResponse:
     properties:
       _count:
-        description: Returns the total count for all items matching the query
-          parameters. If none is matching it will return 0.
+        description: Returns the total count for all items matching the query parameters. If none is matching it will return 0.
         format: int64
         type: integer
     required:

@@ -78,18 +78,14 @@ parameters:
     required: true
     type: string
   devicesSelector.Opt:
-    description: Devices selector. Device tags or device classes or device ids or
-      '*' for any. Multiple values are separated by '|' and interpreted as « OR
-      ».
+    description: Devices selector. Device tags or device classes or device ids or '*' for any. Multiple values are separated by '|' and interpreted as « OR ».
     in: query
     name: devices
     pattern: ^(?:\\*|(?:[A-Z][A-Z0-9]{3}|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Z0-9]{3}|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$
     required: false
     type: string
   devicesSelector.Req:
-    description: Devices selector. Device tags or device classes or device ids or
-      '*' for any. Multiple values are separated by '|' and interpreted as « OR
-      ».
+    description: Devices selector. Device tags or device classes or device ids or '*' for any. Multiple values are separated by '|' and interpreted as « OR ».
     in: query
     name: devices
     pattern: ^(?:\\*|(?:[A-Z][A-Z0-9]{3}|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Z0-9]{3}|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$
@@ -97,10 +93,8 @@ parameters:
     type: string
   embedMetadata:
     collectionFormat: csv
-    description: >
-      Request to include the given keys of metadata in the response. If a
-      key doesn't exist on the resource it is ignored.
-
+    description: |
+      Request to include the given keys of metadata in the response. If a key doesn't exist on the resource it is ignored.
       **Note:** This only applies to the top level resources.
     in: query
     items:
@@ -123,20 +117,16 @@ parameters:
     required: true
     type: string
   functionalitiesSelector.Opt:
-    description: >
-      Functionality selector: Functionality tags or functionality class
-      (optionally, '@' followed by a endpoint in decimal) or '*' for all.
-      Multiple values are separated by '|' and are interpreted as « OR ».
+    description: |
+      Functionality selector: Functionality tags or functionality class (optionally, '@' followed by a endpoint in decimal) or '*' for all. Multiple values are separated by '|' and are interpreted as « OR ».
     in: query
     name: functionalities
     pattern: ^(?:\\*|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$
     required: false
     type: string
   functionalitiesSelector.Req:
-    description: >
-      Functionality selector: Functionality tags or functionality class
-      (optionally, '@' followed by a endpoint in decimal) or '*' for all.
-      Multiple values are separated by '|' and are interpreted as « OR ».
+    description: |
+      Functionality selector: Functionality tags or functionality class (optionally, '@' followed by a endpoint in decimal) or '*' for all. Multiple values are separated by '|' and are interpreted as « OR ».
     in: query
     name: functionalities
     pattern: ^(?:\\*|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22})(?:\\|(?:[A-Z][A-Za-z0-9]+(?:@(?:0|1[0-9]{,2}|[3-9][0-9]?|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?))?|[a-z][a-z0-9_:]{0,20}|[A-Za-z0-9-_]{22}))*)$
@@ -175,8 +165,7 @@ parameters:
     required: true
     type: string
   span.Req:
-    description: "Timespan: H (hour), D (day), Wmo (week starting on Monday), Wsu
-      (week starting on Sunday), M (month), Y (year)"
+    description: "Timespan: H (hour), D (day), Wmo (week starting on Monday), Wsu (week starting on Sunday), M (month), Y (year)"
     enum:
       - H
       - D
@@ -240,27 +229,23 @@ responses:
     schema:
       $ref: "#/definitions/ErrorEntity"
   ErrorAccessBus:
-    description: >
-      *Bus* doesn't exist or the requester doesn't have appropriate
-      access to the *Place*.
+    description: |
+      *Bus* doesn't exist or the requester doesn't have appropriate access to the *Place*.
     schema:
       $ref: "#/definitions/ErrorSubEntity"
   ErrorAccessDevice:
-    description: >
-      *Device* doesn't exist or the requester doesn't have appropriate
-      access to the *Place*.
+    description: |
+      *Device* doesn't exist or the requester doesn't have appropriate access to the *Place*.
     schema:
       $ref: "#/definitions/ErrorEntity"
   ErrorAccessFunctionality:
-    description: >
-      *Functionality* doesn't exist or the requester doesn't have
-      appropriate access to the *Place*.
+    description: |
+      *Functionality* doesn't exist or the requester doesn't have appropriate access to the *Place*.
     schema:
       $ref: "#/definitions/ErrorEntity"
   ErrorAccessNotification:
-    description: >
-      *Notification* doesn't exist or the requester doesn't have
-      appropriate access to the *Place*.
+    description: |
+      *Notification* doesn't exist or the requester doesn't have appropriate access to the *Place*.
     schema:
       $ref: "#/definitions/ErrorEntity"
   ErrorAccessPlace:
@@ -269,15 +254,13 @@ responses:
     schema:
       $ref: "#/definitions/ErrorEntity"
   ErrorAccessProgram:
-    description: >
-      *Program* doesn't exist or the requester doesn't have appropriate
-      access to the *Place*.
+    description: |
+      *Program* doesn't exist or the requester doesn't have appropriate access to the *Place*.
     schema:
       $ref: "#/definitions/ErrorEntity"
   ErrorAccessUser:
-    description: >
-      *User* doesn't exist in this *Account* or the requester doesn't
-      have access to a *Place* on which this *User* has access.
+    description: |
+      *User* doesn't exist in this *Account* or the requester doesn't have access to a *Place* on which this *User* has access.
     schema:
       $ref: "#/definitions/ErrorEntity"
   ErrorGatewayUnreachable:
@@ -352,12 +335,10 @@ paths:
         - Account
     parameters: []
     post:
-      description: >
+      description: |
         Create a new *Place*.
 
-
         A *Device* (`class`: `MINT`, `address`: `0`) is automatically created and attached to the new *Place*.
-
 
         **Note:** requires full access to the *Account*.
       operationId: Account.newPlace
@@ -544,9 +525,8 @@ paths:
     parameters:
       - $ref: "#/parameters/userId"
     patch:
-      description: >
+      description: |
         Modify the metadata.
-
         Keys are limited to the same format as tags (up to 21 characters, [a-z0-9], starting with [a-z]). Values can be any JSON value.
       operationId: User.patchMetadata
       parameters:
@@ -593,8 +573,7 @@ paths:
             $ref: "#/definitions/AuthLogin"
       responses:
         "200":
-          description: Login successful. The access token is given to use the API. The
-            refresh token must be stored in a safe place.
+          description: Login successful. The access token is given to use the API. The refresh token must be stored in a safe place.
           schema:
             $ref: "#/definitions/AuthTokens"
         "401":
@@ -640,16 +619,12 @@ paths:
         - Authentication
   /auth/reset-password:
     post:
-      description: >
+      description: |
         Trigger the request of a new password.
 
-
         The account administrator will receive an e-mail with an URL pointing to a form
-
         to allow him/her to enter a new password.
-
         The old password is still functional until a new one is submitted.
-
 
         Either the login or e-mail of the account must be given.
       operationId: AuthResetPassword
@@ -662,8 +637,7 @@ paths:
             $ref: "#/definitions/AuthResetPassword"
       responses:
         "204":
-          description: As this request is not authenticated, response is always successful
-            to not reveal (in)existence of accounts.
+          description: As this request is not authenticated, response is always successful to not reveal (in)existence of accounts.
         default:
           $ref: "#/responses/DefaultError"
       security: []
@@ -672,10 +646,8 @@ paths:
         - Authentication
   /auth/revoke:
     post:
-      description: >
-        Invalidate the authentication used for the request. The access
-        token and the refresh token will be invalid after this request.
-
+      description: |
+        Invalidate the authentication used for the request. The access token and the refresh token will be invalid after this request.
         This request is typically called to implement logout.
       operationId: AuthRevokeToken
       responses:
@@ -730,32 +702,21 @@ paths:
         - Device
   "/devices/{deviceId}/functionalities":
     post:
-      description: >
+      description: |
         Add a *Functionality* to the device.
 
-
         Required parameters are :
-
         - functionality class
-
         - endpoint
 
-
         Each device class has its own restrictions on which Functionality classes can be added and on which endpoints.
-
         Only a few devices allow to add Functionalities.
 
-
         |Device class|Functionality class|Endpoints|
-
         |------------|-------------------|---------|
-
         |MINT        |CurrentPeriod      |1,2,3    |
-
         |MINT        |ElectricityRates   |1,2,3    |
-
         |MINT        |GenericRate        |1,2,3    |
-
 
         **Note**: requires full access to the *Account*.
       operationId: Device.addFunctionality
@@ -800,9 +761,8 @@ paths:
     parameters:
       - $ref: "#/parameters/deviceId"
     patch:
-      description: >
+      description: |
         Modify the metadata.
-
         Keys are limited to the same format as tags (up to 21 characters, [a-z0-9], starting with [a-z]). Values can be any JSON value.
       operationId: Device.patchMetadata
       parameters:
@@ -823,9 +783,8 @@ paths:
         - Device
   "/devices/{deviceId}/run/{action}":
     post:
-      description: >
-        Run an *Action* on zero, one or multiple Functionalities selected
-        with tags.
+      description: |
+        Run an *Action* on zero, one or multiple Functionalities selected with tags.
       operationId: Device.run
       parameters:
         - $ref: "#/parameters/deviceId"
@@ -921,23 +880,17 @@ paths:
         - Functionality
   "/functionalities/{functionalityId}/attributes":
     get:
-      description: >
+      description: |
         Get the values of multiple *Attributes* and their history.
 
-
         If the `names` parameter is not given, all the attributes of the *Functionality*
-
         are returned. As the list may be huge, this must be avoided.
-
 
         If the `to` parameter is set, `from` must also be set.
 
-
         If `from` is not set, only the last value is returned.
 
-
         The `surround` parameter allows to ask also for one value beyond each interval boundaries.
-
 
         The request may fail if too many values are asked.
       operationId: Functionality.values
@@ -1018,9 +971,8 @@ paths:
     parameters:
       - $ref: "#/parameters/functionalityId"
     patch:
-      description: >
+      description: |
         Modify the metadata.
-
         Keys are limited to the same format as tags (up to 21 characters, [a-z0-9], starting with [a-z]). Values can be any JSON value.
       operationId: Functionality.patchMetadata
       parameters:
@@ -1101,12 +1053,10 @@ paths:
         - Functionality
   /me:
     get:
-      description: >
+      description: |
         Get information on the authenticated *User* who does the request.
 
-
         The *login* property is returned only if the *User* is the administrator of
-
         the *Account*.
       operationId: Me.get
       responses:
@@ -1210,9 +1160,8 @@ paths:
     parameters:
       - $ref: "#/parameters/notificationId"
     patch:
-      description: >
+      description: |
         Modify the metadata of a *Notification*.
-
         Keys are limited to the same format as tags (up to 21 characters, [a-z0-9], starting with [a-z]). Values can be any JSON value.
       operationId: Notification.patchMetadata
       parameters:
@@ -1290,9 +1239,8 @@ paths:
         - Place
   "/places/{placeId}/buses":
     get:
-      description: >-
+      description: |-
         Get the list of *Buses* available on the gateway of this *Place*.
-
         If `withPairing` is `true`, return only buses that allow device pairing (see `/places/{placeId}/buses/{busId}/pairing`).
       operationId: Place.buses
       parameters:
@@ -1540,9 +1488,8 @@ paths:
     parameters:
       - $ref: "#/parameters/placeId"
     patch:
-      description: >
+      description: |
         Modify the metadata.
-
         Keys are limited to the same format as tags (up to 21 characters, [a-z0-9], starting with [a-z]). Values can be any JSON value.
       operationId: Place.patchMetadata
       parameters:
@@ -1658,13 +1605,10 @@ paths:
         - Program
   "/places/{placeId}/run/{action}":
     post:
-      description: >
-        Run an *Action* on zero, one or multiple *Functionalities* selected
-        with tags.
-
+      description: |
+        Run an *Action* on zero, one or multiple *Functionalities* selected with tags.
 
         *Device* and *Functionality* selection are combined with « AND ».
-
 
         If no functionality is matched by the device/functionality selection, an empty array is returned.
       operationId: Place.run
@@ -1791,9 +1735,8 @@ paths:
     parameters:
       - $ref: "#/parameters/programId"
     patch:
-      description: >
+      description: |
         Modify the metadata of a *Program*.
-
         Keys are limited to the same format as tags (up to 21 characters, [a-z0-9], starting with [a-z]). Values can be any JSON value.
       operationId: Program.patchMetadata
       parameters:
@@ -2141,8 +2084,7 @@ definitions:
       metadata:
         $ref: "#/definitions/MetadataSelected"
       name:
-        description: Name of the *Device* as defined by the user. Can be used for user
-          interfaces.
+        description: Name of the *Device* as defined by the user. Can be used for user interfaces.
         minLength: 2
         type: string
       place:
@@ -2169,8 +2111,7 @@ definitions:
   DevicePatch:
     properties:
       name:
-        description: Name of the *Device* as defined by the user. Can be used for user
-          interfaces.
+        description: Name of the *Device* as defined by the user. Can be used for user interfaces.
         minLength: 2
         type: string
     type: object
@@ -2198,8 +2139,7 @@ definitions:
         format: date-time
         type: string
       message:
-        description: Message for cases where computation is not possible (codes 200001,
-          200002)
+        description: Message for cases where computation is not possible (codes 200001, 200002)
         minLength: 1
         type: string
       to:
@@ -2403,8 +2343,7 @@ definitions:
         format: date-time
         type: string
       message:
-        description: Message for cases where computation is not possible (codes 200001,
-          200002)
+        description: Message for cases where computation is not possible (codes 200001, 200002)
         minLength: 1
         type: string
       selfConsumption:
@@ -2696,11 +2635,8 @@ definitions:
     pattern: ^[a-z](?:[a-z0-9_]{0,20}|[a-z0-9_]:[a-z0-9_]{1,18}|[a-z0-9_]{2}:[a-z0-9_]{1,17}|[a-z0-9_]{3}:[a-z0-9_]{1,16}|[a-z0-9_]{4}:[a-z0-9_]{1,15})$
     type: string
   Locale:
-    description: >
-      Locale identifier (language, region). See
-      https://tools.ietf.org/html/rfc5646 and
-      https://www.iana.org/assignments/lang-subtags-templates/lang-subtags-templates.xhtml
-      .
+    description: |
+      Locale identifier (language, region). See https://tools.ietf.org/html/rfc5646 and https://www.iana.org/assignments/lang-subtags-templates/lang-subtags-templates.xhtml .
     example: fr-FR
     minLength: 2
     pattern: ^[a-z]{2}[A-Za-z0-9-]*$
@@ -2708,8 +2644,7 @@ definitions:
   Metadata:
     additionalProperties:
       $ref: "#/definitions/AnyJSON"
-    description: Keys are limited to the same format as tags (up to 21 characters,
-      [a-z0-9], starting with [a-z]). Values can be any JSON value.
+    description: Keys are limited to the same format as tags (up to 21 characters, [a-z0-9], starting with [a-z]). Values can be any JSON value.
     type: object
   MetadataKey:
     maxLength: 21
@@ -2733,8 +2668,7 @@ definitions:
   MetadataSelected:
     additionalProperties:
       $ref: "#/definitions/AnyJSON"
-    description: Subset of metadata attached to the resource selected using the
-      'embed-metadata' parameter
+    description: Subset of metadata attached to the resource selected using the 'embed-metadata' parameter
     type: object
   Notification:
     properties:
@@ -3182,8 +3116,7 @@ definitions:
         uniqueItems: true
     type: object
   TimeZone:
-    description: A time zone name from the Time Zone Database at
-      https://www.iana.org/time-zones
+    description: A time zone name from the Time Zone Database at https://www.iana.org/time-zones
     example: Europe/Paris
     minLength: 2
     pattern: ^[A-Z][A-Za-z0-9-_+]+(?:/[A-Z][A-Za-z0-9-_+]+)*$
@@ -3378,13 +3311,11 @@ definitions:
       id:
         $ref: "#/definitions/TokenId"
       lastUse:
-        description: Time of last use of the token to access the API. Updated at most
-          every 15 minutes. If absent, the token has never been used.
+        description: Time of last use of the token to access the API. Updated at most every 15 minutes. If absent, the token has never been used.
         format: date-time
         type: string
       places:
-        description: List of Places to which the User has access. If absent, it means
-          any Place of the account are allowed.
+        description: List of Places to which the User has access. If absent, it means any Place of the account are allowed.
         items:
           $ref: "#/definitions/PlaceItem"
         type: array

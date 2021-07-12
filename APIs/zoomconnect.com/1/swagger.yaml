@@ -79,10 +79,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: Returns data from the statistics report. Note that by default the
-        statistics shown are based on the number of messages, use the
-        calculateCreditValue should you wish to calculate the statistics based
-        on credit value.
+      description: Returns data from the statistics report. Note that by default the statistics shown are based on the number of messages, use the calculateCreditValue should you wish to calculate the statistics based on credit value.
       operationId: getStatistics
       parameters:
         - description: "date format: dd-MM-yyyy"
@@ -97,10 +94,7 @@ paths:
           name: to
           required: false
           type: string
-        - description: optional email address of user to return statistics for a single
-            user, default is to return statistics for all users if
-            administrator, or statistics for your own account if not an
-            administrator
+        - description: optional email address of user to return statistics for a single user, default is to return statistics for all users if administrator, or statistics for your own account if not an administrator
           in: query
           name: userEmailAddress
           required: false
@@ -115,8 +109,7 @@ paths:
           name: includeRefundedAndOptout
           required: false
           type: boolean
-        - description: optionally calculate using credit value rather than message count,
-            default is false
+        - description: optionally calculate using credit value rather than message count, default is false
           in: query
           name: calculateCreditValue
           required: false
@@ -141,9 +134,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: "Transfers credits between two users in the same team. The
-        <i>account email address</i> fields as well as the <i>number of credits
-        to transfer</i> are required. "
+      description: "Transfers credits between two users in the same team. The <i>account email address</i> fields as well as the <i>number of credits to transfer</i> are required. "
       operationId: transfer
       parameters:
         - description: request
@@ -201,9 +192,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: Creates a new sub-account in your team. The following fields are
-        required <i>firstname, lastname, email address, contact number</i> and
-        <i>password.</i>
+      description: Creates a new sub-account in your team. The following fields are required <i>firstname, lastname, email address, contact number</i> and <i>password.</i>
       parameters:
         - description: request
           in: body
@@ -261,8 +250,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: Updates a sub-account in your team. The following fields can be
-        updated <i>firstname, lastname, contact number</i> and <i>password.</i>
+      description: Updates a sub-account in your team. The following fields can be updated <i>firstname, lastname, contact number</i> and <i>password.</i>
       parameters:
         - description: userId
           format: int64
@@ -914,8 +902,7 @@ paths:
           name: read
           required: false
           type: boolean
-        - description: return only inbox messages which are a reply to the message with
-            the given message id
+        - description: return only inbox messages which are a reply to the message with the given message id
           in: query
           name: repliesToMessageId
           required: false
@@ -971,8 +958,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: Returns the number of credit which would be required to send the
-        request message to the requested recipient number
+      description: Returns the number of credit which would be required to send the request message to the requested recipient number
       operationId: analyse-message-credit-cost
       parameters:
         - description: request
@@ -1004,8 +990,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: Returns the message encoding that would be required to send the
-        requested message
+      description: Returns the message encoding that would be required to send the requested message
       operationId: analyse-message-encoding
       parameters:
         - description: request
@@ -1099,8 +1084,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: Returns the number of SMS parts which would be sent when sending
-        the requested message
+      description: Returns the number of SMS parts which would be sent when sending the requested message
       operationId: analyse-number-of-messages
       parameters:
         - description: request
@@ -1317,8 +1301,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: Sends a single message. The <i>recipientNumber</i> and
-        <i>message</i> fields are required. All other fields are optional.
+      description: Sends a single message. The <i>recipientNumber</i> and <i>message</i> fields are required. All other fields are optional.
       parameters:
         - description: request
           in: body
@@ -1334,8 +1317,7 @@ paths:
         "201":
           description: Created
         "400":
-          description: Validation error</br></br>Code and message:<ul><li>2 - Invalid
-            mobile number</li><li>3 - Message cannot be empty</li></ul>
+          description: Validation error</br></br>Code and message:<ul><li>2 - Invalid mobile number</li><li>3 - Message cannot be empty</li></ul>
           schema:
             $ref: "#/definitions/RestErrorDTO"
         "401":
@@ -1353,8 +1335,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: Returns an example of the data to POST to send multiple messages in
-        one transaction.
+      description: Returns an example of the data to POST to send multiple messages in one transaction.
       responses:
         "200":
           description: OK
@@ -1404,9 +1385,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: Send a single message using URL parameters.The
-        <i>recipientNumber</i> and <i>message</i> parameters are required. All
-        other parameters are optional.
+      description: Send a single message using URL parameters.The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional.
       parameters:
         - description: the phone number of the recipient to send to
           in: query
@@ -1453,9 +1432,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: Send a single message using URL parameters.The
-        <i>recipientNumber</i> and <i>message</i> parameters are required. All
-        other parameters are optional.
+      description: Send a single message using URL parameters.The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional.
       parameters:
         - description: the phone number of the recipient to send to
           in: query
@@ -1505,12 +1482,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: "Send a single message using your unique URL without having to
-        authenticate using your email address or REST API token. The token
-        required is the URL Sending token available on the developer setting
-        page. The <i>recipientNumber</i> and <i>message</i> parameters are
-        required. All other parameters are optional. Not that the token required
-        here is "
+      description: "Send a single message using your unique URL without having to authenticate using your email address or REST API token. The token required is the URL Sending token available on the developer setting page. The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional. Not that the token required here is "
       parameters:
         - description: token
           in: path
@@ -1562,12 +1534,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: "Send a single message using your unique URL without having to
-        authenticate using your email address or REST API token. The token
-        required is the URL Sending token available on the developer setting
-        page. The <i>recipientNumber</i> and <i>message</i> parameters are
-        required. All other parameters are optional. Not that the token required
-        here is "
+      description: "Send a single message using your unique URL without having to authenticate using your email address or REST API token. The token required is the URL Sending token available on the developer setting page. The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional. Not that the token required here is "
       parameters:
         - description: token
           in: path
@@ -1781,8 +1748,7 @@ paths:
       consumes:
         - multipart/form-data
       deprecated: false
-      description: Send a single audio voice message to one recipient. Note,
-        Content-Type header must be set to multipart/form-data for this request.
+      description: Send a single audio voice message to one recipient. Note, Content-Type header must be set to multipart/form-data for this request.
       operationId: single-audio
       parameters:
         - description: audio file to play, supports MP3 or WAV format

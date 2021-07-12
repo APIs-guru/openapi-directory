@@ -4,8 +4,7 @@ schemes:
 host: api.citysdk.waag.org
 basePath: /
 info:
-  description: An API for the distribution and annotation of open data, for small
-    cities and big metropolitan areas.
+  description: An API for the distribution and annotation of open data, for small cities and big metropolitan areas.
   title: CitySDK Linked Data
   version: v1
   x-apisguru-categories:
@@ -265,8 +264,7 @@ paths:
       responses:
         "200":
           description: No response was specified
-      summary: Create one or more objects with data on single layer, or add data to
-        existing objects (or a combination thereof)
+      summary: Create one or more objects with data on single layer, or add data to existing objects (or a combination thereof)
       tags:
         - layers
   "/layers/{layer}/objects/{cdk_id}":
@@ -284,8 +282,7 @@ paths:
       responses:
         "200":
           description: No response was specified
-      summary: Return metadata of single layer about single object, e.g. the date the
-        data was added/modified, etc.
+      summary: Return metadata of single layer about single object, e.g. the date the data was added/modified, etc.
       tags:
         - layers
   "/layers/{layer}/owners":

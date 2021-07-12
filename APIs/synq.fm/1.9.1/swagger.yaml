@@ -33,9 +33,7 @@ responses:
 paths:
   /video/create:
     post:
-      description: Create a new video, optionally setting some metadata fields. You
-        may optionally set some of the metadata associated with the video. Only
-        fields inside the "userdata" field can be set.
+      description: Create a new video, optionally setting some metadata fields. You may optionally set some of the metadata associated with the video. Only fields inside the "userdata" field can be set.
       operationId: create
       parameters:
         - in: formData
@@ -59,8 +57,7 @@ paths:
         - video
   /video/details:
     post:
-      description: Return details about a video. You may optionally request that only
-        some of the metadata fields are returned.
+      description: Return details about a video. You may optionally request that only some of the metadata fields are returned.
       operationId: details
       parameters:
         - in: formData
@@ -84,18 +81,14 @@ paths:
         - video
   /video/query:
     post:
-      description: Find videos matching any criteria, by running a JavaScript function
-        over each video object. A detailed tutorial on how to use this
-        functionality is available on the [documentation
-        page](https://www.synq.fm/queries-video-api/).
+      description: Find videos matching any criteria, by running a JavaScript function over each video object. A detailed tutorial on how to use this functionality is available on the [documentation page](https://www.synq.fm/queries-video-api/).
       operationId: query
       parameters:
         - in: formData
           name: api_key
           required: true
           type: string
-        - description: JavaScript code to be run over each video object, to determine what
-            should be returend.
+        - description: JavaScript code to be run over each video object, to determine what should be returend.
           in: formData
           name: filter
           required: true
@@ -104,30 +97,26 @@ paths:
         - application/json
       responses:
         "200":
-          description: An array of arbitrary elements, up to one element for each video
-            object
+          description: An array of arbitrary elements, up to one element for each video object
           schema:
             items:
               type: object
             type: array
         "400":
           $ref: "#/responses/ErrorResponse"
-      summary: Perform a JavaScript query to return video objects matching any desired
-        criteria.
+      summary: Perform a JavaScript query to return video objects matching any desired criteria.
       tags:
         - video
   /video/stream:
     post:
-      description: Returns a stream url that you can stream to from your broadcasting
-        software, and a playback url people can use to watch the stream.
+      description: Returns a stream url that you can stream to from your broadcasting software, and a playback url people can use to watch the stream.
       operationId: stream
       parameters:
         - in: formData
           name: api_key
           required: true
           type: string
-        - description: The ID of the video you want to stream to. The video needs to have
-            been previously created.
+        - description: The ID of the video you want to stream to. The video needs to have been previously created.
           in: formData
           name: video_id
           required: true
@@ -157,8 +146,7 @@ paths:
         - video
   /video/update:
     post:
-      description: Update a video's metadata through JavaScript code. Only fields
-        inside the "userdata" object can be set.
+      description: Update a video's metadata through JavaScript code. Only fields inside the "userdata" object can be set.
       operationId: update
       parameters:
         - in: formData
@@ -187,26 +175,17 @@ paths:
         - video
   /video/upload:
     post:
-      description: >+
-        Return parameters needed for uploading a video file to Amazon
-        Simple Storage Service. See
-        http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html
-        as well as the language-specific code-examples.
-
+      description: |+
+        Return parameters needed for uploading a video file to Amazon Simple Storage Service. See http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-post-example.html as well as the language-specific code-examples.
         #### *Example request*
-
         ```shell
-
         curl -s https://api.synq.fm/v1/video/upload \
           -F api_key=${SYNQ_API_KEY} \
           -F video_id=2d81c30ce62f4dfdb501dbca96c7ae56
         ```
 
-
         #### *Example response*
-
         ```json
-
         {
           "action": "https://synqfm.s3.amazonaws.com/",
           "AWSAccessKeyId": "AKIAIP77Y7MMX3ITZMFA",
@@ -216,18 +195,13 @@ paths:
           "acl": "public-read",
           "key": "projects/6e/63/6e63b752a1854dde885b5cc472edf569/uploads/videos/2d/81/2d81c30ce62f4dfdb501dbca96c7ae56.mp4"
         }
-
         ```
-
 
         To upload the file, you can then make a multipart POST request to the URL in `action`, and for all the other parameters returned, set them as form parameters.
 
-
         Given the parameters above, you would upload a file `test.mp4` using cURL like this:
 
-
         ```shell
-
         curl -s https://synqfm.s3.amazonaws.com/ \
           -F AWSAccessKeyId="AKIAIP77Y7MMX3ITZMFA" \
           -F Content-Type="video/mp4" \
@@ -244,8 +218,7 @@ paths:
           name: api_key
           required: true
           type: string
-        - description: The ID of the video you are going to upload into. The video needs
-            to have been previously created.
+        - description: The ID of the video you are going to upload into. The video needs to have been previously created.
           in: formData
           name: video_id
           required: true
@@ -264,24 +237,20 @@ paths:
         - video
   /video/uploader:
     post:
-      description: Returns an embeddable url, that contains an uploader widget that
-        allows you to easily upload any mp4. Great way to simplify the uploading
-        process for end users.
+      description: Returns an embeddable url, that contains an uploader widget that allows you to easily upload any mp4. Great way to simplify the uploading process for end users.
       operationId: uploader
       parameters:
         - in: formData
           name: api_key
           required: true
           type: string
-        - description: The ID of the video you are going to upload into. The video needs
-            to have been previously created.
+        - description: The ID of the video you are going to upload into. The video needs to have been previously created.
           in: formData
           name: video_id
           required: true
           type: string
         - default: 2 hours
-          description: How long the uploader widget works for. Anything from '30 minutes'
-            to '2 days'.
+          description: How long the uploader widget works for. Anything from '30 minutes' to '2 days'.
           in: formData
           name: timeout
           required: false

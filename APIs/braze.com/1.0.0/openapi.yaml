@@ -3,87 +3,57 @@ servers:
   - url: https://rest.iad-01.braze.com
 info:
   contact: {}
-  description: >-
+  description: |-
     # Braze API Overview
-
 
     Braze provides a high performance REST API to allow you to track users, send messages, export data, and more.
 
-
     A REST API is a way to programmatically transfer information over the web using a predefined schema. Braze has created many different endpoints with specific requirements that will perform various actions and/or return various data. API access is done using HTTPS web requests to your company's REST API endpoint (this will correspond to your Dashboard URL as shown in the table below).
-
 
     Customers using Braze's EU database should use `https://rest.fra-01.braze.eu/`. For more information on REST API endpoints for customers using Braze's EU database see our [EU/US Implementation Differences documentation](https://www.braze.com/docs/developer_guide/eu01_us3_sdk_implementation_differences/overview/).
 
-
     ## Braze Instances
 
-
     Instance    | Dashboard URL   | REST Endpoint
-
     ----------- |---------------- | --------------------
-
     US-01 | `https://dashboard.braze.com` or<br> `https://dashboard-01.braze.com` | `https://rest.iad-01.braze.com`
-
     US-02 | `https://dashboard-02.braze.com` | `https://rest.iad-02.braze.com`
-
     US-03 | `https://dashboard-03.braze.com` | `https://rest.iad-03.braze.com`
-
     US-04 | `https://dashboard-04.braze.com` | `https://rest.iad-04.braze.com`
-
     US-06 | `https://dashboard-06.braze.com` | `https://rest.iad-06.braze.com`
-
     EU-01 | `https://dashboard.braze.eu` or<br> `https://dashboard-01.braze.eu` | `https://rest.fra-01.braze.eu`
-
 
 
     # Using Braze's Postman Collection 
 
-
     If you have a Postman account (MacOS, Windows, and Linux versions can be downloaded from their website located [here](https://www.getpostman.com)), you can go to our Postman documentation and click the orange `Run in Postman` button in the top, right corner. This will allow you to [create an environment](#setting-up-your-postman-environment), as well as edit the available `POST` and `GET` requests to suit your own needs.
-
 
     ## Setting Up Your Postman Environment
 
-
     The Braze Postman Collection uses a templating variable, `{{instance_url}}`, to substitute the REST API URL of your Braze instance into the pre-built requests. Rather than having to manually edit all requests in the Collection, you can set up this variable in your Postman environment. To do so, please follow the steps below:
 
-
     1. Click on the gear icon in the top right corner of the Postman app. 
-
     2. Select "Manage Environments" to open a modal window which displays your active environments.
-
     3. In the bottom right corner of the modal window, click "Add" to create a new environment.
-
     4. Give this environment a name (e.g. "Braze API Requests") and add keys for `instance_url` and `api_key` with values corresponding to [your Braze instance](https://www.braze.com/docs/api/basics/#endpoints) and [Braze REST API Key](https://www.braze.com/docs/api/basics/#app-group-rest-api-keys), as pictured below. 
-
 
     As of April, 2020 Braze has changed how we read App Group API keys. Instead of passing them in the request body or through url parameters, we now read the App Group Rest`api_key` through the HTTP Authorization header. API keys not passed through the HTTP Authorization Header will coninue to work until they have been sunset. 
 
-
     ## Using the Pre-Built Requests from the Collection
-
 
     Once you have configured your environment. You can use any of the pre-built requests in the collection as a template for building new API requests. To start using one of the pre-built requests, simply click on it within the 'Collections' menu on the left side of Postman. This will open the request as a new tab in the main window of the Postman app.
 
-
     In general, there are two types of requests that Braze's API endpoints accept - `GET` and `POST`. Depending on which `HTTP` method the endpoint uses, you'll need to edit the pre-built request differently.
-
 
     ### Edit a POST Request
 
-
     When editing a `POST` request, you'll need to open the request and navigate to the `Body` section in the request editor. For readability, select the `raw` radio button to format the `JSON` request body.
-
 
     ### Edit a GET Request
 
-
     When editing a `GET` request, you will need to edit the parameters passed in the request URL. To edit these easily, select the `Params` button next to the URL bar and edit the key-value pairs in the fields that will appear below the URL bar.
 
-
     ## Send Your Request
-
 
     Once your API request is ready to send, click on the 'Send' button next to the URL bar. The request will be sent and the response data will be populated in a section underneath the request editor. From here, you can view the raw data returned from Braze's API, see the HTTP response code, see how long the request took to process, and view header information.
   title: Braze Endpoints
@@ -98,15 +68,10 @@ info:
       version: 2.x
   x-providerName: braze.com
 tags:
-  - description: Users’ email subscription status can be updated and retrieved via
-      Braze using a RESTful API. You can use the API to set up bi-directional
-      sync between Braze and other email systems or your own database.
+  - description: Users’ email subscription status can be updated and retrieved via Braze using a RESTful API. You can use the API to set up bi-directional sync between Braze and other email systems or your own database.
     name: Email Lists & Addresses
-  - description: >+
-      With this collection of endpoints, you will be able to access and
-      export various levels of details on your users, segments, campaigns, and
-      Canvases. 
-
+  - description: |+
+      With this collection of endpoints, you will be able to access and export various levels of details on your users, segments, campaigns, and Canvases. 
 
       Please be sure to reference the correct Instance when making API requests.
 
@@ -119,96 +84,58 @@ tags:
   - name: Segment
   - name: Session Analytics
   - name: Users
-  - description: >+
-      The Braze messaging API provides you with two distinct options for
-      sending messages to your users. You can provide the message contents and
-      configuration in the API request with the /messages/send and
-      /messages/schedule endpoints. Alternatively, you can manage the details of
-      your message with an API-Triggered Delivery campaign in the dashboard and
-      just control when and to whom it is sent with the campaigns/trigger/send
-      and campaigns/trigger/schedule endpoints. The following sections will
-      detail the request specification for both methods.
-
+  - description: |+
+      The Braze messaging API provides you with two distinct options for sending messages to your users. You can provide the message contents and configuration in the API request with the /messages/send and /messages/schedule endpoints. Alternatively, you can manage the details of your message with an API-Triggered Delivery campaign in the dashboard and just control when and to whom it is sent with the campaigns/trigger/send and campaigns/trigger/schedule endpoints. The following sections will detail the request specification for both methods.
 
       The examples below contain the URL https://rest.iad-01.braze.com, but some customers will need to use a different endpoint URL, for example if you are hosted in Braze’s EU data center or have a dedicated Braze installation. Your Success Manager will inform you if you should use a different endpoint URL.
-
 
       Similarly to other campaigns, you can limit the number of times a particular user can receive a Messaging API campaign by configuring re-eligibility settings in the Braze Dashboard. Braze will not deliver API messages to users that haven’t become re-eligible for the campaign regardless of how many API requests are sent.
 
     name: Messaging
   - name: Schedule Mesages
   - name: Send Messages
-  - description: Use the Subscription Group REST APIs to programmatically manage the
-      subscription groups that you have stored on the Braze dashboard, on the
-      Subscription Group page.
+  - description: Use the Subscription Group REST APIs to programmatically manage the subscription groups that you have stored on the Braze dashboard, on the Subscription Group page.
     name: Subscription Groups
   - name: Email
   - name: SMS
   - name: Templates
-  - description: >-
+  - description: |-
       Content Blocks are an Email Templating feature that allow you to: 
-
       - Create a consistent look and feel to your Email campaigns using Content Blocks as Headers and Footers.
-
       - Distribute the same offer codes through different channels.
-
       - Create pre-defined assets that can be used to build messages with consistent information and assets.
-
       - Copy entire message bodies to other messages.
-
 
       You can edit Content Blocks in the Templates & Media section of the Braze UI, or here, via API.
     name: Content Blocks
   - name: Email Templates
-  - description: >+
-      The User API allows you to track information on your users by
-      logging data about your users that comes from outside your mobile app. You
-      can also use this API to delete users for testing or other purposes.
-
+  - description: |+
+      The User API allows you to track information on your users by logging data about your users that comes from outside your mobile app. You can also use this API to delete users for testing or other purposes.
 
       All API endpoints have a data payload limit of 4MB. Attempts to post more data than 4MB will fail with an HTTP 413 Request Entity Too Large.
-
 
       The examples below contain the URL https://rest.iad-01.braze.com, but some customers will need to use a different endpoint URL, for example if you are hosted in Braze’s EU data center or have a dedicated Braze installation. Your Success Manager will inform you if you should use a different endpoint URL.
 
     name: User Data
-  - description: The External ID Migration API allows you to rename existing
-      external IDs (creating a new primary ID and deprecating the existing ID)
-      and remove deprecated IDs post-migration. <br><br> We've architected this
-      solution to allow multiple External IDs in order to support a migration
-      period whereby older versions of your apps still in the wild that use the
-      previous External ID naming schema don’t break. We highly recommend
-      removing deprecated External IDs once your old naming schema is no longer
-      in use.
+  - description: The External ID Migration API allows you to rename existing external IDs (creating a new primary ID and deprecating the existing ID) and remove deprecated IDs post-migration. <br><br> We've architected this solution to allow multiple External IDs in order to support a migration period whereby older versions of your apps still in the wild that use the previous External ID naming schema don’t break. We highly recommend removing deprecated External IDs once your old naming schema is no longer in use.
     name: External ID Migration
 paths:
   /campaigns/data_series:
     get:
-      description: >-
-        This endpoint allows you to retrieve a daily series of various
-        stats for a campaign over time. Data returned includes how many messages
-        were sent, opened, clicked, converted, etc., broken down by message
-        channel. 
-
+      description: |-
+        This endpoint allows you to retrieve a daily series of various stats for a campaign over time. Data returned includes how many messages were sent, opened, clicked, converted, etc., broken down by message channel. 
 
         ### Components Used
-
         -[Campaign Identifier](https://www.braze.com/docs/api/identifier_types/)
-
 
 
         ### Responses
 
-
         #### Multi-Channel Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
             "message": (required, string) the status of the export, returns 'success' when completed without errors,
             "data" : [
@@ -289,19 +216,13 @@ paths:
             ],
             ...
         }
-
         ```
-
 
         #### Multivariate Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
             "data" : [
                 {
@@ -370,9 +291,7 @@ paths:
                  }],
                  ...
         }
-
         ```
-
 
         Possible message types are `email`, `in_app_message`, `webhook`, `android_push`, `apple_push`, `kindle_push`, `web_push`, `windows_phone8_push`, and `windows_universal_push`. All push message types will have the same statistics shown for `android_push` above.
       operationId: campaignAnalytics
@@ -386,9 +305,8 @@ paths:
           schema:
             example: "{{campaign_identifier}}"
             type: string
-        - description: >-
+        - description: |-
             (Required) Integer
-
 
             Max number of days before ending_at to include in the returned series - must be between 1 and 100 inclusive
           in: query
@@ -396,9 +314,8 @@ paths:
           schema:
             example: "7"
             type: string
-        - description: >-
+        - description: |-
             (Optional) DateTime (ISO 8601 string)
-
 
             Date on which the data series should end - defaults to time of the request
           in: query
@@ -415,29 +332,20 @@ paths:
         - Campaign
   /campaigns/details:
     get:
-      description: >-
-        This endpoint allows you to retrieve relevant information on a
-        specified campaign, which can be identified by the `campaign_id`. 
-
+      description: |-
+        This endpoint allows you to retrieve relevant information on a specified campaign, which can be identified by the `campaign_id`. 
 
         > The campaign_id for API campaigns can be found on the Developer Console page and the campaign details page within your dashboard or you can use the Campaign List Endpoint.
 
-
         ### Components Used
-
         - [Campaign Identifier](https://www.braze.com/docs/api/identifier_types/)
-
 
 
         ### Campaign Details Endpoint API Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
             "message": (required, string) the status of the export, returns 'success' when completed without errors,
             "created_at" : (string) date created as ISO 8601 date,
@@ -460,35 +368,25 @@ paths:
             },
             "conversion_behaviors": (array) conversion event behaviors assigned to the campaign (see below)
         }
-
         ```
-
 
         #### Messages
 
-
         The `messages` response will contain information about each message. Example message responses for channels are below:
-
 
         ##### Push Channels
 
-
         ```json
-
         {
             "channel": (string) description of the channel, such as "ios_push" or "android_push"
             "alert": (string) alert body text,
             "extras": (hash) any key value pairs provided
         }
-
         ```
-
 
         ##### Email Channel
 
-
         ```json
-
         {
             "channel": "email",
             "subject": (string) subject,
@@ -498,29 +396,21 @@ paths:
             "title": (string) name of the email,
             "extras": (hash) any key value pairs provided
         }
-
         ```
-
 
         ##### Content Card Channel
 
-
         ```json
-
         {
             "channel": "content_cards",
             "name": (string) name of variant,
             "extras": (hash) any key value pairs provided; only present if at least one key-value pair has been set
         }
-
         ```
-
 
         ##### Webhook Channel
 
-
         ```json
-
         {
             "channel": "webhook",
             "url": (string) url for webhook,
@@ -529,136 +419,97 @@ paths:
             "headers": (hash) specified request headers,
             "method": (string) HTTP method (e.g., "POST" or "GET"),
         }
-
         ```
-
 
         ##### SMS Channel
 
-
         ```json
-
         {
           "channel": "sms",
           "body": (string) payload body,
           "from": (string) list of numbers associated with the subscription group,
           "subscription_group_id": (string) API id of the subscription group targeted in the SMS message
         }
-
         ```
-
 
         ##### Control Messages
 
-
         ```json
-
         {
             "channel": (string) description of the channel that the control is for,
             "type": "control"
         }
-
         ```
-
 
         #### Conversion Behaviors
 
-
         The `conversion_behaviors` array will contain information about each conversion event behavior set for the campaign. These behaviors are in order as set by the campaign. For example, Conversion Event A will be the first item in the array, Conversion Event B will be second, etc. Example conversion event behavior responses for are below:
-
 
         ##### Clicks Email
 
-
         ```json
-
         {
             "type": "Clicks Email",
             "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours
         }
-
         ```
-
 
         ##### Opens Email
 
-
         ```json
-
         {
             "type": "Opens Email",
             "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours
         }
-
         ```
-
 
         ##### Makes Purchase (any purchase)
 
-
         ```json
-
         {
             "type": "Makes Any Purchase",
             "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours
         }
-
         ```
-
 
         ##### Makes Purchase (specific product)
 
-
         ```json
-
         {
             "type": "Makes Specific Purchase",
             "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
             "product": (string) name of the product, i.e. - "Feline Body Armor"
         }
-
         ```
-
 
         ##### Performs Custom Event
 
-
         ```json
-
         {
             "type": "Performs Custom Event",
             "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
             "custom_event_name": (string) name of the event, i.e. - "Used Feline Body Armor"
         }
-
         ```
-
 
         ##### Upgrades App
 
-
         ```json
-
         {
             "type": "Upgrades App",
             "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
             "app_ids": (array|null) array of app ids, i.e. - ["12345", "67890"], or `null` if "Track sessions for any app" is selected in the UI
         }
-
         ```
-
 
         ##### Uses App
 
-
         ```json
-
         {
             "type": "Starts Session",
             "window": (integer) number of seconds during which the user can convert on this event, i.e. - 86400, which is 24 hours,
             "app_ids": (array|null) array of app ids, i.e. - ["12345", "67890"], or `null` if "Track sessions for any app" is selected in the UI
         }
-
         ```
       operationId: campaignDetails
       parameters:
@@ -680,23 +531,14 @@ paths:
         - Campaign
   /campaigns/list:
     get:
-      description: >-
-        This endpoint allows you to export a list of campaigns, each of
-        which will include its name, Campaign API Identifier, whether it is an
-        API Campaign, and Tags associated with the campaign. The campaigns are
-        returned in groups of 100 sorted by time of creation (oldest to newest
-        by default).
-
+      description: |-
+        This endpoint allows you to export a list of campaigns, each of which will include its name, Campaign API Identifier, whether it is an API Campaign, and Tags associated with the campaign. The campaigns are returned in groups of 100 sorted by time of creation (oldest to newest by default).
 
         ## Campaign List Endpoint API Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
             "message": (required, string) the status of the export, returns 'success' when completed without errors,
             "campaigns" : [
@@ -710,13 +552,11 @@ paths:
                 ...
             ]
         }
-
         ```
       operationId: campaignList
       parameters:
-        - description: >-
+        - description: |-
             (Optional) Integer
-
 
             The page of campaigns to return, defaults to 0 (returns the first set of up to 100)
           in: query
@@ -733,9 +573,8 @@ paths:
           schema:
             example: "false"
             type: string
-        - description: >-
+        - description: |-
             (Optional) String
-
 
             Pass in the value `desc` to sort by creation time from newest to oldest. Pass in `asc` to sort from oldest to newest. If sort_direction is not included, the default order is oldest to newest.
           in: query
@@ -743,9 +582,8 @@ paths:
           schema:
             example: desc
             type: string
-        - description: >-
+        - description: |-
             (Optional) DateTime (ISO 8601 string)
-
 
             Filters the results and only returns campaigns that were edited greater than the time provided till now. 
           in: query
@@ -762,23 +600,16 @@ paths:
         - Campaign
   /canvas/data_series:
     get:
-      description: >-
+      description: |-
         This endpoint allows you to export time series data for a Canvas.
 
-
         ### Components Used
-
         - [Canvas Identifier](https://www.braze.com/docs/api/identifier_types/)
 
-
         ## Response
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
           "data": {
             "name": (string) Canvas name,
@@ -828,7 +659,6 @@ paths:
           },
           "message": (required, string) the status of the export, returns 'success' when completed without errors
         }
-
         ```
       operationId: canvasDataSeriesAnalytics
       parameters:
@@ -841,9 +671,8 @@ paths:
           schema:
             example: "{{canvas_id}}"
             type: string
-        - description: >-
+        - description: |-
             (Required) DateTime (ISO 8601 string)
-
 
             Date on which the data export should end - defaults to time of the request
           in: query
@@ -851,9 +680,8 @@ paths:
           schema:
             example: 2018-05-30T23:59:59-5:00
             type: string
-        - description: >-
+        - description: |-
             (Optional) DateTime (ISO 8601 string) 
-
 
             Date on which the data export should begin (either length or starting_at are required)
           in: query
@@ -861,9 +689,8 @@ paths:
           schema:
             example: 2018-05-28T23:59:59-5:00
             type: string
-        - description: >-
+        - description: |-
             (Optional) DateTime (ISO 8601 string)
-
 
             Max number of days before ending_at to include in the returned series - must be between 1 and 14 inclusive (either length or starting_at required)
           in: query
@@ -889,9 +716,8 @@ paths:
           schema:
             example: "true"
             type: string
-        - description: >-
+        - description: |-
             (Optional) Boolean
-
 
             Whether or not to include step stats for deleted steps (defaults to false)
           in: query
@@ -908,25 +734,17 @@ paths:
         - Canvas
   /canvas/data_summary:
     get:
-      description: >-
-        This endpoint allows you to export rollups of time series data for
-        a Canvas, providing a concise summary of a Canvas' results.
-
+      description: |-
+        This endpoint allows you to export rollups of time series data for a Canvas, providing a concise summary of a Canvas' results.
 
         ### Components Used
-
         - [Canvas Identifier](https://www.braze.com/docs/api/identifier_types/)
-
 
         ## Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
           "data": {
             "name": (string) Canvas name,
@@ -969,7 +787,6 @@ paths:
           },
           "message": (required, string) the status of the export, returns 'success' when completed without errors
         }
-
         ```
       operationId: canvasDataAnalyticsSummary
       parameters:
@@ -982,9 +799,8 @@ paths:
           schema:
             example: "{{canvas_id}}"
             type: string
-        - description: >-
+        - description: |-
             (Required) DateTime (ISO 8601 string)
-
 
             Date on which the data export should end - defaults to time of the request
           in: query
@@ -992,9 +808,8 @@ paths:
           schema:
             example: 2018-05-30T23:59:59-5:00
             type: string
-        - description: >-
+        - description: |-
             (Optional) DateTime (ISO 8601 string)
-
 
             Date on which the data export should begin (either length or starting_at required)
           in: query
@@ -1002,9 +817,8 @@ paths:
           schema:
             example: 2018-05-28T23:59:59-5:00
             type: string
-        - description: >-
+        - description: |-
             (Optional) Integer
-
 
             Max number of days before ending_at to include in the returned series - must be between 1 and 14 inclusive (either length or starting_at required)
           in: query
@@ -1030,9 +844,8 @@ paths:
           schema:
             example: "true"
             type: string
-        - description: >-
+        - description: |-
             (Optional) Boolean
-
 
             Whether or not to include step stats for deleted steps (defaults to false)
           in: query
@@ -1049,25 +862,17 @@ paths:
         - Canvas
   /canvas/details:
     get:
-      description: >-
-        This endpoint allows you to export metadata about a Canvas, such as
-        its name, when it was created, its current status, and more.
-
+      description: |-
+        This endpoint allows you to export metadata about a Canvas, such as its name, when it was created, its current status, and more.
 
         ### Components Used
-
         - [Canvas Identifier](https://www.braze.com/docs/api/identifier_types/)
-
 
         ## Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
           "created_at": (string) date created as ISO 8601 date,
           "updated_at": (string) date updated as ISO 8601 date,
@@ -1106,7 +911,6 @@ paths:
           ],
           "message": (required, string) the status of the export, returns 'success' when completed without errors
         }
-
         ```
       operationId: canvasDetails
       parameters:
@@ -1128,26 +932,17 @@ paths:
         - Canvas
   /canvas/list:
     get:
-      description: >-
-        This endpoint allows you to export a list of Canvases, including
-        the name, Canvas API Identifier and associated Tags. The Canvases are
-        returned in groups of 100 sorted by time of creation (oldest to newest
-        by default).
-
+      description: |-
+        This endpoint allows you to export a list of Canvases, including the name, Canvas API Identifier and associated Tags. The Canvases are returned in groups of 100 sorted by time of creation (oldest to newest by default).
 
         > Archived Canvases will not be included in the API response unless the `include_archived` field is specified. Canvases that are stopped but not archived, however, will be returned by default.
 
 
-
         ## Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
           "canvases" : [
           	{
@@ -1160,13 +955,11 @@ paths:
           ],
           "message": (required, string) the status of the export, returns 'success' when completed without errors
         }
-
         ```
       operationId: canvasList
       parameters:
-        - description: >-
+        - description: |-
             (Optional) Integer
-
 
             The page of Canvases to return, defaults to `0` (returns the first set of up to 100)
           in: query
@@ -1183,9 +976,8 @@ paths:
           schema:
             example: "false"
             type: string
-        - description: >-
+        - description: |-
             (Optional) String
-
 
             Pass in the value `desc` to sort by creation time from newest to oldest. Pass in `asc` to sort from oldest to newest. If sort_direction is not included, the default order is oldest to newest.
           in: query
@@ -1193,9 +985,8 @@ paths:
           schema:
             example: desc
             type: string
-        - description: >-
+        - description: |-
             (Optional) DateTime (ISO 8601 string)
-
 
             Filters the results and only returns Canvases that were edited greater than the time provided till now.
           in: query
@@ -1212,50 +1003,29 @@ paths:
         - Canvas
   /canvas/trigger/schedule/create:
     post:
-      description: >-
-        Use this endpoint to trigger API Triggered Canvases, which are
-        created on the Dashboard and initiated via the API. You can pass in
-        `canvas_entry_properties` that will be templated into the messages sent
-        by the first steps of the Canvas.
-
+      description: |-
+        Use this endpoint to trigger API Triggered Canvases, which are created on the Dashboard and initiated via the API. You can pass in `canvas_entry_properties` that will be templated into the messages sent by the first steps of the Canvas.
 
         This endpoint allows you to schedule Canvas messages (up to 90 days in advance) via API Triggered delivery, allowing you to decide what action should trigger the message to be sent. Please note that to send messages with this endpoint, you must have a Canvas ID, created when you build a Canvas.
 
-
         ### Request Parameters
 
-
         | Parameter | Required | Data Type | Description |
-
         | --------- | ---------| --------- | ----------- |
-
         |`canvas_id`|Required|String| See canvas identifier|
-
         |`send_id` | Optional | String | See send identifier |
-
         |`recipients` | Optional | Array of recipient objects | See recipients object |
-
         |`audience` | Optional | Connected audience object | See connected audience |
-
         |`broadcast` | Optional | Boolean | See broadcast -- defaults to false on 8/31/17, must be set to true if "recipients" object is omitted |
-
         | `trigger_properties` | Optional | Object | Personalization key value pairs for all users in this send; see trigger properties |
-
         | `schedule` | Required | Schedule object | See schedule object |
 
-
         ## Request Components
-
         - [Canvas Identifier](https://www.braze.com/docs/api/identifier_types/)
-
         - [Recipients](https://www.braze.com/docs/api/objects_filters/recipient_object/)
-
         - [Connected Audience](https://www.braze.com/docs/api/objects_filters/connected_audience/)
-
         - [Broadcast](https://www.braze.com/docs/api/parameters/#broadcast)
-
         - [Trigger Properties](https://www.braze.com/docs/api/objects_filters/trigger_properties_object/)
-
         - [Schedule Object](https://www.braze.com/docs/api/objects_filters/schedule_object/)
       operationId: scheduleApiTriggeredCanvases
       parameters: []
@@ -1369,18 +1139,13 @@ paths:
         - Schedule Mesages
   /content_blocks/info:
     get:
-      description: >-
+      description: |-
         This endpoint will call information for an existing Content Block.
 
-
         ### Successful Response Properties
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR_REST_API_KEY
-
         {
           "content_block_id": "string",
           "name": "string",
@@ -1393,27 +1158,20 @@ paths:
           "inclusion_count" : "integer",
           "message": "success"
         }
-
         ```
 
-
         ### Possible Errors
-
         - `Content Block ID cannot be blank.` - A Content Block has not been listed or is not encapsulated in quotes.
-
 
         - `Content Block ID is invalid for this App Group.` - This Content Block does not exist or is in a different company account or app group.
 
-
         - `Content Block has been deleted - content not available.` - This Content Block, though it may have existed earlier, has been deleted.
-
 
         - `Include Inclusion Data - error` - One of true or false is not provided.
       operationId: seeContentBlockInformation
       parameters:
-        - description: >-
+        - description: |-
             (Required) String
-
 
             The Content Block ID. This can be found by either listing Content Block information or going to the Developer Console, then API Settings, then scrolling to the bottom and searching for your Content Block API Identifier.
           in: query
@@ -1421,9 +1179,8 @@ paths:
           schema:
             example: "{{content_block_id}}"
             type: string
-        - description: >-
+        - description: |-
             (Optional) Boolean
-
 
             When set to ‘true’, the API returns back the Message Variation API ID of Campaigns and Canvases where this content block is included, to be used in subsequent calls. The results exclude archived or deleted Campaigns or Canvases.
           in: query
@@ -1440,18 +1197,13 @@ paths:
         - Content Blocks
   /content_blocks/list:
     get:
-      description: >-
+      description: |-
         This endpoint will list existing Content Block information.
 
-
         ### Successful Response Properties
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR_REST_API_KEY
-
         {
           "count": "integer",
           "content_blocks": [
@@ -1467,47 +1219,30 @@ paths:
             }
           ]
         }
-
         ```
 
-
         ### Possible Errors
-
         - `Modified after time is invalid.`
-
         The date you have provided is not a valid or parsable date. Please reformat this value as a string in ISO 8601 format (`yyyy-mm-ddThh:mm:ss.ffffff`).
-
 
         - `Modified before time is invalid.`
-
         The date you have provided is not a valid or parsable date. Please reformat this value as a string in ISO 8601 format (`yyyy-mm-ddThh:mm:ss.ffffff`).
-
 
         - `Modified after time must be earlier than or the same as modified before time.`
 
-
         - `Content Block number limit is invalid.`
-
         The `limit` parameter must be an integer (positive number) greater than 0.
-
 
         - `Content Block number limit must be greater than 0.`
-
         The `limit` parameter must be an integer (positive number) greater than 0.
-
 
         - `Content Block number limit exceeds maximum of 1000.`
-
         The `limit` parameter must be an integer (positive number) greater than 0.
 
-
         - `Offset is invalid.`
-
         The `offset` parameter must be an integer (positive number) greater than 0.
 
-
         - `Offset must be greater than 0.`
-
         The `offset` parameter must be an integer (positive number) greater than 0.
       operationId: listAvailableContentBlocks
       parameters:
@@ -1529,9 +1264,8 @@ paths:
           schema:
             example: 2020-02-01T01:01:01.000000
             type: string
-        - description: >-
+        - description: |-
             (Optional) Positive Number
-
 
             Maximum number of content blocks to retrieve, default to 100 if not provided, maximum acceptable value is 1000.
           in: query
@@ -1539,9 +1273,8 @@ paths:
           schema:
             example: "100"
             type: string
-        - description: >-
+        - description: |-
             (Optional) Positive Number
-
 
             Number of content blocks to skip before returning rest of the templates that fit the search criteria.
           in: query
@@ -1558,26 +1291,18 @@ paths:
         - Content Blocks
   /email/hard_bounces:
     get:
-      description: >-
-        This endpoint allows you to pull a list of email addresses that
-        have “hard bounced” your email messages within a certain time frame.
-
+      description: |-
+        This endpoint allows you to pull a list of email addresses that have “hard bounced” your email messages within a certain time frame.
 
         > You must provide an `end_date`, as well as either an `email` or a `start_date`.<br><br>If your date range has more than `limit` number of hard bounces, you will need to make multiple API calls, each time increasing the `offset` until a call returns either fewer than `limit` or zero results.
 
-
         ## Response
-
 
         Entries are listed in descending order.
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
           "emails": [
             {
@@ -1595,16 +1320,13 @@ paths:
           ],
           "message": "success"
         }
-
         ```
       operationId: queryHardBouncedEmails
       parameters:
-        - description: >
+        - description: |
             (Optional*) String in YYYY-MM-DD format 
 
-
             Start date of the range to retrieve hard bounces, must be earlier than `end_date`. This is treated as midnight in UTC time by the API.
-
 
             *You must provide either an `email` or a `start_date`, and an `end_date`.
           in: query
@@ -1612,12 +1334,10 @@ paths:
           schema:
             example: 2019-01-01
             type: string
-        - description: >-
+        - description: |-
             (Optional*) String in YYYY-MM-DD format
 
-
             String in YYYY-MM-DD format. End date of the range to retrieve hard bounces. This is treated as midnight in UTC time by the API.
-
 
             *You must provide either an `email` or a `start_date`, and an `end_date`.
           in: query
@@ -1625,9 +1345,8 @@ paths:
           schema:
             example: 2019-02-01
             type: string
-        - description: >-
+        - description: |-
             (Optional) Integer
-
 
             Optional field to limit the number of results returned. Defaults to 100, maximum is 500.
           in: query
@@ -1644,12 +1363,10 @@ paths:
           schema:
             example: "1"
             type: string
-        - description: >-
+        - description: |-
             (Optional*) String
 
-
             If provided, we will return whether or not the user has hard bounced.
-
 
             *You must provide either an `email` or a `start_date`, and an `end_date`.
           in: query
@@ -1665,19 +1382,14 @@ paths:
         - Email Lists & Addresses
   /email/unsubscribes:
     get:
-      description: >-
-        Use the /email/unsubscribes endpoint to return emails that have
-        unsubscribed during the time period from `start_date` to `end_date`. You
-        can use this endpoint to set up a bi-directional sync between Braze and
-        other email systems or your own database.
-
+      description: |-
+        Use the /email/unsubscribes endpoint to return emails that have unsubscribed during the time period from `start_date` to `end_date`. You can use this endpoint to set up a bi-directional sync between Braze and other email systems or your own database.
 
         > You must provide either an email or a start_date and an end_date. <br><br>If your date range has more than `limit` number of unsubscribes, you will need to make multiple API calls, each time increasing the `offset` until a call returns either fewer than `limit` or zero results.
       operationId: queryListOfUnsubscribedEmailAddresses
       parameters:
-        - description: >-
+        - description: |-
             (Optional*) String in YYYY-MM-DD format
-
 
             Start date of the range to retrieve unsubscribes, must be earlier than end_date. This is treated as midnight in UTC time by the API.
           in: query
@@ -1685,9 +1397,8 @@ paths:
           schema:
             example: 2020-01-01
             type: string
-        - description: >-
+        - description: |-
             (Optional*)  String in YYYY-MM-DD format
-
 
             End date of the range to retrieve unsubscribes. This is treated as midnight in UTC time by the API.
           in: query
@@ -1695,9 +1406,8 @@ paths:
           schema:
             example: 2020-02-01
             type: string
-        - description: >-
+        - description: |-
             (Optional) Integer
-
 
             Optional field to limit the number of results returned. Limit must be greater than 1. Defaults to 100, maximum is 500.
           in: query
@@ -1714,9 +1424,8 @@ paths:
           schema:
             example: "1"
             type: string
-        - description: >-
+        - description: |-
             (Optional) String
-
 
             Pass in the value `asc` to sort unsubscribes from oldest to newest. Pass in `desc` to sort from newest to oldest. If sort_direction is not included, the default order is newest to oldest.
           in: query
@@ -1741,26 +1450,18 @@ paths:
         - Email Lists & Addresses
   /events/data_series:
     get:
-      description: >-
-        This endpoint allows you to retrieve a series of the number of
-        occurrences of a custom event in your app over a designated time period.
-
+      description: |-
+        This endpoint allows you to retrieve a series of the number of occurrences of a custom event in your app over a designated time period.
 
         ### Components Used
-
         -[Segment Identifier](https://www.braze.com/docs/api/identifier_types/)
-
 
 
         ## Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
             "message": (required, string) the status of the export, returns 'success' when completed without errors,
             "data" : [
@@ -1771,25 +1472,16 @@ paths:
                 ...
             ]
         }
-
         ```
 
-
         ### Fatal Error Response Codes
-
         The following status codes and associated error messages will be returned if your request encounters a fatal error. Any of these error codes indicate that no data will be processed.
 
-
         | Error Code       | Reason / Cause                                                   |
-
         | ---------------- | ---------------------------------------------------------------- |
-
         | 400 Bad Request  | Bad Syntax                                                       |
-
         | 401 Unauthorized | Unknown or missing REST API Key                                  |
-
         | 429 Rate Limited | Over rate limit                                                  |
-
         | 5XX              | Internal server error, you should retry with exponential backoff |
       operationId: customEventsAnalytics
       parameters:
@@ -1802,9 +1494,8 @@ paths:
           schema:
             example: event_name
             type: string
-        - description: >-
+        - description: |-
             (Required) Integer
-
 
             Max number of units (days or hours) before ending_at to include in the returned series - must be between 1 and 100 inclusive
           in: query
@@ -1812,9 +1503,8 @@ paths:
           schema:
             example: "24"
             type: string
-        - description: >-
+        - description: |-
             (Optional) String
-
 
             Unit of time between data points - can be "day" or "hour" (defaults to "day")
           in: query
@@ -1822,9 +1512,8 @@ paths:
           schema:
             example: hour
             type: string
-        - description: >-
+        - description: |-
             (Optional) DateTime (ISO 8601 string)
-
 
             Point in time when the data series should end - defaults to time of the request
           in: query
@@ -1832,9 +1521,8 @@ paths:
           schema:
             example: 2014-12-10T23:59:59-05:00
             type: string
-        - description: >-
+        - description: |-
             (Optional) String
-
 
             App API identifier retrieved from the Developer Console to limit analytics to a specific app
           in: query
@@ -1842,9 +1530,8 @@ paths:
           schema:
             example: "{{app_identifier}}"
             type: string
-        - description: >-
+        - description: |-
             (Optional) String
-
 
             Segment API identifier indicating the analytics enabled segment for which event analytics should be returned
           in: query
@@ -1861,22 +1548,15 @@ paths:
         - Custom Events
   /events/list:
     get:
-      description: >-
-        This endpoint allows you to export a list of custom events that
-        have been recorded for your app. The event names are returned in groups
-        of 250, sorted alphabetically.
-
+      description: |-
+        This endpoint allows you to export a list of custom events that have been recorded for your app. The event names are returned in groups of 250, sorted alphabetically.
 
 
         ## Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
             "message": (required, string) the status of the export, returns 'success' when completed without errors,
             "events" : [
@@ -1886,32 +1566,22 @@ paths:
                 ...
             ]
         }
-
         ```
-
 
         ### Fatal Error Response Codes
 
-
         The following status codes and associated error messages will be returned if your request encounters a fatal error. Any of these error codes indicate that no data will be processed.
 
-
         | Error Code       | Reason / Cause                                                   |
-
         | ---------------- | ---------------------------------------------------------------- |
-
         | 400 Bad Request  | Bad Syntax                                                       |
-
         | 401 Unauthorized | Unknown or missing REST API Key                                  |
-
         | 429 Rate Limited | Over rate limit                                                  |
-
         | 5XX              | Internal server error, you should retry with exponential backoff |
       operationId: customEventsList
       parameters:
-        - description: >-
+        - description: |-
             (Optional) Integer
-
 
             The page of event names to return, defaults to 0 (returns the first set of up to 250)
           in: query
@@ -1928,27 +1598,18 @@ paths:
         - Custom Events
   /feed/data_series:
     get:
-      description: >-
-        This endpoint allows you to retrieve a daily series of engagement
-        stats for a card over time.
-
+      description: |-
+        This endpoint allows you to retrieve a daily series of engagement stats for a card over time.
 
         ### Components Used
-
         - [Card ID](https://www.braze.com/docs/api/identifier_types/)
-
         - [News Feed List](https://www.braze.com/docs/api/endpoints/export/news_feed/get_news_feed_cards/)
-
 
         ## Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
             "message": (required, string) the status of the export, returns 'success' when completed without errors,
             "data" : [
@@ -1962,7 +1623,6 @@ paths:
                 ...
             ]
         }
-
         ```
       operationId: newsFeedCardAnalytics
       parameters:
@@ -1975,9 +1635,8 @@ paths:
           schema:
             example: "{{card_identifier}}"
             type: string
-        - description: >-
+        - description: |-
             (Required) Integer
-
 
             Max number of units (days or hours) before ending_at to include in the returned series - must be between 1 and 100 inclusive
           in: query
@@ -1985,9 +1644,8 @@ paths:
           schema:
             example: "14"
             type: string
-        - description: >-
+        - description: |-
             (Optional) String
-
 
             Unit of time between data points - can be "day" or "hour" (defaults to "day")
           in: query
@@ -1995,9 +1653,8 @@ paths:
           schema:
             example: day
             type: string
-        - description: >-
+        - description: |-
             (Optional) DateTime (ISO 8601 string)
-
 
             Date on which the data series should end - defaults to time of the request
           in: query
@@ -2014,28 +1671,19 @@ paths:
         - News Feed
   /feed/details:
     get:
-      description: >-
-        This endpoint allows you to retrieve relevant information on the
-        card, which can be identified by the `card_id`.
-
+      description: |-
+        This endpoint allows you to retrieve relevant information on the card, which can be identified by the `card_id`.
 
         ### Components Used
-
         - [Card ID](https://www.braze.com/docs/api/identifier_types/)
-
         - [News Feed List](https://www.braze.com/docs/api/endpoints/export/news_feed/get_news_feed_cards/)
-
 
 
         ## Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
             "message": (required, string) The status of the export, returns 'success' when completed without errors,
             "created_at" : (string) Date created as ISO 8601 date,
@@ -2051,7 +1699,6 @@ paths:
             "archived": (boolean) whether this Card is archived,
             "draft": (boolean) whether this Card is a draft,
         }
-
         ```
       operationId: newsFeedCardsDetails
       parameters:
@@ -2073,23 +1720,15 @@ paths:
         - News Feed
   /feed/list:
     get:
-      description: >-
-        This endpoint allows you to export a list of News Feed cards, each
-        of which will include its name and Card API Identifier. The cards are
-        returned in groups of 100 sorted by time of creation (oldest to newest
-        by default).
-
+      description: |-
+        This endpoint allows you to export a list of News Feed cards, each of which will include its name and Card API Identifier. The cards are returned in groups of 100 sorted by time of creation (oldest to newest by default).
 
 
         ## Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
             "message": (required, string) the status of the export, returns 'success' when completed without errors,
             "cards" : [
@@ -2102,13 +1741,11 @@ paths:
                 ...
             ]
         }
-
         ```
       operationId: newsFeedCardsList
       parameters:
-        - description: >-
+        - description: |-
             (Optional) Integer
-
 
             The page of cards to return, defaults to 0 (returns the first set of up to 100)
           in: query
@@ -2125,9 +1762,8 @@ paths:
           schema:
             example: "true"
             type: string
-        - description: >-
+        - description: |-
             (Optional) String
-
 
             Pass in the value `desc` to sort by creation time from newest to oldest. Pass in `asc` to sort from oldest to newest. If sort_direction is not included, the default order is oldest to newest.
           in: query
@@ -2144,21 +1780,15 @@ paths:
         - News Feed
   /kpi/dau/data_series:
     get:
-      description: >-
-        This endpoint allows you to retrieve a daily series of the total
-        number of unique active users on each date.
-
+      description: |-
+        This endpoint allows you to retrieve a daily series of the total number of unique active users on each date.
 
 
         ## Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
             "message": (required, string) the status of the export, returns 'success' when completed without errors,
             "data" : [
@@ -2169,13 +1799,11 @@ paths:
                 ...
             ]
         }
-
         ```
       operationId: dailyActiveUsersByDate
       parameters:
-        - description: >-
+        - description: |-
             (Required) Integer
-
 
             Max number of days before ending_at to include in the returned series - must be between 1 and 100 inclusive
           in: query
@@ -2183,9 +1811,8 @@ paths:
           schema:
             example: "10"
             type: string
-        - description: >-
+        - description: |-
             (Optional) DateTime (ISO 8601 string)
-
 
             Point in time when the data series should end - defaults to time of the request
           in: query
@@ -2193,9 +1820,8 @@ paths:
           schema:
             example: 2018-06-28T23:59:59-5:00
             type: string
-        - description: >-
+        - description: |-
             (Optional) String
-
 
             App API identifier; if excluded, results for all apps in app group will be returned
           in: query
@@ -2212,20 +1838,14 @@ paths:
         - KPI
   /kpi/mau/data_series:
     get:
-      description: >-
-        This endpoint allows you to retrieve a daily series of the total
-        number of unique active users over a 30-day rolling window.
-
+      description: |-
+        This endpoint allows you to retrieve a daily series of the total number of unique active users over a 30-day rolling window.
 
         ## Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
             "message": (required, string) the status of the export, returns 'success' when completed without errors,
             "data" : [
@@ -2236,13 +1856,11 @@ paths:
                 ...
             ]
         }
-
         ```
       operationId: monthlyActiveUsersForLast30Days
       parameters:
-        - description: >-
+        - description: |-
             (Required) Integer
-
 
             Max number of days before ending_at to include in the returned series - must be between 1 and 100 inclusive
           in: query
@@ -2250,9 +1868,8 @@ paths:
           schema:
             example: "7"
             type: string
-        - description: >-
+        - description: |-
             (Optional) DateTime (ISO 8601 string)
-
 
             Point in time when the data series should end - defaults to time of the request
           in: query
@@ -2260,9 +1877,8 @@ paths:
           schema:
             example: 2018-06-28T23:59:59-05:00
             type: string
-        - description: >-
+        - description: |-
             (Optional) String
-
 
             App API identifier; if excluded, results for all apps in app group will be returned
           in: query
@@ -2279,21 +1895,15 @@ paths:
         - KPI
   /kpi/new_users/data_series:
     get:
-      description: >-
-        This endpoint allows you to retrieve a daily series of the total
-        number of new users on each date.
-
+      description: |-
+        This endpoint allows you to retrieve a daily series of the total number of new users on each date.
 
 
         ## Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
             "message": (required, string) the status of the export, returns 'success' when completed without errors,
             "data" : [
@@ -2304,13 +1914,11 @@ paths:
                 ...
             ]
         }
-
         ```
       operationId: dailyNewUsersByDate
       parameters:
-        - description: >-
+        - description: |-
             (Required) Integer
-
 
             Max number of days before ending_at to include in the returned series - must be between 1 and 100 inclusive
           in: query
@@ -2318,9 +1926,8 @@ paths:
           schema:
             example: "14"
             type: string
-        - description: >-
+        - description: |-
             (Optional) DateTime (ISO 8601 string)
-
 
             Point in time when the data series should end - defaults to time of the request
           in: query
@@ -2328,9 +1935,8 @@ paths:
           schema:
             example: 2018-06-28T23:59:59-5:00
             type: string
-        - description: >-
+        - description: |-
             (Optional) String
-
 
             App API identifier; if excluded, results for all apps in app group will be returned
           in: query
@@ -2347,20 +1953,14 @@ paths:
         - KPI
   /kpi/uninstalls/data_series:
     get:
-      description: >-
-        This endpoint allows you to retrieve a daily series of the total
-        number of uninstalls on each date.
-
+      description: |-
+        This endpoint allows you to retrieve a daily series of the total number of uninstalls on each date.
 
         ## Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
             "message": (required, string) the status of the export, returns 'success' when completed without errors,
             "data" : [
@@ -2371,13 +1971,11 @@ paths:
                 ...
             ]
         }
-
         ```
       operationId: kpIsForDailyAppUninstallsByDate
       parameters:
-        - description: >-
+        - description: |-
             (Required) Integer
-
 
             Max number of days before ending_at to include in the returned series - must be between 1 and 100 inclusive
           in: query
@@ -2385,9 +1983,8 @@ paths:
           schema:
             example: "14"
             type: string
-        - description: >-
+        - description: |-
             (Optional) DateTime (ISO 8601 string)
-
 
             Point in time when the data series should end - defaults to time of the request
           in: query
@@ -2395,9 +1992,8 @@ paths:
           schema:
             example: 2018-06-28T23:59:59-5:00
             type: string
-        - description: >-
+        - description: |-
             (Optional) String
-
 
             App API identifier; if excluded, results for all apps in app group will be returned
           in: query
@@ -2414,25 +2010,14 @@ paths:
         - KPI
   /messages/scheduled_broadcasts:
     get:
-      description: >-
-        You can view a JSON list of upcoming and scheduled Campaigns and
-        Canvases using the following information and parameters. The endpoint
-        will return information about scheduled Campaigns and entry Canvases
-        between now and the designated end_time (ISO 8601 format) specified in
-        the request. Daily, recurring messages will only appear once with their
-        next occurrence. Results returned in this endpoint are only for
-        Campaigns and Canvases created and scheduled in Braze.
-
+      description: |-
+        You can view a JSON list of upcoming and scheduled Campaigns and Canvases using the following information and parameters. The endpoint will return information about scheduled Campaigns and entry Canvases between now and the designated end_time (ISO 8601 format) specified in the request. Daily, recurring messages will only appear once with their next occurrence. Results returned in this endpoint are only for Campaigns and Canvases created and scheduled in Braze.
 
         ## Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
             "scheduled_broadcasts": [
               # Example Canvas
@@ -2455,13 +2040,11 @@ paths:
               },
             ]
         }
-
         ```
       operationId: getUpcomingScheduledCampaignsAndCanvases
       parameters:
-        - description: >-
+        - description: |-
             (Required) String in ISO 8601 format
-
 
             End date of the range to retrieve upcoming scheduled Campaigns and Canvases. This is treated as midnight in UTC time by the API.
           in: query
@@ -2478,25 +2061,17 @@ paths:
         - Schedule Mesages
   /segments/data_series:
     get:
-      description: >-
-        This endpoint allows you to retrieve a daily series of the size of
-        a segment over time for a segment.
-
+      description: |-
+        This endpoint allows you to retrieve a daily series of the size of a segment over time for a segment.
 
         ### Request Components
-
         - [Segment Identifier](https://www.braze.com/docs/api/identifier_types/)
-
 
         ## Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
             "message": (required, string) the status of the export, returns 'success' when completed without errors,
             "data" : [
@@ -2507,7 +2082,6 @@ paths:
                 ...
             ]
         }
-
         ```
       operationId: segmentAnalytics
       parameters:
@@ -2520,9 +2094,8 @@ paths:
           schema:
             example: "{{segment_identifier}}"
             type: string
-        - description: >-
+        - description: |-
             (Required) Integer
-
 
             Max number of days before `ending_at` to include in the returned series - must be between 1 and 100 inclusive.
           in: query
@@ -2530,9 +2103,8 @@ paths:
           schema:
             example: "14"
             type: string
-        - description: >-
+        - description: |-
             (Optional) DateTime (ISO 8601 string)
-
 
             Point in time when the data series should end - defaults to time of the request.
           in: query
@@ -2549,25 +2121,17 @@ paths:
         - Segment
   /segments/details:
     get:
-      description: >-
-        This endpoint allows you to retrieve relevant information on the
-        segment, which can be identified by the `segment_id`.
-
+      description: |-
+        This endpoint allows you to retrieve relevant information on the segment, which can be identified by the `segment_id`.
 
         ### Request Components
-
         - [Segment Identifier](https://www.braze.com/docs/api/identifier_types/)
-
 
         ## Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
               "message": (required, string) the status of the export, returns 'success' when completed without errors,
               "created_at" : (string) date created as ISO 8601 date,
@@ -2577,7 +2141,6 @@ paths:
               "text_description" : (string) segment description, 
               "tags" : (array) tag names associated with the segment
         }
-
         ```
       operationId: segmentDetails
       parameters:
@@ -2599,29 +2162,18 @@ paths:
         - Segment
   /segments/list:
     get:
-      description: >-
-        This endpoint allows you to export a list of segments, each of
-        which will include its name, Segment API Identifier, and whether it has
-        analytics tracking enabled. The segments are returned in groups of 100
-        sorted by time of creation (oldest to newest by default). Archived
-        segments are not included.
-
+      description: |-
+        This endpoint allows you to export a list of segments, each of which will include its name, Segment API Identifier, and whether it has analytics tracking enabled. The segments are returned in groups of 100 sorted by time of creation (oldest to newest by default). Archived segments are not included.
 
         ### Request Components
-
         - [Segment Identifier](https://www.braze.com/docs/api/identifier_types/)
-
 
 
         ## Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
             "message": (required, string) the status of the export, returns 'success' when completed without errors,
             "segments" : [
@@ -2634,13 +2186,11 @@ paths:
                 ...
             ]
         }
-
         ```
       operationId: segmentList
       parameters:
-        - description: >-
+        - description: |-
             (Optional) Integer
-
 
             The page of segments to return, defaults to 0 (returns the first set of up to 100)
           in: query
@@ -2648,9 +2198,8 @@ paths:
           schema:
             example: "1"
             type: string
-        - description: >-
+        - description: |-
             (Optional) String
-
 
             Pass in the value `desc` to sort by creation time from newest to oldest. Pass in `asc` to sort from oldest to newest. If `sort_direction` is not included, the default order is oldest to newest.
           in: query
@@ -2667,32 +2216,21 @@ paths:
         - Segment
   /sends/data_series:
     get:
-      description: >-
-        This endpoint allows you to retrieve a daily series of various
-        stats for a tracked `send_id`. Braze stores send analytics for 14 days
-        after the send.
-
+      description: |-
+        This endpoint allows you to retrieve a daily series of various stats for a tracked `send_id`. Braze stores send analytics for 14 days after the send.
 
         Campaign conversions will be attributed towards the most recent send id that a given user has received from the campaign.
 
-
         > The `send_id` is only generated for API campaign sends targeting segments, connected audiences or broadcasts. When relevant, the `send_id` is included in response for the `messages/send`, `messages/schedule`, `campaign/trigger/send` and `campaign/trigger/schedule` endpoints.
 
-
         ### Components Used
-
         - [Campaign Identifier](https://www.braze.com/docs/api/identifier_types/)
-
 
         ### Send Analytics Endpoint API Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
                     "variation_name": (string) variation name,
                     "sent": (int) the number of sends,
@@ -2730,7 +2268,6 @@ paths:
           ],
           "message": "success"
         }
-
         ```
       operationId: sendAnalytics
       parameters:
@@ -2752,9 +2289,8 @@ paths:
           schema:
             example: "{{send_identifier}}"
             type: string
-        - description: >-
+        - description: |-
             (Required) Integer
-
 
             Maximum number of days before `ending_at` to include in the returned series. Must be between 1 and 100 inclusive.
           in: query
@@ -2762,9 +2298,8 @@ paths:
           schema:
             example: "30"
             type: string
-        - description: >-
+        - description: |-
             (Optional) Datetime ISO 8601 string
-
 
             Date on which the data series should end. Defaults to time of the request.
           in: query
@@ -2781,25 +2316,17 @@ paths:
         - Campaign
   /sessions/data_series:
     get:
-      description: >-
-        This endpoint allows you to retrieve a series of the number of
-        sessions for your app over a designated time period.
-
+      description: |-
+        This endpoint allows you to retrieve a series of the number of sessions for your app over a designated time period.
 
         ### Components Used
-
         - [Segment Identifier](https://www.braze.com/docs/api/identifier_types/)
-
 
         ## Response
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
             "message": (required, string) the status of the export, returns 'success' when completed without errors,
             "data" : [
@@ -2810,13 +2337,11 @@ paths:
                 ...
             ]
         }
-
         ```
       operationId: appSessionsByTime
       parameters:
-        - description: >-
+        - description: |-
             (Required) Integer
-
 
             Max number of units (days or hours) before ending_at to include in the returned series - must be between 1 and 100 inclusive.
           in: query
@@ -2824,9 +2349,8 @@ paths:
           schema:
             example: "14"
             type: string
-        - description: >-
+        - description: |-
             (Optional) String
-
 
             Unit of time between data points - can be "day" or "hour" (defaults to "day"). 
           in: query
@@ -2834,9 +2358,8 @@ paths:
           schema:
             example: day
             type: string
-        - description: >-
+        - description: |-
             (Optional) DateTime (ISO 8601 string)
-
 
             Point in time when the data series should end - defaults to time of the request.
           in: query
@@ -2844,9 +2367,8 @@ paths:
           schema:
             example: 2018-06-28T23:59:59-5:00
             type: string
-        - description: >-
+        - description: |-
             (Optional) String
-
 
             App API identifier retrieved from the Developer Console to limit analytics to a specific app.
           in: query
@@ -2854,9 +2376,8 @@ paths:
           schema:
             example: "{{app_identifier}}"
             type: string
-        - description: >-
+        - description: |-
             (Optional) String
-
 
             Segment API identifier indicating the analytics enabled segment for which sessions should be returned.
           in: query
@@ -2873,30 +2394,18 @@ paths:
         - Session Analytics
   /subscription/status/get:
     get:
-      description: >-
-        Use the endpoint below to get the subscription state of a user in a
-        subscription group. The response from this endpoint will include the
-        external ID and either subscribed, unsubscribed, or unknown for the
-        specific subscription group requested in the API call. This can be used
-        to update the subscription group state in subsequent API calls or to be
-        displayed on a hosted web page.
-
+      description: |-
+        Use the endpoint below to get the subscription state of a user in a subscription group. The response from this endpoint will include the external ID and either subscribed, unsubscribed, or unknown for the specific subscription group requested in the API call. This can be used to update the subscription group state in subsequent API calls or to be displayed on a hosted web page.
 
         > *Either `external_id` or `email` are required.
 
-
         ## Response
-
 
         All successful responses will return `subscribed`, `unsubscribed`, or `unknown` depending on status and user history with the subscription group.
 
-
         ```json
-
         Content-Type: application/json
-
         Authorization: Bearer YOUR-REST-API-KEY
-
         {
           "status": {
             "1": "Unsubscribed",
@@ -2904,7 +2413,6 @@ paths:
           },
           "message": "success"
         }
-
         ```
       operationId: listUser'sSubscriptionGroupStatusSms
       parameters:
@@ -2917,12 +2425,10 @@ paths:
           schema:
             example: "{{subscription_group_id}}"
             type: string
-        - description: >
+        - description: |
             (Required*) String
 
-
             The `external_id` of the user (must include at least one and at most 50 `external_ids`).
-
 
             Only external_id or phone is accepted for SMS subscription groups
           in: query
@@ -2930,12 +2436,10 @@ paths:
           schema:
             example: "{{external_identifier}}"
             type: string
-        - description: >
+        - description: |
             (Required*) String
 
-
             The phone number of the user (must include at least one phone number and at most 50 phone numbers). The recommendation is to provide this in the E.164 format.
-
 
             Only external_id or phone is accepted for SMS subscription groups
           in: query
@@ -2952,17 +2456,14 @@ paths:
         - SMS
   /subscription/user/status:
     get:
-      description: >-
-        Use the endpoint below to list and get the subscription groups of a
-        certain user.
-
+      description: |-
+        Use the endpoint below to list and get the subscription groups of a certain user.
 
         > If there are multiple users (multiple external ids) who share the same email address, all users will be returned as a separate user (even if they have the same email address or subscription group).
       operationId: listUser'sSubscriptionGroupSms
       parameters:
-        - description: >-
+        - description: |-
             (Required*) String
-
 
             The external_id of the user. Must include at least one and at most 50 `external_ids`.
           in: query
@@ -2970,9 +2471,8 @@ paths:
           schema:
             example: "{{external_id}}"
             type: string
-        - description: >-
+        - description: |-
             (Optional) Integer
-
 
             The limit on the maximum number of results returned. Default (and max) limit is 100.
           in: query
@@ -2980,9 +2480,8 @@ paths:
           schema:
             example: "100"
             type: string
-        - description: >-
+        - description: |-
             (Optional) Integer
-
 
             Number of templates to skip before returning rest of the templates that fit the search criteria.
           in: query
@@ -2990,9 +2489,8 @@ paths:
           schema:
             example: "1"
             type: string
-        - description: >
+        - description: |
             (Required*) String
-
 
             The phone number of the user (must include at least one phone number and at most 50 phone numbers). The recommendation is to provide this in the E.164 format.
           in: query
@@ -3009,15 +2507,12 @@ paths:
         - SMS
   /templates/email/info:
     get:
-      description: >-
+      description: |-
         Use to get information on your email templates.
-
 
         Use the Template REST APIs to programmatically manage the email templates that you have stored on the Braze dashboard, on the Templates & Media page. Braze provides two endpoints for creating and updating your email templates.
 
-
         ### Request Components
-
         - [Template Identifier](https://www.braze.com/docs/api/identifier_types/)
       operationId: seeEmailTemplateInformation
       parameters:
@@ -3039,18 +2534,13 @@ paths:
         - Email Templates
   /templates/email/list:
     get:
-      description: >-
-        Use this endpoint to get a list of available templates in your
-        Braze account.
-
+      description: |-
+        Use this endpoint to get a list of available templates in your Braze account.
 
         Use the Template REST APIs to programmatically manage the email templates that you have stored on the Braze dashboard, on the Templates & Media page. Braze provides two endpoints for creating and updating your email templates.
 
-
         ### Successful Response Properties
-
         ```json
-
         {
           "count": number of templates returned
           "templates": [template with the following properties]:
@@ -3081,9 +2571,8 @@ paths:
           schema:
             example: 2020-02-01T01:01:01.000000
             type: string
-        - description: >-
+        - description: |-
             (Optional) Positive Number
-
 
             Maximum number of templates to retrieve, default to 100 if not provided, maximum acceptable value is 1000.
           in: query
@@ -3091,9 +2580,8 @@ paths:
           schema:
             example: "1"
             type: string
-        - description: >-
+        - description: |-
             (Optional) Positive Number
-
 
             Number of templates to skip before returning rest of the templates that fit the search criteria.
           in: query

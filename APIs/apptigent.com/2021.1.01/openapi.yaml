@@ -6,12 +6,7 @@ info:
     email: support@apptigent.com
     name: Customer Support
     url: https://www.apptigent.com/help/
-  description: Apptigent PowerTools Developer Edition is a powerful suite of API
-    endpoints for custom applications running on any stack. Manipulate text,
-    modify collections, format dates and times, convert currency, perform
-    advanced mathematical calculations, shorten URL's, encode strings, convert
-    text to speech, translate content into multiple languages, process images,
-    and more. PowerTools is the ultimate developer toolkit.
+  description: Apptigent PowerTools Developer Edition is a powerful suite of API endpoints for custom applications running on any stack. Manipulate text, modify collections, format dates and times, convert currency, perform advanced mathematical calculations, shorten URL's, encode strings, convert text to speech, translate content into multiple languages, process images, and more. PowerTools is the ultimate developer toolkit.
   title: PowerTools Developer
   version: 2021.1.01
   x-apisguru-categories:
@@ -1350,8 +1345,7 @@ paths:
       x-codegen-request-body-name: dateTimeDifference
   /DateTimeInfo:
     post:
-      description: Retrieve useful date and time information, such as day of year,
-        total seconds and ticks
+      description: Retrieve useful date and time information, such as day of year, total seconds and ticks
       operationId: DateTimeInfo
       requestBody:
         content:
@@ -3184,8 +3178,7 @@ components:
         items: ""
       properties:
         index:
-          description: Index position for operation (leave blank to specify end of
-            collection)
+          description: Index position for operation (leave blank to specify end of collection)
           type: string
           x-ms-summary: Index
         input:
@@ -3365,8 +3358,7 @@ components:
           type: array
           x-ms-summary: Collection
         match:
-          description: String to match (explicit, case-insensitive, leave empty to use
-            Index)
+          description: String to match (explicit, case-insensitive, leave empty to use Index)
           type: string
           x-ms-summary: Match Value
       required:
@@ -4078,8 +4070,7 @@ components:
       type: object
     inputDataQuery:
       example:
-        input: '{"properties":
-          [{"name":"ID","value":"1234"},{"name":"Title","value":"Some Title"}]}'
+        input: '{"properties": [{"name":"ID","value":"1234"},{"name":"Title","value":"Some Title"}]}'
         query: $.properties[?(@.name == "ID")].value
       properties:
         input:
@@ -4098,8 +4089,7 @@ components:
       example:
         format: yyyy-MM-dd HH:mm:ss
         input: 03/10/2010 09:00:00
-        source: "GMT Standard Time - (GMT) Greenwich Mean Time : Dublin, Edinburgh,
-          Lisbon, London"
+        source: "GMT Standard Time - (GMT) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London"
         target: Central Standard Time - (GMT-06:00) Central Time (US & Canada)
       properties:
         format:
@@ -4111,32 +4101,25 @@ components:
           type: string
           x-ms-summary: Value
         source:
-          default: "GMT Standard Time - (GMT) Greenwich Mean Time : Dublin, Edinburgh,
-            Lisbon, London"
+          default: "GMT Standard Time - (GMT) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London"
           enum:
-            - "GMT Standard Time - (GMT) Greenwich Mean Time : Dublin,
-              Edinburgh, Lisbon, London"
+            - "GMT Standard Time - (GMT) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London"
             - Greenwich Standard Time - (GMT) Monrovia, Reykjavik
-            - W. Europe Standard Time - (GMT+01:00) Amsterdam, Berlin, Bern,
-              Rome, Stockholm, Vienna
-            - Central Europe Standard Time - (GMT+01:00) Belgrade, Bratislava,
-              Budapest, Ljubljana, Prague
-            - Central European Standard Time - (GMT+01:00) Sarajevo, Skopje,
-              Warsaw, Zagreb
+            - W. Europe Standard Time - (GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna
+            - Central Europe Standard Time - (GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague
+            - Central European Standard Time - (GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb
             - W. Central Africa Standard Time - (GMT+01:00) West Central Africa
             - GTB Standard Time - (GMT+02:00) Athens, Bucharest, Istanbul
             - Middle East Standard Time - (GMT+02:00) Beirut
             - Egypt Standard Time - (GMT+02:00) Cairo
             - South Africa Standard Time - (GMT+02:00) Harare, Pretoria
-            - FLE Standard Time - (GMT+02:00) Helsinki, Kyiv, Riga, Sofia,
-              Tallinn, Vilnius
+            - FLE Standard Time - (GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius
             - Israel Standard Time - (GMT+02:00) Jerusalem
             - E. Europe Standard Time - (GMT+02:00) Minsk
             - Namibia Standard Time - (GMT+02:00) Windhoek
             - Arabic Standard Time - (GMT+03:00) Baghdad
             - Arab Standard Time - (GMT+03:00) Kuwait, Riyadh
-            - Russian Standard Time - (GMT+03:00) Moscow, St. Petersburg,
-              Volgograd
+            - Russian Standard Time - (GMT+03:00) Moscow, St. Petersburg, Volgograd
             - E. Africa Standard Time - (GMT+03:00) Nairobi
             - Georgian Standard Time - (GMT+03:00) Tbilisi
             - Iran Standard Time - (GMT+03:30) Tehran
@@ -4148,8 +4131,7 @@ components:
             - Ekaterinburg Standard Time - (GMT+05:00) Ekaterinburg
             - Pakistan Standard Time - (GMT+05:00) Islamabad, Karachi
             - West Asia Standard Time - (GMT+05:00) Tashkent
-            - India Standard Time - (GMT+05:30) Chennai, Kolkata, Mumbai, New
-              Delhi
+            - India Standard Time - (GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi
             - Sri Lanka Standard Time - (GMT+05:30) Sri Jayawardenepura
             - Nepal Standard Time - (GMT+05:45) Kathmandu
             - N. Central Asia Standard Time - (GMT+06:00) Almaty, Novosibirsk
@@ -4157,8 +4139,7 @@ components:
             - Myanmar Standard Time - (GMT+06:30) Yangon (Rangoon)
             - SE Asia Standard Time - (GMT+07:00) Bangkok, Hanoi, Jakarta
             - North Asia Standard Time - (GMT+07:00) Krasnoyarsk
-            - China Standard Time - (GMT+08:00) Beijing, Chongqing, Hong Kong,
-              Urumqi
+            - China Standard Time - (GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi
             - North Asia East Standard Time - (GMT+08:00) Irkutsk, Ulaan Bataar
             - Singapore Standard Time - (GMT+08:00) Kuala Lumpur, Singapore
             - W. Australia Standard Time - (GMT+08:00) Perth
@@ -4173,8 +4154,7 @@ components:
             - West Pacific Standard Time - (GMT+10:00) Guam, Port Moresby
             - Tasmania Standard Time - (GMT+10:00) Hobart
             - Vladivostok Standard Time - (GMT+10:00) Vladivostok
-            - Central Pacific Standard Time - (GMT+11:00) Magadan, Solomon Is.,
-              New Caledonia
+            - Central Pacific Standard Time - (GMT+11:00) Magadan, Solomon Is., New Caledonia
             - New Zealand Standard Time - (GMT+12:00) Auckland, Wellington
             - Fiji Standard Time - (GMT+12:00) Fiji, Kamchatka, Marshall Is.
             - Tonga Standard Time - (GMT+13:00) Nuku'alofa
@@ -4192,22 +4172,18 @@ components:
             - Central Brazilian Standard Time - (GMT-04:00) Manaus
             - Pacific SA Standard Time - (GMT-04:00) Santiago
             - Venezuela Standard Time - (GMT-04:30) Caracas
-            - SA Pacific Standard Time - (GMT-05:00) Bogota, Lima, Quito, Rio
-              Branco
+            - SA Pacific Standard Time - (GMT-05:00) Bogota, Lima, Quito, Rio Branco
             - Eastern Standard Time - (GMT-05:00) Eastern Time (US & Canada)
             - US Eastern Standard Time - (GMT-05:00) Indiana (East)
             - Central America Standard Time - (GMT-06:00) Central America
             - Central Standard Time - (GMT-06:00) Central Time (US & Canada)
-            - Central Standard Time (Mexico) - (GMT-06:00) Guadalajara, Mexico
-              City, Monterrey
+            - Central Standard Time (Mexico) - (GMT-06:00) Guadalajara, Mexico City, Monterrey
             - Canada Central Standard Time - (GMT-06:00) Saskatchewan
             - US Mountain Standard Time - (GMT-07:00) Arizona
-            - Mountain Standard Time (Mexico) - (GMT-07:00) Chihuahua, La Paz,
-              Mazatlan
+            - Mountain Standard Time (Mexico) - (GMT-07:00) Chihuahua, La Paz, Mazatlan
             - Mountain Standard Time - (GMT-07:00) Mountain Time (US & Canada)
             - Pacific Standard Time - (GMT-08:00) Pacific Time (US & Canada)
-            - Pacific Standard Time (Mexico) - (GMT-08:00) Tijuana, Baja
-              California
+            - Pacific Standard Time (Mexico) - (GMT-08:00) Tijuana, Baja California
             - Alaskan Standard Time - (GMT-09:00) Alaska
             - Hawaiian Standard Time - (GMT-10:00) Hawaii
             - Samoa Standard Time - (GMT-11:00) Midway Island, Samoa
@@ -4215,32 +4191,25 @@ components:
           type: string
           x-ms-summary: Source Time Zone
         target:
-          default: "GMT Standard Time - (GMT) Greenwich Mean Time : Dublin, Edinburgh,
-            Lisbon, London"
+          default: "GMT Standard Time - (GMT) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London"
           enum:
-            - "GMT Standard Time - (GMT) Greenwich Mean Time : Dublin,
-              Edinburgh, Lisbon, London"
+            - "GMT Standard Time - (GMT) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London"
             - Greenwich Standard Time - (GMT) Monrovia, Reykjavik
-            - W. Europe Standard Time - (GMT+01:00) Amsterdam, Berlin, Bern,
-              Rome, Stockholm, Vienna
-            - Central Europe Standard Time - (GMT+01:00) Belgrade, Bratislava,
-              Budapest, Ljubljana, Prague
-            - Central European Standard Time - (GMT+01:00) Sarajevo, Skopje,
-              Warsaw, Zagreb
+            - W. Europe Standard Time - (GMT+01:00) Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna
+            - Central Europe Standard Time - (GMT+01:00) Belgrade, Bratislava, Budapest, Ljubljana, Prague
+            - Central European Standard Time - (GMT+01:00) Sarajevo, Skopje, Warsaw, Zagreb
             - W. Central Africa Standard Time - (GMT+01:00) West Central Africa
             - GTB Standard Time - (GMT+02:00) Athens, Bucharest, Istanbul
             - Middle East Standard Time - (GMT+02:00) Beirut
             - Egypt Standard Time - (GMT+02:00) Cairo
             - South Africa Standard Time - (GMT+02:00) Harare, Pretoria
-            - FLE Standard Time - (GMT+02:00) Helsinki, Kyiv, Riga, Sofia,
-              Tallinn, Vilnius
+            - FLE Standard Time - (GMT+02:00) Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius
             - Israel Standard Time - (GMT+02:00) Jerusalem
             - E. Europe Standard Time - (GMT+02:00) Minsk
             - Namibia Standard Time - (GMT+02:00) Windhoek
             - Arabic Standard Time - (GMT+03:00) Baghdad
             - Arab Standard Time - (GMT+03:00) Kuwait, Riyadh
-            - Russian Standard Time - (GMT+03:00) Moscow, St. Petersburg,
-              Volgograd
+            - Russian Standard Time - (GMT+03:00) Moscow, St. Petersburg, Volgograd
             - E. Africa Standard Time - (GMT+03:00) Nairobi
             - Georgian Standard Time - (GMT+03:00) Tbilisi
             - Iran Standard Time - (GMT+03:30) Tehran
@@ -4252,8 +4221,7 @@ components:
             - Ekaterinburg Standard Time - (GMT+05:00) Ekaterinburg
             - Pakistan Standard Time - (GMT+05:00) Islamabad, Karachi
             - West Asia Standard Time - (GMT+05:00) Tashkent
-            - India Standard Time - (GMT+05:30) Chennai, Kolkata, Mumbai, New
-              Delhi
+            - India Standard Time - (GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi
             - Sri Lanka Standard Time - (GMT+05:30) Sri Jayawardenepura
             - Nepal Standard Time - (GMT+05:45) Kathmandu
             - N. Central Asia Standard Time - (GMT+06:00) Almaty, Novosibirsk
@@ -4261,8 +4229,7 @@ components:
             - Myanmar Standard Time - (GMT+06:30) Yangon (Rangoon)
             - SE Asia Standard Time - (GMT+07:00) Bangkok, Hanoi, Jakarta
             - North Asia Standard Time - (GMT+07:00) Krasnoyarsk
-            - China Standard Time - (GMT+08:00) Beijing, Chongqing, Hong Kong,
-              Urumqi
+            - China Standard Time - (GMT+08:00) Beijing, Chongqing, Hong Kong, Urumqi
             - North Asia East Standard Time - (GMT+08:00) Irkutsk, Ulaan Bataar
             - Singapore Standard Time - (GMT+08:00) Kuala Lumpur, Singapore
             - W. Australia Standard Time - (GMT+08:00) Perth
@@ -4277,8 +4244,7 @@ components:
             - West Pacific Standard Time - (GMT+10:00) Guam, Port Moresby
             - Tasmania Standard Time - (GMT+10:00) Hobart
             - Vladivostok Standard Time - (GMT+10:00) Vladivostok
-            - Central Pacific Standard Time - (GMT+11:00) Magadan, Solomon Is.,
-              New Caledonia
+            - Central Pacific Standard Time - (GMT+11:00) Magadan, Solomon Is., New Caledonia
             - New Zealand Standard Time - (GMT+12:00) Auckland, Wellington
             - Fiji Standard Time - (GMT+12:00) Fiji, Kamchatka, Marshall Is.
             - Tonga Standard Time - (GMT+13:00) Nuku'alofa
@@ -4296,22 +4262,18 @@ components:
             - Central Brazilian Standard Time - (GMT-04:00) Manaus
             - Pacific SA Standard Time - (GMT-04:00) Santiago
             - Venezuela Standard Time - (GMT-04:30) Caracas
-            - SA Pacific Standard Time - (GMT-05:00) Bogota, Lima, Quito, Rio
-              Branco
+            - SA Pacific Standard Time - (GMT-05:00) Bogota, Lima, Quito, Rio Branco
             - Eastern Standard Time - (GMT-05:00) Eastern Time (US & Canada)
             - US Eastern Standard Time - (GMT-05:00) Indiana (East)
             - Central America Standard Time - (GMT-06:00) Central America
             - Central Standard Time - (GMT-06:00) Central Time (US & Canada)
-            - Central Standard Time (Mexico) - (GMT-06:00) Guadalajara, Mexico
-              City, Monterrey
+            - Central Standard Time (Mexico) - (GMT-06:00) Guadalajara, Mexico City, Monterrey
             - Canada Central Standard Time - (GMT-06:00) Saskatchewan
             - US Mountain Standard Time - (GMT-07:00) Arizona
-            - Mountain Standard Time (Mexico) - (GMT-07:00) Chihuahua, La Paz,
-              Mazatlan
+            - Mountain Standard Time (Mexico) - (GMT-07:00) Chihuahua, La Paz, Mazatlan
             - Mountain Standard Time - (GMT-07:00) Mountain Time (US & Canada)
             - Pacific Standard Time - (GMT-08:00) Pacific Time (US & Canada)
-            - Pacific Standard Time (Mexico) - (GMT-08:00) Tijuana, Baja
-              California
+            - Pacific Standard Time (Mexico) - (GMT-08:00) Tijuana, Baja California
             - Alaskan Standard Time - (GMT-09:00) Alaska
             - Hawaiian Standard Time - (GMT-10:00) Hawaii
             - Samoa Standard Time - (GMT-11:00) Midway Island, Samoa
@@ -4898,9 +4860,7 @@ components:
             - Plain Text (string)
             - Bitcoin Payment (address|amount|label|message)
             - Bookmark (url|title)
-            - Calendar Event
-              (subject|description|location|start|end|allDayEvent['true' or
-              'false']|format ['universal' or 'iCal'])
+            - Calendar Event (subject|description|location|start|end|allDayEvent['true' or 'false']|format ['universal' or 'iCal'])
             - Geolocation (latitude|longitude)
             - Mail (recipient|subject|message)
             - Phone Number (string)

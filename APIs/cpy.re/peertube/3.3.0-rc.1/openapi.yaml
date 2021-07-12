@@ -10,61 +10,38 @@ info:
   contact:
     name: PeerTube Community
     url: https://joinpeertube.org
-  description: >
-    The PeerTube API is built on HTTP(S) and is RESTful. You can use
-    your favorite
-
+  description: |
+    The PeerTube API is built on HTTP(S) and is RESTful. You can use your favorite
     HTTP/REST library for your programming language to use PeerTube. The spec API is fully compatible with
-
     [openapi-generator](https://github.com/OpenAPITools/openapi-generator/wiki/API-client-generator-HOWTO)
-
     which generates a client SDK in the language of your choice - we generate some client SDKs automatically:
 
-
     - [Python](https://framagit.org/framasoft/peertube/clients/python)
-
     - [Go](https://framagit.org/framasoft/peertube/clients/go)
-
     - [Kotlin](https://framagit.org/framasoft/peertube/clients/kotlin)
 
-
     See the [REST API quick start](https://docs.joinpeertube.org/api-rest-getting-started) for a few
-
     examples of using the PeerTube API.
-
 
     # Authentication
 
-
     When you sign up for an account on a PeerTube instance, you are given the possibility
-
     to generate sessions on it, and authenticate there using an access token. Only __one
-
     access token can currently be used at a time__.
-
 
     ## Roles
 
-
     Accounts are given permissions based on their role. There are three roles on
-
     PeerTube: Administrator, Moderator, and User. See the [roles guide](https://docs.joinpeertube.org/admin-managing-users?id=roles) for a detail of their permissions.
-
 
     # Errors
 
-
     The API uses standard HTTP status codes to indicate the success or failure
-
     of the API call, completed by a [RFC7807-compliant](https://tools.ietf.org/html/rfc7807) response body.
 
-
     ```
-
     HTTP 1.1 404 Not Found
-
     Content-Type: application/problem+json; charset=utf-8
-
 
     {
       "detail": "Video not found",
@@ -73,23 +50,15 @@ info:
       "title": "Not Found",
       "type": "about:blank"
     }
-
     ```
-
 
     We provide error `type` values for [a growing number of cases](https://github.com/Chocobozzz/PeerTube/blob/develop/shared/models/server/server-error-code.enum.ts),
-
     but it is still optional. Types are used to disambiguate errors that bear the same status code
-
     and are non-obvious:
 
-
     ```
-
     HTTP 1.1 403 Forbidden
-
     Content-Type: application/problem+json; charset=utf-8
-
 
     {
       "detail": "Cannot get this video regarding follow constraints",
@@ -98,29 +67,19 @@ info:
       "title": "Forbidden",
       "type": "https://docs.joinpeertube.org/api-rest-reference.html#section/Errors/does_not_respect_follow_constraints"
     }
-
     ```
-
 
     Here a 403 error could otherwise mean that the video is private or blocklisted.
 
-
     ### Validation errors
 
-
     Each parameter is evaluated on its own against a set of rules before the route validator
-
     proceeds with potential testing involving parameter combinations. Errors coming from validation
-
     errors appear earlier and benefit from a more detailed error description:
 
-
     ```
-
     HTTP 1.1 400 Bad Request
-
     Content-Type: application/problem+json; charset=utf-8
-
 
     {
       "detail": "Incorrect request parameters: id",
@@ -138,93 +97,55 @@ info:
       "title": "Bad Request",
       "type": "about:blank"
     }
-
     ```
 
-
     Where `id` is the name of the field concerned by the error, within the route definition.
-
     `invalid-params.<field>.location` can be either 'params', 'body', 'header', 'query' or 'cookies', and
-
     `invalid-params.<field>.value` reports the value that didn't pass validation whose `invalid-params.<field>.msg`
-
     is about.
-
 
     ### Deprecated error fields
 
-
     Some fields could be included with previous versions. They are still included but their use is deprecated:
-
     - `error`: superseded by `detail`
-
     - `code`: superseded by `type` (which is now an URI)
-
 
     # Rate limits
 
-
     We are rate-limiting all endpoints of PeerTube's API. Custom values can be set by administrators:
 
-
     | Endpoint (prefix: `/api/v1`) | Calls         | Time frame   |
-
     |------------------------------|---------------|--------------|
-
     | `/*`                         | 50            | 10 seconds   |
-
     | `POST /users/token`          | 15            | 5 minutes    |
-
     | `POST /users/register`       | 2<sup>*</sup> | 5 minutes    |
-
     | `POST /users/ask-send-verify-email` | 3      | 5 minutes    |
 
-
     Depending on the endpoint, <sup>*</sup>failed requests are not taken into account. A service
-
     limit is announced by a `429 Too Many Requests` status code.
 
-
     You can get details about the current state of your rate limit by reading the
-
     following headers:
 
-
     | Header                  | Description                                                |
-
     |-------------------------|------------------------------------------------------------|
-
     | `X-RateLimit-Limit`     | Number of max requests allowed in the current time period  |
-
     | `X-RateLimit-Remaining` | Number of remaining requests in the current time period    |
-
     | `X-RateLimit-Reset`     | Timestamp of end of current time period as UNIX timestamp  |
-
     | `Retry-After`           | Seconds to delay after the first `429` is received         |
-
 
     # CORS
 
-
     This API features [Cross-Origin Resource Sharing (CORS)](https://fetch.spec.whatwg.org/),
-
     allowing cross-domain communication from the browser for some routes:
 
-
     | Endpoint                    |
-
     |------------------------- ---|
-
     | `/api/*`                    |
-
     | `/download/*`               |
-
     | `/lazy-static/*`            |
-
     | `/live/segments-sha256/*`   |
-
     | `/.well-known/webfinger`    |
-
 
     In addition, all routes serving ActivityPub are CORS-enabled for all origins.
   license:
@@ -249,170 +170,116 @@ info:
 externalDocs:
   url: https://docs.joinpeertube.org/api-rest-reference.html
 tags:
-  - description: >
-      As a visitor, you can use this API to open an account (if
-      registrations are open on
-
+  - description: |
+      As a visitor, you can use this API to open an account (if registrations are open on
       that PeerTube instance). As an admin, you should use the dedicated [User creation
-
       API](#operation/addUser) instead.
     name: Register
-  - description: >
-      Sessions deal with access tokens over time. Only __one session
-      token can currently be used at a time__.
+  - description: |
+      Sessions deal with access tokens over time. Only __one session token can currently be used at a time__.
     name: Session
     x-displayName: Login/Logout
-  - description: >
-      Accounts encompass remote accounts discovered across the
-      federation, and correspond to the main Actor, along with video channels a
-      user can create, which are also Actors.
-
+  - description: |
+      Accounts encompass remote accounts discovered across the federation, and correspond to the main Actor, along with video channels a user can create, which are also Actors.
       When a comment is posted, it is done with your Account's Actor.
     name: Accounts
-  - description: >
-      Using some features of PeerTube require authentication, for which
-      User provide different levels of permission as well as associated user
-      information. Each user has a corresponding local Account for federation.
+  - description: |
+      Using some features of PeerTube require authentication, for which User provide different levels of permission as well as associated user information. Each user has a corresponding local Account for federation.
     name: Users
   - description: |
       Operations related to your own User, when logged-in.
     name: My User
-  - description: >
-      Operations related to your subscriptions to video channels, their
-      new videos, and how to keep up to date with their latest publications!
+  - description: |
+      Operations related to your subscriptions to video channels, their new videos, and how to keep up to date with their latest publications!
     name: My Subscriptions
   - description: |
       Operations related to your watch history.
     name: My History
-  - description: >
-      Notifications following new videos, follows or reports. They allow
-      you to keep track of the interactions and overall important information
-      that concerns you. You MAY set per-notification type delivery preference,
-      to receive the info either by mail, by in-browser notification or both.
+  - description: |
+      Notifications following new videos, follows or reports. They allow you to keep track of the interactions and overall important information that concerns you. You MAY set per-notification type delivery preference, to receive the info either by mail, by in-browser notification or both.
     name: My Notifications
-  - description: >
-      Each server exposes public information regarding supported videos
-      and options.
+  - description: |
+      Each server exposes public information regarding supported videos and options.
     name: Config
-  - description: >
-      Jobs are long-running tasks enqueued and processed by the instance
-      itself. No additional worker registration is currently available.
+  - description: |
+      Jobs are long-running tasks enqueued and processed by the instance itself. No additional worker registration is currently available.
     name: Job
-  - description: >
-      Managing servers which the instance interacts with is crucial to
-      the concept of federation in PeerTube and external video indexation. The
-      PeerTube server then deals with inter-server ActivityPub operations and
-      propagates information across its social graph by posting activities to
-      actors' inbox endpoints.
+  - description: |
+      Managing servers which the instance interacts with is crucial to the concept of federation in PeerTube and external video indexation. The PeerTube server then deals with inter-server ActivityPub operations and propagates information across its social graph by posting activities to actors' inbox endpoints.
     externalDocs:
       url: https://docs.joinpeertube.org/admin-following-instances?id=instances-follows
     name: Instance Follows
-  - description: >
-      Redundancy is part of the inter-server solidarity that PeerTube
-      fosters. Manage the list of instances you wish to help by seeding their
-      videos according to the policy of video selection of your choice. Note
-      that you have a similar functionality to mirror individual videos, see
-      [video mirroring](#tag/Video-Mirroring).
+  - description: |
+      Redundancy is part of the inter-server solidarity that PeerTube fosters. Manage the list of instances you wish to help by seeding their videos according to the policy of video selection of your choice. Note that you have a similar functionality to mirror individual videos, see [video mirroring](#tag/Video-Mirroring).
     externalDocs:
       url: https://docs.joinpeertube.org/admin-following-instances?id=instances-redundancy
     name: Instance Redundancy
-  - description: >
-      Managing plugins installed from a local path or from NPM, or search
-      for new ones.
+  - description: |
+      Managing plugins installed from a local path or from NPM, or search for new ones.
     externalDocs:
       url: https://docs.joinpeertube.org/api-plugins
     name: Plugins
-  - description: >
+  - description: |
       Abuses deal with reports of local or remote videos/comments/accounts alike.
     name: Abuses
   - description: |
       Operations dealing with listing, uploading, fetching or modifying videos.
     name: Video
-  - description: >
-      Operations dealing with adding video or audio. PeerTube supports
-      two upload modes, and three import modes.
-
+  - description: |
+      Operations dealing with adding video or audio. PeerTube supports two upload modes, and three import modes.
 
       ### Upload
 
-
       - [_legacy_](#operation/uploadLegacy), where the video file is sent in a single request
-
       - [_resumable_](#operation/uploadResumableInit), where the video file is sent in chunks
 
-
       You can upload videos more reliably by using the resumable variant. Its protocol lets
-
       you resume an upload operation after a network interruption or other transmission failure,
-
       saving time and bandwidth in the event of network failures.
 
-
       Favor using resumable uploads in any of the following cases:
-
       - You are transferring large files
-
       - The likelihood of a network interruption is high
-
       - Uploads are originating from a device with a low-bandwidth or unstable Internet connection,
         such as a mobile device
 
       ### Import
 
-
       - _URL_-based: where the URL points to any service supported by [youtube-dl](https://ytdl-org.github.io/youtube-dl/)
-
       - _magnet_-based: where the URI resolves to a BitTorrent ressource containing a single supported video file
-
       - _torrent_-based: where the metainfo file resolves to a BitTorrent ressource containing a single supported video file
 
-
       The import function is practical when the desired video/audio is available online. It makes PeerTube
-
       download it for you, saving you as much bandwidth and avoiding any instability or limitation your network might have.
     name: Video Upload
-  - description: Operations dealing with listing, adding and removing closed
-      captions of a video.
+  - description: Operations dealing with listing, adding and removing closed captions of a video.
     name: Video Captions
-  - description: Operations dealing with the creation, modification and listing of
-      videos within a channel.
+  - description: Operations dealing with the creation, modification and listing of videos within a channel.
     name: Video Channels
-  - description: >
-      Operations dealing with comments to a video. Comments are organized
-      in threads: adding a comment in response to the video starts a thread,
-      adding a reply to a comment adds it to its root comment thread.
+  - description: |
+      Operations dealing with comments to a video. Comments are organized in threads: adding a comment in response to the video starts a thread, adding a reply to a comment adds it to its root comment thread.
     name: Video Comments
-  - description: Operations dealing with blocking videos (removing them from view
-      and preventing interactions).
+  - description: Operations dealing with blocking videos (removing them from view and preventing interactions).
     name: Video Blocks
   - description: Like/dislike a video.
     name: Video Rates
-  - description: Operations dealing with playlists of videos. Playlists are bound to
-      users and/or channels.
+  - description: Operations dealing with playlists of videos. Playlists are bound to users and/or channels.
     name: Video Playlists
   - description: Server syndication feeds
     name: Feeds
-  - description: >
-      The search helps to find _videos_ or _channels_ from within the
-      instance and beyond.
-
+  - description: |
+      The search helps to find _videos_ or _channels_ from within the instance and beyond.
       Videos from other instances federated by the instance (that is, instances
-
       followed by the instance) can be found via keywords and other criteria of
-
       the advanced search.
 
-
       Administrators can also enable the use of a remote search system, indexing
-
       videos and channels not could be not federated by the instance.
     name: Search
   - description: Get and update the custom homepage
     name: Homepage
-  - description: >
-      PeerTube instances can mirror videos from one another, and help
-      distribute some videos.
-
+  - description: |
+      PeerTube instances can mirror videos from one another, and help distribute some videos.
 
       For importing videos as your own, refer to [video imports](#operation/importVideo).
     name: Video Mirroring
@@ -431,8 +298,7 @@ paths:
           name: predefinedReason
           schema:
             $ref: "#/components/schemas/PredefinedAbuseReasons"
-        - description: plain search that will match with video titles, reporter names and
-            more
+        - description: plain search that will match with video titles, reporter names and more
           in: query
           name: search
           schema:
@@ -748,8 +614,7 @@ paths:
     get:
       parameters:
         - $ref: "#/components/parameters/name"
-        - description: include view statistics for the last 30 days (only if authentified
-            as the account user)
+        - description: include view statistics for the last 30 days (only if authentified as the account user)
           in: query
           name: withStats
           schema:
@@ -810,33 +675,24 @@ paths:
             ## DEPENDENCIES: jq
             curl -s https://peertube2.cpy.re/api/v1/accounts/{name}/videos | jq
         - lang: Ruby
-          source: >
+          source: |
             require 'net/http'
-
             require 'json'
-
 
             uri = URI.parse("https://peertube2.cpy.re/api/v1/accounts/{name}/videos")
 
-
             http = Net::HTTP.new(uri.host, uri.port)
-
             http.use_ssl = true
-
 
             response = http.get(uri.request_uri)
 
-
             puts JSON.parse(response.read_body)
         - lang: Python
-          source: >
+          source: |
             import requests
 
-
             r = requests.get("https://peertube2.cpy.re/api/v1//accounts/{name}/videos")
-
             json = r.json()
-
 
             print(json)
   /config:
@@ -904,7 +760,7 @@ paths:
         "200":
           description: successful operation
         "400":
-          description: >
+          description: |
             Arises when:
               - the emailer is disabled and the instance is open to registrations
               - webtorrent and hls are disabled with transcoding enabled - you need at least one enabled
@@ -952,8 +808,7 @@ paths:
     get:
       operationId: getSyndicatedSubscriptionVideos
       parameters:
-        - description: format expected (we focus on making `rss` the most featureful ; it
-            serves [Media RSS](https://www.rssboard.org/media-rss))
+        - description: format expected (we focus on making `rss` the most featureful ; it serves [Media RSS](https://www.rssboard.org/media-rss))
           in: path
           name: format
           required: true
@@ -1016,8 +871,7 @@ paths:
     get:
       operationId: getSyndicatedComments
       parameters:
-        - description: format expected (we focus on making `rss` the most featureful ; it
-            serves [Media RSS](https://www.rssboard.org/media-rss))
+        - description: format expected (we focus on making `rss` the most featureful ; it serves [Media RSS](https://www.rssboard.org/media-rss))
           in: path
           name: format
           required: true
@@ -1111,8 +965,7 @@ paths:
     get:
       operationId: getSyndicatedVideos
       parameters:
-        - description: format expected (we focus on making `rss` the most featureful ; it
-            serves [Media RSS](https://www.rssboard.org/media-rss))
+        - description: format expected (we focus on making `rss` the most featureful ; it serves [Media RSS](https://www.rssboard.org/media-rss))
           in: path
           name: format
           required: true
@@ -1240,8 +1093,7 @@ paths:
         - Job
   /oauth-clients/local:
     get:
-      description: You need to retrieve a client id and secret before [logging
-        in](#operation/getOAuthToken).
+      description: You need to retrieve a client id and secret before [logging in](#operation/getOAuthToken).
       operationId: getOAuthClient
       responses:
         "200":
@@ -1512,11 +1364,8 @@ paths:
           $ref: "#/components/callbacks/searchIndex"
       operationId: searchChannels
       parameters:
-        - description: >
-            String to search. If the user can make a remote URI search, and the
-            string is an URI then the PeerTube instance will fetch the remote
-            object and add it to its database. Then, you can use the REST API to
-            fetch the complete channel information and interact with it.
+        - description: |
+            String to search. If the user can make a remote URI search, and the string is an URI then the PeerTube instance will fetch the remote object and add it to its database. Then, you can use the REST API to fetch the complete channel information and interact with it.
           in: query
           name: search
           required: true
@@ -1545,11 +1394,8 @@ paths:
           $ref: "#/components/callbacks/searchIndex"
       operationId: searchPlaylists
       parameters:
-        - description: >
-            String to search. If the user can make a remote URI search, and the
-            string is an URI then the PeerTube instance will fetch the remote
-            object and add it to its database. Then, you can use the REST API to
-            fetch the complete playlist information and interact with it.
+        - description: |
+            String to search. If the user can make a remote URI search, and the string is an URI then the PeerTube instance will fetch the remote object and add it to its database. Then, you can use the REST API to fetch the complete playlist information and interact with it.
           in: query
           name: search
           required: true
@@ -1587,11 +1433,8 @@ paths:
       operationId: searchVideos
       parameters:
         - allowEmptyValue: false
-          description: >
-            String to search. If the user can make a remote URI search, and the
-            string is an URI then the PeerTube instance will fetch the remote
-            object and add it to its database. Then, you can use the REST API to
-            fetch the complete video information and interact with it.
+          description: |
+            String to search. If the user can make a remote URI search, and the string is an URI then the PeerTube instance will fetch the remote object and add it to its database. Then, you can use the REST API to fetch the complete video information and interact with it.
           in: query
           name: search
           required: true
@@ -2077,10 +1920,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/AddUser"
-        description: >
-          If the smtp server is configured, you can leave the password empty
-          and an email will be sent
-
+        description: |
+          If the smtp server is configured, you can leave the password empty and an email will be sent
           asking the user to set it first.
         required: true
       responses:
@@ -2638,8 +2479,7 @@ paths:
         - Register
   /users/revoke-token:
     post:
-      description: Revokes your access token and its associated refresh token,
-        destroying your current session.
+      description: Revokes your access token and its associated refresh token, destroying your current session.
       operationId: revokeOAuthToken
       responses:
         "200":
@@ -2651,8 +2491,7 @@ paths:
         - Session
   /users/token:
     post:
-      description: With your [client id and secret](#operation/getOAuthClient), you
-        can retrieve an access and refresh tokens.
+      description: With your [client id and secret](#operation/getOAuthClient), you can retrieve an access and refresh tokens.
       operationId: getOAuthToken
       requestBody:
         content:
@@ -2710,22 +2549,15 @@ paths:
         - Session
       x-codeSamples:
         - lang: Shell
-          source: >
+          source: |
             ## DEPENDENCIES: jq
-
             API="https://peertube2.cpy.re/api/v1"
-
             USERNAME="<your_username>"
-
             PASSWORD="<your_password>"
 
-
             ## AUTH
-
             client_id=$(curl -s "$API/oauth-clients/local" | jq -r ".client_id")
-
             client_secret=$(curl -s "$API/oauth-clients/local" | jq -r ".client_secret")
-
             curl -s "$API/users/token" \
               --data client_id="$client_id" \
               --data client_secret="$client_secret" \
@@ -2748,8 +2580,7 @@ paths:
     get:
       operationId: getUser
       parameters:
-        - description: include statistics about the user (only available as a
-            moderator/admin)
+        - description: include statistics about the user (only available as a moderator/admin)
           in: query
           name: withStats
           schema:
@@ -2762,10 +2593,8 @@ paths:
                 oneOf:
                   - $ref: "#/components/schemas/User"
                   - $ref: "#/components/schemas/UserWithStats"
-          description: >
-            As an admin/moderator, you can request a response augmented with
-            statistics about the user's
-
+          description: |
+            As an admin/moderator, you can request a response augmented with statistics about the user's
             moderation relations and videos usage, by using the `withStats` parameter.
           x-summary: successful operation
       security:
@@ -2793,10 +2622,8 @@ paths:
         - Users
   "/users/{id}/verify-email":
     post:
-      description: >
-        Following a user registration, the new user will receive an email
-        asking to click a link
-
+      description: |
+        Following a user registration, the new user will receive an email asking to click a link
         containing a secret.
       operationId: verifyUser
       parameters:
@@ -3168,8 +2995,7 @@ paths:
       tags:
         - Video Playlists
     put:
-      description: If the video playlist is set as public, the playlist must have a
-        assigned channel.
+      description: If the video playlist is set as public, the playlist must have a assigned channel.
       parameters:
         - $ref: "#/components/parameters/playlistId"
       requestBody:
@@ -3279,8 +3105,7 @@ paths:
             schema:
               properties:
                 insertAfterPosition:
-                  description: New position for the block to reorder, to add the block before the
-                    first element
+                  description: New position for the block to reorder, to add the block before the first element
                   minimum: 0
                   type: integer
                 reorderLength:
@@ -3435,8 +3260,7 @@ paths:
         - Video
   /videos/imports:
     post:
-      description: Import a torrent or magnetURI or HTTP resource (if enabled by the
-        instance administrator)
+      description: Import a torrent or magnetURI or HTTP resource (if enabled by the instance administrator)
       operationId: importVideo
       requestBody:
         content:
@@ -3560,8 +3384,7 @@ paths:
                   example: Please support our work on https://soutenir.framasoft.org/en/ <3
                   type: string
                 tags:
-                  description: Live video/replay tags (maximum 5 tags each between 2 and 30
-                    characters)
+                  description: Live video/replay tags (maximum 5 tags each between 2 and 30 characters)
                   items:
                     maxLength: 30
                     minLength: 2
@@ -3585,27 +3408,19 @@ paths:
                 $ref: "#/components/schemas/VideoUploadResponse"
           description: successful operation
         "400":
-          description: >
+          description: |
             Disambiguate via `type`:
-
             - default type for a validation error
-
             - `live_conflicting_permanent_and_save_replay` for conflicting parameters set
-          x-summary: validation error, or conflicting `saveReplay` and `permanentLive`
-            parameter set
+          x-summary: validation error, or conflicting `saveReplay` and `permanentLive` parameter set
         "403":
-          description: >
+          description: |
             Disambiguate via `type`:
-
             - `live_not_enabled` for a disabled live feature
-
             - `live_not_allowing_replay` for a disabled replay feature
-
             - `max_instance_lives_limit_reached` for the absolute concurrent live limit
-
             - `max_user_lives_limit_reached` for the user concurrent live limit
-          x-summary: live is not enabled, allow replay is not enabled, or max
-            instance/user live videos limit is exceeded
+          x-summary: live is not enabled, allow replay is not enabled, or max instance/user live videos limit is exceeded
       security:
         - OAuth2: []
       summary: Create a live
@@ -3645,8 +3460,7 @@ paths:
         "400":
           description: bad parameters or trying to update a live that has already started
         "403":
-          description: trying to save replay of the live but saving replay is not enabled
-            on the instance
+          description: trying to save replay of the live but saving replay is not enabled on the instance
       security:
         - OAuth2: []
       summary: Update information about a live
@@ -3726,9 +3540,7 @@ paths:
               thumbnailfile:
                 contentType: image/jpeg
               videofile:
-                contentType: video/mp4, video/webm, video/ogg, video/avi, video/quicktime,
-                  video/x-msvideo, video/x-flv, video/x-matroska,
-                  application/octet-stream
+                contentType: video/mp4, video/webm, video/ogg, video/avi, video/quicktime, video/x-msvideo, video/x-flv, video/x-matroska, application/octet-stream
             schema:
               $ref: "#/components/schemas/VideoUploadRequestLegacy"
       responses:
@@ -3743,10 +3555,8 @@ paths:
         "408":
           description: upload has timed out
         "413":
-          description: >
-            If the response has no body, it means the reverse-proxy didn't let
-            it through. Otherwise disambiguate via `type`:
-
+          description: |
+            If the response has no body, it means the reverse-proxy didn't let it through. Otherwise disambiguate via `type`:
             - `quota_reached` for quota limits wether daily or global
           headers:
             X-File-Maximum-Size:
@@ -3754,8 +3564,7 @@ paths:
               schema:
                 format: Nginx size
                 type: string
-          x-summary: video file too large, due to quota or max body size limit set by the
-            reverse-proxy
+          x-summary: video file too large, due to quota or max body size limit set by the reverse-proxy
         "415":
           description: video type unsupported
         "422":
@@ -3768,28 +3577,18 @@ paths:
         - Video Upload
       x-codeSamples:
         - lang: Shell
-          source: >
+          source: |
             ## DEPENDENCIES: jq
-
             USERNAME="<your_username>"
-
             PASSWORD="<your_password>"
-
             FILE_PATH="<your_file_path>"
-
             CHANNEL_ID="<your_channel_id>"
-
             NAME="<video_name>"
-
             API="https://peertube2.cpy.re/api/v1"
 
-
             ## AUTH
-
             client_id=$(curl -s "$API/oauth-clients/local" | jq -r ".client_id")
-
             client_secret=$(curl -s "$API/oauth-clients/local" | jq -r ".client_secret")
-
             token=$(curl -s "$API/users/token" \
               --data client_id="$client_id" \
               --data client_secret="$client_secret" \
@@ -3799,7 +3598,6 @@ paths:
               | jq -r ".access_token")
 
             ## VIDEO UPLOAD
-
             curl -s "$API/videos/upload" \
               -H "Authorization: Bearer $token" \
               --max-time 600 \
@@ -3808,15 +3606,11 @@ paths:
               --form name="$NAME"
   /videos/upload-resumable:
     delete:
-      description: Uses [a resumable
-        protocol](https://github.com/kukhariev/node-uploadx/blob/master/proto.md)
-        to cancel the upload of a video
+      description: Uses [a resumable protocol](https://github.com/kukhariev/node-uploadx/blob/master/proto.md) to cancel the upload of a video
       operationId: uploadResumableCancel
       parameters:
-        - description: >
-            Created session id to proceed with. If you didn't send chunks in
-            the last 12 hours, it is
-
+        - description: |
+            Created session id to proceed with. If you didn't send chunks in the last 12 hours, it is
             not valid anymore and the upload session has already been deleted with its data ;-)
           in: query
           name: upload_id
@@ -3846,21 +3640,17 @@ paths:
         - Video
         - Video Upload
     post:
-      description: Uses [a resumable
-        protocol](https://github.com/kukhariev/node-uploadx/blob/master/proto.md)
-        to initialize the upload of a video
+      description: Uses [a resumable protocol](https://github.com/kukhariev/node-uploadx/blob/master/proto.md) to initialize the upload of a video
       operationId: uploadResumableInit
       parameters:
-        - description: Number of bytes that will be uploaded in subsequent requests. Set
-            this value to the size of the file you are uploading.
+        - description: Number of bytes that will be uploaded in subsequent requests. Set this value to the size of the file you are uploading.
           in: header
           name: X-Upload-Content-Length
           required: true
           schema:
             example: 2469036
             type: number
-        - description: MIME type of the file that you are uploading. Depending on your
-            instance settings, acceptable values might vary.
+        - description: MIME type of the file that you are uploading. Depending on your instance settings, acceptable values might vary.
           in: header
           name: X-Upload-Content-Type
           required: true
@@ -3875,9 +3665,7 @@ paths:
               $ref: "#/components/schemas/VideoUploadRequestResumable"
       responses:
         "200":
-          description: file already exists, send a
-            [`resume`](https://github.com/kukhariev/node-uploadx/blob/master/proto.md)
-            request instead
+          description: file already exists, send a [`resume`](https://github.com/kukhariev/node-uploadx/blob/master/proto.md) request instead
         "201":
           description: created
           headers:
@@ -3895,8 +3683,7 @@ paths:
             Disambiguate via `type`:
             - `max_file_size_reached` for the absolute file size limit
             - `quota_reached` for quota limits whether daily or global
-          x-summary: video file too large, due to quota, absolute max file size or
-            concurrent partial upload limit
+          x-summary: video file too large, due to quota, absolute max file size or concurrent partial upload limit
         "415":
           description: video type unsupported
       security:
@@ -3906,27 +3693,21 @@ paths:
         - Video
         - Video Upload
     put:
-      description: Uses [a resumable
-        protocol](https://github.com/kukhariev/node-uploadx/blob/master/proto.md)
-        to continue, pause or resume the upload of a video
+      description: Uses [a resumable protocol](https://github.com/kukhariev/node-uploadx/blob/master/proto.md) to continue, pause or resume the upload of a video
       operationId: uploadResumable
       parameters:
-        - description: >
-            Created session id to proceed with. If you didn't send chunks in
-            the last 12 hours, it is
-
+        - description: |
+            Created session id to proceed with. If you didn't send chunks in the last 12 hours, it is
             not valid anymore and you need to initialize a new upload.
           in: query
           name: upload_id
           required: true
           schema:
             type: string
-        - description: >
+        - description: |
             Specifies the bytes in the file that the request is uploading.
 
-
             For example, a value of `bytes 0-262143/1000000` shows that the request is sending the first
-
             262144 bytes (256 x 1024) in a 2,469,036 byte file.
           in: header
           name: Content-Range
@@ -3934,17 +3715,13 @@ paths:
           schema:
             example: bytes 0-262143/2469036
             type: string
-        - description: >
+        - description: |
             Size of the chunk that the request is sending.
 
-
             The chunk size __must be a multiple of 256 KB__, and unlike [Google Resumable](https://developers.google.com/youtube/v3/guides/using_resumable_upload_protocol)
-
             doesn't mandate for chunks to have the same size throughout the upload sequence.
 
-
             Remember that larger chunks are more efficient. PeerTube's web client uses chunks varying from
-
             1048576 bytes (~1MB) and increases or reduces size depending on connection health.
           in: header
           name: Content-Length
@@ -4323,11 +4100,8 @@ paths:
           content:
             application/json:
               schema:
-                example: >
-                  **[Want to help to translate this
-                  video?](https://weblate.framasoft.org/projects/what-is-peertube-video/)**\r\n\r\n**Take
-                  back the control of your videos!
-                  [#JoinPeertube](https://joinpeertube.org)**
+                example: |
+                  **[Want to help to translate this video?](https://weblate.framasoft.org/projects/what-is-peertube-video/)**\r\n\r\n**Take back the control of your videos! [#JoinPeertube](https://joinpeertube.org)**
                 maxLength: 10000
                 minLength: 3
                 nullable: true
@@ -4432,8 +4206,7 @@ components:
                   schema:
                     $ref: "#/components/schemas/VideoListResponse"
               description: successful operation
-          summary: third-party search index MAY be used instead of the local index, if
-            enabled by the instance admin. see `searchTarget`
+          summary: third-party search index MAY be used instead of the local index, if enabled by the instance admin. see `searchTarget`
   parameters:
     abuseId:
       description: Abuse id
@@ -4495,8 +4268,7 @@ components:
       schema:
         $ref: "#/components/schemas/VideoLanguageSet"
     categoryOneOf:
-      description: category id of the video (see
-        [/videos/categories](#operation/getCategories))
+      description: category id of the video (see [/videos/categories](#operation/getCategories))
       explode: false
       in: query
       name: categoryOneOf
@@ -4544,7 +4316,7 @@ components:
         minimum: 1
         type: integer
     filter:
-      description: >
+      description: |
         Special filters which might require special rights:
          * `local` - only videos local to the instance
          * `all-local` - only videos local to the instance, but showing private and unlisted videos (requires Admin privileges)
@@ -4610,9 +4382,7 @@ components:
           - video-live-ending
         type: string
     languageOneOf:
-      description: language id of the video (see
-        [/videos/languages](#operation/getLanguages)). Use `_unknown` to filter
-        on videos that don't have a video language
+      description: language id of the video (see [/videos/languages](#operation/getLanguages)). Use `_unknown` to filter on videos that don't have a video language
       explode: false
       in: query
       name: languageOneOf
@@ -4678,18 +4448,15 @@ components:
       schema:
         $ref: "#/components/schemas/VideoPlaylist/properties/id"
     search:
-      description: Plain text search, applied to various parts of the model depending
-        on endpoint
+      description: Plain text search, applied to various parts of the model depending on endpoint
       in: query
       name: search
       required: false
       schema:
         type: string
     searchTarget:
-      description: >
-        If the administrator enabled search index support, you can override
-        the default search target.
-
+      description: |
+        If the administrator enabled search index support, you can override the default search target.
 
         **Warning**: If you choose to make an index search, PeerTube will get results from a third party service. It means the instance may not yet know the objects you fetched. If you want to load video/channel information:
           * If the current user has the ability to make a remote URI search (this information is available in the config endpoint),
@@ -4964,8 +4731,7 @@ components:
           minimum: 0
           type: integer
         followingCount:
-          description: number of actors subscribed to by this actor, as seen by this
-            instance
+          description: number of actors subscribed to by this actor, as seen by this instance
           minimum: 0
           type: integer
         host:
@@ -5112,8 +4878,7 @@ components:
         id:
           $ref: "#/components/schemas/id"
         score:
-          description: score reflecting the reachability of the actor, with steps of `10`
-            and a base score of `1000`.
+          description: score reflecting the reachability of the actor, with steps of `10` and a base score of `1000`.
           type: number
         state:
           enum:
@@ -5887,12 +5652,10 @@ components:
           description: Settings pertaining to transcoding jobs
           properties:
             allowAdditionalExtensions:
-              description: Allow your users to upload .mkv, .mov, .avi, .wmv, .flv, .f4v,
-                .3g2, .3gp, .mts, m2ts, .mxf, .nut videos
+              description: Allow your users to upload .mkv, .mov, .avi, .wmv, .flv, .f4v, .3g2, .3gp, .mts, m2ts, .mxf, .nut videos
               type: boolean
             allowAudioFiles:
-              description: If a user uploads an audio file, PeerTube will create a video by
-                merging the preview file and the audio file
+              description: If a user uploads an audio file, PeerTube will create a video by merging the preview file and the audio file
               type: boolean
             concurrency:
               description: Amount of transcoding jobs to execute in parallel
@@ -5906,9 +5669,8 @@ components:
                   type: boolean
               type: object
             profile:
-              description: >
-                New profiles can be added by plugins ; available in core PeerTube:
-                'default'.
+              description: |
+                New profiles can be added by plugins ; available in core PeerTube: 'default'.
               enum:
                 - default
               type: string
@@ -5965,8 +5727,7 @@ components:
           description: new preference regarding playing following videos automatically
           type: boolean
         autoPlayNextVideoPlaylist:
-          description: new preference regarding playing following playlist videos
-            automatically
+          description: new preference regarding playing following playlist videos automatically
           type: boolean
         autoPlayVideo:
           description: new preference regarding playing videos automatically
@@ -6037,12 +5798,10 @@ components:
         account:
           $ref: "#/components/schemas/Account"
         autoPlayNextVideo:
-          description: Automatically start playing the upcoming video after the currently
-            playing video
+          description: Automatically start playing the upcoming video after the currently playing video
           type: boolean
         autoPlayNextVideoPlaylist:
-          description: Automatically start playing the video on the playlist after the
-            currently playing video
+          description: Automatically start playing the video on the playlist after the currently playing video
           type: boolean
         autoPlayVideo:
           description: Automatically start playing the video on the watch page
@@ -6131,8 +5890,7 @@ components:
         - $ref: "#/components/schemas/User"
         - properties:
             abusesAcceptedCount:
-              description: Count of reports/abuses created by the user and accepted/acted upon
-                by the moderation team
+              description: Count of reports/abuses created by the user and accepted/acted upon by the moderation team
               type: integer
             abusesCount:
               description: Count of reports/abuses of which the user is a target
@@ -6168,14 +5926,11 @@ components:
           format: date-time
           type: string
         description:
-          description: >
+          description: |
             truncated description of the video, written in Markdown.
-
             Resolve `descriptionPath` to get the full description of maximum `10000` characters.
-          example: >
-            **[Want to help to translate this
-            video?](https://weblate.framasoft.org/projects/what-is-peertube-video/)**\r\n\r\n
-
+          example: |
+            **[Want to help to translate this video?](https://weblate.framasoft.org/projects/what-is-peertube-video/)**\r\n\r\n
             **Take back the control of your videos! [#JoinPeertube](https://joinpeertube.org)**\r\n*A decentralized video hosting network, based on fr...
           maxLength: 250
           minLength: 3
@@ -6219,8 +5974,7 @@ components:
         nsfw:
           type: boolean
         originallyPublishedAt:
-          description: used to represent a date of first publication, prior to the
-            practical publication date of `publishedAt`
+          description: used to represent a date of first publication, prior to the practical publication date of `publishedAt`
           example: 2010-10-01T10:52:46.396Z
           format: date-time
           type: string
@@ -6232,9 +5986,7 @@ components:
             - $ref: "#/components/schemas/VideoPrivacyConstant"
           description: privacy policy used to distribute the video
         publishedAt:
-          description: time at which the video was marked as ready for playback (with
-            restrictions depending on `privacy`). Usually set after a `state`
-            evolution.
+          description: time at which the video was marked as ready for playback (with restrictions depending on `privacy`). Usually set after a `state` evolution.
           example: 2018-10-01T10:52:46.396Z
           format: date-time
           type: string
@@ -6248,8 +6000,7 @@ components:
         state:
           allOf:
             - $ref: "#/components/schemas/VideoStateConstant"
-          description: represents the internal state of the video processing within the
-            PeerTube instance
+          description: represents the internal state of the video processing within the PeerTube instance
         thumbnailPath:
           example: /static/thumbnails/a65bc12f-9383-462e-81ae-8207e8b434ee.jpg
           type: string
@@ -6313,8 +6064,7 @@ components:
         language:
           $ref: "#/components/schemas/VideoConstantString-Language"
     VideoCategorySet:
-      description: category id of the video (see
-        [/videos/categories](#operation/getCategories))
+      description: category id of the video (see [/videos/categories](#operation/getCategories))
       example: 15
       type: integer
     VideoChannel:
@@ -6347,8 +6097,7 @@ components:
           readOnly: true
           type: object
         support:
-          description: text shown by default on all videos of this channel, to tell the
-            audience how to support it
+          description: text shown by default on all videos of this channel, to tell the audience how to support it
           example: Please support our work on https://soutenir.framasoft.org/en/ <3
           maxLength: 1000
           minLength: 3
@@ -6533,20 +6282,16 @@ components:
             commentsEnabled:
               type: boolean
             descriptionPath:
-              description: path at which to get the full description of maximum `10000`
-                characters
+              description: path at which to get the full description of maximum `10000` characters
               example: /api/v1/videos/9c9de5e8-0a1e-484a-b099-e80766180a6d/description
               type: string
             downloadEnabled:
               type: boolean
             files:
-              description: >
-                WebTorrent/raw video files. If WebTorrent is disabled on the
-                server:
-
+              description: |
+                WebTorrent/raw video files. If WebTorrent is disabled on the server:
 
                 - field will be empty
-
                 - video files will be found in `streamingPlaylists[].files` field
               items:
                 $ref: "#/components/schemas/VideoFile"
@@ -6589,8 +6334,7 @@ components:
     VideoFile:
       properties:
         fileDownloadUrl:
-          description: URL endpoint that transfers the video file as an attachment (so
-            that the browser opens a download dialog)
+          description: URL endpoint that transfers the video file as an attachment (so that the browser opens a download dialog)
           format: url
           type: string
         fileUrl:
@@ -6601,8 +6345,7 @@ components:
           description: Frames per second of the video file
           type: number
         magnetUri:
-          description: magnet URI allowing to resolve the video via BitTorrent without a
-            metainfo file
+          description: magnet URI allowing to resolve the video via BitTorrent without a metainfo file
           example: magnet:?xs=https%3A%2F%2Fframatube.org%2Fstatic%2Ftorrents%2F9c9de5e8-0a1e-484a-b099-e80766180a6d-240.torrent&xt=urn:btih:38b4747ff788b30bf61f59d1965cd38f9e48e01f&dn=What+is+PeerTube%3F&tr=wss%3A%2F%2Fframatube.org%2Ftracker%2Fsocket&tr=https%3A%2F%2Fframatube.org%2Ftracker%2Fannounce&ws=https%3A%2F%2Fframatube.org%2Fstatic%2Fwebseed%2F9c9de5e8-0a1e-484a-b099-e80766180a6d-240.mp4
           format: uri
           pattern: /magnet:\?xt=urn:[a-z0-9]+:[a-z0-9]{32}/i
@@ -6617,8 +6360,7 @@ components:
           description: Video file size in bytes
           type: integer
         torrentDownloadUrl:
-          description: URL endpoint that transfers the torrent file as an attachment (so
-            that the browser opens a download dialog)
+          description: URL endpoint that transfers the torrent file as an attachment (so that the browser opens a download dialog)
           format: url
           type: string
         torrentUrl:
@@ -6702,8 +6444,7 @@ components:
         uuid:
           $ref: "#/components/schemas/Video/properties/uuid"
     VideoLanguageSet:
-      description: language id of the video (see
-        [/videos/languages](#operation/getLanguages))
+      description: language id of the video (see [/videos/languages](#operation/getLanguages))
       example: en
       type: string
     VideoLicenceSet:
@@ -6790,8 +6531,7 @@ components:
         label:
           type: string
     VideoPrivacySet:
-      description: privacy id of the video (see
-        [/videos/privacies](#operation/getPrivacyPolicies))
+      description: privacy id of the video (see [/videos/privacies](#operation/getPrivacyPolicies))
       enum:
         - 1
         - 2
@@ -6843,10 +6583,8 @@ components:
           example: 240p
           type: string
     VideoResolutionSet:
-      description: >
-        Video resolution (`0`, `240`, `360`, `720`, `1080`, `1440` or
-        `2160`)
-
+      description: |
+        Video resolution (`0`, `240`, `360`, `720`, `1080`, `1440` or `2160`)
 
         `0` is used as a special value for stillimage videos dedicated to audio, a.k.a. audio-only videos.
       example: 240
@@ -6864,8 +6602,7 @@ components:
     VideoStateConstant:
       properties:
         id:
-          description: The video state (Published = `1`, to transcode = `2`, to import =
-            `3`)
+          description: The video state (Published = `1`, to transcode = `2`, to import = `3`)
           enum:
             - 1
             - 2
@@ -6890,9 +6627,8 @@ components:
     VideoStreamingPlaylists-HLS:
       properties:
         files:
-          description: >
+          description: |
             Video files associated to this playlist.
-
 
             The difference with the root `files` property is that these files are fragmented, so they can be used in this streaming playlist (HLS, etc.)
           items:
@@ -6926,11 +6662,8 @@ components:
           type: boolean
         description:
           description: Video description
-          example: >
-            **[Want to help to translate this
-            video?](https://weblate.framasoft.org/projects/what-is-peertube-video/)**\r\n\r\n**Take
-            back the control of your videos!
-            [#JoinPeertube](https://joinpeertube.org)**
+          example: |
+            **[Want to help to translate this video?](https://weblate.framasoft.org/projects/what-is-peertube-video/)**\r\n\r\n**Take back the control of your videos! [#JoinPeertube](https://joinpeertube.org)**
           type: string
         downloadEnabled:
           description: Enable or disable downloading for this video
@@ -7071,9 +6804,7 @@ components:
             description: video category (MRSS)
             type: integer
           media:community:
-            description: see
-              [media:community](https://www.rssboard.org/media-rss#media-community)
-              (MRSS)
+            description: see [media:community](https://www.rssboard.org/media-rss#media-community) (MRSS)
             properties:
               media:statistics:
                 properties:
@@ -7095,11 +6826,7 @@ components:
                   attribute: true
             type: object
           media:group:
-            description: list of streamable files for the video. see
-              [media:peerLink](https://www.rssboard.org/media-rss#media-peerlink)
-              and
-              [media:content](https://www.rssboard.org/media-rss#media-content)
-              or  (MRSS)
+            description: list of streamable files for the video. see [media:peerLink](https://www.rssboard.org/media-rss#media-peerlink) and [media:content](https://www.rssboard.org/media-rss#media-content) or  (MRSS)
             items:
               anyOf:
                 - $ref: "#/components/schemas/MRSSPeerLink"
@@ -7115,8 +6842,7 @@ components:
                   attribute: true
             type: object
           media:rating:
-            description: see [media:rating](https://www.rssboard.org/media-rss#media-rating)
-              (MRSS)
+            description: see [media:rating](https://www.rssboard.org/media-rss#media-rating) (MRSS)
             enum:
               - nonadult
               - adult
@@ -7138,8 +6864,7 @@ components:
                   attribute: true
             type: object
           media:title:
-            description: see [media:title](https://www.rssboard.org/media-rss#media-title)
-              (MRSS). We only use `plain` titles.
+            description: see [media:title](https://www.rssboard.org/media-rss#media-title) (MRSS). We only use `plain` titles.
             type: string
           pubDate:
             description: video publication date

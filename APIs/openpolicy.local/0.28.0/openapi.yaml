@@ -5,17 +5,12 @@ info:
   contact:
     name: The OPA team
     url: https://github.com/open-policy-agent/opa
-  description: >-
-    OPA provides policy-based control for cloud native environments.
-    The following *endpoints* (such as `PUT /v1/policies`) provide reference
-    documentation for the OPA REST API.
-
+  description: |-
+    OPA provides policy-based control for cloud native environments. The following *endpoints* (such as `PUT /v1/policies`) provide reference documentation for the OPA REST API.
 
     ### API specification viewing options
 
-
     - **[View the specification in *Redoc* (default)](index.html)**
-
     - **[View the specification in *Swagger UI*](swagger-ui.html)**
   license:
     name: Apache 2.0
@@ -38,31 +33,21 @@ externalDocs:
   url: https://www.openpolicyagent.org/docs/latest/
 security: []
 tags:
-  - description: Allows you to add, remove and modify policy modules. *Policy module
-      identifiers are only used for management purposes. They are not used
-      outside the Policy API.*
+  - description: Allows you to add, remove and modify policy modules. *Policy module identifiers are only used for management purposes. They are not used outside the Policy API.*
     name: Policy API
-  - description: Exposes endpoints for reading and writing documents in OPA. For an
-      explanation of the different types of documents, see [the OPA document
-      model](https://www.openpolicyagent.org/docs/latest/philosophy/#the-opa-document-model)
+  - description: Exposes endpoints for reading and writing documents in OPA. For an explanation of the different types of documents, see [the OPA document model](https://www.openpolicyagent.org/docs/latest/philosophy/#the-opa-document-model)
     name: Data API
   - description: Posting queries to OPA
     name: Query API
   - description: Posting partial queries to OPA
     name: Compile API
-  - description: Executes a simple built-in policy query to verify that the server
-      is operational
+  - description: Executes a simple built-in policy query to verify that the server is operational
     name: Health API
 paths:
   /:
     post:
-      description: >-
-        This API queries the document at */data/system/main* by default
-        (however, you can [configure
-        OPA](https://www.openpolicyagent.org/docs/latest/configuration/) to use
-        a different path to serve these queries). That document defines the
-        response.
-
+      description: |-
+        This API queries the document at */data/system/main* by default (however, you can [configure OPA](https://www.openpolicyagent.org/docs/latest/configuration/) to use a different path to serve these queries). That document defines the response.
         For example, use the following in `PUT /v1/policies/{path}`) to define a rule that will produce a value for the */data/system/main* document:
 
           ```yaml
@@ -97,26 +82,18 @@ paths:
         - Query API
   /health:
     get:
-      description: >-
+      description: |-
         This API endpoint verifies that the server is operational.
 
-
         The response from the server is either 200 or 500:
-
         - **200** - OPA service is healthy. If `bundles` is true, then all configured bundles have been activated. If `plugins` is true, then all plugins are in an 'OK' state.
-
         - **500** - OPA service is *not* healthy. If `bundles` is true, at least one of configured bundles has not yet been activated. If `plugins` is true, at least one plugins is in a 'not OK' state.
 
-
         ---
-
         **Note**
-
         This check is only for initial bundle activation. Subsequent downloads will not affect the health check.
 
-
         Use the **status** endpoint (in the (management API)[management.html]) for more fine-grained bundle status monitoring.
-
 
         ---
       externalDocs:
@@ -138,9 +115,8 @@ paths:
     parameters:
       - $ref: "#/components/parameters/webhookPathParameter"
     post:
-      description: >
-        The example given here assumes you have created a policy (with `PUT
-        /v1/policies/{path}`), such as:
+      description: |
+        The example given here assumes you have created a policy (with `PUT /v1/policies/{path}`), such as:
 
           ```yaml
           package opa.examples
@@ -173,42 +149,26 @@ paths:
         - Data API
   /v1/compile:
     post:
-      description: >-
-        This API endpoint allows you to partially evaluate Rego queries and
-        obtain a simplified version of the policy. The example below assumes
-        that OPA has been given the following policy (use `PUT
-        /v1/policies/{path}`):
-
+      description: |-
+        This API endpoint allows you to partially evaluate Rego queries and obtain a simplified version of the policy. The example below assumes that OPA has been given the following policy (use `PUT /v1/policies/{path}`):
 
         ```yaml
-
         package example
-
         allow {
           input.subject.clearance_level >= data.reports[_].clearance_level
         }
-
         ```
-
         Compile API **request body** so that it contain the following fields:
 
-
         | Field | Type | Required | Description |
-
         | --- | --- | --- | --- |
-
         | `query` | `string` | Yes | The query to partially evaluate and compile. |
-
         | `input` | `any` | No | The input document to use during partial evaluation (default: undefined). |
-
         | `unknowns` | `array[string]` | No | The terms to treat as unknown during partial evaluation (default: `["input"]`]). |
-
 
         For example:
 
-
         ```json
-
         {
           "query": "data.example.allow == true",
           "input": {
@@ -220,11 +180,8 @@ paths:
             "data.reports"
             ]
         }
-
         ```
-
         ### Partial evaluation
-
         In some cases, the result of partial valuation is a conclusive, unconditional answer. See [the guidance](https://www.openpolicyagent.org/docs/latest/rest-api/#unconditional-results-from-partial-evaluation) for details.
       externalDocs:
         description: Partial evaluation article
@@ -294,9 +251,7 @@ paths:
     parameters:
       - $ref: "#/components/parameters/pathParameter"
     patch:
-      description: This API endpoint updates an existing document on the server by
-        describing the changes required (using [JSON patch
-        operations](http://jsonpatch.com/))
+      description: This API endpoint updates an existing document on the server by describing the changes required (using [JSON patch operations](http://jsonpatch.com/))
       operationId: patchDocument
       requestBody:
         content:
@@ -318,13 +273,10 @@ paths:
       tags:
         - Data API
     post:
-      description: >-
+      description: |-
         The server will return a *bad request* (400) response if either:
-
         - The query requires an input document and you do not provide it
-
         - You provided an input document but the query has already defined it.
-
 
         If `path` indexes into an array, the server will attempt to convert the array index to an integer. If the path element cannot be converted to an integer, a *not found* response (404) will be returned.
       operationId: getDocumentWithPath
@@ -352,11 +304,8 @@ paths:
       tags:
         - Data API
     put:
-      description: >-
-        If the path does not refer to an existing document (for example
-        *us-west/servers*), the server will attempt to create all the necessary
-        containing documents.
-
+      description: |-
+        If the path does not refer to an existing document (for example *us-west/servers*), the server will attempt to create all the necessary containing documents.
 
         This behavior is similar to the Unix command [mkdir -p](https://en.wikipedia.org/wiki/Mkdir#Options).
       operationId: putDocument
@@ -378,8 +327,7 @@ paths:
         - Data API
   /v1/policies:
     get:
-      description: This API endpoint responds with a list of all policy modules on the
-        server (result response)
+      description: This API endpoint responds with a list of all policy modules on the server (result response)
       operationId: getPolicies
       parameters:
         - $ref: "#/components/parameters/prettyParameter"
@@ -457,8 +405,7 @@ paths:
       tags:
         - Policy API
     get:
-      description: This API endpoint returns the details of the specified policy
-        module (`{id}`)
+      description: This API endpoint returns the details of the specified policy module (`{id}`)
       operationId: getPolicyModule
       parameters:
         - $ref: "#/components/parameters/prettyParameter"
@@ -475,28 +422,19 @@ paths:
     parameters:
       - $ref: "#/components/parameters/idParameter"
     put:
-      description: >-
+      description: |-
         - If the policy module does not exist, it is created.
-
         - If the policy module already exists, it is replaced.
-
 
         If the policy module isn't correctly defined, a *bad request* (400) response is returned.
 
-
         ### Example policy module
-
         ```yaml
-
         package opa.examples
 
-
         import data.servers
-
         import data.networks
-
         import data.ports
-
 
         public_servers[server] {
           some k, m
@@ -505,7 +443,6 @@ paths:
           	ports[k].networks[_] == networks[m].id
           	networks[m].public == true
         }
-
         ```
       operationId: putPolicyModule
       parameters:
@@ -595,10 +532,8 @@ paths:
 components:
   parameters:
     bundlesParameter:
-      description: >-
-        Reports on bundle activation status (useful for 'ready' checks at
-        startup).
-
+      description: |-
+        Reports on bundle activation status (useful for 'ready' checks at startup).
 
         This includes any discovery bundles or bundles defined in the loaded discovery configuration.
       example: true
@@ -608,8 +543,7 @@ components:
       schema:
         type: boolean
     explainParameter:
-      description: If set to *full*, response will include query explanations in
-        addition to the result.
+      description: If set to *full*, response will include query explanations in addition to the result.
       example: full
       in: query
       name: explain
@@ -625,9 +559,7 @@ components:
       schema:
         type: string
     ifNoneMatchParameter:
-      description: The server will respect the If-None-Match header if it is set to *
-        (in other words, it will not overwrite an existing document located at
-        the specified `path`).
+      description: The server will respect the If-None-Match header if it is set to * (in other words, it will not overwrite an existing document located at the specified `path`).
       example: "*"
       in: header
       name: If-None-Match
@@ -635,9 +567,7 @@ components:
       schema:
         type: string
     inputParameter:
-      description: Provide the text for an [input
-        document](https://www.openpolicyagent.org/docs/latest/kubernetes-primer/#input-document)
-        in JSON format
+      description: Provide the text for an [input document](https://www.openpolicyagent.org/docs/latest/kubernetes-primer/#input-document) in JSON format
       in: query
       name: input
       required: false
@@ -649,10 +579,8 @@ components:
               flag: true
         type: object
     instrumentParameter:
-      description: >-
-        If true, response will return additional performance metrics in
-        addition to the result and the standard metrics.
-
+      description: |-
+        If true, response will return additional performance metrics in addition to the result and the standard metrics.
 
         **Caution:** This can add significant overhead to query evaluation. The recommendation is to only use this parameter if you are debugging a performance problem.
       example: false
@@ -671,10 +599,7 @@ components:
         type: boolean
     pathParameter:
       allowReserved: true
-      description: A backslash (/) delimited path to access values inside object and
-        array documents. If the path points to an array, the server will attempt
-        to convert the array index to an integer. If the path element cannot be
-        converted to an integer, the server will respond with 404.
+      description: A backslash (/) delimited path to access values inside object and array documents. If the path points to an array, the server will attempt to convert the array index to an integer. If the path element cannot be converted to an integer, the server will respond with 404.
       example: opa/examples/public_servers
       in: path
       name: path
@@ -698,8 +623,7 @@ components:
       schema:
         type: boolean
     provenanceParameter:
-      description: If true, response will include build and version information in
-        addition to the result.
+      description: If true, response will include build and version information in addition to the result.
       example: false
       in: query
       name: provenance
@@ -707,20 +631,15 @@ components:
       schema:
         type: boolean
     qParameter:
-      description: The [URL-encoded](https://www.w3schools.com/tags/ref_urlencode.ASP)
-        ad-hoc query to execute.
-      example: '{"query": "data.servers[i].ports[_] = \"p2\"; data.servers[i].name =
-        name"}'
+      description: The [URL-encoded](https://www.w3schools.com/tags/ref_urlencode.ASP) ad-hoc query to execute.
+      example: '{"query": "data.servers[i].ports[_] = \"p2\"; data.servers[i].name = name"}'
       in: query
       name: q
       required: true
       schema:
         type: string
     webhookPathParameter:
-      description: A backslash (/) delimited path to access values inside object and
-        array documents. If the path points to an array, the server will attempt
-        to convert the array index to an integer. If the path element cannot be
-        converted to an integer, the server will respond with 404.
+      description: A backslash (/) delimited path to access values inside object and array documents. If the path points to an array, the server will attempt to convert the array index to an integer. If the path element cannot be converted to an integer, the server will respond with 404.
       example: opa/examples/allow_request
       in: path
       name: path
@@ -739,8 +658,7 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/404"
-      description: Not found (for example, a requested policy module or document does
-        not exist)
+      description: Not found (for example, a requested policy module or document does not exist)
     serverErrorResponse:
       content:
         application/json:
@@ -788,8 +706,7 @@ components:
           minLength: 1
           type: string
         errors:
-          description: Errors that may have been generated during the parse, compile, or
-            installation of a policy module
+          description: Errors that may have been generated during the parse, compile, or installation of a policy module
           items:
             properties:
               code:
@@ -837,8 +754,7 @@ components:
           minLength: 1
           type: string
         message:
-          description: The description of the error (including the name of any undefined
-            policy module)
+          description: The description of the error (including the name of any undefined policy module)
           example: 'storage_not_found_error: policy id \"partial\"'
           minLength: 1
           type: string
@@ -852,8 +768,7 @@ components:
           items:
             properties:
               locals:
-                description: The query's term bindings at the point when the trace event was
-                  emitted.
+                description: The query's term bindings at the point when the trace event was emitted.
                 items:
                   properties:
                     key:
@@ -894,22 +809,15 @@ components:
                     type: array
                 type: object
               op:
-                description: >-
+                description: |-
                   The kind of *trace event*
 
-
                   Each trace event represents a step in the query evaluation process. Trace events are emitted at the following points:
-
                   - enter - before a body or rule is evaluated
-
                   - exit - after a body or rule has evaluated successfully
-
                   - eval - before an expression is evaluated
-
                   - fail - after an expression has evaluated to false.
-
                   - redo - before evaluation restarts from a body, rule, or expression.
-
 
                   By default, OPA searches for all sets of term bindings that make all expressions in the query evaluate to true. Because there may be multiple answers, the search can restart when OPA determines the query is true or false. When the search restarts, a *redo trace event* is emitted.
                 enum:
@@ -921,18 +829,15 @@ components:
                 example: enter
                 type: string
               parent_id:
-                description: >-
-                  The parent query. Use this field to identify trace events from
-                  related queries.
-
+                description: |-
+                  The parent query. Use this field to identify trace events from related queries.
 
                   For example, if query A references rule R, trace events emitted when evaluating rule R will have the *parent_id* field set to query A’s *query_id*.
                 example: 0
                 minimum: 0
                 type: number
               query_id:
-                description: The query that the trace event was emitted for. Use this field to
-                  distinguish trace events emitted by from different queries.
+                description: The query that the trace event was emitted for. Use this field to distinguish trace events emitted by from different queries.
                 example: 0
                 minimum: 0
                 type: number
@@ -956,63 +861,51 @@ components:
               example: 0
               type: number
             timer_query_compile_stage_build_comprehension_index_ns:
-              description: (Only returned if `instrument` is true.) *Description is
-                forthcoming*
+              description: (Only returned if `instrument` is true.) *Description is forthcoming*
               example: 43000
               type: number
             timer_query_compile_stage_check_safety_ns:
-              description: (Only returned if `instrument` is true.) *Description is
-                forthcoming*
+              description: (Only returned if `instrument` is true.) *Description is forthcoming*
               example: 852000
               type: number
             timer_query_compile_stage_check_types_ns:
-              description: (Only returned if `instrument` is true.) *Description is
-                forthcoming*
+              description: (Only returned if `instrument` is true.) *Description is forthcoming*
               example: 577000
               type: number
             timer_query_compile_stage_check_undefined_funcs_ns:
-              description: (Only returned if `instrument` is true.) *Description is
-                forthcoming*
+              description: (Only returned if `instrument` is true.) *Description is forthcoming*
               example: 426000
               type: number
             timer_query_compile_stage_check_unsafe_builtins_ns:
-              description: (Only returned if `instrument` is true.) *Description is
-                forthcoming*
+              description: (Only returned if `instrument` is true.) *Description is forthcoming*
               example: 14000
               type: number
             timer_query_compile_stage_resolve_refs_ns:
-              description: (Only returned if `instrument` is true.) *Description is
-                forthcoming*
+              description: (Only returned if `instrument` is true.) *Description is forthcoming*
               example: 3000
               type: number
             timer_query_compile_stage_rewrite_comprehension_terms_ns:
-              description: (Only returned if `instrument` is true.) *Description is
-                forthcoming*
+              description: (Only returned if `instrument` is true.) *Description is forthcoming*
               example: 329000
               type: number
             timer_query_compile_stage_rewrite_dynamic_terms_ns:
-              description: (Only returned if `instrument` is true.) *Description is
-                forthcoming*
+              description: (Only returned if `instrument` is true.) *Description is forthcoming*
               example: 27000
               type: number
             timer_query_compile_stage_rewrite_expr_terms_ns:
-              description: (Only returned if `instrument` is true.) *Description is
-                forthcoming*
+              description: (Only returned if `instrument` is true.) *Description is forthcoming*
               example: 40000
               type: number
             timer_query_compile_stage_rewrite_local_vars_ns:
-              description: (Only returned if `instrument` is true.) *Description is
-                forthcoming*
+              description: (Only returned if `instrument` is true.) *Description is forthcoming*
               example: 187000
               type: number
             timer_query_compile_stage_rewrite_to_capture_value_ns:
-              description: (Only returned if `instrument` is true.) *Description is
-                forthcoming*
+              description: (Only returned if `instrument` is true.) *Description is forthcoming*
               example: 1178000
               type: number
             timer_query_compile_stage_rewrite_with_values_ns:
-              description: (Only returned if `instrument` is true.) *Description is
-                forthcoming*
+              description: (Only returned if `instrument` is true.) *Description is forthcoming*
               example: 23000
               type: number
             timer_rego_input_parse_ns:
@@ -1062,13 +955,11 @@ components:
               example: 3bb58334a5a9
               type: string
             build_timestamp:
-              description: When this OPA instance was built (in [ISO8601
-                format](https://www.w3.org/TR/NOTE-datetime))
+              description: When this OPA instance was built (in [ISO8601 format](https://www.w3.org/TR/NOTE-datetime))
               type: string
             bundles:
               additionalProperties: {}
-              description: A set of key-value pairs describing each bundle activated on the
-                server.
+              description: A set of key-value pairs describing each bundle activated on the server.
               type: object
             version:
               description: The version of this OPA instance
@@ -1081,10 +972,7 @@ components:
           items:
             properties:
               ast:
-                description: The types for declarations and runtime objects passed to your
-                  implementation. This consists of an abstract syntax tree (AST)
-                  of policy modules, package and import declarations, rules,
-                  expressions, and terms.
+                description: The types for declarations and runtime objects passed to your implementation. This consists of an abstract syntax tree (AST) of policy modules, package and import declarations, rules, expressions, and terms.
                 externalDocs:
                   description: AST
                   url: https://godoc.org/github.com/open-policy-agent/opa/ast
@@ -1109,8 +997,7 @@ components:
                         type: array
                     type: object
                   rules:
-                    description: When OPA evaluates a rule, it generates the content of a [virtual
-                      documents](https://www.openpolicyagent.org/docs/latest/philosophy/#the-opa-document-model)
+                    description: When OPA evaluates a rule, it generates the content of a [virtual documents](https://www.openpolicyagent.org/docs/latest/philosophy/#the-opa-document-model)
                     externalDocs:
                       description: Rules
                       url: https://www.openpolicyagent.org/docs/latest/policy-language/#rules
@@ -1172,9 +1059,7 @@ components:
                 type: string
               raw:
                 description: A string representation of the full Rego policy
-                example: package opa.examples\n\nimport data.servers\n\nviolations[server]
-                  {\n\tserver = servers[_]\n\tserver.protocols[_] =
-                  \"http\"\n\tpublic_servers[server]\n}\n
+                example: package opa.examples\n\nimport data.servers\n\nviolations[server] {\n\tserver = servers[_]\n\tserver.protocols[_] = \"http\"\n\tpublic_servers[server]\n}\n
                 minLength: 1
                 type: string
           type: array
@@ -1233,19 +1118,14 @@ components:
             minLength: 1
             type: string
           path:
-            description: >-
-              A [JSON pointer](https://tools.ietf.org/html/rfc6901) to a location
-              within the target document where the operation is performed.
-
+            description: |-
+              A [JSON pointer](https://tools.ietf.org/html/rfc6901) to a location within the target document where the operation is performed.
 
               The *effective path* is this value prefixed with the API call's `path` parameter.
 
-
               The server will return a *bad request* (404) response if:
 
-
               - The *parent* of the effective path does not refer to an existing document
-
               - For **remove** and **replace** operations, the effective path does not refer to an existing document.
             example: "-"
             minLength: 1
@@ -1269,7 +1149,7 @@ components:
       type: array
     qSchema:
       additionalProperties: {}
-      example: >-
+      example: |-
         {
           "query": "data.servers[i].ports[_] = \"p2\"; data.servers[i].name = name"
         }

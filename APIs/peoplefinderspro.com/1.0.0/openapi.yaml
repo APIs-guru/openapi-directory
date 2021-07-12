@@ -2,17 +2,13 @@ openapi: 3.0.0
 servers:
   - url: https://api.peoplefinderspro.com
 info:
-  description: >-
+  description: |-
     Self Service Developer API documentation and demo.
-
 
     ##Getting Started
 
-
     You will need an API access profile user and password in order to access search endpoints.
-
     Your access profile user and password is used for authenticating all requests to our search API. 
-
     You MUST pass the user and password each time you perform a search request.
   title: Self Service Developer API
   version: 1.0.0
@@ -27,13 +23,10 @@ tags: []
 paths:
   /address/autocomplete:
     post:
-      description: >-
-        ###### *Click on the grey search box above, to view sample
-        request/response objects for Address Autocomplete Search*
-
+      description: |-
+        ###### *Click on the grey search box above, to view sample request/response objects for Address Autocomplete Search*
 
         Perform a search:
-
 
         1. Add your key and key secret to the request headers.
             + galaxy-ap-name: [Key]
@@ -49,9 +42,7 @@ paths:
 
         3.  Submit your search
 
-
         The JSON request should have parts of the address.
-
 
         + <code>Input</code> = null (optional, string) ... address.
       parameters:
@@ -111,13 +102,10 @@ paths:
       tags: []
   /contact/enrich:
     post:
-      description: >-
-        ###### *Click on the grey search box above, to view sample
-        request/response objects for Contact Enrichment Search*
-
+      description: |-
+        ###### *Click on the grey search box above, to view sample request/response objects for Contact Enrichment Search*
 
         Perform a search:
-
 
         1. Add your key and key secret to the request headers.
             + galaxy-ap-name: [Key]
@@ -143,24 +131,17 @@ paths:
 
         3.  Submit your search
 
-
         A complete list of JSON request properties follows.
-
 
         + <code>FirstName</code>= null (optional, string) ... First name.
 
-
         + <code>MiddleName</code> = null (optional, string) ... Middle name or middle initial.
-
 
         + <code>LastName</code> = null (optional, string) ... Last name.
 
-
         + <code>Dob</code> = null (optional, string) ... Date of birth (format: MM/DD/YYYY).
 
-
         + <code>Age</code> = null (optional, int) ... Age.
-
 
         + <code>Addresses</code> = null (optional, Addresses[]) ... List of addresses.
             + <code>Members</code>
@@ -168,7 +149,6 @@ paths:
                 + <code>AddressLine2</code> = null (optional, string) ... State or City and State or Zip (i.e. Sacramento, CA).
 
         + <code>Phone</code> = null (optional, string) ... Phone number (formats: ###-###-####, (###) ###-####).
-
 
         + <code>Email</code> = null (optional, string) ... E-mail address.
       parameters:
@@ -230,13 +210,10 @@ paths:
       tags: []
   /email/enrich:
     post:
-      description: >-
-        ###### *Click on the grey search box above, to view sample
-        request/response objects for Email Enrichment Search*
-
+      description: |-
+        ###### *Click on the grey search box above, to view sample request/response objects for Email Enrichment Search*
 
         Perform a search:
-
 
         1. Add your Access Profile username and password to the request headers.
             + galaxy-ap-name: [Key]
@@ -252,9 +229,7 @@ paths:
 
         3.  Submit your search
 
-
         The JSON request should have an email.
-
 
         + <code>Email</code> = null (optional, string) ... E-mail address.
       parameters:
@@ -315,13 +290,10 @@ paths:
       tags: []
   /identity/verify_id:
     post:
-      description: >-
-        ###### *Click on the grey search box above, to view sample
-        request/response objects for the Identity Verification Search*
-
+      description: |-
+        ###### *Click on the grey search box above, to view sample request/response objects for the Identity Verification Search*
 
         Perform a search:
-
 
         1. Add your key and key secret to the request headers.
             + galaxy-ap-name: [Key]
@@ -347,24 +319,17 @@ paths:
 
         3.  Submit your search
 
-
         A complete list of JSON request properties follows.
-
 
         + <code>FirstName</code>= null (optional, string) ... First name.
 
-
         + <code>MiddleName</code> = null (optional, string) ... Middle name or middle initial.
-
 
         + <code>LastName</code> = null (optional, string) ... Last name.
 
-
         + <code>Dob</code> = null (optional, string) ... Date of birth (format: MM/DD/YYYY).
 
-
         + <code>Age</code> = null (optional, int) ... Age.
-
 
         + <code>Addresses</code> = null (optional, Addresses[]) ... List of addresses.
             + <code>Members</code>
@@ -372,7 +337,6 @@ paths:
                 + <code>AddressLine2</code> = null (optional, string) ... State or City and State or Zip (i.e. Sacramento, CA).
 
         + <code>Phone</code> = null (optional, string) ... Phone number (formats: ###-###-####, (###) ###-####).
-
 
         + <code>Email</code> = null (optional, string) ... E-mail address.
       operationId: Search
@@ -447,13 +411,10 @@ paths:
       tags: []
   /phone/enrich:
     post:
-      description: >-
-        ###### *Click on the grey search box above, to view sample
-        request/response objects for Phone Enrichment Search*
-
+      description: |-
+        ###### *Click on the grey search box above, to view sample request/response objects for Phone Enrichment Search*
 
         Perform a search:
-
 
         1. Add your key and key secret to the request headers.
             + galaxy-ap-name: [Key]
@@ -469,9 +430,7 @@ paths:
 
         3.  Submit your search
 
-
         The JSON request should have a phone number.
-
 
         + <code>Phone</code> = null (optional, string) ... Phone number (formats: ###-###-####, (###) ###-####).
       parameters:

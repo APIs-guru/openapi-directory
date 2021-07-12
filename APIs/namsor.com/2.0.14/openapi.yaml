@@ -9,13 +9,7 @@ info:
     name: Namsor SAS
     url: http://www.namsor.com/
     x-twitter: gendreapp
-  description: "NamSor API v2 : enpoints to process personal names (gender,
-    cultural origin or ethnicity) in all alphabets or languages. By default,
-    enpoints use 1 unit per name (ex. Gender), but Ethnicity classification uses
-    10 to 20 units per name depending on taxonomy. Use GET methods for small
-    tests, but prefer POST methods for higher throughput (batch processing of up
-    to 100 names at a time). Need something you can't find here? We have many
-    more features coming soon. Let us know, we'll do our best to add it! "
+  description: "NamSor API v2 : enpoints to process personal names (gender, cultural origin or ethnicity) in all alphabets or languages. By default, enpoints use 1 unit per name (ex. Gender), but Ethnicity classification uses 10 to 20 units per name depending on taxonomy. Use GET methods for small tests, but prefer POST methods for higher throughput (batch processing of up to 100 names at a time). Need something you can't find here? We have many more features coming soon. Let us know, we'll do our best to add it! "
   license:
     name: NamSorAPI_Lic_v0.0.7
     url: https://v2.namsor.com/NamSorAPIv2/assets/pdf/201803_NamSor_API_Terms_v007.pdf
@@ -39,8 +33,7 @@ externalDocs:
 security:
   - api_key: []
 tags:
-  - description: "Personal names (anthroponyms) : gender, country origin/ethnicity,
-      diaspora, US 'race'/ethniciy"
+  - description: "Personal names (anthroponyms) : gender, country origin/ethnicity, diaspora, US 'race'/ethniciy"
     name: personal
   - description: Social media and pseudonyms
     name: social
@@ -185,8 +178,7 @@ paths:
           description: Missing or incorrect API Key
       security:
         - api_key: []
-      summary: Print historical API usage (in an aggregated view, by service, by
-        day/hour/min).
+      summary: Print historical API usage (in an aggregated view, by service, by day/hour/min).
       tags:
         - admin
   /api2/json/availablePlans:
@@ -258,8 +250,7 @@ paths:
           description: The billing history
         "401":
           description: Missing or incorrect token
-      summary: Read the history billing information (invoices paid via Stripe or
-        manually).
+      summary: Read the history billing information (invoices paid via Stripe or manually).
       tags:
         - admin
   "/api2/json/billingInfo/{token}":
@@ -305,8 +296,7 @@ paths:
           description: A stripe customerID
         "401":
           description: Missing or incorrect email or payment token
-      summary: Create a Stripe Customer, based on a payment card token (from secure
-        StripeJS) and email.
+      summary: Create a Stripe Customer, based on a payment card token (from secure StripeJS) and email.
       tags:
         - admin
   "/api2/json/chineseNameCandidates/{chineseSurnameLatin}/{chineseGivenNameLatin}":
@@ -336,8 +326,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Identify Chinese name candidates, based on the romanized name ex. Wang
-        Xiaoming
+      summary: Identify Chinese name candidates, based on the romanized name ex. Wang Xiaoming
       tags:
         - chinese
   /api2/json/chineseNameCandidatesBatch:
@@ -348,8 +337,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/BatchFirstLastNameIn"
-        description: A list of personal Chinese names in LATIN, firstName =
-          chineseGivenName; lastName=chineseSurname
+        description: A list of personal Chinese names in LATIN, firstName = chineseGivenName; lastName=chineseSurname
       responses:
         "200":
           content:
@@ -363,9 +351,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Identify Chinese name candidates, based on the romanized name
-        (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang
-        Xiaoming
+      summary: Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang Xiaoming
       tags:
         - chinese
   /api2/json/chineseNameCandidatesGenderBatch:
@@ -376,8 +362,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/BatchFirstLastNameIn"
-        description: A list of personal Chinese names in LATIN, firstName =
-          chineseGivenName; lastName=chineseSurname
+        description: A list of personal Chinese names in LATIN, firstName = chineseGivenName; lastName=chineseSurname
       responses:
         "200":
           content:
@@ -391,9 +376,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Identify Chinese name candidates, based on the romanized name
-        (firstName = chineseGivenName; lastName=chineseSurname) ex. Wang
-        Xiaoming.
+      summary: Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname) ex. Wang Xiaoming.
       tags:
         - chinese
   "/api2/json/chineseNameGenderCandidates/{chineseSurnameLatin}/{chineseGivenNameLatin}/{knownGender}":
@@ -428,8 +411,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Identify Chinese name candidates, based on the romanized name ex. Wang
-        Xiaoming - having a known gender ('male' or 'female')
+      summary: Identify Chinese name candidates, based on the romanized name ex. Wang Xiaoming - having a known gender ('male' or 'female')
       tags:
         - chinese
   "/api2/json/chineseNameMatch/{chineseSurnameLatin}/{chineseGivenNameLatin}/{chineseName}":
@@ -464,8 +446,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Return a score for matching Chinese name ex. 王晓明 with a romanized name
-        ex. Wang Xiaoming
+      summary: Return a score for matching Chinese name ex. 王晓明 with a romanized name ex. Wang Xiaoming
       tags:
         - chinese
   /api2/json/chineseNameMatchBatch:
@@ -476,8 +457,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/BatchFirstLastNameIn"
-        description: A list of personal Chinese names in LATIN, firstName =
-          chineseGivenName; lastName=chineseSurname
+        description: A list of personal Chinese names in LATIN, firstName = chineseGivenName; lastName=chineseSurname
       responses:
         "200":
           content:
@@ -491,9 +471,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Identify Chinese name candidates, based on the romanized name
-        (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang
-        Xiaoming
+      summary: Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang Xiaoming
       tags:
         - chinese
   "/api2/json/corporateKey/{apiKey}/{corporate}":
@@ -565,8 +543,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "[USES 20 UNITS PER NAME COUPLE] Infer several classifications for a
-        cross border interaction between names (ex. remit, travel, intl com)"
+      summary: "[USES 20 UNITS PER NAME COUPLE] Infer several classifications for a cross border interaction between names (ex. remit, travel, intl com)"
       tags:
         - personal
   /api2/json/corridorBatch:
@@ -591,9 +568,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "[USES 20 UNITS PER NAME PAIR] Infer several classifications for up to
-        100 cross border interaction between names (ex. remit, travel, intl
-        com)"
+      summary: "[USES 20 UNITS PER NAME PAIR] Infer several classifications for up to 100 cross border interaction between names (ex. remit, travel, intl com)"
       tags:
         - personal
   "/api2/json/country/{personalNameFull}":
@@ -618,9 +593,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "[USES 10 UNITS PER NAME] Infer the likely country of residence of a
-        personal full name, or one surname. Assumes names as they are in the
-        country of residence OR the country of origin."
+      summary: "[USES 10 UNITS PER NAME] Infer the likely country of residence of a personal full name, or one surname. Assumes names as they are in the country of residence OR the country of origin."
       tags:
         - personal
   /api2/json/countryBatch:
@@ -645,9 +618,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "[USES 10 UNITS PER NAME] Infer the likely country of residence of up
-        to 100 personal full names, or surnames. Assumes names as they are in
-        the country of residence OR the country of origin."
+      summary: "[USES 10 UNITS PER NAME] Infer the likely country of residence of up to 100 personal full names, or surnames. Assumes names as they are in the country of residence OR the country of origin."
       tags:
         - personal
   "/api2/json/debugLevel/{logger}/{level}":
@@ -702,9 +673,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "[USES 20 UNITS PER NAME] Infer the likely ethnicity/diaspora of a
-        personal name, given a country of residence ISO2 code (ex. US, CA, AU,
-        NZ etc.)"
+      summary: "[USES 20 UNITS PER NAME] Infer the likely ethnicity/diaspora of a personal name, given a country of residence ISO2 code (ex. US, CA, AU, NZ etc.)"
       tags:
         - personal
   /api2/json/diasporaBatch:
@@ -729,9 +698,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "[USES 20 UNITS PER NAME] Infer the likely ethnicity/diaspora of up to
-        100 personal names, given a country of residence ISO2 code (ex. US, CA,
-        AU, NZ etc.)"
+      summary: "[USES 20 UNITS PER NAME] Infer the likely ethnicity/diaspora of up to 100 personal names, given a country of residence ISO2 code (ex. US, CA, AU, NZ etc.)"
       tags:
         - personal
   /api2/json/flush:
@@ -799,8 +766,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Infer the likely gender of up to 100 names, detecting automatically the
-        cultural context.
+      summary: Infer the likely gender of up to 100 names, detecting automatically the cultural context.
       tags:
         - personal
   "/api2/json/genderChineseName/{chineseName}":
@@ -955,8 +921,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Infer the likely gender of up to 100 full names, detecting
-        automatically the cultural context.
+      summary: Infer the likely gender of up to 100 full names, detecting automatically the cultural context.
       tags:
         - personal
   "/api2/json/genderFullGeo/{fullName}/{countryIso2}":
@@ -986,8 +951,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Infer the likely gender of a full name, given a local context (ISO2
-        country code).
+      summary: Infer the likely gender of a full name, given a local context (ISO2 country code).
       tags:
         - personal
   /api2/json/genderFullGeoBatch:
@@ -1012,8 +976,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Infer the likely gender of up to 100 full names, with a given cultural
-        context (country ISO2 code).
+      summary: Infer the likely gender of up to 100 full names, with a given cultural context (country ISO2 code).
       tags:
         - personal
   "/api2/json/genderGeo/{firstName}/{lastName}/{countryIso2}":
@@ -1048,8 +1011,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Infer the likely gender of a name, given a local context (ISO2 country
-        code).
+      summary: Infer the likely gender of a name, given a local context (ISO2 country code).
       tags:
         - personal
   /api2/json/genderGeoBatch:
@@ -1074,8 +1036,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Infer the likely gender of up to 100 names, each given a local context
-        (ISO2 country code).
+      summary: Infer the likely gender of up to 100 names, each given a local context (ISO2 country code).
       tags:
         - personal
   "/api2/json/genderJapaneseName/{japaneseSurname}/{japaneseGivenName}":
@@ -1202,8 +1163,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/BatchFirstLastNameIn"
-        description: A list of personal japanese names in LATIN, firstName =
-          japaneseGivenName; lastName=japaneseSurname and known gender
+        description: A list of personal japanese names in LATIN, firstName = japaneseGivenName; lastName=japaneseSurname and known gender
       responses:
         "200":
           content:
@@ -1217,9 +1177,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Identify japanese name candidates in KANJI, based on the romanized name
-        (firstName = japaneseGivenName; lastName=japaneseSurname) with KNOWN
-        gender, ex. Yamamoto Sanae
+      summary: Identify japanese name candidates in KANJI, based on the romanized name (firstName = japaneseGivenName; lastName=japaneseSurname) with KNOWN gender, ex. Yamamoto Sanae
       tags:
         - japanese
   "/api2/json/japaneseNameKanjiCandidates/{japaneseSurnameLatin}/{japaneseGivenNameLatin}":
@@ -1249,8 +1207,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Identify japanese name candidates in KANJI, based on the romanized name
-        ex. Yamamoto Sanae
+      summary: Identify japanese name candidates in KANJI, based on the romanized name ex. Yamamoto Sanae
       tags:
         - japanese
   "/api2/json/japaneseNameKanjiCandidates/{japaneseSurnameLatin}/{japaneseGivenNameLatin}/{knownGender}":
@@ -1285,8 +1242,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Identify japanese name candidates in KANJI, based on the romanized name
-        ex. Yamamoto Sanae - and a known gender.
+      summary: Identify japanese name candidates in KANJI, based on the romanized name ex. Yamamoto Sanae - and a known gender.
       tags:
         - japanese
   /api2/json/japaneseNameKanjiCandidatesBatch:
@@ -1297,8 +1253,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/BatchFirstLastNameIn"
-        description: A list of personal japanese names in LATIN, firstName =
-          japaneseGivenName; lastName=japaneseSurname
+        description: A list of personal japanese names in LATIN, firstName = japaneseGivenName; lastName=japaneseSurname
       responses:
         "200":
           content:
@@ -1312,9 +1267,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Identify japanese name candidates in KANJI, based on the romanized name
-        (firstName = japaneseGivenName; lastName=japaneseSurname), ex. Yamamoto
-        Sanae
+      summary: Identify japanese name candidates in KANJI, based on the romanized name (firstName = japaneseGivenName; lastName=japaneseSurname), ex. Yamamoto Sanae
       tags:
         - japanese
   "/api2/json/japaneseNameLatinCandidates/{japaneseSurnameKanji}/{japaneseGivenNameKanji}":
@@ -1355,8 +1308,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/BatchFirstLastNameIn"
-        description: A list of personal japanese names in KANJI, firstName =
-          japaneseGivenName; lastName=japaneseSurname
+        description: A list of personal japanese names in KANJI, firstName = japaneseGivenName; lastName=japaneseSurname
       responses:
         "200":
           content:
@@ -1405,8 +1357,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Return a score for matching Japanese name in KANJI ex. 山本 早苗 with a
-        romanized name ex. Yamamoto Sanae
+      summary: Return a score for matching Japanese name in KANJI ex. 山本 早苗 with a romanized name ex. Yamamoto Sanae
       tags:
         - japanese
   /api2/json/japaneseNameMatchBatch:
@@ -1417,8 +1368,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/BatchFirstLastNameIn"
-        description: A list of personal Japanese names in LATIN, firstName =
-          japaneseGivenName; lastName=japaneseSurname
+        description: A list of personal Japanese names in LATIN, firstName = japaneseGivenName; lastName=japaneseSurname
       responses:
         "200":
           content:
@@ -1432,8 +1382,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Return a score for matching a list of Japanese names in KANJI ex. 山本 早苗
-        with romanized names ex. Yamamoto Sanae
+      summary: Return a score for matching a list of Japanese names in KANJI ex. 山本 早苗 with romanized names ex. Yamamoto Sanae
       tags:
         - japanese
   "/api2/json/japaneseNameMatchFeedbackLoop/{japaneseSurnameLatin}/{japaneseGivenNameLatin}/{japaneseName}":
@@ -1468,8 +1417,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "[CREDITS 1 UNIT] Feedback loop to better perform matching Japanese
-        name in KANJI ex. 山本 早苗 with a romanized name ex. Yamamoto Sanae"
+      summary: "[CREDITS 1 UNIT] Feedback loop to better perform matching Japanese name in KANJI ex. 山本 早苗 with a romanized name ex. Yamamoto Sanae"
       tags:
         - japanese
   "/api2/json/learnable/{source}/{learnable}":
@@ -1516,8 +1464,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Infer the likely type of a proper noun (personal name, brand name,
-        place name etc.)
+      summary: Infer the likely type of a proper noun (personal name, brand name, place name etc.)
       tags:
         - general
   /api2/json/nameTypeBatch:
@@ -1542,8 +1489,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Infer the likely common type of up to 100 proper nouns (personal name,
-        brand name, place name etc.)
+      summary: Infer the likely common type of up to 100 proper nouns (personal name, brand name, place name etc.)
       tags:
         - general
   "/api2/json/nameTypeGeo/{properNoun}/{countryIso2}":
@@ -1573,8 +1519,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Infer the likely type of a proper noun (personal name, brand name,
-        place name etc.)
+      summary: Infer the likely type of a proper noun (personal name, brand name, place name etc.)
       tags:
         - general
   /api2/json/nameTypeGeoBatch:
@@ -1599,8 +1544,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Infer the likely common type of up to 100 proper nouns (personal name,
-        brand name, place name etc.)
+      summary: Infer the likely common type of up to 100 proper nouns (personal name, brand name, place name etc.)
       tags:
         - general
   /api2/json/namsorCounter:
@@ -1645,9 +1589,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "[USES 10 UNITS PER NAME] Infer the likely country of origin of a
-        personal name. Assumes names as they are in the country of origin. For
-        US, CA, AU, NZ and other melting-pots : use 'diaspora' instead."
+      summary: "[USES 10 UNITS PER NAME] Infer the likely country of origin of a personal name. Assumes names as they are in the country of origin. For US, CA, AU, NZ and other melting-pots : use 'diaspora' instead."
       tags:
         - personal
   /api2/json/originBatch:
@@ -1672,8 +1614,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "[USES 10 UNITS PER NAME] Infer the likely country of origin of up to
-        100 names, detecting automatically the cultural context."
+      summary: "[USES 10 UNITS PER NAME] Infer the likely country of origin of up to 100 names, detecting automatically the cultural context."
       tags:
         - personal
   "/api2/json/parseChineseName/{chineseName}":
@@ -1698,8 +1639,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Infer the likely first/last name structure of a name, ex. 王晓明 ->
-        王(surname) 晓明(given name)
+      summary: Infer the likely first/last name structure of a name, ex. 王晓明 -> 王(surname) 晓明(given name)
       tags:
         - chinese
   /api2/json/parseChineseNameBatch:
@@ -1724,8 +1664,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Infer the likely first/last name structure of a name, ex. 王晓明 ->
-        王(surname) 晓明(given name).
+      summary: Infer the likely first/last name structure of a name, ex. 王晓明 -> 王(surname) 晓明(given name).
       tags:
         - chinese
   "/api2/json/parseJapaneseName/{japaneseName}":
@@ -1750,8 +1689,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Infer the likely first/last name structure of a name, ex. 山本 早苗 or
-        Yamamoto Sanae
+      summary: Infer the likely first/last name structure of a name, ex. 山本 早苗 or Yamamoto Sanae
       tags:
         - japanese
   /api2/json/parseJapaneseNameBatch:
@@ -1776,8 +1714,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "Infer the likely first/last name structure of a name, ex. 山本 早苗 or
-        Yamamoto Sanae "
+      summary: "Infer the likely first/last name structure of a name, ex. 山本 早苗 or Yamamoto Sanae "
       tags:
         - japanese
   "/api2/json/parseName/{nameFull}":
@@ -1802,8 +1739,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "Infer the likely first/last name structure of a name, ex. John Smith
-        or SMITH, John or SMITH; John. "
+      summary: "Infer the likely first/last name structure of a name, ex. John Smith or SMITH, John or SMITH; John. "
       tags:
         - personal
   "/api2/json/parseName/{nameFull}/{countryIso2}":
@@ -1833,9 +1769,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Infer the likely first/last name structure of a name, ex. John Smith or
-        SMITH, John or SMITH; John. For better accuracy, provide a geographic
-        context.
+      summary: Infer the likely first/last name structure of a name, ex. John Smith or SMITH, John or SMITH; John. For better accuracy, provide a geographic context.
       tags:
         - personal
   /api2/json/parseNameBatch:
@@ -1860,8 +1794,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Infer the likely first/last name structure of a name, ex. John Smith or
-        SMITH, John or SMITH; John.
+      summary: Infer the likely first/last name structure of a name, ex. John Smith or SMITH, John or SMITH; John.
       tags:
         - personal
   /api2/json/parseNameGeoBatch:
@@ -1886,9 +1819,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "Infer the likely first/last name structure of a name, ex. John Smith
-        or SMITH, John or SMITH; John. Giving a local context improves
-        precision. "
+      summary: "Infer the likely first/last name structure of a name, ex. John Smith or SMITH, John or SMITH; John. Giving a local context improves precision. "
       tags:
         - personal
   /api2/json/parsedGenderBatch:
@@ -1913,8 +1844,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Infer the likely gender of up to 100 fully parsed names, detecting
-        automatically the cultural context.
+      summary: Infer the likely gender of up to 100 fully parsed names, detecting automatically the cultural context.
       tags:
         - personal
   /api2/json/parsedGenderGeoBatch:
@@ -1939,8 +1869,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Infer the likely gender of up to 100 fully parsed names, detecting
-        automatically the cultural context.
+      summary: Infer the likely gender of up to 100 fully parsed names, detecting automatically the cultural context.
       tags:
         - personal
   "/api2/json/paymentInfo/{token}":
@@ -1961,8 +1890,7 @@ paths:
           description: An session token
         "401":
           description: Missing or incorrect token
-      summary: Get the Stripe payment information associated with the current google
-        auth session token.
+      summary: Get the Stripe payment information associated with the current google auth session token.
       tags:
         - admin
   "/api2/json/phoneCode/{firstName}/{lastName}/{phoneNumber}":
@@ -1997,8 +1925,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "[USES 11 UNITS PER NAME] Infer the likely country and phone prefix,
-        given a personal name and formatted / unformatted phone number."
+      summary: "[USES 11 UNITS PER NAME] Infer the likely country and phone prefix, given a personal name and formatted / unformatted phone number."
       tags:
         - social
   /api2/json/phoneCodeBatch:
@@ -2023,9 +1950,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "[USES 11 UNITS PER NAME] Infer the likely country and phone prefix, of
-        up to 100 personal names, detecting automatically the local context
-        given a name and formatted / unformatted phone number."
+      summary: "[USES 11 UNITS PER NAME] Infer the likely country and phone prefix, of up to 100 personal names, detecting automatically the local context given a name and formatted / unformatted phone number."
       tags:
         - social
   "/api2/json/phoneCodeGeo/{firstName}/{lastName}/{phoneNumber}/{countryIso2}":
@@ -2065,9 +1990,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "[USES 11 UNITS PER NAME] Infer the likely phone prefix, given a
-        personal name and formatted / unformatted phone number, with a local
-        context (ISO2 country of residence)."
+      summary: "[USES 11 UNITS PER NAME] Infer the likely phone prefix, given a personal name and formatted / unformatted phone number, with a local context (ISO2 country of residence)."
       tags:
         - social
   /api2/json/phoneCodeGeoBatch:
@@ -2092,9 +2015,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "[USES 11 UNITS PER NAME] Infer the likely country and phone prefix, of
-        up to 100 personal names, with a local context (ISO2 country of
-        residence)."
+      summary: "[USES 11 UNITS PER NAME] Infer the likely country and phone prefix, of up to 100 personal names, with a local context (ISO2 country of residence)."
       tags:
         - social
   "/api2/json/phoneCodeGeoFeedbackLoop/{firstName}/{lastName}/{phoneNumber}/{phoneNumberE164}/{countryIso2}":
@@ -2139,9 +2060,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "[CREDITS 1 UNIT] Feedback loop to better infer the likely phone
-        prefix, given a personal name and formatted / unformatted phone number,
-        with a local context (ISO2 country of residence)."
+      summary: "[CREDITS 1 UNIT] Feedback loop to better infer the likely phone prefix, given a personal name and formatted / unformatted phone number, with a local context (ISO2 country of residence)."
       tags:
         - social
   "/api2/json/pinyinChineseName/{chineseName}":
@@ -2166,8 +2085,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Romanize the Chinese name to Pinyin, ex. 王晓明 -> Wang (surname) Xiaoming
-        (given name)
+      summary: Romanize the Chinese name to Pinyin, ex. 王晓明 -> Wang (surname) Xiaoming (given name)
       tags:
         - chinese
   /api2/json/pinyinChineseNameBatch:
@@ -2192,8 +2110,7 @@ paths:
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: Romanize a list of Chinese name to Pinyin, ex. 王晓明 -> Wang (surname)
-        Xiaoming (given name).
+      summary: Romanize a list of Chinese name to Pinyin, ex. 王晓明 -> Wang (surname) Xiaoming (given name).
       tags:
         - chinese
   "/api2/json/procureKey/{token}":
@@ -2214,8 +2131,7 @@ paths:
           description: An API Key
         "401":
           description: Missing or incorrect token
-      summary: Procure an API Key (sent via Email), based on an auth token. Keep your
-        API Key secret.
+      summary: Procure an API Key (sent via Email), based on an auth token. Keep your API Key secret.
       tags:
         - admin
   "/api2/json/removeUserAccount/{token}":
@@ -2377,8 +2293,7 @@ paths:
           description: An API subscription
         "401":
           description: Missing or incorrect token
-      summary: Subscribe to a give API plan, using the user's preferred or default
-        currency.
+      summary: Subscribe to a give API plan, using the user's preferred or default currency.
       tags:
         - admin
   "/api2/json/subscribePlanOnBehalf/{planName}/{apiKey}":
@@ -2404,8 +2319,7 @@ paths:
           description: An API subscription
         "401":
           description: Missing or incorrect token
-      summary: Subscribe to a give API plan, using the user's preferred or default
-        currency (admin only).
+      summary: Subscribe to a give API plan, using the user's preferred or default currency (admin only).
       tags:
         - admin
   "/api2/json/taxonomyClasses/{classifierName}":
@@ -2452,8 +2366,7 @@ paths:
           description: The updated billing info
         "401":
           description: Missing or incorrect token
-      summary: Sets or update the billing information (company name, address, phone,
-        vat ID)
+      summary: Sets or update the billing information (company name, address, phone, vat ID)
       tags:
         - admin
   "/api2/json/updateLimit/{usageLimit}/{hardOrSoft}/{token}":
@@ -2485,8 +2398,7 @@ paths:
           description: An API subscription
         "401":
           description: Missing or incorrect token
-      summary: Modifies the hard/soft limit on the API plan's overages (default is 0$
-        soft limit).
+      summary: Modifies the hard/soft limit on the API plan's overages (default is 0$ soft limit).
       tags:
         - admin
   "/api2/json/updatePaymentDefault/{defautSourceId}/{token}":
@@ -2512,8 +2424,7 @@ paths:
           description: An session token
         "401":
           description: Missing or incorrect token
-      summary: Update the default Stripe card associated with the current google auth
-        session token.
+      summary: Update the default Stripe card associated with the current google auth session token.
       tags:
         - admin
   "/api2/json/usRaceEthnicity/{firstName}/{lastName}":
@@ -2536,22 +2447,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/FirstLastNameUSRaceEthnicityOut"
-          description: "a US resident's likely race/ethnicity : W_NL (white, non latino),
-            HL (hispano latino),  A (asian, non latino), B_NL (black, non
-            latino), AI_AN (American Indian or Alaskan Native*) and PI (Pacific
-            Islander*). *optionally"
+          description: "a US resident's likely race/ethnicity : W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino), AI_AN (American Indian or Alaskan Native*) and PI (Pacific Islander*). *optionally"
         "401":
           description: Missing or incorrect API Key
         "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "[USES 10 UNITS PER NAME] Infer a US resident's likely race/ethnicity
-        according to US Census taxonomy W_NL (white, non latino), HL (hispano
-        latino),  A (asian, non latino), B_NL (black, non latino). Optionally
-        add header X-OPTION-USRACEETHNICITY-TAXONOMY: USRACEETHNICITY-6CLASSES
-        for two additional classes, AI_AN (American Indian or Alaskan Native)
-        and PI (Pacific Islander)."
+      summary: "[USES 10 UNITS PER NAME] Infer a US resident's likely race/ethnicity according to US Census taxonomy W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino). Optionally add header X-OPTION-USRACEETHNICITY-TAXONOMY: USRACEETHNICITY-6CLASSES for two additional classes, AI_AN (American Indian or Alaskan Native) and PI (Pacific Islander)."
       tags:
         - personal
   /api2/json/usRaceEthnicityBatch:
@@ -2569,22 +2472,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BatchFirstLastNameUSRaceEthnicityOut"
-          description: A list of US resident's likely race/ethnicity. W_NL (white, non
-            latino), HL (hispano latino),  A (asian, non latino), B_NL (black,
-            non latino), AI_AN (American Indian or Alaskan Native*) and PI
-            (Pacific Islander*). *optionally
+          description: A list of US resident's likely race/ethnicity. W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino), AI_AN (American Indian or Alaskan Native*) and PI (Pacific Islander*). *optionally
         "401":
           description: Missing or incorrect API Key
         "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "[USES 10 UNITS PER NAME] Infer up-to 100 US resident's likely
-        race/ethnicity according to US Census taxonomy. Output is W_NL (white,
-        non latino), HL (hispano latino),  A (asian, non latino), B_NL (black,
-        non latino). Optionally add header X-OPTION-USRACEETHNICITY-TAXONOMY:
-        USRACEETHNICITY-6CLASSES for two additional classes, AI_AN (American
-        Indian or Alaskan Native) and PI (Pacific Islander)."
+      summary: "[USES 10 UNITS PER NAME] Infer up-to 100 US resident's likely race/ethnicity according to US Census taxonomy. Output is W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino). Optionally add header X-OPTION-USRACEETHNICITY-TAXONOMY: USRACEETHNICITY-6CLASSES for two additional classes, AI_AN (American Indian or Alaskan Native) and PI (Pacific Islander)."
       tags:
         - personal
   "/api2/json/usRaceEthnicityZIP5/{firstName}/{lastName}/{zip5Code}":
@@ -2612,23 +2507,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/FirstLastNameUSRaceEthnicityOut"
-          description: "a US resident's likely race/ethnicity : W_NL (white, non latino),
-            HL (hispano latino),  A (asian, non latino), B_NL (black, non
-            latino), AI_AN (American Indian or Alaskan Native*) and PI (Pacific
-            Islander*). *optionally"
+          description: "a US resident's likely race/ethnicity : W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino), AI_AN (American Indian or Alaskan Native*) and PI (Pacific Islander*). *optionally"
         "401":
           description: Missing or incorrect API Key
         "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "[USES 10 UNITS PER NAME] Infer a US resident's likely race/ethnicity
-        according to US Census taxonomy, using (optional) ZIP5 code info. Output
-        is W_NL (white, non latino), HL (hispano latino),  A (asian, non
-        latino), B_NL (black, non latino). Optionally add header
-        X-OPTION-USRACEETHNICITY-TAXONOMY: USRACEETHNICITY-6CLASSES for two
-        additional classes, AI_AN (American Indian or Alaskan Native) and PI
-        (Pacific Islander)."
+      summary: "[USES 10 UNITS PER NAME] Infer a US resident's likely race/ethnicity according to US Census taxonomy, using (optional) ZIP5 code info. Output is W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino). Optionally add header X-OPTION-USRACEETHNICITY-TAXONOMY: USRACEETHNICITY-6CLASSES for two additional classes, AI_AN (American Indian or Alaskan Native) and PI (Pacific Islander)."
       tags:
         - personal
   /api2/json/usZipRaceEthnicityBatch:
@@ -2646,23 +2532,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BatchFirstLastNameUSRaceEthnicityOut"
-          description: A list of US resident's likely race/ethnicity. W_NL (white, non
-            latino), HL (hispano latino),  A (asian, non latino), B_NL (black,
-            non latino), AI_AN (American Indian or Alaskan Native*) and PI
-            (Pacific Islander*). *optionally
+          description: A list of US resident's likely race/ethnicity. W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino), AI_AN (American Indian or Alaskan Native*) and PI (Pacific Islander*). *optionally
         "401":
           description: Missing or incorrect API Key
         "403":
           description: API Limit Reached or API Key Disabled
       security:
         - api_key: []
-      summary: "[USES 10 UNITS PER NAME] Infer up-to 100 US resident's likely
-        race/ethnicity according to US Census taxonomy, with (optional) ZIP
-        code. Output is W_NL (white, non latino), HL (hispano latino),  A
-        (asian, non latino), B_NL (black, non latino). Optionally add header
-        X-OPTION-USRACEETHNICITY-TAXONOMY: USRACEETHNICITY-6CLASSES for two
-        additional classes, AI_AN (American Indian or Alaskan Native) and PI
-        (Pacific Islander)."
+      summary: "[USES 10 UNITS PER NAME] Infer up-to 100 US resident's likely race/ethnicity according to US Census taxonomy, with (optional) ZIP code. Output is W_NL (white, non latino), HL (hispano latino),  A (asian, non latino), B_NL (black, non latino). Optionally add header X-OPTION-USRACEETHNICITY-TAXONOMY: USRACEETHNICITY-6CLASSES for two additional classes, AI_AN (American Indian or Alaskan Native) and PI (Pacific Islander)."
       tags:
         - personal
   "/api2/json/userInfo/{token}":
@@ -2683,8 +2560,7 @@ paths:
           description: An session token
         "401":
           description: Missing or incorrect token
-      summary: Get the user profile associated with the current google auth session
-        token.
+      summary: Get the user profile associated with the current google auth session token.
       tags:
         - admin
   "/api2/json/verifyEmail/{emailToken}":
@@ -3054,8 +2930,7 @@ components:
       xml:
         name: BatchCorridorOut
     BatchFirstLastNameDiasporaedOut:
-      description: Represents the output of inferring the LIKELY ethnicity from a
-        personal name, given an country of residence.
+      description: Represents the output of inferring the LIKELY ethnicity from a personal name, given an country of residence.
       properties:
         personalNames:
           items:
@@ -3074,8 +2949,7 @@ components:
       xml:
         name: BatchFirstLastNameGenderIn
     BatchFirstLastNameGenderedOut:
-      description: Represents the output of inferring the LIKELY gender from a list of
-        personal names.
+      description: Represents the output of inferring the LIKELY gender from a list of personal names.
       properties:
         personalNames:
           items:
@@ -3112,8 +2986,7 @@ components:
       xml:
         name: BatchFirstLastNameIn
     BatchFirstLastNameOriginedOut:
-      description: Represents the output of inferring the LIKELY origin from a list of
-        personal names.
+      description: Represents the output of inferring the LIKELY origin from a list of personal names.
       properties:
         personalNames:
           items:
@@ -3123,8 +2996,7 @@ components:
       xml:
         name: BatchFirstLastNameOriginedOut
     BatchFirstLastNamePhoneCodedOut:
-      description: Represents the output of inferring the LIKELY country and phone
-        code of personal names+phones.
+      description: Represents the output of inferring the LIKELY country and phone code of personal names+phones.
       properties:
         personalNamesWithPhoneNumbers:
           items:
@@ -3152,9 +3024,7 @@ components:
       xml:
         name: BatchFirstLastNamePhoneNumberIn
     BatchFirstLastNameUSRaceEthnicityOut:
-      description: Represents the output of inferring the LIKELY US 'race/ethnicity'
-        from a personal name, given US country of residence and (optionally) a
-        ZIP5 code.
+      description: Represents the output of inferring the LIKELY US 'race/ethnicity' from a personal name, given US country of residence and (optionally) a ZIP5 code.
       properties:
         personalNames:
           items:
@@ -3272,8 +3142,7 @@ components:
       xml:
         name: BatchPersonalNameParsedOut
     BatchProperNounCategorizedOut:
-      description: Represents the output of inferring the common type (anthroponym,
-        toponym, brand, etc.) from a list of proper names.
+      description: Represents the output of inferring the common type (anthroponym, toponym, brand, etc.) from a list of proper names.
       properties:
         properNouns:
           items:
@@ -3413,8 +3282,7 @@ components:
       xml:
         name: ClassifierMetricsOut
     CorridorIn:
-      description: Represent any transnational interaction between names (ex.
-        remittance, communication, cross-border investment, airline travel
+      description: Represent any transnational interaction between names (ex. remittance, communication, cross-border investment, airline travel
       properties:
         firstLastNameGeoFrom:
           $ref: "#/components/schemas/FirstLastNameGeoIn"
@@ -3428,8 +3296,7 @@ components:
       xml:
         name: CorridorIn
     CorridorOut:
-      description: Represent multiple classifications for corridor sender and receiver
-        (gender, country, origin, diaspora)
+      description: Represent multiple classifications for corridor sender and receiver (gender, country, origin, diaspora)
       properties:
         FirstLastNameDiasporaedOut:
           $ref: "#/components/schemas/FirstLastNameDiasporaedOut"
@@ -3488,8 +3355,7 @@ components:
       xml:
         name: FeedbackLoopOut
     FirstLastNameDiasporaedOut:
-      description: Represents the output of inferring the LIKELY ethnicity from a
-        personal name, given an country of residence.
+      description: Represents the output of inferring the LIKELY ethnicity from a personal name, given an country of residence.
       properties:
         category:
           type: string
@@ -3552,8 +3418,7 @@ components:
       xml:
         name: FirstLastName
     FirstLastNameGenderedOut:
-      description: Represents the output of inferring the LIKELY gender from a
-        personal name.
+      description: Represents the output of inferring the LIKELY gender from a personal name.
       properties:
         category:
           type: string
@@ -3649,8 +3514,7 @@ components:
       xml:
         name: FirstLastName
     FirstLastNameOriginedOut:
-      description: Represents the output of inferring the LIKELY country of Origin
-        from a personal name.
+      description: Represents the output of inferring the LIKELY country of Origin from a personal name.
       properties:
         category:
           type: string
@@ -3712,8 +3576,7 @@ components:
       xml:
         name: FirstLastNameOut
     FirstLastNamePhoneCodedOut:
-      description: Represents the output of inferring the LIKELY country and phone
-        code from a personal name and phone number.
+      description: Represents the output of inferring the LIKELY country and phone code from a personal name and phone number.
       properties:
         category:
           type: string
@@ -3802,9 +3665,7 @@ components:
       xml:
         name: FirstLastNamePhoneNumberIn
     FirstLastNameUSRaceEthnicityOut:
-      description: Represents the output of inferring the LIKELY US 'race/ethnicity'
-        from a personal name, given US country of residence and (optionally) a
-        ZIP5 code.
+      description: Represents the output of inferring the LIKELY US 'race/ethnicity' from a personal name, given US country of residence and (optionally) a ZIP5 code.
       properties:
         category:
           type: string

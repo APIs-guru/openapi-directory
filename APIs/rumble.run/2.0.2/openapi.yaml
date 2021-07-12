@@ -419,8 +419,7 @@ paths:
           $ref: "#/components/responses/UnauthorizedError"
       security:
         - bearerAuth: []
-      summary: Rotates the organization export token and returns the updated
-        organization
+      summary: Rotates the organization export token and returns the updated organization
       tags:
         - Account
   /account/sites:
@@ -718,8 +717,7 @@ paths:
           $ref: "#/components/responses/UnauthorizedError"
       security:
         - bearerAuth: []
-      summary: Cisco serial number and model name export for Cisco Smart Net Total
-        Care Service.
+      summary: Cisco serial number and model name export for Cisco Smart Net Total Care Service.
       tags:
         - Cisco SNTC
   /export/org/assets.csv:
@@ -907,8 +905,7 @@ paths:
           $ref: "#/components/responses/UnauthorizedError"
       security:
         - bearerAuth: []
-      summary: Exports the asset inventory in a sync-friendly manner using created_at
-        as a checkpoint. Requires the Splunk entitlement.
+      summary: Exports the asset inventory in a sync-friendly manner using created_at as a checkpoint. Requires the Splunk entitlement.
       tags:
         - Splunk
   /export/org/assets/sync/updated/assets.json:
@@ -946,8 +943,7 @@ paths:
           $ref: "#/components/responses/UnauthorizedError"
       security:
         - bearerAuth: []
-      summary: Exports the asset inventory in a sync-friendly manner using updated_at
-        as a checkpoint. Requires the Splunk entitlement.
+      summary: Exports the asset inventory in a sync-friendly manner using updated_at as a checkpoint. Requires the Splunk entitlement.
       tags:
         - Splunk
   /export/org/services.csv:
@@ -2047,8 +2043,7 @@ paths:
           $ref: "#/components/responses/NotFoundError"
       security:
         - bearerAuth: []
-      summary: Signal that a task should be stopped or canceledThis will also remove
-        recurring and scheduled tasks
+      summary: Signal that a task should be stopped or canceledThis will also remove recurring and scheduled tasks
       tags:
         - Organization
   /org/wireless:

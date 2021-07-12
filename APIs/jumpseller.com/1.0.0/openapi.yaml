@@ -4,193 +4,117 @@ servers:
 info:
   contact:
     x-twitter: jumpseller
-  description: >
+  description: |
     # Endpoint Structure
-
 
     All URLs are in the format: 
 
-
     ```text
-
     https://api.jumpseller.com/v1/path.json?login=XXXXXX&authtoken=storetoken  
-
     ```
 
-
     The path is prefixed by the API version and the URL takes as parameters the login (your store specific API login) and your authentication token.
-
     <br/><br/>
-
     ***
-
 
     # Version
 
-
     The current version of the API is **v1**.  
-
     If we change the API in backward-incompatible ways, we'll increase the version number and maintain stable support for the old urls.
-
     <br/><br/>
-
     ***
-
 
     # Authentication
 
-
     The API uses a token-based authentication with a combination of a login key and an auth token. **Both parameters can be found on the left sidebar of the Account section, accessed from the main menu of your Admin Panel**. The auth token of the user can be reset on the same page.
-
 
     ![Store Login](/images/support/api/apilogin.png)
 
-
     The auth token is a **32 characters** string.
 
-
     If you are developing a Jumpseller App, the authentication should be done using [OAuth-2](/support/oauth-2). Please read the article [Build an App](/support/apps) for more information.
-
     <br/><br/>
-
     ***
-
 
     # Curl Examples
 
-
     To request all the products at your store, you would append the products index path to the base url to create an URL with the format:  
 
-
     ```text
-
     https://api.jumpseller.com/v1/products.json?login=XXXXXX&authtoken=XXXXX
-
     ```
-
 
     In curl, you can invoque that URL with:  
 
-
     ```text
-
     curl -X GET "https://api.jumpseller.com/v1/products.json?login=XXXXXX&authtoken=XXXXX"
-
     ```
-
 
     To create a product, you will include the JSON data and specify the MIME Type:  
 
-
     ```text
-
     curl -X POST -d '{ "product" : {"name": "My new Product!", "price": 100} }' "https://api.jumpseller.com/v1/products.json?login=XXXXXX&authtoken=XXXXX" -H "Content-Type:application/json"
-
     ```
-
 
     and to update the product identified with 123:  
 
-
     ```text
-
     curl -X PUT -d '{ "product" : {"name": "My updated Product!", "price": 99} }' "https://api.jumpseller.com/v1/products/123.json?login=XXXXXX&authtoken=XXXXX" -H "Content-Type:application/json"
-
     ```
-
 
     or delete it:  
 
-
     ```text
-
     curl -X DELETE "https://api.jumpseller.com/v1/products/123.json?login=XXXXXX&authtoken=XXXXX" -H "Content-Type:application/json"
-
     ```
-
     <br/><br/>
-
     ***
-
 
     # PHP Examples
 
-
     Create a new Product (POST method)
 
-
     ```php
-
     $url = 'https://api.jumpseller.com/v1/products.json?login=XXXXX&authtoken=XXXXX;
-
     $ch = curl_init($url);
-
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 
-
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST"); //post method
-
     curl_setopt($ch, CURLOPT_POSTFIELDS, '{ "product" : {"name": "My updated Product!", "price": 99} }');
 
-
     $result = curl_exec($ch);
-
     print_r($result);
-
     curl_close($ch);
-
     ```
-
     <br/><br/>
-
     ***
-
 
     # Plain JSON only. No XML.
 
-
     * We only support JSON for data serialization.
-
     * Our node format has no root element.  
-
     * We use snake_case to describe attribute keys (like "created_at").  
-
     * All empty value are replaced with **null** strings.
-
     * All API URLs end in .json to indicate that they accept and return JSON.
-
     * POST and PUT methods require you to explicitly state the MIME type of your request's body content as **"application/json"**.
-
     <br/><br/>
-
     ***
 
-
     # Rate Limit
-
     You can perform a maximum of:
 
-
     + 240 (two hundred forty) requests per minute and
-
     + 8 (eight) requests per second 
-
 
     If you exceed this limit, you'll get a 403 Forbidden (Rate Limit Exceeded) response for subsequent requests.  
 
-
     The rate limits apply by IP address and by store. This means that multiple requests on different stores are not counted towards the same rate limit.
-
 
     This limits are necessary to ensure resources are correctly used. Your application should be aware of this limits and retry any unsuccessful request, check the following Ruby stub:
 
-
     ```ruby
-
     tries = 0; max_tries = 3;
-
     begin
       HTTParty.send(method, uri) # perform an API call.
       sleep 0.5
@@ -201,67 +125,40 @@ info:
         retry
       end
     end
-
     ```
-
 
     Finally, you can review the Response Headers of each request:
 
-
     ```text
-
     Jumpseller-PerMinuteRateLimit-Limit: 60  
-
     Jumpseller-PerMinuteRateLimit-Remaining: 59 # requests available on the per-second interval  
-
     Jumpseller-PerSecondRateLimit-Limit: 2  
-
     Jumpseller-PerSecondRateLimit-Remaining: 1 # requests available on the per-second interval
-
     ``` 
-
 
     to better model your application requests intervals.
 
-
     In the event of getting your IP banned, the Response Header `Jumpseller-BannedByRateLimit-Reset` informs you the time when will your ban be reseted.
-
     <br/><br/>
-
     ***
-
 
     # Pagination
 
-
     By default we will return 50 objects (products, orders, etc) per page. There is a maximum of 100, using a query string `&limit=100`.
-
     If the result set gets paginated it is your responsibility to check the next page for more objects -- you do this by using query strings `&page=2`, `&page=3` and so on.
 
-
     ```text
-
     https://api.jumpseller.com/v1/products.json?login=XXXXXX&authtoken=XXXXX&page=3&limit=100
-
     ```
-
     <br/><br/>
-
     ***
-
 
     # More
-
     * [Jumpseller API wrapper](https://gitlab.com/jumpseller-api/ruby) provides a public Ruby abstraction over our API;
-
     * [Apps Page](/apps) showcases external integrations with Jumpseller done by technical experts;
-
     * [Imgbb API](https://api.imgbb.com/) provides an easy way to upload and temporaly host for images and files.
-
     <br/><br/>
-
     ***
-
     <br/><br/>
   title: Jumpseller API
   version: 1.0.0
@@ -293,8 +190,7 @@ paths:
       tags:
         - Categories
     post:
-      description: Category's permalink is automatically generated from the given
-        category's name.
+      description: Category's permalink is automatically generated from the given category's name.
       parameters:
         - $ref: "#/components/parameters/LoginParam"
         - $ref: "#/components/parameters/AuthtokenParam"
@@ -429,8 +325,7 @@ paths:
       tags:
         - Checkout Custom Fields
     post:
-      description: "Type values can be: input, selection, checkbox, date or text. Area
-        values can be: contact, billing_shipping or other."
+      description: "Type values can be: input, selection, checkbox, date or text. Area values can be: contact, billing_shipping or other."
       parameters:
         - $ref: "#/components/parameters/LoginParam"
         - $ref: "#/components/parameters/AuthtokenParam"
@@ -1704,8 +1599,7 @@ paths:
       tags:
         - Orders
     post:
-      description: Orders created externally keep the given order product's values
-        (bypassing internal promotion or product amounts).
+      description: Orders created externally keep the given order product's values (bypassing internal promotion or product amounts).
       parameters:
         - $ref: "#/components/parameters/LoginParam"
         - $ref: "#/components/parameters/AuthtokenParam"
@@ -1728,8 +1622,7 @@ paths:
         - Orders
   "/orders/after/{id}.json":
     get:
-      description: For example the GET /orders/after/5000 will return Order 5001,
-        5002, 5003, etc.
+      description: For example the GET /orders/after/5000 will return Order 5001, 5002, 5003, etc.
       parameters:
         - $ref: "#/components/parameters/LoginParam"
         - $ref: "#/components/parameters/AuthtokenParam"
@@ -1834,10 +1727,7 @@ paths:
       tags:
         - Orders
     put:
-      description: Only `status`, `shipment_status`, `tracking_number`,
-        `tracking_company`, `tracking_url`, `additional_information` and
-        `additional_fields` are available for update. An email is send if
-        `shipment_status` changes.
+      description: Only `status`, `shipment_status`, `tracking_number`, `tracking_company`, `tracking_url`, `additional_information` and `additional_fields` are available for update. An email is send if `shipment_status` changes.
       parameters:
         - $ref: "#/components/parameters/LoginParam"
         - $ref: "#/components/parameters/AuthtokenParam"
@@ -2246,14 +2136,11 @@ paths:
         - Products
   /products/search.json:
     get:
-      description: >-
+      description: |-
         Endpoint example: 
 
-
         ```text
-
         https://api.jumpseller.com/v1/products/search.json?login=XXXXXX&authtoken=XXXXX&query=test&fields=name,description 
-
         ```
       parameters:
         - $ref: "#/components/parameters/LoginParam"
@@ -4031,8 +3918,7 @@ components:
           description: Filename of the attachment (with file extensison)
           type: string
         url:
-          description: "Public accessible URL with the desired file contents. (LIMIT:
-            100MB)"
+          description: "Public accessible URL with the desired file contents. (LIMIT: 100MB)"
           type: string
       type: object
     AttachmentFields:
@@ -4070,8 +3956,7 @@ components:
           description: Postal code of the Customer's Billing Address
           type: string
         region:
-          description: Region code of the Customer's Billing Address (Use the FIPS
-            standard - http://www.geonames.org/countries/)
+          description: Region code of the Customer's Billing Address (Use the FIPS standard - http://www.geonames.org/countries/)
           type: string
         surname:
           description: Surname of the Customer's Billing Address
@@ -4518,8 +4403,7 @@ components:
           description: Filename of the digital product (with file extensison)
           type: string
         url:
-          description: "Public accessible URL with the desired file contents. (LIMIT:
-            100MB)"
+          description: "Public accessible URL with the desired file contents. (LIMIT: 100MB)"
           type: string
       type: object
     DigitalProductFields:
@@ -4693,8 +4577,7 @@ components:
           description: Postal code of the Order's Billing Address
           type: string
         region:
-          description: Region code of the Order's Billing Address (Use the FIPS standard -
-            http://www.geonames.org/countries/)
+          description: Region code of the Order's Billing Address (Use the FIPS standard - http://www.geonames.org/countries/)
           type: string
         street_number:
           description: Street number of the Order's Billing Address
@@ -4710,8 +4593,7 @@ components:
     OrderCreateFields:
       properties:
         customer:
-          $ref: "#/components/schemas/CustomerFieldsWithBillingAddressAndShippingAddressF\
-            ields"
+          $ref: "#/components/schemas/CustomerFieldsWithBillingAddressAndShippingAddressFields"
         products:
           items:
             $ref: "#/components/schemas/OrderProductOrderCreate"
@@ -4724,8 +4606,7 @@ components:
           description: Shipping method name e.g. Royal Mail
           type: string
         shipping_price:
-          description: Shipping method's price (applicable if shipping_method_name is
-            provided instead of a shipping_method_id)
+          description: Shipping method's price (applicable if shipping_method_name is provided instead of a shipping_method_id)
           format: float
           type: number
         status:
@@ -4875,8 +4756,7 @@ components:
             - Paid
           type: string
         subtotal:
-          description: Subtotal value for the given Order. Excluding taxes, shipping and
-            discounts
+          description: Subtotal value for the given Order. Excluding taxes, shipping and discounts
           format: float
           type: number
         tax:
@@ -4884,8 +4764,7 @@ components:
           format: float
           type: number
         total:
-          description: Total value for the given Order. Including taxes, shipping and
-            discounts
+          description: Total value for the given Order. Including taxes, shipping and discounts
           format: float
           type: number
         tracking_company:
@@ -5042,8 +4921,7 @@ components:
           description: Postal code of the Order's Shipping Address
           type: string
         region:
-          description: Region code of the Order's Shipping Address (Use the FIPS standard
-            - http://www.geonames.org/countries/)
+          description: Region code of the Order's Shipping Address (Use the FIPS standard - http://www.geonames.org/countries/)
           type: string
         street_number:
           description: Street number of the Order's Shipping Address
@@ -5591,8 +5469,7 @@ components:
           description: Controls the promotion's condition ('none', 'price', 'qty')
           type: string
         categories:
-          description: Products Categories where the promotion will be applied (requires
-            'discount_target' param - 'categories')
+          description: Products Categories where the promotion will be applied (requires 'discount_target' param - 'categories')
           items:
             $ref: "#/components/schemas/Id"
           type: array
@@ -5600,13 +5477,11 @@ components:
           description: Code of the promotion
           type: string
         condition_price:
-          description: Minimum order amount to validate the promotion (requires
-            'buys_at_least' param - 'price')
+          description: Minimum order amount to validate the promotion (requires 'buys_at_least' param - 'price')
           format: float
           type: number
         condition_qty:
-          description: Minimum quantity of ordered itens to validate the promotion
-            (requires 'buys_at_least' param - 'qty')
+          description: Minimum quantity of ordered itens to validate the promotion (requires 'buys_at_least' param - 'qty')
           format: int32
           type: integer
         cumulative:
@@ -5614,28 +5489,23 @@ components:
           description: True if the promotion can be acumulated with others
           type: boolean
         customer_categories:
-          description: Customer Categories to whom the promotion will be applied (requires
-            'customers' param - 'categories')
+          description: Customer Categories to whom the promotion will be applied (requires 'customers' param - 'categories')
           items:
             $ref: "#/components/schemas/Id"
           type: array
         customers:
-          description: Controls to which customers the promotion will be applied ('all',
-            'loggedin', 'categories', 'guests')
+          description: Controls to which customers the promotion will be applied ('all', 'loggedin', 'categories', 'guests')
           type: string
         discount_amount_fix:
-          description: Fixed discount amount of the promotion (requires 'type' param -
-            'fix')
+          description: Fixed discount amount of the promotion (requires 'type' param - 'fix')
           format: float
           type: number
         discount_amount_percent:
-          description: Percentual discount amount of the promotion (requires 'type' param
-            - 'percentage')
+          description: Percentual discount amount of the promotion (requires 'type' param - 'percentage')
           format: float
           type: number
         discount_target:
-          description: Where the promotion will be applied ('order', 'shipping',
-            'categories', 'buy_x_get_y)
+          description: Where the promotion will be applied ('order', 'shipping', 'categories', 'buy_x_get_y)
           type: string
         enabled:
           default: true
@@ -5645,32 +5515,27 @@ components:
           description: Expiration date of the promotion (requires 'lasts' param - 'date')
           type: string
         lasts:
-          description: Controls when the promotion will expire ('none', 'date',
-            'max_times_used')
+          description: Controls when the promotion will expire ('none', 'date', 'max_times_used')
           type: string
         max_times_used:
-          description: Maximum amount a promotion can be used (requires 'lasts' param -
-            'max_times_used')
+          description: Maximum amount a promotion can be used (requires 'lasts' param - 'max_times_used')
           format: int32
           type: integer
         name:
           description: Name of the product
           type: string
         products:
-          description: Products where the promotion will be applied (requires
-            'discount_target' param - 'categories' or 'buy_x_get_y')
+          description: Products where the promotion will be applied (requires 'discount_target' param - 'categories' or 'buy_x_get_y')
           items:
             $ref: "#/components/schemas/Id"
           type: array
         products_x:
-          description: Products required to apply the promotion (requires
-            'discount_target' param - 'buy_x_get_y')
+          description: Products required to apply the promotion (requires 'discount_target' param - 'buy_x_get_y')
           items:
             $ref: "#/components/schemas/Id"
           type: array
         quantity_x:
-          description: Number of sets of products_x needed to be able to apply the
-            promotion (requires 'discount_target' param - 'buy_x_get_y')
+          description: Number of sets of products_x needed to be able to apply the promotion (requires 'discount_target' param - 'buy_x_get_y')
           format: int32
           type: integer
         type:
@@ -5683,8 +5548,7 @@ components:
           description: Creation date of the promotion (requires 'lasts' param - 'date')
           type: string
         categories:
-          description: Products Categories where the promotion will be applied (requires
-            'discount_target' param - 'categories')
+          description: Products Categories where the promotion will be applied (requires 'discount_target' param - 'categories')
           items:
             $ref: "#/components/schemas/Id"
           type: array
@@ -5704,8 +5568,7 @@ components:
           description: True if the promotion can be acumulated with others
           type: boolean
         customer_categories:
-          description: Customer Categories to whom the promotion will be applied (requires
-            'customers' param - 'categories')
+          description: Customer Categories to whom the promotion will be applied (requires 'customers' param - 'categories')
           items:
             $ref: "#/components/schemas/Id"
           type: array
@@ -5718,8 +5581,7 @@ components:
           format: float
           type: number
         discount_target:
-          description: Where the promotion will be applied ('order', 'shipping',
-            'categories', 'buy_x_get_y)
+          description: Where the promotion will be applied ('order', 'shipping', 'categories', 'buy_x_get_y)
           type: string
         enabled:
           default: true
@@ -5733,32 +5595,27 @@ components:
           format: int32
           type: integer
         lasts:
-          description: Controls when the promotion will expire ('none', 'date',
-            'max_times_used')
+          description: Controls when the promotion will expire ('none', 'date', 'max_times_used')
           type: string
         max_times_used:
-          description: Maximum amount a promotion can be used (requires 'lasts' param -
-            'max_times_used')
+          description: Maximum amount a promotion can be used (requires 'lasts' param - 'max_times_used')
           format: int32
           type: integer
         name:
           description: Name of the product
           type: string
         products:
-          description: Products where the promotion will be applied (requires
-            'discount_target' param - 'categories' or 'buy_x_get_y')
+          description: Products where the promotion will be applied (requires 'discount_target' param - 'categories' or 'buy_x_get_y')
           items:
             $ref: "#/components/schemas/Id"
           type: array
         products_x:
-          description: Products required to apply the promotion (requires
-            'discount_target' param - 'buy_x_get_y')
+          description: Products required to apply the promotion (requires 'discount_target' param - 'buy_x_get_y')
           items:
             $ref: "#/components/schemas/Id"
           type: array
         quantity_x:
-          description: Number of sets of products_x needed to be able to apply the
-            promotion (requires 'discount_target' param - 'buy_x_get_y')
+          description: Number of sets of products_x needed to be able to apply the promotion (requires 'discount_target' param - 'buy_x_get_y')
           format: int32
           type: integer
         status:
@@ -5796,8 +5653,7 @@ components:
           description: Postal code of the Customer's Shipping Address
           type: string
         region:
-          description: Region code of the Customer's Shipping Address (Use the FIPS
-            standard - http://www.geonames.org/countries/)
+          description: Region code of the Customer's Shipping Address (Use the FIPS standard - http://www.geonames.org/countries/)
           type: string
         surname:
           description: Surname of the Customer's Shipping Address
