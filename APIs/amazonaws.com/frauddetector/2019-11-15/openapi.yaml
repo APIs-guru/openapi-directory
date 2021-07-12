@@ -314,6 +314,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
       requestBody:
         required: true
         content:
@@ -4406,7 +4412,7 @@ components:
         eventVariables:
           allOf:
             - $ref: '#/components/schemas/EventVariableMap'
-            - description: Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.
+            - description: '<p>Names of the event type''s variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.</p> <important> <ul> <li> <p>You must provide at least one eventVariable</p> </li> <li> <p>If detectorVersion is associated with a modelVersion, you must provide at least one associated eventVariable</p> </li> </ul> </important> <p>To ensure highest possible fraud prediction and to simplify your data preparation, Amazon Fraud Detector will replace all missing variables or values as follows:</p> <p> <b>For Amazon Fraud Detector trained models:</b> </p> <p>If a null value is provided explicitly for a variable or if a variable is missing, model will replace the null value or the missing variable (no variable name in the eventVariables map) with calculated default mean/medians for numeric variables and with special values for categorical variables.</p> <p> <b>For External models ( for example, imported SageMaker):</b> </p> <p>If a null value is provided explicitly for a variable, the model and rules will use “null” as the value. If a variable is not provided (no variable name in the eventVariables map), model and rules will use the default value that is provided for the variable. </p>'
         externalModelEndpointDataBlobs:
           allOf:
             - $ref: '#/components/schemas/ExternalModelEndpointDataBlobMap'
@@ -5945,6 +5951,30 @@ components:
             - $ref: '#/components/schemas/labelMapper'
             - description: 'The label mapper maps the Amazon Fraud Detector supported model classification labels (<code>FRAUD</code>, <code>LEGIT</code>) to the appropriate event type labels. For example, if "<code>FRAUD</code>" and "<code>LEGIT</code>" are Amazon Fraud Detector supported labels, this mapper could be: <code>{"FRAUD" =&gt; ["0"]</code>, <code>"LEGIT" =&gt; ["1"]}</code> or <code>{"FRAUD" =&gt; ["false"]</code>, <code>"LEGIT" =&gt; ["true"]}</code> or <code>{"FRAUD" =&gt; ["fraud", "abuse"]</code>, <code>"LEGIT" =&gt; ["legit", "safe"]}</code>. The value part of the mapper is a list, because you may have multiple label variants from your event type for a single Amazon Fraud Detector label. '
       description: The label schema.
+    LogitMetric:
+      type: object
+      required:
+        - variableName
+        - variableType
+        - variableImportance
+      properties:
+        variableName:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The name of the variable.
+        variableType:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The type of variable.
+        variableImportance:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: The relative importance of the variable.
+      description: The logit metric details.
+    ListOfLogitMetrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/LogitMetric'
     ModelScores:
       type: object
       properties:
@@ -6085,6 +6115,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TrainingMetrics'
             - description: The training metric details.
+        variableImportanceMetrics:
+          allOf:
+            - $ref: '#/components/schemas/VariableImportanceMetrics'
+            - description: The variable importance metrics.
       description: The training result details.
     ModelVersionDetail:
       type: object
@@ -6248,6 +6282,14 @@ components:
             - $ref: '#/components/schemas/metricDataPointsList'
             - description: The data points details.
       description: The training metric details.
+    VariableImportanceMetrics:
+      type: object
+      properties:
+        LogitMetrics:
+          allOf:
+            - $ref: '#/components/schemas/ListOfLogitMetrics'
+            - description: List of variable metrics.
+      description: The variable importance metrics details.
     tagKeyList:
       type: array
       items:

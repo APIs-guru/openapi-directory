@@ -118,7 +118,7 @@ paths:
   /#X-Amz-Target=AWSKendraFrontendService.BatchDeleteDocument:
     post:
       operationId: BatchDeleteDocument
-      description: <p>Removes one or more documents from an index. The documents must have been added with the <code>BatchPutDocument</code> operation.</p> <p>The documents are deleted asynchronously. You can see the progress of the deletion by using AWS CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.</p>
+      description: <p>Removes one or more documents from an index. The documents must have been added with the <code>BatchPutDocument</code> operation.</p> <p>The documents are deleted asynchronously. You can see the progress of the deletion by using Amazon Web Services CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.</p>
       responses:
         '200':
           description: Success
@@ -256,7 +256,7 @@ paths:
   /#X-Amz-Target=AWSKendraFrontendService.BatchPutDocument:
     post:
       operationId: BatchPutDocument
-      description: '<p>Adds one or more documents to an index.</p> <p>The <code>BatchPutDocument</code> operation enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this operation to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index.</p> <p>The documents are indexed asynchronously. You can see the progress of the batch using AWS CloudWatch. Any error messages related to processing the batch are sent to your AWS CloudWatch log.</p>'
+      description: '<p>Adds one or more documents to an index.</p> <p>The <code>BatchPutDocument</code> operation enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this operation to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index.</p> <p>The documents are indexed asynchronously. You can see the progress of the batch using Amazon Web Services CloudWatch. Any error messages related to processing the batch are sent to your Amazon Web Services CloudWatch log.</p>'
       responses:
         '200':
           description: Success
@@ -969,6 +969,71 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.DeletePrincipalMapping:
+    post:
+      operationId: DeletePrincipalMapping
+      description: '<p>Deletes a group so that all users and sub groups that belong to the group can no longer access documents only available to that group.</p> <p>For example, after deleting the group "Summer Interns", all interns who belonged to that group no longer see intern-only documents in their search results.</p> <p>If you want to delete or replace users or sub groups of a group, you need to use the <code>PutPrincipalMapping</code> operation. For example, if a user in the group "Engineering" leaves the engineering team and another user takes their place, you provide an updated list of users or sub groups that belong to the "Engineering" group when calling <code>PutPrincipalMapping</code>. You can update your internal list of users or sub groups and input this list when calling <code>PutPrincipalMapping</code>.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletePrincipalMappingRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.DeletePrincipalMapping
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSKendraFrontendService.DeleteQuerySuggestionsBlockList:
     post:
       operationId: DeleteQuerySuggestionsBlockList
@@ -1280,6 +1345,69 @@ paths:
             type: string
             enum:
               - AWSKendraFrontendService.DescribeIndex
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.DescribePrincipalMapping:
+    post:
+      operationId: DescribePrincipalMapping
+      description: 'Describes the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups. This includes information on the status of actions currently processing or yet to be processed, when actions were last updated, when actions were received by Amazon Kendra, the latest action that should process and apply after other actions, and useful error messages if an action could not be processed.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribePrincipalMappingResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribePrincipalMappingRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.DescribePrincipalMapping
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1771,6 +1899,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.ListGroupsOlderThanOrderingId:
+    post:
+      operationId: ListGroupsOlderThanOrderingId
+      description: Provides a list of groups that are mapped to users before a given ordering or timestamp identifier.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListGroupsOlderThanOrderingIdResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListGroupsOlderThanOrderingIdRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.ListGroupsOlderThanOrderingId
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSKendraFrontendService.ListIndices:
     post:
       operationId: ListIndices
@@ -2021,6 +2218,77 @@ paths:
             type: string
             enum:
               - AWSKendraFrontendService.ListThesauri
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.PutPrincipalMapping:
+    post:
+      operationId: PutPrincipalMapping
+      description: '<p>Maps users to their groups. You can also map sub groups to groups. For example, the group "Company Intellectual Property Teams" includes sub groups "Research" and "Engineering". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their search results. </p> <p>You map users to their groups when you want to filter search results for different users based on their group’s access to documents. For more information on filtering search results for different users, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html">Filtering on user context</a>.</p> <p>If more than five <code>PUT</code> actions for a group are currently processing, a validation exception is thrown.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '486':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutPrincipalMappingRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.PutPrincipalMapping
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2874,7 +3142,7 @@ components:
         FailedDocuments:
           allOf:
             - $ref: '#/components/schemas/BatchPutDocumentResponseFailedDocuments'
-            - description: '<p>A list of documents that were not added to the index because the document failed a validation check. Each document contains an error message that indicates why the document couldn''t be added to the index.</p> <p>If there was an error adding a document to an index the error is reported in your AWS CloudWatch log. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/cloudwatch-logs.html">Monitoring Amazon Kendra with Amazon CloudWatch Logs</a> </p>'
+            - description: '<p>A list of documents that were not added to the index because the document failed a validation check. Each document contains an error message that indicates why the document couldn''t be added to the index.</p> <p>If there was an error adding a document to an index the error is reported in your Amazon Web Services CloudWatch log. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/cloudwatch-logs.html">Monitoring Amazon Kendra with Amazon CloudWatch Logs</a> </p>'
     BatchPutDocumentRequest:
       type: object
       required:
@@ -3028,15 +3296,15 @@ components:
         Edition:
           allOf:
             - $ref: '#/components/schemas/IndexEdition'
-            - description: '<p>The Amazon Kendra edition to use for the index. Choose <code>DEVELOPER_EDITION</code> for indexes intended for development, testing, or proof of concept. Use <code>ENTERPRISE_EDITION</code> for your production databases. Once you set the edition for an index, it can''t be changed. </p> <p>The <code>Edition</code> parameter is optional. If you don''t supply a value, the default is <code>ENTERPRISE_EDITION</code>.</p> <p>For more information on quota limits for enterprise and developer editions, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/quotas.html">Quotas</a>.</p>'
+            - description: '<p>The Amazon Kendra edition to use for the index. Choose <code>DEVELOPER_EDITION</code> for indexes intended for development, testing, or proof of concept. Use <code>ENTERPRISE_EDITION</code> for your production databases. Once you set the edition for an index, it can''t be changed. </p> <p>The <code>Edition</code> parameter is optional. If you don''t supply a value, the default is <code>ENTERPRISE_EDITION</code>.</p>'
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: An AWS Identity and Access Management (IAM) role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the <code>BatchPutDocument</code> operation to index documents from an Amazon S3 bucket.
+            - description: An Identity and Access Management(IAM) role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the <code>BatchPutDocument</code> operation to index documents from an Amazon S3 bucket.
         ServerSideEncryptionConfiguration:
           allOf:
             - $ref: '#/components/schemas/ServerSideEncryptionConfiguration'
-            - description: The identifier of the AWS KMS customer managed key (CMK) to use to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
+            - description: The identifier of the KMScustomer managed key (CMK) to use to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
         Description:
           allOf:
             - $ref: '#/components/schemas/Description'
@@ -3185,6 +3453,29 @@ components:
           allOf:
             - $ref: '#/components/schemas/IndexId'
             - description: The identifier of the index to delete.
+    DeletePrincipalMappingRequest:
+      type: object
+      required:
+        - IndexId
+        - GroupId
+      title: DeletePrincipalMappingRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index you want to delete a group from.
+        DataSourceId:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceId'
+            - description: '<p>The identifier of the data source you want to delete a group from.</p> <p>This is useful if a group is tied to multiple data sources and you want to delete a group from accessing documents in a certain data source. For example, the groups "Research", "Engineering", and "Sales and Marketing" are all tied to the company''s documents stored in the data sources Confluence and Salesforce. You want to delete "Research" and "Engineering" groups from Salesforce, so that these groups cannot access customer-related documents stored in Salesforce. Only "Sales and Marketing" should access documents in the Salesforce data source.</p>'
+        GroupId:
+          allOf:
+            - $ref: '#/components/schemas/GroupId'
+            - description: The identifier of the group you want to delete.
+        OrderingId:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalOrderingId'
+            - description: '<p>The timestamp identifier you specify to ensure Amazon Kendra does not override the latest <code>DELETE</code> action with previous actions. The highest number ID, which is the ordering ID, is the latest action you want to process and apply on top of other actions with lower number IDs. This prevents previous actions with lower number IDs from possibly overriding the latest action.</p> <p>The ordering ID can be the UNIX time of the last update you made to a group members list. You would then provide this list when calling <code>PutPrincipalMapping</code>. This ensures your <code>DELETE</code> action for that updated group with the latest members list doesn''t get overwritten by earlier <code>DELETE</code> actions for the same group which are yet to be processed.</p> <p>The default ordering ID is the current UNIX time in milliseconds that the action was received by Amazon Kendra. </p>'
     DeleteQuerySuggestionsBlockListRequest:
       type: object
       required:
@@ -3363,7 +3654,7 @@ components:
         ServerSideEncryptionConfiguration:
           allOf:
             - $ref: '#/components/schemas/ServerSideEncryptionConfiguration'
-            - description: The identifier of the AWS KMS customer master key (CMK) used to encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.
+            - description: The identifier of the KMScustomer master key (CMK) used to encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.
         Status:
           allOf:
             - $ref: '#/components/schemas/IndexStatus'
@@ -3414,6 +3705,44 @@ components:
           allOf:
             - $ref: '#/components/schemas/IndexId'
             - description: The name of the index to describe.
+    DescribePrincipalMappingResponse:
+      type: object
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: Shows the identifier of the index to see information on the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups.
+        DataSourceId:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceId'
+            - description: Shows the identifier of the data source to see information on the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups.
+        GroupId:
+          allOf:
+            - $ref: '#/components/schemas/GroupId'
+            - description: Shows the identifier of the group to see information on the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups.
+        GroupOrderingIdSummaries:
+          allOf:
+            - $ref: '#/components/schemas/GroupOrderingIdSummaries'
+            - description: '<p>Shows the following information on the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups:</p> <ul> <li> <p>Status – the status can be either <code>PROCESSING</code>, <code>SUCCEEDED</code>, <code>DELETING</code>, <code>DELETED</code>, or <code>FAILED</code>.</p> </li> <li> <p>Last updated – the last date-time an action was updated.</p> </li> <li> <p>Received – the last date-time an action was received or submitted.</p> </li> <li> <p>Ordering ID – the latest action that should process and apply after other actions.</p> </li> <li> <p>Failure reason – the reason an action could not be processed.</p> </li> </ul>'
+    DescribePrincipalMappingRequest:
+      type: object
+      required:
+        - IndexId
+        - GroupId
+      title: DescribePrincipalMappingRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index required to check the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups.
+        DataSourceId:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceId'
+            - description: The identifier of the data source to check the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups.
+        GroupId:
+          allOf:
+            - $ref: '#/components/schemas/GroupId'
+            - description: The identifier of the group required to check the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups.
     DescribeQuerySuggestionsBlockListResponse:
       type: object
       properties:
@@ -3727,6 +4056,44 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResultsIntegerForListFaqsRequest'
             - description: 'The maximum number of FAQs to return in the response. If there are fewer results in the list, this response contains only the actual results.'
+    ListGroupsOlderThanOrderingIdResponse:
+      type: object
+      properties:
+        GroupsSummaries:
+          allOf:
+            - $ref: '#/components/schemas/ListOfGroupSummaries'
+            - description: ' Summary information for list of groups that are mapped to users before a given ordering or timestamp identifier. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The next items in the list of groups that go beyond the maximum. '
+    ListGroupsOlderThanOrderingIdRequest:
+      type: object
+      required:
+        - IndexId
+        - OrderingId
+      title: ListGroupsOlderThanOrderingIdRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index for getting a list of groups mapped to users before a given ordering or timestamp identifier.
+        DataSourceId:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceId'
+            - description: The identifier of the data source for getting a list of groups mapped to users before a given ordering timestamp identifier.
+        OrderingId:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalOrderingId'
+            - description: The timestamp identifier used for the latest <code>PUT</code> or <code>DELETE</code> action for mapping users to their groups.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' The next items in the list of groups that go beyond the maximum. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsIntegerForListPrincipalsRequest'
+            - description: ' The maximum results shown for a list of groups that are mapped to users before a given ordering or timestamp identifier. '
     ListIndicesResponse:
       type: object
       properties:
@@ -3826,6 +4193,38 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResultsIntegerForListThesauriRequest'
             - description: The maximum number of thesauri to return.
+    PutPrincipalMappingRequest:
+      type: object
+      required:
+        - IndexId
+        - GroupId
+        - GroupMembers
+      title: PutPrincipalMappingRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index you want to map users to their groups.
+        DataSourceId:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceId'
+            - description: '<p>The identifier of the data source you want to map users to their groups.</p> <p>This is useful if a group is tied to multiple data sources, but you only want the group to access documents of a certain data source. For example, the groups "Research", "Engineering", and "Sales and Marketing" are all tied to the company''s documents stored in the data sources Confluence and Salesforce. However, "Sales and Marketing" team only needs access to customer-related documents stored in Salesforce.</p>'
+        GroupId:
+          allOf:
+            - $ref: '#/components/schemas/GroupId'
+            - description: The identifier of the group you want to map its users to.
+        GroupMembers:
+          allOf:
+            - $ref: '#/components/schemas/GroupMembers'
+            - description: '<p>The list that contains your users or sub groups that belong the same group.</p> <p>For example, the group "Company" includes the user "CEO" and the sub groups "Research", "Engineering", and "Sales and Marketing".</p> <p>If you have more than 1000 users and/or sub groups for a single group, you need to provide the path to the S3 file that lists your users and sub groups for a group. Your sub groups can contain more than 1000 users, but the list of sub groups that belong to a group (and/or users) must be no more than 1000.</p>'
+        OrderingId:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalOrderingId'
+            - description: '<p>The timestamp identifier you specify to ensure Amazon Kendra does not override the latest <code>PUT</code> action with previous actions. The highest number ID, which is the ordering ID, is the latest action you want to process and apply on top of other actions with lower number IDs. This prevents previous actions with lower number IDs from possibly overriding the latest action.</p> <p>The ordering ID can be the UNIX time of the last update you made to a group members list. You would then provide this list when calling <code>PutPrincipalMapping</code>. This ensures your <code>PUT</code> action for that updated group with the latest members list doesn''t get overwritten by earlier <code>PUT</code> actions for the same group which are yet to be processed.</p> <p>The default ordering ID is the current UNIX time in milliseconds that the action was received by Amazon Kendra.</p>'
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: '<p>The Amazon Resource Name (ARN) of a role that has access to the S3 file that contains your list of users or sub groups that belong to a group.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-ds">IAM roles for Amazon Kendra</a>.</p>'
     QueryResult:
       type: object
       properties:
@@ -4168,7 +4567,7 @@ components:
         KeyPath:
           allOf:
             - $ref: '#/components/schemas/S3ObjectKey'
-            - description: Path to the AWS S3 bucket that contains the ACL files.
+            - description: Path to the Amazon Web Services S3 bucket that contains the ACL files.
       description: 'Access Control List files for the documents in a data source. For the format of the file, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html">Access control for S3 data sources</a>.'
     ColumnName:
       type: string
@@ -4491,11 +4890,11 @@ components:
         StorageCapacityUnits:
           allOf:
             - $ref: '#/components/schemas/StorageCapacityUnit'
-            - description: 'The amount of extra storage capacity for an index. A single capacity unit provides 30 GB of storage space or 100,000 documents, whichever is reached first.'
+            - description: 'The amount of extra storage capacity for an index. A single capacity unit for an index provides 150 GB of storage space or 500,000 documents, whichever is reached first.'
         QueryCapacityUnits:
           allOf:
             - $ref: '#/components/schemas/QueryCapacityUnit'
-            - description: '<p>The amount of extra query capacity for an index and <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html">GetQuerySuggestions</a> capacity.</p> <p>A single extra capacity unit for an index provides 0.1 queries per second or approximately 8,000 queries per day.</p> <p> <code>GetQuerySuggestions</code> capacity is five times the provisioned query capacity for an index, or the base capacity of 2.5 calls per second, whichever is higher. For example, the base capacity for an index is 0.1 queries per second, and <code>GetQuerySuggestions</code> capacity has a base of 2.5 calls per second. If you add another 0.1 queries per second to total 0.2 queries per second for an index, the <code>GetQuerySuggestions</code> capacity is 2.5 calls per second (higher than five times 0.2 queries per second).</p>'
+            - description: '<p>The amount of extra query capacity for an index and <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html">GetQuerySuggestions</a> capacity.</p> <p>A single extra capacity unit for an index provides 0.5 queries per second or approximately 40,000 queries per day.</p> <p> <code>GetQuerySuggestions</code> capacity is 5 times the provisioned query capacity for an index. For example, the base capacity for an index is 0.5 queries per second, so GetQuerySuggestions capacity is 2.5 calls per second. If adding another 0.5 queries per second to total 1 queries per second for an index, the <code>GetQuerySuggestions</code> capacity is 5 calls per second.</p>'
       description: Specifies capacity units configured for your enterprise edition index. You can add and remove capacity units to tune an index to your requirements.
     ChangeDetectingColumns:
       type: array
@@ -4749,7 +5148,7 @@ components:
         SecretArn:
           allOf:
             - $ref: '#/components/schemas/SecretArn'
-            - description: '<p>The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the key/value pairs required to connect to your Confluence server. The secret must contain a JSON structure with the following keys:</p> <ul> <li> <p>username - The user name or email address of a user with administrative privileges for the Confluence server.</p> </li> <li> <p>password - The password associated with the user logging in to the Confluence server.</p> </li> </ul>'
+            - description: '<p>The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the key/value pairs required to connect to your Confluence server. The secret must contain a JSON structure with the following keys:</p> <ul> <li> <p>username - The user name or email address of a user with administrative privileges for the Confluence server.</p> </li> <li> <p>password - The password associated with the user logging in to the Confluence server.</p> </li> </ul>'
         Version:
           allOf:
             - $ref: '#/components/schemas/ConfluenceVersion'
@@ -4905,7 +5304,7 @@ components:
         SecretArn:
           allOf:
             - $ref: '#/components/schemas/SecretArn'
-            - description: 'The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html">Using a Database Data Source</a>. For more information about AWS Secrets Manager, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html"> What Is AWS Secrets Manager </a> in the <i>AWS Secrets Manager</i> user guide.'
+            - description: 'The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html">Using a Database Data Source</a>. For more information about AWS Secrets Manager, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html"> What Is AWS Secrets Manager </a> in the <i> Secrets Manager </i> user guide.'
       description: Provides the information necessary to connect to a database.
     ContentType:
       type: string
@@ -5040,8 +5439,8 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
-            - description: The identifier of the AWS KMS customer master key (CMK). Amazon Kendra doesn't support asymmetric CMKs.
-      description: Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
+            - description: The identifier of the KMScustomer master key (CMK). Amazon Kendra doesn't support asymmetric CMKs.
+      description: Provides the identifier of the KMScustomer master key (CMK) used to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
     UserTokenConfigurationList:
       type: array
       items:
@@ -5118,7 +5517,7 @@ components:
         SecretArn:
           allOf:
             - $ref: '#/components/schemas/SecretArn'
-            - description: 'The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html">Using a Microsoft SharePoint Data Source</a>. For more information about AWS Secrets Manager, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html"> What Is AWS Secrets Manager </a> in the <i>AWS Secrets Manager</i> user guide.'
+            - description: 'The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. If you use SharePoint Sever, you also need to provide the sever domain name as part of the credentials. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html">Using a Microsoft SharePoint Data Source</a>. For more information about AWS Secrets Manager, see <a href="https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html"> What Is AWS Secrets Manager </a> in the <i>Secrets Manager </i> user guide.'
         CrawlAttachments:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -5195,7 +5594,7 @@ components:
         SecretArn:
           allOf:
             - $ref: '#/components/schemas/SecretArn'
-            - description: '<p>The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the key/value pairs required to connect to your Salesforce instance. The secret must contain a JSON structure with the following keys:</p> <ul> <li> <p>authenticationUrl - The OAUTH endpoint that Amazon Kendra connects to get an OAUTH token. </p> </li> <li> <p>consumerKey - The application public key generated when you created your Salesforce application.</p> </li> <li> <p>consumerSecret - The application private key generated when you created your Salesforce application.</p> </li> <li> <p>password - The password associated with the user logging in to the Salesforce instance.</p> </li> <li> <p>securityToken - The token associated with the user account logging in to the Salesforce instance.</p> </li> <li> <p>username - The user name of the user logging in to the Salesforce instance.</p> </li> </ul>'
+            - description: '<p>The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the key/value pairs required to connect to your Salesforce instance. The secret must contain a JSON structure with the following keys:</p> <ul> <li> <p>authenticationUrl - The OAUTH endpoint that Amazon Kendra connects to get an OAUTH token. </p> </li> <li> <p>consumerKey - The application public key generated when you created your Salesforce application.</p> </li> <li> <p>consumerSecret - The application private key generated when you created your Salesforce application.</p> </li> <li> <p>password - The password associated with the user logging in to the Salesforce instance.</p> </li> <li> <p>securityToken - The token associated with the user account logging in to the Salesforce instance.</p> </li> <li> <p>username - The user name of the user logging in to the Salesforce instance.</p> </li> </ul>'
         StandardObjectConfigurations:
           allOf:
             - $ref: '#/components/schemas/SalesforceStandardObjectConfigurationList'
@@ -5239,7 +5638,7 @@ components:
         SecretArn:
           allOf:
             - $ref: '#/components/schemas/SecretArn'
-            - description: 'The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the user name and password to connect to OneDrive. The user namd should be the application ID for the OneDrive application, and the password is the application key for the OneDrive application.'
+            - description: 'The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the user name and password to connect to OneDrive. The user namd should be the application ID for the OneDrive application, and the password is the application key for the OneDrive application.'
         OneDriveUsers:
           allOf:
             - $ref: '#/components/schemas/OneDriveUsers'
@@ -5275,7 +5674,7 @@ components:
         SecretArn:
           allOf:
             - $ref: '#/components/schemas/SecretArn'
-            - description: The Amazon Resource Name (ARN) of the AWS Secret Manager secret that contains the user name and password required to connect to the ServiceNow instance.
+            - description: The Amazon Resource Name (ARN) of the Secrets Manager secret that contains the user name and password required to connect to the ServiceNow instance.
         ServiceNowBuildVersion:
           allOf:
             - $ref: '#/components/schemas/ServiceNowBuildVersionType'
@@ -5301,7 +5700,7 @@ components:
         SecretArn:
           allOf:
             - $ref: '#/components/schemas/SecretArn'
-            - description: 'The Amazon Resource Name (ARN) of a AWS Secrets Manager secret that contains the credentials required to connect to Google Drive. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html">Using a Google Workspace Drive data source</a>.'
+            - description: 'The Amazon Resource Name (ARN) of a Secrets Managersecret that contains the credentials required to connect to Google Drive. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html">Using a Google Workspace Drive data source</a>.'
         InclusionPatterns:
           allOf:
             - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
@@ -5374,6 +5773,32 @@ components:
       pattern: '^[a-zA-Z][a-zA-Z0-9_.]*$'
       minLength: 1
       maxLength: 100
+    PrincipalName:
+      type: string
+      pattern: '^\P{C}*$'
+      minLength: 1
+      maxLength: 200
+    DataSourceGroup:
+      type: object
+      required:
+        - GroupId
+        - DataSourceId
+      properties:
+        GroupId:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalName'
+            - description: The identifier of the group you want to add to your list of groups. This is for filtering search results based on the groups' access to documents.
+        DataSourceId:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceId'
+            - description: The identifier of the data source group you want to add to your list of data source groups. This is for filtering search results based on the groups' access to documents in that data source.
+      description: ' Data source information for user context filtering. '
+    DataSourceGroups:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataSourceGroup'
+      minItems: 1
+      maxItems: 2048
     DataSourceInclusionsExclusionsStringsMember:
       type: string
       minLength: 1
@@ -5546,6 +5971,15 @@ components:
             - $ref: '#/components/schemas/QueryIdentifiersEnclosingOption'
             - description: '<p>Determines whether Amazon Kendra encloses SQL identifiers for tables and column names in double quotes (") when making a database query.</p> <p>By default, Amazon Kendra passes SQL identifiers the way that they are entered into the data source configuration. It does not change the case of identifiers or enclose them in quotes.</p> <p>PostgreSQL internally converts uppercase characters to lower case characters in identifiers unless they are quoted. Choosing this option encloses identifiers in quotes so that PostgreSQL does not convert the character''s case.</p> <p>For MySQL databases, you must enable the <code>ansi_quotes</code> option when you set this field to <code>DOUBLE_QUOTES</code>.</p>'
       description: Provides information that configures Amazon Kendra to use a SQL database.
+    GroupId:
+      type: string
+      pattern: '^\P{C}*$'
+      minLength: 1
+      maxLength: 1024
+    PrincipalOrderingId:
+      type: integer
+      minimum: 0
+      maximum: 32535158400000
     FaqStatus:
       type: string
       enum:
@@ -5584,6 +6018,11 @@ components:
             - $ref: '#/components/schemas/TextDocumentStatistics'
             - description: The number of text documents indexed.
       description: Provides information about the number of documents and the number of questions and answers in an index.
+    GroupOrderingIdSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/GroupOrderingIdSummary'
+      maxItems: 10
     QuerySuggestionsBlockListStatus:
       type: string
       enum:
@@ -5636,6 +6075,13 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Principal'
+    HierarchicalPrincipalList:
+      type: array
+      description: 'A list of <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html">principal</a> lists that define the hierarchy for which documents users should have access to. Each hierarchical list specifies which user or group has allow or deny access for each document.'
+      items:
+        $ref: '#/components/schemas/HierarchicalPrincipal'
+      minItems: 1
+      maxItems: 30
     Document:
       type: object
       required:
@@ -5652,7 +6098,7 @@ components:
         Blob:
           allOf:
             - $ref: '#/components/schemas/Blob'
-            - description: '<p>The contents of the document. </p> <p>Documents passed to the <code>Blob</code> parameter must be base64 encoded. Your code might not need to encode the document file bytes if you''re using an AWS SDK to call Amazon Kendra operations. If you are calling the Amazon Kendra endpoint directly using REST, you must base64 encode the contents before sending.</p>'
+            - description: '<p>The contents of the document. </p> <p>Documents passed to the <code>Blob</code> parameter must be base64 encoded. Your code might not need to encode the document file bytes if you''re using an Amazon Web Services SDK to call Amazon Kendra operations. If you are calling the Amazon Kendra endpoint directly using REST, you must base64 encode the contents before sending.</p>'
         S3Path:
           $ref: '#/components/schemas/S3Path'
         Attributes:
@@ -5662,7 +6108,11 @@ components:
         AccessControlList:
           allOf:
             - $ref: '#/components/schemas/PrincipalList'
-            - description: Information to use for user context filtering.
+            - description: 'Information on user and group access rights, which is used for user context filtering.'
+        HierarchicalAccessControlList:
+          allOf:
+            - $ref: '#/components/schemas/HierarchicalPrincipalList'
+            - description: 'The list of <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html">principal</a> lists that define the hierarchy for which documents users should have access to.'
         ContentType:
           allOf:
             - $ref: '#/components/schemas/ContentType'
@@ -5871,7 +6321,7 @@ components:
         S3Prefix:
           allOf:
             - $ref: '#/components/schemas/S3ObjectKey'
-            - description: A prefix used to filter metadata configuration files in the AWS S3 bucket. The S3 bucket might contain multiple metadata files. Use <code>S3Prefix</code> to include only the desired metadata files.
+            - description: A prefix used to filter metadata configuration files in the Amazon Web Services S3 bucket. The S3 bucket might contain multiple metadata files. Use <code>S3Prefix</code> to include only the desired metadata files.
       description: 'Document metadata files that contain information such as the document access control information, source URI, document author, and custom attributes. Each metadata file contains metadata about a single document.'
     Duration:
       type: string
@@ -5943,6 +6393,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/FacetResult'
+    FailureReason:
+      type: string
+      pattern: '^\P{C}*$'
+      minLength: 1
+      maxLength: 2048
     IndexedQuestionAnswersCount:
       type: integer
       minimum: 0
@@ -6009,6 +6464,94 @@ components:
       pattern: '^\P{C}*$'
       minLength: 1
       maxLength: 100
+    MemberGroups:
+      type: array
+      items:
+        $ref: '#/components/schemas/MemberGroup'
+      minItems: 1
+      maxItems: 1000
+    MemberUsers:
+      type: array
+      items:
+        $ref: '#/components/schemas/MemberUser'
+      minItems: 1
+      maxItems: 1000
+    GroupMembers:
+      type: object
+      properties:
+        MemberGroups:
+          allOf:
+            - $ref: '#/components/schemas/MemberGroups'
+            - description: 'A list of sub groups that belong to a group. For example, the sub groups "Research", "Engineering", and "Sales and Marketing" all belong to the group "Company".'
+        MemberUsers:
+          allOf:
+            - $ref: '#/components/schemas/MemberUsers'
+            - description: 'A list of users that belong to a group. For example, a list of interns all belong to the "Interns" group.'
+        S3PathforGroupMembers:
+          allOf:
+            - $ref: '#/components/schemas/S3Path'
+            - description: 'If you have more than 1000 users and/or sub groups for a single group, you need to provide the path to the S3 file that lists your users and sub groups for a group. Your sub groups can contain more than 1000 users, but the list of sub groups that belong to a group (and/or users) must be no more than 1000.'
+      description: A list of users or sub groups that belong to a group. Users and groups are useful for filtering search results to different users based on their group's access to documents.
+    GroupOrderingIdSummary:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalMappingStatus'
+            - description: 'The current processing status of actions for mapping users to their groups. The status can be either <code>PROCESSING</code>, <code>SUCCEEDED</code>, <code>DELETING</code>, <code>DELETED</code>, or <code>FAILED</code>.'
+        LastUpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The last date-time an action was updated. An action can be a <code>PUT</code> or <code>DELETE</code> action for mapping users to their groups.
+        ReceivedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date-time an action was received by Amazon Kendra. An action can be a <code>PUT</code> or <code>DELETE</code> action for mapping users to their groups.
+        OrderingId:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalOrderingId'
+            - description: The order in which actions should complete processing. An action can be a <code>PUT</code> or <code>DELETE</code> action for mapping users to their groups.
+        FailureReason:
+          allOf:
+            - $ref: '#/components/schemas/FailureReason'
+            - description: The reason an action could not be processed. An action can be a <code>PUT</code> or <code>DELETE</code> action for mapping users to their groups.
+      description: Information on the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups.
+    PrincipalMappingStatus:
+      type: string
+      enum:
+        - FAILED
+        - SUCCEEDED
+        - PROCESSING
+        - DELETING
+        - DELETED
+    GroupSummary:
+      type: object
+      properties:
+        GroupId:
+          allOf:
+            - $ref: '#/components/schemas/GroupId'
+            - description: ' The identifier of the group you want group summary information on. '
+        OrderingId:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalOrderingId'
+            - description: ' The timestamp identifier used for the latest <code>PUT</code> or <code>DELETE</code> action. '
+      description: ' Group summary information. '
+    Groups:
+      type: array
+      items:
+        $ref: '#/components/schemas/PrincipalName'
+      minItems: 1
+      maxItems: 2048
+    HierarchicalPrincipal:
+      type: object
+      required:
+        - PrincipalList
+      properties:
+        PrincipalList:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalList'
+            - description: 'A list of <a href="https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html">principal</a> lists that define the hierarchy for which documents users should have access to. Each hierarchical list specifies which user or group has allow or deny access for each document.'
+      description: ' Information to define the hierarchy for which documents users should have access to. '
     HighlightType:
       type: string
       enum:
@@ -6199,6 +6742,14 @@ components:
       type: integer
       minimum: 1
       maximum: 100
+    MaxResultsIntegerForListPrincipalsRequest:
+      type: integer
+      minimum: 1
+      maximum: 10
+    ListOfGroupSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/GroupSummary'
     MaxResultsIntegerForListIndicesRequest:
       type: integer
       minimum: 1
@@ -6232,6 +6783,35 @@ components:
       type: integer
       minimum: 1
       maximum: 300
+    MemberGroup:
+      type: object
+      required:
+        - GroupId
+      properties:
+        GroupId:
+          allOf:
+            - $ref: '#/components/schemas/GroupId'
+            - description: The identifier of the sub group you want to map to a group.
+        DataSourceId:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceId'
+            - description: The identifier of the data source for the sub group you want to map to a group.
+      description: The sub groups that belong to a group.
+    UserId:
+      type: string
+      pattern: '^\P{C}*$'
+      minLength: 1
+      maxLength: 1024
+    MemberUser:
+      type: object
+      required:
+        - UserId
+      properties:
+        UserId:
+          allOf:
+            - $ref: '#/components/schemas/UserId'
+            - description: The identifier of the user you want to map to a group.
+      description: The users that belong to a group.
     TenantDomain:
       type: string
       pattern: '^([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.)+[a-z]{2,}$'
@@ -6265,11 +6845,6 @@ components:
       enum:
         - ASCENDING
         - DESCENDING
-    PrincipalName:
-      type: string
-      pattern: '^\P{C}*$'
-      minLength: 1
-      maxLength: 200
     PrincipalType:
       type: string
       enum:
@@ -6299,6 +6874,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ReadAccessType'
             - description: Whether to allow or deny access to the principal.
+        DataSourceId:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceId'
+            - description: The identifier of the data source the principal should access documents from.
       description: Provides user and group information for document access filtering.
     ProxyConfiguration:
       type: object
@@ -6361,8 +6940,20 @@ components:
         Token:
           allOf:
             - $ref: '#/components/schemas/Token'
-            - description: The user context token. It must be a JWT or a JSON token.
-      description: Provides information about the user context for a Amazon Kendra index.
+            - description: The user context token for filtering search results for a user. It must be a JWT or a JSON token.
+        UserId:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalName'
+            - description: The identifier of the user you want to filter search results based on their access to documents.
+        Groups:
+          allOf:
+            - $ref: '#/components/schemas/Groups'
+            - description: The list of groups you want to filter search results based on the groups' access to documents.
+        DataSourceGroups:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceGroups'
+            - description: The list of data source groups you want to filter search results based on groups' access to documents in that data source.
+      description: '<p>Provides information about the user context for a Amazon Kendra index.</p> <p>This is used for filtering search results for different users based on their access to documents.</p> <p>You provide one of the following:</p> <ul> <li> <p>User token</p> </li> <li> <p>User ID, the groups the user belongs to, and the data sources the groups can access</p> </li> </ul> <p>If you provide both, an exception is thrown.</p>'
     VisitorId:
       type: string
       pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
