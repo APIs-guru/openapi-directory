@@ -16,8 +16,7 @@ info:
 tags:
   - description: Operations to configure custom workflow actions.
     name: Definitions
-  - description: Operations to configure the functions associated with custom
-      workflow actions.
+  - description: Operations to configure the functions associated with custom workflow actions.
     name: Functions
   - description: Operations to retrieve the revisions for custom workflow actions.
     name: Revisions
@@ -95,9 +94,7 @@ paths:
             format: int32
             type: integer
           style: form
-        - description: The paging cursor token of the last successfully read resource will
-            be returned as the `paging.next.after` JSON property of a paged
-            response containing more results.
+        - description: The paging cursor token of the last successfully read resource will be returned as the `paging.next.after` JSON property of a paged response containing more results.
           explode: true
           in: query
           name: after
@@ -178,8 +175,7 @@ paths:
                         actionName: Create new widget
                         inputFieldDescriptions:
                           widgetColor: This is the color that will be used to paint the widget.
-                          widgetName: Enter the full widget name. I support <a
-                            href="https://hubspot.com">links</a> too.
+                          widgetName: Enter the full widget name. I support <a href="https://hubspot.com">links</a> too.
                         inputFieldLabels:
                           widgetColor: Widget Color
                           widgetName: Widget Name
@@ -199,8 +195,7 @@ paths:
                     published: false
                     revisionId: "1"
               schema:
-                $ref: "#/components/schemas/CollectionResponseExtensionActionDefinitionForwardP\
-                  aging"
+                $ref: "#/components/schemas/CollectionResponseExtensionActionDefinitionForwardPaging"
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
@@ -280,8 +275,7 @@ paths:
                     actionName: Create new widget
                     inputFieldDescriptions:
                       widgetColor: This is the color that will be used to paint the widget.
-                      widgetName: Enter the full widget name. I support <a
-                        href="https://hubspot.com">links</a> too.
+                      widgetName: Enter the full widget name. I support <a href="https://hubspot.com">links</a> too.
                     inputFieldLabels:
                       widgetColor: Widget Color
                       widgetName: Widget Name
@@ -308,10 +302,7 @@ paths:
         - Definitions
   "/automation/v4/actions/{appId}/{definitionId}":
     delete:
-      description: Archives a single custom workflow action with the specified ID.
-        Workflows that currently use this custom action will stop attempting to
-        execute the action, and all future executions will be marked as a
-        failure.
+      description: Archives a single custom workflow action with the specified ID. Workflows that currently use this custom action will stop attempting to execute the action, and all future executions will be marked as a failure.
       operationId: delete-/automation/v4/actions/{appId}/{definitionId}_archive
       parameters:
         - description: The ID of the custom workflow action.
@@ -422,8 +413,7 @@ paths:
                     actionName: Create new widget
                     inputFieldDescriptions:
                       widgetColor: This is the color that will be used to paint the widget.
-                      widgetName: Enter the full widget name. I support <a
-                        href="https://hubspot.com">links</a> too.
+                      widgetName: Enter the full widget name. I support <a href="https://hubspot.com">links</a> too.
                     inputFieldLabels:
                       widgetColor: Widget Color
                       widgetName: Widget Name
@@ -449,8 +439,7 @@ paths:
       tags:
         - Definitions
     patch:
-      description: Updates a custom workflow action with new values for the specified
-        fields.
+      description: Updates a custom workflow action with new values for the specified fields.
       operationId: patch-/automation/v4/actions/{appId}/{definitionId}_update
       parameters:
         - description: The ID of the custom workflow action.
@@ -530,8 +519,7 @@ paths:
                     actionName: Create new widget
                     inputFieldDescriptions:
                       widgetColor: This is the color that will be used to paint the widget.
-                      widgetName: Enter the full widget name. I support <a
-                        href="https://hubspot.com">links</a> too.
+                      widgetName: Enter the full widget name. I support <a href="https://hubspot.com">links</a> too.
                     inputFieldLabels:
                       widgetColor: Widget Color
                       widgetName: Widget Name
@@ -558,8 +546,7 @@ paths:
         - Definitions
   "/automation/v4/actions/{appId}/{definitionId}/functions":
     get:
-      description: Returns a list of all functions that are associated with the given
-        custom workflow action.
+      description: Returns a list of all functions that are associated with the given custom workflow action.
       operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions_getPage
       parameters:
         - description: The ID of the custom workflow action.
@@ -602,9 +589,7 @@ paths:
         - Functions
   "/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}":
     delete:
-      description: Delete a function for a custom workflow action. This will remove
-        the function itself as well as removing the association between the
-        function and the custom action. This can't be undone.
+      description: Delete a function for a custom workflow action. This will remove the function itself as well as removing the association between the function and the custom action. This can't be undone.
       operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}_archiveByFunctionType
       parameters:
         - description: The ID of the custom workflow action.
@@ -615,8 +600,7 @@ paths:
           schema:
             type: string
           style: simple
-        - description: The type of function. This determines when the function will be
-            called.
+        - description: The type of function. This determines when the function will be called.
           explode: false
           in: path
           name: functionType
@@ -659,8 +643,7 @@ paths:
           schema:
             type: string
           style: simple
-        - description: The type of function. This determines when the function will be
-            called.
+        - description: The type of function. This determines when the function will be called.
           explode: false
           in: path
           name: functionType
@@ -685,10 +668,8 @@ paths:
           content:
             application/json:
               example:
-                functionSource: >-
-                  exports.main = (event, callback) => { return
-                  callback(transformRequest(event)); };
-
+                functionSource: |-
+                  exports.main = (event, callback) => { return callback(transformRequest(event)); };
                   function transformRequest(request) { return { webhookUrl: request.webhookUrl, body: JSON.stringify(request.body), httpMethod: "POST" } }
                 functionType: PRE_ACTION_EXECUTION
               schema:
@@ -713,8 +694,7 @@ paths:
           schema:
             type: string
           style: simple
-        - description: The type of function. This determines when the function will be
-            called.
+        - description: The type of function. This determines when the function will be called.
           explode: false
           in: path
           name: functionType
@@ -759,9 +739,7 @@ paths:
         - Functions
   "/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}":
     delete:
-      description: Delete a function for a custom workflow action. This will remove
-        the function itself as well as removing the association between the
-        function and the custom action. This can't be undone.
+      description: Delete a function for a custom workflow action. This will remove the function itself as well as removing the association between the function and the custom action. This can't be undone.
       operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}_archive
       parameters:
         - description: The ID of the custom workflow action
@@ -772,8 +750,7 @@ paths:
           schema:
             type: string
           style: simple
-        - description: The type of function. This determines when the function will be
-            called.
+        - description: The type of function. This determines when the function will be called.
           explode: false
           in: path
           name: functionType
@@ -785,9 +762,7 @@ paths:
               - POST_FETCH_OPTIONS
             type: string
           style: simple
-        - description: The ID qualifier for the function. This is used to specify which
-            input field a function is associated with for `PRE_FETCH_OPTIONS`
-            and `POST_FETCH_OPTIONS` function types.
+        - description: The ID qualifier for the function. This is used to specify which input field a function is associated with for `PRE_FETCH_OPTIONS` and `POST_FETCH_OPTIONS` function types.
           explode: false
           in: path
           name: functionId
@@ -826,8 +801,7 @@ paths:
           schema:
             type: string
           style: simple
-        - description: The type of function. This determines when the function will be
-            called.
+        - description: The type of function. This determines when the function will be called.
           explode: false
           in: path
           name: functionType
@@ -839,9 +813,7 @@ paths:
               - POST_FETCH_OPTIONS
             type: string
           style: simple
-        - description: The ID qualifier for the function. This is used to specify which
-            input field a function is associated with for `PRE_FETCH_OPTIONS`
-            and `POST_FETCH_OPTIONS` function types.
+        - description: The ID qualifier for the function. This is used to specify which input field a function is associated with for `PRE_FETCH_OPTIONS` and `POST_FETCH_OPTIONS` function types.
           explode: false
           in: path
           name: functionId
@@ -862,10 +834,8 @@ paths:
           content:
             application/json:
               example:
-                functionSource: >-
-                  exports.main = (event, callback) => { return
-                  callback(transformRequest(event)); };
-
+                functionSource: |-
+                  exports.main = (event, callback) => { return callback(transformRequest(event)); };
                   function transformRequest(request) { return { webhookUrl: request.webhookUrl, body: JSON.stringify(request.body), httpMethod: "POST" } }
                 functionType: PRE_FETCH_OPTIONS
                 id: widgetSize
@@ -891,8 +861,7 @@ paths:
           schema:
             type: string
           style: simple
-        - description: The type of function. This determines when the function will be
-            called.
+        - description: The type of function. This determines when the function will be called.
           explode: false
           in: path
           name: functionType
@@ -904,9 +873,7 @@ paths:
               - POST_FETCH_OPTIONS
             type: string
           style: simple
-        - description: The ID qualifier for the function. This is used to specify which
-            input field a function is associated with for `PRE_FETCH_OPTIONS`
-            and `POST_FETCH_OPTIONS` function types.
+        - description: The ID qualifier for the function. This is used to specify which input field a function is associated with for `PRE_FETCH_OPTIONS` and `POST_FETCH_OPTIONS` function types.
           explode: false
           in: path
           name: functionId
@@ -968,9 +935,7 @@ paths:
             format: int32
             type: integer
           style: form
-        - description: The paging cursor token of the last successfully read resource will
-            be returned as the `paging.next.after` JSON property of a paged
-            response containing more results.
+        - description: The paging cursor token of the last successfully read resource will be returned as the `paging.next.after` JSON property of a paged response containing more results.
           explode: true
           in: query
           name: after
@@ -1043,8 +1008,7 @@ paths:
                           actionName: Create new widget
                           inputFieldDescriptions:
                             widgetColor: This is the color that will be used to paint the widget.
-                            widgetName: Enter the full widget name. I support <a
-                              href="https://hubspot.com">links</a> too.
+                            widgetName: Enter the full widget name. I support <a href="https://hubspot.com">links</a> too.
                           inputFieldLabels:
                             widgetColor: Widget Color
                             widgetName: Widget Name
@@ -1162,8 +1126,7 @@ paths:
                       actionName: Create new widget
                       inputFieldDescriptions:
                         widgetColor: This is the color that will be used to paint the widget.
-                        widgetName: Enter the full widget name. I support <a
-                          href="https://hubspot.com">links</a> too.
+                        widgetName: Enter the full widget name. I support <a href="https://hubspot.com">links</a> too.
                       inputFieldLabels:
                         widgetColor: Widget Color
                         widgetName: Widget Name
@@ -1207,17 +1170,14 @@ components:
           description: The function source code.
           type: string
         functionType:
-          description: The type of function. This determines when the function will be
-            called.
+          description: The type of function. This determines when the function will be called.
           enum:
             - PRE_ACTION_EXECUTION
             - PRE_FETCH_OPTIONS
             - POST_FETCH_OPTIONS
           type: string
         id:
-          description: The ID qualifier for the function. This is used to specify which
-            input field a function is associated with for `PRE_FETCH_OPTIONS`
-            and `POST_FETCH_OPTIONS` function types.
+          description: The ID qualifier for the function. This is used to specify which input field a function is associated with for `PRE_FETCH_OPTIONS` and `POST_FETCH_OPTIONS` function types.
           type: string
       required:
         - functionSource
@@ -1227,17 +1187,14 @@ components:
       description: A serverless function associated with this custom workflow action.
       properties:
         functionType:
-          description: The type of function. This determines when the function will be
-            called.
+          description: The type of function. This determines when the function will be called.
           enum:
             - PRE_ACTION_EXECUTION
             - PRE_FETCH_OPTIONS
             - POST_FETCH_OPTIONS
           type: string
         id:
-          description: The ID qualifier for the function. This is used to specify which
-            input field a function is associated with for `PRE_FETCH_OPTIONS`
-            and `POST_FETCH_OPTIONS` function types.
+          description: The ID qualifier for the function. This is used to specify which input field a function is associated with for `PRE_FETCH_OPTIONS` and `POST_FETCH_OPTIONS` function types.
           type: string
       required:
         - functionType
@@ -1246,26 +1203,21 @@ components:
       description: User-facing labels for this custom workflow action.
       properties:
         actionCardContent:
-          description: The label to be displayed in the action card of the workflow editor
-            once this custom action has been added to a workflow.
+          description: The label to be displayed in the action card of the workflow editor once this custom action has been added to a workflow.
           type: string
         actionDescription:
-          description: A description for this custom action. This will show up in the
-            action editor along with the input fields.
+          description: A description for this custom action. This will show up in the action editor along with the input fields.
           type: string
         actionName:
-          description: The name of this custom action. This is what will show up when
-            users are selecting an action in the workflows app.
+          description: The name of this custom action. This is what will show up when users are selecting an action in the workflows app.
           type: string
         appDisplayName:
-          description: The name to be displayed at the top of the action editor in the
-            workflows app.
+          description: The name to be displayed at the top of the action editor in the workflows app.
           type: string
         inputFieldDescriptions:
           additionalProperties:
             type: string
-          description: A map of input field names to descriptions for the fields. These
-            will show up as tooltips when users are editing your action.
+          description: A map of input field names to descriptions for the fields. These will show up as tooltips when users are editing your action.
           type: object
         inputFieldLabels:
           additionalProperties:
@@ -1305,8 +1257,7 @@ components:
         - inputs
       type: object
     CallbackCompletionBatchRequest:
-      description: Any information to send back to Workflows when completing an action
-        callback as part of a batch request.
+      description: Any information to send back to Workflows when completing an action callback as part of a batch request.
       example:
         callbackId: ap-123-123-123-0
         outputFields:
@@ -1325,8 +1276,7 @@ components:
         - outputFields
       type: object
     CallbackCompletionRequest:
-      description: Any information to send back to Workflows when completing an action
-        callback.
+      description: Any information to send back to Workflows when completing an action callback.
       example:
         outputFields:
           hs_execution_state: SUCCESS
@@ -1417,8 +1367,7 @@ components:
               - scope2
           type: object
         correlationId:
-          description: A unique identifier for the request. Include this value with any
-            error reports or support tickets
+          description: A unique identifier for the request. Include this value with any error reports or support tickets
           example: aeb5f871-7f07-4993-9211-075dc63e7cbf
           format: uuid
           type: string
@@ -1430,17 +1379,14 @@ components:
         links:
           additionalProperties:
             type: string
-          description: A map of link names to associated URIs containing documentation
-            about the error or recommended remediation steps
+          description: A map of link names to associated URIs containing documentation about the error or recommended remediation steps
           type: object
         message:
-          description: A human readable message describing the error along with
-            remediation steps where appropriate
+          description: A human readable message describing the error along with remediation steps where appropriate
           example: An error occurred
           type: string
         subCategory:
-          description: A specific category that contains more specific detail about the
-            error
+          description: A specific category that contains more specific detail about the error
           type: string
       required:
         - category
@@ -1467,12 +1413,10 @@ components:
           description: The name of the field or parameter in which the error was found.
           type: string
         message:
-          description: A human readable message describing the error along with
-            remediation steps where appropriate
+          description: A human readable message describing the error along with remediation steps where appropriate
           type: string
         subCategory:
-          description: A specific category that contains more specific detail about the
-            error
+          description: A specific category that contains more specific detail about the error
           type: string
       required:
         - message
@@ -1481,12 +1425,10 @@ components:
       description: Configuration for custom workflow action.
       properties:
         actionUrl:
-          description: The URL that will accept an HTTPS request each time workflows
-            executes the custom action.
+          description: The URL that will accept an HTTPS request each time workflows executes the custom action.
           type: string
         archivedAt:
-          description: The date that this custom action was archived, if the custom action
-            is archived.
+          description: The date that this custom action was archived, if the custom action is archived.
           format: int64
           type: integer
         functions:
@@ -1498,8 +1440,7 @@ components:
           description: The ID of the custom action.
           type: string
         inputFieldDependencies:
-          description: A list of dependencies between the input fields. These configure
-            when the input fields should be visible.
+          description: A list of dependencies between the input fields. These configure when the input fields should be visible.
           items:
             oneOf:
               - $ref: "#/components/schemas/SingleFieldDependency"
@@ -1541,12 +1482,10 @@ components:
       description: State of custom workflow action to be created.
       properties:
         actionUrl:
-          description: The URL that will accept an HTTPS request each time workflows
-            executes the custom action.
+          description: The URL that will accept an HTTPS request each time workflows executes the custom action.
           type: string
         archivedAt:
-          description: The date that this custom action was archived, if the custom action
-            is archived.
+          description: The date that this custom action was archived, if the custom action is archived.
           format: int64
           type: integer
         functions:
@@ -1555,8 +1494,7 @@ components:
             $ref: "#/components/schemas/ActionFunction"
           type: array
         inputFieldDependencies:
-          description: A list of dependencies between the input fields. These configure
-            when the input fields should be visible.
+          description: A list of dependencies between the input fields. These configure when the input fields should be visible.
           items:
             oneOf:
               - $ref: "#/components/schemas/SingleFieldDependency"
@@ -1594,12 +1532,10 @@ components:
       description: Fields on custom workflow action to be updated.
       properties:
         actionUrl:
-          description: The URL that will accept an HTTPS request each time workflows
-            executes the custom action.
+          description: The URL that will accept an HTTPS request each time workflows executes the custom action.
           type: string
         inputFieldDependencies:
-          description: A list of dependencies between the input fields. These configure
-            when the input fields should be visible.
+          description: A list of dependencies between the input fields. These configure when the input fields should be visible.
           items:
             oneOf:
               - $ref: "#/components/schemas/SingleFieldDependency"
@@ -1657,12 +1593,10 @@ components:
             $ref: "#/components/schemas/Option"
           type: array
         optionsUrl:
-          description: A URL that will accept HTTPS requests when the valid options for
-            the field are fetched.
+          description: A URL that will accept HTTPS requests when the valid options for the field are fetched.
           type: string
         referencedObjectType:
-          description: This can be set to `OWNER` if the field should contain a HubSpot
-            owner value.
+          description: This can be set to `OWNER` if the field should contain a HubSpot owner value.
           enum:
             - CONTACT
             - COMPANY
@@ -1758,14 +1692,7 @@ components:
           description: Whether the field is required for the custom action to be valid
           type: boolean
         supportedValueTypes:
-          description: Controls what kind of input a customer can use to specify the field
-            value. Must contain exactly one of `STATIC_VALUE` or
-            `OBJECT_PROPERTY`. If `STATIC_VALUE`, the customer will be able to
-            choose a value when configuring the custom action; if
-            `OBJECT_PROPERTY`, the customer will be able to choose a property
-            from the enrolled workflow object that the field value will be
-            copied from. In the future we may support more than one input
-            control type here.
+          description: Controls what kind of input a customer can use to specify the field value. Must contain exactly one of `STATIC_VALUE` or `OBJECT_PROPERTY`. If `STATIC_VALUE`, the customer will be able to choose a value when configuring the custom action; if `OBJECT_PROPERTY`, the customer will be able to choose a property from the enrolled workflow object that the field value will be copied from. In the future we may support more than one input control type here.
           items:
             enum:
               - STATIC_VALUE
@@ -1789,12 +1716,10 @@ components:
         - after
       type: object
     ObjectRequestOptions:
-      description: Configures what properties of the enrolled CRM object are included
-        in the action execution request
+      description: Configures what properties of the enrolled CRM object are included in the action execution request
       properties:
         properties:
-          description: A list of properties of the CRM object to include with the request
-            to the `actionUrl`.
+          description: A list of properties of the CRM object to include with the request to the `actionUrl`.
           items:
             type: string
           type: array
@@ -1819,8 +1744,7 @@ components:
         readOnly:
           type: boolean
         value:
-          description: The internal value for the option. This is what will be included in
-            the execution request to the `actionUrl`.
+          description: The internal value for the option. This is what will be included in the execution request to the `actionUrl`.
           type: string
       required:
         - description

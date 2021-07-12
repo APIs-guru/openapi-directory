@@ -2,10 +2,7 @@ openapi: 3.0.1
 servers:
   - url: https://api.hubapi.com/
 info:
-  description: Subscriptions allow contacts to control what forms of
-    communications they receive. Contacts can decide whether they want to
-    receive communication pertaining to a specific topic, brand, or an entire
-    HubSpot account.
+  description: Subscriptions allow contacts to control what forms of communications they receive. Contacts can decide whether they want to receive communication pertaining to a specific topic, brand, or an entire HubSpot account.
   title: Subscriptions
   version: v3
   x-logo:
@@ -17,8 +14,7 @@ info:
   x-providerName: hubapi.com
   x-serviceName: communication-preferences
 tags:
-  - description: Whether a contact has subscribed or unsubscribed from a given
-      subscription type.
+  - description: Whether a contact has subscribed or unsubscribed from a given subscription type.
     name: Status
   - description: The different subscription types that are defined in a portal.
     name: Definition
@@ -117,9 +113,7 @@ paths:
         - Status
   /communication-preferences/v3/subscribe:
     post:
-      description: Subscribes a contact to the given subscription type. This API is
-        not valid to use for subscribing a contact at a brand or portal level
-        and will return an error.
+      description: Subscribes a contact to the given subscription type. This API is not valid to use for subscribing a contact at a brand or portal level and will return an error.
       operationId: post-/communication-preferences/v3/subscribe_subscribe
       requestBody:
         content:
@@ -152,9 +146,7 @@ paths:
         - Status
   /communication-preferences/v3/unsubscribe:
     post:
-      description: Unsubscribes a contact from the given subscription type. This API
-        is not valid to use for unsubscribing a contact at a brand or portal
-        level and will return an error.
+      description: Unsubscribes a contact from the given subscription type. This API is not valid to use for unsubscribing a contact at a brand or portal level and will return an error.
       operationId: post-/communication-preferences/v3/unsubscribe_unsubscribe
       requestBody:
         content:
@@ -219,8 +211,7 @@ components:
               - scope2
           type: object
         correlationId:
-          description: A unique identifier for the request. Include this value with any
-            error reports or support tickets
+          description: A unique identifier for the request. Include this value with any error reports or support tickets
           example: aeb5f871-7f07-4993-9211-075dc63e7cbf
           format: uuid
           type: string
@@ -232,17 +223,14 @@ components:
         links:
           additionalProperties:
             type: string
-          description: A map of link names to associated URIs containing documentation
-            about the error or recommended remediation steps
+          description: A map of link names to associated URIs containing documentation about the error or recommended remediation steps
           type: object
         message:
-          description: A human readable message describing the error along with
-            remediation steps where appropriate
+          description: A human readable message describing the error along with remediation steps where appropriate
           example: An error occurred
           type: string
         subCategory:
-          description: A specific category that contains more specific detail about the
-            error
+          description: A specific category that contains more specific detail about the error
           type: string
       required:
         - category
@@ -269,12 +257,10 @@ components:
           description: The name of the field or parameter in which the error was found.
           type: string
         message:
-          description: A human readable message describing the error along with
-            remediation steps where appropriate
+          description: A human readable message describing the error along with remediation steps where appropriate
           type: string
         subCategory:
-          description: A specific category that contains more specific detail about the
-            error
+          description: A specific category that contains more specific detail about the error
           type: string
       required:
         - message
@@ -283,8 +269,7 @@ components:
       description: The status of a subscription for a contact.
       properties:
         brandId:
-          description: The ID of the brand that the subscription is associated with, if
-            there is one.
+          description: The ID of the brand that the subscription is associated with, if there is one.
           format: int64
           type: integer
         description:
@@ -311,12 +296,10 @@ components:
           description: The name of the subscription.
           type: string
         preferenceGroupName:
-          description: The name of the preferences group that the subscription is
-            associated with.
+          description: The name of the preferences group that the subscription is associated with.
           type: string
         sourceOfStatus:
-          description: Where the status is determined from e.g. PORTAL_WIDE_STATUS if the
-            contact opted out from the portal.
+          description: Where the status is determined from e.g. PORTAL_WIDE_STATUS if the contact opted out from the portal.
           enum:
             - PORTAL_WIDE_STATUS
             - BRAND_WIDE_STATUS
@@ -357,8 +340,7 @@ components:
           description: Contact's email address.
           type: string
         legalBasis:
-          description: Legal basis for resubscribing the contact (required for GDPR
-            enabled portals).
+          description: Legal basis for resubscribing the contact (required for GDPR enabled portals).
           enum:
             - LEGITIMATE_INTEREST_PQL
             - LEGITIMATE_INTEREST_CLIENT
@@ -369,8 +351,7 @@ components:
             - LEGITIMATE_INTEREST_OTHER
           type: string
         legalBasisExplanation:
-          description: A more detailed explanation to go with the legal basis (required
-            for GDPR enabled portals).
+          description: A more detailed explanation to go with the legal basis (required for GDPR enabled portals).
           type: string
         subscriptionId:
           description: ID of the subscription the contact is being resubscribed to.
@@ -401,15 +382,13 @@ components:
           description: A subscription definition created by HubSpot.
           type: boolean
         isInternal:
-          description: A default description that is used by some HubSpot tools and cannot
-            be edited.
+          description: A default description that is used by some HubSpot tools and cannot be edited.
           type: boolean
         name:
           description: The name of the subscription.
           type: string
         purpose:
-          description: The purpose of this subscription or the department in your
-            organization that uses it.
+          description: The purpose of this subscription or the department in your organization that uses it.
           type: string
         updatedAt:
           description: Time at which the definition was last updated.

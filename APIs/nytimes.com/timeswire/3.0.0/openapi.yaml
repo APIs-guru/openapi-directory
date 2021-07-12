@@ -3,10 +3,7 @@ servers:
   - url: http://api.nytimes.com/svc/news/v3
   - url: https://api.nytimes.com/svc/news/v3
 info:
-  description: With the Times Newswire API, you can get links and metadata for
-    Times articles and blog posts as soon as they are published on NYTimes.com.
-    The Times Newswire API provides an up-to-the-minute stream of published
-    items.
+  description: With the Times Newswire API, you can get links and metadata for Times articles and blog posts as soon as they are published on NYTimes.com. The Times Newswire API provides an up-to-the-minute stream of published items.
   termsOfService: http://developer.nytimes.com/tou
   title: Times Newswire API
   version: 3.0.0
@@ -31,8 +28,7 @@ paths:
   /content.json:
     get:
       parameters:
-        - description: The complete URL of a specific news item, URL-encoded or
-            backslash-escaped
+        - description: The complete URL of a specific news item, URL-encoded or backslash-escaped
           in: query
           name: url
           required: true
@@ -59,14 +55,11 @@ paths:
   "/content/{source}/{section}.json":
     get:
       parameters:
-        - description: >
+        - description: |
             Limits the set of items by originating source
 
-
             all = items from both The New York Times and The International New York Times
-
             nyt = New York Times items only
-
             iht = International New York Times items only
           in: path
           name: source
@@ -78,9 +71,8 @@ paths:
               - iht
             type: string
           x-consoleDefault: all
-        - description: >
+        - description: |
             Limits the set of items by one or more sections
-
             all | One or more section names, separated by semicolons
 
              To get all sections, specify all. To get a particular section or sections, use the section names returned by this request:
@@ -126,14 +118,11 @@ paths:
   "/content/{source}/{section}/{time-period}.json":
     get:
       parameters:
-        - description: >
+        - description: |
             Limits the set of items by originating source
 
-
             all = items from both The New York Times and The International New York Times
-
             nyt = New York Times items only
-
             iht = International New York Times items only
           in: path
           name: source
@@ -144,9 +133,8 @@ paths:
               - nyt
               - iht
             type: string
-        - description: >
+        - description: |
             Limits the set of items by one or more sections
-
             all | One or more section names, separated by semicolons
 
              To get all sections, specify all. To get a particular section or sections, use the section names returned by this request:

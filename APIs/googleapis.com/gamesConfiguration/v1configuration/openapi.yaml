@@ -6,8 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: The Google Play Game Services Publishing API allows developers to
-    configure their games in Game Services.
+  description: The Google Play Game Services Publishing API allows developers to configure their games in Game Services.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -56,8 +55,7 @@ paths:
       tags:
         - achievementConfigurations
     get:
-      description: Retrieves the metadata of the achievement configuration with the
-        given ID.
+      description: Retrieves the metadata of the achievement configuration with the given ID.
       operationId: gamesConfiguration.achievementConfigurations.get
       parameters:
         - description: The ID of the achievement used by this method.
@@ -132,9 +130,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of resource configurations to return in the
-            response, used for paging. For any response, the actual number of
-            resources returned may be less than the specified `maxResults`.
+        - description: The maximum number of resource configurations to return in the response, used for paging. For any response, the actual number of resources returned may be less than the specified `maxResults`.
           in: query
           name: maxResults
           schema:
@@ -210,9 +206,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of resource configurations to return in the
-            response, used for paging. For any response, the actual number of
-            resources returned may be less than the specified `maxResults`.
+        - description: The maximum number of resource configurations to return in the response, used for paging. For any response, the actual number of resources returned may be less than the specified `maxResults`.
           in: query
           name: maxResults
           schema:
@@ -346,8 +340,7 @@ paths:
       tags:
         - leaderboardConfigurations
     get:
-      description: Retrieves the metadata of the leaderboard configuration with the
-        given ID.
+      description: Retrieves the metadata of the leaderboard configuration with the given ID.
       operationId: gamesConfiguration.leaderboardConfigurations.get
       parameters:
         - description: The ID of the leaderboard.
@@ -451,9 +444,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -471,9 +462,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -515,8 +504,7 @@ components:
             - REVEALED
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `gamesConfiguration#achievementConfiguration`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesConfiguration#achievementConfiguration`.
           type: string
         published:
           $ref: "#/components/schemas/AchievementConfigurationDetail"
@@ -539,8 +527,7 @@ components:
           description: The icon url of this achievement. Writes to this field are ignored.
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `gamesConfiguration#achievementConfigurationDetail`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesConfiguration#achievementConfigurationDetail`.
           type: string
         name:
           $ref: "#/components/schemas/LocalizedStringBundle"
@@ -563,9 +550,7 @@ components:
             $ref: "#/components/schemas/AchievementConfiguration"
           type: array
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string
-            `gamesConfiguration#achievementConfigurationListResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesConfiguration#achievementConfigurationListResponse`.
           type: string
         nextPageToken:
           description: The pagination token for the next page of results.
@@ -576,31 +561,22 @@ components:
       properties:
         few:
           $ref: "#/components/schemas/LocalizedStringBundle"
-          description: When the language requires special treatment of "small" numbers (as
-            with 2, 3, and 4 in Czech; or numbers ending 2, 3, or 4 but not 12,
-            13, or 14 in Polish).
+          description: When the language requires special treatment of "small" numbers (as with 2, 3, and 4 in Czech; or numbers ending 2, 3, or 4 but not 12, 13, or 14 in Polish).
         many:
           $ref: "#/components/schemas/LocalizedStringBundle"
-          description: When the language requires special treatment of "large" numbers (as
-            with numbers ending 11-99 in Maltese).
+          description: When the language requires special treatment of "large" numbers (as with numbers ending 11-99 in Maltese).
         one:
           $ref: "#/components/schemas/LocalizedStringBundle"
-          description: When the language requires special treatment of numbers like one
-            (as with the number 1 in English and most other languages; in
-            Russian, any number ending in 1 but not ending in 11 is in this
-            class).
+          description: When the language requires special treatment of numbers like one (as with the number 1 in English and most other languages; in Russian, any number ending in 1 but not ending in 11 is in this class).
         other:
           $ref: "#/components/schemas/LocalizedStringBundle"
-          description: When the language does not require special treatment of the given
-            quantity (as with all numbers in Chinese, or 42 in English).
+          description: When the language does not require special treatment of the given quantity (as with all numbers in Chinese, or 42 in English).
         two:
           $ref: "#/components/schemas/LocalizedStringBundle"
-          description: When the language requires special treatment of numbers like two
-            (as with 2 in Welsh, or 102 in Slovenian).
+          description: When the language requires special treatment of numbers like two (as with 2 in Welsh, or 102 in Slovenian).
         zero:
           $ref: "#/components/schemas/LocalizedStringBundle"
-          description: When the language requires special treatment of the number 0 (as in
-            Arabic).
+          description: When the language requires special treatment of the number 0 (as in Arabic).
       type: object
     GamesNumberFormatConfiguration:
       description: A number format resource.
@@ -609,8 +585,7 @@ components:
           description: The curreny code string. Only used for CURRENCY format type.
           type: string
         numDecimalPlaces:
-          description: The number of decimal places for number. Only used for NUMERIC
-            format type.
+          description: The number of decimal places for number. Only used for NUMERIC format type.
           format: int32
           type: integer
         numberFormatType:
@@ -623,8 +598,7 @@ components:
           type: string
         suffix:
           $ref: "#/components/schemas/GamesNumberAffixConfiguration"
-          description: An optional suffix for the NUMERIC format type. These strings
-            follow the same plural rules as all Android string resources.
+          description: An optional suffix for the NUMERIC format type. These strings follow the same plural rules as all Android string resources.
       type: object
     ImageConfiguration:
       description: An image configuration resource.
@@ -637,8 +611,7 @@ components:
             - LEADERBOARD_ICON
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `gamesConfiguration#imageConfiguration`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesConfiguration#imageConfiguration`.
           type: string
         resourceId:
           description: The resource ID of resource which the image belongs to.
@@ -657,8 +630,7 @@ components:
           description: The ID of the leaderboard.
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `gamesConfiguration#leaderboardConfiguration`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesConfiguration#leaderboardConfiguration`.
           type: string
         published:
           $ref: "#/components/schemas/LeaderboardConfigurationDetail"
@@ -688,8 +660,7 @@ components:
           description: The icon url of this leaderboard. Writes to this field are ignored.
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `gamesConfiguration#leaderboardConfigurationDetail`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesConfiguration#leaderboardConfigurationDetail`.
           type: string
         name:
           $ref: "#/components/schemas/LocalizedStringBundle"
@@ -711,9 +682,7 @@ components:
             $ref: "#/components/schemas/LeaderboardConfiguration"
           type: array
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string
-            `gamesConfiguration#leaderboardConfigurationListResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesConfiguration#leaderboardConfigurationListResponse`.
           type: string
         nextPageToken:
           description: The pagination token for the next page of results.
@@ -723,8 +692,7 @@ components:
       description: A localized string resource.
       properties:
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `gamesConfiguration#localizedString`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesConfiguration#localizedString`.
           type: string
         locale:
           description: The locale string.
@@ -737,8 +705,7 @@ components:
       description: A localized string bundle resource.
       properties:
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `gamesConfiguration#localizedStringBundle`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesConfiguration#localizedStringBundle`.
           type: string
         translations:
           description: The locale strings.

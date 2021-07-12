@@ -5,8 +5,7 @@ info:
   contact:
     name: Google
     url: https://google.com
-  description: Enable cloud users to discover enterprise catalogs and products in
-    their organizations.
+  description: Enable cloud users to discover enterprise catalogs and products in their organizations.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -40,15 +39,11 @@ paths:
         scope of the consumer cloud resource hierarchy context.
       operationId: cloudprivatecatalog.organizations.catalogs.search
       parameters:
-        - description: >-
-            Required. The name of the resource context. It can be in following
-            formats:
-
+        - description: |-
+            Required. The name of the resource context. It can be in following formats:
 
             * `projects/{project_id}`
-
             * `folders/{folder_id}`
-
             * `organizations/{organization_id}`
           in: path
           name: resource
@@ -61,12 +56,9 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: >-
-            A pagination token returned from a previous call to SearchCatalogs
-            that
-
+        - description: |-
+            A pagination token returned from a previous call to SearchCatalogs that
             indicates where this listing should continue from.
-
             This field is optional.
           in: query
           name: pageToken
@@ -85,8 +77,7 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudPrivatecatalogV1beta1SearchCatalogsRespo\
-                  nse"
+                $ref: "#/components/schemas/GoogleCloudPrivatecatalogV1beta1SearchCatalogsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -128,12 +119,9 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: >-
-            A pagination token returned from a previous call to SearchProducts
-            that
-
+        - description: |-
+            A pagination token returned from a previous call to SearchProducts that
             indicates where this listing should continue from.
-
             This field is optional.
           in: query
           name: pageToken
@@ -156,8 +144,7 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudPrivatecatalogV1beta1SearchProductsRespo\
-                  nse"
+                $ref: "#/components/schemas/GoogleCloudPrivatecatalogV1beta1SearchProductsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -207,18 +194,13 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: >-
+        - description: |-
             The query to filter the versions. Required.
 
-
             The supported queries are:
-
             * List versions under a product:
-
             `parent=catalogs/{catalog_id}/products/{product_id}`
-
             * Get a version by name:
-
             `name=catalogs/{catalog_id}/products/{product_id}/versions/{version_id}`
           in: query
           name: query
@@ -229,8 +211,7 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudPrivatecatalogV1beta1SearchVersionsRespo\
-                  nse"
+                $ref: "#/components/schemas/GoogleCloudPrivatecatalogV1beta1SearchVersionsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -292,9 +273,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -313,9 +292,7 @@ components:
         default: true
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -346,14 +323,11 @@ components:
           description: Output only. The description of the catalog.
           type: string
         displayName:
-          description: Output only. The descriptive name of the catalog as it appears in
-            UIs.
+          description: Output only. The descriptive name of the catalog as it appears in UIs.
           type: string
         name:
-          description: >-
-            Output only. The resource name of the target catalog, in the format
-            of
-
+          description: |-
+            Output only. The resource name of the target catalog, in the format of
             `catalogs/{catalog_id}'.
           type: string
         updateTime:
@@ -381,22 +355,15 @@ components:
         displayMetadata:
           additionalProperties:
             description: Properties of the object.
-          description: >-
+          description: |-
             Output only. The display metadata to describe the product.
-
             The JSON schema of the metadata differs by Product.asset_type.
-
             When the type is `google.deploymentmanager.Template`, the schema is as
-
             follows:
 
-
             ```
-
             "$schema": http://json-schema.org/draft-04/schema#
-
             type: object
-
             properties:
               name:
                 type: string
@@ -436,28 +403,18 @@ components:
                       minLength: 1
                       maxLength: 2048
             required:
-
             - name
-
             - description
-
             additionalProperties: false
 
-
             ```
-
 
             When the asset type is `google.cloudprivatecatalog.ListingOnly`, the schema
-
             is as follows:
 
-
             ```
-
             "$schema": http://json-schema.org/draft-04/schema#
-
             type: object
-
             properties:
               name:
                 type: string
@@ -501,27 +458,19 @@ components:
                 pattern:
                 "^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]"
             required:
-
             - name
-
             - description
-
             - signup_url
-
             additionalProperties: false
-
             ```
           type: object
         iconUri:
           description: Output only. The icon URI of the product.
           type: string
         name:
-          description: >-
-            Output only. The resource name of the target product, in the format
-            of
-
+          description: |-
+            Output only. The resource name of the target product, in the format of
             `products/a-z*[a-z0-9]'.
-
 
             A unique identifier for the product under a catalog.
           type: string
@@ -539,12 +488,9 @@ components:
             $ref: "#/components/schemas/GoogleCloudPrivatecatalogV1beta1Catalog"
           type: array
         nextPageToken:
-          description: >-
-            A pagination token returned from a previous call to SearchCatalogs
-            that
-
+          description: |-
+            A pagination token returned from a previous call to SearchCatalogs that
             indicates from where listing should continue.
-
             This field is optional.
           type: string
       type: object
@@ -552,12 +498,9 @@ components:
       description: Response message for PrivateCatalog.SearchProducts.
       properties:
         nextPageToken:
-          description: >-
-            A pagination token returned from a previous call to SearchProducts
-            that
-
+          description: |-
+            A pagination token returned from a previous call to SearchProducts that
             indicates from where listing should continue.
-
             This field is optional.
           type: string
         products:
@@ -570,12 +513,9 @@ components:
       description: Response message for PrivateCatalog.SearchVersions.
       properties:
         nextPageToken:
-          description: >-
-            A pagination token returned from a previous call to SearchVersions
-            that
-
+          description: |-
+            A pagination token returned from a previous call to SearchVersions that
             indicates from where the listing should continue.
-
             This field is optional.
           type: string
         versions:
@@ -585,20 +525,16 @@ components:
           type: array
       type: object
     GoogleCloudPrivatecatalogV1beta1Version:
-      description: >-
-        The consumer representation of a version which is a child resource
-        under a
-
+      description: |-
+        The consumer representation of a version which is a child resource under a
         `Product` with asset data.
       properties:
         asset:
           additionalProperties:
             description: Properties of the object.
-          description: >-
+          description: |-
             Output only. The asset which has been validated and is ready to be
-
             provisioned. See
-
             google.cloud.privatecatalogproducer.v1beta.Version.asset for details.
           type: object
         createTime:
@@ -606,10 +542,8 @@ components:
           format: google-datetime
           type: string
         description:
-          description: >-
-            Output only. The user-supplied description of the version. Maximum
-            of 256
-
+          description: |-
+            Output only. The user-supplied description of the version. Maximum of 256
             characters.
           type: string
         name:

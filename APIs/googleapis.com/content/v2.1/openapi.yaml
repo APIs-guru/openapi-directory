@@ -1102,6 +1102,11 @@ paths:
           name: maxResults
           schema:
             type: integer
+        - description: If set, only the accounts with the given name (case sensitive) will be returned.
+          in: query
+          name: name
+          schema:
+            type: string
         - description: The token returned by the previous request.
           in: query
           name: pageToken
@@ -1509,6 +1514,11 @@ paths:
           name: maxResults
           schema:
             type: integer
+        - description: If set, only the accounts with the given name (case sensitive) will be returned.
+          in: query
+          name: name
+          schema:
+            type: string
         - description: The token returned by the previous request.
           in: query
           name: pageToken
@@ -6746,6 +6756,9 @@ components:
     Account:
       description: Account data. After the creation of a new account it may take a few minutes before it is fully operational. The methods delete, insert, and update require the admin role.
       properties:
+        accountManagement:
+          description: 'How the account is managed. Acceptable values are: - "`manual`" - "`automatic`" '
+          type: string
         adsLinks:
           description: Linked Ads accounts that are active or pending approval. To create a new link request, add a new link with status `active` to the list. It will remain in a `pending` state until approved or rejected either in the Ads interface or through the AdWords API. To delete an active link, or to cancel a link request, remove it from the list.
           items:
@@ -6955,6 +6968,9 @@ components:
           items:
             $ref: "#/components/schemas/AccountStatusAccountLevelIssue"
           type: array
+        accountManagement:
+          description: 'How the account is managed. Acceptable values are: - "`manual`" - "`automatic`" '
+          type: string
         kind:
           description: 'Identifies what kind of resource this is. Value: the fixed string "`content#accountStatus`"'
           type: string
@@ -13110,7 +13126,7 @@ components:
           type: array
         unitPrice:
           $ref: "#/components/schemas/Price"
-          description: "[required] Pre-tax or post-tax price of the unit depending on the locality of the order."
+          description: "[required] Pre-tax or post-tax price of one unit depending on the locality of the order. *Note:* Invoicing works on a per unit basis. The `unitPrice` is the price of a single unit, and will be multiplied by the number of entries in `shipmentUnitId`."
         unitPriceTaxes:
           description: Tax amounts to apply to the unit price.
           items:
@@ -13121,7 +13137,7 @@ components:
       properties:
         additionalChargeAmount:
           $ref: "#/components/schemas/Amount"
-          description: "[required] Amount of the additional charge."
+          description: "[required] Amount of the additional charge per unit. *Note:* Invoicing works on a per unit bases. The `additionalChargeAmount` is the amount charged per unit, and will be multiplied by the number of entries in `shipmentUnitID`."
         type:
           description: '[required] Type of the additional charge. Acceptable values are: - "`shipping`" '
           type: string

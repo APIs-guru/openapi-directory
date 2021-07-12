@@ -31,15 +31,12 @@ paths:
       description: Retrieve a list of Commands from your account.
       operationId: ListCommand
       parameters:
-        - description: The `sid` or `unique_name` of the [Sim
-            resources](https://www.twilio.com/docs/wireless/api/sim-resource) to
-            read.
+        - description: The `sid` or `unique_name` of the [Sim resources](https://www.twilio.com/docs/wireless/api/sim-resource) to read.
           in: query
           name: Sim
           schema:
             type: string
-        - description: "The status of the resources to read. Can be: `queued`, `sent`,
-            `delivered`, `received`, or `failed`."
+        - description: "The status of the resources to read. Can be: `queued`, `sent`, `delivered`, `received`, or `failed`."
           in: query
           name: Status
           schema:
@@ -58,8 +55,7 @@ paths:
               - from_sim
               - to_sim
             type: string
-        - description: "Only return Commands with this transport value. Can be: `sms` or
-            `ip`."
+        - description: "Only return Commands with this transport value. Can be: `sms` or `ip`."
           in: query
           name: Transport
           schema:
@@ -67,8 +63,7 @@ paths:
               - sms
               - ip
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -122,8 +117,7 @@ paths:
             schema:
               properties:
                 CallbackMethod:
-                  description: "The HTTP method we use to call `callback_url`. Can be: `POST` or
-                    `GET`, and the default is `POST`."
+                  description: "The HTTP method we use to call `callback_url`. Can be: `POST` or `GET`, and the default is `POST`."
                   enum:
                     - HEAD
                     - GET
@@ -133,47 +127,26 @@ paths:
                     - DELETE
                   type: string
                 CallbackUrl:
-                  description: The URL we call using the `callback_url` when the Command has
-                    finished sending, whether the command was delivered or it
-                    failed.
+                  description: The URL we call using the `callback_url` when the Command has finished sending, whether the command was delivered or it failed.
                   format: uri
                   type: string
                 Command:
-                  description: The message body of the Command. Can be plain text in text mode or
-                    a Base64 encoded byte string in binary mode.
+                  description: The message body of the Command. Can be plain text in text mode or a Base64 encoded byte string in binary mode.
                   type: string
                 CommandMode:
-                  description: "The mode to use when sending the SMS message. Can be: `text` or
-                    `binary`. The default SMS mode is `text`."
+                  description: "The mode to use when sending the SMS message. Can be: `text` or `binary`. The default SMS mode is `text`."
                   enum:
                     - text
                     - binary
                   type: string
                 DeliveryReceiptRequested:
-                  description: Whether to request delivery receipt from the recipient. For
-                    Commands that request delivery receipt, the Command state
-                    transitions to 'delivered' once the server has received a
-                    delivery receipt from the device. The default value is
-                    `true`.
+                  description: Whether to request delivery receipt from the recipient. For Commands that request delivery receipt, the Command state transitions to 'delivered' once the server has received a delivery receipt from the device. The default value is `true`.
                   type: boolean
                 IncludeSid:
-                  description: "Whether to include the SID of the command in the message body. Can
-                    be: `none`, `start`, or `end`, and the default behavior is
-                    `none`. When sending a Command to a SIM in text mode, we can
-                    automatically include the SID of the Command in the message
-                    body, which could be used to ensure that the device does not
-                    process the same Command more than once.  A value of `start`
-                    will prepend the message with the Command SID, and `end`
-                    will append it to the end, separating the Command SID from
-                    the message body with a space. The length of the Command SID
-                    is included in the 160 character limit so the SMS body must
-                    be 128 characters or less before the Command SID is
-                    included."
+                  description: "Whether to include the SID of the command in the message body. Can be: `none`, `start`, or `end`, and the default behavior is `none`. When sending a Command to a SIM in text mode, we can automatically include the SID of the Command in the message body, which could be used to ensure that the device does not process the same Command more than once.  A value of `start` will prepend the message with the Command SID, and `end` will append it to the end, separating the Command SID from the message body with a space. The length of the Command SID is included in the 160 character limit so the SMS body must be 128 characters or less before the Command SID is included."
                   type: string
                 Sim:
-                  description: The `sid` or `unique_name` of the
-                    [SIM](https://www.twilio.com/docs/wireless/api/sim-resource)
-                    to send the Command to.
+                  description: The `sid` or `unique_name` of the [SIM](https://www.twilio.com/docs/wireless/api/sim-resource) to send the Command to.
                   type: string
               required:
                 - Command
@@ -264,8 +237,7 @@ paths:
       description: ""
       operationId: ListRatePlan
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -322,57 +294,33 @@ paths:
                   description: Whether SIMs can use GPRS/3G/4G/LTE data connectivity.
                   type: boolean
                 DataLimit:
-                  description: The total data usage (download and upload combined) in Megabytes
-                    that the Network allows during one month on the home network
-                    (T-Mobile USA). The metering period begins the day of
-                    activation and ends on the same day in the following month.
-                    Can be up to 2TB and the default value is `1000`.
+                  description: The total data usage (download and upload combined) in Megabytes that the Network allows during one month on the home network (T-Mobile USA). The metering period begins the day of activation and ends on the same day in the following month. Can be up to 2TB and the default value is `1000`.
                   type: integer
                 DataMetering:
-                  description: "The model used to meter data usage. Can be: `payg` and `quota-1`,
-                    `quota-10`, and `quota-50`. Learn more about the available
-                    [data metering
-                    models](https://www.twilio.com/docs/wireless/api/rateplan-r\
-                    esource#payg-vs-quota-data-plans)."
+                  description: "The model used to meter data usage. Can be: `payg` and `quota-1`, `quota-10`, and `quota-50`. Learn more about the available [data metering models](https://www.twilio.com/docs/wireless/api/rateplan-resource#payg-vs-quota-data-plans)."
                   type: string
                 FriendlyName:
-                  description: A descriptive string that you create to describe the resource. It
-                    does not have to be unique.
+                  description: A descriptive string that you create to describe the resource. It does not have to be unique.
                   type: string
                 InternationalRoaming:
-                  description: "The list of services that SIMs capable of using GPRS/3G/4G/LTE
-                    data connectivity can use outside of the United States. Can
-                    be: `data`, `voice`, and `messaging`."
+                  description: "The list of services that SIMs capable of using GPRS/3G/4G/LTE data connectivity can use outside of the United States. Can be: `data`, `voice`, and `messaging`."
                   items:
                     type: string
                   type: array
                 InternationalRoamingDataLimit:
-                  description: The total data usage (download and upload combined) in Megabytes
-                    that the Network allows during one month when roaming
-                    outside the United States. Can be up to 2TB.
+                  description: The total data usage (download and upload combined) in Megabytes that the Network allows during one month when roaming outside the United States. Can be up to 2TB.
                   type: integer
                 MessagingEnabled:
-                  description: Whether SIMs can make, send, and receive SMS using
-                    [Commands](https://www.twilio.com/docs/wireless/api/command-resource).
+                  description: Whether SIMs can make, send, and receive SMS using [Commands](https://www.twilio.com/docs/wireless/api/command-resource).
                   type: boolean
                 NationalRoamingDataLimit:
-                  description: The total data usage (download and upload combined) in Megabytes
-                    that the Network allows during one month on non-home
-                    networks in the United States. The metering period begins
-                    the day of activation and ends on the same day in the
-                    following month. Can be up to 2TB. See [national
-                    roaming](https://www.twilio.com/docs/wireless/api/rateplan-resource#national-roaming)
-                    for more info.
+                  description: The total data usage (download and upload combined) in Megabytes that the Network allows during one month on non-home networks in the United States. The metering period begins the day of activation and ends on the same day in the following month. Can be up to 2TB. See [national roaming](https://www.twilio.com/docs/wireless/api/rateplan-resource#national-roaming) for more info.
                   type: integer
                 NationalRoamingEnabled:
-                  description: Whether SIMs can roam on networks other than the home network
-                    (T-Mobile USA) in the United States. See [national
-                    roaming](https://www.twilio.com/docs/wireless/api/rateplan-resource#national-roaming).
+                  description: Whether SIMs can roam on networks other than the home network (T-Mobile USA) in the United States. See [national roaming](https://www.twilio.com/docs/wireless/api/rateplan-resource#national-roaming).
                   type: boolean
                 UniqueName:
-                  description: An application-defined string that uniquely identifies the
-                    resource. It can be used in place of the resource's `sid` in
-                    the URL to address the resource.
+                  description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource.
                   type: string
                 VoiceEnabled:
                   description: Whether SIMs can make and receive voice calls.
@@ -455,13 +403,10 @@ paths:
             schema:
               properties:
                 FriendlyName:
-                  description: A descriptive string that you create to describe the resource. It
-                    does not have to be unique.
+                  description: A descriptive string that you create to describe the resource. It does not have to be unique.
                   type: string
                 UniqueName:
-                  description: An application-defined string that uniquely identifies the
-                    resource. It can be used in place of the resource's `sid` in
-                    the URL to address the resource.
+                  description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource.
                   type: string
               title: UpdateRatePlanRequest
               type: object
@@ -505,15 +450,12 @@ paths:
               - scheduled
               - updating
             type: string
-        - description: Only return Sim resources with this ICCID. This will return a list
-            with a maximum size of 1.
+        - description: Only return Sim resources with this ICCID. This will return a list with a maximum size of 1.
           in: query
           name: Iccid
           schema:
             type: string
-        - description: The SID or unique name of a [RatePlan
-            resource](https://www.twilio.com/docs/wireless/api/rateplan-resource).
-            Only return Sim resources assigned to this RatePlan resource.
+        - description: The SID or unique name of a [RatePlan resource](https://www.twilio.com/docs/wireless/api/rateplan-resource). Only return Sim resources assigned to this RatePlan resource.
           in: query
           name: RatePlan
           schema:
@@ -523,14 +465,12 @@ paths:
           name: EId
           schema:
             type: string
-        - description: Only return Sim resources with this registration code. This will
-            return a list with a maximum size of 1.
+        - description: Only return Sim resources with this registration code. This will return a list with a maximum size of 1.
           in: query
           name: SimRegistrationCode
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -640,19 +580,10 @@ paths:
             schema:
               properties:
                 AccountSid:
-                  description: The SID of the
-                    [Account](https://www.twilio.com/docs/iam/api/account) to
-                    which the Sim resource should belong. The Account SID can
-                    only be that of the requesting Account or that of a
-                    [Subaccount](https://www.twilio.com/docs/iam/api/subaccounts)
-                    of the requesting Account. Only valid when the Sim
-                    resource's status is `new`. For more information, see the
-                    [Move SIMs between Subaccounts
-                    documentation](https://www.twilio.com/docs/wireless/api/sim-resource#move-sims-between-subaccounts).
+                  description: The SID of the [Account](https://www.twilio.com/docs/iam/api/account) to which the Sim resource should belong. The Account SID can only be that of the requesting Account or that of a [Subaccount](https://www.twilio.com/docs/iam/api/subaccounts) of the requesting Account. Only valid when the Sim resource's status is `new`. For more information, see the [Move SIMs between Subaccounts documentation](https://www.twilio.com/docs/wireless/api/sim-resource#move-sims-between-subaccounts).
                   type: string
                 CallbackMethod:
-                  description: "The HTTP method we should use to call `callback_url`. Can be:
-                    `POST` or `GET`. The default is `POST`."
+                  description: "The HTTP method we should use to call `callback_url`. Can be: `POST` or `GET`. The default is `POST`."
                   enum:
                     - HEAD
                     - GET
@@ -662,17 +593,11 @@ paths:
                     - DELETE
                   type: string
                 CallbackUrl:
-                  description: The URL we should call using the `callback_url` when the SIM has
-                    finished updating. When the SIM transitions from `new` to
-                    `ready` or from any status to `deactivated`, we call this
-                    URL when the status changes to an intermediate status
-                    (`ready` or `deactivated`) and again when the status changes
-                    to its final status (`active` or `canceled`).
+                  description: The URL we should call using the `callback_url` when the SIM has finished updating. When the SIM transitions from `new` to `ready` or from any status to `deactivated`, we call this URL when the status changes to an intermediate status (`ready` or `deactivated`) and again when the status changes to its final status (`active` or `canceled`).
                   format: uri
                   type: string
                 CommandsCallbackMethod:
-                  description: "The HTTP method we should use to call `commands_callback_url`. Can
-                    be: `POST` or `GET`. The default is `POST`."
+                  description: "The HTTP method we should use to call `commands_callback_url`. Can be: `POST` or `GET`. The default is `POST`."
                   enum:
                     - HEAD
                     - GET
@@ -682,32 +607,22 @@ paths:
                     - DELETE
                   type: string
                 CommandsCallbackUrl:
-                  description: The URL we should call using the `commands_callback_method` when
-                    the SIM sends a
-                    [Command](https://www.twilio.com/docs/wireless/api/command-resource).
-                    Your server should respond with an HTTP status code in the
-                    200 range; any response body is ignored.
+                  description: The URL we should call using the `commands_callback_method` when the SIM sends a [Command](https://www.twilio.com/docs/wireless/api/command-resource). Your server should respond with an HTTP status code in the 200 range; any response body is ignored.
                   format: uri
                   type: string
                 FriendlyName:
-                  description: A descriptive string that you create to describe the Sim resource.
-                    It does not need to be unique.
+                  description: A descriptive string that you create to describe the Sim resource. It does not need to be unique.
                   type: string
                 RatePlan:
-                  description: The SID or unique name of the [RatePlan
-                    resource](https://www.twilio.com/docs/wireless/api/rateplan-resource)
-                    to which the Sim resource should be assigned.
+                  description: The SID or unique name of the [RatePlan resource](https://www.twilio.com/docs/wireless/api/rateplan-resource) to which the Sim resource should be assigned.
                   type: string
                 ResetStatus:
-                  description: Initiate a connectivity reset on the SIM. Set to `resetting` to
-                    initiate a connectivity reset on the SIM. No other value is
-                    valid.
+                  description: Initiate a connectivity reset on the SIM. Set to `resetting` to initiate a connectivity reset on the SIM. No other value is valid.
                   enum:
                     - resetting
                   type: string
                 SmsFallbackMethod:
-                  description: "The HTTP method we should use to call `sms_fallback_url`. Can be:
-                    `GET` or `POST`. Default is `POST`."
+                  description: "The HTTP method we should use to call `sms_fallback_url`. Can be: `GET` or `POST`. Default is `POST`."
                   enum:
                     - HEAD
                     - GET
@@ -717,14 +632,11 @@ paths:
                     - DELETE
                   type: string
                 SmsFallbackUrl:
-                  description: The URL we should call using the `sms_fallback_method` when an
-                    error occurs while retrieving or executing the TwiML
-                    requested from `sms_url`.
+                  description: The URL we should call using the `sms_fallback_method` when an error occurs while retrieving or executing the TwiML requested from `sms_url`.
                   format: uri
                   type: string
                 SmsMethod:
-                  description: "The HTTP method we should use to call `sms_url`. Can be: `GET` or
-                    `POST`. Default is `POST`."
+                  description: "The HTTP method we should use to call `sms_url`. Can be: `GET` or `POST`. Default is `POST`."
                   enum:
                     - HEAD
                     - GET
@@ -734,14 +646,11 @@ paths:
                     - DELETE
                   type: string
                 SmsUrl:
-                  description: The URL we should call using the `sms_method` when the
-                    SIM-connected device sends an SMS message that is not a
-                    [Command](https://www.twilio.com/docs/wireless/api/command-resource).
+                  description: The URL we should call using the `sms_method` when the SIM-connected device sends an SMS message that is not a [Command](https://www.twilio.com/docs/wireless/api/command-resource).
                   format: uri
                   type: string
                 Status:
-                  description: "The new status of the Sim resource. Can be: `ready`, `active`,
-                    `suspended`, or `deactivated`."
+                  description: "The new status of the Sim resource. Can be: `ready`, `active`, `suspended`, or `deactivated`."
                   enum:
                     - new
                     - ready
@@ -753,13 +662,10 @@ paths:
                     - updating
                   type: string
                 UniqueName:
-                  description: An application-defined string that uniquely identifies the
-                    resource. It can be used in place of the `sid` in the URL
-                    path to address the resource.
+                  description: An application-defined string that uniquely identifies the resource. It can be used in place of the `sid` in the URL path to address the resource.
                   type: string
                 VoiceFallbackMethod:
-                  description: "The HTTP method we should use to call `voice_fallback_url`. Can
-                    be: `GET` or `POST`."
+                  description: "The HTTP method we should use to call `voice_fallback_url`. Can be: `GET` or `POST`."
                   enum:
                     - HEAD
                     - GET
@@ -769,14 +675,11 @@ paths:
                     - DELETE
                   type: string
                 VoiceFallbackUrl:
-                  description: The URL we should call using the `voice_fallback_method` when an
-                    error occurs while retrieving or executing the TwiML
-                    requested from `voice_url`.
+                  description: The URL we should call using the `voice_fallback_method` when an error occurs while retrieving or executing the TwiML requested from `voice_url`.
                   format: uri
                   type: string
                 VoiceMethod:
-                  description: "The HTTP method we should use when we call `voice_url`. Can be:
-                    `GET` or `POST`."
+                  description: "The HTTP method we should use when we call `voice_url`. Can be: `GET` or `POST`."
                   enum:
                     - HEAD
                     - GET
@@ -786,8 +689,7 @@ paths:
                     - DELETE
                   type: string
                 VoiceUrl:
-                  description: The URL we should call using the `voice_method` when the
-                    SIM-connected device makes a voice call.
+                  description: The URL we should call using the `voice_method` when the SIM-connected device makes a voice call.
                   format: uri
                   type: string
               title: UpdateSimRequest
@@ -818,16 +720,13 @@ paths:
       description: ""
       operationId: ListDataSession
       parameters:
-        - description: The SID of the [Sim
-            resource](https://www.twilio.com/docs/wireless/api/sim-resource)
-            with the Data Sessions to read.
+        - description: The SID of the [Sim resource](https://www.twilio.com/docs/wireless/api/sim-resource) with the Data Sessions to read.
           in: path
           name: SimSid
           required: true
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -888,35 +787,25 @@ paths:
       description: ""
       operationId: ListUsageRecord
       parameters:
-        - description: The SID of the [Sim
-            resource](https://www.twilio.com/docs/wireless/api/sim-resource)  to
-            read the usage from.
+        - description: The SID of the [Sim resource](https://www.twilio.com/docs/wireless/api/sim-resource)  to read the usage from.
           in: path
           name: SimSid
           required: true
           schema:
             type: string
-        - description: Only include usage that occurred on or before this date, specified
-            in [ISO
-            8601](https://www.iso.org/iso-8601-date-and-time-format.html). The
-            default is the current time.
+        - description: Only include usage that occurred on or before this date, specified in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html). The default is the current time.
           in: query
           name: End
           schema:
             format: date-time
             type: string
-        - description: Only include usage that has occurred on or after this date,
-            specified in [ISO
-            8601](https://www.iso.org/iso-8601-date-and-time-format.html). The
-            default is one month before the `end` parameter value.
+        - description: Only include usage that has occurred on or after this date, specified in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html). The default is one month before the `end` parameter value.
           in: query
           name: Start
           schema:
             format: date-time
             type: string
-        - description: "How to summarize the usage by time. Can be: `daily`, `hourly`, or
-            `all`. The default is `all`. A value of `all` returns one Usage
-            Record that describes the usage for the entire period."
+        - description: "How to summarize the usage by time. Can be: `daily`, `hourly`, or `all`. The default is `all`. A value of `all` returns one Usage Record that describes the usage for the entire period."
           in: query
           name: Granularity
           schema:
@@ -925,8 +814,7 @@ paths:
               - daily
               - all
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -983,25 +871,19 @@ paths:
       description: ""
       operationId: ListAccountUsageRecord
       parameters:
-        - description: Only include usage that has occurred on or before this date. Format
-            is [ISO
-            8601](https://www.iso.org/iso-8601-date-and-time-format.html).
+        - description: Only include usage that has occurred on or before this date. Format is [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html).
           in: query
           name: End
           schema:
             format: date-time
             type: string
-        - description: Only include usage that has occurred on or after this date. Format
-            is [ISO
-            8601](https://www.iso.org/iso-8601-date-and-time-format.html).
+        - description: Only include usage that has occurred on or after this date. Format is [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html).
           in: query
           name: Start
           schema:
             format: date-time
             type: string
-        - description: "How to summarize the usage by time. Can be: `daily`, `hourly`, or
-            `all`. A value of `all` returns one Usage Record that describes the
-            usage for the entire period."
+        - description: "How to summarize the usage by time. Can be: `daily`, `hourly`, or `all`. A value of `all` returns one Usage Record that describes the usage for the entire period."
           in: query
           name: Granularity
           schema:
@@ -1010,8 +892,7 @@ paths:
               - daily
               - all
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1074,13 +955,11 @@ components:
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         commands:
-          description: An object that describes the aggregated Commands usage for all SIMs
-            during the specified period
+          description: An object that describes the aggregated Commands usage for all SIMs during the specified period
           nullable: true
           type: object
         data:
-          description: An object that describes the aggregated Data usage for all SIMs
-            over the period
+          description: An object that describes the aggregated Data usage for all SIMs over the period
           nullable: true
           type: object
         period:
@@ -1114,8 +993,7 @@ components:
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the resource was last
-            updated format
+          description: The ISO 8601 date and time in GMT when the resource was last updated format
           format: date-time
           nullable: true
           type: string
@@ -1181,8 +1059,7 @@ components:
           nullable: true
           type: boolean
         data_limit:
-          description: The total data usage in Megabytes that the Network allows during
-            one month on the home network
+          description: The total data usage in Megabytes that the Network allows during one month on the home network
           nullable: true
           type: integer
         data_metering:
@@ -1190,14 +1067,12 @@ components:
           nullable: true
           type: string
         date_created:
-          description: The date when the resource was created, given as GMT in ISO 8601
-            format
+          description: The date when the resource was created, given as GMT in ISO 8601 format
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The date when the resource was last updated, given as GMT in ISO
-            8601 format
+          description: The date when the resource was last updated, given as GMT in ISO 8601 format
           format: date-time
           nullable: true
           type: string
@@ -1206,16 +1081,13 @@ components:
           nullable: true
           type: string
         international_roaming:
-          description: The services that SIMs capable of using GPRS/3G/4G/LTE data
-            connectivity can use outside of the United States
+          description: The services that SIMs capable of using GPRS/3G/4G/LTE data connectivity can use outside of the United States
           items:
             type: string
           nullable: true
           type: array
         international_roaming_data_limit:
-          description: The total data usage (download and upload combined) in Megabytes
-            that the Network allows during one month when roaming outside the
-            United States
+          description: The total data usage (download and upload combined) in Megabytes that the Network allows during one month when roaming outside the United States
           nullable: true
           type: integer
         messaging_enabled:
@@ -1223,13 +1095,11 @@ components:
           nullable: true
           type: boolean
         national_roaming_data_limit:
-          description: The total data usage in Megabytes that the Network allows during
-            one month on non-home networks in the United States
+          description: The total data usage in Megabytes that the Network allows during one month on non-home networks in the United States
           nullable: true
           type: integer
         national_roaming_enabled:
-          description: Whether SIMs can roam on networks other than the home network in
-            the United States
+          description: Whether SIMs can roam on networks other than the home network in the United States
           nullable: true
           type: boolean
         sid:
@@ -1284,8 +1154,7 @@ components:
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the Sim resource was last
-            updated
+          description: The ISO 8601 date and time in GMT when the Sim resource was last updated
           format: date-time
           nullable: true
           type: string
@@ -1310,8 +1179,7 @@ components:
           nullable: true
           type: object
         rate_plan_sid:
-          description: The SID of the RatePlan resource to which the Sim resource is
-            assigned.
+          description: The SID of the RatePlan resource to which the Sim resource is assigned.
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1342,8 +1210,7 @@ components:
           nullable: true
           type: string
         sms_fallback_url:
-          description: The URL we call when an error occurs while retrieving or executing
-            the TwiML requested from the sms_url
+          description: The URL we call when an error occurs while retrieving or executing the TwiML requested from the sms_url
           format: uri
           nullable: true
           type: string
@@ -1359,8 +1226,7 @@ components:
           nullable: true
           type: string
         sms_url:
-          description: The URL we call when the SIM-connected device sends an SMS message
-            that is not a Command
+          description: The URL we call when the SIM-connected device sends an SMS message that is not a Command
           format: uri
           nullable: true
           type: string
@@ -1398,8 +1264,7 @@ components:
           nullable: true
           type: string
         voice_fallback_url:
-          description: The URL we call when an error occurs while retrieving or executing
-            the TwiML requested from voice_url
+          description: The URL we call when an error occurs while retrieving or executing the TwiML requested from voice_url
           format: uri
           nullable: true
           type: string
@@ -1430,13 +1295,11 @@ components:
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         cell_id:
-          description: The unique ID of the cellular tower that the device was attached to
-            at the moment when the Data Session was last updated
+          description: The unique ID of the cellular tower that the device was attached to at the moment when the Data Session was last updated
           nullable: true
           type: string
         cell_location_estimate:
-          description: An object with the estimated location where the device's Data
-            Session took place
+          description: An object with the estimated location where the device's Data Session took place
           nullable: true
           type: object
         end:
@@ -1449,39 +1312,32 @@ components:
           nullable: true
           type: string
         last_updated:
-          description: The date that the resource was last updated, given as GMT in ISO
-            8601 format
+          description: The date that the resource was last updated, given as GMT in ISO 8601 format
           format: date-time
           nullable: true
           type: string
         operator_country:
-          description: The three letter country code representing where the device's Data
-            Session took place
+          description: The three letter country code representing where the device's Data Session took place
           nullable: true
           type: string
         operator_mcc:
-          description: The 'mobile country code' is the unique ID of the home country
-            where the Data Session took place
+          description: The 'mobile country code' is the unique ID of the home country where the Data Session took place
           nullable: true
           type: string
         operator_mnc:
-          description: The 'mobile network code' is the unique ID specific to the mobile
-            operator network where the Data Session took place
+          description: The 'mobile network code' is the unique ID specific to the mobile operator network where the Data Session took place
           nullable: true
           type: string
         operator_name:
-          description: The friendly name of the mobile operator network that the
-            SIM-connected device is attached to
+          description: The friendly name of the mobile operator network that the SIM-connected device is attached to
           nullable: true
           type: string
         packets_downloaded:
-          description: The number of packets downloaded by the device between the start
-            time and when the Data Session was last updated
+          description: The number of packets downloaded by the device between the start time and when the Data Session was last updated
           nullable: true
           type: integer
         packets_uploaded:
-          description: The number of packets uploaded by the device between the start time
-            and when the Data Session was last updated
+          description: The number of packets uploaded by the device between the start time and when the Data Session was last updated
           nullable: true
           type: integer
         radio_link:
@@ -1497,8 +1353,7 @@ components:
           nullable: true
           type: string
         start:
-          description: The date that the Data Session started, given as GMT in ISO 8601
-            format
+          description: The date that the Data Session started, given as GMT in ISO 8601 format
           format: date-time
           nullable: true
           type: string
@@ -1513,13 +1368,11 @@ components:
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         commands:
-          description: An object that describes the SIM's usage of Commands during the
-            specified period
+          description: An object that describes the SIM's usage of Commands during the specified period
           nullable: true
           type: object
         data:
-          description: An object that describes the SIM's data usage during the specified
-            period
+          description: An object that describes the SIM's data usage during the specified period
           nullable: true
           type: object
         period:

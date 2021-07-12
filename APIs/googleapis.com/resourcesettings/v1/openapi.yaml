@@ -6,9 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: The Resource Settings API allows users to control and modify the
-    behavior of their GCP resources (e.g., VM, firewall, Project, etc.) across
-    the Cloud Resource Hierarchy.
+  description: The Resource Settings API allows users to control and modify the behavior of their GCP resources (e.g., VM, firewall, Project, etc.) across the Cloud Resource Hierarchy.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -35,12 +33,10 @@ tags:
 paths:
   "/v1/{name}":
     get:
-      description: Returns a specified setting. Returns a `google.rpc.Status` with
-        `google.rpc.Code.NOT_FOUND` if the setting does not exist.
+      description: Returns a specified setting. Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the setting does not exist.
       operationId: resourcesettings.projects.settings.get
       parameters:
-        - description: Required. The name of the setting to get. See Setting for naming
-            requirements.
+        - description: Required. The name of the setting to get. See Setting for naming requirements.
           in: path
           name: name
           required: true
@@ -83,22 +79,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: "Updates a specified setting. Returns a `google.rpc.Status` with
-        `google.rpc.Code.NOT_FOUND` if the setting does not exist. Returns a
-        `google.rpc.Status` with `google.rpc.Code.FAILED_PRECONDITION` if the
-        setting is flagged as read only. Returns a `google.rpc.Status` with
-        `google.rpc.Code.ABORTED` if the etag supplied in the request does not
-        match the persisted etag of the setting value. On success, the response
-        will contain only `name`, `local_value` and `etag`. The `metadata` and
-        `effective_value` cannot be updated through this API. Note: the supplied
-        setting will perform a full overwrite of the `local_value` field."
+      description: "Updates a specified setting. Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the setting does not exist. Returns a `google.rpc.Status` with `google.rpc.Code.FAILED_PRECONDITION` if the setting is flagged as read only. Returns a `google.rpc.Status` with `google.rpc.Code.ABORTED` if the etag supplied in the request does not match the persisted etag of the setting value. On success, the response will contain only `name`, `local_value` and `etag`. The `metadata` and `effective_value` cannot be updated through this API. Note: the supplied setting will perform a full overwrite of the `local_value` field."
       operationId: resourcesettings.projects.settings.patch
       parameters:
-        - description: 'The resource name of the setting. Must be in one of the following
-            forms: * `projects/{project_number}/settings/{setting_name}` *
-            `folders/{folder_id}/settings/{setting_name}` *
-            `organizations/{organization_id}/settings/{setting_name}` For
-            example, "/projects/123/settings/gcp-enableMyFeature"'
+        - description: 'The resource name of the setting. Must be in one of the following forms: * `projects/{project_number}/settings/{setting_name}` * `folders/{folder_id}/settings/{setting_name}` * `organizations/{organization_id}/settings/{setting_name}` For example, "/projects/123/settings/gcp-enableMyFeature"'
           in: path
           name: name
           required: true
@@ -128,10 +112,7 @@ paths:
       description: Lists all the settings that are available on the Cloud resource `parent`.
       operationId: resourcesettings.projects.settings.list
       parameters:
-        - description: "Required. The project, folder, or organization that is the parent
-            resource for this setting. Must be in one of the following forms: *
-            `projects/{project_number}` * `projects/{project_id}` *
-            `folders/{folder_id}` * `organizations/{organization_id}`"
+        - description: "Required. The project, folder, or organization that is the parent resource for this setting. Must be in one of the following forms: * `projects/{project_number}` * `projects/{project_id}` * `folders/{folder_id}` * `organizations/{organization_id}`"
           in: path
           name: parent
           required: true
@@ -223,9 +204,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -243,9 +222,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -270,8 +247,7 @@ components:
           description: Unused. A page token used to retrieve the next page.
           type: string
         settings:
-          description: A list of settings that are available at the specified Cloud
-            resource.
+          description: A list of settings that are available at the specified Cloud resource.
           items:
             $ref: "#/components/schemas/GoogleCloudResourcesettingsV1Setting"
           type: array
@@ -281,38 +257,20 @@ components:
       properties:
         effectiveValue:
           $ref: "#/components/schemas/GoogleCloudResourcesettingsV1Value"
-          description: "Output only. The effective value of the setting at the given
-            parent resource, evaluated based on the resource hierarchy The
-            effective value evaluates to one of the following options, in this
-            order. If an option is not valid or doesn't exist, then the next
-            option is used: 1. The local setting value on the given resource:
-            Setting.local_value 2. If one of the given resource's ancestors in
-            the resource hierarchy have a local setting value, the local value
-            at the nearest such ancestor. 3. The setting's default value:
-            SettingMetadata.default_value 4. An empty value, defined as a
-            `Value` with all fields unset. The data type of Value must always be
-            consistent with the data type defined in Setting.metadata."
+          description: "Output only. The effective value of the setting at the given parent resource, evaluated based on the resource hierarchy The effective value evaluates to one of the following options, in this order. If an option is not valid or doesn't exist, then the next option is used: 1. The local setting value on the given resource: Setting.local_value 2. If one of the given resource's ancestors in the resource hierarchy have a local setting value, the local value at the nearest such ancestor. 3. The setting's default value: SettingMetadata.default_value 4. An empty value, defined as a `Value` with all fields unset. The data type of Value must always be consistent with the data type defined in Setting.metadata."
           readOnly: true
         etag:
-          description: A fingerprint used for optimistic concurrency. See UpdateSetting
-            for more details.
+          description: A fingerprint used for optimistic concurrency. See UpdateSetting for more details.
           type: string
         localValue:
           $ref: "#/components/schemas/GoogleCloudResourcesettingsV1Value"
-          description: The configured value of the setting at the given parent resource,
-            ignoring the resource hierarchy. The data type of Value must always
-            be consistent with the data type defined in Setting.metadata.
+          description: The configured value of the setting at the given parent resource, ignoring the resource hierarchy. The data type of Value must always be consistent with the data type defined in Setting.metadata.
         metadata:
           $ref: "#/components/schemas/GoogleCloudResourcesettingsV1SettingMetadata"
-          description: Output only. Metadata about a setting which is not editable by the
-            end user.
+          description: Output only. Metadata about a setting which is not editable by the end user.
           readOnly: true
         name:
-          description: 'The resource name of the setting. Must be in one of the following
-            forms: * `projects/{project_number}/settings/{setting_name}` *
-            `folders/{folder_id}/settings/{setting_name}` *
-            `organizations/{organization_id}/settings/{setting_name}` For
-            example, "/projects/123/settings/gcp-enableMyFeature"'
+          description: 'The resource name of the setting. Must be in one of the following forms: * `projects/{project_number}/settings/{setting_name}` * `folders/{folder_id}/settings/{setting_name}` * `organizations/{organization_id}/settings/{setting_name}` For example, "/projects/123/settings/gcp-enableMyFeature"'
           type: string
       type: object
     GoogleCloudResourcesettingsV1SettingMetadata:
@@ -331,8 +289,7 @@ components:
           type: string
         defaultValue:
           $ref: "#/components/schemas/GoogleCloudResourcesettingsV1Value"
-          description: "The value provided by Setting.effective_value if no setting value
-            is explicitly set. Note: not all settings have a default value."
+          description: "The value provided by Setting.effective_value if no setting value is explicitly set. Note: not all settings have a default value."
         description:
           description: A detailed description of what this setting does.
           type: string
@@ -340,8 +297,7 @@ components:
           description: The human readable name for this setting.
           type: string
         readOnly:
-          description: A flag indicating that values of this setting cannot be modified.
-            See documentation for the specific setting for updates and reasons.
+          description: A flag indicating that values of this setting cannot be modified. See documentation for the specific setting for updates and reasons.
           type: boolean
       type: object
     GoogleCloudResourcesettingsV1Value:
@@ -368,18 +324,14 @@ components:
           type: string
       type: object
     GoogleCloudResourcesettingsV1ValueEnumValue:
-      description: A enum value that can hold any enum type setting values. Each enum
-        type is represented by a number, this representation is stored in the
-        definitions.
+      description: A enum value that can hold any enum type setting values. Each enum type is represented by a number, this representation is stored in the definitions.
       properties:
         value:
           description: The value of this enum
           type: string
       type: object
     GoogleCloudResourcesettingsV1ValueStringMap:
-      description: A string->string map value that can hold a map of string keys to
-        string values. The maximum length of each string is 200 characters and
-        there can be a maximum of 50 key-value pairs in the map.
+      description: A string->string map value that can hold a map of string keys to string values. The maximum length of each string is 200 characters and there can be a maximum of 50 key-value pairs in the map.
       properties:
         mappings:
           additionalProperties:
@@ -388,9 +340,7 @@ components:
           type: object
       type: object
     GoogleCloudResourcesettingsV1ValueStringSet:
-      description: A string set value that can hold a set of strings. The maximum
-        length of each string is 200 characters and there can be a maximum of 50
-        strings in the string set.
+      description: A string set value that can hold a set of strings. The maximum length of each string is 200 characters and there can be a maximum of 50 strings in the string set.
       properties:
         values:
           description: The strings in the set

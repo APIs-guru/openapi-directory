@@ -132,9 +132,7 @@ paths:
                     copyright: Copyright (c) 2016 The New York Times Company.  All Rights Reserved.
                     num_results: 24
                     results:
-                      - abstract: Timothy D. Cook, Apple’s chief, said the government’s request to
-                          bypass security on the phone used by Syed Rizwan
-                          Farook had “chilling” implications.
+                      - abstract: Timothy D. Cook, Apple’s chief, said the government’s request to bypass security on the phone used by Syed Rizwan Farook had “chilling” implications.
                         asset_id: 100000004214575
                         byline: By ERIC LICHTBLAU and KATIE BENNER
                         column: ""
@@ -142,11 +140,7 @@ paths:
                           - IPHONE
                         geo_facet: ""
                         media:
-                          - caption: Timothy D. Cook, the chief executive of Apple, released a letter to
-                              customers several hours after a California judge
-                              ordered the company to unlock an iPhone used by
-                              one of the shooters in a recent attack that killed
-                              14 people in San Bernardino.
+                          - caption: Timothy D. Cook, the chief executive of Apple, released a letter to customers several hours after a California judge ordered the company to unlock an iPhone used by one of the shooters in a recent attack that killed 14 people in San Bernardino.
                             copyright: Jeff Chiu/Associated Press
                             media-metadata:
                               - format: Standard Thumbnail
@@ -226,12 +220,8 @@ paths:
                     copyright: Copyright (c) 2016 The New York Times Company.  All Rights Reserved.
                     num_results: 121
                     results:
-                      - abstract: Republicans have parked themselves so far to the right for so many
-                          years that it’s not clear if they can hear how
-                          deranged they sound.
-                        adx_keywords: Supreme Court (US);McConnell, Mitch;Scalia, Antonin;Obama,
-                          Barack;Kirk, Mark Steven;Republican
-                          Party;Senate;Cornyn, John;Collins, Susan M
+                      - abstract: Republicans have parked themselves so far to the right for so many years that it’s not clear if they can hear how deranged they sound.
+                        adx_keywords: Supreme Court (US);McConnell, Mitch;Scalia, Antonin;Obama, Barack;Kirk, Mark Steven;Republican Party;Senate;Cornyn, John;Collins, Susan M
                         asset_id: 100000004229487
                         byline: By THE EDITORIAL BOARD
                         column: Editorial
@@ -281,9 +271,8 @@ components:
         default: 20
         type: integer
     Section:
-      description: >
+      description: |
         Limits the results by one or more sections. You can use
-
         `all-sections` or one or more section names seperated by semicolons. See `viewed/sections.json` call to get a list of sections. 
       in: path
       name: section
@@ -328,8 +317,7 @@ components:
           - all-sections
         type: string
     SharedTypes:
-      description: Limits the results by the method used to share the items only works
-        on mostshared requests.
+      description: Limits the results by the method used to share the items only works on mostshared requests.
       in: query
       name: shared-types
       schema:
@@ -345,8 +333,7 @@ components:
           - yahoobuzz
         type: string
     TimePeriod:
-      description: Number of days `1 | 7 | 30 ` corresponds to a day, a week, or a
-        month of content.
+      description: Number of days `1 | 7 | 30 ` corresponds to a day, a week, or a month of content.
       in: path
       name: time-period
       required: true

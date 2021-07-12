@@ -6,8 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: The My Business Place Actions API provides an interface for
-    managing place action links of a location on Google.
+  description: The My Business Place Actions API provides an interface for managing place action links of a location on Google.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -33,37 +32,25 @@ tags:
 paths:
   /v1/placeActionTypeMetadata:
     get:
-      description: Returns the list of available place action types for a location or
-        country.
+      description: Returns the list of available place action types for a location or country.
       operationId: mybusinessplaceactions.placeActionTypeMetadata.list
       parameters:
-        - description: "Optional. A filter constraining the place action types to return
-            metadata for. The response includes entries that match the filter.
-            We support only the following filters: 1. location=XYZ where XYZ is
-            a string indicating the resource name of a location, in the format
-            `locations/{location_id}`. 2. region_code=XYZ where XYZ is a Unicode
-            CLDR region code to find available action types. If no filter is
-            provided, all place action types are returned."
+        - description: "Optional. A filter constraining the place action types to return metadata for. The response includes entries that match the filter. We support only the following filters: 1. location=XYZ where XYZ is a string indicating the resource name of a location, in the format `locations/{location_id}`. 2. region_code=XYZ where XYZ is a Unicode CLDR region code to find available action types. If no filter is provided, all place action types are returned."
           in: query
           name: filter
           schema:
             type: string
-        - description: Optional. The IETF BCP-47 code of language to get display names in.
-            If this language is not available, they will be provided in English.
+        - description: Optional. The IETF BCP-47 code of language to get display names in. If this language is not available, they will be provided in English.
           in: query
           name: languageCode
           schema:
             type: string
-        - description: Optional. How many action types to include per page. Default is 10,
-            minimum is 1.
+        - description: Optional. How many action types to include per page. Default is 10, minimum is 1.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Optional. If specified, the next page of place action type metadata
-            is retrieved. The `pageToken` is returned when a call to
-            `placeActionTypeMetadata.list` returns more results than can fit
-            into the requested page size.
+        - description: Optional. If specified, the next page of place action type metadata is retrieved. The `pageToken` is returned when a call to `placeActionTypeMetadata.list` returns more results than can fit into the requested page size.
           in: query
           name: pageToken
           schema:
@@ -94,8 +81,7 @@ paths:
       description: Deletes a place action link from the specified location.
       operationId: mybusinessplaceactions.locations.placeActionLinks.delete
       parameters:
-        - description: Required. The resource name of the place action link to remove from
-            the location.
+        - description: Required. The resource name of the place action link to remove from the location.
           in: path
           name: name
           required: true
@@ -145,23 +131,13 @@ paths:
       description: Updates the specified place action link and returns it.
       operationId: mybusinessplaceactions.locations.placeActionLinks.patch
       parameters:
-        - description: Optional. The resource name, in the format
-            `locations/{location_id}/placeActionLinks/{place_action_link_id}`.
-            The name field will only be considered in UpdatePlaceActionLink and
-            DeletePlaceActionLink requests for updating and deleting links
-            respectively. However, it will be ignored in CreatePlaceActionLink
-            request, where `place_action_link_id` will be assigned by the server
-            on successful creation of a new link and returned as part of the
-            response.
+        - description: Optional. The resource name, in the format `locations/{location_id}/placeActionLinks/{place_action_link_id}`. The name field will only be considered in UpdatePlaceActionLink and DeletePlaceActionLink requests for updating and deleting links respectively. However, it will be ignored in CreatePlaceActionLink request, where `place_action_link_id` will be assigned by the server on successful creation of a new link and returned as part of the response.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Required. The specific fields to update. The only editable fields
-            are `uri`, `place_action_type` and `is_preferred`. If the updated
-            link already exists at the same location with the same
-            `place_action_type` and `uri`, fails with an `ALREADY_EXISTS` error.
+        - description: Required. The specific fields to update. The only editable fields are `uri`, `place_action_type` and `is_preferred`. If the updated link already exists at the same location with the same `place_action_type` and `uri`, fails with an `ALREADY_EXISTS` error.
           in: query
           name: updateMask
           schema:
@@ -185,23 +161,18 @@ paths:
       description: Lists the place action links for the specified location.
       operationId: mybusinessplaceactions.locations.placeActionLinks.list
       parameters:
-        - description: Required. The name of the location whose place action links will be
-            listed. `locations/{location_id}`.
+        - description: Required. The name of the location whose place action links will be listed. `locations/{location_id}`.
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: "Optional. A filter constraining the place action links to return.
-            The response includes entries that match the filter. We support only
-            the following filter: 1. place_action_type=XYZ where XYZ is a valid
-            PlaceActionType."
+        - description: "Optional. A filter constraining the place action links to return. The response includes entries that match the filter. We support only the following filter: 1. place_action_type=XYZ where XYZ is a valid PlaceActionType."
           in: query
           name: filter
           schema:
             type: string
-        - description: Optional. How many place action links to return per page. Default
-            of 10. The minimum is 1.
+        - description: Optional. How many place action links to return per page. Default of 10. The minimum is 1.
           in: query
           name: pageSize
           schema:
@@ -233,14 +204,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a place action link associated with the specified location,
-        and returns it. The request is considered duplicate if the `parent`,
-        `place_action_link.uri` and `place_action_link.place_action_type` are
-        the same as a previous request.
+      description: Creates a place action link associated with the specified location, and returns it. The request is considered duplicate if the `parent`, `place_action_link.uri` and `place_action_link.place_action_type` are the same as a previous request.
       operationId: mybusinessplaceactions.locations.placeActionLinks.create
       parameters:
-        - description: Required. The resource name of the location where to create this
-            place action link. `locations/{location_id}`.
+        - description: Required. The resource name of the location where to create this place action link. `locations/{location_id}`.
           in: path
           name: parent
           required: true
@@ -300,9 +267,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -320,9 +285,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -341,21 +304,14 @@ components:
         type: string
   schemas:
     Empty:
-      description: "A generic empty message that you can re-use to avoid defining
-        duplicated empty messages in your APIs. A typical example is to use it
-        as the request or the response type of an API method. For instance:
-        service Foo { rpc Bar(google.protobuf.Empty) returns
-        (google.protobuf.Empty); } The JSON representation for `Empty` is empty
-        JSON object `{}`."
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
       type: object
     ListPlaceActionLinksResponse:
       description: Response message for PlaceActions.ListPlaceActionLinks.
       properties:
         nextPageToken:
-          description: If there are more place action links than the requested page size,
-            then this field is populated with a token to fetch the next page of
-            results.
+          description: If there are more place action links than the requested page size, then this field is populated with a token to fetch the next page of results.
           type: string
         placeActionLinks:
           description: The returned list of place action links.
@@ -367,10 +323,7 @@ components:
       description: Response message for PlaceActions.ListPlaceActionTypeMetadata.
       properties:
         nextPageToken:
-          description: If the number of action types exceeded the requested page size,
-            this field will be populated with a token to fetch the next page on
-            a subsequent call to `placeActionTypeMetadata.list`. If there are no
-            more results, this field will not be present in the response.
+          description: If the number of action types exceeded the requested page size, this field will be populated with a token to fetch the next page on a subsequent call to `placeActionTypeMetadata.list`. If there are no more results, this field will not be present in the response.
           type: string
         placeActionTypeMetadata:
           description: A collection of metadata for the available place action types.
@@ -391,25 +344,13 @@ components:
           readOnly: true
           type: boolean
         isPreferred:
-          description: Optional. Whether this link is preferred by the merchant. Only one
-            link can be marked as preferred per place action type at a location.
-            If a future request marks a different link as preferred for the same
-            place action type, then the current preferred link (if any exists)
-            will lose its preference.
+          description: Optional. Whether this link is preferred by the merchant. Only one link can be marked as preferred per place action type at a location. If a future request marks a different link as preferred for the same place action type, then the current preferred link (if any exists) will lose its preference.
           type: boolean
         name:
-          description: Optional. The resource name, in the format
-            `locations/{location_id}/placeActionLinks/{place_action_link_id}`.
-            The name field will only be considered in UpdatePlaceActionLink and
-            DeletePlaceActionLink requests for updating and deleting links
-            respectively. However, it will be ignored in CreatePlaceActionLink
-            request, where `place_action_link_id` will be assigned by the server
-            on successful creation of a new link and returned as part of the
-            response.
+          description: Optional. The resource name, in the format `locations/{location_id}/placeActionLinks/{place_action_link_id}`. The name field will only be considered in UpdatePlaceActionLink and DeletePlaceActionLink requests for updating and deleting links respectively. However, it will be ignored in CreatePlaceActionLink request, where `place_action_link_id` will be assigned by the server on successful creation of a new link and returned as part of the response.
           type: string
         placeActionType:
-          description: Required. The type of place action that can be performed using this
-            link.
+          description: Required. The type of place action that can be performed using this link.
           enum:
             - PLACE_ACTION_TYPE_UNSPECIFIED
             - APPOINTMENT
@@ -433,18 +374,14 @@ components:
           readOnly: true
           type: string
         uri:
-          description: Required. The link uri. The same uri can be reused for different
-            action types across different locations. However, only one place
-            action link is allowed for each unique combination of (uri, place
-            action type, location).
+          description: Required. The link uri. The same uri can be reused for different action types across different locations. However, only one place action link is allowed for each unique combination of (uri, place action type, location).
           type: string
       type: object
     PlaceActionTypeMetadata:
       description: Metadata for supported place action types.
       properties:
         displayName:
-          description: The localized display name for the attribute, if available;
-            otherwise, the English display name.
+          description: The localized display name for the attribute, if available; otherwise, the English display name.
           type: string
         placeActionType:
           description: The place action type.

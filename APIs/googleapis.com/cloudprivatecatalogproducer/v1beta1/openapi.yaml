@@ -5,8 +5,7 @@ info:
   contact:
     name: Google
     url: https://google.com
-  description: Enables cloud users to manage and share enterprise catalogs intheir
-    organizations.
+  description: Enables cloud users to manage and share enterprise catalogs intheir organizations.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -62,8 +61,7 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudPrivatecatalogproducerV1beta1ListCatalog\
-                  sResponse"
+                $ref: "#/components/schemas/GoogleCloudPrivatecatalogproducerV1beta1ListCatalogsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -242,16 +240,12 @@ paths:
       description: Updates a specific Version resource.
       operationId: cloudprivatecatalogproducer.catalogs.products.versions.patch
       parameters:
-        - description: >-
+        - description: |-
             Required. The resource name of the version, in the format
-
             `catalogs/{catalog_id}/products/{product_id}/versions/a-z*[a-z0-9]'.
 
-
             A unique identifier for the version under a product, which can't
-
             be changed after the version is created. The final segment of the name must
-
             between 1 and 63 characters in length.
           in: path
           name: name
@@ -259,8 +253,7 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: Field mask that controls which fields of the version should be
-            updated.
+        - description: Field mask that controls which fields of the version should be updated.
           in: query
           name: updateMask
           schema:
@@ -298,26 +291,16 @@ paths:
       - $ref: "#/components/parameters/oauth_token"
       - $ref: "#/components/parameters/callback"
     post:
-      description: >-
-        Starts asynchronous cancellation on a long-running operation.  The
-        server
-
+      description: |-
+        Starts asynchronous cancellation on a long-running operation.  The server
         makes a best effort to cancel the operation, but success is not
-
         guaranteed.  If the server doesn't support this method, it returns
-
         `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-
         Operations.GetOperation or
-
         other methods to check whether the cancellation succeeded or whether the
-
         operation completed despite cancellation. On successful cancellation,
-
         the operation is not deleted; instead, it becomes an operation with
-
         an Operation.error value with a google.rpc.Status.code of 1,
-
         corresponding to `Code.CANCELLED`.
       operationId: cloudprivatecatalogproducer.operations.cancel
       parameters:
@@ -375,8 +358,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudPrivatecatalogproducerV1beta1CopyProduct\
-                Request"
+              $ref: "#/components/schemas/GoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest"
       responses:
         "200":
           content:
@@ -419,8 +401,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudPrivatecatalogproducerV1beta1UndeleteCat\
-                alogRequest"
+              $ref: "#/components/schemas/GoogleCloudPrivatecatalogproducerV1beta1UndeleteCatalogRequest"
       responses:
         "200":
           content:
@@ -466,8 +447,7 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudPrivatecatalogproducerV1beta1ListAssocia\
-                  tionsResponse"
+                $ref: "#/components/schemas/GoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -503,8 +483,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudPrivatecatalogproducerV1beta1CreateAssoc\
-                iationRequest"
+              $ref: "#/components/schemas/GoogleCloudPrivatecatalogproducerV1beta1CreateAssociationRequest"
       responses:
         "200":
           content:
@@ -558,8 +537,7 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudPrivatecatalogproducerV1beta1ListProduct\
-                  sResponse"
+                $ref: "#/components/schemas/GoogleCloudPrivatecatalogproducerV1beta1ListProductsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -642,8 +620,7 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudPrivatecatalogproducerV1beta1ListVersion\
-                  sResponse"
+                $ref: "#/components/schemas/GoogleCloudPrivatecatalogproducerV1beta1ListVersionsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -728,8 +705,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudPrivatecatalogproducerV1beta1UploadIconR\
-                equest"
+              $ref: "#/components/schemas/GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest"
       responses:
         "200":
           content:
@@ -749,9 +725,8 @@ paths:
       description: Gets IAM policy for the specified Catalog.
       operationId: cloudprivatecatalogproducer.catalogs.getIamPolicy
       parameters:
-        - description: >-
+        - description: |-
             REQUIRED: The resource for which the policy is being requested.
-
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
@@ -759,19 +734,14 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: >-
+        - description: |-
             Optional. The policy format version to be returned.
 
-
             Valid values are 0, 1, and 3. Requests specifying an invalid value will be
-
             rejected.
 
-
             Requests for policies with any conditional bindings must specify version 3.
-
             Policies without any conditional bindings may specify any valid value or
-
             leave the field unset.
           in: query
           name: options.requestedPolicyVersion
@@ -820,9 +790,8 @@ paths:
       description: Sets the IAM policy for the specified Catalog.
       operationId: cloudprivatecatalogproducer.catalogs.setIamPolicy
       parameters:
-        - description: >-
+        - description: |-
             REQUIRED: The resource for which the policy is being specified.
-
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
@@ -866,10 +835,8 @@ paths:
       description: Tests the IAM permissions for the specified Catalog.
       operationId: cloudprivatecatalogproducer.catalogs.testIamPermissions
       parameters:
-        - description: >-
-            REQUIRED: The resource for which the policy detail is being
-            requested.
-
+        - description: |-
+            REQUIRED: The resource for which the policy detail is being requested.
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
@@ -937,9 +904,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -958,9 +923,7 @@ components:
         default: true
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -985,43 +948,29 @@ components:
             $ref: "#/components/schemas/GoogleCloudPrivatecatalogproducerV1beta1Version"
   schemas:
     GoogleCloudPrivatecatalogproducerV1beta1Association:
-      description: >-
+      description: |-
         An association tuple that pairs a `Catalog` to a resource
-
         that can use the `Catalog`. After association, a
-
         google.cloud.privatecatalog.v1beta1.Catalog becomes available to
-
         consumers under specified Association.resource and all of its child
-
         nodes.
-
         Users who have the `cloudprivatecatalog.targets.get` permission on any of
-
         the resource nodes can access the catalog and child products under the node.
 
-
         For example, suppose the cloud resource hierarchy is as follows:
-
 
         * organizations/example.com
           * folders/team
             * projects/test
 
         After creating an association with `organizations/example.com`, the catalog
-
         `catalogs/1`  is accessible from the following paths:
 
-
         * organizations/example.com
-
         * folders/team
-
         * projects/test
 
-
         Users can access them by
-
         google.cloud.v1beta1.PrivateCatalog.SearchCatalogs action.
       properties:
         createTime:
@@ -1029,38 +978,27 @@ components:
           format: google-datetime
           type: string
         name:
-          description: >-
-            Output only. The resource name of the catalog association, in the
-            format
-
+          description: |-
+            Output only. The resource name of the catalog association, in the format
             `catalogs/{catalog_id}/associations/{association_id}'.
 
-
             A unique identifier for the catalog association, which is
-
             generated by catalog service.
           type: string
         resource:
-          description: >-
+          description: |-
             Required. The user-supplied fully qualified name of the `Resource`
-
             associated to the `Catalog`. It supports `Organization`, `Folder`,
-
             and `Project`. Values are of the form
 
-
             * `//cloudresourcemanager.googleapis.com/projects/{product_number}`
-
             * `//cloudresourcemanager.googleapis.com/folders/{folder_id}`
-
             * `//cloudresourcemanager.googleapis.com/organizations/{organization_id}`
           type: string
       type: object
     GoogleCloudPrivatecatalogproducerV1beta1Catalog:
-      description: >-
-        The producer representation of a catalog which is a curated
-        collection of
-
+      description: |-
+        The producer representation of a catalog which is a curated collection of
         solutions that can be managed, controlled, and shared by cloud admins.
       properties:
         createTime:
@@ -1068,17 +1006,13 @@ components:
           format: google-datetime
           type: string
         description:
-          description: >-
-            Required. The user-supplied description of the catalog. Maximum of
-            512
-
+          description: |-
+            Required. The user-supplied description of the catalog. Maximum of 512
             characters.
           type: string
         displayName:
-          description: >-
-            Required. The user-supplied descriptive name of the catalog as it
-            appears
-
+          description: |-
+            Required. The user-supplied descriptive name of the catalog as it appears
             in UIs. Maximum 256 characters in length.
           type: string
         name:
@@ -1090,14 +1024,10 @@ components:
             by catalog service.
           type: string
         parent:
-          description: >-
-            Required. The parent resource name of the catalog, which can't be
-            changed
-
+          description: |-
+            Required. The parent resource name of the catalog, which can't be changed
             after a catalog is created. It can only be an organization. Values are of
-
             the form `//cloudresourcemanager.googleapis.com/organizations/<id>`.
-
             Maximum 256 characters in length.
           type: string
         updateTime:
@@ -1115,14 +1045,11 @@ components:
       properties:
         association:
           $ref: "#/components/schemas/GoogleCloudPrivatecatalogproducerV1beta1Association"
-          description: >-
+          description: |-
             The user-supplied `Association` that is going to be created.
 
-
             If the `resource` field is set, the
-
             `privatecatalogproducer.catalogTargets.associate` permission is checked on
-
             the target resource.
       type: object
     GoogleCloudPrivatecatalogproducerV1beta1ListAssociationsResponse:
@@ -1133,11 +1060,9 @@ components:
             $ref: "#/components/schemas/GoogleCloudPrivatecatalogproducerV1beta1Association"
           type: array
         nextPageToken:
-          description: >-
+          description: |-
             A pagination token returned from a previous call to
-
             `ListAssociations` that indicates where the listing should continue from.
-
             This field is optional.
           type: string
       type: object
@@ -1189,30 +1114,19 @@ components:
         `Catalog` with display metadata and a list of `Version` resources.
       properties:
         assetType:
-          description: >-
-            Required. The type of the product asset, which cannot be changed
-            after the
-
+          description: |-
+            Required. The type of the product asset, which cannot be changed after the
             product is created. It supports the values
-
             `google.deploymentmanager.Template` and
-
             `google.cloudprivatecatalog.ListingOnly`. Other values will be
-
             rejected by the server. Read only after creation.
 
-
             The following fields or resource types have different validation rules
-
             under each `asset_type` values:
 
-
             * Product.display_metadata has different validation schema for each
-
             asset type value. See its comment for details.
-
             * Version resource isn't allowed to be added under the
-
             `google.cloudprivatecatalog.ListingOnly` type.
           type: string
         createTime:
@@ -1222,22 +1136,15 @@ components:
         displayMetadata:
           additionalProperties:
             description: Properties of the object.
-          description: >-
+          description: |-
             The user-supplied display metadata to describe the product.
-
             The JSON schema of the metadata differs by Product.asset_type.
-
             When the type is `google.deploymentmanager.Template`, the schema is as
-
             follows:
 
-
             ```
-
             "$schema": http://json-schema.org/draft-04/schema#
-
             type: object
-
             properties:
               name:
                 type: string
@@ -1277,28 +1184,18 @@ components:
                       minLength: 1
                       maxLength: 2048
             required:
-
             - name
-
             - description
-
             additionalProperties: false
 
-
             ```
-
 
             When the asset type is `google.cloudprivatecatalog.ListingOnly`, the schema
-
             is as follows:
 
-
             ```
-
             "$schema": http://json-schema.org/draft-04/schema#
-
             type: object
-
             properties:
               name:
                 type: string
@@ -1342,15 +1239,10 @@ components:
                 pattern:
                 "^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]"
             required:
-
             - name
-
             - description
-
             - signup_url
-
             additionalProperties: false
-
             ```
           type: object
         iconUri:
@@ -1380,23 +1272,17 @@ components:
     GoogleCloudPrivatecatalogproducerV1beta1UploadIconRequest:
       properties:
         icon:
-          description: >-
-            The raw icon bytes user-supplied to be uploaded to the product. The
-            format
-
+          description: |-
+            The raw icon bytes user-supplied to be uploaded to the product. The format
             of the icon can only be PNG or JPEG. The minimum allowed dimensions are
-
             130x130 pixels and the maximum dimensions are 10000x10000 pixels.
-
             Required.
           format: byte
           type: string
       type: object
     GoogleCloudPrivatecatalogproducerV1beta1Version:
-      description: >-
-        The producer representation of a version, which is a child resource
-        under a
-
+      description: |-
+        The producer representation of a version, which is a child resource under a
         `Product` with asset data.
       properties:
         asset:
@@ -1411,36 +1297,26 @@ components:
           format: google-datetime
           type: string
         description:
-          description: The user-supplied description of the version. Maximum of 256
-            characters.
+          description: The user-supplied description of the version. Maximum of 256 characters.
           type: string
         name:
-          description: >-
+          description: |-
             Required. The resource name of the version, in the format
-
             `catalogs/{catalog_id}/products/{product_id}/versions/a-z*[a-z0-9]'.
 
-
             A unique identifier for the version under a product, which can't
-
             be changed after the version is created. The final segment of the name must
-
             between 1 and 63 characters in length.
           type: string
         originalAsset:
           additionalProperties:
             description: Properties of the object.
-          description: >-
-            The user-supplied asset payload. The maximum size of the payload is
-            2MB.
-
+          description: |-
+            The user-supplied asset payload. The maximum size of the payload is 2MB.
             The JSON schema of the payload is defined as:
 
-
             ```
-
             type: object
-
             properties:
               mainTemplate:
                 type: string
@@ -1468,24 +1344,16 @@ components:
           type: string
       type: object
     GoogleIamV1AuditConfig:
-      description: >-
+      description: |-
         Specifies the audit configuration for a service.
-
         The configuration determines which permission types are logged, and what
-
         identities, if any, are exempted from logging.
-
         An AuditConfig must have one or more AuditLogConfigs.
 
-
         If there are AuditConfigs for both `allServices` and a specific service,
-
         the union of the two AuditConfigs is used for that service: the log_types
-
         specified in each AuditConfig are enabled, and the exempted_members in each
-
         AuditLogConfig are exempted.
-
 
         Example Policy with multiple AuditConfigs:
 
@@ -1526,9 +1394,7 @@ components:
             }
 
         For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
-
         logging. It also exempts jose@example.com from DATA_READ logging, and
-
         aliya@example.com from DATA_WRITE logging.
       properties:
         auditLogConfigs:
@@ -1587,21 +1453,15 @@ components:
       properties:
         condition:
           $ref: "#/components/schemas/GoogleTypeExpr"
-          description: >-
+          description: |-
             The condition that is associated with this binding.
-
             NOTE: An unsatisfied condition will not allow user access via current
-
             binding. Different bindings, including their conditions, are examined
-
             independently.
         members:
-          description: >+
-            Specifies the identities requesting access for a Cloud Platform
-            resource.
-
+          description: |+
+            Specifies the identities requesting access for a Cloud Platform resource.
             `members` can have the following values:
-
 
             * `allUsers`: A special identifier that represents anyone who is
                on the internet; with or without a Google account.
@@ -1652,33 +1512,21 @@ components:
           type: string
       type: object
     GoogleIamV1Policy:
-      description: >-
-        An Identity and Access Management (IAM) policy, which specifies
-        access
-
+      description: |-
+        An Identity and Access Management (IAM) policy, which specifies access
         controls for Google Cloud resources.
 
 
-
         A `Policy` is a collection of `bindings`. A `binding` binds one or more
-
         `members` to a single `role`. Members can be user accounts, service accounts,
-
         Google groups, and domains (such as G Suite). A `role` is a named list of
-
         permissions; each `role` can be an IAM predefined role or a user-created
-
         custom role.
 
-
         Optionally, a `binding` can specify a `condition`, which is a logical
-
         expression that allows access to a resource only if the expression evaluates
-
         to `true`. A condition can add constraints based on attributes of the
-
         request, the resource, or both.
-
 
         **JSON example:**
 
@@ -1727,7 +1575,6 @@ components:
             - version: 3
 
         For a description of IAM and its features, see the
-
         [IAM documentation](https://cloud.google.com/iam/docs/).
       properties:
         auditConfigs:
@@ -1736,77 +1583,51 @@ components:
             $ref: "#/components/schemas/GoogleIamV1AuditConfig"
           type: array
         bindings:
-          description: >-
-            Associates a list of `members` to a `role`. Optionally, may specify
-            a
-
+          description: |-
+            Associates a list of `members` to a `role`. Optionally, may specify a
             `condition` that determines how and when the `bindings` are applied. Each
-
             of the `bindings` must contain at least one member.
           items:
             $ref: "#/components/schemas/GoogleIamV1Binding"
           type: array
         etag:
-          description: >-
+          description: |-
             `etag` is used for optimistic concurrency control as a way to help
-
             prevent simultaneous updates of a policy from overwriting each other.
-
             It is strongly suggested that systems make use of the `etag` in the
-
             read-modify-write cycle to perform policy updates in order to avoid race
-
             conditions: An `etag` is returned in the response to `getIamPolicy`, and
-
             systems are expected to put that etag in the request to `setIamPolicy` to
-
             ensure that their change will be applied to the same version of the policy.
 
-
             **Important:** If you use IAM Conditions, you must include the `etag` field
-
             whenever you call `setIamPolicy`. If you omit this field, then IAM allows
-
             you to overwrite a version `3` policy with a version `1` policy, and all of
-
             the conditions in the version `3` policy are lost.
           format: byte
           type: string
         version:
-          description: >-
+          description: |-
             Specifies the format of the policy.
 
-
             Valid values are `0`, `1`, and `3`. Requests that specify an invalid value
-
             are rejected.
 
-
             Any operation that affects conditional role bindings must specify version
-
             `3`. This requirement applies to the following operations:
 
-
             * Getting a policy that includes a conditional role binding
-
             * Adding a conditional role binding to a policy
-
             * Changing a conditional role binding in a policy
-
             * Removing any role binding, with or without a condition, from a policy
               that includes conditions
 
             **Important:** If you use IAM Conditions, you must include the `etag` field
-
             whenever you call `setIamPolicy`. If you omit this field, then IAM allows
-
             you to overwrite a version `3` policy with a version `1` policy, and all of
-
             the conditions in the version `3` policy are lost.
 
-
             If a policy does not include any conditions, operations on that policy may
-
             specify any valid version or leave the field unset.
           format: int32
           type: integer
@@ -1816,26 +1637,17 @@ components:
       properties:
         policy:
           $ref: "#/components/schemas/GoogleIamV1Policy"
-          description: >-
-            REQUIRED: The complete policy to be applied to the `resource`. The
-            size of
-
+          description: |-
+            REQUIRED: The complete policy to be applied to the `resource`. The size of
             the policy is limited to a few 10s of KB. An empty policy is a
-
             valid policy but certain Cloud Platform services (such as Projects)
-
             might reject them.
         updateMask:
-          description: >-
-            OPTIONAL: A FieldMask specifying which fields of the policy to
-            modify. Only
-
+          description: |-
+            OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
             the fields in the mask will be modified. If no mask is provided, the
-
             following default mask is used:
-
             paths: "bindings, etag"
-
             This field is only used by Cloud IAM.
           format: google-fieldmask
           type: string
@@ -1844,14 +1656,10 @@ components:
       description: Request message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: >-
-            The set of permissions to check for the `resource`. Permissions
-            with
-
+          description: |-
+            The set of permissions to check for the `resource`. Permissions with
             wildcards (such as '*' or 'storage.*') are not allowed. For more
-
             information see
-
             [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
           items:
             type: string
@@ -1879,26 +1687,20 @@ components:
           description: The standard List next-page token.
           type: string
         operations:
-          description: A list of operations that matches the specified filter in the
-            request.
+          description: A list of operations that matches the specified filter in the request.
           items:
             $ref: "#/components/schemas/GoogleLongrunningOperation"
           type: array
       type: object
     GoogleLongrunningOperation:
-      description: >-
-        This resource represents a long-running operation that is the
-        result of a
-
+      description: |-
+        This resource represents a long-running operation that is the result of a
         network API call.
       properties:
         done:
-          description: >-
-            If the value is `false`, it means the operation is still in
-            progress.
-
+          description: |-
+            If the value is `false`, it means the operation is still in progress.
             If `true`, the operation is completed, and either `error` or `response` is
-
             available.
           type: boolean
         error:
@@ -1907,54 +1709,36 @@ components:
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: >-
-            Service-specific metadata associated with the operation.  It
-            typically
-
+          description: |-
+            Service-specific metadata associated with the operation.  It typically
             contains progress information and common metadata such as create time.
-
             Some services might not provide such metadata.  Any method that returns a
-
             long-running operation should document the metadata type, if any.
           type: object
         name:
-          description: >-
-            The server-assigned name, which is only unique within the same
-            service that
-
+          description: |-
+            The server-assigned name, which is only unique within the same service that
             originally returns it. If you use the default HTTP mapping, the
-
             `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: >-
-            The normal response of the operation in case of success.  If the
-            original
-
+          description: |-
+            The normal response of the operation in case of success.  If the original
             method returns no data on success, such as `Delete`, the response is
-
             `google.protobuf.Empty`.  If the original method is standard
-
             `Get`/`Create`/`Update`, the response should be the resource.  For other
-
             methods, the response should have the type `XxxResponse`, where `Xxx`
-
             is the original method name.  For example, if the original method name
-
             is `TakeSnapshot()`, the inferred response type is
-
             `TakeSnapshotResponse`.
           type: object
       type: object
     GoogleProtobufEmpty:
-      description: >-
-        A generic empty message that you can re-use to avoid defining
-        duplicated
-
+      description: |-
+        A generic empty message that you can re-use to avoid defining duplicated
         empty messages in your APIs. A typical example is to use it as the request
-
         or the response type of an API method. For instance:
 
             service Foo {
@@ -1965,19 +1749,13 @@ components:
       properties: {}
       type: object
     GoogleRpcStatus:
-      description: >-
-        The `Status` type defines a logical error model that is suitable
-        for
-
+      description: |-
+        The `Status` type defines a logical error model that is suitable for
         different programming environments, including REST APIs and RPC APIs. It is
-
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
-
         three pieces of data: error code, error message, and error details.
 
-
         You can find out more about this error model and how to work with it in the
-
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
@@ -1985,10 +1763,8 @@ components:
           format: int32
           type: integer
         details:
-          description: >-
-            A list of messages that carry the error details.  There is a common
-            set of
-
+          description: |-
+            A list of messages that carry the error details.  There is a common set of
             message types for APIs to use.
           items:
             additionalProperties:
@@ -2011,10 +1787,8 @@ components:
             expression: "size(request.user) > 0"
       properties:
         description:
-          description: >-
-            An optional description of the expression. This is a longer text
-            which
-
+          description: |-
+            An optional description of the expression. This is a longer text which
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
@@ -2026,10 +1800,8 @@ components:
             well-known feature set of CEL is supported.
           type: string
         location:
-          description: >-
-            An optional string indicating the location of the expression for
-            error
-
+          description: |-
+            An optional string indicating the location of the expression for error
             reporting, e.g. a file name and a position in the file.
           type: string
         title:

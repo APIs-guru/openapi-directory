@@ -47,8 +47,7 @@ paths:
           name: FriendlyName
           schema:
             type: string
-        - description: The unique string of a policy that is associated to the
-            Customer-Profile resource.
+        - description: The unique string of a policy that is associated to the Customer-Profile resource.
           in: query
           name: PolicySid
           schema:
@@ -56,8 +55,7 @@ paths:
             minLength: 34
             pattern: ^RN[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -111,15 +109,13 @@ paths:
             schema:
               properties:
                 Email:
-                  description: The email address that will receive updates when the
-                    Customer-Profile resource changes status.
+                  description: The email address that will receive updates when the Customer-Profile resource changes status.
                   type: string
                 FriendlyName:
                   description: The string that you assigned to describe the resource.
                   type: string
                 PolicySid:
-                  description: The unique string of a policy that is associated to the
-                    Customer-Profile resource.
+                  description: The unique string of a policy that is associated to the Customer-Profile resource.
                   maxLength: 34
                   minLength: 34
                   pattern: ^RN[0-9a-fA-F]{32}$
@@ -159,8 +155,7 @@ paths:
       description: Retrieve a list of all Assigned Items for an account.
       operationId: ListCustomerProfileChannelEndpointAssignment
       parameters:
-        - description: The unique string that we created to identify the CustomerProfile
-            resource.
+        - description: The unique string that we created to identify the CustomerProfile resource.
           in: path
           name: CustomerProfileSid
           required: true
@@ -182,8 +177,7 @@ paths:
           name: ChannelEndpointSids
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -219,8 +213,7 @@ paths:
                     type: object
                   results:
                     items:
-                      $ref: "#/components/schemas/trusthub.v1.customer_profile.customer_profile_chann\
-                        el_endpoint_assignment"
+                      $ref: "#/components/schemas/trusthub.v1.customer_profile.customer_profile_channel_endpoint_assignment"
                     type: array
                 title: ListCustomerProfileChannelEndpointAssignmentResponse
                 type: object
@@ -233,8 +226,7 @@ paths:
       description: Create a new Assigned Item.
       operationId: CreateCustomerProfileChannelEndpointAssignment
       parameters:
-        - description: The unique string that we created to identify the CustomerProfile
-            resource.
+        - description: The unique string that we created to identify the CustomerProfile resource.
           in: path
           name: CustomerProfileSid
           required: true
@@ -267,8 +259,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/trusthub.v1.customer_profile.customer_profile_chann\
-                  el_endpoint_assignment"
+                $ref: "#/components/schemas/trusthub.v1.customer_profile.customer_profile_channel_endpoint_assignment"
           description: Created
       security:
         - accountSid_authToken: []
@@ -285,8 +276,7 @@ paths:
       description: Remove an Assignment Item Instance.
       operationId: DeleteCustomerProfileChannelEndpointAssignment
       parameters:
-        - description: The unique string that we created to identify the CustomerProfile
-            resource.
+        - description: The unique string that we created to identify the CustomerProfile resource.
           in: path
           name: CustomerProfileSid
           required: true
@@ -316,8 +306,7 @@ paths:
       description: Fetch specific Assigned Item Instance.
       operationId: FetchCustomerProfileChannelEndpointAssignment
       parameters:
-        - description: The unique string that we created to identify the CustomerProfile
-            resource.
+        - description: The unique string that we created to identify the CustomerProfile resource.
           in: path
           name: CustomerProfileSid
           required: true
@@ -340,8 +329,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/trusthub.v1.customer_profile.customer_profile_chann\
-                  el_endpoint_assignment"
+                $ref: "#/components/schemas/trusthub.v1.customer_profile.customer_profile_channel_endpoint_assignment"
           description: OK
       security:
         - accountSid_authToken: []
@@ -359,8 +347,7 @@ paths:
       description: Retrieve a list of all Assigned Items for an account.
       operationId: ListCustomerProfileEntityAssignment
       parameters:
-        - description: The unique string that we created to identify the CustomerProfile
-            resource.
+        - description: The unique string that we created to identify the CustomerProfile resource.
           in: path
           name: CustomerProfileSid
           required: true
@@ -369,8 +356,7 @@ paths:
             minLength: 34
             pattern: ^BU[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -406,8 +392,7 @@ paths:
                     type: object
                   results:
                     items:
-                      $ref: "#/components/schemas/trusthub.v1.customer_profile.customer_profile_entit\
-                        y_assignment"
+                      $ref: "#/components/schemas/trusthub.v1.customer_profile.customer_profile_entity_assignment"
                     type: array
                 title: ListCustomerProfileEntityAssignmentResponse
                 type: object
@@ -420,8 +405,7 @@ paths:
       description: Create a new Assigned Item.
       operationId: CreateCustomerProfileEntityAssignment
       parameters:
-        - description: The unique string that we created to identify the CustomerProfile
-            resource.
+        - description: The unique string that we created to identify the CustomerProfile resource.
           in: path
           name: CustomerProfileSid
           required: true
@@ -436,8 +420,7 @@ paths:
             schema:
               properties:
                 ObjectSid:
-                  description: The SID of an object bag that holds information of the different
-                    items.
+                  description: The SID of an object bag that holds information of the different items.
                   maxLength: 34
                   minLength: 34
                   pattern: ^[a-zA-Z]{2}[0-9a-fA-F]{32}$
@@ -451,8 +434,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/trusthub.v1.customer_profile.customer_profile_entit\
-                  y_assignment"
+                $ref: "#/components/schemas/trusthub.v1.customer_profile.customer_profile_entity_assignment"
           description: Created
       security:
         - accountSid_authToken: []
@@ -469,8 +451,7 @@ paths:
       description: Remove an Assignment Item Instance.
       operationId: DeleteCustomerProfileEntityAssignment
       parameters:
-        - description: The unique string that we created to identify the CustomerProfile
-            resource.
+        - description: The unique string that we created to identify the CustomerProfile resource.
           in: path
           name: CustomerProfileSid
           required: true
@@ -500,8 +481,7 @@ paths:
       description: Fetch specific Assigned Item Instance.
       operationId: FetchCustomerProfileEntityAssignment
       parameters:
-        - description: The unique string that we created to identify the CustomerProfile
-            resource.
+        - description: The unique string that we created to identify the CustomerProfile resource.
           in: path
           name: CustomerProfileSid
           required: true
@@ -524,8 +504,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/trusthub.v1.customer_profile.customer_profile_entit\
-                  y_assignment"
+                $ref: "#/components/schemas/trusthub.v1.customer_profile.customer_profile_entity_assignment"
           description: OK
       security:
         - accountSid_authToken: []
@@ -540,12 +519,10 @@ paths:
   "/v1/CustomerProfiles/{CustomerProfileSid}/Evaluations":
     description: "TODO: Resource-level docs"
     get:
-      description: Retrieve a list of Evaluations associated to the customer_profile
-        resource.
+      description: Retrieve a list of Evaluations associated to the customer_profile resource.
       operationId: ListCustomerProfileEvaluation
       parameters:
-        - description: The unique string that we created to identify the CustomerProfile
-            resource.
+        - description: The unique string that we created to identify the CustomerProfile resource.
           in: path
           name: CustomerProfileSid
           required: true
@@ -554,8 +531,7 @@ paths:
             minLength: 34
             pattern: ^BU[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -591,8 +567,7 @@ paths:
                     type: object
                   results:
                     items:
-                      $ref: "#/components/schemas/trusthub.v1.customer_profile.customer_profile_evalu\
-                        ation"
+                      $ref: "#/components/schemas/trusthub.v1.customer_profile.customer_profile_evaluation"
                     type: array
                 title: ListCustomerProfileEvaluationResponse
                 type: object
@@ -605,8 +580,7 @@ paths:
       description: Create a new Evaluation
       operationId: CreateCustomerProfileEvaluation
       parameters:
-        - description: The unique string that we created to identify the CustomerProfile
-            resource.
+        - description: The unique string that we created to identify the CustomerProfile resource.
           in: path
           name: CustomerProfileSid
           required: true
@@ -621,8 +595,7 @@ paths:
             schema:
               properties:
                 PolicySid:
-                  description: The unique string of a policy that is associated to the
-                    customer_profile resource.
+                  description: The unique string of a policy that is associated to the customer_profile resource.
                   maxLength: 34
                   minLength: 34
                   pattern: ^RN[0-9a-fA-F]{32}$
@@ -636,8 +609,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/trusthub.v1.customer_profile.customer_profile_evalu\
-                  ation"
+                $ref: "#/components/schemas/trusthub.v1.customer_profile.customer_profile_evaluation"
           description: Created
       security:
         - accountSid_authToken: []
@@ -655,8 +627,7 @@ paths:
       description: Fetch specific Evaluation Instance.
       operationId: FetchCustomerProfileEvaluation
       parameters:
-        - description: The unique string that we created to identify the customer_profile
-            resource.
+        - description: The unique string that we created to identify the customer_profile resource.
           in: path
           name: CustomerProfileSid
           required: true
@@ -679,8 +650,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/trusthub.v1.customer_profile.customer_profile_evalu\
-                  ation"
+                $ref: "#/components/schemas/trusthub.v1.customer_profile.customer_profile_evaluation"
           description: OK
       security:
         - accountSid_authToken: []
@@ -697,8 +667,7 @@ paths:
       description: Delete a specific Customer-Profile.
       operationId: DeleteCustomerProfile
       parameters:
-        - description: The unique string that we created to identify the Customer-Profile
-            resource.
+        - description: The unique string that we created to identify the Customer-Profile resource.
           in: path
           name: Sid
           required: true
@@ -719,8 +688,7 @@ paths:
       description: Fetch a specific Customer-Profile instance.
       operationId: FetchCustomerProfile
       parameters:
-        - description: The unique string that we created to identify the Customer-Profile
-            resource.
+        - description: The unique string that we created to identify the Customer-Profile resource.
           in: path
           name: Sid
           required: true
@@ -744,8 +712,7 @@ paths:
       description: Updates a Customer-Profile in an account.
       operationId: UpdateCustomerProfile
       parameters:
-        - description: The unique string that we created to identify the Customer-Profile
-            resource.
+        - description: The unique string that we created to identify the Customer-Profile resource.
           in: path
           name: Sid
           required: true
@@ -760,8 +727,7 @@ paths:
             schema:
               properties:
                 Email:
-                  description: The email address that will receive updates when the
-                    Customer-Profile resource changes status.
+                  description: The email address that will receive updates when the Customer-Profile resource changes status.
                   type: string
                 FriendlyName:
                   description: The string that you assigned to describe the resource.
@@ -806,8 +772,7 @@ paths:
       description: Retrieve a list of all End-User Types.
       operationId: ListEndUserType
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -895,8 +860,7 @@ paths:
       description: Retrieve a list of all End User for an account.
       operationId: ListEndUser
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -950,15 +914,13 @@ paths:
             schema:
               properties:
                 Attributes:
-                  description: The set of parameters that are the attributes of the End User
-                    resource which are derived End User Types.
+                  description: The set of parameters that are the attributes of the End User resource which are derived End User Types.
                   type: object
                 FriendlyName:
                   description: The string that you assigned to describe the resource.
                   type: string
                 Type:
-                  description: The type of end user of the Bundle resource - can be `individual`
-                    or `business`.
+                  description: The type of end user of the Bundle resource - can be `individual` or `business`.
                   type: string
               required:
                 - FriendlyName
@@ -988,8 +950,7 @@ paths:
       description: Delete a specific End User.
       operationId: DeleteEndUser
       parameters:
-        - description: The unique string created by Twilio to identify the End User
-            resource.
+        - description: The unique string created by Twilio to identify the End User resource.
           in: path
           name: Sid
           required: true
@@ -1010,8 +971,7 @@ paths:
       description: Fetch specific End User Instance.
       operationId: FetchEndUser
       parameters:
-        - description: The unique string created by Twilio to identify the End User
-            resource.
+        - description: The unique string created by Twilio to identify the End User resource.
           in: path
           name: Sid
           required: true
@@ -1035,8 +995,7 @@ paths:
       description: Update an existing End User.
       operationId: UpdateEndUser
       parameters:
-        - description: The unique string created by Twilio to identify the End User
-            resource.
+        - description: The unique string created by Twilio to identify the End User resource.
           in: path
           name: Sid
           required: true
@@ -1051,8 +1010,7 @@ paths:
             schema:
               properties:
                 Attributes:
-                  description: The set of parameters that are the attributes of the End User
-                    resource which are derived End User Types.
+                  description: The set of parameters that are the attributes of the End User resource which are derived End User Types.
                   type: object
                 FriendlyName:
                   description: The string that you assigned to describe the resource.
@@ -1083,8 +1041,7 @@ paths:
       description: Retrieve a list of all Policys.
       operationId: ListPolicies
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1175,8 +1132,7 @@ paths:
       description: Retrieve a list of all Supporting Document Types.
       operationId: ListSupportingDocumentType
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1234,8 +1190,7 @@ paths:
       description: Fetch a specific Supporting Document Type Instance.
       operationId: FetchSupportingDocumentType
       parameters:
-        - description: The unique string that identifies the Supporting Document Type
-            resource.
+        - description: The unique string that identifies the Supporting Document Type resource.
           in: path
           name: Sid
           required: true
@@ -1265,8 +1220,7 @@ paths:
       description: Retrieve a list of all Supporting Document for an account.
       operationId: ListSupportingDocument
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1320,9 +1274,7 @@ paths:
             schema:
               properties:
                 Attributes:
-                  description: The set of parameters that are the attributes of the Supporting
-                    Documents resource which are derived Supporting Document
-                    Types.
+                  description: The set of parameters that are the attributes of the Supporting Documents resource which are derived Supporting Document Types.
                   type: object
                 FriendlyName:
                   description: The string that you assigned to describe the resource.
@@ -1358,8 +1310,7 @@ paths:
       description: Delete a specific Supporting Document.
       operationId: DeleteSupportingDocument
       parameters:
-        - description: The unique string created by Twilio to identify the Supporting
-            Document resource.
+        - description: The unique string created by Twilio to identify the Supporting Document resource.
           in: path
           name: Sid
           required: true
@@ -1380,8 +1331,7 @@ paths:
       description: Fetch specific Supporting Document Instance.
       operationId: FetchSupportingDocument
       parameters:
-        - description: The unique string created by Twilio to identify the Supporting
-            Document resource.
+        - description: The unique string created by Twilio to identify the Supporting Document resource.
           in: path
           name: Sid
           required: true
@@ -1405,8 +1355,7 @@ paths:
       description: Update an existing Supporting Document.
       operationId: UpdateSupportingDocument
       parameters:
-        - description: The unique string created by Twilio to identify the Supporting
-            Document resource.
+        - description: The unique string created by Twilio to identify the Supporting Document resource.
           in: path
           name: Sid
           required: true
@@ -1421,9 +1370,7 @@ paths:
             schema:
               properties:
                 Attributes:
-                  description: The set of parameters that are the attributes of the Supporting
-                    Document resource which are derived Supporting Document
-                    Types.
+                  description: The set of parameters that are the attributes of the Supporting Document resource which are derived Supporting Document Types.
                   type: object
                 FriendlyName:
                   description: The string that you assigned to describe the resource.
@@ -1470,8 +1417,7 @@ paths:
           name: FriendlyName
           schema:
             type: string
-        - description: The unique string of a policy that is associated to the
-            Customer-Profile resource.
+        - description: The unique string of a policy that is associated to the Customer-Profile resource.
           in: query
           name: PolicySid
           schema:
@@ -1479,8 +1425,7 @@ paths:
             minLength: 34
             pattern: ^RN[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1534,15 +1479,13 @@ paths:
             schema:
               properties:
                 Email:
-                  description: The email address that will receive updates when the
-                    Customer-Profile resource changes status.
+                  description: The email address that will receive updates when the Customer-Profile resource changes status.
                   type: string
                 FriendlyName:
                   description: The string that you assigned to describe the resource.
                   type: string
                 PolicySid:
-                  description: The unique string of a policy that is associated to the
-                    Customer-Profile resource.
+                  description: The unique string of a policy that is associated to the Customer-Profile resource.
                   maxLength: 34
                   minLength: 34
                   pattern: ^RN[0-9a-fA-F]{32}$
@@ -1581,8 +1524,7 @@ paths:
       description: Delete a specific Customer-Profile.
       operationId: DeleteTrustProduct
       parameters:
-        - description: The unique string that we created to identify the Customer-Profile
-            resource.
+        - description: The unique string that we created to identify the Customer-Profile resource.
           in: path
           name: Sid
           required: true
@@ -1603,8 +1545,7 @@ paths:
       description: Fetch a specific Customer-Profile instance.
       operationId: FetchTrustProduct
       parameters:
-        - description: The unique string that we created to identify the Customer-Profile
-            resource.
+        - description: The unique string that we created to identify the Customer-Profile resource.
           in: path
           name: Sid
           required: true
@@ -1628,8 +1569,7 @@ paths:
       description: Updates a Customer-Profile in an account.
       operationId: UpdateTrustProduct
       parameters:
-        - description: The unique string that we created to identify the Customer-Profile
-            resource.
+        - description: The unique string that we created to identify the Customer-Profile resource.
           in: path
           name: Sid
           required: true
@@ -1644,8 +1584,7 @@ paths:
             schema:
               properties:
                 Email:
-                  description: The email address that will receive updates when the
-                    Customer-Profile resource changes status.
+                  description: The email address that will receive updates when the Customer-Profile resource changes status.
                   type: string
                 FriendlyName:
                   description: The string that you assigned to describe the resource.
@@ -1690,8 +1629,7 @@ paths:
       description: Retrieve a list of all Assigned Items for an account.
       operationId: ListTrustProductChannelEndpointAssignment
       parameters:
-        - description: The unique string that we created to identify the CustomerProfile
-            resource.
+        - description: The unique string that we created to identify the CustomerProfile resource.
           in: path
           name: TrustProductSid
           required: true
@@ -1713,8 +1651,7 @@ paths:
           name: ChannelEndpointSids
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1750,8 +1687,7 @@ paths:
                     type: object
                   results:
                     items:
-                      $ref: "#/components/schemas/trusthub.v1.trust_product.trust_product_channel_end\
-                        point_assignment"
+                      $ref: "#/components/schemas/trusthub.v1.trust_product.trust_product_channel_endpoint_assignment"
                     type: array
                 title: ListTrustProductChannelEndpointAssignmentResponse
                 type: object
@@ -1764,8 +1700,7 @@ paths:
       description: Create a new Assigned Item.
       operationId: CreateTrustProductChannelEndpointAssignment
       parameters:
-        - description: The unique string that we created to identify the CustomerProfile
-            resource.
+        - description: The unique string that we created to identify the CustomerProfile resource.
           in: path
           name: TrustProductSid
           required: true
@@ -1798,8 +1733,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/trusthub.v1.trust_product.trust_product_channel_end\
-                  point_assignment"
+                $ref: "#/components/schemas/trusthub.v1.trust_product.trust_product_channel_endpoint_assignment"
           description: Created
       security:
         - accountSid_authToken: []
@@ -1816,8 +1750,7 @@ paths:
       description: Remove an Assignment Item Instance.
       operationId: DeleteTrustProductChannelEndpointAssignment
       parameters:
-        - description: The unique string that we created to identify the CustomerProfile
-            resource.
+        - description: The unique string that we created to identify the CustomerProfile resource.
           in: path
           name: TrustProductSid
           required: true
@@ -1847,8 +1780,7 @@ paths:
       description: Fetch specific Assigned Item Instance.
       operationId: FetchTrustProductChannelEndpointAssignment
       parameters:
-        - description: The unique string that we created to identify the CustomerProfile
-            resource.
+        - description: The unique string that we created to identify the CustomerProfile resource.
           in: path
           name: TrustProductSid
           required: true
@@ -1871,8 +1803,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/trusthub.v1.trust_product.trust_product_channel_end\
-                  point_assignment"
+                $ref: "#/components/schemas/trusthub.v1.trust_product.trust_product_channel_endpoint_assignment"
           description: OK
       security:
         - accountSid_authToken: []
@@ -1890,8 +1821,7 @@ paths:
       description: Retrieve a list of all Assigned Items for an account.
       operationId: ListTrustProductEntityAssignment
       parameters:
-        - description: The unique string that we created to identify the TrustProduct
-            resource.
+        - description: The unique string that we created to identify the TrustProduct resource.
           in: path
           name: TrustProductSid
           required: true
@@ -1900,8 +1830,7 @@ paths:
             minLength: 34
             pattern: ^BU[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1937,8 +1866,7 @@ paths:
                     type: object
                   results:
                     items:
-                      $ref: "#/components/schemas/trusthub.v1.trust_product.trust_product_entity_assi\
-                        gnment"
+                      $ref: "#/components/schemas/trusthub.v1.trust_product.trust_product_entity_assignment"
                     type: array
                 title: ListTrustProductEntityAssignmentResponse
                 type: object
@@ -1951,8 +1879,7 @@ paths:
       description: Create a new Assigned Item.
       operationId: CreateTrustProductEntityAssignment
       parameters:
-        - description: The unique string that we created to identify the TrustProduct
-            resource.
+        - description: The unique string that we created to identify the TrustProduct resource.
           in: path
           name: TrustProductSid
           required: true
@@ -1967,8 +1894,7 @@ paths:
             schema:
               properties:
                 ObjectSid:
-                  description: The SID of an object bag that holds information of the different
-                    items.
+                  description: The SID of an object bag that holds information of the different items.
                   maxLength: 34
                   minLength: 34
                   pattern: ^[a-zA-Z]{2}[0-9a-fA-F]{32}$
@@ -1982,8 +1908,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/trusthub.v1.trust_product.trust_product_entity_assi\
-                  gnment"
+                $ref: "#/components/schemas/trusthub.v1.trust_product.trust_product_entity_assignment"
           description: Created
       security:
         - accountSid_authToken: []
@@ -2000,8 +1925,7 @@ paths:
       description: Remove an Assignment Item Instance.
       operationId: DeleteTrustProductEntityAssignment
       parameters:
-        - description: The unique string that we created to identify the TrustProduct
-            resource.
+        - description: The unique string that we created to identify the TrustProduct resource.
           in: path
           name: TrustProductSid
           required: true
@@ -2031,8 +1955,7 @@ paths:
       description: Fetch specific Assigned Item Instance.
       operationId: FetchTrustProductEntityAssignment
       parameters:
-        - description: The unique string that we created to identify the TrustProduct
-            resource.
+        - description: The unique string that we created to identify the TrustProduct resource.
           in: path
           name: TrustProductSid
           required: true
@@ -2055,8 +1978,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/trusthub.v1.trust_product.trust_product_entity_assi\
-                  gnment"
+                $ref: "#/components/schemas/trusthub.v1.trust_product.trust_product_entity_assignment"
           description: OK
       security:
         - accountSid_authToken: []
@@ -2074,8 +1996,7 @@ paths:
       description: Retrieve a list of Evaluations associated to the trust_product resource.
       operationId: ListTrustProductEvaluation
       parameters:
-        - description: The unique string that we created to identify the trust_product
-            resource.
+        - description: The unique string that we created to identify the trust_product resource.
           in: path
           name: TrustProductSid
           required: true
@@ -2084,8 +2005,7 @@ paths:
             minLength: 34
             pattern: ^BU[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -2134,8 +2054,7 @@ paths:
       description: Create a new Evaluation
       operationId: CreateTrustProductEvaluation
       parameters:
-        - description: The unique string that we created to identify the trust_product
-            resource.
+        - description: The unique string that we created to identify the trust_product resource.
           in: path
           name: TrustProductSid
           required: true
@@ -2150,8 +2069,7 @@ paths:
             schema:
               properties:
                 PolicySid:
-                  description: The unique string of a policy that is associated to the
-                    customer_profile resource.
+                  description: The unique string of a policy that is associated to the customer_profile resource.
                   maxLength: 34
                   minLength: 34
                   pattern: ^RN[0-9a-fA-F]{32}$
@@ -2183,8 +2101,7 @@ paths:
       description: Fetch specific Evaluation Instance.
       operationId: FetchTrustProductEvaluation
       parameters:
-        - description: The unique string that we created to identify the trust_product
-            resource.
+        - description: The unique string that we created to identify the trust_product resource.
           in: path
           name: TrustProductSid
           required: true
@@ -2287,8 +2204,7 @@ components:
           nullable: true
           type: string
         valid_until:
-          description: The ISO 8601 date and time in GMT when the resource will be valid
-            until.
+          description: The ISO 8601 date and time in GMT when the resource will be valid until.
           format: date-time
           nullable: true
           type: string
@@ -2599,13 +2515,11 @@ components:
           nullable: true
           type: string
         machine_name:
-          description: The machine-readable description of the Supporting Document Type
-            resource
+          description: The machine-readable description of the Supporting Document Type resource
           nullable: true
           type: string
         sid:
-          description: The unique string that identifies the Supporting Document Type
-            resource
+          description: The unique string that identifies the Supporting Document Type resource
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2683,8 +2597,7 @@ components:
           nullable: true
           type: string
         valid_until:
-          description: The ISO 8601 date and time in GMT when the resource will be valid
-            until.
+          description: The ISO 8601 date and time in GMT when the resource will be valid until.
           format: date-time
           nullable: true
           type: string

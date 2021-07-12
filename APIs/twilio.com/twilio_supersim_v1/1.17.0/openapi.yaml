@@ -36,10 +36,7 @@ paths:
           name: Sim
           schema:
             type: string
-        - description: "The status of the Command. Can be: `queued`, `sent`, `delivered`,
-            `received` or `failed`. See the [Command Status
-            Values](https://www.twilio.com/docs/wireless/api/command-resource#s\
-            tatus-values) for a description of each."
+        - description: "The status of the Command. Can be: `queued`, `sent`, `delivered`, `received` or `failed`. See the [Command Status Values](https://www.twilio.com/docs/wireless/api/command-resource#status-values) for a description of each."
           in: query
           name: Status
           schema:
@@ -50,9 +47,7 @@ paths:
               - received
               - failed
             type: string
-        - description: The direction of the Command. Can be `to_sim` or `from_sim`. The
-            value of `to_sim` is synonymous with the term `mobile terminated`,
-            and `from_sim` is synonymous with the term `mobile originated`.
+        - description: The direction of the Command. Can be `to_sim` or `from_sim`. The value of `to_sim` is synonymous with the term `mobile terminated`, and `from_sim` is synonymous with the term `mobile originated`.
           in: query
           name: Direction
           schema:
@@ -60,8 +55,7 @@ paths:
               - to_sim
               - from_sim
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -115,8 +109,7 @@ paths:
             schema:
               properties:
                 CallbackMethod:
-                  description: "The HTTP method we should use to call `callback_url`. Can be:
-                    `GET` or `POST` and the default is POST."
+                  description: "The HTTP method we should use to call `callback_url`. Can be: `GET` or `POST` and the default is POST."
                   enum:
                     - HEAD
                     - GET
@@ -126,17 +119,14 @@ paths:
                     - DELETE
                   type: string
                 CallbackUrl:
-                  description: The URL we should call using the `callback_method` after we have
-                    sent the command.
+                  description: The URL we should call using the `callback_method` after we have sent the command.
                   format: uri
                   type: string
                 Command:
                   description: The message body of the command.
                   type: string
                 Sim:
-                  description: The `sid` or `unique_name` of the
-                    [SIM](https://www.twilio.com/docs/wireless/api/sim-resource)
-                    to send the Command to.
+                  description: The `sid` or `unique_name` of the [SIM](https://www.twilio.com/docs/wireless/api/sim-resource) to send the Command to.
                   maxLength: 34
                   minLength: 34
                   pattern: ^HS[0-9a-fA-F]{32}$
@@ -205,14 +195,12 @@ paths:
       description: Retrieve a list of Fleets from your account.
       operationId: ListFleet
       parameters:
-        - description: The SID or unique name of the Network Access Profile that controls
-            which cellular networks the Fleet's SIMs can connect to.
+        - description: The SID or unique name of the Network Access Profile that controls which cellular networks the Fleet's SIMs can connect to.
           in: query
           name: NetworkAccessProfile
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -266,14 +254,10 @@ paths:
             schema:
               properties:
                 CommandsEnabled:
-                  description: Defines whether SIMs in the Fleet are capable of sending and
-                    receiving machine-to-machine SMS via Commands. Defaults to
-                    `true`.
+                  description: Defines whether SIMs in the Fleet are capable of sending and receiving machine-to-machine SMS via Commands. Defaults to `true`.
                   type: boolean
                 CommandsMethod:
-                  description: A string representing the HTTP method to use when making a request
-                    to `commands_url`. Can be one of `POST` or `GET`. Defaults
-                    to `POST`.
+                  description: A string representing the HTTP method to use when making a request to `commands_url`. Can be one of `POST` or `GET`. Defaults to `POST`.
                   enum:
                     - HEAD
                     - GET
@@ -283,37 +267,23 @@ paths:
                     - DELETE
                   type: string
                 CommandsUrl:
-                  description: The URL that will receive a webhook when a Super SIM in the Fleet
-                    is used to send an SMS from your device to the Commands
-                    number. Your server should respond with an HTTP status code
-                    in the 200 range; any response body will be ignored.
+                  description: The URL that will receive a webhook when a Super SIM in the Fleet is used to send an SMS from your device to the Commands number. Your server should respond with an HTTP status code in the 200 range; any response body will be ignored.
                   format: uri
                   type: string
                 DataEnabled:
-                  description: Defines whether SIMs in the Fleet are capable of using
-                    2G/3G/4G/LTE/CAT-M data connectivity. Defaults to `true`.
+                  description: Defines whether SIMs in the Fleet are capable of using 2G/3G/4G/LTE/CAT-M data connectivity. Defaults to `true`.
                   type: boolean
                 DataLimit:
-                  description: The total data usage (download and upload combined) in Megabytes
-                    that each Sim resource assigned to the Fleet resource can
-                    consume during a billing period (normally one month). Value
-                    must be between 1MB (1) and 2TB (2,000,000). Defaults to 1GB
-                    (1,000).
+                  description: The total data usage (download and upload combined) in Megabytes that each Sim resource assigned to the Fleet resource can consume during a billing period (normally one month). Value must be between 1MB (1) and 2TB (2,000,000). Defaults to 1GB (1,000).
                   type: integer
                 NetworkAccessProfile:
-                  description: The SID or unique name of the Network Access Profile that will
-                    control which cellular networks the Fleet's SIMs can connect
-                    to.
+                  description: The SID or unique name of the Network Access Profile that will control which cellular networks the Fleet's SIMs can connect to.
                   type: string
                 SmsCommandsEnabled:
-                  description: Defines whether SIMs in the Fleet are capable of sending and
-                    receiving machine-to-machine SMS via Commands. Defaults to
-                    `true`.
+                  description: Defines whether SIMs in the Fleet are capable of sending and receiving machine-to-machine SMS via Commands. Defaults to `true`.
                   type: boolean
                 SmsCommandsMethod:
-                  description: A string representing the HTTP method to use when making a request
-                    to `sms_commands_url`. Can be one of `POST` or `GET`.
-                    Defaults to `POST`.
+                  description: A string representing the HTTP method to use when making a request to `sms_commands_url`. Can be one of `POST` or `GET`. Defaults to `POST`.
                   enum:
                     - HEAD
                     - GET
@@ -323,16 +293,11 @@ paths:
                     - DELETE
                   type: string
                 SmsCommandsUrl:
-                  description: The URL that will receive a webhook when a Super SIM in the Fleet
-                    is used to send an SMS from your device to the SMS Commands
-                    number. Your server should respond with an HTTP status code
-                    in the 200 range; any response body will be ignored.
+                  description: The URL that will receive a webhook when a Super SIM in the Fleet is used to send an SMS from your device to the SMS Commands number. Your server should respond with an HTTP status code in the 200 range; any response body will be ignored.
                   format: uri
                   type: string
                 UniqueName:
-                  description: An application-defined string that uniquely identifies the
-                    resource. It can be used in place of the resource's `sid` in
-                    the URL to address the resource.
+                  description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource.
                   type: string
               required:
                 - NetworkAccessProfile
@@ -381,8 +346,7 @@ paths:
       x-maturity:
         - Beta
     post:
-      description: Updates the given properties of a Super SIM Fleet instance from
-        your account.
+      description: Updates the given properties of a Super SIM Fleet instance from your account.
       operationId: UpdateFleet
       parameters:
         - description: The SID of the Fleet resource to update.
@@ -397,9 +361,7 @@ paths:
             schema:
               properties:
                 CommandsMethod:
-                  description: A string representing the HTTP method to use when making a request
-                    to `commands_url`. Can be one of `POST` or `GET`. Defaults
-                    to `POST`.
+                  description: A string representing the HTTP method to use when making a request to `commands_url`. Can be one of `POST` or `GET`. Defaults to `POST`.
                   enum:
                     - HEAD
                     - GET
@@ -409,21 +371,14 @@ paths:
                     - DELETE
                   type: string
                 CommandsUrl:
-                  description: The URL that will receive a webhook when a Super SIM in the Fleet
-                    is used to send an SMS from your device to the Commands
-                    number. Your server should respond with an HTTP status code
-                    in the 200 range; any response body will be ignored.
+                  description: The URL that will receive a webhook when a Super SIM in the Fleet is used to send an SMS from your device to the Commands number. Your server should respond with an HTTP status code in the 200 range; any response body will be ignored.
                   format: uri
                   type: string
                 NetworkAccessProfile:
-                  description: The SID or unique name of the Network Access Profile that will
-                    control which cellular networks the Fleet's SIMs can connect
-                    to.
+                  description: The SID or unique name of the Network Access Profile that will control which cellular networks the Fleet's SIMs can connect to.
                   type: string
                 SmsCommandsMethod:
-                  description: A string representing the HTTP method to use when making a request
-                    to `sms_commands_url`. Can be one of `POST` or `GET`.
-                    Defaults to `POST`.
+                  description: A string representing the HTTP method to use when making a request to `sms_commands_url`. Can be one of `POST` or `GET`. Defaults to `POST`.
                   enum:
                     - HEAD
                     - GET
@@ -433,16 +388,11 @@ paths:
                     - DELETE
                   type: string
                 SmsCommandsUrl:
-                  description: The URL that will receive a webhook when a Super SIM in the Fleet
-                    is used to send an SMS from your device to the SMS Commands
-                    number. Your server should respond with an HTTP status code
-                    in the 200 range; any response body will be ignored.
+                  description: The URL that will receive a webhook when a Super SIM in the Fleet is used to send an SMS from your device to the SMS Commands number. Your server should respond with an HTTP status code in the 200 range; any response body will be ignored.
                   format: uri
                   type: string
                 UniqueName:
-                  description: An application-defined string that uniquely identifies the
-                    resource. It can be used in place of the resource's `sid` in
-                    the URL to address the resource.
+                  description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource.
                   type: string
               title: UpdateFleetRequest
               type: object
@@ -471,8 +421,7 @@ paths:
       description: Retrieve a list of Network Access Profiles from your account.
       operationId: ListNetworkAccessProfile
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -526,15 +475,12 @@ paths:
             schema:
               properties:
                 Networks:
-                  description: List of Network SIDs that this Network Access Profile will allow
-                    connections to.
+                  description: List of Network SIDs that this Network Access Profile will allow connections to.
                   items:
                     type: string
                   type: array
                 UniqueName:
-                  description: An application-defined string that uniquely identifies the
-                    resource. It can be used in place of the resource's `sid` in
-                    the URL to address the resource.
+                  description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource.
                   type: string
               title: CreateNetworkAccessProfileRequest
               type: object
@@ -563,15 +509,13 @@ paths:
       description: Retrieve a list of Network Access Profile resource's Network resource.
       operationId: ListNetworkAccessProfileNetwork
       parameters:
-        - description: The unique string that identifies the Network Access Profile
-            resource.
+        - description: The unique string that identifies the Network Access Profile resource.
           in: path
           name: NetworkAccessProfileSid
           required: true
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -607,8 +551,7 @@ paths:
                     type: object
                   networks:
                     items:
-                      $ref: "#/components/schemas/supersim.v1.network_access_profile.network_access_p\
-                        rofile_network"
+                      $ref: "#/components/schemas/supersim.v1.network_access_profile.network_access_profile_network"
                     type: array
                 title: ListNetworkAccessProfileNetworkResponse
                 type: object
@@ -621,8 +564,7 @@ paths:
       description: Add a Network resource to the Network Access Profile resource.
       operationId: CreateNetworkAccessProfileNetwork
       parameters:
-        - description: The unique string that identifies the Network Access Profile
-            resource.
+        - description: The unique string that identifies the Network Access Profile resource.
           in: path
           name: NetworkAccessProfileSid
           required: true
@@ -634,8 +576,7 @@ paths:
             schema:
               properties:
                 Network:
-                  description: The SID of the Network resource to be added to the Network Access
-                    Profile resource.
+                  description: The SID of the Network resource to be added to the Network Access Profile resource.
                   maxLength: 34
                   minLength: 34
                   pattern: ^HW[0-9a-fA-F]{32}$
@@ -649,8 +590,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/supersim.v1.network_access_profile.network_access_p\
-                  rofile_network"
+                $ref: "#/components/schemas/supersim.v1.network_access_profile.network_access_profile_network"
           description: Created
       security:
         - accountSid_authToken: []
@@ -667,8 +607,7 @@ paths:
       description: Remove a Network resource from the Network Access Profile resource's.
       operationId: DeleteNetworkAccessProfileNetwork
       parameters:
-        - description: The unique string that identifies the Network Access Profile
-            resource.
+        - description: The unique string that identifies the Network Access Profile resource.
           in: path
           name: NetworkAccessProfileSid
           required: true
@@ -677,8 +616,7 @@ paths:
             minLength: 34
             pattern: ^HA[0-9a-fA-F]{32}$
             type: string
-        - description: The SID of the Network resource to be removed from the Network
-            Access Profile resource.
+        - description: The SID of the Network resource to be removed from the Network Access Profile resource.
           in: path
           name: Sid
           required: true
@@ -699,8 +637,7 @@ paths:
       description: Fetch a Network Access Profile resource's Network resource.
       operationId: FetchNetworkAccessProfileNetwork
       parameters:
-        - description: The unique string that identifies the Network Access Profile
-            resource.
+        - description: The unique string that identifies the Network Access Profile resource.
           in: path
           name: NetworkAccessProfileSid
           required: true
@@ -720,8 +657,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/supersim.v1.network_access_profile.network_access_p\
-                  rofile_network"
+                $ref: "#/components/schemas/supersim.v1.network_access_profile.network_access_profile_network"
           description: OK
       security:
         - accountSid_authToken: []
@@ -801,27 +737,22 @@ paths:
       description: Retrieve a list of Network resources.
       operationId: ListNetwork
       parameters:
-        - description: The [ISO country
-            code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the
-            Network resources to read.
+        - description: The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the Network resources to read.
           in: query
           name: IsoCountry
           schema:
             type: string
-        - description: The 'mobile country code' of a country. Network resources with this
-            `mcc` in their `identifiers` will be read.
+        - description: The 'mobile country code' of a country. Network resources with this `mcc` in their `identifiers` will be read.
           in: query
           name: Mcc
           schema:
             type: string
-        - description: The 'mobile network code' of a mobile operator network. Network
-            resources with this `mnc` in their `identifiers` will be read.
+        - description: The 'mobile network code' of a mobile operator network. Network resources with this `mnc` in their `identifiers` will be read.
           in: query
           name: Mnc
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -910,8 +841,7 @@ paths:
       description: Retrieve a list of Super SIMs from your account.
       operationId: ListSim
       parameters:
-        - description: The status of the Sim resources to read. Can be `new`, `ready`,
-            `active`, `inactive`, or `scheduled`.
+        - description: The status of the Sim resources to read. Can be `new`, `ready`, `active`, `inactive`, or `scheduled`.
           in: query
           name: Status
           schema:
@@ -922,22 +852,17 @@ paths:
               - inactive
               - scheduled
             type: string
-        - description: The SID or unique name of the Fleet to which a list of Sims are
-            assigned.
+        - description: The SID or unique name of the Fleet to which a list of Sims are assigned.
           in: query
           name: Fleet
           schema:
             type: string
-        - description: The
-            [ICCID](https://en.wikipedia.org/wiki/Subscriber_identity_module#ICCID)
-            associated with a Super SIM to filter the list by. Passing this
-            parameter will always return a list containing zero or one SIMs.
+        - description: The [ICCID](https://en.wikipedia.org/wiki/Subscriber_identity_module#ICCID) associated with a Super SIM to filter the list by. Passing this parameter will always return a list containing zero or one SIMs.
           in: query
           name: Iccid
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -991,9 +916,7 @@ paths:
             schema:
               properties:
                 Iccid:
-                  description: The
-                    [ICCID](https://en.wikipedia.org/wiki/Subscriber_identity_module#ICCID)
-                    of the Super SIM to be added to your Account.
+                  description: The [ICCID](https://en.wikipedia.org/wiki/Subscriber_identity_module#ICCID) of the Super SIM to be added to your Account.
                   type: string
                 RegistrationCode:
                   description: The 10-digit code required to claim the Super SIM for your Account.
@@ -1061,14 +984,10 @@ paths:
             schema:
               properties:
                 AccountSid:
-                  description: The SID of the Account to which the Sim resource should belong. The
-                    Account SID can only be that of the requesting Account or
-                    that of a Subaccount of the requesting Account. Only valid
-                    when the Sim resource's status is new.
+                  description: The SID of the Account to which the Sim resource should belong. The Account SID can only be that of the requesting Account or that of a Subaccount of the requesting Account. Only valid when the Sim resource's status is new.
                   type: string
                 CallbackMethod:
-                  description: "The HTTP method we should use to call `callback_url`. Can be:
-                    `GET` or `POST` and the default is POST."
+                  description: "The HTTP method we should use to call `callback_url`. Can be: `GET` or `POST` and the default is POST."
                   enum:
                     - HEAD
                     - GET
@@ -1078,28 +997,21 @@ paths:
                     - DELETE
                   type: string
                 CallbackUrl:
-                  description: The URL we should call using the `callback_method` after an
-                    asynchronous update has finished.
+                  description: The URL we should call using the `callback_method` after an asynchronous update has finished.
                   format: uri
                   type: string
                 Fleet:
-                  description: The SID or unique name of the Fleet to which the SIM resource
-                    should be assigned.
+                  description: The SID or unique name of the Fleet to which the SIM resource should be assigned.
                   type: string
                 Status:
-                  description: "The new status of the resource. Can be: `ready`, `active`, or
-                    `inactive`. See the [Super SIM Status
-                    Values](https://www.twilio.com/docs/iot/supersim/api/sim-re\
-                    source#status-values) for more info."
+                  description: "The new status of the resource. Can be: `ready`, `active`, or `inactive`. See the [Super SIM Status Values](https://www.twilio.com/docs/iot/supersim/api/sim-resource#status-values) for more info."
                   enum:
                     - ready
                     - active
                     - inactive
                   type: string
                 UniqueName:
-                  description: An application-defined string that uniquely identifies the
-                    resource. It can be used in place of the resource's `sid` in
-                    the URL to address the resource.
+                  description: An application-defined string that uniquely identifies the resource. It can be used in place of the resource's `sid` in the URL to address the resource.
                   type: string
               title: UpdateSimRequest
               type: object
@@ -1134,16 +1046,12 @@ paths:
       description: Retrieve a list of SMS Commands from your account.
       operationId: ListSmsCommand
       parameters:
-        - description: The SID or unique name of the Sim resource that SMS Command was
-            sent to or from.
+        - description: The SID or unique name of the Sim resource that SMS Command was sent to or from.
           in: query
           name: Sim
           schema:
             type: string
-        - description: "The status of the SMS Command. Can be: `queued`, `sent`,
-            `delivered`, `received` or `failed`. See the [SMS Command Status
-            Values](https://www.twilio.com/docs/wireless/api/smscommand-resourc\
-            e#status-values) for a description of each."
+        - description: "The status of the SMS Command. Can be: `queued`, `sent`, `delivered`, `received` or `failed`. See the [SMS Command Status Values](https://www.twilio.com/docs/wireless/api/smscommand-resource#status-values) for a description of each."
           in: query
           name: Status
           schema:
@@ -1154,10 +1062,7 @@ paths:
               - received
               - failed
             type: string
-        - description: The direction of the SMS Command. Can be `to_sim` or `from_sim`.
-            The value of `to_sim` is synonymous with the term `mobile
-            terminated`, and `from_sim` is synonymous with the term `mobile
-            originated`.
+        - description: The direction of the SMS Command. Can be `to_sim` or `from_sim`. The value of `to_sim` is synonymous with the term `mobile terminated`, and `from_sim` is synonymous with the term `mobile originated`.
           in: query
           name: Direction
           schema:
@@ -1165,8 +1070,7 @@ paths:
               - to_sim
               - from_sim
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1220,8 +1124,7 @@ paths:
             schema:
               properties:
                 CallbackMethod:
-                  description: "The HTTP method we should use to call `callback_url`. Can be:
-                    `GET` or `POST` and the default is POST."
+                  description: "The HTTP method we should use to call `callback_url`. Can be: `GET` or `POST` and the default is POST."
                   enum:
                     - HEAD
                     - GET
@@ -1231,17 +1134,14 @@ paths:
                     - DELETE
                   type: string
                 CallbackUrl:
-                  description: The URL we should call using the `callback_method` after we have
-                    sent the command.
+                  description: The URL we should call using the `callback_method` after we have sent the command.
                   format: uri
                   type: string
                 Payload:
                   description: The message body of the SMS Command.
                   type: string
                 Sim:
-                  description: The `sid` or `unique_name` of the
-                    [SIM](https://www.twilio.com/docs/wireless/api/sim-resource)
-                    to send the SMS Command to.
+                  description: The `sid` or `unique_name` of the [SIM](https://www.twilio.com/docs/wireless/api/sim-resource) to send the SMS Command to.
                   maxLength: 34
                   minLength: 34
                   pattern: ^HS[0-9a-fA-F]{32}$
@@ -1310,21 +1210,17 @@ paths:
       description: List UsageRecords
       operationId: ListUsageRecord
       parameters:
-        - description: SID or unique name of a Sim resource. Only show UsageRecords
-            representing usage incurred by this Super SIM.
+        - description: SID or unique name of a Sim resource. Only show UsageRecords representing usage incurred by this Super SIM.
           in: query
           name: Sim
           schema:
             type: string
-        - description: SID or unique name of a Fleet resource. Only show UsageRecords
-            representing usage for Super SIMs belonging to this Fleet resource
-            at the time the usage occurred.
+        - description: SID or unique name of a Fleet resource. Only show UsageRecords representing usage for Super SIMs belonging to this Fleet resource at the time the usage occurred.
           in: query
           name: Fleet
           schema:
             type: string
-        - description: SID of a Network resource. Only show UsageRecords representing
-            usage on this network.
+        - description: SID of a Network resource. Only show UsageRecords representing usage on this network.
           in: query
           name: Network
           schema:
@@ -1332,16 +1228,12 @@ paths:
             minLength: 34
             pattern: ^HW[0-9a-fA-F]{32}$
             type: string
-        - description: Alpha-2 ISO Country Code. Only show UsageRecords representing usage
-            in this country.
+        - description: Alpha-2 ISO Country Code. Only show UsageRecords representing usage in this country.
           in: query
           name: IsoCountry
           schema:
             type: string
-        - description: "Dimension over which to aggregate usage records. Can be: `sim`,
-            `fleet`, `network`, `isoCountry`. Default is to not aggregate across
-            any of these dimensions, UsageRecords will be aggregated into the
-            time buckets described by the `Granularity` parameter."
+        - description: "Dimension over which to aggregate usage records. Can be: `sim`, `fleet`, `network`, `isoCountry`. Default is to not aggregate across any of these dimensions, UsageRecords will be aggregated into the time buckets described by the `Granularity` parameter."
           in: query
           name: Group
           schema:
@@ -1351,9 +1243,7 @@ paths:
               - network
               - isoCountry
             type: string
-        - description: "Time-based grouping that UsageRecords should be aggregated by. Can
-            be: `hour`, `day`, or `all`. Default is `all`. `all` returns one
-            UsageRecord that describes the usage for the entire period."
+        - description: "Time-based grouping that UsageRecords should be aggregated by. Can be: `hour`, `day`, or `all`. Default is `all`. `all` returns one UsageRecord that describes the usage for the entire period."
           in: query
           name: Granularity
           schema:
@@ -1362,24 +1252,19 @@ paths:
               - day
               - all
             type: string
-        - description: Only include usage that occurred at or after this time, specified
-            in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
-            Default is one month before the `end_time`.
+        - description: Only include usage that occurred at or after this time, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. Default is one month before the `end_time`.
           in: query
           name: StartTime
           schema:
             format: date-time
             type: string
-        - description: Only include usage that occurred before this time, specified in
-            [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. Default
-            is the current time.
+        - description: Only include usage that occurred before this time, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. Default is the current time.
           in: query
           name: EndTime
           schema:
             format: date-time
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1503,13 +1388,11 @@ components:
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         commands_enabled:
-          description: Defines whether SIMs in the Fleet are capable of sending and
-            receiving machine-to-machine SMS via Commands
+          description: Defines whether SIMs in the Fleet are capable of sending and receiving machine-to-machine SMS via Commands
           nullable: true
           type: boolean
         commands_method:
-          description: A string representing the HTTP method to use when making a request
-            to `commands_url`
+          description: A string representing the HTTP method to use when making a request to `commands_url`
           enum:
             - HEAD
             - GET
@@ -1520,19 +1403,16 @@ components:
           nullable: true
           type: string
         commands_url:
-          description: The URL that will receive a webhook when a Super SIM in the Fleet
-            is used to send an SMS from your device to the Commands number
+          description: The URL that will receive a webhook when a Super SIM in the Fleet is used to send an SMS from your device to the Commands number
           format: uri
           nullable: true
           type: string
         data_enabled:
-          description: Defines whether SIMs in the Fleet are capable of using data
-            connectivity
+          description: Defines whether SIMs in the Fleet are capable of using data connectivity
           nullable: true
           type: boolean
         data_limit:
-          description: The total data usage (download and upload combined) in Megabytes
-            that each Sim resource assigned to the Fleet resource can consume
+          description: The total data usage (download and upload combined) in Megabytes that each Sim resource assigned to the Fleet resource can consume
           nullable: true
           type: integer
         data_metering:
@@ -1566,13 +1446,11 @@ components:
           pattern: ^HF[0-9a-fA-F]{32}$
           type: string
         sms_commands_enabled:
-          description: Defines whether SIMs in the Fleet are capable of sending and
-            receiving machine-to-machine SMS via Commands
+          description: Defines whether SIMs in the Fleet are capable of sending and receiving machine-to-machine SMS via Commands
           nullable: true
           type: boolean
         sms_commands_method:
-          description: A string representing the HTTP method to use when making a request
-            to `sms_commands_url`
+          description: A string representing the HTTP method to use when making a request to `sms_commands_url`
           enum:
             - HEAD
             - GET
@@ -1583,8 +1461,7 @@ components:
           nullable: true
           type: string
         sms_commands_url:
-          description: The URL that will receive a webhook when a Super SIM in the Fleet
-            is used to send an SMS from your device to the SMS Commands number
+          description: The URL that will receive a webhook when a Super SIM in the Fleet is used to send an SMS from your device to the SMS Commands number
           format: uri
           nullable: true
           type: string
@@ -1875,6 +1752,5 @@ components:
       scheme: basic
       type: http
 x-maturity:
-  - description: PLEASE NOTE that this is a Beta product that is subject to change.
-      Use it with caution.
+  - description: PLEASE NOTE that this is a Beta product that is subject to change. Use it with caution.
     name: Beta

@@ -3,9 +3,7 @@ servers:
   - url: http://api.nytimes.com/svc/archive/v1
   - url: https://api.nytimes.com/svc/archive/v1
 info:
-  description: The Archive API provides lists of NYT articles by month going back
-    to 1851.  You can use it to build your own local database of NYT article
-    metadata.
+  description: The Archive API provides lists of NYT articles by month going back to 1851.  You can use it to build your own local database of NYT article metadata.
   termsOfService: http://developer.nytimes.com/tou
   title: Archive API
   version: 1.0.0
@@ -29,10 +27,8 @@ security:
 paths:
   "/{year}/{month}.json":
     get:
-      description: >
-        The Archive API provides lists of NYT articles by month going back
-        to 1851.  Simply pass in the year and month you want and it returns a
-        JSON object with all articles for that month.
+      description: |
+        The Archive API provides lists of NYT articles by month going back to 1851.  Simply pass in the year and month you want and it returns a JSON object with all articles for that month.
       parameters:
         - description: The year (e.g. 2016).
           in: path

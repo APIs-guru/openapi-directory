@@ -36,10 +36,7 @@ tags:
 paths:
   /v3/urlNotifications/metadata:
     get:
-      description: Gets metadata about a Web Document. This method can _only_ be used
-        to query URLs that were previously seen in successful Indexing API
-        notifications. Includes the latest `UrlNotification` received via this
-        API.
+      description: Gets metadata about a Web Document. This method can _only_ be used to query URLs that were previously seen in successful Indexing API notifications. Includes the latest `UrlNotification` received via this API.
       operationId: indexing.urlNotifications.getMetadata
       parameters:
         - description: URL that is being queried.
@@ -148,9 +145,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -168,9 +163,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -196,12 +189,10 @@ components:
           description: Description of the notification events received for this URL.
       type: object
     UrlNotification:
-      description: "`UrlNotification` is the resource used in all Indexing API calls.
-        It describes one event in the life cycle of a Web Document."
+      description: "`UrlNotification` is the resource used in all Indexing API calls. It describes one event in the life cycle of a Web Document."
       properties:
         notifyTime:
-          description: Creation timestamp for this notification. Users should _not_
-            specify it, the field is ignored at the request time.
+          description: Creation timestamp for this notification. Users should _not_ specify it, the field is ignored at the request time.
           format: google-datetime
           type: string
         type:
@@ -212,14 +203,11 @@ components:
             - URL_DELETED
           type: string
         url:
-          description: The object of this notification. The URL must be owned by the
-            publisher of this notification and, in case of `URL_UPDATED`
-            notifications, it _must_ be crawlable by Google.
+          description: The object of this notification. The URL must be owned by the publisher of this notification and, in case of `URL_UPDATED` notifications, it _must_ be crawlable by Google.
           type: string
       type: object
     UrlNotificationMetadata:
-      description: Summary of the most recent Indexing API notifications successfully
-        received, for a given URL.
+      description: Summary of the most recent Indexing API notifications successfully received, for a given URL.
       properties:
         latestRemove:
           $ref: "#/components/schemas/UrlNotification"

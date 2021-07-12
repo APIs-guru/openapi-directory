@@ -6,8 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: The Google Play Game Management API allows developers to manage
-    resources from the Google Play Game service.
+  description: The Google Play Game Management API allows developers to manage resources from the Google Play Game service.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -50,9 +49,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Resets all achievements for the currently authenticated player for
-        your application. This method is only accessible to whitelisted tester
-        accounts for your application.
+      description: Resets all achievements for the currently authenticated player for your application. This method is only accessible to whitelisted tester accounts for your application.
       operationId: gamesManagement.achievements.resetAll
       responses:
         "200":
@@ -82,8 +79,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Resets all draft achievements for all players. This method is only
-        available to user accounts for your developer console.
+      description: Resets all draft achievements for all players. This method is only available to user accounts for your developer console.
       operationId: gamesManagement.achievements.resetAllForAllPlayers
       responses:
         "200":
@@ -109,9 +105,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Resets achievements with the given IDs for all players. This method
-        is only available to user accounts for your developer console. Only
-        draft achievements may be reset.
+      description: Resets achievements with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft achievements may be reset.
       operationId: gamesManagement.achievements.resetMultipleForAllPlayers
       requestBody:
         content:
@@ -142,9 +136,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Resets the achievement with the given ID for the currently
-        authenticated player. This method is only accessible to whitelisted
-        tester accounts for your application.
+      description: Resets the achievement with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
       operationId: gamesManagement.achievements.reset
       parameters:
         - description: The ID of the achievement used by this method.
@@ -181,9 +173,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Resets the achievement with the given ID for all players. This
-        method is only available to user accounts for your developer console.
-        Only draft achievements can be reset.
+      description: Resets the achievement with the given ID for all players. This method is only available to user accounts for your developer console. Only draft achievements can be reset.
       operationId: gamesManagement.achievements.resetForAllPlayers
       parameters:
         - description: The ID of the achievement used by this method.
@@ -204,8 +194,7 @@ paths:
         - achievements
   "/games/v1management/applications/{applicationId}/players/hidden":
     get:
-      description: Get the list of players hidden from the given application. This
-        method is only available to user accounts for your developer console.
+      description: Get the list of players hidden from the given application. This method is only available to user accounts for your developer console.
       operationId: gamesManagement.applications.listHidden
       parameters:
         - description: The application ID from the Google Play developer console.
@@ -214,9 +203,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of player resources to return in the response,
-            used for paging. For any response, the actual number of player
-            resources returned may be less than the specified `maxResults`.
+        - description: The maximum number of player resources to return in the response, used for paging. For any response, the actual number of player resources returned may be less than the specified `maxResults`.
           in: query
           name: maxResults
           schema:
@@ -254,9 +241,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/games/v1management/applications/{applicationId}/players/hidden/{playerId}":
     delete:
-      description: Unhide the given player's leaderboard scores from the given
-        application. This method is only available to user accounts for your
-        developer console.
+      description: Unhide the given player's leaderboard scores from the given application. This method is only available to user accounts for your developer console.
       operationId: gamesManagement.players.unhide
       parameters:
         - description: The application ID from the Google Play developer console.
@@ -265,8 +250,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: A player ID. A value of `me` may be used in place of the
-            authenticated player's ID.
+        - description: A player ID. A value of `me` may be used in place of the authenticated player's ID.
           in: path
           name: playerId
           required: true
@@ -295,9 +279,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Hide the given player's leaderboard scores from the given
-        application. This method is only available to user accounts for your
-        developer console.
+      description: Hide the given player's leaderboard scores from the given application. This method is only available to user accounts for your developer console.
       operationId: gamesManagement.players.hide
       parameters:
         - description: The application ID from the Google Play developer console.
@@ -306,8 +288,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: A player ID. A value of `me` may be used in place of the
-            authenticated player's ID.
+        - description: A player ID. A value of `me` may be used in place of the authenticated player's ID.
           in: path
           name: playerId
           required: true
@@ -337,9 +318,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Resets all player progress on all events for the currently
-        authenticated player. This method is only accessible to whitelisted
-        tester accounts for your application.
+      description: Resets all player progress on all events for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
       operationId: gamesManagement.events.resetAll
       responses:
         "200":
@@ -365,8 +344,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Resets all draft events for all players. This method is only
-        available to user accounts for your developer console.
+      description: Resets all draft events for all players. This method is only available to user accounts for your developer console.
       operationId: gamesManagement.events.resetAllForAllPlayers
       responses:
         "200":
@@ -392,9 +370,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Resets events with the given IDs for all players. This method is
-        only available to user accounts for your developer console. Only draft
-        events may be reset.
+      description: Resets events with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft events may be reset.
       operationId: gamesManagement.events.resetMultipleForAllPlayers
       requestBody:
         content:
@@ -425,9 +401,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Resets all player progress on the event with the given ID for the
-        currently authenticated player. This method is only accessible to
-        whitelisted tester accounts for your application.
+      description: Resets all player progress on the event with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
       operationId: gamesManagement.events.reset
       parameters:
         - description: The ID of the event.
@@ -460,9 +434,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Resets the event with the given ID for all players. This method is
-        only available to user accounts for your developer console. Only draft
-        events can be reset.
+      description: Resets the event with the given ID for all players. This method is only available to user accounts for your developer console. Only draft events can be reset.
       operationId: gamesManagement.events.resetForAllPlayers
       parameters:
         - description: The ID of the event.
@@ -495,9 +467,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Resets scores for the leaderboard with the given ID for the
-        currently authenticated player. This method is only accessible to
-        whitelisted tester accounts for your application.
+      description: Resets scores for the leaderboard with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.
       operationId: gamesManagement.scores.reset
       parameters:
         - description: The ID of the leaderboard.
@@ -534,9 +504,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Resets scores for the leaderboard with the given ID for all
-        players. This method is only available to user accounts for your
-        developer console. Only draft leaderboards can be reset.
+      description: Resets scores for the leaderboard with the given ID for all players. This method is only available to user accounts for your developer console. Only draft leaderboards can be reset.
       operationId: gamesManagement.scores.resetForAllPlayers
       parameters:
         - description: The ID of the leaderboard.
@@ -569,9 +537,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Resets all scores for all leaderboards for the currently
-        authenticated players. This method is only accessible to whitelisted
-        tester accounts for your application.
+      description: Resets all scores for all leaderboards for the currently authenticated players. This method is only accessible to whitelisted tester accounts for your application.
       operationId: gamesManagement.scores.resetAll
       responses:
         "200":
@@ -601,8 +567,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Resets scores for all draft leaderboards for all players. This
-        method is only available to user accounts for your developer console.
+      description: Resets scores for all draft leaderboards for all players. This method is only available to user accounts for your developer console.
       operationId: gamesManagement.scores.resetAllForAllPlayers
       responses:
         "200":
@@ -628,9 +593,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Resets scores for the leaderboards with the given IDs for all
-        players. This method is only available to user accounts for your
-        developer console. Only draft leaderboards may be reset.
+      description: Resets scores for the leaderboards with the given IDs for all players. This method is only available to user accounts for your developer console. Only draft leaderboards may be reset.
       operationId: gamesManagement.scores.resetMultipleForAllPlayers
       requestBody:
         content:
@@ -687,9 +650,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -707,9 +668,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -731,8 +690,7 @@ components:
       description: Achievement reset all response.
       properties:
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `gamesManagement#achievementResetAllResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesManagement#achievementResetAllResponse`.
           type: string
         results:
           description: The achievement reset results.
@@ -748,26 +706,20 @@ components:
             type: string
           type: array
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string
-            `gamesManagement#achievementResetMultipleForAllRequest`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesManagement#achievementResetMultipleForAllRequest`.
           type: string
       type: object
     AchievementResetResponse:
       description: An achievement reset response.
       properties:
         currentState:
-          description: 'The current state of the achievement. This is the same as the
-            initial state of the achievement. Possible values are: - "`HIDDEN`"-
-            Achievement is hidden. - "`REVEALED`" - Achievement is revealed. -
-            "`UNLOCKED`" - Achievement is unlocked. '
+          description: 'The current state of the achievement. This is the same as the initial state of the achievement. Possible values are: - "`HIDDEN`"- Achievement is hidden. - "`REVEALED`" - Achievement is revealed. - "`UNLOCKED`" - Achievement is unlocked. '
           type: string
         definitionId:
           description: The ID of an achievement for which player state has been updated.
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `gamesManagement#achievementResetResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesManagement#achievementResetResponse`.
           type: string
         updateOccurred:
           description: Flag to indicate if the requested update actually occurred.
@@ -782,8 +734,7 @@ components:
             type: string
           type: array
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `gamesManagement#eventsResetMultipleForAllRequest`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesManagement#eventsResetMultipleForAllRequest`.
           type: string
       type: object
     GamesPlayerExperienceInfoResource:
@@ -797,14 +748,12 @@ components:
           $ref: "#/components/schemas/GamesPlayerLevelResource"
           description: The current level of the player.
         lastLevelUpTimestampMillis:
-          description: The timestamp when the player was leveled up, in millis since Unix
-            epoch UTC.
+          description: The timestamp when the player was leveled up, in millis since Unix epoch UTC.
           format: int64
           type: string
         nextLevel:
           $ref: "#/components/schemas/GamesPlayerLevelResource"
-          description: The next level of the player. If the current level is the maximum
-            level, this should be same as the current level.
+          description: The next level of the player. If the current level is the maximum level, this should be same as the current level.
       type: object
     GamesPlayerLevelResource:
       description: 1P/3P metadata about a user's level.
@@ -831,8 +780,7 @@ components:
           readOnly: true
           type: string
         kind:
-          description: Output only. Uniquely identifies the type of this resource. Value
-            is always the fixed string `gamesManagement#hiddenPlayer`.
+          description: Output only. Uniquely identifies the type of this resource. Value is always the fixed string `gamesManagement#hiddenPlayer`.
           readOnly: true
           type: string
         player:
@@ -849,8 +797,7 @@ components:
             $ref: "#/components/schemas/HiddenPlayer"
           type: array
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `gamesManagement#hiddenPlayerList`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesManagement#hiddenPlayerList`.
           type: string
         nextPageToken:
           description: The pagination token for the next page of results.
@@ -873,39 +820,29 @@ components:
           type: string
         experienceInfo:
           $ref: "#/components/schemas/GamesPlayerExperienceInfoResource"
-          description: An object to represent Play Game experience information for the
-            player.
+          description: An object to represent Play Game experience information for the player.
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `gamesManagement#player`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesManagement#player`.
           type: string
         name:
-          description: An object representation of the individual components of the
-            player's name. For some players, these fields may not be present.
+          description: An object representation of the individual components of the player's name. For some players, these fields may not be present.
           properties:
             familyName:
-              description: The family name of this player. In some places, this is known as
-                the last name.
+              description: The family name of this player. In some places, this is known as the last name.
               type: string
             givenName:
-              description: The given name of this player. In some places, this is known as the
-                first name.
+              description: The given name of this player. In some places, this is known as the first name.
               type: string
           type: object
         originalPlayerId:
-          description: The player ID that was used for this player the first time they
-            signed into the game in question. This is only populated for calls
-            to player.get for the requesting player, only if the player ID has
-            subsequently changed, and only to clients that support remapping
-            player IDs.
+          description: The player ID that was used for this player the first time they signed into the game in question. This is only populated for calls to player.get for the requesting player, only if the player ID has subsequently changed, and only to clients that support remapping player IDs.
           type: string
         playerId:
           description: The ID of the player.
           type: string
         profileSettings:
           $ref: "#/components/schemas/ProfileSettings"
-          description: The player's profile settings. Controls whether or not the player's
-            profile is visible to other players.
+          description: The player's profile settings. Controls whether or not the player's profile is visible to other players.
         title:
           description: The player's title rewarded for their game activities.
           type: string
@@ -914,8 +851,7 @@ components:
       description: A list of leaderboard reset resources.
       properties:
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `gamesManagement#playerScoreResetAllResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesManagement#playerScoreResetAllResponse`.
           type: string
         results:
           description: The leaderboard reset results.
@@ -930,13 +866,10 @@ components:
           description: The ID of an leaderboard for which player state has been updated.
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `gamesManagement#playerScoreResetResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesManagement#playerScoreResetResponse`.
           type: string
         resetScoreTimeSpans:
-          description: 'The time spans of the updated score. Possible values are: -
-            "`ALL_TIME`" - The score is an all-time score. - "`WEEKLY`" - The
-            score is a weekly score. - "`DAILY`" - The score is a daily score. '
+          description: 'The time spans of the updated score. Possible values are: - "`ALL_TIME`" - The score is an all-time score. - "`WEEKLY`" - The score is a weekly score. - "`DAILY`" - The score is a daily score. '
           items:
             type: string
           type: array
@@ -945,8 +878,7 @@ components:
       description: Profile settings
       properties:
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `gamesManagement#profileSettings`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesManagement#profileSettings`.
           type: string
         profileVisible:
           type: boolean
@@ -954,8 +886,7 @@ components:
     ScoresResetMultipleForAllRequest:
       properties:
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `gamesManagement#scoresResetMultipleForAllRequest`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `gamesManagement#scoresResetMultipleForAllRequest`.
           type: string
         leaderboard_ids:
           description: The IDs of leaderboards to reset.

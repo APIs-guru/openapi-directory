@@ -7,10 +7,8 @@ info:
     name: Adyen Developer Experience team
     url: https://www.adyen.help/hc/en-us/community/topics
     x-twitter: Adyen
-  description: >-
-    The Balance Platform API enables you to create a platform, onboard
-    users as account holders, create balance accounts, and issue cards.
-
+  description: |-
+    The Balance Platform API enables you to create a platform, onboard users as account holders, create balance accounts, and issue cards.
 
     For information about use cases, refer to [Adyen Issuing](https://docs.adyen.com/issuing).
 
@@ -19,48 +17,28 @@ info:
 
      ```
     curl
-
     -H "Content-Type: application/json" \
-
     -H "X-API-Key: YOUR_API_KEY" \
-
     ...
-
     ```
-
 
     Alternatively, you can use the username and password to connect to the API using basic authentication. For example:
 
-
     ```
-
     curl
-
     -H "Content-Type: application/json" \
-
     -U "ws@BalancePlatform.YOUR_BALANCE_PLATFORM":"YOUR_WS_PASSWORD" \
-
     ...
-
     ```
-
     ## Versioning
-
     Balance Platform API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
 
-
     For example:
-
     ```
-
     https://balanceplatform-api-test.adyen.com/bcl/v1
-
     ```
-
     ## Going live
-
     When going live, your Adyen contact will provide your API credential for the live environment. You can then use the API key or the username and password to send requests to `https://balanceplatform-api-live.adyen.com/bcl/v1`.
-
 
     For more information, refer to our [Going live documentation](https://docs.adyen.com/issuing/integration-checklist#going-live).
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
@@ -80,10 +58,8 @@ info:
 paths:
   /accountHolders:
     post:
-      description: >-
-        Creates an account holder. This resource represents your user's
-        entity within the balance platform.
-
+      description: |-
+        Creates an account holder. This resource represents your user's entity within the balance platform.
 
         For more information, refer to [Create accounts](https://docs.adyen.com/issuing/create-accounts).
       operationId: post-accountHolders
@@ -225,13 +201,10 @@ paths:
       x-groupName: Account holders
       x-sortIndex: 3
     patch:
-      description: >-
-        Updates a specific account holder. When updating an account holder
-        resource, note that:
-
+      description: |-
+        Updates a specific account holder. When updating an account holder resource, note that:
 
         * If a parameter is not provided in the request, the parameter is left unchanged.
-
 
         * When updating any parameter in the `contactDetails` object, you must send all other existing `contactDetails` parameters.
       operationId: patch-accountHolders-id
@@ -311,11 +284,8 @@ paths:
       x-sortIndex: 2
   "/accountHolders/{id}/balanceAccounts":
     get:
-      description: >-
-        Returns a paginated list of balance accounts associated with a
-        specific account holder. To fetch multiple pages, use the query
-        parameters. 
-
+      description: |-
+        Returns a paginated list of balance accounts associated with a specific account holder. To fetch multiple pages, use the query parameters. 
 
         For example, to limit the page to 5 balance accounts and to skip the first 10: `/accountHolders/{id}/balanceAccounts?limit=5&offset=10`.
       operationId: get-accountHolders-id-balanceAccounts
@@ -333,8 +303,7 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: The number of items returned per page, maximum 100 items. By
-            default, the response returns 10 items per page.
+        - description: The number of items returned per page, maximum 100 items. By default, the response returns 10 items per page.
           in: query
           name: limit
           required: false
@@ -402,10 +371,8 @@ paths:
       x-sortIndex: 4
   /balanceAccounts:
     post:
-      description: >-
-        Creates a balance account. The balance account resource holds the
-        funds of the associated account holder. 
-
+      description: |-
+        Creates a balance account. The balance account resource holds the funds of the associated account holder. 
 
         For more information, refer to [Create accounts](https://docs.adyen.com/issuing/create-accounts).
       operationId: post-balanceAccounts
@@ -548,11 +515,8 @@ paths:
       x-sortIndex: 3
   "/balanceAccounts/{id}/paymentInstruments":
     get:
-      description: >-
-        Returns a paginated list of the payment instruments associated with
-        a specific balance account. To fetch multiple pages, use the query
-        parameters. 
-
+      description: |-
+        Returns a paginated list of the payment instruments associated with a specific balance account. To fetch multiple pages, use the query parameters. 
 
         For example, to limit the page to 3 payment instruments and to skip the first 6: `/balanceAccounts/{id}/paymentInstruments?limit=3&offset=6`
       operationId: get-balanceAccounts-id-paymentInstruments
@@ -570,8 +534,7 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: The number of items returned per page, maximum 100 items. By
-            default, the response returns 10 items per page.
+        - description: The number of items returned per page, maximum 100 items. By default, the response returns 10 items per page.
           in: query
           name: limit
           required: false
@@ -584,8 +547,7 @@ paths:
             application/json:
               examples:
                 success-200:
-                  $ref: "#/components/examples/get-balanceAccounts-id-paymentInstruments-success-\
-                    200"
+                  $ref: "#/components/examples/get-balanceAccounts-id-paymentInstruments-success-200"
               schema:
                 $ref: "#/components/schemas/PaginatedPaymentInstrumentsResponse"
           description: OK - the request has succeeded.
@@ -710,11 +672,8 @@ paths:
       x-sortIndex: 0
   "/balancePlatforms/{id}/accountHolders":
     get:
-      description: >-
-        Returns a paginated list of all the account holders that belong to
-        the balance platform. To fetch multiple pages, use the query
-        parameters. 
-
+      description: |-
+        Returns a paginated list of all the account holders that belong to the balance platform. To fetch multiple pages, use the query parameters. 
 
         For example, to limit the page to 5 account holders and to skip the first 20: `/balancePlatforms/{id}/accountHolders?limit=5&offset=20`.
       operationId: get-balancePlatforms-id-accountHolders
@@ -732,8 +691,7 @@ paths:
           schema:
             format: int32
             type: integer
-        - description: The number of items returned per page, maximum 100 items. By
-            default, the response returns 10 items per page.
+        - description: The number of items returned per page, maximum 100 items. By default, the response returns 10 items per page.
           in: query
           name: limit
           required: false
@@ -801,14 +759,8 @@ paths:
       x-sortIndex: 0
   /documents:
     post:
-      description: >-
-        Uploads a document for verification checks. Adyen uses the
-        information from the [legal
-        entity](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/legalEntities)
-        to run automated Know Your Customer checks. If these checks fail, your
-        Adyen contact will inform you so you can provide additional documents.
-        Adyen uses the documents to validate the identity of the individual or
-        organization legal entity, or the legal entity's bank account details.
+      description: |-
+        Uploads a document for verification checks. Adyen uses the information from the [legal entity](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/legalEntities) to run automated Know Your Customer checks. If these checks fail, your Adyen contact will inform you so you can provide additional documents. Adyen uses the documents to validate the identity of the individual or organization legal entity, or the legal entity's bank account details.
 
          You should only upload documents when your Adyen contact informs you to provide additional information for the legal entity. For more information, refer to [Onboard and verify account holders](https://docs.adyen.com/issuing/kyc-verification).
       operationId: post-documents
@@ -1079,13 +1031,8 @@ paths:
       x-sortIndex: 6
   /legalEntities:
     post:
-      description: >-
-        Creates a legal entity. This resource contains information about an
-        individual or organization that will be onboarded on your balance
-        platform. Adyen uses this information to perform Know Your Customer
-        (KYC) checks as required by payment industry regulations. Your Adyen
-        contact will inform you of the status and results of the KYC checks. 
-
+      description: |-
+        Creates a legal entity. This resource contains information about an individual or organization that will be onboarded on your balance platform. Adyen uses this information to perform Know Your Customer (KYC) checks as required by payment industry regulations. Your Adyen contact will inform you of the status and results of the KYC checks. 
 
         When the legal entity passes the verification checks, you can issue a card to them. For more information, refer to [Onboard and verify account holders](https://docs.adyen.com/issuing/kyc-verification).
       operationId: post-legalEntities
@@ -1218,9 +1165,8 @@ paths:
       x-groupName: Legal entities
       x-sortIndex: 2
     patch:
-      description: >-
-        Updates a legal entity. When updating a legal entity resource, note
-        that:
+      description: |-
+        Updates a legal entity. When updating a legal entity resource, note that:
 
          * To update the `entityAssociations` array, you need to replace the entire array. For example, if the array has 3 entries and you want to remove 1 entry, you need to PATCH the resource with the remaining 2 entries.
       operationId: patch-legalEntities-id
@@ -1294,17 +1240,14 @@ paths:
       x-sortIndex: 3
   /paymentInstrumentGroups:
     post:
-      description: Creates a payment instrument group, which you use to associate and
-        group payment instrument resources together. You can apply a transaction
-        rule to a payment instrument group.
+      description: Creates a payment instrument group, which you use to associate and group payment instrument resources together. You can apply a transaction rule to a payment instrument group.
       operationId: post-paymentInstrumentGroups
       requestBody:
         content:
           application/json:
             examples:
               createPaymentInstrumentGroups:
-                $ref: "#/components/examples/post-paymentInstrumentGroups-createPaymentInstrume\
-                  ntGroups"
+                $ref: "#/components/examples/post-paymentInstrumentGroups-createPaymentInstrumentGroups"
             schema:
               $ref: "#/components/schemas/PaymentInstrumentGroupInfo"
       responses:
@@ -1438,8 +1381,7 @@ paths:
       x-sortIndex: 2
   "/paymentInstrumentGroups/{id}/transactionRules":
     get:
-      description: Returns a list of all the transaction rules associated with a
-        specific payment instrument group.
+      description: Returns a list of all the transaction rules associated with a specific payment instrument group.
       operationId: get-paymentInstrumentGroups-id-transactionRules
       parameters:
         - description: Unique identifier of the payment instrument group.
@@ -1454,8 +1396,7 @@ paths:
             application/json:
               examples:
                 success-200:
-                  $ref: "#/components/examples/get-paymentInstrumentGroups-id-transactionRules-su\
-                    ccess-200"
+                  $ref: "#/components/examples/get-paymentInstrumentGroups-id-transactionRules-success-200"
               schema:
                 $ref: "#/components/schemas/TransactionRulesResponse"
           description: OK - the request has succeeded.
@@ -1510,9 +1451,8 @@ paths:
       x-sortIndex: 3
   /paymentInstruments:
     post:
-      description: >-
-        Creates a payment instrument, which results in issuing either a
-        physical or a virtual card to your user.
+      description: |-
+        Creates a payment instrument, which results in issuing either a physical or a virtual card to your user.
 
          For more information, refer to [Create cards](https://docs.adyen.com/issuing/create-cards).
       operationId: post-paymentInstruments
@@ -1656,10 +1596,7 @@ paths:
       x-groupName: Payment instruments
       x-sortIndex: 13
     patch:
-      description: Updates a specific payment instrument. Once a payment instrument is
-        already active, you can only update the status. However, for cards
-        created with a **Requested** or **Inactive** status, you can still
-        update the balance account associated with the card.
+      description: Updates a specific payment instrument. Once a payment instrument is already active, you can only update the status. However, for cards created with a **Requested** or **Inactive** status, you can still update the balance account associated with the card.
       operationId: patch-paymentInstruments-id
       parameters:
         - description: Unique identifier of the payment instrument.
@@ -1673,11 +1610,9 @@ paths:
           application/json:
             examples:
               updatePaymentInstrumentBalanceAccount:
-                $ref: "#/components/examples/patch-paymentInstruments-id-updatePaymentInstrumen\
-                  tBalanceAccount"
+                $ref: "#/components/examples/patch-paymentInstruments-id-updatePaymentInstrumentBalanceAccount"
               updatePaymentInstrumentStatus:
-                $ref: "#/components/examples/patch-paymentInstruments-id-updatePaymentInstrumen\
-                  tStatus"
+                $ref: "#/components/examples/patch-paymentInstruments-id-updatePaymentInstrumentStatus"
             schema:
               $ref: "#/components/schemas/PaymentInstrumentUpdateRequest"
       responses:
@@ -1743,8 +1678,7 @@ paths:
       x-sortIndex: 12
   "/paymentInstruments/{id}/transactionRules":
     get:
-      description: Returns a list of transaction rules associated to a specific
-        payment instrument.
+      description: Returns a list of transaction rules associated to a specific payment instrument.
       operationId: get-paymentInstruments-id-transactionRules
       parameters:
         - description: Unique identifier of the payment instrument.
@@ -1759,8 +1693,7 @@ paths:
             application/json:
               examples:
                 success-200:
-                  $ref: "#/components/examples/get-paymentInstruments-id-transactionRules-success\
-                    -200"
+                  $ref: "#/components/examples/get-paymentInstruments-id-transactionRules-success-200"
               schema:
                 $ref: "#/components/schemas/TransactionRulesResponse"
           description: OK - the request has succeeded.
@@ -1815,12 +1748,8 @@ paths:
       x-sortIndex: 14
   /transactionRules:
     post:
-      description: >-
-        Creates a transaction rule. Transaction rules define conditions to
-        automatically approve or deny transactions. You can apply transaction
-        rules to a specific payment instrument, a group of payment instruments,
-        or to all the payment instruments in your balance platform.
-
+      description: |-
+        Creates a transaction rule. Transaction rules define conditions to automatically approve or deny transactions. You can apply transaction rules to a specific payment instrument, a group of payment instruments, or to all the payment instruments in your balance platform.
 
         For more information on how you can set conditions, refer to [Transaction rules](https://docs.adyen.com/issuing/transaction-rules).
       operationId: post-transactionRules
@@ -1908,8 +1837,7 @@ paths:
             application/json:
               examples:
                 success-200:
-                  $ref: "#/components/examples/delete-transactionRules-transactionRuleId-success-\
-                    200"
+                  $ref: "#/components/examples/delete-transactionRules-transactionRuleId-success-200"
               schema:
                 $ref: "#/components/schemas/TransactionRule"
           description: OK - the request has succeeded.
@@ -2032,13 +1960,10 @@ paths:
       x-groupName: Transaction rules
       x-sortIndex: 2
     patch:
-      description: >-
-        Updates a transaction rule.  When updating a transaction rule
-        resource, note that: 
-
+      description: |-
+        Updates a transaction rule.  When updating a transaction rule resource, note that: 
 
         * When updating only the `status`, you can send only the `status` parameter. All other parameters not provided in the request are left unchanged.
-
 
         * When updating any other parameter, you need to send all existing resource parameters. If you omit a parameter in the request, the parameter is removed from the resource.
       operationId: patch-transactionRules-transactionRuleId
@@ -2054,8 +1979,7 @@ paths:
           application/json:
             examples:
               updateTransactionRuleStatus:
-                $ref: "#/components/examples/patch-transactionRules-transactionRuleId-updateTra\
-                  nsactionRuleStatus"
+                $ref: "#/components/examples/patch-transactionRules-transactionRuleId-updateTransactionRuleStatus"
             schema:
               $ref: "#/components/schemas/TransactionRuleInfo"
       responses:
@@ -2064,8 +1988,7 @@ paths:
             application/json:
               examples:
                 success-200:
-                  $ref: "#/components/examples/patch-transactionRules-transactionRuleId-success-2\
-                    00"
+                  $ref: "#/components/examples/patch-transactionRules-transactionRuleId-success-200"
               schema:
                 $ref: "#/components/schemas/TransactionRule"
           description: OK - the request has succeeded.
@@ -2120,13 +2043,8 @@ paths:
       x-sortIndex: 3
   /transferInstruments:
     post:
-      description: >-
-        Creates a transfer instrument. A transfer instrument is a bank
-        account or other payment details that a legal entity owns. Adyen
-        performs Know Your Customer (KYC) checks on the transfer instrument as
-        required by payment industry regulations. Your Adyen contact will inform
-        you of the status and results of the KYC checks.
-
+      description: |-
+        Creates a transfer instrument. A transfer instrument is a bank account or other payment details that a legal entity owns. Adyen performs Know Your Customer (KYC) checks on the transfer instrument as required by payment industry regulations. Your Adyen contact will inform you of the status and results of the KYC checks.
 
         When the transfer instrument passes the verification checks, you can start sending funds from the balance platform to the transfer instrument (such as payouts).
       operationId: post-transferInstruments
@@ -2446,8 +2364,7 @@ components:
     generic-422:
       summary: Response code - 422 Unprocessable Entity.
       value:
-        detail: The balanceAccountId can only be changed when the status is Inactive or
-          Requested
+        detail: The balanceAccountId can only be changed when the status is Inactive or Requested
         errorCode: 30_031
         requestId: 1W1UI15PLVGC9V8O
         status: 422
@@ -2472,8 +2389,7 @@ components:
         title: Error processing request
         type: https://docs.adyen.com/errors/general/processing-error
     get-accountHolders-id-balanceAccounts-success-200:
-      description: Example response when retrieving a list of balance accounts under
-        an account holder
+      description: Example response when retrieving a list of balance accounts under an account holder
       summary: Response code - 200 OK
       value:
         balanceAccounts:
@@ -2511,8 +2427,7 @@ components:
         id: AH32272223222B5CM4MWJ892H
         status: Active
     get-balanceAccounts-id-paymentInstruments-success-200:
-      description: Example response when retrieving a list of payment instruments
-        under a balance account
+      description: Example response when retrieving a list of payment instruments under a balance account
       summary: Response code - 200 OK
       value:
         hasNext: "true"
@@ -2564,8 +2479,7 @@ components:
           - id: PI32272223222B5BRM4FZ7J9J
         status: Active
     get-balancePlatforms-id-accountHolders-success-200:
-      description: Example response when retrieving a list of account holders under a
-        balance platform
+      description: Example response when retrieving a list of account holders under a balance platform
       summary: Response code - 200 OK
       value:
         accountHolders:
@@ -2605,8 +2519,7 @@ components:
         id: PG3227C223222B5CMD3FJFKGZ
         txVariant: mc
     get-paymentInstrumentGroups-id-transactionRules-success-200:
-      description: Example response when retrieving a list of transaction rules
-        applied to a payment instrument group
+      description: Example response when retrieving a list of transaction rules applied to a payment instrument group
       summary: Response code - 200 OK
       value:
         transactionRules:
@@ -2654,8 +2567,7 @@ components:
         status: Active
         type: card
     get-paymentInstruments-id-transactionRules-success-200:
-      description: Example response when retrieving a list of transaction rules
-        applied to a payment instrument
+      description: Example response when retrieving a list of transaction rules applied to a payment instrument
       summary: Response code - 200 OK
       value:
         transactionRules:
@@ -2697,8 +2609,7 @@ components:
           status: active
           type: velocity
     patch-accountHolders-id-success-200:
-      description: Example response for successfully updating the status of an account
-        holder
+      description: Example response for successfully updating the status of an account holder
       summary: Response code - 200 OK
       value:
         balancePlatform: YOUR_BALANCE_PLATFORM
@@ -2725,16 +2636,14 @@ components:
       description: Example response for a failed request to update the balance account ID
       summary: Response code - 422 Unprocessable Entity
       value:
-        detail: The balanceAccountId can only be changed when the status is Inactive or
-          Requested
+        detail: The balanceAccountId can only be changed when the status is Inactive or Requested
         errorCode: 30_031
         requestId: 1W1UI15PLVGC9V8O
         status: 422
         title: Invalid Payment Instrument information provided
         type: https://docs.adyen.com/errors/general/invalid-field-value
     patch-paymentInstruments-id-success-200:
-      description: Example respones for successfully updating the status of a payment
-        instrument
+      description: Example respones for successfully updating the status of a payment instrument
       summary: Response code - 200 OK
       value:
         balanceAccountId: BA32272223222B59CZ3T52DKZ
@@ -2764,8 +2673,7 @@ components:
       value:
         status: Suspended
     patch-transactionRules-transactionRuleId-success-200:
-      description: Example response for successfully updating the status of a
-        transaction rule
+      description: Example response for successfully updating the status of a transaction rule
       summary: Response code - 200 OK
       value:
         description: Allow 5 transactions per month
@@ -2946,10 +2854,7 @@ components:
     AccountHolder:
       properties:
         balancePlatform:
-          description: Unique identifier of the [balance
-            platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id)
-            where the account holder belongs. Required in the request if your
-            API credentials has access to multiple balance platforms.
+          description: Unique identifier of the [balance platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id) where the account holder belongs. Required in the request if your API credentials has access to multiple balance platforms.
           type: string
         contactDetails:
           $ref: "#/components/schemas/ContactDetails"
@@ -2962,13 +2867,8 @@ components:
           description: Unique identifier of the account holder.
           type: string
         legalEntityId:
-          description: >-
-            The unique identifier of the [legal
-            entity](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/legalEntities)
-            associated with the account holder. Adyen performs the Know Your
-            Customer (KYC) verification process against the legal entity of the
-            account holder.
-
+          description: |-
+            The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/legalEntities) associated with the account holder. Adyen performs the Know Your Customer (KYC) verification process against the legal entity of the account holder.
 
             To create a legal entity, refer to [Onboard and verify account holders](https://docs.adyen.com/issuing/kyc-verification).
           type: string
@@ -2977,9 +2877,8 @@ components:
           maxLength: 150
           type: string
         status:
-          description: >-
+          description: |-
             The status of the account holder.
-
 
             Possible values: 
 
@@ -3001,11 +2900,8 @@ components:
         sweepConfigurations:
           additionalProperties:
             $ref: "#/components/schemas/SweepConfiguration"
-          description: >+
-            Contains key-value pairs that specify configurations for balance
-            sweeps per currency code. A sweep pulls in or pushes out funds based
-            on a defined schedule, amount, and a source (for pulling funds) or a
-            destination (for pushing funds).
+          description: |+
+            Contains key-value pairs that specify configurations for balance sweeps per currency code. A sweep pulls in or pushes out funds based on a defined schedule, amount, and a source (for pulling funds) or a destination (for pushing funds).
 
              Sweep configurations on the account holder level applies to all the account holder's balance accounts.
 
@@ -3018,10 +2914,7 @@ components:
     AccountHolderInfo:
       properties:
         balancePlatform:
-          description: Unique identifier of the [balance
-            platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id)
-            where the account holder belongs. Required in the request if your
-            API credentials has access to multiple balance platforms.
+          description: Unique identifier of the [balance platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id) where the account holder belongs. Required in the request if your API credentials has access to multiple balance platforms.
           type: string
         contactDetails:
           $ref: "#/components/schemas/ContactDetails"
@@ -3031,13 +2924,8 @@ components:
           maxLength: 300
           type: string
         legalEntityId:
-          description: >-
-            The unique identifier of the [legal
-            entity](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/legalEntities)
-            associated with the account holder. Adyen performs the Know Your
-            Customer (KYC) verification process against the legal entity of the
-            account holder.
-
+          description: |-
+            The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/legalEntities) associated with the account holder. Adyen performs the Know Your Customer (KYC) verification process against the legal entity of the account holder.
 
             To create a legal entity, refer to [Onboard and verify account holders](https://docs.adyen.com/issuing/kyc-verification).
           type: string
@@ -3048,11 +2936,8 @@ components:
         sweepConfigurations:
           additionalProperties:
             $ref: "#/components/schemas/SweepConfiguration"
-          description: >+
-            Contains key-value pairs that specify configurations for balance
-            sweeps per currency code. A sweep pulls in or pushes out funds based
-            on a defined schedule, amount, and a source (for pulling funds) or a
-            destination (for pushing funds).
+          description: |+
+            Contains key-value pairs that specify configurations for balance sweeps per currency code. A sweep pulls in or pushes out funds based on a defined schedule, amount, and a source (for pulling funds) or a destination (for pushing funds).
 
              Sweep configurations on the account holder level applies to all the account holder's balance accounts.
 
@@ -3067,30 +2952,24 @@ components:
           description: The name of the city.
           type: string
         country:
-          description: >-
-            The two-character country code as defined in ISO-3166-1 alpha-2.
-            For example, **US**.
-
+          description: |-
+            The two-character country code as defined in ISO-3166-1 alpha-2. For example, **US**.
             > If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
           type: string
         houseNumberOrName:
           description: The number or name of the house.
           type: string
         postalCode:
-          description: A maximum of five digits for an address in the US, or a maximum of
-            ten characters for an address in all other countries.
+          description: A maximum of five digits for an address in the US, or a maximum of ten characters for an address in all other countries.
           type: string
         stateOrProvince:
-          description: >-
-            State or province codes as defined in ISO 3166-2. For example,
-            **CA** in the US or **ON** in Canada.
-
+          description: |-
+            State or province codes as defined in ISO 3166-2. For example, **CA** in the US or **ON** in Canada.
             > Required for the US and Canada.
           type: string
         street:
-          description: >-
+          description: |-
             The name of the street.
-
             > The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
           type: string
       required:
@@ -3105,15 +2984,13 @@ components:
           description: The name of the city.
           type: string
         country:
-          description: The two-letter country code, in [ISO 3166-1
-            alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
+          description: The two-letter country code, in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
           type: string
         postalCode:
           description: Postal code.
           type: string
         stateOrProvince:
-          description: State or province as defined in ISO 3166-2. For example, **CA** in
-            the US.
+          description: State or province as defined in ISO 3166-2. For example, **CA** in the US.
           type: string
         street:
           description: The name of the street, and the house or building number.
@@ -3124,14 +3001,12 @@ components:
     Amount:
       properties:
         currency:
-          description: The three-character [ISO currency
-            code](https://docs.adyen.com/development-resources/currency-codes).
+          description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
           maxLength: 3
           minLength: 3
           type: string
         value:
-          description: The amount of the transaction, in [minor
-            units](https://docs.adyen.com/development-resources/currency-codes).
+          description: The amount of the transaction, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
           format: int64
           type: integer
       required:
@@ -3144,7 +3019,7 @@ components:
           format: byte
           type: string
         contentType:
-          description: >-
+          description: |-
             The file format.
 
              Possible values: **application/pdf**, **image/jpg**, **image/jpeg**, or **image/png**. 
@@ -3153,12 +3028,10 @@ components:
           description: The name of the file including the file extension.
           type: string
         pageType:
-          description: >-
+          description: |-
             Specifies which side of the ID card is being uploaded.
 
-
             - When `type` is **driversLicense**, set this to **front** or **back**.
-
 
             - When omitted, we infer the page number based on the order of attachments.
           type: string
@@ -3183,13 +3056,10 @@ components:
           format: int64
           type: integer
         currency:
-          description: The three-character [ISO currency
-            code](https://docs.adyen.com/development-resources/currency-codes)
-            of the balance.
+          description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) of the balance.
           type: string
         reserved:
-          description: The amount reserved for payments that have been authorised, but
-            have not been captured yet.
+          description: The amount reserved for payments that have been authorised, but have not been captured yet.
           format: int64
           type: integer
       required:
@@ -3200,9 +3070,7 @@ components:
     BalanceAccount:
       properties:
         accountHolderId:
-          description: Unique identifier of the [account
-            holder](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/accountHolders/{id})
-            associated with the balance account.
+          description: Unique identifier of the [account holder](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/accountHolders/{id}) associated with the balance account.
           type: string
         balances:
           description: List of balances with the amount and currency.
@@ -3210,27 +3078,19 @@ components:
             $ref: "#/components/schemas/Balance"
           type: array
         defaultCurrencyCode:
-          description: >-
-            The default currency code of this balance account, in
-            three-character [ISO currency
-            code](https://docs.adyen.com/development-resources/currency-codes)
-            format.
-
+          description: |-
+            The default currency code of this balance account, in three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) format.
             The default value is **EUR**.
           type: string
         description:
-          description: A human-readable description of the balance account, maximum 300
-            characters. You can use this parameter to help distinguish between
-            multiple balance accounts under an account holder.
+          description: A human-readable description of the balance account, maximum 300 characters. You can use this parameter to help distinguish between multiple balance accounts under an account holder.
           maxLength: 300
           type: string
         id:
           description: Unique identifier of the balance account.
           type: string
         paymentInstruments:
-          description: List of [payment
-            instruments](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/paymentInstruments/{id}__queryParam_id)
-            associated with the balance account.
+          description: List of [payment instruments](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/paymentInstruments/{id}__queryParam_id) associated with the balance account.
           items:
             $ref: "#/components/schemas/PaymentInstrumentReference"
           type: array
@@ -3245,15 +3105,10 @@ components:
         sweepConfigurations:
           additionalProperties:
             $ref: "#/components/schemas/SweepConfiguration"
-          description: >-
-            Contains key-value pairs that specify configurations for balance
-            sweeps per currency code. A sweep pulls in or pushes out funds based
-            on a defined schedule, amount, and a source (for pulling funds) or a
-            destination (for pushing funds).
-
+          description: |-
+            Contains key-value pairs that specify configurations for balance sweeps per currency code. A sweep pulls in or pushes out funds based on a defined schedule, amount, and a source (for pulling funds) or a destination (for pushing funds).
 
             Sweep configurations on the balance account override [account holder](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/accountHolders__reqParam_sweepConfigurations) configurations.
-
 
             The key must be a currency code in the three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) format and in uppercase. For example, **EUR**. The value must be an object containing the sweep configuration.
           type: object
@@ -3263,23 +3118,15 @@ components:
     BalanceAccountInfo:
       properties:
         accountHolderId:
-          description: Unique identifier of the [account
-            holder](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/accountHolders/{id})
-            associated with the balance account.
+          description: Unique identifier of the [account holder](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/accountHolders/{id}) associated with the balance account.
           type: string
         defaultCurrencyCode:
-          description: >-
-            The default currency code of this balance account, in
-            three-character [ISO currency
-            code](https://docs.adyen.com/development-resources/currency-codes)
-            format.
-
+          description: |-
+            The default currency code of this balance account, in three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) format.
             The default value is **EUR**.
           type: string
         description:
-          description: A human-readable description of the balance account, maximum 300
-            characters. You can use this parameter to help distinguish between
-            multiple balance accounts under an account holder.
+          description: A human-readable description of the balance account, maximum 300 characters. You can use this parameter to help distinguish between multiple balance accounts under an account holder.
           maxLength: 300
           type: string
         reference:
@@ -3289,15 +3136,10 @@ components:
         sweepConfigurations:
           additionalProperties:
             $ref: "#/components/schemas/SweepConfiguration"
-          description: >-
-            Contains key-value pairs that specify configurations for balance
-            sweeps per currency code. A sweep pulls in or pushes out funds based
-            on a defined schedule, amount, and a source (for pulling funds) or a
-            destination (for pushing funds).
-
+          description: |-
+            Contains key-value pairs that specify configurations for balance sweeps per currency code. A sweep pulls in or pushes out funds based on a defined schedule, amount, and a source (for pulling funds) or a destination (for pushing funds).
 
             Sweep configurations on the balance account override [account holder](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/accountHolders__reqParam_sweepConfigurations) configurations.
-
 
             The key must be a currency code in the three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) format and in uppercase. For example, **EUR**. The value must be an object containing the sweep configuration.
           type: object
@@ -3313,9 +3155,8 @@ components:
           description: Unique identifier of the balance platform.
           type: string
         status:
-          description: >-
+          description: |-
             The status of the balance platform.
-
 
             Possible values: **Active**, **Inactive**, **Closed**, **Suspended**.
           type: string
@@ -3324,16 +3165,14 @@ components:
     BankAccountInfo:
       properties:
         accountNumber:
-          description: >-
+          description: |-
             The bank account number (without separators).
 
              When this is provided, the `bankCode` and `branchCode` are also required.
           type: string
         accountType:
-          description: >-
-            The type of bank account. Only applies to bank accounts held in the
-            US. 
-
+          description: |-
+            The type of bank account. Only applies to bank accounts held in the US. 
 
             Possible values: **checking**, **savings**.
           type: string
@@ -3344,22 +3183,17 @@ components:
           description: The city where the bank is located.
           type: string
         bankCode:
-          description: >-
-            The bank code of the banking institution with which the bank
-            account is registered.
-
+          description: |-
+            The bank code of the banking institution with which the bank account is registered.
 
             Required when you provide an `accountNumber`.
           type: string
         bankName:
-          description: The name of the banking institution with which the bank account is
-            held.
+          description: The name of the banking institution with which the bank account is held.
           type: string
         branchCode:
-          description: >-
-            The branch code of the branch under which the bank account is
-            registered.
-
+          description: |-
+            The branch code of the branch under which the bank account is registered.
 
             Required when you provide an `accountNumber`.
 
@@ -3367,28 +3201,20 @@ components:
 
 
             * United States - Routing number
-
             * United Kingdom - Sort code
-
             * Germany - Bankleitzahl
           type: string
         checkCode:
           description: The check code of the bank account.
           type: string
         countryCode:
-          description: Country where the bank account is registered, in the two-character
-            [ISO 3166-1
-            alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
-            For example, **NL**.
+          description: Country where the bank account is registered, in the two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. For example, **NL**.
           type: string
         currencyCode:
-          description: The account's three-character [ISO currency
-            code](https://docs.adyen.com/development-resources/currency-codes).
-            For example, **EUR**.
+          description: The account's three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes). For example, **EUR**.
           type: string
         iban:
-          description: The international bank account number as defined in the
-            [ISO-13616](https://www.iso.org/standard/81090.html) standard.
+          description: The international bank account number as defined in the [ISO-13616](https://www.iso.org/standard/81090.html) standard.
           type: string
     BirthData:
       properties:
@@ -3399,8 +3225,7 @@ components:
       properties:
         authentication:
           $ref: "#/components/schemas/Authentication"
-          description: Authentication details for 3D Secure and SMS one-time password
-            (OTP) for wallet activation.
+          description: Authentication details for 3D Secure and SMS one-time password (OTP) for wallet activation.
         bin:
           description: The BIN of the card number.
           type: string
@@ -3410,9 +3235,8 @@ components:
             Possible values: **visa**, **mc**.
           type: string
         brandVariant:
-          description: >-
+          description: |-
             The brand variant for the payment instrument.
-
             >Contact your Adyen Implementation Manager to get the values that are relevant to your integration. Examples: **visadebit**, **mcprepaid**.
           type: string
         cardholderName:
@@ -3422,9 +3246,8 @@ components:
           $ref: "#/components/schemas/CardConfiguration"
           description: Specific settings for this card, including the configuration profile.
         cvc:
-          description: >-
+          description: |-
             The CVC2 value of the card.
-
             >By default this field will not be present. Only for single use virtual cards the CVC2 is returned (only in response to `POST` request).
           type: string
         deliveryContact:
@@ -3446,9 +3269,8 @@ components:
           description: Last last four digits of the card number.
           type: string
         number:
-          description: >-
+          description: |-
             The primary account number of the card.
-
             >By default the primary account number will be masked. Only for single use virtual cards the full primary account number is returned.
           readOnly: true
           type: string
@@ -3485,17 +3307,15 @@ components:
       properties:
         authentication:
           $ref: "#/components/schemas/Authentication"
-          description: Authentication details for 3D Secure and SMS one-time password
-            (OTP) for wallet activation.
+          description: Authentication details for 3D Secure and SMS one-time password (OTP) for wallet activation.
         brand:
           description: |-
             The brand for the payment instrument.
             Possible values: **visa**, **mc**.
           type: string
         brandVariant:
-          description: >-
+          description: |-
             The brand variant for the payment instrument.
-
             >Contact your Adyen Implementation Manager to get the values that are relevant to your integration. Examples: **visadebit**, **mcprepaid**.
           type: string
         cardholderName:
@@ -3530,10 +3350,8 @@ components:
           description: The e-mail address of the contact.
           type: string
         fullPhoneNumber:
-          description: >-
-            The phone number of the contact provided as a single string.  It
-            will be handled as a landline phone.
-
+          description: |-
+            The phone number of the contact provided as a single string.  It will be handled as a landline phone.
             **Examples:** "0031 6 11 22 33 44", "+316/1122-3344", "(0031) 611223344"
           type: string
         name:
@@ -3570,11 +3388,9 @@ components:
       properties:
         attachment:
           $ref: "#/components/schemas/Attachment"
-          description: This object will be deprecated soon. Use the `attachments` array
-            instead.
+          description: This object will be deprecated soon. Use the `attachments` array instead.
         attachments:
-          description: Array that contains the document. The array supports multiple
-            attachments for uploading different sides or pages of one document.
+          description: Array that contains the document. The array supports multiple attachments for uploading different sides or pages of one document.
           items:
             $ref: "#/components/schemas/Attachment"
           type: array
@@ -3588,10 +3404,7 @@ components:
           description: Unique identifier of the document.
           type: string
         issuerCountry:
-          description: The country where the document was issued, in the two-character
-            [ISO 3166-1
-            alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
-            For example, **US**.
+          description: The country where the document was issued, in the two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. For example, **US**.
           type: string
         issuerState:
           description: The state or province where the document was issued.
@@ -3603,16 +3416,12 @@ components:
           $ref: "#/components/schemas/Entity"
           description: Contains information about the resource that owns the document.
         type:
-          description: >-
-            The type of document. The possible values depend on the legal
-            entity `type`.
-
+          description: |-
+            The type of document. The possible values depend on the legal entity `type`.
 
             * For `type` **organization**, the values can be **proofOfAddress**, **registrationDocument**, **taxDocument**. 
 
-
             * For `type` **individual**, the values can be **driversLicense**, **identityCard**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **ssn**.
-
 
             When uploading a document owned by a [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/documents__reqParam_owner), use **bankStatement**.
           enum:
@@ -3630,16 +3439,10 @@ components:
     Entity:
       properties:
         id:
-          description: Unique identifier of the resource that owns the document. Depending
-            on the entity `type`, this value can be the unique identifier of the
-            [legal
-            entity](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/legalEntities/{id}__queryParam_id)
-            or the [transfer
-            instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/get/transferInstruments/{id}__queryParam_id).
+          description: Unique identifier of the resource that owns the document. Depending on the entity `type`, this value can be the unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/legalEntities/{id}__queryParam_id) or the [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/get/transferInstruments/{id}__queryParam_id).
           type: string
         type:
-          description: "The type of resource that owns the document. Possible values:
-            **legalEntity**, **bankAccount**."
+          description: "The type of resource that owns the document. Possible values: **legalEntity**, **bankAccount**."
           type: string
     EntityReference:
       properties:
@@ -3657,32 +3460,25 @@ components:
     GenericEntityInfo:
       properties:
         entityAssociations:
-          description: >-
-            List of individual legal entities associated with the organization
-            legal entity. 
-
+          description: |-
+            List of individual legal entities associated with the organization legal entity. 
             For example, ultimate business owners through ownership or control, and signatories. 
           items:
             $ref: "#/components/schemas/LegalEntityAssociation"
           type: array
         individual:
           $ref: "#/components/schemas/Individual"
-          description: Information about the individual. Required if `type` is
-            **individual**.
+          description: Information about the individual. Required if `type` is **individual**.
         organization:
           $ref: "#/components/schemas/Organization"
-          description: Information about the organization. Required if `type` is
-            **organization**.
+          description: Information about the organization. Required if `type` is **organization**.
     IdentificationData:
       properties:
         expiryDate:
           description: The expiry date of the document, in YYYY-MM-DD format.
           type: string
         issuerCountry:
-          description: The country where the document was issued, in the two-character
-            [ISO 3166-1
-            alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
-            For example, **US**.
+          description: The country where the document was issued, in the two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. For example, **US**.
           type: string
         issuerState:
           description: The state or province where the document was issued.
@@ -3691,16 +3487,12 @@ components:
           description: The number in the document.
           type: string
         type:
-          description: >-
-            The type of document. The possible values depend on the legal
-            entity `type`.
-
+          description: |-
+            The type of document. The possible values depend on the legal entity `type`.
 
             * For `type` **organization**, the values can be **proofOfAddress**, **registrationDocument**, **taxDocument**. 
 
-
             * For `type` **individual**, the values can be **driversLicense**, **identityCard**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **ssn**.
-
 
             When uploading a document owned by a [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/documents__reqParam_owner), use **bankStatement**.
           enum:
@@ -3764,10 +3556,8 @@ components:
             $ref: "#/components/schemas/EntityReference"
           type: array
         entityAssociations:
-          description: >-
-            List of individual legal entities associated with the organization
-            legal entity. 
-
+          description: |-
+            List of individual legal entities associated with the organization legal entity. 
             For example, ultimate business owners through ownership or control, and signatories. 
           items:
             $ref: "#/components/schemas/LegalEntityAssociation"
@@ -3777,20 +3567,17 @@ components:
           type: string
         individual:
           $ref: "#/components/schemas/Individual"
-          description: Information about the individual. Required if `type` is
-            **individual**.
+          description: Information about the individual. Required if `type` is **individual**.
         organization:
           $ref: "#/components/schemas/Organization"
-          description: Information about the organization. Required if `type` is
-            **organization**.
+          description: Information about the organization. Required if `type` is **organization**.
         transferInstruments:
           description: List of transfer instruments that the legal entity owns.
           items:
             $ref: "#/components/schemas/EntityReference"
           type: array
         type:
-          description: "The type of legal entity. Possible values: **individual**,
-            **organization**."
+          description: "The type of legal entity. Possible values: **individual**, **organization**."
           enum:
             - individual
             - organization
@@ -3798,17 +3585,14 @@ components:
     LegalEntityAssociation:
       properties:
         jobTitle:
-          description: The individual's job title in case of `type` **uboThroughControl**
-            or **signatory**.
+          description: The individual's job title in case of `type` **uboThroughControl** or **signatory**.
           type: string
         legalEntityId:
-          description: Unique identifier of the individual legal entity associated with
-            the organization.
+          description: Unique identifier of the individual legal entity associated with the organization.
           type: string
         type:
-          description: >-
+          description: |-
             How the individual is associated with the organization. 
-
 
             Possible values: **uboThroughOwnership**, **uboThroughControl**, **signatory**. 
           enum:
@@ -3819,25 +3603,20 @@ components:
     LegalEntityInfo:
       properties:
         entityAssociations:
-          description: >-
-            List of individual legal entities associated with the organization
-            legal entity. 
-
+          description: |-
+            List of individual legal entities associated with the organization legal entity. 
             For example, ultimate business owners through ownership or control, and signatories. 
           items:
             $ref: "#/components/schemas/LegalEntityAssociation"
           type: array
         individual:
           $ref: "#/components/schemas/Individual"
-          description: Information about the individual. Required if `type` is
-            **individual**.
+          description: Information about the individual. Required if `type` is **individual**.
         organization:
           $ref: "#/components/schemas/Organization"
-          description: Information about the organization. Required if `type` is
-            **organization**.
+          description: Information about the organization. Required if `type` is **organization**.
         type:
-          description: "The type of legal entity. Possible values: **individual**,
-            **organization**."
+          description: "The type of legal entity. Possible values: **individual**, **organization**."
           enum:
             - individual
             - organization
@@ -3888,20 +3667,16 @@ components:
           description: The phone number of the legal entity.
         principalPlaceOfBusiness:
           $ref: "#/components/schemas/Address2"
-          description: The address where the organization operates from. Provide this if
-            the principal place of business is different from the
-            `registeredAddress`.
+          description: The address where the organization operates from. Provide this if the principal place of business is different from the `registeredAddress`.
         registeredAddress:
           $ref: "#/components/schemas/Address2"
-          description: The address of the organization registered at their registrar (such
-            as the Chamber of Commerce).
+          description: The address of the organization registered at their registrar (such as the Chamber of Commerce).
         registrationNumber:
           description: The organization's registration number.
           type: string
         stockData:
           $ref: "#/components/schemas/StockData"
-          description: Information about the organization's publicly traded stock. Provide
-            this object only if `type` is **listedPublicCompany**.
+          description: Information about the organization's publicly traded stock. Provide this object only if `type` is **listedPublicCompany**.
         taxId:
           description: The organization's tax identifier.
           type: string
@@ -3915,11 +3690,7 @@ components:
             - belowTaxThreshold
           type: string
         type:
-          description: "The type of organization. Possible values:
-            **associationIncorporated**, **governmentalOrganization**,
-            **listedPublicCompany**,**nonProfit**, **partnershipIncorporated**,
-            **privateCompany**, **unlistedPublicCompany**,
-            **soleProprietorship**."
+          description: "The type of organization. Possible values: **associationIncorporated**, **governmentalOrganization**, **listedPublicCompany**,**nonProfit**, **partnershipIncorporated**, **privateCompany**, **unlistedPublicCompany**, **soleProprietorship**."
           enum:
             - associationIncorporated
             - governmentalOrganization
@@ -3987,9 +3758,7 @@ components:
     PaymentInstrument:
       properties:
         balanceAccountId:
-          description: Unique identifier of the [balance
-            account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id}__queryParam_id)
-            associated with the payment instrument.
+          description: Unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id}__queryParam_id) associated with the payment instrument.
           type: string
         card:
           $ref: "#/components/schemas/Card"
@@ -4002,49 +3771,35 @@ components:
           description: Unique identifier of the payment instrument.
           type: string
         issuingCountryCode:
-          description: Country where the payment instrument is being issued, in the
-            two-character [ISO 3166-1
-            alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
-            For example, **NL**, **US**.
+          description: Country where the payment instrument is being issued, in the two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. For example, **NL**, **US**.
           type: string
         paymentInstrumentGroupId:
-          description: The ID of a payment instrument group that this payment instrument
-            is part of.
+          description: The ID of a payment instrument group that this payment instrument is part of.
           type: string
         reference:
           description: Your reference to the payment instrument, maximum 150 characters.
           maxLength: 150
           type: string
         status:
-          description: "The status of the payment instrument. If a status is not specified
-            when creating a payment instrument, the status is set to **Active**
-            by default. However, there can be exceptions based on the
-            `card.formFactor` and the `issuingCountryCode`. For example, when
-            issuing physical cards issued in the US, the default status is
-            **Requested**.
+          description: "The status of the payment instrument. If a status is not specified when creating a payment instrument, the status is set to **Active** by default. However, there can be exceptions based on the `card.formFactor` and the `issuingCountryCode`. For example, when issuing physical cards issued in the US, the default status is **Requested**.
 
 
             Possible values:\ 
 
 
-            \ * **Active**:  The payment instrument is active and
-            can be used to make payments.\ 
+            \ * **Active**:  The payment instrument is active and can be used to make payments.\ 
 
 
-            \ * **Requested**: The payment instrument has been
-            requested. This state is applicable when creating physical cards.\ 
+            \ * **Requested**: The payment instrument has been requested. This state is applicable when creating physical cards.\ 
 
 
-            * **Inactive**: The payment instrument is inactive and
-            cannot be used to make payments.\ 
+            * **Inactive**: The payment instrument is inactive and cannot be used to make payments.\ 
 
 
-            \ * **Suspended**: The payment instrument is temporarily
-            suspended and cannot be used to make payments.\ 
+            \ * **Suspended**: The payment instrument is temporarily suspended and cannot be used to make payments.\ 
 
 
-            \ * **Closed**: The payment instrument is permanently
-            closed. This action cannot be undone.\ 
+            \ * **Closed**: The payment instrument is permanently closed. This action cannot be undone.\ 
 
 
             * **Stolen**\ 
@@ -4085,13 +3840,10 @@ components:
     PaymentInstrumentGroup:
       properties:
         balancePlatform:
-          description: Unique identifier of the [balance
-            platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id)
-            where this payment instrument group belongs.
+          description: Unique identifier of the [balance platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id) where this payment instrument group belongs.
           type: string
         description:
-          description: Your description for the payment instrument group, maximum 300
-            characters.
+          description: Your description for the payment instrument group, maximum 300 characters.
           maxLength: 300
           type: string
         id:
@@ -4103,8 +3855,7 @@ components:
           description: Properties of the payment instrument group.
           type: object
         reference:
-          description: Your reference to the payment instrument group, maximum 150
-            characters.
+          description: Your reference to the payment instrument group, maximum 150 characters.
           maxLength: 150
           type: string
         txVariant:
@@ -4116,13 +3867,10 @@ components:
     PaymentInstrumentGroupInfo:
       properties:
         balancePlatform:
-          description: Unique identifier of the [balance
-            platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id)
-            where this payment instrument group belongs.
+          description: Unique identifier of the [balance platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id) where this payment instrument group belongs.
           type: string
         description:
-          description: Your description for the payment instrument group, maximum 300
-            characters.
+          description: Your description for the payment instrument group, maximum 300 characters.
           maxLength: 300
           type: string
         properties:
@@ -4131,8 +3879,7 @@ components:
           description: Properties of the payment instrument group.
           type: object
         reference:
-          description: Your reference to the payment instrument group, maximum 150
-            characters.
+          description: Your reference to the payment instrument group, maximum 150 characters.
           maxLength: 150
           type: string
         txVariant:
@@ -4144,9 +3891,7 @@ components:
     PaymentInstrumentInfo:
       properties:
         balanceAccountId:
-          description: Unique identifier of the [balance
-            account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id}__queryParam_id)
-            associated with the payment instrument.
+          description: Unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id}__queryParam_id) associated with the payment instrument.
           type: string
         card:
           $ref: "#/components/schemas/CardInfo"
@@ -4156,49 +3901,35 @@ components:
           maxLength: 300
           type: string
         issuingCountryCode:
-          description: Country where the payment instrument is being issued, in the
-            two-character [ISO 3166-1
-            alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
-            For example, **NL**, **US**.
+          description: Country where the payment instrument is being issued, in the two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. For example, **NL**, **US**.
           type: string
         paymentInstrumentGroupId:
-          description: The ID of a payment instrument group that this payment instrument
-            is part of.
+          description: The ID of a payment instrument group that this payment instrument is part of.
           type: string
         reference:
           description: Your reference to the payment instrument, maximum 150 characters.
           maxLength: 150
           type: string
         status:
-          description: "The status of the payment instrument. If a status is not specified
-            when creating a payment instrument, the status is set to **Active**
-            by default. However, there can be exceptions based on the
-            `card.formFactor` and the `issuingCountryCode`. For example, when
-            issuing physical cards issued in the US, the default status is
-            **Requested**.
+          description: "The status of the payment instrument. If a status is not specified when creating a payment instrument, the status is set to **Active** by default. However, there can be exceptions based on the `card.formFactor` and the `issuingCountryCode`. For example, when issuing physical cards issued in the US, the default status is **Requested**.
 
 
             Possible values:\ 
 
 
-            \ * **Active**:  The payment instrument is active and
-            can be used to make payments.\ 
+            \ * **Active**:  The payment instrument is active and can be used to make payments.\ 
 
 
-            \ * **Requested**: The payment instrument has been
-            requested. This state is applicable when creating physical cards.\ 
+            \ * **Requested**: The payment instrument has been requested. This state is applicable when creating physical cards.\ 
 
 
-            * **Inactive**: The payment instrument is inactive and
-            cannot be used to make payments.\ 
+            * **Inactive**: The payment instrument is inactive and cannot be used to make payments.\ 
 
 
-            \ * **Suspended**: The payment instrument is temporarily
-            suspended and cannot be used to make payments.\ 
+            \ * **Suspended**: The payment instrument is temporarily suspended and cannot be used to make payments.\ 
 
 
-            \ * **Closed**: The payment instrument is permanently
-            closed. This action cannot be undone.\ 
+            \ * **Closed**: The payment instrument is permanently closed. This action cannot be undone.\ 
 
 
             * **Stolen**\ 
@@ -4245,10 +3976,8 @@ components:
     PaymentInstrumentUpdateRequest:
       properties:
         balanceAccountId:
-          description: >-
-            Unique identifier of the balance account associated with this
-            payment instrument.
-
+          description: |-
+            Unique identifier of the balance account associated with this payment instrument.
             >You can only change the balance account ID if the payment instrument has a **Requested** or **Inactive** status.
           type: string
         card:
@@ -4261,24 +3990,19 @@ components:
             Possible values:\ 
 
 
-            \ * **Active**:  The payment instrument is active and
-            can be used to make payments.\ 
+            \ * **Active**:  The payment instrument is active and can be used to make payments.\ 
 
 
-            \ * **Requested**: The payment instrument has been
-            requested. This state is applicable when creating physical cards.\ 
+            \ * **Requested**: The payment instrument has been requested. This state is applicable when creating physical cards.\ 
 
 
-            * **Inactive**: The payment instrument is inactive and
-            cannot be used to make payments.\ 
+            * **Inactive**: The payment instrument is inactive and cannot be used to make payments.\ 
 
 
-            \ * **Suspended**: The payment instrument is temporarily
-            suspended and cannot be used to make payments.\ 
+            \ * **Suspended**: The payment instrument is temporarily suspended and cannot be used to make payments.\ 
 
 
-            \ * **Closed**: The payment instrument is permanently
-            closed. This action cannot be undone.\ 
+            \ * **Closed**: The payment instrument is permanently closed. This action cannot be undone.\ 
 
 
             * **Stolen**\ 
@@ -4312,10 +4036,8 @@ components:
           description: An ID number of the person.
           type: string
         nationality:
-          description: >-
-            The nationality of the person represented by a two-character
-            country code.
-
+          description: |-
+            The nationality of the person represented by a two-character country code.
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
           maxLength: 2
           minLength: 2
@@ -4346,9 +4068,8 @@ components:
     PhoneNumber:
       properties:
         phoneCountryCode:
-          description: >-
+          description: |-
             The two-character country code of the phone number.
-
             >The permitted country codes are defined in ISO-3166-1 alpha-2 (e.g. 'NL').
           type: string
         phoneNumber:
@@ -4357,9 +4078,8 @@ components:
             >The inclusion of the phone number country code is not necessary.
           type: string
         phoneType:
-          description: >-
+          description: |-
             The type of the phone number.
-
             >The following values are permitted: `Landline`, `Mobile`, `SIP`, `Fax`.
           enum:
             - Fax
@@ -4373,9 +4093,7 @@ components:
     PhoneNumber2:
       properties:
         countryCode:
-          description: The two-letter country code, in [ISO 3166-1
-            alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format.
-            For example, **US** or **NL**.
+          description: The two-letter country code, in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. For example, **US** or **NL**.
           type: string
         number:
           description: The phone number.
@@ -4391,8 +4109,7 @@ components:
           description: The merchant account used when the payment details were stored.
           type: string
         reference:
-          description: The `recurringDetailReference` returned in the response when the
-            payment details were stored.
+          description: The `recurringDetailReference` returned in the response when the payment details were stored.
           type: string
         shopperReference:
           description: The unique identifier used when the payment details were stored.
@@ -4400,15 +4117,13 @@ components:
     RestServiceError:
       properties:
         detail:
-          description: A human-readable explanation specific to this occurrence of the
-            problem.
+          description: A human-readable explanation specific to this occurrence of the problem.
           type: string
         errorCode:
           description: A code that identifies the problem type.
           type: string
         errorType:
-          description: A URI that identifies the problem type, which points to
-            human-readable documentation on this problem type.
+          description: A URI that identifies the problem type, which points to human-readable documentation on this problem type.
           type: string
         instance:
           description: A unique URI that identifies the specific occurrence of the problem.
@@ -4419,8 +4134,7 @@ components:
             $ref: "#/components/schemas/InvalidField"
           type: array
         requestId:
-          description: A unique reference for the request, essentially same as
-            `pspReference`.
+          description: A unique reference for the request, essentially same as `pspReference`.
           type: string
         status:
           description: The HTTP status code.
@@ -4456,9 +4170,7 @@ components:
     StockData:
       properties:
         marketIdentifier:
-          description: The [Market Identifier
-            Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) of the
-            stock market where the organization's stocks are traded.
+          description: The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) of the stock market where the organization's stocks are traded.
           type: string
         stockNumber:
           description: The stock number.
@@ -4469,53 +4181,34 @@ components:
     SweepConfiguration:
       properties:
         balanceAccountId:
-          description: Unique identifier of the [balance
-            account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id})
-            that will be the source or destination of the balance sweep. This
-            can only be used for periodic sweep schedules such as
-            `schedule.type` **daily** or **monthly**.
+          description: Unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id}) that will be the source or destination of the balance sweep. This can only be used for periodic sweep schedules such as `schedule.type` **daily** or **monthly**.
           type: string
         merchantAccount:
-          description: The merchant account that will be the source of funds. You can only
-            use this if you are processing payments with Adyen. This can only be
-            used for sweeps of `type` **pull** and `schedule.type` **balance**.
+          description: The merchant account that will be the source of funds. You can only use this if you are processing payments with Adyen. This can only be used for sweeps of `type` **pull** and `schedule.type` **balance**.
           type: string
         schedule:
           $ref: "#/components/schemas/SweepSchedule"
-          description: The schedule when the `triggerAmount` is evaluated. If the balance
-            meets the threshold, funds are pushed out of or pulled in to the
-            balance account.
+          description: The schedule when the `triggerAmount` is evaluated. If the balance meets the threshold, funds are pushed out of or pulled in to the balance account.
         sweepAmount:
           $ref: "#/components/schemas/Amount"
-          description: The amount that must be pushed out or pulled in. You can configure
-            only one of `sweepAmount` or `targetAmount`.
+          description: The amount that must be pushed out or pulled in. You can configure only one of `sweepAmount` or `targetAmount`.
         targetAmount:
           $ref: "#/components/schemas/Amount"
-          description: The amount that must be available in the balance account after the
-            sweep. You can configure only one of `sweepAmount` or
-            `targetAmount`.
+          description: The amount that must be available in the balance account after the sweep. You can configure only one of `sweepAmount` or `targetAmount`.
         transferInstrumentId:
-          description: Unique identifier of the [transfer
-            instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/transferInstruments/{id}__queryParam_id)
-            that will be the source or destination of the balance sweep. This
-            can only be used for periodic sweep schedules such as
-            `schedule.type` **daily** or **monthly**.
+          description: Unique identifier of the [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/transferInstruments/{id}__queryParam_id) that will be the source or destination of the balance sweep. This can only be used for periodic sweep schedules such as `schedule.type` **daily** or **monthly**.
           type: string
         triggerAmount:
           $ref: "#/components/schemas/Amount"
-          description: >-
-            The threshold amount that triggers the sweep. If not specified, the
-            amount defaults to zero. The `triggerAmount` is evaluated at the
-            specified `schedule.type`.
-
+          description: |-
+            The threshold amount that triggers the sweep. If not specified, the amount defaults to zero. The `triggerAmount` is evaluated at the specified `schedule.type`.
 
             * For `type` **pull**, if the balance is less than or equal to the `triggerAmount`, funds will be pulled in to the balance account.
-
 
             * For `type` **push**, if the balance is more than or equal to the `triggerAmount`, funds will be pushed out of the balance account.
         type:
           default: push
-          description: >-
+          description: |-
             The direction of sweep. Possible values:
 
              * **push**: _Push funds out_ to a destination balance account or transfer instrument.
@@ -4531,21 +4224,16 @@ components:
     SweepSchedule:
       properties:
         type:
-          description: >-
+          description: |-
             The schedule type.
-
 
             Possible values:
 
-
             * **daily**: Push out funds daily at 07:00 AM CET.
-
 
             * **weekly**: Push out funds every Monday at 07:00 AM CET.
 
-
             * **monthly**: Push out funds every 1st of the month at 07:00 AM CET.
-
 
             * **balance**: Only for sweeps of `type` **pull** and with a `merchantAccount` source. Pull in funds instantly if the balance is less than or equal to the `triggerAmount`.
           enum:
@@ -4558,16 +4246,12 @@ components:
       properties:
         amount:
           $ref: "#/components/schemas/Amount"
-          description: The maximum amount that a payment instrument can be used for in a
-            given period specified in the `interval.type`.
+          description: The maximum amount that a payment instrument can be used for in a given period specified in the `interval.type`.
         balancePlatformId:
-          description: Unique identifier of the [balance
-            platform](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/get/balancePlatforms/{id}__queryParam_id)
-            to which the rule applies.
+          description: Unique identifier of the [balance platform](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/get/balancePlatforms/{id}__queryParam_id) to which the rule applies.
           type: string
         countries:
-          description: 'List of countries to which the rule applies. For example:
-            **["NL","US"]**.'
+          description: 'List of countries to which the rule applies. For example: **["NL","US"]**.'
           items:
             type: string
           type: array
@@ -4576,18 +4260,14 @@ components:
           maxLength: 300
           type: string
         endDate:
-          description: >-
-            The date when the rule will stop being evaluated, in ISO 8601
-            extended offset date-time format.  For example,
-            **2020-12-18T10:15:30+01:00**.
-
+          description: |-
+            The date when the rule will stop being evaluated, in ISO 8601 extended offset date-time format.  For example, **2020-12-18T10:15:30+01:00**.
 
             If not provided when creating a transaction rule, the rule will be evaluated until the rule status is set to **inactive**.
           type: string
         entryModes:
-          description: >-
+          description: |-
             List of point-of-sale entry modes to which the rule applies.
-
 
             Possible values: **manual**, **chip**, **magstripe**, **contactless**, **cof**, **token**, **server**, **barcode**, **ocr**.
           items:
@@ -4611,8 +4291,7 @@ components:
           $ref: "#/components/schemas/TransactionRuleInterval"
           description: The interval when the rule conditions must be applied.
         maxTransactions:
-          description: The maximum number of transactions that a payment instrument can be
-            used for in a given period specified in the `interval.type`.
+          description: The maximum number of transactions that a payment instrument can be used for in a given period specified in the `interval.type`.
           format: int32
           type: integer
         mccs:
@@ -4621,19 +4300,14 @@ components:
             type: string
           type: array
         paymentInstrumentGroupId:
-          description: Unique identifier of the [payment instrument
-            group](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/paymentInstrumentGroups/{id})
-            to which the rule applies.
+          description: Unique identifier of the [payment instrument group](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/paymentInstrumentGroups/{id}) to which the rule applies.
           type: string
         paymentInstrumentId:
-          description: Unique identifier of the [payment
-            instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/paymentInstruments/{id})
-            to which the rule applies.
+          description: Unique identifier of the [payment instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/paymentInstruments/{id}) to which the rule applies.
           type: string
         processingTypes:
-          description: >-
+          description: |-
             List of processing types to which the rule applies.
-
 
             Possible values: **atmWithdraw**, **pos**, **ecommerce**, **moto**, **recurring**, **balanceInquiry**.
           items:
@@ -4652,22 +4326,16 @@ components:
           maxLength: 150
           type: string
         startDate:
-          description: >+
-            The date when the rule will start to be evaluated, in ISO 8601
-            extended offset date-time format. For example,
-            **2020-12-18T10:15:30+01:00**.
-
+          description: |+
+            The date when the rule will start to be evaluated, in ISO 8601 extended offset date-time format. For example, **2020-12-18T10:15:30+01:00**.
 
             If not provided when creating a transaction rule, the `startDate` is set to the date when the rule status is set to **active**. 
 
           type: string
         status:
-          description: >-
-            The status of the transaction rule. If you provide a `startDate` in
-            the request, the rule is automatically created 
-
+          description: |-
+            The status of the transaction rule. If you provide a `startDate` in the request, the rule is automatically created 
             with an **active** status. 
-
 
             Possible values: **active**, **inactive**.
           enum:
@@ -4675,9 +4343,8 @@ components:
             - inactive
           type: string
         type:
-          description: >
+          description: |
             The type of conditions provided in the rule.
-
 
             Possible values:
               * **allowList** - The rule provides categories (such as country and MCC) where payments must be allowed. 
@@ -4699,16 +4366,12 @@ components:
       properties:
         amount:
           $ref: "#/components/schemas/Amount"
-          description: The maximum amount that a payment instrument can be used for in a
-            given period specified in the `interval.type`.
+          description: The maximum amount that a payment instrument can be used for in a given period specified in the `interval.type`.
         balancePlatformId:
-          description: Unique identifier of the [balance
-            platform](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/get/balancePlatforms/{id}__queryParam_id)
-            to which the rule applies.
+          description: Unique identifier of the [balance platform](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/get/balancePlatforms/{id}__queryParam_id) to which the rule applies.
           type: string
         countries:
-          description: 'List of countries to which the rule applies. For example:
-            **["NL","US"]**.'
+          description: 'List of countries to which the rule applies. For example: **["NL","US"]**.'
           items:
             type: string
           type: array
@@ -4717,18 +4380,14 @@ components:
           maxLength: 300
           type: string
         endDate:
-          description: >-
-            The date when the rule will stop being evaluated, in ISO 8601
-            extended offset date-time format.  For example,
-            **2020-12-18T10:15:30+01:00**.
-
+          description: |-
+            The date when the rule will stop being evaluated, in ISO 8601 extended offset date-time format.  For example, **2020-12-18T10:15:30+01:00**.
 
             If not provided when creating a transaction rule, the rule will be evaluated until the rule status is set to **inactive**.
           type: string
         entryModes:
-          description: >-
+          description: |-
             List of point-of-sale entry modes to which the rule applies.
-
 
             Possible values: **manual**, **chip**, **magstripe**, **contactless**, **cof**, **token**, **server**, **barcode**, **ocr**.
           items:
@@ -4749,8 +4408,7 @@ components:
           $ref: "#/components/schemas/TransactionRuleInterval"
           description: The interval when the rule conditions must be applied.
         maxTransactions:
-          description: The maximum number of transactions that a payment instrument can be
-            used for in a given period specified in the `interval.type`.
+          description: The maximum number of transactions that a payment instrument can be used for in a given period specified in the `interval.type`.
           format: int32
           type: integer
         mccs:
@@ -4759,19 +4417,14 @@ components:
             type: string
           type: array
         paymentInstrumentGroupId:
-          description: Unique identifier of the [payment instrument
-            group](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/paymentInstrumentGroups/{id})
-            to which the rule applies.
+          description: Unique identifier of the [payment instrument group](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/paymentInstrumentGroups/{id}) to which the rule applies.
           type: string
         paymentInstrumentId:
-          description: Unique identifier of the [payment
-            instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/paymentInstruments/{id})
-            to which the rule applies.
+          description: Unique identifier of the [payment instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/paymentInstruments/{id}) to which the rule applies.
           type: string
         processingTypes:
-          description: >-
+          description: |-
             List of processing types to which the rule applies.
-
 
             Possible values: **atmWithdraw**, **pos**, **ecommerce**, **moto**, **recurring**, **balanceInquiry**.
           items:
@@ -4790,22 +4443,16 @@ components:
           maxLength: 150
           type: string
         startDate:
-          description: >+
-            The date when the rule will start to be evaluated, in ISO 8601
-            extended offset date-time format. For example,
-            **2020-12-18T10:15:30+01:00**.
-
+          description: |+
+            The date when the rule will start to be evaluated, in ISO 8601 extended offset date-time format. For example, **2020-12-18T10:15:30+01:00**.
 
             If not provided when creating a transaction rule, the `startDate` is set to the date when the rule status is set to **active**. 
 
           type: string
         status:
-          description: >-
-            The status of the transaction rule. If you provide a `startDate` in
-            the request, the rule is automatically created 
-
+          description: |-
+            The status of the transaction rule. If you provide a `startDate` in the request, the rule is automatically created 
             with an **active** status. 
-
 
             Possible values: **active**, **inactive**.
           enum:
@@ -4813,9 +4460,8 @@ components:
             - inactive
           type: string
         type:
-          description: >
+          description: |
             The type of conditions provided in the rule.
-
 
             Possible values:
               * **allowList** - The rule provides categories (such as country and MCC) where payments must be allowed. 
@@ -4836,10 +4482,8 @@ components:
     TransactionRuleInterval:
       properties:
         type:
-          description: >-
-            Defines the period when the rule conditions and limits apply, and
-            how often the amount and transaction counters are reset.
-
+          description: |-
+            Defines the period when the rule conditions and limits apply, and how often the amount and transaction counters are reset.
 
             Possible values:
               * **perTransaction**: The conditions are evaluated and the counters are reset for every transaction.
@@ -4872,20 +4516,16 @@ components:
       properties:
         bankAccount:
           $ref: "#/components/schemas/BankAccountInfo"
-          description: Contains information about the legal entity's bank account.
-            Required when `type` is **bankAccount**.
+          description: Contains information about the legal entity's bank account. Required when `type` is **bankAccount**.
         id:
           description: Unique identifier of the transfer instrument.
           type: string
         legalEntityId:
-          description: Unique identifier of the [legal
-            entity](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/legalEntities/{id}__queryParam_id)
-            that owns the transfer instrument.
+          description: Unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/legalEntities/{id}__queryParam_id) that owns the transfer instrument.
           type: string
         recurringDetail:
           $ref: "#/components/schemas/RecurringDetail"
-          description: Contains information about the legal entity's previously stored
-            payment details. Required when `type` is **recurringDetail**.
+          description: Contains information about the legal entity's previously stored payment details. Required when `type` is **recurringDetail**.
         type:
           description: |-
             The type of transfer instrument.
@@ -4896,17 +4536,13 @@ components:
       properties:
         bankAccount:
           $ref: "#/components/schemas/BankAccountInfo"
-          description: Contains information about the legal entity's bank account.
-            Required when `type` is **bankAccount**.
+          description: Contains information about the legal entity's bank account. Required when `type` is **bankAccount**.
         legalEntityId:
-          description: Unique identifier of the [legal
-            entity](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/legalEntities/{id}__queryParam_id)
-            that owns the transfer instrument.
+          description: Unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/legalEntities/{id}__queryParam_id) that owns the transfer instrument.
           type: string
         recurringDetail:
           $ref: "#/components/schemas/RecurringDetail"
-          description: Contains information about the legal entity's previously stored
-            payment details. Required when `type` is **recurringDetail**.
+          description: Contains information about the legal entity's previously stored payment details. Required when `type` is **recurringDetail**.
         type:
           description: |-
             The type of transfer instrument.

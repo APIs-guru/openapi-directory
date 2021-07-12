@@ -816,6 +816,9 @@ components:
         nodeId:
           description: The id of the node. This should be equal to SaasInstanceNode.node_id.
           type: string
+        perSliEligibility:
+          $ref: "#/components/schemas/GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility"
+          description: If present, this will override eligibility for the node coming from instance or exclusions for specified SLIs.
       type: object
     GoogleCloudSaasacceleratorManagementProvidersV1PerSliSloEligibility:
       description: PerSliSloEligibility is a mapping from an SLI name to eligibility.

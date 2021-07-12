@@ -6,9 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: The Chrome Policy API is a suite of services that allows Chrome
-    administrators to control the policies applied to their managed Chrome OS
-    devices and Chrome browsers.
+  description: The Chrome Policy API is a suite of services that allows Chrome administrators to control the policies applied to their managed Chrome OS devices and Chrome browsers.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -46,8 +44,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates an enterprise file from the content provided by user.
-        Returns a public download url for end user.
+      description: Creates an enterprise file from the content provided by user. Returns a public download url for end user.
       operationId: chromepolicy.media.upload
       parameters:
         - description: Required. The customer for which the file upload will apply.
@@ -89,16 +86,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Modify multiple policy values that are applied to a specific org
-        unit so that they now inherit the value from a parent (if applicable).
-        All targets must have the same target format. That is to say that they
-        must point to the same target resource and must have the same keys
-        specified in `additionalTargetKeyNames`. On failure the request will
-        return the error details as part of the google.rpc.Status.
+      description: Modify multiple policy values that are applied to a specific org unit so that they now inherit the value from a parent (if applicable). All targets must have the same target format. That is to say that they must point to the same target resource and must have the same keys specified in `additionalTargetKeyNames`. On failure the request will return the error details as part of the google.rpc.Status.
       operationId: chromepolicy.customers.policies.orgunits.batchInherit
       parameters:
-        - description: ID of the G Suite account or literal "my_customer" for the customer
-            associated to the request.
+        - description: ID of the G Suite account or literal "my_customer" for the customer associated to the request.
           in: path
           name: customer
           required: true
@@ -108,8 +99,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleChromePolicyV1BatchInheritOrgUnitPoliciesRequ\
-                est"
+              $ref: "#/components/schemas/GoogleChromePolicyV1BatchInheritOrgUnitPoliciesRequest"
       responses:
         "200":
           content:
@@ -138,15 +128,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Modify multiple policy values that are applied to a specific org
-        unit. All targets must have the same target format. That is to say that
-        they must point to the same target resource and must have the same keys
-        specified in `additionalTargetKeyNames`. On failure the request will
-        return the error details as part of the google.rpc.Status.
+      description: Modify multiple policy values that are applied to a specific org unit. All targets must have the same target format. That is to say that they must point to the same target resource and must have the same keys specified in `additionalTargetKeyNames`. On failure the request will return the error details as part of the google.rpc.Status.
       operationId: chromepolicy.customers.policies.orgunits.batchModify
       parameters:
-        - description: ID of the G Suite account or literal "my_customer" for the customer
-            associated to the request.
+        - description: ID of the G Suite account or literal "my_customer" for the customer associated to the request.
           in: path
           name: customer
           required: true
@@ -156,8 +141,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleChromePolicyV1BatchModifyOrgUnitPoliciesReque\
-                st"
+              $ref: "#/components/schemas/GoogleChromePolicyV1BatchModifyOrgUnitPoliciesRequest"
       responses:
         "200":
           content:
@@ -186,12 +170,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Gets the resolved policy values for a list of policies that match a
-        search query.
+      description: Gets the resolved policy values for a list of policies that match a search query.
       operationId: chromepolicy.customers.policies.resolve
       parameters:
-        - description: ID of the G Suite account or literal "my_customer" for the customer
-            associated to the request.
+        - description: ID of the G Suite account or literal "my_customer" for the customer associated to the request.
           in: path
           name: customer
           required: true
@@ -263,8 +245,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/policySchemas":
     get:
-      description: Gets a list of policy schemas that match a specified filter value
-        for a given customer.
+      description: Gets a list of policy schemas that match a specified filter value for a given customer.
       operationId: chromepolicy.customers.policySchemas.list
       parameters:
         - description: Required. The customer for which the listing request will apply.
@@ -273,8 +254,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The schema filter used to find a particular schema based on fields
-            like its resource name, description and `additionalTargetKeyNames`.
+        - description: The schema filter used to find a particular schema based on fields like its resource name, description and `additionalTargetKeyNames`.
           in: query
           name: filter
           schema:
@@ -284,8 +264,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: The page token used to retrieve a specific page of the listing
-            request.
+        - description: The page token used to retrieve a specific page of the listing request.
           in: query
           name: pageToken
           schema:
@@ -360,9 +339,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -380,9 +357,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -401,8 +376,7 @@ components:
         type: string
   schemas:
     GoogleChromePolicyV1AdditionalTargetKeyName:
-      description: Additional key names that will be used to identify the target of
-        the policy value.
+      description: Additional key names that will be used to identify the target of the policy value.
       properties:
         key:
           description: Key name.
@@ -412,55 +386,32 @@ components:
           type: string
       type: object
     GoogleChromePolicyV1BatchInheritOrgUnitPoliciesRequest:
-      description: Request message for specifying that multiple policy values inherit
-        their value from their parents.
+      description: Request message for specifying that multiple policy values inherit their value from their parents.
       properties:
         requests:
-          description: "List of policies that have to inherit their values as defined by
-            the `requests`. All requests in the list must follow these
-            restrictions: 1. All schemas in the list must have the same root
-            namespace. 2. All `policyTargetKey.targetResource` values must point
-            to an org unit resource. 3. All `policyTargetKey` values must have
-            the same key names in the ` additionalTargetKeys`. This also means
-            if one of the targets has an empty `additionalTargetKeys` map, all
-            of the targets must have an empty `additionalTargetKeys` map. 4. No
-            two modification requests can reference the same `policySchema` + `
-            policyTargetKey` pair. "
+          description: "List of policies that have to inherit their values as defined by the `requests`. All requests in the list must follow these restrictions: 1. All schemas in the list must have the same root namespace. 2. All `policyTargetKey.targetResource` values must point to an org unit resource. 3. All `policyTargetKey` values must have the same key names in the ` additionalTargetKeys`. This also means if one of the targets has an empty `additionalTargetKeys` map, all of the targets must have an empty `additionalTargetKeys` map. 4. No two modification requests can reference the same `policySchema` + ` policyTargetKey` pair. "
           items:
             $ref: "#/components/schemas/GoogleChromePolicyV1InheritOrgUnitPolicyRequest"
           type: array
       type: object
     GoogleChromePolicyV1BatchModifyOrgUnitPoliciesRequest:
-      description: Request message for modifying multiple policy values for a specific
-        target.
+      description: Request message for modifying multiple policy values for a specific target.
       properties:
         requests:
-          description: "List of policies to modify as defined by the `requests`. All
-            requests in the list must follow these restrictions: 1. All schemas
-            in the list must have the same root namespace. 2. All
-            `policyTargetKey.targetResource` values must point to an org unit
-            resource. 3. All `policyTargetKey` values must have the same key
-            names in the ` additionalTargetKeys`. This also means if one of the
-            targets has an empty `additionalTargetKeys` map, all of the targets
-            must have an empty `additionalTargetKeys` map. 4. No two
-            modification requests can reference the same `policySchema` + `
-            policyTargetKey` pair. "
+          description: "List of policies to modify as defined by the `requests`. All requests in the list must follow these restrictions: 1. All schemas in the list must have the same root namespace. 2. All `policyTargetKey.targetResource` values must point to an org unit resource. 3. All `policyTargetKey` values must have the same key names in the ` additionalTargetKeys`. This also means if one of the targets has an empty `additionalTargetKeys` map, all of the targets must have an empty `additionalTargetKeys` map. 4. No two modification requests can reference the same `policySchema` + ` policyTargetKey` pair. "
           items:
             $ref: "#/components/schemas/GoogleChromePolicyV1ModifyOrgUnitPolicyRequest"
           type: array
       type: object
     GoogleChromePolicyV1InheritOrgUnitPolicyRequest:
-      description: Request parameters for inheriting policy value of a specific org
-        unit target from the policy value of its parent org unit.
+      description: Request parameters for inheriting policy value of a specific org unit target from the policy value of its parent org unit.
       properties:
         policySchema:
-          description: The fully qualified name of the policy schema that is being
-            inherited.
+          description: The fully qualified name of the policy schema that is being inherited.
           type: string
         policyTargetKey:
           $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
-          description: Required. The key of the target for which we want to modify a
-            policy. The target resource must point to an Org Unit.
+          description: Required. The key of the target for which we want to modify a policy. The target resource must point to an Org Unit.
       type: object
     GoogleChromePolicyV1ListPolicySchemasResponse:
       description: Response message for listing policy schemas that match a filter.
@@ -475,21 +426,16 @@ components:
           type: array
       type: object
     GoogleChromePolicyV1ModifyOrgUnitPolicyRequest:
-      description: Request parameters for modifying a policy value for a specific org
-        unit target.
+      description: Request parameters for modifying a policy value for a specific org unit target.
       properties:
         policyTargetKey:
           $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
-          description: Required. The key of the target for which we want to modify a
-            policy. The target resource must point to an Org Unit.
+          description: Required. The key of the target for which we want to modify a policy. The target resource must point to an Org Unit.
         policyValue:
           $ref: "#/components/schemas/GoogleChromePolicyV1PolicyValue"
           description: The new value for the policy.
         updateMask:
-          description: Required. Policy fields to update. Only fields in this mask will be
-            updated; other fields in `policy_value` will be ignored (even if
-            they have values). If a field is in this list it must have a value
-            in 'policy_value'.
+          description: Required. Policy fields to update. Only fields in this mask will be updated; other fields in `policy_value` will be ignored (even if they have values). If a field is in this list it must have a value in 'policy_value'.
           format: google-fieldmask
           type: string
       type: object
@@ -503,10 +449,7 @@ components:
           readOnly: true
           type: array
         additionalTargetKeyNames:
-          description: Output only. Additional key names that will be used to identify the
-            target of the policy value. When specifying a `policyTargetKey`,
-            each of the additional keys specified here will have to be included
-            in the `additionalTargetKeys` map.
+          description: Output only. Additional key names that will be used to identify the target of the policy value. When specifying a `policyTargetKey`, each of the additional keys specified here will have to be included in the `additionalTargetKeys` map.
           items:
             $ref: "#/components/schemas/GoogleChromePolicyV1AdditionalTargetKeyName"
           readOnly: true
@@ -515,8 +458,7 @@ components:
           $ref: "#/components/schemas/Proto2FileDescriptorProto"
           description: Schema definition using proto descriptor.
         fieldDescriptions:
-          description: Output only. Detailed description of each field that is part of the
-            schema.
+          description: Output only. Detailed description of each field that is part of the schema.
           items:
             $ref: "#/components/schemas/GoogleChromePolicyV1PolicySchemaFieldDescription"
           readOnly: true
@@ -525,21 +467,17 @@ components:
           description: "Format: name=customers/{customer}/policySchemas/{schema_namespace}"
           type: string
         notices:
-          description: Output only. Special notice messages related to setting certain
-            values in certain fields in the schema.
+          description: Output only. Special notice messages related to setting certain values in certain fields in the schema.
           items:
             $ref: "#/components/schemas/GoogleChromePolicyV1PolicySchemaNoticeDescription"
           readOnly: true
           type: array
         policyDescription:
-          description: Output only. Description about the policy schema for user
-            consumption.
+          description: Output only. Description about the policy schema for user consumption.
           readOnly: true
           type: string
         schemaName:
-          description: Output only. The full qualified name of the policy schema. This
-            value is used to fill the field `policy_schema` in PolicyValue when
-            calling BatchInheritOrgUnitPolicies or BatchModifyOrgUnitPolicies.
+          description: Output only. The full qualified name of the policy schema. This value is used to fill the field `policy_schema` in PolicyValue when calling BatchInheritOrgUnitPolicies or BatchModifyOrgUnitPolicies.
           readOnly: true
           type: string
         supportUri:
@@ -548,60 +486,50 @@ components:
           type: string
       type: object
     GoogleChromePolicyV1PolicySchemaFieldDescription:
-      description: Provides detailed information for a particular field that is part
-        of a PolicySchema.
+      description: Provides detailed information for a particular field that is part of a PolicySchema.
       properties:
         description:
           description: Output only. The description for the field.
           readOnly: true
           type: string
         field:
-          description: Output only. The name of the field for associated with this
-            description.
+          description: Output only. The name of the field for associated with this description.
           readOnly: true
           type: string
         inputConstraint:
-          description: Output only. Any input constraints associated on the values for the
-            field.
+          description: Output only. Any input constraints associated on the values for the field.
           readOnly: true
           type: string
         knownValueDescriptions:
-          description: Output only. If the field has a set of know values, this field will
-            provide a description for these values.
+          description: Output only. If the field has a set of know values, this field will provide a description for these values.
           items:
-            $ref: "#/components/schemas/GoogleChromePolicyV1PolicySchemaFieldKnownValueDesc\
-              ription"
+            $ref: "#/components/schemas/GoogleChromePolicyV1PolicySchemaFieldKnownValueDescription"
           readOnly: true
           type: array
         nestedFieldDescriptions:
-          description: Output only. Provides the description of the fields nested in this
-            field, if the field is a message type that defines multiple fields.
+          description: Output only. Provides the description of the fields nested in this field, if the field is a message type that defines multiple fields.
           items:
             $ref: "#/components/schemas/GoogleChromePolicyV1PolicySchemaFieldDescription"
           readOnly: true
           type: array
       type: object
     GoogleChromePolicyV1PolicySchemaFieldKnownValueDescription:
-      description: Provides detailed information about a known value that is allowed
-        for a particular field in a PolicySchema.
+      description: Provides detailed information about a known value that is allowed for a particular field in a PolicySchema.
       properties:
         description:
           description: Output only. Additional description for this value.
           readOnly: true
           type: string
         value:
-          description: Output only. The string represenstation of the value that can be
-            set for the field.
+          description: Output only. The string represenstation of the value that can be set for the field.
           readOnly: true
           type: string
       type: object
     GoogleChromePolicyV1PolicySchemaNoticeDescription:
-      description: Provides special notice messages related to a particular value in a
-        field that is part of a PolicySchema.
+      description: Provides special notice messages related to a particular value in a field that is part of a PolicySchema.
       properties:
         acknowledgementRequired:
-          description: Output only. Whether the user needs to acknowledge the notice
-            message before the value can be set.
+          description: Output only. Whether the user needs to acknowledge the notice message before the value can be set.
           readOnly: true
           type: boolean
         field:
@@ -609,14 +537,11 @@ components:
           readOnly: true
           type: string
         noticeMessage:
-          description: Output only. The notice message associate with the value of the
-            field.
+          description: Output only. The notice message associate with the value of the field.
           readOnly: true
           type: string
         noticeValue:
-          description: Output only. The value of the field that has a notice. When setting
-            the field to this value, the user may be required to acknowledge the
-            notice message in order for the value to be set.
+          description: Output only. The value of the field that has a notice. When setting the field to this value, the user may be required to acknowledge the notice message in order for the value to be set.
           readOnly: true
           type: string
       type: object
@@ -626,64 +551,46 @@ components:
         additionalTargetKeys:
           additionalProperties:
             type: string
-          description: Map containing the additional target key name and value pairs used
-            to further identify the target of the policy.
+          description: Map containing the additional target key name and value pairs used to further identify the target of the policy.
           type: object
         targetResource:
-          description: 'The target resource on which this policy is applied. The following
-            resources are supported: * Organizational Unit
-            ("orgunits/{orgunit_id}")'
+          description: 'The target resource on which this policy is applied. The following resources are supported: * Organizational Unit ("orgunits/{orgunit_id}")'
           type: string
       type: object
     GoogleChromePolicyV1PolicyValue:
       description: A particular value for a policy managed by the service.
       properties:
         policySchema:
-          description: The fully qualified name of the policy schema associated with this
-            policy.
+          description: The fully qualified name of the policy schema associated with this policy.
           type: string
         value:
           additionalProperties:
             description: Properties of the object.
-          description: The value of the policy that is compatible with the schema that it
-            is associated with.
+          description: The value of the policy that is compatible with the schema that it is associated with.
           type: object
       type: object
     GoogleChromePolicyV1ResolveRequest:
-      description: Request message for getting the resolved policy value for a
-        specific target.
+      description: Request message for getting the resolved policy value for a specific target.
       properties:
         pageSize:
-          description: The maximum number of policies to return, defaults to 100 and has a
-            maximum of 1000.
+          description: The maximum number of policies to return, defaults to 100 and has a maximum of 1000.
           format: int32
           type: integer
         pageToken:
           description: The page token used to retrieve a specific page of the request.
           type: string
         policySchemaFilter:
-          description: 'The schema filter to apply to the resolve request. Specify a
-            schema name to view a particular schema, for example:
-            chrome.users.ShowLogoutButton Wildcards are supported, but only in
-            the leaf portion of the schema name. Wildcards cannot be used in
-            namespace directly. Please read
-            https://developers.google.com/chrome/chrome-management/guides/policyapi
-            for details on schema namepsaces. For example: Valid:
-            "chrome.users.*", "chrome.users.apps.*", "chrome.printers.*"
-            Invalid: "*", "*.users", "chrome.*", "chrome.*.apps.*"'
+          description: 'The schema filter to apply to the resolve request. Specify a schema name to view a particular schema, for example: chrome.users.ShowLogoutButton Wildcards are supported, but only in the leaf portion of the schema name. Wildcards cannot be used in namespace directly. Please read https://developers.google.com/chrome/chrome-management/guides/policyapi for details on schema namepsaces. For example: Valid: "chrome.users.*", "chrome.users.apps.*", "chrome.printers.*" Invalid: "*", "*.users", "chrome.*", "chrome.*.apps.*"'
           type: string
         policyTargetKey:
           $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
-          description: Required. The key of the target resource on which the policies
-            should be resolved. The target resource must point to an Org Unit.
+          description: Required. The key of the target resource on which the policies should be resolved. The target resource must point to an Org Unit.
       type: object
     GoogleChromePolicyV1ResolveResponse:
-      description: Response message for getting the resolved policy value for a
-        specific target.
+      description: Response message for getting the resolved policy value for a specific target.
       properties:
         nextPageToken:
-          description: The page token used to get the next set of resolved policies found
-            by the request.
+          description: The page token used to get the next set of resolved policies found by the request.
           type: string
         resolvedPolicies:
           description: The list of resolved policies found by the resolve request.
@@ -696,16 +603,11 @@ components:
       properties:
         sourceKey:
           $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
-          description: Output only. The source resource from which this policy value is
-            obtained. May be the same as `targetKey` if the policy is directly
-            modified on the target, otherwise it would be another resource from
-            which the policy gets its value (if applicable). If not present, the
-            source is the default value for the customer.
+          description: Output only. The source resource from which this policy value is obtained. May be the same as `targetKey` if the policy is directly modified on the target, otherwise it would be another resource from which the policy gets its value (if applicable). If not present, the source is the default value for the customer.
           readOnly: true
         targetKey:
           $ref: "#/components/schemas/GoogleChromePolicyV1PolicyTargetKey"
-          description: Output only. The target resource for which the resolved policy
-            value applies.
+          description: Output only. The target resource for which the resolved policy value applies.
           readOnly: true
         value:
           $ref: "#/components/schemas/GoogleChromePolicyV1PolicyValue"
@@ -716,9 +618,7 @@ components:
       description: "Request message for uploading a file for a policy. Next ID: 5"
       properties:
         policyField:
-          description: Required. The fully qualified policy schema and field name this
-            file is uploaded for. This information will be used to validate the
-            content type of the file.
+          description: Required. The fully qualified policy schema and field name this file is uploaded for. This information will be used to validate the content type of the file.
           type: string
       type: object
     GoogleChromePolicyV1UploadPolicyFileResponse:
@@ -729,12 +629,7 @@ components:
           type: string
       type: object
     GoogleProtobufEmpty:
-      description: "A generic empty message that you can re-use to avoid defining
-        duplicated empty messages in your APIs. A typical example is to use it
-        as the request or the response type of an API method. For instance:
-        service Foo { rpc Bar(google.protobuf.Empty) returns
-        (google.protobuf.Empty); } The JSON representation for `Empty` is empty
-        JSON object `{}`."
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
       type: object
     Proto2DescriptorProto:
@@ -782,16 +677,10 @@ components:
       description: Describes a field within a message.
       properties:
         defaultValue:
-          description: For numeric types, contains the original text representation of the
-            value. For booleans, "true" or "false". For strings, contains the
-            default text contents (not escaped in any way). For bytes, contains
-            the C escaped value. All bytes >= 128 are escaped.
+          description: For numeric types, contains the original text representation of the value. For booleans, "true" or "false". For strings, contains the default text contents (not escaped in any way). For bytes, contains the C escaped value. All bytes >= 128 are escaped.
           type: string
         jsonName:
-          description: JSON name of this field. The value is set by protocol compiler. If
-            the user has set a "json_name" option on this field, that option's
-            value will be used. Otherwise, it's deduced from the field's name by
-            converting it to camelCase.
+          description: JSON name of this field. The value is set by protocol compiler. If the user has set a "json_name" option on this field, that option's value will be used. Otherwise, it's deduced from the field's name by converting it to camelCase.
           type: string
         label:
           enum:
@@ -805,34 +694,14 @@ components:
           format: int32
           type: integer
         oneofIndex:
-          description: If set, gives the index of a oneof in the containing type's
-            oneof_decl list. This field is a member of that oneof.
+          description: If set, gives the index of a oneof in the containing type's oneof_decl list. This field is a member of that oneof.
           format: int32
           type: integer
         proto3Optional:
-          description: If true, this is a proto3 "optional". When a proto3 field is
-            optional, it tracks presence regardless of field type. When
-            proto3_optional is true, this field must be belong to a oneof to
-            signal to old proto3 clients that presence is tracked for this
-            field. This oneof is known as a "synthetic" oneof, and this field
-            must be its sole member (each proto3 optional field gets its own
-            synthetic oneof). Synthetic oneofs exist in the descriptor only, and
-            do not generate any API. Synthetic oneofs must be ordered after all
-            "real" oneofs. For message fields, proto3_optional doesn't create
-            any semantic change, since non-repeated message fields always track
-            presence. However it still indicates the semantic detail of whether
-            the user wrote "optional" or not. This can be useful for
-            round-tripping the .proto file. For consistency we give message
-            fields a synthetic oneof also, even though it is not required to
-            track presence. This is especially important because the parser
-            can't tell if a field is a message or an enum, so it must always
-            create a synthetic oneof. Proto2 optional fields do not set this
-            flag, because they already indicate optional with `LABEL_OPTIONAL`.
+          description: If true, this is a proto3 "optional". When a proto3 field is optional, it tracks presence regardless of field type. When proto3_optional is true, this field must be belong to a oneof to signal to old proto3 clients that presence is tracked for this field. This oneof is known as a "synthetic" oneof, and this field must be its sole member (each proto3 optional field gets its own synthetic oneof). Synthetic oneofs exist in the descriptor only, and do not generate any API. Synthetic oneofs must be ordered after all "real" oneofs. For message fields, proto3_optional doesn't create any semantic change, since non-repeated message fields always track presence. However it still indicates the semantic detail of whether the user wrote "optional" or not. This can be useful for round-tripping the .proto file. For consistency we give message fields a synthetic oneof also, even though it is not required to track presence. This is especially important because the parser can't tell if a field is a message or an enum, so it must always create a synthetic oneof. Proto2 optional fields do not set this flag, because they already indicate optional with `LABEL_OPTIONAL`.
           type: boolean
         type:
-          description: If type_name is set, this need not be set. If both this and
-            type_name are set, this must be one of TYPE_ENUM, TYPE_MESSAGE or
-            TYPE_GROUP.
+          description: If type_name is set, this need not be set. If both this and type_name are set, this must be one of TYPE_ENUM, TYPE_MESSAGE or TYPE_GROUP.
           enum:
             - TYPE_DOUBLE
             - TYPE_FLOAT
@@ -854,11 +723,7 @@ components:
             - TYPE_SINT64
           type: string
         typeName:
-          description: For message and enum types, this is the name of the type. If the
-            name starts with a '.', it is fully-qualified. Otherwise, C++-like
-            scoping rules are used to find the type (i.e. first the nested types
-            within this message are searched, then within the parent, on up to
-            the root namespace).
+          description: For message and enum types, this is the name of the type. If the name starts with a '.', it is fully-qualified. Otherwise, C++-like scoping rules are used to find the type (i.e. first the nested types within this message are searched, then within the parent, on up to the root namespace).
           type: string
       type: object
     Proto2FileDescriptorProto:
@@ -880,8 +745,7 @@ components:
           description: e.g. "foo", "foo.bar", etc.
           type: string
         syntax:
-          description: The syntax of the proto file. The supported values are "proto2" and
-            "proto3".
+          description: The syntax of the proto file. The supported values are "proto2" and "proto3".
           type: string
       type: object
     Proto2OneofDescriptorProto:
@@ -897,12 +761,8 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/chrome.management.policy: See, edit, create or
-              delete policies applied to Chrome OS and Chrome Browsers managed
-              within your organization
-            https://www.googleapis.com/auth/chrome.management.policy.readonly:
-              See policies applied to Chrome OS and Chrome Browsers managed
-              within your organization
+            https://www.googleapis.com/auth/chrome.management.policy: See, edit, create or delete policies applied to Chrome OS and Chrome Browsers managed within your organization
+            https://www.googleapis.com/auth/chrome.management.policy.readonly: See policies applied to Chrome OS and Chrome Browsers managed within your organization
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -910,11 +770,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/chrome.management.policy: See, edit, create or
-              delete policies applied to Chrome OS and Chrome Browsers managed
-              within your organization
-            https://www.googleapis.com/auth/chrome.management.policy.readonly:
-              See policies applied to Chrome OS and Chrome Browsers managed
-              within your organization
+            https://www.googleapis.com/auth/chrome.management.policy: See, edit, create or delete policies applied to Chrome OS and Chrome Browsers managed within your organization
+            https://www.googleapis.com/auth/chrome.management.policy.readonly: See policies applied to Chrome OS and Chrome Browsers managed within your organization
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

@@ -179,8 +179,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     patch:
-      description: Modify the list of owners for your website or domain. This method
-        supports patch semantics.
+      description: Modify the list of owners for your website or domain. This method supports patch semantics.
       operationId: siteVerification.webResource.patch
       parameters:
         - description: The id of a verified site or domain.
@@ -254,9 +253,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -274,8 +271,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: An opaque string that represents a user for quota purposes. Must
-        not exceed 40 characters.
+      description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -293,34 +289,23 @@ components:
           description: The site for which a verification token will be generated.
           properties:
             identifier:
-              description: The site identifier. If the type is set to SITE, the identifier is
-                a URL. If the type is set to INET_DOMAIN, the site identifier is
-                a domain name.
+              description: The site identifier. If the type is set to SITE, the identifier is a URL. If the type is set to INET_DOMAIN, the site identifier is a domain name.
               type: string
             type:
-              description: The type of resource to be verified. Can be SITE or INET_DOMAIN
-                (domain name).
+              description: The type of resource to be verified. Can be SITE or INET_DOMAIN (domain name).
               type: string
           type: object
         verificationMethod:
-          description: The verification method that will be used to verify this site. For
-            sites, 'FILE' or 'META' methods may be used. For domains, only 'DNS'
-            may be used.
+          description: The verification method that will be used to verify this site. For sites, 'FILE' or 'META' methods may be used. For domains, only 'DNS' may be used.
           type: string
       type: object
     SiteVerificationWebResourceGettokenResponse:
       properties:
         method:
-          description: The verification method to use in conjunction with this token. For
-            FILE, the token should be placed in the top-level directory of the
-            site, stored inside a file of the same name. For META, the token
-            should be placed in the HEAD tag of the default page that is loaded
-            for the site. For DNS, the token should be placed in a TXT record of
-            the domain.
+          description: The verification method to use in conjunction with this token. For FILE, the token should be placed in the top-level directory of the site, stored inside a file of the same name. For META, the token should be placed in the HEAD tag of the default page that is loaded for the site. For DNS, the token should be placed in a TXT record of the domain.
           type: string
         token:
-          description: The verification token. The token must be placed appropriately in
-            order for verification to succeed.
+          description: The verification token. The token must be placed appropriately in order for verification to succeed.
           type: string
       type: object
     SiteVerificationWebResourceListResponse:
@@ -334,9 +319,7 @@ components:
     SiteVerificationWebResourceResource:
       properties:
         id:
-          description: The string used to identify this site. This value should be used in
-            the "id" portion of the REST URL for the Get, Update, and Delete
-            operations.
+          description: The string used to identify this site. This value should be used in the "id" portion of the REST URL for the Get, Update, and Delete operations.
           type: string
         owners:
           description: The email addresses of all verified owners.
@@ -347,9 +330,7 @@ components:
           description: The address and type of a site that is verified or will be verified.
           properties:
             identifier:
-              description: The site identifier. If the type is set to SITE, the identifier is
-                a URL. If the type is set to INET_DOMAIN, the site identifier is
-                a domain name.
+              description: The site identifier. If the type is set to SITE, the identifier is a URL. If the type is set to INET_DOMAIN, the site identifier is a domain name.
               type: string
             type:
               description: The site type. Can be SITE or INET_DOMAIN (domain name).

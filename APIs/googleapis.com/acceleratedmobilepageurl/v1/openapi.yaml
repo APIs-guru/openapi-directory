@@ -6,8 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: "Retrieves the list of AMP URLs (and equivalent AMP Cache URLs) for
-    a given list of public URL(s). "
+  description: "Retrieves the list of AMP URLs (and equivalent AMP Cache URLs) for a given list of public URL(s). "
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -49,8 +48,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Returns AMP URL(s) and equivalent [AMP Cache
-        URL(s)](/amp/cache/overview#amp-cache-url-format).
+      description: Returns AMP URL(s) and equivalent [AMP Cache URL(s)](/amp/cache/overview#amp-cache-url-format).
       operationId: acceleratedmobilepageurl.ampUrls.batchGet
       requestBody:
         content:
@@ -106,9 +104,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -126,9 +122,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -153,8 +147,7 @@ components:
           description: The AMP URL pointing to the publisher's web server.
           type: string
         cdnAmpUrl:
-          description: The [AMP Cache URL](/amp/cache/overview#amp-cache-url-format)
-            pointing to the cached document in the Google AMP Cache.
+          description: The [AMP Cache URL](/amp/cache/overview#amp-cache-url-format) pointing to the cached document in the Google AMP Cache.
           type: string
         originalUrl:
           description: The original non-AMP URL.
@@ -190,9 +183,7 @@ components:
             - IN_INDEX_DOC
           type: string
         urls:
-          description: List of URLs to look up for the paired AMP URLs. The URLs are
-            case-sensitive. Up to 50 URLs per lookup (see [Usage
-            Limits](/amp/cache/reference/limits)).
+          description: List of URLs to look up for the paired AMP URLs. The URLs are case-sensitive. Up to 50 URLs per lookup (see [Usage Limits](/amp/cache/reference/limits)).
           items:
             type: string
           type: array
@@ -201,10 +192,7 @@ components:
       description: Batch AMP URL response.
       properties:
         ampUrls:
-          description: For each URL in BatchAmpUrlsRequest, the URL response. The response
-            might not be in the same order as URLs in the batch request. If
-            BatchAmpUrlsRequest contains duplicate URLs, AmpUrl is generated
-            only once.
+          description: For each URL in BatchAmpUrlsRequest, the URL response. The response might not be in the same order as URLs in the batch request. If BatchAmpUrlsRequest contains duplicate URLs, AmpUrl is generated only once.
           items:
             $ref: "#/components/schemas/AmpUrl"
           type: array

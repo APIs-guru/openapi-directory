@@ -113,9 +113,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -133,9 +131,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -158,16 +154,13 @@ components:
       properties:
         actor:
           $ref: "#/components/schemas/Actor"
-          description: The actor responsible for this action (or empty if all actors are
-            responsible).
+          description: The actor responsible for this action (or empty if all actors are responsible).
         detail:
           $ref: "#/components/schemas/ActionDetail"
           description: The type and detailed information about the action.
         target:
           $ref: "#/components/schemas/Target"
-          description: The target this action affects (or empty if affecting all targets).
-            This represents the state of the target immediately after this
-            action occurred.
+          description: The target this action affects (or empty if affecting all targets). This represents the state of the target immediately after this action occurred.
         timeRange:
           $ref: "#/components/schemas/TimeRange"
           description: The action occurred over this time range.
@@ -237,8 +230,7 @@ components:
       properties: {}
       type: object
     AnonymousUser:
-      description: Empty message representing an anonymous user or indicating the
-        authenticated user should be anonymized.
+      description: Empty message representing an anonymous user or indicating the authenticated user should be anonymized.
       properties: {}
       type: object
     Anyone:
@@ -294,11 +286,7 @@ components:
           description: A change on a suggestion.
       type: object
     ConsolidationStrategy:
-      description: How the individual activities are consolidated. A set of activities
-        may be consolidated into one combined activity if they are related in
-        some way, such as one actor performing the same action on multiple
-        targets, or multiple actors performing the same action on a single
-        target. The strategy defines the rules for which activities are related.
+      description: How the individual activities are consolidated. A set of activities may be consolidated into one combined activity if they are related in some way, such as one actor performing the same action on multiple targets, or multiple actors performing the same action on a single target. The strategy defines the rules for which activities are related.
       properties:
         legacy:
           $ref: "#/components/schemas/Legacy"
@@ -319,16 +307,13 @@ components:
       properties:
         copy:
           $ref: "#/components/schemas/Copy"
-          description: If present, indicates the object was created by copying an existing
-            Drive object.
+          description: If present, indicates the object was created by copying an existing Drive object.
         new:
           $ref: "#/components/schemas/New"
-          description: If present, indicates the object was newly created (e.g. as a blank
-            document), not derived from a Drive object or external object.
+          description: If present, indicates the object was newly created (e.g. as a blank document), not derived from a Drive object or external object.
         upload:
           $ref: "#/components/schemas/Upload"
-          description: If present, indicates the object originated externally and was
-            uploaded to Drive.
+          description: If present, indicates the object originated externally and was uploaded to Drive.
       type: object
     DataLeakPreventionChange:
       description: A change in the object's data leak prevention status.
@@ -370,9 +355,7 @@ components:
       description: Information about a shared drive.
       properties:
         name:
-          description: The resource name of the shared drive. The format is
-            `COLLECTION_ID/DRIVE_ID`. Clients should not assume a specific
-            collection ID for this resource name.
+          description: The resource name of the shared drive. The format is `COLLECTION_ID/DRIVE_ID`. Clients should not assume a specific collection ID for this resource name.
           type: string
         root:
           $ref: "#/components/schemas/DriveItem"
@@ -382,13 +365,7 @@ components:
           type: string
       type: object
     DriveActivity:
-      description: A single Drive activity comprising one or more Actions by one or
-        more Actors on one or more Targets. Some Action groupings occur
-        spontaneously, such as moving an item into a shared folder triggering a
-        permission change. Other groupings of related Actions, such as multiple
-        Actors editing one item or moving multiple files into a new folder, are
-        controlled by the selection of a ConsolidationStrategy in the
-        QueryDriveActivityRequest.
+      description: A single Drive activity comprising one or more Actions by one or more Actors on one or more Targets. Some Action groupings occur spontaneously, such as moving an item into a shared folder triggering a permission change. Other groupings of related Actions, such as multiple Actors editing one item or moving multiple files into a new folder, are controlled by the selection of a ConsolidationStrategy in the QueryDriveActivityRequest.
       properties:
         actions:
           description: Details on all actions in this activity.
@@ -402,13 +379,9 @@ components:
           type: array
         primaryActionDetail:
           $ref: "#/components/schemas/ActionDetail"
-          description: Key information about the primary action for this activity. This is
-            either representative, or the most important, of all actions in the
-            activity, according to the ConsolidationStrategy in the request.
+          description: Key information about the primary action for this activity. This is either representative, or the most important, of all actions in the activity, according to the ConsolidationStrategy in the request.
         targets:
-          description: All Google Drive objects this activity is about (e.g. file, folder,
-            drive). This represents the state of the target immediately after
-            the actions occurred.
+          description: All Google Drive objects this activity is about (e.g. file, folder, drive). This represents the state of the target immediately after the actions occurred.
           items:
             $ref: "#/components/schemas/Target"
           type: array
@@ -444,8 +417,7 @@ components:
           description: The Drive item is a file.
         driveFolder:
           $ref: "#/components/schemas/DriveFolder"
-          description: The Drive item is a folder. Includes information about the type of
-            folder.
+          description: The Drive item is a folder. Includes information about the type of folder.
         file:
           $ref: "#/components/schemas/File"
           description: This field is deprecated; please use the `driveFile` field instead.
@@ -453,8 +425,7 @@ components:
           $ref: "#/components/schemas/Folder"
           description: This field is deprecated; please use the `driveFolder` field instead.
         mimeType:
-          description: The MIME type of the Drive item. See
-            https://developers.google.com/drive/v3/web/mime-types.
+          description: The MIME type of the Drive item. See https://developers.google.com/drive/v3/web/mime-types.
           type: string
         name:
           description: The target Drive item. The format is `items/ITEM_ID`.
@@ -474,8 +445,7 @@ components:
           description: The Drive item is a file.
         driveFolder:
           $ref: "#/components/schemas/DriveFolder"
-          description: The Drive item is a folder. Includes information about the type of
-            folder.
+          description: The Drive item is a folder. Includes information about the type of folder.
         file:
           $ref: "#/components/schemas/File"
           description: This field is deprecated; please use the `driveFile` field instead.
@@ -493,9 +463,7 @@ components:
       description: A lightweight reference to a shared drive.
       properties:
         name:
-          description: The resource name of the shared drive. The format is
-            `COLLECTION_ID/DRIVE_ID`. Clients should not assume a specific
-            collection ID for this resource name.
+          description: The resource name of the shared drive. The format is `COLLECTION_ID/DRIVE_ID`. Clients should not assume a specific collection ID for this resource name.
           type: string
         title:
           description: The title of the shared drive.
@@ -513,19 +481,13 @@ components:
       description: A comment on a file.
       properties:
         legacyCommentId:
-          description: The comment in the discussion thread. This identifier is an opaque
-            string compatible with the Drive API; see
-            https://developers.google.com/drive/v3/reference/comments/get
+          description: The comment in the discussion thread. This identifier is an opaque string compatible with the Drive API; see https://developers.google.com/drive/v3/reference/comments/get
           type: string
         legacyDiscussionId:
-          description: The discussion thread to which the comment was added. This
-            identifier is an opaque string compatible with the Drive API and
-            references the first comment in a discussion; see
-            https://developers.google.com/drive/v3/reference/comments/get
+          description: The discussion thread to which the comment was added. This identifier is an opaque string compatible with the Drive API and references the first comment in a discussion; see https://developers.google.com/drive/v3/reference/comments/get
           type: string
         linkToDiscussion:
-          description: The link to the discussion thread containing this comment, for
-            example, `https://docs.google.com/DOCUMENT_ID/edit?disco=THREAD_ID`.
+          description: The link to the discussion thread containing this comment, for example, `https://docs.google.com/DOCUMENT_ID/edit?disco=THREAD_ID`.
           type: string
         parent:
           $ref: "#/components/schemas/DriveItem"
@@ -554,9 +516,7 @@ components:
           type: string
       type: object
     Impersonation:
-      description: Information about an impersonation, where an admin acts on behalf
-        of an end user. Information about the acting admin is not currently
-        available.
+      description: Information about an impersonation, where an admin acts on behalf of an end user. Information about the acting admin is not currently available.
       properties:
         impersonatedUser:
           $ref: "#/components/schemas/User"
@@ -569,18 +529,11 @@ components:
           description: True if this is the user making the request.
           type: boolean
         personName:
-          description: The identifier for this user that can be used with the People API
-            to get more information. The format is `people/ACCOUNT_ID`. See
-            https://developers.google.com/people/.
+          description: The identifier for this user that can be used with the People API to get more information. The format is `people/ACCOUNT_ID`. See https://developers.google.com/people/.
           type: string
       type: object
     Legacy:
-      description: A strategy which consolidates activities using the grouping rules
-        from the legacy V1 Activity API. Similar actions occurring within a
-        window of time can be grouped across multiple targets (such as moving a
-        set of files at once) or multiple actors (such as several users editing
-        the same item). Grouping rules for this strategy are specific to each
-        type of action.
+      description: A strategy which consolidates activities using the grouping rules from the legacy V1 Activity API. Similar actions occurring within a window of time can be grouped across multiple targets (such as moving a set of files at once) or multiple actors (such as several users editing the same item). Grouping rules for this strategy are specific to each type of action.
       properties: {}
       type: object
     Move:
@@ -625,8 +578,7 @@ components:
       description: The permission setting of an object.
       properties:
         allowDiscovery:
-          description: If true, the item can be discovered (e.g. in the user's "Shared
-            with me" collection) without needing a link to the item.
+          description: If true, the item can be discovered (e.g. in the user's "Shared with me" collection) without needing a link to the item.
           type: boolean
         anyone:
           $ref: "#/components/schemas/Anyone"
@@ -638,10 +590,7 @@ components:
           $ref: "#/components/schemas/Group"
           description: The group to whom this permission applies.
         role:
-          description: Indicates the [Google Drive permissions
-            role](https://developers.google.com/drive/web/manage-sharing#roles).
-            The role determines a user's ability to read, write, and comment on
-            items.
+          description: Indicates the [Google Drive permissions role](https://developers.google.com/drive/web/manage-sharing#roles). The role determines a user's ability to read, write, and comment on items.
           enum:
             - ROLE_UNSPECIFIED
             - OWNER
@@ -689,42 +638,23 @@ components:
       description: The request message for querying Drive activity.
       properties:
         ancestorName:
-          description: Return activities for this Drive folder and all children and
-            descendants. The format is `items/ITEM_ID`.
+          description: Return activities for this Drive folder and all children and descendants. The format is `items/ITEM_ID`.
           type: string
         consolidationStrategy:
           $ref: "#/components/schemas/ConsolidationStrategy"
-          description: Details on how to consolidate related actions that make up the
-            activity. If not set, then related actions are not consolidated.
+          description: Details on how to consolidate related actions that make up the activity. If not set, then related actions are not consolidated.
         filter:
-          description: 'The filtering for items returned from this query request. The
-            format of the filter string is a sequence of expressions, joined by
-            an optional "AND", where each expression is of the form "field
-            operator value". Supported fields: - `time`: Uses numerical
-            operators on date values either in terms of milliseconds since Jan
-            1, 1970 or in RFC 3339 format. Examples: - `time > 1452409200000 AND
-            time <= 1492812924310` - `time >= "2016-01-10T01:02:03-05:00"` -
-            `detail.action_detail_case`: Uses the "has" operator (:) and either
-            a singular value or a list of allowed action types enclosed in
-            parentheses. Examples: - `detail.action_detail_case: RENAME` -
-            `detail.action_detail_case:(CREATE EDIT)` -
-            `-detail.action_detail_case:MOVE` '
+          description: 'The filtering for items returned from this query request. The format of the filter string is a sequence of expressions, joined by an optional "AND", where each expression is of the form "field operator value". Supported fields: - `time`: Uses numerical operators on date values either in terms of milliseconds since Jan 1, 1970 or in RFC 3339 format. Examples: - `time > 1452409200000 AND time <= 1492812924310` - `time >= "2016-01-10T01:02:03-05:00"` - `detail.action_detail_case`: Uses the "has" operator (:) and either a singular value or a list of allowed action types enclosed in parentheses. Examples: - `detail.action_detail_case: RENAME` - `detail.action_detail_case:(CREATE EDIT)` - `-detail.action_detail_case:MOVE` '
           type: string
         itemName:
           description: Return activities for this Drive item. The format is `items/ITEM_ID`.
           type: string
         pageSize:
-          description: The miminum number of activities desired in the response; the
-            server will attempt to return at least this quanitity. The server
-            may also return fewer activities if it has a partial response ready
-            before the request times out. If not set, a default value is used.
+          description: The miminum number of activities desired in the response; the server will attempt to return at least this quanitity. The server may also return fewer activities if it has a partial response ready before the request times out. If not set, a default value is used.
           format: int32
           type: integer
         pageToken:
-          description: The token identifying which page of results to return. Set this to
-            the next_page_token value returned from a previous query to obtain
-            the following page of results. If not set, the first page of results
-            will be returned.
+          description: The token identifying which page of results to return. Set this to the next_page_token value returned from a previous query to obtain the following page of results. If not set, the first page of results will be returned.
           type: string
       type: object
     QueryDriveActivityResponse:
@@ -736,8 +666,7 @@ components:
             $ref: "#/components/schemas/DriveActivity"
           type: array
         nextPageToken:
-          description: Token to retrieve the next page of results, or empty if there are
-            no more results in the list.
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
           type: string
       type: object
     Rename:

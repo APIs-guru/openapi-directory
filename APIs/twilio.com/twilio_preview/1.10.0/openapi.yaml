@@ -28,8 +28,7 @@ paths:
       description: ""
       operationId: DeleteJob
       parameters:
-        - description: The unique string that that we created to identify the Bulk Export
-            job
+        - description: The unique string that that we created to identify the Bulk Export job
           in: path
           name: JobSid
           required: true
@@ -50,8 +49,7 @@ paths:
       description: ""
       operationId: FetchJob
       parameters:
-        - description: The unique string that that we created to identify the Bulk Export
-            job
+        - description: The unique string that that we created to identify the Bulk Export job
           in: path
           name: JobSid
           required: true
@@ -81,8 +79,7 @@ paths:
       description: Fetch a specific Export.
       operationId: FetchExport
       parameters:
-        - description: The type of communication – Messages, Calls, Conferences, and
-            Participants
+        - description: The type of communication – Messages, Calls, Conferences, and Participants
           in: path
           name: ResourceType
           required: true
@@ -109,8 +106,7 @@ paths:
       description: Fetch a specific Export Configuration.
       operationId: FetchExportConfiguration
       parameters:
-        - description: The type of communication – Messages, Calls, Conferences, and
-            Participants
+        - description: The type of communication – Messages, Calls, Conferences, and Participants
           in: path
           name: ResourceType
           required: true
@@ -131,8 +127,7 @@ paths:
       description: Update a specific Export Configuration.
       operationId: UpdateExportConfiguration
       parameters:
-        - description: The type of communication – Messages, Calls, Conferences, and
-            Participants
+        - description: The type of communication – Messages, Calls, Conferences, and Participants
           in: path
           name: ResourceType
           required: true
@@ -144,17 +139,13 @@ paths:
             schema:
               properties:
                 Enabled:
-                  description: If true, Twilio will automatically generate every day's file when
-                    the day is over.
+                  description: If true, Twilio will automatically generate every day's file when the day is over.
                   type: boolean
                 WebhookMethod:
-                  description: Sets whether Twilio should call a webhook URL when the automatic
-                    generation is complete, using GET or POST. The actual
-                    destination is set in the webhook_url
+                  description: Sets whether Twilio should call a webhook URL when the automatic generation is complete, using GET or POST. The actual destination is set in the webhook_url
                   type: string
                 WebhookUrl:
-                  description: Stores the URL destination for the method specified in
-                    webhook_method.
+                  description: Stores the URL destination for the method specified in webhook_method.
                   format: uri
                   type: string
               title: UpdateExportConfigurationRequest
@@ -180,15 +171,13 @@ paths:
       description: Retrieve a list of all Days for a resource.
       operationId: ListDay
       parameters:
-        - description: The type of communication – Messages, Calls, Conferences, and
-            Participants
+        - description: The type of communication – Messages, Calls, Conferences, and Participants
           in: path
           name: ResourceType
           required: true
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -243,8 +232,7 @@ paths:
       description: Fetch a specific Day.
       operationId: FetchDay
       parameters:
-        - description: The type of communication – Messages, Calls, Conferences, and
-            Participants
+        - description: The type of communication – Messages, Calls, Conferences, and Participants
           in: path
           name: ResourceType
           required: true
@@ -277,15 +265,13 @@ paths:
       description: ""
       operationId: ListExportCustomJob
       parameters:
-        - description: The type of communication – Messages, Calls, Conferences, and
-            Participants
+        - description: The type of communication – Messages, Calls, Conferences, and Participants
           in: path
           name: ResourceType
           required: true
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -334,8 +320,7 @@ paths:
       description: ""
       operationId: CreateExportCustomJob
       parameters:
-        - description: The type of communication – Messages or Calls, Conferences, and
-            Participants
+        - description: The type of communication – Messages or Calls, Conferences, and Participants
           in: path
           name: ResourceType
           required: true
@@ -350,25 +335,19 @@ paths:
                   description: The optional email to send the completion notification to
                   type: string
                 EndDay:
-                  description: The end day for the custom export specified as a string in the
-                    format of yyyy-mm-dd. End day is inclusive and must be 2
-                    days earlier than the current UTC day.
+                  description: The end day for the custom export specified as a string in the format of yyyy-mm-dd. End day is inclusive and must be 2 days earlier than the current UTC day.
                   type: string
                 FriendlyName:
                   description: The friendly name specified when creating the job
                   type: string
                 StartDay:
-                  description: The start day for the custom export specified as a string in the
-                    format of yyyy-mm-dd
+                  description: The start day for the custom export specified as a string in the format of yyyy-mm-dd
                   type: string
                 WebhookMethod:
-                  description: This is the method used to call the webhook on completion of the
-                    job. If this is supplied, `WebhookUrl` must also be
-                    supplied.
+                  description: This is the method used to call the webhook on completion of the job. If this is supplied, `WebhookUrl` must also be supplied.
                   type: string
                 WebhookUrl:
-                  description: The optional webhook url called on completion of the job. If this
-                    is supplied, `WebhookMethod` must also be supplied.
+                  description: The optional webhook url called on completion of the job. If this is supplied, `WebhookMethod` must also be supplied.
                   type: string
               required:
                 - StartDay
@@ -397,8 +376,7 @@ paths:
       description: Retrieve a list of all Fleets belonging to your account.
       operationId: ListFleet
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -452,8 +430,7 @@ paths:
             schema:
               properties:
                 FriendlyName:
-                  description: Provides a human readable descriptive text for this Fleet, up to
-                    256 characters long.
+                  description: Provides a human readable descriptive text for this Fleet, up to 256 characters long.
                   type: string
               title: CreateFleetRequest
               type: object
@@ -484,8 +461,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Filters the resulting list of Certificates by a unique string
-            identifier of an authenticated Device.
+        - description: Filters the resulting list of Certificates by a unique string identifier of an authenticated Device.
           in: query
           name: DeviceSid
           schema:
@@ -493,8 +469,7 @@ paths:
             minLength: 34
             pattern: ^TH[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -540,8 +515,7 @@ paths:
       x-maturity:
         - Preview
     post:
-      description: Enroll a new Certificate credential to the Fleet, optionally giving
-        it a friendly name and assigning to a Device.
+      description: Enroll a new Certificate credential to the Fleet, optionally giving it a friendly name and assigning to a Device.
       operationId: CreateCertificate
       parameters:
         - description: ""
@@ -556,19 +530,16 @@ paths:
             schema:
               properties:
                 CertificateData:
-                  description: Provides a URL encoded representation of the public certificate in
-                    PEM format.
+                  description: Provides a URL encoded representation of the public certificate in PEM format.
                   type: string
                 DeviceSid:
-                  description: Provides the unique string identifier of an existing Device to
-                    become authenticated with this Certificate credential.
+                  description: Provides the unique string identifier of an existing Device to become authenticated with this Certificate credential.
                   maxLength: 34
                   minLength: 34
                   pattern: ^TH[0-9a-fA-F]{32}$
                   type: string
                 FriendlyName:
-                  description: Provides a human readable descriptive text for this Certificate
-                    credential, up to 256 characters long.
+                  description: Provides a human readable descriptive text for this Certificate credential, up to 256 characters long.
                   type: string
               required:
                 - CertificateData
@@ -591,9 +562,7 @@ paths:
     x-path-type: list
   "/DeployedDevices/Fleets/{FleetSid}/Certificates/{Sid}":
     delete:
-      description: Unregister a specific Certificate credential from the Fleet,
-        effectively disallowing any inbound client connections that are
-        presenting it.
+      description: Unregister a specific Certificate credential from the Fleet, effectively disallowing any inbound client connections that are presenting it.
       operationId: DeleteCertificate
       parameters:
         - description: ""
@@ -602,8 +571,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Provides a 34 character string that uniquely identifies the
-            requested Certificate credential resource.
+        - description: Provides a 34 character string that uniquely identifies the requested Certificate credential resource.
           in: path
           name: Sid
           required: true
@@ -630,8 +598,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Provides a 34 character string that uniquely identifies the
-            requested Certificate credential resource.
+        - description: Provides a 34 character string that uniquely identifies the requested Certificate credential resource.
           in: path
           name: Sid
           required: true
@@ -652,8 +619,7 @@ paths:
       x-maturity:
         - Preview
     post:
-      description: Update the given properties of a specific Certificate credential in
-        the Fleet, giving it a friendly name or assigning to a Device.
+      description: Update the given properties of a specific Certificate credential in the Fleet, giving it a friendly name or assigning to a Device.
       operationId: UpdateCertificate
       parameters:
         - description: ""
@@ -662,8 +628,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Provides a 34 character string that uniquely identifies the
-            requested Certificate credential resource.
+        - description: Provides a 34 character string that uniquely identifies the requested Certificate credential resource.
           in: path
           name: Sid
           required: true
@@ -678,15 +643,13 @@ paths:
             schema:
               properties:
                 DeviceSid:
-                  description: Provides the unique string identifier of an existing Device to
-                    become authenticated with this Certificate credential.
+                  description: Provides the unique string identifier of an existing Device to become authenticated with this Certificate credential.
                   maxLength: 34
                   minLength: 34
                   pattern: ^TH[0-9a-fA-F]{32}$
                   type: string
                 FriendlyName:
-                  description: Provides a human readable descriptive text for this Certificate
-                    credential, up to 256 characters long.
+                  description: Provides a human readable descriptive text for this Certificate credential, up to 256 characters long.
                   type: string
               title: UpdateCertificateRequest
               type: object
@@ -717,8 +680,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -764,8 +726,7 @@ paths:
       x-maturity:
         - Preview
     post:
-      description: Create a new Deployment in the Fleet, optionally giving it a
-        friendly name and linking to a specific Twilio Sync service instance.
+      description: Create a new Deployment in the Fleet, optionally giving it a friendly name and linking to a specific Twilio Sync service instance.
       operationId: CreateDeployment
       parameters:
         - description: ""
@@ -780,13 +741,10 @@ paths:
             schema:
               properties:
                 FriendlyName:
-                  description: Provides a human readable descriptive text for this Deployment, up
-                    to 256 characters long.
+                  description: Provides a human readable descriptive text for this Deployment, up to 256 characters long.
                   type: string
                 SyncServiceSid:
-                  description: Provides the unique string identifier of the Twilio Sync service
-                    instance that will be linked to and accessible by this
-                    Deployment.
+                  description: Provides the unique string identifier of the Twilio Sync service instance that will be linked to and accessible by this Deployment.
                   maxLength: 34
                   minLength: 34
                   pattern: ^IS[0-9a-fA-F]{32}$
@@ -810,8 +768,7 @@ paths:
     x-path-type: list
   "/DeployedDevices/Fleets/{FleetSid}/Deployments/{Sid}":
     delete:
-      description: Delete a specific Deployment from the Fleet, leaving associated
-        devices effectively undeployed.
+      description: Delete a specific Deployment from the Fleet, leaving associated devices effectively undeployed.
       operationId: DeleteDeployment
       parameters:
         - description: ""
@@ -820,8 +777,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Provides a 34 character string that uniquely identifies the
-            requested Deployment resource.
+        - description: Provides a 34 character string that uniquely identifies the requested Deployment resource.
           in: path
           name: Sid
           required: true
@@ -848,8 +804,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Provides a 34 character string that uniquely identifies the
-            requested Deployment resource.
+        - description: Provides a 34 character string that uniquely identifies the requested Deployment resource.
           in: path
           name: Sid
           required: true
@@ -870,9 +825,7 @@ paths:
       x-maturity:
         - Preview
     post:
-      description: Update the given properties of a specific Deployment credential in
-        the Fleet, giving it a friendly name or linking to a specific Twilio
-        Sync service instance.
+      description: Update the given properties of a specific Deployment credential in the Fleet, giving it a friendly name or linking to a specific Twilio Sync service instance.
       operationId: UpdateDeployment
       parameters:
         - description: ""
@@ -881,8 +834,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Provides a 34 character string that uniquely identifies the
-            requested Deployment resource.
+        - description: Provides a 34 character string that uniquely identifies the requested Deployment resource.
           in: path
           name: Sid
           required: true
@@ -897,13 +849,10 @@ paths:
             schema:
               properties:
                 FriendlyName:
-                  description: Provides a human readable descriptive text for this Deployment, up
-                    to 64 characters long
+                  description: Provides a human readable descriptive text for this Deployment, up to 64 characters long
                   type: string
                 SyncServiceSid:
-                  description: Provides the unique string identifier of the Twilio Sync service
-                    instance that will be linked to and accessible by this
-                    Deployment.
+                  description: Provides the unique string identifier of the Twilio Sync service instance that will be linked to and accessible by this Deployment.
                   maxLength: 34
                   minLength: 34
                   pattern: ^IS[0-9a-fA-F]{32}$
@@ -937,8 +886,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Filters the resulting list of Devices by a unique string identifier
-            of the Deployment they are associated with.
+        - description: Filters the resulting list of Devices by a unique string identifier of the Deployment they are associated with.
           in: query
           name: DeploymentSid
           schema:
@@ -946,8 +894,7 @@ paths:
             minLength: 34
             pattern: ^DL[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -993,9 +940,7 @@ paths:
       x-maturity:
         - Preview
     post:
-      description: Create a new Device in the Fleet, optionally giving it a unique
-        name, friendly name, and assigning to a Deployment and/or human
-        identity.
+      description: Create a new Device in the Fleet, optionally giving it a unique name, friendly name, and assigning to a Deployment and/or human identity.
       operationId: CreateDevice
       parameters:
         - description: ""
@@ -1010,8 +955,7 @@ paths:
             schema:
               properties:
                 DeploymentSid:
-                  description: Specifies the unique string identifier of the Deployment group that
-                    this Device is going to be associated with.
+                  description: Specifies the unique string identifier of the Deployment group that this Device is going to be associated with.
                   maxLength: 34
                   minLength: 34
                   pattern: ^DL[0-9a-fA-F]{32}$
@@ -1020,18 +964,13 @@ paths:
                   description: ""
                   type: boolean
                 FriendlyName:
-                  description: Provides a human readable descriptive text to be assigned to this
-                    Device, up to 256 characters long.
+                  description: Provides a human readable descriptive text to be assigned to this Device, up to 256 characters long.
                   type: string
                 Identity:
-                  description: Provides an arbitrary string identifier representing a human user
-                    to be associated with this Device, up to 256 characters
-                    long.
+                  description: Provides an arbitrary string identifier representing a human user to be associated with this Device, up to 256 characters long.
                   type: string
                 UniqueName:
-                  description: Provides a unique and addressable name to be assigned to this
-                    Device, to be used in addition to SID, up to 128 characters
-                    long.
+                  description: Provides a unique and addressable name to be assigned to this Device, to be used in addition to SID, up to 128 characters long.
                   type: string
               title: CreateDeviceRequest
               type: object
@@ -1052,8 +991,7 @@ paths:
     x-path-type: list
   "/DeployedDevices/Fleets/{FleetSid}/Devices/{Sid}":
     delete:
-      description: Delete a specific Device from the Fleet, also removing it from
-        associated Deployments.
+      description: Delete a specific Device from the Fleet, also removing it from associated Deployments.
       operationId: DeleteDevice
       parameters:
         - description: ""
@@ -1062,8 +1000,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Provides a 34 character string that uniquely identifies the
-            requested Device resource.
+        - description: Provides a 34 character string that uniquely identifies the requested Device resource.
           in: path
           name: Sid
           required: true
@@ -1087,8 +1024,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Provides a 34 character string that uniquely identifies the
-            requested Device resource.
+        - description: Provides a 34 character string that uniquely identifies the requested Device resource.
           in: path
           name: Sid
           required: true
@@ -1106,9 +1042,7 @@ paths:
       x-maturity:
         - Preview
     post:
-      description: Update the given properties of a specific Device in the Fleet,
-        giving it a friendly name, assigning to a Deployment, or a human
-        identity.
+      description: Update the given properties of a specific Device in the Fleet, giving it a friendly name, assigning to a Deployment, or a human identity.
       operationId: UpdateDevice
       parameters:
         - description: ""
@@ -1117,8 +1051,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Provides a 34 character string that uniquely identifies the
-            requested Device resource.
+        - description: Provides a 34 character string that uniquely identifies the requested Device resource.
           in: path
           name: Sid
           required: true
@@ -1130,8 +1063,7 @@ paths:
             schema:
               properties:
                 DeploymentSid:
-                  description: Specifies the unique string identifier of the Deployment group that
-                    this Device is going to be associated with.
+                  description: Specifies the unique string identifier of the Deployment group that this Device is going to be associated with.
                   maxLength: 34
                   minLength: 34
                   pattern: ^DL[0-9a-fA-F]{32}$
@@ -1140,13 +1072,10 @@ paths:
                   description: ""
                   type: boolean
                 FriendlyName:
-                  description: Provides a human readable descriptive text to be assigned to this
-                    Device, up to 256 characters long.
+                  description: Provides a human readable descriptive text to be assigned to this Device, up to 256 characters long.
                   type: string
                 Identity:
-                  description: Provides an arbitrary string identifier representing a human user
-                    to be associated with this Device, up to 256 characters
-                    long.
+                  description: Provides an arbitrary string identifier representing a human user to be associated with this Device, up to 256 characters long.
                   type: string
               title: UpdateDeviceRequest
               type: object
@@ -1177,8 +1106,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Filters the resulting list of Keys by a unique string identifier of
-            an authenticated Device.
+        - description: Filters the resulting list of Keys by a unique string identifier of an authenticated Device.
           in: query
           name: DeviceSid
           schema:
@@ -1186,8 +1114,7 @@ paths:
             minLength: 34
             pattern: ^TH[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1233,8 +1160,7 @@ paths:
       x-maturity:
         - Preview
     post:
-      description: Create a new Key credential in the Fleet, optionally giving it a
-        friendly name and assigning to a Device.
+      description: Create a new Key credential in the Fleet, optionally giving it a friendly name and assigning to a Device.
       operationId: CreateKey
       parameters:
         - description: ""
@@ -1249,15 +1175,13 @@ paths:
             schema:
               properties:
                 DeviceSid:
-                  description: Provides the unique string identifier of an existing Device to
-                    become authenticated with this Key credential.
+                  description: Provides the unique string identifier of an existing Device to become authenticated with this Key credential.
                   maxLength: 34
                   minLength: 34
                   pattern: ^TH[0-9a-fA-F]{32}$
                   type: string
                 FriendlyName:
-                  description: Provides a human readable descriptive text for this Key credential,
-                    up to 256 characters long.
+                  description: Provides a human readable descriptive text for this Key credential, up to 256 characters long.
                   type: string
               title: CreateKeyRequest
               type: object
@@ -1278,8 +1202,7 @@ paths:
     x-path-type: list
   "/DeployedDevices/Fleets/{FleetSid}/Keys/{Sid}":
     delete:
-      description: Delete a specific Key credential from the Fleet, effectively
-        disallowing any inbound client connections that are presenting it.
+      description: Delete a specific Key credential from the Fleet, effectively disallowing any inbound client connections that are presenting it.
       operationId: DeleteKey
       parameters:
         - description: ""
@@ -1288,8 +1211,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Provides a 34 character string that uniquely identifies the
-            requested Key credential resource.
+        - description: Provides a 34 character string that uniquely identifies the requested Key credential resource.
           in: path
           name: Sid
           required: true
@@ -1316,8 +1238,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Provides a 34 character string that uniquely identifies the
-            requested Key credential resource.
+        - description: Provides a 34 character string that uniquely identifies the requested Key credential resource.
           in: path
           name: Sid
           required: true
@@ -1338,8 +1259,7 @@ paths:
       x-maturity:
         - Preview
     post:
-      description: Update the given properties of a specific Key credential in the
-        Fleet, giving it a friendly name or assigning to a Device.
+      description: Update the given properties of a specific Key credential in the Fleet, giving it a friendly name or assigning to a Device.
       operationId: UpdateKey
       parameters:
         - description: ""
@@ -1348,8 +1268,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Provides a 34 character string that uniquely identifies the
-            requested Key credential resource.
+        - description: Provides a 34 character string that uniquely identifies the requested Key credential resource.
           in: path
           name: Sid
           required: true
@@ -1364,15 +1283,13 @@ paths:
             schema:
               properties:
                 DeviceSid:
-                  description: Provides the unique string identifier of an existing Device to
-                    become authenticated with this Key credential.
+                  description: Provides the unique string identifier of an existing Device to become authenticated with this Key credential.
                   maxLength: 34
                   minLength: 34
                   pattern: ^TH[0-9a-fA-F]{32}$
                   type: string
                 FriendlyName:
-                  description: Provides a human readable descriptive text for this Key credential,
-                    up to 256 characters long.
+                  description: Provides a human readable descriptive text for this Key credential, up to 256 characters long.
                   type: string
               title: UpdateKeyRequest
               type: object
@@ -1393,12 +1310,10 @@ paths:
     x-path-type: instance
   "/DeployedDevices/Fleets/{Sid}":
     delete:
-      description: "Delete a specific Fleet from your account, also destroys all
-        nested resources: Devices, Deployments, Certificates, Keys."
+      description: "Delete a specific Fleet from your account, also destroys all nested resources: Devices, Deployments, Certificates, Keys."
       operationId: DeleteFleet
       parameters:
-        - description: Provides a 34 character string that uniquely identifies the
-            requested Fleet resource.
+        - description: Provides a 34 character string that uniquely identifies the requested Fleet resource.
           in: path
           name: Sid
           required: true
@@ -1416,8 +1331,7 @@ paths:
       description: Fetch information about a specific Fleet in your account.
       operationId: FetchFleet
       parameters:
-        - description: Provides a 34 character string that uniquely identifies the
-            requested Fleet resource.
+        - description: Provides a 34 character string that uniquely identifies the requested Fleet resource.
           in: path
           name: Sid
           required: true
@@ -1438,8 +1352,7 @@ paths:
       description: Update the friendly name property of a specific Fleet in your account.
       operationId: UpdateFleet
       parameters:
-        - description: Provides a 34 character string that uniquely identifies the
-            requested Fleet resource.
+        - description: Provides a 34 character string that uniquely identifies the requested Fleet resource.
           in: path
           name: Sid
           required: true
@@ -1451,15 +1364,13 @@ paths:
             schema:
               properties:
                 DefaultDeploymentSid:
-                  description: Provides a string identifier of a Deployment that is going to be
-                    used as a default one for this Fleet.
+                  description: Provides a string identifier of a Deployment that is going to be used as a default one for this Fleet.
                   maxLength: 34
                   minLength: 34
                   pattern: ^DL[0-9a-fA-F]{32}$
                   type: string
                 FriendlyName:
-                  description: Provides a human readable descriptive text for this Fleet, up to
-                    256 characters long.
+                  description: Provides a human readable descriptive text for this Fleet, up to 256 characters long.
                   type: string
               title: UpdateFleetRequest
               type: object
@@ -1481,8 +1392,7 @@ paths:
   /HostedNumbers/AuthorizationDocuments:
     description: "TODO: Resource-level docs"
     get:
-      description: Retrieve a list of AuthorizationDocuments belonging to the account
-        initiating the request.
+      description: Retrieve a list of AuthorizationDocuments belonging to the account initiating the request.
       operationId: ListAuthorizationDocument
       parameters:
         - description: Email that this AuthorizationDocument will be sent to for signing.
@@ -1490,12 +1400,7 @@ paths:
           name: Email
           schema:
             type: string
-        - description: "Status of an instance resource. It can hold one of the values: 1.
-            opened 2. signing, 3. signed LOA, 4. canceled, 5. failed. See the
-            section entitled [Status
-            Values](https://www.twilio.com/docs/api/phone-numbers/hosted-number\
-            -authorization-documents#status-values) for more information on each
-            of these statuses."
+        - description: "Status of an instance resource. It can hold one of the values: 1. opened 2. signing, 3. signed LOA, 4. canceled, 5. failed. See the section entitled [Status Values](https://www.twilio.com/docs/api/phone-numbers/hosted-number-authorization-documents#status-values) for more information on each of these statuses."
           in: query
           name: Status
           schema:
@@ -1506,8 +1411,7 @@ paths:
               - canceled
               - failed
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1553,8 +1457,7 @@ paths:
       x-maturity:
         - Preview
     post:
-      description: Create an AuthorizationDocument for authorizing the hosting of
-        phone number capabilities on Twilio's platform.
+      description: Create an AuthorizationDocument for authorizing the hosting of phone number capabilities on Twilio's platform.
       operationId: CreateAuthorizationDocument
       requestBody:
         content:
@@ -1562,33 +1465,27 @@ paths:
             schema:
               properties:
                 AddressSid:
-                  description: A 34 character string that uniquely identifies the Address resource
-                    that is associated with this AuthorizationDocument.
+                  description: A 34 character string that uniquely identifies the Address resource that is associated with this AuthorizationDocument.
                   maxLength: 34
                   minLength: 34
                   pattern: ^AD[0-9a-fA-F]{32}$
                   type: string
                 CcEmails:
-                  description: Email recipients who will be informed when an Authorization
-                    Document has been sent and signed.
+                  description: Email recipients who will be informed when an Authorization Document has been sent and signed.
                   items:
                     type: string
                   type: array
                 ContactPhoneNumber:
-                  description: The contact phone number of the person authorized to sign the
-                    Authorization Document.
+                  description: The contact phone number of the person authorized to sign the Authorization Document.
                   type: string
                 ContactTitle:
-                  description: The title of the person authorized to sign the Authorization
-                    Document for this phone number.
+                  description: The title of the person authorized to sign the Authorization Document for this phone number.
                   type: string
                 Email:
                   description: Email that this AuthorizationDocument will be sent to for signing.
                   type: string
                 HostedNumberOrderSids:
-                  description: A list of HostedNumberOrder sids that this AuthorizationDocument
-                    will authorize for hosting phone number capabilities on
-                    Twilio's platform.
+                  description: A list of HostedNumberOrder sids that this AuthorizationDocument will authorize for hosting phone number capabilities on Twilio's platform.
                   items:
                     type: string
                   type: array
@@ -1621,8 +1518,7 @@ paths:
       description: Fetch a specific AuthorizationDocument.
       operationId: FetchAuthorizationDocument
       parameters:
-        - description: A 34 character string that uniquely identifies this
-            AuthorizationDocument.
+        - description: A 34 character string that uniquely identifies this AuthorizationDocument.
           in: path
           name: Sid
           required: true
@@ -1661,43 +1557,32 @@ paths:
             schema:
               properties:
                 AddressSid:
-                  description: A 34 character string that uniquely identifies the Address resource
-                    that is associated with this AuthorizationDocument.
+                  description: A 34 character string that uniquely identifies the Address resource that is associated with this AuthorizationDocument.
                   maxLength: 34
                   minLength: 34
                   pattern: ^AD[0-9a-fA-F]{32}$
                   type: string
                 CcEmails:
-                  description: Email recipients who will be informed when an Authorization
-                    Document has been sent and signed
+                  description: Email recipients who will be informed when an Authorization Document has been sent and signed
                   items:
                     type: string
                   type: array
                 ContactPhoneNumber:
-                  description: The contact phone number of the person authorized to sign the
-                    Authorization Document.
+                  description: The contact phone number of the person authorized to sign the Authorization Document.
                   type: string
                 ContactTitle:
-                  description: The title of the person authorized to sign the Authorization
-                    Document for this phone number.
+                  description: The title of the person authorized to sign the Authorization Document for this phone number.
                   type: string
                 Email:
                   description: Email that this AuthorizationDocument will be sent to for signing.
                   type: string
                 HostedNumberOrderSids:
-                  description: A list of HostedNumberOrder sids that this AuthorizationDocument
-                    will authorize for hosting phone number capabilities on
-                    Twilio's platform.
+                  description: A list of HostedNumberOrder sids that this AuthorizationDocument will authorize for hosting phone number capabilities on Twilio's platform.
                   items:
                     type: string
                   type: array
                 Status:
-                  description: "Status of an instance resource. It can hold one of the values: 1.
-                    opened 2. signing, 3. signed LOA, 4. canceled, 5. failed.
-                    See the section entitled [Status
-                    Values](https://www.twilio.com/docs/api/phone-numbers/hoste\
-                    d-number-authorization-documents#status-values) for more
-                    information on each of these statuses."
+                  description: "Status of an instance resource. It can hold one of the values: 1. opened 2. signing, 3. signed LOA, 4. canceled, 5. failed. See the section entitled [Status Values](https://www.twilio.com/docs/api/phone-numbers/hosted-number-authorization-documents#status-values) for more information on each of these statuses."
                   enum:
                     - opened
                     - signing
@@ -1725,8 +1610,7 @@ paths:
   "/HostedNumbers/AuthorizationDocuments/{SigningDocumentSid}/DependentHostedNumberOrders":
     description: "TODO: Resource-level docs"
     get:
-      description: Retrieve a list of dependent HostedNumberOrders belonging to the
-        AuthorizationDocument.
+      description: Retrieve a list of dependent HostedNumberOrders belonging to the AuthorizationDocument.
       operationId: ListDependentHostedNumberOrder
       parameters:
         - description: ""
@@ -1738,12 +1622,7 @@ paths:
             minLength: 34
             pattern: ^PX[0-9a-fA-F]{32}$
             type: string
-        - description: "Status of an instance resource. It can hold one of the values: 1.
-            opened 2. signing, 3. signed LOA, 4. canceled, 5. failed. See the
-            section entitled [Status
-            Values](https://www.twilio.com/docs/api/phone-numbers/hosted-number\
-            -authorization-documents#status-values) for more information on each
-            of these statuses."
+        - description: "Status of an instance resource. It can hold one of the values: 1. opened 2. signing, 3. signed LOA, 4. canceled, 5. failed. See the section entitled [Status Values](https://www.twilio.com/docs/api/phone-numbers/hosted-number-authorization-documents#status-values) for more information on each of these statuses."
           in: query
           name: Status
           schema:
@@ -1763,8 +1642,7 @@ paths:
           name: PhoneNumber
           schema:
             type: string
-        - description: A 34 character string that uniquely identifies the
-            IncomingPhoneNumber resource created by this HostedNumberOrder.
+        - description: A 34 character string that uniquely identifies the IncomingPhoneNumber resource created by this HostedNumberOrder.
           in: query
           name: IncomingPhoneNumberSid
           schema:
@@ -1777,15 +1655,12 @@ paths:
           name: FriendlyName
           schema:
             type: string
-        - description: Provides a unique and addressable name to be assigned to this
-            HostedNumberOrder, assigned by the developer, to be optionally used
-            in addition to SID.
+        - description: Provides a unique and addressable name to be assigned to this HostedNumberOrder, assigned by the developer, to be optionally used in addition to SID.
           in: query
           name: UniqueName
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1800,8 +1675,7 @@ paths:
                 properties:
                   items:
                     items:
-                      $ref: "#/components/schemas/preview.hosted_numbers.authorization_document.depen\
-                        dent_hosted_number_order"
+                      $ref: "#/components/schemas/preview.hosted_numbers.authorization_document.dependent_hosted_number_order"
                     type: array
                   meta:
                     properties:
@@ -1838,14 +1712,10 @@ paths:
   /HostedNumbers/HostedNumberOrders:
     description: "TODO: Resource-level docs"
     get:
-      description: Retrieve a list of HostedNumberOrders belonging to the account
-        initiating the request.
+      description: Retrieve a list of HostedNumberOrders belonging to the account initiating the request.
       operationId: ListHostedNumberOrder
       parameters:
-        - description: The Status of this HostedNumberOrder. One of `received`,
-            `pending-verification`, `verified`, `pending-loa`,
-            `carrier-processing`, `testing`, `completed`, `failed`, or
-            `action-required`.
+        - description: The Status of this HostedNumberOrder. One of `received`, `pending-verification`, `verified`, `pending-loa`, `carrier-processing`, `testing`, `completed`, `failed`, or `action-required`.
           in: query
           name: Status
           schema:
@@ -1865,8 +1735,7 @@ paths:
           name: PhoneNumber
           schema:
             type: string
-        - description: A 34 character string that uniquely identifies the
-            IncomingPhoneNumber resource created by this HostedNumberOrder.
+        - description: A 34 character string that uniquely identifies the IncomingPhoneNumber resource created by this HostedNumberOrder.
           in: query
           name: IncomingPhoneNumberSid
           schema:
@@ -1879,15 +1748,12 @@ paths:
           name: FriendlyName
           schema:
             type: string
-        - description: Provides a unique and addressable name to be assigned to this
-            HostedNumberOrder, assigned by the developer, to be optionally used
-            in addition to SID.
+        - description: Provides a unique and addressable name to be assigned to this HostedNumberOrder, assigned by the developer, to be optionally used in addition to SID.
           in: query
           name: UniqueName
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1941,56 +1807,42 @@ paths:
             schema:
               properties:
                 AccountSid:
-                  description: This defaults to the AccountSid of the authorization the user is
-                    using. This can be provided to specify a subaccount to add
-                    the HostedNumberOrder to.
+                  description: This defaults to the AccountSid of the authorization the user is using. This can be provided to specify a subaccount to add the HostedNumberOrder to.
                   maxLength: 34
                   minLength: 34
                   pattern: ^AC[0-9a-fA-F]{32}$
                   type: string
                 AddressSid:
-                  description: Optional. A 34 character string that uniquely identifies the
-                    Address resource that represents the address of the owner of
-                    this phone number.
+                  description: Optional. A 34 character string that uniquely identifies the Address resource that represents the address of the owner of this phone number.
                   maxLength: 34
                   minLength: 34
                   pattern: ^AD[0-9a-fA-F]{32}$
                   type: string
                 CcEmails:
-                  description: Optional. A list of emails that the LOA document for this
-                    HostedNumberOrder will be carbon copied to.
+                  description: Optional. A list of emails that the LOA document for this HostedNumberOrder will be carbon copied to.
                   items:
                     type: string
                   type: array
                 Email:
-                  description: Optional. Email of the owner of this phone number that is being
-                    hosted.
+                  description: Optional. Email of the owner of this phone number that is being hosted.
                   type: string
                 FriendlyName:
-                  description: A 64 character string that is a human readable text that describes
-                    this resource.
+                  description: A 64 character string that is a human readable text that describes this resource.
                   type: string
                 PhoneNumber:
-                  description: The number to host in [+E.164](https://en.wikipedia.org/wiki/E.164)
-                    format
+                  description: The number to host in [+E.164](https://en.wikipedia.org/wiki/E.164) format
                   type: string
                 SmsApplicationSid:
-                  description: Optional. The 34 character sid of the application Twilio should use
-                    to handle SMS messages sent to this number. If a
-                    `SmsApplicationSid` is present, Twilio will ignore all of
-                    the SMS urls above and use those set on the application.
+                  description: Optional. The 34 character sid of the application Twilio should use to handle SMS messages sent to this number. If a `SmsApplicationSid` is present, Twilio will ignore all of the SMS urls above and use those set on the application.
                   maxLength: 34
                   minLength: 34
                   pattern: ^AP[0-9a-fA-F]{32}$
                   type: string
                 SmsCapability:
-                  description: Used to specify that the SMS capability will be hosted on Twilio's
-                    platform.
+                  description: Used to specify that the SMS capability will be hosted on Twilio's platform.
                   type: boolean
                 SmsFallbackMethod:
-                  description: The HTTP method that should be used to request the SmsFallbackUrl.
-                    Must be either `GET` or `POST`. This will be copied onto the
-                    IncomingPhoneNumber resource.
+                  description: The HTTP method that should be used to request the SmsFallbackUrl. Must be either `GET` or `POST`. This will be copied onto the IncomingPhoneNumber resource.
                   enum:
                     - HEAD
                     - GET
@@ -2000,15 +1852,11 @@ paths:
                     - DELETE
                   type: string
                 SmsFallbackUrl:
-                  description: A URL that Twilio will request if an error occurs requesting or
-                    executing the TwiML defined by SmsUrl. This will be copied
-                    onto the IncomingPhoneNumber resource.
+                  description: A URL that Twilio will request if an error occurs requesting or executing the TwiML defined by SmsUrl. This will be copied onto the IncomingPhoneNumber resource.
                   format: uri
                   type: string
                 SmsMethod:
-                  description: The HTTP method that should be used to request the SmsUrl. Must be
-                    either `GET` or `POST`.  This will be copied onto the
-                    IncomingPhoneNumber resource.
+                  description: The HTTP method that should be used to request the SmsUrl. Must be either `GET` or `POST`.  This will be copied onto the IncomingPhoneNumber resource.
                   enum:
                     - HEAD
                     - GET
@@ -2018,14 +1866,11 @@ paths:
                     - DELETE
                   type: string
                 SmsUrl:
-                  description: The URL that Twilio should request when somebody sends an SMS to
-                    the phone number. This will be copied onto the
-                    IncomingPhoneNumber resource.
+                  description: The URL that Twilio should request when somebody sends an SMS to the phone number. This will be copied onto the IncomingPhoneNumber resource.
                   format: uri
                   type: string
                 StatusCallbackMethod:
-                  description: Optional. The Status Callback Method attached to the
-                    IncomingPhoneNumber resource.
+                  description: Optional. The Status Callback Method attached to the IncomingPhoneNumber resource.
                   enum:
                     - HEAD
                     - GET
@@ -2035,27 +1880,20 @@ paths:
                     - DELETE
                   type: string
                 StatusCallbackUrl:
-                  description: Optional. The Status Callback URL attached to the
-                    IncomingPhoneNumber resource.
+                  description: Optional. The Status Callback URL attached to the IncomingPhoneNumber resource.
                   format: uri
                   type: string
                 UniqueName:
-                  description: Optional. Provides a unique and addressable name to be assigned to
-                    this HostedNumberOrder, assigned by the developer, to be
-                    optionally used in addition to SID.
+                  description: Optional. Provides a unique and addressable name to be assigned to this HostedNumberOrder, assigned by the developer, to be optionally used in addition to SID.
                   type: string
                 VerificationDocumentSid:
-                  description: Optional. The unique sid identifier of the Identity Document that
-                    represents the document for verifying ownership of the
-                    number to be hosted. Required when VerificationType is
-                    phone-bill.
+                  description: Optional. The unique sid identifier of the Identity Document that represents the document for verifying ownership of the number to be hosted. Required when VerificationType is phone-bill.
                   maxLength: 34
                   minLength: 34
                   pattern: ^RI[0-9a-fA-F]{32}$
                   type: string
                 VerificationType:
-                  description: Optional. The method used for verifying ownership of the number to
-                    be hosted. One of phone-call (default) or phone-bill.
+                  description: Optional. The method used for verifying ownership of the number to be hosted. One of phone-call (default) or phone-bill.
                   enum:
                     - phone-call
                     - phone-bill
@@ -2082,12 +1920,10 @@ paths:
     x-path-type: list
   "/HostedNumbers/HostedNumberOrders/{Sid}":
     delete:
-      description: Cancel the HostedNumberOrder (only available when the status is in
-        `received`).
+      description: Cancel the HostedNumberOrder (only available when the status is in `received`).
       operationId: DeleteHostedNumberOrder
       parameters:
-        - description: A 34 character string that uniquely identifies this
-            HostedNumberOrder.
+        - description: A 34 character string that uniquely identifies this HostedNumberOrder.
           in: path
           name: Sid
           required: true
@@ -2108,8 +1944,7 @@ paths:
       description: Fetch a specific HostedNumberOrder.
       operationId: FetchHostedNumberOrder
       parameters:
-        - description: A 34 character string that uniquely identifies this
-            HostedNumberOrder.
+        - description: A 34 character string that uniquely identifies this HostedNumberOrder.
           in: path
           name: Sid
           required: true
@@ -2148,12 +1983,10 @@ paths:
             schema:
               properties:
                 CallDelay:
-                  description: The number of seconds, between 0 and 60, to delay before initiating
-                    the verification call. Defaults to 0.
+                  description: The number of seconds, between 0 and 60, to delay before initiating the verification call. Defaults to 0.
                   type: integer
                 CcEmails:
-                  description: Optional. A list of emails that LOA document for this
-                    HostedNumberOrder will be carbon copied to.
+                  description: Optional. A list of emails that LOA document for this HostedNumberOrder will be carbon copied to.
                   items:
                     type: string
                   type: array
@@ -2164,13 +1997,10 @@ paths:
                   description: Digits to dial after connecting the verification call.
                   type: string
                 FriendlyName:
-                  description: A 64 character string that is a human readable text that describes
-                    this resource.
+                  description: A 64 character string that is a human readable text that describes this resource.
                   type: string
                 Status:
-                  description: User can only post to `pending-verification` status to transition
-                    the HostedNumberOrder to initiate a verification call or
-                    verification of ownership with a copy of a phone bill.
+                  description: User can only post to `pending-verification` status to transition the HostedNumberOrder to initiate a verification call or verification of ownership with a copy of a phone bill.
                   enum:
                     - received
                     - pending-verification
@@ -2183,26 +2013,19 @@ paths:
                     - action-required
                   type: string
                 UniqueName:
-                  description: Provides a unique and addressable name to be assigned to this
-                    HostedNumberOrder, assigned by the developer, to be
-                    optionally used in addition to SID.
+                  description: Provides a unique and addressable name to be assigned to this HostedNumberOrder, assigned by the developer, to be optionally used in addition to SID.
                   type: string
                 VerificationCode:
-                  description: A verification code that is given to the user via a phone call to
-                    the phone number that is being hosted.
+                  description: A verification code that is given to the user via a phone call to the phone number that is being hosted.
                   type: string
                 VerificationDocumentSid:
-                  description: Optional. The unique sid identifier of the Identity Document that
-                    represents the document for verifying ownership of the
-                    number to be hosted. Required when VerificationType is
-                    phone-bill.
+                  description: Optional. The unique sid identifier of the Identity Document that represents the document for verifying ownership of the number to be hosted. Required when VerificationType is phone-bill.
                   maxLength: 34
                   minLength: 34
                   pattern: ^RI[0-9a-fA-F]{32}$
                   type: string
                 VerificationType:
-                  description: Optional. The method used for verifying ownership of the number to
-                    be hosted. One of phone-call (default) or phone-bill.
+                  description: Optional. The method used for verifying ownership of the number to be hosted. One of phone-call (default) or phone-bill.
                   enum:
                     - phone-call
                     - phone-bill
@@ -2230,8 +2053,7 @@ paths:
       description: ""
       operationId: ListService
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -2329,8 +2151,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -2437,8 +2258,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -2507,8 +2327,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Arbitrary string identifier representing a user associated with an
-            FPA token, assigned by the developer.
+        - description: Arbitrary string identifier representing a user associated with an FPA token, assigned by the developer.
           in: path
           name: Identity
           required: true
@@ -2541,8 +2360,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Arbitrary string identifier representing a user associated with an
-            FPA token, assigned by the developer.
+        - description: Arbitrary string identifier representing a user associated with an FPA token, assigned by the developer.
           in: path
           name: Identity
           required: true
@@ -2578,8 +2396,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Arbitrary string identifier representing a human user associated
-            with an FPA token, assigned by the developer.
+        - description: Arbitrary string identifier representing a human user associated with an FPA token, assigned by the developer.
           in: path
           name: Identity
           required: true
@@ -2591,16 +2408,13 @@ paths:
             schema:
               properties:
                 Manage:
-                  description: Boolean flag specifying whether the identity can delete the Sync
-                    Document.
+                  description: Boolean flag specifying whether the identity can delete the Sync Document.
                   type: boolean
                 Read:
-                  description: Boolean flag specifying whether the identity can read the Sync
-                    Document.
+                  description: Boolean flag specifying whether the identity can read the Sync Document.
                   type: boolean
                 Write:
-                  description: Boolean flag specifying whether the identity can update the Sync
-                    Document.
+                  description: Boolean flag specifying whether the identity can update the Sync Document.
                   type: boolean
               required:
                 - Read
@@ -2747,8 +2561,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -2873,8 +2686,7 @@ paths:
               - inclusive
               - exclusive
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -3118,8 +2930,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -3188,8 +2999,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Arbitrary string identifier representing a user associated with an
-            FPA token, assigned by the developer.
+        - description: Arbitrary string identifier representing a user associated with an FPA token, assigned by the developer.
           in: path
           name: Identity
           required: true
@@ -3222,8 +3032,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Arbitrary string identifier representing a user associated with an
-            FPA token, assigned by the developer.
+        - description: Arbitrary string identifier representing a user associated with an FPA token, assigned by the developer.
           in: path
           name: Identity
           required: true
@@ -3259,8 +3068,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Arbitrary string identifier representing a human user associated
-            with an FPA token, assigned by the developer.
+        - description: Arbitrary string identifier representing a human user associated with an FPA token, assigned by the developer.
           in: path
           name: Identity
           required: true
@@ -3272,16 +3080,13 @@ paths:
             schema:
               properties:
                 Manage:
-                  description: Boolean flag specifying whether the identity can delete the Sync
-                    List.
+                  description: Boolean flag specifying whether the identity can delete the Sync List.
                   type: boolean
                 Read:
-                  description: Boolean flag specifying whether the identity can read the Sync
-                    List.
+                  description: Boolean flag specifying whether the identity can read the Sync List.
                   type: boolean
                 Write:
-                  description: Boolean flag specifying whether the identity can create, update and
-                    delete Items of the Sync List.
+                  description: Boolean flag specifying whether the identity can create, update and delete Items of the Sync List.
                   type: boolean
               required:
                 - Read
@@ -3381,8 +3186,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -3507,8 +3311,7 @@ paths:
               - inclusive
               - exclusive
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -3756,8 +3559,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -3826,8 +3628,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Arbitrary string identifier representing a user associated with an
-            FPA token, assigned by the developer.
+        - description: Arbitrary string identifier representing a user associated with an FPA token, assigned by the developer.
           in: path
           name: Identity
           required: true
@@ -3860,8 +3661,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Arbitrary string identifier representing a user associated with an
-            FPA token, assigned by the developer.
+        - description: Arbitrary string identifier representing a user associated with an FPA token, assigned by the developer.
           in: path
           name: Identity
           required: true
@@ -3897,8 +3697,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Arbitrary string identifier representing a human user associated
-            with an FPA token, assigned by the developer.
+        - description: Arbitrary string identifier representing a human user associated with an FPA token, assigned by the developer.
           in: path
           name: Identity
           required: true
@@ -3910,15 +3709,13 @@ paths:
             schema:
               properties:
                 Manage:
-                  description: Boolean flag specifying whether the identity can delete the Sync
-                    Map.
+                  description: Boolean flag specifying whether the identity can delete the Sync Map.
                   type: boolean
                 Read:
                   description: Boolean flag specifying whether the identity can read the Sync Map.
                   type: boolean
                 Write:
-                  description: Boolean flag specifying whether the identity can create, update and
-                    delete Items of the Sync Map.
+                  description: Boolean flag specifying whether the identity can create, update and delete Items of the Sync Map.
                   type: boolean
               required:
                 - Read
@@ -4103,8 +3900,7 @@ paths:
       description: Associate a channel to a branded channel
       operationId: CreateChannel
       parameters:
-        - description: The unique SID identifier of the Branded Channel. The given phone
-            number is going to be assigned to this Branded Channel
+        - description: The unique SID identifier of the Branded Channel. The given phone number is going to be assigned to this Branded Channel
           in: path
           name: BrandedChannelSid
           required: true
@@ -4119,8 +3915,7 @@ paths:
             schema:
               properties:
                 PhoneNumberSid:
-                  description: The unique SID identifier of the Phone Number of the Phone number
-                    to be assigned to the Branded Channel.
+                  description: The unique SID identifier of the Phone Number of the Phone number to be assigned to the Branded Channel.
                   maxLength: 34
                   minLength: 34
                   pattern: ^PN[0-9a-fA-F]{32}$
@@ -4193,9 +3988,7 @@ paths:
       description: Retrieve the newest available BrandInformation
       operationId: FetchBrandsInformation
       parameters:
-        - description: "Standard `If-None-Match` HTTP header. For more information visit:
-            https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-M\
-            atch."
+        - description: "Standard `If-None-Match` HTTP header. For more information visit: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match."
           in: header
           name: If-None-Match
           schema:
@@ -4222,8 +4015,7 @@ paths:
   /TrustedComms/CPS:
     description: "TODO: Resource-level docs"
     get:
-      description: Fetch a specific Call Placement Service (CPS) given a phone number
-        via `X-XCNAM-Sensitive-Phone-Number` header.
+      description: Fetch a specific Call Placement Service (CPS) given a phone number via `X-XCNAM-Sensitive-Phone-Number` header.
       operationId: FetchCps
       parameters:
         - description: Phone number used to retrieve its corresponding CPS.
@@ -4252,21 +4044,15 @@ paths:
   /TrustedComms/CurrentCall:
     description: "TODO: Resource-level docs"
     get:
-      description: Retrieve a current call given the originating and terminating
-        number via `X-XCNAM-Sensitive-Phone-Number-From` and
-        `X-XCNAM-Sensitive-Phone-Number-To` headers.
+      description: Retrieve a current call given the originating and terminating number via `X-XCNAM-Sensitive-Phone-Number-From` and `X-XCNAM-Sensitive-Phone-Number-To` headers.
       operationId: FetchCurrentCall
       parameters:
-        - description: The originating Phone Number, given in [E.164
-            format](https://www.twilio.com/docs/glossary/what-e164). This phone
-            number should be a Twilio number, otherwise it will return an error
-            with HTTP Status Code 400.
+        - description: The originating Phone Number, given in [E.164 format](https://www.twilio.com/docs/glossary/what-e164). This phone number should be a Twilio number, otherwise it will return an error with HTTP Status Code 400.
           in: header
           name: X-Xcnam-Sensitive-Phone-Number-From
           schema:
             type: string
-        - description: The terminating Phone Number, given in [E.164
-            format](https://www.twilio.com/docs/glossary/what-e164).
+        - description: The terminating Phone Number, given in [E.164 format](https://www.twilio.com/docs/glossary/what-e164).
           in: header
           name: X-Xcnam-Sensitive-Phone-Number-To
           schema:
@@ -4306,8 +4092,7 @@ paths:
       description: Retrieve a list of Add-ons currently available to be installed.
       operationId: ListAvailableAddOn
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -4371,8 +4156,7 @@ paths:
             minLength: 34
             pattern: ^XB[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -4387,8 +4171,7 @@ paths:
                 properties:
                   extensions:
                     items:
-                      $ref: "#/components/schemas/preview.marketplace.available_add_on.available_add_\
-                        on_extension"
+                      $ref: "#/components/schemas/preview.marketplace.available_add_on.available_add_on_extension"
                     type: array
                   meta:
                     properties:
@@ -4451,8 +4234,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/preview.marketplace.available_add_on.available_add_\
-                  on_extension"
+                $ref: "#/components/schemas/preview.marketplace.available_add_on.available_add_on_extension"
           description: OK
       security:
         - accountSid_authToken: []
@@ -4498,8 +4280,7 @@ paths:
       description: Retrieve a list of Add-ons currently installed on this Account.
       operationId: ListInstalledAddOn
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -4562,12 +4343,10 @@ paths:
                   pattern: ^XB[0-9a-fA-F]{32}$
                   type: string
                 Configuration:
-                  description: The JSON object that represents the configuration of the new Add-on
-                    being installed.
+                  description: The JSON object that represents the configuration of the new Add-on being installed.
                   type: object
                 UniqueName:
-                  description: An application-defined string that uniquely identifies the
-                    resource. This value must be unique within the Account.
+                  description: An application-defined string that uniquely identifies the resource. This value must be unique within the Account.
                   type: string
               required:
                 - AvailableAddOnSid
@@ -4604,8 +4383,7 @@ paths:
             minLength: 34
             pattern: ^XE[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -4620,8 +4398,7 @@ paths:
                 properties:
                   extensions:
                     items:
-                      $ref: "#/components/schemas/preview.marketplace.installed_add_on.installed_add_\
-                        on_extension"
+                      $ref: "#/components/schemas/preview.marketplace.installed_add_on.installed_add_on_extension"
                     type: array
                   meta:
                     properties:
@@ -4684,8 +4461,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/preview.marketplace.installed_add_on.installed_add_\
-                  on_extension"
+                $ref: "#/components/schemas/preview.marketplace.installed_add_on.installed_add_on_extension"
           description: OK
       security:
         - accountSid_authToken: []
@@ -4730,8 +4506,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/preview.marketplace.installed_add_on.installed_add_\
-                  on_extension"
+                $ref: "#/components/schemas/preview.marketplace.installed_add_on.installed_add_on_extension"
           description: OK
       security:
         - accountSid_authToken: []
@@ -4806,13 +4581,10 @@ paths:
             schema:
               properties:
                 Configuration:
-                  description: Valid JSON object that conform to the configuration schema exposed
-                    by the associated AvailableAddOn resource. This is only
-                    required by Add-ons that need to be configured
+                  description: Valid JSON object that conform to the configuration schema exposed by the associated AvailableAddOn resource. This is only required by Add-ons that need to be configured
                   type: object
                 UniqueName:
-                  description: An application-defined string that uniquely identifies the
-                    resource. This value must be unique within the Account.
+                  description: An application-defined string that uniquely identifies the resource. This value must be unique within the Account.
                   type: string
               title: UpdateInstalledAddOnRequest
               type: object
@@ -4837,8 +4609,7 @@ paths:
       description: ""
       operationId: ListAssistant
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -4892,37 +4663,29 @@ paths:
             schema:
               properties:
                 CallbackEvents:
-                  description: Space-separated list of callback events that will trigger
-                    callbacks.
+                  description: Space-separated list of callback events that will trigger callbacks.
                   type: string
                 CallbackUrl:
                   description: A user-provided URL to send event callbacks to.
                   format: uri
                   type: string
                 FallbackActions:
-                  description: The JSON actions to be executed when the user's input is not
-                    recognized as matching any Task.
+                  description: The JSON actions to be executed when the user's input is not recognized as matching any Task.
                   type: object
                 FriendlyName:
-                  description: A text description for the Assistant. It is non-unique and can up
-                    to 255 characters long.
+                  description: A text description for the Assistant. It is non-unique and can up to 255 characters long.
                   type: string
                 InitiationActions:
-                  description: The JSON actions to be executed on inbound phone calls when the
-                    Assistant has to say something first.
+                  description: The JSON actions to be executed on inbound phone calls when the Assistant has to say something first.
                   type: object
                 LogQueries:
-                  description: A boolean that specifies whether queries should be logged for 30
-                    days further training. If false, no queries will be stored,
-                    if true, queries will be stored for 30 days and deleted
-                    thereafter. Defaults to true if no value is provided.
+                  description: A boolean that specifies whether queries should be logged for 30 days further training. If false, no queries will be stored, if true, queries will be stored for 30 days and deleted thereafter. Defaults to true if no value is provided.
                   type: boolean
                 StyleSheet:
                   description: The JSON object that holds the style sheet for the assistant
                   type: object
                 UniqueName:
-                  description: A user-provided string that uniquely identifies this resource as an
-                    alternative to the sid. Unique up to 64 characters long.
+                  description: A user-provided string that uniquely identifies this resource as an alternative to the sid. Unique up to 64 characters long.
                   type: string
               title: CreateAssistantRequest
               type: object
@@ -4991,8 +4754,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/preview.understand.assistant.assistant_fallback_act\
-                  ions"
+                $ref: "#/components/schemas/preview.understand.assistant.assistant_fallback_actions"
           description: OK
       security:
         - accountSid_authToken: []
@@ -5023,8 +4785,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/preview.understand.assistant.assistant_fallback_act\
-                  ions"
+                $ref: "#/components/schemas/preview.understand.assistant.assistant_fallback_actions"
           description: OK
       security:
         - accountSid_authToken: []
@@ -5046,8 +4807,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -5108,12 +4868,10 @@ paths:
             schema:
               properties:
                 FriendlyName:
-                  description: A user-provided string that identifies this resource. It is
-                    non-unique and can up to 255 characters long.
+                  description: A user-provided string that identifies this resource. It is non-unique and can up to 255 characters long.
                   type: string
                 UniqueName:
-                  description: A user-provided string that uniquely identifies this resource as an
-                    alternative to the sid. Unique up to 64 characters long.
+                  description: A user-provided string that uniquely identifies this resource as an alternative to the sid. Unique up to 64 characters long.
                   type: string
               required:
                 - UniqueName
@@ -5157,8 +4915,7 @@ paths:
           name: Language
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -5228,12 +4985,10 @@ paths:
                   description: An ISO language-country string of the value.
                   type: string
                 SynonymOf:
-                  description: A value that indicates this field value is a synonym of. Empty if
-                    the value is not a synonym.
+                  description: A value that indicates this field value is a synonym of. Empty if the value is not a synonym.
                   type: string
                 Value:
-                  description: A user-provided string that uniquely identifies this resource as an
-                    alternative to the sid. Unique up to 64 characters long.
+                  description: A user-provided string that uniquely identifies this resource as an alternative to the sid. Unique up to 64 characters long.
                   type: string
               required:
                 - Language
@@ -5397,12 +5152,10 @@ paths:
             schema:
               properties:
                 FriendlyName:
-                  description: A user-provided string that identifies this resource. It is
-                    non-unique and can up to 255 characters long.
+                  description: A user-provided string that identifies this resource. It is non-unique and can up to 255 characters long.
                   type: string
                 UniqueName:
-                  description: A user-provided string that uniquely identifies this resource as an
-                    alternative to the sid. Unique up to 64 characters long.
+                  description: A user-provided string that uniquely identifies this resource as an alternative to the sid. Unique up to 64 characters long.
                   type: string
               title: UpdateFieldTypeRequest
               type: object
@@ -5438,8 +5191,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/preview.understand.assistant.assistant_initiation_a\
-                  ctions"
+                $ref: "#/components/schemas/preview.understand.assistant.assistant_initiation_actions"
           description: OK
       security:
         - accountSid_authToken: []
@@ -5470,8 +5222,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/preview.understand.assistant.assistant_initiation_a\
-                  ctions"
+                $ref: "#/components/schemas/preview.understand.assistant.assistant_initiation_actions"
           description: OK
       security:
         - accountSid_authToken: []
@@ -5493,8 +5244,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -5559,9 +5309,7 @@ paths:
                   format: uri
                   type: string
                 UniqueName:
-                  description: "A user-provided string that uniquely identifies this resource as
-                    an alternative to the sid. Unique up to 64 characters long.
-                    For example: v0.1"
+                  description: "A user-provided string that uniquely identifies this resource as an alternative to the sid. Unique up to 64 characters long. For example: v0.1"
                   type: string
               title: CreateModelBuildRequest
               type: object
@@ -5654,9 +5402,7 @@ paths:
             schema:
               properties:
                 UniqueName:
-                  description: "A user-provided string that uniquely identifies this resource as
-                    an alternative to the sid. Unique up to 64 characters long.
-                    For example: v0.1"
+                  description: "A user-provided string that uniquely identifies this resource as an alternative to the sid. Unique up to 64 characters long. For example: v0.1"
                   type: string
               title: UpdateModelBuildRequest
               type: object
@@ -5697,14 +5443,12 @@ paths:
           name: ModelBuild
           schema:
             type: string
-        - description: "A string that described the query status. The values can be:
-            pending_review, reviewed, discarded"
+        - description: "A string that described the query status. The values can be: pending_review, reviewed, discarded"
           in: query
           name: Status
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -5765,26 +5509,19 @@ paths:
             schema:
               properties:
                 Field:
-                  description: Constraints the query to a given Field with an task. Useful when
-                    you know the Field you are expecting. It accepts one field
-                    in the format *task-unique-name-1*:*field-unique-name*
+                  description: Constraints the query to a given Field with an task. Useful when you know the Field you are expecting. It accepts one field in the format *task-unique-name-1*:*field-unique-name*
                   type: string
                 Language:
                   description: An ISO language-country string of the sample.
                   type: string
                 ModelBuild:
-                  description: The Model Build Sid or unique name of the Model Build to be
-                    queried.
+                  description: The Model Build Sid or unique name of the Model Build to be queried.
                   type: string
                 Query:
-                  description: A user-provided string that uniquely identifies this resource as an
-                    alternative to the sid. It can be up to 2048 characters
-                    long.
+                  description: A user-provided string that uniquely identifies this resource as an alternative to the sid. It can be up to 2048 characters long.
                   type: string
                 Tasks:
-                  description: Constraints the query to a set of tasks. Useful when you need to
-                    constrain the paths the user can take. Tasks should be comma
-                    separated *task-unique-name-1*, *task-unique-name-2*
+                  description: Constraints the query to a set of tasks. Useful when you need to constrain the paths the user can take. Tasks should be comma separated *task-unique-name-1*, *task-unique-name-2*
                   type: string
               required:
                 - Language
@@ -5886,8 +5623,7 @@ paths:
                   pattern: ^UF[0-9a-fA-F]{32}$
                   type: string
                 Status:
-                  description: "A string that described the query status. The values can be:
-                    pending_review, reviewed, discarded"
+                  description: "A string that described the query status. The values can be: pending_review, reviewed, discarded"
                   type: string
               title: UpdateQueryRequest
               type: object
@@ -5930,8 +5666,7 @@ paths:
       x-maturity:
         - Preview
     post:
-      description: Updates the style sheet for an assistant identified by
-        {AssistantSid} or {AssistantUniqueName}.
+      description: Updates the style sheet for an assistant identified by {AssistantSid} or {AssistantUniqueName}.
       operationId: UpdateStyleSheet
       parameters:
         - description: The unique ID of the Assistant
@@ -5977,8 +5712,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -6039,21 +5773,17 @@ paths:
             schema:
               properties:
                 Actions:
-                  description: A user-provided JSON object encoded as a string to specify the
-                    actions for this task. It is optional and non-unique.
+                  description: A user-provided JSON object encoded as a string to specify the actions for this task. It is optional and non-unique.
                   type: object
                 ActionsUrl:
-                  description: User-provided HTTP endpoint where from the assistant fetches
-                    actions
+                  description: User-provided HTTP endpoint where from the assistant fetches actions
                   format: uri
                   type: string
                 FriendlyName:
-                  description: A user-provided string that identifies this resource. It is
-                    non-unique and can up to 255 characters long.
+                  description: A user-provided string that identifies this resource. It is non-unique and can up to 255 characters long.
                   type: string
                 UniqueName:
-                  description: A user-provided string that uniquely identifies this resource as an
-                    alternative to the sid. Unique up to 64 characters long.
+                  description: A user-provided string that uniquely identifies this resource as an alternative to the sid. Unique up to 64 characters long.
                   type: string
               required:
                 - UniqueName
@@ -6148,21 +5878,17 @@ paths:
             schema:
               properties:
                 Actions:
-                  description: A user-provided JSON object encoded as a string to specify the
-                    actions for this task. It is optional and non-unique.
+                  description: A user-provided JSON object encoded as a string to specify the actions for this task. It is optional and non-unique.
                   type: object
                 ActionsUrl:
-                  description: User-provided HTTP endpoint where from the assistant fetches
-                    actions
+                  description: User-provided HTTP endpoint where from the assistant fetches actions
                   format: uri
                   type: string
                 FriendlyName:
-                  description: A user-provided string that identifies this resource. It is
-                    non-unique and can up to 255 characters long.
+                  description: A user-provided string that identifies this resource. It is non-unique and can up to 255 characters long.
                   type: string
                 UniqueName:
-                  description: A user-provided string that uniquely identifies this resource as an
-                    alternative to the sid. Unique up to 64 characters long.
+                  description: A user-provided string that uniquely identifies this resource as an alternative to the sid. Unique up to 64 characters long.
                   type: string
               title: UpdateTaskRequest
               type: object
@@ -6211,8 +5937,7 @@ paths:
       x-maturity:
         - Preview
     post:
-      description: Updates the actions of an Task identified by {TaskSid} or
-        {TaskUniqueName}.
+      description: Updates the actions of an Task identified by {TaskSid} or {TaskUniqueName}.
       operationId: UpdateTaskActions
       parameters:
         - description: The unique ID of the parent Assistant.
@@ -6233,8 +5958,7 @@ paths:
             schema:
               properties:
                 Actions:
-                  description: The JSON actions that instruct the Assistant how to perform this
-                    task.
+                  description: The JSON actions that instruct the Assistant how to perform this task.
                   type: object
               title: UpdateTaskActionsRequest
               type: object
@@ -6271,8 +5995,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -6339,15 +6062,10 @@ paths:
             schema:
               properties:
                 FieldType:
-                  description: The unique name or sid of the FieldType. It can be any [Built-in
-                    Field
-                    Type](https://www.twilio.com/docs/assistant/api/built-in-field-types)
-                    or the unique_name or the Field Type sid of a custom Field
-                    Type.
+                  description: The unique name or sid of the FieldType. It can be any [Built-in Field Type](https://www.twilio.com/docs/assistant/api/built-in-field-types) or the unique_name or the Field Type sid of a custom Field Type.
                   type: string
                 UniqueName:
-                  description: A user-provided string that uniquely identifies this resource as an
-                    alternative to the sid. Unique up to 64 characters long.
+                  description: A user-provided string that uniquely identifies this resource as an alternative to the sid. Unique up to 64 characters long.
                   type: string
               required:
                 - FieldType
@@ -6460,8 +6178,7 @@ paths:
           name: Language
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -6531,13 +6248,10 @@ paths:
                   description: An ISO language-country string of the sample.
                   type: string
                 SourceChannel:
-                  description: "The communication channel the sample was captured. It can be:
-                    *voice*, *sms*, *chat*, *alexa*, *google-assistant*, or
-                    *slack*. If not included the value will be null"
+                  description: "The communication channel the sample was captured. It can be: *voice*, *sms*, *chat*, *alexa*, *google-assistant*, or *slack*. If not included the value will be null"
                   type: string
                 TaggedText:
-                  description: The text example of how end-users may express this task. The sample
-                    may contain Field tag blocks.
+                  description: The text example of how end-users may express this task. The sample may contain Field tag blocks.
                   type: string
               required:
                 - Language
@@ -6663,13 +6377,10 @@ paths:
                   description: An ISO language-country string of the sample.
                   type: string
                 SourceChannel:
-                  description: "The communication channel the sample was captured. It can be:
-                    *voice*, *sms*, *chat*, *alexa*, *google-assistant*, or
-                    *slack*. If not included the value will be null"
+                  description: "The communication channel the sample was captured. It can be: *voice*, *sms*, *chat*, *alexa*, *google-assistant*, or *slack*. If not included the value will be null"
                   type: string
                 TaggedText:
-                  description: The text example of how end-users may express this task. The sample
-                    may contain Field tag blocks.
+                  description: The text example of how end-users may express this task. The sample may contain Field tag blocks.
                   type: string
               title: UpdateSampleRequest
               type: object
@@ -6777,37 +6488,29 @@ paths:
             schema:
               properties:
                 CallbackEvents:
-                  description: Space-separated list of callback events that will trigger
-                    callbacks.
+                  description: Space-separated list of callback events that will trigger callbacks.
                   type: string
                 CallbackUrl:
                   description: A user-provided URL to send event callbacks to.
                   format: uri
                   type: string
                 FallbackActions:
-                  description: The JSON actions to be executed when the user's input is not
-                    recognized as matching any Task.
+                  description: The JSON actions to be executed when the user's input is not recognized as matching any Task.
                   type: object
                 FriendlyName:
-                  description: A text description for the Assistant. It is non-unique and can up
-                    to 255 characters long.
+                  description: A text description for the Assistant. It is non-unique and can up to 255 characters long.
                   type: string
                 InitiationActions:
-                  description: The JSON actions to be executed on inbound phone calls when the
-                    Assistant has to say something first.
+                  description: The JSON actions to be executed on inbound phone calls when the Assistant has to say something first.
                   type: object
                 LogQueries:
-                  description: A boolean that specifies whether queries should be logged for 30
-                    days further training. If false, no queries will be stored,
-                    if true, queries will be stored for 30 days and deleted
-                    thereafter. Defaults to true if no value is provided.
+                  description: A boolean that specifies whether queries should be logged for 30 days further training. If false, no queries will be stored, if true, queries will be stored for 30 days and deleted thereafter. Defaults to true if no value is provided.
                   type: boolean
                 StyleSheet:
                   description: The JSON object that holds the style sheet for the assistant
                   type: object
                 UniqueName:
-                  description: A user-provided string that uniquely identifies this resource as an
-                    alternative to the sid. Unique up to 64 characters long.
+                  description: A user-provided string that uniquely identifies this resource as an alternative to the sid. Unique up to 64 characters long.
                   type: string
               title: UpdateAssistantRequest
               type: object
@@ -6852,8 +6555,7 @@ paths:
           name: Direction
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -6983,8 +6685,7 @@ paths:
       description: ""
       operationId: ListRatePlan
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -7195,8 +6896,7 @@ paths:
           name: SimRegistrationCode
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -8799,7 +8499,5 @@ components:
       scheme: basic
       type: http
 x-maturity:
-  - description: PLEASE NOTE that this is a Preview product that is subject to
-      change. Use it with caution. If you currently do not have developer
-      preview access, please contact help@twilio.com.
+  - description: PLEASE NOTE that this is a Preview product that is subject to change. Use it with caution. If you currently do not have developer preview access, please contact help@twilio.com.
     name: Preview

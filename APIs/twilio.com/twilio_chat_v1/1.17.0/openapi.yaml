@@ -31,8 +31,7 @@ paths:
       description: ""
       operationId: ListCredential
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -86,48 +85,33 @@ paths:
             schema:
               properties:
                 ApiKey:
-                  description: "[GCM only] The API key for the project that was obtained from the
-                    Google Developer console for your GCM Service application
-                    credential."
+                  description: "[GCM only] The API key for the project that was obtained from the Google Developer console for your GCM Service application credential."
                   type: string
                 Certificate:
-                  description: >-
-                    [APN only] The URL encoded representation of the certificate. For
-                    example, 
-
+                  description: |-
+                    [APN only] The URL encoded representation of the certificate. For example, 
                     `-----BEGIN CERTIFICATE-----
-
                     MIIFnTCCBIWgAwIBAgIIAjy9H849+E8wDQYJKoZIhvcNAQEFBQAwgZYxCzAJBgNV.....A==
-
                     -----END CERTIFICATE-----`
                   type: string
                 FriendlyName:
-                  description: A descriptive string that you create to describe the new resource.
-                    It can be up to 64 characters long.
+                  description: A descriptive string that you create to describe the new resource. It can be up to 64 characters long.
                   type: string
                 PrivateKey:
-                  description: >-
-                    [APN only] The URL encoded representation of the private key. For
-                    example,
-
+                  description: |-
+                    [APN only] The URL encoded representation of the private key. For example,
                     `-----BEGIN RSA PRIVATE KEY-----
-
                     MIIEpQIBAAKCAQEAuyf/lNrH9ck8DmNyo3fGgvCI1l9s+cmBY3WIz+cUDqmxiieR.
-
                     -----END RSA PRIVATE KEY-----`
                   type: string
                 Sandbox:
-                  description: "[APN only] Whether to send the credential to sandbox APNs. Can be
-                    `true` to send to sandbox APNs or `false` to send to
-                    production."
+                  description: "[APN only] Whether to send the credential to sandbox APNs. Can be `true` to send to sandbox APNs or `false` to send to production."
                   type: boolean
                 Secret:
-                  description: "[FCM only] The **Server key** of your project from the Firebase
-                    console, found under Settings / Cloud messaging."
+                  description: "[FCM only] The **Server key** of your project from the Firebase console, found under Settings / Cloud messaging."
                   type: string
                 Type:
-                  description: "The type of push-notification service the credential is for. Can
-                    be: `gcm`, `fcm`, or `apn`."
+                  description: "The type of push-notification service the credential is for. Can be: `gcm`, `fcm`, or `apn`."
                   enum:
                     - gcm
                     - apn
@@ -161,8 +145,7 @@ paths:
       description: ""
       operationId: DeleteCredential
       parameters:
-        - description: The Twilio-provided string that uniquely identifies the Credential
-            resource to delete.
+        - description: The Twilio-provided string that uniquely identifies the Credential resource to delete.
           in: path
           name: Sid
           required: true
@@ -183,8 +166,7 @@ paths:
       description: ""
       operationId: FetchCredential
       parameters:
-        - description: The Twilio-provided string that uniquely identifies the Credential
-            resource to fetch.
+        - description: The Twilio-provided string that uniquely identifies the Credential resource to fetch.
           in: path
           name: Sid
           required: true
@@ -208,8 +190,7 @@ paths:
       description: ""
       operationId: UpdateCredential
       parameters:
-        - description: The Twilio-provided string that uniquely identifies the Credential
-            resource to update.
+        - description: The Twilio-provided string that uniquely identifies the Credential resource to update.
           in: path
           name: Sid
           required: true
@@ -224,44 +205,30 @@ paths:
             schema:
               properties:
                 ApiKey:
-                  description: "[GCM only] The API key for the project that was obtained from the
-                    Google Developer console for your GCM Service application
-                    credential."
+                  description: "[GCM only] The API key for the project that was obtained from the Google Developer console for your GCM Service application credential."
                   type: string
                 Certificate:
-                  description: >-
-                    [APN only] The URL encoded representation of the certificate. For
-                    example, 
-
+                  description: |-
+                    [APN only] The URL encoded representation of the certificate. For example, 
                     `-----BEGIN CERTIFICATE-----
-
                     MIIFnTCCBIWgAwIBAgIIAjy9H849+E8wDQYJKoZIhvcNAQEFBQAwgZYxCzAJBgNV.....A==
-
                     -----END CERTIFICATE-----`
                   type: string
                 FriendlyName:
-                  description: A descriptive string that you create to describe the resource. It
-                    can be up to 64 characters long.
+                  description: A descriptive string that you create to describe the resource. It can be up to 64 characters long.
                   type: string
                 PrivateKey:
-                  description: >-
-                    [APN only] The URL encoded representation of the private key. For
-                    example,
-
+                  description: |-
+                    [APN only] The URL encoded representation of the private key. For example,
                     `-----BEGIN RSA PRIVATE KEY-----
-
                     MIIEpQIBAAKCAQEAuyf/lNrH9ck8DmNyo3fGgvCI1l9s+cmBY3WIz+cUDqmxiieR.
-
                     -----END RSA PRIVATE KEY-----`
                   type: string
                 Sandbox:
-                  description: "[APN only] Whether to send the credential to sandbox APNs. Can be
-                    `true` to send to sandbox APNs or `false` to send to
-                    production."
+                  description: "[APN only] Whether to send the credential to sandbox APNs. Can be `true` to send to sandbox APNs or `false` to send to production."
                   type: boolean
                 Secret:
-                  description: "[FCM only] The **Server key** of your project from the Firebase
-                    console, found under Settings / Cloud messaging."
+                  description: "[FCM only] The **Server key** of your project from the Firebase console, found under Settings / Cloud messaging."
                   type: string
               title: UpdateCredentialRequest
               type: object
@@ -290,8 +257,7 @@ paths:
       description: ""
       operationId: ListService
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -345,8 +311,7 @@ paths:
             schema:
               properties:
                 FriendlyName:
-                  description: A descriptive string that you create to describe the resource. It
-                    can be up to 64 characters long.
+                  description: A descriptive string that you create to describe the resource. It can be up to 64 characters long.
                   type: string
               required:
                 - FriendlyName
@@ -377,9 +342,7 @@ paths:
       description: ""
       operationId: ListChannel
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            read the resources from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to read the resources from.
           in: path
           name: ServiceSid
           required: true
@@ -388,8 +351,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: "The visibility of the Channels to read. Can be: `public` or
-            `private` and defaults to `public`."
+        - description: "The visibility of the Channels to read. Can be: `public` or `private` and defaults to `public`."
           in: query
           name: Type
           schema:
@@ -399,8 +361,7 @@ paths:
                 - private
               type: string
             type: array
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -449,9 +410,7 @@ paths:
       description: ""
       operationId: CreateChannel
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            create the resource under.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to create the resource under.
           in: path
           name: ServiceSid
           required: true
@@ -469,22 +428,16 @@ paths:
                   description: A valid JSON string that contains application-specific data.
                   type: string
                 FriendlyName:
-                  description: A descriptive string that you create to describe the new resource.
-                    It can be up to 64 characters long.
+                  description: A descriptive string that you create to describe the new resource. It can be up to 64 characters long.
                   type: string
                 Type:
-                  description: "The visibility of the channel. Can be: `public` or `private` and
-                    defaults to `public`."
+                  description: "The visibility of the channel. Can be: `public` or `private` and defaults to `public`."
                   enum:
                     - public
                     - private
                   type: string
                 UniqueName:
-                  description: An application-defined string that uniquely identifies the
-                    resource. It can be used to address the resource in place of
-                    the resource's `sid` in the URL. This value must be 64
-                    characters or less in length and be unique within the
-                    Service.
+                  description: An application-defined string that uniquely identifies the resource. It can be used to address the resource in place of the resource's `sid` in the URL. This value must be 64 characters or less in length and be unique within the Service.
                   type: string
               title: CreateChannelRequest
               type: object
@@ -513,9 +466,7 @@ paths:
       description: ""
       operationId: ListInvite
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            read the resources from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to read the resources from.
           in: path
           name: ServiceSid
           required: true
@@ -524,26 +475,20 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The SID of the
-            [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the
-            resources to read belong to.
+        - description: The SID of the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the resources to read belong to.
           in: path
           name: ChannelSid
           required: true
           schema:
             type: string
-        - description: The [User](https://www.twilio.com/docs/api/chat/rest/v1/user)'s
-            `identity` value of the resources to read. See [access
-            tokens](https://www.twilio.com/docs/api/chat/guides/create-tokens)
-            for more details.
+        - description: The [User](https://www.twilio.com/docs/api/chat/rest/v1/user)'s `identity` value of the resources to read. See [access tokens](https://www.twilio.com/docs/api/chat/guides/create-tokens) for more details.
           in: query
           name: Identity
           schema:
             items:
               type: string
             type: array
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -592,9 +537,7 @@ paths:
       description: ""
       operationId: CreateInvite
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            create the resource under.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to create the resource under.
           in: path
           name: ServiceSid
           required: true
@@ -603,9 +546,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The SID of the
-            [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the
-            new resource belongs to.
+        - description: The SID of the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the new resource belongs to.
           in: path
           name: ChannelSid
           required: true
@@ -617,18 +558,10 @@ paths:
             schema:
               properties:
                 Identity:
-                  description: The `identity` value that uniquely identifies the new resource's
-                    [User](https://www.twilio.com/docs/api/chat/rest/v1/user)
-                    within the
-                    [Service](https://www.twilio.com/docs/api/chat/rest/v1/service).
-                    See [access
-                    tokens](https://www.twilio.com/docs/api/chat/guides/create-tokens)
-                    for more info.
+                  description: The `identity` value that uniquely identifies the new resource's [User](https://www.twilio.com/docs/api/chat/rest/v1/user) within the [Service](https://www.twilio.com/docs/api/chat/rest/v1/service). See [access tokens](https://www.twilio.com/docs/api/chat/guides/create-tokens) for more info.
                   type: string
                 RoleSid:
-                  description: The SID of the
-                    [Role](https://www.twilio.com/docs/api/chat/rest/roles)
-                    assigned to the new member.
+                  description: The SID of the [Role](https://www.twilio.com/docs/api/chat/rest/roles) assigned to the new member.
                   maxLength: 34
                   minLength: 34
                   pattern: ^RL[0-9a-fA-F]{32}$
@@ -661,9 +594,7 @@ paths:
       description: ""
       operationId: DeleteInvite
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            delete the resource from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to delete the resource from.
           in: path
           name: ServiceSid
           required: true
@@ -672,16 +603,13 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The SID of the
-            [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the
-            resource to delete belongs to.
+        - description: The SID of the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the resource to delete belongs to.
           in: path
           name: ChannelSid
           required: true
           schema:
             type: string
-        - description: The Twilio-provided string that uniquely identifies the Invite
-            resource to delete.
+        - description: The Twilio-provided string that uniquely identifies the Invite resource to delete.
           in: path
           name: Sid
           required: true
@@ -702,9 +630,7 @@ paths:
       description: ""
       operationId: FetchInvite
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            fetch the resource from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to fetch the resource from.
           in: path
           name: ServiceSid
           required: true
@@ -713,16 +639,13 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The SID of the
-            [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the
-            resource to fetch belongs to.
+        - description: The SID of the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the resource to fetch belongs to.
           in: path
           name: ChannelSid
           required: true
           schema:
             type: string
-        - description: The Twilio-provided string that uniquely identifies the Invite
-            resource to fetch.
+        - description: The Twilio-provided string that uniquely identifies the Invite resource to fetch.
           in: path
           name: Sid
           required: true
@@ -756,9 +679,7 @@ paths:
       description: ""
       operationId: ListMember
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            read the resources from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to read the resources from.
           in: path
           name: ServiceSid
           required: true
@@ -767,27 +688,20 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The unique ID of the
-            [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the
-            members to read belong to. Can be the Channel resource's `sid` or
-            `unique_name` value.
+        - description: The unique ID of the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the members to read belong to. Can be the Channel resource's `sid` or `unique_name` value.
           in: path
           name: ChannelSid
           required: true
           schema:
             type: string
-        - description: The [User](https://www.twilio.com/docs/api/chat/rest/v1/user)'s
-            `identity` value of the resources to read. See [access
-            tokens](https://www.twilio.com/docs/api/chat/guides/create-tokens)
-            for more details.
+        - description: The [User](https://www.twilio.com/docs/api/chat/rest/v1/user)'s `identity` value of the resources to read. See [access tokens](https://www.twilio.com/docs/api/chat/guides/create-tokens) for more details.
           in: query
           name: Identity
           schema:
             items:
               type: string
             type: array
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -836,9 +750,7 @@ paths:
       description: ""
       operationId: CreateMember
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            create the resource under.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to create the resource under.
           in: path
           name: ServiceSid
           required: true
@@ -847,10 +759,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The unique ID of the
-            [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the
-            new member belongs to. Can be the Channel resource's `sid` or
-            `unique_name`.
+        - description: The unique ID of the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the new member belongs to. Can be the Channel resource's `sid` or `unique_name`.
           in: path
           name: ChannelSid
           required: true
@@ -862,20 +771,10 @@ paths:
             schema:
               properties:
                 Identity:
-                  description: The `identity` value that uniquely identifies the new resource's
-                    [User](https://www.twilio.com/docs/api/chat/rest/v1/user)
-                    within the
-                    [Service](https://www.twilio.com/docs/api/chat/rest/services).
-                    See [access
-                    tokens](https://www.twilio.com/docs/api/chat/guides/create-tokens)
-                    for more details.
+                  description: The `identity` value that uniquely identifies the new resource's [User](https://www.twilio.com/docs/api/chat/rest/v1/user) within the [Service](https://www.twilio.com/docs/api/chat/rest/services). See [access tokens](https://www.twilio.com/docs/api/chat/guides/create-tokens) for more details.
                   type: string
                 RoleSid:
-                  description: The SID of the
-                    [Role](https://www.twilio.com/docs/api/chat/rest/roles) to
-                    assign to the member. The default roles are those specified
-                    on the
-                    [Service](https://www.twilio.com/docs/chat/api/services).
+                  description: The SID of the [Role](https://www.twilio.com/docs/api/chat/rest/roles) to assign to the member. The default roles are those specified on the [Service](https://www.twilio.com/docs/chat/api/services).
                   maxLength: 34
                   minLength: 34
                   pattern: ^RL[0-9a-fA-F]{32}$
@@ -908,9 +807,7 @@ paths:
       description: ""
       operationId: DeleteMember
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            delete the resource from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to delete the resource from.
           in: path
           name: ServiceSid
           required: true
@@ -919,16 +816,13 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The unique ID of the
-            [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the
-            message belongs to.  Can be the Channel's `sid` or `unique_name`.
+        - description: The unique ID of the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the message belongs to.  Can be the Channel's `sid` or `unique_name`.
           in: path
           name: ChannelSid
           required: true
           schema:
             type: string
-        - description: The Twilio-provided string that uniquely identifies the Member
-            resource to delete.
+        - description: The Twilio-provided string that uniquely identifies the Member resource to delete.
           in: path
           name: Sid
           required: true
@@ -949,9 +843,7 @@ paths:
       description: ""
       operationId: FetchMember
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            fetch the resource from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to fetch the resource from.
           in: path
           name: ServiceSid
           required: true
@@ -960,17 +852,13 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The unique ID of the
-            [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the
-            member to fetch belongs to. Can be the Channel resource's `sid` or
-            `unique_name` value.
+        - description: The unique ID of the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the member to fetch belongs to. Can be the Channel resource's `sid` or `unique_name` value.
           in: path
           name: ChannelSid
           required: true
           schema:
             type: string
-        - description: The Twilio-provided string that uniquely identifies the Member
-            resource to fetch.
+        - description: The Twilio-provided string that uniquely identifies the Member resource to fetch.
           in: path
           name: Sid
           required: true
@@ -994,9 +882,7 @@ paths:
       description: ""
       operationId: UpdateMember
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            update the resource from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to update the resource from.
           in: path
           name: ServiceSid
           required: true
@@ -1005,17 +891,13 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The unique ID of the
-            [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the
-            member to update belongs to. Can be the Channel resource's `sid` or
-            `unique_name`.
+        - description: The unique ID of the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the member to update belongs to. Can be the Channel resource's `sid` or `unique_name`.
           in: path
           name: ChannelSid
           required: true
           schema:
             type: string
-        - description: The Twilio-provided string that uniquely identifies the Member
-            resource to update.
+        - description: The Twilio-provided string that uniquely identifies the Member resource to update.
           in: path
           name: Sid
           required: true
@@ -1030,18 +912,11 @@ paths:
             schema:
               properties:
                 LastConsumedMessageIndex:
-                  description: The index of the last
-                    [Message](https://www.twilio.com/docs/api/chat/rest/messages)
-                    that the Member has read within the
-                    [Channel](https://www.twilio.com/docs/api/chat/rest/channels).
+                  description: The index of the last [Message](https://www.twilio.com/docs/api/chat/rest/messages) that the Member has read within the [Channel](https://www.twilio.com/docs/api/chat/rest/channels).
                   nullable: true
                   type: integer
                 RoleSid:
-                  description: The SID of the
-                    [Role](https://www.twilio.com/docs/api/chat/rest/roles) to
-                    assign to the member. The default roles are those specified
-                    on the
-                    [Service](https://www.twilio.com/docs/chat/api/services).
+                  description: The SID of the [Role](https://www.twilio.com/docs/api/chat/rest/roles) to assign to the member. The default roles are those specified on the [Service](https://www.twilio.com/docs/chat/api/services).
                   maxLength: 34
                   minLength: 34
                   pattern: ^RL[0-9a-fA-F]{32}$
@@ -1073,9 +948,7 @@ paths:
       description: ""
       operationId: ListMessage
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            read the resources from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to read the resources from.
           in: path
           name: ServiceSid
           required: true
@@ -1084,10 +957,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The unique ID of the
-            [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the
-            message to read belongs to. Can be the Channel's `sid` or
-            `unique_name`.
+        - description: The unique ID of the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the message to read belongs to. Can be the Channel's `sid` or `unique_name`.
           in: path
           name: ChannelSid
           required: true
@@ -1096,8 +966,7 @@ paths:
             minLength: 34
             pattern: ^CH[0-9a-fA-F]{32}$
             type: string
-        - description: "The sort order of the returned messages. Can be: `asc` (ascending)
-            or `desc` (descending) with `asc` as the default."
+        - description: "The sort order of the returned messages. Can be: `asc` (ascending) or `desc` (descending) with `asc` as the default."
           in: query
           name: Order
           schema:
@@ -1105,8 +974,7 @@ paths:
               - asc
               - desc
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1155,9 +1023,7 @@ paths:
       description: ""
       operationId: CreateMessage
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            create the resource under.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to create the resource under.
           in: path
           name: ServiceSid
           required: true
@@ -1166,10 +1032,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The unique ID of the
-            [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the
-            new resource belongs to. Can be the Channel resource's `sid` or
-            `unique_name`.
+        - description: The unique ID of the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the new resource belongs to. Can be the Channel resource's `sid` or `unique_name`.
           in: path
           name: ChannelSid
           required: true
@@ -1187,15 +1050,10 @@ paths:
                   description: A valid JSON string that contains application-specific data.
                   type: string
                 Body:
-                  description: The message to send to the channel. Can also be an empty string or
-                    `null`, which sets the value as an empty string. You can
-                    send structured data in the body by serializing it as a
-                    string.
+                  description: The message to send to the channel. Can also be an empty string or `null`, which sets the value as an empty string. You can send structured data in the body by serializing it as a string.
                   type: string
                 From:
-                  description: The
-                    [identity](https://www.twilio.com/docs/api/chat/guides/identity)
-                    of the new message's author. The default value is `system`.
+                  description: The [identity](https://www.twilio.com/docs/api/chat/guides/identity) of the new message's author. The default value is `system`.
                   type: string
               required:
                 - Body
@@ -1226,9 +1084,7 @@ paths:
       description: ""
       operationId: DeleteMessage
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            delete the resource from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to delete the resource from.
           in: path
           name: ServiceSid
           required: true
@@ -1237,10 +1093,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The unique ID of the
-            [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the
-            message to delete belongs to.  Can be the Channel resource's `sid`
-            or `unique_name`.
+        - description: The unique ID of the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the message to delete belongs to.  Can be the Channel resource's `sid` or `unique_name`.
           in: path
           name: ChannelSid
           required: true
@@ -1249,8 +1102,7 @@ paths:
             minLength: 34
             pattern: ^CH[0-9a-fA-F]{32}$
             type: string
-        - description: The Twilio-provided string that uniquely identifies the Message
-            resource to delete.
+        - description: The Twilio-provided string that uniquely identifies the Message resource to delete.
           in: path
           name: Sid
           required: true
@@ -1271,9 +1123,7 @@ paths:
       description: ""
       operationId: FetchMessage
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            fetch the resource from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to fetch the resource from.
           in: path
           name: ServiceSid
           required: true
@@ -1282,10 +1132,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The unique ID of the
-            [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the
-            message to fetch belongs to. Can be the Channel's `sid` or
-            `unique_name`.
+        - description: The unique ID of the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the message to fetch belongs to. Can be the Channel's `sid` or `unique_name`.
           in: path
           name: ChannelSid
           required: true
@@ -1294,8 +1141,7 @@ paths:
             minLength: 34
             pattern: ^CH[0-9a-fA-F]{32}$
             type: string
-        - description: The Twilio-provided string that uniquely identifies the Message
-            resource to fetch.
+        - description: The Twilio-provided string that uniquely identifies the Message resource to fetch.
           in: path
           name: Sid
           required: true
@@ -1319,9 +1165,7 @@ paths:
       description: ""
       operationId: UpdateMessage
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            update the resource from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to update the resource from.
           in: path
           name: ServiceSid
           required: true
@@ -1330,9 +1174,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The unique ID of the
-            [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the
-            message belongs to. Can be the Channel's `sid` or `unique_name`.
+        - description: The unique ID of the [Channel](https://www.twilio.com/docs/api/chat/rest/channels) the message belongs to. Can be the Channel's `sid` or `unique_name`.
           in: path
           name: ChannelSid
           required: true
@@ -1341,8 +1183,7 @@ paths:
             minLength: 34
             pattern: ^CH[0-9a-fA-F]{32}$
             type: string
-        - description: The Twilio-provided string that uniquely identifies the Message
-            resource to update.
+        - description: The Twilio-provided string that uniquely identifies the Message resource to update.
           in: path
           name: Sid
           required: true
@@ -1360,10 +1201,7 @@ paths:
                   description: A valid JSON string that contains application-specific data.
                   type: string
                 Body:
-                  description: The message to send to the channel. Can also be an empty string or
-                    `null`, which sets the value as an empty string. You can
-                    send structured data in the body by serializing it as a
-                    string.
+                  description: The message to send to the channel. Can also be an empty string or `null`, which sets the value as an empty string. You can send structured data in the body by serializing it as a string.
                   type: string
               title: UpdateMessageRequest
               type: object
@@ -1392,9 +1230,7 @@ paths:
       description: ""
       operationId: DeleteChannel
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            delete the resource from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to delete the resource from.
           in: path
           name: ServiceSid
           required: true
@@ -1403,8 +1239,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The Twilio-provided string that uniquely identifies the Channel
-            resource to delete.
+        - description: The Twilio-provided string that uniquely identifies the Channel resource to delete.
           in: path
           name: Sid
           required: true
@@ -1422,9 +1257,7 @@ paths:
       description: ""
       operationId: FetchChannel
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            fetch the resource from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to fetch the resource from.
           in: path
           name: ServiceSid
           required: true
@@ -1433,8 +1266,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The Twilio-provided string that uniquely identifies the Channel
-            resource to fetch.
+        - description: The Twilio-provided string that uniquely identifies the Channel resource to fetch.
           in: path
           name: Sid
           required: true
@@ -1455,9 +1287,7 @@ paths:
       description: ""
       operationId: UpdateChannel
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            update the resource from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to update the resource from.
           in: path
           name: ServiceSid
           required: true
@@ -1466,8 +1296,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The Twilio-provided string that uniquely identifies the Channel
-            resource to update.
+        - description: The Twilio-provided string that uniquely identifies the Channel resource to update.
           in: path
           name: Sid
           required: true
@@ -1482,15 +1311,10 @@ paths:
                   description: A valid JSON string that contains application-specific data.
                   type: string
                 FriendlyName:
-                  description: A descriptive string that you create to describe the resource. It
-                    can be up to 64 characters long.
+                  description: A descriptive string that you create to describe the resource. It can be up to 64 characters long.
                   type: string
                 UniqueName:
-                  description: An application-defined string that uniquely identifies the
-                    resource. It can be used to address the resource in place of
-                    the resource's `sid` in the URL. This value must be 64
-                    characters or less in length and be unique within the
-                    Service.
+                  description: An application-defined string that uniquely identifies the resource. It can be used to address the resource in place of the resource's `sid` in the URL. This value must be 64 characters or less in length and be unique within the Service.
                   type: string
               title: UpdateChannelRequest
               type: object
@@ -1519,9 +1343,7 @@ paths:
       description: ""
       operationId: ListRole
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            read the resources from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to read the resources from.
           in: path
           name: ServiceSid
           required: true
@@ -1530,8 +1352,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1580,9 +1401,7 @@ paths:
       description: ""
       operationId: CreateRole
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            create the resource under.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to create the resource under.
           in: path
           name: ServiceSid
           required: true
@@ -1597,24 +1416,15 @@ paths:
             schema:
               properties:
                 FriendlyName:
-                  description: A descriptive string that you create to describe the new resource.
-                    It can be up to 64 characters long.
+                  description: A descriptive string that you create to describe the new resource. It can be up to 64 characters long.
                   type: string
                 Permission:
-                  description: A permission that you grant to the new role. Only one permission
-                    can be granted per parameter. To assign more than one
-                    permission, repeat this parameter for each permission value.
-                    The values for this parameter depend on the role's `type`
-                    and are described in the documentation.
+                  description: A permission that you grant to the new role. Only one permission can be granted per parameter. To assign more than one permission, repeat this parameter for each permission value. The values for this parameter depend on the role's `type` and are described in the documentation.
                   items:
                     type: string
                   type: array
                 Type:
-                  description: "The type of role. Can be: `channel` for
-                    [Channel](https://www.twilio.com/docs/chat/api/channels)
-                    roles or `deployment` for
-                    [Service](https://www.twilio.com/docs/chat/api/services)
-                    roles."
+                  description: "The type of role. Can be: `channel` for [Channel](https://www.twilio.com/docs/chat/api/channels) roles or `deployment` for [Service](https://www.twilio.com/docs/chat/api/services) roles."
                   enum:
                     - channel
                     - deployment
@@ -1649,9 +1459,7 @@ paths:
       description: ""
       operationId: DeleteRole
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            delete the resource from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to delete the resource from.
           in: path
           name: ServiceSid
           required: true
@@ -1660,8 +1468,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The Twilio-provided string that uniquely identifies the Role
-            resource to delete.
+        - description: The Twilio-provided string that uniquely identifies the Role resource to delete.
           in: path
           name: Sid
           required: true
@@ -1682,9 +1489,7 @@ paths:
       description: ""
       operationId: FetchRole
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            fetch the resource from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to fetch the resource from.
           in: path
           name: ServiceSid
           required: true
@@ -1693,8 +1498,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The Twilio-provided string that uniquely identifies the Role
-            resource to fetch.
+        - description: The Twilio-provided string that uniquely identifies the Role resource to fetch.
           in: path
           name: Sid
           required: true
@@ -1718,9 +1522,7 @@ paths:
       description: ""
       operationId: UpdateRole
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            update the resource from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to update the resource from.
           in: path
           name: ServiceSid
           required: true
@@ -1729,8 +1531,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The Twilio-provided string that uniquely identifies the Role
-            resource to update.
+        - description: The Twilio-provided string that uniquely identifies the Role resource to update.
           in: path
           name: Sid
           required: true
@@ -1745,11 +1546,7 @@ paths:
             schema:
               properties:
                 Permission:
-                  description: A permission that you grant to the role. Only one permission can be
-                    granted per parameter. To assign more than one permission,
-                    repeat this parameter for each permission value. The values
-                    for this parameter depend on the role's `type` and are
-                    described in the documentation.
+                  description: A permission that you grant to the role. Only one permission can be granted per parameter. To assign more than one permission, repeat this parameter for each permission value. The values for this parameter depend on the role's `type` and are described in the documentation.
                   items:
                     type: string
                   type: array
@@ -1782,9 +1579,7 @@ paths:
       description: ""
       operationId: ListUser
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            read the resources from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to read the resources from.
           in: path
           name: ServiceSid
           required: true
@@ -1793,8 +1588,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1843,9 +1637,7 @@ paths:
       description: ""
       operationId: CreateUser
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            create the resource under.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to create the resource under.
           in: path
           name: ServiceSid
           required: true
@@ -1863,21 +1655,13 @@ paths:
                   description: A valid JSON string that contains application-specific data.
                   type: string
                 FriendlyName:
-                  description: A descriptive string that you create to describe the new resource.
-                    This value is often used for display purposes.
+                  description: A descriptive string that you create to describe the new resource. This value is often used for display purposes.
                   type: string
                 Identity:
-                  description: The `identity` value that uniquely identifies the new resource's
-                    [User](https://www.twilio.com/docs/api/chat/rest/v1/user)
-                    within the
-                    [Service](https://www.twilio.com/docs/api/chat/rest/v1/service).
-                    This value is often a username or email address. See the
-                    Identity documentation for more details.
+                  description: The `identity` value that uniquely identifies the new resource's [User](https://www.twilio.com/docs/api/chat/rest/v1/user) within the [Service](https://www.twilio.com/docs/api/chat/rest/v1/service). This value is often a username or email address. See the Identity documentation for more details.
                   type: string
                 RoleSid:
-                  description: The SID of the
-                    [Role](https://www.twilio.com/docs/api/chat/rest/roles)
-                    assigned to the new User.
+                  description: The SID of the [Role](https://www.twilio.com/docs/api/chat/rest/roles) assigned to the new User.
                   maxLength: 34
                   minLength: 34
                   pattern: ^RL[0-9a-fA-F]{32}$
@@ -1910,9 +1694,7 @@ paths:
       description: ""
       operationId: DeleteUser
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            delete the resource from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to delete the resource from.
           in: path
           name: ServiceSid
           required: true
@@ -1921,8 +1703,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The Twilio-provided string that uniquely identifies the User
-            resource to delete.
+        - description: The Twilio-provided string that uniquely identifies the User resource to delete.
           in: path
           name: Sid
           required: true
@@ -1940,9 +1721,7 @@ paths:
       description: ""
       operationId: FetchUser
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            fetch the resource from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to fetch the resource from.
           in: path
           name: ServiceSid
           required: true
@@ -1951,8 +1730,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The Twilio-provided string that uniquely identifies the User
-            resource to fetch.
+        - description: The Twilio-provided string that uniquely identifies the User resource to fetch.
           in: path
           name: Sid
           required: true
@@ -1973,9 +1751,7 @@ paths:
       description: ""
       operationId: UpdateUser
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            update the resource from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to update the resource from.
           in: path
           name: ServiceSid
           required: true
@@ -1984,8 +1760,7 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The Twilio-provided string that uniquely identifies the User
-            resource to update.
+        - description: The Twilio-provided string that uniquely identifies the User resource to update.
           in: path
           name: Sid
           required: true
@@ -2000,13 +1775,10 @@ paths:
                   description: A valid JSON string that contains application-specific data.
                   type: string
                 FriendlyName:
-                  description: A descriptive string that you create to describe the resource. It
-                    is often used for display purposes.
+                  description: A descriptive string that you create to describe the resource. It is often used for display purposes.
                   type: string
                 RoleSid:
-                  description: The SID of the
-                    [Role](https://www.twilio.com/docs/api/chat/rest/roles)
-                    assigned to this user.
+                  description: The SID of the [Role](https://www.twilio.com/docs/api/chat/rest/roles) assigned to this user.
                   maxLength: 34
                   minLength: 34
                   pattern: ^RL[0-9a-fA-F]{32}$
@@ -2038,9 +1810,7 @@ paths:
       description: List all Channels for a given User.
       operationId: ListUserChannel
       parameters:
-        - description: The SID of the
-            [Service](https://www.twilio.com/docs/api/chat/rest/services) to
-            read the resources from.
+        - description: The SID of the [Service](https://www.twilio.com/docs/api/chat/rest/services) to read the resources from.
           in: path
           name: ServiceSid
           required: true
@@ -2049,16 +1819,13 @@ paths:
             minLength: 34
             pattern: ^IS[0-9a-fA-F]{32}$
             type: string
-        - description: The SID of the
-            [User](https://www.twilio.com/docs/api/chat/rest/users) to read the
-            User Channel resources from.
+        - description: The SID of the [User](https://www.twilio.com/docs/api/chat/rest/users) to read the User Channel resources from.
           in: path
           name: UserSid
           required: true
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -2115,8 +1882,7 @@ paths:
       description: ""
       operationId: DeleteService
       parameters:
-        - description: The Twilio-provided string that uniquely identifies the Service
-            resource to delete.
+        - description: The Twilio-provided string that uniquely identifies the Service resource to delete.
           in: path
           name: Sid
           required: true
@@ -2137,8 +1903,7 @@ paths:
       description: ""
       operationId: FetchService
       parameters:
-        - description: The Twilio-provided string that uniquely identifies the Service
-            resource to fetch.
+        - description: The Twilio-provided string that uniquely identifies the Service resource to fetch.
           in: path
           name: Sid
           required: true
@@ -2162,8 +1927,7 @@ paths:
       description: ""
       operationId: UpdateService
       parameters:
-        - description: The Twilio-provided string that uniquely identifies the Service
-            resource to update.
+        - description: The Twilio-provided string that uniquely identifies the Service resource to update.
           in: path
           name: Sid
           required: true
@@ -2178,132 +1942,83 @@ paths:
             schema:
               properties:
                 ConsumptionReportInterval:
-                  description: DEPRECATED. The interval in seconds between consumption reports
-                    submission batches from client endpoints.
+                  description: DEPRECATED. The interval in seconds between consumption reports submission batches from client endpoints.
                   type: integer
                 DefaultChannelCreatorRoleSid:
-                  description: The channel role assigned to a channel creator when they join a new
-                    channel. See the [Roles
-                    endpoint](https://www.twilio.com/docs/chat/api/roles) for
-                    more details.
+                  description: The channel role assigned to a channel creator when they join a new channel. See the [Roles endpoint](https://www.twilio.com/docs/chat/api/roles) for more details.
                   maxLength: 34
                   minLength: 34
                   pattern: ^RL[0-9a-fA-F]{32}$
                   type: string
                 DefaultChannelRoleSid:
-                  description: The channel role assigned to users when they are added to a
-                    channel. See the [Roles
-                    endpoint](https://www.twilio.com/docs/chat/api/roles) for
-                    more details.
+                  description: The channel role assigned to users when they are added to a channel. See the [Roles endpoint](https://www.twilio.com/docs/chat/api/roles) for more details.
                   maxLength: 34
                   minLength: 34
                   pattern: ^RL[0-9a-fA-F]{32}$
                   type: string
                 DefaultServiceRoleSid:
-                  description: The service role assigned to users when they are added to the
-                    service. See the [Roles
-                    endpoint](https://www.twilio.com/docs/chat/api/roles) for
-                    more details.
+                  description: The service role assigned to users when they are added to the service. See the [Roles endpoint](https://www.twilio.com/docs/chat/api/roles) for more details.
                   maxLength: 34
                   minLength: 34
                   pattern: ^RL[0-9a-fA-F]{32}$
                   type: string
                 FriendlyName:
-                  description: A descriptive string that you create to describe the resource. It
-                    can be up to 64 characters long.
+                  description: A descriptive string that you create to describe the resource. It can be up to 64 characters long.
                   type: string
                 Limits.ChannelMembers:
-                  description: The maximum number of Members that can be added to Channels within
-                    this Service. Can be up to 1,000.
+                  description: The maximum number of Members that can be added to Channels within this Service. Can be up to 1,000.
                   type: integer
                 Limits.UserChannels:
-                  description: The maximum number of Channels Users can be a Member of within this
-                    Service. Can be up to 1,000.
+                  description: The maximum number of Channels Users can be a Member of within this Service. Can be up to 1,000.
                   type: integer
                 Notifications.AddedToChannel.Enabled:
-                  description: "Whether to send a notification when a member is added to a
-                    channel. Can be: `true` or `false` and the default is
-                    `false`."
+                  description: "Whether to send a notification when a member is added to a channel. Can be: `true` or `false` and the default is `false`."
                   type: boolean
                 Notifications.AddedToChannel.Template:
-                  description: The template to use to create the notification text displayed when
-                    a member is added to a channel and
-                    `notifications.added_to_channel.enabled` is `true`.
+                  description: The template to use to create the notification text displayed when a member is added to a channel and `notifications.added_to_channel.enabled` is `true`.
                   type: string
                 Notifications.InvitedToChannel.Enabled:
-                  description: "Whether to send a notification when a user is invited to a
-                    channel. Can be: `true` or `false` and the default is
-                    `false`."
+                  description: "Whether to send a notification when a user is invited to a channel. Can be: `true` or `false` and the default is `false`."
                   type: boolean
                 Notifications.InvitedToChannel.Template:
-                  description: The template to use to create the notification text displayed when
-                    a user is invited to a channel and
-                    `notifications.invited_to_channel.enabled` is `true`.
+                  description: The template to use to create the notification text displayed when a user is invited to a channel and `notifications.invited_to_channel.enabled` is `true`.
                   type: string
                 Notifications.NewMessage.Enabled:
-                  description: "Whether to send a notification when a new message is added to a
-                    channel. Can be: `true` or `false` and the default is
-                    `false`."
+                  description: "Whether to send a notification when a new message is added to a channel. Can be: `true` or `false` and the default is `false`."
                   type: boolean
                 Notifications.NewMessage.Template:
-                  description: The template to use to create the notification text displayed when
-                    a new message is added to a channel and
-                    `notifications.new_message.enabled` is `true`.
+                  description: The template to use to create the notification text displayed when a new message is added to a channel and `notifications.new_message.enabled` is `true`.
                   type: string
                 Notifications.RemovedFromChannel.Enabled:
-                  description: "Whether to send a notification to a user when they are removed
-                    from a channel. Can be: `true` or `false` and the default is
-                    `false`."
+                  description: "Whether to send a notification to a user when they are removed from a channel. Can be: `true` or `false` and the default is `false`."
                   type: boolean
                 Notifications.RemovedFromChannel.Template:
-                  description: The template to use to create the notification text displayed to a
-                    user when they are removed from a channel and
-                    `notifications.removed_from_channel.enabled` is `true`.
+                  description: The template to use to create the notification text displayed to a user when they are removed from a channel and `notifications.removed_from_channel.enabled` is `true`.
                   type: string
                 PostWebhookUrl:
-                  description: The URL for post-event webhooks, which are called by using the
-                    `webhook_method`. See [Webhook
-                    Events](https://www.twilio.com/docs/api/chat/webhooks) for
-                    more details.
+                  description: The URL for post-event webhooks, which are called by using the `webhook_method`. See [Webhook Events](https://www.twilio.com/docs/api/chat/webhooks) for more details.
                   format: uri
                   type: string
                 PreWebhookUrl:
-                  description: The URL for pre-event webhooks, which are called by using the
-                    `webhook_method`. See [Webhook
-                    Events](https://www.twilio.com/docs/api/chat/webhooks) for
-                    more details.
+                  description: The URL for pre-event webhooks, which are called by using the `webhook_method`. See [Webhook Events](https://www.twilio.com/docs/api/chat/webhooks) for more details.
                   format: uri
                   type: string
                 ReachabilityEnabled:
-                  description: Whether to enable the [Reachability
-                    Indicator](https://www.twilio.com/docs/chat/reachability-indicator)
-                    for this Service instance. The default is `false`.
+                  description: Whether to enable the [Reachability Indicator](https://www.twilio.com/docs/chat/reachability-indicator) for this Service instance. The default is `false`.
                   type: boolean
                 ReadStatusEnabled:
-                  description: Whether to enable the [Message Consumption
-                    Horizon](https://www.twilio.com/docs/chat/consumption-horizon)
-                    feature. The default is `true`.
+                  description: Whether to enable the [Message Consumption Horizon](https://www.twilio.com/docs/chat/consumption-horizon) feature. The default is `true`.
                   type: boolean
                 TypingIndicatorTimeout:
-                  description: How long in seconds after a `started typing` event until clients
-                    should assume that user is no longer typing, even if no
-                    `ended typing` message was received.  The default is 5
-                    seconds.
+                  description: How long in seconds after a `started typing` event until clients should assume that user is no longer typing, even if no `ended typing` message was received.  The default is 5 seconds.
                   type: integer
                 WebhookFilters:
-                  description: The list of WebHook events that are enabled for this Service
-                    instance. See [Webhook
-                    Events](https://www.twilio.com/docs/chat/webhook-events) for
-                    more details.
+                  description: The list of WebHook events that are enabled for this Service instance. See [Webhook Events](https://www.twilio.com/docs/chat/webhook-events) for more details.
                   items:
                     type: string
                   type: array
                 WebhookMethod:
-                  description: "The HTTP method to use for calls to the `pre_webhook_url` and
-                    `post_webhook_url` webhooks.  Can be: `POST` or `GET` and
-                    the default is `POST`. See [Webhook
-                    Events](https://www.twilio.com/docs/chat/webhook-events) for
-                    more details."
+                  description: "The HTTP method to use for calls to the `pre_webhook_url` and `post_webhook_url` webhooks.  Can be: `POST` or `GET` and the default is `POST`. See [Webhook Events](https://www.twilio.com/docs/chat/webhook-events) for more details."
                   enum:
                     - HEAD
                     - GET
@@ -2313,8 +2028,7 @@ paths:
                     - DELETE
                   type: string
                 Webhooks.OnChannelAdd.Method:
-                  description: The HTTP method to use when calling the
-                    `webhooks.on_channel_add.url`.
+                  description: The HTTP method to use when calling the `webhooks.on_channel_add.url`.
                   enum:
                     - HEAD
                     - GET
@@ -2324,14 +2038,11 @@ paths:
                     - DELETE
                   type: string
                 Webhooks.OnChannelAdd.Url:
-                  description: The URL of the webhook to call in response to the `on_channel_add`
-                    event using the `webhooks.on_channel_add.method` HTTP
-                    method.
+                  description: The URL of the webhook to call in response to the `on_channel_add` event using the `webhooks.on_channel_add.method` HTTP method.
                   format: uri
                   type: string
                 Webhooks.OnChannelAdded.Method:
-                  description: The URL of the webhook to call in response to the
-                    `on_channel_added` event`.
+                  description: The URL of the webhook to call in response to the `on_channel_added` event`.
                   enum:
                     - HEAD
                     - GET
@@ -2341,14 +2052,11 @@ paths:
                     - DELETE
                   type: string
                 Webhooks.OnChannelAdded.Url:
-                  description: The URL of the webhook to call in response to the
-                    `on_channel_added` event using the
-                    `webhooks.on_channel_added.method` HTTP method.
+                  description: The URL of the webhook to call in response to the `on_channel_added` event using the `webhooks.on_channel_added.method` HTTP method.
                   format: uri
                   type: string
                 Webhooks.OnChannelDestroy.Method:
-                  description: The HTTP method to use when calling the
-                    `webhooks.on_channel_destroy.url`.
+                  description: The HTTP method to use when calling the `webhooks.on_channel_destroy.url`.
                   enum:
                     - HEAD
                     - GET
@@ -2358,14 +2066,11 @@ paths:
                     - DELETE
                   type: string
                 Webhooks.OnChannelDestroy.Url:
-                  description: The URL of the webhook to call in response to the
-                    `on_channel_destroy` event using the
-                    `webhooks.on_channel_destroy.method` HTTP method.
+                  description: The URL of the webhook to call in response to the `on_channel_destroy` event using the `webhooks.on_channel_destroy.method` HTTP method.
                   format: uri
                   type: string
                 Webhooks.OnChannelDestroyed.Method:
-                  description: The HTTP method to use when calling the
-                    `webhooks.on_channel_destroyed.url`.
+                  description: The HTTP method to use when calling the `webhooks.on_channel_destroyed.url`.
                   enum:
                     - HEAD
                     - GET
@@ -2375,14 +2080,11 @@ paths:
                     - DELETE
                   type: string
                 Webhooks.OnChannelDestroyed.Url:
-                  description: The URL of the webhook to call in response to the
-                    `on_channel_added` event using the
-                    `webhooks.on_channel_destroyed.method` HTTP method.
+                  description: The URL of the webhook to call in response to the `on_channel_added` event using the `webhooks.on_channel_destroyed.method` HTTP method.
                   format: uri
                   type: string
                 Webhooks.OnChannelUpdate.Method:
-                  description: The HTTP method to use when calling the
-                    `webhooks.on_channel_update.url`.
+                  description: The HTTP method to use when calling the `webhooks.on_channel_update.url`.
                   enum:
                     - HEAD
                     - GET
@@ -2392,14 +2094,11 @@ paths:
                     - DELETE
                   type: string
                 Webhooks.OnChannelUpdate.Url:
-                  description: The URL of the webhook to call in response to the
-                    `on_channel_update` event using the
-                    `webhooks.on_channel_update.method` HTTP method.
+                  description: The URL of the webhook to call in response to the `on_channel_update` event using the `webhooks.on_channel_update.method` HTTP method.
                   format: uri
                   type: string
                 Webhooks.OnChannelUpdated.Method:
-                  description: The HTTP method to use when calling the
-                    `webhooks.on_channel_updated.url`.
+                  description: The HTTP method to use when calling the `webhooks.on_channel_updated.url`.
                   enum:
                     - HEAD
                     - GET
@@ -2409,14 +2108,11 @@ paths:
                     - DELETE
                   type: string
                 Webhooks.OnChannelUpdated.Url:
-                  description: The URL of the webhook to call in response to the
-                    `on_channel_updated` event using the
-                    `webhooks.on_channel_updated.method` HTTP method.
+                  description: The URL of the webhook to call in response to the `on_channel_updated` event using the `webhooks.on_channel_updated.method` HTTP method.
                   format: uri
                   type: string
                 Webhooks.OnMemberAdd.Method:
-                  description: The HTTP method to use when calling the
-                    `webhooks.on_member_add.url`.
+                  description: The HTTP method to use when calling the `webhooks.on_member_add.url`.
                   enum:
                     - HEAD
                     - GET
@@ -2426,13 +2122,11 @@ paths:
                     - DELETE
                   type: string
                 Webhooks.OnMemberAdd.Url:
-                  description: The URL of the webhook to call in response to the `on_member_add`
-                    event using the `webhooks.on_member_add.method` HTTP method.
+                  description: The URL of the webhook to call in response to the `on_member_add` event using the `webhooks.on_member_add.method` HTTP method.
                   format: uri
                   type: string
                 Webhooks.OnMemberAdded.Method:
-                  description: The HTTP method to use when calling the
-                    `webhooks.on_channel_updated.url`.
+                  description: The HTTP method to use when calling the `webhooks.on_channel_updated.url`.
                   enum:
                     - HEAD
                     - GET
@@ -2442,14 +2136,11 @@ paths:
                     - DELETE
                   type: string
                 Webhooks.OnMemberAdded.Url:
-                  description: The URL of the webhook to call in response to the
-                    `on_channel_updated` event using the
-                    `webhooks.on_channel_updated.method` HTTP method.
+                  description: The URL of the webhook to call in response to the `on_channel_updated` event using the `webhooks.on_channel_updated.method` HTTP method.
                   format: uri
                   type: string
                 Webhooks.OnMemberRemove.Method:
-                  description: The HTTP method to use when calling the
-                    `webhooks.on_member_remove.url`.
+                  description: The HTTP method to use when calling the `webhooks.on_member_remove.url`.
                   enum:
                     - HEAD
                     - GET
@@ -2459,14 +2150,11 @@ paths:
                     - DELETE
                   type: string
                 Webhooks.OnMemberRemove.Url:
-                  description: The URL of the webhook to call in response to the
-                    `on_member_remove` event using the
-                    `webhooks.on_member_remove.method` HTTP method.
+                  description: The URL of the webhook to call in response to the `on_member_remove` event using the `webhooks.on_member_remove.method` HTTP method.
                   format: uri
                   type: string
                 Webhooks.OnMemberRemoved.Method:
-                  description: The HTTP method to use when calling the
-                    `webhooks.on_member_removed.url`.
+                  description: The HTTP method to use when calling the `webhooks.on_member_removed.url`.
                   enum:
                     - HEAD
                     - GET
@@ -2476,14 +2164,11 @@ paths:
                     - DELETE
                   type: string
                 Webhooks.OnMemberRemoved.Url:
-                  description: The URL of the webhook to call in response to the
-                    `on_member_removed` event using the
-                    `webhooks.on_member_removed.method` HTTP method.
+                  description: The URL of the webhook to call in response to the `on_member_removed` event using the `webhooks.on_member_removed.method` HTTP method.
                   format: uri
                   type: string
                 Webhooks.OnMessageRemove.Method:
-                  description: The HTTP method to use when calling the
-                    `webhooks.on_message_remove.url`.
+                  description: The HTTP method to use when calling the `webhooks.on_message_remove.url`.
                   enum:
                     - HEAD
                     - GET
@@ -2493,14 +2178,11 @@ paths:
                     - DELETE
                   type: string
                 Webhooks.OnMessageRemove.Url:
-                  description: The URL of the webhook to call in response to the
-                    `on_message_remove` event using the
-                    `webhooks.on_message_remove.method` HTTP method.
+                  description: The URL of the webhook to call in response to the `on_message_remove` event using the `webhooks.on_message_remove.method` HTTP method.
                   format: uri
                   type: string
                 Webhooks.OnMessageRemoved.Method:
-                  description: The HTTP method to use when calling the
-                    `webhooks.on_message_removed.url`.
+                  description: The HTTP method to use when calling the `webhooks.on_message_removed.url`.
                   enum:
                     - HEAD
                     - GET
@@ -2510,14 +2192,11 @@ paths:
                     - DELETE
                   type: string
                 Webhooks.OnMessageRemoved.Url:
-                  description: The URL of the webhook to call in response to the
-                    `on_message_removed` event using the
-                    `webhooks.on_message_removed.method` HTTP method.
+                  description: The URL of the webhook to call in response to the `on_message_removed` event using the `webhooks.on_message_removed.method` HTTP method.
                   format: uri
                   type: string
                 Webhooks.OnMessageSend.Method:
-                  description: The HTTP method to use when calling the
-                    `webhooks.on_message_send.url`.
+                  description: The HTTP method to use when calling the `webhooks.on_message_send.url`.
                   enum:
                     - HEAD
                     - GET
@@ -2527,14 +2206,11 @@ paths:
                     - DELETE
                   type: string
                 Webhooks.OnMessageSend.Url:
-                  description: The URL of the webhook to call in response to the `on_message_send`
-                    event using the `webhooks.on_message_send.method` HTTP
-                    method.
+                  description: The URL of the webhook to call in response to the `on_message_send` event using the `webhooks.on_message_send.method` HTTP method.
                   format: uri
                   type: string
                 Webhooks.OnMessageSent.Method:
-                  description: The URL of the webhook to call in response to the `on_message_sent`
-                    event`.
+                  description: The URL of the webhook to call in response to the `on_message_sent` event`.
                   enum:
                     - HEAD
                     - GET
@@ -2544,14 +2220,11 @@ paths:
                     - DELETE
                   type: string
                 Webhooks.OnMessageSent.Url:
-                  description: The URL of the webhook to call in response to the `on_message_sent`
-                    event using the `webhooks.on_message_sent.method` HTTP
-                    method.
+                  description: The URL of the webhook to call in response to the `on_message_sent` event using the `webhooks.on_message_sent.method` HTTP method.
                   format: uri
                   type: string
                 Webhooks.OnMessageUpdate.Method:
-                  description: The HTTP method to use when calling the
-                    `webhooks.on_message_update.url`.
+                  description: The HTTP method to use when calling the `webhooks.on_message_update.url`.
                   enum:
                     - HEAD
                     - GET
@@ -2561,14 +2234,11 @@ paths:
                     - DELETE
                   type: string
                 Webhooks.OnMessageUpdate.Url:
-                  description: The URL of the webhook to call in response to the
-                    `on_message_update` event using the
-                    `webhooks.on_message_update.method` HTTP method.
+                  description: The URL of the webhook to call in response to the `on_message_update` event using the `webhooks.on_message_update.method` HTTP method.
                   format: uri
                   type: string
                 Webhooks.OnMessageUpdated.Method:
-                  description: The HTTP method to use when calling the
-                    `webhooks.on_message_updated.url`.
+                  description: The HTTP method to use when calling the `webhooks.on_message_updated.url`.
                   enum:
                     - HEAD
                     - GET
@@ -2578,9 +2248,7 @@ paths:
                     - DELETE
                   type: string
                 Webhooks.OnMessageUpdated.Url:
-                  description: The URL of the webhook to call in response to the
-                    `on_message_updated` event using the
-                    `webhooks.on_message_updated.method` HTTP method.
+                  description: The URL of the webhook to call in response to the `on_message_updated` event using the `webhooks.on_message_updated.method` HTTP method.
                   format: uri
                   type: string
               title: UpdateServiceRequest
@@ -2678,8 +2346,7 @@ components:
           nullable: true
           type: string
         default_channel_creator_role_sid:
-          description: The channel role assigned to a channel creator when they join a new
-            channel
+          description: The channel role assigned to a channel creator when they join a new channel
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2724,8 +2391,7 @@ components:
           nullable: true
           type: string
         reachability_enabled:
-          description: Whether the Reachability Indicator feature is enabled for this
-            Service instance
+          description: Whether the Reachability Indicator feature is enabled for this Service instance
           nullable: true
           type: boolean
         read_status_enabled:
@@ -2740,8 +2406,7 @@ components:
           pattern: ^IS[0-9a-fA-F]{32}$
           type: string
         typing_indicator_timeout:
-          description: How long in seconds to wait before assuming the user is no longer
-            typing
+          description: How long in seconds to wait before assuming the user is no longer typing
           nullable: true
           type: integer
         url:
@@ -2760,8 +2425,7 @@ components:
           nullable: true
           type: string
         webhooks:
-          description: An object that contains information about the webhooks configured
-            for this service
+          description: An object that contains information about the webhooks configured for this service
           nullable: true
           type: object
       type: object
@@ -2797,8 +2461,7 @@ components:
           nullable: true
           type: string
         links:
-          description: Absolute URLs to access the Members, Messages , Invites and, if it
-            exists, the last Message for the Channel
+          description: Absolute URLs to access the Members, Messages , Invites and, if it exists, the last Message for the Channel
           nullable: true
           type: object
         members_count:
@@ -2932,13 +2595,11 @@ components:
           nullable: true
           type: string
         last_consumed_message_index:
-          description: The index of the last Message that the Member has read within the
-            Channel
+          description: The index of the last Message that the Member has read within the Channel
           nullable: true
           type: integer
         last_consumption_timestamp:
-          description: The ISO 8601 based timestamp string that represents the date-time
-            of the last Message read event for the Member within the Channel
+          description: The ISO 8601 based timestamp string that represents the date-time of the last Message read event for the Member within the Channel
           format: date-time
           nullable: true
           type: string
@@ -3130,13 +2791,11 @@ components:
           nullable: true
           type: string
         is_notifiable:
-          description: Whether the User has a potentially valid Push Notification
-            registration for the Service instance
+          description: Whether the User has a potentially valid Push Notification registration for the Service instance
           nullable: true
           type: boolean
         is_online:
-          description: Whether the User is actively connected to the Service instance and
-            online
+          description: Whether the User is actively connected to the Service instance and online
           nullable: true
           type: boolean
         joined_channels_count:
@@ -3144,8 +2803,7 @@ components:
           nullable: true
           type: integer
         links:
-          description: The absolute URLs of the Channel and Binding resources related to
-            the user
+          description: The absolute URLs of the Channel and Binding resources related to the user
           nullable: true
           type: object
         role_sid:
@@ -3196,8 +2854,7 @@ components:
           nullable: true
           type: integer
         links:
-          description: Absolute URLs to access the Members, Messages , Invites and, if it
-            exists, the last Message for the Channel
+          description: Absolute URLs to access the Members, Messages , Invites and, if it exists, the last Message for the Channel
           nullable: true
           type: object
         member_sid:

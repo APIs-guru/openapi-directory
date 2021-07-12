@@ -31,8 +31,7 @@ paths:
       description: Fetch a frontline user
       operationId: FetchUser
       parameters:
-        - description: The SID of the User resource to fetch. This value can be either the
-            `sid` or the `identity` of the User resource to fetch.
+        - description: The SID of the User resource to fetch. This value can be either the `sid` or the `identity` of the User resource to fetch.
           in: path
           name: Sid
           required: true
@@ -53,8 +52,7 @@ paths:
       description: Update an existing frontline user
       operationId: UpdateUser
       parameters:
-        - description: The SID of the User resource to update. This value can be either
-            the `sid` or the `identity` of the User resource to update.
+        - description: The SID of the User resource to update. This value can be either the `sid` or the `identity` of the User resource to update.
           in: path
           name: Sid
           required: true
@@ -72,8 +70,7 @@ paths:
                   description: The string that you assigned to describe the User.
                   type: string
                 State:
-                  description: Current state of this user. Can be either `active` or `deactivated`
-                    and defaults to `active`
+                  description: Current state of this user. Can be either `active` or `deactivated` and defaults to `active`
                   enum:
                     - active
                     - deactivated
@@ -139,6 +136,5 @@ components:
       scheme: basic
       type: http
 x-maturity:
-  - description: PLEASE NOTE that this is a Beta product that is subject to change.
-      Use it with caution.
+  - description: PLEASE NOTE that this is a Beta product that is subject to change. Use it with caution.
     name: Beta

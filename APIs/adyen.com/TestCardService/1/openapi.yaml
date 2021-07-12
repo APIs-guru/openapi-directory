@@ -7,10 +7,7 @@ info:
     name: Adyen Developer Experience team
     url: https://www.adyen.help/hc/en-us/community/topics
     x-twitter: Adyen
-  description: The Test Cards API provides endpoints for generating custom test
-    card numbers. For more information, refer to [Custom test
-    cards](https://docs.adyen.com/development-resources/test-cards/create-test-cards)
-    documentation.
+  description: The Test Cards API provides endpoints for generating custom test card numbers. For more information, refer to [Custom test cards](https://docs.adyen.com/development-resources/test-cards/create-test-cards) documentation.
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
   title: Adyen Test Cards API
   version: "1"
@@ -97,21 +94,15 @@ components:
     CreateTestCardRangesRequest:
       properties:
         accountCode:
-          description: The code of the account, for which the test card ranges should be
-            created.
+          description: The code of the account, for which the test card ranges should be created.
           type: string
         accountTypeCode:
-          description: >-
-            The type of the account, for which the test card ranges should be
-            created.
-
+          description: |-
+            The type of the account, for which the test card ranges should be created.
 
             Permitted values:
-
             * Company
-
             * MerchantAccount
-
             > These values are case-sensitive.
           type: string
         testCardRanges:
@@ -154,12 +145,9 @@ components:
       properties:
         address:
           $ref: "#/components/schemas/AvsAddress"
-          description: Contains the billing address of the card holder. The address
-            details need to be AVS-compliant, which means that you need to
-            provide at least street address.
+          description: Contains the billing address of the card holder. The address details need to be AVS-compliant, which means that you need to provide at least street address.
         cardHolderName:
-          description: The name of the card holder, as it appears on the card, for the
-            test card range.
+          description: The name of the card holder, as it appears on the card, for the test card range.
           type: string
         cvc:
           description: |-
@@ -222,15 +210,11 @@ components:
             Example: 5432 1234 1234 1234
           type: string
         threeDDirectoryServerResponse:
-          description: >-
-            3D Secure server response. It notifies whether the specified card
-            holder is enrolled in a 3D Secure service. Possible values:
-
+          description: |-
+            3D Secure server response. It notifies whether the specified card holder is enrolled in a 3D Secure service. Possible values:
 
             * Y (Authentication available)
-
             * N (Card holder not enrolled/not participating)
-
             * U (Unable to authenticate)
           enum:
             - N
@@ -264,14 +248,10 @@ components:
             Example: 5432 1234 1234 1234
           type: string
         creationResultCode:
-          description: >-
-            Notification message. It informs about the outcome of the
-            operation. Possible values:
-
+          description: |-
+            Notification message. It informs about the outcome of the operation. Possible values:
             * CREATED
-
             * ALREADY_EXISTS
-
             * ERROR
           enum:
             - ALREADY_EXISTS

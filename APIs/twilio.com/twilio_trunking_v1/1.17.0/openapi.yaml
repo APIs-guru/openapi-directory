@@ -31,8 +31,7 @@ paths:
       description: ""
       operationId: ListTrunk
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -86,16 +85,10 @@ paths:
             schema:
               properties:
                 CnamLookupEnabled:
-                  description: Whether Caller ID Name (CNAM) lookup should be enabled for the
-                    trunk. If enabled, all inbound calls to the SIP Trunk from
-                    the United States and Canada automatically perform a CNAM
-                    Lookup and display Caller ID data on your phone. See [CNAM
-                    Lookups](https://www.twilio.com/docs/sip-trunking#CNAM) for
-                    more information.
+                  description: Whether Caller ID Name (CNAM) lookup should be enabled for the trunk. If enabled, all inbound calls to the SIP Trunk from the United States and Canada automatically perform a CNAM Lookup and display Caller ID data on your phone. See [CNAM Lookups](https://www.twilio.com/docs/sip-trunking#CNAM) for more information.
                   type: boolean
                 DisasterRecoveryMethod:
-                  description: "The HTTP method we should use to call the `disaster_recovery_url`.
-                    Can be: `GET` or `POST`."
+                  description: "The HTTP method we should use to call the `disaster_recovery_url`. Can be: `GET` or `POST`."
                   enum:
                     - HEAD
                     - GET
@@ -105,39 +98,20 @@ paths:
                     - DELETE
                   type: string
                 DisasterRecoveryUrl:
-                  description: The URL we should call using the `disaster_recovery_method` if an
-                    error occurs while sending SIP traffic towards the
-                    configured Origination URL. We retrieve TwiML from the URL
-                    and execute the instructions like any other normal TwiML
-                    call. See [Disaster
-                    Recovery](https://www.twilio.com/docs/sip-trunking#disaster-recovery)
-                    for more information.
+                  description: The URL we should call using the `disaster_recovery_method` if an error occurs while sending SIP traffic towards the configured Origination URL. We retrieve TwiML from the URL and execute the instructions like any other normal TwiML call. See [Disaster Recovery](https://www.twilio.com/docs/sip-trunking#disaster-recovery) for more information.
                   format: uri
                   type: string
                 DomainName:
-                  description: The unique address you reserve on Twilio to which you route your
-                    SIP traffic. Domain names can contain letters, digits, and
-                    `-` and must end with `pstn.twilio.com`. See [Termination
-                    Settings](https://www.twilio.com/docs/sip-trunking#termination)
-                    for more information.
+                  description: The unique address you reserve on Twilio to which you route your SIP traffic. Domain names can contain letters, digits, and `-` and must end with `pstn.twilio.com`. See [Termination Settings](https://www.twilio.com/docs/sip-trunking#termination) for more information.
                   type: string
                 FriendlyName:
-                  description: A descriptive string that you create to describe the resource. It
-                    can be up to 64 characters long.
+                  description: A descriptive string that you create to describe the resource. It can be up to 64 characters long.
                   type: string
                 Secure:
-                  description: Whether Secure Trunking is enabled for the trunk. If enabled, all
-                    calls going through the trunk will be secure using SRTP for
-                    media and TLS for signaling. If disabled, then RTP will be
-                    used for media. See [Secure
-                    Trunking](https://www.twilio.com/docs/sip-trunking#securetrunking)
-                    for more information.
+                  description: Whether Secure Trunking is enabled for the trunk. If enabled, all calls going through the trunk will be secure using SRTP for media and TLS for signaling. If disabled, then RTP will be used for media. See [Secure Trunking](https://www.twilio.com/docs/sip-trunking#securetrunking) for more information.
                   type: boolean
                 TransferMode:
-                  description: "The call transfer settings for the trunk. Can be: `enable-all`,
-                    `sip-only` and `disable-all`. See
-                    [Transfer](https://www.twilio.com/docs/sip-trunking/call-tr\
-                    ansfer) for more information."
+                  description: "The call transfer settings for the trunk. Can be: `enable-all`, `sip-only` and `disable-all`. See [Transfer](https://www.twilio.com/docs/sip-trunking/call-transfer) for more information."
                   enum:
                     - disable-all
                     - enable-all
@@ -169,8 +143,7 @@ paths:
       description: ""
       operationId: DeleteTrunk
       parameters:
-        - description: The unique string that we created to identify the Trunk resource to
-            delete.
+        - description: The unique string that we created to identify the Trunk resource to delete.
           in: path
           name: Sid
           required: true
@@ -191,8 +164,7 @@ paths:
       description: ""
       operationId: FetchTrunk
       parameters:
-        - description: The unique string that we created to identify the Trunk resource to
-            fetch.
+        - description: The unique string that we created to identify the Trunk resource to fetch.
           in: path
           name: Sid
           required: true
@@ -216,8 +188,7 @@ paths:
       description: ""
       operationId: UpdateTrunk
       parameters:
-        - description: The unique string that we created to identify the OriginationUrl
-            resource to update.
+        - description: The unique string that we created to identify the OriginationUrl resource to update.
           in: path
           name: Sid
           required: true
@@ -232,16 +203,10 @@ paths:
             schema:
               properties:
                 CnamLookupEnabled:
-                  description: Whether Caller ID Name (CNAM) lookup should be enabled for the
-                    trunk. If enabled, all inbound calls to the SIP Trunk from
-                    the United States and Canada automatically perform a CNAM
-                    Lookup and display Caller ID data on your phone. See [CNAM
-                    Lookups](https://www.twilio.com/docs/sip-trunking#CNAM) for
-                    more information.
+                  description: Whether Caller ID Name (CNAM) lookup should be enabled for the trunk. If enabled, all inbound calls to the SIP Trunk from the United States and Canada automatically perform a CNAM Lookup and display Caller ID data on your phone. See [CNAM Lookups](https://www.twilio.com/docs/sip-trunking#CNAM) for more information.
                   type: boolean
                 DisasterRecoveryMethod:
-                  description: "The HTTP method we should use to call the `disaster_recovery_url`.
-                    Can be: `GET` or `POST`."
+                  description: "The HTTP method we should use to call the `disaster_recovery_url`. Can be: `GET` or `POST`."
                   enum:
                     - HEAD
                     - GET
@@ -251,39 +216,20 @@ paths:
                     - DELETE
                   type: string
                 DisasterRecoveryUrl:
-                  description: The URL we should call using the `disaster_recovery_method` if an
-                    error occurs while sending SIP traffic towards the
-                    configured Origination URL. We retrieve TwiML from the URL
-                    and execute the instructions like any other normal TwiML
-                    call. See [Disaster
-                    Recovery](https://www.twilio.com/docs/sip-trunking#disaster-recovery)
-                    for more information.
+                  description: The URL we should call using the `disaster_recovery_method` if an error occurs while sending SIP traffic towards the configured Origination URL. We retrieve TwiML from the URL and execute the instructions like any other normal TwiML call. See [Disaster Recovery](https://www.twilio.com/docs/sip-trunking#disaster-recovery) for more information.
                   format: uri
                   type: string
                 DomainName:
-                  description: The unique address you reserve on Twilio to which you route your
-                    SIP traffic. Domain names can contain letters, digits, and
-                    `-` and must end with `pstn.twilio.com`. See [Termination
-                    Settings](https://www.twilio.com/docs/sip-trunking#termination)
-                    for more information.
+                  description: The unique address you reserve on Twilio to which you route your SIP traffic. Domain names can contain letters, digits, and `-` and must end with `pstn.twilio.com`. See [Termination Settings](https://www.twilio.com/docs/sip-trunking#termination) for more information.
                   type: string
                 FriendlyName:
-                  description: A descriptive string that you create to describe the resource. It
-                    can be up to 64 characters long.
+                  description: A descriptive string that you create to describe the resource. It can be up to 64 characters long.
                   type: string
                 Secure:
-                  description: Whether Secure Trunking is enabled for the trunk. If enabled, all
-                    calls going through the trunk will be secure using SRTP for
-                    media and TLS for signaling. If disabled, then RTP will be
-                    used for media. See [Secure
-                    Trunking](https://www.twilio.com/docs/sip-trunking#securetrunking)
-                    for more information.
+                  description: Whether Secure Trunking is enabled for the trunk. If enabled, all calls going through the trunk will be secure using SRTP for media and TLS for signaling. If disabled, then RTP will be used for media. See [Secure Trunking](https://www.twilio.com/docs/sip-trunking#securetrunking) for more information.
                   type: boolean
                 TransferMode:
-                  description: "The call transfer settings for the trunk. Can be: `enable-all`,
-                    `sip-only` and `disable-all`. See
-                    [Transfer](https://www.twilio.com/docs/sip-trunking/call-tr\
-                    ansfer) for more information."
+                  description: "The call transfer settings for the trunk. Can be: `enable-all`, `sip-only` and `disable-all`. See [Transfer](https://www.twilio.com/docs/sip-trunking/call-transfer) for more information."
                   enum:
                     - disable-all
                     - enable-all
@@ -325,8 +271,7 @@ paths:
             minLength: 34
             pattern: ^TK[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -390,10 +335,7 @@ paths:
             schema:
               properties:
                 CredentialListSid:
-                  description: The SID of the [Credential
-                    List](https://www.twilio.com/docs/voice/sip/api/sip-credentiallist-resource)
-                    that you want to associate with the trunk. Once associated,
-                    we will authenticate access to the trunk against this list.
+                  description: The SID of the [Credential List](https://www.twilio.com/docs/voice/sip/api/sip-credentiallist-resource) that you want to associate with the trunk. Once associated, we will authenticate access to the trunk against this list.
                   maxLength: 34
                   minLength: 34
                   pattern: ^CL[0-9a-fA-F]{32}$
@@ -435,8 +377,7 @@ paths:
             minLength: 34
             pattern: ^TK[0-9a-fA-F]{32}$
             type: string
-        - description: The unique string that we created to identify the CredentialList
-            resource to delete.
+        - description: The unique string that we created to identify the CredentialList resource to delete.
           in: path
           name: Sid
           required: true
@@ -466,8 +407,7 @@ paths:
             minLength: 34
             pattern: ^TK[0-9a-fA-F]{32}$
             type: string
-        - description: The unique string that we created to identify the CredentialList
-            resource to fetch.
+        - description: The unique string that we created to identify the CredentialList resource to fetch.
           in: path
           name: Sid
           required: true
@@ -510,8 +450,7 @@ paths:
             minLength: 34
             pattern: ^TK[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -575,9 +514,7 @@ paths:
             schema:
               properties:
                 IpAccessControlListSid:
-                  description: The SID of the [IP Access Control
-                    List](https://www.twilio.com/docs/voice/sip/api/sip-ipaccesscontrollist-resource)
-                    that you want to associate with the trunk.
+                  description: The SID of the [IP Access Control List](https://www.twilio.com/docs/voice/sip/api/sip-ipaccesscontrollist-resource) that you want to associate with the trunk.
                   maxLength: 34
                   minLength: 34
                   pattern: ^AL[0-9a-fA-F]{32}$
@@ -619,8 +556,7 @@ paths:
             minLength: 34
             pattern: ^TK[0-9a-fA-F]{32}$
             type: string
-        - description: The unique string that we created to identify the
-            IpAccessControlList resource to delete.
+        - description: The unique string that we created to identify the IpAccessControlList resource to delete.
           in: path
           name: Sid
           required: true
@@ -650,8 +586,7 @@ paths:
             minLength: 34
             pattern: ^TK[0-9a-fA-F]{32}$
             type: string
-        - description: The unique string that we created to identify the
-            IpAccessControlList resource to fetch.
+        - description: The unique string that we created to identify the IpAccessControlList resource to fetch.
           in: path
           name: Sid
           required: true
@@ -694,8 +629,7 @@ paths:
             minLength: 34
             pattern: ^TK[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -762,25 +696,17 @@ paths:
                   description: Whether the URL is enabled. The default is `true`.
                   type: boolean
                 FriendlyName:
-                  description: A descriptive string that you create to describe the resource. It
-                    can be up to 64 characters long.
+                  description: A descriptive string that you create to describe the resource. It can be up to 64 characters long.
                   type: string
                 Priority:
-                  description: The relative importance of the URI. Can be an integer from 0 to
-                    65535, inclusive, and the default is 10. The lowest number
-                    represents the most important URI.
+                  description: The relative importance of the URI. Can be an integer from 0 to 65535, inclusive, and the default is 10. The lowest number represents the most important URI.
                   type: integer
                 SipUrl:
-                  description: The SIP address you want Twilio to route your Origination calls to.
-                    This must be a `sip:` schema.
+                  description: The SIP address you want Twilio to route your Origination calls to. This must be a `sip:` schema.
                   format: uri
                   type: string
                 Weight:
-                  description: The value that determines the relative share of the load the URI
-                    should receive compared to other URIs with the same
-                    priority. Can be an integer from 1 to 65535, inclusive, and
-                    the default is 10. URLs with higher values receive more load
-                    than those with lower ones with the same priority.
+                  description: The value that determines the relative share of the load the URI should receive compared to other URIs with the same priority. Can be an integer from 1 to 65535, inclusive, and the default is 10. URLs with higher values receive more load than those with lower ones with the same priority.
                   type: integer
               required:
                 - Weight
@@ -825,8 +751,7 @@ paths:
             minLength: 34
             pattern: ^TK[0-9a-fA-F]{32}$
             type: string
-        - description: The unique string that we created to identify the OriginationUrl
-            resource to delete.
+        - description: The unique string that we created to identify the OriginationUrl resource to delete.
           in: path
           name: Sid
           required: true
@@ -856,8 +781,7 @@ paths:
             minLength: 34
             pattern: ^TK[0-9a-fA-F]{32}$
             type: string
-        - description: The unique string that we created to identify the OriginationUrl
-            resource to fetch.
+        - description: The unique string that we created to identify the OriginationUrl resource to fetch.
           in: path
           name: Sid
           required: true
@@ -890,8 +814,7 @@ paths:
             minLength: 34
             pattern: ^TK[0-9a-fA-F]{32}$
             type: string
-        - description: The unique string that we created to identify the OriginationUrl
-            resource to update.
+        - description: The unique string that we created to identify the OriginationUrl resource to update.
           in: path
           name: Sid
           required: true
@@ -909,25 +832,17 @@ paths:
                   description: Whether the URL is enabled. The default is `true`.
                   type: boolean
                 FriendlyName:
-                  description: A descriptive string that you create to describe the resource. It
-                    can be up to 64 characters long.
+                  description: A descriptive string that you create to describe the resource. It can be up to 64 characters long.
                   type: string
                 Priority:
-                  description: The relative importance of the URI. Can be an integer from 0 to
-                    65535, inclusive, and the default is 10. The lowest number
-                    represents the most important URI.
+                  description: The relative importance of the URI. Can be an integer from 0 to 65535, inclusive, and the default is 10. The lowest number represents the most important URI.
                   type: integer
                 SipUrl:
-                  description: The SIP address you want Twilio to route your Origination calls to.
-                    This must be a `sip:` schema. `sips` is NOT supported.
+                  description: The SIP address you want Twilio to route your Origination calls to. This must be a `sip:` schema. `sips` is NOT supported.
                   format: uri
                   type: string
                 Weight:
-                  description: The value that determines the relative share of the load the URI
-                    should receive compared to other URIs with the same
-                    priority. Can be an integer from 1 to 65535, inclusive, and
-                    the default is 10. URLs with higher values receive more load
-                    than those with lower ones with the same priority.
+                  description: The value that determines the relative share of the load the URI should receive compared to other URIs with the same priority. Can be an integer from 1 to 65535, inclusive, and the default is 10. URLs with higher values receive more load than those with lower ones with the same priority.
                   type: integer
               title: UpdateOriginationUrlRequest
               type: object
@@ -967,8 +882,7 @@ paths:
             minLength: 34
             pattern: ^TK[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1032,9 +946,7 @@ paths:
             schema:
               properties:
                 PhoneNumberSid:
-                  description: The SID of the [Incoming Phone
-                    Number](https://www.twilio.com/docs/phone-numbers/api/incomingphonenumber-resource)
-                    that you want to associate with the trunk.
+                  description: The SID of the [Incoming Phone Number](https://www.twilio.com/docs/phone-numbers/api/incomingphonenumber-resource) that you want to associate with the trunk.
                   maxLength: 34
                   minLength: 34
                   pattern: ^PN[0-9a-fA-F]{32}$
@@ -1076,8 +988,7 @@ paths:
             minLength: 34
             pattern: ^TK[0-9a-fA-F]{32}$
             type: string
-        - description: The unique string that we created to identify the PhoneNumber
-            resource to delete.
+        - description: The unique string that we created to identify the PhoneNumber resource to delete.
           in: path
           name: Sid
           required: true
@@ -1107,8 +1018,7 @@ paths:
             minLength: 34
             pattern: ^TK[0-9a-fA-F]{32}$
             type: string
-        - description: The unique string that we created to identify the PhoneNumber
-            resource to fetch.
+        - description: The unique string that we created to identify the PhoneNumber resource to fetch.
           in: path
           name: Sid
           required: true
@@ -1181,9 +1091,7 @@ paths:
             schema:
               properties:
                 Mode:
-                  description: The recording mode for the trunk. Can be do-not-record (default),
-                    record-from-ringing, record-from-answer,
-                    record-from-ringing-dual, or record-from-answer-dual.
+                  description: The recording mode for the trunk. Can be do-not-record (default), record-from-ringing, record-from-answer, record-from-ringing-dual, or record-from-answer-dual.
                   enum:
                     - do-not-record
                     - record-from-ringing
@@ -1192,8 +1100,7 @@ paths:
                     - record-from-answer-dual
                   type: string
                 Trim:
-                  description: The recording trim setting for the trunk. Can be do-not-trim
-                    (default) or trim-silence.
+                  description: The recording trim setting for the trunk. Can be do-not-trim (default) or trim-silence.
                   enum:
                     - trim-silence
                     - do-not-trim
@@ -1265,14 +1172,12 @@ components:
           nullable: true
           type: string
         disaster_recovery_url:
-          description: The HTTP URL that we call if an error occurs while sending SIP
-            traffic towards your configured Origination URL
+          description: The HTTP URL that we call if an error occurs while sending SIP traffic towards your configured Origination URL
           format: uri
           nullable: true
           type: string
         domain_name:
-          description: The unique address you reserve on Twilio to which you route your
-            SIP traffic
+          description: The unique address you reserve on Twilio to which you route your SIP traffic
           nullable: true
           type: string
         friendly_name:
@@ -1454,8 +1359,7 @@ components:
           nullable: true
           type: string
         weight:
-          description: The value that determines the relative load the URI should receive
-            compared to others with the same priority
+          description: The value that determines the relative load the URI should receive compared to others with the same priority
           nullable: true
           type: integer
       type: object
@@ -1519,8 +1423,7 @@ components:
           pattern: ^PN[0-9a-fA-F]{32}$
           type: string
         sms_application_sid:
-          description: The SID of the application that handles SMS messages sent to the
-            phone number
+          description: The SID of the application that handles SMS messages sent to the phone number
           maxLength: 34
           minLength: 34
           nullable: true
@@ -1538,8 +1441,7 @@ components:
           nullable: true
           type: string
         sms_fallback_url:
-          description: The URL that we call when an error occurs while retrieving or
-            executing the TwiML
+          description: The URL that we call when an error occurs while retrieving or executing the TwiML
           format: uri
           nullable: true
           type: string
@@ -1555,8 +1457,7 @@ components:
           nullable: true
           type: string
         sms_url:
-          description: The URL we call when the phone number receives an incoming SMS
-            message
+          description: The URL we call when the phone number receives an incoming SMS message
           format: uri
           nullable: true
           type: string

@@ -308,11 +308,9 @@ paths:
       description: Gets a single setting by ID.
       operationId: mirror.settings.get
       parameters:
-        - description: >-
+        - description: |-
             The ID of the setting. The following IDs are valid: 
-
             - locale - The key to the user’s language/locale (BCP 47 identifier) that Glassware should use to render localized content. 
-
             - timezone - The key to the user’s current time zone region as defined in the tz database. Example: America/Los_Angeles.
           in: path
           name: id
@@ -459,8 +457,7 @@ paths:
           name: includeDeleted
           schema:
             type: boolean
-        - description: The maximum number of items to include in the response, used for
-            paging.
+        - description: The maximum number of items to include in the response, used for paging.
           in: query
           name: maxResults
           schema:
@@ -1881,9 +1878,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -1902,8 +1897,7 @@ components:
         default: true
         type: boolean
     quotaUser:
-      description: An opaque string that represents a user for quota purposes. Must
-        not exceed 40 characters.
+      description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -3027,8 +3021,7 @@ components:
           type: array
       type: object
     Attachment:
-      description: Represents media content, such as a photo, that can be attached to
-        a timeline item.
+      description: Represents media content, such as a photo, that can be attached to a timeline item.
       properties:
         contentType:
           description: The MIME type of the attachment.
@@ -3040,14 +3033,11 @@ components:
           description: The ID of the attachment.
           type: string
         isProcessingContent:
-          description: Indicates that the contentUrl is not available because the
-            attachment content is still being processed. If the caller wishes to
-            retrieve the content, it should try again later.
+          description: Indicates that the contentUrl is not available because the attachment content is still being processed. If the caller wishes to retrieve the content, it should try again later.
           type: boolean
       type: object
     AttachmentsListResponse:
-      description: A list of Attachments. This is the response from the server to GET
-        requests on the attachments collection.
+      description: A list of Attachments. This is the response from the server to GET requests on the attachments collection.
       properties:
         items:
           description: The list of attachments.
@@ -3070,12 +3060,9 @@ components:
       description: A single menu command that is part of a Contact.
       properties:
         type:
-          description: >-
-            The type of operation this command corresponds to. Allowed values
-            are:  
-
+          description: |-
+            The type of operation this command corresponds to. Allowed values are:  
             - TAKE_A_NOTE - Shares a timeline item with the transcription of user speech from the "Take a note" voice menu command.  
-
             - POST_AN_UPDATE - Shares a timeline item with the transcription of user speech from the "Post an update" voice menu command.
           type: string
       type: object
@@ -3083,18 +3070,12 @@ components:
       description: A person or group that can be used as a creator or a contact.
       properties:
         acceptCommands:
-          description: A list of voice menu commands that a contact can handle. Glass
-            shows up to three contacts for each voice menu command. If there are
-            more than that, the three contacts with the highest priority are
-            shown for that particular command.
+          description: A list of voice menu commands that a contact can handle. Glass shows up to three contacts for each voice menu command. If there are more than that, the three contacts with the highest priority are shown for that particular command.
           items:
             $ref: "#/components/schemas/Command"
           type: array
         acceptTypes:
-          description: A list of MIME types that a contact supports. The contact will be
-            shown to the user if any of its acceptTypes matches any of the types
-            of the attachments on the item. If no acceptTypes are given, the
-            contact will be shown for all items.
+          description: A list of MIME types that a contact supports. The contact will be shown to the user if any of its acceptTypes matches any of the types of the attachments on the item. If no acceptTypes are given, the contact will be shown for all items.
           items:
             type: string
           type: array
@@ -3102,13 +3083,10 @@ components:
           description: The name to display for this contact.
           type: string
         id:
-          description: An ID for this contact. This is generated by the application and is
-            treated as an opaque token.
+          description: An ID for this contact. This is generated by the application and is treated as an opaque token.
           type: string
         imageUrls:
-          description: Set of image URLs to display for a contact. Most contacts will have
-            a single image, but a "group" contact may include up to 8 image URLs
-            and they will be resized and cropped into a mosaic on the client.
+          description: Set of image URLs to display for a contact. Most contacts will have a single image, but a "group" contact may include up to 8 image URLs and they will be resized and cropped into a mosaic on the client.
           items:
             type: string
           type: array
@@ -3117,48 +3095,34 @@ components:
           description: The type of resource. This is always mirror#contact.
           type: string
         phoneNumber:
-          description: Primary phone number for the contact. This can be a fully-qualified
-            number, with country calling code and area code, or a local number.
+          description: Primary phone number for the contact. This can be a fully-qualified number, with country calling code and area code, or a local number.
           type: string
         priority:
-          description: Priority for the contact to determine ordering in a list of
-            contacts. Contacts with higher priorities will be shown before ones
-            with lower priorities.
+          description: Priority for the contact to determine ordering in a list of contacts. Contacts with higher priorities will be shown before ones with lower priorities.
           format: uint32
           type: integer
         sharingFeatures:
-          description: >-
-            A list of sharing features that a contact can handle. Allowed
-            values are:  
-
+          description: |-
+            A list of sharing features that a contact can handle. Allowed values are:  
             - ADD_CAPTION
           items:
             type: string
           type: array
         source:
-          description: The ID of the application that created this contact. This is
-            populated by the API
+          description: The ID of the application that created this contact. This is populated by the API
           type: string
         speakableName:
-          description: Name of this contact as it should be pronounced. If this contact's
-            name must be spoken as part of a voice disambiguation menu, this
-            name is used as the expected pronunciation. This is useful for
-            contact names with unpronounceable characters or whose display
-            spelling is otherwise not phonetic.
+          description: Name of this contact as it should be pronounced. If this contact's name must be spoken as part of a voice disambiguation menu, this name is used as the expected pronunciation. This is useful for contact names with unpronounceable characters or whose display spelling is otherwise not phonetic.
           type: string
         type:
-          description: >-
-            The type for this contact. This is used for sorting in UIs. Allowed
-            values are:  
-
+          description: |-
+            The type for this contact. This is used for sorting in UIs. Allowed values are:  
             - INDIVIDUAL - Represents a single person. This is the default. 
-
             - GROUP - Represents more than a single person.
           type: string
       type: object
     ContactsListResponse:
-      description: A list of Contacts representing contacts. This is the response from
-        the server to GET requests on the contacts collection.
+      description: A list of Contacts representing contacts. This is the response from the server to GET requests on the contacts collection.
       properties:
         items:
           description: Contact list.
@@ -3181,8 +3145,7 @@ components:
           description: The full address of the location.
           type: string
         displayName:
-          description: The name to be displayed. This may be a business name or a
-            user-defined place, such as "Home".
+          description: The name to be displayed. This may be a business name or a user-defined place, such as "Home".
           type: string
         id:
           description: The ID of the location.
@@ -3200,14 +3163,12 @@ components:
           format: double
           type: number
         timestamp:
-          description: The time at which this location was captured, formatted according
-            to RFC 3339.
+          description: The time at which this location was captured, formatted according to RFC 3339.
           format: date-time
           type: string
       type: object
     LocationsListResponse:
-      description: A list of Locations. This is the response from the server to GET
-        requests on the locations collection.
+      description: A list of Locations. This is the response from the server to GET requests on the locations collection.
       properties:
         items:
           description: The list of locations.
@@ -3223,74 +3184,43 @@ components:
       description: A custom menu item that can be presented to the user by a timeline item.
       properties:
         action:
-          description: >-
-            Controls the behavior when the user picks the menu option. Allowed
-            values are:  
-
+          description: |-
+            Controls the behavior when the user picks the menu option. Allowed values are:  
             - CUSTOM - Custom action set by the service. When the user selects this menuItem, the API triggers a notification to your callbackUrl with the userActions.type set to CUSTOM and the userActions.payload set to the ID of this menu item. This is the default value. 
-
             - Built-in actions:  
-
             - REPLY - Initiate a reply to the timeline item using the voice recording UI. The creator attribute must be set in the timeline item for this menu to be available. 
-
             - REPLY_ALL - Same behavior as REPLY. The original timeline item's recipients will be added to the reply item. 
-
             - DELETE - Delete the timeline item. 
-
             - SHARE - Share the timeline item with the available contacts. 
-
             - READ_ALOUD - Read the timeline item's speakableText aloud; if this field is not set, read the text field; if none of those fields are set, this menu item is ignored. 
-
             - GET_MEDIA_INPUT - Allow users to provide media payloads to Glassware from a menu item (currently, only transcribed text from voice input is supported). Subscribe to notifications when users invoke this menu item to receive the timeline item ID. Retrieve the media from the timeline item in the payload property. 
-
             - VOICE_CALL - Initiate a phone call using the timeline item's creator.phoneNumber attribute as recipient. 
-
             - NAVIGATE - Navigate to the timeline item's location. 
-
             - TOGGLE_PINNED - Toggle the isPinned state of the timeline item. 
-
             - OPEN_URI - Open the payload of the menu item in the browser. 
-
             - PLAY_VIDEO - Open the payload of the menu item in the Glass video player. 
-
             - SEND_MESSAGE - Initiate sending a message to the timeline item's creator:  
-
             - If the creator.phoneNumber is set and Glass is connected to an Android phone, the message is an SMS. 
-
             - Otherwise, if the creator.email is set, the message is an email.
           type: string
         contextual_command:
-          description: The ContextualMenus.Command associated with this MenuItem (e.g.
-            READ_ALOUD). The voice label for this command will be displayed in
-            the voice menu and the touch label will be displayed in the touch
-            menu. Note that the default menu value's display name will be
-            overriden if you specify this property. Values that do not
-            correspond to a ContextualMenus.Command name will be ignored.
+          description: The ContextualMenus.Command associated with this MenuItem (e.g. READ_ALOUD). The voice label for this command will be displayed in the voice menu and the touch label will be displayed in the touch menu. Note that the default menu value's display name will be overriden if you specify this property. Values that do not correspond to a ContextualMenus.Command name will be ignored.
           type: string
         id:
-          description: The ID for this menu item. This is generated by the application and
-            is treated as an opaque token.
+          description: The ID for this menu item. This is generated by the application and is treated as an opaque token.
           type: string
         payload:
-          description: >-
-            A generic payload whose meaning changes depending on this
-            MenuItem's action.  
-
+          description: |-
+            A generic payload whose meaning changes depending on this MenuItem's action.  
             - When the action is OPEN_URI, the payload is the URL of the website to view. 
-
             - When the action is PLAY_VIDEO, the payload is the streaming URL of the video 
-
             - When the action is GET_MEDIA_INPUT, the payload is the text transcription of a user's speech input
           type: string
         removeWhenSelected:
-          description: If set to true on a CUSTOM menu item, that item will be removed
-            from the menu after it is selected.
+          description: If set to true on a CUSTOM menu item, that item will be removed from the menu after it is selected.
           type: boolean
         values:
-          description: For CUSTOM items, a list of values controlling the appearance of
-            the menu item in each of its states. A value for the DEFAULT state
-            must be provided. If the PENDING or CONFIRMED states are missing,
-            they will not be shown.
+          description: For CUSTOM items, a list of values controlling the appearance of the menu item in each of its states. A value for the DEFAULT state must be provided. If the PENDING or CONFIRMED states are missing, they will not be shown.
           items:
             $ref: "#/components/schemas/MenuValue"
           type: array
@@ -3299,21 +3229,16 @@ components:
       description: A single value that is part of a MenuItem.
       properties:
         displayName:
-          description: The name to display for the menu item. If you specify this property
-            for a built-in menu item, the default contextual voice command for
-            that menu item is not shown.
+          description: The name to display for the menu item. If you specify this property for a built-in menu item, the default contextual voice command for that menu item is not shown.
           type: string
         iconUrl:
           description: URL of an icon to display with the menu item.
           type: string
         state:
-          description: >-
+          description: |-
             The state that this value applies to. Allowed values are:  
-
             - DEFAULT - Default value shown when displayed in the menuItems list. 
-
             - PENDING - Value shown when the menuItem has been selected by the user but can still be cancelled. 
-
             - CONFIRMED - Value shown when the menuItem has been selected by the user and can no longer be cancelled.
           type: string
       type: object
@@ -3335,12 +3260,10 @@ components:
             $ref: "#/components/schemas/UserAction"
           type: array
         userToken:
-          description: The user token provided by the service when it subscribed for
-            notifications.
+          description: The user token provided by the service when it subscribed for notifications.
           type: string
         verifyToken:
-          description: The secret verify token provided by the service when it subscribed
-            for notifications.
+          description: The secret verify token provided by the service when it subscribed for notifications.
           type: string
       type: object
     NotificationConfig:
@@ -3351,9 +3274,8 @@ components:
           format: date-time
           type: string
         level:
-          description: >-
+          description: |-
             Describes how important the notification is. Allowed values are:  
-
             - DEFAULT - Notifications of default importance. A chime will be played to alert users.
           type: string
       type: object
@@ -3361,11 +3283,9 @@ components:
       description: A setting for Glass.
       properties:
         id:
-          description: >-
+          description: |-
             The setting's ID. The following IDs are valid:  
-
             - locale - The key to the user’s language/locale (BCP 47 identifier) that Glassware should use to render localized content.  
-
             - timezone - The key to the user’s current time zone region as defined in the tz database. Example: America/Los_Angeles.
           type: string
         kind:
@@ -3380,17 +3300,13 @@ components:
       description: A subscription to events on a collection.
       properties:
         callbackUrl:
-          description: The URL where notifications should be delivered (must start with
-            https://).
+          description: The URL where notifications should be delivered (must start with https://).
           type: string
         collection:
-          description: >-
+          description: |-
             The collection to subscribe to. Allowed values are:  
-
             - timeline - Changes in the timeline including insertion, deletion, and updates. 
-
             - locations - Location updates. 
-
             - settings - Settings updates.
           type: string
         id:
@@ -3402,41 +3318,30 @@ components:
           type: string
         notification:
           $ref: "#/components/schemas/Notification"
-          description: Container object for notifications. This is not populated in the
-            Subscription resource.
+          description: Container object for notifications. This is not populated in the Subscription resource.
         operation:
-          description: >-
-            A list of operations that should be subscribed to. An empty list
-            indicates that all operations on the collection should be subscribed
-            to. Allowed values are:  
-
+          description: |-
+            A list of operations that should be subscribed to. An empty list indicates that all operations on the collection should be subscribed to. Allowed values are:  
             - UPDATE - The item has been updated. 
-
             - INSERT - A new item has been inserted. 
-
             - DELETE - The item has been deleted. 
-
             - MENU_ACTION - A custom menu item has been triggered by the user.
           items:
             type: string
           type: array
         updated:
-          description: The time at which this subscription was last modified, formatted
-            according to RFC 3339.
+          description: The time at which this subscription was last modified, formatted according to RFC 3339.
           format: date-time
           type: string
         userToken:
-          description: An opaque token sent to the subscriber in notifications so that it
-            can determine the ID of the user.
+          description: An opaque token sent to the subscriber in notifications so that it can determine the ID of the user.
           type: string
         verifyToken:
-          description: A secret token sent to the subscriber in notifications so that it
-            can verify that the notification was generated by Google.
+          description: A secret token sent to the subscriber in notifications so that it can verify that the notification was generated by Google.
           type: string
       type: object
     SubscriptionsListResponse:
-      description: A list of Subscriptions. This is the response from the server to
-        GET requests on the subscription collection.
+      description: A list of Subscriptions. This is the response from the server to GET requests on the subscription collection.
       properties:
         items:
           description: The list of subscriptions.
@@ -3449,116 +3354,78 @@ components:
           type: string
       type: object
     TimelineItem:
-      description: Each item in the user's timeline is represented as a TimelineItem
-        JSON structure, described below.
+      description: Each item in the user's timeline is represented as a TimelineItem JSON structure, described below.
       properties:
         attachments:
-          description: >-
-            A list of media attachments associated with this item. As a
-            convenience, you can refer to attachments in your HTML payloads with
-            the attachment or cid scheme. For example:  
-
+          description: |-
+            A list of media attachments associated with this item. As a convenience, you can refer to attachments in your HTML payloads with the attachment or cid scheme. For example:  
             - attachment: <img src="attachment:attachment_index"> where attachment_index is the 0-based index of this array. 
-
             - cid: <img src="cid:attachment_id"> where attachment_id is the ID of the attachment.
           items:
             $ref: "#/components/schemas/Attachment"
           type: array
         bundleId:
-          description: The bundle ID for this item. Services can specify a bundleId to
-            group many items together. They appear under a single top-level item
-            on the device.
+          description: The bundle ID for this item. Services can specify a bundleId to group many items together. They appear under a single top-level item on the device.
           type: string
         canonicalUrl:
-          description: A canonical URL pointing to the canonical/high quality version of
-            the data represented by the timeline item.
+          description: A canonical URL pointing to the canonical/high quality version of the data represented by the timeline item.
           type: string
         created:
-          description: The time at which this item was created, formatted according to RFC
-            3339.
+          description: The time at which this item was created, formatted according to RFC 3339.
           format: date-time
           type: string
         creator:
           $ref: "#/components/schemas/Contact"
           description: The user or group that created this item.
         displayTime:
-          description: The time that should be displayed when this item is viewed in the
-            timeline, formatted according to RFC 3339. This user's timeline is
-            sorted chronologically on display time, so this will also determine
-            where the item is displayed in the timeline. If not set by the
-            service, the display time defaults to the updated time.
+          description: The time that should be displayed when this item is viewed in the timeline, formatted according to RFC 3339. This user's timeline is sorted chronologically on display time, so this will also determine where the item is displayed in the timeline. If not set by the service, the display time defaults to the updated time.
           format: date-time
           type: string
         etag:
           description: ETag for this item.
           type: string
         html:
-          description: >-
-            HTML content for this item. If both text and html are provided for
-            an item, the html will be rendered in the timeline.
-
+          description: |-
+            HTML content for this item. If both text and html are provided for an item, the html will be rendered in the timeline.
             Allowed HTML elements - You can use these elements in your timeline cards.
              
             - Headers: h1, h2, h3, h4, h5, h6 
-
             - Images: img 
-
             - Lists: li, ol, ul 
-
             - HTML5 semantics: article, aside, details, figure, figcaption, footer, header, nav, section, summary, time 
-
             - Structural: blockquote, br, div, hr, p, span 
-
             - Style: b, big, center, em, i, u, s, small, strike, strong, style, sub, sup 
-
             - Tables: table, tbody, td, tfoot, th, thead, tr  
-
             Blocked HTML elements: These elements and their contents are removed from HTML payloads.
              
             - Document headers: head, title 
-
             - Embeds: audio, embed, object, source, video 
-
             - Frames: frame, frameset 
-
             - Scripting: applet, script  
-
             Other elements: Any elements that aren't listed are removed, but their contents are preserved.
           type: string
         id:
           description: The ID of the timeline item. This is unique within a user's timeline.
           type: string
         inReplyTo:
-          description: If this item was generated as a reply to another item, this field
-            will be set to the ID of the item being replied to. This can be used
-            to attach a reply to the appropriate conversation or post.
+          description: If this item was generated as a reply to another item, this field will be set to the ID of the item being replied to. This can be used to attach a reply to the appropriate conversation or post.
           type: string
         isBundleCover:
-          description: >-
+          description: |-
             Whether this item is a bundle cover.
-
 
             If an item is marked as a bundle cover, it will be the entry point to the bundle of items that have the same bundleId as that item. It will be shown only on the main timeline — not within the opened bundle.
 
-
             On the main timeline, items that are shown are:  
-
             - Items that have isBundleCover set to true  
-
             - Items that do not have a bundleId  In a bundle sub-timeline, items that are shown are:  
-
             - Items that have the bundleId in question AND isBundleCover set to false
           type: boolean
         isDeleted:
-          description: When true, indicates this item is deleted, and only the ID property
-            is set.
+          description: When true, indicates this item is deleted, and only the ID property is set.
           type: boolean
         isPinned:
-          description: When true, indicates this item is pinned, which means it's grouped
-            alongside "active" items like navigation and hangouts, on the
-            opposite side of the home screen from historical (non-pinned)
-            timeline items. You can allow the user to toggle the value of this
-            property with the TOGGLE_PINNED built-in menu item.
+          description: When true, indicates this item is pinned, which means it's grouped alongside "active" items like navigation and hangouts, on the opposite side of the home screen from historical (non-pinned) timeline items. You can allow the user to toggle the value of this property with the TOGGLE_PINNED built-in menu item.
           type: boolean
         kind:
           default: mirror#timelineItem
@@ -3568,19 +3435,15 @@ components:
           $ref: "#/components/schemas/Location"
           description: The geographic location associated with this item.
         menuItems:
-          description: A list of menu items that will be presented to the user when this
-            item is selected in the timeline.
+          description: A list of menu items that will be presented to the user when this item is selected in the timeline.
           items:
             $ref: "#/components/schemas/MenuItem"
           type: array
         notification:
           $ref: "#/components/schemas/NotificationConfig"
-          description: Controls how notifications for this item are presented on the
-            device. If this is missing, no notification will be generated.
+          description: Controls how notifications for this item are presented on the device. If this is missing, no notification will be generated.
         pinScore:
-          description: "For pinned items, this determines the order in which the item is
-            displayed in the timeline, with a higher score appearing closer to
-            the clock. Note: setting this field is currently not supported."
+          description: "For pinned items, this determines the order in which the item is displayed in the timeline, with a higher score appearing closer to the clock. Note: setting this field is currently not supported."
           format: int32
           type: integer
         recipients:
@@ -3592,29 +3455,19 @@ components:
           description: A URL that can be used to retrieve this item.
           type: string
         sourceItemId:
-          description: Opaque string you can use to map a timeline item to data in your
-            own service.
+          description: Opaque string you can use to map a timeline item to data in your own service.
           type: string
         speakableText:
-          description: >-
-            The speakable version of the content of this item. Along with the
-            READ_ALOUD menu item, use this field to provide text that would be
-            clearer when read aloud, or to provide extended information to what
-            is displayed visually on Glass.
-
+          description: |-
+            The speakable version of the content of this item. Along with the READ_ALOUD menu item, use this field to provide text that would be clearer when read aloud, or to provide extended information to what is displayed visually on Glass.
 
             Glassware should also specify the speakableType field, which will be spoken before this text in cases where the additional context is useful, for example when the user requests that the item be read aloud following a notification.
           type: string
         speakableType:
-          description: >-
-            A speakable description of the type of this item. This will be
-            announced to the user prior to reading the content of the item in
-            cases where the additional context is useful, for example when the
-            user requests that the item be read aloud following a notification.
-
+          description: |-
+            A speakable description of the type of this item. This will be announced to the user prior to reading the content of the item in cases where the additional context is useful, for example when the user requests that the item be read aloud following a notification.
 
             This should be a short, simple noun phrase such as "Email", "Text message", or "Daily Planet News Update".
-
 
             Glassware are encouraged to populate this field for every timeline item, even if the item does not contain speakableText or text so that the user can learn the type of the item without looking at the screen.
           type: string
@@ -3625,14 +3478,12 @@ components:
           description: The title of this item.
           type: string
         updated:
-          description: The time at which this item was last modified, formatted according
-            to RFC 3339.
+          description: The time at which this item was last modified, formatted according to RFC 3339.
           format: date-time
           type: string
       type: object
     TimelineListResponse:
-      description: A list of timeline items. This is the response from the server to
-        GET requests on the timeline collection.
+      description: A list of timeline items. This is the response from the server to GET requests on the timeline collection.
       properties:
         items:
           description: Items in the timeline.
@@ -3644,38 +3495,28 @@ components:
           description: The type of resource. This is always mirror#timeline.
           type: string
         nextPageToken:
-          description: The next page token. Provide this as the pageToken parameter in the
-            request to retrieve the next page of results.
+          description: The next page token. Provide this as the pageToken parameter in the request to retrieve the next page of results.
           type: string
       type: object
     UserAction:
       description: Represents an action taken by the user that triggered a notification.
       properties:
         payload:
-          description: >-
+          description: |-
             An optional payload for the action.
-
 
             For actions of type CUSTOM, this is the ID of the custom menu item that was selected.
           type: string
         type:
-          description: >-
+          description: |-
             The type of action. The value of this can be:  
-
             - SHARE - the user shared an item. 
-
             - REPLY - the user replied to an item. 
-
             - REPLY_ALL - the user replied to all recipients of an item. 
-
             - CUSTOM - the user selected a custom menu item on the timeline item. 
-
             - DELETE - the user deleted the item. 
-
             - PIN - the user pinned the item. 
-
             - UNPIN - the user unpinned the item. 
-
             - LAUNCH - the user initiated a voice command.  In the future, additional types may be added. UserActions with unrecognized types should be ignored.
           type: string
       type: object

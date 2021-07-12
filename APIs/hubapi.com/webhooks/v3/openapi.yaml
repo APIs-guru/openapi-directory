@@ -2,10 +2,7 @@ openapi: 3.0.1
 servers:
   - url: https://api.hubapi.com/
 info:
-  description: Provides a way for apps to subscribe to certain change events in
-    HubSpot. Once configured, apps will receive event payloads containing
-    details about the changes at a specified target URL. There can only be one
-    target URL for receiving event notifications per app.
+  description: Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
   title: Webhooks API
   version: v3
   x-apisguru-categories:
@@ -26,9 +23,7 @@ tags:
 paths:
   "/webhooks/v3/{appId}/settings":
     delete:
-      description: Resets webhook target URL to empty, and max concurrency limit to
-        `0` for the given app. This will effectively pause all webhook
-        subscriptions until new settings are provided.
+      description: Resets webhook target URL to empty, and max concurrency limit to `0` for the given app. This will effectively pause all webhook subscriptions until new settings are provided.
       operationId: delete-/webhooks/v3/{appId}/settings_clear
       parameters:
         - description: The ID of the target app.
@@ -52,9 +47,7 @@ paths:
       tags:
         - Settings
     get:
-      description: Returns the current state of webhook settings for the given app.
-        These settings include the app's configured target URL and max
-        concurrency limit.
+      description: Returns the current state of webhook settings for the given app. These settings include the app's configured target URL and max concurrency limit.
       operationId: get-/webhooks/v3/{appId}/settings_getAll
       parameters:
         - description: The ID of the target app.
@@ -88,8 +81,7 @@ paths:
       tags:
         - Settings
     put:
-      description: Used to set the webhook target URL and max concurrency limit for
-        the given app.
+      description: Used to set the webhook target URL and max concurrency limit for the given app.
       operationId: put-/webhooks/v3/{appId}/settings_configure
       parameters:
         - description: The ID of the target app.
@@ -171,8 +163,7 @@ paths:
       tags:
         - Subscriptions
     post:
-      description: Creates a new webhook subscription for the given app. Each
-        subscription in an app must be unique.
+      description: Creates a new webhook subscription for the given app. Each subscription in an app must be unique.
       operationId: post-/webhooks/v3/{appId}/subscriptions_create
       parameters:
         - description: The ID of the target app.
@@ -266,8 +257,7 @@ paths:
                     context:
                       subscriptionIds:
                         - "4567"
-                    message: Failed to find subscriptions by id `4567`. Try again using a different
-                      subscriptionId.
+                    message: Failed to find subscriptions by id `4567`. Try again using a different subscriptionId.
                     status: error
                     subCategory: SubscriptionErrors.SUBSCRIPTION_IDS_NOT_FOUND
                 numErrors: 1
@@ -531,8 +521,7 @@ components:
               - scope2
           type: object
         correlationId:
-          description: A unique identifier for the request. Include this value with any
-            error reports or support tickets
+          description: A unique identifier for the request. Include this value with any error reports or support tickets
           example: aeb5f871-7f07-4993-9211-075dc63e7cbf
           format: uuid
           type: string
@@ -544,17 +533,14 @@ components:
         links:
           additionalProperties:
             type: string
-          description: A map of link names to associated URIs containing documentation
-            about the error or recommended remediation steps
+          description: A map of link names to associated URIs containing documentation about the error or recommended remediation steps
           type: object
         message:
-          description: A human readable message describing the error along with
-            remediation steps where appropriate
+          description: A human readable message describing the error along with remediation steps where appropriate
           example: An error occurred
           type: string
         subCategory:
-          description: A specific category that contains more specific detail about the
-            error
+          description: A specific category that contains more specific detail about the error
           type: string
       required:
         - category
@@ -653,12 +639,10 @@ components:
           description: The name of the field or parameter in which the error was found.
           type: string
         message:
-          description: A human readable message describing the error along with
-            remediation steps where appropriate
+          description: A human readable message describing the error along with remediation steps where appropriate
           type: string
         subCategory:
-          description: A specific category that contains more specific detail about the
-            error
+          description: A specific category that contains more specific detail about the error
           type: string
       required:
         - message
@@ -672,9 +656,7 @@ components:
           period: SECONDLY
       properties:
         targetUrl:
-          description: A publicly available URL for Hubspot to call where event payloads
-            will be delivered. See [link-so-some-doc](#) for details about the
-            format of these event payloads.
+          description: A publicly available URL for Hubspot to call where event payloads will be delivered. See [link-so-some-doc](#) for details about the format of these event payloads.
           type: string
         throttling:
           $ref: "#/components/schemas/ThrottlingSettings"
@@ -693,20 +675,16 @@ components:
         updatedAt: 2020-01-24T16:32:43Z
       properties:
         createdAt:
-          description: When this subscription was created. Formatted as milliseconds from
-            the [Unix epoch](#).
+          description: When this subscription was created. Formatted as milliseconds from the [Unix epoch](#).
           format: date-time
           type: string
         targetUrl:
-          description: A publicly available URL for Hubspot to call where event payloads
-            will be delivered. See [link-so-some-doc](#) for details about the
-            format of these event payloads.
+          description: A publicly available URL for Hubspot to call where event payloads will be delivered. See [link-so-some-doc](#) for details about the format of these event payloads.
           type: string
         throttling:
           $ref: "#/components/schemas/ThrottlingSettings"
         updatedAt:
-          description: When this subscription was last updated. Formatted as milliseconds
-            from the [Unix epoch](#).
+          description: When this subscription was last updated. Formatted as milliseconds from the [Unix epoch](#).
           format: date-time
           type: string
       required:
@@ -769,12 +747,10 @@ components:
       properties:
         active:
           default: false
-          description: Determines if the subscription is active or paused. Defaults to
-            false.
+          description: Determines if the subscription is active or paused. Defaults to false.
           type: boolean
         eventType:
-          description: Type of event to listen for. Can be one of `create`, `delete`,
-            `deletedForPrivacy`, or `propertyChange`.
+          description: Type of event to listen for. Can be one of `create`, `delete`, `deletedForPrivacy`, or `propertyChange`.
           enum:
             - contact.propertyChange
             - company.propertyChange
@@ -788,8 +764,7 @@ components:
             - deal.deletion
           type: string
         propertyName:
-          description: The internal name of the property to monitor for changes. Only
-            applies when `eventType` is `propertyChange`.
+          description: The internal name of the property to monitor for changes. Only applies when `eventType` is `propertyChange`.
           example: firstname
           type: string
       required:
@@ -822,13 +797,11 @@ components:
           description: Determines if the subscription is active or paused.
           type: boolean
         createdAt:
-          description: When this subscription was created. Formatted as milliseconds from
-            the [Unix epoch](#).
+          description: When this subscription was created. Formatted as milliseconds from the [Unix epoch](#).
           format: date-time
           type: string
         eventType:
-          description: Type of event to listen for. Can be one of `create`, `delete`,
-            `deletedForPrivacy`, or `propertyChange`.
+          description: Type of event to listen for. Can be one of `create`, `delete`, `deletedForPrivacy`, or `propertyChange`.
           enum:
             - contact.propertyChange
             - company.propertyChange
@@ -845,12 +818,10 @@ components:
           description: The unique ID of the subscription.
           type: string
         propertyName:
-          description: The internal name of the property being monitored for changes. Only
-            applies when `eventType` is `propertyChange`.
+          description: The internal name of the property being monitored for changes. Only applies when `eventType` is `propertyChange`.
           type: string
         updatedAt:
-          description: When this subscription was last updated. Formatted as milliseconds
-            from the [Unix epoch](#).
+          description: When this subscription was last updated. Formatted as milliseconds from the [Unix epoch](#).
           format: date-time
           type: string
       required:
@@ -863,13 +834,11 @@ components:
       description: Configuration details for webhook throttling.
       properties:
         maxConcurrentRequests:
-          description: The maximum number of HTTP requests HubSpot will attempt to make to
-            your app in a given time frame determined by `period`.
+          description: The maximum number of HTTP requests HubSpot will attempt to make to your app in a given time frame determined by `period`.
           format: int32
           type: integer
         period:
-          description: Time scale for this setting. Can be either `SECONDLY` (per second)
-            or `ROLLING_MINUTE` (per minute).
+          description: Time scale for this setting. Can be either `SECONDLY` (per second) or `ROLLING_MINUTE` (per minute).
           enum:
             - SECONDLY
             - ROLLING_MINUTE

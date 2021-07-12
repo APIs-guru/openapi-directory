@@ -55,19 +55,16 @@ components:
           description: Internal name of the event-type to trigger
           type: string
         objectId:
-          description: The object id that this event occurred on. Could be a contact id or
-            a visitor id.
+          description: The object id that this event occurred on. Could be a contact id or a visitor id.
           type: string
         occurredAt:
-          description: The time when this event occurred (if any). If this isn't set, the
-            current time will be used
+          description: The time when this event occurred (if any). If this isn't set, the current time will be used
           format: date-time
           type: string
         properties:
           additionalProperties:
             type: string
-          description: Map of properties for the event in the format property internal
-            name - property value
+          description: Map of properties for the event in the format property internal name - property value
           type: object
         utk:
           description: User token
@@ -101,8 +98,7 @@ components:
               - scope2
           type: object
         correlationId:
-          description: A unique identifier for the request. Include this value with any
-            error reports or support tickets
+          description: A unique identifier for the request. Include this value with any error reports or support tickets
           example: aeb5f871-7f07-4993-9211-075dc63e7cbf
           format: uuid
           type: string
@@ -114,17 +110,14 @@ components:
         links:
           additionalProperties:
             type: string
-          description: A map of link names to associated URIs containing documentation
-            about the error or recommended remediation steps
+          description: A map of link names to associated URIs containing documentation about the error or recommended remediation steps
           type: object
         message:
-          description: A human readable message describing the error along with
-            remediation steps where appropriate
+          description: A human readable message describing the error along with remediation steps where appropriate
           example: An error occurred
           type: string
         subCategory:
-          description: A specific category that contains more specific detail about the
-            error
+          description: A specific category that contains more specific detail about the error
           type: string
       required:
         - category
@@ -151,12 +144,10 @@ components:
           description: The name of the field or parameter in which the error was found.
           type: string
         message:
-          description: A human readable message describing the error along with
-            remediation steps where appropriate
+          description: A human readable message describing the error along with remediation steps where appropriate
           type: string
         subCategory:
-          description: A specific category that contains more specific detail about the
-            error
+          description: A specific category that contains more specific detail about the error
           type: string
       required:
         - message

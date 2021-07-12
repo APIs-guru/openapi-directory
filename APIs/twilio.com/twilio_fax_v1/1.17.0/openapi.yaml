@@ -31,36 +31,29 @@ paths:
       description: Retrieve a list of all faxes.
       operationId: ListFax
       parameters:
-        - description: Retrieve only those faxes sent from this phone number, specified in
-            [E.164](https://www.twilio.com/docs/glossary/what-e164) format.
+        - description: Retrieve only those faxes sent from this phone number, specified in [E.164](https://www.twilio.com/docs/glossary/what-e164) format.
           in: query
           name: From
           schema:
             type: string
-        - description: Retrieve only those faxes sent to this phone number, specified in
-            [E.164](https://www.twilio.com/docs/glossary/what-e164) format.
+        - description: Retrieve only those faxes sent to this phone number, specified in [E.164](https://www.twilio.com/docs/glossary/what-e164) format.
           in: query
           name: To
           schema:
             type: string
-        - description: Retrieve only those faxes with a `date_created` that is before or
-            equal to this value, specified in [ISO
-            8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+        - description: Retrieve only those faxes with a `date_created` that is before or equal to this value, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           in: query
           name: DateCreatedOnOrBefore
           schema:
             format: date-time
             type: string
-        - description: Retrieve only those faxes with a `date_created` that is later than
-            this value, specified in [ISO
-            8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+        - description: Retrieve only those faxes with a `date_created` that is later than this value, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           in: query
           name: DateCreatedAfter
           schema:
             format: date-time
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -114,60 +107,37 @@ paths:
             schema:
               properties:
                 From:
-                  description: The number the fax was sent from. Can be the phone number in
-                    [E.164](https://www.twilio.com/docs/glossary/what-e164)
-                    format or the SIP `from` value. The caller ID displayed to
-                    the recipient uses this value. If this is a phone number, it
-                    must be a Twilio number or a verified outgoing caller id
-                    from your account. If `to` is a SIP address, this can be any
-                    alphanumeric string (and also the characters `+`, `_`, `.`,
-                    and `-`), which will be used in the `from` header of the SIP
-                    request.
+                  description: The number the fax was sent from. Can be the phone number in [E.164](https://www.twilio.com/docs/glossary/what-e164) format or the SIP `from` value. The caller ID displayed to the recipient uses this value. If this is a phone number, it must be a Twilio number or a verified outgoing caller id from your account. If `to` is a SIP address, this can be any alphanumeric string (and also the characters `+`, `_`, `.`, and `-`), which will be used in the `from` header of the SIP request.
                   type: string
                 MediaUrl:
-                  description: The URL of the PDF that contains the fax. See our
-                    [security](https://www.twilio.com/docs/usage/security) page
-                    for information on how to ensure the request for your media
-                    comes from Twilio.
+                  description: The URL of the PDF that contains the fax. See our [security](https://www.twilio.com/docs/usage/security) page for information on how to ensure the request for your media comes from Twilio.
                   format: uri
                   type: string
                 Quality:
-                  description: "The [Fax Quality
-                    value](https://www.twilio.com/docs/fax/api/fax-resource#fax\
-                    -quality-values) that describes the fax quality. Can be:
-                    `standard`, `fine`, or `superfine` and defaults to `fine`."
+                  description: "The [Fax Quality value](https://www.twilio.com/docs/fax/api/fax-resource#fax-quality-values) that describes the fax quality. Can be: `standard`, `fine`, or `superfine` and defaults to `fine`."
                   enum:
                     - standard
                     - fine
                     - superfine
                   type: string
                 SipAuthPassword:
-                  description: The password to use with `sip_auth_username` to authenticate faxes
-                    sent to a SIP address.
+                  description: The password to use with `sip_auth_username` to authenticate faxes sent to a SIP address.
                   type: string
                 SipAuthUsername:
-                  description: The username to use with the `sip_auth_password` to authenticate
-                    faxes sent to a SIP address.
+                  description: The username to use with the `sip_auth_password` to authenticate faxes sent to a SIP address.
                   type: string
                 StatusCallback:
-                  description: The URL we should call using the `POST` method to send [status
-                    information](https://www.twilio.com/docs/fax/api/fax-resource#fax-status-callback)
-                    to your application when the status of the fax changes.
+                  description: The URL we should call using the `POST` method to send [status information](https://www.twilio.com/docs/fax/api/fax-resource#fax-status-callback) to your application when the status of the fax changes.
                   format: uri
                   type: string
                 StoreMedia:
-                  description: "Whether to store a copy of the sent media on our servers for later
-                    retrieval. Can be: `true` or `false` and the default is
-                    `true`."
+                  description: "Whether to store a copy of the sent media on our servers for later retrieval. Can be: `true` or `false` and the default is `true`."
                   type: boolean
                 To:
-                  description: The phone number to receive the fax in
-                    [E.164](https://www.twilio.com/docs/glossary/what-e164)
-                    format or the recipient's SIP URI.
+                  description: The phone number to receive the fax in [E.164](https://www.twilio.com/docs/glossary/what-e164) format or the recipient's SIP URI.
                   type: string
                 Ttl:
-                  description: How long in minutes from when the fax is initiated that we should
-                    try to send the fax.
+                  description: How long in minutes from when the fax is initiated that we should try to send the fax.
                   type: integer
               required:
                 - To
@@ -210,8 +180,7 @@ paths:
             minLength: 34
             pattern: ^FX[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -277,8 +246,7 @@ paths:
             minLength: 34
             pattern: ^FX[0-9a-fA-F]{32}$
             type: string
-        - description: The Twilio-provided string that uniquely identifies the FaxMedia
-            resource to delete.
+        - description: The Twilio-provided string that uniquely identifies the FaxMedia resource to delete.
           in: path
           name: Sid
           required: true
@@ -308,8 +276,7 @@ paths:
             minLength: 34
             pattern: ^FX[0-9a-fA-F]{32}$
             type: string
-        - description: The Twilio-provided string that uniquely identifies the FaxMedia
-            resource to fetch.
+        - description: The Twilio-provided string that uniquely identifies the FaxMedia resource to fetch.
           in: path
           name: Sid
           required: true
@@ -341,8 +308,7 @@ paths:
       description: Delete a specific fax and its associated media.
       operationId: DeleteFax
       parameters:
-        - description: The Twilio-provided string that uniquely identifies the Fax
-            resource to delete.
+        - description: The Twilio-provided string that uniquely identifies the Fax resource to delete.
           in: path
           name: Sid
           required: true
@@ -363,8 +329,7 @@ paths:
       description: Fetch a specific fax.
       operationId: FetchFax
       parameters:
-        - description: The Twilio-provided string that uniquely identifies the Fax
-            resource to fetch.
+        - description: The Twilio-provided string that uniquely identifies the Fax resource to fetch.
           in: path
           name: Sid
           required: true
@@ -388,8 +353,7 @@ paths:
       description: Update a specific fax.
       operationId: UpdateFax
       parameters:
-        - description: The Twilio-provided string that uniquely identifies the Fax
-            resource to update.
+        - description: The Twilio-provided string that uniquely identifies the Fax resource to update.
           in: path
           name: Sid
           required: true
@@ -404,10 +368,7 @@ paths:
             schema:
               properties:
                 Status:
-                  description: The new
-                    [status](https://www.twilio.com/docs/fax/api/fax-resource#fax-status-values)
-                    of the resource. Can be only `canceled`. This may fail if
-                    transmission has already started.
+                  description: The new [status](https://www.twilio.com/docs/fax/api/fax-resource#fax-status-values) of the resource. Can be only `canceled`. This may fail if transmission has already started.
                   enum:
                     - canceled
                   type: string
@@ -450,14 +411,12 @@ components:
           nullable: true
           type: string
         date_created:
-          description: The ISO 8601 formatted date and time in GMT when the resource was
-            created
+          description: The ISO 8601 formatted date and time in GMT when the resource was created
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 formatted date and time in GMT when the resource was
-            last updated
+          description: The ISO 8601 formatted date and time in GMT when the resource was last updated
           format: date-time
           nullable: true
           type: string
@@ -591,6 +550,5 @@ components:
       scheme: basic
       type: http
 x-maturity:
-  - description: PLEASE NOTE that this is a Beta product that is subject to change.
-      Use it with caution.
+  - description: PLEASE NOTE that this is a Beta product that is subject to change. Use it with caution.
     name: Beta

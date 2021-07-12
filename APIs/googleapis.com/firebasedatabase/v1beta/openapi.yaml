@@ -6,8 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: The Firebase Realtime Database Management API enables programmatic
-    provisioning and management of Realtime Database instances.
+  description: The Firebase Realtime Database Management API enables programmatic provisioning and management of Realtime Database instances.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -32,16 +31,10 @@ tags:
 paths:
   "/v1beta/{name}":
     delete:
-      description: Marks a DatabaseInstance to be deleted. The DatabaseInstance will
-        be purged within 30 days. The default database cannot be deleted. IDs
-        for deleted database instances may never be recovered or re-used. The
-        Database may only be deleted if it is already in a DISABLED state.
+      description: Marks a DatabaseInstance to be deleted. The DatabaseInstance will be purged within 30 days. The default database cannot be deleted. IDs for deleted database instances may never be recovered or re-used. The Database may only be deleted if it is already in a DISABLED state.
       operationId: firebasedatabase.projects.locations.instances.delete
       parameters:
-        - description: "The fully qualified resource name of the database instance, in the
-            form:
-            `projects/{project-number}/locations/{location-id}/instances/{datab\
-            ase-id}`"
+        - description: "The fully qualified resource name of the database instance, in the form: `projects/{project-number}/locations/{location-id}/instances/{database-id}`"
           in: path
           name: name
           required: true
@@ -69,14 +62,7 @@ paths:
       description: Gets the DatabaseInstance identified by the specified resource name.
       operationId: firebasedatabase.projects.locations.instances.get
       parameters:
-        - description: "The fully qualified resource name of the database instance, in the
-            form:
-            `projects/{project-number}/locations/{location-id}/instances/{datab\
-            ase-id}`. `database-id` is a globally unique identifier across all
-            parent collections. For convenience, this method allows you to
-            supply `-` as a wildcard character in place of specific collections
-            under `projects` and `locations`. The resulting wildcarding form of
-            the method is: `projects/-/locations/-/instances/{database-id}`."
+        - description: "The fully qualified resource name of the database instance, in the form: `projects/{project-number}/locations/{location-id}/instances/{database-id}`. `database-id` is a globally unique identifier across all parent collections. For convenience, this method allows you to supply `-` as a wildcard character in place of specific collections under `projects` and `locations`. The resulting wildcarding form of the method is: `projects/-/locations/-/instances/{database-id}`."
           in: path
           name: name
           required: true
@@ -134,15 +120,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Disables a DatabaseInstance. The database can be re-enabled later
-        using ReenableDatabaseInstance. When a database is disabled, all reads
-        and writes are denied, including view access in the Firebase console.
+      description: Disables a DatabaseInstance. The database can be re-enabled later using ReenableDatabaseInstance. When a database is disabled, all reads and writes are denied, including view access in the Firebase console.
       operationId: firebasedatabase.projects.locations.instances.disable
       parameters:
-        - description: "The fully qualified resource name of the database instance, in the
-            form:
-            `projects/{project-number}/locations/{location-id}/instances/{datab\
-            ase-id}`"
+        - description: "The fully qualified resource name of the database instance, in the form: `projects/{project-number}/locations/{location-id}/instances/{database-id}`"
           in: path
           name: name
           required: true
@@ -185,15 +166,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Enables a DatabaseInstance. The database must have been disabled
-        previously using DisableDatabaseInstance. The state of a successfully
-        reenabled DatabaseInstance is ACTIVE.
+      description: Enables a DatabaseInstance. The database must have been disabled previously using DisableDatabaseInstance. The state of a successfully reenabled DatabaseInstance is ACTIVE.
       operationId: firebasedatabase.projects.locations.instances.reenable
       parameters:
-        - description: "The fully qualified resource name of the database instance, in the
-            form:
-            `projects/{project-number}/locations/{location-id}/instances/{datab\
-            ase-id}`"
+        - description: "The fully qualified resource name of the database instance, in the form: `projects/{project-number}/locations/{location-id}/instances/{database-id}`"
           in: path
           name: name
           required: true
@@ -224,33 +200,21 @@ paths:
         - projects
   "/v1beta/{parent}/instances":
     get:
-      description: Lists each DatabaseInstance associated with the specified parent
-        project. The list items are returned in no particular order, but will be
-        a consistent view of the database instances when additional requests are
-        made with a `pageToken`. The resulting list contains instances in any
-        STATE. The list results may be stale by a few seconds. Use
-        GetDatabaseInstance for consistent reads.
+      description: Lists each DatabaseInstance associated with the specified parent project. The list items are returned in no particular order, but will be a consistent view of the database instances when additional requests are made with a `pageToken`. The resulting list contains instances in any STATE. The list results may be stale by a few seconds. Use GetDatabaseInstance for consistent reads.
       operationId: firebasedatabase.projects.locations.instances.list
       parameters:
-        - description: "The parent project for which to list database instances, in the
-            form: `projects/{project-number}/locations/{location-id}` To list
-            across all locations, use a parent in the form:
-            `projects/{project-number}/locations/-`"
+        - description: "The parent project for which to list database instances, in the form: `projects/{project-number}/locations/{location-id}` To list across all locations, use a parent in the form: `projects/{project-number}/locations/-`"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: The maximum number of database instances to return in the response.
-            The server may return fewer than this at its discretion. If no value
-            is specified (or too large a value is specified), then the server
-            will impose its own limit.
+        - description: The maximum number of database instances to return in the response. The server may return fewer than this at its discretion. If no value is specified (or too large a value is specified), then the server will impose its own limit.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Token returned from a previous call to `ListDatabaseInstances`
-            indicating where in the set of database instances to resume listing.
+        - description: Token returned from a previous call to `ListDatabaseInstances` indicating where in the set of database instances to resume listing.
           in: query
           name: pageToken
           schema:
@@ -294,17 +258,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Requests that a new DatabaseInstance be created. The state of a
-        successfully created DatabaseInstance is ACTIVE. Only available for
-        projects on the Blaze plan. Projects can be upgraded using the Cloud
-        Billing API
-        https://cloud.google.com/billing/reference/rest/v1/projects/updateBillingInfo.
-        Note that it might take a few minutes for billing enablement state to
-        propagate to Firebase systems.
+      description: Requests that a new DatabaseInstance be created. The state of a successfully created DatabaseInstance is ACTIVE. Only available for projects on the Blaze plan. Projects can be upgraded using the Cloud Billing API https://cloud.google.com/billing/reference/rest/v1/projects/updateBillingInfo. Note that it might take a few minutes for billing enablement state to propagate to Firebase systems.
       operationId: firebasedatabase.projects.locations.instances.create
       parameters:
-        - description: "The parent project for which to create a database instance, in the
-            form: `projects/{project-number}/locations/{location-id}`."
+        - description: "The parent project for which to create a database instance, in the form: `projects/{project-number}/locations/{location-id}`."
           in: path
           name: parent
           required: true
@@ -383,9 +340,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -403,9 +358,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -424,22 +377,16 @@ components:
         type: string
   schemas:
     DatabaseInstance:
-      description: "Representation of a Realtime Database instance. Details on
-        interacting with contents of a DatabaseInstance can be found at:
-        https://firebase.google.com/docs/database/rest/start."
+      description: "Representation of a Realtime Database instance. Details on interacting with contents of a DatabaseInstance can be found at: https://firebase.google.com/docs/database/rest/start."
       properties:
         databaseUrl:
           description: Immutable. The globally unique hostname of the database.
           type: string
         name:
-          description: "The fully qualified resource name of the database instance, in the
-            form:
-            `projects/{project-number}/locations/{location-id}/instances/{datab\
-            ase-id}`."
+          description: "The fully qualified resource name of the database instance, in the form: `projects/{project-number}/locations/{location-id}/instances/{database-id}`."
           type: string
         project:
-          description: "The resource name of the project this instance belongs to. For
-            example: `projects/{project-number}`."
+          description: "The resource name of the project this instance belongs to. For example: `projects/{project-number}`."
           type: string
         state:
           description: The database's lifecycle state. Read-only.
@@ -450,8 +397,7 @@ components:
             - DELETED
           type: string
         type:
-          description: The database instance type. On creation only USER_DATABASE is
-            allowed, which is also the default when omitted.
+          description: The database instance type. On creation only USER_DATABASE is allowed, which is also the default when omitted.
           enum:
             - DATABASE_INSTANCE_TYPE_UNSPECIFIED
             - DEFAULT_DATABASE
@@ -471,11 +417,7 @@ components:
             $ref: "#/components/schemas/DatabaseInstance"
           type: array
         nextPageToken:
-          description: If the result list is too large to fit in a single response, then a
-            token is returned. If the string is empty, then this response is the
-            last page of results. This token can be used in a subsequent call to
-            `ListDatabaseInstances` to find the next group of database
-            instances. Page tokens are short-lived and should not be persisted.
+          description: If the result list is too large to fit in a single response, then a token is returned. If the string is empty, then this response is the last page of results. This token can be used in a subsequent call to `ListDatabaseInstances` to find the next group of database instances. Page tokens are short-lived and should not be persisted.
           type: string
       type: object
     ReenableDatabaseInstanceRequest:

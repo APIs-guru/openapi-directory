@@ -6,9 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: The Chrome Management API is a suite of services that allows Chrome
-    administrators to view, manage and gain insights on their Chrome OS and
-    Chrome Browser devices.
+  description: The Chrome Management API is a suite of services that allows Chrome administrators to view, manage and gain insights on their Chrome OS and Chrome Browser devices.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -36,16 +34,13 @@ paths:
       description: Generate report of installed Chrome versions.
       operationId: chromemanagement.customers.reports.countChromeVersions
       parameters:
-        - description: Required. Customer id or "my_customer" to use the customer
-            associated to the account making the request.
+        - description: Required. Customer id or "my_customer" to use the customer associated to the account making the request.
           in: path
           name: customer
           required: true
           schema:
             type: string
-        - description: "Query string to filter results, AND-separated fields in EBNF
-            syntax. Note: OR operations are not supported in this filter.
-            Supported filter fields: * last_active_date"
+        - description: "Query string to filter results, AND-separated fields in EBNF syntax. Note: OR operations are not supported in this filter. Supported filter fields: * last_active_date"
           in: query
           name: filter
           schema:
@@ -96,25 +91,18 @@ paths:
       description: Generate report of app installations.
       operationId: chromemanagement.customers.reports.countInstalledApps
       parameters:
-        - description: Required. Customer id or "my_customer" to use the customer
-            associated to the account making the request.
+        - description: Required. Customer id or "my_customer" to use the customer associated to the account making the request.
           in: path
           name: customer
           required: true
           schema:
             type: string
-        - description: "Query string to filter results, AND-separated fields in EBNF
-            syntax. Note: OR operations are not supported in this filter.
-            Supported filter fields: * app_name * app_type * install_type *
-            number_of_permissions * total_install_count *
-            latest_profile_active_date * permission_name"
+        - description: "Query string to filter results, AND-separated fields in EBNF syntax. Note: OR operations are not supported in this filter. Supported filter fields: * app_name * app_type * install_type * number_of_permissions * total_install_count * latest_profile_active_date * permission_name"
           in: query
           name: filter
           schema:
             type: string
-        - description: "Field used to order results. Supported order by fields: * app_name
-            * app_type * install_type * number_of_permissions *
-            total_install_count"
+        - description: "Field used to order results. Supported order by fields: * app_name * app_type * install_type * number_of_permissions * total_install_count"
           in: query
           name: orderBy
           schema:
@@ -165,16 +153,13 @@ paths:
       description: Generate report of devices that have a specified app installed.
       operationId: chromemanagement.customers.reports.findInstalledAppDevices
       parameters:
-        - description: Required. Customer id or "my_customer" to use the customer
-            associated to the account making the request.
+        - description: Required. Customer id or "my_customer" to use the customer associated to the account making the request.
           in: path
           name: customer
           required: true
           schema:
             type: string
-        - description: Unique identifier of the app. For Chrome apps and extensions, the
-            32-character id (e.g. ehoadneljpdggcbbknedodolkkjodefl). For Android
-            apps, the package name (e.g. com.evernote).
+        - description: Unique identifier of the app. For Chrome apps and extensions, the 32-character id (e.g. ehoadneljpdggcbbknedodolkkjodefl). For Android apps, the package name (e.g. com.evernote).
           in: query
           name: appId
           schema:
@@ -191,15 +176,12 @@ paths:
               - HOSTED_APP
               - ANDROID_APP
             type: string
-        - description: "Query string to filter results, AND-separated fields in EBNF
-            syntax. Note: OR operations are not supported in this filter.
-            Supported filter fields: * last_active_date"
+        - description: "Query string to filter results, AND-separated fields in EBNF syntax. Note: OR operations are not supported in this filter. Supported filter fields: * last_active_date"
           in: query
           name: filter
           schema:
             type: string
-        - description: "Field used to order results. Supported order by fields: * machine
-            * device_id"
+        - description: "Field used to order results. Supported order by fields: * machine * device_id"
           in: query
           name: orderBy
           schema:
@@ -224,8 +206,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleChromeManagementV1FindInstalledAppDevicesResp\
-                  onse"
+                $ref: "#/components/schemas/GoogleChromeManagementV1FindInstalledAppDevicesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -286,9 +267,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -306,9 +285,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -402,8 +379,7 @@ components:
       description: Describes a device reporting Chrome browser information.
       properties:
         deviceId:
-          description: Output only. The ID of the device that reported this Chrome browser
-            information.
+          description: Output only. The ID of the device that reported this Chrome browser information.
           readOnly: true
           type: string
         machine:
@@ -415,8 +391,7 @@ components:
       description: Response containing a list of devices with queried app installed.
       properties:
         devices:
-          description: A list of devices which have the app installed. Sorted in ascending
-            alphabetical order on the Device.machine field.
+          description: A list of devices which have the app installed. Sorted in ascending alphabetical order on the Device.machine field.
           items:
             $ref: "#/components/schemas/GoogleChromeManagementV1Device"
           type: array
@@ -432,10 +407,7 @@ components:
       description: Describes an installed app.
       properties:
         appId:
-          description: Output only. Unique identifier of the app. For Chrome apps and
-            extensions, the 32-character id (e.g.
-            ehoadneljpdggcbbknedodolkkjodefl). For Android apps, the package
-            name (e.g. com.evernote).
+          description: Output only. Unique identifier of the app. For Chrome apps and extensions, the 32-character id (e.g. ehoadneljpdggcbbknedodolkkjodefl). For Android apps, the package name (e.g. com.evernote).
           readOnly: true
           type: string
         appInstallType:
@@ -509,9 +481,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/chrome.management.reports.readonly:
-              See reports about devices and Chrome browsers managed within your
-              organization
+            https://www.googleapis.com/auth/chrome.management.reports.readonly: See reports about devices and Chrome browsers managed within your organization
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -519,8 +489,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/chrome.management.reports.readonly:
-              See reports about devices and Chrome browsers managed within your
-              organization
+            https://www.googleapis.com/auth/chrome.management.reports.readonly: See reports about devices and Chrome browsers managed within your organization
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

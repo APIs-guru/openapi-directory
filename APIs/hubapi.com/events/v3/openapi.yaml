@@ -38,8 +38,7 @@ paths:
             format: date-time
             type: string
           style: form
-        - description: The type of object being selected. Valid values are hubspot named
-            object types (e.g. `contact`).
+        - description: The type of object being selected. Valid values are hubspot named object types (e.g. `contact`).
           explode: true
           in: query
           name: objectType
@@ -47,8 +46,7 @@ paths:
           schema:
             type: string
           style: form
-        - description: The id of the selected object. If not present, then the
-            `objectProperty` parameter is required.
+        - description: The id of the selected object. If not present, then the `objectProperty` parameter is required.
           explode: true
           in: query
           name: objectId
@@ -57,9 +55,7 @@ paths:
             format: int64
             type: integer
           style: form
-        - description: Limits the response to the specified event type.  For example
-            `&eventType=e_visited_page` returns only `e_visited_page`
-            events.  If not present all event types are returned.
+        - description: Limits the response to the specified event type.  For example `&eventType=e_visited_page` returns only `e_visited_page` events.  If not present all event types are returned.
           explode: true
           in: query
           name: eventType
@@ -67,8 +63,7 @@ paths:
           schema:
             type: string
           style: form
-        - description: An additional parameter that may be used to get the next `limit`
-            set of results.
+        - description: An additional parameter that may be used to get the next `limit` set of results.
           explode: true
           in: query
           name: after
@@ -92,9 +87,7 @@ paths:
             format: int32
             type: integer
           style: form
-        - description: Selects the sort field and order. Defaults to ascending, prefix
-            with `-` for descending order. `occurredAt` is the only field
-            supported for sorting.
+        - description: Selects the sort field and order. Defaults to ascending, prefix with `-` for descending order. `occurredAt` is the only field supported for sorting.
           explode: true
           in: query
           name: sort
@@ -165,8 +158,7 @@ components:
               - scope2
           type: object
         correlationId:
-          description: A unique identifier for the request. Include this value with any
-            error reports or support tickets
+          description: A unique identifier for the request. Include this value with any error reports or support tickets
           example: aeb5f871-7f07-4993-9211-075dc63e7cbf
           format: uuid
           type: string
@@ -178,17 +170,14 @@ components:
         links:
           additionalProperties:
             type: string
-          description: A map of link names to associated URIs containing documentation
-            about the error or recommended remediation steps
+          description: A map of link names to associated URIs containing documentation about the error or recommended remediation steps
           type: object
         message:
-          description: A human readable message describing the error along with
-            remediation steps where appropriate
+          description: A human readable message describing the error along with remediation steps where appropriate
           example: An error occurred
           type: string
         subCategory:
-          description: A specific category that contains more specific detail about the
-            error
+          description: A specific category that contains more specific detail about the error
           type: string
       required:
         - category
@@ -215,23 +204,18 @@ components:
           description: The name of the field or parameter in which the error was found.
           type: string
         message:
-          description: A human readable message describing the error along with
-            remediation steps where appropriate
+          description: A human readable message describing the error along with remediation steps where appropriate
           type: string
         subCategory:
-          description: A specific category that contains more specific detail about the
-            error
+          description: A specific category that contains more specific detail about the error
           type: string
       required:
         - message
       type: object
     ExternalUnifiedEvent:
-      description: >-
-        Used to represent any event. With this format, the `objectType` and
-        `eventType` values are stringified CRM types. Example object:
-
+      description: |-
+        Used to represent any event. With this format, the `objectType` and `eventType` values are stringified CRM types. Example object:
         <br/>
-
         ```
          {
               "objectType": "CONTACT",
@@ -254,9 +238,7 @@ components:
         ```
       properties:
         eventType:
-          description: The format of the `eventType` string is
-            `ae{appId}_{eventTypeLabel}`, `pe{portalId}_{eventTypeLabel}`, or
-            just `e_{eventTypeLabel}` for HubSpot events.
+          description: The format of the `eventType` string is `ae{appId}_{eventTypeLabel}`, `pe{portalId}_{eventTypeLabel}`, or just `e_{eventTypeLabel}` for HubSpot events.
           type: string
         id:
           description: A unique identifier for the event.

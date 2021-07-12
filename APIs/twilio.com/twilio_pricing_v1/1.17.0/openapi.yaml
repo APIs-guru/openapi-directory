@@ -31,8 +31,7 @@ paths:
       description: ""
       operationId: ListMessagingCountry
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -92,9 +91,7 @@ paths:
       description: ""
       operationId: FetchMessagingCountry
       parameters:
-        - description: The [ISO country
-            code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the
-            pricing information to fetch.
+        - description: The [ISO country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the pricing information to fetch.
           in: path
           name: IsoCountry
           required: true
@@ -126,8 +123,7 @@ paths:
       description: ""
       operationId: ListPhoneNumberCountry
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -185,9 +181,7 @@ paths:
       description: ""
       operationId: FetchPhoneNumberCountry
       parameters:
-        - description: The [ISO country
-            code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the
-            pricing information to fetch.
+        - description: The [ISO country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the pricing information to fetch.
           in: path
           name: IsoCountry
           required: true
@@ -198,8 +192,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/pricing.v1.phone_number.phone_number_country-instan\
-                  ce"
+                $ref: "#/components/schemas/pricing.v1.phone_number.phone_number_country-instance"
           description: OK
       security:
         - accountSid_authToken: []
@@ -218,8 +211,7 @@ paths:
       description: ""
       operationId: ListVoiceCountry
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -277,9 +269,7 @@ paths:
       description: ""
       operationId: FetchVoiceCountry
       parameters:
-        - description: The [ISO country
-            code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the
-            pricing information to fetch.
+        - description: The [ISO country code](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the pricing information to fetch.
           in: path
           name: IsoCountry
           required: true
@@ -414,8 +404,7 @@ components:
           nullable: true
           type: array
         price_unit:
-          description: The currency in which prices are measured, in ISO 4127 format (e.g.
-            usd, eur, jpy)
+          description: The currency in which prices are measured, in ISO 4127 format (e.g. usd, eur, jpy)
           nullable: true
           type: string
         url:
@@ -477,8 +466,7 @@ components:
           nullable: true
           type: array
         price_unit:
-          description: The currency in which prices are measured, in ISO 4127 format (e.g.
-            usd, eur, jpy)
+          description: The currency in which prices are measured, in ISO 4127 format (e.g. usd, eur, jpy)
           nullable: true
           type: string
         url:
@@ -557,8 +545,7 @@ components:
           nullable: true
           type: array
         price_unit:
-          description: The currency in which prices are measured, in ISO 4127 format (e.g.
-            usd, eur, jpy)
+          description: The currency in which prices are measured, in ISO 4127 format (e.g. usd, eur, jpy)
           nullable: true
           type: string
         url:
@@ -602,8 +589,7 @@ components:
               type: number
           type: object
         price_unit:
-          description: The currency in which prices are measured, in ISO 4127 format (e.g.
-            usd, eur, jpy)
+          description: The currency in which prices are measured, in ISO 4127 format (e.g. usd, eur, jpy)
           nullable: true
           type: string
         url:

@@ -360,15 +360,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/IdentitytoolkitRelyingpartySendVerificationCodeRequ\
-                est"
+              $ref: "#/components/schemas/IdentitytoolkitRelyingpartySendVerificationCodeRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/IdentitytoolkitRelyingpartySendVerificationCodeResp\
-                  onse"
+                $ref: "#/components/schemas/IdentitytoolkitRelyingpartySendVerificationCodeResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -639,8 +637,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Verifies ownership of a phone number and creates/updates the user
-        account accordingly.
+      description: Verifies ownership of a phone number and creates/updates the user account accordingly.
       operationId: identitytoolkit.relyingparty.verifyPhoneNumber
       requestBody:
         content:
@@ -652,8 +649,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/IdentitytoolkitRelyingpartyVerifyPhoneNumberRespons\
-                  e"
+                $ref: "#/components/schemas/IdentitytoolkitRelyingpartyVerifyPhoneNumberResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -679,9 +675,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -699,8 +693,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: An opaque string that represents a user for quota purposes. Must
-        not exceed 40 characters.
+      description: An opaque string that represents a user for quota purposes. Must not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -740,8 +733,7 @@ components:
           description: Whether the user is registered if the identifier is an email.
           type: boolean
         sessionId:
-          description: Session ID which should be passed in the following verifyAssertion
-            request.
+          description: Session ID which should be passed in the following verifyAssertion request.
           type: string
         signinMethods:
           description: All sign-in methods this user has used.
@@ -765,8 +757,7 @@ components:
           description: The fixed string "identitytoolkit#DownloadAccountResponse".
           type: string
         nextPageToken:
-          description: The next page token. To be used in a subsequent request to return
-            the next page of results.
+          description: The next page token. To be used in a subsequent request to return the next page of results.
           type: string
         users:
           description: The user accounts data.
@@ -837,8 +828,7 @@ components:
           type: array
       type: object
     GetOobConfirmationCodeResponse:
-      description: Response of getting a code for user confirmation (reset password,
-        change email etc.).
+      description: Response of getting a code for user confirmation (reset password, change email etc.).
       properties:
         email:
           description: The email address that the email is sent to.
@@ -862,44 +852,35 @@ components:
           description: Site key registered at recaptcha.
           type: string
         recaptchaStoken:
-          description: The stoken field for the recaptcha widget, used to request captcha
-            challenge.
+          description: The stoken field for the recaptcha widget, used to request captcha challenge.
           type: string
       type: object
     IdentitytoolkitRelyingpartyCreateAuthUriRequest:
       description: Request to get the IDP authentication URL.
       properties:
         appId:
-          description: The app ID of the mobile app, base64(CERT_SHA1):PACKAGE_NAME for
-            Android, BUNDLE_ID for iOS.
+          description: The app ID of the mobile app, base64(CERT_SHA1):PACKAGE_NAME for Android, BUNDLE_ID for iOS.
           type: string
         authFlowType:
-          description: Explicitly specify the auth flow type. Currently only support
-            "CODE_FLOW" type. The field is only used for Google provider.
+          description: Explicitly specify the auth flow type. Currently only support "CODE_FLOW" type. The field is only used for Google provider.
           type: string
         clientId:
           description: The relying party OAuth client ID.
           type: string
         context:
-          description: The opaque value used by the client to maintain context info
-            between the authentication request and the IDP callback.
+          description: The opaque value used by the client to maintain context info between the authentication request and the IDP callback.
           type: string
         continueUri:
-          description: The URI to which the IDP redirects the user after the federated
-            login flow.
+          description: The URI to which the IDP redirects the user after the federated login flow.
           type: string
         customParameter:
           additionalProperties:
             description: The customized query parameter.
             type: string
-          description: "The query parameter that client can customize by themselves in
-            auth url. The following parameters are reserved for server so that
-            they cannot be customized by clients: client_id, response_type,
-            scope, redirect_uri, state, oauth_token."
+          description: "The query parameter that client can customize by themselves in auth url. The following parameters are reserved for server so that they cannot be customized by clients: client_id, response_type, scope, redirect_uri, state, oauth_token."
           type: object
         hostedDomain:
-          description: The hosted domain to restrict sign-in to accounts at that domain
-            for Google Apps hosted accounts.
+          description: The hosted domain to restrict sign-in to accounts at that domain for Google Apps hosted accounts.
           type: string
         identifier:
           description: The email or federated ID of the user.
@@ -908,29 +889,22 @@ components:
           description: The developer's consumer key for OpenId OAuth Extension
           type: string
         oauthScope:
-          description: Additional oauth scopes, beyond the basid user profile, that the
-            user would be prompted to grant
+          description: Additional oauth scopes, beyond the basid user profile, that the user would be prompted to grant
           type: string
         openidRealm:
-          description: Optional realm for OpenID protocol. The sub string
-            "scheme://domain:port" of the param "continueUri" is used if this is
-            not set.
+          description: Optional realm for OpenID protocol. The sub string "scheme://domain:port" of the param "continueUri" is used if this is not set.
           type: string
         otaApp:
           description: The native app package for OTA installation.
           type: string
         providerId:
-          description: The IdP ID. For white listed IdPs it's a short domain name e.g.
-            google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs
-            it's the OP identifier.
+          description: The IdP ID. For white listed IdPs it's a short domain name e.g. google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it's the OP identifier.
           type: string
         sessionId:
           description: The session_id passed by client.
           type: string
         tenantId:
-          description: For multi-tenant use cases, in order to construct sign-in URL with
-            the correct IDP parameters, Firebear needs to know which Tenant to
-            retrieve IDP configs from.
+          description: For multi-tenant use cases, in order to construct sign-in URL with the correct IDP parameters, Firebear needs to know which Tenant to retrieve IDP configs from.
           type: string
         tenantProjectNumber:
           description: Tenant project number to be used for idp discovery.
@@ -941,8 +915,7 @@ components:
       description: Request to delete account.
       properties:
         delegatedProjectNumber:
-          description: GCP project number of the requesting delegated app. Currently only
-            intended for Firebase V1 migration.
+          description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
           format: int64
           type: string
         idToken:
@@ -956,8 +929,7 @@ components:
       description: Request to download user account in batch.
       properties:
         delegatedProjectNumber:
-          description: GCP project number of the requesting delegated app. Currently only
-            intended for Firebase V1 migration.
+          description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
           format: int64
           type: string
         maxResults:
@@ -965,12 +937,10 @@ components:
           format: uint32
           type: integer
         nextPageToken:
-          description: The token for the next page. This should be taken from the previous
-            response.
+          description: The token for the next page. This should be taken from the previous response.
           type: string
         targetProjectId:
-          description: Specify which project (field value is actually project id) to
-            operate. Only used when provided credential.
+          description: Specify which project (field value is actually project id) to operate. Only used when provided credential.
           type: string
       type: object
     IdentitytoolkitRelyingpartyEmailLinkSigninRequest:
@@ -990,8 +960,7 @@ components:
       description: Request to get the account information.
       properties:
         delegatedProjectNumber:
-          description: GCP project number of the requesting delegated app. Currently only
-            intended for Firebase V1 migration.
+          description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
           format: int64
           type: string
         email:
@@ -1117,8 +1086,7 @@ components:
           description: The custom attributes to be set in the user's id token.
           type: string
         delegatedProjectNumber:
-          description: GCP project number of the requesting delegated app. Currently only
-            intended for Firebase V1 migration.
+          description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
           format: int64
           type: string
         deleteAttribute:
@@ -1174,8 +1142,7 @@ components:
             type: string
           type: array
         returnSecureToken:
-          description: Whether return sts id token and refresh token instead of gitkit
-            token.
+          description: Whether return sts id token and refresh token instead of gitkit token.
           type: boolean
         upgradeToFederatedLogin:
           description: Mark the user to upgrade to federated login.
@@ -1203,8 +1170,7 @@ components:
           $ref: "#/components/schemas/EmailTemplate"
           description: Change email template.
         delegatedProjectNumber:
-          description: GCP project number of the requesting delegated app. Currently only
-            intended for Firebase V1 migration.
+          description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
           format: int64
           type: string
         enableAnonymousUser:
@@ -1253,8 +1219,7 @@ components:
           type: string
       type: object
     IdentitytoolkitRelyingpartySignupNewUserRequest:
-      description: Request to signup new user, create anonymous user or anonymous user
-        reauth.
+      description: Request to signup new user, create anonymous user or anonymous user reauth.
       properties:
         captchaChallenge:
           description: The captcha challenge.
@@ -1272,8 +1237,7 @@ components:
           description: The email of the user.
           type: string
         emailVerified:
-          description: Mark the email as verified or not. Only can be used by service
-            account.
+          description: Mark the email as verified or not. Only can be used by service account.
           type: boolean
         idToken:
           description: The GITKit token of the authenticated user.
@@ -1294,9 +1258,7 @@ components:
           description: The photo url of the user.
           type: string
         tenantId:
-          description: For multi-tenant use cases, in order to construct sign-in URL with
-            the correct IDP parameters, Firebear needs to know which Tenant to
-            retrieve IDP configs from.
+          description: For multi-tenant use cases, in order to construct sign-in URL with the correct IDP parameters, Firebear needs to know which Tenant to retrieve IDP configs from.
           type: string
         tenantProjectNumber:
           description: Tenant project number to be used for idp discovery.
@@ -1317,8 +1279,7 @@ components:
           format: int32
           type: integer
         delegatedProjectNumber:
-          description: GCP project number of the requesting delegated app. Currently only
-            intended for Firebase V1 migration.
+          description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
           format: int64
           type: string
         dkLen:
@@ -1343,16 +1304,14 @@ components:
           format: byte
           type: string
         sanityCheck:
-          description: If true, backend will do sanity check(including duplicate email and
-            federated id) when uploading account.
+          description: If true, backend will do sanity check(including duplicate email and federated id) when uploading account.
           type: boolean
         signerKey:
           description: The key for to hash the password.
           format: byte
           type: string
         targetProjectId:
-          description: Specify which project (field value is actually project id) to
-            operate. Only used when provided credential.
+          description: Specify which project (field value is actually project id) to operate. Only used when provided credential.
           type: string
         users:
           description: The account info to be stored.
@@ -1364,13 +1323,10 @@ components:
       description: Request to verify the IDP assertion.
       properties:
         autoCreate:
-          description: When it's true, automatically creates a new account if the user
-            doesn't exist. When it's false, allows existing user to sign in
-            normally and throws exception if the user doesn't exist.
+          description: When it's true, automatically creates a new account if the user doesn't exist. When it's false, allows existing user to sign in normally and throws exception if the user doesn't exist.
           type: boolean
         delegatedProjectNumber:
-          description: GCP project number of the requesting delegated app. Currently only
-            intended for Firebase V1 migration.
+          description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
           format: int64
           type: string
         idToken:
@@ -1380,35 +1336,28 @@ components:
           description: Instance id token of the app.
           type: string
         pendingIdToken:
-          description: The GITKit token for the non-trusted IDP pending to be confirmed by
-            the user.
+          description: The GITKit token for the non-trusted IDP pending to be confirmed by the user.
           type: string
         postBody:
           description: The post body if the request is a HTTP POST.
           type: string
         requestUri:
-          description: The URI to which the IDP redirects the user back. It may contain
-            federated login result params added by the IDP.
+          description: The URI to which the IDP redirects the user back. It may contain federated login result params added by the IDP.
           type: string
         returnIdpCredential:
-          description: Whether return 200 and IDP credential rather than throw exception
-            when federated id is already linked.
+          description: Whether return 200 and IDP credential rather than throw exception when federated id is already linked.
           type: boolean
         returnRefreshToken:
           description: Whether to return refresh tokens.
           type: boolean
         returnSecureToken:
-          description: Whether return sts id token and refresh token instead of gitkit
-            token.
+          description: Whether return sts id token and refresh token instead of gitkit token.
           type: boolean
         sessionId:
-          description: Session ID, which should match the one in previous createAuthUri
-            request.
+          description: Session ID, which should match the one in previous createAuthUri request.
           type: string
         tenantId:
-          description: For multi-tenant use cases, in order to construct sign-in URL with
-            the correct IDP parameters, Firebear needs to know which Tenant to
-            retrieve IDP configs from.
+          description: For multi-tenant use cases, in order to construct sign-in URL with the correct IDP parameters, Firebear needs to know which Tenant to retrieve IDP configs from.
           type: string
         tenantProjectNumber:
           description: Tenant project number to be used for idp discovery.
@@ -1419,16 +1368,14 @@ components:
       description: Request to verify a custom token
       properties:
         delegatedProjectNumber:
-          description: GCP project number of the requesting delegated app. Currently only
-            intended for Firebase V1 migration.
+          description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
           format: int64
           type: string
         instanceId:
           description: Instance id token of the app.
           type: string
         returnSecureToken:
-          description: Whether return sts id token and refresh token instead of gitkit
-            token.
+          description: Whether return sts id token and refresh token instead of gitkit token.
           type: boolean
         token:
           description: The custom token to verify
@@ -1444,8 +1391,7 @@ components:
           description: Response to the captcha.
           type: string
         delegatedProjectNumber:
-          description: GCP project number of the requesting delegated app. Currently only
-            intended for Firebase V1 migration.
+          description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
           format: int64
           type: string
         email:
@@ -1461,17 +1407,13 @@ components:
           description: The password inputed by the user.
           type: string
         pendingIdToken:
-          description: The GITKit token for the non-trusted IDP, which is to be confirmed
-            by the user.
+          description: The GITKit token for the non-trusted IDP, which is to be confirmed by the user.
           type: string
         returnSecureToken:
-          description: Whether return sts id token and refresh token instead of gitkit
-            token.
+          description: Whether return sts id token and refresh token instead of gitkit token.
           type: boolean
         tenantId:
-          description: For multi-tenant use cases, in order to construct sign-in URL with
-            the correct IDP parameters, Firebear needs to know which Tenant to
-            retrieve IDP configs from.
+          description: For multi-tenant use cases, in order to construct sign-in URL with the correct IDP parameters, Firebear needs to know which Tenant to retrieve IDP configs from.
           type: string
         tenantProjectNumber:
           description: Tenant project number to be used for idp discovery.
@@ -1490,8 +1432,7 @@ components:
         phoneNumber:
           type: string
         sessionInfo:
-          description: The session info previously returned by
-            IdentityToolkit-SendVerificationCode.
+          description: The session info previously returned by IdentityToolkit-SendVerificationCode.
           type: string
         temporaryProof:
           type: string
@@ -1535,8 +1476,7 @@ components:
           description: Whether this IDP is enabled.
           type: boolean
         experimentPercent:
-          description: Percent of users who will be prompted/redirected federated login
-            for this IDP.
+          description: Percent of users who will be prompted/redirected federated login for this IDP.
           format: int32
           type: integer
         provider:
@@ -1552,24 +1492,19 @@ components:
           type: array
       type: object
     Relyingparty:
-      description: Request of getting a code for user confirmation (reset password,
-        change email etc.)
+      description: Request of getting a code for user confirmation (reset password, change email etc.)
       properties:
         androidInstallApp:
-          description: whether or not to install the android app on the device where the
-            link is opened
+          description: whether or not to install the android app on the device where the link is opened
           type: boolean
         androidMinimumVersion:
-          description: minimum version of the app. if the version on the device is lower
-            than this version then the user is taken to the play store to
-            upgrade the app
+          description: minimum version of the app. if the version on the device is lower than this version then the user is taken to the play store to upgrade the app
           type: string
         androidPackageName:
           description: android package name of the android app to handle the action code
           type: string
         canHandleCodeInApp:
-          description: whether or not the app can handle the oob code without first going
-            to web
+          description: whether or not the app can handle the oob code without first going to web
           type: boolean
         captchaResp:
           description: The recaptcha response from the user.
@@ -1610,8 +1545,7 @@ components:
       description: Response of resetting the password.
       properties:
         email:
-          description: The user's email. If the out-of-band code is for email recovery,
-            the user's original email.
+          description: The user's email. If the out-of-band code is for email recovery, the user's original email.
           type: string
         kind:
           default: identitytoolkit#ResetPasswordResponse
@@ -1637,8 +1571,7 @@ components:
           description: If email has been verified.
           type: boolean
         expiresIn:
-          description: If idToken is STS id token, then this field will be expiration time
-            of STS id token in seconds.
+          description: If idToken is STS id token, then this field will be expiration time of STS id token in seconds.
           format: int64
           type: string
         idToken:
@@ -1675,9 +1608,7 @@ components:
                 description: The user's photo url at the IDP.
                 type: string
               providerId:
-                description: The IdP ID. For whitelisted IdPs it's a short domain name, e.g.,
-                  google.com, aol.com, live.net and yahoo.com. For other OpenID
-                  IdPs it's the OP identifier.
+                description: The IdP ID. For whitelisted IdPs it's a short domain name, e.g., google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it's the OP identifier.
                 type: string
             type: object
           type: array
@@ -1686,8 +1617,7 @@ components:
           type: string
       type: object
     SignupNewUserResponse:
-      description: Response of signing up new user, creating anonymous user or
-        anonymous user reauth.
+      description: Response of signing up new user, creating anonymous user or anonymous user reauth.
       properties:
         displayName:
           description: The name of the user.
@@ -1696,8 +1626,7 @@ components:
           description: The email of the user.
           type: string
         expiresIn:
-          description: If idToken is STS id token, then this field will be expiration time
-            of STS id token in seconds.
+          description: If idToken is STS id token, then this field will be expiration time of STS id token in seconds.
           format: int64
           type: string
         idToken:
@@ -1801,9 +1730,7 @@ components:
                 description: The user's photo url at the IDP.
                 type: string
               providerId:
-                description: The IdP ID. For white listed IdPs it's a short domain name, e.g.,
-                  google.com, aol.com, live.net and yahoo.com. For other OpenID
-                  IdPs it's the OP identifier.
+                description: The IdP ID. For white listed IdPs it's a short domain name, e.g., google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it's the OP identifier.
                 type: string
               rawId:
                 description: User's raw identifier directly returned from IDP.
@@ -1845,8 +1772,7 @@ components:
           description: The custom scheme used by mobile app.
           type: string
         context:
-          description: The opaque value used by the client to maintain context info
-            between the authentication request and the IDP callback.
+          description: The opaque value used by the client to maintain context info between the authentication request and the IDP callback.
           type: string
         dateOfBirth:
           description: The birth date of the IdP account.
@@ -1855,22 +1781,19 @@ components:
           description: The display name of the user.
           type: string
         email:
-          description: "The email returned by the IdP. NOTE: The federated login user may
-            not own the email."
+          description: "The email returned by the IdP. NOTE: The federated login user may not own the email."
           type: string
         emailRecycled:
           description: It's true if the email is recycled.
           type: boolean
         emailVerified:
-          description: The value is true if the IDP is also the email provider. It means
-            the user owns the email.
+          description: The value is true if the IDP is also the email provider. It means the user owns the email.
           type: boolean
         errorMessage:
           description: Client error code.
           type: string
         expiresIn:
-          description: If idToken is STS id token, then this field will be expiration time
-            of STS id token in seconds.
+          description: If idToken is STS id token, then this field will be expiration time of STS id token in seconds.
           format: int64
           type: string
         federatedId:
@@ -1886,9 +1809,7 @@ components:
           description: The ID token.
           type: string
         inputEmail:
-          description: It's the identifier param in the createAuthUri request if the
-            identifier is an email. It can be used to check whether the user
-            input email is different from the asserted email.
+          description: It's the identifier param in the createAuthUri request if the identifier is an email. It can be used to check whether the user input email is different from the asserted email.
           type: string
         isNewUser:
           description: True if it's a new user sign-in, false if it's a returning user.
@@ -1904,16 +1825,13 @@ components:
           description: The last name of the user.
           type: string
         localId:
-          description: The RP local ID if it's already been mapped to the IdP account
-            identified by the federated ID.
+          description: The RP local ID if it's already been mapped to the IdP account identified by the federated ID.
           type: string
         needConfirmation:
-          description: Whether the assertion is from a non-trusted IDP and need account
-            linking confirmation.
+          description: Whether the assertion is from a non-trusted IDP and need account linking confirmation.
           type: boolean
         needEmail:
-          description: Whether need client to supply email to complete the federated login
-            flow.
+          description: Whether need client to supply email to complete the federated login flow.
           type: boolean
         nickName:
           description: The nick name of the user.
@@ -1941,19 +1859,13 @@ components:
           description: The OAuth1 access token secret.
           type: string
         originalEmail:
-          description: The original email stored in the mapping storage. It's returned
-            when the federated ID is associated to a different email.
+          description: The original email stored in the mapping storage. It's returned when the federated ID is associated to a different email.
           type: string
         photoUrl:
           description: The URI of the public accessible profiel picture.
           type: string
         providerId:
-          description: The IdP ID. For white listed IdPs it's a short domain name e.g.
-            google.com, aol.com, live.net and yahoo.com. If the "providerId"
-            param is set to OpenID OP identifer other than the whilte listed
-            IdPs the OP identifier is returned. If the "identifier" param is
-            federated ID in the createAuthUri request. The domain part of the
-            federated ID is returned.
+          description: The IdP ID. For white listed IdPs it's a short domain name e.g. google.com, aol.com, live.net and yahoo.com. If the "providerId" param is set to OpenID OP identifer other than the whilte listed IdPs the OP identifier is returned. If the "identifier" param is federated ID in the createAuthUri request. The domain part of the federated ID is returned.
           type: string
         rawUserInfo:
           description: Raw IDP-returned user info.
@@ -1968,8 +1880,7 @@ components:
           description: The timezone of the user.
           type: string
         verifiedProvider:
-          description: When action is 'map', contains the idps which can be used for
-            confirmation.
+          description: When action is 'map', contains the idps which can be used for confirmation.
           items:
             type: string
           type: array
@@ -1978,8 +1889,7 @@ components:
       description: Response from verifying a custom token
       properties:
         expiresIn:
-          description: If idToken is STS id token, then this field will be expiration time
-            of STS id token in seconds.
+          description: If idToken is STS id token, then this field will be expiration time of STS id token in seconds.
           format: int64
           type: string
         idToken:
@@ -2003,12 +1913,10 @@ components:
           description: The name of the user.
           type: string
         email:
-          description: "The email returned by the IdP. NOTE: The federated login user may
-            not own the email."
+          description: "The email returned by the IdP. NOTE: The federated login user may not own the email."
           type: string
         expiresIn:
-          description: If idToken is STS id token, then this field will be expiration time
-            of STS id token in seconds.
+          description: If idToken is STS id token, then this field will be expiration time of STS id token in seconds.
           format: int64
           type: string
         idToken:
@@ -2019,8 +1927,7 @@ components:
           description: The fixed string "identitytoolkit#VerifyPasswordResponse".
           type: string
         localId:
-          description: The RP local ID if it's already been mapped to the IdP account
-            identified by the federated ID.
+          description: The RP local ID if it's already been mapped to the IdP account identified by the federated ID.
           type: string
         oauthAccessToken:
           description: The OAuth2 access token.

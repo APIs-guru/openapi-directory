@@ -26,14 +26,12 @@ info:
   x-serviceName: twilio_serverless_v1
 paths:
   /v1/Services:
-    description: The top-level resource for a Serverless application, which serves
-      as a container for the application environments.
+    description: The top-level resource for a Serverless application, which serves as a container for the application environments.
     get:
       description: Retrieve a list of all Services.
       operationId: ListService
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -87,22 +85,16 @@ paths:
             schema:
               properties:
                 FriendlyName:
-                  description: A descriptive string that you create to describe the Service
-                    resource. It can be a maximum of 255 characters.
+                  description: A descriptive string that you create to describe the Service resource. It can be a maximum of 255 characters.
                   type: string
                 IncludeCredentials:
-                  description: Whether to inject Account credentials into a function invocation
-                    context. The default value is `true`.
+                  description: Whether to inject Account credentials into a function invocation context. The default value is `true`.
                   type: boolean
                 UiEditable:
-                  description: Whether the Service's properties and subresources can be edited via
-                    the UI. The default value is `false`.
+                  description: Whether the Service's properties and subresources can be edited via the UI. The default value is `false`.
                   type: boolean
                 UniqueName:
-                  description: A user-defined string that uniquely identifies the Service
-                    resource. It can be used as an alternative to the `sid` in
-                    the URL path to address the Service resource. This value
-                    must be 50 characters or less in length and be unique.
+                  description: A user-defined string that uniquely identifies the Service resource. It can be used as an alternative to the `sid` in the URL path to address the Service resource. This value must be 50 characters or less in length and be unique.
                   type: string
               required:
                 - UniqueName
@@ -129,8 +121,7 @@ paths:
         - friendly_name
       pathType: list
   "/v1/Services/{ServiceSid}/Assets":
-    description: A wrapper that represents a static file and groups the different
-      Versions of the static file.
+    description: A wrapper that represents a static file and groups the different Versions of the static file.
     get:
       description: Retrieve a list of all Assets.
       operationId: ListAsset
@@ -141,8 +132,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -203,8 +193,7 @@ paths:
             schema:
               properties:
                 FriendlyName:
-                  description: A descriptive string that you create to describe the Asset
-                    resource. It can be a maximum of 255 characters.
+                  description: A descriptive string that you create to describe the Asset resource. It can be a maximum of 255 characters.
                   type: string
               required:
                 - FriendlyName
@@ -241,8 +230,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The SID of the Asset resource that is the parent of the Asset
-            Version resources to read.
+        - description: The SID of the Asset resource that is the parent of the Asset Version resources to read.
           in: path
           name: AssetSid
           required: true
@@ -251,8 +239,7 @@ paths:
             minLength: 34
             pattern: ^ZH[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -318,8 +305,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The SID of the Asset resource that is the parent of the Asset
-            Version resource to fetch.
+        - description: The SID of the Asset resource that is the parent of the Asset Version resource to fetch.
           in: path
           name: AssetSid
           required: true
@@ -384,8 +370,7 @@ paths:
         - accountSid_authToken: []
       x-maturity:
         - Beta
-    description: A wrapper that represents a static file and groups the different
-      Versions of the static file.
+    description: A wrapper that represents a static file and groups the different Versions of the static file.
     get:
       description: Retrieve a specific Asset resource.
       operationId: FetchAsset
@@ -441,8 +426,7 @@ paths:
             schema:
               properties:
                 FriendlyName:
-                  description: A descriptive string that you create to describe the Asset
-                    resource. It can be a maximum of 255 characters.
+                  description: A descriptive string that you create to describe the Asset resource. It can be a maximum of 255 characters.
                   type: string
               required:
                 - FriendlyName
@@ -468,8 +452,7 @@ paths:
         - date_created
       pathType: instance
   "/v1/Services/{ServiceSid}/Builds":
-    description: A collection of Function Versions, Asset Versions, Dependencies,
-      and a Runtime that form a deployable unit.
+    description: A collection of Function Versions, Asset Versions, Dependencies, and a Runtime that form a deployable unit.
     get:
       description: Retrieve a list of all Builds.
       operationId: ListBuild
@@ -480,8 +463,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -527,8 +509,7 @@ paths:
       x-maturity:
         - Beta
     post:
-      description: Create a new Build resource. At least one function version or asset
-        version is required.
+      description: Create a new Build resource. At least one function version or asset version is required.
       operationId: CreateBuild
       parameters:
         - description: The SID of the Service to create the Build resource under.
@@ -551,13 +532,10 @@ paths:
                     type: string
                   type: array
                 Dependencies:
-                  description: A list of objects that describe the Dependencies included in the
-                    Build. Each object contains the `name` and `version` of the
-                    dependency.
+                  description: A list of objects that describe the Dependencies included in the Build. Each object contains the `name` and `version` of the dependency.
                   type: string
                 FunctionVersions:
-                  description: The list of the Function Version resource SIDs to include in the
-                    Build.
+                  description: The list of the Function Version resource SIDs to include in the Build.
                   items:
                     maxLength: 34
                     minLength: 34
@@ -565,8 +543,7 @@ paths:
                     type: string
                   type: array
                 Runtime:
-                  description: The Runtime version that will be used to run the Build resource
-                    when it is deployed.
+                  description: The Runtime version that will be used to run the Build resource when it is deployed.
                   type: string
               title: CreateBuildRequest
               type: object
@@ -616,8 +593,7 @@ paths:
         - accountSid_authToken: []
       x-maturity:
         - Beta
-    description: A collection of Function Versions, Asset Versions, Dependencies,
-      and a Runtime that form a deployable unit.
+    description: A collection of Function Versions, Asset Versions, Dependencies, and a Runtime that form a deployable unit.
     get:
       description: Retrieve a specific Build resource.
       operationId: FetchBuild
@@ -696,8 +672,7 @@ paths:
         - status
       pathType: instance
   "/v1/Services/{ServiceSid}/Environments":
-    description: Represents a deployed build of a given set of Functions and/or
-      Assets at a specific URL.
+    description: Represents a deployed build of a given set of Functions and/or Assets at a specific URL.
     get:
       description: Retrieve a list of all environments.
       operationId: ListEnvironment
@@ -708,8 +683,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -770,12 +744,10 @@ paths:
             schema:
               properties:
                 DomainSuffix:
-                  description: A URL-friendly name that represents the environment and forms part
-                    of the domain name. It can be a maximum of 16 characters.
+                  description: A URL-friendly name that represents the environment and forms part of the domain name. It can be a maximum of 16 characters.
                   type: string
                 UniqueName:
-                  description: A user-defined string that uniquely identifies the Environment
-                    resource. It can be a maximum of 100 characters.
+                  description: A user-defined string that uniquely identifies the Environment resource. It can be a maximum of 100 characters.
                   type: string
               required:
                 - UniqueName
@@ -802,8 +774,7 @@ paths:
         - build_sid
       pathType: list
   "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Deployments":
-    description: An association of a Build with an Environment so that the Build is
-      published in the Environment.
+    description: An association of a Build with an Environment so that the Build is published in the Environment.
     get:
       description: Retrieve a list of all Deployments.
       operationId: ListDeployment
@@ -823,8 +794,7 @@ paths:
             minLength: 34
             pattern: ^ZE[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -921,8 +891,7 @@ paths:
         - date_created
       pathType: list
   "/v1/Services/{ServiceSid}/Environments/{EnvironmentSid}/Deployments/{Sid}":
-    description: An association of a Build with an Environment so that the Build is
-      published in the Environment.
+    description: An association of a Build with an Environment so that the Build is published in the Environment.
     get:
       description: Retrieve a specific Deployment.
       operationId: FetchDeployment
@@ -991,8 +960,7 @@ paths:
             minLength: 34
             pattern: ^ZE[0-9a-fA-F]{32}$
             type: string
-        - description: The SID of the function whose invocation produced the Log resources
-            to read.
+        - description: The SID of the function whose invocation produced the Log resources to read.
           in: query
           name: FunctionSid
           schema:
@@ -1000,22 +968,19 @@ paths:
             minLength: 34
             pattern: ^ZH[0-9a-fA-F]{32}$
             type: string
-        - description: The date/time (in GMT, ISO 8601) after which the Log resources must
-            have been created. Defaults to 1 day prior to current date/time.
+        - description: The date/time (in GMT, ISO 8601) after which the Log resources must have been created. Defaults to 1 day prior to current date/time.
           in: query
           name: StartDate
           schema:
             format: date-time
             type: string
-        - description: The date/time (in GMT, ISO 8601) before which the Log resources
-            must have been created. Defaults to current date/time.
+        - description: The date/time (in GMT, ISO 8601) before which the Log resources must have been created. Defaults to current date/time.
           in: query
           name: EndDate
           schema:
             format: date-time
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1132,8 +1097,7 @@ paths:
             minLength: 34
             pattern: ^ZE[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1203,12 +1167,10 @@ paths:
             schema:
               properties:
                 Key:
-                  description: A string by which the Variable resource can be referenced. It can
-                    be a maximum of 128 characters.
+                  description: A string by which the Variable resource can be referenced. It can be a maximum of 128 characters.
                   type: string
                 Value:
-                  description: A string that contains the actual value of the Variable. It can be
-                    a maximum of 450 bytes in size.
+                  description: A string that contains the actual value of the Variable. It can be a maximum of 450 bytes in size.
                   type: string
               required:
                 - Key
@@ -1344,12 +1306,10 @@ paths:
             schema:
               properties:
                 Key:
-                  description: A string by which the Variable resource can be referenced. It can
-                    be a maximum of 128 characters.
+                  description: A string by which the Variable resource can be referenced. It can be a maximum of 128 characters.
                   type: string
                 Value:
-                  description: A string that contains the actual value of the Variable. It can be
-                    a maximum of 450 bytes in size.
+                  description: A string that contains the actual value of the Variable. It can be a maximum of 450 bytes in size.
                   type: string
               title: UpdateVariableRequest
               type: object
@@ -1399,8 +1359,7 @@ paths:
         - accountSid_authToken: []
       x-maturity:
         - Beta
-    description: Represents a deployed build of a given set of Functions and/or
-      Assets at a specific URL.
+    description: Represents a deployed build of a given set of Functions and/or Assets at a specific URL.
     get:
       description: Retrieve a specific environment.
       operationId: FetchEnvironment
@@ -1441,8 +1400,7 @@ paths:
         - build_sid
       pathType: instance
   "/v1/Services/{ServiceSid}/Functions":
-    description: A wrapper that represents a Serverless JavaScript function and
-      groups the different  and groups the different Versions of this code.
+    description: A wrapper that represents a Serverless JavaScript function and groups the different  and groups the different Versions of this code.
     get:
       description: Retrieve a list of all Functions.
       operationId: ListFunction
@@ -1453,8 +1411,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1515,8 +1472,7 @@ paths:
             schema:
               properties:
                 FriendlyName:
-                  description: A descriptive string that you create to describe the Function
-                    resource. It can be a maximum of 255 characters.
+                  description: A descriptive string that you create to describe the Function resource. It can be a maximum of 255 characters.
                   type: string
               required:
                 - FriendlyName
@@ -1553,8 +1509,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The SID of the function that is the parent of the Function Version
-            resources to read.
+        - description: The SID of the function that is the parent of the Function Version resources to read.
           in: path
           name: FunctionSid
           required: true
@@ -1563,8 +1518,7 @@ paths:
             minLength: 34
             pattern: ^ZH[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1630,8 +1584,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The SID of the function that is the parent of the Function Version
-            resource to fetch.
+        - description: The SID of the function that is the parent of the Function Version resource to fetch.
           in: path
           name: FunctionSid
           required: true
@@ -1681,8 +1634,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The SID of the Function that is the parent of the Function Version
-            content to fetch.
+        - description: The SID of the Function that is the parent of the Function Version content to fetch.
           in: path
           name: FunctionSid
           required: true
@@ -1705,8 +1657,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/serverless.v1.service.function.function_version.fun\
-                  ction_version_content"
+                $ref: "#/components/schemas/serverless.v1.service.function.function_version.function_version_content"
           description: OK
       security:
         - accountSid_authToken: []
@@ -1746,8 +1697,7 @@ paths:
         - accountSid_authToken: []
       x-maturity:
         - Beta
-    description: A wrapper that represents a Serverless JavaScript function and
-      groups the different  and groups the different Versions of this code.
+    description: A wrapper that represents a Serverless JavaScript function and groups the different  and groups the different Versions of this code.
     get:
       description: Retrieve a specific Function resource.
       operationId: FetchFunction
@@ -1803,8 +1753,7 @@ paths:
             schema:
               properties:
                 FriendlyName:
-                  description: A descriptive string that you create to describe the Function
-                    resource. It can be a maximum of 255 characters.
+                  description: A descriptive string that you create to describe the Function resource. It can be a maximum of 255 characters.
                   type: string
               required:
                 - FriendlyName
@@ -1847,8 +1796,7 @@ paths:
         - accountSid_authToken: []
       x-maturity:
         - Beta
-    description: The top-level resource for a Serverless application, which serves
-      as a container for the application environments.
+    description: The top-level resource for a Serverless application, which serves as a container for the application environments.
     get:
       description: Retrieve a specific Service resource.
       operationId: FetchService
@@ -1886,16 +1834,13 @@ paths:
             schema:
               properties:
                 FriendlyName:
-                  description: A descriptive string that you create to describe the Service
-                    resource. It can be a maximum of 255 characters.
+                  description: A descriptive string that you create to describe the Service resource. It can be a maximum of 255 characters.
                   type: string
                 IncludeCredentials:
-                  description: Whether to inject Account credentials into a function invocation
-                    context.
+                  description: Whether to inject Account credentials into a function invocation context.
                   type: boolean
                 UiEditable:
-                  description: Whether the Service resource's properties and subresources can be
-                    edited via the UI. The default value is `false`.
+                  description: Whether the Service resource's properties and subresources can be edited via the UI. The default value is `false`.
                   type: boolean
               title: UpdateServiceRequest
               type: object
@@ -1930,14 +1875,12 @@ components:
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the Service resource was
-            created
+          description: The ISO 8601 date and time in GMT when the Service resource was created
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the Service resource was
-            last updated
+          description: The ISO 8601 date and time in GMT when the Service resource was last updated
           format: date-time
           nullable: true
           type: string
@@ -1946,8 +1889,7 @@ components:
           nullable: true
           type: string
         include_credentials:
-          description: Whether to inject Account credentials into a function invocation
-            context
+          description: Whether to inject Account credentials into a function invocation context
           nullable: true
           type: boolean
         links:
@@ -1962,8 +1904,7 @@ components:
           pattern: ^ZS[0-9a-fA-F]{32}$
           type: string
         ui_editable:
-          description: Whether the Service resource's properties and subresources can be
-            edited via the UI
+          description: Whether the Service resource's properties and subresources can be edited via the UI
           nullable: true
           type: boolean
         unique_name:
@@ -1991,8 +1932,7 @@ components:
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the Asset resource was last
-            updated
+          description: The ISO 8601 date and time in GMT when the Asset resource was last updated
           format: date-time
           nullable: true
           type: string
@@ -2041,8 +1981,7 @@ components:
           pattern: ^ZH[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the Asset Version resource
-            was created
+          description: The ISO 8601 date and time in GMT when the Asset Version resource was created
           format: date-time
           nullable: true
           type: string
@@ -2051,8 +1990,7 @@ components:
           nullable: true
           type: string
         service_sid:
-          description: The SID of the Service that the Asset Version resource is
-            associated with
+          description: The SID of the Service that the Asset Version resource is associated with
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2071,8 +2009,7 @@ components:
           nullable: true
           type: string
         visibility:
-          description: The access control that determines how the Asset Version can be
-            accessed
+          description: The access control that determines how the Asset Version can be accessed
           enum:
             - public
             - private
@@ -2090,8 +2027,7 @@ components:
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         asset_versions:
-          description: The list of Asset Version resource SIDs that are included in the
-            Build
+          description: The list of Asset Version resource SIDs that are included in the Build
           items:
             type: object
           nullable: true
@@ -2102,21 +2038,18 @@ components:
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the Build resource was last
-            updated
+          description: The ISO 8601 date and time in GMT when the Build resource was last updated
           format: date-time
           nullable: true
           type: string
         dependencies:
-          description: A list of objects that describe the Dependencies included in the
-            Build
+          description: A list of objects that describe the Dependencies included in the Build
           items:
             type: object
           nullable: true
           type: array
         function_versions:
-          description: The list of Function Version resource SIDs that are included in the
-            Build
+          description: The list of Function Version resource SIDs that are included in the Build
           items:
             type: object
           nullable: true
@@ -2214,20 +2147,17 @@ components:
           pattern: ^ZB[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the Environment resource was
-            created
+          description: The ISO 8601 date and time in GMT when the Environment resource was created
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the Environment resource was
-            last updated
+          description: The ISO 8601 date and time in GMT when the Environment resource was last updated
           format: date-time
           nullable: true
           type: string
         domain_name:
-          description: The base domain name for all Functions and Assets deployed in the
-            Environment
+          description: The base domain name for all Functions and Assets deployed in the Environment
           nullable: true
           type: string
         domain_suffix:
@@ -2239,8 +2169,7 @@ components:
           nullable: true
           type: object
         service_sid:
-          description: The SID of the Service that the Environment resource is associated
-            with
+          description: The SID of the Service that the Environment resource is associated with
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2254,8 +2183,7 @@ components:
           pattern: ^ZE[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: A user-defined string that uniquely identifies the Environment
-            resource
+          description: A user-defined string that uniquely identifies the Environment resource
           nullable: true
           type: string
         url:
@@ -2281,14 +2209,12 @@ components:
           pattern: ^ZB[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the Deployment resource was
-            created
+          description: The ISO 8601 date and time in GMT when the Deployment resource was created
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the Deployment resource was
-            last updated
+          description: The ISO 8601 date and time in GMT when the Deployment resource was last updated
           format: date-time
           nullable: true
           type: string
@@ -2300,8 +2226,7 @@ components:
           pattern: ^ZE[0-9a-fA-F]{32}$
           type: string
         service_sid:
-          description: The SID of the Service that the Deployment resource is associated
-            with
+          description: The SID of the Service that the Deployment resource is associated with
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2411,14 +2336,12 @@ components:
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the Variable resource was
-            created
+          description: The ISO 8601 date and time in GMT when the Variable resource was created
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the Variable resource was
-            last updated
+          description: The ISO 8601 date and time in GMT when the Variable resource was last updated
           format: date-time
           nullable: true
           type: string
@@ -2467,14 +2390,12 @@ components:
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the Function resource was
-            created
+          description: The ISO 8601 date and time in GMT when the Function resource was created
           format: date-time
           nullable: true
           type: string
         date_updated:
-          description: The ISO 8601 date and time in GMT when the Function resource was
-            last updated
+          description: The ISO 8601 date and time in GMT when the Function resource was last updated
           format: date-time
           nullable: true
           type: string
@@ -2516,14 +2437,12 @@ components:
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         date_created:
-          description: The ISO 8601 date and time in GMT when the Function Version
-            resource was created
+          description: The ISO 8601 date and time in GMT when the Function Version resource was created
           format: date-time
           nullable: true
           type: string
         function_sid:
-          description: The SID of the Function resource that is the parent of the Function
-            Version resource
+          description: The SID of the Function resource that is the parent of the Function Version resource
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2533,13 +2452,11 @@ components:
           nullable: true
           type: object
         path:
-          description: The URL-friendly string by which the Function Version resource can
-            be referenced
+          description: The URL-friendly string by which the Function Version resource can be referenced
           nullable: true
           type: string
         service_sid:
-          description: The SID of the Service that the Function Version resource is
-            associated with
+          description: The SID of the Service that the Function Version resource is associated with
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2558,8 +2475,7 @@ components:
           nullable: true
           type: string
         visibility:
-          description: The access control that determines how the Function Version
-            resource can be accessed
+          description: The access control that determines how the Function Version resource can be accessed
           enum:
             - public
             - private
@@ -2588,8 +2504,7 @@ components:
           pattern: ^ZH[0-9a-fA-F]{32}$
           type: string
         service_sid:
-          description: The SID of the Service that the Function Version resource is
-            associated with
+          description: The SID of the Service that the Function Version resource is associated with
           maxLength: 34
           minLength: 34
           nullable: true
@@ -2612,6 +2527,5 @@ components:
       scheme: basic
       type: http
 x-maturity:
-  - description: PLEASE NOTE that this is a Beta product that is subject to change.
-      Use it with caution.
+  - description: PLEASE NOTE that this is a Beta product that is subject to change. Use it with caution.
     name: Beta

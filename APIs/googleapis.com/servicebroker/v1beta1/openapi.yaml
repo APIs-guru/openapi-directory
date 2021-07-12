@@ -79,8 +79,7 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__DeleteBindingRespo\
-                  nse"
+                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__DeleteBindingResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -93,9 +92,8 @@ paths:
       description: GetBinding returns the binding information.
       operationId: servicebroker.projects.brokers.v2.service_instances.service_bindings.get
       parameters:
-        - description: >-
+        - description: |-
             Name must match
-
             `projects/[PROJECT_ID]/brokers/[BROKER_ID]/v2/service_instances/[INSTANCE_ID]/service_bindings`.
           in: path
           name: name
@@ -145,9 +143,8 @@ paths:
         See CreateServiceInstance for possible response codes.
       operationId: servicebroker.projects.brokers.v2.service_instances.patch
       parameters:
-        - description: >-
+        - description: |-
             Name must match
-
             `projects/[PROJECT_ID]/brokers/[BROKER_ID]/v2/service_instances/[INSTANCE_ID]`.
           in: path
           name: name
@@ -170,8 +167,7 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__UpdateServiceInsta\
-                  nceResponse"
+                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__UpdateServiceInstanceResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -187,9 +183,8 @@ paths:
         Only last (or current) operation can be polled.
       operationId: servicebroker.projects.brokers.v2.service_instances.service_bindings.getLast_operation
       parameters:
-        - description: >-
+        - description: |-
             Name must match
-
             `projects/[PROJECT_ID]/brokers/[BROKER_ID]/v2/service_instances/[INSTANCE_ID]/service_binding/[BINDING_ID]`.
           in: path
           name: name
@@ -197,10 +192,8 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: >-
-            If `operation` was returned during mutation operation, this field
-            must be
-
+        - description: |-
+            If `operation` was returned during mutation operation, this field must be
             populated with the provided value.
           in: query
           name: operation
@@ -259,12 +252,9 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: >-
-            Specifies the number of results to return per page. If there are
-            fewer
-
+        - description: |-
+            Specifies the number of results to return per page. If there are fewer
             elements than the specified number, returns all elements.
-
             Optional. Acceptable values are 0 to 200, inclusive. (Default: 100)
           in: query
           name: pageSize
@@ -282,8 +272,7 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__ListBindingsRespon\
-                  se"
+                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__ListBindingsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -316,12 +305,9 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: >-
-            Specifies the number of results to return per page. If there are
-            fewer
-
+        - description: |-
+            Specifies the number of results to return per page. If there are fewer
             elements than the specified number, returns all elements.
-
             Optional. Acceptable values are 0 to 200, inclusive. (Default: 100)
           in: query
           name: pageSize
@@ -339,8 +325,7 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__ListBrokersRespons\
-                  e"
+                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__ListBrokersResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -406,12 +391,9 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: >-
-            Specifies the number of results to return per page. If there are
-            fewer
-
+        - description: |-
+            Specifies the number of results to return per page. If there are fewer
             elements than the specified number, returns all elements.
-
             Optional. Acceptable values are 0 to 200, inclusive. (Default: 100)
           in: query
           name: pageSize
@@ -429,8 +411,7 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__ListServiceInstanc\
-                  esResponse"
+                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__ListServiceInstancesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -465,18 +446,14 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
     put:
-      description: >-
-        CreateBinding generates a service binding to an existing service
-        instance.
-
+      description: |-
+        CreateBinding generates a service binding to an existing service instance.
         See ProviServiceInstance for async operation details.
       operationId: servicebroker.projects.brokers.v2.service_instances.service_bindings.create
       parameters:
-        - description: >-
+        - description: |-
             The GCP container.
-
             Must match
-
             `projects/[PROJECT_ID]/brokers/[BROKER_ID]/v2/service_instances/[INSTANCE_ID]`.
           in: path
           name: parent
@@ -509,8 +486,7 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__CreateBindingRespo\
-                  nse"
+                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__CreateBindingResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -534,12 +510,9 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: >-
-            Specifies the number of results to return per page. If there are
-            fewer
-
+        - description: |-
+            Specifies the number of results to return per page. If there are fewer
             elements than the specified number, returns all elements.
-
             Optional. If unset or 0, all the results will be returned.
           in: query
           name: pageSize
@@ -557,8 +530,7 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__ListCatalogRespons\
-                  e"
+                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__ListCatalogResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -593,29 +565,18 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
     put:
-      description: >-
+      description: |-
         Provisions a service instance.
-
         If `request.accepts_incomplete` is false and Broker cannot execute request
-
         synchronously HTTP 422 error will be returned along with
-
         FAILED_PRECONDITION status.
-
         If `request.accepts_incomplete` is true and the Broker decides to execute
-
         resource asynchronously then HTTP 202 response code will be returned and a
-
         valid polling operation in the response will be included.
-
         If Broker executes the request synchronously and it succeeds HTTP 201
-
         response will be furnished.
-
         If identical instance exists, then HTTP 200 response will be returned.
-
         If an instance with identical ID but mismatching parameters exists, then
-
         HTTP 409 status code will be returned.
       operationId: servicebroker.projects.brokers.v2.service_instances.create
       parameters:
@@ -636,20 +597,13 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: >-
-            Value indicating that API client supports asynchronous operations.
-            If
-
+        - description: |-
+            Value indicating that API client supports asynchronous operations. If
             Broker cannot execute the request synchronously HTTP 422 code will be
-
             returned to HTTP clients along with FAILED_PRECONDITION error.
-
             If true and broker will execute request asynchronously 202 HTTP code will
-
             be returned.
-
             This broker always requires this to be true as all mutator operations are
-
             asynchronous.
           in: query
           name: acceptsIncomplete
@@ -665,8 +619,7 @@ paths:
           content:
             "*/*":
               schema:
-                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__CreateServiceInsta\
-                  nceResponse"
+                $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__CreateServiceInstanceResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -677,17 +630,14 @@ paths:
         - projects
   "/v1beta1/{resource}:getIamPolicy":
     get:
-      description: >-
+      description: |-
         Gets the access control policy for a resource.
-
         Returns an empty policy if the resource exists and does not have a policy
-
         set.
       operationId: servicebroker.getIamPolicy
       parameters:
-        - description: >-
+        - description: |-
             REQUIRED: The resource for which the policy is being requested.
-
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
@@ -695,19 +645,14 @@ paths:
           schema:
             type: string
           x-reservedExpansion: true
-        - description: >-
+        - description: |-
             Optional. The policy format version to be returned.
 
-
             Valid values are 0, 1, and 3. Requests specifying an invalid value will be
-
             rejected.
 
-
             Requests for policies with any conditional bindings must specify version 3.
-
             Policies without any conditional bindings may specify any valid value or
-
             leave the field unset.
           in: query
           name: options.requestedPolicyVersion
@@ -753,19 +698,15 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: >-
-        Sets the access control policy on the specified resource. Replaces
-        any
-
+      description: |-
+        Sets the access control policy on the specified resource. Replaces any
         existing policy.
-
 
         Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and PERMISSION_DENIED
       operationId: servicebroker.setIamPolicy
       parameters:
-        - description: >-
+        - description: |-
             REQUIRED: The resource for which the policy is being specified.
-
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
@@ -806,25 +747,18 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
     post:
-      description: >-
+      description: |-
         Returns permissions that a caller has on the specified resource.
-
         If the resource does not exist, this will return an empty set of
-
         permissions, not a NOT_FOUND error.
 
-
         Note: This operation is designed to be used for building permission-aware
-
         UIs and command-line tools, not for authorization checking. This operation
-
         may "fail open" without warning.
       operationId: servicebroker.testIamPermissions
       parameters:
-        - description: >-
-            REQUIRED: The resource for which the policy detail is being
-            requested.
-
+        - description: |-
+            REQUIRED: The resource for which the policy detail is being requested.
             See the operation documentation for the appropriate value for this field.
           in: path
           name: resource
@@ -892,9 +826,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -913,9 +845,7 @@ components:
         default: true
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -945,10 +875,8 @@ components:
         bind_resource:
           additionalProperties:
             description: Properties of the object.
-          description: >-
-            A JSON object that contains data for platform resources associated
-            with
-
+          description: |-
+            A JSON object that contains data for platform resources associated with
             the binding to be created.
           type: object
         binding_id:
@@ -962,10 +890,8 @@ components:
           format: google-datetime
           type: string
         deploymentName:
-          description: >-
-            Output only. String containing the Deployment Manager deployment
-            name that was created
-
+          description: |-
+            Output only. String containing the Deployment Manager deployment name that was created
             for this binding,
           type: string
         parameters:
@@ -980,9 +906,8 @@ components:
             Required.
           type: string
         resourceName:
-          description: >-
+          description: |-
             Output only. The resource name of the binding, e.g.
-
             projects/project_id/brokers/broker_id/service_instances/instance_id/bindings/binding_id.
           type: string
         service_id:
@@ -1010,15 +935,13 @@ components:
             enable having custom brokers per GKE cluster, for example.
           type: string
         title:
-          description: >-
+          description: |-
             User friendly title of the broker.
-
             Limited to 1024 characters. Requests with longer titles will be rejected.
           type: string
         url:
-          description: >-
+          description: |-
             Output only. URL of the broker OSB-compliant endpoint, for example:
-
             https://servicebroker.googleapis.com/projects/<project>/brokers/<broker>
           type: string
       type: object
@@ -1031,28 +954,20 @@ components:
           description: Credentials to use the binding.
           type: object
         description:
-          description: >-
-            Used to communicate description of the response. Usually for
-            non-standard
-
+          description: |-
+            Used to communicate description of the response. Usually for non-standard
             error codes.
-
             https://github.com/openservicebrokerapi/servicebroker/blob/master/spec.md#service-broker-errors
           type: string
         operation:
-          description: >-
-            If broker executes operation asynchronously, this is the operation
-            ID that
-
+          description: |-
+            If broker executes operation asynchronously, this is the operation ID that
             can be polled to check the completion status of said operation.
-
             This broker always executes all create/delete operations asynchronously.
           type: string
         route_service_url:
-          description: >-
-            A URL to which the platform may proxy requests for the address sent
-            with
-
+          description: |-
+            A URL to which the platform may proxy requests for the address sent with
             bind_resource.route
           type: string
         syslog_drain_url:
@@ -1070,35 +985,27 @@ components:
       description: Response for the `CreateServiceInstance()` method.
       properties:
         description:
-          description: >-
-            Used to communicate description of the response. Usually for
-            non-standard
-
+          description: |-
+            Used to communicate description of the response. Usually for non-standard
             error codes.
-
             https://github.com/openservicebrokerapi/servicebroker/blob/master/spec.md#service-broker-errors
           type: string
         operation:
-          description: >-
-            If broker executes operation asynchronously, this is the operation
-            ID that
-
+          description: |-
+            If broker executes operation asynchronously, this is the operation ID that
             can be polled to check the completion status of said operation.
-
             This broker always will return a non-empty operation on success.
           type: string
       type: object
     GoogleCloudServicebrokerV1beta1__DashboardClient:
-      description: Message containing information required to activate Dashboard SSO
-        feature.
+      description: Message containing information required to activate Dashboard SSO feature.
       properties:
         id:
           description: The id of the Oauth client that the dashboard will use.
           type: string
         redirect_uri:
-          description: >-
+          description: |-
             A URI for the service dashboard.
-
             Validated by the OAuth token server when the dashboard requests a token.
           type: string
         secret:
@@ -1109,19 +1016,14 @@ components:
       description: Response for the `DeleteBinding()` method.
       properties:
         description:
-          description: >-
-            Used to communicate description of the response. Usually for
-            non-standard
-
+          description: |-
+            Used to communicate description of the response. Usually for non-standard
             error codes.
-
             https://github.com/openservicebrokerapi/servicebroker/blob/master/spec.md#service-broker-errors
           type: string
         operation:
-          description: >-
-            If broker executes operation asynchronously, this is the operation
-            ID that
-
+          description: |-
+            If broker executes operation asynchronously, this is the operation ID that
             can be polled to check the completion status of said operation.
           type: string
       type: object
@@ -1129,19 +1031,14 @@ components:
       description: Response for the `DeleteServiceInstance()` method.
       properties:
         description:
-          description: >-
-            Used to communicate description of the response. Usually for
-            non-standard
-
+          description: |-
+            Used to communicate description of the response. Usually for non-standard
             error codes.
-
             https://github.com/openservicebrokerapi/servicebroker/blob/master/spec.md#service-broker-errors
           type: string
         operation:
-          description: >-
-            If broker executes operation asynchronously, this is the operation
-            ID that
-
+          description: |-
+            If broker executes operation asynchronously, this is the operation ID that
             can be polled to check the completion status of said operation.
           type: string
       type: object
@@ -1154,32 +1051,24 @@ components:
           description: Credentials to use the binding.
           type: object
         deploymentName:
-          description: >-
-            String containing the Deployment Manager deployment name that was
-            created
-
+          description: |-
+            String containing the Deployment Manager deployment name that was created
             for this binding,
           type: string
         description:
-          description: >-
-            Used to communicate description of the response. Usually for
-            non-standard
-
+          description: |-
+            Used to communicate description of the response. Usually for non-standard
             error codes.
-
             https://github.com/openservicebrokerapi/servicebroker/blob/master/spec.md#service-broker-errors
           type: string
         resourceName:
-          description: >-
+          description: |-
             Output only. The resource name of the binding, e.g.
-
             projects/project_id/brokers/broker_id/service_instances/instance_id/bindings/binding_id.
           type: string
         route_service_url:
-          description: >-
-            A URL to which the platform may proxy requests for the address sent
-            with
-
+          description: |-
+            A URL to which the platform may proxy requests for the address sent with
             bind_resource.route
           type: string
         syslog_drain_url:
@@ -1202,25 +1091,17 @@ components:
             $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__Binding"
           type: array
         description:
-          description: >-
-            Used to communicate description of the response. Usually for
-            non-standard
-
+          description: |-
+            Used to communicate description of the response. Usually for non-standard
             error codes.
-
             https://github.com/openservicebrokerapi/servicebroker/blob/master/spec.md#service-broker-errors
           type: string
         nextPageToken:
-          description: >-
-            This token allows you to get the next page of results for list
-            requests.
-
+          description: |-
+            This token allows you to get the next page of results for list requests.
             If the number of results is larger than `pageSize`, use the `nextPageToken`
-
             as a value for the query parameter `pageToken` in the next list request.
-
             Subsequent list requests will have their own `nextPageToken` to continue
-
             paging through the results
           type: string
       type: object
@@ -1233,16 +1114,11 @@ components:
             $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__Broker"
           type: array
         nextPageToken:
-          description: >-
-            This token allows you to get the next page of results for list
-            requests.
-
+          description: |-
+            This token allows you to get the next page of results for list requests.
             If the number of results is larger than `pageSize`, use the `nextPageToken`
-
             as a value for the query parameter `pageToken` in the next list request.
-
             Subsequent list requests will have their own `nextPageToken` to continue
-
             paging through the results
           type: string
       type: object
@@ -1250,25 +1126,17 @@ components:
       description: Response message for the `ListCatalog()` method.
       properties:
         description:
-          description: >-
-            Used to communicate description of the response. Usually for
-            non-standard
-
+          description: |-
+            Used to communicate description of the response. Usually for non-standard
             error codes.
-
             https://github.com/openservicebrokerapi/servicebroker/blob/master/spec.md#service-broker-errors
           type: string
         nextPageToken:
-          description: >-
-            This token allows you to get the next page of results for list
-            requests.
-
+          description: |-
+            This token allows you to get the next page of results for list requests.
             If the number of results is larger than `pageSize`, use the `nextPageToken`
-
             as a value for the query parameter `pageToken` in the next list request.
-
             Subsequent list requests will have their own `nextPageToken` to continue
-
             paging through the results
           type: string
         services:
@@ -1281,12 +1149,9 @@ components:
       description: The response for the `ListServiceInstances()` method.
       properties:
         description:
-          description: >-
-            Used to communicate description of the response. Usually for
-            non-standard
-
+          description: |-
+            Used to communicate description of the response. Usually for non-standard
             error codes.
-
             https://github.com/openservicebrokerapi/servicebroker/blob/master/spec.md#service-broker-errors
           type: string
         instances:
@@ -1295,16 +1160,11 @@ components:
             $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__ServiceInstance"
           type: array
         nextPageToken:
-          description: >-
-            This token allows you to get the next page of results for list
-            requests.
-
+          description: |-
+            This token allows you to get the next page of results for list requests.
             If the number of results is larger than `pageSize`, use the `nextPageToken`
-
             as a value for the query parameter `pageToken` in the next list request.
-
             Subsequent list requests will have their own `nextPageToken` to continue
-
             paging through the results
           type: string
       type: object
@@ -1324,10 +1184,8 @@ components:
       description: Plan message describes a Service Plan.
       properties:
         bindable:
-          description: >-
-            Specifies whether instances of the service can be bound to
-            applications.
-
+          description: |-
+            Specifies whether instances of the service can be bound to applications.
             If not specified, `Service.bindable` will be presumed.
           type: boolean
         description:
@@ -1337,10 +1195,8 @@ components:
           description: Whether the service is free.
           type: boolean
         id:
-          description: >-
-            ID is a globally unique identifier used to uniquely identify the
-            plan.
-
+          description: |-
+            ID is a globally unique identifier used to uniquely identify the plan.
             User must make no presumption about the format of this field.
           type: string
         metadata:
@@ -1351,13 +1207,10 @@ components:
             Metadata is an arbitrary JSON object.
           type: object
         name:
-          description: >-
+          description: |-
             User friendly name of the plan.
-
             The name must be globally unique within GCP project.
-
             Note, which is different from ("This must be globally unique within a
-
             platform marketplace").
           type: string
         schemas:
@@ -1367,20 +1220,15 @@ components:
           type: object
       type: object
     GoogleCloudServicebrokerV1beta1__Service:
-      description: >-
+      description: |-
         The resource model mostly follows the Open Service Broker API, as
-
         described here:
-
         https://github.com/openservicebrokerapi/servicebroker/blob/master/_spec.md
-
         Though due to Google Specifics it has additional optional fields.
       properties:
         bindable:
-          description: >-
-            Specifies whether instances of the service can be bound to
-            applications.
-
+          description: |-
+            Specifies whether instances of the service can be bound to applications.
             Required.
           type: boolean
         binding_retrievable:
@@ -1396,10 +1244,8 @@ components:
           description: Textual description of the service. Required.
           type: string
         id:
-          description: >-
-            ID is a globally unique identifier used to uniquely identify the
-            service.
-
+          description: |-
+            ID is a globally unique identifier used to uniquely identify the service.
             ID is an opaque string.
           type: string
         instances_retrievable:
@@ -1413,17 +1259,12 @@ components:
             Metadata is an arbitrary JSON object.
           type: object
         name:
-          description: >-
+          description: |-
             User friendly service name.
-
             Name must match [a-z0-9]+ regexp.
-
             The name must be globally unique within GCP project.
-
             Note, which is different from ("This must be globally unique within a
-
             platform marketplace").
-
             Required.
           type: string
         plan_updateable:
@@ -1437,30 +1278,23 @@ components:
             $ref: "#/components/schemas/GoogleCloudServicebrokerV1beta1__Plan"
           type: array
         tags:
-          description: >-
-            Tags provide a flexible mechanism to expose a classification,
-            attribute, or
-
+          description: |-
+            Tags provide a flexible mechanism to expose a classification, attribute, or
             base technology of a service.
           items:
             type: string
           type: array
       type: object
     GoogleCloudServicebrokerV1beta1__ServiceInstance:
-      description: Message describing inputs to Provision and Update Service instance
-        requests.
+      description: Message describing inputs to Provision and Update Service instance requests.
       properties:
         context:
           additionalProperties:
             description: Properties of the object.
-          description: >-
-            Platform specific contextual information under which the service
-            instance
-
+          description: |-
+            Platform specific contextual information under which the service instance
             is to be provisioned. This replaces organization_guid and space_guid.
-
             But can also contain anything.
-
             Currently only used for logging context information.
           type: object
         createTime:
@@ -1468,17 +1302,13 @@ components:
           format: google-datetime
           type: string
         deploymentName:
-          description: >-
-            Output only. String containing the Deployment Manager deployment
-            name that was created
-
+          description: |-
+            Output only. String containing the Deployment Manager deployment name that was created
             for this instance,
           type: string
         description:
-          description: >-
-            To return errors when GetInstance call is done via HTTP to be
-            unified with
-
+          description: |-
+            To return errors when GetInstance call is done via HTTP to be unified with
             other methods.
           type: string
         instance_id:
@@ -1488,12 +1318,9 @@ components:
             Required.
           type: string
         organization_guid:
-          description: >-
-            The platform GUID for the organization under which the service is
-            to be
-
+          description: |-
+            The platform GUID for the organization under which the service is to be
             provisioned.
-
             Required.
           type: string
         parameters:
@@ -1512,10 +1339,8 @@ components:
         previous_values:
           additionalProperties:
             description: Properties of the object.
-          description: >-
-            Used only in UpdateServiceInstance request to optionally specify
-            previous
-
+          description: |-
+            Used only in UpdateServiceInstance request to optionally specify previous
             fields.
           type: object
         resourceName:
@@ -1531,10 +1356,8 @@ components:
             Required.
           type: string
         space_guid:
-          description: >-
-            The identifier for the project space within the platform
-            organization.
-
+          description: |-
+            The identifier for the project space within the platform organization.
             Required.
           type: string
       type: object
@@ -1542,19 +1365,14 @@ components:
       description: Response for the `UpdateServiceInstance()` method.
       properties:
         description:
-          description: >-
-            Used to communicate description of the response. Usually for
-            non-standard
-
+          description: |-
+            Used to communicate description of the response. Usually for non-standard
             error codes.
-
             https://github.com/openservicebrokerapi/servicebroker/blob/master/spec.md#service-broker-errors
           type: string
         operation:
-          description: >-
-            If broker executes operation asynchronously, this is the operation
-            ID that
-
+          description: |-
+            If broker executes operation asynchronously, this is the operation ID that
             can be polled to check the completion status of said operation.
           type: string
       type: object
@@ -1563,21 +1381,15 @@ components:
       properties:
         condition:
           $ref: "#/components/schemas/GoogleType__Expr"
-          description: >-
+          description: |-
             The condition that is associated with this binding.
-
             NOTE: An unsatisfied condition will not allow user access via current
-
             binding. Different bindings, including their conditions, are examined
-
             independently.
         members:
-          description: >+
-            Specifies the identities requesting access for a Cloud Platform
-            resource.
-
+          description: |+
+            Specifies the identities requesting access for a Cloud Platform resource.
             `members` can have the following values:
-
 
             * `allUsers`: A special identifier that represents anyone who is
                on the internet; with or without a Google account.
@@ -1628,33 +1440,21 @@ components:
           type: string
       type: object
     GoogleIamV1__Policy:
-      description: >-
-        An Identity and Access Management (IAM) policy, which specifies
-        access
-
+      description: |-
+        An Identity and Access Management (IAM) policy, which specifies access
         controls for Google Cloud resources.
 
 
-
         A `Policy` is a collection of `bindings`. A `binding` binds one or more
-
         `members` to a single `role`. Members can be user accounts, service accounts,
-
         Google groups, and domains (such as G Suite). A `role` is a named list of
-
         permissions; each `role` can be an IAM predefined role or a user-created
-
         custom role.
 
-
         Optionally, a `binding` can specify a `condition`, which is a logical
-
         expression that allows access to a resource only if the expression evaluates
-
         to `true`. A condition can add constraints based on attributes of the
-
         request, the resource, or both.
-
 
         **JSON example:**
 
@@ -1703,81 +1503,54 @@ components:
             - version: 3
 
         For a description of IAM and its features, see the
-
         [IAM documentation](https://cloud.google.com/iam/docs/).
       properties:
         bindings:
-          description: >-
-            Associates a list of `members` to a `role`. Optionally, may specify
-            a
-
+          description: |-
+            Associates a list of `members` to a `role`. Optionally, may specify a
             `condition` that determines how and when the `bindings` are applied. Each
-
             of the `bindings` must contain at least one member.
           items:
             $ref: "#/components/schemas/GoogleIamV1__Binding"
           type: array
         etag:
-          description: >-
+          description: |-
             `etag` is used for optimistic concurrency control as a way to help
-
             prevent simultaneous updates of a policy from overwriting each other.
-
             It is strongly suggested that systems make use of the `etag` in the
-
             read-modify-write cycle to perform policy updates in order to avoid race
-
             conditions: An `etag` is returned in the response to `getIamPolicy`, and
-
             systems are expected to put that etag in the request to `setIamPolicy` to
-
             ensure that their change will be applied to the same version of the policy.
 
-
             **Important:** If you use IAM Conditions, you must include the `etag` field
-
             whenever you call `setIamPolicy`. If you omit this field, then IAM allows
-
             you to overwrite a version `3` policy with a version `1` policy, and all of
-
             the conditions in the version `3` policy are lost.
           format: byte
           type: string
         version:
-          description: >-
+          description: |-
             Specifies the format of the policy.
 
-
             Valid values are `0`, `1`, and `3`. Requests that specify an invalid value
-
             are rejected.
 
-
             Any operation that affects conditional role bindings must specify version
-
             `3`. This requirement applies to the following operations:
 
-
             * Getting a policy that includes a conditional role binding
-
             * Adding a conditional role binding to a policy
-
             * Changing a conditional role binding in a policy
-
             * Removing any role binding, with or without a condition, from a policy
               that includes conditions
 
             **Important:** If you use IAM Conditions, you must include the `etag` field
-
             whenever you call `setIamPolicy`. If you omit this field, then IAM allows
-
             you to overwrite a version `3` policy with a version `1` policy, and all of
-
             the conditions in the version `3` policy are lost.
 
-
             If a policy does not include any conditions, operations on that policy may
-
             specify any valid version or leave the field unset.
           format: int32
           type: integer
@@ -1787,28 +1560,20 @@ components:
       properties:
         policy:
           $ref: "#/components/schemas/GoogleIamV1__Policy"
-          description: >-
-            REQUIRED: The complete policy to be applied to the `resource`. The
-            size of
-
+          description: |-
+            REQUIRED: The complete policy to be applied to the `resource`. The size of
             the policy is limited to a few 10s of KB. An empty policy is a
-
             valid policy but certain Cloud Platform services (such as Projects)
-
             might reject them.
       type: object
     GoogleIamV1__TestIamPermissionsRequest:
       description: Request message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: >-
-            The set of permissions to check for the `resource`. Permissions
-            with
-
+          description: |-
+            The set of permissions to check for the `resource`. Permissions with
             wildcards (such as '*' or 'storage.*') are not allowed. For more
-
             information see
-
             [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
           items:
             type: string
@@ -1826,12 +1591,9 @@ components:
           type: array
       type: object
     GoogleProtobuf__Empty:
-      description: >-
-        A generic empty message that you can re-use to avoid defining
-        duplicated
-
+      description: |-
+        A generic empty message that you can re-use to avoid defining duplicated
         empty messages in your APIs. A typical example is to use it as the request
-
         or the response type of an API method. For instance:
 
             service Foo {
@@ -1850,10 +1612,8 @@ components:
             expression: "size(request.user) > 0"
       properties:
         description:
-          description: >-
-            An optional description of the expression. This is a longer text
-            which
-
+          description: |-
+            An optional description of the expression. This is a longer text which
             describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
@@ -1865,10 +1625,8 @@ components:
             well-known feature set of CEL is supported.
           type: string
         location:
-          description: >-
-            An optional string indicating the location of the expression for
-            error
-
+          description: |-
+            An optional string indicating the location of the expression for error
             reporting, e.g. a file name and a position in the file.
           type: string
         title:

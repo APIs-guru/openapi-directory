@@ -6,8 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: Schedules reporting jobs containing your YouTube Analytics data and
-    downloads the resulting bulk data reports in the form of CSV files.
+  description: Schedules reporting jobs containing your YouTube Analytics data and downloads the resulting bulk data reports in the form of CSV files.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -42,29 +41,22 @@ paths:
       description: Lists jobs.
       operationId: youtubereporting.jobs.list
       parameters:
-        - description: If set to true, also system-managed jobs will be returned;
-            otherwise only user-created jobs will be returned. System-managed
-            jobs can neither be modified nor deleted.
+        - description: If set to true, also system-managed jobs will be returned; otherwise only user-created jobs will be returned. System-managed jobs can neither be modified nor deleted.
           in: query
           name: includeSystemManaged
           schema:
             type: boolean
-        - description: The content owner's external ID on which behalf the user is acting
-            on. If not set, the user is acting for himself (his own channel).
+        - description: The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
           in: query
           name: onBehalfOfContentOwner
           schema:
             type: string
-        - description: Requested page size. Server may return fewer jobs than requested.
-            If unspecified, server will pick an appropriate default.
+        - description: Requested page size. Server may return fewer jobs than requested. If unspecified, server will pick an appropriate default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListReportTypesResponse.next_page_token returned in response to the
-            previous call to the `ListJobs` method.
+        - description: A token identifying a page of results the server should return. Typically, this is the value of ListReportTypesResponse.next_page_token returned in response to the previous call to the `ListJobs` method.
           in: query
           name: pageToken
           schema:
@@ -103,8 +95,7 @@ paths:
       description: Creates a job and returns it.
       operationId: youtubereporting.jobs.create
       parameters:
-        - description: The content owner's external ID on which behalf the user is acting
-            on. If not set, the user is acting for himself (his own channel).
+        - description: The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
           in: query
           name: onBehalfOfContentOwner
           schema:
@@ -143,8 +134,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The content owner's external ID on which behalf the user is acting
-            on. If not set, the user is acting for himself (his own channel).
+        - description: The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
           in: query
           name: onBehalfOfContentOwner
           schema:
@@ -177,8 +167,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The content owner's external ID on which behalf the user is acting
-            on. If not set, the user is acting for himself (his own channel).
+        - description: The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
           in: query
           name: onBehalfOfContentOwner
           schema:
@@ -215,8 +204,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/jobs/{jobId}/reports":
     get:
-      description: Lists reports created by a specific job. Returns NOT_FOUND if the
-        job does not exist.
+      description: Lists reports created by a specific job. Returns NOT_FOUND if the job does not exist.
       operationId: youtubereporting.jobs.reports.list
       parameters:
         - description: The ID of the job.
@@ -225,40 +213,32 @@ paths:
           required: true
           schema:
             type: string
-        - description: If set, only reports created after the specified date/time are
-            returned.
+        - description: If set, only reports created after the specified date/time are returned.
           in: query
           name: createdAfter
           schema:
             type: string
-        - description: The content owner's external ID on which behalf the user is acting
-            on. If not set, the user is acting for himself (his own channel).
+        - description: The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
           in: query
           name: onBehalfOfContentOwner
           schema:
             type: string
-        - description: Requested page size. Server may return fewer report types than
-            requested. If unspecified, server will pick an appropriate default.
+        - description: Requested page size. Server may return fewer report types than requested. If unspecified, server will pick an appropriate default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A token identifying a page of results the server should return.
-            Typically, this is the value of ListReportsResponse.next_page_token
-            returned in response to the previous call to the `ListReports`
-            method.
+        - description: A token identifying a page of results the server should return. Typically, this is the value of ListReportsResponse.next_page_token returned in response to the previous call to the `ListReports` method.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: If set, only reports whose start time is greater than or equal the
-            specified date/time are returned.
+        - description: If set, only reports whose start time is greater than or equal the specified date/time are returned.
           in: query
           name: startTimeAtOrAfter
           schema:
             type: string
-        - description: If set, only reports whose start time is smaller than the specified
-            date/time are returned.
+        - description: If set, only reports whose start time is smaller than the specified date/time are returned.
           in: query
           name: startTimeBefore
           schema:
@@ -310,8 +290,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The content owner's external ID on which behalf the user is acting
-            on. If not set, the user is acting for himself (his own channel).
+        - description: The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
           in: query
           name: onBehalfOfContentOwner
           schema:
@@ -348,8 +327,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/media/{resourceName}":
     get:
-      description: Method for media download. Download is supported on the URI
-        `/v1/media/{+name}?alt=media`.
+      description: Method for media download. Download is supported on the URI `/v1/media/{+name}?alt=media`.
       operationId: youtubereporting.media.download
       parameters:
         - description: Name of the media that is being downloaded.
@@ -393,29 +371,22 @@ paths:
       description: Lists report types.
       operationId: youtubereporting.reportTypes.list
       parameters:
-        - description: If set to true, also system-managed report types will be returned;
-            otherwise only the report types that can be used to create new
-            reporting jobs will be returned.
+        - description: If set to true, also system-managed report types will be returned; otherwise only the report types that can be used to create new reporting jobs will be returned.
           in: query
           name: includeSystemManaged
           schema:
             type: boolean
-        - description: The content owner's external ID on which behalf the user is acting
-            on. If not set, the user is acting for himself (his own channel).
+        - description: The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).
           in: query
           name: onBehalfOfContentOwner
           schema:
             type: string
-        - description: Requested page size. Server may return fewer report types than
-            requested. If unspecified, server will pick an appropriate default.
+        - description: Requested page size. Server may return fewer report types than requested. If unspecified, server will pick an appropriate default.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A token identifying a page of results the server should return.
-            Typically, this is the value of
-            ListReportTypesResponse.next_page_token returned in response to the
-            previous call to the `ListReportTypes` method.
+        - description: A token identifying a page of results the server should return. Typically, this is the value of ListReportTypesResponse.next_page_token returned in response to the previous call to the `ListReportTypes` method.
           in: query
           name: pageToken
           schema:
@@ -490,9 +461,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -510,9 +479,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -531,12 +498,7 @@ components:
         type: string
   schemas:
     Empty:
-      description: "A generic empty message that you can re-use to avoid defining
-        duplicated empty messages in your APIs. A typical example is to use it
-        as the request or the response type of an API method. For instance:
-        service Foo { rpc Bar(google.protobuf.Empty) returns
-        (google.protobuf.Empty); } The JSON representation for `Empty` is empty
-        JSON object `{}`."
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
       type: object
     GdataBlobstore2Info:
@@ -845,8 +807,7 @@ components:
           format: google-datetime
           type: string
         expireTime:
-          description: The date/time when this job will expire/expired. After a job
-            expired, no new reports are generated.
+          description: The date/time when this job will expire/expired. After a job expired, no new reports are generated.
           format: google-datetime
           type: string
         id:
@@ -856,12 +817,10 @@ components:
           description: The name of the job (max. 100 characters).
           type: string
         reportTypeId:
-          description: The type of reports this job creates. Corresponds to the ID of a
-            ReportType.
+          description: The type of reports this job creates. Corresponds to the ID of a ReportType.
           type: string
         systemManaged:
-          description: True if this a system-managed job that cannot be modified by the
-            user; otherwise false.
+          description: True if this a system-managed job that cannot be modified by the user; otherwise false.
           type: boolean
       type: object
     ListJobsResponse:
@@ -873,18 +832,14 @@ components:
             $ref: "#/components/schemas/Job"
           type: array
         nextPageToken:
-          description: A token to retrieve next page of results. Pass this value in the
-            ListJobsRequest.page_token field in the subsequent call to
-            `ListJobs` method to retrieve the next page of results.
+          description: A token to retrieve next page of results. Pass this value in the ListJobsRequest.page_token field in the subsequent call to `ListJobs` method to retrieve the next page of results.
           type: string
       type: object
     ListReportTypesResponse:
       description: Response message for ReportingService.ListReportTypes.
       properties:
         nextPageToken:
-          description: A token to retrieve next page of results. Pass this value in the
-            ListReportTypesRequest.page_token field in the subsequent call to
-            `ListReportTypes` method to retrieve the next page of results.
+          description: A token to retrieve next page of results. Pass this value in the ListReportTypesRequest.page_token field in the subsequent call to `ListReportTypes` method to retrieve the next page of results.
           type: string
         reportTypes:
           description: The list of report types.
@@ -896,9 +851,7 @@ components:
       description: Response message for ReportingService.ListReports.
       properties:
         nextPageToken:
-          description: A token to retrieve next page of results. Pass this value in the
-            ListReportsRequest.page_token field in the subsequent call to
-            `ListReports` method to retrieve the next page of results.
+          description: A token to retrieve next page of results. Pass this value in the ListReportsRequest.page_token field in the subsequent call to `ListReports` method to retrieve the next page of results.
           type: string
         reports:
           description: The list of report types.
@@ -907,36 +860,31 @@ components:
           type: array
       type: object
     Report:
-      description: A report's metadata including the URL from which the report itself
-        can be downloaded.
+      description: A report's metadata including the URL from which the report itself can be downloaded.
       properties:
         createTime:
           description: The date/time when this report was created.
           format: google-datetime
           type: string
         downloadUrl:
-          description: The URL from which the report can be downloaded (max. 1000
-            characters).
+          description: The URL from which the report can be downloaded (max. 1000 characters).
           type: string
         endTime:
-          description: The end of the time period that the report instance covers. The
-            value is exclusive.
+          description: The end of the time period that the report instance covers. The value is exclusive.
           format: google-datetime
           type: string
         id:
           description: The server-generated ID of the report.
           type: string
         jobExpireTime:
-          description: The date/time when the job this report belongs to will
-            expire/expired.
+          description: The date/time when the job this report belongs to will expire/expired.
           format: google-datetime
           type: string
         jobId:
           description: The ID of the job that created this report.
           type: string
         startTime:
-          description: The start of the time period that the report instance covers. The
-            value is inclusive.
+          description: The start of the time period that the report instance covers. The value is inclusive.
           format: google-datetime
           type: string
       type: object
@@ -954,9 +902,7 @@ components:
           description: The name of the report type (max. 100 characters).
           type: string
         systemManaged:
-          description: True if this a system-managed report type; otherwise false.
-            Reporting jobs for system-managed report types are created
-            automatically and can thus not be used in the `CreateJob` method.
+          description: True if this a system-managed report type; otherwise false. Reporting jobs for system-managed report types are created automatically and can thus not be used in the `CreateJob` method.
           type: boolean
       type: object
   securitySchemes:
@@ -966,9 +912,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/yt-analytics-monetary.readonly:
-              View monetary and non-monetary YouTube Analytics reports for your
-              YouTube content
+            https://www.googleapis.com/auth/yt-analytics-monetary.readonly: View monetary and non-monetary YouTube Analytics reports for your YouTube content
             https://www.googleapis.com/auth/yt-analytics.readonly: View YouTube Analytics reports for your YouTube content
       type: oauth2
     Oauth2c:
@@ -977,9 +921,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/yt-analytics-monetary.readonly:
-              View monetary and non-monetary YouTube Analytics reports for your
-              YouTube content
+            https://www.googleapis.com/auth/yt-analytics-monetary.readonly: View monetary and non-monetary YouTube Analytics reports for your YouTube content
             https://www.googleapis.com/auth/yt-analytics.readonly: View YouTube Analytics reports for your YouTube content
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

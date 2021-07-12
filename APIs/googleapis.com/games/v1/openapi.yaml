@@ -6,9 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: The Google Play games service allows developers to enhance games
-    with social leaderboards, achievements, game state, sign-in with Google, and
-    more.
+  description: The Google Play games service allows developers to enhance games with social leaderboards, achievements, game state, sign-in with Google, and more.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -53,10 +51,7 @@ paths:
           name: language
           schema:
             type: string
-        - description: The maximum number of achievement resources to return in the
-            response, used for paging. For any response, the actual number of
-            achievement resources returned may be less than the specified
-            `maxResults`.
+        - description: The maximum number of achievement resources to return in the response, used for paging. For any response, the actual number of achievement resources returned may be less than the specified `maxResults`.
           in: query
           name: maxResults
           schema:
@@ -141,8 +136,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Increments the steps of the achievement with the given ID for the
-        currently authenticated player.
+      description: Increments the steps of the achievement with the given ID for the currently authenticated player.
       operationId: games.achievements.increment
       parameters:
         - description: The ID of the achievement used by this method.
@@ -157,9 +151,7 @@ paths:
           required: true
           schema:
             type: integer
-        - description: A randomly generated numeric ID for each request specified by the
-            caller. This number is used at the server to ensure that the request
-            is handled correctly across retries.
+        - description: A randomly generated numeric ID for each request specified by the caller. This number is used at the server to ensure that the request is handled correctly across retries.
           in: query
           name: requestId
           schema:
@@ -192,8 +184,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Sets the state of the achievement with the given ID to `REVEALED`
-        for the currently authenticated player.
+      description: Sets the state of the achievement with the given ID to `REVEALED` for the currently authenticated player.
       operationId: games.achievements.reveal
       parameters:
         - description: The ID of the achievement used by this method.
@@ -230,10 +221,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Sets the steps for the currently authenticated player towards
-        unlocking an achievement. If the steps parameter is less than the
-        current number of steps that the player already gained for the
-        achievement, the achievement is not modified.
+      description: Sets the steps for the currently authenticated player towards unlocking an achievement. If the steps parameter is less than the current number of steps that the player already gained for the achievement, the achievement is not modified.
       operationId: games.achievements.setStepsAtLeast
       parameters:
         - description: The ID of the achievement used by this method.
@@ -358,8 +346,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Indicate that the currently authenticated user is playing your
-        application.
+      description: Indicate that the currently authenticated user is playing your application.
       operationId: games.applications.played
       responses:
         "200":
@@ -373,9 +360,7 @@ paths:
         - applications
   "/games/v1/applications/{applicationId}":
     get:
-      description: Retrieves the metadata of the application with the given ID. If the
-        requested application is not available for the specified `platformType`,
-        the returned response will not include any instance data.
+      description: Retrieves the metadata of the application with the given ID. If the requested application is not available for the specified `platformType`, the returned response will not include any instance data.
       operationId: games.applications.get
       parameters:
         - description: The application ID from the Google Play developer console.
@@ -427,9 +412,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/games/v1/applications/{applicationId}/verify":
     get:
-      description: Verifies the auth token provided with this request is for the
-        application with the specified ID, and returns the ID of the player it
-        was granted for.
+      description: Verifies the auth token provided with this request is for the application with the specified ID, and returns the ID of the player it was granted for.
       operationId: games.applications.verify
       parameters:
         - description: The application ID from the Google Play developer console.
@@ -474,9 +457,7 @@ paths:
           name: language
           schema:
             type: string
-        - description: The maximum number of event definitions to return in the response,
-            used for paging. For any response, the actual number of event
-            definitions to return may be less than the specified `maxResults`.
+        - description: The maximum number of event definitions to return in the response, used for paging. For any response, the actual number of event definitions to return may be less than the specified `maxResults`.
           in: query
           name: maxResults
           schema:
@@ -514,8 +495,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   /games/v1/events:
     get:
-      description: Returns a list showing the current progress on events in this
-        application for the currently authenticated user.
+      description: Returns a list showing the current progress on events in this application for the currently authenticated user.
       operationId: games.events.listByPlayer
       parameters:
         - description: The preferred language to use for strings returned by this method.
@@ -523,9 +503,7 @@ paths:
           name: language
           schema:
             type: string
-        - description: The maximum number of events to return in the response, used for
-            paging. For any response, the actual number of events to return may
-            be less than the specified maxResults.
+        - description: The maximum number of events to return in the response, used for paging. For any response, the actual number of events to return may be less than the specified maxResults.
           in: query
           name: maxResults
           schema:
@@ -562,8 +540,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Records a batch of changes to the number of times events have
-        occurred for the currently authenticated user of this application.
+      description: Records a batch of changes to the number of times events have occurred for the currently authenticated user of this application.
       operationId: games.events.record
       parameters:
         - description: The preferred language to use for strings returned by this method.
@@ -600,9 +577,7 @@ paths:
           name: language
           schema:
             type: string
-        - description: The maximum number of leaderboards to return in the response. For
-            any response, the actual number of leaderboards returned may be less
-            than the specified `maxResults`.
+        - description: The maximum number of leaderboards to return in the response. For any response, the actual number of leaderboards returned may be less than the specified `maxResults`.
           in: query
           name: maxResults
           schema:
@@ -744,13 +719,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The score you're submitting. The submitted score is ignored if it
-            is worse than a previously submitted score, where worse depends on
-            the leaderboard sort order. The meaning of the score value depends
-            on the leaderboard format type. For fixed-point, the score
-            represents the raw value. For time, the score represents elapsed
-            time in milliseconds. For currency, the score represents a value in
-            micro units.
+        - description: The score you're submitting. The submitted score is ignored if it is worse than a previously submitted score, where worse depends on the leaderboard sort order. The meaning of the score value depends on the leaderboard format type. For fixed-point, the score represents the raw value. For time, the score represents elapsed time in milliseconds. For currency, the score represents a value in micro units.
           in: query
           name: score
           required: true
@@ -761,9 +730,7 @@ paths:
           name: language
           schema:
             type: string
-        - description: Additional information about the score you're submitting. Values
-            must contain no more than 64 URI-safe characters as defined by
-            section 2.3 of RFC 3986.
+        - description: Additional information about the score you're submitting. Values must contain no more than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
           in: query
           name: scoreTag
           schema:
@@ -820,9 +787,7 @@ paths:
           name: language
           schema:
             type: string
-        - description: The maximum number of leaderboard scores to return in the response.
-            For any response, the actual number of leaderboard scores returned
-            may be less than the specified `maxResults`.
+        - description: The maximum number of leaderboard scores to return in the response. For any response, the actual number of leaderboard scores returned may be less than the specified `maxResults`.
           in: query
           name: maxResults
           schema:
@@ -860,8 +825,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/games/v1/leaderboards/{leaderboardId}/window/{collection}":
     get:
-      description: Lists the scores in a leaderboard around (and including) a player's
-        score.
+      description: Lists the scores in a leaderboard around (and including) a player's score.
       operationId: games.scores.listWindow
       parameters:
         - description: The ID of the leaderboard.
@@ -897,9 +861,7 @@ paths:
           name: language
           schema:
             type: string
-        - description: The maximum number of leaderboard scores to return in the response.
-            For any response, the actual number of leaderboard scores returned
-            may be less than the specified `maxResults`.
+        - description: The maximum number of leaderboard scores to return in the response. For any response, the actual number of leaderboard scores returned may be less than the specified `maxResults`.
           in: query
           name: maxResults
           schema:
@@ -909,16 +871,12 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: The preferred number of scores to return above the player's score.
-            More scores may be returned if the player is at the bottom of the
-            leaderboard; fewer may be returned if the player is at the top. Must
-            be less than or equal to maxResults.
+        - description: The preferred number of scores to return above the player's score. More scores may be returned if the player is at the bottom of the leaderboard; fewer may be returned if the player is at the top. Must be less than or equal to maxResults.
           in: query
           name: resultsAbove
           schema:
             type: integer
-        - description: True if the top scores should be returned when the player is not in
-            the leaderboard. Defaults to true.
+        - description: True if the top scores should be returned when the player is not in the leaderboard. Defaults to true.
           in: query
           name: returnTopIfAbsent
           schema:
@@ -999,9 +957,7 @@ paths:
           name: language
           schema:
             type: string
-        - description: The maximum number of player resources to return in the response,
-            used for paging. For any response, the actual number of player
-            resources returned may be less than the specified `maxResults`.
+        - description: The maximum number of player resources to return in the response, used for paging. For any response, the actual number of player resources returned may be less than the specified `maxResults`.
           in: query
           name: maxResults
           schema:
@@ -1039,12 +995,10 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/games/v1/players/{playerId}":
     get:
-      description: Retrieves the Player resource with the given ID. To retrieve the
-        player for the currently authenticated user, set `playerId` to `me`.
+      description: Retrieves the Player resource with the given ID. To retrieve the player for the currently authenticated user, set `playerId` to `me`.
       operationId: games.players.get
       parameters:
-        - description: A player ID. A value of `me` may be used in place of the
-            authenticated player's ID.
+        - description: A player ID. A value of `me` may be used in place of the authenticated player's ID.
           in: path
           name: playerId
           required: true
@@ -1083,12 +1037,10 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/games/v1/players/{playerId}/achievements":
     get:
-      description: Lists the progress for all your application's achievements for the
-        currently authenticated player.
+      description: Lists the progress for all your application's achievements for the currently authenticated player.
       operationId: games.achievements.list
       parameters:
-        - description: A player ID. A value of `me` may be used in place of the
-            authenticated player's ID.
+        - description: A player ID. A value of `me` may be used in place of the authenticated player's ID.
           in: path
           name: playerId
           required: true
@@ -1099,10 +1051,7 @@ paths:
           name: language
           schema:
             type: string
-        - description: The maximum number of achievement resources to return in the
-            response, used for paging. For any response, the actual number of
-            achievement resources returned may be less than the specified
-            `maxResults`.
+        - description: The maximum number of achievement resources to return in the response, used for paging. For any response, the actual number of achievement resources returned may be less than the specified `maxResults`.
           in: query
           name: maxResults
           schema:
@@ -1112,9 +1061,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Tells the server to return only achievements with the specified
-            state. If this parameter isn't specified, all achievements are
-            returned.
+        - description: Tells the server to return only achievements with the specified state. If this parameter isn't specified, all achievements are returned.
           in: query
           name: state
           schema:
@@ -1152,12 +1099,10 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/games/v1/players/{playerId}/categories/{collection}":
     get:
-      description: List play data aggregated per category for the player corresponding
-        to `playerId`.
+      description: List play data aggregated per category for the player corresponding to `playerId`.
       operationId: games.metagame.listCategoriesByPlayer
       parameters:
-        - description: A player ID. A value of `me` may be used in place of the
-            authenticated player's ID.
+        - description: A player ID. A value of `me` may be used in place of the authenticated player's ID.
           in: path
           name: playerId
           required: true
@@ -1177,9 +1122,7 @@ paths:
           name: language
           schema:
             type: string
-        - description: The maximum number of category resources to return in the response,
-            used for paging. For any response, the actual number of category
-            resources returned may be less than the specified `maxResults`.
+        - description: The maximum number of category resources to return in the response, used for paging. For any response, the actual number of category resources returned may be less than the specified `maxResults`.
           in: query
           name: maxResults
           schema:
@@ -1217,23 +1160,16 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/games/v1/players/{playerId}/leaderboards/{leaderboardId}/scores/{timeSpan}":
     get:
-      description: "Get high scores, and optionally ranks, in leaderboards for the
-        currently authenticated player. For a specific time span,
-        `leaderboardId` can be set to `ALL` to retrieve data for all
-        leaderboards in a given time span. `NOTE: You cannot ask for 'ALL'
-        leaderboards and 'ALL' timeSpans in the same request; only one parameter
-        may be set to 'ALL'."
+      description: "Get high scores, and optionally ranks, in leaderboards for the currently authenticated player. For a specific time span, `leaderboardId` can be set to `ALL` to retrieve data for all leaderboards in a given time span. `NOTE: You cannot ask for 'ALL' leaderboards and 'ALL' timeSpans in the same request; only one parameter may be set to 'ALL'."
       operationId: games.scores.get
       parameters:
-        - description: A player ID. A value of `me` may be used in place of the
-            authenticated player's ID.
+        - description: A player ID. A value of `me` may be used in place of the authenticated player's ID.
           in: path
           name: playerId
           required: true
           schema:
             type: string
-        - description: The ID of the leaderboard. Can be set to 'ALL' to retrieve data for
-            all leaderboards for this application.
+        - description: The ID of the leaderboard. Can be set to 'ALL' to retrieve data for all leaderboards for this application.
           in: path
           name: leaderboardId
           required: true
@@ -1251,8 +1187,7 @@ paths:
               - WEEKLY
               - DAILY
             type: string
-        - description: The types of ranks to return. If the parameter is omitted, no ranks
-            will be returned.
+        - description: The types of ranks to return. If the parameter is omitted, no ranks will be returned.
           in: query
           name: includeRankType
           schema:
@@ -1268,9 +1203,7 @@ paths:
           name: language
           schema:
             type: string
-        - description: The maximum number of leaderboard scores to return in the response.
-            For any response, the actual number of leaderboard scores returned
-            may be less than the specified `maxResults`.
+        - description: The maximum number of leaderboard scores to return in the response. For any response, the actual number of leaderboard scores returned may be less than the specified `maxResults`.
           in: query
           name: maxResults
           schema:
@@ -1308,12 +1241,10 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/games/v1/players/{playerId}/snapshots":
     get:
-      description: Retrieves a list of snapshots created by your application for the
-        player corresponding to the player ID.
+      description: Retrieves a list of snapshots created by your application for the player corresponding to the player ID.
       operationId: games.snapshots.list
       parameters:
-        - description: A player ID. A value of `me` may be used in place of the
-            authenticated player's ID.
+        - description: A player ID. A value of `me` may be used in place of the authenticated player's ID.
           in: path
           name: playerId
           required: true
@@ -1324,9 +1255,7 @@ paths:
           name: language
           schema:
             type: string
-        - description: The maximum number of snapshot resources to return in the response,
-            used for paging. For any response, the actual number of snapshot
-            resources returned may be less than the specified `maxResults`.
+        - description: The maximum number of snapshot resources to return in the response, used for paging. For any response, the actual number of snapshot resources returned may be less than the specified `maxResults`.
           in: query
           name: maxResults
           schema:
@@ -1371,11 +1300,7 @@ paths:
       description: Checks whether the games client is out of date.
       operationId: games.revisions.check
       parameters:
-        - description: "The revision of the client SDK used by your application. Format:
-            `[PLATFORM_TYPE]:[VERSION_NUMBER]`. Possible values of
-            `PLATFORM_TYPE` are: * `ANDROID` - Client is running the Android
-            SDK. * `IOS` - Client is running the iOS SDK. * `WEB_APP` - Client
-            is running as a Web App."
+        - description: "The revision of the client SDK used by your application. Format: `[PLATFORM_TYPE]:[VERSION_NUMBER]`. Possible values of `PLATFORM_TYPE` are: * `ANDROID` - Client is running the Android SDK. * `IOS` - Client is running the iOS SDK. * `WEB_APP` - Client is running as a Web App."
           in: query
           name: clientRevision
           required: true
@@ -1455,8 +1380,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   /games/v1/stats:
     get:
-      description: Returns engagement and spend statistics in this application for the
-        currently authenticated user.
+      description: Returns engagement and spend statistics in this application for the currently authenticated user.
       operationId: games.stats.get
       responses:
         "200":
@@ -1524,9 +1448,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -1544,9 +1466,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -1578,8 +1498,7 @@ components:
           description: The description of the achievement.
           type: string
         experiencePoints:
-          description: Experience points which will be earned when unlocking this
-            achievement.
+          description: Experience points which will be earned when unlocking this achievement.
           format: int64
           type: string
         formattedTotalSteps:
@@ -1597,16 +1516,13 @@ components:
             - UNLOCKED
           type: string
         isRevealedIconUrlDefault:
-          description: Indicates whether the revealed icon image being returned is a
-            default image, or is provided by the game.
+          description: Indicates whether the revealed icon image being returned is a default image, or is provided by the game.
           type: boolean
         isUnlockedIconUrlDefault:
-          description: Indicates whether the unlocked icon image being returned is a
-            default image, or is game-provided.
+          description: Indicates whether the unlocked icon image being returned is a default image, or is game-provided.
           type: boolean
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#achievementDefinition`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#achievementDefinition`.
           type: string
         name:
           description: The name of the achievement.
@@ -1631,8 +1547,7 @@ components:
             $ref: "#/components/schemas/AchievementDefinition"
           type: array
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#achievementDefinitionsListResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#achievementDefinitionsListResponse`.
           type: string
         nextPageToken:
           description: Token corresponding to the next page of results.
@@ -1646,29 +1561,24 @@ components:
           format: int32
           type: integer
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#achievementIncrementResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#achievementIncrementResponse`.
           type: string
         newlyUnlocked:
-          description: Whether the current steps for the achievement has reached the
-            number of steps required to unlock.
+          description: Whether the current steps for the achievement has reached the number of steps required to unlock.
           type: boolean
       type: object
     AchievementRevealResponse:
       description: An achievement reveal response
       properties:
         currentState:
-          description: The current state of the achievement for which a reveal was
-            attempted. This might be `UNLOCKED` if the achievement was already
-            unlocked.
+          description: The current state of the achievement for which a reveal was attempted. This might be `UNLOCKED` if the achievement was already unlocked.
           enum:
             - REVEAL_ACHIEVEMENT_STATE_UNSPECIFIED
             - REVEALED
             - UNLOCKED
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#achievementRevealResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#achievementRevealResponse`.
           type: string
       type: object
     AchievementSetStepsAtLeastResponse:
@@ -1679,32 +1589,27 @@ components:
           format: int32
           type: integer
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#achievementSetStepsAtLeastResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#achievementSetStepsAtLeastResponse`.
           type: string
         newlyUnlocked:
-          description: Whether the current steps for the achievement has reached the
-            number of steps required to unlock.
+          description: Whether the current steps for the achievement has reached the number of steps required to unlock.
           type: boolean
       type: object
     AchievementUnlockResponse:
       description: An achievement unlock response
       properties:
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#achievementUnlockResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#achievementUnlockResponse`.
           type: string
         newlyUnlocked:
-          description: Whether this achievement was newly unlocked (that is, whether the
-            unlock request for the achievement was the first for the player).
+          description: Whether this achievement was newly unlocked (that is, whether the unlock request for the achievement was the first for the player).
           type: boolean
       type: object
     AchievementUpdateMultipleRequest:
       description: A list of achievement update requests.
       properties:
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#achievementUpdateMultipleRequest`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#achievementUpdateMultipleRequest`.
           type: string
         updates:
           description: The individual achievement update requests.
@@ -1716,8 +1621,7 @@ components:
       description: Response message for UpdateMultipleAchievements rpc.
       properties:
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#achievementUpdateMultipleResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#achievementUpdateMultipleResponse`.
           type: string
         updatedAchievements:
           description: The updated state of the achievements.
@@ -1733,16 +1637,13 @@ components:
           type: string
         incrementPayload:
           $ref: "#/components/schemas/GamesAchievementIncrement"
-          description: The payload if an update of type `INCREMENT` was requested for the
-            achievement.
+          description: The payload if an update of type `INCREMENT` was requested for the achievement.
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#achievementUpdateRequest`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#achievementUpdateRequest`.
           type: string
         setStepsAtLeastPayload:
           $ref: "#/components/schemas/GamesAchievementSetStepsAtLeast"
-          description: The payload if an update of type `SET_STEPS_AT_LEAST` was requested
-            for the achievement.
+          description: The payload if an update of type `SET_STEPS_AT_LEAST` was requested for the achievement.
         updateType:
           description: The type of update being applied.
           enum:
@@ -1772,12 +1673,10 @@ components:
           format: int32
           type: integer
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#achievementUpdateResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#achievementUpdateResponse`.
           type: string
         newlyUnlocked:
-          description: Whether this achievement was newly unlocked (that is, whether the
-            unlock request for the achievement was the first for the player).
+          description: Whether this achievement was newly unlocked (that is, whether the unlock request for the achievement was the first for the player).
           type: boolean
         updateOccurred:
           description: Whether the requested updates actually affected the achievement.
@@ -1787,8 +1686,7 @@ components:
       description: The Application resource.
       properties:
         achievement_count:
-          description: The number of achievements visible to the currently authenticated
-            player.
+          description: The number of achievements visible to the currently authenticated player.
           format: int32
           type: integer
         assets:
@@ -1822,32 +1720,28 @@ components:
             $ref: "#/components/schemas/Instance"
           type: array
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#application`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#application`.
           type: string
         lastUpdatedTimestamp:
           description: The last updated timestamp of the application.
           format: int64
           type: string
         leaderboard_count:
-          description: The number of leaderboards visible to the currently authenticated
-            player.
+          description: The number of leaderboards visible to the currently authenticated player.
           format: int32
           type: integer
         name:
           description: The name of the application.
           type: string
         themeColor:
-          description: A hint to the client UI for what color to use as an app-themed
-            color. The color is given as an RGB triplet (e.g. "E0E0E0").
+          description: A hint to the client UI for what color to use as an app-themed color. The color is given as an RGB triplet (e.g. "E0E0E0").
           type: string
       type: object
     ApplicationCategory:
       description: An application category object.
       properties:
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#applicationCategory`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#applicationCategory`.
           type: string
         primary:
           description: The primary category.
@@ -1860,17 +1754,13 @@ components:
       description: A third party application verification response resource.
       properties:
         alternate_player_id:
-          description: An alternate ID that was once used for the player that was issued
-            the auth token used in this request. (This field is not normally
-            populated.)
+          description: An alternate ID that was once used for the player that was issued the auth token used in this request. (This field is not normally populated.)
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#applicationVerifyResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#applicationVerifyResponse`.
           type: string
         player_id:
-          description: The ID of the player that was issued the auth token used in this
-            request.
+          description: The ID of the player that was issued the auth token used in this request.
           type: string
       type: object
     Category:
@@ -1884,8 +1774,7 @@ components:
           format: int64
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#category`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#category`.
           type: string
       type: object
     CategoryListResponse:
@@ -1897,8 +1786,7 @@ components:
             $ref: "#/components/schemas/Category"
           type: array
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#categoryListResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#categoryListResponse`.
           type: string
         nextPageToken:
           description: Token corresponding to the next page of results.
@@ -1908,8 +1796,7 @@ components:
       description: Container for a URL end point of the requested type.
       properties:
         url:
-          description: A URL suitable for loading in a web browser for the requested
-            endpoint.
+          description: A URL suitable for loading in a web browser for the requested endpoint.
           type: string
       type: object
     EventBatchRecordFailure:
@@ -1927,8 +1814,7 @@ components:
             - RECORD_RATE_HIGH
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#eventBatchRecordFailure`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#eventBatchRecordFailure`.
           type: string
         range:
           $ref: "#/components/schemas/EventPeriodRange"
@@ -1941,8 +1827,7 @@ components:
           description: The ID of the child event.
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#eventChild`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#eventChild`.
           type: string
       type: object
     EventDefinition:
@@ -1966,12 +1851,10 @@ components:
           description: The base URL for the image that represents the event.
           type: string
         isDefaultImageUrl:
-          description: Indicates whether the icon image being returned is a default image,
-            or is game-provided.
+          description: Indicates whether the icon image being returned is a default image, or is game-provided.
           type: boolean
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#eventDefinition`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#eventDefinition`.
           type: string
         visibility:
           description: The visibility of event being tracked in this definition.
@@ -1990,8 +1873,7 @@ components:
             $ref: "#/components/schemas/EventDefinition"
           type: array
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#eventDefinitionListResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#eventDefinitionListResponse`.
           type: string
         nextPageToken:
           description: The pagination token for the next page of results.
@@ -2001,17 +1883,14 @@ components:
       description: An event period time range.
       properties:
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#eventPeriodRange`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#eventPeriodRange`.
           type: string
         periodEndMillis:
-          description: The time when this update period ends, in millis, since 1970 UTC
-            (Unix Epoch).
+          description: The time when this update period ends, in millis, since 1970 UTC (Unix Epoch).
           format: int64
           type: string
         periodStartMillis:
-          description: The time when this update period begins, in millis, since 1970 UTC
-            (Unix Epoch).
+          description: The time when this update period begins, in millis, since 1970 UTC (Unix Epoch).
           format: int64
           type: string
       type: object
@@ -2019,8 +1898,7 @@ components:
       description: An event period update resource.
       properties:
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#eventPeriodUpdate`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#eventPeriodUpdate`.
           type: string
         timePeriod:
           $ref: "#/components/schemas/EventPeriodRange"
@@ -2045,21 +1923,18 @@ components:
             - INVALID_UPDATE_VALUE
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#eventRecordFailure`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#eventRecordFailure`.
           type: string
       type: object
     EventRecordRequest:
       description: An event period update resource.
       properties:
         currentTimeMillis:
-          description: The current time when this update was sent, in milliseconds, since
-            1970 UTC (Unix Epoch).
+          description: The current time when this update was sent, in milliseconds, since 1970 UTC (Unix Epoch).
           format: int64
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#eventRecordRequest`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#eventRecordRequest`.
           type: string
         requestId:
           description: The request ID used to identify this attempt to record events.
@@ -2078,8 +1953,7 @@ components:
           description: The ID of the event being modified in this update.
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#eventUpdateRequest`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#eventUpdateRequest`.
           type: string
         updateCount:
           description: The number of times this event occurred in this time period.
@@ -2100,8 +1974,7 @@ components:
             $ref: "#/components/schemas/EventRecordFailure"
           type: array
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#eventUpdateResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#eventUpdateResponse`.
           type: string
         playerEvents:
           description: The current status of any updated events
@@ -2113,8 +1986,7 @@ components:
       description: The payload to request to increment an achievement.
       properties:
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#GamesAchievementIncrement`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#GamesAchievementIncrement`.
           type: string
         requestId:
           description: The requestId associated with an increment to an achievement.
@@ -2129,8 +2001,7 @@ components:
       description: The payload to request to increment an achievement.
       properties:
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#GamesAchievementSetStepsAtLeast`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#GamesAchievementSetStepsAtLeast`.
           type: string
         steps:
           description: The minimum number of steps for the achievement to be set to.
@@ -2145,8 +2016,7 @@ components:
           format: int32
           type: integer
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#imageAsset`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#imageAsset`.
           type: string
         name:
           description: The name of the asset.
@@ -2172,8 +2042,7 @@ components:
           $ref: "#/components/schemas/InstanceIosDetails"
           description: Platform dependent details for iOS.
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#instance`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#instance`.
           type: string
         name:
           description: Localized display name.
@@ -2203,8 +2072,7 @@ components:
           description: Flag indicating whether the anti-piracy check is enabled.
           type: boolean
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#instanceAndroidDetails`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#instanceAndroidDetails`.
           type: string
         packageName:
           description: Android package name which maps to Google Play URL.
@@ -2223,16 +2091,13 @@ components:
           description: iTunes App ID.
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#instanceIosDetails`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#instanceIosDetails`.
           type: string
         preferredForIpad:
-          description: Indicates that this instance is the default for new installations
-            on iPad devices.
+          description: Indicates that this instance is the default for new installations on iPad devices.
           type: boolean
         preferredForIphone:
-          description: Indicates that this instance is the default for new installations
-            on iPhone devices.
+          description: Indicates that this instance is the default for new installations on iPhone devices.
           type: boolean
         supportIpad:
           description: Flag to indicate if this instance supports iPad.
@@ -2245,8 +2110,7 @@ components:
       description: The Web details resource.
       properties:
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#instanceWebDetails`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#instanceWebDetails`.
           type: string
         launchUrl:
           description: Launch URL for the game.
@@ -2265,12 +2129,10 @@ components:
           description: The leaderboard ID.
           type: string
         isIconUrlDefault:
-          description: Indicates whether the icon image being returned is a default image,
-            or is game-provided.
+          description: Indicates whether the icon image being returned is a default image, or is game-provided.
           type: boolean
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#leaderboard`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#leaderboard`.
           type: string
         name:
           description: The name of the leaderboard.
@@ -2293,8 +2155,7 @@ components:
           description: The localized string for the rank of this score for this leaderboard.
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#leaderboardEntry`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#leaderboardEntry`.
           type: string
         player:
           $ref: "#/components/schemas/Player"
@@ -2304,8 +2165,7 @@ components:
           format: int64
           type: string
         scoreTag:
-          description: Additional information about the score. Values must contain no more
-            than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
+          description: Additional information about the score. Values must contain no more than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
           type: string
         scoreValue:
           description: The numerical value of this score.
@@ -2320,8 +2180,7 @@ components:
             - DAILY
           type: string
         writeTimestampMillis:
-          description: The timestamp at which this score was recorded, in milliseconds
-            since the epoch in UTC.
+          description: The timestamp at which this score was recorded, in milliseconds since the epoch in UTC.
           format: int64
           type: string
       type: object
@@ -2334,8 +2193,7 @@ components:
             $ref: "#/components/schemas/Leaderboard"
           type: array
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#leaderboardListResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#leaderboardListResponse`.
           type: string
         nextPageToken:
           description: Token corresponding to the next page of results.
@@ -2351,8 +2209,7 @@ components:
           description: The rank in the leaderboard as a string.
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#leaderboardScoreRank`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#leaderboardScoreRank`.
           type: string
         numScores:
           description: The number of scores in the leaderboard.
@@ -2372,8 +2229,7 @@ components:
             $ref: "#/components/schemas/LeaderboardEntry"
           type: array
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#leaderboardScores`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#leaderboardScores`.
           type: string
         nextPageToken:
           description: The pagination token for the next page of results.
@@ -2384,11 +2240,7 @@ components:
           type: string
         playerScore:
           $ref: "#/components/schemas/LeaderboardEntry"
-          description: The score of the requesting player on the leaderboard. The player's
-            score may appear both here and in the list of scores above. If you
-            are viewing a public leaderboard and the player is not sharing their
-            gameplay information publicly, the `scoreRank`and
-            `formattedScoreRank` values will not be present.
+          description: The score of the requesting player on the leaderboard. The player's score may appear both here and in the list of scores above. If you are viewing a public leaderboard and the player is not sharing their gameplay information publicly, the `scoreRank`and `formattedScoreRank` values will not be present.
         prevPageToken:
           description: The pagination token for the previous page of results.
           type: string
@@ -2397,13 +2249,11 @@ components:
       description: The metagame config resource
       properties:
         currentVersion:
-          description: Current version of the metagame configuration data. When this data
-            is updated, the version number will be increased by one.
+          description: Current version of the metagame configuration data. When this data is updated, the version number will be increased by one.
           format: int32
           type: integer
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#metagameConfig`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#metagameConfig`.
           type: string
         playerLevels:
           description: The list of player levels.
@@ -2428,47 +2278,36 @@ components:
           type: string
         experienceInfo:
           $ref: "#/components/schemas/PlayerExperienceInfo"
-          description: An object to represent Play Game experience information for the
-            player.
+          description: An object to represent Play Game experience information for the player.
         friendStatus:
-          description: The friend status of the given player, relative to the requester.
-            This is unset if the player is not sharing their friends list with
-            the game.
+          description: The friend status of the given player, relative to the requester. This is unset if the player is not sharing their friends list with the game.
           enum:
             - FRIEND_STATUS_UNSPECIFIED
             - NO_RELATIONSHIP
             - FRIEND
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#player`
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#player`
           type: string
         name:
           description: A representation of the individual components of the name.
           properties:
             familyName:
-              description: The family name of this player. In some places, this is known as
-                the last name.
+              description: The family name of this player. In some places, this is known as the last name.
               type: string
             givenName:
-              description: The given name of this player. In some places, this is known as the
-                first name.
+              description: The given name of this player. In some places, this is known as the first name.
               type: string
           type: object
         originalPlayerId:
-          description: The player ID that was used for this player the first time they
-            signed into the game in question. This is only populated for calls
-            to player.get for the requesting player, only if the player ID has
-            subsequently changed, and only to clients that support remapping
-            player IDs.
+          description: The player ID that was used for this player the first time they signed into the game in question. This is only populated for calls to player.get for the requesting player, only if the player ID has subsequently changed, and only to clients that support remapping player IDs.
           type: string
         playerId:
           description: The ID of the player.
           type: string
         profileSettings:
           $ref: "#/components/schemas/ProfileSettings"
-          description: The player's profile settings. Controls whether or not the player's
-            profile is visible to other players.
+          description: The player's profile settings. Controls whether or not the player's profile is visible to other players.
         title:
           description: The player's title rewarded for their game activities.
           type: string
@@ -2489,10 +2328,7 @@ components:
           format: int32
           type: integer
         experiencePoints:
-          description: Experience points earned for the achievement. This field is absent
-            for achievements that have not yet been unlocked and 0 for
-            achievements that have been unlocked by testers but that are
-            unpublished.
+          description: Experience points earned for the achievement. This field is absent for achievements that have not yet been unlocked and 0 for achievements that have been unlocked by testers but that are unpublished.
           format: int64
           type: string
         formattedCurrentStepsString:
@@ -2502,8 +2338,7 @@ components:
           description: The ID of the achievement.
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#playerAchievement`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#playerAchievement`.
           type: string
         lastUpdatedTimestamp:
           description: The timestamp of the last modification to this achievement's state.
@@ -2519,8 +2354,7 @@ components:
             $ref: "#/components/schemas/PlayerAchievement"
           type: array
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#playerAchievementListResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#playerAchievementListResponse`.
           type: string
         nextPageToken:
           description: Token corresponding to the next page of results.
@@ -2533,13 +2367,10 @@ components:
           description: The ID of the event definition.
           type: string
         formattedNumEvents:
-          description: The current number of times this event has occurred, as a string.
-            The formatting of this string depends on the configuration of your
-            event in the Play Games Developer Console.
+          description: The current number of times this event has occurred, as a string. The formatting of this string depends on the configuration of your event in the Play Games Developer Console.
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#playerEvent`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#playerEvent`.
           type: string
         numEvents:
           description: The current number of times this event has occurred.
@@ -2558,8 +2389,7 @@ components:
             $ref: "#/components/schemas/PlayerEvent"
           type: array
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#playerEventListResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#playerEventListResponse`.
           type: string
         nextPageToken:
           description: The pagination token for the next page of results.
@@ -2576,18 +2406,15 @@ components:
           $ref: "#/components/schemas/PlayerLevel"
           description: The current level of the player.
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#playerExperienceInfo`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#playerExperienceInfo`.
           type: string
         lastLevelUpTimestampMillis:
-          description: The timestamp when the player was leveled up, in millis since Unix
-            epoch UTC.
+          description: The timestamp when the player was leveled up, in millis since Unix epoch UTC.
           format: int64
           type: string
         nextLevel:
           $ref: "#/components/schemas/PlayerLevel"
-          description: The next level of the player. If the current level is the maximum
-            level, this should be same as the current level.
+          description: The next level of the player. If the current level is the maximum level, this should be same as the current level.
       type: object
     PlayerLeaderboardScore:
       description: A player leaderboard score object.
@@ -2596,22 +2423,19 @@ components:
           $ref: "#/components/schemas/LeaderboardScoreRank"
           description: The rank of the score in the friends collection for this leaderboard.
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#playerLeaderboardScore`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#playerLeaderboardScore`.
           type: string
         leaderboard_id:
           description: The ID of the leaderboard this score is in.
           type: string
         publicRank:
           $ref: "#/components/schemas/LeaderboardScoreRank"
-          description: The public rank of the score in this leaderboard. This object will
-            not be present if the user is not sharing their scores publicly.
+          description: The public rank of the score in this leaderboard. This object will not be present if the user is not sharing their scores publicly.
         scoreString:
           description: The formatted value of this score.
           type: string
         scoreTag:
-          description: Additional information about the score. Values must contain no more
-            than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
+          description: Additional information about the score. Values must contain no more than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
           type: string
         scoreValue:
           description: The numerical value of this score.
@@ -2629,8 +2453,7 @@ components:
             - DAILY
           type: string
         writeTimestamp:
-          description: The timestamp at which this score was recorded, in milliseconds
-            since the epoch in UTC.
+          description: The timestamp at which this score was recorded, in milliseconds since the epoch in UTC.
           format: int64
           type: string
       type: object
@@ -2643,8 +2466,7 @@ components:
             $ref: "#/components/schemas/PlayerLeaderboardScore"
           type: array
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#playerLeaderboardScoreListResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#playerLeaderboardScoreListResponse`.
           type: string
         nextPageToken:
           description: The pagination token for the next page of results.
@@ -2657,8 +2479,7 @@ components:
       description: 1P/3P metadata about a user's level.
       properties:
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#playerLevel`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#playerLevel`.
           type: string
         level:
           description: The level for the user.
@@ -2682,8 +2503,7 @@ components:
             $ref: "#/components/schemas/Player"
           type: array
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#playerListResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#playerListResponse`.
           type: string
         nextPageToken:
           description: Token corresponding to the next page of results.
@@ -2696,17 +2516,14 @@ components:
           description: The formatted score for this player score.
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#playerScore`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#playerScore`.
           type: string
         score:
           description: The numerical value for this player score.
           format: int64
           type: string
         scoreTag:
-          description: Additional information about this score. Values will contain no
-            more than 64 URI-safe characters as defined by section 2.3 of RFC
-            3986.
+          description: Additional information about this score. Values will contain no more than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
           type: string
         timeSpan:
           description: The time span for this player score.
@@ -2721,8 +2538,7 @@ components:
       description: A list of score submission statuses.
       properties:
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#playerScoreListResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#playerScoreListResponse`.
           type: string
         submittedScores:
           description: The score submissions statuses.
@@ -2734,8 +2550,7 @@ components:
       description: A list of leaderboard entry resources.
       properties:
         beatenScoreTimeSpans:
-          description: The time spans where the submitted score is better than the
-            existing score for that time span.
+          description: The time spans where the submitted score is better than the existing score for that time span.
           items:
             enum:
               - SCORE_TIME_SPAN_UNSPECIFIED
@@ -2748,22 +2563,16 @@ components:
           description: The formatted value of the submitted score.
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#playerScoreResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#playerScoreResponse`.
           type: string
         leaderboardId:
           description: The leaderboard ID that this score was submitted to.
           type: string
         scoreTag:
-          description: Additional information about this score. Values will contain no
-            more than 64 URI-safe characters as defined by section 2.3 of RFC
-            3986.
+          description: Additional information about this score. Values will contain no more than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
           type: string
         unbeatenScores:
-          description: The scores in time spans that have not been beaten. As an example,
-            the submitted score may be better than the player's `DAILY` score,
-            but not better than the player's scores for the `WEEKLY` or
-            `ALL_TIME` time spans.
+          description: The scores in time spans that have not been beaten. As an example, the submitted score may be better than the player's `DAILY` score, but not better than the player's scores for the `WEEKLY` or `ALL_TIME` time spans.
           items:
             $ref: "#/components/schemas/PlayerScore"
           type: array
@@ -2772,8 +2581,7 @@ components:
       description: A list of score submission requests.
       properties:
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#playerScoreSubmissionList`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#playerScoreSubmissionList`.
           type: string
         scores:
           description: The score submissions.
@@ -2792,24 +2600,20 @@ components:
             - UNAVAILABLE
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#profileSettings`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#profileSettings`.
           type: string
         profileVisible:
-          description: Whether the player's profile is visible to the currently signed in
-            player.
+          description: Whether the player's profile is visible to the currently signed in player.
           type: boolean
       type: object
     RevisionCheckResponse:
       description: A third party checking a revision response.
       properties:
         apiVersion:
-          description: The version of the API this client revision should use when calling
-            API methods.
+          description: The version of the API this client revision should use when calling API methods.
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#revisionCheckResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#revisionCheckResponse`.
           type: string
         revisionStatus:
           description: The result of the revision check.
@@ -2824,8 +2628,7 @@ components:
       description: A request to submit a score to leaderboards.
       properties:
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#scoreSubmission`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#scoreSubmission`.
           type: string
         leaderboardId:
           description: The leaderboard this score is being submitted to.
@@ -2835,13 +2638,10 @@ components:
           format: int64
           type: string
         scoreTag:
-          description: Additional information about this score. Values will contain no
-            more than 64 URI-safe characters as defined by section 2.3 of RFC
-            3986.
+          description: Additional information about this score. Values will contain no more than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
           type: string
         signature:
-          description: Signature Values will contain URI-safe characters as defined by
-            section 2.3 of RFC 3986.
+          description: Signature Values will contain URI-safe characters as defined by section 2.3 of RFC 3986.
           type: string
       type: object
     Snapshot:
@@ -2854,9 +2654,7 @@ components:
           description: The description of this snapshot.
           type: string
         driveId:
-          description: The ID of the file underlying this snapshot in the Drive API. Only
-            present if the snapshot is a view on a Drive file and the file is
-            owned by the caller.
+          description: The ID of the file underlying this snapshot in the Drive API. Only present if the snapshot is a view on a Drive file and the file is owned by the caller.
           type: string
         durationMillis:
           description: The duration associated with this snapshot, in millis.
@@ -2866,17 +2664,14 @@ components:
           description: The ID of the snapshot.
           type: string
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#snapshot`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#snapshot`.
           type: string
         lastModifiedMillis:
-          description: The timestamp (in millis since Unix epoch) of the last modification
-            to this snapshot.
+          description: The timestamp (in millis since Unix epoch) of the last modification to this snapshot.
           format: int64
           type: string
         progressValue:
-          description: The progress value (64-bit integer set by developer) associated
-            with this snapshot.
+          description: The progress value (64-bit integer set by developer) associated with this snapshot.
           format: int64
           type: string
         title:
@@ -2900,15 +2695,13 @@ components:
           format: int32
           type: integer
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#snapshotImage`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#snapshotImage`.
           type: string
         mime_type:
           description: The MIME type of the image.
           type: string
         url:
-          description: The URL of the image. This URL may be invalidated at any time and
-            should not be cached.
+          description: The URL of the image. This URL may be invalidated at any time and should not be cached.
           type: string
         width:
           description: The width of the image.
@@ -2924,79 +2717,56 @@ components:
             $ref: "#/components/schemas/Snapshot"
           type: array
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#snapshotListResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#snapshotListResponse`.
           type: string
         nextPageToken:
-          description: Token corresponding to the next page of results. If there are no
-            more results, the token is omitted.
+          description: Token corresponding to the next page of results. If there are no more results, the token is omitted.
           type: string
       type: object
     StatsResponse:
       description: A third party stats resource.
       properties:
         avg_session_length_minutes:
-          description: Average session length in minutes of the player. E.g., 1, 30, 60,
-            ... . Not populated if there is not enough information.
+          description: Average session length in minutes of the player. E.g., 1, 30, 60, ... . Not populated if there is not enough information.
           format: float
           type: number
         churn_probability:
-          description: The probability of the player not returning to play the game in the
-            next day. E.g., 0, 0.1, 0.5, ..., 1.0. Not populated if there is not
-            enough information.
+          description: The probability of the player not returning to play the game in the next day. E.g., 0, 0.1, 0.5, ..., 1.0. Not populated if there is not enough information.
           format: float
           type: number
         days_since_last_played:
-          description: Number of days since the player last played this game. E.g., 0, 1,
-            5, 10, ... . Not populated if there is not enough information.
+          description: Number of days since the player last played this game. E.g., 0, 1, 5, 10, ... . Not populated if there is not enough information.
           format: int32
           type: integer
         high_spender_probability:
-          description: The probability of the player going to spend beyond a threshold
-            amount of money. E.g., 0, 0.25, 0.50, 0.75. Not populated if there
-            is not enough information.
+          description: The probability of the player going to spend beyond a threshold amount of money. E.g., 0, 0.25, 0.50, 0.75. Not populated if there is not enough information.
           format: float
           type: number
         kind:
-          description: Uniquely identifies the type of this resource. Value is always the
-            fixed string `games#statsResponse`.
+          description: Uniquely identifies the type of this resource. Value is always the fixed string `games#statsResponse`.
           type: string
         num_purchases:
-          description: Number of in-app purchases made by the player in this game. E.g.,
-            0, 1, 5, 10, ... . Not populated if there is not enough information.
+          description: Number of in-app purchases made by the player in this game. E.g., 0, 1, 5, 10, ... . Not populated if there is not enough information.
           format: int32
           type: integer
         num_sessions:
-          description: The approximate number of sessions of the player within the last 28
-            days, where a session begins when the player is connected to Play
-            Games Services and ends when they are disconnected. E.g., 0, 1, 5,
-            10, ... . Not populated if there is not enough information.
+          description: The approximate number of sessions of the player within the last 28 days, where a session begins when the player is connected to Play Games Services and ends when they are disconnected. E.g., 0, 1, 5, 10, ... . Not populated if there is not enough information.
           format: int32
           type: integer
         num_sessions_percentile:
-          description: The approximation of the sessions percentile of the player within
-            the last 30 days, where a session begins when the player is
-            connected to Play Games Services and ends when they are
-            disconnected. E.g., 0, 0.25, 0.5, 0.75. Not populated if there is
-            not enough information.
+          description: The approximation of the sessions percentile of the player within the last 30 days, where a session begins when the player is connected to Play Games Services and ends when they are disconnected. E.g., 0, 0.25, 0.5, 0.75. Not populated if there is not enough information.
           format: float
           type: number
         spend_percentile:
-          description: The approximate spend percentile of the player in this game. E.g.,
-            0, 0.25, 0.5, 0.75. Not populated if there is not enough
-            information.
+          description: The approximate spend percentile of the player in this game. E.g., 0, 0.25, 0.5, 0.75. Not populated if there is not enough information.
           format: float
           type: number
         spend_probability:
-          description: The probability of the player going to spend the game in the next
-            seven days. E.g., 0, 0.25, 0.50, 0.75. Not populated if there is not
-            enough information.
+          description: The probability of the player going to spend the game in the next seven days. E.g., 0, 0.25, 0.50, 0.75. Not populated if there is not enough information.
           format: float
           type: number
         total_spend_next_28_days:
-          description: The predicted amount of money that the player going to spend in the
-            next 28 days. E.g., 1, 30, 60, ... . Not populated if there is not
-            enough information.
+          description: The predicted amount of money that the player going to spend in the next 28 days. E.g., 1, 30, 60, ... . Not populated if there is not enough information.
           format: float
           type: number
       type: object
@@ -3007,8 +2777,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/drive.appdata: See, create, and delete its own
-              configuration data in your Google Drive
+            https://www.googleapis.com/auth/drive.appdata: See, create, and delete its own configuration data in your Google Drive
             https://www.googleapis.com/auth/games: Create, edit, and delete your Google Play Games activity
       type: oauth2
     Oauth2c:
@@ -3017,8 +2786,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/drive.appdata: See, create, and delete its own
-              configuration data in your Google Drive
+            https://www.googleapis.com/auth/drive.appdata: See, create, and delete its own configuration data in your Google Drive
             https://www.googleapis.com/auth/games: Create, edit, and delete your Google Play Games activity
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

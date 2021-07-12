@@ -51,11 +51,7 @@ paths:
         is the parent resource, without the operations collection id.
       operationId: cloudfunctions.operations.list
       parameters:
-        - description: "Required. A filter for matching the requested operations.<br><br>
-            The supported formats of <b>filter</b> are:<br> To query for a
-            specific function: <code>project:*,location:*,function:*</code><br>
-            To query for all of the latest operations for a project:
-            <code>project:*,latest:true</code>"
+        - description: "Required. A filter for matching the requested operations.<br><br> The supported formats of <b>filter</b> are:<br> To query for a specific function: <code>project:*,location:*,function:*</code><br> To query for all of the latest operations for a project: <code>project:*,latest:true</code>"
           in: query
           name: filter
           schema:
@@ -65,17 +61,12 @@ paths:
           name: name
           schema:
             type: string
-        - description: The maximum number of records that should be returned.<br>
-            Requested page size cannot exceed 100. If not set, the default page
-            size is 100.<br><br> Pagination is only supported when querying for
-            a specific function.
+        - description: The maximum number of records that should be returned.<br> Requested page size cannot exceed 100. If not set, the default page size is 100.<br><br> Pagination is only supported when querying for a specific function.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Token identifying which result to start with, which is returned by
-            a previous list call.<br><br> Pagination is only supported when
-            querying for a specific function.
+        - description: Token identifying which result to start with, which is returned by a previous list call.<br><br> Pagination is only supported when querying for a specific function.
           in: query
           name: pageToken
           schema:
@@ -111,18 +102,12 @@ paths:
       description: Returns a list of functions that belong to the requested project.
       operationId: cloudfunctions.projects.locations.functions.list
       parameters:
-        - description: >-
-            Required. The project and location from which the function should
-            be listed,
-
+        - description: |-
+            Required. The project and location from which the function should be listed,
             specified in the format `projects/*/locations/*`
-
             If you want to list functions in all locations, use "-" in place of a
-
             location. When listing functions in all locations, if one or more
-
             location(s) are unreachable, the response will contain functions from all
-
             reachable locations along with the names of any unreachable locations.
           in: path
           name: location
@@ -170,19 +155,14 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
-      description: >-
-        Creates a new function. If a function with the given name already
-        exists in
-
+      description: |-
+        Creates a new function. If a function with the given name already exists in
         the specified project, the long running operation will return
-
         `ALREADY_EXISTS` error.
       operationId: cloudfunctions.projects.locations.functions.create
       parameters:
-        - description: >-
-            Required. The project and location in which the function should be
-            created, specified
-
+        - description: |-
+            Required. The project and location in which the function should be created, specified
             in the format `projects/*/locations/*`
           in: path
           name: location
@@ -210,12 +190,9 @@ paths:
         - projects
   "/v1beta2/{name}":
     delete:
-      description: >-
-        Deletes a function with the given name from the specified project.
-        If the
-
+      description: |-
+        Deletes a function with the given name from the specified project. If the
         given function is used by some trigger, the trigger will be updated to
-
         remove this function.
       operationId: cloudfunctions.projects.locations.functions.delete
       parameters:
@@ -424,10 +401,8 @@ paths:
         https://cloud.google.com/storage/docs/access-control/signed-urls
       operationId: cloudfunctions.projects.locations.functions.generateDownloadUrl
       parameters:
-        - description: >-
-            The name of function for which source code Google Cloud Storage
-            signed
-
+        - description: |-
+            The name of function for which source code Google Cloud Storage signed
             URL should be generated.
           in: path
           name: name
@@ -467,29 +442,19 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/callback"
     post:
-      description: >-
+      description: |-
         Returns a signed URL for uploading a function source code.
-
         For more information about the signed URL usage see:
-
         https://cloud.google.com/storage/docs/access-control/signed-urls
-
         Once the function source code upload is complete, the used signed
-
         URL should be provided in CreateFunction or UpdateFunction request
-
         as a reference to the function source code.
 
-
         When uploading source code to the generated signed URL, please follow
-
         these restrictions:
 
-
         * Source file type should be a zip file.
-
         * Source file size should not exceed 100MB limit.
-
         * No credentials should be attached - the signed URLs provide access to the
           target bucket using internal service identity; if credentials were
           attached, the identity from the credentials would be used, but that
@@ -497,22 +462,16 @@ paths:
 
         When making a HTTP PUT request, these two headers need to be specified:
 
-
         * `content-type: application/zip`
-
         * `x-goog-content-length-range: 0,104857600`
 
-
         And this header SHOULD NOT be specified:
-
 
         * `Authorization: Bearer YOUR_TOKEN`
       operationId: cloudfunctions.projects.locations.functions.generateUploadUrl
       parameters:
-        - description: >-
-            The project and location in which the Google Cloud Storage signed
-            URL
-
+        - description: |-
+            The project and location in which the Google Cloud Storage signed URL
             should be generated, specified in the format `projects/*/locations/*`.
           in: path
           name: parent
@@ -578,9 +537,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -598,9 +555,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -637,18 +592,14 @@ components:
           description: Execution id of function invocation.
           type: string
         result:
-          description: >-
-            Result populated for successful execution of synchronous function.
-            Will
-
+          description: |-
+            Result populated for successful execution of synchronous function. Will
             not be populated if function does not return a result through context.
           type: string
       type: object
     CloudFunction:
-      description: >-
-        Describes a Cloud Function that contains user computation executed
-        in
-
+      description: |-
+        Describes a Cloud Function that contains user computation executed in
         response to an event. It encapsulate function and triggers configurations.
       properties:
         availableMemoryMb:
@@ -658,29 +609,22 @@ components:
           format: int32
           type: integer
         entryPoint:
-          description: >-
+          description: |-
             The name of the function (as defined in source code) that will be
-
             executed. Defaults to the resource name suffix, if not specified. For
-
             backward compatibility, if function with given name is not found, then the
-
             system will try to use function named "function".
-
             For Node.js this is name of a function exported by the module specified
-
             in `source_location`.
           type: string
         environmentVariables:
           additionalProperties:
             type: string
-          description: Environment variables that shall be available during function
-            execution.
+          description: Environment variables that shall be available during function execution.
           type: object
         eventTrigger:
           $ref: "#/components/schemas/EventTrigger"
-          description: A source that fires events in response to a condition in another
-            service.
+          description: A source that fires events in response to a condition in another service.
         httpsTrigger:
           $ref: "#/components/schemas/HTTPSTrigger"
           description: An HTTPS endpoint type of source that can be triggered via URL.
@@ -690,19 +634,14 @@ components:
           description: Labels associated with this Cloud Function.
           type: object
         latestOperation:
-          description: >-
-            Output only. Name of the most recent operation modifying the
-            function. If
-
+          description: |-
+            Output only. Name of the most recent operation modifying the function. If
             the function status is `DEPLOYING` or `DELETING`, then it points to the
-
             active operation.
           type: string
         maxInstances:
-          description: >-
-            The limit on the maximum number of function instances that may
-            coexist at a
-
+          description: |-
+            The limit on the maximum number of function instances that may coexist at a
             given time.
           format: int32
           type: integer
@@ -712,44 +651,28 @@ components:
             globally and match pattern `projects/*/locations/*/functions/*`
           type: string
         network:
-          description: >-
+          description: |-
             The VPC Network that this cloud function can connect to. It can be
-
             either the fully-qualified URI, or the short name of the network resource.
-
             If the short network name is used, the network must belong to the same
-
             project. Otherwise, it must belong to a project within the same
-
             organization. The format of this field is either
-
             `projects/{project}/global/networks/{network}` or `{network}`, where
-
             {project} is a project id where the network is defined, and {network} is
-
             the short name of the network.
 
-
             This field is mutually exclusive with `vpc_connector` and will be replaced
-
             by it.
 
-
             See [the VPC documentation](https://cloud.google.com/compute/docs/vpc) for
-
             more information on connecting Cloud projects.
           type: string
         runtime:
-          description: >-
-            The runtime in which to run the function. Required when deploying a
-            new
-
+          description: |-
+            The runtime in which to run the function. Required when deploying a new
             function, optional when updating an existing function. For a complete
-
             list of possible choices, see the
-
             [`gcloud` command
-
             reference](/sdk/gcloud/reference/functions/deploy#--runtime).
           type: string
         serviceAccount:
@@ -758,47 +681,32 @@ components:
             `{project_id}@appspot.gserviceaccount.com`.
           type: string
         sourceArchiveUrl:
-          description: >-
-            The Google Cloud Storage URL, starting with gs://, pointing to the
-            zip
-
+          description: |-
+            The Google Cloud Storage URL, starting with gs://, pointing to the zip
             archive which contains the function.
           type: string
         sourceRepository:
           $ref: "#/components/schemas/SourceRepository"
           description: The hosted repository where the function is defined.
         sourceRepositoryUrl:
-          description: >-
-            The URL pointing to the hosted repository where the function is
-            defined.
-
+          description: |-
+            The URL pointing to the hosted repository where the function is defined.
             There are supported Cloud Source Repository URLs in the following
-
             formats:
 
-
             To refer to a specific commit:
-
             `https://source.developers.google.com/projects/*/repos/*/revisions/*/paths/*`
-
             To refer to a moveable alias (branch):
-
             `https://source.developers.google.com/projects/*/repos/*/moveable-aliases/*/paths/*`
-
             In particular, to refer to HEAD use `master` moveable alias.
-
             To refer to a specific fixed alias (tag):
-
             `https://source.developers.google.com/projects/*/repos/*/fixed-aliases/*/paths/*`
-
 
             You may omit `paths/*` if you want to use the main directory.
           type: string
         sourceUploadUrl:
-          description: >-
-            The Google Cloud Storage signed URL used for source uploading,
-            generated
-
+          description: |-
+            The Google Cloud Storage signed URL used for source uploading, generated
             by google.cloud.functions.v1beta2.GenerateUploadUrl
           type: string
         status:
@@ -822,32 +730,22 @@ components:
           format: google-datetime
           type: string
         versionId:
-          description: >-
-            Output only. The version identifier of the Cloud Function. Each
-            deployment attempt
-
+          description: |-
+            Output only. The version identifier of the Cloud Function. Each deployment attempt
             results in a new version of a function being created.
           format: int64
           type: string
         vpcConnector:
-          description: >-
-            The VPC Network Connector that this cloud function can connect to.
-            It can
-
+          description: |-
+            The VPC Network Connector that this cloud function can connect to. It can
             be either the fully-qualified URI, or the short name of the network
-
             connector resource. The format of this field is
-
             `projects/*/locations/*/connectors/*`
 
-
             This field is mutually exclusive with `network` field and will eventually
-
             replace it.
 
-
             See [the VPC documentation](https://cloud.google.com/compute/docs/vpc) for
-
             more information on connecting Cloud projects.
           type: string
       type: object
@@ -857,51 +755,35 @@ components:
         service.
       properties:
         eventType:
-          description: >-
-            `event_type` names contain the service that is sending an event and
-            the
-
+          description: |-
+            `event_type` names contain the service that is sending an event and the
             kind of event that was fired. Must be of the form
-
             `providers/*/eventTypes/*` e.g. Directly handle a Message published to
-
             Google Cloud Pub/Sub `providers/cloud.pubsub/eventTypes/topic.publish`.
 
-
             Handle an object changing in Google Cloud Storage:
-
             `providers/cloud.storage/eventTypes/object.change`
 
-
             Handle a write to the Firebase Realtime Database:
-
             `providers/google.firebase.database/eventTypes/ref.write`
           type: string
         failurePolicy:
           $ref: "#/components/schemas/FailurePolicy"
           description: Specifies policy for failed executions.
         resource:
-          description: >-
-            Which instance of the source's service should send events. E.g. for
-            Pub/Sub
-
+          description: |-
+            Which instance of the source's service should send events. E.g. for Pub/Sub
             this would be a Pub/Sub topic at `projects/*/topics/*`. For Google Cloud
-
             Storage this would be a bucket at `projects/*/buckets/*`. For any source
-
             that only supports one instance per-project, this should be the name of the
-
             project (`projects/*`)
           type: string
         service:
-          description: >-
+          description: |-
             The hostname of the service that should be observed.
 
-
             If no string is provided, the default service implementing the API will
-
             be used. For example, `storage.googleapis.com` is the default for all
-
             event types in the `google.storage` namespace.
           type: string
       type: object
@@ -926,10 +808,8 @@ components:
       description: Response of `GenerateDownloadUrl` method.
       properties:
         downloadUrl:
-          description: >-
-            The generated Google Cloud Storage signed URL that should be used
-            for
-
+          description: |-
+            The generated Google Cloud Storage signed URL that should be used for
             function source code download.
           type: string
       type: object
@@ -941,12 +821,9 @@ components:
       description: Response of `GenerateUploadUrl` method.
       properties:
         uploadUrl:
-          description: >-
-            The generated Google Cloud Storage signed URL that should be used
-            for a
-
+          description: |-
+            The generated Google Cloud Storage signed URL that should be used for a
             function source code upload. The uploaded file should be a zip archive
-
             which contains a function.
           type: string
       type: object
@@ -973,10 +850,8 @@ components:
             to get more functions.
           type: string
         unreachable:
-          description: >-
-            Locations that could not be reached. The response does not include
-            any
-
+          description: |-
+            Locations that could not be reached. The response does not include any
             functions from these locations.
           items:
             type: string
@@ -1001,8 +876,7 @@ components:
           description: The standard List next-page token.
           type: string
         operations:
-          description: A list of operations that matches the specified filter in the
-            request.
+          description: A list of operations that matches the specified filter in the request.
           items:
             $ref: "#/components/schemas/Operation"
           type: array
@@ -1029,34 +903,25 @@ components:
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: >-
-            Service-specific metadata. For example the available capacity at
-            the given
-
+          description: |-
+            Service-specific metadata. For example the available capacity at the given
             location.
           type: object
         name:
-          description: >-
-            Resource name for the location, which may vary between
-            implementations.
-
+          description: |-
+            Resource name for the location, which may vary between implementations.
             For example: `"projects/example-project/locations/us-east1"`
           type: string
       type: object
     Operation:
-      description: >-
-        This resource represents a long-running operation that is the
-        result of a
-
+      description: |-
+        This resource represents a long-running operation that is the result of a
         network API call.
       properties:
         done:
-          description: >-
-            If the value is `false`, it means the operation is still in
-            progress.
-
+          description: |-
+            If the value is `false`, it means the operation is still in progress.
             If `true`, the operation is completed, and either `error` or `response` is
-
             available.
           type: boolean
         error:
@@ -1065,44 +930,29 @@ components:
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: >-
-            Service-specific metadata associated with the operation.  It
-            typically
-
+          description: |-
+            Service-specific metadata associated with the operation.  It typically
             contains progress information and common metadata such as create time.
-
             Some services might not provide such metadata.  Any method that returns a
-
             long-running operation should document the metadata type, if any.
           type: object
         name:
-          description: >-
-            The server-assigned name, which is only unique within the same
-            service that
-
+          description: |-
+            The server-assigned name, which is only unique within the same service that
             originally returns it. If you use the default HTTP mapping, the
-
             `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: >-
-            The normal response of the operation in case of success.  If the
-            original
-
+          description: |-
+            The normal response of the operation in case of success.  If the original
             method returns no data on success, such as `Delete`, the response is
-
             `google.protobuf.Empty`.  If the original method is standard
-
             `Get`/`Create`/`Update`, the response should be the resource.  For other
-
             methods, the response should have the type `XxxResponse`, where `Xxx`
-
             is the original method name.  For example, if the original method name
-
             is `TakeSnapshot()`, the inferred response type is
-
             `TakeSnapshotResponse`.
           type: object
       type: object
@@ -1110,10 +960,8 @@ components:
       description: Metadata describing an Operation
       properties:
         buildId:
-          description: >-
-            The Cloud Build ID of the function created or updated by an API
-            call.
-
+          description: |-
+            The Cloud Build ID of the function created or updated by an API call.
             This field is only populated for Create and Update operations.
           type: string
         request:
@@ -1178,15 +1026,11 @@ components:
           type: string
       type: object
     Retry:
-      description: >-
+      description: |-
         Describes the retry policy in case of function's execution failure.
-
         A function execution will be retried on any failure.
-
         A failed execution will be retried up to 7 days with an exponential backoff
-
         (capped at 10 seconds).
-
         Retried execution is charged as any other execution.
       properties: {}
       type: object
@@ -1197,43 +1041,29 @@ components:
           description: The name of the branch from which the function should be fetched.
           type: string
         deployedRevision:
-          description: >-
-            Output only. The id of the revision that was resolved at the moment
-            of
-
+          description: |-
+            Output only. The id of the revision that was resolved at the moment of
             function creation or update. For example when a user deployed from a
-
             branch, it will be the revision id of the latest change on this branch at
-
             that time. If user deployed from revision then this value will be always
-
             equal to the revision specified by the user.
           type: string
         repositoryUrl:
-          description: >-
-            URL to the hosted repository where the function is defined. Only
-            paths in
-
+          description: |-
+            URL to the hosted repository where the function is defined. Only paths in
             https://source.developers.google.com domain are supported. The path should
-
             contain the name of the repository.
           type: string
         revision:
-          description: >-
-            The id of the revision that captures the state of the repository
-            from
-
+          description: |-
+            The id of the revision that captures the state of the repository from
             which the function should be fetched.
           type: string
         sourcePath:
-          description: >-
-            The path within the repository where the function is defined. The
-            path
-
+          description: |-
+            The path within the repository where the function is defined. The path
             should point to the directory where Cloud Functions files are located. Use
-
             "/" if the function is defined directly in the root directory of a
-
             repository.
           type: string
         tag:
@@ -1243,19 +1073,13 @@ components:
           type: string
       type: object
     Status:
-      description: >-
-        The `Status` type defines a logical error model that is suitable
-        for
-
+      description: |-
+        The `Status` type defines a logical error model that is suitable for
         different programming environments, including REST APIs and RPC APIs. It is
-
         used by [gRPC](https://github.com/grpc). Each `Status` message contains
-
         three pieces of data: error code, error message, and error details.
 
-
         You can find out more about this error model and how to work with it in the
-
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       properties:
         code:
@@ -1263,10 +1087,8 @@ components:
           format: int32
           type: integer
         details:
-          description: >-
-            A list of messages that carry the error details.  There is a common
-            set of
-
+          description: |-
+            A list of messages that carry the error details.  There is a common set of
             message types for APIs to use.
           items:
             additionalProperties:

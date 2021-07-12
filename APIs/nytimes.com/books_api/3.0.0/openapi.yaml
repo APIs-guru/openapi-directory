@@ -2,8 +2,7 @@ openapi: 3.0.0
 servers:
   - url: https://api.nytimes.com/svc/books/v3
 info:
-  description: The Books API provides information about book reviews and The New
-    York Times bestsellers lists.
+  description: The Books API provides information about book reviews and The New York Times bestsellers lists.
   termsOfService: http://developer.nytimes.com/tou
   title: Books API
   version: 3.0.0
@@ -28,25 +27,21 @@ paths:
       description: ""
       operationId: GET_lists-format
       parameters:
-        - description: >-
-            The name of the Times best-seller list. To get valid values, use a
-            list names request.
-
+        - description: |-
+            The name of the Times best-seller list. To get valid values, use a list names request.
 
             Be sure to replace spaces with hyphens (e.g., e-book-fiction or hardcover-fiction, not E-Book Fiction or Hardcover Fiction). (The parameter is not case sensitive.)
           in: query
           name: list
           schema:
             type: string
-        - description: The number of weeks that the best seller has been on list-name, as
-            of bestsellers-date
+        - description: The number of weeks that the best seller has been on list-name, as of bestsellers-date
           in: query
           name: weeks-on-list
           schema:
             type: integer
-        - description: >-
+        - description: |-
             YYYY-MM-DD
-
 
             The week-ending date for the sales reflected on list-name. Times best-seller lists are compiled using available book sale data. The bestsellers-date may be significantly earlier than published-date. For additional information, see the explanation at the bottom of any best-seller list page on NYTimes.com (example: Hardcover Fiction, published Dec. 5 but reflecting sales to Nov. 29).
           in: query
@@ -54,8 +49,7 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: YYYY-MM-DD  The date the best-seller list was published on
-            NYTimes.com (compare bestsellers-date)
+        - description: YYYY-MM-DD  The date the best-seller list was published on NYTimes.com (compare bestsellers-date)
           in: query
           name: date
           schema:
@@ -65,9 +59,8 @@ paths:
           name: isbn
           schema:
             type: string
-        - description: >-
+        - description: |-
             YYYY-MM-DD
-
 
             The date the best-seller list was published on NYTimes.com (compare bestsellers-date)
           in: query
@@ -79,8 +72,7 @@ paths:
           name: rank
           schema:
             type: integer
-        - description: The rank of the best seller on list-name one week prior to
-            bestsellers-date
+        - description: The rank of the best seller on list-name one week prior to bestsellers-date
           in: query
           name: rank-last-week
           schema:
@@ -118,8 +110,7 @@ paths:
                             author: Debbie Macomber
                             contributor: by Debbie Macomber
                             contributor_note: ""
-                            description: A mother and her daughter-in-law both leave unhappy marriages and
-                              take up with new men.
+                            description: A mother and her daughter-in-law both leave unhappy marriages and take up with new men.
                             price: 0
                             primary_isbn10: "0553391925"
                             primary_isbn13: "9780553391923"
@@ -248,45 +239,35 @@ paths:
           name: age-group
           schema:
             type: string
-        - description: >-
-            The author of the best seller. The author field does not include
-            additional contributors (see Data Structure for more details about
-            the author and contributor fields).
-
+        - description: |-
+            The author of the best seller. The author field does not include additional contributors (see Data Structure for more details about the author and contributor fields).
 
             When searching the author field, you can specify any combination of first, middle and last names.
-
 
             When sort-by is set to author, the results will be sorted by author's first name. 
           in: query
           name: author
           schema:
             type: string
-        - description: >-
-            The author of the best seller, as well as other contributors such
-            as the illustrator (to search or sort by author name only, use
-            author instead).
-
+        - description: |-
+            The author of the best seller, as well as other contributors such as the illustrator (to search or sort by author name only, use author instead).
 
             When searching, you can specify any combination of first, middle and last names of any of the contributors.
-
 
             When sort-by is set to contributor, the results will be sorted by the first name of the first contributor listed. 
           in: query
           name: contributor
           schema:
             type: string
-        - description: >-
+        - description: |-
             International Standard Book Number, 10 or 13 digits
-
 
             A best seller may have both 10-digit and 13-digit ISBNs, and may have multiple ISBNs of each type. To search on multiple ISBNs, separate the ISBNs with semicolons (example: 9780446579933;0061374229).
           in: query
           name: isbn
           schema:
             type: string
-        - description: The publisher's list price of the best seller, including decimal
-            point
+        - description: The publisher's list price of the best seller, including decimal point
           in: query
           name: price
           schema:
@@ -296,9 +277,8 @@ paths:
           name: publisher
           schema:
             type: string
-        - description: >-
+        - description: |-
             The title of the best seller
-
 
             When searching, you can specify a portion of a title or a full title.
           in: query
@@ -498,12 +478,10 @@ paths:
       description: ""
       operationId: GET_lists-overview-format
       parameters:
-        - description: >-
+        - description: |-
             The best-seller list publication date. YYYY-MM-DD
 
-
             You do not have to specify the exact date the list was published. The service will search forward (into the future) for the closest publication date to the date you specify. For example, a request for lists/overview/2013-05-22 will retrieve the list that was published on 05-26.
-
 
             If you do not include a published_date, the current week's best-sellers lists will be returned.
           in: query
@@ -532,11 +510,7 @@ paths:
                               contributor: by Clive Cussler and Justin Scott
                               contributor_note: ""
                               created_date: 2016-03-10 12:00:22
-                              description: In the ninth book in this series, set in 1906, the New York
-                                detective Isaac Bell contends with a crime boss
-                                passing as a respectable businessman and a
-                                tycoon’s plot against President Theodore
-                                Roosevelt.
+                              description: In the ninth book in this series, set in 1906, the New York detective Isaac Bell contends with a crime boss passing as a respectable businessman and a tycoon’s plot against President Theodore Roosevelt.
                               price: 0
                               primary_isbn10: "0698406427"
                               primary_isbn13: "9780698406421"
@@ -636,19 +610,16 @@ paths:
           name: isbn
           schema:
             type: integer
-        - description: >-
-            The name of the Times best-seller list. To get valid values, use a
-            list names request.
-
+        - description: |-
+            The name of the Times best-seller list. To get valid values, use a list names request.
 
             Be sure to replace spaces with hyphens (e.g., e-book-fiction or hardcover-fiction, not E-Book Fiction or Hardcover Fiction). (The parameter is not case sensitive.)
           in: query
           name: list-name
           schema:
             type: string
-        - description: >-
+        - description: |-
             YYYY-MM-DD
-
 
             The date the best-seller list was published on NYTimes.com (compare bestsellers-date)
           in: query
@@ -656,17 +627,15 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: >-
+        - description: |-
             YYYY-MM-DD
-
 
             The week-ending date for the sales reflected on list-name. Times best-seller lists are compiled using available book sale data. The bestsellers-date may be significantly earlier than published-date. For additional information, see the explanation at the bottom of any best-seller list page on NYTimes.com (example: Hardcover Fiction, published Dec. 5 but reflecting sales to Nov. 29).
           in: query
           name: bestsellers-date
           schema:
             type: string
-        - description: The number of weeks that the best seller has been on list-name, as
-            of bestsellers-date
+        - description: The number of weeks that the best seller has been on list-name, as of bestsellers-date
           in: query
           name: weeks-on-list
           schema:
@@ -676,8 +645,7 @@ paths:
           name: rank
           schema:
             type: string
-        - description: The rank of the best seller on list-name one week prior to
-            bestsellers-date
+        - description: The rank of the best seller on list-name one week prior to bestsellers-date
           in: query
           name: rank-last-week
           schema:
@@ -688,8 +656,7 @@ paths:
           schema:
             multipleOf: 20
             type: integer
-        - description: The default is ASC (ascending). The sort-order parameter is used
-            with the sort-by parameter — for details, see each request type.
+        - description: The default is ASC (ascending). The sort-order parameter is used with the sort-by parameter — for details, see each request type.
           in: query
           name: sort-order
           schema:
@@ -720,8 +687,7 @@ paths:
                           contributor: by Andy Weir
                           contributor_note: ""
                           dagger: 0
-                          description: Separated from his crew, an astronaut embarks on a quest to stay
-                            alive on Mars. The basis of the movie.
+                          description: Separated from his crew, an astronaut embarks on a quest to stay alive on Mars. The basis of the movie.
                           first_chapter_link: ""
                           isbns:
                             - isbn10: "0804139024"
@@ -839,8 +805,7 @@ paths:
         required: true
         schema:
           type: string
-      - description: Name of the Best Sellers List. You can get the full list from
-          /lists/names.json
+      - description: Name of the Best Sellers List. You can get the full list from /lists/names.json
         in: path
         name: list
         required: true
@@ -851,20 +816,17 @@ paths:
       description: ""
       operationId: GET_reviews-format
       parameters:
-        - description: Searching by ISBN is the recommended method. You can enter 10- or
-            13-digit ISBNs.
+        - description: Searching by ISBN is the recommended method. You can enter 10- or 13-digit ISBNs.
           in: query
           name: isbn
           schema:
             type: integer
-        - description: You’ll need to enter the full title of the book. Spaces in the
-            title will be converted into the characters %20.
+        - description: You’ll need to enter the full title of the book. Spaces in the title will be converted into the characters %20.
           in: query
           name: title
           schema:
             type: string
-        - description: You’ll need to enter the author’s first and last name, separated by
-            a space. This space will be converted into the characters %20.
+        - description: You’ll need to enter the author’s first and last name, separated by a space. This space will be converted into the characters %20.
           in: query
           name: author
           schema:
@@ -889,8 +851,7 @@ paths:
                         isbn13:
                           - "9780307476463"
                         publication_dt: 2011-11-10
-                        summary: In “1Q84,” the Japanese novelist Haruki Murakami writes about
-                          characters in a Tokyo with two moons.
+                        summary: In “1Q84,” the Japanese novelist Haruki Murakami writes about characters in a Tokyo with two moons.
                         url: http://www.nytimes.com/2011/11/10/books/1q84-by-haruki-murakami-review.html
                     status: OK
               schema:

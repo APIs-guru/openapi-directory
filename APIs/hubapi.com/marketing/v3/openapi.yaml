@@ -2,14 +2,10 @@ openapi: 3.0.1
 servers:
   - url: https://api.hubapi.com/
 info:
-  description: >
-    These APIs allow you to interact with HubSpot's Marketing Events
-    Extension. It allows you to:
-
+  description: |
+    These APIs allow you to interact with HubSpot's Marketing Events Extension. It allows you to:
     * Create, Read or update Marketing Event information in HubSpot
-
     * Specify whether a HubSpot contact has registered, attended or cancelled a registration to a Marketing Event.
-
     * Specify a URL that can be called to get the details of a Marketing Event.
   title: Marketing Events Extension
   version: v3
@@ -24,16 +20,13 @@ info:
 tags:
   - description: Operations to interact with URL settings for an external application.
     name: Settings
-  - description: Endpoints that allow you to create or modify the state of an
-      individual Marketing Event in HubSpot.
+  - description: Endpoints that allow you to create or modify the state of an individual Marketing Event in HubSpot.
     name: Basic
-  - description: Endpoints that allow you to create or modify the state of multiple
-      Marketing Events in HubSpot.
+  - description: Endpoints that allow you to create or modify the state of multiple Marketing Events in HubSpot.
     name: Batch
   - description: Endpoints that allow you to search for Marketing Events in HubSpot.
     name: Search
-  - description: Operations to mark HubSpot contacts as registered, attended or
-      cancelled a registration to a Marketing Event.
+  - description: Operations to mark HubSpot contacts as registered, attended or cancelled a registration to a Marketing Event.
     name: Subscriber State Changes
 paths:
   /marketing/v3/marketing-events-beta/events:
@@ -86,8 +79,7 @@ paths:
         - Batch
   /marketing/v3/marketing-events-beta/events/search:
     get:
-      description: Search for marketing events that have an event id that starts with
-        the query string
+      description: Search for marketing events that have an event id that starts with the query string
       operationId: get-/marketing/v3/marketing-events-beta/events/search
       parameters:
         - description: The partial event id to search for
@@ -103,8 +95,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CollectionResponseMarketingEventExternalUniqueIdent\
-                  ifierNoPaging"
+                $ref: "#/components/schemas/CollectionResponseMarketingEventExternalUniqueIdentifierNoPaging"
           description: successful operation
         default:
           $ref: "#/components/responses/Error"
@@ -117,9 +108,7 @@ paths:
         - Search
   /marketing/v3/marketing-events-beta/events/upsert:
     post:
-      description: Upset multiple Marketing Event. If there is an existing Marketing
-        event with the specified id, it will be updated; otherwise a new event
-        will be created.
+      description: Upset multiple Marketing Event. If there is an existing Marketing event with the specified id, it will be updated; otherwise a new event will be created.
       operationId: post-/marketing/v3/marketing-events-beta/events/upsert
       requestBody:
         content:
@@ -179,8 +168,7 @@ paths:
       tags:
         - Basic
     get:
-      description: Returns the details of the Marketing Event with the specified id,
-        if one exists.
+      description: Returns the details of the Marketing Event with the specified id, if one exists.
       operationId: get-/marketing/v3/marketing-events-beta/events/{externalEventId}
       parameters:
         - description: The id of the marketing event to return
@@ -259,9 +247,7 @@ paths:
       tags:
         - Basic
     put:
-      description: Upsets a Marketing Event. If there is an existing Marketing event
-        with the specified id, it will be updated; otherwise a new event will be
-        created.
+      description: Upsets a Marketing Event. If there is an existing Marketing event with the specified id, it will be updated; otherwise a new event will be created.
       operationId: put-/marketing/v3/marketing-events-beta/events/{externalEventId}
       parameters:
         - description: The id of the marketing event to upsert
@@ -334,8 +320,7 @@ paths:
         - Basic
   "/marketing/v3/marketing-events-beta/events/{externalEventId}/{subscriberState}/email-upsert":
     post:
-      description: Record a subscription state between multiple HubSpot contacts and a
-        marketing event, using contact email addresses.
+      description: Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses.
       operationId: post-/marketing/v3/marketing-events-beta/events/{externalEventId}/{subscriberState}/email-upsert
       parameters:
         - description: The id of the marketing event
@@ -346,8 +331,7 @@ paths:
           schema:
             type: string
           style: simple
-        - description: The new subscriber state for the HubSpot contacts and the specified
-            marketing event
+        - description: The new subscriber state for the HubSpot contacts and the specified marketing event
           explode: false
           in: path
           name: subscriberState
@@ -382,8 +366,7 @@ paths:
         - Subscriber State Changes
   "/marketing/v3/marketing-events-beta/events/{externalEventId}/{subscriberState}/upsert":
     post:
-      description: Record a subscription state between multiple HubSpot contacts and a
-        marketing event, using HubSpot contact ids.
+      description: Record a subscription state between multiple HubSpot contacts and a marketing event, using HubSpot contact ids.
       operationId: post-/marketing/v3/marketing-events-beta/events/{externalEventId}/{subscriberState}/upsert
       parameters:
         - description: The id of the marketing event
@@ -394,8 +377,7 @@ paths:
           schema:
             type: string
           style: simple
-        - description: The new subscriber state for the HubSpot contacts and the specified
-            marketing event
+        - description: The new subscriber state for the HubSpot contacts and the specified marketing event
           explode: false
           in: path
           name: subscriberState
@@ -614,8 +596,7 @@ components:
               - scope2
           type: object
         correlationId:
-          description: A unique identifier for the request. Include this value with any
-            error reports or support tickets
+          description: A unique identifier for the request. Include this value with any error reports or support tickets
           example: aeb5f871-7f07-4993-9211-075dc63e7cbf
           format: uuid
           type: string
@@ -627,17 +608,14 @@ components:
         links:
           additionalProperties:
             type: string
-          description: A map of link names to associated URIs containing documentation
-            about the error or recommended remediation steps
+          description: A map of link names to associated URIs containing documentation about the error or recommended remediation steps
           type: object
         message:
-          description: A human readable message describing the error along with
-            remediation steps where appropriate
+          description: A human readable message describing the error along with remediation steps where appropriate
           example: An error occurred
           type: string
         subCategory:
-          description: A specific category that contains more specific detail about the
-            error
+          description: A specific category that contains more specific detail about the error
           type: string
       required:
         - category
@@ -736,12 +714,10 @@ components:
           description: The name of the field or parameter in which the error was found.
           type: string
         message:
-          description: A human readable message describing the error along with
-            remediation steps where appropriate
+          description: A human readable message describing the error along with remediation steps where appropriate
           type: string
         subCategory:
-          description: A specific category that contains more specific detail about the
-            error
+          description: A specific category that contains more specific detail about the error
           type: string
       required:
         - message
@@ -762,9 +738,7 @@ components:
     EventDetailSettingsUrl:
       properties:
         eventDetailsUrl:
-          description: "The url that will be used to fetch marketing event details by id.
-            Must contain a `%s` character sequence that will be substituted with
-            the event id. For example: `https://my.event.app/events/%s`"
+          description: "The url that will be used to fetch marketing event details by id. Must contain a `%s` character sequence that will be substituted with the event id. For example: `https://my.event.app/events/%s`"
           type: string
       required:
         - eventDetailsUrl
@@ -772,12 +746,8 @@ components:
     MarketingEventCreateRequestParams:
       properties:
         customProperties:
-          description: >
-            A list of PropertyValues. These can be whatever kind of property
-            names and values you want. However, they must already exist on the
-            HubSpot account's definition of the MarketingEvent Object. If they
-            don't they will be filtered out and not set.
-
+          description: |
+            A list of PropertyValues. These can be whatever kind of property names and values you want. However, they must already exist on the HubSpot account's definition of the MarketingEvent Object. If they don't they will be filtered out and not set.
             In order to do this you'll need to create a new PropertyGroup on the HubSpot account's MarketingEvent object for your specific app and create the Custom Property you want to track on that HubSpot account. Do not create any new default properties on the MarketingEvent object as that will apply to all HubSpot accounts.
           items:
             $ref: "#/components/schemas/PropertyValue"
@@ -787,8 +757,7 @@ components:
           format: date-time
           type: string
         eventCancelled:
-          description: Indicates if the marketing event has been cancelled.  Defaults to
-            `false`
+          description: Indicates if the marketing event has been cancelled.  Defaults to `false`
           type: boolean
         eventDescription:
           description: The description of the marketing event.
@@ -800,16 +769,13 @@ components:
           description: The name of the organizer of the marketing event.
           type: string
         eventType:
-          description: "Describes what type of event this is.  For example: `WEBINAR`,
-            `CONFERENCE`, `WORKSHOP`"
+          description: "Describes what type of event this is.  For example: `WEBINAR`, `CONFERENCE`, `WORKSHOP`"
           type: string
         eventUrl:
-          description: A URL in the external event application where the marketing event
-            can be managed.
+          description: A URL in the external event application where the marketing event can be managed.
           type: string
         externalAccountId:
-          description: The accountId that is associated with this marketing event in the
-            external event application.
+          description: The accountId that is associated with this marketing event in the external event application.
           type: string
         externalEventId:
           description: The id of the marketing event in the external event application.
@@ -828,12 +794,8 @@ components:
     MarketingEventDefaultResponse:
       properties:
         customProperties:
-          description: >
-            A list of PropertyValues. These can be whatever kind of property
-            names and values you want. However, they must already exist on the
-            HubSpot account's definition of the MarketingEvent Object. If they
-            don't they will be filtered out and not set.
-
+          description: |
+            A list of PropertyValues. These can be whatever kind of property names and values you want. However, they must already exist on the HubSpot account's definition of the MarketingEvent Object. If they don't they will be filtered out and not set.
             In order to do this you'll need to create a new PropertyGroup on the HubSpot account's MarketingEvent object for your specific app and create the Custom Property you want to track on that HubSpot account. Do not create any new default properties on the MarketingEvent object as that will apply to all HubSpot accounts.
           items:
             $ref: "#/components/schemas/PropertyValue"
@@ -858,8 +820,7 @@ components:
           description: The type of the marketing event.
           type: string
         eventUrl:
-          description: The URL in the external event application where the marketing event
-            can be managed.
+          description: The URL in the external event application where the marketing event can be managed.
           type: string
         startDateTime:
           description: The start date and time of the marketing event.
@@ -873,9 +834,7 @@ components:
     MarketingEventEmailSubscriber:
       properties:
         email:
-          description: The email address of the contact in HubSpot to associate with the
-            event. Note that the contact must already exist in HubSpot; a
-            contact will not be created.
+          description: The email address of the contact in HubSpot to associate with the event. Note that the contact must already exist in HubSpot; a contact will not be created.
           type: string
         interactionDateTime:
           description: The date and time at which the contact subscribed to the event.
@@ -888,13 +847,11 @@ components:
     MarketingEventExternalUniqueIdentifier:
       properties:
         appId:
-          description: The id of the application that created the marketing event in
-            HubSpot.
+          description: The id of the application that created the marketing event in HubSpot.
           format: int32
           type: integer
         externalAccountId:
-          description: The accountId that is associated with this marketing event in the
-            external event application.
+          description: The accountId that is associated with this marketing event in the external event application.
           type: string
         externalEventId:
           description: The id of the marketing event in the external event application.
@@ -910,12 +867,8 @@ components:
           format: date-time
           type: string
         customProperties:
-          description: >
-            A list of PropertyValues. These can be whatever kind of property
-            names and values you want. However, they must already exist on the
-            HubSpot account's definition of the MarketingEvent Object. If they
-            don't they will be filtered out and not set.
-
+          description: |
+            A list of PropertyValues. These can be whatever kind of property names and values you want. However, they must already exist on the HubSpot account's definition of the MarketingEvent Object. If they don't they will be filtered out and not set.
             In order to do this you'll need to create a new PropertyGroup on the HubSpot account's MarketingEvent object for your specific app and create the Custom Property you want to track on that HubSpot account. Do not create any new default properties on the MarketingEvent object as that will apply to all HubSpot accounts.
           items:
             $ref: "#/components/schemas/PropertyValue"
@@ -940,8 +893,7 @@ components:
           description: The type of the marketing event.
           type: string
         eventUrl:
-          description: A URL in the external event application where the marketing event
-            can be managed.
+          description: A URL in the external event application where the marketing event can be managed.
           type: string
         id:
           type: string
@@ -967,20 +919,15 @@ components:
           format: int32
           type: integer
         cancellations:
-          description: The number of HubSpot contacts that registered for this marketing
-            event, but later cancelled their registration.
+          description: The number of HubSpot contacts that registered for this marketing event, but later cancelled their registration.
           format: int32
           type: integer
         createdAt:
           format: date-time
           type: string
         customProperties:
-          description: >
-            A list of PropertyValues. These can be whatever kind of property
-            names and values you want. However, they must already exist on the
-            HubSpot account's definition of the MarketingEvent Object. If they
-            don't they will be filtered out and not set.
-
+          description: |
+            A list of PropertyValues. These can be whatever kind of property names and values you want. However, they must already exist on the HubSpot account's definition of the MarketingEvent Object. If they don't they will be filtered out and not set.
             In order to do this you'll need to create a new PropertyGroup on the HubSpot account's MarketingEvent object for your specific app and create the Custom Property you want to track on that HubSpot account. Do not create any new default properties on the MarketingEvent object as that will apply to all HubSpot accounts.
           items:
             $ref: "#/components/schemas/PropertyValue"
@@ -1005,8 +952,7 @@ components:
           description: The type of the marketing event.
           type: string
         eventUrl:
-          description: A URL in the external event application where the marketing event
-            can be managed.
+          description: A URL in the external event application where the marketing event can be managed.
           type: string
         externalEventId:
           description: The id of the marketing event in the external event application.
@@ -1014,14 +960,11 @@ components:
         id:
           type: string
         noShows:
-          description: The number of HubSpot contacts that registered for this marketing
-            event, but did not attend. This field only had a value when the
-            event is over.
+          description: The number of HubSpot contacts that registered for this marketing event, but did not attend. This field only had a value when the event is over.
           format: int32
           type: integer
         registrants:
-          description: The number of HubSpot contacts that registered for this marketing
-            event.
+          description: The number of HubSpot contacts that registered for this marketing event.
           format: int32
           type: integer
         startDateTime:
@@ -1060,12 +1003,8 @@ components:
     MarketingEventUpdateRequestParams:
       properties:
         customProperties:
-          description: >
-            A list of PropertyValues. These can be whatever kind of property
-            names and values you want. However, they must already exist on the
-            HubSpot account's definition of the MarketingEvent Object. If they
-            don't they will be filtered out and not set.
-
+          description: |
+            A list of PropertyValues. These can be whatever kind of property names and values you want. However, they must already exist on the HubSpot account's definition of the MarketingEvent Object. If they don't they will be filtered out and not set.
             In order to do this you'll need to create a new PropertyGroup on the HubSpot account's MarketingEvent object for your specific app and create the Custom Property you want to track on that HubSpot account. Do not create any new default properties on the MarketingEvent object as that will apply to all HubSpot accounts.
           items:
             $ref: "#/components/schemas/PropertyValue"
@@ -1075,8 +1014,7 @@ components:
           format: date-time
           type: string
         eventCancelled:
-          description: Indicates if the marketing event has been cancelled. Defaults to
-            `false`
+          description: Indicates if the marketing event has been cancelled. Defaults to `false`
           type: boolean
         eventDescription:
           description: The description of the marketing event.
@@ -1088,12 +1026,10 @@ components:
           description: The name of the organizer of the marketing event.
           type: string
         eventType:
-          description: "Describes what type of event this is.  For example: `WEBINAR`,
-            `CONFERENCE`, `WORKSHOP`"
+          description: "Describes what type of event this is.  For example: `WEBINAR`, `CONFERENCE`, `WORKSHOP`"
           type: string
         eventUrl:
-          description: A URL in the external event application where the marketing event
-            can be managed.
+          description: A URL in the external event application where the marketing event can be managed.
           type: string
         startDateTime:
           description: The start date and time of the marketing event.
@@ -1192,8 +1128,7 @@ components:
         sourceLabel:
           type: string
         sourceMetadata:
-          description: "Source metadata encoded as a base64 string. For example:
-            `ZXhhbXBsZSBzdHJpbmc=`"
+          description: "Source metadata encoded as a base64 string. For example: `ZXhhbXBsZSBzdHJpbmc=`"
           type: string
         sourceVid:
           items:

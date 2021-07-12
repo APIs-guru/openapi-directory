@@ -596,7 +596,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `5000`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -1633,7 +1633,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `5000`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -2210,7 +2210,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `5000`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -3660,7 +3660,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `5000`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:

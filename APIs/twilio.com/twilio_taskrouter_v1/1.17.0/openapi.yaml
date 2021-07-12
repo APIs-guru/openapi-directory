@@ -31,14 +31,12 @@ paths:
       description: ""
       operationId: ListWorkspace
       parameters:
-        - description: The `friendly_name` of the Workspace resources to read. For example
-            `Customer Support` or `2014 Election Campaign`.
+        - description: The `friendly_name` of the Workspace resources to read. For example `Customer Support` or `2014 Election Campaign`.
           in: query
           name: FriendlyName
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -92,57 +90,26 @@ paths:
             schema:
               properties:
                 EventCallbackUrl:
-                  description: The URL we should call when an event occurs. If provided, the
-                    Workspace will publish events to this URL, for example, to
-                    collect data for reporting. See [Workspace
-                    Events](https://www.twilio.com/docs/taskrouter/api/event)
-                    for more information.
+                  description: The URL we should call when an event occurs. If provided, the Workspace will publish events to this URL, for example, to collect data for reporting. See [Workspace Events](https://www.twilio.com/docs/taskrouter/api/event) for more information.
                   format: uri
                   type: string
                 EventsFilter:
-                  description: The list of Workspace events for which to call event_callback_url.
-                    For example, if `EventsFilter=task.created, task.canceled,
-                    worker.activity.update`, then TaskRouter will call
-                    event_callback_url only when a task is created, canceled, or
-                    a Worker activity is updated.
+                  description: The list of Workspace events for which to call event_callback_url. For example, if `EventsFilter=task.created, task.canceled, worker.activity.update`, then TaskRouter will call event_callback_url only when a task is created, canceled, or a Worker activity is updated.
                   type: string
                 FriendlyName:
-                  description: "A descriptive string that you create to describe the Workspace
-                    resource. It can be up to 64 characters long. For example:
-                    `Customer Support` or `2014 Election Campaign`."
+                  description: "A descriptive string that you create to describe the Workspace resource. It can be up to 64 characters long. For example: `Customer Support` or `2014 Election Campaign`."
                   type: string
                 MultiTaskEnabled:
-                  description: "Whether to enable multi-tasking. Can be: `true` to enable
-                    multi-tasking, or `false` to disable it. The default is
-                    `false`. Multi-tasking allows Workers to handle multiple
-                    Tasks simultaneously. When enabled (`true`), each Worker can
-                    receive parallel reservations up to the per-channel maximums
-                    defined in the Workers section. Otherwise, each Worker will
-                    only receive a new reservation when the previous task is
-                    completed. Learn more at
-                    [Multitasking](https://www.twilio.com/docs/taskrouter/multi\
-                    tasking)."
+                  description: "Whether to enable multi-tasking. Can be: `true` to enable multi-tasking, or `false` to disable it. The default is `false`. Multi-tasking allows Workers to handle multiple Tasks simultaneously. When enabled (`true`), each Worker can receive parallel reservations up to the per-channel maximums defined in the Workers section. Otherwise, each Worker will only receive a new reservation when the previous task is completed. Learn more at [Multitasking](https://www.twilio.com/docs/taskrouter/multitasking)."
                   type: boolean
                 PrioritizeQueueOrder:
-                  description: "The type of TaskQueue to prioritize when Workers are receiving
-                    Tasks from both types of TaskQueues. Can be: `LIFO` or
-                    `FIFO` and the default is `FIFO`. For more information, see
-                    [Queue
-                    Ordering](https://www.twilio.com/docs/taskrouter/queue-orde\
-                    ring-last-first-out-lifo)."
+                  description: "The type of TaskQueue to prioritize when Workers are receiving Tasks from both types of TaskQueues. Can be: `LIFO` or `FIFO` and the default is `FIFO`. For more information, see [Queue Ordering](https://www.twilio.com/docs/taskrouter/queue-ordering-last-first-out-lifo)."
                   enum:
                     - FIFO
                     - LIFO
                   type: string
                 Template:
-                  description: "An available template name. Can be: `NONE` or `FIFO` and the
-                    default is `NONE`. Pre-configures the Workspace with the
-                    Workflow and Activities specified in the template. `NONE`
-                    will create a Workspace with only a set of default
-                    activities. `FIFO` will configure TaskRouter with a set of
-                    default activities and a single TaskQueue for first-in,
-                    first-out distribution, which can be useful when you are
-                    getting started with TaskRouter."
+                  description: "An available template name. Can be: `NONE` or `FIFO` and the default is `NONE`. Pre-configures the Workspace with the Workflow and Activities specified in the template. `NONE` will create a Workspace with only a set of default activities. `FIFO` will configure TaskRouter with a set of default activities and a single TaskQueue for first-in, first-out distribution, which can be useful when you are getting started with TaskRouter."
                   type: string
               required:
                 - FriendlyName
@@ -232,56 +199,32 @@ paths:
             schema:
               properties:
                 DefaultActivitySid:
-                  description: The SID of the Activity that will be used when new Workers are
-                    created in the Workspace.
+                  description: The SID of the Activity that will be used when new Workers are created in the Workspace.
                   maxLength: 34
                   minLength: 34
                   pattern: ^WA[0-9a-fA-F]{32}$
                   type: string
                 EventCallbackUrl:
-                  description: The URL we should call when an event occurs. See [Workspace
-                    Events](https://www.twilio.com/docs/taskrouter/api/event)
-                    for more information.
+                  description: The URL we should call when an event occurs. See [Workspace Events](https://www.twilio.com/docs/taskrouter/api/event) for more information.
                   format: uri
                   type: string
                 EventsFilter:
-                  description: The list of Workspace events for which to call event_callback_url.
-                    For example if
-                    `EventsFilter=task.created,task.canceled,worker.activity.update`,
-                    then TaskRouter will call event_callback_url only when a
-                    task is created, canceled, or a Worker activity is updated.
+                  description: The list of Workspace events for which to call event_callback_url. For example if `EventsFilter=task.created,task.canceled,worker.activity.update`, then TaskRouter will call event_callback_url only when a task is created, canceled, or a Worker activity is updated.
                   type: string
                 FriendlyName:
-                  description: "A descriptive string that you create to describe the Workspace
-                    resource. For example: `Sales Call Center` or `Customer
-                    Support Team`."
+                  description: "A descriptive string that you create to describe the Workspace resource. For example: `Sales Call Center` or `Customer Support Team`."
                   type: string
                 MultiTaskEnabled:
-                  description: "Whether to enable multi-tasking. Can be: `true` to enable
-                    multi-tasking, or `false` to disable it. The default is
-                    `false`. Multi-tasking allows Workers to handle multiple
-                    Tasks simultaneously. When enabled (`true`), each Worker can
-                    receive parallel reservations up to the per-channel maximums
-                    defined in the Workers section. Otherwise, each Worker will
-                    only receive a new reservation when the previous task is
-                    completed. Learn more at
-                    [Multitasking](https://www.twilio.com/docs/taskrouter/multi\
-                    tasking)."
+                  description: "Whether to enable multi-tasking. Can be: `true` to enable multi-tasking, or `false` to disable it. The default is `false`. Multi-tasking allows Workers to handle multiple Tasks simultaneously. When enabled (`true`), each Worker can receive parallel reservations up to the per-channel maximums defined in the Workers section. Otherwise, each Worker will only receive a new reservation when the previous task is completed. Learn more at [Multitasking](https://www.twilio.com/docs/taskrouter/multitasking)."
                   type: boolean
                 PrioritizeQueueOrder:
-                  description: "The type of TaskQueue to prioritize when Workers are receiving
-                    Tasks from both types of TaskQueues. Can be: `LIFO` or
-                    `FIFO` and the default is `FIFO`. For more information, see
-                    [Queue
-                    Ordering](https://www.twilio.com/docs/taskrouter/queue-orde\
-                    ring-last-first-out-lifo)."
+                  description: "The type of TaskQueue to prioritize when Workers are receiving Tasks from both types of TaskQueues. Can be: `LIFO` or `FIFO` and the default is `FIFO`. For more information, see [Queue Ordering](https://www.twilio.com/docs/taskrouter/queue-ordering-last-first-out-lifo)."
                   enum:
                     - FIFO
                     - LIFO
                   type: string
                 TimeoutActivitySid:
-                  description: The SID of the Activity that will be assigned to a Worker when a
-                    Task reservation times out without a response.
+                  description: The SID of the Activity that will be assigned to a Worker when a Task reservation times out without a response.
                   maxLength: 34
                   minLength: 34
                   pattern: ^WA[0-9a-fA-F]{32}$
@@ -327,16 +270,12 @@ paths:
           name: FriendlyName
           schema:
             type: string
-        - description: Whether return only Activity resources that are available or
-            unavailable. A value of `true` returns only available activities.
-            Values of '1' or `yes` also indicate `true`. All other values
-            represent `false` and return activities that are unavailable.
+        - description: Whether return only Activity resources that are available or unavailable. A value of `true` returns only available activities. Values of '1' or `yes` also indicate `true`. All other values represent `false` and return activities that are unavailable.
           in: query
           name: Available
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -400,19 +339,10 @@ paths:
             schema:
               properties:
                 Available:
-                  description: Whether the Worker should be eligible to receive a Task when it
-                    occupies the Activity. A value of `true`, `1`, or `yes`
-                    specifies the Activity is available. All other values
-                    specify that it is not. The value cannot be changed after
-                    the Activity is created.
+                  description: Whether the Worker should be eligible to receive a Task when it occupies the Activity. A value of `true`, `1`, or `yes` specifies the Activity is available. All other values specify that it is not. The value cannot be changed after the Activity is created.
                   type: boolean
                 FriendlyName:
-                  description: "A descriptive string that you create to describe the Activity
-                    resource. It can be up to 64 characters long. These names
-                    are used to calculate and expose statistics about Workers,
-                    and provide visibility into the state of each Worker.
-                    Examples of friendly names include: `on-call`, `break`, and
-                    `email`."
+                  description: "A descriptive string that you create to describe the Activity resource. It can be up to 64 characters long. These names are used to calculate and expose statistics about Workers, and provide visibility into the state of each Worker. Examples of friendly names include: `on-call`, `break`, and `email`."
                   type: string
               required:
                 - FriendlyName
@@ -529,12 +459,7 @@ paths:
             schema:
               properties:
                 FriendlyName:
-                  description: "A descriptive string that you create to describe the Activity
-                    resource. It can be up to 64 characters long. These names
-                    are used to calculate and expose statistics about Workers,
-                    and provide visibility into the state of each Worker.
-                    Examples of friendly names include: `on-call`, `break`, and
-                    `email`."
+                  description: "A descriptive string that you create to describe the Activity resource. It can be up to 64 characters long. These names are used to calculate and expose statistics about Workers, and provide visibility into the state of each Worker. Examples of friendly names include: `on-call`, `break`, and `email`."
                   type: string
               title: UpdateActivityRequest
               type: object
@@ -572,45 +497,29 @@ paths:
             minLength: 34
             pattern: ^WS[0-9a-fA-F]{32}$
             type: string
-        - description: Only include usage that occurred on or before this date, specified
-            in GMT as an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
-            date-time.
+        - description: Only include usage that occurred on or before this date, specified in GMT as an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date-time.
           in: query
           name: EndDate
           schema:
             format: date-time
             type: string
-        - description: Only calculate statistics since this many minutes in the past. The
-            default 15 minutes. This is helpful for displaying statistics for
-            the last 15 minutes, 240 minutes (4 hours), and 480 minutes (8
-            hours) to see trends.
+        - description: Only calculate statistics since this many minutes in the past. The default 15 minutes. This is helpful for displaying statistics for the last 15 minutes, 240 minutes (4 hours), and 480 minutes (8 hours) to see trends.
           in: query
           name: Minutes
           schema:
             type: integer
-        - description: Only calculate statistics from this date and time and later,
-            specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
-            format.
+        - description: Only calculate statistics from this date and time and later, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           in: query
           name: StartDate
           schema:
             format: date-time
             type: string
-        - description: Only calculate cumulative statistics on this TaskChannel. Can be
-            the TaskChannel's SID or its `unique_name`, such as `voice`, `sms`,
-            or `default`.
+        - description: Only calculate cumulative statistics on this TaskChannel. Can be the TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or `default`.
           in: query
           name: TaskChannel
           schema:
             type: string
-        - description: A comma separated list of values that describes the thresholds, in
-            seconds, to calculate statistics on. For each threshold specified,
-            the number of Tasks canceled and reservations accepted above and
-            below the specified thresholds in seconds are computed. For example,
-            `5,30` would show splits of Tasks that were canceled or accepted
-            before and after 5 seconds and before and after 30 seconds. This can
-            be used to show short abandoned Tasks or Tasks that failed to meet
-            an SLA.
+        - description: A comma separated list of values that describes the thresholds, in seconds, to calculate statistics on. For each threshold specified, the number of Tasks canceled and reservations accepted above and below the specified thresholds in seconds are computed. For example, `5,30` would show splits of Tasks that were canceled or accepted before and after 5 seconds and before and after 30 seconds. This can be used to show short abandoned Tasks or Tasks that failed to meet an SLA.
           in: query
           name: SplitByWaitTime
           schema:
@@ -620,8 +529,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/taskrouter.v1.workspace.workspace_cumulative_statis\
-                  tics"
+                $ref: "#/components/schemas/taskrouter.v1.workspace.workspace_cumulative_statistics"
           description: OK
       security:
         - accountSid_authToken: []
@@ -642,8 +550,7 @@ paths:
       description: ""
       operationId: ListEvent
       parameters:
-        - description: The SID of the Workspace with the Events to read. Returns only the
-            Events that pertain to the specified Workspace.
+        - description: The SID of the Workspace with the Events to read. Returns only the Events that pertain to the specified Workspace.
           in: path
           name: WorkspaceSid
           required: true
@@ -652,30 +559,23 @@ paths:
             minLength: 34
             pattern: ^WS[0-9a-fA-F]{32}$
             type: string
-        - description: Only include Events that occurred on or before this date, specified
-            in GMT as an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
-            date-time.
+        - description: Only include Events that occurred on or before this date, specified in GMT as an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date-time.
           in: query
           name: EndDate
           schema:
             format: date-time
             type: string
-        - description: The type of Events to read. Returns only Events of the type
-            specified.
+        - description: The type of Events to read. Returns only Events of the type specified.
           in: query
           name: EventType
           schema:
             type: string
-        - description: The period of events to read in minutes. Returns only Events that
-            occurred since this many minutes in the past. The default is `15`
-            minutes. Task Attributes for Events occuring more 43,200 minutes ago
-            will be redacted.
+        - description: The period of events to read in minutes. Returns only Events that occurred since this many minutes in the past. The default is `15` minutes. Task Attributes for Events occuring more 43,200 minutes ago will be redacted.
           in: query
           name: Minutes
           schema:
             type: integer
-        - description: The SID of the Reservation with the Events to read. Returns only
-            Events that pertain to the specified Reservation.
+        - description: The SID of the Reservation with the Events to read. Returns only Events that pertain to the specified Reservation.
           in: query
           name: ReservationSid
           schema:
@@ -683,16 +583,13 @@ paths:
             minLength: 34
             pattern: ^WR[0-9a-fA-F]{32}$
             type: string
-        - description: Only include Events from on or after this date and time, specified
-            in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. Task
-            Attributes for Events older than 30 days will be redacted.
+        - description: Only include Events from on or after this date and time, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format. Task Attributes for Events older than 30 days will be redacted.
           in: query
           name: StartDate
           schema:
             format: date-time
             type: string
-        - description: The SID of the TaskQueue with the Events to read. Returns only the
-            Events that pertain to the specified TaskQueue.
+        - description: The SID of the TaskQueue with the Events to read. Returns only the Events that pertain to the specified TaskQueue.
           in: query
           name: TaskQueueSid
           schema:
@@ -700,8 +597,7 @@ paths:
             minLength: 34
             pattern: ^WQ[0-9a-fA-F]{32}$
             type: string
-        - description: The SID of the Task with the Events to read. Returns only the
-            Events that pertain to the specified Task.
+        - description: The SID of the Task with the Events to read. Returns only the Events that pertain to the specified Task.
           in: query
           name: TaskSid
           schema:
@@ -709,8 +605,7 @@ paths:
             minLength: 34
             pattern: ^WT[0-9a-fA-F]{32}$
             type: string
-        - description: The SID of the Worker with the Events to read. Returns only the
-            Events that pertain to the specified Worker.
+        - description: The SID of the Worker with the Events to read. Returns only the Events that pertain to the specified Worker.
           in: query
           name: WorkerSid
           schema:
@@ -718,8 +613,7 @@ paths:
             minLength: 34
             pattern: ^WK[0-9a-fA-F]{32}$
             type: string
-        - description: The SID of the Workflow with the Events to read. Returns only the
-            Events that pertain to the specified Workflow.
+        - description: The SID of the Workflow with the Events to read. Returns only the Events that pertain to the specified Workflow.
           in: query
           name: WorkflowSid
           schema:
@@ -727,8 +621,7 @@ paths:
             minLength: 34
             pattern: ^WW[0-9a-fA-F]{32}$
             type: string
-        - description: The TaskChannel with the Events to read. Returns only the Events
-            that pertain to the specified TaskChannel.
+        - description: The TaskChannel with the Events to read. Returns only the Events that pertain to the specified TaskChannel.
           in: query
           name: TaskChannel
           schema:
@@ -741,8 +634,7 @@ paths:
             minLength: 34
             pattern: ^EV[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -853,9 +745,7 @@ paths:
             minLength: 34
             pattern: ^WS[0-9a-fA-F]{32}$
             type: string
-        - description: Only calculate real-time statistics on this TaskChannel. Can be the
-            TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or
-            `default`.
+        - description: Only calculate real-time statistics on this TaskChannel. Can be the TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or `default`.
           in: query
           name: TaskChannel
           schema:
@@ -865,8 +755,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/taskrouter.v1.workspace.workspace_real_time_statist\
-                  ics"
+                $ref: "#/components/schemas/taskrouter.v1.workspace.workspace_real_time_statistics"
           description: OK
       security:
         - accountSid_authToken: []
@@ -895,45 +784,29 @@ paths:
             minLength: 34
             pattern: ^WS[0-9a-fA-F]{32}$
             type: string
-        - description: Only calculate statistics since this many minutes in the past. The
-            default 15 minutes. This is helpful for displaying statistics for
-            the last 15 minutes, 240 minutes (4 hours), and 480 minutes (8
-            hours) to see trends.
+        - description: Only calculate statistics since this many minutes in the past. The default 15 minutes. This is helpful for displaying statistics for the last 15 minutes, 240 minutes (4 hours), and 480 minutes (8 hours) to see trends.
           in: query
           name: Minutes
           schema:
             type: integer
-        - description: Only calculate statistics from this date and time and later,
-            specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
-            format.
+        - description: Only calculate statistics from this date and time and later, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           in: query
           name: StartDate
           schema:
             format: date-time
             type: string
-        - description: Only calculate statistics from this date and time and earlier,
-            specified in GMT as an [ISO
-            8601](https://en.wikipedia.org/wiki/ISO_8601) date-time.
+        - description: Only calculate statistics from this date and time and earlier, specified in GMT as an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date-time.
           in: query
           name: EndDate
           schema:
             format: date-time
             type: string
-        - description: Only calculate statistics on this TaskChannel. Can be the
-            TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or
-            `default`.
+        - description: Only calculate statistics on this TaskChannel. Can be the TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or `default`.
           in: query
           name: TaskChannel
           schema:
             type: string
-        - description: A comma separated list of values that describes the thresholds, in
-            seconds, to calculate statistics on. For each threshold specified,
-            the number of Tasks canceled and reservations accepted above and
-            below the specified thresholds in seconds are computed. For example,
-            `5,30` would show splits of Tasks that were canceled or accepted
-            before and after 5 seconds and before and after 30 seconds. This can
-            be used to show short abandoned Tasks or Tasks that failed to meet
-            an SLA.
+        - description: A comma separated list of values that describes the thresholds, in seconds, to calculate statistics on. For each threshold specified, the number of Tasks canceled and reservations accepted above and below the specified thresholds in seconds are computed. For example, `5,30` would show splits of Tasks that were canceled or accepted before and after 5 seconds and before and after 30 seconds. This can be used to show short abandoned Tasks or Tasks that failed to meet an SLA.
           in: query
           name: SplitByWaitTime
           schema:
@@ -970,8 +843,7 @@ paths:
             minLength: 34
             pattern: ^WS[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1035,17 +907,13 @@ paths:
             schema:
               properties:
                 ChannelOptimizedRouting:
-                  description: Whether the Task Channel should prioritize Workers that have been
-                    idle. If `true`, Workers that have been idle the longest are
-                    prioritized.
+                  description: Whether the Task Channel should prioritize Workers that have been idle. If `true`, Workers that have been idle the longest are prioritized.
                   type: boolean
                 FriendlyName:
-                  description: A descriptive string that you create to describe the Task Channel.
-                    It can be up to 64 characters long.
+                  description: A descriptive string that you create to describe the Task Channel. It can be up to 64 characters long.
                   type: string
                 UniqueName:
-                  description: An application-defined string that uniquely identifies the Task
-                    Channel, such as `voice` or `sms`.
+                  description: An application-defined string that uniquely identifies the Task Channel, such as `voice` or `sms`.
                   type: string
               required:
                 - FriendlyName
@@ -1154,13 +1022,10 @@ paths:
             schema:
               properties:
                 ChannelOptimizedRouting:
-                  description: Whether the TaskChannel should prioritize Workers that have been
-                    idle. If `true`, Workers that have been idle the longest are
-                    prioritized.
+                  description: Whether the TaskChannel should prioritize Workers that have been idle. If `true`, Workers that have been idle the longest are prioritized.
                   type: boolean
                 FriendlyName:
-                  description: A descriptive string that you create to describe the Task Channel.
-                    It can be up to 64 characters long.
+                  description: A descriptive string that you create to describe the Task Channel. It can be up to 64 characters long.
                   type: string
               title: UpdateTaskChannelRequest
               type: object
@@ -1203,8 +1068,7 @@ paths:
           name: FriendlyName
           schema:
             type: string
-        - description: The attributes of the Workers to read. Returns the TaskQueues with
-            Workers that match the attributes specified in this parameter.
+        - description: The attributes of the Workers to read. Returns the TaskQueues with Workers that match the attributes specified in this parameter.
           in: query
           name: EvaluateWorkerAttributes
           schema:
@@ -1217,8 +1081,7 @@ paths:
             minLength: 34
             pattern: ^WK[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1282,43 +1145,28 @@ paths:
             schema:
               properties:
                 AssignmentActivitySid:
-                  description: The SID of the Activity to assign Workers when a task is assigned
-                    to them.
+                  description: The SID of the Activity to assign Workers when a task is assigned to them.
                   maxLength: 34
                   minLength: 34
                   pattern: ^WA[0-9a-fA-F]{32}$
                   type: string
                 FriendlyName:
-                  description: A descriptive string that you create to describe the TaskQueue. For
-                    example `Support-Tier 1`, `Sales`, or `Escalation`.
+                  description: A descriptive string that you create to describe the TaskQueue. For example `Support-Tier 1`, `Sales`, or `Escalation`.
                   type: string
                 MaxReservedWorkers:
-                  description: The maximum number of Workers to reserve for the assignment of a
-                    Task in the queue. Can be an integer between 1 and 50,
-                    inclusive and defaults to 1.
+                  description: The maximum number of Workers to reserve for the assignment of a Task in the queue. Can be an integer between 1 and 50, inclusive and defaults to 1.
                   type: integer
                 ReservationActivitySid:
-                  description: The SID of the Activity to assign Workers when a task is reserved
-                    for them.
+                  description: The SID of the Activity to assign Workers when a task is reserved for them.
                   maxLength: 34
                   minLength: 34
                   pattern: ^WA[0-9a-fA-F]{32}$
                   type: string
                 TargetWorkers:
-                  description: A string that describes the Worker selection criteria for any Tasks
-                    that enter the TaskQueue. For example, `'"language" ==
-                    "spanish"'`. The default value is `1==1`. If this value is
-                    empty, Tasks will wait in the TaskQueue until they are
-                    deleted or moved to another TaskQueue. For more information
-                    about Worker selection, see [Describing Worker selection
-                    criteria](https://www.twilio.com/docs/taskrouter/api/taskqueues#target-workers).
+                  description: A string that describes the Worker selection criteria for any Tasks that enter the TaskQueue. For example, `'"language" == "spanish"'`. The default value is `1==1`. If this value is empty, Tasks will wait in the TaskQueue until they are deleted or moved to another TaskQueue. For more information about Worker selection, see [Describing Worker selection criteria](https://www.twilio.com/docs/taskrouter/api/taskqueues#target-workers).
                   type: string
                 TaskOrder:
-                  description: How Tasks will be assigned to Workers. Set this parameter to `LIFO`
-                    to assign most recently created Task first or FIFO to assign
-                    the oldest Task first. Default is `FIFO`. [Click
-                    here](https://www.twilio.com/docs/taskrouter/queue-ordering-last-first-out-lifo)
-                    to learn more.
+                  description: How Tasks will be assigned to Workers. Set this parameter to `LIFO` to assign most recently created Task first or FIFO to assign the oldest Task first. Default is `FIFO`. [Click here](https://www.twilio.com/docs/taskrouter/queue-ordering-last-first-out-lifo) to learn more.
                   enum:
                     - FIFO
                     - LIFO
@@ -1361,9 +1209,7 @@ paths:
             minLength: 34
             pattern: ^WS[0-9a-fA-F]{32}$
             type: string
-        - description: Only calculate statistics from this date and time and earlier,
-            specified in GMT as an [ISO
-            8601](https://en.wikipedia.org/wiki/ISO_8601) date-time.
+        - description: Only calculate statistics from this date and time and earlier, specified in GMT as an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date-time.
           in: query
           name: EndDate
           schema:
@@ -1374,37 +1220,28 @@ paths:
           name: FriendlyName
           schema:
             type: string
-        - description: Only calculate statistics since this many minutes in the past. The
-            default is 15 minutes.
+        - description: Only calculate statistics since this many minutes in the past. The default is 15 minutes.
           in: query
           name: Minutes
           schema:
             type: integer
-        - description: Only calculate statistics from this date and time and later,
-            specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
-            format.
+        - description: Only calculate statistics from this date and time and later, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           in: query
           name: StartDate
           schema:
             format: date-time
             type: string
-        - description: Only calculate statistics on this TaskChannel. Can be the
-            TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or
-            `default`.
+        - description: Only calculate statistics on this TaskChannel. Can be the TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or `default`.
           in: query
           name: TaskChannel
           schema:
             type: string
-        - description: A comma separated list of values that describes the thresholds, in
-            seconds, to calculate statistics on. For each threshold specified,
-            the number of Tasks canceled and reservations accepted above and
-            below the specified thresholds in seconds are computed.
+        - description: A comma separated list of values that describes the thresholds, in seconds, to calculate statistics on. For each threshold specified, the number of Tasks canceled and reservations accepted above and below the specified thresholds in seconds are computed.
           in: query
           name: SplitByWaitTime
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1440,8 +1277,7 @@ paths:
                     type: object
                   task_queues_statistics:
                     items:
-                      $ref: "#/components/schemas/taskrouter.v1.workspace.task_queue.task_queues_stat\
-                        istics"
+                      $ref: "#/components/schemas/taskrouter.v1.workspace.task_queue.task_queues_statistics"
                     type: array
                 title: ListTaskQueuesStatisticsResponse
                 type: object
@@ -1548,42 +1384,28 @@ paths:
             schema:
               properties:
                 AssignmentActivitySid:
-                  description: The SID of the Activity to assign Workers when a task is assigned
-                    for them.
+                  description: The SID of the Activity to assign Workers when a task is assigned for them.
                   maxLength: 34
                   minLength: 34
                   pattern: ^WA[0-9a-fA-F]{32}$
                   type: string
                 FriendlyName:
-                  description: A descriptive string that you create to describe the TaskQueue. For
-                    example `Support-Tier 1`, `Sales`, or `Escalation`.
+                  description: A descriptive string that you create to describe the TaskQueue. For example `Support-Tier 1`, `Sales`, or `Escalation`.
                   type: string
                 MaxReservedWorkers:
-                  description: The maximum number of Workers to create reservations for the
-                    assignment of a task while in the queue. Maximum of 50.
+                  description: The maximum number of Workers to create reservations for the assignment of a task while in the queue. Maximum of 50.
                   type: integer
                 ReservationActivitySid:
-                  description: The SID of the Activity to assign Workers when a task is reserved
-                    for them.
+                  description: The SID of the Activity to assign Workers when a task is reserved for them.
                   maxLength: 34
                   minLength: 34
                   pattern: ^WA[0-9a-fA-F]{32}$
                   type: string
                 TargetWorkers:
-                  description: A string describing the Worker selection criteria for any Tasks
-                    that enter the TaskQueue. For example '"language" ==
-                    "spanish"' If no TargetWorkers parameter is provided, Tasks
-                    will wait in the queue until they are either deleted or
-                    moved to another queue. Additional examples on how to
-                    describing Worker selection criteria below.
+                  description: A string describing the Worker selection criteria for any Tasks that enter the TaskQueue. For example '"language" == "spanish"' If no TargetWorkers parameter is provided, Tasks will wait in the queue until they are either deleted or moved to another queue. Additional examples on how to describing Worker selection criteria below.
                   type: string
                 TaskOrder:
-                  description: "How Tasks will be assigned to Workers. Can be: `FIFO` or `LIFO`
-                    and the default is `FIFO`. Use `FIFO` to assign the oldest
-                    task first and `LIFO` to assign the most recent task first.
-                    For more information, see [Queue
-                    Ordering](https://www.twilio.com/docs/taskrouter/queue-orde\
-                    ring-last-first-out-lifo)."
+                  description: "How Tasks will be assigned to Workers. Can be: `FIFO` or `LIFO` and the default is `FIFO`. Use `FIFO` to assign the oldest task first and `LIFO` to assign the most recent task first. For more information, see [Queue Ordering](https://www.twilio.com/docs/taskrouter/queue-ordering-last-first-out-lifo)."
                   enum:
                     - FIFO
                     - LIFO
@@ -1633,39 +1455,29 @@ paths:
             minLength: 34
             pattern: ^WQ[0-9a-fA-F]{32}$
             type: string
-        - description: Only calculate statistics from this date and time and earlier,
-            specified in GMT as an [ISO
-            8601](https://en.wikipedia.org/wiki/ISO_8601) date-time.
+        - description: Only calculate statistics from this date and time and earlier, specified in GMT as an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date-time.
           in: query
           name: EndDate
           schema:
             format: date-time
             type: string
-        - description: Only calculate statistics since this many minutes in the past. The
-            default is 15 minutes.
+        - description: Only calculate statistics since this many minutes in the past. The default is 15 minutes.
           in: query
           name: Minutes
           schema:
             type: integer
-        - description: Only calculate statistics from this date and time and later,
-            specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
-            format.
+        - description: Only calculate statistics from this date and time and later, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           in: query
           name: StartDate
           schema:
             format: date-time
             type: string
-        - description: Only calculate cumulative statistics on this TaskChannel. Can be
-            the TaskChannel's SID or its `unique_name`, such as `voice`, `sms`,
-            or `default`.
+        - description: Only calculate cumulative statistics on this TaskChannel. Can be the TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or `default`.
           in: query
           name: TaskChannel
           schema:
             type: string
-        - description: A comma separated list of values that describes the thresholds, in
-            seconds, to calculate statistics on. For each threshold specified,
-            the number of Tasks canceled and reservations accepted above and
-            below the specified thresholds in seconds are computed.
+        - description: A comma separated list of values that describes the thresholds, in seconds, to calculate statistics on. For each threshold specified, the number of Tasks canceled and reservations accepted above and below the specified thresholds in seconds are computed.
           in: query
           name: SplitByWaitTime
           schema:
@@ -1675,8 +1487,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/taskrouter.v1.workspace.task_queue.task_queue_cumul\
-                  ative_statistics"
+                $ref: "#/components/schemas/taskrouter.v1.workspace.task_queue.task_queue_cumulative_statistics"
           description: OK
       security:
         - accountSid_authToken: []
@@ -1715,9 +1526,7 @@ paths:
             minLength: 34
             pattern: ^WQ[0-9a-fA-F]{32}$
             type: string
-        - description: The TaskChannel for which to fetch statistics. Can be the
-            TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or
-            `default`.
+        - description: The TaskChannel for which to fetch statistics. Can be the TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or `default`.
           in: query
           name: TaskChannel
           schema:
@@ -1727,8 +1536,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/taskrouter.v1.workspace.task_queue.task_queue_real_\
-                  time_statistics"
+                $ref: "#/components/schemas/taskrouter.v1.workspace.task_queue.task_queue_real_time_statistics"
           description: OK
       security:
         - accountSid_authToken: []
@@ -1766,39 +1574,29 @@ paths:
             minLength: 34
             pattern: ^WQ[0-9a-fA-F]{32}$
             type: string
-        - description: Only calculate statistics from this date and time and earlier,
-            specified in GMT as an [ISO
-            8601](https://en.wikipedia.org/wiki/ISO_8601) date-time.
+        - description: Only calculate statistics from this date and time and earlier, specified in GMT as an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date-time.
           in: query
           name: EndDate
           schema:
             format: date-time
             type: string
-        - description: Only calculate statistics since this many minutes in the past. The
-            default is 15 minutes.
+        - description: Only calculate statistics since this many minutes in the past. The default is 15 minutes.
           in: query
           name: Minutes
           schema:
             type: integer
-        - description: Only calculate statistics from this date and time and later,
-            specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
-            format.
+        - description: Only calculate statistics from this date and time and later, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           in: query
           name: StartDate
           schema:
             format: date-time
             type: string
-        - description: Only calculate real-time and cumulative statistics for the
-            specified TaskChannel. Can be the TaskChannel's SID or its
-            `unique_name`, such as `voice`, `sms`, or `default`.
+        - description: Only calculate real-time and cumulative statistics for the specified TaskChannel. Can be the TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or `default`.
           in: query
           name: TaskChannel
           schema:
             type: string
-        - description: A comma separated list of values that describes the thresholds, in
-            seconds, to calculate statistics on. For each threshold specified,
-            the number of Tasks canceled and reservations accepted above and
-            below the specified thresholds in seconds are computed.
+        - description: A comma separated list of values that describes the thresholds, in seconds, to calculate statistics on. For each threshold specified, the number of Tasks canceled and reservations accepted above and below the specified thresholds in seconds are computed.
           in: query
           name: SplitByWaitTime
           schema:
@@ -1808,8 +1606,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/taskrouter.v1.workspace.task_queue.task_queue_stati\
-                  stics"
+                $ref: "#/components/schemas/taskrouter.v1.workspace.task_queue.task_queue_statistics"
           description: OK
       security:
         - accountSid_authToken: []
@@ -1836,24 +1633,19 @@ paths:
             minLength: 34
             pattern: ^WS[0-9a-fA-F]{32}$
             type: string
-        - description: The priority value of the Tasks to read. Returns the list of all
-            Tasks in the Workspace with the specified priority.
+        - description: The priority value of the Tasks to read. Returns the list of all Tasks in the Workspace with the specified priority.
           in: query
           name: Priority
           schema:
             type: integer
-        - description: "The `assignment_status` of the Tasks you want to read. Can be:
-            `pending`, `reserved`, `assigned`, `canceled`, `wrapping`, or
-            `completed`. Returns all Tasks in the Workspace with the specified
-            `assignment_status`."
+        - description: "The `assignment_status` of the Tasks you want to read. Can be: `pending`, `reserved`, `assigned`, `canceled`, `wrapping`, or `completed`. Returns all Tasks in the Workspace with the specified `assignment_status`."
           in: query
           name: AssignmentStatus
           schema:
             items:
               type: string
             type: array
-        - description: The SID of the Workflow with the Tasks to read. Returns the Tasks
-            controlled by the Workflow identified by this SID.
+        - description: The SID of the Workflow with the Tasks to read. Returns the Tasks controlled by the Workflow identified by this SID.
           in: query
           name: WorkflowSid
           schema:
@@ -1861,15 +1653,12 @@ paths:
             minLength: 34
             pattern: ^WW[0-9a-fA-F]{32}$
             type: string
-        - description: The friendly name of the Workflow with the Tasks to read. Returns
-            the Tasks controlled by the Workflow identified by this friendly
-            name.
+        - description: The friendly name of the Workflow with the Tasks to read. Returns the Tasks controlled by the Workflow identified by this friendly name.
           in: query
           name: WorkflowName
           schema:
             type: string
-        - description: The SID of the TaskQueue with the Tasks to read. Returns the Tasks
-            waiting in the TaskQueue identified by this SID.
+        - description: The SID of the TaskQueue with the Tasks to read. Returns the Tasks waiting in the TaskQueue identified by this SID.
           in: query
           name: TaskQueueSid
           schema:
@@ -1877,40 +1666,27 @@ paths:
             minLength: 34
             pattern: ^WQ[0-9a-fA-F]{32}$
             type: string
-        - description: The `friendly_name` of the TaskQueue with the Tasks to read.
-            Returns the Tasks waiting in the TaskQueue identified by this
-            friendly name.
+        - description: The `friendly_name` of the TaskQueue with the Tasks to read. Returns the Tasks waiting in the TaskQueue identified by this friendly name.
           in: query
           name: TaskQueueName
           schema:
             type: string
-        - description: The attributes of the Tasks to read. Returns the Tasks that match
-            the attributes specified in this parameter.
+        - description: The attributes of the Tasks to read. Returns the Tasks that match the attributes specified in this parameter.
           in: query
           name: EvaluateTaskAttributes
           schema:
             type: string
-        - description: "How to order the returned Task resources. y default, Tasks are
-            sorted by ascending DateCreated. This value is specified as:
-            `Attribute:Order`, where `Attribute` can be either `Priority` or
-            `DateCreated` and `Order` can be either `asc` or `desc`. For
-            example, `Priority:desc` returns Tasks ordered in descending order
-            of their Priority. Multiple sort orders can be specified in a
-            comma-separated list such as `Priority:desc,DateCreated:asc`, which
-            returns the Tasks in descending Priority order and ascending
-            DateCreated Order."
+        - description: "How to order the returned Task resources. y default, Tasks are sorted by ascending DateCreated. This value is specified as: `Attribute:Order`, where `Attribute` can be either `Priority` or `DateCreated` and `Order` can be either `asc` or `desc`. For example, `Priority:desc` returns Tasks ordered in descending order of their Priority. Multiple sort orders can be specified in a comma-separated list such as `Priority:desc,DateCreated:asc`, which returns the Tasks in descending Priority order and ascending DateCreated Order."
           in: query
           name: Ordering
           schema:
             type: string
-        - description: Whether to read Tasks with addons. If `true`, returns only Tasks
-            with addons. If `false`, returns only Tasks without addons.
+        - description: Whether to read Tasks with addons. If `true`, returns only Tasks with addons. If `false`, returns only Tasks without addons.
           in: query
           name: HasAddons
           schema:
             type: boolean
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -1974,38 +1750,19 @@ paths:
             schema:
               properties:
                 Attributes:
-                  description: "A URL-encoded JSON string with the attributes of the new task.
-                    This value is passed to the Workflow's
-                    `assignment_callback_url` when the Task is assigned to a
-                    Worker. For example: `{ \"task_type\": \"call\",
-                    \"twilio_call_sid\": \"CAxxx\", \"customer_ticket_number\":
-                    \"12345\" }`."
+                  description: "A URL-encoded JSON string with the attributes of the new task. This value is passed to the Workflow's `assignment_callback_url` when the Task is assigned to a Worker. For example: `{ \"task_type\": \"call\", \"twilio_call_sid\": \"CAxxx\", \"customer_ticket_number\": \"12345\" }`."
                   type: string
                 Priority:
-                  description: The priority to assign the new task and override the default. When
-                    supplied, the new Task will have this priority unless it
-                    matches a Workflow Target with a Priority set. When not
-                    supplied, the new Task will have the priority of the
-                    matching Workflow Target. Value can be 0 to 2^31^
-                    (2,147,483,647).
+                  description: The priority to assign the new task and override the default. When supplied, the new Task will have this priority unless it matches a Workflow Target with a Priority set. When not supplied, the new Task will have the priority of the matching Workflow Target. Value can be 0 to 2^31^ (2,147,483,647).
                   type: integer
                 TaskChannel:
-                  description: When MultiTasking is enabled, specify the TaskChannel by passing
-                    either its `unique_name` or `sid`. Default value is
-                    `default`.
+                  description: When MultiTasking is enabled, specify the TaskChannel by passing either its `unique_name` or `sid`. Default value is `default`.
                   type: string
                 Timeout:
-                  description: The amount of time in seconds the new task can live before being
-                    assigned. Can be up to a maximum of 2 weeks (1,209,600
-                    seconds). The default value is 24 hours (86,400 seconds). On
-                    timeout, the `task.canceled` event will fire with
-                    description `Task TTL Exceeded`.
+                  description: The amount of time in seconds the new task can live before being assigned. Can be up to a maximum of 2 weeks (1,209,600 seconds). The default value is 24 hours (86,400 seconds). On timeout, the `task.canceled` event will fire with description `Task TTL Exceeded`.
                   type: integer
                 WorkflowSid:
-                  description: The SID of the Workflow that you would like to handle routing for
-                    the new Task. If there is only one Workflow defined for the
-                    Workspace that you are posting the new task to, this
-                    parameter is optional.
+                  description: The SID of the Workflow that you would like to handle routing for the new Task. If there is only one Workflow defined for the Workspace that you are posting the new task to, this parameter is optional.
                   maxLength: 34
                   minLength: 34
                   pattern: ^WW[0-9a-fA-F]{32}$
@@ -2056,11 +1813,7 @@ paths:
             minLength: 34
             pattern: ^WT[0-9a-fA-F]{32}$
             type: string
-        - description: If provided, deletes this Task if (and only if) the
-            [ETag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag)
-            header of the Task matches the provided value. This matches the
-            semantics of (and is implemented with) the HTTP [If-Match
-            header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-Match).
+        - description: If provided, deletes this Task if (and only if) the [ETag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag) header of the Task matches the provided value. This matches the semantics of (and is implemented with) the HTTP [If-Match header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-Match).
           in: header
           name: If-Match
           schema:
@@ -2128,11 +1881,7 @@ paths:
             minLength: 34
             pattern: ^WT[0-9a-fA-F]{32}$
             type: string
-        - description: If provided, applies this mutation if (and only if) the
-            [ETag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag)
-            header of the Task matches the provided value. This matches the
-            semantics of (and is implemented with) the HTTP [If-Match
-            header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-Match).
+        - description: If provided, applies this mutation if (and only if) the [ETag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag) header of the Task matches the provided value. This matches the semantics of (and is implemented with) the HTTP [If-Match header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-Match).
           in: header
           name: If-Match
           schema:
@@ -2143,10 +1892,7 @@ paths:
             schema:
               properties:
                 AssignmentStatus:
-                  description: "The new status of the task. Can be: `canceled`, to cancel a Task
-                    that is currently `pending` or `reserved`; `wrapping`, to
-                    move the Task to wrapup state; or `completed`, to move a
-                    Task to the completed state."
+                  description: "The new status of the task. Can be: `canceled`, to cancel a Task that is currently `pending` or `reserved`; `wrapping`, to move the Task to wrapup state; or `completed`, to move a Task to the completed state."
                   enum:
                     - pending
                     - reserved
@@ -2159,20 +1905,13 @@ paths:
                   description: The JSON string that describes the custom attributes of the task.
                   type: string
                 Priority:
-                  description: The Task's new priority value. When supplied, the Task takes on the
-                    specified priority unless it matches a Workflow Target with
-                    a Priority set. Value can be 0 to 2^31^ (2,147,483,647).
+                  description: The Task's new priority value. When supplied, the Task takes on the specified priority unless it matches a Workflow Target with a Priority set. Value can be 0 to 2^31^ (2,147,483,647).
                   type: integer
                 Reason:
-                  description: The reason that the Task was canceled or completed. This parameter
-                    is required only if the Task is canceled or completed.
-                    Setting this value queues the task for deletion and logs the
-                    reason.
+                  description: The reason that the Task was canceled or completed. This parameter is required only if the Task is canceled or completed. Setting this value queues the task for deletion and logs the reason.
                   type: string
                 TaskChannel:
-                  description: When MultiTasking is enabled, specify the TaskChannel with the task
-                    to update. Can be the TaskChannel's SID or its
-                    `unique_name`, such as `voice`, `sms`, or `default`.
+                  description: When MultiTasking is enabled, specify the TaskChannel with the task to update. Can be the TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or `default`.
                   type: string
               title: UpdateTaskRequest
               type: object
@@ -2212,8 +1951,7 @@ paths:
             minLength: 34
             pattern: ^WS[0-9a-fA-F]{32}$
             type: string
-        - description: The SID of the reserved Task resource with the TaskReservation
-            resources to read.
+        - description: The SID of the reserved Task resource with the TaskReservation resources to read.
           in: path
           name: TaskSid
           required: true
@@ -2222,9 +1960,7 @@ paths:
             minLength: 34
             pattern: ^WT[0-9a-fA-F]{32}$
             type: string
-        - description: "Returns the list of reservations for a task with a specified
-            ReservationStatus.  Can be: `pending`, `accepted`, `rejected`, or
-            `timeout`."
+        - description: "Returns the list of reservations for a task with a specified ReservationStatus.  Can be: `pending`, `accepted`, `rejected`, or `timeout`."
           in: query
           name: ReservationStatus
           schema:
@@ -2238,8 +1974,7 @@ paths:
               - wrapping
               - completed
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -2308,8 +2043,7 @@ paths:
             minLength: 34
             pattern: ^WS[0-9a-fA-F]{32}$
             type: string
-        - description: The SID of the reserved Task resource with the TaskReservation
-            resource to fetch.
+        - description: The SID of the reserved Task resource with the TaskReservation resource to fetch.
           in: path
           name: TaskSid
           required: true
@@ -2342,8 +2076,7 @@ paths:
       description: ""
       operationId: UpdateTaskReservation
       parameters:
-        - description: The SID of the Workspace with the TaskReservation resources to
-            update.
+        - description: The SID of the Workspace with the TaskReservation resources to update.
           in: path
           name: WorkspaceSid
           required: true
@@ -2352,8 +2085,7 @@ paths:
             minLength: 34
             pattern: ^WS[0-9a-fA-F]{32}$
             type: string
-        - description: The SID of the reserved Task resource with the TaskReservation
-            resources to update.
+        - description: The SID of the reserved Task resource with the TaskReservation resources to update.
           in: path
           name: TaskSid
           required: true
@@ -2377,9 +2109,7 @@ paths:
             schema:
               properties:
                 Beep:
-                  description: "Whether to play a notification beep when the participant joins or
-                    when to play a beep. Can be: `true`, `false`, `onEnter`, or
-                    `onExit`. The default value is `true`."
+                  description: "Whether to play a notification beep when the participant joins or when to play a beep. Can be: `true`, `false`, `onEnter`, or `onExit`. The default value is `true`."
                   type: string
                 BeepOnCustomerEntrance:
                   description: Whether to play a notification beep when the customer joins.
@@ -2388,49 +2118,34 @@ paths:
                   description: Whether to accept a reservation when executing a Call instruction.
                   type: boolean
                 CallFrom:
-                  description: The Caller ID of the outbound call when executing a Call
-                    instruction.
+                  description: The Caller ID of the outbound call when executing a Call instruction.
                   type: string
                 CallRecord:
-                  description: Whether to record both legs of a call when executing a Call
-                    instruction or which leg to record.
+                  description: Whether to record both legs of a call when executing a Call instruction or which leg to record.
                   type: string
                 CallStatusCallbackUrl:
-                  description: The URL to call  for the completed call event when executing a Call
-                    instruction.
+                  description: The URL to call  for the completed call event when executing a Call instruction.
                   format: uri
                   type: string
                 CallTimeout:
                   description: Timeout for call when executing a Call instruction.
                   type: integer
                 CallTo:
-                  description: The Contact URI of the worker when executing a Call
-                    instruction.  Can be the URI of the Twilio Client, the SIP
-                    URI for Programmable SIP, or the
-                    [E.164](https://www.twilio.com/docs/glossary/what-e164)
-                    formatted phone number, depending on the destination.
+                  description: The Contact URI of the worker when executing a Call instruction.  Can be the URI of the Twilio Client, the SIP URI for Programmable SIP, or the [E.164](https://www.twilio.com/docs/glossary/what-e164) formatted phone number, depending on the destination.
                   type: string
                 CallUrl:
-                  description: TwiML URI executed on answering the worker's leg as a result of the
-                    Call instruction.
+                  description: TwiML URI executed on answering the worker's leg as a result of the Call instruction.
                   format: uri
                   type: string
                 ConferenceRecord:
-                  description: "Whether to record the conference the participant is joining or
-                    when to record the conference. Can be: `true`, `false`,
-                    `record-from-start`, and `do-not-record`. The default value
-                    is `false`."
+                  description: "Whether to record the conference the participant is joining or when to record the conference. Can be: `true`, `false`, `record-from-start`, and `do-not-record`. The default value is `false`."
                   type: string
                 ConferenceRecordingStatusCallback:
-                  description: The URL we should call using the
-                    `conference_recording_status_callback_method` when the
-                    conference recording is available.
+                  description: The URL we should call using the `conference_recording_status_callback_method` when the conference recording is available.
                   format: uri
                   type: string
                 ConferenceRecordingStatusCallbackMethod:
-                  description: "The HTTP method we should use to call
-                    `conference_recording_status_callback`. Can be: `GET` or
-                    `POST` and defaults to `POST`."
+                  description: "The HTTP method we should use to call `conference_recording_status_callback`. Can be: `GET` or `POST` and defaults to `POST`."
                   enum:
                     - HEAD
                     - GET
@@ -2440,18 +2155,11 @@ paths:
                     - DELETE
                   type: string
                 ConferenceStatusCallback:
-                  description: The URL we should call using the
-                    `conference_status_callback_method` when the conference
-                    events in `conference_status_callback_event` occur. Only the
-                    value set by the first participant to join the conference is
-                    used. Subsequent `conference_status_callback` values are
-                    ignored.
+                  description: The URL we should call using the `conference_status_callback_method` when the conference events in `conference_status_callback_event` occur. Only the value set by the first participant to join the conference is used. Subsequent `conference_status_callback` values are ignored.
                   format: uri
                   type: string
                 ConferenceStatusCallbackEvent:
-                  description: "The conference status events that we will send to
-                    `conference_status_callback`. Can be: `start`, `end`,
-                    `join`, `leave`, `mute`, `hold`, `speaker`."
+                  description: "The conference status events that we will send to `conference_status_callback`. Can be: `start`, `end`, `join`, `leave`, `mute`, `hold`, `speaker`."
                   items:
                     enum:
                       - start
@@ -2464,9 +2172,7 @@ paths:
                     type: string
                   type: array
                 ConferenceStatusCallbackMethod:
-                  description: "The HTTP method we should use to call
-                    `conference_status_callback`. Can be: `GET` or `POST` and
-                    defaults to `POST`."
+                  description: "The HTTP method we should use to call `conference_status_callback`. Can be: `GET` or `POST` and defaults to `POST`."
                   enum:
                     - HEAD
                     - GET
@@ -2476,50 +2182,37 @@ paths:
                     - DELETE
                   type: string
                 ConferenceTrim:
-                  description: "How to trim the leading and trailing silence from your recorded
-                    conference audio files. Can be: `trim-silence` or
-                    `do-not-trim` and defaults to `trim-silence`."
+                  description: "How to trim the leading and trailing silence from your recorded conference audio files. Can be: `trim-silence` or `do-not-trim` and defaults to `trim-silence`."
                   type: string
                 DequeueFrom:
-                  description: The Caller ID of the call to the worker when executing a Dequeue
-                    instruction.
+                  description: The Caller ID of the call to the worker when executing a Dequeue instruction.
                   type: string
                 DequeuePostWorkActivitySid:
-                  description: The SID of the Activity resource to start after executing a Dequeue
-                    instruction.
+                  description: The SID of the Activity resource to start after executing a Dequeue instruction.
                   maxLength: 34
                   minLength: 34
                   pattern: ^WA[0-9a-fA-F]{32}$
                   type: string
                 DequeueRecord:
-                  description: Whether to record both legs of a call when executing a Dequeue
-                    instruction or which leg to record.
+                  description: Whether to record both legs of a call when executing a Dequeue instruction or which leg to record.
                   type: string
                 DequeueStatusCallbackEvent:
-                  description: The Call progress events sent via webhooks as a result of a Dequeue
-                    instruction.
+                  description: The Call progress events sent via webhooks as a result of a Dequeue instruction.
                   items:
                     type: string
                   type: array
                 DequeueStatusCallbackUrl:
-                  description: The Callback URL for completed call event when executing a Dequeue
-                    instruction.
+                  description: The Callback URL for completed call event when executing a Dequeue instruction.
                   format: uri
                   type: string
                 DequeueTimeout:
                   description: Timeout for call when executing a Dequeue instruction.
                   type: integer
                 DequeueTo:
-                  description: The Contact URI of the worker when executing a Dequeue instruction.
-                    Can be the URI of the Twilio Client, the SIP URI for
-                    Programmable SIP, or the
-                    [E.164](https://www.twilio.com/docs/glossary/what-e164)
-                    formatted phone number, depending on the destination.
+                  description: The Contact URI of the worker when executing a Dequeue instruction. Can be the URI of the Twilio Client, the SIP URI for Programmable SIP, or the [E.164](https://www.twilio.com/docs/glossary/what-e164) formatted phone number, depending on the destination.
                   type: string
                 EarlyMedia:
-                  description: Whether to allow an agent to hear the state of the outbound call,
-                    including ringing or disconnect messages. The default is
-                    `true`.
+                  description: Whether to allow an agent to hear the state of the outbound call, including ringing or disconnect messages. The default is `true`.
                   type: boolean
                 EndConferenceOnCustomerExit:
                   description: Whether to end the conference when the customer leaves.
@@ -2528,46 +2221,35 @@ paths:
                   description: Whether to end the conference when the agent leaves.
                   type: boolean
                 From:
-                  description: The Caller ID of the call to the worker when executing a Conference
-                    instruction.
+                  description: The Caller ID of the call to the worker when executing a Conference instruction.
                   type: string
                 Instruction:
                   description: The assignment instruction for reservation.
                   type: string
                 MaxParticipants:
-                  description: The maximum number of participants in the conference. Can be a
-                    positive integer from `2` to `250`. The default value is
-                    `250`.
+                  description: The maximum number of participants in the conference. Can be a positive integer from `2` to `250`. The default value is `250`.
                   type: integer
                 Muted:
-                  description: Whether the agent is muted in the conference. The default is
-                    `false`.
+                  description: Whether the agent is muted in the conference. The default is `false`.
                   type: boolean
                 PostWorkActivitySid:
-                  description: The new worker activity SID after executing a Conference
-                    instruction.
+                  description: The new worker activity SID after executing a Conference instruction.
                   maxLength: 34
                   minLength: 34
                   pattern: ^WA[0-9a-fA-F]{32}$
                   type: string
                 Record:
-                  description: Whether to record the participant and their conferences, including
-                    the time between conferences. The default is `false`.
+                  description: Whether to record the participant and their conferences, including the time between conferences. The default is `false`.
                   type: boolean
                 RecordingChannels:
-                  description: "The recording channels for the final recording. Can be: `mono` or
-                    `dual` and the default is `mono`."
+                  description: "The recording channels for the final recording. Can be: `mono` or `dual` and the default is `mono`."
                   type: string
                 RecordingStatusCallback:
-                  description: The URL that we should call using the
-                    `recording_status_callback_method` when the recording status
-                    changes.
+                  description: The URL that we should call using the `recording_status_callback_method` when the recording status changes.
                   format: uri
                   type: string
                 RecordingStatusCallbackMethod:
-                  description: "The HTTP method we should use when we call
-                    `recording_status_callback`. Can be: `GET` or `POST` and
-                    defaults to `POST`."
+                  description: "The HTTP method we should use when we call `recording_status_callback`. Can be: `GET` or `POST` and defaults to `POST`."
                   enum:
                     - HEAD
                     - GET
@@ -2577,30 +2259,23 @@ paths:
                     - DELETE
                   type: string
                 RedirectAccept:
-                  description: Whether the reservation should be accepted when executing a
-                    Redirect instruction.
+                  description: Whether the reservation should be accepted when executing a Redirect instruction.
                   type: boolean
                 RedirectCallSid:
-                  description: The Call SID of the call parked in the queue when executing a
-                    Redirect instruction.
+                  description: The Call SID of the call parked in the queue when executing a Redirect instruction.
                   maxLength: 34
                   minLength: 34
                   pattern: ^CA[0-9a-fA-F]{32}$
                   type: string
                 RedirectUrl:
-                  description: TwiML URI to redirect the call to when executing the Redirect
-                    instruction.
+                  description: TwiML URI to redirect the call to when executing the Redirect instruction.
                   format: uri
                   type: string
                 Region:
-                  description: The
-                    [region](https://support.twilio.com/hc/en-us/articles/223132167-How-global-low-latency-routing-and-region-selection-work-for-conferences-and-Client-calls)
-                    where we should mix the recorded audio. Can be:`us1`, `ie1`,
-                    `de1`, `sg1`, `br1`, `au1`, or `jp1`.
+                  description: The [region](https://support.twilio.com/hc/en-us/articles/223132167-How-global-low-latency-routing-and-region-selection-work-for-conferences-and-Client-calls) where we should mix the recorded audio. Can be:`us1`, `ie1`, `de1`, `sg1`, `br1`, `au1`, or `jp1`.
                   type: string
                 ReservationStatus:
-                  description: "The new status of the reservation. Can be: `pending`, `accepted`,
-                    `rejected`, or `timeout`."
+                  description: "The new status of the reservation. Can be: `pending`, `accepted`, `rejected`, or `timeout`."
                   enum:
                     - pending
                     - accepted
@@ -2618,20 +2293,14 @@ paths:
                   description: The SIP username used for authentication.
                   type: string
                 StartConferenceOnEnter:
-                  description: Whether to start the conference when the participant joins, if it
-                    has not already started. The default is `true`. If `false`
-                    and the conference has not started, the participant is muted
-                    and hears background music until another participant starts
-                    the conference.
+                  description: Whether to start the conference when the participant joins, if it has not already started. The default is `true`. If `false` and the conference has not started, the participant is muted and hears background music until another participant starts the conference.
                   type: boolean
                 StatusCallback:
-                  description: The URL we should call using the `status_callback_method` to send
-                    status information to your application.
+                  description: The URL we should call using the `status_callback_method` to send status information to your application.
                   format: uri
                   type: string
                 StatusCallbackEvent:
-                  description: "The call progress events that we will send to `status_callback`.
-                    Can be: `initiated`, `ringing`, `answered`, or `completed`."
+                  description: "The call progress events that we will send to `status_callback`. Can be: `initiated`, `ringing`, `answered`, or `completed`."
                   items:
                     enum:
                       - initiated
@@ -2641,8 +2310,7 @@ paths:
                     type: string
                   type: array
                 StatusCallbackMethod:
-                  description: "The HTTP method we should use to call `status_callback`. Can be:
-                    `POST` or `GET` and the default is `POST`."
+                  description: "The HTTP method we should use to call `status_callback`. Can be: `POST` or `GET` and the default is `POST`."
                   enum:
                     - HEAD
                     - GET
@@ -2665,16 +2333,10 @@ paths:
                   description: Timeout for call when executing a Conference instruction.
                   type: integer
                 To:
-                  description: The Contact URI of the worker when executing a Conference
-                    instruction. Can be the URI of the Twilio Client, the SIP
-                    URI for Programmable SIP, or the
-                    [E.164](https://www.twilio.com/docs/glossary/what-e164)
-                    formatted phone number, depending on the destination.
+                  description: The Contact URI of the worker when executing a Conference instruction. Can be the URI of the Twilio Client, the SIP URI for Programmable SIP, or the [E.164](https://www.twilio.com/docs/glossary/what-e164) formatted phone number, depending on the destination.
                   type: string
                 WaitMethod:
-                  description: The HTTP method we should use to call `wait_url`. Can be `GET` or
-                    `POST` and the default is `POST`. When using a static audio
-                    file, this should be `GET` so that we can cache the file.
+                  description: The HTTP method we should use to call `wait_url`. Can be `GET` or `POST` and the default is `POST`. When using a static audio file, this should be `GET` so that we can cache the file.
                   enum:
                     - HEAD
                     - GET
@@ -2684,11 +2346,7 @@ paths:
                     - DELETE
                   type: string
                 WaitUrl:
-                  description: The URL we should call using the `wait_method` for the music to
-                    play while participants are waiting for the conference to
-                    start. The default value is the URL of our standard hold
-                    music. [Learn more about hold
-                    music](https://www.twilio.com/labs/twimlets/holdmusic).
+                  description: The URL we should call using the `wait_method` for the music to play while participants are waiting for the conference to start. The default value is the URL of our standard hold music. [Learn more about hold music](https://www.twilio.com/labs/twimlets/holdmusic).
                   format: uri
                   type: string
                 WorkerActivitySid:
@@ -2747,10 +2405,7 @@ paths:
             minLength: 34
             pattern: ^WA[0-9a-fA-F]{32}$
             type: string
-        - description: Whether to return only Worker resources that are available or
-            unavailable. Can be `true`, `1`, or `yes` to return Worker resources
-            that are available, and `false`, or any value returns the Worker
-            resources that are not available.
+        - description: Whether to return only Worker resources that are available or unavailable. Can be `true`, `1`, or `yes` to return Worker resources that are available, and `false`, or any value returns the Worker resources that are not available.
           in: query
           name: Available
           schema:
@@ -2760,15 +2415,12 @@ paths:
           name: FriendlyName
           schema:
             type: string
-        - description: Filter by Workers that would match an expression on a TaskQueue.
-            This is helpful for debugging which Workers would match a potential
-            queue.
+        - description: Filter by Workers that would match an expression on a TaskQueue. This is helpful for debugging which Workers would match a potential queue.
           in: query
           name: TargetWorkersExpression
           schema:
             type: string
-        - description: The `friendly_name` of the TaskQueue that the Workers to read are
-            eligible for.
+        - description: The `friendly_name` of the TaskQueue that the Workers to read are eligible for.
           in: query
           name: TaskQueueName
           schema:
@@ -2781,8 +2433,7 @@ paths:
             minLength: 34
             pattern: ^WQ[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -2846,25 +2497,16 @@ paths:
             schema:
               properties:
                 ActivitySid:
-                  description: The SID of a valid Activity that will describe the new Worker's
-                    initial state. See
-                    [Activities](https://www.twilio.com/docs/taskrouter/api/activity)
-                    for more information. If not provided, the new Worker's
-                    initial state is the `default_activity_sid` configured on
-                    the Workspace.
+                  description: The SID of a valid Activity that will describe the new Worker's initial state. See [Activities](https://www.twilio.com/docs/taskrouter/api/activity) for more information. If not provided, the new Worker's initial state is the `default_activity_sid` configured on the Workspace.
                   maxLength: 34
                   minLength: 34
                   pattern: ^WA[0-9a-fA-F]{32}$
                   type: string
                 Attributes:
-                  description: 'A valid JSON string that describes the new Worker. For example: `{
-                    "email": "Bob@example.com", "phone": "+5095551234" }`. This
-                    data is passed to the `assignment_callback_url` when
-                    TaskRouter assigns a Task to the Worker. Defaults to {}.'
+                  description: 'A valid JSON string that describes the new Worker. For example: `{ "email": "Bob@example.com", "phone": "+5095551234" }`. This data is passed to the `assignment_callback_url` when TaskRouter assigns a Task to the Worker. Defaults to {}.'
                   type: string
                 FriendlyName:
-                  description: A descriptive string that you create to describe the new Worker. It
-                    can be up to 64 characters long.
+                  description: A descriptive string that you create to describe the new Worker. It can be up to 64 characters long.
                   type: string
               required:
                 - FriendlyName
@@ -2904,33 +2546,24 @@ paths:
             minLength: 34
             pattern: ^WS[0-9a-fA-F]{32}$
             type: string
-        - description: Only calculate statistics from this date and time and earlier,
-            specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
-            format.
+        - description: Only calculate statistics from this date and time and earlier, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           in: query
           name: EndDate
           schema:
             format: date-time
             type: string
-        - description: Only calculate statistics since this many minutes in the past. The
-            default 15 minutes. This is helpful for displaying statistics for
-            the last 15 minutes, 240 minutes (4 hours), and 480 minutes (8
-            hours) to see trends.
+        - description: Only calculate statistics since this many minutes in the past. The default 15 minutes. This is helpful for displaying statistics for the last 15 minutes, 240 minutes (4 hours), and 480 minutes (8 hours) to see trends.
           in: query
           name: Minutes
           schema:
             type: integer
-        - description: Only calculate statistics from this date and time and later,
-            specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
-            format.
+        - description: Only calculate statistics from this date and time and later, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           in: query
           name: StartDate
           schema:
             format: date-time
             type: string
-        - description: Only calculate cumulative statistics on this TaskChannel. Can be
-            the TaskChannel's SID or its `unique_name`, such as `voice`, `sms`,
-            or `default`.
+        - description: Only calculate cumulative statistics on this TaskChannel. Can be the TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or `default`.
           in: query
           name: TaskChannel
           schema:
@@ -2940,8 +2573,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/taskrouter.v1.workspace.worker.workers_cumulative_s\
-                  tatistics"
+                $ref: "#/components/schemas/taskrouter.v1.workspace.worker.workers_cumulative_statistics"
           description: OK
       security:
         - accountSid_authToken: []
@@ -2973,9 +2605,7 @@ paths:
             minLength: 34
             pattern: ^WS[0-9a-fA-F]{32}$
             type: string
-        - description: Only calculate real-time statistics on this TaskChannel. Can be the
-            TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or
-            `default`.
+        - description: Only calculate real-time statistics on this TaskChannel. Can be the TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or `default`.
           in: query
           name: TaskChannel
           schema:
@@ -2985,8 +2615,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/taskrouter.v1.workspace.worker.workers_real_time_st\
-                  atistics"
+                $ref: "#/components/schemas/taskrouter.v1.workspace.worker.workers_real_time_statistics"
           description: OK
       security:
         - accountSid_authToken: []
@@ -3013,25 +2642,18 @@ paths:
             minLength: 34
             pattern: ^WS[0-9a-fA-F]{32}$
             type: string
-        - description: Only calculate statistics since this many minutes in the past. The
-            default 15 minutes. This is helpful for displaying statistics for
-            the last 15 minutes, 240 minutes (4 hours), and 480 minutes (8
-            hours) to see trends.
+        - description: Only calculate statistics since this many minutes in the past. The default 15 minutes. This is helpful for displaying statistics for the last 15 minutes, 240 minutes (4 hours), and 480 minutes (8 hours) to see trends.
           in: query
           name: Minutes
           schema:
             type: integer
-        - description: Only calculate statistics from this date and time and later,
-            specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
-            format.
+        - description: Only calculate statistics from this date and time and later, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           in: query
           name: StartDate
           schema:
             format: date-time
             type: string
-        - description: Only calculate statistics from this date and time and earlier,
-            specified in GMT as an [ISO
-            8601](https://en.wikipedia.org/wiki/ISO_8601) date-time.
+        - description: Only calculate statistics from this date and time and earlier, specified in GMT as an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date-time.
           in: query
           name: EndDate
           schema:
@@ -3045,21 +2667,17 @@ paths:
             minLength: 34
             pattern: ^WQ[0-9a-fA-F]{32}$
             type: string
-        - description: The `friendly_name` of the TaskQueue for which to fetch Worker
-            statistics.
+        - description: The `friendly_name` of the TaskQueue for which to fetch Worker statistics.
           in: query
           name: TaskQueueName
           schema:
             type: string
-        - description: Only include Workers with `friendly_name` values that match this
-            parameter.
+        - description: Only include Workers with `friendly_name` values that match this parameter.
           in: query
           name: FriendlyName
           schema:
             type: string
-        - description: Only calculate statistics on this TaskChannel. Can be the
-            TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or
-            `default`.
+        - description: Only calculate statistics on this TaskChannel. Can be the TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or `default`.
           in: query
           name: TaskChannel
           schema:
@@ -3173,23 +2791,16 @@ paths:
             schema:
               properties:
                 ActivitySid:
-                  description: The SID of a valid Activity that will describe the Worker's initial
-                    state. See
-                    [Activities](https://www.twilio.com/docs/taskrouter/api/activity)
-                    for more information.
+                  description: The SID of a valid Activity that will describe the Worker's initial state. See [Activities](https://www.twilio.com/docs/taskrouter/api/activity) for more information.
                   maxLength: 34
                   minLength: 34
                   pattern: ^WA[0-9a-fA-F]{32}$
                   type: string
                 Attributes:
-                  description: 'The JSON string that describes the Worker. For example: `{
-                    "email": "Bob@example.com", "phone": "+5095551234" }`. This
-                    data is passed to the `assignment_callback_url` when
-                    TaskRouter assigns a Task to the Worker. Defaults to {}.'
+                  description: 'The JSON string that describes the Worker. For example: `{ "email": "Bob@example.com", "phone": "+5095551234" }`. This data is passed to the `assignment_callback_url` when TaskRouter assigns a Task to the Worker. Defaults to {}.'
                   type: string
                 FriendlyName:
-                  description: A descriptive string that you create to describe the Worker. It can
-                    be up to 64 characters long.
+                  description: A descriptive string that you create to describe the Worker. It can be up to 64 characters long.
                   type: string
                 RejectPendingReservations:
                   description: Whether to reject pending reservations.
@@ -3239,8 +2850,7 @@ paths:
             minLength: 34
             pattern: ^WK[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -3368,15 +2978,10 @@ paths:
             schema:
               properties:
                 Available:
-                  description: Whether the WorkerChannel is available. Set to `false` to prevent
-                    the Worker from receiving any new Tasks of this TaskChannel
-                    type.
+                  description: Whether the WorkerChannel is available. Set to `false` to prevent the Worker from receiving any new Tasks of this TaskChannel type.
                   type: boolean
                 Capacity:
-                  description: The total number of Tasks that the Worker should handle for the
-                    TaskChannel type. TaskRouter creates reservations for Tasks
-                    of this TaskChannel type up to the specified capacity. If
-                    the capacity is 0, no new reservations will be created.
+                  description: The total number of Tasks that the Worker should handle for the TaskChannel type. TaskRouter creates reservations for Tasks of this TaskChannel type up to the specified capacity. If the capacity is 0, no new reservations will be created.
                   type: integer
               title: UpdateWorkerChannelRequest
               type: object
@@ -3405,8 +3010,7 @@ paths:
       description: ""
       operationId: ListWorkerReservation
       parameters:
-        - description: The SID of the Workspace with the WorkerReservation resources to
-            read.
+        - description: The SID of the Workspace with the WorkerReservation resources to read.
           in: path
           name: WorkspaceSid
           required: true
@@ -3415,8 +3019,7 @@ paths:
             minLength: 34
             pattern: ^WS[0-9a-fA-F]{32}$
             type: string
-        - description: The SID of the reserved Worker resource with the WorkerReservation
-            resources to read.
+        - description: The SID of the reserved Worker resource with the WorkerReservation resources to read.
           in: path
           name: WorkerSid
           required: true
@@ -3425,9 +3028,7 @@ paths:
             minLength: 34
             pattern: ^WK[0-9a-fA-F]{32}$
             type: string
-        - description: "Returns the list of reservations for a worker with a specified
-            ReservationStatus. Can be: `pending`, `accepted`, `rejected`,
-            `timeout`, `canceled`, or `rescinded`."
+        - description: "Returns the list of reservations for a worker with a specified ReservationStatus. Can be: `pending`, `accepted`, `rejected`, `timeout`, `canceled`, or `rescinded`."
           in: query
           name: ReservationStatus
           schema:
@@ -3441,8 +3042,7 @@ paths:
               - wrapping
               - completed
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -3501,8 +3101,7 @@ paths:
       description: ""
       operationId: FetchWorkerReservation
       parameters:
-        - description: The SID of the Workspace with the WorkerReservation resource to
-            fetch.
+        - description: The SID of the Workspace with the WorkerReservation resource to fetch.
           in: path
           name: WorkspaceSid
           required: true
@@ -3511,8 +3110,7 @@ paths:
             minLength: 34
             pattern: ^WS[0-9a-fA-F]{32}$
             type: string
-        - description: The SID of the reserved Worker resource with the WorkerReservation
-            resource to fetch.
+        - description: The SID of the reserved Worker resource with the WorkerReservation resource to fetch.
           in: path
           name: WorkerSid
           required: true
@@ -3545,8 +3143,7 @@ paths:
       description: ""
       operationId: UpdateWorkerReservation
       parameters:
-        - description: The SID of the Workspace with the WorkerReservation resources to
-            update.
+        - description: The SID of the Workspace with the WorkerReservation resources to update.
           in: path
           name: WorkspaceSid
           required: true
@@ -3555,8 +3152,7 @@ paths:
             minLength: 34
             pattern: ^WS[0-9a-fA-F]{32}$
             type: string
-        - description: The SID of the reserved Worker resource with the WorkerReservation
-            resources to update.
+        - description: The SID of the reserved Worker resource with the WorkerReservation resources to update.
           in: path
           name: WorkerSid
           required: true
@@ -3580,9 +3176,7 @@ paths:
             schema:
               properties:
                 Beep:
-                  description: "Whether to play a notification beep when the participant joins or
-                    when to play a beep. Can be: `true`, `false`, `onEnter`, or
-                    `onExit`. The default value is `true`."
+                  description: "Whether to play a notification beep when the participant joins or when to play a beep. Can be: `true`, `false`, `onEnter`, or `onExit`. The default value is `true`."
                   type: string
                 BeepOnCustomerEntrance:
                   description: Whether to play a notification beep when the customer joins.
@@ -3591,49 +3185,34 @@ paths:
                   description: Whether to accept a reservation when executing a Call instruction.
                   type: boolean
                 CallFrom:
-                  description: The Caller ID of the outbound call when executing a Call
-                    instruction.
+                  description: The Caller ID of the outbound call when executing a Call instruction.
                   type: string
                 CallRecord:
-                  description: Whether to record both legs of a call when executing a Call
-                    instruction.
+                  description: Whether to record both legs of a call when executing a Call instruction.
                   type: string
                 CallStatusCallbackUrl:
-                  description: The URL to call for the completed call event when executing a Call
-                    instruction.
+                  description: The URL to call for the completed call event when executing a Call instruction.
                   format: uri
                   type: string
                 CallTimeout:
                   description: The timeout for a call when executing a Call instruction.
                   type: integer
                 CallTo:
-                  description: The contact URI of the worker when executing a Call instruction.
-                    Can be the URI of the Twilio Client, the SIP URI for
-                    Programmable SIP, or the
-                    [E.164](https://www.twilio.com/docs/glossary/what-e164)
-                    formatted phone number, depending on the destination.
+                  description: The contact URI of the worker when executing a Call instruction. Can be the URI of the Twilio Client, the SIP URI for Programmable SIP, or the [E.164](https://www.twilio.com/docs/glossary/what-e164) formatted phone number, depending on the destination.
                   type: string
                 CallUrl:
-                  description: TwiML URI executed on answering the worker's leg as a result of the
-                    Call instruction.
+                  description: TwiML URI executed on answering the worker's leg as a result of the Call instruction.
                   format: uri
                   type: string
                 ConferenceRecord:
-                  description: "Whether to record the conference the participant is joining or
-                    when to record the conference. Can be: `true`, `false`,
-                    `record-from-start`, and `do-not-record`. The default value
-                    is `false`."
+                  description: "Whether to record the conference the participant is joining or when to record the conference. Can be: `true`, `false`, `record-from-start`, and `do-not-record`. The default value is `false`."
                   type: string
                 ConferenceRecordingStatusCallback:
-                  description: The URL we should call using the
-                    `conference_recording_status_callback_method` when the
-                    conference recording is available.
+                  description: The URL we should call using the `conference_recording_status_callback_method` when the conference recording is available.
                   format: uri
                   type: string
                 ConferenceRecordingStatusCallbackMethod:
-                  description: "The HTTP method we should use to call
-                    `conference_recording_status_callback`. Can be: `GET` or
-                    `POST` and defaults to `POST`."
+                  description: "The HTTP method we should use to call `conference_recording_status_callback`. Can be: `GET` or `POST` and defaults to `POST`."
                   enum:
                     - HEAD
                     - GET
@@ -3643,18 +3222,11 @@ paths:
                     - DELETE
                   type: string
                 ConferenceStatusCallback:
-                  description: The URL we should call using the
-                    `conference_status_callback_method` when the conference
-                    events in `conference_status_callback_event` occur. Only the
-                    value set by the first participant to join the conference is
-                    used. Subsequent `conference_status_callback` values are
-                    ignored.
+                  description: The URL we should call using the `conference_status_callback_method` when the conference events in `conference_status_callback_event` occur. Only the value set by the first participant to join the conference is used. Subsequent `conference_status_callback` values are ignored.
                   format: uri
                   type: string
                 ConferenceStatusCallbackEvent:
-                  description: "The conference status events that we will send to
-                    `conference_status_callback`. Can be: `start`, `end`,
-                    `join`, `leave`, `mute`, `hold`, `speaker`."
+                  description: "The conference status events that we will send to `conference_status_callback`. Can be: `start`, `end`, `join`, `leave`, `mute`, `hold`, `speaker`."
                   items:
                     enum:
                       - start
@@ -3667,9 +3239,7 @@ paths:
                     type: string
                   type: array
                 ConferenceStatusCallbackMethod:
-                  description: "The HTTP method we should use to call
-                    `conference_status_callback`. Can be: `GET` or `POST` and
-                    defaults to `POST`."
+                  description: "The HTTP method we should use to call `conference_status_callback`. Can be: `GET` or `POST` and defaults to `POST`."
                   enum:
                     - HEAD
                     - GET
@@ -3679,50 +3249,37 @@ paths:
                     - DELETE
                   type: string
                 ConferenceTrim:
-                  description: "Whether to trim leading and trailing silence from your recorded
-                    conference audio files. Can be: `trim-silence` or
-                    `do-not-trim` and defaults to `trim-silence`."
+                  description: "Whether to trim leading and trailing silence from your recorded conference audio files. Can be: `trim-silence` or `do-not-trim` and defaults to `trim-silence`."
                   type: string
                 DequeueFrom:
-                  description: The caller ID of the call to the worker when executing a Dequeue
-                    instruction.
+                  description: The caller ID of the call to the worker when executing a Dequeue instruction.
                   type: string
                 DequeuePostWorkActivitySid:
-                  description: The SID of the Activity resource to start after executing a Dequeue
-                    instruction.
+                  description: The SID of the Activity resource to start after executing a Dequeue instruction.
                   maxLength: 34
                   minLength: 34
                   pattern: ^WA[0-9a-fA-F]{32}$
                   type: string
                 DequeueRecord:
-                  description: Whether to record both legs of a call when executing a Dequeue
-                    instruction or which leg to record.
+                  description: Whether to record both legs of a call when executing a Dequeue instruction or which leg to record.
                   type: string
                 DequeueStatusCallbackEvent:
-                  description: The call progress events sent via webhooks as a result of a Dequeue
-                    instruction.
+                  description: The call progress events sent via webhooks as a result of a Dequeue instruction.
                   items:
                     type: string
                   type: array
                 DequeueStatusCallbackUrl:
-                  description: The callback URL for completed call event when executing a Dequeue
-                    instruction.
+                  description: The callback URL for completed call event when executing a Dequeue instruction.
                   format: uri
                   type: string
                 DequeueTimeout:
                   description: The timeout for call when executing a Dequeue instruction.
                   type: integer
                 DequeueTo:
-                  description: The contact URI of the worker when executing a Dequeue instruction.
-                    Can be the URI of the Twilio Client, the SIP URI for
-                    Programmable SIP, or the
-                    [E.164](https://www.twilio.com/docs/glossary/what-e164)
-                    formatted phone number, depending on the destination.
+                  description: The contact URI of the worker when executing a Dequeue instruction. Can be the URI of the Twilio Client, the SIP URI for Programmable SIP, or the [E.164](https://www.twilio.com/docs/glossary/what-e164) formatted phone number, depending on the destination.
                   type: string
                 EarlyMedia:
-                  description: Whether to allow an agent to hear the state of the outbound call,
-                    including ringing or disconnect messages. The default is
-                    `true`.
+                  description: Whether to allow an agent to hear the state of the outbound call, including ringing or disconnect messages. The default is `true`.
                   type: boolean
                 EndConferenceOnCustomerExit:
                   description: Whether to end the conference when the customer leaves.
@@ -3731,46 +3288,35 @@ paths:
                   description: Whether to end the conference when the agent leaves.
                   type: boolean
                 From:
-                  description: The caller ID of the call to the worker when executing a Conference
-                    instruction.
+                  description: The caller ID of the call to the worker when executing a Conference instruction.
                   type: string
                 Instruction:
                   description: The assignment instruction for the reservation.
                   type: string
                 MaxParticipants:
-                  description: The maximum number of participants allowed in the conference. Can
-                    be a positive integer from `2` to `250`. The default value
-                    is `250`.
+                  description: The maximum number of participants allowed in the conference. Can be a positive integer from `2` to `250`. The default value is `250`.
                   type: integer
                 Muted:
                   description: Whether the agent is muted in the conference. Defaults to `false`.
                   type: boolean
                 PostWorkActivitySid:
-                  description: The new worker activity SID after executing a Conference
-                    instruction.
+                  description: The new worker activity SID after executing a Conference instruction.
                   maxLength: 34
                   minLength: 34
                   pattern: ^WA[0-9a-fA-F]{32}$
                   type: string
                 Record:
-                  description: Whether to record the participant and their conferences, including
-                    the time between conferences. Can be `true` or `false` and
-                    the default is `false`.
+                  description: Whether to record the participant and their conferences, including the time between conferences. Can be `true` or `false` and the default is `false`.
                   type: boolean
                 RecordingChannels:
-                  description: "The recording channels for the final recording. Can be: `mono` or
-                    `dual` and the default is `mono`."
+                  description: "The recording channels for the final recording. Can be: `mono` or `dual` and the default is `mono`."
                   type: string
                 RecordingStatusCallback:
-                  description: The URL that we should call using the
-                    `recording_status_callback_method` when the recording status
-                    changes.
+                  description: The URL that we should call using the `recording_status_callback_method` when the recording status changes.
                   format: uri
                   type: string
                 RecordingStatusCallbackMethod:
-                  description: "The HTTP method we should use when we call
-                    `recording_status_callback`. Can be: `GET` or `POST` and
-                    defaults to `POST`."
+                  description: "The HTTP method we should use when we call `recording_status_callback`. Can be: `GET` or `POST` and defaults to `POST`."
                   enum:
                     - HEAD
                     - GET
@@ -3780,30 +3326,23 @@ paths:
                     - DELETE
                   type: string
                 RedirectAccept:
-                  description: Whether the reservation should be accepted when executing a
-                    Redirect instruction.
+                  description: Whether the reservation should be accepted when executing a Redirect instruction.
                   type: boolean
                 RedirectCallSid:
-                  description: The Call SID of the call parked in the queue when executing a
-                    Redirect instruction.
+                  description: The Call SID of the call parked in the queue when executing a Redirect instruction.
                   maxLength: 34
                   minLength: 34
                   pattern: ^CA[0-9a-fA-F]{32}$
                   type: string
                 RedirectUrl:
-                  description: TwiML URI to redirect the call to when executing the Redirect
-                    instruction.
+                  description: TwiML URI to redirect the call to when executing the Redirect instruction.
                   format: uri
                   type: string
                 Region:
-                  description: The
-                    [region](https://support.twilio.com/hc/en-us/articles/223132167-How-global-low-latency-routing-and-region-selection-work-for-conferences-and-Client-calls)
-                    where we should mix the recorded audio. Can be:`us1`, `ie1`,
-                    `de1`, `sg1`, `br1`, `au1`, or `jp1`.
+                  description: The [region](https://support.twilio.com/hc/en-us/articles/223132167-How-global-low-latency-routing-and-region-selection-work-for-conferences-and-Client-calls) where we should mix the recorded audio. Can be:`us1`, `ie1`, `de1`, `sg1`, `br1`, `au1`, or `jp1`.
                   type: string
                 ReservationStatus:
-                  description: "The new status of the reservation. Can be: `pending`, `accepted`,
-                    `rejected`, `timeout`, `canceled`, or `rescinded`."
+                  description: "The new status of the reservation. Can be: `pending`, `accepted`, `rejected`, `timeout`, `canceled`, or `rescinded`."
                   enum:
                     - pending
                     - accepted
@@ -3821,20 +3360,14 @@ paths:
                   description: The SIP username used for authentication.
                   type: string
                 StartConferenceOnEnter:
-                  description: "Whether to start the conference when the participant joins, if it
-                    has not already started. Can be: `true` or `false` and the
-                    default is `true`. If `false` and the conference has not
-                    started, the participant is muted and hears background music
-                    until another participant starts the conference."
+                  description: "Whether to start the conference when the participant joins, if it has not already started. Can be: `true` or `false` and the default is `true`. If `false` and the conference has not started, the participant is muted and hears background music until another participant starts the conference."
                   type: boolean
                 StatusCallback:
-                  description: The URL we should call using the `status_callback_method` to send
-                    status information to your application.
+                  description: The URL we should call using the `status_callback_method` to send status information to your application.
                   format: uri
                   type: string
                 StatusCallbackEvent:
-                  description: "The call progress events that we will send to `status_callback`.
-                    Can be: `initiated`, `ringing`, `answered`, or `completed`."
+                  description: "The call progress events that we will send to `status_callback`. Can be: `initiated`, `ringing`, `answered`, or `completed`."
                   items:
                     enum:
                       - initiated
@@ -3844,8 +3377,7 @@ paths:
                     type: string
                   type: array
                 StatusCallbackMethod:
-                  description: "The HTTP method we should use to call `status_callback`. Can be:
-                    `POST` or `GET` and the default is `POST`."
+                  description: "The HTTP method we should use to call `status_callback`. Can be: `POST` or `GET` and the default is `POST`."
                   enum:
                     - HEAD
                     - GET
@@ -3858,16 +3390,10 @@ paths:
                   description: The timeout for a call when executing a Conference instruction.
                   type: integer
                 To:
-                  description: The Contact URI of the worker when executing a Conference
-                    instruction. Can be the URI of the Twilio Client, the SIP
-                    URI for Programmable SIP, or the
-                    [E.164](https://www.twilio.com/docs/glossary/what-e164)
-                    formatted phone number, depending on the destination.
+                  description: The Contact URI of the worker when executing a Conference instruction. Can be the URI of the Twilio Client, the SIP URI for Programmable SIP, or the [E.164](https://www.twilio.com/docs/glossary/what-e164) formatted phone number, depending on the destination.
                   type: string
                 WaitMethod:
-                  description: The HTTP method we should use to call `wait_url`. Can be `GET` or
-                    `POST` and the default is `POST`. When using a static audio
-                    file, this should be `GET` so that we can cache the file.
+                  description: The HTTP method we should use to call `wait_url`. Can be `GET` or `POST` and the default is `POST`. When using a static audio file, this should be `GET` so that we can cache the file.
                   enum:
                     - HEAD
                     - GET
@@ -3877,11 +3403,7 @@ paths:
                     - DELETE
                   type: string
                 WaitUrl:
-                  description: The URL we should call using the `wait_method` for the music to
-                    play while participants are waiting for the conference to
-                    start. The default value is the URL of our standard hold
-                    music. [Learn more about hold
-                    music](https://www.twilio.com/labs/twimlets/holdmusic).
+                  description: The URL we should call using the `wait_method` for the music to play while participants are waiting for the conference to start. The default value is the URL of our standard hold music. [Learn more about hold music](https://www.twilio.com/labs/twimlets/holdmusic).
                   format: uri
                   type: string
                 WorkerActivitySid:
@@ -3935,33 +3457,24 @@ paths:
             minLength: 34
             pattern: ^WK[0-9a-fA-F]{32}$
             type: string
-        - description: Only calculate statistics since this many minutes in the past. The
-            default 15 minutes. This is helpful for displaying statistics for
-            the last 15 minutes, 240 minutes (4 hours), and 480 minutes (8
-            hours) to see trends.
+        - description: Only calculate statistics since this many minutes in the past. The default 15 minutes. This is helpful for displaying statistics for the last 15 minutes, 240 minutes (4 hours), and 480 minutes (8 hours) to see trends.
           in: query
           name: Minutes
           schema:
             type: integer
-        - description: Only calculate statistics from this date and time and later,
-            specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
-            format.
+        - description: Only calculate statistics from this date and time and later, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           in: query
           name: StartDate
           schema:
             format: date-time
             type: string
-        - description: Only include usage that occurred on or before this date, specified
-            in GMT as an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
-            date-time.
+        - description: Only include usage that occurred on or before this date, specified in GMT as an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date-time.
           in: query
           name: EndDate
           schema:
             format: date-time
             type: string
-        - description: Only calculate statistics on this TaskChannel. Can be the
-            TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or
-            `default`.
+        - description: Only calculate statistics on this TaskChannel. Can be the TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or `default`.
           in: query
           name: TaskChannel
           schema:
@@ -3971,8 +3484,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/taskrouter.v1.workspace.worker.worker_instance_stat\
-                  istics"
+                $ref: "#/components/schemas/taskrouter.v1.workspace.worker.worker_instance_statistics"
           description: OK
       security:
         - accountSid_authToken: []
@@ -4004,8 +3516,7 @@ paths:
           name: FriendlyName
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -4069,32 +3580,21 @@ paths:
             schema:
               properties:
                 AssignmentCallbackUrl:
-                  description: The URL from your application that will process task assignment
-                    events. See [Handling Task Assignment
-                    Callback](https://www.twilio.com/docs/taskrouter/handle-assignment-callbacks)
-                    for more details.
+                  description: The URL from your application that will process task assignment events. See [Handling Task Assignment Callback](https://www.twilio.com/docs/taskrouter/handle-assignment-callbacks) for more details.
                   format: uri
                   type: string
                 Configuration:
-                  description: A JSON string that contains the rules to apply to the Workflow. See
-                    [Configuring
-                    Workflows](https://www.twilio.com/docs/taskrouter/workflow-configuration)
-                    for more information.
+                  description: A JSON string that contains the rules to apply to the Workflow. See [Configuring Workflows](https://www.twilio.com/docs/taskrouter/workflow-configuration) for more information.
                   type: string
                 FallbackAssignmentCallbackUrl:
-                  description: The URL that we should call when a call to the
-                    `assignment_callback_url` fails.
+                  description: The URL that we should call when a call to the `assignment_callback_url` fails.
                   format: uri
                   type: string
                 FriendlyName:
-                  description: A descriptive string that you create to describe the Workflow
-                    resource. For example, `Inbound Call Workflow` or `2014
-                    Outbound Campaign`.
+                  description: A descriptive string that you create to describe the Workflow resource. For example, `Inbound Call Workflow` or `2014 Outbound Campaign`.
                   type: string
                 TaskReservationTimeout:
-                  description: How long TaskRouter will wait for a confirmation response from your
-                    application after it assigns a Task to a Worker. Can be up
-                    to `86,400` (24 hours) and the default is `120`.
+                  description: How long TaskRouter will wait for a confirmation response from your application after it assigns a Task to a Worker. Can be up to `86,400` (24 hours) and the default is `120`.
                   type: integer
               required:
                 - FriendlyName
@@ -4212,37 +3712,24 @@ paths:
             schema:
               properties:
                 AssignmentCallbackUrl:
-                  description: The URL from your application that will process task assignment
-                    events. See [Handling Task Assignment
-                    Callback](https://www.twilio.com/docs/taskrouter/handle-assignment-callbacks)
-                    for more details.
+                  description: The URL from your application that will process task assignment events. See [Handling Task Assignment Callback](https://www.twilio.com/docs/taskrouter/handle-assignment-callbacks) for more details.
                   format: uri
                   type: string
                 Configuration:
-                  description: A JSON string that contains the rules to apply to the Workflow. See
-                    [Configuring
-                    Workflows](https://www.twilio.com/docs/taskrouter/workflow-configuration)
-                    for more information.
+                  description: A JSON string that contains the rules to apply to the Workflow. See [Configuring Workflows](https://www.twilio.com/docs/taskrouter/workflow-configuration) for more information.
                   type: string
                 FallbackAssignmentCallbackUrl:
-                  description: The URL that we should call when a call to the
-                    `assignment_callback_url` fails.
+                  description: The URL that we should call when a call to the `assignment_callback_url` fails.
                   format: uri
                   type: string
                 FriendlyName:
-                  description: A descriptive string that you create to describe the Workflow
-                    resource. For example, `Inbound Call Workflow` or `2014
-                    Outbound Campaign`.
+                  description: A descriptive string that you create to describe the Workflow resource. For example, `Inbound Call Workflow` or `2014 Outbound Campaign`.
                   type: string
                 ReEvaluateTasks:
-                  description: Whether or not to re-evaluate Tasks. The default is `false`, which
-                    means Tasks in the Workflow will not be processed through
-                    the assignment loop again.
+                  description: Whether or not to re-evaluate Tasks. The default is `false`, which means Tasks in the Workflow will not be processed through the assignment loop again.
                   type: string
                 TaskReservationTimeout:
-                  description: How long TaskRouter will wait for a confirmation response from your
-                    application after it assigns a Task to a Worker. Can be up
-                    to `86,400` (24 hours) and the default is `120`.
+                  description: How long TaskRouter will wait for a confirmation response from your application after it assigns a Task to a Worker. Can be up to `86,400` (24 hours) and the default is `120`.
                   type: integer
               title: UpdateWorkflowRequest
               type: object
@@ -4280,8 +3767,7 @@ paths:
             minLength: 34
             pattern: ^WS[0-9a-fA-F]{32}$
             type: string
-        - description: Returns the list of Tasks that are being controlled by the Workflow
-            with the specified Sid value.
+        - description: Returns the list of Tasks that are being controlled by the Workflow with the specified Sid value.
           in: path
           name: WorkflowSid
           required: true
@@ -4290,45 +3776,29 @@ paths:
             minLength: 34
             pattern: ^WW[0-9a-fA-F]{32}$
             type: string
-        - description: Only include usage that occurred on or before this date, specified
-            in GMT as an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
-            date-time.
+        - description: Only include usage that occurred on or before this date, specified in GMT as an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date-time.
           in: query
           name: EndDate
           schema:
             format: date-time
             type: string
-        - description: Only calculate statistics since this many minutes in the past. The
-            default 15 minutes. This is helpful for displaying statistics for
-            the last 15 minutes, 240 minutes (4 hours), and 480 minutes (8
-            hours) to see trends.
+        - description: Only calculate statistics since this many minutes in the past. The default 15 minutes. This is helpful for displaying statistics for the last 15 minutes, 240 minutes (4 hours), and 480 minutes (8 hours) to see trends.
           in: query
           name: Minutes
           schema:
             type: integer
-        - description: Only calculate statistics from this date and time and later,
-            specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
-            format.
+        - description: Only calculate statistics from this date and time and later, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           in: query
           name: StartDate
           schema:
             format: date-time
             type: string
-        - description: Only calculate cumulative statistics on this TaskChannel. Can be
-            the TaskChannel's SID or its `unique_name`, such as `voice`, `sms`,
-            or `default`.
+        - description: Only calculate cumulative statistics on this TaskChannel. Can be the TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or `default`.
           in: query
           name: TaskChannel
           schema:
             type: string
-        - description: A comma separated list of values that describes the thresholds, in
-            seconds, to calculate statistics on. For each threshold specified,
-            the number of Tasks canceled and reservations accepted above and
-            below the specified thresholds in seconds are computed. For example,
-            `5,30` would show splits of Tasks that were canceled or accepted
-            before and after 5 seconds and before and after 30 seconds. This can
-            be used to show short abandoned Tasks or Tasks that failed to meet
-            an SLA.
+        - description: A comma separated list of values that describes the thresholds, in seconds, to calculate statistics on. For each threshold specified, the number of Tasks canceled and reservations accepted above and below the specified thresholds in seconds are computed. For example, `5,30` would show splits of Tasks that were canceled or accepted before and after 5 seconds and before and after 30 seconds. This can be used to show short abandoned Tasks or Tasks that failed to meet an SLA.
           in: query
           name: SplitByWaitTime
           schema:
@@ -4338,8 +3808,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/taskrouter.v1.workspace.workflow.workflow_cumulativ\
-                  e_statistics"
+                $ref: "#/components/schemas/taskrouter.v1.workspace.workflow.workflow_cumulative_statistics"
           description: OK
       security:
         - accountSid_authToken: []
@@ -4369,8 +3838,7 @@ paths:
             minLength: 34
             pattern: ^WS[0-9a-fA-F]{32}$
             type: string
-        - description: Returns the list of Tasks that are being controlled by the Workflow
-            with the specified SID value.
+        - description: Returns the list of Tasks that are being controlled by the Workflow with the specified SID value.
           in: path
           name: WorkflowSid
           required: true
@@ -4379,9 +3847,7 @@ paths:
             minLength: 34
             pattern: ^WW[0-9a-fA-F]{32}$
             type: string
-        - description: Only calculate real-time statistics on this TaskChannel. Can be the
-            TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or
-            `default`.
+        - description: Only calculate real-time statistics on this TaskChannel. Can be the TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or `default`.
           in: query
           name: TaskChannel
           schema:
@@ -4391,8 +3857,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/taskrouter.v1.workspace.workflow.workflow_real_time\
-                  _statistics"
+                $ref: "#/components/schemas/taskrouter.v1.workspace.workflow.workflow_real_time_statistics"
           description: OK
       security:
         - accountSid_authToken: []
@@ -4421,8 +3886,7 @@ paths:
             minLength: 34
             pattern: ^WS[0-9a-fA-F]{32}$
             type: string
-        - description: Returns the list of Tasks that are being controlled by the Workflow
-            with the specified SID value.
+        - description: Returns the list of Tasks that are being controlled by the Workflow with the specified SID value.
           in: path
           name: WorkflowSid
           required: true
@@ -4431,45 +3895,29 @@ paths:
             minLength: 34
             pattern: ^WW[0-9a-fA-F]{32}$
             type: string
-        - description: Only calculate statistics since this many minutes in the past. The
-            default 15 minutes. This is helpful for displaying statistics for
-            the last 15 minutes, 240 minutes (4 hours), and 480 minutes (8
-            hours) to see trends.
+        - description: Only calculate statistics since this many minutes in the past. The default 15 minutes. This is helpful for displaying statistics for the last 15 minutes, 240 minutes (4 hours), and 480 minutes (8 hours) to see trends.
           in: query
           name: Minutes
           schema:
             type: integer
-        - description: Only calculate statistics from this date and time and later,
-            specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
-            format.
+        - description: Only calculate statistics from this date and time and later, specified in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
           in: query
           name: StartDate
           schema:
             format: date-time
             type: string
-        - description: Only calculate statistics from this date and time and earlier,
-            specified in GMT as an [ISO
-            8601](https://en.wikipedia.org/wiki/ISO_8601) date-time.
+        - description: Only calculate statistics from this date and time and earlier, specified in GMT as an [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date-time.
           in: query
           name: EndDate
           schema:
             format: date-time
             type: string
-        - description: Only calculate real-time statistics on this TaskChannel. Can be the
-            TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or
-            `default`.
+        - description: Only calculate real-time statistics on this TaskChannel. Can be the TaskChannel's SID or its `unique_name`, such as `voice`, `sms`, or `default`.
           in: query
           name: TaskChannel
           schema:
             type: string
-        - description: A comma separated list of values that describes the thresholds, in
-            seconds, to calculate statistics on. For each threshold specified,
-            the number of Tasks canceled and reservations accepted above and
-            below the specified thresholds in seconds are computed. For example,
-            `5,30` would show splits of Tasks that were canceled or accepted
-            before and after 5 seconds and before and after 30 seconds. This can
-            be used to show short abandoned Tasks or Tasks that failed to meet
-            an SLA.
+        - description: A comma separated list of values that describes the thresholds, in seconds, to calculate statistics on. For each threshold specified, the number of Tasks canceled and reservations accepted above and below the specified thresholds in seconds are computed. For example, `5,30` would show splits of Tasks that were canceled or accepted before and after 5 seconds and before and after 30 seconds. This can be used to show short abandoned Tasks or Tasks that failed to meet an SLA.
           in: query
           name: SplitByWaitTime
           schema:
@@ -4479,8 +3927,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/taskrouter.v1.workspace.workflow.workflow_statistic\
-                  s"
+                $ref: "#/components/schemas/taskrouter.v1.workspace.workflow.workflow_statistics"
           description: OK
       security:
         - accountSid_authToken: []
@@ -4518,8 +3965,7 @@ components:
           nullable: true
           type: string
         default_activity_sid:
-          description: The SID of the Activity that will be used when new Workers are
-            created in the Workspace
+          description: The SID of the Activity that will be used when new Workers are created in the Workspace
           maxLength: 34
           minLength: 34
           nullable: true
@@ -4547,8 +3993,7 @@ components:
           nullable: true
           type: boolean
         prioritize_queue_order:
-          description: The type of TaskQueue to prioritize when Workers are receiving
-            Tasks from both types of TaskQueues
+          description: The type of TaskQueue to prioritize when Workers are receiving Tasks from both types of TaskQueues
           enum:
             - FIFO
             - LIFO
@@ -4566,8 +4011,7 @@ components:
           nullable: true
           type: string
         timeout_activity_sid:
-          description: The SID of the Activity that will be assigned to a Worker when a
-            Task reservation times out without a response
+          description: The SID of the Activity that will be assigned to a Worker when a Task reservation times out without a response
           maxLength: 34
           minLength: 34
           nullable: true
@@ -4589,8 +4033,7 @@ components:
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         available:
-          description: Whether the Worker should be eligible to receive a Task when it
-            occupies the Activity
+          description: Whether the Worker should be eligible to receive a Task when it occupies the Activity
           nullable: true
           type: boolean
         date_created:
@@ -4764,8 +4207,7 @@ components:
           nullable: true
           type: object
         priority:
-          description: Retrieve the list of all Tasks in the Workspace with the specified
-            priority
+          description: Retrieve the list of all Tasks in the Workspace with the specified priority
           nullable: true
           type: integer
         reason:
@@ -4791,8 +4233,7 @@ components:
           nullable: true
           type: string
         task_queue_entered_date:
-          description: The ISO 8601 date and time in GMT when the Task entered the
-            TaskQueue.
+          description: The ISO 8601 date and time in GMT when the Task entered the TaskQueue.
           format: date-time
           nullable: true
           type: string
@@ -4808,8 +4249,7 @@ components:
           pattern: ^WQ[0-9a-fA-F]{32}$
           type: string
         timeout:
-          description: The amount of time in seconds that the Task can live before being
-            assigned
+          description: The amount of time in seconds that the Task can live before being assigned
           nullable: true
           type: integer
         url:
@@ -4949,8 +4389,7 @@ components:
           pattern: ^TC[0-9a-fA-F]{32}$
           type: string
         unique_name:
-          description: An application-defined string that uniquely identifies the Task
-            Channel
+          description: An application-defined string that uniquely identifies the Task Channel
           nullable: true
           type: string
         url:
@@ -4976,13 +4415,11 @@ components:
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         assignment_activity_name:
-          description: The name of the Activity to assign Workers when a task is assigned
-            for them
+          description: The name of the Activity to assign Workers when a task is assigned for them
           nullable: true
           type: string
         assignment_activity_sid:
-          description: The SID of the Activity to assign Workers when a task is assigned
-            for them
+          description: The SID of the Activity to assign Workers when a task is assigned for them
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5011,13 +4448,11 @@ components:
           nullable: true
           type: integer
         reservation_activity_name:
-          description: The name of the Activity to assign Workers once a task is reserved
-            for them
+          description: The name of the Activity to assign Workers once a task is reserved for them
           nullable: true
           type: string
         reservation_activity_sid:
-          description: The SID of the Activity to assign Workers once a task is reserved
-            for them
+          description: The SID of the Activity to assign Workers once a task is reserved for them
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5031,8 +4466,7 @@ components:
           pattern: ^WQ[0-9a-fA-F]{32}$
           type: string
         target_workers:
-          description: A string describing the Worker selection criteria for any Tasks
-            that enter the TaskQueue
+          description: A string describing the Worker selection criteria for any Tasks that enter the TaskQueue
           nullable: true
           type: string
         task_order:
@@ -5094,18 +4528,15 @@ components:
           nullable: true
           type: integer
         reservations_timed_out:
-          description: The total number of Reservations that timed out for Tasks in the
-            TaskQueue
+          description: The total number of Reservations that timed out for Tasks in the TaskQueue
           nullable: true
           type: integer
         split_by_wait_time:
-          description: A list of objects that describe the Tasks canceled and reservations
-            accepted above and below the specified thresholds
+          description: A list of objects that describe the Tasks canceled and reservations accepted above and below the specified thresholds
           nullable: true
           type: object
         start_time:
-          description: The beginning of the interval during which these statistics were
-            calculated
+          description: The beginning of the interval during which these statistics were calculated
           format: date-time
           nullable: true
           type: string
@@ -5142,18 +4573,15 @@ components:
           nullable: true
           type: string
         wait_duration_in_queue_until_accepted:
-          description: The relative wait duration statistics for Tasks accepted while in
-            the TaskQueue
+          description: The relative wait duration statistics for Tasks accepted while in the TaskQueue
           nullable: true
           type: object
         wait_duration_until_accepted:
-          description: The wait duration statistics for Tasks accepted while in the
-            TaskQueue
+          description: The wait duration statistics for Tasks accepted while in the TaskQueue
           nullable: true
           type: object
         wait_duration_until_canceled:
-          description: The wait duration statistics for Tasks canceled while in the
-            TaskQueue
+          description: The wait duration statistics for Tasks canceled while in the TaskQueue
           nullable: true
           type: object
         workspace_sid:
@@ -5221,8 +4649,7 @@ components:
           nullable: true
           type: integer
         total_eligible_workers:
-          description: The total number of Workers eligible for Tasks in the TaskQueue,
-            independent of their Activity state
+          description: The total number of Workers eligible for Tasks in the TaskQueue, independent of their Activity state
           nullable: true
           type: integer
         total_tasks:
@@ -5602,8 +5029,7 @@ components:
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         activity_durations:
-          description: The minimum, average, maximum, and total time that Workers spent in
-            each Activity
+          description: The minimum, average, maximum, and total time that Workers spent in each Activity
           items:
             type: object
           nullable: true
@@ -5638,8 +5064,7 @@ components:
           nullable: true
           type: integer
         start_time:
-          description: The beginning of the interval during which these statistics were
-            calculated
+          description: The beginning of the interval during which these statistics were calculated
           format: date-time
           nullable: true
           type: string
@@ -5698,8 +5123,7 @@ components:
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         assignment_callback_url:
-          description: The URL that we call when a task managed by the Workflow is
-            assigned to a Worker
+          description: The URL that we call when a task managed by the Workflow is assigned to a Worker
           format: uri
           nullable: true
           type: string
@@ -5722,8 +5146,7 @@ components:
           nullable: true
           type: string
         fallback_assignment_callback_url:
-          description: The URL that we call when a call to the `assignment_callback_url`
-            fails
+          description: The URL that we call when a call to the `assignment_callback_url` fails
           format: uri
           nullable: true
           type: string
@@ -5743,8 +5166,7 @@ components:
           pattern: ^WW[0-9a-fA-F]{32}$
           type: string
         task_reservation_timeout:
-          description: How long TaskRouter will wait for a confirmation response from your
-            application after it assigns a Task to a Worker
+          description: How long TaskRouter will wait for a confirmation response from your application after it assigns a Task to a Worker
           nullable: true
           type: integer
         url:
@@ -5803,13 +5225,11 @@ components:
           nullable: true
           type: integer
         split_by_wait_time:
-          description: A list of objects that describe the Tasks canceled and reservations
-            accepted above and below the specified thresholds
+          description: A list of objects that describe the Tasks canceled and reservations accepted above and below the specified thresholds
           nullable: true
           type: object
         start_time:
-          description: The beginning of the interval during which these statistics were
-            calculated
+          description: The beginning of the interval during which these statistics were calculated
           format: date-time
           nullable: true
           type: string
@@ -5851,8 +5271,7 @@ components:
           nullable: true
           type: object
         workflow_sid:
-          description: Returns the list of Tasks that are being controlled by the Workflow
-            with the specified Sid value
+          description: Returns the list of Tasks that are being controlled by the Workflow with the specified Sid value
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5904,8 +5323,7 @@ components:
           nullable: true
           type: string
         workflow_sid:
-          description: Returns the list of Tasks that are being controlled by the Workflow
-            with the specified SID value
+          description: Returns the list of Tasks that are being controlled by the Workflow with the specified SID value
           maxLength: 34
           minLength: 34
           nullable: true
@@ -5942,8 +5360,7 @@ components:
           nullable: true
           type: string
         workflow_sid:
-          description: Returns the list of Tasks that are being controlled by the Workflow
-            with the specified SID value
+          description: Returns the list of Tasks that are being controlled by the Workflow with the specified SID value
           maxLength: 34
           minLength: 34
           nullable: true
@@ -6000,13 +5417,11 @@ components:
           nullable: true
           type: integer
         split_by_wait_time:
-          description: A list of objects that describe the Tasks canceled and reservations
-            accepted above and below the specified thresholds
+          description: A list of objects that describe the Tasks canceled and reservations accepted above and below the specified thresholds
           nullable: true
           type: object
         start_time:
-          description: The beginning of the interval during which these statistics were
-            calculated
+          description: The beginning of the interval during which these statistics were calculated
           format: date-time
           nullable: true
           type: string

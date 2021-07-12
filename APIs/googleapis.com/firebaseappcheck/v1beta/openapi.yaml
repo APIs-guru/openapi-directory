@@ -6,18 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: "App Check works alongside other Firebase services to help protect
-    your backend resources from abuse, such as billing fraud or phishing. With
-    App Check, devices running your app will use an app or device attestation
-    provider that attests to one or both of the following: * Requests originate
-    from your authentic app * Requests originate from an authentic, untampered
-    device This attestation is attached to every request your app makes to your
-    Firebase backend resources. The Firebase App Check REST API allows you to
-    manage your App Check configurations programmatically. It also allows you to
-    exchange attestation material for App Check tokens directly without using a
-    Firebase SDK. Finally, it allows you to obtain the public key set necessary
-    to validate an App Check token yourself. [Learn more about App
-    Check](https://firebase.google.com/docs/app-check)."
+  description: "App Check works alongside other Firebase services to help protect your backend resources from abuse, such as billing fraud or phishing. With App Check, devices running your app will use an app or device attestation provider that attests to one or both of the following: * Requests originate from your authentic app * Requests originate from an authentic, untampered device This attestation is attached to every request your app makes to your Firebase backend resources. The Firebase App Check REST API allows you to manage your App Check configurations programmatically. It also allows you to exchange attestation material for App Check tokens directly without using a Firebase SDK. Finally, it allows you to obtain the public key set necessary to validate an App Check token yourself. [Learn more about App Check](https://firebase.google.com/docs/app-check)."
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -55,14 +44,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Accepts a AppAttest Artifact and Assertion, and uses the
-        developer's preconfigured auth token to verify the token with Apple.
-        Returns an AttestationToken with the App ID as specified by the `app`
-        field included as attested claims.
+      description: Accepts a AppAttest Artifact and Assertion, and uses the developer's preconfigured auth token to verify the token with Apple. Returns an AttestationToken with the App ID as specified by the `app` field included as attested claims.
       operationId: firebaseappcheck.projects.apps.exchangeAppAttestAssertion
       parameters:
-        - description: 'Required. The full resource name to the iOS App. Format:
-            "projects/{project_id}/apps/{app_id}"'
+        - description: 'Required. The full resource name to the iOS App. Format: "projects/{project_id}/apps/{app_id}"'
           in: path
           name: app
           required: true
@@ -72,15 +57,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangeAppAttestAssert\
-                ionRequest"
+              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangeAppAttestAssertionRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAttestationTokenRespons\
-                  e"
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAttestationTokenResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -107,14 +90,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Accepts a AppAttest CBOR Attestation, and uses the developer's
-        preconfigured team and bundle IDs to verify the token with Apple.
-        Returns an Attestation Artifact that can later be exchanged for an
-        AttestationToken in ExchangeAppAttestAssertion.
+      description: Accepts a AppAttest CBOR Attestation, and uses the developer's preconfigured team and bundle IDs to verify the token with Apple. Returns an Attestation Artifact that can later be exchanged for an AttestationToken in ExchangeAppAttestAssertion.
       operationId: firebaseappcheck.projects.apps.exchangeAppAttestAttestation
       parameters:
-        - description: 'Required. The full resource name to the iOS App. Format:
-            "projects/{project_id}/apps/{app_id}"'
+        - description: 'Required. The full resource name to the iOS App. Format: "projects/{project_id}/apps/{app_id}"'
           in: path
           name: app
           required: true
@@ -124,15 +103,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangeAppAttestAttest\
-                ationRequest"
+              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangeAppAttestAttestationRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangeAppAttestAttest\
-                  ationResponse"
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangeAppAttestAttestationResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -159,16 +136,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Validates a custom token signed using your project's Admin SDK
-        service account credentials. If valid, returns an App Check token
-        encapsulated in an AttestationTokenResponse.
+      description: Validates a custom token signed using your project's Admin SDK service account credentials. If valid, returns an App Check token encapsulated in an AttestationTokenResponse.
       operationId: firebaseappcheck.projects.apps.exchangeCustomToken
       parameters:
-        - description: "Required. The relative resource name of the app, in the format:
-            ``` projects/{project_number}/apps/{app_id} ``` If necessary, the
-            `project_number` element can be replaced with the project ID of the
-            Firebase project. Learn more about using project identifiers in
-            Google's [AIP 2510](https://google.aip.dev/cloud/2510) standard."
+        - description: "Required. The relative resource name of the app, in the format: ``` projects/{project_number}/apps/{app_id} ``` If necessary, the `project_number` element can be replaced with the project ID of the Firebase project. Learn more about using project identifiers in Google's [AIP 2510](https://google.aip.dev/cloud/2510) standard."
           in: path
           name: app
           required: true
@@ -178,15 +149,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangeCustomTokenRequ\
-                est"
+              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangeCustomTokenRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAttestationTokenRespons\
-                  e"
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAttestationTokenResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -213,18 +182,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Validates a debug token secret that you have previously created
-        using CreateDebugToken. If valid, returns an App Check token
-        encapsulated in an AttestationTokenResponse. Note that a restrictive
-        quota is enforced on this method to prevent accidental exposure of the
-        app to abuse.
+      description: Validates a debug token secret that you have previously created using CreateDebugToken. If valid, returns an App Check token encapsulated in an AttestationTokenResponse. Note that a restrictive quota is enforced on this method to prevent accidental exposure of the app to abuse.
       operationId: firebaseappcheck.projects.apps.exchangeDebugToken
       parameters:
-        - description: "Required. The relative resource name of the app, in the format:
-            ``` projects/{project_number}/apps/{app_id} ``` If necessary, the
-            `project_number` element can be replaced with the project ID of the
-            Firebase project. Learn more about using project identifiers in
-            Google's [AIP 2510](https://google.aip.dev/cloud/2510) standard."
+        - description: "Required. The relative resource name of the app, in the format: ``` projects/{project_number}/apps/{app_id} ``` If necessary, the `project_number` element can be replaced with the project ID of the Firebase project. Learn more about using project identifiers in Google's [AIP 2510](https://google.aip.dev/cloud/2510) standard."
           in: path
           name: app
           required: true
@@ -234,15 +195,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangeDebugTokenReque\
-                st"
+              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangeDebugTokenRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAttestationTokenRespons\
-                  e"
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAttestationTokenResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -269,18 +228,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Accepts a
-        [`device_token`](https://developer.apple.com/documentation/devicecheck/dcdevice)
-        issued by DeviceCheck, and attempts to validate it with Apple. If valid,
-        returns an App Check token encapsulated in an AttestationTokenResponse.
+      description: Accepts a [`device_token`](https://developer.apple.com/documentation/devicecheck/dcdevice) issued by DeviceCheck, and attempts to validate it with Apple. If valid, returns an App Check token encapsulated in an AttestationTokenResponse.
       operationId: firebaseappcheck.projects.apps.exchangeDeviceCheckToken
       parameters:
-        - description: "Required. The relative resource name of the iOS app, in the
-            format: ``` projects/{project_number}/apps/{app_id} ``` If
-            necessary, the `project_number` element can be replaced with the
-            project ID of the Firebase project. Learn more about using project
-            identifiers in Google's [AIP
-            2510](https://google.aip.dev/cloud/2510) standard."
+        - description: "Required. The relative resource name of the iOS app, in the format: ``` projects/{project_number}/apps/{app_id} ``` If necessary, the `project_number` element can be replaced with the project ID of the Firebase project. Learn more about using project identifiers in Google's [AIP 2510](https://google.aip.dev/cloud/2510) standard."
           in: path
           name: app
           required: true
@@ -290,15 +241,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangeDeviceCheckToke\
-                nRequest"
+              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangeDeviceCheckTokenRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAttestationTokenRespons\
-                  e"
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAttestationTokenResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -325,17 +274,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Validates a [reCAPTCHA v3 response
-        token](https://developers.google.com/recaptcha/docs/v3). If valid,
-        returns an App Check token encapsulated in an AttestationTokenResponse.
+      description: Validates a [reCAPTCHA v3 response token](https://developers.google.com/recaptcha/docs/v3). If valid, returns an App Check token encapsulated in an AttestationTokenResponse.
       operationId: firebaseappcheck.projects.apps.exchangeRecaptchaToken
       parameters:
-        - description: "Required. The relative resource name of the web app, in the
-            format: ``` projects/{project_number}/apps/{app_id} ``` If
-            necessary, the `project_number` element can be replaced with the
-            project ID of the Firebase project. Learn more about using project
-            identifiers in Google's [AIP
-            2510](https://google.aip.dev/cloud/2510) standard."
+        - description: "Required. The relative resource name of the web app, in the format: ``` projects/{project_number}/apps/{app_id} ``` If necessary, the `project_number` element can be replaced with the project ID of the Firebase project. Learn more about using project identifiers in Google's [AIP 2510](https://google.aip.dev/cloud/2510) standard."
           in: path
           name: app
           required: true
@@ -345,15 +287,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangeRecaptchaTokenR\
-                equest"
+              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangeRecaptchaTokenRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAttestationTokenRespons\
-                  e"
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAttestationTokenResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -380,18 +320,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Validates a [SafetyNet
-        token](https://developer.android.com/training/safetynet/attestation#request-attestation-step).
-        If valid, returns an App Check token encapsulated in an
-        AttestationTokenResponse.
+      description: Validates a [SafetyNet token](https://developer.android.com/training/safetynet/attestation#request-attestation-step). If valid, returns an App Check token encapsulated in an AttestationTokenResponse.
       operationId: firebaseappcheck.projects.apps.exchangeSafetyNetToken
       parameters:
-        - description: "Required. The relative resource name of the Android app, in the
-            format: ``` projects/{project_number}/apps/{app_id} ``` If
-            necessary, the `project_number` element can be replaced with the
-            project ID of the Firebase project. Learn more about using project
-            identifiers in Google's [AIP
-            2510](https://google.aip.dev/cloud/2510) standard."
+        - description: "Required. The relative resource name of the Android app, in the format: ``` projects/{project_number}/apps/{app_id} ``` If necessary, the `project_number` element can be replaced with the project ID of the Firebase project. Learn more about using project identifiers in Google's [AIP 2510](https://google.aip.dev/cloud/2510) standard."
           in: path
           name: app
           required: true
@@ -401,15 +333,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangeSafetyNetTokenR\
-                equest"
+              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaExchangeSafetyNetTokenRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAttestationTokenRespons\
-                  e"
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAttestationTokenResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -436,12 +366,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Initiates the App Attest flow by generating a challenge which will
-        be used as a type of nonce for this attestation.
+      description: Initiates the App Attest flow by generating a challenge which will be used as a type of nonce for this attestation.
       operationId: firebaseappcheck.projects.apps.generateAppAttestChallenge
       parameters:
-        - description: 'Required. The full resource name to the iOS App. Format:
-            "projects/{project_id}/apps/{app_id}"'
+        - description: 'Required. The full resource name to the iOS App. Format: "projects/{project_id}/apps/{app_id}"'
           in: path
           name: app
           required: true
@@ -451,15 +379,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaGenerateAppAttestChalle\
-                ngeRequest"
+              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaGenerateAppAttestChallengeRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAppAttestChallengeRespo\
-                  nse"
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAppAttestChallengeResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -474,16 +400,10 @@ paths:
         - projects
   "/v1beta/{name}":
     delete:
-      description: Deletes the specified DebugToken. A deleted debug token cannot be
-        used to exchange for an App Check token. Use this method when you
-        suspect the secret `token` has been compromised or when you no longer
-        need the debug token.
+      description: Deletes the specified DebugToken. A deleted debug token cannot be used to exchange for an App Check token. Use this method when you suspect the secret `token` has been compromised or when you no longer need the debug token.
       operationId: firebaseappcheck.projects.apps.debugTokens.delete
       parameters:
-        - description: "Required. The relative resource name of the DebugToken to delete,
-            in the format: ```
-            projects/{project_number}/apps/{app_id}/debugTokens/{debug_token_id}
-            ```"
+        - description: "Required. The relative resource name of the DebugToken to delete, in the format: ``` projects/{project_number}/apps/{app_id}/debugTokens/{debug_token_id} ```"
           in: path
           name: name
           required: true
@@ -511,12 +431,7 @@ paths:
       description: Gets the Service configuration for the specified service name.
       operationId: firebaseappcheck.projects.services.get
       parameters:
-        - description: "Required. The relative resource name of the Service to retrieve,
-            in the format: ``` projects/{project_number}/services/{service_id}
-            ``` Note that the `service_id` element must be a supported service
-            ID. Currently, the following service IDs are supported: *
-            `firebasestorage.googleapis.com` (Cloud Storage for Firebase) *
-            `firebasedatabase.googleapis.com` (Firebase Realtime Database)"
+        - description: "Required. The relative resource name of the Service to retrieve, in the format: ``` projects/{project_number}/services/{service_id} ``` Note that the `service_id` element must be a supported service ID. Currently, the following service IDs are supported: * `firebasestorage.googleapis.com` (Cloud Storage for Firebase) * `firebasedatabase.googleapis.com` (Firebase Realtime Database)"
           in: path
           name: name
           required: true
@@ -556,20 +471,13 @@ paths:
       description: Updates the specified Service configuration.
       operationId: firebaseappcheck.projects.services.patch
       parameters:
-        - description: "Required. The relative resource name of the service configuration
-            object, in the format: ```
-            projects/{project_number}/services/{service_id} ``` Note that the
-            `service_id` element must be a supported service ID. Currently, the
-            following service IDs are supported: *
-            `firebasestorage.googleapis.com` (Cloud Storage for Firebase) *
-            `firebasedatabase.googleapis.com` (Firebase Realtime Database)"
+        - description: "Required. The relative resource name of the service configuration object, in the format: ``` projects/{project_number}/services/{service_id} ``` Note that the `service_id` element must be a supported service ID. Currently, the following service IDs are supported: * `firebasestorage.googleapis.com` (Cloud Storage for Firebase) * `firebasedatabase.googleapis.com` (Firebase Realtime Database)"
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: "Required. A comma-separated list of names of fields in the Service
-            to update. Example: `enforcement_mode`."
+        - description: "Required. A comma-separated list of names of fields in the Service to update. Example: `enforcement_mode`."
           in: query
           name: updateMask
           schema:
@@ -599,24 +507,16 @@ paths:
         - projects
   "/v1beta/{parent}/apps/-/deviceCheckConfig:batchGet":
     get:
-      description: Gets the DeviceCheckConfigs for the specified list of apps
-        atomically. For security reasons, the `private_key` field is never
-        populated in the response.
+      description: Gets the DeviceCheckConfigs for the specified list of apps atomically. For security reasons, the `private_key` field is never populated in the response.
       operationId: firebaseappcheck.projects.apps.deviceCheckConfig.batchGet
       parameters:
-        - description: Required. The parent project name shared by all DeviceCheckConfigs
-            being retrieved, in the format ``` projects/{project_number} ``` The
-            parent collection in the `name` field of any resource being
-            retrieved must match this field, or the entire batch fails.
+        - description: Required. The parent project name shared by all DeviceCheckConfigs being retrieved, in the format ``` projects/{project_number} ``` The parent collection in the `name` field of any resource being retrieved must match this field, or the entire batch fails.
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Required. The relative resource names of the DeviceCheckConfigs to
-            retrieve, in the format ```
-            projects/{project_number}/apps/{app_id}/deviceCheckConfig ``` A
-            maximum of 100 objects can be retrieved in a batch.
+        - description: Required. The relative resource names of the DeviceCheckConfigs to retrieve, in the format ``` projects/{project_number}/apps/{app_id}/deviceCheckConfig ``` A maximum of 100 objects can be retrieved in a batch.
           explode: true
           in: query
           name: names
@@ -630,8 +530,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaBatchGetDeviceCheckConf\
-                  igsResponse"
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaBatchGetDeviceCheckConfigsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -658,24 +557,16 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1beta/{parent}/apps/-/recaptchaConfig:batchGet":
     get:
-      description: Gets the RecaptchaConfigs for the specified list of apps
-        atomically. For security reasons, the `site_secret` field is never
-        populated in the response.
+      description: Gets the RecaptchaConfigs for the specified list of apps atomically. For security reasons, the `site_secret` field is never populated in the response.
       operationId: firebaseappcheck.projects.apps.recaptchaConfig.batchGet
       parameters:
-        - description: Required. The parent project name shared by all RecaptchaConfigs
-            being retrieved, in the format ``` projects/{project_number} ``` The
-            parent collection in the `name` field of any resource being
-            retrieved must match this field, or the entire batch fails.
+        - description: Required. The parent project name shared by all RecaptchaConfigs being retrieved, in the format ``` projects/{project_number} ``` The parent collection in the `name` field of any resource being retrieved must match this field, or the entire batch fails.
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: "Required. The relative resource names of the RecaptchaConfigs to
-            retrieve, in the format: ```
-            projects/{project_number}/apps/{app_id}/recaptchaConfig ``` A
-            maximum of 100 objects can be retrieved in a batch."
+        - description: "Required. The relative resource names of the RecaptchaConfigs to retrieve, in the format: ``` projects/{project_number}/apps/{app_id}/recaptchaConfig ``` A maximum of 100 objects can be retrieved in a batch."
           explode: true
           in: query
           name: names
@@ -689,8 +580,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaBatchGetRecaptchaConfig\
-                  sResponse"
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaBatchGetRecaptchaConfigsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -717,32 +607,21 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1beta/{parent}/debugTokens":
     get:
-      description: Lists all DebugTokens for the specified app. For security reasons,
-        the `token` field is never populated in the response.
+      description: Lists all DebugTokens for the specified app. For security reasons, the `token` field is never populated in the response.
       operationId: firebaseappcheck.projects.apps.debugTokens.list
       parameters:
-        - description: "Required. The relative resource name of the parent app for which
-            to list each associated DebugToken, in the format: ```
-            projects/{project_number}/apps/{app_id} ```"
+        - description: "Required. The relative resource name of the parent app for which to list each associated DebugToken, in the format: ``` projects/{project_number}/apps/{app_id} ```"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: The maximum number of DebugTokens to return in the response. Note
-            that an app can have at most 20 debug tokens. The server may return
-            fewer than this at its own discretion. If no value is specified (or
-            too large a value is specified), the server will impose its own
-            limit.
+        - description: The maximum number of DebugTokens to return in the response. Note that an app can have at most 20 debug tokens. The server may return fewer than this at its own discretion. If no value is specified (or too large a value is specified), the server will impose its own limit.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Token returned from a previous call to ListDebugTokens indicating
-            where in the set of DebugTokens to resume listing. Provide this to
-            retrieve the subsequent page. When paginating, all other parameters
-            provided to ListDebugTokens must match the call that provided the
-            page token; if they do not match, the result is undefined.
+        - description: Token returned from a previous call to ListDebugTokens indicating where in the set of DebugTokens to resume listing. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to ListDebugTokens must match the call that provided the page token; if they do not match, the result is undefined.
           in: query
           name: pageToken
           schema:
@@ -778,15 +657,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new DebugToken for the specified app. For security
-        reasons, after the creation operation completes, the `token` field
-        cannot be updated or retrieved, but you can revoke the debug token using
-        DeleteDebugToken. Each app can have a maximum of 20 debug tokens.
+      description: Creates a new DebugToken for the specified app. For security reasons, after the creation operation completes, the `token` field cannot be updated or retrieved, but you can revoke the debug token using DeleteDebugToken. Each app can have a maximum of 20 debug tokens.
       operationId: firebaseappcheck.projects.apps.debugTokens.create
       parameters:
-        - description: "Required. The relative resource name of the parent app in which
-            the specified DebugToken will be created, in the format: ```
-            projects/{project_number}/apps/{app_id} ```"
+        - description: "Required. The relative resource name of the parent app in which the specified DebugToken will be created, in the format: ``` projects/{project_number}/apps/{app_id} ```"
           in: path
           name: parent
           required: true
@@ -817,33 +691,21 @@ paths:
         - projects
   "/v1beta/{parent}/services":
     get:
-      description: Lists all Service configurations for the specified project. Only
-        Services which were explicitly configured using UpdateService or
-        BatchUpdateServices will be returned.
+      description: Lists all Service configurations for the specified project. Only Services which were explicitly configured using UpdateService or BatchUpdateServices will be returned.
       operationId: firebaseappcheck.projects.services.list
       parameters:
-        - description: "Required. The relative resource name of the parent project for
-            which to list each associated Service, in the format: ```
-            projects/{project_number} ```"
+        - description: "Required. The relative resource name of the parent project for which to list each associated Service, in the format: ``` projects/{project_number} ```"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: The maximum number of Services to return in the response. Only
-            explicitly configured services are returned. The server may return
-            fewer than this at its own discretion. If no value is specified (or
-            too large a value is specified), the server will impose its own
-            limit.
+        - description: The maximum number of Services to return in the response. Only explicitly configured services are returned. The server may return fewer than this at its own discretion. If no value is specified (or too large a value is specified), the server will impose its own limit.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Token returned from a previous call to ListServices indicating
-            where in the set of Services to resume listing. Provide this to
-            retrieve the subsequent page. When paginating, all other parameters
-            provided to ListServices must match the call that provided the page
-            token; if they do not match, the result is undefined.
+        - description: Token returned from a previous call to ListServices indicating where in the set of Services to resume listing. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to ListServices must match the call that provided the page token; if they do not match, the result is undefined.
           in: query
           name: pageToken
           schema:
@@ -895,11 +757,7 @@ paths:
       description: Updates the specified Service configurations atomically.
       operationId: firebaseappcheck.projects.services.batchUpdate
       parameters:
-        - description: Required. The parent project name shared by all Service
-            configurations being updated, in the format ```
-            projects/{project_number} ``` The parent collection in the `name`
-            field of any resource being updated must match this field, or the
-            entire batch fails.
+        - description: Required. The parent project name shared by all Service configurations being updated, in the format ``` projects/{project_number} ``` The parent collection in the `name` field of any resource being updated must match this field, or the entire batch fails.
           in: path
           name: parent
           required: true
@@ -909,15 +767,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaBatchUpdateServicesRequ\
-                est"
+              $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaBatchUpdateServicesRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaBatchUpdateServicesResp\
-                  onse"
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaBatchUpdateServicesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -970,9 +826,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -990,9 +844,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -1014,35 +866,22 @@ components:
       description: Response object for GenerateAppAttestChallenge
       properties:
         challenge:
-          description: A one time use challenge for the client to pass to Apple's App
-            Attest API.
+          description: A one time use challenge for the client to pass to Apple's App Attest API.
           format: byte
           type: string
         ttl:
-          description: The duration from the time this challenge is minted until it is
-            expired. This field is intended to ease client-side token
-            management, since the device may have clock skew, but is still able
-            to accurately measure a duration. This expiration is intended to
-            minimize the replay window within which a single challenge may be
-            reused. See AIP 142 for naming of this field.
+          description: The duration from the time this challenge is minted until it is expired. This field is intended to ease client-side token management, since the device may have clock skew, but is still able to accurately measure a duration. This expiration is intended to minimize the replay window within which a single challenge may be reused. See AIP 142 for naming of this field.
           format: google-duration
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaAttestationTokenResponse:
-      description: Encapsulates an *App Check token*, which are used to access
-        Firebase services protected by App Check.
+      description: Encapsulates an *App Check token*, which are used to access Firebase services protected by App Check.
       properties:
         attestationToken:
-          description: An App Check token. App Check tokens are signed
-            [JWTs](https://tools.ietf.org/html/rfc7519) containing claims that
-            identify the attested app and Firebase project. This token is used
-            to access Firebase services protected by App Check.
+          description: An App Check token. App Check tokens are signed [JWTs](https://tools.ietf.org/html/rfc7519) containing claims that identify the attested app and Firebase project. This token is used to access Firebase services protected by App Check.
           type: string
         ttl:
-          description: The duration from the time this token is minted until its
-            expiration. This field is intended to ease client-side token
-            management, since the client may have clock skew, but is still able
-            to accurately measure a duration.
+          description: The duration from the time this token is minted until its expiration. This field is intended to ease client-side token management, since the client may have clock skew, but is still able to accurately measure a duration.
           format: google-duration
           type: string
       type: object
@@ -1068,17 +907,12 @@ components:
       description: Request message for the BatchUpdateServices method.
       properties:
         requests:
-          description: Required. The request messages specifying the Services to update. A
-            maximum of 100 objects can be updated in a batch.
+          description: Required. The request messages specifying the Services to update. A maximum of 100 objects can be updated in a batch.
           items:
             $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaUpdateServiceRequest"
           type: array
         updateMask:
-          description: "Optional. A comma-separated list of names of fields in the
-            Services to update. Example: `display_name`. If this field is
-            present, the `update_mask` field in the UpdateServiceRequest
-            messages must all match this field, or the entire batch fails and no
-            updates will be committed."
+          description: "Optional. A comma-separated list of names of fields in the Services to update. Example: `display_name`. If this field is present, the `update_mask` field in the UpdateServiceRequest messages must all match this field, or the entire batch fails and no updates will be committed."
           format: google-fieldmask
           type: string
       type: object
@@ -1092,57 +926,32 @@ components:
           type: array
       type: object
     GoogleFirebaseAppcheckV1betaDebugToken:
-      description: A *debug token* is a secret used during the development or
-        integration testing of an app. It essentially allows the development or
-        integration testing to bypass app attestation while still allowing App
-        Check to enforce protection on supported production Firebase services.
+      description: A *debug token* is a secret used during the development or integration testing of an app. It essentially allows the development or integration testing to bypass app attestation while still allowing App Check to enforce protection on supported production Firebase services.
       properties:
         displayName:
-          description: Required. A human readable display name used to identify this debug
-            token.
+          description: Required. A human readable display name used to identify this debug token.
           type: string
         name:
-          description: "The relative resource name of the debug token, in the format: ```
-            projects/{project_number}/apps/{app_id}/debugTokens/{debug_token_id}
-            ```"
+          description: "The relative resource name of the debug token, in the format: ``` projects/{project_number}/apps/{app_id}/debugTokens/{debug_token_id} ```"
           type: string
         token:
-          description: Input only. Immutable. The secret token itself. Must be provided
-            during creation, and must be a UUID4, case insensitive. This field
-            is immutable once set, and cannot be provided during an
-            UpdateDebugToken request. You can, however, delete this debug token
-            using DeleteDebugToken to revoke it. For security reasons, this
-            field will never be populated in any response.
+          description: Input only. Immutable. The secret token itself. Must be provided during creation, and must be a UUID4, case insensitive. This field is immutable once set, and cannot be provided during an UpdateDebugToken request. You can, however, delete this debug token using DeleteDebugToken to revoke it. For security reasons, this field will never be populated in any response.
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaDeviceCheckConfig:
-      description: An app's DeviceCheck configuration object. This configuration is
-        used by ExchangeDeviceCheckToken to validate device tokens issued to
-        apps by DeviceCheck. It also controls certain properties of the returned
-        App Check token, such as its ttl. Note that the Team ID registered with
-        your app is used as part of the validation process. Please register it
-        via the Firebase Console or programmatically via the [Firebase
-        Management
-        Service](https://firebase.google.com/docs/projects/api/reference/rest/v1beta1/projects.iosApps/patch).
+      description: An app's DeviceCheck configuration object. This configuration is used by ExchangeDeviceCheckToken to validate device tokens issued to apps by DeviceCheck. It also controls certain properties of the returned App Check token, such as its ttl. Note that the Team ID registered with your app is used as part of the validation process. Please register it via the Firebase Console or programmatically via the [Firebase Management Service](https://firebase.google.com/docs/projects/api/reference/rest/v1beta1/projects.iosApps/patch).
       properties:
         keyId:
-          description: Required. The key identifier of a private key enabled with
-            DeviceCheck, created in your Apple Developer account.
+          description: Required. The key identifier of a private key enabled with DeviceCheck, created in your Apple Developer account.
           type: string
         name:
-          description: "Required. The relative resource name of the DeviceCheck
-            configuration object, in the format: ```
-            projects/{project_number}/apps/{app_id}/deviceCheckConfig ```"
+          description: "Required. The relative resource name of the DeviceCheck configuration object, in the format: ``` projects/{project_number}/apps/{app_id}/deviceCheckConfig ```"
           type: string
         privateKey:
-          description: Required. Input only. The contents of the private key (`.p8`) file
-            associated with the key specified by `key_id`. For security reasons,
-            this field will never be populated in any response.
+          description: Required. Input only. The contents of the private key (`.p8`) file associated with the key specified by `key_id`. For security reasons, this field will never be populated in any response.
           type: string
         privateKeySet:
-          description: Output only. Whether the `private_key` field was previously set.
-            Since we will never return the `private_key` field, this field is
-            the only way to find out whether it was previously set.
+          description: Output only. Whether the `private_key` field was previously set. Since we will never return the `private_key` field, this field is the only way to find out whether it was previously set.
           readOnly: true
           type: boolean
       type: object
@@ -1166,9 +975,7 @@ components:
       description: Request message for ExchangeAppAttestAttestation
       properties:
         attestationStatement:
-          description: The App Attest statement as returned by Apple's client-side App
-            Attest API. This is the CBOR object returned by Apple, which will be
-            Base64 encoded in the JSON API.
+          description: The App Attest statement as returned by Apple's client-side App Attest API. This is the CBOR object returned by Apple, which will be Base64 encoded in the JSON API.
           format: byte
           type: string
         challenge:
@@ -1181,58 +988,49 @@ components:
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaExchangeAppAttestAttestationResponse:
-      description: Response message for ExchangeAppAttestAttestation and
-        ExchangeAppAttestDebugAttestation
+      description: Response message for ExchangeAppAttestAttestation and ExchangeAppAttestDebugAttestation
       properties:
         artifact:
           description: An artifact that should be passed back during the Assertion flow.
           format: byte
           type: string
         attestationToken:
-          $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAttestationTokenRespons\
-            e"
+          $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAttestationTokenResponse"
           description: An attestation token which can be used to access Firebase APIs.
       type: object
     GoogleFirebaseAppcheckV1betaExchangeCustomTokenRequest:
       description: Request message for the ExchangeCustomToken method.
       properties:
         customToken:
-          description: A custom token signed using your project's Admin SDK service
-            account credentials.
+          description: A custom token signed using your project's Admin SDK service account credentials.
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaExchangeDebugTokenRequest:
       description: Request message for the ExchangeDebugToken method.
       properties:
         debugToken:
-          description: A debug token secret. This string must match a debug token secret
-            previously created using CreateDebugToken.
+          description: A debug token secret. This string must match a debug token secret previously created using CreateDebugToken.
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaExchangeDeviceCheckTokenRequest:
       description: Request message for the ExchangeDeviceCheckToken method.
       properties:
         deviceToken:
-          description: The `device_token` as returned by Apple's client-side [DeviceCheck
-            API](https://developer.apple.com/documentation/devicecheck/dcdevice).
-            This is the Base64 encoded `Data` (Swift) or `NSData` (ObjC) object.
+          description: The `device_token` as returned by Apple's client-side [DeviceCheck API](https://developer.apple.com/documentation/devicecheck/dcdevice). This is the Base64 encoded `Data` (Swift) or `NSData` (ObjC) object.
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaExchangeRecaptchaTokenRequest:
       description: Request message for the ExchangeRecaptchaToken method.
       properties:
         recaptchaToken:
-          description: The reCAPTCHA token as returned by the [reCAPTCHA v3 JavaScript
-            API](https://developers.google.com/recaptcha/docs/v3).
+          description: The reCAPTCHA token as returned by the [reCAPTCHA v3 JavaScript API](https://developers.google.com/recaptcha/docs/v3).
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaExchangeSafetyNetTokenRequest:
       description: Request message for the ExchangeSafetyNetToken method.
       properties:
         safetyNetToken:
-          description: The [SafetyNet attestation
-            response](https://developer.android.com/training/safetynet/attestation#request-attestation-step)
-            issued to your app.
+          description: The [SafetyNet attestation response](https://developer.android.com/training/safetynet/attestation#request-attestation-step) issued to your app.
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaGenerateAppAttestChallengeRequest:
@@ -1248,23 +1046,14 @@ components:
             $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaDebugToken"
           type: array
         nextPageToken:
-          description: If the result list is too large to fit in a single response, then a
-            token is returned. If the string is empty or omitted, then this
-            response is the last page of results. This token can be used in a
-            subsequent call to ListDebugTokens to find the next group of
-            DebugTokens. Page tokens are short-lived and should not be
-            persisted.
+          description: If the result list is too large to fit in a single response, then a token is returned. If the string is empty or omitted, then this response is the last page of results. This token can be used in a subsequent call to ListDebugTokens to find the next group of DebugTokens. Page tokens are short-lived and should not be persisted.
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaListServicesResponse:
       description: Response message for the ListServices method.
       properties:
         nextPageToken:
-          description: If the result list is too large to fit in a single response, then a
-            token is returned. If the string is empty or omitted, then this
-            response is the last page of results. This token can be used in a
-            subsequent call to ListServices to find the next group of Services.
-            Page tokens are short-lived and should not be persisted.
+          description: If the result list is too large to fit in a single response, then a token is returned. If the string is empty or omitted, then this response is the last page of results. This token can be used in a subsequent call to ListServices to find the next group of Services. Page tokens are short-lived and should not be persisted.
           type: string
         services:
           description: The Services retrieved.
@@ -1273,74 +1062,52 @@ components:
           type: array
       type: object
     GoogleFirebaseAppcheckV1betaPublicJwk:
-      description: A JWK as specified by [section 4 of RFC
-        7517](https://tools.ietf.org/html/rfc7517#section-4) and [section 6.3.1
-        of RFC 7518](https://tools.ietf.org/html/rfc7518#section-6.3.1).
+      description: A JWK as specified by [section 4 of RFC 7517](https://tools.ietf.org/html/rfc7517#section-4) and [section 6.3.1 of RFC 7518](https://tools.ietf.org/html/rfc7518#section-6.3.1).
       properties:
         alg:
-          description: See [section 4.4 of RFC
-            7517](https://tools.ietf.org/html/rfc7517#section-4.4).
+          description: See [section 4.4 of RFC 7517](https://tools.ietf.org/html/rfc7517#section-4.4).
           type: string
         e:
-          description: See [section 6.3.1.2 of RFC
-            7518](https://tools.ietf.org/html/rfc7518#section-6.3.1.2).
+          description: See [section 6.3.1.2 of RFC 7518](https://tools.ietf.org/html/rfc7518#section-6.3.1.2).
           type: string
         kid:
-          description: See [section 4.5 of RFC
-            7517](https://tools.ietf.org/html/rfc7517#section-4.5).
+          description: See [section 4.5 of RFC 7517](https://tools.ietf.org/html/rfc7517#section-4.5).
           type: string
         kty:
-          description: See [section 4.1 of RFC
-            7517](https://tools.ietf.org/html/rfc7517#section-4.1).
+          description: See [section 4.1 of RFC 7517](https://tools.ietf.org/html/rfc7517#section-4.1).
           type: string
         n:
-          description: See [section 6.3.1.1 of RFC
-            7518](https://tools.ietf.org/html/rfc7518#section-6.3.1.1).
+          description: See [section 6.3.1.1 of RFC 7518](https://tools.ietf.org/html/rfc7518#section-6.3.1.1).
           type: string
         use:
-          description: See [section 4.2 of RFC
-            7517](https://tools.ietf.org/html/rfc7517#section-4.2).
+          description: See [section 4.2 of RFC 7517](https://tools.ietf.org/html/rfc7517#section-4.2).
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaPublicJwkSet:
-      description: The currently active set of public keys that can be used to verify
-        App Check tokens. This object is a JWK set as specified by [section 5 of
-        RFC 7517](https://tools.ietf.org/html/rfc7517#section-5). For security,
-        the response **must not** be cached for longer than one day.
+      description: The currently active set of public keys that can be used to verify App Check tokens. This object is a JWK set as specified by [section 5 of RFC 7517](https://tools.ietf.org/html/rfc7517#section-5). For security, the response **must not** be cached for longer than one day.
       properties:
         keys:
-          description: The set of public keys. See [section 5.1 of RFC
-            7517](https://tools.ietf.org/html/rfc7517#section-5).
+          description: The set of public keys. See [section 5.1 of RFC 7517](https://tools.ietf.org/html/rfc7517#section-5).
           items:
             $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaPublicJwk"
           type: array
       type: object
     GoogleFirebaseAppcheckV1betaRecaptchaConfig:
-      description: An app's reCAPTCHA v3 configuration object. This configuration is
-        used by ExchangeRecaptchaToken to validate reCAPTCHA tokens issued to
-        apps by reCAPTCHA v3. It also controls certain properties of the
-        returned App Check token, such as its ttl.
+      description: An app's reCAPTCHA v3 configuration object. This configuration is used by ExchangeRecaptchaToken to validate reCAPTCHA tokens issued to apps by reCAPTCHA v3. It also controls certain properties of the returned App Check token, such as its ttl.
       properties:
         name:
-          description: "Required. The relative resource name of the reCAPTCHA v3
-            configuration object, in the format: ```
-            projects/{project_number}/apps/{app_id}/recaptchaConfig ```"
+          description: "Required. The relative resource name of the reCAPTCHA v3 configuration object, in the format: ``` projects/{project_number}/apps/{app_id}/recaptchaConfig ```"
           type: string
         siteSecret:
-          description: Required. Input only. The site secret used to identify your service
-            for reCAPTCHA v3 verification. For security reasons, this field will
-            never be populated in any response.
+          description: Required. Input only. The site secret used to identify your service for reCAPTCHA v3 verification. For security reasons, this field will never be populated in any response.
           type: string
         siteSecretSet:
-          description: Output only. Whether the `site_secret` field was previously set.
-            Since we will never return the `site_secret` field, this field is
-            the only way to find out whether it was previously set.
+          description: Output only. Whether the `site_secret` field was previously set. Since we will never return the `site_secret` field, this field is the only way to find out whether it was previously set.
           readOnly: true
           type: boolean
       type: object
     GoogleFirebaseAppcheckV1betaService:
-      description: The enforcement configuration for a Firebase service supported by
-        App Check.
+      description: The enforcement configuration for a Firebase service supported by App Check.
       properties:
         enforcementMode:
           description: Required. The App Check enforcement mode for this service.
@@ -1350,41 +1117,22 @@ components:
             - ENFORCED
           type: string
         name:
-          description: "Required. The relative resource name of the service configuration
-            object, in the format: ```
-            projects/{project_number}/services/{service_id} ``` Note that the
-            `service_id` element must be a supported service ID. Currently, the
-            following service IDs are supported: *
-            `firebasestorage.googleapis.com` (Cloud Storage for Firebase) *
-            `firebasedatabase.googleapis.com` (Firebase Realtime Database)"
+          description: "Required. The relative resource name of the service configuration object, in the format: ``` projects/{project_number}/services/{service_id} ``` Note that the `service_id` element must be a supported service ID. Currently, the following service IDs are supported: * `firebasestorage.googleapis.com` (Cloud Storage for Firebase) * `firebasedatabase.googleapis.com` (Firebase Realtime Database)"
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaUpdateServiceRequest:
-      description: Request message for the UpdateService method as well as an
-        individual update message for the BatchUpdateServices method.
+      description: Request message for the UpdateService method as well as an individual update message for the BatchUpdateServices method.
       properties:
         service:
           $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaService"
-          description: "Required. The Service to update. The Service's `name` field is
-            used to identify the Service to be updated, in the format: ```
-            projects/{project_number}/services/{service_id} ``` Note that the
-            `service_id` element must be a supported service ID. Currently, the
-            following service IDs are supported: *
-            `firebasestorage.googleapis.com` (Cloud Storage for Firebase) *
-            `firebasedatabase.googleapis.com` (Firebase Realtime Database)"
+          description: "Required. The Service to update. The Service's `name` field is used to identify the Service to be updated, in the format: ``` projects/{project_number}/services/{service_id} ``` Note that the `service_id` element must be a supported service ID. Currently, the following service IDs are supported: * `firebasestorage.googleapis.com` (Cloud Storage for Firebase) * `firebasedatabase.googleapis.com` (Firebase Realtime Database)"
         updateMask:
-          description: "Required. A comma-separated list of names of fields in the Service
-            to update. Example: `enforcement_mode`."
+          description: "Required. A comma-separated list of names of fields in the Service to update. Example: `enforcement_mode`."
           format: google-fieldmask
           type: string
       type: object
     GoogleProtobufEmpty:
-      description: "A generic empty message that you can re-use to avoid defining
-        duplicated empty messages in your APIs. A typical example is to use it
-        as the request or the response type of an API method. For instance:
-        service Foo { rpc Bar(google.protobuf.Empty) returns
-        (google.protobuf.Empty); } The JSON representation for `Empty` is empty
-        JSON object `{}`."
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
       type: object
   securitySchemes:

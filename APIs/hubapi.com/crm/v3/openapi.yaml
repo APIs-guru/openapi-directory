@@ -2,10 +2,7 @@ openapi: 3.0.1
 servers:
   - url: https://api.hubapi.com/
 info:
-  description: Allows an app to extend the CRM UI by surfacing custom cards in the
-    sidebar of record pages. These cards are defined up-front as part of app
-    configuration, then populated by external data fetch requests when the
-    record page is accessed by a user.
+  description: Allows an app to extend the CRM UI by surfacing custom cards in the sidebar of record pages. These cards are defined up-front as part of app configuration, then populated by external data fetch requests when the record page is accessed by a user.
   title: CRM cards
   version: v3
   x-logo:
@@ -24,9 +21,7 @@ tags:
 paths:
   /crm/v3/extensions/cards/sample-response:
     get:
-      description: Returns an example card detail response. This is the payload with
-        displayed details for a card that will be shown to a user. An app should
-        send this in response to the data fetch request.
+      description: Returns an example card detail response. This is the payload with displayed details for a card that will be shown to a user. An app should send this in response to the data fetch request.
       operationId: get-/crm/v3/extensions/cards/sample-response_getCardsSampleResponse
       responses:
         "200":
@@ -154,8 +149,7 @@ paths:
       tags:
         - Cards
     post:
-      description: Defines a new card that will become active on an account when this
-        app is installed.
+      description: Defines a new card that will become active on an account when this app is installed.
       operationId: post-/crm/v3/extensions/cards/{appId}_create
       parameters:
         - description: The ID of the target app.
@@ -209,9 +203,7 @@ paths:
         - Cards
   "/crm/v3/extensions/cards/{appId}/{cardId}":
     delete:
-      description: Permanently deletes a card definition with the given ID. Once
-        deleted, data fetch requests for this card will no longer be sent to
-        your service. This can't be undone.
+      description: Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can't be undone.
       operationId: delete-/crm/v3/extensions/cards/{appId}/{cardId}_archive
       parameters:
         - description: The ID of the target app.
@@ -422,10 +414,7 @@ components:
           - https://www.example.com/hubspot
       properties:
         baseUrls:
-          description: A list of URL prefixes that will be accepted for card action URLs.
-            If your data fetch response includes an action URL that doesn't
-            begin with one of these values, it will result in an error and the
-            card will not be displayed.
+          description: A list of URL prefixes that will be accepted for card action URLs. If your data fetch response includes an action URL that doesn't begin with one of these values, it will result in an error and the card will not be displayed.
           items:
             type: string
           type: array
@@ -471,9 +460,7 @@ components:
       description: Configuration for displayed info on a card
       properties:
         properties:
-          description: 'Card display properties. These will will be rendered as "label :
-            value" pairs in the card UI. See the [example card](#) in the
-            overview docs for more details.'
+          description: 'Card display properties. These will will be rendered as "label : value" pairs in the card UI. See the [example card](#) in the overview docs for more details.'
           items:
             $ref: "#/components/schemas/CardDisplayProperty"
           type: array
@@ -500,12 +487,10 @@ components:
           description: The label for this property as you'd like it displayed to users.
           type: string
         name:
-          description: An internal identifier for this property. This value must be unique
-            TODO.
+          description: An internal identifier for this property. This value must be unique TODO.
           type: string
         options:
-          description: An array of available options that can be displayed. Only used in
-            when `dataType` is `STATUS`.
+          description: An array of available options that can be displayed. Only used in when `dataType` is `STATUS`.
           items:
             $ref: "#/components/schemas/DisplayOption"
           type: array
@@ -519,16 +504,12 @@ components:
       description: Configuration for this card's data fetch request.
       properties:
         objectTypes:
-          description: An array of CRM object types where this card should be displayed.
-            HubSpot will call your data fetch URL whenever a user visits a
-            record page of the types defined here.
+          description: An array of CRM object types where this card should be displayed. HubSpot will call your data fetch URL whenever a user visits a record page of the types defined here.
           items:
             $ref: "#/components/schemas/CardObjectTypeBody"
           type: array
         targetUrl:
-          description: URL to a service endpoints that will respond with card details.
-            HubSpot will call this endpoint each time a user visits a CRM record
-            page where this card should be displayed.
+          description: URL to a service endpoints that will respond with card details. HubSpot will call this endpoint each time a user visits a CRM record page where this card should be displayed.
           type: string
       required:
         - objectTypes
@@ -538,16 +519,12 @@ components:
       description: Variant of CardFetchBody with fields as optional for patches
       properties:
         objectTypes:
-          description: An array of CRM object types where this card should be displayed.
-            HubSpot will call your target URL whenever a user visits a record
-            page of the types defined here.
+          description: An array of CRM object types where this card should be displayed. HubSpot will call your target URL whenever a user visits a record page of the types defined here.
           items:
             $ref: "#/components/schemas/CardObjectTypeBody"
           type: array
         targetUrl:
-          description: URL to a service endpoint that will respond with details for this
-            card. HubSpot will call this endpoint each time a user visits a CRM
-            record page where this card should be displayed.
+          description: URL to a service endpoint that will respond with details for this card. HubSpot will call this endpoint each time a user visits a CRM record page where this card should be displayed.
           type: string
       required:
         - objectTypes
@@ -574,9 +551,7 @@ components:
             - tickets
           type: string
         propertiesToSend:
-          description: An array of properties that should be sent to this card's target
-            URL when the data fetch request is made. Must be valid properties
-            for the corresponding CRM object type.
+          description: An array of properties that should be sent to this card's target URL when the data fetch request is made. Must be valid properties for the corresponding CRM object type.
           items:
             type: string
           type: array
@@ -692,8 +667,7 @@ components:
               - scope2
           type: object
         correlationId:
-          description: A unique identifier for the request. Include this value with any
-            error reports or support tickets
+          description: A unique identifier for the request. Include this value with any error reports or support tickets
           example: aeb5f871-7f07-4993-9211-075dc63e7cbf
           format: uuid
           type: string
@@ -705,17 +679,14 @@ components:
         links:
           additionalProperties:
             type: string
-          description: A map of link names to associated URIs containing documentation
-            about the error or recommended remediation steps
+          description: A map of link names to associated URIs containing documentation about the error or recommended remediation steps
           type: object
         message:
-          description: A human readable message describing the error along with
-            remediation steps where appropriate
+          description: A human readable message describing the error along with remediation steps where appropriate
           example: An error occurred
           type: string
         subCategory:
-          description: A specific category that contains more specific detail about the
-            error
+          description: A specific category that contains more specific detail about the error
           type: string
       required:
         - category
@@ -742,12 +713,10 @@ components:
           description: The name of the field or parameter in which the error was found.
           type: string
         message:
-          description: A human readable message describing the error along with
-            remediation steps where appropriate
+          description: A human readable message describing the error along with remediation steps where appropriate
           type: string
         subCategory:
-          description: A specific category that contains more specific detail about the
-            error
+          description: A specific category that contains more specific detail about the error
           type: string
       required:
         - message
@@ -782,18 +751,13 @@ components:
       title: IFRAME
       type: object
     IntegratorCardPayloadResponse:
-      description: The card details payload, sent to HubSpot by an app in response to
-        a data fetch request when a user visits a CRM record page.
+      description: The card details payload, sent to HubSpot by an app in response to a data fetch request when a user visits a CRM record page.
       properties:
         allItemsLinkUrl:
-          description: URL to a page the integrator has built that displays all details
-            for this card. This URL will be displayed to users under a `See more
-            [x]` link if there are more than five items in your response, where
-            `[x]` is the value of `itemLabel`.
+          description: URL to a page the integrator has built that displays all details for this card. This URL will be displayed to users under a `See more [x]` link if there are more than five items in your response, where `[x]` is the value of `itemLabel`.
           type: string
         cardLabel:
-          description: The label to be used for the `allItemsLinkUrl` link (e.g. 'See more
-            tickets'). If not provided, this falls back to the card's title.
+          description: The label to be used for the `allItemsLinkUrl` link (e.g. 'See more tickets'). If not provided, this falls back to the card's title.
           type: string
         responseVersion:
           enum:
@@ -808,8 +772,7 @@ components:
         topLevelActions:
           $ref: "#/components/schemas/TopLevelActions"
         totalCount:
-          description: The total number of card properties that will be sent in this
-            response.
+          description: The total number of card properties that will be sent in this response.
           format: int32
           type: integer
       required:

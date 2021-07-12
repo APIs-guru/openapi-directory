@@ -43,8 +43,7 @@ paths:
                 - group_small
               type: string
             type: array
-        - description: Codecs used by participants in the room. Can be `VP8`, `H264`, or
-            `VP9`.
+        - description: Codecs used by participants in the room. Can be `VP8`, `H264`, or `VP9`.
           in: query
           name: Codec
           schema:
@@ -72,8 +71,7 @@ paths:
           schema:
             format: date-time
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -167,8 +165,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -204,8 +201,7 @@ paths:
                     type: object
                   participants:
                     items:
-                      $ref: "#/components/schemas/insights.v1.video_room_summary.video_participant_su\
-                        mmary"
+                      $ref: "#/components/schemas/insights.v1.video_room_summary.video_participant_summary"
                     type: array
                 title: ListVideoParticipantSummaryResponse
                 type: object
@@ -243,8 +239,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/insights.v1.video_room_summary.video_participant_su\
-                  mmary"
+                $ref: "#/components/schemas/insights.v1.video_room_summary.video_participant_summary"
           description: OK
       security:
         - accountSid_authToken: []
@@ -282,8 +277,7 @@ paths:
               - sdk_edge
               - client_edge
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -374,8 +368,7 @@ paths:
               - outbound
               - both
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -789,8 +782,7 @@ components:
           nullable: true
           type: object
         max_concurrent_participants:
-          description: Maximum number of participants allowed in the room at the same time
-            allowed by the application settings.
+          description: Maximum number of participants allowed in the room at the same time allowed by the application settings.
           nullable: true
           type: integer
         max_participants:
@@ -813,8 +805,7 @@ components:
           nullable: true
           type: string
         processing_state:
-          description: Video Log Analyzer resource state. Will be either `in-progress` or
-            `complete`.
+          description: Video Log Analyzer resource state. Will be either `in-progress` or `complete`.
           enum:
             - complete
             - in_progress
@@ -880,8 +871,7 @@ components:
           nullable: true
           type: integer
         unique_participants:
-          description: Number of participants. May include duplicate identities for
-            participants who left and rejoined.
+          description: Number of participants. May include duplicate identities for participants who left and rejoined.
           nullable: true
           type: integer
         url:
@@ -965,8 +955,7 @@ components:
           nullable: true
           type: string
         participant_identity:
-          description: The application-defined string that uniquely identifies the
-            participant within a Room.
+          description: The application-defined string that uniquely identifies the participant within a Room.
           nullable: true
           type: string
         participant_sid:
@@ -977,8 +966,7 @@ components:
           pattern: ^PA[0-9a-fA-F]{32}$
           type: string
         properties:
-          description: Object containing information about the participant's data from the
-            room.
+          description: Object containing information about the participant's data from the room.
           nullable: true
           type: object
         publisher_info:
@@ -1012,10 +1000,7 @@ components:
 x-maturity:
   - description: This product is Generally Available.
     name: GA
-  - description: PLEASE NOTE that this is a Beta product that is subject to change.
-      Use it with caution.
+  - description: PLEASE NOTE that this is a Beta product that is subject to change. Use it with caution.
     name: Beta
-  - description: PLEASE NOTE that this is a Preview product that is subject to
-      change. Use it with caution. If you currently do not have developer
-      preview access, please contact help@twilio.com.
+  - description: PLEASE NOTE that this is a Preview product that is subject to change. Use it with caution. If you currently do not have developer preview access, please contact help@twilio.com.
     name: Preview

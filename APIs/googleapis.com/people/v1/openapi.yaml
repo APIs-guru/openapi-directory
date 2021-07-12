@@ -38,35 +38,25 @@ tags:
 paths:
   /v1/contactGroups:
     get:
-      description: List all contact groups owned by the authenticated user. Members of
-        the contact groups are not populated.
+      description: List all contact groups owned by the authenticated user. Members of the contact groups are not populated.
       operationId: people.contactGroups.list
       parameters:
-        - description: "Optional. A field mask to restrict which fields on the group are
-            returned. Defaults to `metadata`, `groupType`, `memberCount`, and
-            `name` if not set or set to empty. Valid fields are: * clientData *
-            groupType * memberCount * metadata * name"
+        - description: "Optional. A field mask to restrict which fields on the group are returned. Defaults to `metadata`, `groupType`, `memberCount`, and `name` if not set or set to empty. Valid fields are: * clientData * groupType * memberCount * metadata * name"
           in: query
           name: groupFields
           schema:
             type: string
-        - description: Optional. The maximum number of resources to return. Valid values
-            are between 1 and 1000, inclusive. Defaults to 30 if not set or set
-            to 0.
+        - description: Optional. The maximum number of resources to return. Valid values are between 1 and 1000, inclusive. Defaults to 30 if not set or set to 0.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Optional. The next_page_token value returned from a previous call
-            to [ListContactGroups](/people/api/rest/v1/contactgroups/list).
-            Requests the next page of resources.
+        - description: Optional. The next_page_token value returned from a previous call to [ListContactGroups](/people/api/rest/v1/contactgroups/list). Requests the next page of resources.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: Optional. A sync token, returned by a previous call to
-            `contactgroups.list`. Only resources changed since the sync token
-            was created will be returned.
+        - description: Optional. A sync token, returned by a previous call to `contactgroups.list`. Only resources changed since the sync token was created will be returned.
           in: query
           name: syncToken
           schema:
@@ -102,10 +92,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Create a new contact group owned by the authenticated user. Created
-        contact group names must be unique to the users contact groups.
-        Attempting to create a group with a duplicate name will return a HTTP
-        409 error.
+      description: Create a new contact group owned by the authenticated user. Created contact group names must be unique to the users contact groups. Attempting to create a group with a duplicate name will return a HTTP 409 error.
       operationId: people.contactGroups.create
       requestBody:
         content:
@@ -128,27 +115,20 @@ paths:
         - contactGroups
   /v1/contactGroups:batchGet:
     get:
-      description: Get a list of contact groups owned by the authenticated user by
-        specifying a list of contact group resource names.
+      description: Get a list of contact groups owned by the authenticated user by specifying a list of contact group resource names.
       operationId: people.contactGroups.batchGet
       parameters:
-        - description: "Optional. A field mask to restrict which fields on the group are
-            returned. Defaults to `metadata`, `groupType`, `memberCount`, and
-            `name` if not set or set to empty. Valid fields are: * clientData *
-            groupType * memberCount * metadata * name"
+        - description: "Optional. A field mask to restrict which fields on the group are returned. Defaults to `metadata`, `groupType`, `memberCount`, and `name` if not set or set to empty. Valid fields are: * clientData * groupType * memberCount * metadata * name"
           in: query
           name: groupFields
           schema:
             type: string
-        - description: Optional. Specifies the maximum number of members to return for
-            each group. Defaults to 0 if not set, which will return zero
-            members.
+        - description: Optional. Specifies the maximum number of members to return for each group. Defaults to 0 if not set, which will return zero members.
           in: query
           name: maxMembers
           schema:
             type: integer
-        - description: Required. The resource names of the contact groups to get. There is
-            a maximum of 200 resource names.
+        - description: Required. The resource names of the contact groups to get. There is a maximum of 200 resource names.
           explode: true
           in: query
           name: resourceNames
@@ -189,54 +169,30 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   /v1/otherContacts:
     get:
-      description: List all "Other contacts", that is contacts that are not in a
-        contact group. "Other contacts" are typically auto created contacts from
-        interactions.
+      description: List all "Other contacts", that is contacts that are not in a contact group. "Other contacts" are typically auto created contacts from interactions.
       operationId: people.otherContacts.list
       parameters:
-        - description: Optional. The number of "Other contacts" to include in the
-            response. Valid values are between 1 and 1000, inclusive. Defaults
-            to 100 if not set or set to 0.
+        - description: Optional. The number of "Other contacts" to include in the response. Valid values are between 1 and 1000, inclusive. Defaults to 100 if not set or set to 0.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Optional. A page token, received from a previous
-            `ListOtherContacts` call. Provide this to retrieve the subsequent
-            page. When paginating, all other parameters provided to
-            `ListOtherContacts` must match the call that provided the page
-            token.
+        - description: Optional. A page token, received from a previous `ListOtherContacts` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListOtherContacts` must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: "Required. A field mask to restrict which fields on each person are
-            returned. Multiple fields can be specified by separating them with
-            commas. Valid values are: * emailAddresses * metadata * names *
-            phoneNumbers * photos"
+        - description: "Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are: * emailAddresses * metadata * names * phoneNumbers * photos"
           in: query
           name: readMask
           schema:
             type: string
-        - description: Optional. Whether the response should include `next_sync_token`,
-            which can be used to get all changes since the last request. For
-            subsequent sync requests use the `sync_token` param instead. Initial
-            sync requests that specify `request_sync_token` have an additional
-            rate limit.
+        - description: Optional. Whether the response should include `next_sync_token`, which can be used to get all changes since the last request. For subsequent sync requests use the `sync_token` param instead. Initial sync requests that specify `request_sync_token` have an additional rate limit.
           in: query
           name: requestSyncToken
           schema:
             type: boolean
-        - description: Optional. A sync token, received from a previous
-            `ListOtherContacts` call. Provide this to retrieve only the
-            resources changed since the last request. Sync requests that specify
-            `sync_token` have an additional rate limit. When the `syncToken` is
-            specified, resources deleted since the last sync will be returned as
-            a person with
-            [`PersonMetadata.deleted`](/people/api/rest/v1/people#Person.PersonMetadata.FIELDS.deleted)
-            set to true. When the `syncToken` is specified, all other parameters
-            provided to `ListOtherContacts` must match the call that provided
-            the sync token.
+        - description: Optional. A sync token, received from a previous `ListOtherContacts` call. Provide this to retrieve only the resources changed since the last request. Sync requests that specify `sync_token` have an additional rate limit. When the `syncToken` is specified, resources deleted since the last sync will be returned as a person with [`PersonMetadata.deleted`](/people/api/rest/v1/people#Person.PersonMetadata.FIELDS.deleted) set to true. When the `syncToken` is specified, all other parameters provided to `ListOtherContacts` must match the call that provided the sync token.
           in: query
           name: syncToken
           schema:
@@ -269,34 +225,20 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   /v1/otherContacts:search:
     get:
-      description: "Provides a list of contacts in the authenticated user's other
-        contacts that matches the search query. The query matches on a contact's
-        `names`, `emailAddresses`, and `phoneNumbers` fields that are from the
-        OTHER_CONTACT source. **IMPORTANT**: Before searching, clients should
-        send a warmup request with an empty query to update the cache. See
-        https://developers.google.com/people/v1/other-contacts#search_the_users\
-        _other_contacts"
+      description: "Provides a list of contacts in the authenticated user's other contacts that matches the search query. The query matches on a contact's `names`, `emailAddresses`, and `phoneNumbers` fields that are from the OTHER_CONTACT source. **IMPORTANT**: Before searching, clients should send a warmup request with an empty query to update the cache. See https://developers.google.com/people/v1/other-contacts#search_the_users_other_contacts"
       operationId: people.otherContacts.search
       parameters:
-        - description: Optional. The number of results to return. Defaults to 10 if field
-            is not set, or set to 0. Values greater than 30 will be capped to
-            30.
+        - description: Optional. The number of results to return. Defaults to 10 if field is not set, or set to 0. Values greater than 30 will be capped to 30.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Required. The plain-text query for the request. The query is used
-            to match prefix phrases of the fields on a person. For example, a
-            person with name "foo name" matches queries such as "f", "fo",
-            "foo", "foo n", "nam", etc., but not "oo n".
+        - description: Required. The plain-text query for the request. The query is used to match prefix phrases of the fields on a person. For example, a person with name "foo name" matches queries such as "f", "fo", "foo", "foo n", "nam", etc., but not "oo n".
           in: query
           name: query
           schema:
             type: string
-        - description: "Required. A field mask to restrict which fields on each person are
-            returned. Multiple fields can be specified by separating them with
-            commas. Valid values are: * emailAddresses * metadata * names *
-            phoneNumbers"
+        - description: "Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are: * emailAddresses * metadata * names * phoneNumbers"
           in: query
           name: readMask
           schema:
@@ -341,8 +283,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Create a batch of new contacts and return the PersonResponses for
-        the newly created contacts. Limited to 10 parallel requests per user.
+      description: Create a batch of new contacts and return the PersonResponses for the newly created contacts. Limited to 10 parallel requests per user.
       operationId: people.people.batchCreateContacts
       requestBody:
         content:
@@ -377,8 +318,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Delete a batch of contacts. Any non-contact data will not be
-        deleted. Limited to 10 parallel requests per user.
+      description: Delete a batch of contacts. Any non-contact data will not be deleted. Limited to 10 parallel requests per user.
       operationId: people.people.batchDeleteContacts
       requestBody:
         content:
@@ -401,40 +341,20 @@ paths:
         - people
   /v1/people:batchGet:
     get:
-      description: Provides information about a list of specific people by specifying
-        a list of requested resource names. Use `people/me` to indicate the
-        authenticated user. The request returns a 400 error if 'personFields' is
-        not specified.
+      description: Provides information about a list of specific people by specifying a list of requested resource names. Use `people/me` to indicate the authenticated user. The request returns a 400 error if 'personFields' is not specified.
       operationId: people.people.getBatchGet
       parameters:
-        - description: "Required. A field mask to restrict which fields on each person are
-            returned. Multiple fields can be specified by separating them with
-            commas. Valid values are: * addresses * ageRanges * biographies *
-            birthdays * calendarUrls * clientData * coverPhotos * emailAddresses
-            * events * externalIds * genders * imClients * interests * locales *
-            locations * memberships * metadata * miscKeywords * names *
-            nicknames * occupations * organizations * phoneNumbers * photos *
-            relations * sipAddresses * skills * urls * userDefined"
+        - description: "Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined"
           in: query
           name: personFields
           schema:
             type: string
-        - description: "Required. Comma-separated list of person fields to be included in
-            the response. Each path should start with `person.`: for example,
-            `person.names` or `person.photos`."
+        - description: "Required. Comma-separated list of person fields to be included in the response. Each path should start with `person.`: for example, `person.names` or `person.photos`."
           in: query
           name: requestMask.includeField
           schema:
             type: string
-        - description: Required. The resource names of the people to provide information
-            about. It's repeatable. The URL query parameter should be
-            resourceNames=<name1>&resourceNames=<name2>&... - To get information
-            about the authenticated user, specify `people/me`. - To get
-            information about a google account, specify `people/{account_id}`. -
-            To get information about a contact, specify the resource name that
-            identifies the contact as returned by
-            [`people.connections.list`](/people/api/rest/v1/people.connections/list).
-            There is a maximum of 200 resource names.
+        - description: Required. The resource names of the people to provide information about. It's repeatable. The URL query parameter should be resourceNames=<name1>&resourceNames=<name2>&... - To get information about the authenticated user, specify `people/me`. - To get information about a google account, specify `people/{account_id}`. - To get information about a contact, specify the resource name that identifies the contact as returned by [`people.connections.list`](/people/api/rest/v1/people.connections/list). There is a maximum of 200 resource names.
           explode: true
           in: query
           name: resourceNames
@@ -443,8 +363,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Optional. A mask of what source types to return. Defaults to
-            READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
+        - description: Optional. A mask of what source types to return. Defaults to READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
           explode: true
           in: query
           name: sources
@@ -538,9 +457,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Update a batch of contacts and return a map of resource names to
-        PersonResponses for the updated contacts. Limited to 10 parallel
-        requests per user.
+      description: Update a batch of contacts and return a map of resource names to PersonResponses for the updated contacts. Limited to 10 parallel requests per user.
       operationId: people.people.batchUpdateContacts
       requestBody:
         content:
@@ -575,27 +492,15 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Create a new contact and return the person resource for that
-        contact. The request returns a 400 error if more than one field is
-        specified on a field that is a singleton for contact sources: *
-        biographies * birthdays * genders * names"
+      description: "Create a new contact and return the person resource for that contact. The request returns a 400 error if more than one field is specified on a field that is a singleton for contact sources: * biographies * birthdays * genders * names"
       operationId: people.people.createContact
       parameters:
-        - description: "Required. A field mask to restrict which fields on each person are
-            returned. Multiple fields can be specified by separating them with
-            commas. Defaults to all fields if not set. Valid values are: *
-            addresses * ageRanges * biographies * birthdays * calendarUrls *
-            clientData * coverPhotos * emailAddresses * events * externalIds *
-            genders * imClients * interests * locales * locations * memberships
-            * metadata * miscKeywords * names * nicknames * occupations *
-            organizations * phoneNumbers * photos * relations * sipAddresses *
-            skills * urls * userDefined"
+        - description: "Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Defaults to all fields if not set. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined"
           in: query
           name: personFields
           schema:
             type: string
-        - description: Optional. A mask of what source types to return. Defaults to
-            READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
+        - description: Optional. A mask of what source types to return. Defaults to READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
           explode: true
           in: query
           name: sources
@@ -630,13 +535,10 @@ paths:
         - people
   /v1/people:listDirectoryPeople:
     get:
-      description: Provides a list of domain profiles and domain contacts in the
-        authenticated user's domain directory.
+      description: Provides a list of domain profiles and domain contacts in the authenticated user's domain directory.
       operationId: people.people.listDirectoryPeople
       parameters:
-        - description: Optional. Additional data to merge into the directory sources if
-            they are connected through verified join keys such as email
-            addresses or phone numbers.
+        - description: Optional. Additional data to merge into the directory sources if they are connected through verified join keys such as email addresses or phone numbers.
           explode: true
           in: query
           name: mergeSources
@@ -648,37 +550,22 @@ paths:
               type: string
             type: array
           style: form
-        - description: Optional. The number of people to include in the response. Valid
-            values are between 1 and 1000, inclusive. Defaults to 100 if not set
-            or set to 0.
+        - description: Optional. The number of people to include in the response. Valid values are between 1 and 1000, inclusive. Defaults to 100 if not set or set to 0.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Optional. A page token, received from a previous
-            `ListDirectoryPeople` call. Provide this to retrieve the subsequent
-            page. When paginating, all other parameters provided to
-            `ListDirectoryPeople` must match the call that provided the page
-            token.
+        - description: Optional. A page token, received from a previous `ListDirectoryPeople` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListDirectoryPeople` must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: "Required. A field mask to restrict which fields on each person are
-            returned. Multiple fields can be specified by separating them with
-            commas. Valid values are: * addresses * ageRanges * biographies *
-            birthdays * calendarUrls * clientData * coverPhotos * emailAddresses
-            * events * externalIds * genders * imClients * interests * locales *
-            locations * memberships * metadata * miscKeywords * names *
-            nicknames * occupations * organizations * phoneNumbers * photos *
-            relations * sipAddresses * skills * urls * userDefined"
+        - description: "Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined"
           in: query
           name: readMask
           schema:
             type: string
-        - description: Optional. Whether the response should include `next_sync_token`,
-            which can be used to get all changes since the last request. For
-            subsequent sync requests use the `sync_token` param instead.
+        - description: Optional. Whether the response should include `next_sync_token`, which can be used to get all changes since the last request. For subsequent sync requests use the `sync_token` param instead.
           in: query
           name: requestSyncToken
           schema:
@@ -696,11 +583,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Optional. A sync token, received from a previous
-            `ListDirectoryPeople` call. Provide this to retrieve only the
-            resources changed since the last request. When syncing, all other
-            parameters provided to `ListDirectoryPeople` must match the call
-            that provided the sync token.
+        - description: Optional. A sync token, received from a previous `ListDirectoryPeople` call. Provide this to retrieve only the resources changed since the last request. When syncing, all other parameters provided to `ListDirectoryPeople` must match the call that provided the sync token.
           in: query
           name: syncToken
           schema:
@@ -733,45 +616,25 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   /v1/people:searchContacts:
     get:
-      description: "Provides a list of contacts in the authenticated user's grouped
-        contacts that matches the search query. The query matches on a contact's
-        `names`, `nickNames`, `emailAddresses`, `phoneNumbers`, and
-        `organizations` fields that are from the CONTACT\" source.
-        **IMPORTANT**: Before searching, clients should send a warmup request
-        with an empty query to update the cache. See
-        https://developers.google.com/people/v1/contacts#search_the_users_conta\
-        cts"
+      description: "Provides a list of contacts in the authenticated user's grouped contacts that matches the search query. The query matches on a contact's `names`, `nickNames`, `emailAddresses`, `phoneNumbers`, and `organizations` fields that are from the CONTACT\" source. **IMPORTANT**: Before searching, clients should send a warmup request with an empty query to update the cache. See https://developers.google.com/people/v1/contacts#search_the_users_contacts"
       operationId: people.people.searchContacts
       parameters:
-        - description: Optional. The number of results to return. Defaults to 10 if field
-            is not set, or set to 0. Values greater than 30 will be capped to
-            30.
+        - description: Optional. The number of results to return. Defaults to 10 if field is not set, or set to 0. Values greater than 30 will be capped to 30.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Required. The plain-text query for the request. The query is used
-            to match prefix phrases of the fields on a person. For example, a
-            person with name "foo name" matches queries such as "f", "fo",
-            "foo", "foo n", "nam", etc., but not "oo n".
+        - description: Required. The plain-text query for the request. The query is used to match prefix phrases of the fields on a person. For example, a person with name "foo name" matches queries such as "f", "fo", "foo", "foo n", "nam", etc., but not "oo n".
           in: query
           name: query
           schema:
             type: string
-        - description: "Required. A field mask to restrict which fields on each person are
-            returned. Multiple fields can be specified by separating them with
-            commas. Valid values are: * addresses * ageRanges * biographies *
-            birthdays * calendarUrls * clientData * coverPhotos * emailAddresses
-            * events * externalIds * genders * imClients * interests * locales *
-            locations * memberships * metadata * miscKeywords * names *
-            nicknames * occupations * organizations * phoneNumbers * photos *
-            relations * sipAddresses * skills * urls * userDefined"
+        - description: "Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined"
           in: query
           name: readMask
           schema:
             type: string
-        - description: Optional. A mask of what source types to return. Defaults to
-            READ_SOURCE_TYPE_CONTACT if not set.
+        - description: Optional. A mask of what source types to return. Defaults to READ_SOURCE_TYPE_CONTACT if not set.
           explode: true
           in: query
           name: sources
@@ -817,13 +680,10 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   /v1/people:searchDirectoryPeople:
     get:
-      description: Provides a list of domain profiles and domain contacts in the
-        authenticated user's domain directory that match the search query.
+      description: Provides a list of domain profiles and domain contacts in the authenticated user's domain directory that match the search query.
       operationId: people.people.searchDirectoryPeople
       parameters:
-        - description: Optional. Additional data to merge into the directory sources if
-            they are connected through verified join keys such as email
-            addresses or phone numbers.
+        - description: Optional. Additional data to merge into the directory sources if they are connected through verified join keys such as email addresses or phone numbers.
           explode: true
           in: query
           name: mergeSources
@@ -835,36 +695,22 @@ paths:
               type: string
             type: array
           style: form
-        - description: Optional. The number of people to include in the response. Valid
-            values are between 1 and 500, inclusive. Defaults to 100 if not set
-            or set to 0.
+        - description: Optional. The number of people to include in the response. Valid values are between 1 and 500, inclusive. Defaults to 100 if not set or set to 0.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Optional. A page token, received from a previous
-            `SearchDirectoryPeople` call. Provide this to retrieve the
-            subsequent page. When paginating, all other parameters provided to
-            `SearchDirectoryPeople` must match the call that provided the page
-            token.
+        - description: Optional. A page token, received from a previous `SearchDirectoryPeople` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `SearchDirectoryPeople` must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: Required. Prefix query that matches fields in the person. Does NOT
-            use the read_mask for determining what fields to match.
+        - description: Required. Prefix query that matches fields in the person. Does NOT use the read_mask for determining what fields to match.
           in: query
           name: query
           schema:
             type: string
-        - description: "Required. A field mask to restrict which fields on each person are
-            returned. Multiple fields can be specified by separating them with
-            commas. Valid values are: * addresses * ageRanges * biographies *
-            birthdays * calendarUrls * clientData * coverPhotos * emailAddresses
-            * events * externalIds * genders * imClients * interests * locales *
-            locations * memberships * metadata * miscKeywords * names *
-            nicknames * occupations * organizations * phoneNumbers * photos *
-            relations * sipAddresses * skills * urls * userDefined"
+        - description: "Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined"
           in: query
           name: readMask
           schema:
@@ -910,8 +756,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/{resourceName}":
     delete:
-      description: Delete an existing contact group owned by the authenticated user by
-        specifying a contact group resource name.
+      description: Delete an existing contact group owned by the authenticated user by specifying a contact group resource name.
       operationId: people.contactGroups.delete
       parameters:
         - description: Required. The resource name of the contact group to delete.
@@ -920,8 +765,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. Set to true to also delete the contacts in the specified
-            group.
+        - description: Optional. Set to true to also delete the contacts in the specified group.
           in: query
           name: deleteContacts
           schema:
@@ -941,43 +785,26 @@ paths:
       tags:
         - contactGroups
     get:
-      description: Provides information about a person by specifying a resource name.
-        Use `people/me` to indicate the authenticated user. The request returns
-        a 400 error if 'personFields' is not specified.
+      description: Provides information about a person by specifying a resource name. Use `people/me` to indicate the authenticated user. The request returns a 400 error if 'personFields' is not specified.
       operationId: people.people.get
       parameters:
-        - description: Required. The resource name of the person to provide information
-            about. - To get information about the authenticated user, specify
-            `people/me`. - To get information about a google account, specify
-            `people/{account_id}`. - To get information about a contact, specify
-            the resource name that identifies the contact as returned by
-            [`people.connections.list`](/people/api/rest/v1/people.connections/list).
+        - description: Required. The resource name of the person to provide information about. - To get information about the authenticated user, specify `people/me`. - To get information about a google account, specify `people/{account_id}`. - To get information about a contact, specify the resource name that identifies the contact as returned by [`people.connections.list`](/people/api/rest/v1/people.connections/list).
           in: path
           name: resourceName
           required: true
           schema:
             type: string
-        - description: "Required. A field mask to restrict which fields on the person are
-            returned. Multiple fields can be specified by separating them with
-            commas. Valid values are: * addresses * ageRanges * biographies *
-            birthdays * calendarUrls * clientData * coverPhotos * emailAddresses
-            * events * externalIds * genders * imClients * interests * locales *
-            locations * memberships * metadata * miscKeywords * names *
-            nicknames * occupations * organizations * phoneNumbers * photos *
-            relations * sipAddresses * skills * urls * userDefined"
+        - description: "Required. A field mask to restrict which fields on the person are returned. Multiple fields can be specified by separating them with commas. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined"
           in: query
           name: personFields
           schema:
             type: string
-        - description: "Required. Comma-separated list of person fields to be included in
-            the response. Each path should start with `person.`: for example,
-            `person.names` or `person.photos`."
+        - description: "Required. Comma-separated list of person fields to be included in the response. Each path should start with `person.`: for example, `person.names` or `person.photos`."
           in: query
           name: requestMask.includeField
           schema:
             type: string
-        - description: Optional. A mask of what source types to return. Defaults to
-            READ_SOURCE_TYPE_PROFILE and READ_SOURCE_TYPE_CONTACT if not set.
+        - description: Optional. A mask of what source types to return. Defaults to READ_SOURCE_TYPE_PROFILE and READ_SOURCE_TYPE_CONTACT if not set.
           explode: true
           in: query
           name: sources
@@ -1058,14 +885,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     put:
-      description: Update the name of an existing contact group owned by the
-        authenticated user. Updated contact group names must be unique to the
-        users contact groups. Attempting to create a group with a duplicate name
-        will return a HTTP 409 error.
+      description: Update the name of an existing contact group owned by the authenticated user. Updated contact group names must be unique to the users contact groups. Attempting to create a group with a duplicate name will return a HTTP 409 error.
       operationId: people.contactGroups.update
       parameters:
-        - description: The resource name for the contact group, assigned by the server. An
-            ASCII string, in the form of `contactGroups/{contact_group_id}`.
+        - description: The resource name for the contact group, assigned by the server. An ASCII string, in the form of `contactGroups/{contact_group_id}`.
           in: path
           name: resourceName
           required: true
@@ -1092,69 +915,41 @@ paths:
         - contactGroups
   "/v1/{resourceName}/connections":
     get:
-      description: Provides a list of the authenticated user's contacts. The request
-        returns a 400 error if `personFields` is not specified. The request
-        returns a 410 error if `sync_token` is specified and is expired. Sync
-        tokens expire after 7 days to prevent data drift between clients and the
-        server. To handle a sync token expired error, a request should be sent
-        without `sync_token` to get all contacts.
+      description: Provides a list of the authenticated user's contacts. The request returns a 400 error if `personFields` is not specified. The request returns a 410 error if `sync_token` is specified and is expired. Sync tokens expire after 7 days to prevent data drift between clients and the server. To handle a sync token expired error, a request should be sent without `sync_token` to get all contacts.
       operationId: people.people.connections.list
       parameters:
-        - description: Required. The resource name to return connections for. Only
-            `people/me` is valid.
+        - description: Required. The resource name to return connections for. Only `people/me` is valid.
           in: path
           name: resourceName
           required: true
           schema:
             type: string
-        - description: Optional. The number of connections to include in the response.
-            Valid values are between 1 and 1000, inclusive. Defaults to 100 if
-            not set or set to 0.
+        - description: Optional. The number of connections to include in the response. Valid values are between 1 and 1000, inclusive. Defaults to 100 if not set or set to 0.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Optional. A page token, received from a previous `ListConnections`
-            call. Provide this to retrieve the subsequent page. When paginating,
-            all other parameters provided to `ListConnections` must match the
-            call that provided the page token.
+        - description: Optional. A page token, received from a previous `ListConnections` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListConnections` must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: "Required. A field mask to restrict which fields on each person are
-            returned. Multiple fields can be specified by separating them with
-            commas. Valid values are: * addresses * ageRanges * biographies *
-            birthdays * calendarUrls * clientData * coverPhotos * emailAddresses
-            * events * externalIds * genders * imClients * interests * locales *
-            locations * memberships * metadata * miscKeywords * names *
-            nicknames * occupations * organizations * phoneNumbers * photos *
-            relations * sipAddresses * skills * urls * userDefined"
+        - description: "Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined"
           in: query
           name: personFields
           schema:
             type: string
-        - description: "Required. Comma-separated list of person fields to be included in
-            the response. Each path should start with `person.`: for example,
-            `person.names` or `person.photos`."
+        - description: "Required. Comma-separated list of person fields to be included in the response. Each path should start with `person.`: for example, `person.names` or `person.photos`."
           in: query
           name: requestMask.includeField
           schema:
             type: string
-        - description: Optional. Whether the response should include `next_sync_token` on
-            the last page, which can be used to get all changes since the last
-            request. For subsequent sync requests use the `sync_token` param
-            instead. Initial full sync requests that specify
-            `request_sync_token` and do not specify `sync_token` have an
-            additional rate limit per user. Each client should generally only be
-            doing a full sync once every few days per user and so should not hit
-            this limit.
+        - description: Optional. Whether the response should include `next_sync_token` on the last page, which can be used to get all changes since the last request. For subsequent sync requests use the `sync_token` param instead. Initial full sync requests that specify `request_sync_token` and do not specify `sync_token` have an additional rate limit per user. Each client should generally only be doing a full sync once every few days per user and so should not hit this limit.
           in: query
           name: requestSyncToken
           schema:
             type: boolean
-        - description: Optional. The order in which the connections should be sorted.
-            Defaults to `LAST_MODIFIED_ASCENDING`.
+        - description: Optional. The order in which the connections should be sorted. Defaults to `LAST_MODIFIED_ASCENDING`.
           in: query
           name: sortOrder
           schema:
@@ -1164,8 +959,7 @@ paths:
               - FIRST_NAME_ASCENDING
               - LAST_NAME_ASCENDING
             type: string
-        - description: Optional. A mask of what source types to return. Defaults to
-            READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
+        - description: Optional. A mask of what source types to return. Defaults to READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
           explode: true
           in: query
           name: sources
@@ -1179,16 +973,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Optional. A sync token, received from a previous `ListConnections`
-            call. Provide this to retrieve only the resources changed since the
-            last request. When the `syncToken` is specified, resources deleted
-            since the last sync will be returned as a person with
-            [`PersonMetadata.deleted`](/people/api/rest/v1/people#Person.PersonMetadata.FIELDS.deleted)
-            set to true. When the `syncToken` is specified, all other parameters
-            provided to `ListConnections` except `page_size` and `page_token`
-            must match the initial call that provided the sync token. Sync
-            tokens expire after seven days, after which a full sync request
-            without a `sync_token` should be made.
+        - description: Optional. A sync token, received from a previous `ListConnections` call. Provide this to retrieve only the resources changed since the last request. When the `syncToken` is specified, resources deleted since the last sync will be returned as a person with [`PersonMetadata.deleted`](/people/api/rest/v1/people#Person.PersonMetadata.FIELDS.deleted) set to true. When the `syncToken` is specified, all other parameters provided to `ListConnections` except `page_size` and `page_token` must match the initial call that provided the sync token. Sync tokens expire after seven days, after which a full sync request without a `sync_token` should be made.
           in: query
           name: syncToken
           schema:
@@ -1237,10 +1022,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Modify the members of a contact group owned by the authenticated
-        user. The only system contact groups that can have members added are
-        `contactGroups/myContacts` and `contactGroups/starred`. Other system
-        contact groups are deprecated and can only have contacts removed.
+      description: Modify the members of a contact group owned by the authenticated user. The only system contact groups that can have members added are `contactGroups/myContacts` and `contactGroups/starred`. Other system contact groups are deprecated and can only have contacts removed.
       operationId: people.contactGroups.members.modify
       parameters:
         - description: Required. The resource name of the contact group to modify.
@@ -1282,8 +1064,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Copies an "Other contact" to a new contact in the user's
-        "myContacts" group
+      description: Copies an "Other contact" to a new contact in the user's "myContacts" group
       operationId: people.otherContacts.copyOtherContactToMyContactsGroup
       parameters:
         - description: Required. The resource name of the "Other contact" to copy.
@@ -1357,29 +1138,18 @@ paths:
       description: Delete a contact's photo.
       operationId: people.people.deleteContactPhoto
       parameters:
-        - description: Required. The resource name of the contact whose photo will be
-            deleted.
+        - description: Required. The resource name of the contact whose photo will be deleted.
           in: path
           name: resourceName
           required: true
           schema:
             type: string
-        - description: "Optional. A field mask to restrict which fields on the person are
-            returned. Multiple fields can be specified by separating them with
-            commas. Defaults to empty if not set, which will skip the post
-            mutate get. Valid values are: * addresses * ageRanges * biographies
-            * birthdays * calendarUrls * clientData * coverPhotos *
-            emailAddresses * events * externalIds * genders * imClients *
-            interests * locales * locations * memberships * metadata *
-            miscKeywords * names * nicknames * occupations * organizations *
-            phoneNumbers * photos * relations * sipAddresses * skills * urls *
-            userDefined"
+        - description: "Optional. A field mask to restrict which fields on the person are returned. Multiple fields can be specified by separating them with commas. Defaults to empty if not set, which will skip the post mutate get. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined"
           in: query
           name: personFields
           schema:
             type: string
-        - description: Optional. A mask of what source types to return. Defaults to
-            READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
+        - description: Optional. A mask of what source types to return. Defaults to READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
           explode: true
           in: query
           name: sources
@@ -1433,45 +1203,21 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: "Update contact data for an existing contact person. Any
-        non-contact data will not be modified. Any non-contact data in the
-        person to update will be ignored. All fields specified in the
-        `update_mask` will be replaced. The server returns a 400 error if
-        `person.metadata.sources` is not specified for the contact to be updated
-        or if there is no contact source. The server returns a 400 error with
-        reason `\"failedPrecondition\"` if `person.metadata.sources.etag` is
-        different than the contact's etag, which indicates the contact has
-        changed since its data was read. Clients should get the latest person
-        and merge their updates into the latest person. The server returns a 400
-        error if `memberships` are being updated and there are no contact group
-        memberships specified on the person. The server returns a 400 error if
-        more than one field is specified on a field that is a singleton for
-        contact sources: * biographies * birthdays * genders * names"
+      description: "Update contact data for an existing contact person. Any non-contact data will not be modified. Any non-contact data in the person to update will be ignored. All fields specified in the `update_mask` will be replaced. The server returns a 400 error if `person.metadata.sources` is not specified for the contact to be updated or if there is no contact source. The server returns a 400 error with reason `\"failedPrecondition\"` if `person.metadata.sources.etag` is different than the contact's etag, which indicates the contact has changed since its data was read. Clients should get the latest person and merge their updates into the latest person. The server returns a 400 error if `memberships` are being updated and there are no contact group memberships specified on the person. The server returns a 400 error if more than one field is specified on a field that is a singleton for contact sources: * biographies * birthdays * genders * names"
       operationId: people.people.updateContact
       parameters:
-        - description: The resource name for the person, assigned by the server. An ASCII
-            string with a max length of 27 characters, in the form of
-            `people/{person_id}`.
+        - description: The resource name for the person, assigned by the server. An ASCII string with a max length of 27 characters, in the form of `people/{person_id}`.
           in: path
           name: resourceName
           required: true
           schema:
             type: string
-        - description: "Optional. A field mask to restrict which fields on each person are
-            returned. Multiple fields can be specified by separating them with
-            commas. Defaults to all fields if not set. Valid values are: *
-            addresses * ageRanges * biographies * birthdays * calendarUrls *
-            clientData * coverPhotos * emailAddresses * events * externalIds *
-            genders * imClients * interests * locales * locations * memberships
-            * metadata * miscKeywords * names * nicknames * occupations *
-            organizations * phoneNumbers * photos * relations * sipAddresses *
-            skills * urls * userDefined"
+        - description: "Optional. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. Defaults to all fields if not set. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined"
           in: query
           name: personFields
           schema:
             type: string
-        - description: Optional. A mask of what source types to return. Defaults to
-            READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
+        - description: Optional. A mask of what source types to return. Defaults to READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
           explode: true
           in: query
           name: sources
@@ -1485,14 +1231,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: "Required. A field mask to restrict which fields on the person are
-            updated. Multiple fields can be specified by separating them with
-            commas. All updated fields will be replaced. Valid values are: *
-            addresses * biographies * birthdays * calendarUrls * clientData *
-            emailAddresses * events * externalIds * genders * imClients *
-            interests * locales * locations * memberships * miscKeywords * names
-            * nicknames * occupations * organizations * phoneNumbers * relations
-            * sipAddresses * urls * userDefined"
+        - description: "Required. A field mask to restrict which fields on the person are updated. Multiple fields can be specified by separating them with commas. All updated fields will be replaced. Valid values are: * addresses * biographies * birthdays * calendarUrls * clientData * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * relations * sipAddresses * urls * userDefined"
           in: query
           name: updatePersonFields
           schema:
@@ -1598,9 +1337,7 @@ components:
       schema:
         type: string
     key:
-      description: API key. Your API key identifies your project and provides you with
-        API access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -1618,9 +1355,7 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: Available to use for quota purposes for server-side applications.
-        Can be any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
@@ -1639,8 +1374,7 @@ components:
         type: string
   schemas:
     Address:
-      description: A person's physical address. May be a P.O. box or street address.
-        All fields are optional.
+      description: A person's physical address. May be a P.O. box or street address. All fields are optional.
       properties:
         city:
           description: The city of the address.
@@ -1649,22 +1383,17 @@ components:
           description: The country of the address.
           type: string
         countryCode:
-          description: The [ISO 3166-1 alpha-2](http://www.iso.org/iso/country_codes.htm)
-            country code of the address.
+          description: The [ISO 3166-1 alpha-2](http://www.iso.org/iso/country_codes.htm) country code of the address.
           type: string
         extendedAddress:
-          description: The extended address of the address; for example, the apartment
-            number.
+          description: The extended address of the address; for example, the apartment number.
           type: string
         formattedType:
-          description: Output only. The type of the address translated and formatted in
-            the viewer's account locale or the `Accept-Language` HTTP header
-            locale.
+          description: Output only. The type of the address translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
           readOnly: true
           type: string
         formattedValue:
-          description: The unstructured value of the address. If this is not set by the
-            user it will be automatically constructed from structured values.
+          description: The unstructured value of the address. If this is not set by the user it will be automatically constructed from structured values.
           type: string
         metadata:
           $ref: "#/components/schemas/FieldMetadata"
@@ -1682,8 +1411,7 @@ components:
           description: The street address.
           type: string
         type:
-          description: "The type of the address. The type can be custom or one of these
-            predefined values: * `home` * `work` * `other`"
+          description: "The type of the address. The type can be custom or one of these predefined values: * `home` * `work` * `other`"
           type: string
       type: object
     AgeRangeType:
@@ -1705,28 +1433,16 @@ components:
       description: A request to create a batch of contacts.
       properties:
         contacts:
-          description: Required. The contact to create. Allows up to 200 contacts in a
-            single request.
+          description: Required. The contact to create. Allows up to 200 contacts in a single request.
           items:
             $ref: "#/components/schemas/ContactToCreate"
           type: array
         readMask:
-          description: "Required. A field mask to restrict which fields on each person are
-            returned in the response. Multiple fields can be specified by
-            separating them with commas. If read mask is left empty, the
-            post-mutate-get is skipped and no data will be returned in the
-            response. Valid values are: * addresses * ageRanges * biographies *
-            birthdays * calendarUrls * clientData * coverPhotos * emailAddresses
-            * events * externalIds * genders * imClients * interests * locales *
-            locations * memberships * metadata * miscKeywords * names *
-            nicknames * occupations * organizations * phoneNumbers * photos *
-            relations * sipAddresses * skills * urls * userDefined"
+          description: "Required. A field mask to restrict which fields on each person are returned in the response. Multiple fields can be specified by separating them with commas. If read mask is left empty, the post-mutate-get is skipped and no data will be returned in the response. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined"
           format: google-fieldmask
           type: string
         sources:
-          description: Optional. A mask of what source types to return in the post mutate
-            read. Defaults to READ_SOURCE_TYPE_CONTACT and
-            READ_SOURCE_TYPE_PROFILE if not set.
+          description: Optional. A mask of what source types to return in the post mutate read. Defaults to READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
           items:
             enum:
               - READ_SOURCE_TYPE_UNSPECIFIED
@@ -1740,8 +1456,7 @@ components:
       description: The response to a request to create a batch of contacts.
       properties:
         createdPeople:
-          description: The contacts that were created, unless the request `read_mask` is
-            empty.
+          description: The contacts that were created, unless the request `read_mask` is empty.
           items:
             $ref: "#/components/schemas/PersonResponse"
           type: array
@@ -1750,8 +1465,7 @@ components:
       description: A request to delete a batch of existing contacts.
       properties:
         resourceNames:
-          description: Required. The resource names of the contact to delete. It's
-            repeatable. Allows up to 500 resource names in a single request.
+          description: Required. The resource names of the contact to delete. It's repeatable. Allows up to 500 resource names in a single request.
           items:
             type: string
           type: array
@@ -1771,25 +1485,14 @@ components:
         contacts:
           additionalProperties:
             $ref: "#/components/schemas/Person"
-          description: Required. A map of resource names to the person data to be updated.
-            Allows up to 200 contacts in a single request.
+          description: Required. A map of resource names to the person data to be updated. Allows up to 200 contacts in a single request.
           type: object
         readMask:
-          description: "Required. A field mask to restrict which fields on each person are
-            returned. Multiple fields can be specified by separating them with
-            commas. If read mask is left empty, the post-mutate-get is skipped
-            and no data will be returned in the response. Valid values are: *
-            addresses * ageRanges * biographies * birthdays * calendarUrls *
-            clientData * coverPhotos * emailAddresses * events * externalIds *
-            genders * imClients * interests * locales * locations * memberships
-            * metadata * miscKeywords * names * nicknames * occupations *
-            organizations * phoneNumbers * photos * relations * sipAddresses *
-            skills * urls * userDefined"
+          description: "Required. A field mask to restrict which fields on each person are returned. Multiple fields can be specified by separating them with commas. If read mask is left empty, the post-mutate-get is skipped and no data will be returned in the response. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined"
           format: google-fieldmask
           type: string
         sources:
-          description: Optional. A mask of what source types to return. Defaults to
-            READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
+          description: Optional. A mask of what source types to return. Defaults to READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
           items:
             enum:
               - READ_SOURCE_TYPE_UNSPECIFIED
@@ -1799,15 +1502,7 @@ components:
             type: string
           type: array
         updateMask:
-          description: "Required. A field mask to restrict which fields on the person are
-            updated. Multiple fields can be specified by separating them with
-            commas. All specified fields will be replaced, or cleared if left
-            empty for each person. Valid values are: * addresses * biographies *
-            birthdays * calendarUrls * clientData * emailAddresses * events *
-            externalIds * genders * imClients * interests * locales * locations
-            * memberships * miscKeywords * names * nicknames * occupations *
-            organizations * phoneNumbers * relations * sipAddresses * urls *
-            userDefined"
+          description: "Required. A field mask to restrict which fields on the person are updated. Multiple fields can be specified by separating them with commas. All specified fields will be replaced, or cleared if left empty for each person. Valid values are: * addresses * biographies * birthdays * calendarUrls * clientData * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * relations * sipAddresses * urls * userDefined"
           format: google-fieldmask
           type: string
       type: object
@@ -1817,8 +1512,7 @@ components:
         updateResult:
           additionalProperties:
             $ref: "#/components/schemas/PersonResponse"
-          description: A map of resource names to the contacts that were updated, unless
-            the request `read_mask` is empty.
+          description: A map of resource names to the contacts that were updated, unless the request `read_mask` is empty.
           type: object
       type: object
     Biography:
@@ -1839,9 +1533,7 @@ components:
           type: string
       type: object
     Birthday:
-      description: A person's birthday. At least one of the `date` and `text` fields
-        are specified. The `date` and `text` fields typically represent the same
-        date, but are not guaranteed to.
+      description: A person's birthday. At least one of the `date` and `text` fields are specified. The `date` and `text` fields typically represent the same date, but are not guaranteed to.
       properties:
         date:
           $ref: "#/components/schemas/Date"
@@ -1867,25 +1559,21 @@ components:
       description: A person's calendar URL.
       properties:
         formattedType:
-          description: Output only. The type of the calendar URL translated and formatted
-            in the viewer's account locale or the `Accept-Language` HTTP header
-            locale.
+          description: Output only. The type of the calendar URL translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
           readOnly: true
           type: string
         metadata:
           $ref: "#/components/schemas/FieldMetadata"
           description: Metadata about the calendar URL.
         type:
-          description: "The type of the calendar URL. The type can be custom or one of
-            these predefined values: * `home` * `freeBusy` * `work`"
+          description: "The type of the calendar URL. The type can be custom or one of these predefined values: * `home` * `freeBusy` * `work`"
           type: string
         url:
           description: The calendar URL.
           type: string
       type: object
     ClientData:
-      description: Arbitrary client data that is populated by clients. Duplicate keys
-        and values are allowed.
+      description: Arbitrary client data that is populated by clients. Duplicate keys and values are allowed.
       properties:
         key:
           description: The client specified key of the client data.
@@ -1906,14 +1594,10 @@ components:
             $ref: "#/components/schemas/GroupClientData"
           type: array
         etag:
-          description: The [HTTP entity tag](https://en.wikipedia.org/wiki/HTTP_ETag) of
-            the resource. Used for web cache validation.
+          description: The [HTTP entity tag](https://en.wikipedia.org/wiki/HTTP_ETag) of the resource. Used for web cache validation.
           type: string
         formattedName:
-          description: Output only. The name translated and formatted in the viewer's
-            account locale or the `Accept-Language` HTTP header locale for
-            system groups names. Group names set by the owner are the same as
-            name.
+          description: Output only. The name translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale for system groups names. Group names set by the owner are the same as name.
           readOnly: true
           type: string
         groupType:
@@ -1925,16 +1609,12 @@ components:
           readOnly: true
           type: string
         memberCount:
-          description: Output only. The total number of contacts in the group irrespective
-            of max members in specified in the request.
+          description: Output only. The total number of contacts in the group irrespective of max members in specified in the request.
           format: int32
           readOnly: true
           type: integer
         memberResourceNames:
-          description: Output only. The list of contact person resource names that are
-            members of the contact group. The field is only populated for GET
-            requests and will only return as many members as `maxMembers` in the
-            get request.
+          description: Output only. The list of contact person resource names that are members of the contact group. The field is only populated for GET requests and will only return as many members as `maxMembers` in the get request.
           items:
             type: string
           readOnly: true
@@ -1944,17 +1624,10 @@ components:
           description: Output only. Metadata about the contact group.
           readOnly: true
         name:
-          description: The contact group name set by the group owner or a system provided
-            name for system groups. For
-            [`contactGroups.create`](/people/api/rest/v1/contactGroups/create)
-            or
-            [`contactGroups.update`](/people/api/rest/v1/contactGroups/update)
-            the name must be unique to the users contact groups. Attempting to
-            create a group with a duplicate name will return a HTTP 409 error.
+          description: The contact group name set by the group owner or a system provided name for system groups. For [`contactGroups.create`](/people/api/rest/v1/contactGroups/create) or [`contactGroups.update`](/people/api/rest/v1/contactGroups/update) the name must be unique to the users contact groups. Attempting to create a group with a duplicate name will return a HTTP 409 error.
           type: string
         resourceName:
-          description: The resource name for the contact group, assigned by the server. An
-            ASCII string, in the form of `contactGroups/{contact_group_id}`.
+          description: The resource name for the contact group, assigned by the server. An ASCII string, in the form of `contactGroups/{contact_group_id}`.
           type: string
       type: object
     ContactGroupMembership:
@@ -1965,23 +1638,14 @@ components:
           readOnly: true
           type: string
         contactGroupResourceName:
-          description: The resource name for the contact group, assigned by the server. An
-            ASCII string, in the form of `contactGroups/{contact_group_id}`.
-            Only contact_group_resource_name can be used for modifying
-            memberships. Any contact group membership can be removed, but only
-            user group or "myContacts" or "starred" system groups memberships
-            can be added. A contact must always have at least one contact group
-            membership.
+          description: The resource name for the contact group, assigned by the server. An ASCII string, in the form of `contactGroups/{contact_group_id}`. Only contact_group_resource_name can be used for modifying memberships. Any contact group membership can be removed, but only user group or "myContacts" or "starred" system groups memberships can be added. A contact must always have at least one contact group membership.
           type: string
       type: object
     ContactGroupMetadata:
       description: The metadata about a contact group.
       properties:
         deleted:
-          description: Output only. True if the contact group resource has been deleted.
-            Populated only for
-            [`ListContactGroups`](/people/api/rest/v1/contactgroups/list)
-            requests that include a sync token.
+          description: Output only. True if the contact group resource has been deleted. Populated only for [`ListContactGroups`](/people/api/rest/v1/contactgroups/list) requests that include a sync token.
           readOnly: true
           type: boolean
         updateTime:
@@ -2004,8 +1668,7 @@ components:
           description: The status of the response.
       type: object
     ContactToCreate:
-      description: A wrapper that contains the person data to populate a newly created
-        source.
+      description: A wrapper that contains the person data to populate a newly created source.
       properties:
         contactPerson:
           $ref: "#/components/schemas/Person"
@@ -2015,27 +1678,15 @@ components:
       description: A request to copy an "Other contact" to my contacts group.
       properties:
         copyMask:
-          description: "Required. A field mask to restrict which fields are copied into
-            the new contact. Valid values are: * emailAddresses * names *
-            phoneNumbers"
+          description: "Required. A field mask to restrict which fields are copied into the new contact. Valid values are: * emailAddresses * names * phoneNumbers"
           format: google-fieldmask
           type: string
         readMask:
-          description: "Optional. A field mask to restrict which fields on the person are
-            returned. Multiple fields can be specified by separating them with
-            commas. Defaults to the copy mask with metadata and membership
-            fields if not set. Valid values are: * addresses * ageRanges *
-            biographies * birthdays * calendarUrls * clientData * coverPhotos *
-            emailAddresses * events * externalIds * genders * imClients *
-            interests * locales * locations * memberships * metadata *
-            miscKeywords * names * nicknames * occupations * organizations *
-            phoneNumbers * photos * relations * sipAddresses * skills * urls *
-            userDefined"
+          description: "Optional. A field mask to restrict which fields on the person are returned. Multiple fields can be specified by separating them with commas. Defaults to the copy mask with metadata and membership fields if not set. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined"
           format: google-fieldmask
           type: string
         sources:
-          description: Optional. A mask of what source types to return. Defaults to
-            READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
+          description: Optional. A mask of what source types to return. Defaults to READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
           items:
             enum:
               - READ_SOURCE_TYPE_UNSPECIFIED
@@ -2046,8 +1697,7 @@ components:
           type: array
       type: object
     CoverPhoto:
-      description: A person's cover photo. A large image shown on the person's profile
-        page that represents who they are or what they care about.
+      description: A person's cover photo. A large image shown on the person's profile page that represents who they are or what they care about.
       properties:
         metadata:
           $ref: "#/components/schemas/FieldMetadata"
@@ -2063,38 +1713,23 @@ components:
           $ref: "#/components/schemas/ContactGroup"
           description: Required. The contact group to create.
         readGroupFields:
-          description: "Optional. A field mask to restrict which fields on the group are
-            returned. Defaults to `metadata`, `groupType`, and `name` if not set
-            or set to empty. Valid fields are: * clientData * groupType *
-            metadata * name"
+          description: "Optional. A field mask to restrict which fields on the group are returned. Defaults to `metadata`, `groupType`, and `name` if not set or set to empty. Valid fields are: * clientData * groupType * metadata * name"
           format: google-fieldmask
           type: string
       type: object
     Date:
-      description: "Represents a whole or partial calendar date, such as a birthday.
-        The time of day and time zone are either specified elsewhere or are
-        insignificant. The date is relative to the Gregorian Calendar. This can
-        represent one of the following: * A full date, with non-zero year,
-        month, and day values * A month and day value, with a zero year, such as
-        an anniversary * A year on its own, with zero month and day values * A
-        year and month value, with a zero day, such as a credit card expiration
-        date Related types are google.type.TimeOfDay and
-        `google.protobuf.Timestamp`."
+      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values * A month and day value, with a zero year, such as an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, such as a credit card expiration date Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`."
       properties:
         day:
-          description: Day of a month. Must be from 1 to 31 and valid for the year and
-            month, or 0 to specify a year by itself or a year and month where
-            the day isn't significant.
+          description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
           format: int32
           type: integer
         month:
-          description: Month of a year. Must be from 1 to 12, or 0 to specify a year
-            without a month and day.
+          description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
           format: int32
           type: integer
         year:
-          description: Year of the date. Must be from 1 to 9999, or 0 to specify a date
-            without a year.
+          description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
           format: int32
           type: integer
       type: object
@@ -2103,8 +1738,7 @@ components:
       properties:
         person:
           $ref: "#/components/schemas/Person"
-          description: The updated person, if person_fields is set in the
-            DeleteContactPhotoRequest; otherwise this will be unset.
+          description: The updated person, if person_fields is set in the DeleteContactPhotoRequest; otherwise this will be unset.
       type: object
     DomainMembership:
       description: A Google Workspace Domain membership.
@@ -2120,29 +1754,21 @@ components:
           description: The display name of the email.
           type: string
         formattedType:
-          description: Output only. The type of the email address translated and formatted
-            in the viewer's account locale or the `Accept-Language` HTTP header
-            locale.
+          description: Output only. The type of the email address translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
           readOnly: true
           type: string
         metadata:
           $ref: "#/components/schemas/FieldMetadata"
           description: Metadata about the email address.
         type:
-          description: "The type of the email address. The type can be custom or one of
-            these predefined values: * `home` * `work` * `other`"
+          description: "The type of the email address. The type can be custom or one of these predefined values: * `home` * `work` * `other`"
           type: string
         value:
           description: The email address.
           type: string
       type: object
     Empty:
-      description: "A generic empty message that you can re-use to avoid defining
-        duplicated empty messages in your APIs. A typical example is to use it
-        as the request or the response type of an API method. For instance:
-        service Foo { rpc Bar(google.protobuf.Empty) returns
-        (google.protobuf.Empty); } The JSON representation for `Empty` is empty
-        JSON object `{}`."
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
       type: object
     Event:
@@ -2152,33 +1778,28 @@ components:
           $ref: "#/components/schemas/Date"
           description: The date of the event.
         formattedType:
-          description: Output only. The type of the event translated and formatted in the
-            viewer's account locale or the `Accept-Language` HTTP header locale.
+          description: Output only. The type of the event translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
           readOnly: true
           type: string
         metadata:
           $ref: "#/components/schemas/FieldMetadata"
           description: Metadata about the event.
         type:
-          description: "The type of the event. The type can be custom or one of these
-            predefined values: * `anniversary` * `other`"
+          description: "The type of the event. The type can be custom or one of these predefined values: * `anniversary` * `other`"
           type: string
       type: object
     ExternalId:
       description: An identifier from an external entity related to the person.
       properties:
         formattedType:
-          description: Output only. The type of the event translated and formatted in the
-            viewer's account locale or the `Accept-Language` HTTP header locale.
+          description: Output only. The type of the event translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
           readOnly: true
           type: string
         metadata:
           $ref: "#/components/schemas/FieldMetadata"
           description: Metadata about the external ID.
         type:
-          description: "The type of the external ID. The type can be custom or one of
-            these predefined values: * `account` * `customer` * `loginId` *
-            `network` * `organization`"
+          description: "The type of the external ID. The type can be custom or one of these predefined values: * `account` * `customer` * `loginId` * `network` * `organization`"
           type: string
         value:
           description: The value of the external ID.
@@ -2188,17 +1809,13 @@ components:
       description: Metadata about a field.
       properties:
         primary:
-          description: True if the field is the primary field; false if the field is a
-            secondary field.
+          description: True if the field is the primary field; false if the field is a secondary field.
           type: boolean
         source:
           $ref: "#/components/schemas/Source"
           description: The source of the field.
         verified:
-          description: Output only. True if the field is verified; false if the field is
-            unverified. A verified field is typically a name, email address,
-            phone number, or website that has been confirmed to be owned by the
-            person.
+          description: Output only. True if the field is verified; false if the field is unverified. A verified field is typically a name, email address, phone number, or website that has been confirmed to be owned by the person.
           readOnly: true
           type: boolean
       type: object
@@ -2216,22 +1833,17 @@ components:
       description: A person's gender.
       properties:
         addressMeAs:
-          description: "The type of pronouns that should be used to address the person.
-            The value can be custom or one of these predefined values: * `male`
-            * `female` * `other`"
+          description: "The type of pronouns that should be used to address the person. The value can be custom or one of these predefined values: * `male` * `female` * `other`"
           type: string
         formattedValue:
-          description: Output only. The value of the gender translated and formatted in
-            the viewer's account locale or the `Accept-Language` HTTP header
-            locale. Unspecified or custom value are not localized.
+          description: Output only. The value of the gender translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale. Unspecified or custom value are not localized.
           readOnly: true
           type: string
         metadata:
           $ref: "#/components/schemas/FieldMetadata"
           description: Metadata about the gender.
         value:
-          description: "The gender for the person. The gender can be custom or one of
-            these predefined values: * `male` * `female` * `unspecified`"
+          description: "The gender for the person. The gender can be custom or one of these predefined values: * `male` * `female` * `unspecified`"
           type: string
       type: object
     GetPeopleResponse:
@@ -2244,8 +1856,7 @@ components:
           type: array
       type: object
     GroupClientData:
-      description: Arbitrary client data that is populated by clients. Duplicate keys
-        and values are allowed.
+      description: Arbitrary client data that is populated by clients. Duplicate keys and values are allowed.
       properties:
         key:
           description: The client specified key of the client data.
@@ -2258,27 +1869,21 @@ components:
       description: A person's instant messaging client.
       properties:
         formattedProtocol:
-          description: Output only. The protocol of the IM client formatted in the
-            viewer's account locale or the `Accept-Language` HTTP header locale.
+          description: Output only. The protocol of the IM client formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
           readOnly: true
           type: string
         formattedType:
-          description: Output only. The type of the IM client translated and formatted in
-            the viewer's account locale or the `Accept-Language` HTTP header
-            locale.
+          description: Output only. The type of the IM client translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
           readOnly: true
           type: string
         metadata:
           $ref: "#/components/schemas/FieldMetadata"
           description: Metadata about the IM client.
         protocol:
-          description: "The protocol of the IM client. The protocol can be custom or one
-            of these predefined values: * `aim` * `msn` * `yahoo` * `skype` *
-            `qq` * `googleTalk` * `icq` * `jabber` * `netMeeting`"
+          description: "The protocol of the IM client. The protocol can be custom or one of these predefined values: * `aim` * `msn` * `yahoo` * `skype` * `qq` * `googleTalk` * `icq` * `jabber` * `netMeeting`"
           type: string
         type:
-          description: "The type of the IM client. The type can be custom or one of these
-            predefined values: * `home` * `work` * `other`"
+          description: "The type of the IM client. The type can be custom or one of these predefined values: * `home` * `work` * `other`"
           type: string
         username:
           description: The user name used in the IM client.
@@ -2303,22 +1908,17 @@ components:
             $ref: "#/components/schemas/Person"
           type: array
         nextPageToken:
-          description: A token, which can be sent as `page_token` to retrieve the next
-            page. If this field is omitted, there are no subsequent pages.
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
         nextSyncToken:
-          description: A token, which can be sent as `sync_token` to retrieve changes
-            since the last request. Request must set `request_sync_token` to
-            return the sync token. When the response is paginated, only the last
-            page will contain `nextSyncToken`.
+          description: A token, which can be sent as `sync_token` to retrieve changes since the last request. Request must set `request_sync_token` to return the sync token. When the response is paginated, only the last page will contain `nextSyncToken`.
           type: string
         totalItems:
           description: The total number of items in the list without pagination.
           format: int32
           type: integer
         totalPeople:
-          description: "**DEPRECATED** (Please use totalItems) The total number of people
-            in the list without pagination."
+          description: "**DEPRECATED** (Please use totalItems) The total number of people in the list without pagination."
           format: int32
           type: integer
       type: object
@@ -2326,8 +1926,7 @@ components:
       description: The response to a list contact groups request.
       properties:
         contactGroups:
-          description: The list of contact groups. Members of the contact groups are not
-            populated.
+          description: The list of contact groups. Members of the contact groups are not populated.
           items:
             $ref: "#/components/schemas/ContactGroup"
           type: array
@@ -2335,8 +1934,7 @@ components:
           description: The token that can be used to retrieve the next page of results.
           type: string
         nextSyncToken:
-          description: The token that can be used to retrieve changes since the last
-            request.
+          description: The token that can be used to retrieve changes since the last request.
           type: string
         totalItems:
           description: The total number of items in the list without pagination.
@@ -2347,13 +1945,10 @@ components:
       description: The response to a request for the authenticated user's domain directory.
       properties:
         nextPageToken:
-          description: A token, which can be sent as `page_token` to retrieve the next
-            page. If this field is omitted, there are no subsequent pages.
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
         nextSyncToken:
-          description: A token, which can be sent as `sync_token` to retrieve changes
-            since the last request. Request must set `request_sync_token` to
-            return the sync token.
+          description: A token, which can be sent as `sync_token` to retrieve changes since the last request. Request must set `request_sync_token` to return the sync token.
           type: string
         people:
           description: The list of people in the domain directory.
@@ -2365,18 +1960,13 @@ components:
       description: The response to a request for the authenticated user's "Other contacts".
       properties:
         nextPageToken:
-          description: A token, which can be sent as `page_token` to retrieve the next
-            page. If this field is omitted, there are no subsequent pages.
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
         nextSyncToken:
-          description: A token, which can be sent as `sync_token` to retrieve changes
-            since the last request. Request must set `request_sync_token` to
-            return the sync token.
+          description: A token, which can be sent as `sync_token` to retrieve changes since the last request. Request must set `request_sync_token` to return the sync token.
           type: string
         otherContacts:
-          description: The list of "Other contacts" returned as Person resources. "Other
-            contacts" support a limited subset of fields. See
-            ListOtherContactsRequest.request_mask for more detailed information.
+          description: The list of "Other contacts" returned as Person resources. "Other contacts" support a limited subset of fields. See ListOtherContactsRequest.request_mask for more detailed information.
           items:
             $ref: "#/components/schemas/Person"
           type: array
@@ -2392,8 +1982,7 @@ components:
           $ref: "#/components/schemas/FieldMetadata"
           description: Metadata about the locale.
         value:
-          description: The well-formed [IETF BCP 47](https://tools.ietf.org/html/bcp47)
-            language tag representing the locale.
+          description: The well-formed [IETF BCP 47](https://tools.ietf.org/html/bcp47) language tag representing the locale.
           type: string
       type: object
     Location:
@@ -2418,16 +2007,14 @@ components:
           $ref: "#/components/schemas/FieldMetadata"
           description: Metadata about the location.
         type:
-          description: "The type of the location. The type can be custom or one of these
-            predefined values: * `desk` * `grewUp`"
+          description: "The type of the location. The type can be custom or one of these predefined values: * `desk` * `grewUp`"
           type: string
         value:
           description: The free-form value of the location.
           type: string
       type: object
     Membership:
-      description: A person's membership in a group. Only contact group memberships
-        can be modified.
+      description: A person's membership in a group. Only contact group memberships can be modified.
       properties:
         contactGroupMembership:
           $ref: "#/components/schemas/ContactGroupMembership"
@@ -2444,9 +2031,7 @@ components:
       description: A person's miscellaneous keyword.
       properties:
         formattedType:
-          description: Output only. The type of the miscellaneous keyword translated and
-            formatted in the viewer's account locale or the `Accept-Language`
-            HTTP header locale.
+          description: Output only. The type of the miscellaneous keyword translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
           readOnly: true
           type: string
         metadata:
@@ -2473,23 +2058,15 @@ components:
           type: string
       type: object
     ModifyContactGroupMembersRequest:
-      description: A request to modify an existing contact group's members. Contacts
-        can be removed from any group but they can only be added to a user group
-        or "myContacts" or "starred" system groups.
+      description: A request to modify an existing contact group's members. Contacts can be removed from any group but they can only be added to a user group or "myContacts" or "starred" system groups.
       properties:
         resourceNamesToAdd:
-          description: Optional. The resource names of the contact people to add in the
-            form of `people/{person_id}`. The total number of resource names in
-            `resource_names_to_add` and `resource_names_to_remove` must be less
-            than or equal to 1000.
+          description: Optional. The resource names of the contact people to add in the form of `people/{person_id}`. The total number of resource names in `resource_names_to_add` and `resource_names_to_remove` must be less than or equal to 1000.
           items:
             type: string
           type: array
         resourceNamesToRemove:
-          description: Optional. The resource names of the contact people to remove in the
-            form of `people/{person_id}`. The total number of resource names in
-            `resource_names_to_add` and `resource_names_to_remove` must be less
-            than or equal to 1000.
+          description: Optional. The resource names of the contact people to remove in the form of `people/{person_id}`. The total number of resource names in `resource_names_to_add` and `resource_names_to_remove` must be less than or equal to 1000.
           items:
             type: string
           type: array
@@ -2498,8 +2075,7 @@ components:
       description: The response to a modify contact group members request.
       properties:
         canNotRemoveLastContactGroupResourceNames:
-          description: The contact people resource names that cannot be removed from their
-            last contact group.
+          description: The contact people resource names that cannot be removed from their last contact group.
           items:
             type: string
           type: array
@@ -2513,15 +2089,11 @@ components:
       description: A person's name. If the name is a mononym, the family name is empty.
       properties:
         displayName:
-          description: Output only. The display name formatted according to the locale
-            specified by the viewer's account or the `Accept-Language` HTTP
-            header.
+          description: Output only. The display name formatted according to the locale specified by the viewer's account or the `Accept-Language` HTTP header.
           readOnly: true
           type: string
         displayNameLastFirst:
-          description: Output only. The display name with the last name first formatted
-            according to the locale specified by the viewer's account or the
-            `Accept-Language` HTTP header.
+          description: Output only. The display name with the last name first formatted according to the locale specified by the viewer's account or the `Accept-Language` HTTP header.
           readOnly: true
           type: string
         familyName:
@@ -2596,27 +2168,22 @@ components:
           type: string
       type: object
     Organization:
-      description: A person's past or current organization. Overlapping date ranges
-        are permitted.
+      description: A person's past or current organization. Overlapping date ranges are permitted.
       properties:
         current:
-          description: True if the organization is the person's current organization;
-            false if the organization is a past organization.
+          description: True if the organization is the person's current organization; false if the organization is a past organization.
           type: boolean
         department:
           description: The person's department at the organization.
           type: string
         domain:
-          description: The domain name associated with the organization; for example,
-            `google.com`.
+          description: The domain name associated with the organization; for example, `google.com`.
           type: string
         endDate:
           $ref: "#/components/schemas/Date"
           description: The end date when the person left the organization.
         formattedType:
-          description: Output only. The type of the organization translated and formatted
-            in the viewer's account locale or the `Accept-Language` HTTP header
-            locale.
+          description: Output only. The type of the organization translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
           readOnly: true
           type: string
         jobDescription:
@@ -2638,23 +2205,17 @@ components:
           $ref: "#/components/schemas/Date"
           description: The start date when the person joined the organization.
         symbol:
-          description: The symbol associated with the organization; for example, a stock
-            ticker symbol, abbreviation, or acronym.
+          description: The symbol associated with the organization; for example, a stock ticker symbol, abbreviation, or acronym.
           type: string
         title:
           description: The person's job title at the organization.
           type: string
         type:
-          description: "The type of the organization. The type can be custom or one of
-            these predefined values: * `work` * `school`"
+          description: "The type of the organization. The type can be custom or one of these predefined values: * `work` * `school`"
           type: string
       type: object
     Person:
-      description: Information about a person merged from various data sources such as
-        the authenticated user's contacts and profile data. Most fields can have
-        multiple items. The items in a field have no guaranteed order, but each
-        non-empty field is guaranteed to have exactly one field with
-        `metadata.primary` set to true.
+      description: Information about a person merged from various data sources such as the authenticated user's contacts and profile data. Most fields can have multiple items. The items in a field have no guaranteed order, but each non-empty field is guaranteed to have exactly one field with `metadata.primary` set to true.
       properties:
         addresses:
           description: The person's street addresses.
@@ -2662,8 +2223,7 @@ components:
             $ref: "#/components/schemas/Address"
           type: array
         ageRange:
-          description: Output only. **DEPRECATED** (Please use `person.ageRanges` instead)
-            The person's age range.
+          description: Output only. **DEPRECATED** (Please use `person.ageRanges` instead) The person's age range.
           enum:
             - AGE_RANGE_UNSPECIFIED
             - LESS_THAN_EIGHTEEN
@@ -2678,20 +2238,17 @@ components:
           readOnly: true
           type: array
         biographies:
-          description: The person's biographies. This field is a singleton for contact
-            sources.
+          description: The person's biographies. This field is a singleton for contact sources.
           items:
             $ref: "#/components/schemas/Biography"
           type: array
         birthdays:
-          description: The person's birthdays. This field is a singleton for contact
-            sources.
+          description: The person's birthdays. This field is a singleton for contact sources.
           items:
             $ref: "#/components/schemas/Birthday"
           type: array
         braggingRights:
-          description: "**DEPRECATED**: No data will be returned The person's bragging
-            rights."
+          description: "**DEPRECATED**: No data will be returned The person's bragging rights."
           items:
             $ref: "#/components/schemas/BraggingRights"
           type: array
@@ -2712,19 +2269,12 @@ components:
           readOnly: true
           type: array
         emailAddresses:
-          description: The person's email addresses. For
-            [`connections.list`](/people/api/rest/v1/people.connections/list),
-            [`otherContacts.list`](/people/api/rest/v1/otherContacts/list), and
-            [`people.listDirectoryPeople`](/people/api/rest/v1/people/listDirectoryPeople)
-            the number of email addresses is limited to 100. If a Person has
-            more email addresses the entire set can be obtained by calling
-            ['people.get'](/people/api/rest/v1/people/get).
+          description: The person's email addresses. For [`connections.list`](/people/api/rest/v1/people.connections/list), [`otherContacts.list`](/people/api/rest/v1/otherContacts/list), and [`people.listDirectoryPeople`](/people/api/rest/v1/people/listDirectoryPeople) the number of email addresses is limited to 100. If a Person has more email addresses the entire set can be obtained by calling ['people.get'](/people/api/rest/v1/people/get).
           items:
             $ref: "#/components/schemas/EmailAddress"
           type: array
         etag:
-          description: The [HTTP entity tag](https://en.wikipedia.org/wiki/HTTP_ETag) of
-            the resource. Used for web cache validation.
+          description: The [HTTP entity tag](https://en.wikipedia.org/wiki/HTTP_ETag) of the resource. Used for web cache validation.
           type: string
         events:
           description: The person's events.
@@ -2801,13 +2351,7 @@ components:
             $ref: "#/components/schemas/Organization"
           type: array
         phoneNumbers:
-          description: The person's phone numbers. For
-            [`connections.list`](/people/api/rest/v1/people.connections/list),
-            [`otherContacts.list`](/people/api/rest/v1/otherContacts/list), and
-            [`people.listDirectoryPeople`](/people/api/rest/v1/people/listDirectoryPeople)
-            the number of phone numbers is limited to 100. If a Person has more
-            phone numbers the entire set can be obtained by calling
-            ['people.get'](/people/api/rest/v1/people/get).
+          description: The person's phone numbers. For [`connections.list`](/people/api/rest/v1/people.connections/list), [`otherContacts.list`](/people/api/rest/v1/otherContacts/list), and [`people.listDirectoryPeople`](/people/api/rest/v1/people/listDirectoryPeople) the number of phone numbers is limited to 100. If a Person has more phone numbers the entire set can be obtained by calling ['people.get'](/people/api/rest/v1/people/get).
           items:
             $ref: "#/components/schemas/PhoneNumber"
           type: array
@@ -2823,29 +2367,24 @@ components:
             $ref: "#/components/schemas/Relation"
           type: array
         relationshipInterests:
-          description: "Output only. **DEPRECATED**: No data will be returned The person's
-            relationship interests."
+          description: "Output only. **DEPRECATED**: No data will be returned The person's relationship interests."
           items:
             $ref: "#/components/schemas/RelationshipInterest"
           readOnly: true
           type: array
         relationshipStatuses:
-          description: "Output only. **DEPRECATED**: No data will be returned The person's
-            relationship statuses."
+          description: "Output only. **DEPRECATED**: No data will be returned The person's relationship statuses."
           items:
             $ref: "#/components/schemas/RelationshipStatus"
           readOnly: true
           type: array
         residences:
-          description: "**DEPRECATED**: (Please use `person.locations` instead) The
-            person's residences."
+          description: "**DEPRECATED**: (Please use `person.locations` instead) The person's residences."
           items:
             $ref: "#/components/schemas/Residence"
           type: array
         resourceName:
-          description: The resource name for the person, assigned by the server. An ASCII
-            string with a max length of 27 characters, in the form of
-            `people/{person_id}`.
+          description: The resource name for the person, assigned by the server. An ASCII string with a max length of 27 characters, in the form of `people/{person_id}`.
           type: string
         sipAddresses:
           description: The person's SIP addresses.
@@ -2858,8 +2397,7 @@ components:
             $ref: "#/components/schemas/Skill"
           type: array
         taglines:
-          description: "Output only. **DEPRECATED**: No data will be returned The person's
-            taglines."
+          description: "Output only. **DEPRECATED**: No data will be returned The person's taglines."
           items:
             $ref: "#/components/schemas/Tagline"
           readOnly: true
@@ -2879,11 +2417,7 @@ components:
       description: The metadata about a person.
       properties:
         deleted:
-          description: Output only. True if the person resource has been deleted.
-            Populated only for
-            [`connections.list`](/people/api/rest/v1/people.connections/list)
-            and [`otherContacts.list`](/people/api/rest/v1/otherContacts/list)
-            requests that include a sync token.
+          description: Output only. True if the person resource has been deleted. Populated only for [`connections.list`](/people/api/rest/v1/people.connections/list) and [`otherContacts.list`](/people/api/rest/v1/otherContacts/list) requests that include a sync token.
           readOnly: true
           type: boolean
         linkedPeopleResourceNames:
@@ -2893,9 +2427,7 @@ components:
           readOnly: true
           type: array
         objectType:
-          description: Output only. **DEPRECATED** (Please use
-            `person.metadata.sources.profileMetadata.objectType` instead) The
-            type of the person object.
+          description: Output only. **DEPRECATED** (Please use `person.metadata.sources.profileMetadata.objectType` instead) The type of the person object.
           enum:
             - OBJECT_TYPE_UNSPECIFIED
             - PERSON
@@ -2903,12 +2435,7 @@ components:
           readOnly: true
           type: string
         previousResourceNames:
-          description: Output only. Any former resource names this person has had.
-            Populated only for
-            [`connections.list`](/people/api/rest/v1/people.connections/list)
-            requests that include a sync token. The resource name may change
-            when adding or removing fields that link a contact and profile such
-            as a verified email, verified phone number, or profile URL.
+          description: Output only. Any former resource names this person has had. Populated only for [`connections.list`](/people/api/rest/v1/people.connections/list) requests that include a sync token. The resource name may change when adding or removing fields that link a contact and profile such as a verified email, verified phone number, or profile URL.
           items:
             type: string
           readOnly: true
@@ -2923,18 +2450,14 @@ components:
       description: The response for a single person
       properties:
         httpStatusCode:
-          description: "**DEPRECATED** (Please use status instead) [HTTP 1.1 status code]
-            (http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)."
+          description: "**DEPRECATED** (Please use status instead) [HTTP 1.1 status code] (http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)."
           format: int32
           type: integer
         person:
           $ref: "#/components/schemas/Person"
           description: The person.
         requestedResourceName:
-          description: The original requested resource name. May be different than the
-            resource name on the returned person. The resource name can change
-            when adding or removing fields that link a contact and profile such
-            as a verified email, verified phone number, or a profile URL.
+          description: The original requested resource name. May be different than the resource name on the returned person. The resource name can change when adding or removing fields that link a contact and profile such as a verified email, verified phone number, or a profile URL.
           type: string
         status:
           $ref: "#/components/schemas/Status"
@@ -2944,43 +2467,31 @@ components:
       description: A person's phone number.
       properties:
         canonicalForm:
-          description: Output only. The canonicalized [ITU-T
-            E.164](https://law.resource.org/pub/us/cfr/ibr/004/itu-t.E.164.1.2008.pdf)
-            form of the phone number.
+          description: Output only. The canonicalized [ITU-T E.164](https://law.resource.org/pub/us/cfr/ibr/004/itu-t.E.164.1.2008.pdf) form of the phone number.
           readOnly: true
           type: string
         formattedType:
-          description: Output only. The type of the phone number translated and formatted
-            in the viewer's account locale or the `Accept-Language` HTTP header
-            locale.
+          description: Output only. The type of the phone number translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
           readOnly: true
           type: string
         metadata:
           $ref: "#/components/schemas/FieldMetadata"
           description: Metadata about the phone number.
         type:
-          description: "The type of the phone number. The type can be custom or one of
-            these predefined values: * `home` * `work` * `mobile` * `homeFax` *
-            `workFax` * `otherFax` * `pager` * `workMobile` * `workPager` *
-            `main` * `googleVoice` * `other`"
+          description: "The type of the phone number. The type can be custom or one of these predefined values: * `home` * `work` * `mobile` * `homeFax` * `workFax` * `otherFax` * `pager` * `workMobile` * `workPager` * `main` * `googleVoice` * `other`"
           type: string
         value:
           description: The phone number.
           type: string
       type: object
     Photo:
-      description: A person's photo. A picture shown next to the person's name to help
-        others recognize the person.
+      description: A person's photo. A picture shown next to the person's name to help others recognize the person.
       properties:
         metadata:
           $ref: "#/components/schemas/FieldMetadata"
           description: Metadata about the photo.
         url:
-          description: "The URL of the photo. You can change the desired size by appending
-            a query parameter `sz={size}` at the end of the url, where {size} is
-            the size in pixels. Example:
-            https://lh3.googleusercontent.com/-T_wVWLlmg7w/AAAAAAAAAAI/AAAAAAAA\
-            Ba8/00gzXvDBYqw/s100/photo.jpg?sz=50"
+          description: "The URL of the photo. You can change the desired size by appending a query parameter `sz={size}` at the end of the url, where {size} is the size in pixels. Example: https://lh3.googleusercontent.com/-T_wVWLlmg7w/AAAAAAAAAAI/AAAAAAAABa8/00gzXvDBYqw/s100/photo.jpg?sz=50"
           type: string
       type: object
     ProfileMetadata:
@@ -3010,9 +2521,7 @@ components:
       description: A person's relation to another person.
       properties:
         formattedType:
-          description: Output only. The type of the relation translated and formatted in
-            the viewer's account locale or the locale specified in the
-            Accept-Language HTTP header.
+          description: Output only. The type of the relation translated and formatted in the viewer's account locale or the locale specified in the Accept-Language HTTP header.
           readOnly: true
           type: string
         metadata:
@@ -3022,59 +2531,42 @@ components:
           description: The name of the other person this relation refers to.
           type: string
         type:
-          description: "The person's relation to the other person. The type can be custom
-            or one of these predefined values: * `spouse` * `child` * `mother` *
-            `father` * `parent` * `brother` * `sister` * `friend` * `relative` *
-            `domesticPartner` * `manager` * `assistant` * `referredBy` *
-            `partner`"
+          description: "The person's relation to the other person. The type can be custom or one of these predefined values: * `spouse` * `child` * `mother` * `father` * `parent` * `brother` * `sister` * `friend` * `relative` * `domesticPartner` * `manager` * `assistant` * `referredBy` * `partner`"
           type: string
       type: object
     RelationshipInterest:
-      description: "**DEPRECATED**: No data will be returned A person's relationship
-        interest ."
+      description: "**DEPRECATED**: No data will be returned A person's relationship interest ."
       properties:
         formattedValue:
-          description: Output only. The value of the relationship interest translated and
-            formatted in the viewer's account locale or the locale specified in
-            the Accept-Language HTTP header.
+          description: Output only. The value of the relationship interest translated and formatted in the viewer's account locale or the locale specified in the Accept-Language HTTP header.
           readOnly: true
           type: string
         metadata:
           $ref: "#/components/schemas/FieldMetadata"
           description: Metadata about the relationship interest.
         value:
-          description: "The kind of relationship the person is looking for. The value can
-            be custom or one of these predefined values: * `friend` * `date` *
-            `relationship` * `networking`"
+          description: "The kind of relationship the person is looking for. The value can be custom or one of these predefined values: * `friend` * `date` * `relationship` * `networking`"
           type: string
       type: object
     RelationshipStatus:
-      description: "**DEPRECATED**: No data will be returned A person's relationship
-        status."
+      description: "**DEPRECATED**: No data will be returned A person's relationship status."
       properties:
         formattedValue:
-          description: Output only. The value of the relationship status translated and
-            formatted in the viewer's account locale or the `Accept-Language`
-            HTTP header locale.
+          description: Output only. The value of the relationship status translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
           readOnly: true
           type: string
         metadata:
           $ref: "#/components/schemas/FieldMetadata"
           description: Metadata about the relationship status.
         value:
-          description: "The relationship status. The value can be custom or one of these
-            predefined values: * `single` * `inARelationship` * `engaged` *
-            `married` * `itsComplicated` * `openRelationship` * `widowed` *
-            `inDomesticPartnership` * `inCivilUnion`"
+          description: "The relationship status. The value can be custom or one of these predefined values: * `single` * `inARelationship` * `engaged` * `married` * `itsComplicated` * `openRelationship` * `widowed` * `inDomesticPartnership` * `inCivilUnion`"
           type: string
       type: object
     Residence:
-      description: "**DEPRECATED**: Please use `person.locations` instead. A person's
-        past or current residence."
+      description: "**DEPRECATED**: Please use `person.locations` instead. A person's past or current residence."
       properties:
         current:
-          description: True if the residence is the person's current residence; false if
-            the residence is a past residence.
+          description: True if the residence is the person's current residence; false if the residence is a past residence.
           type: boolean
         metadata:
           $ref: "#/components/schemas/FieldMetadata"
@@ -3084,12 +2576,10 @@ components:
           type: string
       type: object
     SearchDirectoryPeopleResponse:
-      description: The response to a request for people in the authenticated user's
-        domain directory that match the specified query.
+      description: The response to a request for people in the authenticated user's domain directory that match the specified query.
       properties:
         nextPageToken:
-          description: A token, which can be sent as `page_token` to retrieve the next
-            page. If this field is omitted, there are no subsequent pages.
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
         people:
           description: The list of people in the domain directory that match the query.
@@ -3102,8 +2592,7 @@ components:
           type: integer
       type: object
     SearchResponse:
-      description: The response to a search request for the authenticated user, given
-        a query.
+      description: The response to a search request for the authenticated user, given a query.
       properties:
         results:
           description: The results of the request.
@@ -3119,26 +2608,20 @@ components:
           description: The matched Person.
       type: object
     SipAddress:
-      description: A person's SIP address. Session Initial Protocol addresses are used
-        for VoIP communications to make voice or video calls over the internet.
+      description: A person's SIP address. Session Initial Protocol addresses are used for VoIP communications to make voice or video calls over the internet.
       properties:
         formattedType:
-          description: Output only. The type of the SIP address translated and formatted
-            in the viewer's account locale or the `Accept-Language` HTTP header
-            locale.
+          description: Output only. The type of the SIP address translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
           readOnly: true
           type: string
         metadata:
           $ref: "#/components/schemas/FieldMetadata"
           description: Metadata about the SIP address.
         type:
-          description: "The type of the SIP address. The type can be custom or or one of
-            these predefined values: * `home` * `work` * `mobile` * `other`"
+          description: "The type of the SIP address. The type can be custom or or one of these predefined values: * `home` * `work` * `mobile` * `other`"
           type: string
         value:
-          description: The SIP address in the [RFC 3261
-            19.1](https://tools.ietf.org/html/rfc3261#section-19.1) SIP URI
-            format.
+          description: The SIP address in the [RFC 3261 19.1](https://tools.ietf.org/html/rfc3261#section-19.1) SIP URI format.
           type: string
       type: object
     Skill:
@@ -3155,17 +2638,14 @@ components:
       description: The source of a field.
       properties:
         etag:
-          description: "**Only populated in `person.metadata.sources`.** The [HTTP entity
-            tag](https://en.wikipedia.org/wiki/HTTP_ETag) of the source. Used
-            for web cache validation."
+          description: "**Only populated in `person.metadata.sources`.** The [HTTP entity tag](https://en.wikipedia.org/wiki/HTTP_ETag) of the source. Used for web cache validation."
           type: string
         id:
           description: The unique identifier within the source type generated by the server.
           type: string
         profileMetadata:
           $ref: "#/components/schemas/ProfileMetadata"
-          description: Output only. **Only populated in `person.metadata.sources`.**
-            Metadata about a source of type PROFILE.
+          description: Output only. **Only populated in `person.metadata.sources`.** Metadata about a source of type PROFILE.
           readOnly: true
         type:
           description: The source type.
@@ -3179,42 +2659,31 @@ components:
             - DOMAIN_CONTACT
           type: string
         updateTime:
-          description: Output only. **Only populated in `person.metadata.sources`.** Last
-            update timestamp of this source.
+          description: Output only. **Only populated in `person.metadata.sources`.** Last update timestamp of this source.
           format: google-datetime
           readOnly: true
           type: string
       type: object
     Status:
-      description: "The `Status` type defines a logical error model that is suitable
-        for different programming environments, including REST APIs and RPC
-        APIs. It is used by [gRPC](https://github.com/grpc). Each `Status`
-        message contains three pieces of data: error code, error message, and
-        error details. You can find out more about this error model and how to
-        work with it in the [API Design
-        Guide](https://cloud.google.com/apis/design/errors)."
+      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
       properties:
         code:
           description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
-          description: A list of messages that carry the error details. There is a common
-            set of message types for APIs to use.
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
           items:
             additionalProperties:
               description: Properties of the object. Contains field @type with type URL.
             type: object
           type: array
         message:
-          description: A developer-facing error message, which should be in English. Any
-            user-facing error message should be localized and sent in the
-            google.rpc.Status.details field, or localized by the client.
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
     Tagline:
-      description: "**DEPRECATED**: No data will be returned A brief one-line
-        description of the person."
+      description: "**DEPRECATED**: No data will be returned A brief one-line description of the person."
       properties:
         metadata:
           $ref: "#/components/schemas/FieldMetadata"
@@ -3224,42 +2693,25 @@ components:
           type: string
       type: object
     UpdateContactGroupRequest:
-      description: A request to update an existing user contact group. All updated
-        fields will be replaced.
+      description: A request to update an existing user contact group. All updated fields will be replaced.
       properties:
         contactGroup:
           $ref: "#/components/schemas/ContactGroup"
           description: Required. The contact group to update.
         readGroupFields:
-          description: "Optional. A field mask to restrict which fields on the group are
-            returned. Defaults to `metadata`, `groupType`, and `name` if not set
-            or set to empty. Valid fields are: * clientData * groupType *
-            memberCount * metadata * name"
+          description: "Optional. A field mask to restrict which fields on the group are returned. Defaults to `metadata`, `groupType`, and `name` if not set or set to empty. Valid fields are: * clientData * groupType * memberCount * metadata * name"
           format: google-fieldmask
           type: string
         updateGroupFields:
-          description: "Optional. A field mask to restrict which fields on the group are
-            updated. Multiple fields can be specified by separating them with
-            commas. Defaults to `name` if not set or set to empty. Updated
-            fields are replaced. Valid values are: * clientData * name"
+          description: "Optional. A field mask to restrict which fields on the group are updated. Multiple fields can be specified by separating them with commas. Defaults to `name` if not set or set to empty. Updated fields are replaced. Valid values are: * clientData * name"
           format: google-fieldmask
           type: string
       type: object
     UpdateContactPhotoRequest:
-      description: "A request to update an existing contact's photo. All requests must
-        have a valid photo format: JPEG or PNG."
+      description: "A request to update an existing contact's photo. All requests must have a valid photo format: JPEG or PNG."
       properties:
         personFields:
-          description: "Optional. A field mask to restrict which fields on the person are
-            returned. Multiple fields can be specified by separating them with
-            commas. Defaults to empty if not set, which will skip the post
-            mutate get. Valid values are: * addresses * ageRanges * biographies
-            * birthdays * calendarUrls * clientData * coverPhotos *
-            emailAddresses * events * externalIds * genders * imClients *
-            interests * locales * locations * memberships * metadata *
-            miscKeywords * names * nicknames * occupations * organizations *
-            phoneNumbers * photos * relations * sipAddresses * skills * urls *
-            userDefined"
+          description: "Optional. A field mask to restrict which fields on the person are returned. Multiple fields can be specified by separating them with commas. Defaults to empty if not set, which will skip the post mutate get. Valid values are: * addresses * ageRanges * biographies * birthdays * calendarUrls * clientData * coverPhotos * emailAddresses * events * externalIds * genders * imClients * interests * locales * locations * memberships * metadata * miscKeywords * names * nicknames * occupations * organizations * phoneNumbers * photos * relations * sipAddresses * skills * urls * userDefined"
           format: google-fieldmask
           type: string
         photoBytes:
@@ -3267,8 +2719,7 @@ components:
           format: byte
           type: string
         sources:
-          description: Optional. A mask of what source types to return. Defaults to
-            READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
+          description: Optional. A mask of what source types to return. Defaults to READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
           items:
             enum:
               - READ_SOURCE_TYPE_UNSPECIFIED
@@ -3283,25 +2734,20 @@ components:
       properties:
         person:
           $ref: "#/components/schemas/Person"
-          description: The updated person, if person_fields is set in the
-            UpdateContactPhotoRequest; otherwise this will be unset.
+          description: The updated person, if person_fields is set in the UpdateContactPhotoRequest; otherwise this will be unset.
       type: object
     Url:
       description: A person's associated URLs.
       properties:
         formattedType:
-          description: Output only. The type of the URL translated and formatted in the
-            viewer's account locale or the `Accept-Language` HTTP header locale.
+          description: Output only. The type of the URL translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
           readOnly: true
           type: string
         metadata:
           $ref: "#/components/schemas/FieldMetadata"
           description: Metadata about the URL.
         type:
-          description: "The type of the URL. The type can be custom or one of these
-            predefined values: * `home` * `work` * `blog` * `profile` *
-            `homePage` * `ftp` * `reservations` * `appInstallPage`: website for
-            a Currents application. * `other`"
+          description: "The type of the URL. The type can be custom or one of these predefined values: * `home` * `work` * `blog` * `profile` * `homePage` * `ftp` * `reservations` * `appInstallPage`: website for a Currents application. * `other`"
           type: string
         value:
           description: The URL.
@@ -3328,8 +2774,7 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/contacts: See, edit, download, and permanently delete your contacts
-            https://www.googleapis.com/auth/contacts.other.readonly: See and download
-              contact info automatically saved in your "Other contacts"
+            https://www.googleapis.com/auth/contacts.other.readonly: See and download contact info automatically saved in your "Other contacts"
             https://www.googleapis.com/auth/contacts.readonly: See and download your contacts
             https://www.googleapis.com/auth/directory.readonly: See and download your organization's GSuite directory
             https://www.googleapis.com/auth/user.addresses.read: View your street addresses
@@ -3339,8 +2784,7 @@ components:
             https://www.googleapis.com/auth/user.organization.read: See your education, work history and org info
             https://www.googleapis.com/auth/user.phonenumbers.read: See and download your personal phone numbers
             https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address
-            https://www.googleapis.com/auth/userinfo.profile: See your personal info,
-              including any personal info you've made publicly available
+            https://www.googleapis.com/auth/userinfo.profile: See your personal info, including any personal info you've made publicly available
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -3349,8 +2793,7 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/contacts: See, edit, download, and permanently delete your contacts
-            https://www.googleapis.com/auth/contacts.other.readonly: See and download
-              contact info automatically saved in your "Other contacts"
+            https://www.googleapis.com/auth/contacts.other.readonly: See and download contact info automatically saved in your "Other contacts"
             https://www.googleapis.com/auth/contacts.readonly: See and download your contacts
             https://www.googleapis.com/auth/directory.readonly: See and download your organization's GSuite directory
             https://www.googleapis.com/auth/user.addresses.read: View your street addresses
@@ -3360,7 +2803,6 @@ components:
             https://www.googleapis.com/auth/user.organization.read: See your education, work history and org info
             https://www.googleapis.com/auth/user.phonenumbers.read: See and download your personal phone numbers
             https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address
-            https://www.googleapis.com/auth/userinfo.profile: See your personal info,
-              including any personal info you've made publicly available
+            https://www.googleapis.com/auth/userinfo.profile: See your personal info, including any personal info you've made publicly available
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

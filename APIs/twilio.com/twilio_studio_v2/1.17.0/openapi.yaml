@@ -31,8 +31,7 @@ paths:
       description: Retrieve a list of all Flows.
       operationId: ListFlow
       parameters:
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -189,24 +188,19 @@ paths:
             minLength: 34
             pattern: ^FW[0-9a-fA-F]{32}$
             type: string
-        - description: Only show Execution resources starting on or after this [ISO
-            8601](https://en.wikipedia.org/wiki/ISO_8601) date-time, given as
-            `YYYY-MM-DDThh:mm:ss-hh:mm`.
+        - description: Only show Execution resources starting on or after this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date-time, given as `YYYY-MM-DDThh:mm:ss-hh:mm`.
           in: query
           name: DateCreatedFrom
           schema:
             format: date-time
             type: string
-        - description: Only show Execution resources starting before this [ISO
-            8601](https://en.wikipedia.org/wiki/ISO_8601) date-time, given as
-            `YYYY-MM-DDThh:mm:ss-hh:mm`.
+        - description: Only show Execution resources starting before this [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date-time, given as `YYYY-MM-DDThh:mm:ss-hh:mm`.
           in: query
           name: DateCreatedTo
           schema:
             format: date-time
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -270,24 +264,13 @@ paths:
             schema:
               properties:
                 From:
-                  description: The Twilio phone number to send messages or initiate calls from
-                    during the Flow's Execution. Available as variable
-                    `{{flow.channel.address}}`. For SMS, this can also be a
-                    Messaging Service SID.
+                  description: The Twilio phone number to send messages or initiate calls from during the Flow's Execution. Available as variable `{{flow.channel.address}}`. For SMS, this can also be a Messaging Service SID.
                   type: string
                 Parameters:
-                  description: "JSON data that will be added to the Flow's context and that can be
-                    accessed as variables inside your Flow. For example, if you
-                    pass in `Parameters={\"name\":\"Zeke\"}`, a widget in your
-                    Flow can reference the variable `{{flow.data.name}}`, which
-                    returns \"Zeke\". Note: the JSON value must explicitly be
-                    passed as a string, not as a hash object. Depending on your
-                    particular HTTP library, you may need to add quotes or URL
-                    encode the JSON string."
+                  description: "JSON data that will be added to the Flow's context and that can be accessed as variables inside your Flow. For example, if you pass in `Parameters={\"name\":\"Zeke\"}`, a widget in your Flow can reference the variable `{{flow.data.name}}`, which returns \"Zeke\". Note: the JSON value must explicitly be passed as a string, not as a hash object. Depending on your particular HTTP library, you may need to add quotes or URL encode the JSON string."
                   type: object
                 To:
-                  description: The Contact phone number to start a Studio Flow Execution,
-                    available as variable `{{contact.channel.address}}`.
+                  description: The Contact phone number to start a Studio Flow Execution, available as variable `{{contact.channel.address}}`.
                   type: string
               required:
                 - To
@@ -378,8 +361,7 @@ paths:
             minLength: 34
             pattern: ^FN[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -522,8 +504,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/studio.v2.flow.execution.execution_step.execution_s\
-                  tep_context"
+                $ref: "#/components/schemas/studio.v2.flow.execution.execution_step.execution_step_context"
           description: OK
       security:
         - accountSid_authToken: []
@@ -773,8 +754,7 @@ paths:
             minLength: 34
             pattern: ^FW[0-9a-fA-F]{32}$
             type: string
-        - description: How many resources to return in each list page. The default is 50,
-            and the maximum is 1000.
+        - description: How many resources to return in each list page. The default is 50, and the maximum is 1000.
           in: query
           name: PageSize
           schema:
@@ -843,8 +823,7 @@ paths:
             minLength: 34
             pattern: ^FW[0-9a-fA-F]{32}$
             type: string
-        - description: Specific Revision number or can be `LatestPublished` and
-            `LatestRevision`.
+        - description: Specific Revision number or can be `LatestPublished` and `LatestRevision`.
           in: path
           name: Revision
           required: true
@@ -915,8 +894,7 @@ paths:
             schema:
               properties:
                 TestUsers:
-                  description: List of test user identities that can test draft versions of the
-                    flow.
+                  description: List of test user identities that can test draft versions of the flow.
                   items:
                     type: string
                   type: array
@@ -1032,8 +1010,7 @@ components:
           pattern: ^AC[0-9a-fA-F]{32}$
           type: string
         contact_channel_address:
-          description: The phone number, SIP address or Client identifier that triggered
-            the Execution
+          description: The phone number, SIP address or Client identifier that triggered the Execution
           nullable: true
           type: string
         context:
@@ -1295,8 +1272,7 @@ components:
           pattern: ^FW[0-9a-fA-F]{32}$
           type: string
         test_users:
-          description: List of test user identities that can test draft versions of the
-            flow.
+          description: List of test user identities that can test draft versions of the flow.
           items:
             type: string
           nullable: true

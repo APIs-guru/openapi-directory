@@ -971,6 +971,9 @@ components:
         admin:
           description: Optional. The name of delegated administrator account used to perform Active Directory operations. If not specified, `setupadmin` will be used.
           type: string
+        auditLogsEnabled:
+          description: Optional. Configuration for audit logs. True if audit logs are enabled, else false. Default is audit logs disabled.
+          type: boolean
         authorizedNetworks:
           description: Optional. The full names of the Google Compute Engine [networks](/compute/docs/networks-and-firewalls#networks) the domain instance is connected to. Networks can be added using UpdateDomain. The domain is only available on networks listed in `authorized_networks`. If CIDR subnets overlap between networks, domain creation will fail.
           items:
@@ -1347,7 +1350,7 @@ components:
           description: Output only. The certificate used to configure LDAPS. Certificates can be chained with a maximum length of 15.
           readOnly: true
         certificatePassword:
-          description: Input only. The password used to encrypt the uploaded pfx certificate.
+          description: Input only. The password used to encrypt the uploaded PFX certificate.
           type: string
         certificatePfx:
           description: "Input only. The uploaded PKCS12-formatted certificate to configure LDAPS with. It will enable the domain controllers in this domain to accept LDAPS connections (either LDAP over SSL/TLS or the StartTLS operation). A valid certificate chain must form a valid x.509 certificate chain (or be comprised of a single self-signed certificate. It must be encrypted with either: 1) PBES2 + PBKDF2 + AES256 encryption and SHA256 PRF; or 2) pbeWithSHA1And3-KeyTripleDES-CBC Private key must be included for the leaf / single self-signed certificate. Note: For a fqdn your-example-domain.com, the wildcard fqdn is *.your-example-domain.com. Specifically the leaf certificate must have: - Either a blank subject or a subject with CN matching the wildcard fqdn. - Exactly two SANs - the fqdn and wildcard fqdn. - Encipherment and digital key signature key usages. - Server authentication extended key usage (OID=1.3.6.1.5.5.7.3.1) - Private key must be in one of the following formats: RSA, ECDSA, ED25519. - Private key must have appropriate key length: 2048 for RSA, 256 for ECDSA - Signature algorithm of the leaf certificate cannot be MD2, MD5 or SHA1."
@@ -1522,27 +1525,34 @@ components:
       description: Represents the metadata of the long-running operation.
       properties:
         apiVersion:
-          description: "[Output only] API version used to start the operation."
+          description: Output only. API version used to start the operation.
+          readOnly: true
           type: string
         cancelRequested:
-          description: "[Output only] Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`."
+          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          readOnly: true
           type: boolean
         createTime:
-          description: "[Output only] The time the operation was created."
+          description: Output only. The time the operation was created.
           format: google-datetime
+          readOnly: true
           type: string
         endTime:
-          description: "[Output only] The time the operation finished running."
+          description: Output only. The time the operation finished running.
           format: google-datetime
+          readOnly: true
           type: string
         statusDetail:
-          description: "[Output only] Human-readable status of the operation, if any."
+          description: Output only. Human-readable status of the operation, if any.
+          readOnly: true
           type: string
         target:
-          description: "[Output only] Server-defined resource path for the target of the operation."
+          description: Output only. Server-defined resource path for the target of the operation.
+          readOnly: true
           type: string
         verb:
-          description: "[Output only] Name of the verb executed by the operation."
+          description: Output only. Name of the verb executed by the operation.
+          readOnly: true
           type: string
       type: object
     Policy:
@@ -1616,21 +1626,21 @@ components:
           description: "REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them."
       type: object
     SqlIntegration:
-      description: Represents the Sql instance integrated with AD.
+      description: Represents the SQL instance integrated with Managed AD.
       properties:
         createTime:
-          description: Output only. The time sql integration was created. Synthetic field is populated automatically by CCFE.
+          description: Output only. The time the SQL integration was created.
           format: google-datetime
           readOnly: true
           type: string
         name:
-          description: The unique name of the sql integration in the form of `projects/{project_id}/locations/global/domains/{domain_name}/sqlIntegrations/{sql_integration}`
+          description: The unique name of the SQL integration in the form of `projects/{project_id}/locations/global/domains/{domain_name}/sqlIntegrations/{sql_integration}`
           type: string
         sqlInstance:
-          description: The full resource name of an integrated sql instance
+          description: The full resource name of an integrated SQL instance
           type: string
         state:
-          description: Output only. The current state of the sql integration.
+          description: Output only. The current state of the SQL integration.
           enum:
             - STATE_UNSPECIFIED
             - CREATING
@@ -1639,7 +1649,7 @@ components:
           readOnly: true
           type: string
         updateTime:
-          description: Output only. The time sql integration was updated. Synthetic field is populated automatically by CCFE.
+          description: Output only. The time the SQL integration was updated.
           format: google-datetime
           readOnly: true
           type: string
