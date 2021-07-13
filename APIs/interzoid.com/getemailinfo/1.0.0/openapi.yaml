@@ -1,7 +1,5 @@
 openapi: 3.0.0
 servers:
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/interzoid/email_validation/1.0.0
   - url: https://api.interzoid.com
 info:
   contact:
@@ -62,6 +60,8 @@ paths:
                   Geolocation:
                     type: string
                   Info:
+                    type: string
+                  IsDisposable:
                     type: string
                   IsEducational:
                     type: string

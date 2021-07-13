@@ -46,7 +46,7 @@ paths:
       description: Links a Google Cloud Storage bucket to a Firebase project.
       operationId: firebasestorage.projects.buckets.addFirebase
       parameters:
-        - description: Required. Resource name of the bucket, mirrors the ID of the underlying Google Cloud Storage bucket. Because bucket resource names are unique across projects, you may omit the project number, `projects/-/buckets/{bucket_id}`.
+        - description: Required. Resource name of the bucket, mirrors the ID of the underlying Google Cloud Storage bucket, `projects/{project_number}/buckets/{bucket_id}`.
           in: path
           name: bucket
           required: true
@@ -92,7 +92,7 @@ paths:
       description: Unlinks a linked Google Cloud Storage bucket from a Firebase project.
       operationId: firebasestorage.projects.buckets.removeFirebase
       parameters:
-        - description: Required. Resource name of the bucket, mirrors the ID of the underlying Google Cloud Storage bucket. Because bucket resource names are unique across projects, you may omit the project number, `projects/-/buckets/{bucket_id}`.
+        - description: Required. Resource name of the bucket, mirrors the ID of the underlying Google Cloud Storage bucket, `projects/{project_number}/buckets/{bucket_id}`.
           in: path
           name: bucket
           required: true
@@ -126,7 +126,7 @@ paths:
       description: Gets a single linked storage bucket.
       operationId: firebasestorage.projects.buckets.get
       parameters:
-        - description: Required. Resource name of the bucket, mirrors the ID of the underlying Google Cloud Storage bucket. Because bucket resource names are unique across projects, you may omit the project number, `projects/-/buckets/{bucket_id}`.
+        - description: Required. Resource name of the bucket, mirrors the ID of the underlying Google Cloud Storage bucket, `projects/{project_number}/buckets/{bucket_id}`.
           in: path
           name: name
           required: true
@@ -296,6 +296,10 @@ components:
     Bucket:
       description: A storage bucket and its relation to a parent Firebase project.
       properties:
+        location:
+          description: Output only. Location of the storage bucket.
+          readOnly: true
+          type: string
         name:
           description: Resource name of the bucket.
           type: string

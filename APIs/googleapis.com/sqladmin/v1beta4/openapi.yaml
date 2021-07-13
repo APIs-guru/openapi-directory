@@ -34,6 +34,7 @@ externalDocs:
   url: https://developers.google.com/cloud-sql/
 tags:
   - name: backupRuns
+  - name: connect
   - name: databases
   - name: flags
   - name: instances
@@ -380,7 +381,7 @@ paths:
         - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/backupRuns":
     get:
-      description: Lists all backup runs associated with a given instance and configuration in the reverse chronological order of the backup initiation time.
+      description: Lists all backup runs associated with the project or a given instance and configuration in the reverse chronological order of the backup initiation time.
       operationId: sql.backupRuns.list
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -389,7 +390,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Cloud SQL instance ID. This does not include the project ID.
+        - description: Cloud SQL instance ID, or "-" for all instances. This does not include the project ID.
           in: path
           name: instance
           required: true
@@ -619,6 +620,58 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
+  "/sql/v1beta4/projects/{project}/instances/{instance}/connectSettings":
+    get:
+      description: Retrieves connect settings about a Cloud SQL instance.
+      operationId: sql.connect.get
+      parameters:
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Cloud SQL instance ID. This does not include the project ID.
+          in: path
+          name: instance
+          required: true
+          schema:
+            type: string
+        - description: Optional. Optional snapshot read timestamp to trade freshness for performance.
+          in: query
+          name: readTime
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConnectSettings"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/sqlservice.admin
+          Oauth2c:
+            - https://www.googleapis.com/auth/sqlservice.admin
+      tags:
+        - connect
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/sql/v1beta4/projects/{project}/instances/{instance}/createEphemeral":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2110,6 +2163,58 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - projects
+  "/sql/v1beta4/projects/{project}/instances/{instance}:generateEphemeralCert":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Generates a short-lived X509 certificate containing the provided public key and signed by a private key specific to the target instance. Users may use the certificate to authenticate as themselves when connecting to the database.
+      operationId: sql.connect.generateEphemeral
+      parameters:
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Cloud SQL instance ID. This does not include the project ID.
+          in: path
+          name: instance
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenerateEphemeralCertRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenerateEphemeralCertResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/sqlservice.admin
+          Oauth2c:
+            - https://www.googleapis.com/auth/sqlservice.admin
+      tags:
+        - connect
   "/sql/v1beta4/projects/{project}/operations":
     get:
       description: Lists all instance operations that have been performed on the given Cloud SQL instance in the reverse chronological order of the start time.
@@ -2382,7 +2487,7 @@ components:
           description: Location of the backup
           type: string
         pointInTimeRecoveryEnabled:
-          description: Reserved for future use.
+          description: (Postgres only) Whether point in time recovery is enabled.
           type: boolean
         replicationLogArchivingEnabled:
           description: Reserved for future use.
@@ -2542,9 +2647,55 @@ components:
           format: int64
           type: string
         pointInTime:
-          description: Reserved for future use.
+          description: Timestamp, if specified, identifies the time to which the source instance is cloned.
           format: google-datetime
           type: string
+      type: object
+    ConnectSettings:
+      description: Connect settings retrieval response.
+      properties:
+        backendType:
+          description: "**SECOND_GEN**: Cloud SQL database instance. **EXTERNAL**: A database server that is not managed by Google. This property is read-only; use the **tier** property in the **settings** object to determine the database type."
+          enum:
+            - SQL_BACKEND_TYPE_UNSPECIFIED
+            - FIRST_GEN
+            - SECOND_GEN
+            - EXTERNAL
+          type: string
+        databaseVersion:
+          description: "The database engine type and version. The **databaseVersion** field cannot be changed after instance creation. MySQL instances: **MYSQL_8_0**, **MYSQL_5_7** (default), or **MYSQL_5_6**. PostgreSQL instances: **POSTGRES_9_6**, **POSTGRES_10**, **POSTGRES_11** or **POSTGRES_12** (default). SQL Server instances: **SQLSERVER_2017_STANDARD** (default), **SQLSERVER_2017_ENTERPRISE**, **SQLSERVER_2017_EXPRESS**, or **SQLSERVER_2017_WEB**."
+          enum:
+            - SQL_DATABASE_VERSION_UNSPECIFIED
+            - MYSQL_5_1
+            - MYSQL_5_5
+            - MYSQL_5_6
+            - MYSQL_5_7
+            - POSTGRES_9_6
+            - POSTGRES_11
+            - SQLSERVER_2017_STANDARD
+            - SQLSERVER_2017_ENTERPRISE
+            - SQLSERVER_2017_EXPRESS
+            - SQLSERVER_2017_WEB
+            - POSTGRES_10
+            - POSTGRES_12
+            - MYSQL_8_0
+            - POSTGRES_13
+            - SQLSERVER_2019_STANDARD
+            - SQLSERVER_2019_ENTERPRISE
+            - SQLSERVER_2019_EXPRESS
+            - SQLSERVER_2019_WEB
+          type: string
+        ipAddresses:
+          description: The assigned IP addresses for the instance.
+          items:
+            $ref: "#/components/schemas/IpMapping"
+          type: array
+        kind:
+          description: This is always `sql#connectSettings`.
+          type: string
+        serverCaCert:
+          $ref: "#/components/schemas/SslCert"
+          description: SSL configuration.
       type: object
     Database:
       description: Represents a SQL database on the Cloud SQL instance.
@@ -2985,6 +3136,27 @@ components:
         kind:
           description: This is always *sql#flagsList*.
           type: string
+      type: object
+    GenerateEphemeralCertRequest:
+      description: Ephemeral certificate creation request.
+      properties:
+        access_token:
+          description: Optional. Access token to include in the signed certificate.
+          type: string
+        public_key:
+          description: PEM encoded public key to include in the signed certificate.
+          type: string
+        readTime:
+          description: Optional. Optional snapshot read timestamp to trade freshness for performance.
+          format: google-datetime
+          type: string
+      type: object
+    GenerateEphemeralCertResponse:
+      description: Ephemeral certificate creation request.
+      properties:
+        ephemeralCert:
+          $ref: "#/components/schemas/SslCert"
+          description: Generated cert
       type: object
     ImportContext:
       description: Database instance import context.
@@ -3686,6 +3858,10 @@ components:
         canReschedule:
           description: If the scheduled maintenance can be rescheduled.
           type: boolean
+        scheduleDeadlineTime:
+          description: Maintenance cannot be rescheduled to start beyond this deadline.
+          format: google-datetime
+          type: string
         startTime:
           description: The start time of any upcoming scheduled maintenance for this instance.
           format: google-datetime

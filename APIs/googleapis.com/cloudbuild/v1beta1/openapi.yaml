@@ -534,7 +534,7 @@ components:
           type: string
         pool:
           $ref: "#/components/schemas/PoolOption"
-          description: Optional. Specification for execution on a `WorkerPool`. See [running builds in a custom worker pool](https://cloud.google.com/build/docs/custom-workers/run-builds-in-custom-worker-pool) for more information.
+          description: Optional. Specification for execution on a `WorkerPool`. See [running builds in a private pool](https://cloud.google.com/build/docs/private-pools/run-builds-in-private-pool) for more information.
         requestedVerifyOption:
           description: Requested verifiability options.
           enum:
@@ -849,7 +849,7 @@ components:
           type: object
       type: object
     PoolOption:
-      description: Details about how a build should be executed on a `WorkerPool`. See [running builds in a custom worker pool](https://cloud.google.com/build/docs/custom-workers/run-builds-in-custom-worker-pool) for more information.
+      description: Details about how a build should be executed on a `WorkerPool`. See [running builds in a private pool](https://cloud.google.com/build/docs/private-pools/run-builds-in-private-pool) for more information.
       properties:
         name:
           description: The `WorkerPool` resource to execute the build on. You must have `cloudbuild.workerpools.use` on the project hosting the WorkerPool. Format projects/{project}/locations/{location}/workerPools/{workerPoolId}
@@ -1044,7 +1044,7 @@ components:
           format: int64
           type: string
         object:
-          description: Google Cloud Storage object containing the source. This object must be a gzipped archive file (`.tar.gz`) containing source to build.
+          description: Google Cloud Storage object containing the source. This object must be a zipped (`.zip`) or gzipped archive file (`.tar.gz`) containing source to build.
           type: string
       type: object
     StorageSourceManifest:

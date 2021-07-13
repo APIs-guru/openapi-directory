@@ -505,6 +505,56 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
+  "/v1beta/{parent}/apps/-/appAttestConfig:batchGet":
+    get:
+      description: Gets the AppAttestConfigs for the specified list of apps atomically.
+      operationId: firebaseappcheck.projects.apps.appAttestConfig.batchGet
+      parameters:
+        - description: Required. The parent project name shared by all AppAttestConfigs being retrieved, in the format ``` projects/{project_number} ``` The parent collection in the `name` field of any resource being retrieved must match this field, or the entire batch fails.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The relative resource names of the AppAttestConfigs to retrieve, in the format ``` projects/{project_number}/apps/{app_id}/appAttestConfig ``` A maximum of 100 objects can be retrieved in a batch.
+          explode: true
+          in: query
+          name: names
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaBatchGetAppAttestConfigsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1beta/{parent}/apps/-/deviceCheckConfig:batchGet":
     get:
       description: Gets the DeviceCheckConfigs for the specified list of apps atomically. For security reasons, the `private_key` field is never populated in the response.
@@ -581,6 +631,56 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaBatchGetRecaptchaConfigsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta/{parent}/apps/-/safetyNetConfig:batchGet":
+    get:
+      description: Gets the SafetyNetConfigs for the specified list of apps atomically.
+      operationId: firebaseappcheck.projects.apps.safetyNetConfig.batchGet
+      parameters:
+        - description: Required. The parent project name shared by all SafetyNetConfigs being retrieved, in the format ``` projects/{project_number} ``` The parent collection in the `name` field of any resource being retrieved must match this field, or the entire batch fails.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The relative resource names of the SafetyNetConfigs to retrieve, in the format ``` projects/{project_number}/apps/{app_id}/safetyNetConfig ``` A maximum of 100 objects can be retrieved in a batch.
+          explode: true
+          in: query
+          name: names
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaBatchGetSafetyNetConfigsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -874,6 +974,17 @@ components:
           format: google-duration
           type: string
       type: object
+    GoogleFirebaseAppcheckV1betaAppAttestConfig:
+      description: An app's App Attest configuration object. This configuration controls certain properties of the App Check token returned by ExchangeAppAttestAttestation and ExchangeAppAttestAttestation, such as its ttl. Note that the Team ID registered with your app is used as part of the validation process. Please register it via the Firebase Console or programmatically via the [Firebase Management Service](https://firebase.google.com/docs/projects/api/reference/rest/v1beta1/projects.iosApps/patch).
+      properties:
+        name:
+          description: "Required. The relative resource name of the App Attest configuration object, in the format: ``` projects/{project_number}/apps/{app_id}/appAttestConfig ```"
+          type: string
+        tokenTtl:
+          description: Specifies the duration for which App Check tokens exchanged from App Attest artifacts will be valid. If unset, a default value of 1 hour is assumed. Must be between 30 minutes and 7 days, inclusive.
+          format: google-duration
+          type: string
+      type: object
     GoogleFirebaseAppcheckV1betaAttestationTokenResponse:
       description: Encapsulates an *App Check token*, which are used to access Firebase services protected by App Check.
       properties:
@@ -884,6 +995,15 @@ components:
           description: The duration from the time this token is minted until its expiration. This field is intended to ease client-side token management, since the client may have clock skew, but is still able to accurately measure a duration.
           format: google-duration
           type: string
+      type: object
+    GoogleFirebaseAppcheckV1betaBatchGetAppAttestConfigsResponse:
+      description: Response message for the BatchGetAppAttestConfigs method.
+      properties:
+        configs:
+          description: AppAttestConfigs retrieved.
+          items:
+            $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAppAttestConfig"
+          type: array
       type: object
     GoogleFirebaseAppcheckV1betaBatchGetDeviceCheckConfigsResponse:
       description: Response message for the BatchGetDeviceCheckConfigs method.
@@ -901,6 +1021,15 @@ components:
           description: RecaptchaConfigs retrieved.
           items:
             $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaRecaptchaConfig"
+          type: array
+      type: object
+    GoogleFirebaseAppcheckV1betaBatchGetSafetyNetConfigsResponse:
+      description: Response message for the BatchGetSafetyNetConfigs method.
+      properties:
+        configs:
+          description: SafetyNetConfigs retrieved.
+          items:
+            $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaSafetyNetConfig"
           type: array
       type: object
     GoogleFirebaseAppcheckV1betaBatchUpdateServicesRequest:
@@ -954,6 +1083,10 @@ components:
           description: Output only. Whether the `private_key` field was previously set. Since we will never return the `private_key` field, this field is the only way to find out whether it was previously set.
           readOnly: true
           type: boolean
+        tokenTtl:
+          description: Specifies the duration for which App Check tokens exchanged from DeviceCheck tokens will be valid. If unset, a default value of 1 hour is assumed. Must be between 30 minutes and 7 days, inclusive.
+          format: google-duration
+          type: string
       type: object
     GoogleFirebaseAppcheckV1betaExchangeAppAttestAssertionRequest:
       description: Request message for ExchangeAppAttestAssertion
@@ -1105,6 +1238,21 @@ components:
           description: Output only. Whether the `site_secret` field was previously set. Since we will never return the `site_secret` field, this field is the only way to find out whether it was previously set.
           readOnly: true
           type: boolean
+        tokenTtl:
+          description: Specifies the duration for which App Check tokens exchanged from reCAPTCHA tokens will be valid. If unset, a default value of 1 day is assumed. Must be between 30 minutes and 7 days, inclusive.
+          format: google-duration
+          type: string
+      type: object
+    GoogleFirebaseAppcheckV1betaSafetyNetConfig:
+      description: An app's SafetyNet configuration object. This configuration controls certain properties of the App Check token returned by ExchangeSafetyNetToken, such as its ttl. Note that your registered SHA-256 certificate fingerprints are used to validate tokens issued by SafetyNet; please register them via the Firebase Console or programmatically via the [Firebase Management Service](https://firebase.google.com/docs/projects/api/reference/rest/v1beta1/projects.androidApps.sha/create).
+      properties:
+        name:
+          description: "Required. The relative resource name of the SafetyNet configuration object, in the format: ``` projects/{project_number}/apps/{app_id}/safetyNetConfig ```"
+          type: string
+        tokenTtl:
+          description: Specifies the duration for which App Check tokens exchanged from SafetyNet tokens will be valid. If unset, a default value of 1 hour is assumed. Must be between 30 minutes and 7 days, inclusive.
+          format: google-duration
+          type: string
       type: object
     GoogleFirebaseAppcheckV1betaService:
       description: The enforcement configuration for a Firebase service supported by App Check.

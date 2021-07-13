@@ -1665,7 +1665,7 @@ paths:
       description: Returns a list of all developer attributes.
       operationId: apigee.organizations.developers.attributes.list
       parameters:
-        - description: "Required. Email address of the developer for which attributes are being listed. Use the following structure in your request: `organizations/{org}/developers/{developer_email}`"
+        - description: "Required. Email address of the developer for which attributes are being listed in the following format: `organizations/{org}/developers/{developer_email}`"
           in: path
           name: parent
           required: true
@@ -1701,7 +1701,7 @@ paths:
       description: "Updates developer attributes. This API replaces the existing attributes with those specified in the request. Add new attributes, and include or exclude any existing attributes that you want to retain or remove, respectively. The custom attribute limit is 18. **Note**: OAuth access tokens and Key Management Service (KMS) entities (apps, developers, and API products) are cached for 180 seconds (default). Any custom attributes associated with these entities are cached for at least 180 seconds after the entity is accessed at runtime. Therefore, an `ExpiresIn` element on the OAuthV2 policy won't be able to expire an access token in less than 180 seconds."
       operationId: apigee.organizations.developers.attributes
       parameters:
-        - description: "Required. Email address of the developer for which attributes are being updated. Use the following structure in your request: `organizations/{org}/developers/{developer_email}`"
+        - description: "Required. Email address of the developer for which attributes are being updated in the following format: `organizations/{org}/developers/{developer_email}`"
           in: path
           name: parent
           required: true
@@ -5456,7 +5456,6 @@ components:
             - SLASH_18
             - SLASH_19
             - SLASH_20
-            - SLASH_22
             - SLASH_23
           type: string
         port:

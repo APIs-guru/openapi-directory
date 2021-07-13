@@ -192,6 +192,20 @@ paths:
           name: requestSyncToken
           schema:
             type: boolean
+        - description: Optional. A mask of what source types to return. Defaults to READ_SOURCE_TYPE_CONTACT if not set.
+          explode: true
+          in: query
+          name: sources
+          schema:
+            items:
+              enum:
+                - READ_SOURCE_TYPE_UNSPECIFIED
+                - READ_SOURCE_TYPE_PROFILE
+                - READ_SOURCE_TYPE_CONTACT
+                - READ_SOURCE_TYPE_DOMAIN_CONTACT
+              type: string
+            type: array
+          style: form
         - description: Optional. A sync token, received from a previous `ListOtherContacts` call. Provide this to retrieve only the resources changed since the last request. Sync requests that specify `sync_token` have an additional rate limit. When the `syncToken` is specified, resources deleted since the last sync will be returned as a person with [`PersonMetadata.deleted`](/people/api/rest/v1/people#Person.PersonMetadata.FIELDS.deleted) set to true. When the `syncToken` is specified, all other parameters provided to `ListOtherContacts` must match the call that provided the sync token.
           in: query
           name: syncToken

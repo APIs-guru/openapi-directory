@@ -543,6 +543,13 @@ components:
           items:
             $ref: "#/components/schemas/RoboDirective"
           type: array
+        roboMode:
+          description: The mode in which Robo should run. Most clients should allow the server to populate this field automatically.
+          enum:
+            - ROBO_MODE_UNSPECIFIED
+            - ROBO_VERSION_1
+            - ROBO_VERSION_2
+          type: string
         roboScript:
           $ref: "#/components/schemas/FileReference"
           description: A JSON file with a sequence of actions Robo should perform as a prologue for the crawl.

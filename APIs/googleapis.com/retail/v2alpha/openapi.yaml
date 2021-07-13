@@ -1218,7 +1218,7 @@ components:
       description: The inline source for the input config for ImportProducts method.
       properties:
         products:
-          description: Required. A list of products to update/create. Each product must have a valid Product.id. Recommended max of 10k items.
+          description: Required. A list of products to update/create. Each product must have a valid Product.id. Recommended max of 100 items.
           items:
             $ref: "#/components/schemas/GoogleCloudRetailV2alphaProduct"
           type: array
