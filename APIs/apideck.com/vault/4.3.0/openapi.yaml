@@ -163,7 +163,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 4.1.1
+  version: 4.3.0
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -189,6 +189,8 @@ tags:
     name: Connections
   - description: ""
     name: Consumers
+  - description: ""
+    name: Logs
 paths:
   "/vault/authorize/{service_id}/{application_id}":
     get:
@@ -503,6 +505,36 @@ paths:
       summary: Consumer request counts
       tags:
         - Consumers
+  /vault/logs:
+    get:
+      description: |
+        This endpoint includes all consumer request logs.
+      operationId: logsAll
+      parameters:
+        - $ref: "#/components/parameters/x-apideck-app-id"
+        - $ref: "#/components/parameters/x-apideck-consumer-id"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetLogs"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Get all consumer request logs
+      tags:
+        - Logs
   /vault/proxy:
     post:
       deprecated: true
@@ -883,6 +915,12 @@ components:
           schema:
             $ref: "#/components/schemas/GetConsumersResponse"
       description: All Consumers
+    GetLogs:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetLogsResponse"
+      description: All Consumer Logs
     NoContent:
       content:
         application/json:
@@ -1497,55 +1535,6 @@ components:
                 type: array
             type: object
           type: array
-        links:
-          description: Links to navigate to previous or next pages through the API
-          example:
-            current: https://unify.apideck.com/vault/consumers
-            next: https://unify.apideck.com/vault/consumers?cursor=em9oby1jcm06OnBhZ2U6OjM
-            previous: https://unify.apideck.com/vault/consumers?cursor=em9oby1jcm06OnBhZ2U6OjE%3D
-          properties:
-            current:
-              description: Link to navigate to the current page through the API
-              example: https://unify.apideck.com/crm/companies
-              type: string
-            next:
-              description: Link to navigate to the previous page through the API
-              example: https://unify.apideck.com/crm/companies?cursor=em9oby1jcm06OnBhZ2U6OjM
-              nullable: true
-              type: string
-            previous:
-              description: Link to navigate to the previous page through the API
-              example: https://unify.apideck.com/crm/companies?cursor=em9oby1jcm06OnBhZ2U6OjE%3D
-              nullable: true
-              type: string
-          type: object
-        meta:
-          description: Reponse metadata
-          properties:
-            cursors:
-              description: Cursors to navigate to previous or next pages through the API
-              properties:
-                current:
-                  description: Cursor to navigate to the current page of results through the API
-                  example: em9oby1jcm06OnBhZ2U6OjI=
-                  nullable: true
-                  type: string
-                next:
-                  description: Cursor to navigate to the next page of results through the API
-                  example: em9oby1jcm06OnBhZ2U6OjM=
-                  nullable: true
-                  type: string
-                previous:
-                  description: Cursor to navigate to the previous page of results through the API
-                  example: em9oby1jcm06OnBhZ2U6OjE=
-                  nullable: true
-                  type: string
-              type: object
-            items_on_page:
-              description: Number of items returned in the data property of the response
-              example: 50
-              type: integer
-          type: object
         status:
           description: HTTP Response Status
           example: OK
@@ -1558,6 +1547,214 @@ components:
         - status_code
         - status
         - data
+      type: object
+    GetLogsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Log"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+    Links:
+      description: Links to navigate to previous or next pages through the API
+      properties:
+        current:
+          description: Link to navigate to the current page through the API
+          example: https://unify.apideck.com/crm/companies
+          type: string
+        next:
+          description: Link to navigate to the previous page through the API
+          example: https://unify.apideck.com/crm/companies?cursor=em9oby1jcm06OnBhZ2U6OjM
+          nullable: true
+          type: string
+        previous:
+          description: Link to navigate to the previous page through the API
+          example: https://unify.apideck.com/crm/companies?cursor=em9oby1jcm06OnBhZ2U6OjE%3D
+          nullable: true
+          type: string
+      type: object
+    Log:
+      additionalProperties: false
+      properties:
+        api_style:
+          description: Indicates if the request was made via REST or Graphql endpoint.
+          example: REST
+          type: string
+        base_url:
+          description: The Apideck base URL the request was made to.
+          example: unify.apideck.com
+          type: string
+        child_request:
+          description: Indicates whether or not this is a child or parent request.
+          example: false
+          type: boolean
+        consumer_id:
+          description: The consumer Id associated with the request.
+          example: test-consumer
+          type: string
+        duration:
+          description: The entire execution time in milliseconds it took to call the Apideck service provider.
+          example: 2220.379304
+          type: number
+        error_message:
+          description: If error occured, this is brief explanation
+          example: Refresh token is invalid
+          nullable: true
+          type: string
+        execution:
+          description: The entire execution time in milliseconds it took to make the request.
+          example: 2248
+          type: integer
+        has_children:
+          description: When request is a parent request, this indicates if there are child requests associated.
+          example: false
+          type: boolean
+        http_method:
+          description: HTTP Method of request.
+          example: GET
+          type: string
+        id:
+          description: UUID acting as Request Identifier.
+          example: 0b5f7480-5550-4f5c-a5fc-3c01ac43dd0f
+          type: string
+        latency:
+          description: Latency added by making this request via Unified Api.
+          example: 27.620695999999953
+          type: number
+        operation:
+          additionalProperties: false
+          description: The request as defined in OpenApi Spec.
+          properties:
+            id:
+              description: The OpenApi Operation Id associated with the request
+              example: connectionsAll
+              type: string
+            name:
+              description: The OpenApi Operation name associated with the request
+              example: Get All Connections
+              type: string
+          required:
+            - id
+            - name
+          type: object
+        parent_id:
+          description: When request is a child request, this UUID indicates it's parent request.
+          example: 0b5f7480-5550-4f5c-a5fc-3c01ac43dd0f
+          nullable: true
+          type: string
+        path:
+          description: The path component of the URI the request was made to.
+          example: /vault/connections
+          type: string
+        sandbox:
+          description: Indicates whether the request was made using Apidecks sandbox credentials or not.
+          example: false
+          type: boolean
+        service:
+          additionalProperties: false
+          description: Apideck service provider associated with request.
+          properties:
+            id:
+              description: Apideck service provider id.
+              example: apideck-vault
+              type: string
+            name:
+              description: Apideck service provider name.
+              example: Apideck Vault
+              type: string
+          required:
+            - id
+            - name
+          type: object
+        source_ip:
+          description: The IP address of the source of the request.
+          example: 94.227.131.238
+          nullable: true
+          type: string
+        status_code:
+          description: HTTP Status code that was returned.
+          example: 200
+          type: integer
+        success:
+          description: Whether or not the request was successful.
+          example: true
+          type: boolean
+        timestamp:
+          description: ISO Date and time when the request was made.
+          example: 2021-07-12T14:26:17.420Z
+          type: string
+        unified_api:
+          description: Which Unified Api request was made to.
+          enum:
+            - crm
+            - lead
+            - proxy
+            - vault
+          example: vault
+          type: string
+      required:
+        - id
+        - parent_id
+        - api_style
+        - base_url
+        - child_request
+        - consumer_id
+        - duration
+        - execution
+        - has_children
+        - http_method
+        - latency
+        - operation
+        - path
+        - sandbox
+        - service
+        - status_code
+        - success
+        - timestamp
+        - unified_api
+      type: object
+    Meta:
+      description: Reponse metadata
+      properties:
+        cursors:
+          description: Cursors to navigate to previous or next pages through the API
+          properties:
+            current:
+              description: Cursor to navigate to the current page of results through the API
+              example: em9oby1jcm06OnBhZ2U6OjI=
+              nullable: true
+              type: string
+            next:
+              description: Cursor to navigate to the next page of results through the API
+              example: em9oby1jcm06OnBhZ2U6OjM=
+              nullable: true
+              type: string
+            previous:
+              description: Cursor to navigate to the previous page of results through the API
+              example: em9oby1jcm06OnBhZ2U6OjE=
+              nullable: true
+              type: string
+          type: object
+        items_on_page:
+          description: Number of items returned in the data property of the response
+          example: 50
+          type: integer
       type: object
     NotFoundResponse:
       properties:
