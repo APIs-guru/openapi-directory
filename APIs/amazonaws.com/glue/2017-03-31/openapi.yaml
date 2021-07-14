@@ -10926,6 +10926,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
             - description: 'The tags to use with this trigger. You may use tags to limit access to the trigger. For more information about tags in Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">Amazon Web Services Tags in Glue</a> in the developer guide. '
+        EventBatchingCondition:
+          $ref: '#/components/schemas/EventBatchingCondition'
     CreateUserDefinedFunctionResponse:
       type: object
       properties: {}
@@ -14649,6 +14651,10 @@ components:
         $ref: '#/components/schemas/Workflow'
       minItems: 1
       maxItems: 25
+    BatchSize:
+      type: integer
+      minimum: 1
+      maximum: 100
     IdString:
       type: string
       minLength: 1
@@ -14775,6 +14781,10 @@ components:
             - $ref: '#/components/schemas/PartitionInput'
             - description: The structure used to update a partition.
       description: A structure that contains the values and structure used to update a partition.
+    BatchWindow:
+      type: integer
+      minimum: 1
+      maximum: 900
     NonNegativeLong:
       type: integer
       minimum: 0
@@ -16520,6 +16530,7 @@ components:
         - SCHEDULED
         - CONDITIONAL
         - ON_DEMAND
+        - EVENT
     Predicate:
       type: object
       properties:
@@ -16532,6 +16543,20 @@ components:
             - $ref: '#/components/schemas/ConditionList'
             - description: A list of the conditions that determine when the trigger will fire.
       description: 'Defines the predicate of the trigger, which determines when it fires.'
+    EventBatchingCondition:
+      type: object
+      required:
+        - BatchSize
+      properties:
+        BatchSize:
+          allOf:
+            - $ref: '#/components/schemas/BatchSize'
+            - description: Number of events that must be received from Amazon EventBridge before EventBridge event trigger fires.
+        BatchWindow:
+          allOf:
+            - $ref: '#/components/schemas/BatchWindow'
+            - description: Window of time in seconds after which EventBridge event trigger fires. Window starts when first event is received.
+      description: Batch condition that must be met (specified number of events received or batch time window expired) before EventBridge event trigger fires.
     UserDefinedFunctionInput:
       type: object
       properties:
@@ -16877,7 +16902,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NameString'
             - description: The unique of the node within the workflow where the edge ends.
-      description: An edge represents a directed connection between two Glue components that are part of the workflow the edge belongs to.
+      description: An edge represents a directed connection between two components on a workflow graph.
     EdgeList:
       type: array
       items:
@@ -17712,6 +17737,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Predicate'
             - description: 'The predicate of this trigger, which defines when it will fire.'
+        EventBatchingCondition:
+          allOf:
+            - $ref: '#/components/schemas/EventBatchingCondition'
+            - description: Batch condition that must be met (specified number of events received or batch time window expired) before EventBridge event trigger fires.
       description: Information about a specific trigger.
     UserDefinedFunction:
       type: object
@@ -17759,7 +17788,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/NameString'
-            - description: The name of the workflow representing the flow.
+            - description: The name of the workflow.
         Description:
           allOf:
             - $ref: '#/components/schemas/GenericString'
@@ -17767,7 +17796,7 @@ components:
         DefaultRunProperties:
           allOf:
             - $ref: '#/components/schemas/WorkflowRunProperties'
-            - description: A collection of properties to be used as part of each execution of the workflow.
+            - description: A collection of properties to be used as part of each execution of the workflow. The run properties are made available to each job in the workflow. A job can modify the properties for the next jobs in the flow.
         CreatedOn:
           allOf:
             - $ref: '#/components/schemas/TimestampValue'
@@ -17788,7 +17817,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NullableInteger'
             - description: 'You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.'
-      description: A workflow represents a flow in which Glue components should be run to complete a logical task.
+      description: A workflow is a collection of multiple dependent Glue jobs and crawlers that are run to complete a complex ETL task. A workflow manages the execution and monitoring of all its jobs and crawlers.
     WorkflowRun:
       type: object
       properties:
@@ -17832,6 +17861,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkflowGraph'
             - description: The graph representing all the Glue components that belong to the workflow as nodes and directed connections between them as edges.
+        StartingEventBatchCondition:
+          allOf:
+            - $ref: '#/components/schemas/StartingEventBatchCondition'
+            - description: The batch condition that started the workflow run.
       description: A workflow run is an execution of a workflow providing all the runtime information.
     WorkflowRuns:
       type: array
@@ -18323,7 +18356,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CrawlerNodeDetails'
             - description: Details of the crawler when the node represents a crawler.
-      description: 'A node represents an Glue component such as a trigger, or job, etc., that is part of a workflow.'
+      description: 'A node represents an Glue component (trigger, crawler, or job) on a workflow graph.'
     NodeIdList:
       type: array
       items:
@@ -18810,6 +18843,18 @@ components:
       enum:
         - DESCENDING
         - ASCENDING
+    StartingEventBatchCondition:
+      type: object
+      properties:
+        BatchSize:
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: Number of events in the batch.
+        BatchWindow:
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: Duration of the batch window in seconds.
+      description: 'The batch condition that started the workflow run. Either the number of events in the batch size arrived, in which case the BatchSize member is non-zero, or the batch window expired, in which case the BatchWindow member is non-zero.'
     ViewTextString:
       type: string
       maxLength: 409600
@@ -18974,6 +19019,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Predicate'
             - description: 'The predicate of this trigger, which defines when it will fire.'
+        EventBatchingCondition:
+          allOf:
+            - $ref: '#/components/schemas/EventBatchingCondition'
+            - description: Batch condition that must be met (specified number of events received or batch time window expired) before EventBridge event trigger fires.
       description: A structure used to provide information used to update a trigger. This object updates the previous trigger definition by overwriting it completely.
     UpdateGrokClassifierRequest:
       type: object

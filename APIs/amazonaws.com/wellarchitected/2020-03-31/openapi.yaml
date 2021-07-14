@@ -809,7 +809,7 @@ paths:
   '/workloads/{WorkloadId}/lensReviews/{LensAlias}/answers/{QuestionId}':
     get:
       operationId: GetAnswer
-      description: Get lens review.
+      description: Get the answer to a specific question in a workload review.
       responses:
         '200':
           description: Success
@@ -976,6 +976,11 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/ChoiceId'
+                ChoiceUpdates:
+                  description: A list of choices to update on a question in your workload. The String key corresponds to the choice ID to be updated.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/ChoiceUpdate'
                 Notes:
                   description: The notes associated with the workload.
                   type: string
@@ -983,6 +988,15 @@ paths:
                 IsApplicable:
                   description: Defines whether this question is applicable to a lens review.
                   type: boolean
+                Reason:
+                  description: The reason why a question is not applicable to your workload.
+                  type: string
+                  enum:
+                    - OUT_OF_SCOPE
+                    - BUSINESS_PRIORITIES
+                    - ARCHITECTURE_CONSTRAINTS
+                    - OTHER
+                    - NONE
   '/workloads/{WorkloadId}/lensReviews/{LensAlias}':
     get:
       operationId: GetLensReview
@@ -2274,7 +2288,7 @@ paths:
   '/tags/{WorkloadArn}#tagKeys':
     delete:
       operationId: UntagResource
-      description: Deletes specified tags from a resource.
+      description: '<p>Deletes specified tags from a resource.</p> <p>To specify multiple tags, use separate <b>tagKeys</b> parameters, for example:</p> <p> <code>DELETE /tags/WorkloadArn?tagKeys=key1&amp;tagKeys=key2</code> </p>'
       responses:
         '200':
           description: Success
@@ -2305,7 +2319,7 @@ paths:
         - name: tagKeys
           in: query
           required: true
-          description: The keys of the tags to be removed.
+          description: A list of tag keys. Existing tags of the resource whose keys are members of this list are removed from the resource.
           schema:
             type: array
             items:
@@ -2868,6 +2882,24 @@ components:
       description: The ID of a choice.
       minLength: 1
       maxLength: 64
+    ChoiceUpdate:
+      type: object
+      required:
+        - Status
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ChoiceStatus'
+            - description: The status of a choice.
+        Reason:
+          allOf:
+            - $ref: '#/components/schemas/ChoiceReason'
+            - description: The reason why a choice is non-applicable to a question in your workload.
+        Notes:
+          allOf:
+            - $ref: '#/components/schemas/ChoiceNotes'
+            - description: The notes associated with a choice.
+      description: A list of choices to be updated.
     UpdateLensReviewOutput:
       type: object
       properties:
@@ -2918,7 +2950,7 @@ components:
       maxLength: 1024
     ImprovementPlanUrl:
       type: string
-      description: The improvement plan URL for a question.
+      description: <p>The improvement plan URL for a question.</p> <p>This value is only available if the question has been answered.</p>
       minLength: 1
       maxLength: 2048
     HelpfulResourceUrl:
@@ -2936,6 +2968,10 @@ components:
       description: <p>List of selected choice IDs in a question answer.</p> <p>The values entered replace the previously selected choices.</p>
       items:
         $ref: '#/components/schemas/ChoiceId'
+    ChoiceAnswers:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChoiceAnswer'
     IsApplicable:
       type: boolean
       description: Defines whether this question is applicable to a lens review.
@@ -2948,6 +2984,14 @@ components:
         - NONE
         - NOT_APPLICABLE
       description: 'The risk for a given workload, lens review, pillar, or question.'
+    AnswerReason:
+      type: string
+      enum:
+        - OUT_OF_SCOPE
+        - BUSINESS_PRIORITIES
+        - ARCHITECTURE_CONSTRAINTS
+        - OTHER
+        - NONE
     Answer:
       type: object
       properties:
@@ -2967,12 +3011,20 @@ components:
           $ref: '#/components/schemas/Choices'
         SelectedChoices:
           $ref: '#/components/schemas/SelectedChoices'
+        ChoiceAnswers:
+          allOf:
+            - $ref: '#/components/schemas/ChoiceAnswers'
+            - description: A list of selected choices to a question in your workload.
         IsApplicable:
           $ref: '#/components/schemas/IsApplicable'
         Risk:
           $ref: '#/components/schemas/Risk'
         Notes:
           $ref: '#/components/schemas/Notes'
+        Reason:
+          allOf:
+            - $ref: '#/components/schemas/AnswerReason'
+            - description: The reason why the question is not applicable to your workload.
       description: An answer of the question.
     AnswerSummary:
       type: object
@@ -2987,16 +3039,28 @@ components:
           $ref: '#/components/schemas/Choices'
         SelectedChoices:
           $ref: '#/components/schemas/SelectedChoices'
+        ChoiceAnswerSummaries:
+          allOf:
+            - $ref: '#/components/schemas/ChoiceAnswerSummaries'
+            - description: A list of selected choices to a question in your workload.
         IsApplicable:
           $ref: '#/components/schemas/IsApplicable'
         Risk:
           $ref: '#/components/schemas/Risk'
+        Reason:
+          allOf:
+            - $ref: '#/components/schemas/AnswerReason'
+            - description: The reason why a choice is non-applicable to a question in your workload.
       description: An answer summary of a lens review in a workload.
     AnswerSummaries:
       type: array
       description: List of answer summaries of lens review in a workload.
       items:
         $ref: '#/components/schemas/AnswerSummary'
+    ChoiceAnswerSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChoiceAnswerSummary'
     WorkloadId:
       type: string
       pattern: '[0-9a-f]{32}'
@@ -3039,6 +3103,59 @@ components:
         Description:
           $ref: '#/components/schemas/ChoiceDescription'
       description: A choice available to answer question.
+    ChoiceStatus:
+      type: string
+      enum:
+        - SELECTED
+        - NOT_APPLICABLE
+        - UNSELECTED
+    ChoiceReason:
+      type: string
+      enum:
+        - OUT_OF_SCOPE
+        - BUSINESS_PRIORITIES
+        - ARCHITECTURE_CONSTRAINTS
+        - OTHER
+        - NONE
+    ChoiceNotes:
+      type: string
+      maxLength: 250
+    ChoiceAnswer:
+      type: object
+      properties:
+        ChoiceId:
+          $ref: '#/components/schemas/ChoiceId'
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ChoiceStatus'
+            - description: The status of a choice.
+        Reason:
+          allOf:
+            - $ref: '#/components/schemas/ChoiceReason'
+            - description: The reason why a choice is non-applicable to a question in your workload.
+        Notes:
+          allOf:
+            - $ref: '#/components/schemas/ChoiceNotes'
+            - description: The notes associated with a choice.
+      description: A choice that has been answered on a question in your workload.
+    ChoiceAnswerSummary:
+      type: object
+      properties:
+        ChoiceId:
+          $ref: '#/components/schemas/ChoiceId'
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ChoiceStatus'
+            - description: The status of a choice.
+        Reason:
+          allOf:
+            - $ref: '#/components/schemas/ChoiceReason'
+            - description: The reason why a choice is non-applicable to a question in your workload.
+      description: A choice summary that has been answered on a question in your workload.
+    ChoiceUpdates:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/ChoiceUpdate'
     ClientRequestToken:
       type: string
       description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after it has completed successfully, the result of the original request is returned. </p> <important> <p>This token is listed as required, however, if you do not specify it, the AWS SDKs automatically generate one for you. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the request will fail.</p> </important>'
@@ -3800,10 +3917,18 @@ components:
       properties:
         SelectedChoices:
           $ref: '#/components/schemas/SelectedChoices'
+        ChoiceUpdates:
+          allOf:
+            - $ref: '#/components/schemas/ChoiceUpdates'
+            - description: A list of choices to update on a question in your workload. The String key corresponds to the choice ID to be updated.
         Notes:
           $ref: '#/components/schemas/Notes'
         IsApplicable:
           $ref: '#/components/schemas/IsApplicable'
+        Reason:
+          allOf:
+            - $ref: '#/components/schemas/AnswerReason'
+            - description: The reason why a question is not applicable to your workload.
       description: Input to update answer.
     UpdateLensReviewInput:
       type: object
