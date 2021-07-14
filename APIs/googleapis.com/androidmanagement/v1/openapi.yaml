@@ -37,25 +37,25 @@ tags:
 paths:
   /v1/enterprises:
     get:
-      description: This feature is not generally available yet. Lists enterprises that are managed by an EMM. Only partial views are returned.
+      description: Lists EMM-managed enterprises. Only BASIC fields are returned.
       operationId: androidmanagement.enterprises.list
       parameters:
-        - description: This feature is not generally available yet. The requested page size. The actual page size may be fixed to a min or max value.
+        - description: The requested page size. The actual page size may be fixed to a min or max value.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: This feature is not generally available yet. A token identifying a page of results returned by the server.
+        - description: A token identifying a page of results returned by the server.
           in: query
           name: pageToken
           schema:
             type: string
-        - description: Required. This feature is not generally available yet. The ID of the Cloud project of the EMM the enterprises belongs to.
+        - description: Required. The Cloud project ID of the EMM managing the enterprises.
           in: query
           name: projectId
           schema:
             type: string
-        - description: This feature is not generally available yet. View that specify that partial response should be returned.
+        - description: Specifies which Enterprise fields to return. This method only supports BASIC.
           in: query
           name: view
           schema:
@@ -93,12 +93,12 @@ paths:
       description: Creates an enterprise. This is the last step in the enterprise signup flow.
       operationId: androidmanagement.enterprises.create
       parameters:
-        - description: This feature is not generally available yet. Whether the managed Google Play Agreement is presented and agreed.
+        - description: Whether the enterprise admin has seen and agreed to the managed Google Play Agreement (https://www.android.com/enterprise/terms/). Always set this to true when creating an EMM-managed enterprise. Do not create the enterprise until the admin has viewed and accepted the agreement.
           in: query
           name: agreementAccepted
           schema:
             type: boolean
-        - description: The enterprise token appended to the callback URL.
+        - description: The enterprise token appended to the callback URL. Only set this when creating a customer-managed enterprise.
           in: query
           name: enterpriseToken
           schema:
@@ -108,7 +108,7 @@ paths:
           name: projectId
           schema:
             type: string
-        - description: The name of the SignupUrl used to sign up for the enterprise.
+        - description: The name of the SignupUrl used to sign up for the enterprise. Only set this when creating a customer-managed enterprise.
           in: query
           name: signupUrlName
           schema:
@@ -1408,7 +1408,7 @@ components:
           type: boolean
         contactInfo:
           $ref: "#/components/schemas/ContactInfo"
-          description: This feature is not generally available yet. The enterprise contact info of an EMM owned enterprise
+          description: The enterprise contact info of an EMM-managed enterprise.
         enabledNotificationTypes:
           description: The types of Google Pub/Sub notifications enabled for the enterprise.
           items:
@@ -1674,15 +1674,15 @@ components:
           type: string
       type: object
     ListEnterprisesResponse:
-      description: This feature is not generally available yet. Response to a request to list enterprises.
+      description: Response to a request to list enterprises.
       properties:
         enterprises:
-          description: This feature is not generally available yet. The list of enterprises.
+          description: The list of enterprises.
           items:
             $ref: "#/components/schemas/Enterprise"
           type: array
         nextPageToken:
-          description: This feature is not generally available yet. If there are more results, a token to retrieve next page of results.
+          description: If there are more results, a token to retrieve next page of results.
           type: string
       type: object
     ListOperationsResponse:

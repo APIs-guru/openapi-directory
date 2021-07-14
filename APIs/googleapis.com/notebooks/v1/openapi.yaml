@@ -6,7 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: AI Platform Notebooks API is used to manage notebook resources in Google Cloud.
+  description: Notebooks API is used to manage notebook resources in Google Cloud.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -25,7 +25,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: notebooks
 externalDocs:
-  url: https://cloud.google.com/ai-platform/notebooks/docs/
+  url: https://cloud.google.com/notebooks/docs/
 tags:
   - name: projects
 paths:
@@ -301,6 +301,48 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ReportInstanceInfoRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{name}:reportEvent":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Report and process a runtime event.
+      operationId: notebooks.projects.locations.runtimes.reportEvent
+      parameters:
+        - description: "Required. Format: `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReportRuntimeEventRequest"
       responses:
         "200":
           content:
@@ -1705,6 +1747,20 @@ components:
           $ref: "#/components/schemas/VmImage"
           description: Use a Compute Engine VM image to start the notebook instance.
       type: object
+    Event:
+      description: The definition of an Event for a managed / semi-managed notebook instance.
+      properties:
+        reportTime:
+          description: Event report time.
+          format: google-datetime
+          type: string
+        type:
+          description: Event type.
+          enum:
+            - EVENT_TYPE_UNSPECIFIED
+            - IDLE
+          type: string
+      type: object
     Execution:
       description: The definition of a single executed notebook.
       properties:
@@ -1723,6 +1779,10 @@ components:
         executionTemplate:
           $ref: "#/components/schemas/ExecutionTemplate"
           description: execute metadata including name, hardware spec, region, labels, etc.
+        jobUri:
+          description: Output only. The URI of the external job used to execute the notebook.
+          readOnly: true
+          type: string
         name:
           description: "Output only. The resource name of the execute. Format: `projects/{project_id}/locations/{location}/execution/{execution_id}"
           readOnly: true
@@ -1742,6 +1802,7 @@ components:
             - CANCELLING
             - CANCELLED
             - EXPIRED
+            - INITIALIZING
           readOnly: true
           type: string
         updateTime:
@@ -1780,7 +1841,7 @@ components:
           description: "Parameters to be overridden in the notebook during execution. Ref https://papermill.readthedocs.io/en/latest/usage-parameterize.html on how to specifying parameters in the input notebook and pass them here in an YAML file. Ex: gs://notebook_user/scheduled_notebooks/sentiment_notebook_params.yaml"
           type: string
         scaleTier:
-          description: Required. Scale tier of the hardware used for notebook execution.
+          description: Required. Scale tier of the hardware used for notebook execution. DEPRECATED Will be discontinued. As right now only CUSTOM is supported.
           enum:
             - SCALE_TIER_UNSPECIFIED
             - BASIC
@@ -1945,6 +2006,9 @@ components:
           description: Output only. The proxy endpoint that is used to access the Jupyter notebook.
           readOnly: true
           type: string
+        reservationAffinity:
+          $ref: "#/components/schemas/ReservationAffinity"
+          description: Optional. The optional reservation affinity. Setting this field will apply the specified [Zonal Compute Reservation](https://cloud.google.com/compute/docs/instances/reserving-zonal-resources) to this notebook instance.
         serviceAccount:
           description: The service account on this instance, giving access to other Google Cloud services. You can use any service account within the same project, but you must have the service account user permission to use the instance. If not specified, the [Compute Engine default service account](https://cloud.google.com/compute/docs/access/service-accounts#default_service_account) is used.
           type: string
@@ -2319,6 +2383,36 @@ components:
           description: Required. The VM hardware token for authenticating the VM. https://cloud.google.com/compute/docs/instances/verifying-instance-identity
           type: string
       type: object
+    ReportRuntimeEventRequest:
+      description: Request for reporting a Managed Notebook Event.
+      properties:
+        event:
+          $ref: "#/components/schemas/Event"
+          description: Required. The Event to be reported.
+        vmId:
+          description: Required. The VM hardware token for authenticating the VM. https://cloud.google.com/compute/docs/instances/verifying-instance-identity
+          type: string
+      type: object
+    ReservationAffinity:
+      description: Reservation Affinity for consuming Zonal reservation.
+      properties:
+        consumeReservationType:
+          description: Optional. Type of reservation to consume
+          enum:
+            - TYPE_UNSPECIFIED
+            - NO_RESERVATION
+            - ANY_RESERVATION
+            - SPECIFIC_RESERVATION
+          type: string
+        key:
+          description: Optional. Corresponds to the label key of reservation resource.
+          type: string
+        values:
+          description: Optional. Corresponds to the label values of reservation resource.
+          items:
+            type: string
+          type: array
+      type: object
     ResetInstanceRequest:
       description: Request for reseting a notebook instance
       properties: {}
@@ -2468,10 +2562,10 @@ components:
           description: "Verifies core internal services are running. Default: True"
           type: boolean
         idleShutdown:
-          description: "Runtime will automatically shutdown after idle_shutdown_time. Default: False"
+          description: "Runtime will automatically shutdown after idle_shutdown_time. Default: True"
           type: boolean
         idleShutdownTimeout:
-          description: "Time in minutes to wait before shuting down runtime. Default: 90 minutes"
+          description: "Time in minutes to wait before shuting down runtime. Default: 180 minutes"
           format: int32
           type: integer
         installGpuDriver:
@@ -2522,6 +2616,8 @@ components:
             - PAUSED
             - DISABLED
             - UPDATE_FAILED
+            - INITIALIZING
+            - DELETING
           type: string
         timeZone:
           description: 'Timezone on which the cron_schedule. The value of this field must be a time zone name from the tz database. TZ Database: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones Note that some time zones include a provision for daylight savings time. The rules for daylight saving time are determined by the chosen tz. For UTC use the string "utc". If a time zone is not specified, the default will be in UTC (also known as GMT).'

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 servers:
   - url: https://checkout-test.adyen.com/v52
 info:
@@ -40,7 +40,7 @@ info:
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/CheckoutService-v52.json
-      version: "3.0"
+      version: "3.1"
   x-preferred: false
   x-providerName: adyen.com
   x-publicVersion: true
@@ -131,6 +131,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Cancels an authorised payment.
       x-groupName: Modifications
       x-sortIndex: 3
@@ -209,6 +212,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Creates an order for the given amount.
       x-groupName: Orders
       x-sortIndex: 2
@@ -287,6 +293,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Cancels the given order.
       x-groupName: Orders
       x-sortIndex: 3
@@ -367,6 +376,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Create originKey values for one or more merchant domains.
       x-groupName: Utility
       x-sortIndex: 1
@@ -457,6 +469,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Creates a payment link.
       x-groupName: Payment links
       x-sortIndex: 1
@@ -533,6 +548,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Retrieve a payment link.
       x-groupName: Payment links
       x-sortIndex: 2
@@ -616,6 +634,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Update the status of a payment link
       x-groupName: Payment links
       x-sortIndex: 3
@@ -705,6 +726,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Returns available payment methods.
       x-groupName: Payments
       x-sortIndex: 1
@@ -785,6 +809,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Returns the available balance on gift card.
       x-groupName: Orders
       x-sortIndex: 1
@@ -876,6 +903,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Creates a payment session.
       x-groupName: Classic Checkout SDK
       x-sortIndex: 1
@@ -1012,6 +1042,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Starts a transaction.
       x-groupName: Payments
       x-sortIndex: 2
@@ -1095,6 +1128,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Submits details for a payment.
       x-groupName: Payments
       x-sortIndex: 3
@@ -1173,13 +1209,16 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Verifies payment result.
       x-groupName: Classic Checkout SDK
       x-sortIndex: 2
   "/payments/{paymentPspReference}/amountUpdates":
     post:
       description: |-
-        Increases or decreases the authorised payment amount and returns a unique reference for this request. You get the outcome of the request asynchronosly, in an [**AUTHORISATION_ADJUSTMENT** webhook](https://docs.adyen.com/development-resources/webhooks/understand-notifications#event-codes).
+        Increases or decreases the authorised payment amount and returns a unique reference for this request. You get the outcome of the request asynchronously, in an [**AUTHORISATION_ADJUSTMENT** webhook](https://docs.adyen.com/development-resources/webhooks/understand-notifications#event-codes).
 
         You can only update authorised amounts that have not yet been [captured](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments/{paymentPspReference}/captures).
 
@@ -1267,6 +1306,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Increases or decreases the authorised amount.
       x-groupName: Modifications
       x-sortIndex: 6
@@ -1361,13 +1403,16 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Cancels an authorised payment.
       x-groupName: Modifications
       x-sortIndex: 2
   "/payments/{paymentPspReference}/captures":
     post:
       description: |2-
-         Captures an authorised payment and returns a unique reference for this request. You get the outcome of the request asynchronosly, in a [**CAPTURE** webhook](https://docs.adyen.com/online-payments/capture#capture-notification).
+         Captures an authorised payment and returns a unique reference for this request. You get the outcome of the request asynchronously, in a [**CAPTURE** webhook](https://docs.adyen.com/online-payments/capture#capture-notification).
 
         You can capture either the full authorised amount or a part of the authorised amount. By default, any unclaimed amount after a partial capture gets cancelled. This does not apply if you enabled multiple partial captures on your account and the payment method supports multiple partial captures. 
 
@@ -1455,6 +1500,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Captures an authorised payment.
       x-groupName: Modifications
       x-sortIndex: 1
@@ -1551,6 +1599,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Refunds a captured payment.
       x-groupName: Modifications
       x-sortIndex: 4
@@ -1644,6 +1695,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Cancels or refunds a payment.
       x-groupName: Modifications
       x-sortIndex: 5
@@ -2826,6 +2880,8 @@ components:
             type: kcp_creditcard
           - name: PayCo
             type: kcp_payco
+          - name: Naver Pay
+            type: kcp_naverpay
           - name: Virtual Account via KCP
             type: kcp_va
           - name: Pay later with Klarna.
@@ -3052,7 +3108,7 @@ components:
             type: onebip
           - name: One Two Three
             type: onetwothree
-          - name: Local Polish Payment Methods
+          - name: Local Polish Payment Methods (P24)
             type: onlineBanking_PL
           - details:
               - items:
@@ -3209,6 +3265,8 @@ components:
             type: tenpay
           - name: The Sting Giftcard
             type: thestinggiftcard
+          - name: TrueMoney
+            type: truemoney
           - name: Trustly
             type: trustly
           - name: Online Banking by Trustpay
@@ -5948,7 +6006,7 @@ components:
     Address:
       properties:
         city:
-          description: The name of the city.
+          description: "The name of the city. Maximum length: 3000 characters."
           type: string
         country:
           description: |-
@@ -5956,7 +6014,7 @@ components:
             > If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
           type: string
         houseNumberOrName:
-          description: The number or name of the house.
+          description: "The number or name of the house. Maximum length: 3000 characters."
           type: string
         postalCode:
           description: A maximum of five digits for an address in the US, or a maximum of ten characters for an address in all other countries.
@@ -5968,7 +6026,7 @@ components:
           type: string
         street:
           description: |-
-            The name of the street.
+            The name of the street. Maximum length: 3000 characters.
             > The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
           type: string
       required:
@@ -6407,6 +6465,7 @@ components:
             - alipay_hk_wap
             - alipay_hk_web
             - alipay_wap
+            - kcp_naverpay
             - upi
             - primeiropay_boleto
             - gopay_wallet
@@ -7261,8 +7320,8 @@ components:
         reason:
           description: |-
             The reason for the amount update. Possible values: 
-            * **DelayedCharge** 
-            * **NoShow**
+            * **delayedCharge** 
+            * **noShow**
           enum:
             - delayedCharge
             - noShow
@@ -7270,10 +7329,14 @@ components:
         reference:
           description: "Your reference for the amount update request. Maximum length: 80 characters."
           type: string
+        splits:
+          description: An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/platforms/processing-payments#providing-split-information).
+          items:
+            $ref: "#/components/schemas/Split"
+          type: array
       required:
         - merchantAccount
         - amount
-        - reason
     CreatePaymentCancelRequest:
       properties:
         merchantAccount:
@@ -7423,7 +7486,7 @@ components:
           description: The physical store, for which this payment is processed.
           type: string
         storePaymentMethod:
-          description: When this is set to **true** and the `shopperReference` is provided, the payment details will be stored.
+          description: When this is set to **true** and the `shopperReference` is provided, the payment details will be stored. From api version 68 use `storePaymentMethodMode` instead.
           type: boolean
           x-addedInVersion: 50
       required:
@@ -7441,6 +7504,11 @@ components:
         reference:
           description: "Your reference for the refund request. Maximum length: 80 characters."
           type: string
+        splits:
+          description: An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/platforms/processing-payments#providing-split-information).
+          items:
+            $ref: "#/components/schemas/Split"
+          type: array
       required:
         - merchantAccount
         - amount
@@ -7474,7 +7542,7 @@ components:
           $ref: "#/components/schemas/PaymentCompletionDetails"
           description: Use this collection to submit the details that were returned as a result of the `/payments` call.
         paymentData:
-          description: The `paymentData` value from the `/payments` response. Required if the `/payments` response returns this value. In v67 and later, you will always get this value from the Component.
+          description: "The `paymentData` value from the `/payments` response. Required if the `/payments` response returns this value. "
           maxLength: 100000
           type: string
         threeDSAuthenticationOnly:
@@ -7780,10 +7848,10 @@ components:
           type: string
           x-addedInVersion: 49
         type:
-          default: paywithgoogle
-          description: "**paywithgoogle**"
+          default: googlepay
+          description: "**googlepay**, **paywithgoogle**"
           enum:
-            - paywithgoogle
+            - googlepay
           type: string
       required:
         - googlePayToken
@@ -7956,6 +8024,9 @@ components:
           type: string
         imageUrl:
           description: Link to the picture of the purchased item.
+          type: string
+        itemCategory:
+          description: Item category, used by the RatePay payment method.
           type: string
         productUrl:
           description: Link to the purchased item.
@@ -8189,11 +8260,6 @@ components:
         firstName:
           description: The first name.
           type: string
-        infix:
-          description: |-
-            The name's infix, if applicable.
-            >A maximum length of twenty (20) characters is imposed.
-          type: string
         lastName:
           description: The last name.
           type: string
@@ -8291,6 +8357,36 @@ components:
       required:
         - type
       title: PayU
+    PayWithGoogleDetails:
+      additionalProperties: false
+      properties:
+        fundingSource:
+          description: The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
+          enum:
+            - debit
+          type: string
+        googlePayToken:
+          description: The `token` that you obtained from the [Google Pay API](https://developers.google.com/pay/api/web/reference/response-objects#PaymentData) `PaymentData` response.
+          type: string
+        recurringDetailReference:
+          deprecated: true
+          description: This is the `recurringDetailReference` returned in the response when you created the token.
+          type: string
+          x-deprecatedInVersion: 49
+          x-deprecatedMessage: Use `storedPaymentMethodId` instead.
+        storedPaymentMethodId:
+          description: This is the `recurringDetailReference` returned in the response when you created the token.
+          type: string
+          x-addedInVersion: 49
+        type:
+          default: paywithgoogle
+          description: "**paywithgoogle**"
+          enum:
+            - paywithgoogle
+          type: string
+      required:
+        - googlePayToken
+      title: Google Pay
     PaymentAmountUpdateResource:
       properties:
         amount:
@@ -8317,6 +8413,11 @@ components:
         reference:
           description: "Your reference for the amount update request. Maximum length: 80 characters."
           type: string
+        splits:
+          description: An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/platforms/processing-payments#providing-split-information).
+          items:
+            $ref: "#/components/schemas/Split"
+          type: array
         status:
           description: The status of your request. This will always have the value **received**.
           enum:
@@ -8326,9 +8427,9 @@ components:
         - status
         - merchantAccount
         - amount
+        - reference
         - pspReference
         - paymentPspReference
-        - reason
     PaymentCancelResource:
       properties:
         merchantAccount:
@@ -8930,6 +9031,11 @@ components:
         reference:
           description: Your reference for the refund request.
           type: string
+        splits:
+          description: An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/platforms/processing-payments#providing-split-information).
+          items:
+            $ref: "#/components/schemas/Split"
+          type: array
         status:
           description: The status of your request. This will always have the value **received**.
           enum:
@@ -9175,6 +9281,7 @@ components:
             - $ref: "#/components/schemas/OpenInvoiceDetails"
             - $ref: "#/components/schemas/PayPalDetails"
             - $ref: "#/components/schemas/PayUUpiDetails"
+            - $ref: "#/components/schemas/PayWithGoogleDetails"
             - $ref: "#/components/schemas/PaymentDetails"
             - $ref: "#/components/schemas/QiwiWalletDetails"
             - $ref: "#/components/schemas/RatepayDetails"
@@ -10937,6 +11044,7 @@ components:
             - oxxo
             - gcash
             - kakaopay
+            - truemoney
           type: string
       title: Stored Payment Method
     SubInputDetail:

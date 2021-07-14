@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 servers:
   - url: https://balanceplatform-api-test.adyen.com/bcl/v1
 info:
@@ -51,7 +51,7 @@ info:
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/BalancePlatformService-v1.json
-      version: "3.0"
+      version: "3.1"
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BalancePlatformService
@@ -126,6 +126,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Create an account holder.
       x-addedInVersion: 1
       x-groupName: Account holders
@@ -196,6 +198,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Retrieve an account holder.
       x-addedInVersion: 1
       x-groupName: Account holders
@@ -278,6 +282,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Update an account holder.
       x-addedInVersion: 1
       x-groupName: Account holders
@@ -365,6 +371,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Retrieve all balance accounts of a specific account holder.
       x-addedInVersion: 1
       x-groupName: Account holders
@@ -439,6 +447,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Create a balance account.
       x-addedInVersion: 1
       x-groupName: Balance accounts
@@ -509,6 +519,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Retrieve a balance account.
       x-addedInVersion: 1
       x-groupName: Balance accounts
@@ -596,6 +608,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Retrieve all payment instruments for a specific balance account.
       x-addedInVersion: 1
       x-groupName: Balance accounts
@@ -666,6 +680,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Retrieve a balance platform.
       x-addedInVersion: 1
       x-groupName: General
@@ -753,6 +769,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Retrieve all account holders under a specific balance platform.
       x-addedInVersion: 1
       x-groupName: General
@@ -821,6 +839,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Upload a document for verification checks.
       x-addedInVersion: 1
       x-groupName: Documents
@@ -888,6 +908,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Delete a document.
       x-addedInVersion: 1
       x-groupName: Documents
@@ -954,6 +976,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Retrieve a document.
       x-addedInVersion: 1
       x-groupName: Documents
@@ -1025,6 +1049,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Update a document.
       x-addedInVersion: 1
       x-groupName: Documents
@@ -1093,6 +1119,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Create a legal entity.
       x-addedInVersion: 1
       x-groupName: Legal entities
@@ -1160,6 +1188,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Retrieve a legal entity.
       x-addedInVersion: 1
       x-groupName: Legal entities
@@ -1234,6 +1264,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Update a legal entity.
       x-addedInVersion: 1
       x-groupName: Legal entities
@@ -1305,6 +1337,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Create a payment instrument group.
       x-addedInVersion: 1
       x-groupName: Payment instrument groups
@@ -1375,6 +1409,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Retrieve a payment instrument group.
       x-addedInVersion: 1
       x-groupName: Payment instrument groups
@@ -1445,6 +1481,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Retrieve all transaction rules for a specific payment instruments group.
       x-addedInVersion: 1
       x-groupName: Payment instrument groups
@@ -1521,6 +1559,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Create a payment instrument.
       x-addedInVersion: 1
       x-groupName: Payment instruments
@@ -1591,6 +1631,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Retrieve a payment instrument.
       x-addedInVersion: 1
       x-groupName: Payment instruments
@@ -1672,6 +1714,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Update a payment instrument.
       x-addedInVersion: 1
       x-groupName: Payment instruments
@@ -1742,6 +1786,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Retrieve all transaction rules for a specific payment instrument.
       x-addedInVersion: 1
       x-groupName: Payment instruments
@@ -1816,6 +1862,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Create a transaction rule.
       x-addedInVersion: 1
       x-groupName: Transaction rules
@@ -1886,6 +1934,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Delete a transaction rule.
       x-addedInVersion: 1
       x-groupName: Transaction rules
@@ -1955,6 +2005,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Retrieve a transaction rule.
       x-addedInVersion: 1
       x-groupName: Transaction rules
@@ -2037,6 +2089,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Update a transaction rule.
       x-addedInVersion: 1
       x-groupName: Transaction rules
@@ -2105,6 +2159,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Create a transfer instrument.
       x-addedInVersion: 1
       x-groupName: Transfer instruments
@@ -2172,6 +2228,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Delete a transfer instrument
       x-addedInVersion: 1
       x-groupName: Transfer instruments
@@ -2238,6 +2296,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Retrieve a transfer instrument.
       x-addedInVersion: 1
       x-groupName: Transfer instruments
@@ -2309,6 +2369,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - ApiKeyAuth: []
       summary: Update a transfer instrument.
       x-addedInVersion: 1
       x-groupName: Transfer instruments
@@ -2892,10 +2954,6 @@ components:
             - Closed
             - Inactive
             - Suspended
-            - active
-            - closed
-            - inactive
-            - suspended
           type: string
         sweepConfigurations:
           additionalProperties:
@@ -3019,14 +3077,20 @@ components:
           format: byte
           type: string
         contentType:
+          deprecated: true
           description: |-
             The file format.
 
              Possible values: **application/pdf**, **image/jpg**, **image/jpeg**, or **image/png**. 
           type: string
+          x-deprecatedInVersion: 1
+          x-deprecatedMessage: Field is being deprecated.
         filename:
+          deprecated: true
           description: The name of the file including the file extension.
           type: string
+          x-deprecatedInVersion: 1
+          x-deprecatedMessage: Field is being deprecated.
         pageType:
           description: |-
             Specifies which side of the ID card is being uploaded.
@@ -3240,7 +3304,7 @@ components:
             >Contact your Adyen Implementation Manager to get the values that are relevant to your integration. Examples: **visadebit**, **mcprepaid**.
           type: string
         cardholderName:
-          description: The name of the card holder.
+          description: The name of the card holder. Maximum length 26 characters.
           type: string
         configuration:
           $ref: "#/components/schemas/CardConfiguration"
@@ -3248,7 +3312,7 @@ components:
         cvc:
           description: |-
             The CVC2 value of the card.
-            >By default this field will not be present. Only for single use virtual cards the CVC2 is returned (only in response to `POST` request).
+            > The CVC2 is not sent by default. This is only returned in the `POST` response for single-use virtual cards.
           type: string
         deliveryContact:
           $ref: "#/components/schemas/Contact"
@@ -3271,7 +3335,7 @@ components:
         number:
           description: |-
             The primary account number of the card.
-            >By default the primary account number will be masked. Only for single use virtual cards the full primary account number is returned.
+            > The primary account number is masked by default. The full primary account number is only returned for single-use virtual cards.
           readOnly: true
           type: string
       required:
@@ -3319,7 +3383,7 @@ components:
             >Contact your Adyen Implementation Manager to get the values that are relevant to your integration. Examples: **visadebit**, **mcprepaid**.
           type: string
         cardholderName:
-          description: The name of the card holder.
+          description: The name of the card holder. Maximum length 26 characters.
           type: string
         configuration:
           $ref: "#/components/schemas/CardConfiguration"
@@ -3388,7 +3452,10 @@ components:
       properties:
         attachment:
           $ref: "#/components/schemas/Attachment"
+          deprecated: true
           description: This object will be deprecated soon. Use the `attachments` array instead.
+          x-deprecatedInVersion: 1
+          x-deprecatedMessage: Use the `attachments` array instead.
         attachments:
           description: Array that contains the document. The array supports multiple attachments for uploading different sides or pages of one document.
           items:
@@ -3398,17 +3465,26 @@ components:
           description: Your description of the document.
           type: string
         expiryDate:
+          deprecated: true
           description: The expiry date of the document, in YYYY-MM-DD format.
           type: string
+          x-deprecatedInVersion: 1
+          x-deprecatedMessage: Field is deprecated.
         id:
           description: Unique identifier of the document.
           type: string
         issuerCountry:
+          deprecated: true
           description: The country where the document was issued, in the two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. For example, **US**.
           type: string
+          x-deprecatedInVersion: 1
+          x-deprecatedMessage: Field is deprecated.
         issuerState:
-          description: The state or province where the document was issued.
+          deprecated: true
+          description: The state or province where the document was issued (AU only).
           type: string
+          x-deprecatedInVersion: 1
+          x-deprecatedMessage: Field is being deprecated.
         number:
           description: The number in the document.
           type: string
@@ -3421,13 +3497,14 @@ components:
 
             * For `type` **organization**, the values can be **proofOfAddress**, **registrationDocument**, **taxDocument**. 
 
-            * For `type` **individual**, the values can be **driversLicense**, **identityCard**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **ssn**.
+            * For `type` **individual**, the values can be **driversLicense**, **identityCard**, **nationalIdNumber**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **ssn**.
 
             When uploading a document owned by a [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/documents__reqParam_owner), use **bankStatement**.
           enum:
             - bankStatement
             - driversLicense
             - identityCard
+            - nationalIdNumber
             - passport
             - proofOfAddress
             - proofOfNationalIdNumber
@@ -3475,14 +3552,23 @@ components:
     IdentificationData:
       properties:
         expiryDate:
+          deprecated: true
           description: The expiry date of the document, in YYYY-MM-DD format.
           type: string
+          x-deprecatedInVersion: 1
+          x-deprecatedMessage: Field is deprecated.
         issuerCountry:
+          deprecated: true
           description: The country where the document was issued, in the two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. For example, **US**.
           type: string
+          x-deprecatedInVersion: 1
+          x-deprecatedMessage: Field is deprecated.
         issuerState:
-          description: The state or province where the document was issued.
+          description: The state or province where the document was issued (AU only).
           type: string
+        nationalIdExempt:
+          description: Applies only to individuals in the US. Set to **true** if the individual does not have an SSN. To verify their identity, note that Adyen will require them to [upload an ID document](https://docs.adyen.com/issuing/kyc-verification#upload-documents).
+          type: boolean
         number:
           description: The number in the document.
           type: string
@@ -3492,13 +3578,14 @@ components:
 
             * For `type` **organization**, the values can be **proofOfAddress**, **registrationDocument**, **taxDocument**. 
 
-            * For `type` **individual**, the values can be **driversLicense**, **identityCard**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **ssn**.
+            * For `type` **individual**, the values can be **driversLicense**, **identityCard**, **nationalIdNumber**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **ssn**.
 
             When uploading a document owned by a [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/documents__reqParam_owner), use **bankStatement**.
           enum:
             - bankStatement
             - driversLicense
             - identityCard
+            - nationalIdNumber
             - passport
             - proofOfAddress
             - proofOfNationalIdNumber
@@ -3532,6 +3619,7 @@ components:
           description: The residential address of the individual.
         webData:
           $ref: "#/components/schemas/WebData"
+          deprecated: true
           description: The website and app URL of the legal entity.
     InvalidField:
       properties:
@@ -3626,11 +3714,6 @@ components:
         firstName:
           description: The first name.
           type: string
-        infix:
-          description: |-
-            The name's infix, if applicable.
-            >A maximum length of twenty (20) characters is imposed.
-          type: string
         lastName:
           description: The last name.
           type: string
@@ -3703,6 +3786,7 @@ components:
           type: string
         webData:
           $ref: "#/components/schemas/WebData"
+          deprecated: true
           description: The website and app URL of the legal entity.
     PaginatedAccountHoldersResponse:
       properties:
@@ -3817,10 +3901,6 @@ components:
             - Requested
             - Stolen
             - Suspended
-            - active
-            - blocked
-            - discarded
-            - inactive
           type: string
         type:
           description: |-
@@ -3947,10 +4027,6 @@ components:
             - Requested
             - Stolen
             - Suspended
-            - active
-            - blocked
-            - discarded
-            - inactive
           type: string
         type:
           description: |-
@@ -4020,10 +4096,6 @@ components:
             - Requested
             - Stolen
             - Suspended
-            - active
-            - blocked
-            - discarded
-            - inactive
           type: string
     PersonalData:
       properties:
@@ -4059,8 +4131,6 @@ components:
           enum:
             - Landline
             - Mobile
-            - landline
-            - mobile
           type: string
       required:
         - number

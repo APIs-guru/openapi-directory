@@ -312,6 +312,60 @@ components:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
       type: object
+    GoogleFirebaseStorageControlplaneV1alphaMigrateLocationDestructivelyMetadata:
+      description: Metadata for MigrateLocationDestructively LRO.
+      properties:
+        createTime:
+          description: The time the LRO was created.
+          format: google-datetime
+          type: string
+        lastUpdateTime:
+          description: The time the LRO was last updated.
+          format: google-datetime
+          type: string
+        state:
+          description: The current state of the migration.
+          enum:
+            - STATE_UNSPECIFIED
+            - PENDING
+            - CREATING_TEMP_BUCKET
+            - TRANSFERRING_TO_TEMP
+            - DELETING_SOURCE_BUCKET
+            - CREATING_DESTINATION_BUCKET
+            - TRANSFERRING_TO_DESTINATION
+            - DELETING_TEMP_BUCKET
+            - SUCCEEDED
+            - FAILED
+            - ROLLING_BACK
+          type: string
+      type: object
+    GoogleFirebaseStorageControlplaneV1betaMigrateLocationDestructivelyMetadata:
+      description: Metadata for MigrateLocationDestructively LRO.
+      properties:
+        createTime:
+          description: The time the LRO was created.
+          format: google-datetime
+          type: string
+        lastUpdateTime:
+          description: The time the LRO was last updated.
+          format: google-datetime
+          type: string
+        state:
+          description: The current state of the migration.
+          enum:
+            - STATE_UNSPECIFIED
+            - PENDING
+            - CREATING_TEMP_BUCKET
+            - TRANSFERRING_TO_TEMP
+            - DELETING_SOURCE_BUCKET
+            - CREATING_DESTINATION_BUCKET
+            - TRANSFERRING_TO_DESTINATION
+            - DELETING_TEMP_BUCKET
+            - SUCCEEDED
+            - FAILED
+            - ROLLING_BACK
+          type: string
+      type: object
     ListBucketsResponse:
       description: The response returned by `ListBuckets`.
       properties:

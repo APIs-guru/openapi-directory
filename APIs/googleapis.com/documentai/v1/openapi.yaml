@@ -599,7 +599,10 @@ components:
       type: object
     GoogleCloudDocumentaiUiv1beta3ExportProcessorVersionResponse:
       description: Response message associated with the ExportProcessorVersion operation.
-      properties: {}
+      properties:
+        gcsUri:
+          description: The Cloud Storage URI containing the output artifacts.
+          type: string
       type: object
     GoogleCloudDocumentaiUiv1beta3SetDefaultProcessorVersionMetadata:
       description: The long running operation metadata for set default processor version method.

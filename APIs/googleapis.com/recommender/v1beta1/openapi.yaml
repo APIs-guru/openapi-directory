@@ -710,6 +710,11 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudRecommenderV1beta1OperationGroup"
           type: array
+        overview:
+          additionalProperties:
+            description: Properties of the object.
+          description: Condensed overview information about the recommendation.
+          type: object
       type: object
     GoogleCloudRecommenderV1beta1RecommendationInsightReference:
       description: Reference to an associated insight.
