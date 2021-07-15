@@ -24,14 +24,6 @@ paths:
     post:
       description: Upload a single file with content specified in request body.
       operationId: post-/files/v3/files_upload
-      parameters:
-        - explode: false
-          in: header
-          name: User-Agent
-          required: false
-          schema:
-            type: string
-          style: simple
       requestBody:
         content:
           multipart/form-data:
@@ -194,10 +186,42 @@ paths:
             format: date-time
             type: string
           style: form
+        - explode: true
+          in: query
+          name: createdAtLte
+          required: false
+          schema:
+            format: date-time
+            type: string
+          style: form
+        - explode: true
+          in: query
+          name: createdAtGte
+          required: false
+          schema:
+            format: date-time
+            type: string
+          style: form
         - description: Search files by time of latest updated.
           explode: true
           in: query
           name: updatedAt
+          required: false
+          schema:
+            format: date-time
+            type: string
+          style: form
+        - explode: true
+          in: query
+          name: updatedAtLte
+          required: false
+          schema:
+            format: date-time
+            type: string
+          style: form
+        - explode: true
+          in: query
+          name: updatedAtGte
           required: false
           schema:
             format: date-time
@@ -435,13 +459,6 @@ paths:
             pattern: \d+
             type: string
           style: simple
-        - explode: false
-          in: header
-          name: User-Agent
-          required: false
-          schema:
-            type: string
-          style: simple
       requestBody:
         content:
           multipart/form-data:
@@ -654,10 +671,42 @@ paths:
             format: date-time
             type: string
           style: form
+        - explode: true
+          in: query
+          name: createdAtLte
+          required: false
+          schema:
+            format: date-time
+            type: string
+          style: form
+        - explode: true
+          in: query
+          name: createdAtGte
+          required: false
+          schema:
+            format: date-time
+            type: string
+          style: form
         - description: Search for folder at given update timestamp.
           explode: true
           in: query
           name: updatedAt
+          required: false
+          schema:
+            format: date-time
+            type: string
+          style: form
+        - explode: true
+          in: query
+          name: updatedAtLte
+          required: false
+          schema:
+            format: date-time
+            type: string
+          style: form
+        - explode: true
+          in: query
+          name: updatedAtGte
           required: false
           schema:
             format: date-time

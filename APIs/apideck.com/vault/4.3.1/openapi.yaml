@@ -56,7 +56,7 @@ info:
         -H "Authorization: Bearer <your-api-key>"
         -H "X-APIDECK-CONSUMER-ID: <consumer-id>"
         -H "X-APIDECK-APP-ID: <application-id>"
-        -d '{"consumer_metadata": { "account_name" : "Sample", "user_name": "vault@sample", "image": "https://unavatar.now.sh/jake" }, "theme": { "vault_name": "Intercom", "primary_color": "#286efa", "sidepanel_background_color": "#286efa","sidepanel_text_color": "#FFFFFF", "favicon": "https://res.cloudinary.com/apideck/icons/intercom" }}'
+        -d '{"consumer_metadata": { "account_name" : "Sample", "user_name": "Sand Box", "email": "sand@box.com", "image": "https://unavatar.now.sh/jake" }, "theme": { "vault_name": "Intercom", "primary_color": "#286efa", "sidepanel_background_color": "#286efa","sidepanel_text_color": "#FFFFFF", "favicon": "https://res.cloudinary.com/apideck/icons/intercom" }}'
     ```
 
     ### Vault API
@@ -163,7 +163,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 4.3.0
+  version: 4.3.1
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -513,6 +513,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/x-apideck-app-id"
         - $ref: "#/components/parameters/x-apideck-consumer-id"
+        - $ref: "#/components/parameters/filter"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
       responses:
@@ -709,6 +710,28 @@ components:
       required: true
       schema:
         type: string
+    filter:
+      description: Filter results
+      in: query
+      name: filter
+      schema:
+        properties:
+          connector_id:
+            example: crm+salesforce
+            nullable: true
+            type: string
+          exclude_unified_apis:
+            example:
+              - vault
+              - proxy
+            items:
+              type: string
+            type: array
+          status_code:
+            example: 201
+            nullable: true
+            type: number
+        type: object
     id:
       description: ID of the record you are acting upon.
       in: path
@@ -1866,6 +1889,9 @@ components:
           properties:
             account_name:
               example: SpaceX
+              type: string
+            email:
+              example: elon@musk.com
               type: string
             image:
               example: https://www.spacex.com/static/images/share.jpg
