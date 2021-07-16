@@ -3,7 +3,7 @@ info:
   version: '2020-07-29'
   x-release: v4
   title: Amazon AppIntegrations Service
-  description: '<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>The Amazon AppIntegrations service enables you to configure and reuse connections to external applications.</p> <p>For information about how you can use external applications with Amazon Connect, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/crm.html">Set up pre-built integrations</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
+  description: '<p>The Amazon AppIntegrations service enables you to configure and reuse connections to external applications.</p> <p>For information about how you can use external applications with Amazon Connect, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/crm.html">Set up pre-built integrations</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -118,7 +118,7 @@ paths:
   /eventIntegrations:
     post:
       operationId: CreateEventIntegration
-      description: '<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>Creates an EventIntegration, given a specified name, description, and a reference to an Amazon Eventbridge bus in your account and a partner event source that will push events to that bus. No objects are created in the your account, only metadata that is persisted on the EventIntegration control plane.</p>'
+      description: 'Creates an EventIntegration, given a specified name, description, and a reference to an Amazon EventBridge bus in your account and a partner event source that pushes events to that bus. No objects are created in the your account, only metadata that is persisted on the EventIntegration control plane.'
       responses:
         '200':
           description: Success
@@ -187,7 +187,7 @@ paths:
                   minLength: 1
                   maxLength: 1000
                 EventFilter:
-                  description: <p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>The event filter.</p>
+                  description: The event filter.
                   type: object
                   properties:
                     Source:
@@ -195,7 +195,7 @@ paths:
                         - $ref: '#/components/schemas/Source'
                         - description: The source of the events.
                 EventBridgeBus:
-                  description: The Eventbridge bus.
+                  description: The EventBridge bus.
                   type: string
                   pattern: '^[a-zA-Z0-9\/\._\-]+$'
                   minLength: 1
@@ -223,7 +223,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListEventIntegrations
-      description: <p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>Returns a paginated list of event integrations in the account.</p>
+      description: Returns a paginated list of event integrations in the account.
       responses:
         '200':
           description: Success
@@ -276,7 +276,7 @@ paths:
   '/eventIntegrations/{Name}':
     delete:
       operationId: DeleteEventIntegration
-      description: '<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>Deletes the specified existing event integration. If the event integration is associated with clients, the request is rejected.</p>'
+      description: 'Deletes the specified existing event integration. If the event integration is associated with clients, the request is rejected.'
       responses:
         '200':
           description: Success
@@ -334,7 +334,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetEventIntegration
-      description: <p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>Return information about the event integration.</p>
+      description: Return information about the event integration.
       responses:
         '200':
           description: Success
@@ -384,7 +384,7 @@ paths:
             maxLength: 255
     patch:
       operationId: UpdateEventIntegration
-      description: <p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>Updates the description of an event integration.</p>
+      description: Updates the description of an event integration.
       responses:
         '200':
           description: Success
@@ -448,7 +448,7 @@ paths:
   '/eventIntegrations/{Name}/associations':
     get:
       operationId: ListEventIntegrationAssociations
-      description: <p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>Returns a paginated list of event integration associations in the account. </p>
+      description: 'Returns a paginated list of event integration associations in the account. '
       responses:
         '200':
           description: Success
@@ -524,7 +524,7 @@ paths:
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
-      description: <p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>Lists the tags for the specified resource.</p>
+      description: Lists the tags for the specified resource.
       responses:
         '200':
           description: Success
@@ -576,7 +576,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: <p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>Adds the specified tags to the specified resource.</p>
+      description: Adds the specified tags to the specified resource.
       responses:
         '200':
           description: Success
@@ -637,7 +637,7 @@ paths:
   '/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
-      description: <p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>Removes the specified tags from the specified resource.</p>
+      description: Removes the specified tags from the specified resource.
       responses:
         '200':
           description: Success
@@ -792,7 +792,7 @@ components:
         EventBridgeBus:
           allOf:
             - $ref: '#/components/schemas/EventBridgeBus'
-            - description: The Eventbridge bus.
+            - description: The EventBridge bus.
         EventFilter:
           allOf:
             - $ref: '#/components/schemas/EventFilter'
@@ -882,7 +882,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Source'
             - description: The source of the events.
-      description: <p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>The event filter.</p>
+      description: The event filter.
     EventBridgeBus:
       type: string
       pattern: '^[a-zA-Z0-9\/\._\-]+$'
@@ -922,7 +922,7 @@ components:
         EventBridgeBus:
           allOf:
             - $ref: '#/components/schemas/EventBridgeBus'
-            - description: The Eventbridge bus.
+            - description: The EventBridge bus.
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/IdempotencyToken'
@@ -962,12 +962,12 @@ components:
         EventBridgeBus:
           allOf:
             - $ref: '#/components/schemas/EventBridgeBus'
-            - description: The Amazon Eventbridge bus for the event integration.
+            - description: The Amazon EventBridge bus for the event integration.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags.
-      description: <p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>The event integration.</p>
+      description: The event integration.
     UUID:
       type: string
       pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
@@ -993,12 +993,12 @@ components:
         EventBridgeRuleName:
           allOf:
             - $ref: '#/components/schemas/EventBridgeRuleName'
-            - description: The name of the Eventbridge rule.
+            - description: The name of the EventBridge rule.
         ClientAssociationMetadata:
           allOf:
             - $ref: '#/components/schemas/ClientAssociationMetadata'
             - description: The metadata associated with the client.
-      description: <p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>The event integration association.</p>
+      description: The event integration association.
     EventIntegrationAssociationsList:
       type: array
       items:

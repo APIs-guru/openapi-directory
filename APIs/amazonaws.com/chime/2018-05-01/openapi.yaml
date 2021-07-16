@@ -17226,6 +17226,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/License'
+    AccountStatus:
+      type: string
+      enum:
+        - Suspended
+        - Active
     SigninDelegateGroupList:
       type: array
       items:
@@ -17265,6 +17270,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LicenseList'
             - description: Supported licenses for the Amazon Chime account.
+        AccountStatus:
+          allOf:
+            - $ref: '#/components/schemas/AccountStatus'
+            - description: 'The status of the account, <code>Suspended</code> or <code>Active</code>.'
         SigninDelegateGroups:
           allOf:
             - $ref: '#/components/schemas/SigninDelegateGroupList'

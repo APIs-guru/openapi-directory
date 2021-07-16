@@ -3,7 +3,7 @@ info:
   version: '2017-07-25'
   x-release: v4
   title: AWS Audit Manager
-  description: '<p>Welcome to the AWS Audit Manager API reference. This guide is for developers who need detailed information about the AWS Audit Manager API operations, data types, and errors. </p> <p>AWS Audit Manager is a service that provides automated evidence collection so that you can continuously audit your AWS usage, and assess the effectiveness of your controls to better manage risk and simplify compliance.</p> <p>AWS Audit Manager provides pre-built frameworks that structure and automate assessments for a given compliance standard. Frameworks include a pre-built collection of controls with descriptions and testing procedures, which are grouped according to the requirements of the specified compliance standard or regulation. You can also customize frameworks and controls to support internal audits with unique requirements. </p> <p>Use the following links to get started with the AWS Audit Manager API:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Operations.html">Actions</a>: An alphabetical list of all AWS Audit Manager API operations.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Types.html">Data types</a>: An alphabetical list of all AWS Audit Manager data types.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonParameters.html">Common parameters</a>: Parameters that all Query operations can use.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonErrors.html">Common errors</a>: Client and server errors that all operations can return.</p> </li> </ul> <p>If you''re new to AWS Audit Manager, we recommend that you review the <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html"> AWS Audit Manager User Guide</a>.</p>'
+  description: '<p>Welcome to the Audit Manager API reference. This guide is for developers who need detailed information about the Audit Manager API operations, data types, and errors. </p> <p>Audit Manager is a service that provides automated evidence collection so that you can continuously audit your Amazon Web Services usage, and assess the effectiveness of your controls to better manage risk and simplify compliance.</p> <p>Audit Manager provides pre-built frameworks that structure and automate assessments for a given compliance standard. Frameworks include a pre-built collection of controls with descriptions and testing procedures, which are grouped according to the requirements of the specified compliance standard or regulation. You can also customize frameworks and controls to support internal audits with unique requirements. </p> <p>Use the following links to get started with the Audit Manager API:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Operations.html">Actions</a>: An alphabetical list of all Audit Manager API operations.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Types.html">Data types</a>: An alphabetical list of all Audit Manager data types.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonParameters.html">Common parameters</a>: Parameters that all Query operations can use.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonErrors.html">Common errors</a>: Client and server errors that all operations can return.</p> </li> </ul> <p>If you''re new to Audit Manager, we recommend that you review the <a href="https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html"> Audit Manager User Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -118,7 +118,7 @@ paths:
   '/assessments/{assessmentId}/associateToAssessmentReport':
     put:
       operationId: AssociateAssessmentReportEvidenceFolder
-      description: ' Associates an evidence folder to the specified assessment report in AWS Audit Manager. '
+      description: ' Associates an evidence folder to the specified assessment report in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -186,7 +186,7 @@ paths:
   '/assessments/{assessmentId}/batchAssociateToAssessmentReport':
     put:
       operationId: BatchAssociateAssessmentReportEvidence
-      description: ' Associates a list of evidence to an assessment report in an AWS Audit Manager assessment. '
+      description: ' Associates a list of evidence to an assessment report in an Audit Manager assessment. '
       responses:
         '200':
           description: Success
@@ -262,7 +262,7 @@ paths:
   '/assessments/{assessmentId}/delegations':
     post:
       operationId: BatchCreateDelegationByAssessment
-      description: ' Create a batch of delegations for a specified assessment in AWS Audit Manager. '
+      description: ' Create a batch of delegations for a specified assessment in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -314,7 +314,7 @@ paths:
                 - createDelegationRequests
               properties:
                 createDelegationRequests:
-                  description: ' The API request to batch create delegations in AWS Audit Manager. '
+                  description: ' The API request to batch create delegations in Audit Manager. '
                   type: array
                   items:
                     $ref: '#/components/schemas/CreateDelegationRequest'
@@ -330,7 +330,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
       operationId: BatchDeleteDelegationByAssessment
-      description: ' Deletes the delegations in the specified AWS Audit Manager assessment. '
+      description: ' Deletes the delegations in the specified Audit Manager assessment. '
       responses:
         '200':
           description: Success
@@ -391,7 +391,7 @@ paths:
   '/assessments/{assessmentId}/batchDisassociateFromAssessmentReport':
     put:
       operationId: BatchDisassociateAssessmentReportEvidence
-      description: ' Disassociates a list of evidence from the specified assessment report in AWS Audit Manager. '
+      description: ' Disassociates a list of evidence from the specified assessment report in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -467,7 +467,7 @@ paths:
   '/assessments/{assessmentId}/controlSets/{controlSetId}/controls/{controlId}/evidence':
     post:
       operationId: BatchImportEvidenceToAssessmentControl
-      description: ' Uploads one or more pieces of evidence to the specified control in the assessment in AWS Audit Manager. '
+      description: ' Uploads one or more pieces of evidence to the specified control in the assessment in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -554,7 +554,7 @@ paths:
   /assessments:
     post:
       operationId: CreateAssessment
-      description: ' Creates an assessment in AWS Audit Manager. '
+      description: ' Creates an assessment in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -612,7 +612,7 @@ paths:
                   pattern: '^[\w\W\s\S]*$'
                   maxLength: 1000
                 assessmentReportsDestination:
-                  description: ' The location in which AWS Audit Manager saves assessment reports for the given assessment. '
+                  description: ' The location in which Audit Manager saves assessment reports for the given assessment. '
                   type: object
                   properties:
                     destinationType:
@@ -624,17 +624,17 @@ paths:
                         - $ref: '#/components/schemas/S3Url'
                         - description: ' The destination of the assessment report. '
                 scope:
-                  description: ' The wrapper that contains the AWS accounts and AWS services in scope for the assessment. '
+                  description: ' The wrapper that contains the accounts and services in scope for the assessment. '
                   type: object
                   properties:
                     awsAccounts:
                       allOf:
                         - $ref: '#/components/schemas/AWSAccounts'
-                        - description: ' The AWS accounts included in the scope of the assessment. '
+                        - description: ' The accounts included in the scope of the assessment. '
                     awsServices:
                       allOf:
                         - $ref: '#/components/schemas/AWSServices'
-                        - description: ' The AWS services included in the scope of the assessment. '
+                        - description: ' The Amazon Web Services services included in the scope of the assessment. '
                 roles:
                   description: ' The list of roles for the specified assessment. '
                   type: array
@@ -663,7 +663,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListAssessments
-      description: ' Returns a list of current and past assessments from AWS Audit Manager. '
+      description: ' Returns a list of current and past assessments from Audit Manager. '
       responses:
         '200':
           description: Success
@@ -711,7 +711,7 @@ paths:
   /assessmentFrameworks:
     post:
       operationId: CreateAssessmentFramework
-      description: ' Creates a custom framework in AWS Audit Manager. '
+      description: ' Creates a custom framework in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -868,7 +868,7 @@ paths:
   /controls:
     post:
       operationId: CreateControl
-      description: ' Creates a new custom control in AWS Audit Manager. '
+      description: ' Creates a new custom control in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -961,7 +961,7 @@ paths:
   '/assessments/{assessmentId}':
     delete:
       operationId: DeleteAssessment
-      description: ' Deletes an assessment in AWS Audit Manager. '
+      description: ' Deletes an assessment in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -1013,7 +1013,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetAssessment
-      description: ' Returns an assessment from AWS Audit Manager. '
+      description: ' Returns an assessment from Audit Manager. '
       responses:
         '200':
           description: Success
@@ -1057,7 +1057,7 @@ paths:
             maxLength: 36
     put:
       operationId: UpdateAssessment
-      description: ' Edits an AWS Audit Manager assessment. '
+      description: ' Edits an Audit Manager assessment. '
       responses:
         '200':
           description: Success
@@ -1120,19 +1120,19 @@ paths:
                   pattern: '^[\w\W\s\S]*$'
                   maxLength: 1000
                 scope:
-                  description: ' The wrapper that contains the AWS accounts and AWS services in scope for the assessment. '
+                  description: ' The wrapper that contains the accounts and services in scope for the assessment. '
                   type: object
                   properties:
                     awsAccounts:
                       allOf:
                         - $ref: '#/components/schemas/AWSAccounts'
-                        - description: ' The AWS accounts included in the scope of the assessment. '
+                        - description: ' The accounts included in the scope of the assessment. '
                     awsServices:
                       allOf:
                         - $ref: '#/components/schemas/AWSServices'
-                        - description: ' The AWS services included in the scope of the assessment. '
+                        - description: ' The Amazon Web Services services included in the scope of the assessment. '
                 assessmentReportsDestination:
-                  description: ' The location in which AWS Audit Manager saves assessment reports for the given assessment. '
+                  description: ' The location in which Audit Manager saves assessment reports for the given assessment. '
                   type: object
                   properties:
                     destinationType:
@@ -1151,7 +1151,7 @@ paths:
   '/assessmentFrameworks/{frameworkId}':
     delete:
       operationId: DeleteAssessmentFramework
-      description: ' Deletes a custom framework in AWS Audit Manager. '
+      description: ' Deletes a custom framework in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -1203,7 +1203,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetAssessmentFramework
-      description: ' Returns a framework from AWS Audit Manager. '
+      description: ' Returns a framework from Audit Manager. '
       responses:
         '200':
           description: Success
@@ -1247,7 +1247,7 @@ paths:
             maxLength: 36
     put:
       operationId: UpdateAssessmentFramework
-      description: ' Updates a custom framework in AWS Audit Manager. '
+      description: ' Updates a custom framework in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -1324,7 +1324,7 @@ paths:
   '/assessments/{assessmentId}/reports/{assessmentReportId}':
     delete:
       operationId: DeleteAssessmentReport
-      description: ' Deletes an assessment report from an assessment in AWS Audit Manager. '
+      description: ' Deletes an assessment report from an assessment in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -1386,7 +1386,7 @@ paths:
   '/controls/{controlId}':
     delete:
       operationId: DeleteControl
-      description: ' Deletes a custom control in AWS Audit Manager. '
+      description: ' Deletes a custom control in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -1438,7 +1438,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetControl
-      description: ' Returns a control from AWS Audit Manager. '
+      description: ' Returns a control from Audit Manager. '
       responses:
         '200':
           description: Success
@@ -1482,7 +1482,7 @@ paths:
             maxLength: 36
     put:
       operationId: UpdateControl
-      description: ' Updates a custom control in AWS Audit Manager. '
+      description: ' Updates a custom control in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -1569,7 +1569,7 @@ paths:
   /account/deregisterAccount:
     post:
       operationId: DeregisterAccount
-      description: ' Deregisters an account in AWS Audit Manager. '
+      description: ' Deregisters an account in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -1613,7 +1613,7 @@ paths:
   /account/deregisterOrganizationAdminAccount:
     post:
       operationId: DeregisterOrganizationAdminAccount
-      description: ' Deregisters the delegated AWS administrator account from the AWS organization. '
+      description: '<p>Removes the specified member account as a delegated administrator for Audit Manager. </p> <important> <p>When you remove a delegated administrator from your Audit Manager settings, or when you deregister a delegated administrator from Organizations, you continue to have access to the evidence that you previously collected under that account. However, Audit Manager will stop collecting and attaching evidence to that delegated administrator account moving forward.</p> </important>'
       responses:
         '200':
           description: Success
@@ -1670,7 +1670,7 @@ paths:
   '/assessments/{assessmentId}/disassociateFromAssessmentReport':
     put:
       operationId: DisassociateAssessmentReportEvidenceFolder
-      description: ' Disassociates an evidence folder from the specified assessment report in AWS Audit Manager. '
+      description: ' Disassociates an evidence folder from the specified assessment report in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -1738,7 +1738,7 @@ paths:
   /account/status:
     get:
       operationId: GetAccountStatus
-      description: ' Returns the registration status of an account in AWS Audit Manager. '
+      description: ' Returns the registration status of an account in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -1764,7 +1764,7 @@ paths:
   '/assessments/{assessmentId}/reports/{assessmentReportId}/url':
     get:
       operationId: GetAssessmentReportUrl
-      description: ' Returns the URL of a specified assessment report in AWS Audit Manager. '
+      description: ' Returns the URL of a specified assessment report in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -1826,7 +1826,7 @@ paths:
   '/assessments/{assessmentId}/changelogs':
     get:
       operationId: GetChangeLogs
-      description: ' Returns a list of changelogs from AWS Audit Manager. '
+      description: ' Returns a list of changelogs from Audit Manager. '
       responses:
         '200':
           description: Success
@@ -1971,7 +1971,7 @@ paths:
   '/assessments/{assessmentId}/controlSets/{controlSetId}/evidenceFolders/{evidenceFolderId}/evidence/{evidenceId}':
     get:
       operationId: GetEvidence
-      description: ' Returns evidence from AWS Audit Manager. '
+      description: ' Returns evidence from Audit Manager. '
       responses:
         '200':
           description: Success
@@ -2051,7 +2051,7 @@ paths:
   '/assessments/{assessmentId}/controlSets/{controlSetId}/evidenceFolders/{evidenceFolderId}/evidence':
     get:
       operationId: GetEvidenceByEvidenceFolder
-      description: ' Returns all evidence from a specified evidence folder in AWS Audit Manager. '
+      description: ' Returns all evidence from a specified evidence folder in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -2140,7 +2140,7 @@ paths:
   '/assessments/{assessmentId}/controlSets/{controlSetId}/evidenceFolders/{evidenceFolderId}':
     get:
       operationId: GetEvidenceFolder
-      description: ' Returns an evidence folder from the specified assessment in AWS Audit Manager. '
+      description: ' Returns an evidence folder from the specified assessment in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -2211,7 +2211,7 @@ paths:
   '/assessments/{assessmentId}/evidenceFolders':
     get:
       operationId: GetEvidenceFoldersByAssessment
-      description: ' Returns the evidence folders from a specified assessment in AWS Audit Manager. '
+      description: ' Returns the evidence folders from a specified assessment in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -2282,7 +2282,7 @@ paths:
   '/assessments/{assessmentId}/evidenceFolders-by-assessment-control/{controlSetId}/{controlId}':
     get:
       operationId: GetEvidenceFoldersByAssessmentControl
-      description: ' Returns a list of evidence folders associated with a specified control of an assessment in AWS Audit Manager. '
+      description: ' Returns a list of evidence folders associated with a specified control of an assessment in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -2371,7 +2371,7 @@ paths:
   /account/organizationAdminAccount:
     get:
       operationId: GetOrganizationAdminAccount
-      description: ' Returns the name of the delegated AWS administrator account for the AWS organization. '
+      description: ' Returns the name of the delegated Amazon Web Services administrator account for the organization. '
       responses:
         '200':
           description: Success
@@ -2415,7 +2415,7 @@ paths:
   /services:
     get:
       operationId: GetServicesInScope
-      description: ' Returns a list of the in-scope AWS services for the specified assessment. '
+      description: ' Returns a list of the in-scope Amazon Web Services services for the specified assessment. '
       responses:
         '200':
           description: Success
@@ -2453,7 +2453,7 @@ paths:
   '/settings/{attribute}':
     get:
       operationId: GetSettings
-      description: ' Returns the settings for the specified AWS account. '
+      description: ' Returns the settings for the specified account. '
       responses:
         '200':
           description: Success
@@ -2497,7 +2497,7 @@ paths:
   /assessmentFrameworks#frameworkType:
     get:
       operationId: ListAssessmentFrameworks
-      description: ' Returns a list of the frameworks available in the AWS Audit Manager framework library. '
+      description: ' Returns a list of the frameworks available in the Audit Manager framework library. '
       responses:
         '200':
           description: Success
@@ -2562,7 +2562,7 @@ paths:
   /assessmentReports:
     get:
       operationId: ListAssessmentReports
-      description: ' Returns a list of assessment reports created in AWS Audit Manager. '
+      description: ' Returns a list of assessment reports created in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -2618,7 +2618,7 @@ paths:
   /controls#controlType:
     get:
       operationId: ListControls
-      description: ' Returns a list of controls from AWS Audit Manager. '
+      description: ' Returns a list of controls from Audit Manager. '
       responses:
         '200':
           description: Success
@@ -2751,7 +2751,7 @@ paths:
   /notifications:
     get:
       operationId: ListNotifications
-      description: ' Returns a list of all AWS Audit Manager notifications. '
+      description: ' Returns a list of all Audit Manager notifications. '
       responses:
         '200':
           description: Success
@@ -2807,7 +2807,7 @@ paths:
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
-      description: ' Returns a list of tags for the specified resource in AWS Audit Manager. '
+      description: ' Returns a list of tags for the specified resource in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -2853,7 +2853,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: ' Tags the specified resource in AWS Audit Manager. '
+      description: ' Tags the specified resource in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -2908,7 +2908,7 @@ paths:
   /account/registerAccount:
     post:
       operationId: RegisterAccount
-      description: ' Enables AWS Audit Manager for the specified AWS account. '
+      description: ' Enables Audit Manager for the specified account. '
       responses:
         '200':
           description: Success
@@ -2949,13 +2949,13 @@ paths:
               type: object
               properties:
                 kmsKey:
-                  description: ' The AWS KMS key details. '
+                  description: ' The KMS key details. '
                   type: string
                   pattern: '^arn:.*:kms:.*|DEFAULT'
                   minLength: 7
                   maxLength: 2048
                 delegatedAdminAccount:
-                  description: ' The delegated administrator account for AWS Audit Manager. '
+                  description: ' The delegated administrator account for Audit Manager. '
                   type: string
                   pattern: '^[0-9]{12}$'
                   minLength: 12
@@ -2971,7 +2971,7 @@ paths:
   /account/registerOrganizationAdminAccount:
     post:
       operationId: RegisterOrganizationAdminAccount
-      description: ' Enables an AWS account within the organization as the delegated administrator for AWS Audit Manager. '
+      description: ' Enables an account within the organization as the delegated administrator for Audit Manager. '
       responses:
         '200':
           description: Success
@@ -3030,7 +3030,7 @@ paths:
   '/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
-      description: ' Removes a tag from a resource in AWS Audit Manager. '
+      description: ' Removes a tag from a resource in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -3087,7 +3087,7 @@ paths:
   '/assessments/{assessmentId}/controlSets/{controlSetId}/controls/{controlId}':
     put:
       operationId: UpdateAssessmentControl
-      description: ' Updates a control within an assessment in AWS Audit Manager. '
+      description: ' Updates a control within an assessment in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -3177,7 +3177,7 @@ paths:
   '/assessments/{assessmentId}/controlSets/{controlSetId}/status':
     put:
       operationId: UpdateAssessmentControlSetStatus
-      description: ' Updates the status of a control set in an AWS Audit Manager assessment. '
+      description: ' Updates the status of a control set in an Audit Manager assessment. '
       responses:
         '200':
           description: Success
@@ -3261,7 +3261,7 @@ paths:
   '/assessments/{assessmentId}/status':
     put:
       operationId: UpdateAssessmentStatus
-      description: ' Updates the status of an assessment in AWS Audit Manager. '
+      description: ' Updates the status of an assessment in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -3329,7 +3329,7 @@ paths:
   /settings:
     put:
       operationId: UpdateSettings
-      description: ' Updates AWS Audit Manager settings for the current user account. '
+      description: ' Updates Audit Manager settings for the current user account. '
       responses:
         '200':
           description: Success
@@ -3364,13 +3364,13 @@ paths:
               type: object
               properties:
                 snsTopic:
-                  description: ' The Amazon Simple Notification Service (Amazon SNS) topic to which AWS Audit Manager sends notifications. '
+                  description: ' The Amazon Simple Notification Service (Amazon SNS) topic to which Audit Manager sends notifications. '
                   type: string
                   pattern: '^arn:.*:sns:.*'
                   minLength: 20
                   maxLength: 2048
                 defaultAssessmentReportsDestination:
-                  description: ' The location in which AWS Audit Manager saves assessment reports for the given assessment. '
+                  description: ' The location in which Audit Manager saves assessment reports for the given assessment. '
                   type: object
                   properties:
                     destinationType:
@@ -3387,7 +3387,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/Role'
                 kmsKey:
-                  description: ' The AWS KMS key details. '
+                  description: ' The KMS key details. '
                   type: string
                   pattern: '^arn:.*:kms:.*|DEFAULT'
                   minLength: 7
@@ -3403,7 +3403,7 @@ paths:
   /assessmentReports/integrity:
     post:
       operationId: ValidateAssessmentReportIntegrity
-      description: ' Validates the integrity of an assessment report in AWS Audit Manager. '
+      description: ' Validates the integrity of an assessment report in Audit Manager. '
       responses:
         '200':
           description: Success
@@ -3448,7 +3448,7 @@ paths:
                 s3RelativePath:
                   description: ' The relative path of the specified Amazon S3 bucket in which the assessment report is stored. '
                   type: string
-                  pattern: '^(S|s)3:\/\/[a-zA-Z0-9-_\/.]+$'
+                  pattern: '^(S|s)3:\/\/[a-zA-Z0-9\-\.\(\)\''\*\_\!\/]+$'
                   minLength: 1
                   maxLength: 1024
     parameters:
@@ -3564,7 +3564,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/RoleType'
             - description: '<p> The type of customer persona. </p> <note> <p>In <code>CreateAssessment</code>, <code>roleType</code> can only be <code>PROCESS_OWNER</code>. </p> <p>In <code>UpdateSettings</code>, <code>roleType</code> can only be <code>PROCESS_OWNER</code>.</p> <p>In <code>BatchCreateDelegationByAssessment</code>, <code>roleType</code> can only be <code>RESOURCE_OWNER</code>.</p> </note>'
-      description: ' A collection of attributes used to create a delegation for an assessment in AWS Audit Manager. '
+      description: ' A collection of attributes used to create a delegation for an assessment in Audit Manager. '
     BatchDeleteDelegationByAssessmentResponse:
       type: object
       properties:
@@ -3597,7 +3597,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3Url'
             - description: ' The Amazon S3 URL that points to a manual evidence object. '
-      description: ' Evidence that is uploaded to AWS Audit Manager manually. '
+      description: ' Evidence that is uploaded to Audit Manager manually. '
     CreateAssessmentResponse:
       type: object
       properties:
@@ -3609,7 +3609,7 @@ components:
         - S3
     S3Url:
       type: string
-      pattern: '^(S|s)3:\/\/[a-zA-Z0-9-_\/.]+$'
+      pattern: '^(S|s)3:\/\/[a-zA-Z0-9\-\.\(\)\''\*\_\!\/]+$'
       minLength: 1
       maxLength: 1024
     AWSAccounts:
@@ -3631,7 +3631,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/IamArn'
             - description: ' The Amazon Resource Name (ARN) of the IAM role. '
-      description: ' The wrapper that contains the AWS Audit Manager role information of the current user, such as the role type and IAM Amazon Resource Name (ARN). '
+      description: ' The wrapper that contains the Audit Manager role information of the current user, such as the role type and IAM Amazon Resource Name (ARN). '
     TagValue:
       type: string
       pattern: '.{0,255}'
@@ -3657,7 +3657,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CreateAssessmentFrameworkControls'
             - description: ' The list of controls within the control set. This does not contain the control set ID. '
-      description: ' A <code>controlSet</code> entity that represents a collection of controls in AWS Audit Manager. This does not contain the control set ID. '
+      description: ' A <code>controlSet</code> entity that represents a collection of controls in Audit Manager. This does not contain the control set ID. '
     CreateAssessmentReportResponse:
       type: object
       properties:
@@ -3682,7 +3682,7 @@ components:
         sourceDescription:
           allOf:
             - $ref: '#/components/schemas/SourceDescription'
-            - description: ' The description of the data source that determines from where AWS Audit Manager collects evidence for the control. '
+            - description: ' The description of the data source that determines from where Audit Manager collects evidence for the control. '
         sourceSetUpOption:
           allOf:
             - $ref: '#/components/schemas/SourceSetUpOption'
@@ -3733,7 +3733,7 @@ components:
         status:
           allOf:
             - $ref: '#/components/schemas/AccountStatus'
-            - description: ' The status of the specified AWS account. '
+            - description: ' The status of the specified account. '
     GetAssessmentResponse:
       type: object
       properties:
@@ -3846,14 +3846,14 @@ components:
         serviceMetadata:
           allOf:
             - $ref: '#/components/schemas/ServiceMetadataList'
-            - description: ' The metadata associated with the aAWS service. '
+            - description: ' The metadata associated with the Amazon Web Service. '
     GetSettingsResponse:
       type: object
       properties:
         settings:
           allOf:
             - $ref: '#/components/schemas/Settings'
-            - description: ' The settings object that holds all supported AWS Audit Manager settings. '
+            - description: ' The settings object that holds all supported Audit Manager settings. '
     ListAssessmentFrameworksResponse:
       type: object
       properties:
@@ -3944,7 +3944,7 @@ components:
         organizationId:
           allOf:
             - $ref: '#/components/schemas/organizationId'
-            - description: ' The identifier for the specified AWS organization. '
+            - description: ' The identifier for the specified organization. '
     TagResourceResponse:
       type: object
       properties: {}
@@ -4001,7 +4001,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CreateAssessmentFrameworkControls'
             - description: ' The list of controls contained within the control set. '
-      description: ' A <code>controlSet</code> entity that represents a collection of controls in AWS Audit Manager. This does not contain the control set ID. '
+      description: ' A <code>controlSet</code> entity that represents a collection of controls in Audit Manager. This does not contain the control set ID. '
     UpdateAssessmentStatusResponse:
       type: object
       properties:
@@ -4049,7 +4049,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TroubleshootingText'
             - description: ' The instructions for troubleshooting the specified control. '
-      description: ' The data source that determines from where AWS Audit Manager collects evidence for the control. '
+      description: ' The data source that determines from where Audit Manager collects evidence for the control. '
     UpdateSettingsResponse:
       type: object
       properties:
@@ -4101,16 +4101,16 @@ components:
         id:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: ' The identifier for the specified AWS account. '
+            - description: ' The identifier for the specified account. '
         emailAddress:
           allOf:
             - $ref: '#/components/schemas/EmailAddress'
-            - description: ' The email address associated with the specified AWS account. '
+            - description: ' The email address associated with the specified account. '
         name:
           allOf:
             - $ref: '#/components/schemas/AccountName'
-            - description: ' The name of the specified AWS account. '
-      description: ' The wrapper of AWS account details, such as account ID, email address, and so on. '
+            - description: ' The name of the specified account. '
+      description: ' The wrapper of account details, such as account ID, email address, and so on. '
     AWSServiceName:
       type: string
       pattern: '^[a-zA-Z0-9-\s().]+$'
@@ -4122,8 +4122,8 @@ components:
         serviceName:
           allOf:
             - $ref: '#/components/schemas/AWSServiceName'
-            - description: ' The name of the AWS service. '
-      description: ' An AWS service such as Amazon S3, AWS CloudTrail, and so on. '
+            - description: ' The name of the Amazon Web Service. '
+      description: ' An Amazon Web Service such as Amazon S3, CloudTrail, and so on. '
     AccountStatus:
       type: string
       enum:
@@ -4184,7 +4184,7 @@ components:
         scope:
           allOf:
             - $ref: '#/components/schemas/Scope'
-            - description: ' The wrapper of AWS accounts and services in scope for the assessment. '
+            - description: ' The wrapper of accounts and services in scope for the assessment. '
         roles:
           allOf:
             - $ref: '#/components/schemas/Roles'
@@ -4219,7 +4219,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/AssessmentControlSets'
             - description: ' The control sets associated with the framework. '
-      description: ' The file used to structure and automate AWS Audit Manager assessments for a given compliance standard. '
+      description: ' The file used to structure and automate Audit Manager assessments for a given compliance standard. '
     TagMap:
       type: object
       minProperties: 0
@@ -4236,7 +4236,7 @@ components:
         awsAccount:
           allOf:
             - $ref: '#/components/schemas/AWSAccount'
-            - description: ' The AWS account associated with the assessment. '
+            - description: ' The account associated with the assessment. '
         metadata:
           allOf:
             - $ref: '#/components/schemas/AssessmentMetadata'
@@ -4249,7 +4249,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: ' The tags associated with the assessment. '
-      description: ' An entity that defines the scope of audit evidence collected by AWS Audit Manager. An AWS Audit Manager assessment is an implementation of an AWS Audit Manager framework. '
+      description: ' An entity that defines the scope of audit evidence collected by Audit Manager. An Audit Manager assessment is an implementation of an Audit Manager framework. '
     ControlName:
       type: string
       pattern: '^[^\\]*$'
@@ -4321,7 +4321,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Integer'
             - description: ' The amount of evidence in the assessment report. '
-      description: ' The control entity that represents a standard or custom control used in an AWS Audit Manager assessment. '
+      description: ' The control entity that represents a standard or custom control used in an Audit Manager assessment. '
     ControlSetId:
       type: string
       pattern: '^[\w\W\s\S]*$'
@@ -4385,7 +4385,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Integer'
             - description: ' The total number of evidence objects uploaded manually to the control set. '
-      description: ' Represents a set of controls in an AWS Audit Manager assessment. '
+      description: ' Represents a set of controls in an Audit Manager assessment. '
     AssessmentControlSets:
       type: array
       items:
@@ -4437,7 +4437,7 @@ components:
         dataSource:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: ' The AWS service from which the evidence was collected. '
+            - description: ' The Amazon Web Service from which the evidence was collected. '
         author:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -4461,7 +4461,7 @@ components:
         evidenceByTypeConfigurationDataCount:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: ' The number of evidence that falls under the configuration data category. This evidence is collected from configuration snapshots of other AWS services such as Amazon EC2, Amazon S3, or IAM. '
+            - description: ' The number of evidence that falls under the configuration data category. This evidence is collected from configuration snapshots of other Amazon Web Services services such as Amazon EC2, Amazon S3, or IAM. '
         evidenceByTypeManualCount:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -4469,20 +4469,20 @@ components:
         evidenceByTypeComplianceCheckCount:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: ' The number of evidence that falls under the compliance check category. This evidence is collected from AWS Config or AWS Security Hub. '
+            - description: ' The number of evidence that falls under the compliance check category. This evidence is collected from Config or Security Hub. '
         evidenceByTypeComplianceCheckIssuesCount:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: ' The total number of issues that were reported directly from AWS Security Hub, AWS Config, or both. '
+            - description: ' The total number of issues that were reported directly from Security Hub, Config, or both. '
         evidenceByTypeUserActivityCount:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: ' The number of evidence that falls under the user activity category. This evidence is collected from AWS CloudTrail logs. '
+            - description: ' The number of evidence that falls under the user activity category. This evidence is collected from CloudTrail logs. '
         evidenceAwsServiceSourceCount:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: ' The total number of AWS resources assessed to generate the evidence. '
-      description: ' The folder in which AWS Audit Manager stores evidence for an assessment. '
+            - description: ' The total number of Amazon Web Services resources assessed to generate the evidence. '
+      description: ' The folder in which Audit Manager stores evidence for an assessment. '
     AssessmentEvidenceFolders:
       type: array
       items:
@@ -4609,19 +4609,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3Url'
             - description: ' The destination of the assessment report. '
-      description: ' The location in which AWS Audit Manager saves assessment reports for the given assessment. '
+      description: ' The location in which Audit Manager saves assessment reports for the given assessment. '
     Scope:
       type: object
       properties:
         awsAccounts:
           allOf:
             - $ref: '#/components/schemas/AWSAccounts'
-            - description: ' The AWS accounts included in the scope of the assessment. '
+            - description: ' The accounts included in the scope of the assessment. '
         awsServices:
           allOf:
             - $ref: '#/components/schemas/AWSServices'
-            - description: ' The AWS services included in the scope of the assessment. '
-      description: ' The wrapper that contains the AWS accounts and AWS services in scope for the assessment. '
+            - description: ' The Amazon Web Services services included in the scope of the assessment. '
+      description: ' The wrapper that contains the accounts and services in scope for the assessment. '
     AssessmentMetadataItem:
       type: object
       properties:
@@ -4657,7 +4657,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: ' The time of the most recent update. '
-      description: ' A metadata object associated with an assessment in AWS Audit Manager. '
+      description: ' A metadata object associated with an assessment in Audit Manager. '
     AssessmentReportName:
       type: string
       pattern: '^[a-zA-Z0-9-_\.]+$'
@@ -4696,7 +4696,7 @@ components:
         awsAccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: ' The identifier for the specified AWS account. '
+            - description: ' The identifier for the specified account. '
         assessmentId:
           allOf:
             - $ref: '#/components/schemas/UUID'
@@ -4717,7 +4717,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: ' Specifies when the assessment report was created. '
-      description: ' A finalized document generated from an AWS Audit Manager assessment. These reports summarize the relevant evidence collected for your audit, and link to the relevant evidence folders which are named and organized according to the controls specified in your assessment. '
+      description: ' A finalized document generated from an Audit Manager assessment. These reports summarize the relevant evidence collected for your audit, and link to the relevant evidence folders which are named and organized according to the controls specified in your assessment. '
     ErrorCode:
       type: string
       pattern: '[0-9]{3}'
@@ -4824,7 +4824,7 @@ components:
         createDelegationRequest:
           allOf:
             - $ref: '#/components/schemas/CreateDelegationRequest'
-            - description: ' The API request to batch create delegations in AWS Audit Manager. '
+            - description: ' The API request to batch create delegations in Audit Manager. '
         errorCode:
           allOf:
             - $ref: '#/components/schemas/ErrorCode'
@@ -4853,7 +4853,7 @@ components:
         createDelegationRequests:
           allOf:
             - $ref: '#/components/schemas/CreateDelegationRequests'
-            - description: ' The API request to batch create delegations in AWS Audit Manager. '
+            - description: ' The API request to batch create delegations in Audit Manager. '
     BatchDeleteDelegationByAssessmentError:
       type: object
       properties:
@@ -4911,7 +4911,7 @@ components:
         manualEvidence:
           allOf:
             - $ref: '#/components/schemas/ManualEvidence'
-            - description: ' Manual evidence that cannot be collected automatically by AWS Audit Manager. '
+            - description: ' Manual evidence that cannot be collected automatically by Audit Manager. '
         errorCode:
           allOf:
             - $ref: '#/components/schemas/ErrorCode'
@@ -4979,7 +4979,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/IamArn'
             - description: ' The IAM user or role that performed the action. '
-      description: ' The record of a change within AWS Audit Manager, such as a modified assessment, a delegated control set, and so on. '
+      description: ' The record of a change within Audit Manager, such as a modified assessment, a delegated control set, and so on. '
     ChangeLogs:
       type: array
       items:
@@ -5051,7 +5051,7 @@ components:
         controlSources:
           allOf:
             - $ref: '#/components/schemas/ControlSources'
-            - description: ' The data source that determines from where AWS Audit Manager collects evidence for the control. '
+            - description: ' The data source that determines from where Audit Manager collects evidence for the control. '
         controlMappingSources:
           allOf:
             - $ref: '#/components/schemas/ControlMappingSources'
@@ -5076,7 +5076,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: ' The tags associated with the control. '
-      description: ' A control in AWS Audit Manager. '
+      description: ' A control in Audit Manager. '
     ControlCommentBody:
       type: string
       pattern: '^[\w\W\s\S]*$'
@@ -5128,8 +5128,8 @@ components:
         keywordValue:
           allOf:
             - $ref: '#/components/schemas/KeywordValue'
-            - description: ' The value of the keyword used to search AWS CloudTrail logs, AWS Config rules, AWS Security Hub checks, and AWS API names when mapping a control data source. '
-      description: ' The keyword to search for in AWS CloudTrail logs, AWS Config rules, AWS Security Hub checks, and AWS API names. '
+            - description: ' The value of the keyword used to search CloudTrail logs, Config rules, Security Hub checks, and Amazon Web Services API names when mapping a control data source. '
+      description: ' The keyword to search for in CloudTrail logs, Config rules, Security Hub checks, and Amazon Web Services API names. '
     SourceFrequency:
       type: string
       enum:
@@ -5158,7 +5158,7 @@ components:
         controlSources:
           allOf:
             - $ref: '#/components/schemas/ControlSources'
-            - description: ' The data source that determines from where AWS Audit Manager collects evidence for the control. '
+            - description: ' The data source that determines from where Audit Manager collects evidence for the control. '
         createdAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -5197,7 +5197,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Controls'
             - description: ' The list of controls within the control set. '
-      description: ' A set of controls in AWS Audit Manager. '
+      description: ' A set of controls in Audit Manager. '
     ControlSets:
       type: array
       items:
@@ -5210,7 +5210,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/UUID'
             - description: ' The unique identifier of the control. '
-      description: ' Control entity attributes that uniquely identify an existing control to be added to a framework in AWS Audit Manager. '
+      description: ' Control entity attributes that uniquely identify an existing control to be added to a framework in Audit Manager. '
     CreateAssessmentFrameworkControls:
       type: array
       items:
@@ -5282,7 +5282,7 @@ components:
         controlSources:
           allOf:
             - $ref: '#/components/schemas/ControlSources'
-            - description: ' The sources from which AWS Audit Manager collects evidence for the control. '
+            - description: ' The sources from which Audit Manager collects evidence for the control. '
         controlSets:
           allOf:
             - $ref: '#/components/schemas/ControlSets'
@@ -5307,7 +5307,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: ' The tags associated with the framework. '
-      description: ' The file used to structure and automate AWS Audit Manager assessments for a given compliance standard. '
+      description: ' The file used to structure and automate Audit Manager assessments for a given compliance standard. '
     CreateAssessmentReportRequest:
       type: object
       required:
@@ -5557,7 +5557,7 @@ components:
         evidenceAwsAccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: ' The identifier for the specified AWS account. '
+            - description: ' The identifier for the specified account. '
         time:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -5565,7 +5565,7 @@ components:
         eventSource:
           allOf:
             - $ref: '#/components/schemas/AWSServiceName'
-            - description: ' The AWS service from which the evidence is collected. '
+            - description: ' The Amazon Web Service from which the evidence is collected. '
         eventName:
           allOf:
             - $ref: '#/components/schemas/EventName'
@@ -5589,15 +5589,15 @@ components:
         complianceCheck:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: ' The evaluation status for evidence that falls under the compliance check category. For evidence collected from AWS Security Hub, a <i>Pass</i> or <i>Fail</i> result is shown. For evidence collected from AWS Config, a <i>Compliant</i> or <i>Noncompliant</i> result is shown. '
+            - description: ' The evaluation status for evidence that falls under the compliance check category. For evidence collected from Security Hub, a <i>Pass</i> or <i>Fail</i> result is shown. For evidence collected from Config, a <i>Compliant</i> or <i>Noncompliant</i> result is shown. '
         awsOrganization:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: ' The AWS account from which the evidence is collected, and its AWS organization path. '
+            - description: ' The account from which the evidence is collected, and its organization path. '
         awsAccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: ' The identifier for the specified AWS account. '
+            - description: ' The identifier for the specified account. '
         evidenceFolderId:
           allOf:
             - $ref: '#/components/schemas/UUID'
@@ -5737,7 +5737,7 @@ components:
         isAwsOrgEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: ' Specifies whether AWS Organizations is enabled. '
+            - description: ' Specifies whether Organizations is enabled. '
         snsTopic:
           allOf:
             - $ref: '#/components/schemas/SNSTopic'
@@ -5753,8 +5753,8 @@ components:
         kmsKey:
           allOf:
             - $ref: '#/components/schemas/KmsKey'
-            - description: ' The AWS KMS key details. '
-      description: ' The settings object that holds all supported AWS Audit Manager settings. '
+            - description: ' The KMS key details. '
+      description: ' The settings object that holds all supported Audit Manager settings. '
     HyperlinkName:
       type: string
       pattern: '^[\w\W\s\S]*$'
@@ -5854,7 +5854,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: ' The sender of the notification. '
-      description: ' The notification used to inform a user of an update in AWS Audit Manager. For example, this includes the notification that is sent when a control set is delegated for review. '
+      description: ' The notification used to inform a user of an update in Audit Manager. For example, this includes the notification that is sent when a control set is delegated for review. '
     RegisterAccountRequest:
       type: object
       title: RegisterAccountRequest
@@ -5862,11 +5862,11 @@ components:
         kmsKey:
           allOf:
             - $ref: '#/components/schemas/KmsKey'
-            - description: ' The AWS KMS key details. '
+            - description: ' The KMS key details. '
         delegatedAdminAccount:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: ' The delegated administrator account for AWS Audit Manager. '
+            - description: ' The delegated administrator account for Audit Manager. '
     RegisterOrganizationAdminAccountRequest:
       type: object
       required:
@@ -5888,7 +5888,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: ' The value of the specified resource. '
-      description: ' A system asset that is evaluated in an AWS Audit Manager assessment. '
+      description: ' A system asset that is evaluated in an Audit Manager assessment. '
     SNSTopic:
       type: string
       pattern: '^[a-zA-Z0-9-_\(\)\[\]]+$'
@@ -5900,20 +5900,20 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/AWSServiceName'
-            - description: ' The name of the AWS service. '
+            - description: ' The name of the Amazon Web Service. '
         displayName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The display name of the AWS service. '
+            - description: ' The display name of the Amazon Web Service. '
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The description of the specified AWS service. '
+            - description: ' The description of the specified Amazon Web Service. '
         category:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: ' The category in which the AWS service belongs, such as compute, storage, database, and so on. '
-      description: ' The metadata associated with the specified AWS service. '
+            - description: ' The category in which the Amazon Web Service belongs, such as compute, storage, database, and so on. '
+      description: ' The metadata associated with the specified Amazon Web Service. '
     SnsArn:
       type: string
       pattern: '^arn:.*:sns:.*'
@@ -6072,7 +6072,7 @@ components:
         snsTopic:
           allOf:
             - $ref: '#/components/schemas/SnsArn'
-            - description: ' The Amazon Simple Notification Service (Amazon SNS) topic to which AWS Audit Manager sends notifications. '
+            - description: ' The Amazon Simple Notification Service (Amazon SNS) topic to which Audit Manager sends notifications. '
         defaultAssessmentReportsDestination:
           allOf:
             - $ref: '#/components/schemas/AssessmentReportsDestination'
@@ -6084,7 +6084,7 @@ components:
         kmsKey:
           allOf:
             - $ref: '#/components/schemas/KmsKey'
-            - description: ' The AWS KMS key details. '
+            - description: ' The KMS key details. '
     ValidateAssessmentReportIntegrityRequest:
       type: object
       required:
