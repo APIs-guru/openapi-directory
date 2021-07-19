@@ -42,6 +42,134 @@ securityDefinitions:
       write_users: Write access to User Profiles
     type: oauth2
 paths:
+  /ScheduleSeries/AddBooking:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: ScheduleSeries_AddBooking
+      parameters:
+        - description: ""
+          in: body
+          name: model
+          required: true
+          schema:
+            $ref: "#/definitions/CreateBooking"
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ScheduleSeriesDetails"
+      security:
+        - oauth2:
+            - write_schedule
+      summary: Create new Schedule Booking
+      tags:
+        - ScheduleSeries
+  /ScheduleSeries/AddLeave:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: ScheduleSeries_AddLeave
+      parameters:
+        - description: ""
+          in: body
+          name: model
+          required: true
+          schema:
+            $ref: "#/definitions/CreateLeave"
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ScheduleSeriesDetails"
+      security:
+        - oauth2:
+            - write_schedule
+      summary: Create new Leave Booking
+      tags:
+        - ScheduleSeries
+  /ScheduleSeries/EditBooking:
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: ScheduleSeries_EditBooking
+      parameters:
+        - description: ""
+          in: body
+          name: model
+          required: true
+          schema:
+            $ref: "#/definitions/EditBooking"
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ScheduleSeriesDetails"
+      security:
+        - oauth2:
+            - write_schedule
+      summary: Edit Booking
+      tags:
+        - ScheduleSeries
+  /ScheduleSeries/EditLeave:
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: ScheduleSeries_EditLeave
+      parameters:
+        - description: ""
+          in: body
+          name: model
+          required: true
+          schema:
+            $ref: "#/definitions/EditLeave"
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ScheduleSeriesDetails"
+      security:
+        - oauth2:
+            - write_schedule
+      summary: Edit Leave Booking
+      tags:
+        - ScheduleSeries
   /api/Account:
     get:
       consumes: []
@@ -3013,6 +3141,61 @@ definitions:
         format: int32
         type: integer
     type: object
+  CreateBooking:
+    properties:
+      CategoryIDFK:
+        format: int32
+        type: integer
+      DurationType:
+        type: string
+      EndDate:
+        format: date-time
+        type: string
+      HoursPerDay:
+        format: double
+        type: number
+      Notes:
+        type: string
+      ProjectIDFK:
+        format: int32
+        type: integer
+      ScheduleOnDaysOff:
+        type: boolean
+      StartDate:
+        format: date-time
+        type: string
+      TaskIDFK:
+        format: int32
+        type: integer
+      TotalDuration:
+        format: double
+        type: number
+      UserIDFK:
+        format: int32
+        type: integer
+    type: object
+  CreateLeave:
+    properties:
+      LeaveEndDate:
+        format: date-time
+        type: string
+      LeaveHoursPerDay:
+        format: double
+        type: number
+      LeaveNotes:
+        type: string
+      LeaveNotify:
+        type: boolean
+      LeaveStartDate:
+        format: date-time
+        type: string
+      LeaveTypeIDFK:
+        format: int32
+        type: integer
+      LeaveUserIDFK:
+        format: int32
+        type: integer
+    type: object
   CreateSubscription:
     description: New Subscription to be Created
     properties:
@@ -3151,6 +3334,65 @@ definitions:
         items:
           $ref: "#/definitions/Currency"
         type: array
+    type: object
+  EditBooking:
+    properties:
+      CategoryIDFK:
+        format: int32
+        type: integer
+      DurationType:
+        type: string
+      EndDate:
+        format: date-time
+        type: string
+      HoursPerDay:
+        format: double
+        type: number
+      Notes:
+        type: string
+      ProjectIDFK:
+        format: int32
+        type: integer
+      ScheduleOnDaysOff:
+        type: boolean
+      ScheduleSeriesID:
+        format: int64
+        type: integer
+      StartDate:
+        format: date-time
+        type: string
+      TaskIDFK:
+        format: int32
+        type: integer
+      TotalDuration:
+        format: double
+        type: number
+      UserIDFK:
+        format: int32
+        type: integer
+    type: object
+  EditLeave:
+    properties:
+      EndDate:
+        format: date-time
+        type: string
+      HoursPerDay:
+        format: double
+        type: number
+      LeaveTypeIDFK:
+        format: int32
+        type: integer
+      Notes:
+        type: string
+      ScheduleSeriesID:
+        format: int64
+        type: integer
+      StartDate:
+        format: date-time
+        type: string
+      UserIDFK:
+        format: int32
+        type: integer
     type: object
   EstimateDetails:
     properties:

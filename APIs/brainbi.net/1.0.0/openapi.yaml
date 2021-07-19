@@ -28,7 +28,7 @@ paths:
   /api/analyze/pricing:
     get:
       description: "To update a product, please use the listed attributes listed underneath. "
-      operationId: "[beta]ScrapeProduct"
+      operationId: "[beta]ScrapeProductCopy"
       parameters:
         - in: query
           name: url
@@ -41,7 +41,7 @@ paths:
       responses:
         "200":
           description: ""
-      summary: "[BETA] Scrape Product"
+      summary: "[BETA] Scrape Product Copy"
       tags:
         - Products
   /api/customers:

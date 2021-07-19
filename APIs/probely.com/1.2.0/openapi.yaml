@@ -801,6 +801,70 @@ paths:
       summary: Check validity of password reset token
       tags:
         - Password Reset
+  /enterprise/auth/obtain/:
+    post:
+      description: |
+        The received token should be used for authenticated requests by including in the Authorization header as `Authorization: JWT <token>`.
+      requestBody:
+        $ref: "#/components/requestBodies/Login"
+      responses:
+        "200":
+          $ref: "#/components/responses/Token"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security: []
+      summary: Enterprise user authentication
+      tags:
+        - Login
+  /enterprise/auth/refresh/:
+    post:
+      requestBody:
+        $ref: "#/components/requestBodies/Token"
+      responses:
+        "200":
+          $ref: "#/components/responses/Token"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security: []
+      summary: Enterprise token refresh
+      tags:
+        - Login
+  /enterprise/auth/revoke/:
+    post:
+      requestBody:
+        $ref: "#/components/requestBodies/Token"
+      responses:
+        "200":
+          $ref: "#/components/responses/Token"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security: []
+      summary: Enterprise token revokation
+      tags:
+        - Login
+  /enterprise/auth/verify/:
+    post:
+      description: |
+        Check for the validity of a user token.
+      requestBody:
+        $ref: "#/components/requestBodies/Token"
+      responses:
+        "200":
+          $ref: "#/components/responses/Token"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+      security: []
+      summary: Enterprise token verification
+      tags:
+        - Login
   /events/:
     get:
       responses:

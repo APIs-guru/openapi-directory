@@ -588,6 +588,7 @@ paths:
                 filters:
                   email: ""
                   event: api.access
+                  excludeEvent: api.access
                   projectId: ""
                   userId: ""
               properties:
@@ -622,6 +623,62 @@ paths:
                         - group.policy.edit
                         - group.policy.delete
                         - group.settings.feature_flag.edit
+                      type: string
+                    excludeEvent:
+                      description: Will return logs except logs for this event.
+                      enum:
+                        - api.access
+                        - org.create
+                        - org.delete
+                        - org.edit
+                        - org.ignore_policy.edit
+                        - org.integration.create
+                        - org.integration.delete
+                        - org.integration.edit
+                        - org.integration.settings.edit
+                        - org.notification_settings.edit
+                        - org.cloud_config.settings.edit
+                        - org.settings.feature_flag.edit
+                        - org.sast_settings.edit
+                        - org.request_access_settings.edit
+                        - org.webhook.add
+                        - org.webhook.delete
+                        - org.project.add
+                        - org.project.edit
+                        - org.project.delete
+                        - org.project.remove
+                        - org.project.monitor
+                        - org.project.stop_monitor
+                        - org.project.test
+                        - org.project.ignore.create
+                        - org.project.ignore.delete
+                        - org.project.ignore.edit
+                        - org.project.settings.edit
+                        - org.project.settings.delete
+                        - org.project.tag.add
+                        - org.project.tag.remove
+                        - org.project.attributes.edit
+                        - org.service_account.create
+                        - org.service_account.delete
+                        - org.service_account.edit
+                        - org.user.provision.create
+                        - org.user.provision.accept
+                        - org.user.provision.delete
+                        - org.user.add
+                        - org.user.invite
+                        - org.user.invite.accept
+                        - org.user.leave
+                        - org.user.remove
+                        - org.user.role.edit
+                        - org.billing.info.edit
+                        - org.billing.subscription.edit
+                        - org.project.fix_pr.manual_open
+                        - org.project.fix_pr.auto_open
+                        - org.project.pr_check.edit
+                        - org.license_rule.create
+                        - org.license_rule.edit
+                        - org.license_rule.delete
+                        - org.policy.edit
                       type: string
                     projectId:
                       description: Will return only logs for this specific project.
@@ -1275,6 +1332,7 @@ paths:
                 filters:
                   email: ""
                   event: api.access
+                  excludeEvent: api.access
                   projectId: ""
                   userId: ""
               properties:
@@ -1285,6 +1343,62 @@ paths:
                       type: string
                     event:
                       description: Will return only logs for this specific event.
+                      enum:
+                        - api.access
+                        - org.create
+                        - org.delete
+                        - org.edit
+                        - org.ignore_policy.edit
+                        - org.integration.create
+                        - org.integration.delete
+                        - org.integration.edit
+                        - org.integration.settings.edit
+                        - org.notification_settings.edit
+                        - org.cloud_config.settings.edit
+                        - org.settings.feature_flag.edit
+                        - org.sast_settings.edit
+                        - org.request_access_settings.edit
+                        - org.webhook.add
+                        - org.webhook.delete
+                        - org.project.add
+                        - org.project.edit
+                        - org.project.delete
+                        - org.project.remove
+                        - org.project.monitor
+                        - org.project.stop_monitor
+                        - org.project.test
+                        - org.project.ignore.create
+                        - org.project.ignore.delete
+                        - org.project.ignore.edit
+                        - org.project.settings.edit
+                        - org.project.settings.delete
+                        - org.project.tag.add
+                        - org.project.tag.remove
+                        - org.project.attributes.edit
+                        - org.service_account.create
+                        - org.service_account.delete
+                        - org.service_account.edit
+                        - org.user.provision.create
+                        - org.user.provision.accept
+                        - org.user.provision.delete
+                        - org.user.add
+                        - org.user.invite
+                        - org.user.invite.accept
+                        - org.user.leave
+                        - org.user.remove
+                        - org.user.role.edit
+                        - org.billing.info.edit
+                        - org.billing.subscription.edit
+                        - org.project.fix_pr.manual_open
+                        - org.project.fix_pr.auto_open
+                        - org.project.pr_check.edit
+                        - org.license_rule.create
+                        - org.license_rule.edit
+                        - org.license_rule.delete
+                        - org.policy.edit
+                      type: string
+                    excludeEvent:
+                      description: Will return logs except logs for this event.
                       enum:
                         - api.access
                         - org.create
@@ -3603,6 +3717,43 @@ paths:
           description: OK
           headers: {}
       summary: List Members
+      tags:
+        - Organizations
+  "/org/{orgId}/members/update/{userId}":
+    put:
+      description: ""
+      operationId: Update a member's role in the organization
+      parameters:
+        - description: The organization ID. The `API_KEY` must have admin access to this organization.
+          example: 4a18d42f-0706-4ad0-b127-24078731fbed
+          in: path
+          name: orgId
+          required: true
+          schema:
+            type: string
+        - description: The user ID.
+          example: 4a18d42f-0706-4ad0-b127-24078731fbed
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                rolePublicId: ""
+              properties:
+                rolePublicId:
+                  description: The new role public ID to update the user to.
+                  type: string
+              type: object
+      responses:
+        "200":
+          description: OK
+          headers: {}
+      summary: Update a member's role in the organization
       tags:
         - Organizations
   "/org/{orgId}/members/{userId}":
@@ -19040,6 +19191,62 @@ components:
                 - group.policy.delete
                 - group.settings.feature_flag.edit
               type: string
+            excludeEvent:
+              description: Will return logs except logs for this event.
+              enum:
+                - api.access
+                - org.create
+                - org.delete
+                - org.edit
+                - org.ignore_policy.edit
+                - org.integration.create
+                - org.integration.delete
+                - org.integration.edit
+                - org.integration.settings.edit
+                - org.notification_settings.edit
+                - org.cloud_config.settings.edit
+                - org.settings.feature_flag.edit
+                - org.sast_settings.edit
+                - org.request_access_settings.edit
+                - org.webhook.add
+                - org.webhook.delete
+                - org.project.add
+                - org.project.edit
+                - org.project.delete
+                - org.project.remove
+                - org.project.monitor
+                - org.project.stop_monitor
+                - org.project.test
+                - org.project.ignore.create
+                - org.project.ignore.delete
+                - org.project.ignore.edit
+                - org.project.settings.edit
+                - org.project.settings.delete
+                - org.project.tag.add
+                - org.project.tag.remove
+                - org.project.attributes.edit
+                - org.service_account.create
+                - org.service_account.delete
+                - org.service_account.edit
+                - org.user.provision.create
+                - org.user.provision.accept
+                - org.user.provision.delete
+                - org.user.add
+                - org.user.invite
+                - org.user.invite.accept
+                - org.user.leave
+                - org.user.remove
+                - org.user.role.edit
+                - org.billing.info.edit
+                - org.billing.subscription.edit
+                - org.project.fix_pr.manual_open
+                - org.project.fix_pr.auto_open
+                - org.project.pr_check.edit
+                - org.license_rule.create
+                - org.license_rule.edit
+                - org.license_rule.delete
+                - org.policy.edit
+              type: string
             projectId:
               description: Will return only logs for this specific project.
               type: string
@@ -19931,6 +20138,62 @@ components:
               type: string
             event:
               description: Will return only logs for this specific event.
+              enum:
+                - api.access
+                - org.create
+                - org.delete
+                - org.edit
+                - org.ignore_policy.edit
+                - org.integration.create
+                - org.integration.delete
+                - org.integration.edit
+                - org.integration.settings.edit
+                - org.notification_settings.edit
+                - org.cloud_config.settings.edit
+                - org.settings.feature_flag.edit
+                - org.sast_settings.edit
+                - org.request_access_settings.edit
+                - org.webhook.add
+                - org.webhook.delete
+                - org.project.add
+                - org.project.edit
+                - org.project.delete
+                - org.project.remove
+                - org.project.monitor
+                - org.project.stop_monitor
+                - org.project.test
+                - org.project.ignore.create
+                - org.project.ignore.delete
+                - org.project.ignore.edit
+                - org.project.settings.edit
+                - org.project.settings.delete
+                - org.project.tag.add
+                - org.project.tag.remove
+                - org.project.attributes.edit
+                - org.service_account.create
+                - org.service_account.delete
+                - org.service_account.edit
+                - org.user.provision.create
+                - org.user.provision.accept
+                - org.user.provision.delete
+                - org.user.add
+                - org.user.invite
+                - org.user.invite.accept
+                - org.user.leave
+                - org.user.remove
+                - org.user.role.edit
+                - org.billing.info.edit
+                - org.billing.subscription.edit
+                - org.project.fix_pr.manual_open
+                - org.project.fix_pr.auto_open
+                - org.project.pr_check.edit
+                - org.license_rule.create
+                - org.license_rule.edit
+                - org.license_rule.delete
+                - org.policy.edit
+              type: string
+            excludeEvent:
+              description: Will return logs except logs for this event.
               enum:
                 - api.access
                 - org.create
@@ -20890,6 +21153,7 @@ components:
       type: object
     The_API_details: {}
     The_Snyk_organization_for_a_request: {}
+    Update_member_roles_in_your_organization: {}
     User_Details: {}
     User_invitation_to_organization: {}
     User_organization_notification_settings: {}

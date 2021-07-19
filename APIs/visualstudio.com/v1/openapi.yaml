@@ -1675,6 +1675,50 @@ paths:
           description: Not Found
       tags:
         - Environments
+  /api/v1/GenevaActions/Privacy/refresh-profile-telemetry-properties:
+    post:
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/RefreshProfileTelemetryPropertiesRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RefreshProfileTelemetryPropertiesRequest"
+          application/json-patch+json:
+            schema:
+              $ref: "#/components/schemas/RefreshProfileTelemetryPropertiesRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/RefreshProfileTelemetryPropertiesRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RefreshProfileTelemetryPropertiesResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/RefreshProfileTelemetryPropertiesResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/RefreshProfileTelemetryPropertiesResponse"
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+          description: Bad Request
+      tags:
+        - Privacy
   /api/v1/HeartBeat:
     post:
       requestBody:
@@ -4721,12 +4765,6 @@ components:
         autoShutdownDelayMinutes:
           format: int32
           type: integer
-        branchName:
-          nullable: true
-          type: string
-        commitId:
-          nullable: true
-          type: string
         connection:
           $ref: "#/components/schemas/ConnectionInfoBody"
         containerImage:
@@ -4769,12 +4807,6 @@ components:
           deprecated: true
           nullable: true
           type: string
-        prebuildHash:
-          nullable: true
-          type: string
-        repoId:
-          format: int64
-          type: integer
         secrets:
           items:
             $ref: "#/components/schemas/SecretDataBody"
@@ -5346,6 +5378,19 @@ components:
           nullable: true
           type: string
       type: object
+    ProfileSpecifier:
+      additionalProperties: false
+      properties:
+        oid:
+          nullable: true
+          type: string
+        provider:
+          nullable: true
+          type: string
+        tid:
+          nullable: true
+          type: string
+      type: object
     ProvisioningStatusResult:
       additionalProperties: false
       properties:
@@ -5403,6 +5448,55 @@ components:
           type: array
         tenantId:
           format: uuid
+          type: string
+      type: object
+    RefreshProfileTelemetryPropertiesRequest:
+      additionalProperties: false
+      properties:
+        partner:
+          nullable: true
+          type: string
+        tenantId:
+          nullable: true
+          type: string
+        userIds:
+          nullable: true
+          type: string
+      type: object
+    RefreshProfileTelemetryPropertiesResponse:
+      additionalProperties: false
+      properties:
+        failed:
+          items:
+            $ref: "#/components/schemas/ProfileSpecifier"
+          nullable: true
+          type: array
+        succeeded:
+          items:
+            $ref: "#/components/schemas/ProfileSpecifier"
+          nullable: true
+          type: array
+      type: object
+    RepositoryInfoBody:
+      additionalProperties: false
+      properties:
+        branchName:
+          nullable: true
+          type: string
+        commitId:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        prebuildHash:
+          nullable: true
+          type: string
+        repoId:
+          format: int64
+          type: integer
+        url:
+          nullable: true
           type: string
       type: object
     ResourceUsageDetail:
@@ -5546,6 +5640,8 @@ components:
           $ref: "#/components/schemas/GitConfigOptionsBody"
         recurseClone:
           type: boolean
+        repository:
+          $ref: "#/components/schemas/RepositoryInfoBody"
         seedMoniker:
           nullable: true
           type: string

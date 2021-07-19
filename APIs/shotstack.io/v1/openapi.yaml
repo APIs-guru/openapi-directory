@@ -4,6 +4,7 @@ servers:
     variables:
       version:
         default: v1
+        description: Set the stage to `v1` for production usage without watermarks. Set to `stage` to use the development sandbox.
         enum:
           - v1
           - stage
@@ -98,7 +99,7 @@ paths:
         - DeveloperKey: []
       summary: Render Video
       tags:
-        - Endpoints
+        - Editing API
   "/render/{id}":
     get:
       description: Get the rendering status, video url and details of a timeline by ID.
@@ -110,7 +111,7 @@ paths:
               example:
                 message: OK
                 response:
-                  created: 2018-05-06T03:33:25.425Z
+                  created: 2020-10-30T09:42:29.446Z
                   data:
                     output:
                       format: mp4
@@ -157,7 +158,7 @@ paths:
                   id: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
                   owner: 5ca6hu7s9k
                   status: rendering
-                  updated: 2018-05-06T03:33:48.521Z
+                  updated: 2020-10-30T09:42:39.168Z
                   url: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
                 success: true
               schema:
@@ -167,9 +168,96 @@ paths:
         - DeveloperKey: []
       summary: Get Render Status
       tags:
-        - Endpoints
+        - Editing API
     parameters:
       - description: The id of the timeline render task in UUID format
+        in: path
+        name: id
+        required: true
+        schema:
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+  "/serve/assets/render/{id}":
+    get:
+      description: A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are created the only known id is the render id returned by the original [render request](#render-video), status  request or webhook. This endpoint lets you look up one or more assets by the render id.
+      operationId: getAssetByRenderId
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                response:
+                  data:
+                    - attributes:
+                        created: 2021-05-06T03:33:48.600Z
+                        filename: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+                        id: a4482cbf-e321-42a2-ac8b-947d26886840
+                        owner: 5ca6hu7s9k
+                        region: au
+                        renderId: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+                        status: ready
+                        updated: 2021-05-06T03:33:49.521Z
+                        url: https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+                      type: asset
+              schema:
+                $ref: "#/components/schemas/AssetRenderResponse"
+          description: Get one or more assets by render id
+      security:
+        - DeveloperKey: []
+      summary: Get Asset by Render ID
+      tags:
+        - Serve API
+    parameters:
+      - description: The render id associated with the asset in UUID format
+        in: path
+        name: id
+        required: true
+        schema:
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+  "/serve/assets/{id}":
+    delete:
+      description: Delete an asset by it's render id. If a render creates multiple assets, such as thumbnail and poster images, each asset must be deleted individually by the asset id.
+      operationId: deleteAsset
+      responses:
+        "204":
+          description: An empty response signifying the asset has been deleted
+      security:
+        - DeveloperKey: []
+      summary: Delete Asset
+      tags:
+        - Serve API
+    get:
+      description: The Serve API is used to interact with, and delete hosted assets including videos, images, audio files,  thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique for each asset and different from the render id.
+      operationId: getAsset
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                response:
+                  data:
+                    attributes:
+                      created: 2021-05-06T03:33:48.600Z
+                      filename: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+                      id: a4482cbf-e321-42a2-ac8b-947d26886840
+                      owner: 5ca6hu7s9k
+                      region: au
+                      renderId: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+                      status: ready
+                      updated: 2021-05-06T03:33:49.521Z
+                      url: https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+                    type: asset
+              schema:
+                $ref: "#/components/schemas/AssetResponse"
+          description: Get asset by asset id
+      security:
+        - DeveloperKey: []
+      summary: Get Asset
+      tags:
+        - Serve API
+    parameters:
+      - description: The id of the asset in UUID format
         in: path
         name: id
         required: true
@@ -185,6 +273,84 @@ components:
   requestBodies: {}
   responses: {}
   schemas:
+    AssetRenderResponse:
+      description: The response returned by the Serve API [get asset by render id](#get-asset-by-render-id) request. The response  is an array of asset resources, including video, image, audio, thumbnail and poster image. The response follows  the [json:api](https://jsonapi.org/) specification.
+      properties:
+        data:
+          description: An array of asset resources grouped by render id.
+          items:
+            $ref: "#/components/schemas/AssetResponseData"
+          type: array
+      type: object
+    AssetResponse:
+      description: The response returned by the Serve API [get asset](#get-asset) request. Includes details of a hosted video, image, audio file, thumbnail or poster image. The response follows the [json:api](https://jsonapi.org/) specification.
+      properties:
+        data:
+          $ref: "#/components/schemas/AssetResponseData"
+          description: An asset resource.
+      type: object
+    AssetResponseAttributes:
+      description: The list of asset attributes and their values.
+      properties:
+        created:
+          description: The time the asset was created.
+          example: 2021-06-30T09:42:29.446Z
+          type: string
+        filename:
+          description: The asset file name.
+          example: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+          type: string
+        id:
+          description: The unique id of the hosted asset in UUID format.
+          example: a4482cbf-e321-42a2-ac8b-947d26886840
+          type: string
+        owner:
+          description: The owner id of the render task.
+          example: 5ca6hu7s9k
+          type: string
+        region:
+          description: The region the asset is hosted, currently only `au` (Australia).
+          example: au
+          type: string
+        renderId:
+          description: The original render id that created the asset in UUID format. Multiple assets can share the same render id.
+          example: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+          type: string
+        status:
+          description: |-
+            The status of the asset. <ul>
+              <li>`importing` - the asset is being copied to the hosting service</li>
+              <li>`ready` - the asset is ready to be served to users</li>
+              <li>`failed` - the asset failed to copy or delete</li>
+              <li>`deleted` - the asset has been deleted</li>
+            </ul>
+          enum:
+            - importing
+            - ready
+            - failed
+            - deleted
+          example: ready
+          type: string
+        updated:
+          description: The time the asset status was last updated.
+          example: 2021-06-30T09:42:30.168Z
+          type: string
+        url:
+          description: The asset file name.
+          example: https://cdn.shotstack.io/au/v1/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+          type: string
+      type: object
+    AssetResponseData:
+      description: The type of resource (an asset) and attributes of the asset.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AssetResponseAttributes"
+          description: The asset attributes including render id, url, filename, file size, etc...
+        type:
+          description: The type of resource, in this case it is an assets.
+          example: asset
+          type: string
+      type: object
     AudioAsset:
       description: The AudioAsset is used to add sound effects and audio at specific intervals on the timeline. The src must be a publicly accessible URL to an audio resource such  as an mp3 file.
       properties:
@@ -619,6 +785,7 @@ components:
         - capture
       type: object
     QueuedResponse:
+      description: The response received after a [render request](#render-video) is submitted. The render task is queued for rendering and a unique render id is returned.
       properties:
         message:
           description: "`Created`, `Bad Request` or an error message."
@@ -637,6 +804,7 @@ components:
         - response
       type: object
     QueuedResponseData:
+      description: The response data returned with the [QueuedResponse](#tocs_queuedresponse).
       properties:
         id:
           description: The id of the render task in UUID format.
@@ -667,6 +835,7 @@ components:
           type: number
       type: object
     RenderResponse:
+      description: The response received after a [render status request](#get-render-status) is submitted. The response includes  details about status of a render and the output URL.
       properties:
         message:
           description: "`OK` or an error message."
@@ -685,6 +854,7 @@ components:
         - response
       type: object
     RenderResponseData:
+      description: The response data returned with the [RenderResponse](#tocs_renderresponse) including status and URL.
       properties:
         created:
           description: The time the render task was initially queued.
@@ -707,7 +877,7 @@ components:
           type: string
         owner:
           description: The owner id of the render task.
-          example: ho6ve8x9q1
+          example: 5ca6hu7s9k
           type: string
         plan:
           description: The customer subscription plan.
@@ -715,7 +885,7 @@ components:
           type: string
         poster:
           description: The URL of the poster image if requested. This will only be available if status is done.
-          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-poster.jpg
+          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-poster.jpg
           type: string
         renderTime:
           description: The time taken to render the video in milliseconds.
@@ -742,7 +912,7 @@ components:
           type: string
         thumbnail:
           description: The URL of the thumbnail image if requested. This will only be available if status is done.
-          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-thumb.jpg
+          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7-thumb.jpg
           type: string
         updated:
           description: The time the render status was last updated.
@@ -750,7 +920,7 @@ components:
           type: string
         url:
           description: The URL of the final video. This will only be available if status is done.
-          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/ho6ve8x9q1/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+          example: https://shotstack-api-v1-output.s3-ap-southeast-2.amazonaws.com/5ca6hu7s9k/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
           type: string
       required:
         - status

@@ -96,7 +96,7 @@ paths:
                 value: |
                   <InventoryFeed xmlns="http://walmart.com/">
                       <InventoryHeader>
-                          <version>1.4</version>
+                          <version>1.5</version>
                       </InventoryHeader>
                       <inventory>
                           <sku>test1</sku>
@@ -534,7 +534,6 @@ paths:
                           type: object
                         errors:
                           items:
-                            description: Node Update Error description.
                             properties:
                               category:
                                 enum:
@@ -727,7 +726,6 @@ paths:
                         errors:
                           description: Node Update Error description.
                           items:
-                            description: Node Update Error description.
                             properties:
                               category:
                                 enum:
@@ -856,7 +854,7 @@ paths:
               schema:
                 properties:
                   quantity:
-                    description: Information about the quantity in inventory
+                    description: Quantity of an item that is available to be allocated to orders
                     properties:
                       amount:
                         description: The number available in the inventory
@@ -892,7 +890,7 @@ paths:
               schema:
                 properties:
                   quantity:
-                    description: Information about the quantity in inventory
+                    description: Quantity of an item that is available to be allocated to orders
                     properties:
                       amount:
                         description: The number available in the inventory
@@ -980,7 +978,7 @@ paths:
             schema:
               properties:
                 quantity:
-                  description: Information about the quantity in inventory
+                  description: Quantity of an item that is available to be allocated to orders
                   properties:
                     amount:
                       description: The number available in the inventory
@@ -1016,7 +1014,7 @@ paths:
             schema:
               properties:
                 quantity:
-                  description: Information about the quantity in inventory
+                  description: Quantity of an item that is available to be allocated to orders
                   properties:
                     amount:
                       description: The number available in the inventory
@@ -1053,7 +1051,7 @@ paths:
               schema:
                 properties:
                   quantity:
-                    description: Information about the quantity in inventory
+                    description: Quantity of an item that is available to be allocated to orders
                     properties:
                       amount:
                         description: The number available in the inventory
@@ -1089,7 +1087,7 @@ paths:
               schema:
                 properties:
                   quantity:
-                    description: Information about the quantity in inventory
+                    description: Quantity of an item that is available to be allocated to orders
                     properties:
                       amount:
                         description: The number available in the inventory
@@ -1252,7 +1250,6 @@ components:
           type: array
       type: object
     Error:
-      description: Node Update Error description.
       properties:
         category:
           enum:
@@ -1443,7 +1440,6 @@ components:
                 type: object
               errors:
                 items:
-                  description: Node Update Error description.
                   properties:
                     category:
                       enum:
@@ -1520,7 +1516,7 @@ components:
     Inventory:
       properties:
         quantity:
-          description: Information about the quantity in inventory
+          description: Quantity of an item that is available to be allocated to orders
           properties:
             amount:
               description: The number available in the inventory
@@ -1686,7 +1682,6 @@ components:
               errors:
                 description: Node Update Error description.
                 items:
-                  description: Node Update Error description.
                   properties:
                     category:
                       enum:
@@ -1767,7 +1762,6 @@ components:
           type: object
         errors:
           items:
-            description: Node Update Error description.
             properties:
               category:
                 enum:
@@ -1884,7 +1878,7 @@ components:
           type: string
       type: object
     SupplyQuantity:
-      description: Information about the quantity in inventory
+      description: Quantity of an item that is available to be allocated to orders
       properties:
         amount:
           description: The number available in the inventory
@@ -1958,7 +1952,6 @@ components:
         errors:
           description: Node Update Error description.
           items:
-            description: Node Update Error description.
             properties:
               category:
                 enum:

@@ -15079,16 +15079,16 @@ components:
           format: date-time
           type: string
         DealerCode:
-          description: The dealer code the voucher is assigned to.  Required for commercial vouchers.
+          description: The dealer code the voucher is assigned to.  Required for commercial and right to repair vouchers.
           type: string
         Deleted:
           description: Read-Only. True if voucher has been deleted.
           type: boolean
         Email:
-          description: The order number. Required for Commercial Vouchers. Not supported for other Vouchers.
+          description: Required for internal vouchers.
           type: string
         ExpirationDate:
-          description: The expiration date of the voucher. Required for Temporary Vouchers.
+          description: The expiration date of the voucher. Required for Temporary and Right to Repair Vouchers.
           format: date-time
           type: string
         LicenseTo:
@@ -15098,7 +15098,7 @@ components:
           description: Read-Only. The user that made the last modification to the voucher.
           type: string
         OrderNumber:
-          description: The order number of a commercial license. Required for Commercial Vouchers. Not supported for other Vouchers.
+          description: The order number of a license. Required for Commercial and Right To Repair Vouchers. Not supported for other Vouchers.
           type: string
         Punched:
           description: True if voucher has aleady been used.  False if the voucher has not been used.

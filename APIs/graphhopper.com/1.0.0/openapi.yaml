@@ -63,9 +63,9 @@ info:
 
     If you create your own client, make sure it supports http/2 and gzipped responses for best speed.
 
-    If you use the Matrix or Route Optimization API and want to solve large problems, we recommend you to reduce bandwidth
+    If you use the Matrix, the Route Optimization API or the Cluster API and want to solve large problems, we recommend you to reduce bandwidth
     by [compressing your POST request](https://gist.github.com/karussell/82851e303ea7b3459b2dea01f18949f4)
-    and specifying the header as follows: `Content-Encoding: gzip`.
+    and specifying the header as follows: `Content-Encoding: gzip`. This will also avoid the HTTP 413 error "Request Entity Too Large".
 
     ## Contact Us
 
@@ -851,7 +851,7 @@ paths:
         With this Matrix Endpoint you submit the points and parameters via URL parameters and is the most convenient
         as it works out-of-the-box in the browser. If possible you should
         prefer using the [POST Matrix Endpoint](#operation/postMatrix) that avoids problems with many locations
-        and automatically gzipps the request (note that all endpoints return gzipped results).
+        and can also gzip the **request**. (Note, that all endpoints return gzipped responses).
       operationId: getMatrix
       parameters:
         - description: Specify multiple points in `latitude,longitude` for which the weight-, route-, time- or distance-matrix should be calculated. In this case the starts are identical to the destinations. If there are N points, then NxN entries will be calculated. The order of the point parameter is important. Specify at least three points. Cannot be used together with from_point or to_point.
@@ -1038,7 +1038,7 @@ paths:
         The effected parameters are: `points`, `from_points`, `to_points`, and `out_arrays`. For the remaining parameters
         please refer to the [guide of the GET endpoint](#operation/getMatrix).
 
-        **Please note that in contrast to GET endpoint the points have to be specified as `longitude, latitude` pairs (in that order, similar to [GeoJson](http://geojson.org/geojson-spec.html#examples))**.
+        **Please note that in contrast to GET endpoint the points have to be specified as `[longitude, latitude]` array (in that order, similar to [GeoJson](http://geojson.org/geojson-spec.html#examples))**.
 
         For example the query `point=10,11&point=20,22&vehicle=car` will be converted to the following JSON:
         ```json

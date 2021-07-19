@@ -809,6 +809,17 @@ paths:
               - refresh
             format: string
             type: string
+        - description: Optional data translation (only available in limited jurisdictions)
+          in: query
+          name: lang
+          required: false
+          schema:
+            enum:
+              - ""
+              - EN
+              - ES
+            format: string
+            type: string
       responses:
         "200":
           content:

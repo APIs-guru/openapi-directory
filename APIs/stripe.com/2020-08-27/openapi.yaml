@@ -1184,7 +1184,7 @@ paths:
           description: Error response.
     post:
       description: |-
-        <p>Updates the metadata, account holder name, and account holder type of a bank account belonging to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the default for its currency. Other bank account details are not editable by design.</p>
+        <p>Updates the metadata, account holder name, account holder type of a bank account belonging to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the default for its currency. Other bank account details are not editable by design.</p>
 
         <p>You can re-enable a disabled bank account by performing an update call without providing any arguments or changes.</p>
       operationId: PostAccountBankAccountsId
@@ -1697,7 +1697,7 @@ paths:
           description: Error response.
     post:
       description: |-
-        <p>Updates the metadata, account holder name, and account holder type of a bank account belonging to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the default for its currency. Other bank account details are not editable by design.</p>
+        <p>Updates the metadata, account holder name, account holder type of a bank account belonging to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the default for its currency. Other bank account details are not editable by design.</p>
 
         <p>You can re-enable a disabled bank account by performing an update call without providing any arguments or changes.</p>
       operationId: PostAccountExternalAccountsId
@@ -5518,7 +5518,7 @@ paths:
           description: Error response.
     post:
       description: |-
-        <p>Updates the metadata, account holder name, and account holder type of a bank account belonging to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the default for its currency. Other bank account details are not editable by design.</p>
+        <p>Updates the metadata, account holder name, account holder type of a bank account belonging to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the default for its currency. Other bank account details are not editable by design.</p>
 
         <p>You can re-enable a disabled bank account by performing an update call without providing any arguments or changes.</p>
       operationId: PostAccountsAccountBankAccountsId
@@ -6088,7 +6088,7 @@ paths:
           description: Error response.
     post:
       description: |-
-        <p>Updates the metadata, account holder name, and account holder type of a bank account belonging to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the default for its currency. Other bank account details are not editable by design.</p>
+        <p>Updates the metadata, account holder name, account holder type of a bank account belonging to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the default for its currency. Other bank account details are not editable by design.</p>
 
         <p>You can re-enable a disabled bank account by performing an update call without providing any arguments or changes.</p>
       operationId: PostAccountsAccountExternalAccountsId
@@ -12073,7 +12073,7 @@ paths:
                   title: shipping_address_collection_params
                   type: object
                 shipping_rates:
-                  description: The shipping rate to apply to this Session. Currently, only up to one may be specified
+                  description: The shipping rate to apply to this Session. Currently, only up to one may be specified.
                   items:
                     type: string
                   type: array
@@ -47153,6 +47153,10 @@ paths:
                       - product.updated
                       - promotion_code.created
                       - promotion_code.updated
+                      - quote.accepted
+                      - quote.canceled
+                      - quote.created
+                      - quote.finalized
                       - radar.early_fraud_warning.created
                       - radar.early_fraud_warning.updated
                       - recipient.created
@@ -47481,6 +47485,10 @@ paths:
                       - product.updated
                       - promotion_code.created
                       - promotion_code.updated
+                      - quote.accepted
+                      - quote.canceled
+                      - quote.created
+                      - quote.finalized
                       - radar.early_fraud_warning.created
                       - radar.early_fraud_warning.updated
                       - recipient.created

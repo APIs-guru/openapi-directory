@@ -238,9 +238,9 @@ info:
 
     **Example Pagination Link header**
     ```bash
-    Link: <https://api.hetzner.cloud/actions?page=2&per_page=5>; rel="prev",
-          <https://api.hetzner.cloud/actions?page=4&per_page=5>; rel="next",
-          <https://api.hetzner.cloud/actions?page=6&per_page=5>; rel="last"
+    Link: <https://api.hetzner.cloud/v1/actions?page=2&per_page=5>; rel="prev",
+          <https://api.hetzner.cloud/v1/actions?page=4&per_page=5>; rel="next",
+          <https://api.hetzner.cloud/v1/actions?page=6&per_page=5>; rel="last"
     ```
 
     Line breaks have been added for display purposes only and responses may only contain some of the above `rel` values.
@@ -313,10 +313,10 @@ info:
 
     **Example: Sorting**
     ```bash
-    https://api.hetzner.cloud/actions?sort=status
-    https://api.hetzner.cloud/actions?sort=status:asc
-    https://api.hetzner.cloud/actions?sort=status:desc
-    https://api.hetzner.cloud/actions?sort=status:asc&sort=command:desc
+    https://api.hetzner.cloud/v1/actions?sort=status
+    https://api.hetzner.cloud/v1/actions?sort=status:asc
+    https://api.hetzner.cloud/v1/actions?sort=status:desc
+    https://api.hetzner.cloud/v1/actions?sort=status:asc&sort=command:desc
     ```
 
     ## Changelog

@@ -55,6 +55,8 @@ tags:
   - description: |
       Self-Service to create a full receipt (Quittung) for energy delivery in case of submetering. Please refer to [Strom-Quittung](http://strom-quittung.de) for a sample usage.
     name: Strom-Quittung
+  - description: Technische Sicherheitseinrichtung - use in context of strom-quittungen to get digitaly signed receipts.
+    name: TSE
 paths:
   /alternative/easee/lastSessions:
     get:
@@ -477,6 +479,136 @@ paths:
       summary: Create a receipt for an energy delivery (only valid in Germany).
       tags:
         - Strom-Quittung
+  /quittung/prepare:
+    post:
+      description: |
+        During the first call an account parameter will be returned within the result object. Any other parameter will be set inside the preperation. If account is put into body/request in following requests, the existing collection will be extended/updated with the provided body parameters/values.
+      operationId: quittungPrepare
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                account:
+                  type: string
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: All collected values for an account (eq. session).
+                type: string
+          description: Success
+      summary: Allows to collect data with several requests (or a single) for a receipt.
+      tags:
+        - Strom-Quittung
+  /quittung/tse:
+    post:
+      description: |
+        Allows to retrieve all relevant data assiciated to a TSE service call. E.q. Input parameters, public key and signature.
+      operationId: quittungTSE
+      parameters:
+        - description: Quittung Identifier  (serialnumber generated during receipt generation process)
+          in: query
+          name: account
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    description: JSON object that got signed by TSE.
+                    x-schema:
+                      properties:
+                        algorithmus:
+                          description: Standard used for signing and hashing of input values
+                          example: RSA-SHA512
+                          type: string
+                        clientid:
+                          description: Digital Identity of transaction system.
+                          example: 1D2323CDEF
+                          type: string
+                        end:
+                          description: Finishing timestamp of signature process by TSE service in UTC ISO Format.
+                          example: 2021-07-12T18:43:05.582Z
+                          type: string
+                        serialnumber:
+                          description: Quittung Identifier  (serialnumber generated during receipt generation process)
+                          example: "0x29fB5aeE3Ca29f239E7f771280cf4e2fD3999DF3"
+                          type: string
+                        signaturecnt:
+                          description: Sequential number of signed transactions by TSE service.
+                          example: 2
+                          type: integer
+                        start:
+                          description: Starting timestamp of signature process by TSE service in UTC ISO Format.
+                          example: 2021-07-12T18:43:05.582Z
+                          type: string
+                        timeformat:
+                          description: Format of Timestamp to aply to  KassenSichV regulation
+                          example: utcTime
+                          type: string
+                        txcnt:
+                          description: Sequential number of this transaction (requester)
+                          example: 1
+                          type: integer
+                      type: object
+                  publickey:
+                    description: Public Key of TSE
+                    type: string
+                  raw:
+                    description: Datastring of JSON Object as it got used to create signature.
+                    type: string
+                  signature:
+                    description: Resulting signature by signing raw datastring using private key of TSE.
+                    type: string
+                type: object
+          description: Success
+      summary: Retrieve TSE (Technische Sicherheitseinrichtung) Data for a given receipt (Strom-Quittung).
+      tags:
+        - Strom-Quittung
+        - TSE
+  /quittung/tsedata:
+    post:
+      description: |
+        Allows to retrieve input string for a signing process.
+      operationId: quittungTSEData
+      parameters:
+        - description: Quittung Identifier  (serialnumber generated during receipt generation process)
+          in: query
+          name: account
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Retrieve TSE (Technische Sicherheitseinrichtung) raw data  only for a given receipt (Strom-Quittung).
+      tags:
+        - Strom-Quittung
+        - TSE
+  /quittung/tsesignature:
+    post:
+      description: |
+        Allows to retrieve digital signature for a given receipt.
+      operationId: quittungTSEsignature
+      parameters:
+        - description: Quittung Identifier  (serialnumber generated during receipt generation process)
+          in: query
+          name: account
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Retrieve TSE (Technische Sicherheitseinrichtung) Signature only for a given receipt (Strom-Quittung).
+      tags:
+        - Strom-Quittung
+        - TSE
   /stromkonto/balances:
     get:
       description: |

@@ -9,7 +9,7 @@ info:
   description: |
     The Cisco Meraki Dashboard API is a modern REST API based on the OpenAPI specification.
 
-    > Date: 12 July, 2021
+    > Date: 19 July, 2021
     >
     > [What's New](https://meraki.io/whats-new/)
 
@@ -8623,6 +8623,8 @@ paths:
             application/json:
               collectorIp: 1.2.3.4
               collectorPort: 443
+              etaDstPort: 443
+              etaEnabled: true
               reportingEnabled: true
           schema:
             type: object
@@ -8643,6 +8645,8 @@ paths:
             example:
               collectorIp: 1.2.3.4
               collectorPort: 443
+              etaDstPort: 443
+              etaEnabled: true
               reportingEnabled: true
             properties:
               collectorIp:
@@ -8662,6 +8666,8 @@ paths:
             application/json:
               collectorIp: 1.2.3.4
               collectorPort: 443
+              etaDstPort: 443
+              etaEnabled: true
               reportingEnabled: true
           schema:
             type: object

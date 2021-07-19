@@ -121,6 +121,24 @@ paths:
         - Blog
       x-cli-cmd-group: blog
     x-internal: true
+  "/cache/{key}":
+    delete:
+      operationId: deleteCache
+      parameters:
+        - description: Cache key
+          in: path
+          name: key
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationStatus"
+          description: Operation status
+      summary: Clear cache by key
   /commissions:
     get:
       operationId: getCommissions
@@ -7496,6 +7514,8 @@ components:
           type: string
         first_name:
           type: string
+        has_pwd:
+          type: boolean
         id:
           format: int64
           type: integer

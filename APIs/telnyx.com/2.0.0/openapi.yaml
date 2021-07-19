@@ -51,10 +51,6 @@ tags:
     name: Debugging
   - description: Detail Records operations
     name: Detail Records
-  - description: Documents required documentation for international numbers and porting orders
-    name: Document Requirements
-  - description: Documents the various types of documents required for international numbers and porting orders
-    name: Document Types
   - description: Documents
     name: Documents
   - description: FQDN connection operations
@@ -121,6 +117,14 @@ tags:
     name: Recordings Commands
   - description: Wireless reporting operations
     name: Reporting
+  - description: Types of requirements for international numbers and porting orders
+    name: Requirement Types
+  - description: Requirements for international numbers and porting orders
+    name: Requirements
+  - description: Rooms Participants operations.
+    name: Room Participants
+  - description: Rooms Sessions operations.
+    name: Room Sessions
   - description: Rooms operations.
     name: Rooms
   - description: Rooms Client Tokens operations.
@@ -1602,7 +1606,7 @@ paths:
 
         *Notes:*
 
-        - When `overlay` is enabled, `loop` is limited to 1, and `target_legs` is limited to `self`.
+        - When `overlay` is enabled, `target_legs` is limited to `self`.
         - A customer cannot Play Audio with `overlay=true` unless there is a Play Audio with `overlay=false` actively playing.
 
         **Expected Webhooks:**
@@ -3167,42 +3171,6 @@ paths:
       summary: List all document links
       tags:
         - Documents
-      x-latency-category: responsive
-  /document_requirements:
-    get:
-      description: List all document requirements with filtering, sorting, and pagination
-      operationId: listDocumentRequirements
-      parameters:
-        - $ref: "#/components/parameters/DocReqsCountryFilter"
-        - $ref: "#/components/parameters/DocReqsPhoneNumberTypeFilter"
-        - $ref: "#/components/parameters/DocReqsActionFilter"
-        - $ref: "#/components/parameters/DocReqsDocumentRequirementsSort"
-        - $ref: "#/components/parameters/PageNumber"
-        - $ref: "#/components/parameters/PageSize"
-      responses:
-        "200":
-          $ref: "#/components/responses/ListDocumentRequirementsResponse"
-        default:
-          $ref: "#/components/responses/GenericErrorResponse"
-      summary: List all document requirements
-      tags:
-        - Document Requirements
-      x-latency-category: responsive
-  /document_types:
-    get:
-      description: List all document types ordered by created_at descending
-      operationId: docReqsListDocumentTypes
-      parameters:
-        - $ref: "#/components/parameters/DocReqsDocumentTypeNameFilter"
-        - $ref: "#/components/parameters/DocReqsDocumentTypesSort"
-      responses:
-        "200":
-          $ref: "#/components/responses/DocReqsListDocumentTypesResponse"
-        default:
-          $ref: "#/components/responses/GenericErrorResponse"
-      summary: List all document types
-      tags:
-        - Document Types
       x-latency-category: responsive
   /documents:
     get:
@@ -7725,6 +7693,400 @@ paths:
       tags:
         - WDR Detail Reports
       x-latency-category: interactive
+  /requirement_types:
+    get:
+      description: List all requirement types ordered by created_at descending
+      operationId: docReqsListRequirementTypes
+      parameters:
+        - $ref: "#/components/parameters/DocReqsRequirementTypeNameFilter"
+        - $ref: "#/components/parameters/DocReqsRequirementTypesSort"
+      responses:
+        "200":
+          $ref: "#/components/responses/DocReqsListRequirementTypesResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: List all requirement types
+      tags:
+        - Requirement Types
+      x-latency-category: responsive
+  "/requirement_types/{id}":
+    get:
+      description: Retrieve a requirement type by id
+      operationId: docReqsRetrieveRequirementType
+      parameters:
+        - $ref: "#/components/parameters/DocReqsRequirementTypeId"
+      responses:
+        "200":
+          $ref: "#/components/responses/DocReqsRequirementTypeResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Retrieve a requirement types
+      tags:
+        - Requirement Types
+      x-latency-category: responsive
+  /requirements:
+    get:
+      description: List all requirements with filtering, sorting, and pagination
+      operationId: listRequirements
+      parameters:
+        - $ref: "#/components/parameters/DocReqsCountryFilter"
+        - $ref: "#/components/parameters/DocReqsPhoneNumberTypeFilter"
+        - $ref: "#/components/parameters/DocReqsActionFilter"
+        - $ref: "#/components/parameters/DocReqsRequirementsSort"
+        - $ref: "#/components/parameters/PageNumber"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          $ref: "#/components/responses/ListRequirementsResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: List all requirements
+      tags:
+        - Requirements
+      x-latency-category: responsive
+  "/requirements/{id}":
+    get:
+      description: Retrieve a document requirement record
+      operationId: docReqsRetrieveDocumentRequirements
+      parameters:
+        - $ref: "#/components/parameters/DocReqsRequirementId"
+      responses:
+        "200":
+          $ref: "#/components/responses/DocReqsRequirementResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Retrieve a document requirement
+      tags:
+        - Requirements
+      x-latency-category: responsive
+  /room_participants:
+    get:
+      description: ""
+      operationId: ListRoomParticipants
+      parameters:
+        - description: ISO 8601 date for filtering room participants that joined on that date.
+          in: query
+          name: filter[date_joined_at][eq]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room participants that joined after that date.
+          in: query
+          name: filter[date_joined_at][gte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room participants that joined before that date.
+          in: query
+          name: filter[date_joined_at][lte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room participants updated on that date.
+          in: query
+          name: filter[date_updated_at][eq]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room participants updated after that date.
+          in: query
+          name: filter[date_updated_at][gte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room participants updated before that date.
+          in: query
+          name: filter[date_updated_at][lte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room participants that left on that date.
+          in: query
+          name: filter[date_left_at][eq]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room participants that left after that date.
+          in: query
+          name: filter[date_left_at][gte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room participants that left before that date.
+          in: query
+          name: filter[date_left_at][lte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: Filter room participants based on the context.
+          in: query
+          name: filter[context]
+          schema:
+            example: Alice
+            type: string
+        - description: Session_id for filtering room participants.
+          in: query
+          name: filter[session_id]
+          schema:
+            example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+            type: string
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/PageNumber"
+      responses:
+        "200":
+          $ref: "#/components/responses/ListRoomParticipantsResponse"
+      summary: View a list of room participants.
+      tags:
+        - Room Participants
+      x-endpoint-cost: medium
+      x-latency-category: responsive
+  "/room_participants/{room_participant_id}":
+    get:
+      operationId: ViewRoomParticipant
+      parameters:
+        - description: The unique identifier of a room participant.
+          in: path
+          name: room_participant_id
+          required: true
+          schema:
+            example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+            format: uuid
+            type: string
+      responses:
+        "200":
+          $ref: "#/components/responses/GetRoomParticipantResponse"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+      summary: View a room participant.
+      tags:
+        - Room Participants
+      x-endpoint-cost: light
+      x-latency-category: responsive
+  /room_sessions:
+    get:
+      description: ""
+      operationId: ListRoomSessions
+      parameters:
+        - description: ISO 8601 date for filtering room sessions created on that date.
+          in: query
+          name: filter[date_created_at][eq]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room sessions created after that date.
+          in: query
+          name: filter[date_created_at][gte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room sessions created before that date.
+          in: query
+          name: filter[date_created_at][lte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room sessions updated on that date.
+          in: query
+          name: filter[date_updated_at][eq]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room sessions updated after that date.
+          in: query
+          name: filter[date_updated_at][gte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room sessions updated before that date.
+          in: query
+          name: filter[date_updated_at][lte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room sessions ended on that date.
+          in: query
+          name: filter[date_ended_at][eq]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room sessions ended after that date.
+          in: query
+          name: filter[date_ended_at][gte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room sessions ended before that date.
+          in: query
+          name: filter[date_ended_at][lte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: Room_id for filtering room sessions.
+          in: query
+          name: filter[room_id]
+          schema:
+            example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+            type: string
+        - description: Filter active or inactive room sessions.
+          in: query
+          name: filter[active]
+          schema:
+            example: true
+            type: boolean
+        - description: To decide if room participants should be included in the response.
+          in: query
+          name: include_participants
+          schema:
+            example: true
+            type: boolean
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/PageNumber"
+      responses:
+        "200":
+          $ref: "#/components/responses/ListRoomSessionsResponse"
+      summary: View a list of room sessions.
+      tags:
+        - Room Sessions
+      x-endpoint-cost: medium
+      x-latency-category: responsive
+  "/room_sessions/{room_session_id}":
+    get:
+      operationId: ViewRoomSession
+      parameters:
+        - description: The unique identifier of a room session.
+          in: path
+          name: room_session_id
+          required: true
+          schema:
+            example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+            format: uuid
+            type: string
+        - description: To decide if room participants should be included in the response.
+          in: query
+          name: include_participants
+          schema:
+            example: true
+            type: boolean
+      responses:
+        "200":
+          $ref: "#/components/responses/GetRoomSessionResponse"
+        "404":
+          $ref: "#/components/responses/ResourceNotFound"
+      summary: View a room session.
+      tags:
+        - Room Sessions
+      x-endpoint-cost: light
+      x-latency-category: responsive
+  "/room_sessions/{room_session_id}/participants":
+    get:
+      description: ""
+      operationId: NestedListRoomParticipants
+      parameters:
+        - description: The unique identifier of a room session.
+          in: path
+          name: room_session_id
+          required: true
+          schema:
+            example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+            format: uuid
+            type: string
+        - description: ISO 8601 date for filtering room participants that joined on that date.
+          in: query
+          name: filter[date_joined_at][eq]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room participants that joined after that date.
+          in: query
+          name: filter[date_joined_at][gte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room participants that joined before that date.
+          in: query
+          name: filter[date_joined_at][lte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room participants updated on that date.
+          in: query
+          name: filter[date_updated_at][eq]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room participants updated after that date.
+          in: query
+          name: filter[date_updated_at][gte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room participants updated before that date.
+          in: query
+          name: filter[date_updated_at][lte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room participants that left on that date.
+          in: query
+          name: filter[date_left_at][eq]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room participants that left after that date.
+          in: query
+          name: filter[date_left_at][gte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room participants that left before that date.
+          in: query
+          name: filter[date_left_at][lte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: Filter room participants based on the context.
+          in: query
+          name: filter[context]
+          schema:
+            example: Alice
+            type: string
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/PageNumber"
+      responses:
+        "200":
+          $ref: "#/components/responses/ListRoomParticipantsResponse"
+      summary: View a list of room participants.
+      tags:
+        - Room Sessions
+      x-endpoint-cost: medium
+      x-latency-category: responsive
   /rooms:
     get:
       description: ""
@@ -7778,6 +8140,12 @@ paths:
           schema:
             example: my_video_room
             type: string
+        - description: To decide if room sessions should be included in the response.
+          in: query
+          name: include_sessions
+          schema:
+            example: true
+            type: boolean
         - $ref: "#/components/parameters/PageSize"
         - $ref: "#/components/parameters/PageNumber"
       responses:
@@ -7803,7 +8171,7 @@ paths:
           $ref: "#/components/responses/CreateRoomResponse"
         "422":
           $ref: "#/components/responses/UnprocessableEntity"
-      summary: Create a room
+      summary: Create a room.
       tags:
         - Rooms
       x-endpoint-cost: medium
@@ -7826,7 +8194,7 @@ paths:
           description: The resource was deleted successfully.
         "404":
           $ref: "#/components/responses/ResourceNotFound"
-      summary: Delete a room
+      summary: Delete a room.
       tags:
         - Rooms
       x-endpoint-cost: medium
@@ -7842,12 +8210,18 @@ paths:
             example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
             format: uuid
             type: string
+        - description: To decide if room sessions should be included in the response.
+          in: query
+          name: include_sessions
+          schema:
+            example: true
+            type: boolean
       responses:
         "200":
           $ref: "#/components/responses/GetRoomResponse"
         "404":
           $ref: "#/components/responses/ResourceNotFound"
-      summary: View a room
+      summary: View a room.
       tags:
         - Rooms
       x-endpoint-cost: light
@@ -7877,7 +8251,7 @@ paths:
           $ref: "#/components/responses/CreateRoomClientTokenResponse"
         "403":
           $ref: "#/components/responses/Forbidden"
-      summary: Create Client Token to join a room
+      summary: Create Client Token to join a room.
       tags:
         - Rooms Client Tokens
       x-endpoint-cost: medium
@@ -7908,10 +8282,108 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
       security: []
-      summary: Refresh Client Token to join a room
+      summary: Refresh Client Token to join a room.
       tags:
         - Rooms Client Tokens
       x-endpoint-cost: light
+      x-latency-category: responsive
+  "/rooms/{room_id}/sessions":
+    get:
+      description: ""
+      operationId: NestedListRoomSessions
+      parameters:
+        - description: The unique identifier of a room.
+          in: path
+          name: room_id
+          required: true
+          schema:
+            example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+            format: uuid
+            type: string
+        - description: ISO 8601 date for filtering room sessions created on that date.
+          in: query
+          name: filter[date_created_at][eq]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room sessions created after that date.
+          in: query
+          name: filter[date_created_at][gte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room sessions created before that date.
+          in: query
+          name: filter[date_created_at][lte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room sessions updated on that date.
+          in: query
+          name: filter[date_updated_at][eq]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room sessions updated after that date.
+          in: query
+          name: filter[date_updated_at][gte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room sessions updated before that date.
+          in: query
+          name: filter[date_updated_at][lte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room sessions ended on that date.
+          in: query
+          name: filter[date_ended_at][eq]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room sessions ended after that date.
+          in: query
+          name: filter[date_ended_at][gte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: ISO 8601 date for filtering room sessions ended before that date.
+          in: query
+          name: filter[date_ended_at][lte]
+          schema:
+            example: 2021-04-25
+            format: date
+            type: string
+        - description: Filter active or inactive room sessions.
+          in: query
+          name: filter[active]
+          schema:
+            example: true
+            type: boolean
+        - description: To decide if room participants should be included in the response.
+          in: query
+          name: include_participants
+          schema:
+            example: true
+            type: boolean
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/PageNumber"
+      responses:
+        "200":
+          $ref: "#/components/responses/ListRoomSessionsResponse"
+      summary: View a list of room sessions.
+      tags:
+        - Rooms
+      x-endpoint-cost: medium
       x-latency-category: responsive
   /short_codes:
     get:
@@ -8146,6 +8618,38 @@ paths:
       tags:
         - SIM Card Groups
       x-latency-category: background
+  /sim_card_order_preview:
+    post:
+      description: Preview SIM card order purchases.
+      operationId: SimCardOrdersPreview
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                address_id:
+                  description: Uniquely identifies the address for the order.
+                  example: "1293384261075731499"
+                  format: int64
+                  type: string
+                quantity:
+                  description: The amount of SIM cards that the user would like to purchase in the SIM card order.
+                  example: 21
+                  minimum: 1
+                  type: integer
+              required:
+                - quantity
+                - address_id
+              type: object
+      responses:
+        "202":
+          $ref: "#/components/responses/SIMCardOrdersPreviewResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntity"
+      summary: Preview SIM card orders
+      tags:
+        - SIM Card Orders
+      x-latency-category: responsive
   /sim_card_orders:
     get:
       description: Get all SIM card orders according to filters.
@@ -8470,6 +8974,23 @@ paths:
         default:
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Set SIM card public IP
+      tags:
+        - SIM Cards
+      x-latency-category: responsive
+  "/sim_cards/{sim_card_id}/wireless_connectivity_logs":
+    get:
+      description: This API allows listing a paginated collection of Wireless Connectivity Logs associated with a SIM Card, for troubleshooting purposes.
+      operationId: WirelessConnectivityLogsGet
+      parameters:
+        - $ref: "#/components/parameters/PageNumber"
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/SIMCardId"
+      responses:
+        "200":
+          $ref: "#/components/responses/WirelessConnectivityLogCollectionResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: List wireless connectivity logs
       tags:
         - SIM Cards
       x-latency-category: responsive
@@ -9761,21 +10282,28 @@ components:
       schema:
         example: US
         type: string
-    DocReqsDocumentRequirementsSort:
-      description: Specifies the sort order for results. If you want to sort by a field in ascending order, include it as a sort parameter. If you want to sort in descending order, prepend a `-` in front of the field name.
+    DocReqsPhoneNumberTypeFilter:
+      description: Filters results to those applying to a specific `phone_number_type`
       in: query
-      name: sort[]
-      required: false
+      name: filter[phone_number_type]
       schema:
         enum:
-          - action
-          - country_code
-          - locality
-          - phone_number_type
-        example: country_code
+          - local
+          - national
+          - toll-free
+        example: local
         type: string
-    DocReqsDocumentTypeId:
-      description: Uniquely identifies the document_type record
+    DocReqsRequirementId:
+      description: Uniquely identifies the requirement_type record
+      example: a9dad8d5-fdbd-49d7-aa23-39bb08a5ebaa
+      in: path
+      name: id
+      required: true
+      schema:
+        format: uuid
+        type: string
+    DocReqsRequirementTypeId:
+      description: Uniquely identifies the requirement_type record
       example: a38c217a-8019-48f8-bff6-0fdd9939075b
       in: path
       name: id
@@ -9783,14 +10311,14 @@ components:
       schema:
         format: uuid
         type: string
-    DocReqsDocumentTypeNameFilter:
-      description: Filters document types to those whose name contains a certain string.
+    DocReqsRequirementTypeNameFilter:
+      description: Filters requirement types to those whose name contains a certain string.
       in: query
       name: filter[name][contains]
       schema:
         example: utility bill
         type: string
-    DocReqsDocumentTypesSort:
+    DocReqsRequirementTypesSort:
       description: Specifies the sort order for results. If you want to sort by a field in ascending order, include it as a sort parameter. If you want to sort in descending order, prepend a `-` in front of the field name.
       in: query
       name: sort[]
@@ -9802,16 +10330,18 @@ components:
           - updated_at
         example: country_code
         type: string
-    DocReqsPhoneNumberTypeFilter:
-      description: Filters results to those applying to a specific `phone_number_type`
+    DocReqsRequirementsSort:
+      description: Specifies the sort order for results. If you want to sort by a field in ascending order, include it as a sort parameter. If you want to sort in descending order, prepend a `-` in front of the field name.
       in: query
-      name: filter[phone_number_type]
+      name: sort[]
+      required: false
       schema:
         enum:
-          - local
-          - national
-          - toll-free
-        example: local
+          - action
+          - country_code
+          - locality
+          - phone_number_type
+        example: country_code
         type: string
     DocServiceDocumentIdFilter:
       description: Identifies the associated document to filter on.
@@ -10877,15 +11407,33 @@ components:
                 $ref: "#/components/schemas/WdrReport"
             type: object
       description: Successful response
-    DocReqsListDocumentTypesResponse:
+    DocReqsListRequirementTypesResponse:
       content:
         application/json:
           schema:
             properties:
               data:
-                $ref: "#/components/schemas/DocReqsDocumentTypeList"
+                $ref: "#/components/schemas/DocReqsRequirementTypeList"
               meta:
                 $ref: "#/components/schemas/PaginationMeta"
+            type: object
+      description: Successful response
+    DocReqsRequirementResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/DocReqsRequirement"
+            type: object
+      description: Successful response
+    DocReqsRequirementTypeResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/DocReqsRequirementType"
             type: object
       description: Successful response
     DocServiceDocumentResponse:
@@ -11079,6 +11627,15 @@ components:
                 $ref: "#/components/schemas/PrivateWirelessGateway"
             type: object
       description: Successful response
+    GetRoomParticipantResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/RoomParticipant"
+            type: object
+      description: Get room participant response.
     GetRoomResponse:
       content:
         application/json:
@@ -11088,6 +11645,15 @@ components:
                 $ref: "#/components/schemas/Room"
             type: object
       description: Get room response.
+    GetRoomSessionResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/RoomSession"
+            type: object
+      description: Get room session response.
     GetSimCardGroupResponse:
       content:
         application/json:
@@ -11301,17 +11867,6 @@ components:
                 items:
                   $ref: "#/components/schemas/DocServiceDocument"
                 type: array
-              meta:
-                $ref: "#/components/schemas/PaginationMeta"
-            type: object
-      description: Successful response
-    ListDocumentRequirementsResponse:
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                $ref: "#/components/schemas/DocumentRequirementList"
               meta:
                 $ref: "#/components/schemas/PaginationMeta"
             type: object
@@ -11731,6 +12286,43 @@ components:
             title: List Recordings Response
             type: object
       description: Successful response with a list of recordings.
+    ListRequirementsResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/DocReqsRequirementList"
+              meta:
+                $ref: "#/components/schemas/PaginationMeta"
+            type: object
+      description: Successful response
+    ListRoomParticipantsResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/RoomParticipant"
+                type: array
+              meta:
+                $ref: "#/components/schemas/PaginationMeta"
+            type: object
+      description: List room participants response.
+    ListRoomSessionsResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/RoomSession"
+                type: array
+              meta:
+                $ref: "#/components/schemas/PaginationMeta"
+            type: object
+      description: List room sessions response.
     ListRoomsResponse:
       content:
         application/json:
@@ -12158,6 +12750,15 @@ components:
                 $ref: "#/components/schemas/SIMCardNetworkPreferenceWithOTAUpdates"
             type: object
       description: A successful network preferences definition response.
+    SIMCardOrdersPreviewResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/SIMCardOrderPreview"
+            type: object
+      description: Successful response
     SIMCardPublicIPResponse:
       content:
         application/json:
@@ -12431,6 +13032,19 @@ components:
               data:
                 $ref: "#/components/schemas/WhatsAppUser"
             title: Successful response with details about the WhatsApp message sent.
+            type: object
+      description: Successful response
+    WirelessConnectivityLogCollectionResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/WirelessConnectivityLog"
+                type: array
+              meta:
+                $ref: "#/components/schemas/PaginationMeta"
             type: object
       description: Successful response
   schemas:
@@ -15520,6 +16134,94 @@ components:
           $ref: "#/components/schemas/ConferenceCreated"
       title: Conference Created Event
       type: object
+    ConferenceDetailRecord:
+      properties:
+        billed_sec:
+          description: Duration of the conference call for billing purposes
+          example: 120
+          type: integer
+        call_leg_id:
+          description: Telnyx UUID that identifies the conference call leg
+          example: 3ca7bd3d-7d82-4e07-9df4-009123068320
+          type: string
+        call_sec:
+          description: Duration of the conference call in seconds
+          example: 100
+          type: integer
+        call_session_id:
+          description: Telnyx UUID that identifies with conference call session
+          example: 3ca7bd3d-7d82-4e07-9df4-009123068320
+          type: string
+        connection_id:
+          description: Connection id
+          example: "1583941447772537867"
+          type: string
+        cost:
+          description: Currency amount for Telnyx billing cost
+          example: "0.004"
+          type: string
+        currency:
+          description: Telnyx account currency used to describe monetary values, including billing cost
+          example: USD
+          type: string
+        ended_at:
+          description: Conference end time
+          example: 2020-07-01T00:00:00-06:00
+          format: date-time
+          type: string
+        expires_at:
+          description: Conference expiry time
+          example: 2020-07-01T00:00:00-06:00
+          format: date-time
+          type: string
+        id:
+          description: Conference id
+          example: 3ca7bd3d-7d82-4e07-9df4-009123068320
+          type: string
+        is_telnyx_billable:
+          description: Indicates whether Telnyx billing charges might be applicable
+          example: true
+          type: boolean
+        name:
+          description: Conference name
+          example: My Conference
+          type: string
+        participant_call_sec:
+          description: Sum of the conference call duration for all participants in seconds
+          example: 100
+          type: integer
+        participant_count:
+          description: Number of participants that joined the conference call
+          example: 5
+          type: integer
+        rate:
+          description: Currency amount per billing unit used to calculate the Telnyx billing cost
+          example: "0.002"
+          type: string
+        rate_measured_in:
+          description: Billing unit used to calculate the Telnyx billing cost
+          example: minutes
+          type: string
+        record_type:
+          default: conference_detail_record
+          example: conference_detail_record
+          type: string
+        region:
+          description: Region where the conference is hosted
+          example: ch1
+          type: string
+        started_at:
+          description: Conference start time
+          example: 2020-07-01T00:00:00-06:00
+          format: date-time
+          type: string
+        user_id:
+          description: User id
+          example: 3ca7bd3d-7d82-4e07-9df4-009123068320
+          type: string
+      required:
+        - record_type
+      type: object
     ConferenceEnded:
       example:
         event_type: conference.ended
@@ -15694,6 +16396,61 @@ components:
             type: string
           type: array
       title: Conference Mute Request
+      type: object
+    ConferenceParticipantDetailRecord:
+      properties:
+        call_leg_id:
+          description: Telnyx UUID that identifies the conference call leg
+          example: 3ca7bd3d-7d82-4e07-9df4-009123068320
+          type: string
+        call_sec:
+          description: Duration of the conference call in seconds
+          example: 100
+          type: integer
+        call_session_id:
+          description: Telnyx UUID that identifies with conference call session
+          example: 3ca7bd3d-7d82-4e07-9df4-009123068320
+          type: string
+        conference_id:
+          description: Conference id
+          example: 3ca7bd3d-7d82-4e07-9df4-009123068320
+          type: string
+        destination_number:
+          description: Number called by the participant to join the conference
+          example: "+18005550199"
+          type: string
+        id:
+          description: Participant id
+          example: 3ca7bd3d-7d82-4e07-9df4-009123068320
+          type: string
+        is_telnyx_billable:
+          description: Indicates whether Telnyx billing charges might be applicable
+          example: false
+          type: boolean
+        joined_at:
+          description: Participant join time
+          example: 2020-07-01T00:00:00-06:00
+          format: date-time
+          type: string
+        left_at:
+          description: Participant leave time
+          example: 2020-07-01T00:00:00-06:00
+          format: date-time
+          type: string
+        originating_number:
+          description: Participant origin number used in the conference call
+          example: "+18005550199"
+          type: string
+        record_type:
+          default: conference_participant_detail_record
+          example: conference_participant_detail_record
+          type: string
+        user_id:
+          description: User id
+          example: 3ca7bd3d-7d82-4e07-9df4-009123068320
+          type: string
+      required:
+        - record_type
       type: object
     ConferenceParticipantJoined:
       example:
@@ -18455,10 +19212,6 @@ components:
     CreateVerificationRequestWhatsapp:
       description: The request body when creating a verification.
       properties:
-        app_name:
-          description: The name that identifies the application requesting 2fa in the verification message.
-          example: Example Secure App
-          type: string
         phone_number:
           description: +E164 formatted phone number.
           example: "+13035551234"
@@ -19066,6 +19819,8 @@ components:
         propertyName: record_type
       oneOf:
         - $ref: "#/components/schemas/MessageDetailRecord"
+        - $ref: "#/components/schemas/ConferenceDetailRecord"
+        - $ref: "#/components/schemas/ConferenceParticipantDetailRecord"
       required:
         - record_type
       type: object
@@ -19083,7 +19838,69 @@ components:
         - INBOUND
         - OUTBOUND
       type: string
-    DocReqsDocumentType:
+    DocReqsRequirement:
+      properties:
+        action:
+          description: Indicates whether this requirement applies to ordering, porting, or both
+          enum:
+            - both
+            - ordering
+            - porting
+          example: ordering
+          readOnly: false
+          type: string
+        country_code:
+          description: The 2-character (ISO 3166-1 alpha-2) country code where this requirement applies
+          example: FR
+          readOnly: false
+          type: string
+        created_at:
+          description: ISO 8601 formatted date-time indicating when the resource was created.
+          example: 2021-04-09T22:25:27.521Z
+          readOnly: true
+          type: string
+        id:
+          description: Identifies the associated document
+          example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+          format: uuid
+          readOnly: true
+          type: string
+        locality:
+          description: The locality where this requirement applies
+          example: Nice
+          readOnly: false
+          type: string
+        phone_number_type:
+          description: Indicates the phone_number_type this requirement applies to. Leave blank if this requirement applies to all number_types.
+          enum:
+            - local
+            - national
+            - toll_free
+          example: local
+          readOnly: false
+          type: string
+        record_type:
+          description: Identifies the type of the resource.
+          example: requirement
+          readOnly: true
+          type: string
+        requirements_types:
+          description: Lists the requirement types necessary to fulfill this requirement
+          items:
+            $ref: "#/components/schemas/DocReqsRequirementType"
+          readOnly: true
+          type: array
+        updated_at:
+          description: ISO 8601 formatted date-time indicating when the resource was last updated.
+          example: 2021-04-12T20:20:20.020Z
+          readOnly: true
+          type: string
+      type: object
+    DocReqsRequirementList:
+      items:
+        $ref: "#/components/schemas/DocReqsRequirement"
+      type: array
+    DocReqsRequirementType:
       properties:
         acceptance_criteria:
           description: Specifies objective criteria for acceptance
@@ -19105,7 +19922,7 @@ components:
           readOnly: true
           type: string
         description:
-          description: Describes the document type
+          description: Describes the requirement type
           example: Proves the customer has a physical address in the same locality as the phone number
           readOnly: false
           type: string
@@ -19121,14 +19938,23 @@ components:
           readOnly: true
           type: string
         name:
-          description: A short descriptive name for this document_type
+          description: A short descriptive name for this requirement_type
           example: Proof of Address
           readOnly: true
           type: string
         record_type:
           description: Identifies the type of the resource
-          example: document_type
+          example: requirement_type
           readOnly: true
+          type: string
+        type:
+          description: Defines the type of this requirement type
+          enum:
+            - document
+            - address
+            - textual
+          example: document
+          readOnly: false
           type: string
         updated_at:
           description: ISO 8601 formatted date-time indicating when the resource was last updated.
@@ -19136,9 +19962,9 @@ components:
           readOnly: true
           type: string
       type: object
-    DocReqsDocumentTypeList:
+    DocReqsRequirementTypeList:
       items:
-        $ref: "#/components/schemas/DocReqsDocumentType"
+        $ref: "#/components/schemas/DocReqsRequirementType"
       type: array
     DocServiceDocument:
       allOf:
@@ -19178,6 +20004,15 @@ components:
                   type: string
               readOnly: true
               type: object
+            status:
+              description: Indicates the current document reviewing status
+              enum:
+                - pending
+                - verified
+                - denied
+              example: pending
+              readOnly: true
+              type: string
           type: object
     DocServiceDocumentLink:
       allOf:
@@ -19273,48 +20108,6 @@ components:
           type: string
       title: Document
       type: object
-    DocumentRequirement:
-      properties:
-        acceptance_criteria:
-          description: Additional requirements
-          properties:
-            locality_limit:
-              description: Indicates geography-based acceptance criterium
-              example: within locality of phone number desired
-              readOnly: true
-              type: string
-            time_limit:
-              description: Indicates a time-based acceptance criterium
-              example: no older than 45 days from submission
-              readOnly: true
-              type: string
-          readOnly: true
-          type: object
-        description:
-          description: Describes the requirement in more detail
-          example: This proves the customer has a physical address in the same locality of the desired phone number
-          readOnly: true
-          type: string
-        example:
-          description: Describes an acceptable document that would meet the requirement
-          example: Utility bill, internet bill, phone bill, or lease
-          readOnly: true
-          type: string
-        name:
-          description: A short name for the document requirement
-          example: Proof of Address
-          readOnly: true
-          type: string
-        record_type:
-          description: Identifies the type of the resource.
-          example: document_requirement
-          readOnly: true
-          type: string
-      type: object
-    DocumentRequirementList:
-      items:
-        $ref: "#/components/schemas/DocumentRequirement"
-      type: array
     DownlinkData:
       properties:
         amount:
@@ -24148,6 +24941,7 @@ components:
         messaging_profile_id: abc85f64-5717-4562-b3fc-2c9600000000
         messaging_profile_name: regional-customers
         phone_number: "+19705555098"
+        phone_number_type: longcode
         purchased_at: 2019-10-23T18:10:00.000Z
         record_type: phone_number
         status: deleted
@@ -24217,6 +25011,13 @@ components:
           description: The +E.164-formatted phone number associated with this record.
           readOnly: true
           type: string
+        phone_number_type:
+          description: The phone number's type.
+          enum:
+            - longcode
+            - tollfree
+          readOnly: true
+          type: string
         purchased_at:
           description: ISO 8601 formatted date indicating the time the request was made to purchase the number.
           readOnly: true
@@ -24272,6 +25073,7 @@ components:
         messaging_profile_id: abc85f64-5717-4562-b3fc-2c9600000000
         messaging_profile_name: regional-customers
         phone_number: "+19705555098"
+        phone_number_type: longcode
         purchased_at: 2019-10-23T18:10:00.000Z
         record_type: phone_number
         status: active
@@ -24339,6 +25141,13 @@ components:
           type: string
         phone_number:
           description: The +E.164-formatted phone number associated with this record.
+          readOnly: true
+          type: string
+        phone_number_type:
+          description: The phone number's type.
+          enum:
+            - longcode
+            - tollfree
           readOnly: true
           type: string
         purchased_at:
@@ -24851,6 +25660,7 @@ components:
           example: true
           type: boolean
         stop:
+          default: all
           description: When specified, it stops the current audio being played.  Specify `current` to stop the current audio being played, and to play the next file in the queue. Specify `all` to stop the current audio file being played and to also clear all audio files from the queue.
           example: current
           type: string
@@ -25918,13 +26728,27 @@ components:
       type: object
     Room:
       example:
+        active_session_id: 7b61621f-62e0-4aad-ab11-9fd19e272e74
         created_at: 2021-04-16T09:46:20.954863Z
         id: 7b61621f-62e0-4aad-ab11-9fd19e272e73
         max_participants: 50
         record_type: room
+        sessions:
+          - active: true
+            created_at: 2021-04-16T09:46:20.954863Z
+            id: 7b61621f-62e0-4aad-ab11-9fd19e272e74
+            participants: []
+            record_type: room_session
+            room_id: 7b61621f-62e0-4aad-ab11-9fd19e272e73
+            updated_at: 2021-04-16T10:24:55.962200Z
         unique_name: My Room
         updated_at: 2021-04-16T10:24:55.962200Z
       properties:
+        active_session_id:
+          description: The identifier of the active room session if any.
+          example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+          format: uuid
+          type: string
         created_at:
           description: ISO 8601 timestamp when the room was created.
           example: 2021-03-26T17:51:59.588408Z
@@ -25943,12 +26767,109 @@ components:
           example: room
           readOnly: true
           type: string
+        sessions:
+          items:
+            $ref: "#/components/schemas/RoomSession"
+          type: array
         unique_name:
           description: The unique (within the Telnyx account scope) name of the room.
           example: My room
           type: string
         updated_at:
           description: ISO 8601 timestamp when the room was updated.
+          example: 2021-03-26T17:51:59.588408Z
+          format: datetime
+          type: string
+      type: object
+    RoomParticipant:
+      example:
+        context: Alice
+        id: 7b61621f-62e0-4aad-ab11-9fd19e272e73
+        joined_at: 2021-04-16T09:46:20.954863Z
+        left_at: 2021-04-16T10:24:55.962200Z
+        record_type: room_participant
+        session_id: 7b61621f-5fe4-4aad-ab11-9fd19e272e73
+        updated_at: 2021-04-16T10:24:55.962200Z
+      properties:
+        context:
+          description: Context provided to the given participant through the client SDK
+          example: Alice
+          type: string
+        id:
+          description: Identifies the room participant.
+          example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+          format: uuid
+          type: string
+        joined_at:
+          description: ISO 8601 timestamp when the participant joined the session.
+          example: 2021-03-26T17:51:59.588408Z
+          format: datetime
+          type: string
+        left_at:
+          description: ISO 8601 timestamp when the participant left the session.
+          example: 2021-03-26T17:51:59.588408Z
+          format: datetime
+          type: string
+        record_type:
+          example: room_participant
+          readOnly: true
+          type: string
+        session_id:
+          description: Identify the room session that participant is part of.
+          example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777b0
+          format: uuid
+          type: string
+        updated_at:
+          description: ISO 8601 timestamp when the participant was updated.
+          example: 2021-03-26T17:51:59.588408Z
+          format: datetime
+          type: string
+      type: object
+    RoomSession:
+      example:
+        active: false
+        created_at: 2021-04-16T09:46:20.954863Z
+        ended_at: 2021-04-16T10:24:55.962200Z
+        id: 7b61621f-62e0-4aad-ab11-9fd19e272e73
+        participants: []
+        record_type: room_session
+        room_id: 7b61621f-5fe4-4aad-ab11-9fd19e272e73
+        updated_at: 2021-04-16T10:24:55.962200Z
+      properties:
+        active:
+          description: Shows if the room session is active or not.
+          example: false
+          type: boolean
+        created_at:
+          description: ISO 8601 timestamp when the room session was created.
+          example: 2021-03-26T17:51:59.588408Z
+          format: datetime
+          type: string
+        ended_at:
+          description: ISO 8601 timestamp when the room session has ended.
+          example: 2021-03-26T17:51:59.588408Z
+          format: datetime
+          type: string
+        id:
+          description: Identifies the room session.
+          example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+          format: uuid
+          type: string
+        participants:
+          items:
+            $ref: "#/components/schemas/RoomParticipant"
+          type: array
+        record_type:
+          example: room_session
+          readOnly: true
+          type: string
+        room_id:
+          description: Identify the room hosting that room session.
+          example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777b0
+          format: uuid
+          type: string
+        updated_at:
+          description: ISO 8601 timestamp when the room session was updated.
           example: 2021-03-26T17:51:59.588408Z
           format: datetime
           type: string
@@ -26324,6 +27245,55 @@ components:
           readOnly: true
           type: string
       title: SIMCardOrder
+      type: object
+    SIMCardOrderPreview:
+      properties:
+        quantity:
+          description: The amount of SIM cards requested in the SIM card order.
+          example: 21
+          type: integer
+        record_type:
+          description: Identifies the type of the resource.
+          example: sim_card_order_preview
+          readOnly: true
+          type: string
+        shipping_cost:
+          properties:
+            amount:
+              description: A string representing the cost amount.
+              example: "2.32"
+              type: string
+            currency:
+              description: ISO 4217 currency string.
+              example: USD
+              format: currency
+              type: string
+          type: object
+        sim_cards_cost:
+          properties:
+            amount:
+              description: A string representing the cost amount.
+              example: "2.32"
+              type: string
+            currency:
+              description: ISO 4217 currency string.
+              example: USD
+              format: currency
+              type: string
+          type: object
+        total_cost:
+          properties:
+            amount:
+              description: A string representing the cost amount.
+              example: "2.32"
+              type: string
+            currency:
+              description: ISO 4217 currency string.
+              example: USD
+              format: currency
+              type: string
+          type: object
+      title: SIMCardOrderPreview
       type: object
     SIMCardPublicIP:
       properties:
@@ -29434,6 +30404,96 @@ components:
           title: Webhook Url
           type: string
       title: WhatsApp User
+      type: object
+    WirelessConnectivityLog:
+      description: This object represents a wireless connectivity session log that happened through a SIM card. It aids in finding out potential problems when the SIM is not able to attach properly.
+      properties:
+        apn:
+          description: The Access Point Name (APN) identifies the packet data network that a mobile data user wants to communicate with.
+          example: data00.telnyx
+          readOnly: true
+          type: string
+        id:
+          description: Uniquely identifies the session.
+          example: 137509451
+          readOnly: true
+          type: integer
+        imei:
+          description: The International Mobile Equipment Identity (or IMEI) is a number, usually unique, that identifies the device currently being used connect to the network.
+          example: "490154203237518"
+          readOnly: true
+          type: string
+        imsi:
+          description: |
+            SIM cards are identified on their individual operator networks by a unique International Mobile Subscriber Identity (IMSI). <br/>
+            Mobile network operators connect mobile phone calls and communicate with their market SIM cards using their IMSIs. The IMSI is stored in the Subscriber  Identity Module (SIM) inside the device and is sent by the device to the appropriate network. It is used to acquire the details of the device in the Home  Location Register (HLR) or the Visitor Location Register (VLR).
+          example: 81932214823362980
+          readOnly: true
+          type: string
+        ipv4:
+          description: |
+            The SIM's address in the currently connected network. This IPv4 address is usually obtained dynamically, so it may vary according to the location or new connections.
+          example: 192.168.0.0
+          readOnly: true
+          type: string
+        ipv6:
+          description: |
+            The SIM's address in the currently connected network. This IPv6 address is usually obtained dynamically, so it may vary according to the location or new connections.
+          example: 2001:cdba:0000:0000:0000:0000:3257:9652
+          readOnly: true
+          type: string
+        log_type:
+          description: The type of the session, 'registration' being the initial authentication session and 'data' the actual data transfer sessions.
+          enum:
+            - registration
+            - data
+          example: registration
+          readOnly: true
+          type: string
+        mobile_country_code:
+          description: |-
+            It's a three decimal digit that identifies a country.<br/><br/>
+            This code is commonly seen joined with a Mobile Network Code (MNC) in a tuple that allows identifying a carrier known as PLMN (Public Land Mobile Network) code.
+          example: "310"
+          readOnly: true
+          type: string
+        mobile_network_code:
+          description: |-
+            It's a two to three decimal digits that identify a network.<br/><br/>
+             This code is commonly seen joined with a Mobile Country Code (MCC) in a tuple that allows identifying a carrier known as PLMN (Public Land Mobile Network) code.
+          example: "410"
+          readOnly: true
+          type: string
+        radio_access_technology:
+          description: The radio technology the SIM card used during the session.
+          example: LTE
+          readOnly: true
+          type: string
+        record_type:
+          example: wireless_connectivity_log
+          readOnly: true
+          type: string
+        sim_card_id:
+          description: The identification UUID of the related SIM card resource.
+          example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+          format: uuid
+          type: string
+        start_time:
+          description: ISO 8601 formatted date-time indicating when the session started.
+          example: 2018-02-02T22:25:27.521Z
+          readOnly: true
+          type: string
+        state:
+          description: The state of the SIM card after when the session happened.
+          example: provisioned
+          readOnly: true
+          type: string
+        stop_time:
+          description: ISO 8601 formatted date-time indicating when the session ended.
+          example: 2018-02-02T22:25:27.521Z
+          readOnly: true
+          type: string
+      title: WirelessConnectivityLog
       type: object
     WirelessCost:
       properties:
