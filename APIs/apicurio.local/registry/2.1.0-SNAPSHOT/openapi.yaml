@@ -23,17 +23,17 @@ info:
     - XML Schema Definition
 
 
-    **Important**: The Apicurio Registry REST API is available from `http://MY-REGISTRY-URL/apis/registry/v2` by default. Therefore you must prefix all API operation paths with `../apis/registry/v2` in this case. For example: `../apis/registry/v2/ids/globalIds/{globalId}`.
+    **Important**: The Apicurio Registry REST API is available from `https://MY-REGISTRY-URL/apis/registry/v2` by default. Therefore you must prefix all API operation paths with `../apis/registry/v2` in this case. For example: `../apis/registry/v2/ids/globalIds/{globalId}`.
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
   title: Apicurio Registry API [v2]
-  version: 2.0.1-SNAPSHOT
+  version: 2.1.0-SNAPSHOT
   x-apisguru-categories:
     - developer_tools
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/Apicurio/apicurio-registry/master/common/src/main/resources/META-INF/openapi.json
+      url: https://raw.githubusercontent.com/Apicurio/apicurio-registry/master/app/src/main/resources-unfiltered/META-INF/resources/api-specifications/registry/v2/openapi.json
       version: "3.0"
   x-preferred: true
   x-providerName: apicurio.local
@@ -73,6 +73,8 @@ tags:
     name: Admin
   - description: System level functionality, including versioning and status information.
     name: System
+  - description: Some operations related to users.
+    name: Users
 paths:
   /admin/export:
     get:
@@ -195,6 +197,129 @@ paths:
       tags:
         - Admin
     summary: Manage logger settings/configurations.
+  /admin/roleMappings:
+    get:
+      description: |
+        Gets a list of all role mappings configured in the registry (if any).
+
+        This operation can fail for the following reasons:
+
+        * A server error occurred (HTTP error `500`)
+      operationId: listRoleMappings
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/RoleMapping"
+                type: array
+          description: A successful response will return the list of role mappings.
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: List all role mappings
+      tags:
+        - Admin
+    post:
+      description: |+
+        Creates a new mapping between a user/principal and a role.
+
+        This operation can fail for the following reasons:
+
+        * A server error occurred (HTTP error `500`)
+
+      operationId: createRoleMapping
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleMapping"
+        required: true
+      responses:
+        "204":
+          description: Returned when the role mapping was successfully created.
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: Create a new role mapping
+      tags:
+        - Admin
+    summary: Collection to manage role mappings for authenticated principals
+  "/admin/roleMappings/{principalId}":
+    delete:
+      description: |
+        Deletes a single role mapping, effectively denying access to a user/principal.
+
+        This operation can fail for the following reasons:
+
+        * No role mapping for the principalId exists (HTTP error `404`)
+        * A server error occurred (HTTP error `500`)
+      operationId: deleteRoleMapping
+      responses:
+        "204":
+          description: Response returned when the delete was successful.
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: Delete a role mapping
+      tags:
+        - Admin
+    get:
+      description: |
+        Gets the details of a single role mapping (by principalId).
+
+        This operation can fail for the following reasons:
+
+        * No role mapping for the principalId exists (HTTP error `404`)
+        * A server error occurred (HTTP error `500`)
+      operationId: getRoleMapping
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleMapping"
+          description: When successful, returns the details of a role mapping.
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: Return a single role mapping
+      tags:
+        - Admin
+    parameters:
+      - description: Unique id of a principal (typically either a user or service account).
+        in: path
+        name: principalId
+        required: true
+        schema:
+          type: string
+    put:
+      description: |
+        Updates a single role mapping for one user/principal.
+
+        This operation can fail for the following reasons:
+
+        * No role mapping for the principalId exists (HTTP error `404`)
+        * A server error occurred (HTTP error `500`)
+      operationId: updateRoleMapping
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateRole"
+        required: true
+      responses:
+        "204":
+          description: Response when the update is successful.
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: Update a role mapping
+      tags:
+        - Admin
+    summary: Manage the configuration of a single role mapping.
   /admin/rules:
     delete:
       description: |
@@ -577,7 +702,6 @@ paths:
       summary: Create artifact
       tags:
         - Artifacts
-      x-codegen-async: true
     summary: Manage the collection of artifacts within a single group in the registry.
   "/groups/{groupId}/artifacts/{artifactId}":
     delete:
@@ -729,7 +853,6 @@ paths:
       summary: Update artifact
       tags:
         - Artifacts
-      x-codegen-async: true
     summary: Manage a single artifact.
   "/groups/{groupId}/artifacts/{artifactId}/meta":
     get:
@@ -1339,7 +1462,6 @@ paths:
       summary: Create artifact version
       tags:
         - Versions
-      x-codegen-async: true
     summary: Manage all the versions of an artifact in the registry.
   "/groups/{groupId}/artifacts/{artifactId}/versions/{version}":
     get:
@@ -1797,6 +1919,23 @@ paths:
       tags:
         - System
     summary: Retrieve system information
+  /users/me:
+    get:
+      description: Returns information about the currently authenticated user.
+      operationId: getCurrentUserInfo
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserInfo"
+          description: Response when the endpoint is successfully invoked.
+        "500":
+          $ref: "#/components/responses/ServerError"
+      summary: Get current user
+      tags:
+        - Users
+    summary: Retrieves information about the current user
   x-codegen-contextRoot: /apis/registry/v2
 components:
   responses:
@@ -2111,6 +2250,30 @@ components:
       type: object
       x-codegen-inline: true
       x-codegen-type: StringMap
+    RoleMapping:
+      description: The mapping between a user/principal and their role.
+      example:
+        principalId: user1
+        role: READ_ONLY
+      properties:
+        principalId:
+          description: ""
+          type: string
+        role:
+          $ref: "#/components/schemas/RoleType"
+          description: ""
+      required:
+        - principalId
+        - role
+      type: object
+    RoleType:
+      description: ""
+      enum:
+        - READ_ONLY
+        - DEVELOPER
+        - ADMIN
+      type: string
+      x-codegen-package: io.apicurio.registry.types
     Rule:
       description: ""
       example:
@@ -2325,6 +2488,17 @@ components:
           type: string
       title: Root Type for SystemInfo
       type: object
+    UpdateRole:
+      description: ""
+      example:
+        role: READ_ONLY
+      properties:
+        role:
+          $ref: "#/components/schemas/RoleType"
+      required:
+        - role
+      title: Root Type for UpdateRole
+      type: object
     UpdateState:
       description: ""
       example:
@@ -2335,6 +2509,27 @@ components:
       required:
         - state
       title: Root Type for UpdateState
+      type: object
+    UserInfo:
+      description: Information about a single user.
+      example:
+        admin: true
+        developer: false
+        displayName: Diana Prince
+        username: dprince
+        viewer: false
+      properties:
+        admin:
+          type: boolean
+        developer:
+          type: boolean
+        displayName:
+          type: string
+        username:
+          type: string
+        viewer:
+          type: boolean
+      title: Root Type for UserInfo
       type: object
     Version:
       description: |-
