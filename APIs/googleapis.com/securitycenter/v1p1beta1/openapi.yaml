@@ -999,6 +999,18 @@ components:
         externalUri:
           description: The URI that, if available, points to a web page outside of Security Command Center where additional information about the finding can be found. This field is guaranteed to be either empty or a well formed URL.
           type: string
+        findingClass:
+          description: The class of the finding.
+          enum:
+            - FINDING_CLASS_UNSPECIFIED
+            - THREAT
+            - VULNERABILITY
+            - MISCONFIGURATION
+            - OBSERVATION
+          type: string
+        indicator:
+          $ref: "#/components/schemas/Indicator"
+          description: "Represents what's commonly known as an Indicator of compromise (IoC) in computer forensics. This is an artifact observed on a network or in an operating system that, with high confidence, indicates a computer intrusion. Reference: https://en.wikipedia.org/wiki/Indicator_of_compromise"
         name:
           description: 'The relative resource name of this finding. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name Example: "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}"'
           type: string
@@ -1435,6 +1447,20 @@ components:
           additionalProperties: {}
           description: Properties matching the groupBy fields in the request.
           type: object
+      type: object
+    Indicator:
+      description: "Represents what's commonly known as an Indicator of compromise (IoC) in computer forensics. This is an artifact observed on a network or in an operating system that, with high confidence, indicates a computer intrusion. Reference: https://en.wikipedia.org/wiki/Indicator_of_compromise"
+      properties:
+        domains:
+          description: List of domains associated to the Finding.
+          items:
+            type: string
+          type: array
+        ipAddresses:
+          description: List of ip addresses associated to the Finding.
+          items:
+            type: string
+          type: array
       type: object
     ListAssetsResponse:
       description: Response message for listing assets.

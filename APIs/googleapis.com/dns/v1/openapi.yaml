@@ -921,7 +921,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new ResourceRecordSet.
-      operationId: dns.projects.managedZones.rrsets.create
+      operationId: dns.resourceRecordSets.create
       parameters:
         - description: Identifies the project addressed by this request.
           in: path
@@ -962,11 +962,11 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
-        - projects
+        - resourceRecordSets
   "/dns/v1/projects/{project}/managedZones/{managedZone}/rrsets/{name}/{type}":
     delete:
       description: Deletes a previously created ResourceRecordSet.
-      operationId: dns.projects.managedZones.rrsets.delete
+      operationId: dns.resourceRecordSets.delete
       parameters:
         - description: Identifies the project addressed by this request.
           in: path
@@ -1014,10 +1014,10 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
-        - projects
+        - resourceRecordSets
     get:
       description: Fetches the representation of an existing ResourceRecordSet.
-      operationId: dns.projects.managedZones.rrsets.get
+      operationId: dns.resourceRecordSets.get
       parameters:
         - description: Identifies the project addressed by this request.
           in: path
@@ -1073,7 +1073,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
-        - projects
+        - resourceRecordSets
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1088,7 +1088,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     patch:
       description: Applies a partial update to an existing ResourceRecordSet.
-      operationId: dns.projects.managedZones.rrsets.patch
+      operationId: dns.resourceRecordSets.patch
       parameters:
         - description: Identifies the project addressed by this request.
           in: path
@@ -1141,7 +1141,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
-        - projects
+        - resourceRecordSets
   "/dns/v1/projects/{project}/policies":
     get:
       description: Enumerates all Policies associated with a project.

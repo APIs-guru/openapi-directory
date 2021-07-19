@@ -1144,6 +1144,12 @@ components:
     DeviceClaim:
       description: A record of a device claimed by a reseller for a customer. Devices claimed for zero-touch enrollment have a claim with the type `SECTION_TYPE_ZERO_TOUCH`. To learn more, read [Claim devices for customers](/zero-touch/guides/how-it-works#claim).
       properties:
+        additionalService:
+          description: The Additional service registered for the device.
+          enum:
+            - ADDITIONAL_SERVICE_UNSPECIFIED
+            - DEVICE_PROTECTION
+          type: string
         ownerCompanyId:
           description: The ID of the Customer that purchased the device.
           format: int64

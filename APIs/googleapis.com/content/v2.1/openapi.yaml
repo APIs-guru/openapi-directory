@@ -4670,7 +4670,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The Content API Supplemental Feed ID.
+        - description: The Content API Supplemental Feed ID. If present then product insertion applies to the data in a supplemental feed.
           in: query
           name: feedId
           schema:
@@ -4711,7 +4711,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The Content API Supplemental Feed ID.
+        - description: The Content API Supplemental Feed ID. If present then product deletion applies to the data in a supplemental feed. If absent, entire product will be deleted.
           in: query
           name: feedId
           schema:
@@ -6757,7 +6757,8 @@ components:
       description: Account data. After the creation of a new account it may take a few minutes before it is fully operational. The methods delete, insert, and update require the admin role.
       properties:
         accountManagement:
-          description: 'How the account is managed. Acceptable values are: - "`manual`" - "`automatic`" '
+          description: 'Output only. How the account is managed. Acceptable values are: - "`manual`" - "`automatic`" '
+          readOnly: true
           type: string
         adsLinks:
           description: Linked Ads accounts that are active or pending approval. To create a new link request, add a new link with status `active` to the list. It will remain in a `pending` state until approved or rejected either in the Ads interface or through the AdWords API. To delete an active link, or to cancel a link request, remove it from the list.
@@ -6788,7 +6789,7 @@ components:
           format: uint64
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#account`"'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#account`".'
           type: string
         labelIds:
           description: Manually created label IDs that are assigned to the account by CSS.
@@ -7082,7 +7083,7 @@ components:
           format: uint64
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#accountTax".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#accountTax`".'
           type: string
         rules:
           description: Tax rules. Updating the tax rules will enable US taxes (not reversible). Defining no rules is equivalent to not charging tax at all.
@@ -7145,13 +7146,13 @@ components:
             $ref: "#/components/schemas/AccountIdentifier"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#accountsAuthInfoResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#accountsAuthInfoResponse`".'
           type: string
       type: object
     AccountsClaimWebsiteResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#accountsClaimWebsiteResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#accountsClaimWebsiteResponse`".'
           type: string
       type: object
     AccountsCustomBatchRequest:
@@ -7227,7 +7228,7 @@ components:
             $ref: "#/components/schemas/AccountsCustomBatchResponseEntry"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#accountsCustomBatchResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#accountsCustomBatchResponse`".'
           type: string
       type: object
     AccountsCustomBatchResponseEntry:
@@ -7270,13 +7271,13 @@ components:
     AccountsLinkResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#accountsLinkResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#accountsLinkResponse`".'
           type: string
       type: object
     AccountsListLinksResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#accountsListLinksResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#accountsListLinksResponse`".'
           type: string
         links:
           description: The list of available links.
@@ -7290,7 +7291,7 @@ components:
     AccountsListResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#accountsListResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#accountsListResponse`".'
           type: string
         nextPageToken:
           description: The token for the retrieval of the next page of accounts.
@@ -7312,7 +7313,7 @@ components:
     AccountsUpdateLabelsResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#accountsUpdateLabelsResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#accountsUpdateLabelsResponse`".'
           type: string
       type: object
     AccountstatusesCustomBatchRequest:
@@ -7355,7 +7356,7 @@ components:
             $ref: "#/components/schemas/AccountstatusesCustomBatchResponseEntry"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#accountstatusesCustomBatchResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#accountstatusesCustomBatchResponse`".'
           type: string
       type: object
     AccountstatusesCustomBatchResponseEntry:
@@ -7375,7 +7376,7 @@ components:
     AccountstatusesListResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#accountstatusesListResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#accountstatusesListResponse`".'
           type: string
         nextPageToken:
           description: The token for the retrieval of the next page of account statuses.
@@ -7423,7 +7424,7 @@ components:
             $ref: "#/components/schemas/AccounttaxCustomBatchResponseEntry"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#accounttaxCustomBatchResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#accounttaxCustomBatchResponse`".'
           type: string
       type: object
     AccounttaxCustomBatchResponseEntry:
@@ -7446,7 +7447,7 @@ components:
     AccounttaxListResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#accounttaxListResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#accounttaxListResponse`".'
           type: string
         nextPageToken:
           description: The token for the retrieval of the next page of account tax settings.
@@ -7945,7 +7946,7 @@ components:
             $ref: "#/components/schemas/DatafeedsCustomBatchResponseEntry"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#datafeedsCustomBatchResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#datafeedsCustomBatchResponse`".'
           type: string
       type: object
     DatafeedsCustomBatchResponseEntry:
@@ -7965,13 +7966,13 @@ components:
     DatafeedsFetchNowResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#datafeedsFetchNowResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#datafeedsFetchNowResponse`".'
           type: string
       type: object
     DatafeedsListResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#datafeedsListResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#datafeedsListResponse`".'
           type: string
         nextPageToken:
           description: The token for the retrieval of the next page of datafeeds.
@@ -8022,7 +8023,7 @@ components:
             $ref: "#/components/schemas/DatafeedstatusesCustomBatchResponseEntry"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#datafeedstatusesCustomBatchResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#datafeedstatusesCustomBatchResponse`".'
           type: string
       type: object
     DatafeedstatusesCustomBatchResponseEntry:
@@ -8042,7 +8043,7 @@ components:
     DatafeedstatusesListResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#datafeedstatusesListResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#datafeedstatusesListResponse`".'
           type: string
         nextPageToken:
           description: The token for the retrieval of the next page of datafeed statuses.
@@ -8475,7 +8476,7 @@ components:
             $ref: "#/components/schemas/LiasettingsCustomBatchResponseEntry"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#liasettingsCustomBatchResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#liasettingsCustomBatchResponse`".'
           type: string
       type: object
     LiasettingsCustomBatchResponseEntry:
@@ -8514,13 +8515,13 @@ components:
             $ref: "#/components/schemas/GmbAccountsGmbAccount"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#liasettingsGetAccessibleGmbAccountsResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#liasettingsGetAccessibleGmbAccountsResponse`".'
           type: string
       type: object
     LiasettingsListPosDataProvidersResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#liasettingsListPosDataProvidersResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#liasettingsListPosDataProvidersResponse`".'
           type: string
         posDataProviders:
           description: The list of POS data providers for each eligible country
@@ -8531,7 +8532,7 @@ components:
     LiasettingsListResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#liasettingsListResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#liasettingsListResponse`".'
           type: string
         nextPageToken:
           description: The token for the retrieval of the next page of LIA settings.
@@ -8544,25 +8545,25 @@ components:
     LiasettingsRequestGmbAccessResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#liasettingsRequestGmbAccessResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#liasettingsRequestGmbAccessResponse`".'
           type: string
       type: object
     LiasettingsRequestInventoryVerificationResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#liasettingsRequestInventoryVerificationResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#liasettingsRequestInventoryVerificationResponse`".'
           type: string
       type: object
     LiasettingsSetInventoryVerificationContactResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#liasettingsSetInventoryVerificationContactResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#liasettingsSetInventoryVerificationContactResponse`".'
           type: string
       type: object
     LiasettingsSetPosDataProviderResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#liasettingsSetPosDataProviderResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#liasettingsSetPosDataProviderResponse`".'
           type: string
       type: object
     LinkService:
@@ -8771,7 +8772,7 @@ components:
             $ref: "#/components/schemas/LocalinventoryCustomBatchResponseEntry"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#localinventoryCustomBatchResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#localinventoryCustomBatchResponse`".'
           type: string
       type: object
     LocalinventoryCustomBatchResponseEntry:
@@ -9773,7 +9774,7 @@ components:
           description: 'The status of the execution. Acceptable values are: - "`duplicate`" - "`executed`" '
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#orderinvoicesCreateChargeInvoiceResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#orderinvoicesCreateChargeInvoiceResponse`".'
           type: string
       type: object
     OrderinvoicesCreateRefundInvoiceRequest:
@@ -9802,7 +9803,7 @@ components:
           description: 'The status of the execution. Acceptable values are: - "`duplicate`" - "`executed`" '
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#orderinvoicesCreateRefundInvoiceResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#orderinvoicesCreateRefundInvoiceResponse`".'
           type: string
       type: object
     OrderinvoicesCustomBatchRequestEntryCreateRefundInvoiceRefundOption:
@@ -9831,7 +9832,7 @@ components:
             $ref: "#/components/schemas/OrderReportDisbursement"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#orderreportsListDisbursementsResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#orderreportsListDisbursementsResponse`".'
           type: string
         nextPageToken:
           description: The token for the retrieval of the next page of disbursements.
@@ -9840,7 +9841,7 @@ components:
     OrderreportsListTransactionsResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#orderreportsListTransactionsResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#orderreportsListTransactionsResponse`".'
           type: string
         nextPageToken:
           description: The token for the retrieval of the next page of transactions.
@@ -9863,7 +9864,7 @@ components:
           description: 'The status of the execution. Acceptable values are: - "`duplicate`" - "`executed`" '
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#orderreturnsAcknowledgeResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#orderreturnsAcknowledgeResponse`".'
           type: string
       type: object
     OrderreturnsCreateOrderReturnRequest:
@@ -9889,7 +9890,7 @@ components:
           description: 'The status of the execution. Acceptable values are: - "`duplicate`" - "`executed`" '
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#orderreturnsCreateOrderReturnResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#orderreturnsCreateOrderReturnResponse`".'
           type: string
         orderReturn:
           $ref: "#/components/schemas/MerchantOrderReturn"
@@ -9911,7 +9912,7 @@ components:
     OrderreturnsListResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#orderreturnsListResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#orderreturnsListResponse`".'
           type: string
         nextPageToken:
           description: The token for the retrieval of the next page of returns.
@@ -9953,7 +9954,7 @@ components:
           description: 'The status of the execution. Acceptable values are: - "`duplicate`" - "`executed`" '
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#orderreturnsProcessResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#orderreturnsProcessResponse`".'
           type: string
       type: object
     OrderreturnsRefundOperation:
@@ -10007,13 +10008,13 @@ components:
           description: 'The status of the execution. Acceptable values are: - "`duplicate`" - "`executed`" '
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersAcknowledgeResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersAcknowledgeResponse`".'
           type: string
       type: object
     OrdersAdvanceTestOrderResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersAdvanceTestOrderResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersAdvanceTestOrderResponse`".'
           type: string
       type: object
     OrdersCancelLineItemRequest:
@@ -10044,7 +10045,7 @@ components:
           description: 'The status of the execution. Acceptable values are: - "`duplicate`" - "`executed`" '
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersCancelLineItemResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersCancelLineItemResponse`".'
           type: string
       type: object
     OrdersCancelRequest:
@@ -10065,7 +10066,7 @@ components:
           description: 'The status of the execution. Acceptable values are: - "`duplicate`" - "`executed`" '
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersCancelResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersCancelResponse`".'
           type: string
       type: object
     OrdersCancelTestOrderByCustomerRequest:
@@ -10077,7 +10078,7 @@ components:
     OrdersCancelTestOrderByCustomerResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersCancelTestOrderByCustomerResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersCancelTestOrderByCustomerResponse`".'
           type: string
       type: object
     OrdersCreateTestOrderRequest:
@@ -10095,7 +10096,7 @@ components:
     OrdersCreateTestOrderResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersCreateTestOrderResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersCreateTestOrderResponse`".'
           type: string
         orderId:
           description: The ID of the newly created test order.
@@ -10112,7 +10113,7 @@ components:
     OrdersCreateTestReturnResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersCreateTestReturnResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersCreateTestReturnResponse`".'
           type: string
         returnId:
           description: The ID of the newly created test order return.
@@ -10181,7 +10182,7 @@ components:
     OrdersGetByMerchantOrderIdResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersGetByMerchantOrderIdResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersGetByMerchantOrderIdResponse`".'
           type: string
         order:
           $ref: "#/components/schemas/Order"
@@ -10190,7 +10191,7 @@ components:
     OrdersGetTestOrderTemplateResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersGetTestOrderTemplateResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersGetTestOrderTemplateResponse`".'
           type: string
         template:
           $ref: "#/components/schemas/TestOrder"
@@ -10230,13 +10231,13 @@ components:
           description: 'The status of the execution. Acceptable values are: - "`duplicate`" - "`executed`" '
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersInStoreRefundLineItemResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersInStoreRefundLineItemResponse`".'
           type: string
       type: object
     OrdersListResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersListResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersListResponse`".'
           type: string
         nextPageToken:
           description: The token for the retrieval of the next page of orders.
@@ -10272,7 +10273,7 @@ components:
           description: 'The status of the execution. Acceptable values are: - "`duplicate`" - "`executed`" '
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersRefundItemResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersRefundItemResponse`".'
           type: string
       type: object
     OrdersRefundOrderRequest:
@@ -10299,7 +10300,7 @@ components:
           description: 'The status of the execution. Acceptable values are: - "`duplicate`" - "`executed`" '
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersRefundOrderResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersRefundOrderResponse`".'
           type: string
       type: object
     OrdersRejectReturnLineItemRequest:
@@ -10330,7 +10331,7 @@ components:
           description: 'The status of the execution. Acceptable values are: - "`duplicate`" - "`executed`" '
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersRejectReturnLineItemResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersRejectReturnLineItemResponse`".'
           type: string
       type: object
     OrdersReturnRefundLineItemRequest:
@@ -10367,7 +10368,7 @@ components:
           description: 'The status of the execution. Acceptable values are: - "`duplicate`" - "`executed`" '
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersReturnRefundLineItemResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersReturnRefundLineItemResponse`".'
           type: string
       type: object
     OrdersSetLineItemMetadataRequest:
@@ -10392,7 +10393,7 @@ components:
           description: 'The status of the execution. Acceptable values are: - "`duplicate`" - "`executed`" '
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersSetLineItemMetadataResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersSetLineItemMetadataResponse`".'
           type: string
       type: object
     OrdersShipLineItemsRequest:
@@ -10420,7 +10421,7 @@ components:
           description: 'The status of the execution. Acceptable values are: - "`duplicate`" - "`executed`" '
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersShipLineItemsResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersShipLineItemsResponse`".'
           type: string
       type: object
     OrdersUpdateLineItemShippingDetailsRequest:
@@ -10447,7 +10448,7 @@ components:
           description: 'The status of the execution. Acceptable values are: - "`duplicate`" - "`executed`" '
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersUpdateLineItemShippingDetailsResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersUpdateLineItemShippingDetailsResponse`".'
           type: string
       type: object
     OrdersUpdateMerchantOrderIdRequest:
@@ -10465,7 +10466,7 @@ components:
           description: 'The status of the execution. Acceptable values are: - "`duplicate`" - "`executed`" '
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersUpdateMerchantOrderIdResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersUpdateMerchantOrderIdResponse`".'
           type: string
       type: object
     OrdersUpdateShipmentRequest:
@@ -10507,7 +10508,7 @@ components:
           description: 'The status of the execution. Acceptable values are: - "`duplicate`" - "`executed`" '
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#ordersUpdateShipmentResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#ordersUpdateShipmentResponse`".'
           type: string
       type: object
     PauseBuyOnGoogleProgramRequest:
@@ -10591,7 +10592,7 @@ components:
             $ref: "#/components/schemas/PosCustomBatchResponseEntry"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#posCustomBatchResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#posCustomBatchResponse`".'
           type: string
       type: object
     PosCustomBatchResponseEntry:
@@ -10712,7 +10713,7 @@ components:
           description: Required. A unique identifier for the item.
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#posInventoryResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#posInventoryResponse`".'
           type: string
         price:
           $ref: "#/components/schemas/Price"
@@ -10734,7 +10735,7 @@ components:
     PosListResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#posListResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#posListResponse`".'
           type: string
         resources:
           items:
@@ -10819,7 +10820,7 @@ components:
           description: Required. A unique identifier for the item.
           type: string
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#posSaleResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#posSaleResponse`".'
           type: string
         price:
           $ref: "#/components/schemas/Price"
@@ -11436,7 +11437,7 @@ components:
           format: uint32
           type: integer
         feedId:
-          description: The Content API feed id.
+          description: The Content API Supplemental Feed ID. If present then product insertion or deletion applies to a supplemental feed instead of primary Content API feed.
           format: uint64
           type: string
         merchantId:
@@ -11465,7 +11466,7 @@ components:
             $ref: "#/components/schemas/ProductsCustomBatchResponseEntry"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#productsCustomBatchResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#productsCustomBatchResponse`".'
           type: string
       type: object
     ProductsCustomBatchResponseEntry:
@@ -11488,7 +11489,7 @@ components:
     ProductsListResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#productsListResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#productsListResponse`".'
           type: string
         nextPageToken:
           description: The token for the retrieval of the next page of products.
@@ -11539,7 +11540,7 @@ components:
             $ref: "#/components/schemas/ProductstatusesCustomBatchResponseEntry"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#productstatusesCustomBatchResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#productstatusesCustomBatchResponse`".'
           type: string
       type: object
     ProductstatusesCustomBatchResponseEntry:
@@ -11562,7 +11563,7 @@ components:
     ProductstatusesListResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#productstatusesListResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#productstatusesListResponse`".'
           type: string
         nextPageToken:
           description: The token for the retrieval of the next page of products statuses.
@@ -11697,7 +11698,7 @@ components:
             $ref: "#/components/schemas/CustomAttribute"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#regionalInventory".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#regionalInventory`".'
           type: string
         price:
           $ref: "#/components/schemas/Price"
@@ -11749,7 +11750,7 @@ components:
             $ref: "#/components/schemas/RegionalinventoryCustomBatchResponseEntry"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#regionalinventoryCustomBatchResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#regionalinventoryCustomBatchResponse`".'
           type: string
       type: object
     RegionalinventoryCustomBatchResponseEntry:
@@ -11763,7 +11764,7 @@ components:
           $ref: "#/components/schemas/Errors"
           description: A list of errors defined if and only if the request failed.
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#regionalinventoryCustomBatchResponseEntry".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#regionalinventoryCustomBatchResponseEntry`".'
           type: string
         regionalInventory:
           $ref: "#/components/schemas/RegionalInventory"
@@ -12344,7 +12345,7 @@ components:
             $ref: "#/components/schemas/ReturnaddressCustomBatchResponseEntry"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#returnaddressCustomBatchResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#returnaddressCustomBatchResponse`".'
           type: string
       type: object
     ReturnaddressCustomBatchResponseEntry:
@@ -12366,7 +12367,7 @@ components:
     ReturnaddressListResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#returnaddressListResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#returnaddressListResponse`".'
           type: string
         nextPageToken:
           description: The token for the retrieval of the next page of addresses.
@@ -12412,7 +12413,7 @@ components:
             $ref: "#/components/schemas/ReturnpolicyCustomBatchResponseEntry"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#returnpolicyCustomBatchResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#returnpolicyCustomBatchResponse`".'
           type: string
       type: object
     ReturnpolicyCustomBatchResponseEntry:
@@ -12434,7 +12435,7 @@ components:
     ReturnpolicyListResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#returnpolicyListResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#returnpolicyListResponse`".'
           type: string
         resources:
           items:
@@ -12693,7 +12694,7 @@ components:
     SettlementreportsListResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#settlementreportsListResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#settlementreportsListResponse`".'
           type: string
         nextPageToken:
           description: The token for the retrieval of the next page of returns.
@@ -12706,7 +12707,7 @@ components:
     SettlementtransactionsListResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#settlementtransactionsListResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#settlementtransactionsListResponse`".'
           type: string
         nextPageToken:
           description: The token for the retrieval of the next page of returns.
@@ -12812,7 +12813,7 @@ components:
             $ref: "#/components/schemas/ShippingsettingsCustomBatchResponseEntry"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#shippingsettingsCustomBatchResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#shippingsettingsCustomBatchResponse`".'
           type: string
       type: object
     ShippingsettingsCustomBatchResponseEntry:
@@ -12840,7 +12841,7 @@ components:
             $ref: "#/components/schemas/CarriersCarrier"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#shippingsettingsGetSupportedCarriersResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#shippingsettingsGetSupportedCarriersResponse`".'
           type: string
       type: object
     ShippingsettingsGetSupportedHolidaysResponse:
@@ -12851,13 +12852,13 @@ components:
             $ref: "#/components/schemas/HolidaysHoliday"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#shippingsettingsGetSupportedHolidaysResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#shippingsettingsGetSupportedHolidaysResponse`".'
           type: string
       type: object
     ShippingsettingsGetSupportedPickupServicesResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#shippingsettingsGetSupportedPickupServicesResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#shippingsettingsGetSupportedPickupServicesResponse`".'
           type: string
         pickupServices:
           description: A list of supported pickup services. May be empty.
@@ -12868,7 +12869,7 @@ components:
     ShippingsettingsListResponse:
       properties:
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "content#shippingsettingsListResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "`content#shippingsettingsListResponse`".'
           type: string
         nextPageToken:
           description: The token for the retrieval of the next page of shipping settings.
