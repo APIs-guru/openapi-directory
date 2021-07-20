@@ -464,7 +464,7 @@ paths:
                         - description: The type of the container provider. EKS is the only supported type as of now.
                     id:
                       allOf:
-                        - $ref: '#/components/schemas/String256'
+                        - $ref: '#/components/schemas/ClusterId'
                         - description: The ID of the container cluster.
                     info:
                       allOf:
@@ -1222,11 +1222,11 @@ components:
       type: string
       enum:
         - EKS
-    String256:
+    ClusterId:
       type: string
-      pattern: .*\S.*
+      pattern: '^[0-9A-Za-z][A-Za-z0-9\-_]*'
       minLength: 1
-      maxLength: 256
+      maxLength: 100
     ContainerInfo:
       type: object
       properties:
@@ -1416,6 +1416,11 @@ components:
       pattern: '[\.\-_/#A-Za-z0-9]+'
       minLength: 1
       maxLength: 512
+    String256:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 256
     CloudWatchMonitoringConfiguration:
       type: object
       required:
@@ -1468,7 +1473,7 @@ components:
       properties:
         namespace:
           allOf:
-            - $ref: '#/components/schemas/String256'
+            - $ref: '#/components/schemas/KubernetesNamespace'
             - description: The namespaces of the EKS cluster.
       description: The information about the EKS cluster.
     ContainerProvider:
@@ -1483,7 +1488,7 @@ components:
             - description: The type of the container provider. EKS is the only supported type as of now.
         id:
           allOf:
-            - $ref: '#/components/schemas/String256'
+            - $ref: '#/components/schemas/ClusterId'
             - description: The ID of the container cluster.
         info:
           allOf:
@@ -1734,6 +1739,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/SubnetIds'
             - description: 'The subnet IDs of the endpoint. '
+        stateDetails:
+          allOf:
+            - $ref: '#/components/schemas/String256'
+            - description: ' Additional details of the endpoint state. '
+        failureReason:
+          allOf:
+            - $ref: '#/components/schemas/FailureReason'
+            - description: ' The reasons why the endpoint has failed. '
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -1775,6 +1788,11 @@ components:
             - $ref: '#/components/schemas/TagMap'
             - description: The assigned tags of the virtual cluster.
       description: 'This entity describes a virtual cluster. A virtual cluster is a Kubernetes namespace that Amazon EMR is registered with. Amazon EMR uses virtual clusters to run jobs and host endpoints. Multiple virtual clusters can be backed by the same physical cluster. However, each virtual cluster maps to one namespace on an EKS cluster. Virtual clusters do not create any active resources that contribute to your bill or that require lifecycle management outside the service.'
+    KubernetesNamespace:
+      type: string
+      pattern: '[a-z0-9]([-a-z0-9]*[a-z0-9])?'
+      minLength: 1
+      maxLength: 63
     UriString:
       type: string
       pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\r\n\t]*'
@@ -1784,6 +1802,13 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/String256'
+    FailureReason:
+      type: string
+      enum:
+        - INTERNAL_ERROR
+        - USER_ERROR
+        - VALIDATION_ERROR
+        - CLUSTER_UNAVAILABLE
     EndpointStates:
       type: array
       items:
@@ -1814,13 +1839,6 @@ components:
       minLength: 1
       maxLength: 256
       format: password
-    FailureReason:
-      type: string
-      enum:
-        - INTERNAL_ERROR
-        - USER_ERROR
-        - VALIDATION_ERROR
-        - CLUSTER_UNAVAILABLE
     JavaInteger:
       type: integer
     JobArn:
@@ -1909,7 +1927,7 @@ components:
       type: string
       pattern: '(?!\s*$)(^[^'';|\u0026\u003C\u003E*?`$(){}\[\]!#\\]*$)'
       minLength: 1
-      maxLength: 1024
+      maxLength: 102400
       format: password
     StartJobRunRequest:
       type: object

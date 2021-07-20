@@ -795,7 +795,7 @@ components:
             - description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
         maxResults:
           allOf:
-            - $ref: '#/components/schemas/maxResults'
+            - $ref: '#/components/schemas/maxResultsLowerRange'
             - description: 'The maximum number of items to return in one batch, between 10 and 100, inclusive.'
     DescribeEntityAggregatesResponse:
       type: object
@@ -982,7 +982,7 @@ components:
             - description: 'If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.'
         maxResults:
           allOf:
-            - $ref: '#/components/schemas/maxResults'
+            - $ref: '#/components/schemas/maxResultsLowerRange'
             - description: 'The maximum number of items to return in one batch, between 10 and 100, inclusive.'
         locale:
           allOf:
@@ -1130,6 +1130,10 @@ components:
       pattern: '.{2,256}'
       minLength: 2
       maxLength: 256
+    maxResultsLowerRange:
+      type: integer
+      minimum: 1
+      maximum: 100
     EntityList:
       type: array
       items:
@@ -1425,13 +1429,13 @@ components:
       items:
         $ref: '#/components/schemas/entityArn'
       minItems: 1
-      maxItems: 100
+      maxItems: 99
     entityValueList:
       type: array
       items:
         $ref: '#/components/schemas/entityValue'
       minItems: 1
-      maxItems: 100
+      maxItems: 99
     dateTimeRangeList:
       type: array
       items:

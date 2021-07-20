@@ -5411,6 +5411,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: A map that contains tag keys and tag values that are attached to the world.
+        worldDescriptionBody:
+          allOf:
+            - $ref: '#/components/schemas/Json'
+            - description: Returns the JSON formatted string that describes the contents of your world.
     DescribeWorldExportJobResponse:
       type: object
       properties:
@@ -5526,6 +5530,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: A map that contains tag keys and tag values that are attached to the world template.
+        version:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The version of the world template that you're using.
     GetWorldTemplateBodyResponse:
       type: object
       properties:
@@ -7976,6 +7984,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TemplateName'
             - description: The name of the template.
+        version:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The version of the template that you're using.
       description: Summary information for a template.
     UnrestrictedCommand:
       type: string

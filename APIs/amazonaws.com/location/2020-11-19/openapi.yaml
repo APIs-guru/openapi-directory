@@ -118,7 +118,7 @@ paths:
   '/tracking/v0/trackers/{TrackerName}/consumers':
     post:
       operationId: AssociateTrackerConsumer
-      description: '<p>Creates an association between a geofence collection and a tracker resource. This allows the tracker resource to communicate location data to the linked geofence collection.</p> <note> <p>Currently not supported — Cross-account configurations, such as creating associations between a tracker resource in one account and a geofence collection in another account.</p> </note>'
+      description: '<p>Creates an association between a geofence collection and a tracker resource. This allows the tracker resource to communicate location data to the linked geofence collection. </p> <p>You can associate up to five geofence collections to each tracker resource.</p> <note> <p>Currently not supported — Cross-account configurations, such as creating associations between a tracker resource in one account and a geofence collection in another account.</p> </note>'
       responses:
         '200':
           description: Success
@@ -157,6 +157,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ValidationException'
         '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '486':
           description: ThrottlingException
           content:
             application/json:
@@ -348,7 +354,7 @@ paths:
   '/geofencing/v0/collections/{CollectionName}/positions':
     post:
       operationId: BatchEvaluateGeofences
-      description: '<p>Evaluates device positions against the geofence geometries from a given geofence collection. The evaluation determines if the device has entered or exited a geofenced area, which publishes ENTER or EXIT geofence events to Amazon EventBridge.</p> <note> <p>The last geofence that a device was observed within, if any, is tracked for 30 days after the most recent device position update</p> </note>'
+      description: '<p>Evaluates device positions against the geofence geometries from a given geofence collection.</p> <p>This operation always returns an empty response because geofences are asynchronously evaluated. The evaluation determines if the device has entered or exited a geofenced area, and then publishes one of the following events to Amazon EventBridge:</p> <ul> <li> <p> <code>ENTER</code> if Amazon Location determines that the tracked device has entered a geofenced area.</p> </li> <li> <p> <code>EXIT</code> if Amazon Location determines that the tracked device has exited a geofenced area.</p> </li> </ul> <note> <p>The last geofence that a device was observed within is tracked for 30 days after the most recent device position update.</p> </note>'
       responses:
         '200':
           description: Success
@@ -423,7 +429,7 @@ paths:
   '/tracking/v0/trackers/{TrackerName}/get-positions':
     post:
       operationId: BatchGetDevicePosition
-      description: A batch request to retrieve all device positions.
+      description: Lists the latest device positions for requested devices.
       responses:
         '200':
           description: Success
@@ -647,7 +653,7 @@ paths:
   '/routes/v0/calculators/{CalculatorName}/calculate/route':
     post:
       operationId: CalculateRoute
-      description: '<p> <a href="https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html">Calculates a route</a> given the following required parameters: <code>DeparturePostiton</code> and <code>DestinationPosition</code>. Requires that you first <a href="https://docs.aws.amazon.com/location-routes/latest/APIReference/API_CreateRouteCalculator.html">create aroute calculator resource</a> </p> <p>By default, a request that doesn''t specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route.</p> <p>Additional options include:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#departure-time">Specifying a departure time</a> using either <code>DepartureTime</code> or <code>DepartureNow</code>. This calculates a route based on predictive traffic data at the given time. </p> <note> <p>You can''t specify both <code>DepartureTime</code> and <code>DepartureNow</code> in a single request. Specifying both parameters returns an error message.</p> </note> </li> <li> <p> <a href="https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#travel-mode">Specifying a travel mode</a> using TravelMode. This lets you specify additional route preference such as <code>CarModeOptions</code> if traveling by <code>Car</code>, or <code>TruckModeOptions</code> if traveling by <code>Truck</code>.</p> </li> </ul> <p> </p>'
+      description: '<p> <a href="https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html">Calculates a route</a> given the following required parameters: <code>DeparturePostiton</code> and <code>DestinationPosition</code>. Requires that you first <a href="https://docs.aws.amazon.com/location-routes/latest/APIReference/API_CreateRouteCalculator.html">create a route calculator resource</a> </p> <p>By default, a request that doesn''t specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route.</p> <p>Additional options include:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#departure-time">Specifying a departure time</a> using either <code>DepartureTime</code> or <code>DepartureNow</code>. This calculates a route based on predictive traffic data at the given time. </p> <note> <p>You can''t specify both <code>DepartureTime</code> and <code>DepartureNow</code> in a single request. Specifying both parameters returns an error message.</p> </note> </li> <li> <p> <a href="https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#travel-mode">Specifying a travel mode</a> using TravelMode. This lets you specify an additional route preference such as <code>CarModeOptions</code> if traveling by <code>Car</code>, or <code>TruckModeOptions</code> if traveling by <code>Truck</code>.</p> </li> </ul> <p> </p>'
       responses:
         '200':
           description: Success
@@ -942,7 +948,7 @@ paths:
                     Style:
                       allOf:
                         - $ref: '#/components/schemas/MapStyle'
-                        - description: '<p>Specifies the map style selected from an available data provider.</p> <p>Valid styles: <code>RasterEsriImagery</code>, <code>VectorEsriStreets</code>, <code>VectorEsriTopographic</code>, <code>VectorEsriNavigation</code>, <code>VectorEsriDarkGrayCanvas</code>, <code>VectorEsriLightGrayCanvas</code>, <code>VectorHereBerlin</code>.</p> <note> <p>When using HERE as your data provider, and selecting the Style <code>VectorHereBerlin</code>, you may not use HERE Maps for Asset Management. See the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> for Amazon Location Service.</p> </note>'
+                        - description: '<p>Specifies the map style selected from an available data provider. For additional information on each map style and to preview each map style, see <a href="location/latest/developerguide/esri.html#esri-map-styles">Esri map styles</a> and <a href="location/latest/developerguide/HERE.html#HERE-map-styles">HERE map styles</a>.</p> <p>Valid <a href="https://docs.aws.amazon.com/location/latest/developerguide/esri.html">Esri</a> styles: </p> <ul> <li> <p> <code>VectorEsriDarkGrayCanvas</code> – The Esri Dark Gray Canvas map style. A vector basemap with a dark gray, neutral background with minimal colors, labels, and features that''s designed to draw attention to your thematic content. </p> </li> <li> <p> <code>RasterEsriImagery</code> – The Esri Imagery map style. A raster basemap that provides one meter or better satellite and aerial imagery in many parts of the world and lower resolution satellite imagery worldwide. </p> </li> <li> <p> <code>VectorEsriLightGrayCanvas</code> – The Esri Light Gray Canvas map style, which provides a detailed vector basemap with a light gray, neutral background style with minimal colors, labels, and features that''s designed to draw attention to your thematic content. </p> </li> <li> <p> <code>VectorEsriTopographic</code> – The Esri Light map style, which provides a detailed vector basemap with a classic Esri map style.</p> </li> <li> <p> <code>VectorEsriStreets</code> – The Esri World Streets map style, which provides a detailed vector basemap for the world symbolized with a classic Esri street map style. The vector tile layer is similar in content and style to the World Street Map raster map.</p> </li> <li> <p> <code>VectorEsriNavigation</code> – The Esri World Navigation map style, which provides a detailed basemap for the world symbolized with a custom navigation map style that''s designed for use during the day in mobile devices.</p> </li> </ul> <p>Valid <a href="https://docs.aws.amazon.com/location/latest/developerguide/HERE.html">HERE Technologies</a> styles: </p> <ul> <li> <p> <code>VectorHereBerlin</code> – The HERE Berlin map style is a high contrast detailed base map of the world that blends 3D and 2D rendering.</p> <note> <p>When using HERE as your data provider, and selecting the Style <code>VectorHereBerlin</code>, you may not use HERE Technologies maps for Asset Management. See the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> for Amazon Location Service.</p> </note> </li> </ul>'
                 Description:
                   description: An optional description for the map resource.
                   type: string
@@ -1030,16 +1036,16 @@ paths:
                 - PricingPlan
               properties:
                 DataSource:
-                  description: '<p>Specifies the data provider of geospatial data.</p> <note> <p>This field is case-sensitive. Enter the valid values as shown. For example, entering <code>HERE</code> will return an error.</p> </note> <p>Valid values include:</p> <ul> <li> <p> <code>Esri</code> </p> </li> <li> <p> <code>Here</code> </p> <important> <p>Place index resources using HERE as a data provider can''t be used to <a href="https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html">store</a> results for locations in Japan. For more information, see the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> for Amazon Location Service.</p> </important> </li> </ul> <p>For additional details on data providers, see the <a href="https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html">Amazon Location Service data providers page</a>.</p>'
+                  description: '<p>Specifies the data provider of geospatial data.</p> <note> <p>This field is case-sensitive. Enter the valid values as shown. For example, entering <code>HERE</code> returns an error.</p> </note> <p>Valid values include:</p> <ul> <li> <p> <code>Esri</code> – For additional information about <a href="https://docs.aws.amazon.com/location/latest/developerguide/esri.html">Esri</a>''s coverage in your region of interest, see <a href="https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm">Esri details on geocoding coverage</a>.</p> </li> <li> <p> <code>Here</code> – For additional information about <a href="https://docs.aws.amazon.com/location/latest/developerguide/HERE.html">HERE Technologies</a>''s coverage in your region of interest, see <a href="https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html">HERE details on goecoding coverage</a>.</p> <important> <p>Place index resources using HERE Technologies as a data provider can''t <a href="https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html">store results</a> for locations in Japan. For more information, see the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> for Amazon Location Service.</p> </important> </li> </ul> <p>For additional information , see <a href="https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html">Data providers</a> on the <i>Amazon Location Service Developer Guide</i>.</p>'
                   type: string
                 DataSourceConfiguration:
-                  description: Specifies the data storage option chosen for requesting Places.
+                  description: '<p>Specifies the data storage option chosen for requesting Places.</p> <important> <p>When using Amazon Location Places:</p> <ul> <li> <p>If using HERE Technologies as a data provider, you can''t store results for locations in Japan by setting <code>IntendedUse</code> to <code>Storage</code>. parameter.</p> </li> <li> <p>Under the <code>MobileAssetTracking</code> or <code>MobilAssetManagement</code> pricing plan, you can''t store results from your place index resources by setting <code>IntendedUse</code> to <code>Storage</code>. This returns a validation exception error.</p> </li> </ul> <p>For more information, see the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> for Amazon Location Service.</p> </important>'
                   type: object
                   properties:
                     IntendedUse:
                       allOf:
                         - $ref: '#/components/schemas/IntendedUse'
-                        - description: '<p>Specifies how the results of an operation will be stored by the caller. </p> <p>Valid values include:</p> <ul> <li> <p> <code>SingleUse</code> specifies that the results won''t be stored. </p> </li> <li> <p> <code>Storage</code> specifies that the result can be cached or stored in a database.</p> <important> <p>Place index resources using HERE as a data provider can''t be configured to store results for locations in Japan when choosing <code>Storage</code> for the <code>IntendedUse</code> parameter.</p> </important> </li> </ul> <p>Default value: <code>SingleUse</code> </p>'
+                        - description: '<p>Specifies how the results of an operation will be stored by the caller. </p> <p>Valid values include:</p> <ul> <li> <p> <code>SingleUse</code> specifies that the results won''t be stored. </p> </li> <li> <p> <code>Storage</code> specifies that the result can be cached or stored in a database.</p> </li> </ul> <p>Default value: <code>SingleUse</code> </p>'
                 Description:
                   description: The optional description for the place index resource.
                   type: string
@@ -1133,7 +1139,7 @@ paths:
                   minLength: 1
                   maxLength: 100
                 DataSource:
-                  description: '<p>Specifies the data provider of traffic and road network data.</p> <note> <p>This field is case-sensitive. Enter the valid values as shown. For example, entering <code>HERE</code> returns an error.</p> </note> <p>Valid Values: <code>Esri</code> | <code>Here</code> </p> <p>For more information about data providers, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html">Amazon Location Service data providers</a>.</p>'
+                  description: '<p>Specifies the data provider of traffic and road network data.</p> <note> <p>This field is case-sensitive. Enter the valid values as shown. For example, entering <code>HERE</code> returns an error.</p> </note> <p>Valid values include:</p> <ul> <li> <p> <code>Esri</code> – For additional information about <a href="https://docs.aws.amazon.com/location/latest/developerguide/esri.html">Esri</a>''s coverage in your region of interest, see <a href="https://doc.arcgis.com/en/arcgis-online/reference/network-coverage.htm">Esri details on street networks and traffic coverage</a>.</p> </li> <li> <p> <code>Here</code> – For additional information about <a href="https://docs.aws.amazon.com/location/latest/developerguide/HERE.html">HERE Technologies</a>''s coverage in your region of interest, see <a href="https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/car-routing.html">HERE car routing coverage</a> and <a href="https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/truck-routing.html">HERE truck routing coverage</a>.</p> </li> </ul> <p>For additional information , see <a href="https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html">Data providers</a> on the <i>Amazon Location Service Developer Guide</i>.</p>'
                   type: string
                 Description:
                   description: The optional description for the route calculator resource.
@@ -1364,6 +1370,78 @@ paths:
             pattern: '^[-._\w]+$'
             minLength: 1
             maxLength: 100
+    patch:
+      operationId: UpdateGeofenceCollection
+      description: Updates the specified properties of a given geofence collection.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateGeofenceCollectionResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: CollectionName
+          in: path
+          required: true
+          description: The name of the geofence collection to update.
+          schema:
+            type: string
+            pattern: '^[-._\w]+$'
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Description:
+                  description: Updates the description for the geofence collection.
+                  type: string
+                  minLength: 0
+                  maxLength: 1000
+                PricingPlan:
+                  description: '<p>Updates the pricing plan for the geofence collection.</p> <p>For more information about each pricing plan option restrictions, see <a href="https://aws.amazon.com/location/pricing/">Amazon Location Service pricing</a>.</p>'
+                  type: string
+                  enum:
+                    - RequestBasedUsage
+                    - MobileAssetTracking
+                    - MobileAssetManagement
+                PricingPlanDataSource:
+                  description: '<p>Updates the data provider for the geofence collection. </p> <p>A required value for the following pricing plans: <code>MobileAssetTracking</code>| <code>MobileAssetManagement</code> </p> <p>For more information about <a href="https://aws.amazon.com/location/data-providers/">data providers</a> and <a href="https://aws.amazon.com/location/pricing/">pricing plans</a>, see the Amazon Location Service product page.</p> <note> <p>This can only be updated when updating the <code>PricingPlan</code> in the same request.</p> <p>Amazon Location Service uses <code>PricingPlanDataSource</code> to calculate billing for your geofence collection. Your data won''t be shared with the data provider, and will remain in your AWS account and Region unless you move it.</p> </note>'
+                  type: string
   '/maps/v0/maps/{MapName}':
     delete:
       operationId: DeleteMap
@@ -1473,6 +1551,75 @@ paths:
             pattern: '^[-._\w]+$'
             minLength: 1
             maxLength: 100
+    patch:
+      operationId: UpdateMap
+      description: Updates the specified properties of a given map resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateMapResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: MapName
+          in: path
+          required: true
+          description: The name of the map resource to update.
+          schema:
+            type: string
+            pattern: '^[-._\w]+$'
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Description:
+                  description: Updates the description for the map resource.
+                  type: string
+                  minLength: 0
+                  maxLength: 1000
+                PricingPlan:
+                  description: '<p>Updates the pricing plan for the map resource.</p> <p>For more information about each pricing plan option restrictions, see <a href="https://aws.amazon.com/location/pricing/">Amazon Location Service pricing</a>.</p>'
+                  type: string
+                  enum:
+                    - RequestBasedUsage
+                    - MobileAssetTracking
+                    - MobileAssetManagement
   '/places/v0/indexes/{IndexName}':
     delete:
       operationId: DeletePlaceIndex
@@ -1582,6 +1729,83 @@ paths:
             pattern: '^[-._\w]+$'
             minLength: 1
             maxLength: 100
+    patch:
+      operationId: UpdatePlaceIndex
+      description: Updates the specified properties of a given place index resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePlaceIndexResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: IndexName
+          in: path
+          required: true
+          description: The name of the place index resource to update.
+          schema:
+            type: string
+            pattern: '^[-._\w]+$'
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                DataSourceConfiguration:
+                  description: '<p>Specifies the data storage option chosen for requesting Places.</p> <important> <p>When using Amazon Location Places:</p> <ul> <li> <p>If using HERE Technologies as a data provider, you can''t store results for locations in Japan by setting <code>IntendedUse</code> to <code>Storage</code>. parameter.</p> </li> <li> <p>Under the <code>MobileAssetTracking</code> or <code>MobilAssetManagement</code> pricing plan, you can''t store results from your place index resources by setting <code>IntendedUse</code> to <code>Storage</code>. This returns a validation exception error.</p> </li> </ul> <p>For more information, see the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> for Amazon Location Service.</p> </important>'
+                  type: object
+                  properties:
+                    IntendedUse:
+                      allOf:
+                        - $ref: '#/components/schemas/IntendedUse'
+                        - description: '<p>Specifies how the results of an operation will be stored by the caller. </p> <p>Valid values include:</p> <ul> <li> <p> <code>SingleUse</code> specifies that the results won''t be stored. </p> </li> <li> <p> <code>Storage</code> specifies that the result can be cached or stored in a database.</p> </li> </ul> <p>Default value: <code>SingleUse</code> </p>'
+                Description:
+                  description: Updates the description for the place index resource.
+                  type: string
+                  minLength: 0
+                  maxLength: 1000
+                PricingPlan:
+                  description: '<p>Updates the pricing plan for the place index resource.</p> <p>For more information about each pricing plan option restrictions, see <a href="https://aws.amazon.com/location/pricing/">Amazon Location Service pricing</a>.</p>'
+                  type: string
+                  enum:
+                    - RequestBasedUsage
+                    - MobileAssetTracking
+                    - MobileAssetManagement
   '/routes/v0/calculators/{CalculatorName}':
     delete:
       operationId: DeleteRouteCalculator
@@ -1691,6 +1915,75 @@ paths:
             pattern: '^[-._\w]+$'
             minLength: 1
             maxLength: 100
+    patch:
+      operationId: UpdateRouteCalculator
+      description: Updates the specified properties for a given route calculator resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRouteCalculatorResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: CalculatorName
+          in: path
+          required: true
+          description: The name of the route calculator resource to update.
+          schema:
+            type: string
+            pattern: '^[-._\w]+$'
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Description:
+                  description: Updates the description for the route calculator resource.
+                  type: string
+                  minLength: 0
+                  maxLength: 1000
+                PricingPlan:
+                  description: '<p>Updates the pricing plan for the route calculator resource.</p> <p>For more information about each pricing plan option restrictions, see <a href="https://aws.amazon.com/location/pricing/">Amazon Location Service pricing</a>.</p>'
+                  type: string
+                  enum:
+                    - RequestBasedUsage
+                    - MobileAssetTracking
+                    - MobileAssetManagement
   '/tracking/v0/trackers/{TrackerName}':
     delete:
       operationId: DeleteTracker
@@ -1800,6 +2093,78 @@ paths:
             pattern: '^[-._\w]+$'
             minLength: 1
             maxLength: 100
+    patch:
+      operationId: UpdateTracker
+      description: Updates the specified properties of a given tracker resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTrackerResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: TrackerName
+          in: path
+          required: true
+          description: The name of the tracker resource to update.
+          schema:
+            type: string
+            pattern: '^[-._\w]+$'
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Description:
+                  description: Updates the description for the tracker resource.
+                  type: string
+                  minLength: 0
+                  maxLength: 1000
+                PricingPlan:
+                  description: '<p>Updates the pricing plan for the tracker resource.</p> <p>For more information about each pricing plan option restrictions, see <a href="https://aws.amazon.com/location/pricing/">Amazon Location Service pricing</a>.</p>'
+                  type: string
+                  enum:
+                    - RequestBasedUsage
+                    - MobileAssetTracking
+                    - MobileAssetManagement
+                PricingPlanDataSource:
+                  description: '<p>Updates the data provider for the tracker resource. </p> <p>A required value for the following pricing plans: <code>MobileAssetTracking</code>| <code>MobileAssetManagement</code> </p> <p>For more information about <a href="https://aws.amazon.com/location/data-providers/">data providers</a> and <a href="https://aws.amazon.com/location/pricing/">pricing plans</a>, see the Amazon Location Service product page</p> <note> <p>This can only be updated when updating the <code>PricingPlan</code> in the same request.</p> <p>Amazon Location Service uses <code>PricingPlanDataSource</code> to calculate billing for your tracker resource. Your data won''t be shared with the data provider, and will remain in your AWS account and Region unless you move it.</p> </note>'
+                  type: string
   '/tracking/v0/trackers/{TrackerName}/consumers/{ConsumerArn}':
     delete:
       operationId: DisassociateTrackerConsumer
@@ -2225,7 +2590,7 @@ paths:
         - name: FontStack
           in: path
           required: true
-          description: 'A comma-separated list of fonts to load glyphs from in order of preference.. For example, <code>Noto Sans, Arial Unicode</code>.'
+          description: '<p>A comma-separated list of fonts to load glyphs from in order of preference. For example, <code>Noto Sans Regular, Arial Unicode</code>.</p> <p>Valid fonts for <a href="https://docs.aws.amazon.com/location/latest/developerguide/esri.html">Esri</a> styles: </p> <ul> <li> <p>VectorEsriDarkGrayCanvas – <code>Ubuntu Medium Italic</code> | <code>Ubuntu Medium</code> | <code>Ubuntu Italic</code> | <code>Ubuntu Regular</code> | <code>Ubuntu Bold</code> </p> </li> <li> <p>VectorEsriLightGrayCanvas – <code>Ubuntu Italic</code> | <code>Ubuntu Regular</code> | <code>Ubuntu Light</code> | <code>Ubuntu Bold</code> </p> </li> <li> <p>VectorEsriTopographic – <code>Noto Sans Italic</code> | <code>Noto Sans Regular</code> | <code>Noto Sans Bold</code> | <code>Noto Serif Regular</code> | <code>Roboto Condensed Light Italic</code> </p> </li> <li> <p>VectorEsriStreets – <code>Arial Regular</code> | <code>Arial Italic</code> | <code>Arial Bold</code> </p> </li> <li> <p>VectorEsriNavigation – <code>Arial Regular</code> | <code>Arial Italic</code> | <code>Arial Bold</code> </p> </li> </ul> <p>Valid fonts for <a href="https://docs.aws.amazon.com/location/latest/developerguide/HERE.html">HERE Technologies</a> styles: </p> <ul> <li> <p> <code>VectorHereBerlin</code> – <code>Fira GO Regular</code> | <code>Fira GO Bold</code> </p> </li> </ul>'
           schema:
             type: string
         - name: FontUnicodeRange
@@ -2460,7 +2825,7 @@ paths:
   '/tracking/v0/trackers/{TrackerName}/list-positions':
     post:
       operationId: ListDevicePositions
-      description: Lists the latest device positions for requested devices.
+      description: A batch request to retrieve all device positions.
       responses:
         '200':
           description: Success
@@ -2911,7 +3276,7 @@ paths:
   '/tags/{ResourceArn}':
     get:
       operationId: ListTagsForResource
-      description: Returns the tags for the specified Amazon Location Service resource.
+      description: Returns a list of tags that are applied to the specified Amazon Location resource.
       responses:
         '200':
           description: Success
@@ -2953,7 +3318,7 @@ paths:
         - name: ResourceArn
           in: path
           required: true
-          description: The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.
+          description: '<p>The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.</p> <ul> <li> <p>Format example: <code>arn:aws:geo:region:account-id:resourcetype/ExampleResource</code> </p> </li> </ul>'
           schema:
             type: string
             pattern: '^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$'
@@ -2969,7 +3334,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: '<p>Assigns one or more tags (key-value pairs) to the specified Amazon Location Service resource.</p> <pre><code> &lt;p&gt;Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.&lt;/p&gt; &lt;p&gt;Tags don''t have any semantic meaning to AWS and are interpreted strictly as strings of characters.&lt;/p&gt; &lt;p&gt;You can use the &lt;code&gt;TagResource&lt;/code&gt; action with an Amazon Location Service resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the tags already associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. &lt;/p&gt; &lt;p&gt;You can associate as many as 50 tags with a resource.&lt;/p&gt; </code></pre>'
+      description: '<p>Assigns one or more tags (key-value pairs) to the specified Amazon Location Service resource.</p> <pre><code> &lt;p&gt;Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.&lt;/p&gt; &lt;p&gt;You can use the &lt;code&gt;TagResource&lt;/code&gt; operation with an Amazon Location Service resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the tags already associated with the resource. If you specify a tag key that''s already associated with the resource, the new tag value that you specify replaces the previous value for that tag. &lt;/p&gt; &lt;p&gt;You can associate up to 50 tags with a resource.&lt;/p&gt; </code></pre>'
       responses:
         '200':
           description: Success
@@ -3011,7 +3376,7 @@ paths:
         - name: ResourceArn
           in: path
           required: true
-          description: The Amazon Resource Name (ARN) of the resource whose tags you want to update.
+          description: '<p>The Amazon Resource Name (ARN) of the resource whose tags you want to update.</p> <ul> <li> <p>Format example: <code>arn:aws:geo:region:account-id:resourcetype/ExampleResource</code> </p> </li> </ul>'
           schema:
             type: string
             pattern: '^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$'
@@ -3027,7 +3392,7 @@ paths:
                 - Tags
               properties:
                 Tags:
-                  description: The mapping from tag key to tag value for each tag associated with the specified resource.
+                  description: '<p>Tags that have been applied to the specified resource. Tags are mapped from the tag key to the tag value: <code>"TagKey" : "TagValue"</code>.</p> <ul> <li> <p>Format example: <code>{"tag1" : "value1", "tag2" : "value2"} </code> </p> </li> </ul>'
                   type: object
                   minProperties: 0
                   maxProperties: 50
@@ -3377,7 +3742,7 @@ paths:
   '/tags/{ResourceArn}#tagKeys':
     delete:
       operationId: UntagResource
-      description: Removes one or more tags from the specified Amazon Location Service resource.
+      description: Removes one or more tags from the specified Amazon Location resource.
       responses:
         '200':
           description: Success
@@ -3419,7 +3784,7 @@ paths:
         - name: ResourceArn
           in: path
           required: true
-          description: The Amazon Resource Name (ARN) of the resource from which you want to remove tags.
+          description: '<p>The Amazon Resource Name (ARN) of the resource from which you want to remove tags.</p> <ul> <li> <p>Format example: <code>arn:aws:geo:region:account-id:resourcetype/ExampleResource</code> </p> </li> </ul>'
           schema:
             type: string
             pattern: '^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$'
@@ -3428,7 +3793,7 @@ paths:
         - name: tagKeys
           in: query
           required: true
-          description: The list of tag keys to remove from the resource.
+          description: The list of tag keys to remove from the specified resource.
           schema:
             type: array
             items:
@@ -3503,6 +3868,7 @@ components:
     ConflictException: {}
     AccessDeniedException: {}
     ValidationException: {}
+    ServiceQuotaExceededException: {}
     ThrottlingException: {}
     BatchDeleteDevicePositionHistoryResponse:
       type: object
@@ -3617,11 +3983,11 @@ components:
         Legs:
           allOf:
             - $ref: '#/components/schemas/LegList'
-            - description: '<p>Contains details about each path between a pair of positions included along a route such as: <code>StartPosition</code>, <code>EndPosition</code>, <code>Distance</code>, <code>DurationSeconds</code>, <code>Geometry</code>, and <code>Steps</code>. The number of legs returned corresponds to one less than the total number of positions in the request. </p> <p>For example, a route with a departure position and destination position returns one leg with the positions <a href="https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road">snapped to a nearby road</a>:</p> <ul> <li> <p>The <code>StartPosition</code> is the departure position.</p> </li> <li> <p>The <code>EndPosition</code> is the destination position.</p> </li> </ul> <p>A route with a waypoint between the departure and destination position returns two legs with the positions snapped to a nearby road.:</p> <ul> <li> <p>Leg 1: The <code>StartPosition</code> is the departure position . The <code>EndPosition</code> is the waypoint positon.</p> </li> <li> <p>Leg 2: The <code>StartPosition</code> is the waypoint position. The <code>EndPosition</code> is the destination position.</p> </li> </ul>'
+            - description: '<p>Contains details about each path between a pair of positions included along a route such as: <code>StartPosition</code>, <code>EndPosition</code>, <code>Distance</code>, <code>DurationSeconds</code>, <code>Geometry</code>, and <code>Steps</code>. The number of legs returned corresponds to one fewer than the total number of positions in the request. </p> <p>For example, a route with a departure position and destination position returns one leg with the positions <a href="https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road">snapped to a nearby road</a>:</p> <ul> <li> <p>The <code>StartPosition</code> is the departure position.</p> </li> <li> <p>The <code>EndPosition</code> is the destination position.</p> </li> </ul> <p>A route with a waypoint between the departure and destination position returns two legs with the positions snapped to a nearby road:</p> <ul> <li> <p>Leg 1: The <code>StartPosition</code> is the departure position . The <code>EndPosition</code> is the waypoint positon.</p> </li> <li> <p>Leg 2: The <code>StartPosition</code> is the waypoint position. The <code>EndPosition</code> is the destination position.</p> </li> </ul>'
         Summary:
           allOf:
             - $ref: '#/components/schemas/CalculateRouteSummary'
-            - description: 'Contains information about the whole route, such as: <code>RouteBBox</code>, <code>DataSource</code>, <code>Distance</code>, <code>DistanceUnit</code>, and <code>DurationSeconds</code> '
+            - description: 'Contains information about the whole route, such as: <code>RouteBBox</code>, <code>DataSource</code>, <code>Distance</code>, <code>DistanceUnit</code>, and <code>DurationSeconds</code>.'
       description: Returns the result of the route calculation. Metadata includes legs and route summary.
     Boolean:
       type: boolean
@@ -3704,7 +4070,7 @@ components:
         MapArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: '<p>The Amazon Resource Name (ARN) for the map resource. Used when you need to specify a resource across all AWS.</p> <ul> <li> <p>Format example: <code>arn:aws:geo:region:account-id:maps/ExampleMap</code> </p> </li> </ul>'
+            - description: '<p>The Amazon Resource Name (ARN) for the map resource. Used to specify a resource across all AWS.</p> <ul> <li> <p>Format example: <code>arn:aws:geo:region:account-id:maps/ExampleMap</code> </p> </li> </ul>'
         MapName:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -3728,7 +4094,7 @@ components:
         IndexArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: '<p>The Amazon Resource Name (ARN) for the place index resource. Used to specify a resource across all AWS. </p> <ul> <li> <p>Format example: <code>arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex</code> </p> </li> </ul>'
+            - description: '<p>The Amazon Resource Name (ARN) for the place index resource. Used to specify a resource across AWS. </p> <ul> <li> <p>Format example: <code>arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex</code> </p> </li> </ul>'
         IndexName:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -3868,7 +4234,7 @@ components:
         MapArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: '<p>The Amazon Resource Name (ARN) for the map resource. Used when you need to specify a resource across all AWS.</p> <ul> <li> <p>Format example: <code>arn:aws:geo:region:account-id:maps/ExampleMap</code> </p> </li> </ul>'
+            - description: '<p>The Amazon Resource Name (ARN) for the map resource. Used to specify a resource across all AWS.</p> <ul> <li> <p>Format example: <code>arn:aws:geo:region:account-id:maps/ExampleMap</code> </p> </li> </ul>'
         MapName:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -3916,7 +4282,7 @@ components:
         IndexArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: '<p>The Amazon Resource Name (ARN) for the place index resource. Used to specify a resource across all AWS. </p> <ul> <li> <p>Format example: <code>arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex</code> </p> </li> </ul>'
+            - description: '<p>The Amazon Resource Name (ARN) for the place index resource. Used to specify a resource across AWS. </p> <ul> <li> <p>Format example: <code>arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex</code> </p> </li> </ul>'
         IndexName:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -4202,7 +4568,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: The mapping from tag key to tag value for each tag associated with the specified resource.
+            - description: '<p>Tags that have been applied to the specified resource. Tags are mapped from the tag key to the tag value: <code>"TagKey" : "TagValue"</code>.</p> <ul> <li> <p>Format example: <code>{"tag1" : "value1", "tag2" : "value2"} </code> </p> </li> </ul>'
     ListTrackerConsumersResponse:
       type: object
       required:
@@ -4292,6 +4658,101 @@ components:
       properties: {}
     String:
       type: string
+    UpdateGeofenceCollectionResponse:
+      type: object
+      required:
+        - CollectionArn
+        - CollectionName
+        - UpdateTime
+      properties:
+        CollectionArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) of the updated geofence collection. Used to specify a resource across AWS.</p> <ul> <li> <p>Format example: <code>arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection</code> </p> </li> </ul>'
+        CollectionName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the updated geofence collection.
+        UpdateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time when the geofence collection was last updated in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code> '
+    UpdateMapResponse:
+      type: object
+      required:
+        - MapArn
+        - MapName
+        - UpdateTime
+      properties:
+        MapArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) of the updated map resource. Used to specify a resource across AWS.</p> <ul> <li> <p>Format example: <code>arn:aws:geo:region:account-id:maps/ExampleMap</code> </p> </li> </ul>'
+        MapName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the updated map resource.
+        UpdateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The timestamp for when the map resource was last updated in <a href="https://www.iso.org/iso-8601-date-and-time-format.html"> ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. '
+    UpdatePlaceIndexResponse:
+      type: object
+      required:
+        - IndexArn
+        - IndexName
+        - UpdateTime
+      properties:
+        IndexArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) of the upated place index resource. Used to specify a resource across AWS.</p> <ul> <li> <p>Format example: <code>arn:aws:geo:region:account-id:place- index/ExamplePlaceIndex</code> </p> </li> </ul>'
+        IndexName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the updated place index resource.
+        UpdateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The timestamp for when the place index resource was last updated in <a href="https://www.iso.org/iso-8601-date-and-time-format.html"> ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. '
+    UpdateRouteCalculatorResponse:
+      type: object
+      required:
+        - CalculatorArn
+        - CalculatorName
+        - UpdateTime
+      properties:
+        CalculatorArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) of the updated route calculator resource. Used to specify a resource across AWS.</p> <ul> <li> <p>Format example: <code>arn:aws:geo:region:account-id:route- calculator/ExampleCalculator</code> </p> </li> </ul>'
+        CalculatorName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the updated route calculator resource.
+        UpdateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The timestamp for when the route calculator was last updated in <a href="https://www.iso.org/iso-8601-date-and-time-format.html"> ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. '
+    UpdateTrackerResponse:
+      type: object
+      required:
+        - TrackerArn
+        - TrackerName
+        - UpdateTime
+      properties:
+        TrackerArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) of the updated tracker resource. Used to specify a resource across AWS.</p> <ul> <li> <p>Format example: <code>arn:aws:geo:region:account-id:tracker/ExampleTracker</code> </p> </li> </ul>'
+        TrackerName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the updated tracker resource.
+        UpdateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The timestamp for when the tracker resource was last updated in <a href="https://www.iso.org/iso-8601-date-and-time-format.html"> ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>. '
     Arn:
       type: string
       pattern: '^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$'
@@ -4734,7 +5195,7 @@ components:
         RouteBBox:
           allOf:
             - $ref: '#/components/schemas/BoundingBox'
-            - description: '<p>Specifies a geographical box surrounding a route. Used to zoom into a route when displaying it in a map. For example, <code>[min x, min y, max x, max y]</code> </p> <p>The first 2 <code>bbox</code> parameters describe the lower southwest corner: </p> <ul> <li> <p>The first <code>bbox</code> position is the X coordinate or longitude of the lower southwest corner. </p> </li> <li> <p>The second <code>bbox</code> position is the Y coordinate or latitude of the lower southwest corner. </p> </li> </ul> <p>The next 2 <code>bbox</code> parameters describe the upper northeast corner: </p> <ul> <li> <p>The third <code>bbox</code> position is the X coordinate, or longitude of the upper northeast corner. </p> </li> <li> <p>The fourth <code>bbox</code> position is the Y coordinate, or longitude of the upper northeast corner. </p> </li> </ul>'
+            - description: '<p>Specifies a geographical box surrounding a route. Used to zoom into a route when displaying it in a map. For example, <code>[min x, min y, max x, max y]</code>.</p> <p>The first 2 <code>bbox</code> parameters describe the lower southwest corner: </p> <ul> <li> <p>The first <code>bbox</code> position is the X coordinate or longitude of the lower southwest corner. </p> </li> <li> <p>The second <code>bbox</code> position is the Y coordinate or latitude of the lower southwest corner. </p> </li> </ul> <p>The next 2 <code>bbox</code> parameters describe the upper northeast corner: </p> <ul> <li> <p>The third <code>bbox</code> position is the X coordinate, or longitude of the upper northeast corner. </p> </li> <li> <p>The fourth <code>bbox</code> position is the Y coordinate, or longitude of the upper northeast corner. </p> </li> </ul>'
       description: A summary of the calculated route.
     CalculateRouteSummaryDistanceDouble:
       type: number
@@ -4809,7 +5270,7 @@ components:
         Style:
           allOf:
             - $ref: '#/components/schemas/MapStyle'
-            - description: '<p>Specifies the map style selected from an available data provider.</p> <p>Valid styles: <code>RasterEsriImagery</code>, <code>VectorEsriStreets</code>, <code>VectorEsriTopographic</code>, <code>VectorEsriNavigation</code>, <code>VectorEsriDarkGrayCanvas</code>, <code>VectorEsriLightGrayCanvas</code>, <code>VectorHereBerlin</code>.</p> <note> <p>When using HERE as your data provider, and selecting the Style <code>VectorHereBerlin</code>, you may not use HERE Maps for Asset Management. See the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> for Amazon Location Service.</p> </note>'
+            - description: '<p>Specifies the map style selected from an available data provider. For additional information on each map style and to preview each map style, see <a href="location/latest/developerguide/esri.html#esri-map-styles">Esri map styles</a> and <a href="location/latest/developerguide/HERE.html#HERE-map-styles">HERE map styles</a>.</p> <p>Valid <a href="https://docs.aws.amazon.com/location/latest/developerguide/esri.html">Esri</a> styles: </p> <ul> <li> <p> <code>VectorEsriDarkGrayCanvas</code> – The Esri Dark Gray Canvas map style. A vector basemap with a dark gray, neutral background with minimal colors, labels, and features that''s designed to draw attention to your thematic content. </p> </li> <li> <p> <code>RasterEsriImagery</code> – The Esri Imagery map style. A raster basemap that provides one meter or better satellite and aerial imagery in many parts of the world and lower resolution satellite imagery worldwide. </p> </li> <li> <p> <code>VectorEsriLightGrayCanvas</code> – The Esri Light Gray Canvas map style, which provides a detailed vector basemap with a light gray, neutral background style with minimal colors, labels, and features that''s designed to draw attention to your thematic content. </p> </li> <li> <p> <code>VectorEsriTopographic</code> – The Esri Light map style, which provides a detailed vector basemap with a classic Esri map style.</p> </li> <li> <p> <code>VectorEsriStreets</code> – The Esri World Streets map style, which provides a detailed vector basemap for the world symbolized with a classic Esri street map style. The vector tile layer is similar in content and style to the World Street Map raster map.</p> </li> <li> <p> <code>VectorEsriNavigation</code> – The Esri World Navigation map style, which provides a detailed basemap for the world symbolized with a custom navigation map style that''s designed for use during the day in mobile devices.</p> </li> </ul> <p>Valid <a href="https://docs.aws.amazon.com/location/latest/developerguide/HERE.html">HERE Technologies</a> styles: </p> <ul> <li> <p> <code>VectorHereBerlin</code> – The HERE Berlin map style is a high contrast detailed base map of the world that blends 3D and 2D rendering.</p> <note> <p>When using HERE as your data provider, and selecting the Style <code>VectorHereBerlin</code>, you may not use HERE Technologies maps for Asset Management. See the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> for Amazon Location Service.</p> </note> </li> </ul>'
       description: Specifies the map tile style selected from an available provider.
     CreateMapRequest:
       type: object
@@ -4845,8 +5306,8 @@ components:
         IntendedUse:
           allOf:
             - $ref: '#/components/schemas/IntendedUse'
-            - description: '<p>Specifies how the results of an operation will be stored by the caller. </p> <p>Valid values include:</p> <ul> <li> <p> <code>SingleUse</code> specifies that the results won''t be stored. </p> </li> <li> <p> <code>Storage</code> specifies that the result can be cached or stored in a database.</p> <important> <p>Place index resources using HERE as a data provider can''t be configured to store results for locations in Japan when choosing <code>Storage</code> for the <code>IntendedUse</code> parameter.</p> </important> </li> </ul> <p>Default value: <code>SingleUse</code> </p>'
-      description: Specifies the data storage option chosen for requesting Places.
+            - description: '<p>Specifies how the results of an operation will be stored by the caller. </p> <p>Valid values include:</p> <ul> <li> <p> <code>SingleUse</code> specifies that the results won''t be stored. </p> </li> <li> <p> <code>Storage</code> specifies that the result can be cached or stored in a database.</p> </li> </ul> <p>Default value: <code>SingleUse</code> </p>'
+      description: '<p>Specifies the data storage option chosen for requesting Places.</p> <important> <p>When using Amazon Location Places:</p> <ul> <li> <p>If using HERE Technologies as a data provider, you can''t store results for locations in Japan by setting <code>IntendedUse</code> to <code>Storage</code>. parameter.</p> </li> <li> <p>Under the <code>MobileAssetTracking</code> or <code>MobilAssetManagement</code> pricing plan, you can''t store results from your place index resources by setting <code>IntendedUse</code> to <code>Storage</code>. This returns a validation exception error.</p> </li> </ul> <p>For more information, see the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> for Amazon Location Service.</p> </important>'
     CreatePlaceIndexRequest:
       type: object
       required:
@@ -4858,11 +5319,11 @@ components:
         DataSource:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>Specifies the data provider of geospatial data.</p> <note> <p>This field is case-sensitive. Enter the valid values as shown. For example, entering <code>HERE</code> will return an error.</p> </note> <p>Valid values include:</p> <ul> <li> <p> <code>Esri</code> </p> </li> <li> <p> <code>Here</code> </p> <important> <p>Place index resources using HERE as a data provider can''t be used to <a href="https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html">store</a> results for locations in Japan. For more information, see the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> for Amazon Location Service.</p> </important> </li> </ul> <p>For additional details on data providers, see the <a href="https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html">Amazon Location Service data providers page</a>.</p>'
+            - description: '<p>Specifies the data provider of geospatial data.</p> <note> <p>This field is case-sensitive. Enter the valid values as shown. For example, entering <code>HERE</code> returns an error.</p> </note> <p>Valid values include:</p> <ul> <li> <p> <code>Esri</code> – For additional information about <a href="https://docs.aws.amazon.com/location/latest/developerguide/esri.html">Esri</a>''s coverage in your region of interest, see <a href="https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm">Esri details on geocoding coverage</a>.</p> </li> <li> <p> <code>Here</code> – For additional information about <a href="https://docs.aws.amazon.com/location/latest/developerguide/HERE.html">HERE Technologies</a>''s coverage in your region of interest, see <a href="https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html">HERE details on goecoding coverage</a>.</p> <important> <p>Place index resources using HERE Technologies as a data provider can''t <a href="https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html">store results</a> for locations in Japan. For more information, see the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a> for Amazon Location Service.</p> </important> </li> </ul> <p>For additional information , see <a href="https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html">Data providers</a> on the <i>Amazon Location Service Developer Guide</i>.</p>'
         DataSourceConfiguration:
           allOf:
             - $ref: '#/components/schemas/DataSourceConfiguration'
-            - description: Specifies the data storage option for requesting Places.
+            - description: Specifies the data storage option requesting Places.
         Description:
           allOf:
             - $ref: '#/components/schemas/ResourceDescription'
@@ -4894,7 +5355,7 @@ components:
         DataSource:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>Specifies the data provider of traffic and road network data.</p> <note> <p>This field is case-sensitive. Enter the valid values as shown. For example, entering <code>HERE</code> returns an error.</p> </note> <p>Valid Values: <code>Esri</code> | <code>Here</code> </p> <p>For more information about data providers, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html">Amazon Location Service data providers</a>.</p>'
+            - description: '<p>Specifies the data provider of traffic and road network data.</p> <note> <p>This field is case-sensitive. Enter the valid values as shown. For example, entering <code>HERE</code> returns an error.</p> </note> <p>Valid values include:</p> <ul> <li> <p> <code>Esri</code> – For additional information about <a href="https://docs.aws.amazon.com/location/latest/developerguide/esri.html">Esri</a>''s coverage in your region of interest, see <a href="https://doc.arcgis.com/en/arcgis-online/reference/network-coverage.htm">Esri details on street networks and traffic coverage</a>.</p> </li> <li> <p> <code>Here</code> – For additional information about <a href="https://docs.aws.amazon.com/location/latest/developerguide/HERE.html">HERE Technologies</a>''s coverage in your region of interest, see <a href="https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/car-routing.html">HERE car routing coverage</a> and <a href="https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/truck-routing.html">HERE truck routing coverage</a>.</p> </li> </ul> <p>For additional information , see <a href="https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html">Data providers</a> on the <i>Amazon Location Service Developer Guide</i>.</p>'
         Description:
           allOf:
             - $ref: '#/components/schemas/ResourceDescription'
@@ -5123,7 +5584,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/StepList'
             - description: 'Contains a list of steps, which represent subsections of a leg. Each step provides instructions for how to move to the next step in the leg such as the step''s start position, end position, travel distance, travel duration, and geometry offset.'
-      description: '<p>Contains the calculated route''s details for each path between a pair of positions. The number of legs returned corresponds to one less than the total number of positions in the request. </p> <p>For example, a route with a departure position and destination position returns one leg with the positions <a href="https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road">snapped to a nearby road</a>:</p> <ul> <li> <p>The <code>StartPosition</code> is the departure position.</p> </li> <li> <p>The <code>EndPosition</code> is the destination position.</p> </li> </ul> <p>A route with a waypoint between the departure and destination position returns two legs with the positions snapped to a nearby road.:</p> <ul> <li> <p>Leg 1: The <code>StartPosition</code> is the departure position . The <code>EndPosition</code> is the waypoint positon.</p> </li> <li> <p>Leg 2: The <code>StartPosition</code> is the waypoint position. The <code>EndPosition</code> is the destination position.</p> </li> </ul>'
+      description: '<p>Contains the calculated route''s details for each path between a pair of positions. The number of legs returned corresponds to one fewer than the total number of positions in the request. </p> <p>For example, a route with a departure position and destination position returns one leg with the positions <a href="https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road">snapped to a nearby road</a>:</p> <ul> <li> <p>The <code>StartPosition</code> is the departure position.</p> </li> <li> <p>The <code>EndPosition</code> is the destination position.</p> </li> </ul> <p>A route with a waypoint between the departure and destination position returns two legs with the positions snapped to a nearby road:</p> <ul> <li> <p>Leg 1: The <code>StartPosition</code> is the departure position . The <code>EndPosition</code> is the waypoint positon.</p> </li> <li> <p>Leg 2: The <code>StartPosition</code> is the waypoint position. The <code>EndPosition</code> is the destination position.</p> </li> </ul>'
     LineString:
       type: array
       items:
@@ -5765,7 +6226,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: The mapping from tag key to tag value for each tag associated with the specified resource.
+            - description: '<p>Tags that have been applied to the specified resource. Tags are mapped from the tag key to the tag value: <code>"TagKey" : "TagValue"</code>.</p> <ul> <li> <p>Format example: <code>{"tag1" : "value1", "tag2" : "value2"} </code> </p> </li> </ul>'
     TruckDimensionsHeightDouble:
       type: number
       format: double
@@ -5791,5 +6252,77 @@ components:
       type: object
       title: UntagResourceRequest
       properties: {}
+    UpdateGeofenceCollectionRequest:
+      type: object
+      title: UpdateGeofenceCollectionRequest
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: Updates the description for the geofence collection.
+        PricingPlan:
+          allOf:
+            - $ref: '#/components/schemas/PricingPlan'
+            - description: '<p>Updates the pricing plan for the geofence collection.</p> <p>For more information about each pricing plan option restrictions, see <a href="https://aws.amazon.com/location/pricing/">Amazon Location Service pricing</a>.</p>'
+        PricingPlanDataSource:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Updates the data provider for the geofence collection. </p> <p>A required value for the following pricing plans: <code>MobileAssetTracking</code>| <code>MobileAssetManagement</code> </p> <p>For more information about <a href="https://aws.amazon.com/location/data-providers/">data providers</a> and <a href="https://aws.amazon.com/location/pricing/">pricing plans</a>, see the Amazon Location Service product page.</p> <note> <p>This can only be updated when updating the <code>PricingPlan</code> in the same request.</p> <p>Amazon Location Service uses <code>PricingPlanDataSource</code> to calculate billing for your geofence collection. Your data won''t be shared with the data provider, and will remain in your AWS account and Region unless you move it.</p> </note>'
+    UpdateMapRequest:
+      type: object
+      title: UpdateMapRequest
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: Updates the description for the map resource.
+        PricingPlan:
+          allOf:
+            - $ref: '#/components/schemas/PricingPlan'
+            - description: '<p>Updates the pricing plan for the map resource.</p> <p>For more information about each pricing plan option restrictions, see <a href="https://aws.amazon.com/location/pricing/">Amazon Location Service pricing</a>.</p>'
+    UpdatePlaceIndexRequest:
+      type: object
+      title: UpdatePlaceIndexRequest
+      properties:
+        DataSourceConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceConfiguration'
+            - description: Updates the data storage option for the place index resource.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: Updates the description for the place index resource.
+        PricingPlan:
+          allOf:
+            - $ref: '#/components/schemas/PricingPlan'
+            - description: '<p>Updates the pricing plan for the place index resource.</p> <p>For more information about each pricing plan option restrictions, see <a href="https://aws.amazon.com/location/pricing/">Amazon Location Service pricing</a>.</p>'
+    UpdateRouteCalculatorRequest:
+      type: object
+      title: UpdateRouteCalculatorRequest
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: Updates the description for the route calculator resource.
+        PricingPlan:
+          allOf:
+            - $ref: '#/components/schemas/PricingPlan'
+            - description: '<p>Updates the pricing plan for the route calculator resource.</p> <p>For more information about each pricing plan option restrictions, see <a href="https://aws.amazon.com/location/pricing/">Amazon Location Service pricing</a>.</p>'
+    UpdateTrackerRequest:
+      type: object
+      title: UpdateTrackerRequest
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: Updates the description for the tracker resource.
+        PricingPlan:
+          allOf:
+            - $ref: '#/components/schemas/PricingPlan'
+            - description: '<p>Updates the pricing plan for the tracker resource.</p> <p>For more information about each pricing plan option restrictions, see <a href="https://aws.amazon.com/location/pricing/">Amazon Location Service pricing</a>.</p>'
+        PricingPlanDataSource:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Updates the data provider for the tracker resource. </p> <p>A required value for the following pricing plans: <code>MobileAssetTracking</code>| <code>MobileAssetManagement</code> </p> <p>For more information about <a href="https://aws.amazon.com/location/data-providers/">data providers</a> and <a href="https://aws.amazon.com/location/pricing/">pricing plans</a>, see the Amazon Location Service product page</p> <note> <p>This can only be updated when updating the <code>PricingPlan</code> in the same request.</p> <p>Amazon Location Service uses <code>PricingPlanDataSource</code> to calculate billing for your tracker resource. Your data won''t be shared with the data provider, and will remain in your AWS account and Region unless you move it.</p> </note>'
 security:
   - hmac: []

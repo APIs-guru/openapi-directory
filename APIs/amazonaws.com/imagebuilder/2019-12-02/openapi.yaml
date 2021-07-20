@@ -297,7 +297,7 @@ paths:
                   type: string
                   pattern: '^[-_A-Za-z-0-9][-_A-Za-z0-9 ]{1,126}[-_A-Za-z-0-9]$'
                 semanticVersion:
-                  description: 'The semantic version of the component. This version follows the semantic version syntax. For example, major.minor.patch. This could be versioned like software (2.0.1) or like a date (2019.12.01).'
+                  description: '<p>The semantic version of the component. This version follows the semantic version syntax.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the build number, and that is not open for updates.</p> <p> <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or a date, such as 2021.01.01.</p> </note>'
                   type: string
                   pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
                 description:
@@ -465,7 +465,7 @@ paths:
                   minLength: 1
                   maxLength: 1024
                 semanticVersion:
-                  description: The semantic version of the container recipe (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).
+                  description: '<p>The semantic version of the container recipe. This version follows the semantic version syntax.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the build number, and that is not open for updates.</p> <p> <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or a date, such as 2021.01.01.</p> </note>'
                   type: string
                   pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
                 components:
@@ -1069,7 +1069,7 @@ paths:
                   minLength: 1
                   maxLength: 1024
                 semanticVersion:
-                  description: The semantic version of the image recipe.
+                  description: '<p>The semantic version of the image recipe. This version follows the semantic version syntax.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the build number, and that is not open for updates.</p> <p> <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or a date, such as 2021.01.01.</p> </note>'
                   type: string
                   pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
                 components:
@@ -2552,7 +2552,7 @@ paths:
                   type: string
                   pattern: '^[-_A-Za-z-0-9][-_A-Za-z0-9 ]{1,126}[-_A-Za-z-0-9]$'
                 semanticVersion:
-                  description: 'The semantic version of the component. This version follows the semantic version syntax. For example, major.minor.patch. This could be versioned like software (2.0.1) or like a date (2019.12.01).'
+                  description: '<p>The semantic version of the component. This version follows the semantic version syntax.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Filtering:</b> When you retrieve or reference a resource with a semantic version, you can use wildcards (x) to filter your results. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. For example, specifying "1.2.x", or "1.x.x" works to filter list results, but neither "1.x.2", nor "x.2.x" will work. You do not have to specify the build - Image Builder automatically uses a wildcard for that, if applicable.</p> </note>'
                   type: string
                   pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
                 description:
@@ -2566,7 +2566,7 @@ paths:
                   minLength: 1
                   maxLength: 1024
                 type:
-                  description: The type of the component denotes whether the component is used to build the image or only to test it.
+                  description: 'The type of the component denotes whether the component is used to build the image, or only to test it.'
                   type: string
                   enum:
                     - BUILD
@@ -2618,7 +2618,7 @@ paths:
   /ListComponentBuildVersions:
     post:
       operationId: ListComponentBuildVersions
-      description: ' Returns the list of component build versions for the specified semantic version.'
+      description: '<p> Returns the list of component build versions for the specified semantic version.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Filtering:</b> When you retrieve or reference a resource with a semantic version, you can use wildcards (x) to filter your results. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. For example, specifying "1.2.x", or "1.x.x" works to filter list results, but neither "1.x.2", nor "x.2.x" will work. You do not have to specify the build - Image Builder automatically uses a wildcard for that, if applicable.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2715,7 +2715,7 @@ paths:
   /ListComponents:
     post:
       operationId: ListComponents
-      description: Returns the list of component build versions for the specified semantic version.
+      description: '<p>Returns the list of component build versions for the specified semantic version.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Filtering:</b> When you retrieve or reference a resource with a semantic version, you can use wildcards (x) to filter your results. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. For example, specifying "1.2.x", or "1.x.x" works to filter list results, but neither "1.x.2", nor "x.2.x" will work. You do not have to specify the build - Image Builder automatically uses a wildcard for that, if applicable.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2800,7 +2800,7 @@ paths:
                   minItems: 1
                   maxItems: 10
                 byName:
-                  description: Returns the list of component build versions for the specified semantic version.
+                  description: Returns the list of component build versions for the specified name.
                   type: boolean
                 maxResults:
                   description: The maximum items to return in a request.
@@ -5283,7 +5283,7 @@ components:
         componentVersionList:
           allOf:
             - $ref: '#/components/schemas/ComponentVersionList'
-            - description: The list of component semantic versions.
+            - description: '<p>The list of component semantic versions.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> </note>'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
@@ -5415,7 +5415,7 @@ components:
         imageVersionList:
           allOf:
             - $ref: '#/components/schemas/ImageVersionList'
-            - description: The list of image semantic versions.
+            - description: '<p>The list of image semantic versions.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Filtering:</b> When you retrieve or reference a resource with a semantic version, you can use wildcards (x) to filter your results. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. For example, specifying "1.2.x", or "1.x.x" works to filter list results, but neither "1.x.2", nor "x.2.x" will work. You do not have to specify the build - Image Builder automatically uses a wildcard for that, if applicable.</p> </note>'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
@@ -5935,7 +5935,7 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/ImageBuilderArn'
-            - description: The Amazon Resource Name (ARN) of the component.
+            - description: '<p>The Amazon Resource Name (ARN) of the component.</p> <note> <p>Semantic versioning is included in each object''s Amazon Resource Name (ARN), at the level that applies to that object as follows:</p> <ol> <li> <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are either left off entirely, or they are specified as wildcards, for example: x.x.x.</p> </li> <li> <p>Version ARNs have only the first three nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</p> </li> <li> <p>Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.</p> </li> </ol> </note>'
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -5943,7 +5943,7 @@ components:
         version:
           allOf:
             - $ref: '#/components/schemas/VersionNumber'
-            - description: The semantic version of the component.
+            - description: '<p>The semantic version of the component.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the build number, and that is not open for updates.</p> <p> <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or a date, such as 2021.01.01.</p> <p> <b>Filtering:</b> When you retrieve or reference a resource with a semantic version, you can use wildcards (x) to filter your results. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. For example, specifying "1.2.x", or "1.x.x" works to filter list results, but neither "1.x.2", nor "x.2.x" will work. You do not have to specify the build - Image Builder automatically uses a wildcard for that, if applicable.</p> </note>'
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -5968,7 +5968,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/DateTime'
             - description: The date that the component was created.
-      description: A high-level overview of a component semantic version.
+      description: The defining characteristics of a specific version of an TOE component.
     ComponentVersionArn:
       type: string
       pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):component/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
@@ -6053,7 +6053,7 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/ImageBuilderArn'
-            - description: The Amazon Resource Name (ARN) of the container recipe.
+            - description: '<p>The Amazon Resource Name (ARN) of the container recipe.</p> <note> <p>Semantic versioning is included in each object''s Amazon Resource Name (ARN), at the level that applies to that object as follows:</p> <ol> <li> <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are either left off entirely, or they are specified as wildcards, for example: x.x.x.</p> </li> <li> <p>Version ARNs have only the first three nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</p> </li> <li> <p>Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.</p> </li> </ol> </note>'
         containerType:
           allOf:
             - $ref: '#/components/schemas/ContainerType'
@@ -6077,7 +6077,7 @@ components:
         version:
           allOf:
             - $ref: '#/components/schemas/VersionNumber'
-            - description: The semantic version of the container recipe (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).
+            - description: '<p>The semantic version of the container recipe.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the build number, and that is not open for updates.</p> <p> <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or a date, such as 2021.01.01.</p> <p> <b>Filtering:</b> When you retrieve or reference a resource with a semantic version, you can use wildcards (x) to filter your results. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. For example, specifying "1.2.x", or "1.x.x" works to filter list results, but neither "1.x.2", nor "x.2.x" will work. You do not have to specify the build - Image Builder automatically uses a wildcard for that, if applicable.</p> </note>'
         components:
           allOf:
             - $ref: '#/components/schemas/ComponentConfigurationList'
@@ -6185,7 +6185,7 @@ components:
         semanticVersion:
           allOf:
             - $ref: '#/components/schemas/VersionNumber'
-            - description: 'The semantic version of the component. This version follows the semantic version syntax. For example, major.minor.patch. This could be versioned like software (2.0.1) or like a date (2019.12.01).'
+            - description: '<p>The semantic version of the component. This version follows the semantic version syntax.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the build number, and that is not open for updates.</p> <p> <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or a date, such as 2021.01.01.</p> </note>'
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -6254,7 +6254,7 @@ components:
         semanticVersion:
           allOf:
             - $ref: '#/components/schemas/VersionNumber'
-            - description: The semantic version of the container recipe (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).
+            - description: '<p>The semantic version of the container recipe. This version follows the semantic version syntax.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the build number, and that is not open for updates.</p> <p> <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or a date, such as 2021.01.01.</p> </note>'
         components:
           allOf:
             - $ref: '#/components/schemas/ComponentConfigurationList'
@@ -6457,7 +6457,7 @@ components:
         semanticVersion:
           allOf:
             - $ref: '#/components/schemas/VersionNumber'
-            - description: The semantic version of the image recipe.
+            - description: '<p>The semantic version of the image recipe. This version follows the semantic version syntax.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the build number, and that is not open for updates.</p> <p> <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or a date, such as 2021.01.01.</p> </note>'
         components:
           allOf:
             - $ref: '#/components/schemas/ComponentConfigurationList'
@@ -6994,7 +6994,7 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/ImageBuilderArn'
-            - description: The Amazon Resource Name (ARN) of the image.
+            - description: '<p>The Amazon Resource Name (ARN) of the image.</p> <note> <p>Semantic versioning is included in each object''s Amazon Resource Name (ARN), at the level that applies to that object as follows:</p> <ol> <li> <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are either left off entirely, or they are specified as wildcards, for example: x.x.x.</p> </li> <li> <p>Version ARNs have only the first three nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</p> </li> <li> <p>Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.</p> </li> </ol> </note>'
         type:
           allOf:
             - $ref: '#/components/schemas/ImageType'
@@ -7006,7 +7006,7 @@ components:
         version:
           allOf:
             - $ref: '#/components/schemas/VersionNumber'
-            - description: The semantic version of the image.
+            - description: '<p>The semantic version of the image.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the build number, and that is not open for updates.</p> <p> <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or a date, such as 2021.01.01.</p> <p> <b>Filtering:</b> When you retrieve or reference a resource with a semantic version, you can use wildcards (x) to filter your results. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. For example, specifying "1.2.x", or "1.x.x" works to filter list results, but neither "1.x.2", nor "x.2.x" will work. You do not have to specify the build - Image Builder automatically uses a wildcard for that, if applicable.</p> </note>'
         platform:
           allOf:
             - $ref: '#/components/schemas/Platform'
@@ -7030,7 +7030,7 @@ components:
         containerRecipe:
           allOf:
             - $ref: '#/components/schemas/ContainerRecipe'
-            - description: The container recipe used to create the container image type.
+            - description: The recipe that is used to create an Image Builder container image.
         sourcePipelineName:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -7063,7 +7063,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags of the image.
-      description: An image build version.
+      description: 'An Image Builder image. You must specify exactly one recipe for the image – either a container recipe (<code>containerRecipe</code>), which creates a container image, or an image recipe (<code>imageRecipe</code>), which creates an AMI.'
     GetInfrastructureConfigurationRequest:
       type: object
       title: GetInfrastructureConfigurationRequest
@@ -7278,36 +7278,36 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/ImageBuilderArn'
-            - description: The Amazon Resource Name (ARN) of the image semantic version.
+            - description: '<p>The Amazon Resource Name (ARN) of a specific version of an Image Builder image.</p> <note> <p>Semantic versioning is included in each object''s Amazon Resource Name (ARN), at the level that applies to that object as follows:</p> <ol> <li> <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are either left off entirely, or they are specified as wildcards, for example: x.x.x.</p> </li> <li> <p>Version ARNs have only the first three nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</p> </li> <li> <p>Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.</p> </li> </ol> </note>'
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the image semantic version.
+            - description: The name of this specific version of an Image Builder image.
         type:
           allOf:
             - $ref: '#/components/schemas/ImageType'
-            - description: Specifies whether this is an AMI or container image.
+            - description: Specifies whether this image is an AMI or a container image.
         version:
           allOf:
             - $ref: '#/components/schemas/VersionNumber'
-            - description: The semantic version of the image semantic version.
+            - description: '<p>Details for a specific version of an Image Builder image. This version follows the semantic version syntax.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the build number, and that is not open for updates.</p> <p> <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or a date, such as 2021.01.01.</p> <p> <b>Filtering:</b> When you retrieve or reference a resource with a semantic version, you can use wildcards (x) to filter your results. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. For example, specifying "1.2.x", or "1.x.x" works to filter list results, but neither "1.x.2", nor "x.2.x" will work. You do not have to specify the build - Image Builder automatically uses a wildcard for that, if applicable.</p> </note>'
         platform:
           allOf:
             - $ref: '#/components/schemas/Platform'
-            - description: The platform of the image semantic version.
+            - description: 'The platform of the image version, for example "Windows" or "Linux".'
         osVersion:
           allOf:
             - $ref: '#/components/schemas/OsVersion'
-            - description: 'The operating system version of the instance. For example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.'
+            - description: 'The operating system version of the Amazon EC2 build instance. For example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.'
         owner:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The owner of the image semantic version.
+            - description: The owner of the image version.
         dateCreated:
           allOf:
             - $ref: '#/components/schemas/DateTime'
-            - description: The date at which this image semantic version was created.
-      description: An image semantic version.
+            - description: The date on which this specific version of the Image Builder image was created.
+      description: The defining characteristics of a specific version of an Image Builder image.
     ImageVersionArn:
       type: string
       pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
@@ -7333,7 +7333,7 @@ components:
         semanticVersion:
           allOf:
             - $ref: '#/components/schemas/VersionNumber'
-            - description: 'The semantic version of the component. This version follows the semantic version syntax. For example, major.minor.patch. This could be versioned like software (2.0.1) or like a date (2019.12.01).'
+            - description: '<p>The semantic version of the component. This version follows the semantic version syntax.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Filtering:</b> When you retrieve or reference a resource with a semantic version, you can use wildcards (x) to filter your results. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. For example, specifying "1.2.x", or "1.x.x" works to filter list results, but neither "1.x.2", nor "x.2.x" will work. You do not have to specify the build - Image Builder automatically uses a wildcard for that, if applicable.</p> </note>'
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -7345,7 +7345,7 @@ components:
         type:
           allOf:
             - $ref: '#/components/schemas/ComponentType'
-            - description: The type of the component denotes whether the component is used to build the image or only to test it.
+            - description: 'The type of the component denotes whether the component is used to build the image, or only to test it.'
         format:
           allOf:
             - $ref: '#/components/schemas/ComponentFormat'
@@ -7489,7 +7489,7 @@ components:
         byName:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Returns the list of component build versions for the specified semantic version.
+            - description: Returns the list of component build versions for the specified name.
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'

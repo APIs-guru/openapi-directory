@@ -3034,11 +3034,11 @@ components:
         awsDeviceV2:
           allOf:
             - $ref: '#/components/schemas/AwsDeviceV2'
-            - description: The Direct Connect endpoint on which the physical connection terminates.
+            - description: The Direct Connect endpoint that terminates the physical connection.
         awsLogicalDeviceId:
           allOf:
             - $ref: '#/components/schemas/AwsLogicalDeviceId'
-            - description: The Direct Connect endpoint that terminates a physical connection's BGP sessions.
+            - description: The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.
         hasLogicalRedundancy:
           allOf:
             - $ref: '#/components/schemas/HasLogicalRedundancy'
@@ -3228,11 +3228,11 @@ components:
         awsDeviceV2:
           allOf:
             - $ref: '#/components/schemas/AwsDeviceV2'
-            - description: The Direct Connect endpoint on which the virtual interface terminates.
+            - description: The Direct Connect endpoint that terminates the physical connection.
         awsLogicalDeviceId:
           allOf:
             - $ref: '#/components/schemas/AwsLogicalDeviceId'
-            - description: The Direct Connect endpoint that terminates a physical connection's BGP sessions.
+            - description: The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -3648,11 +3648,11 @@ components:
         awsDeviceV2:
           allOf:
             - $ref: '#/components/schemas/AwsDeviceV2'
-            - description: The Direct Connect endpoint on which the physical connection terminates.
+            - description: The Direct Connect endpoint that terminates the physical connection.
         awsLogicalDeviceId:
           allOf:
             - $ref: '#/components/schemas/AwsLogicalDeviceId'
-            - description: The Direct Connect endpoint that terminates a physical connection's BGP sessions.
+            - description: The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.
         hasLogicalRedundancy:
           allOf:
             - $ref: '#/components/schemas/HasLogicalRedundancy'
@@ -3748,7 +3748,7 @@ components:
         awsLogicalDeviceId:
           allOf:
             - $ref: '#/components/schemas/AwsLogicalDeviceId'
-            - description: The Direct Connect endpoint that terminates a physical connection's BGP sessions.
+            - description: The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.
         connections:
           allOf:
             - $ref: '#/components/schemas/ConnectionList'
@@ -4905,9 +4905,11 @@ components:
         awsDeviceV2:
           allOf:
             - $ref: '#/components/schemas/AwsDeviceV2'
-            - description: The Direct Connect endpoint on which the BGP peer terminates.
+            - description: The Direct Connect endpoint that terminates the BGP peer.
         awsLogicalDeviceId:
-          $ref: '#/components/schemas/AwsLogicalDeviceId'
+          allOf:
+            - $ref: '#/components/schemas/AwsLogicalDeviceId'
+            - description: The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.
       description: Information about a BGP peer.
     BGPPeerIdList:
       type: array
