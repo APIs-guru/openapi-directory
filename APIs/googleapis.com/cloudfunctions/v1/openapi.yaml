@@ -717,7 +717,7 @@ components:
           type: string
       type: object
     CloudFunction:
-      description: Describes a Cloud Function that contains user computation executed in response to an event. It encapsulate function and triggers configurations.
+      description: "Describes a Cloud Function that contains user computation executed in response to an event. It encapsulate function and triggers configurations. Next tag: 35"
       properties:
         availableMemoryMb:
           description: The amount of memory in MB available for a function. Defaults to 256MB.
@@ -1076,7 +1076,7 @@ components:
           description: Name of the environment variable.
           type: string
         projectId:
-          description: Project whose secret manager data is being referenced. Cross project secrets are not supported.
+          description: Project identifier (preferrably project number but can also be the project ID) of the project that contains the secret. If not set, it will be populated with the function's project assuming that the secret exists in the same project as of the function.
           type: string
         secret:
           description: Name of the secret in secret manager (not the full resource name).
@@ -1102,7 +1102,7 @@ components:
           description: "The path within the container to mount the secret volume. For example, setting the mount_path as `/etc/secrets` would mount the secret value files under the `/etc/secrets` directory. This directory will also be completely shadowed and unavailable to mount any other secrets. Recommended mount paths: /etc/secrets Restricted mount paths: /cloudsql, /dev/log, /pod, /proc, /var/log"
           type: string
         projectId:
-          description: Project whose secret manager data is being referenced. Cross project secrets are not supported.
+          description: Project identifier (preferrably project number but can also be the project ID) of the project that contains the secret. If not set, it will be populated with the function's project assuming that the secret exists in the same project as of the function.
           type: string
         secret:
           description: Name of the secret in secret manager (not the full resource name).
