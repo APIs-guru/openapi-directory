@@ -3,7 +3,7 @@ info:
   version: '2009-03-31'
   x-release: v4
   title: Amazon Elastic MapReduce
-  description: 'Amazon EMR is a web service that makes it easier to process large amounts of data efficiently. Amazon EMR uses Hadoop processing combined with several AWS services to do tasks such as web indexing, data mining, log file analysis, machine learning, scientific simulation, and data warehouse management.'
+  description: 'Amazon EMR is a web service that makes it easier to process large amounts of data efficiently. Amazon EMR uses Hadoop processing combined with several Amazon Web Services services to do tasks such as web indexing, data mining, log file analysis, machine learning, scientific simulation, and data warehouse management.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -291,7 +291,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.CancelSteps:
     post:
       operationId: CancelSteps
-      description: 'Cancels a pending step or steps in a running cluster. Available only in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee that a step will be canceled, even if the request is successfully submitted. You can only cancel steps that are in a <code>PENDING</code> state.'
+      description: 'Cancels a pending step or steps in a running cluster. Available only in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee that a step will be canceled, even if the request is successfully submitted. When you use Amazon EMR versions 5.28.0 and later, you can cancel steps that are in a <code>PENDING</code> or <code>RUNNING</code> state. In earlier versions of Amazon EMR, you can only cancel steps that are in a <code>PENDING</code> state. '
       responses:
         '200':
           description: Success
@@ -721,6 +721,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ElasticMapReduce.DescribeReleaseLabel:
+    post:
+      operationId: DescribeReleaseLabel
+      description: 'Provides EMR release label details, such as releases available the region where the API request is run, and the available applications for a specific EMR release label. Can also list EMR release versions that support a specified version of Spark.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeReleaseLabelOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeReleaseLabelInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ElasticMapReduce.DescribeReleaseLabel
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=ElasticMapReduce.DescribeSecurityConfiguration:
     post:
       operationId: DescribeSecurityConfiguration
@@ -859,7 +904,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.GetBlockPublicAccessConfiguration:
     post:
       operationId: GetBlockPublicAccessConfiguration
-      description: 'Returns the Amazon EMR block public access configuration for your AWS account in the current Region. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html">Configure Block Public Access for Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.'
+      description: 'Returns the Amazon EMR block public access configuration for your account in the current Region. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html">Configure Block Public Access for Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.'
       responses:
         '200':
           description: Success
@@ -1033,7 +1078,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.ListClusters:
     post:
       operationId: ListClusters
-      description: 'Provides the status of all clusters visible to this AWS account. Allows you to filter the list of clusters based on certain criteria; for example, filtering by cluster creation date and time or by status. This call returns a maximum of 50 clusters per call, but returns a marker to track the paging of the cluster list across multiple ListClusters calls.'
+      description: 'Provides the status of all clusters visible to this account. Allows you to filter the list of clusters based on certain criteria; for example, filtering by cluster creation date and time or by status. This call returns a maximum of 50 clusters in unsorted order per call, but returns a marker to track the paging of the cluster list across multiple ListClusters calls.'
       responses:
         '200':
           description: Success
@@ -1285,6 +1330,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ElasticMapReduce.ListReleaseLabels:
+    post:
+      operationId: ListReleaseLabels
+      description: Retrieves release labels of EMR services in the region where the API is called.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListReleaseLabelsOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListReleaseLabelsInput'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ElasticMapReduce.ListReleaseLabels
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=ElasticMapReduce.ListSecurityConfigurations:
     post:
       operationId: ListSecurityConfigurations
@@ -1339,7 +1441,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.ListSteps:
     post:
       operationId: ListSteps
-      description: Provides a list of steps for the cluster in reverse order unless you specify <code>stepIds</code> with the request of filter by <code>StepStates</code>. You can specify a maximum of 10 <code>stepIDs</code>.
+      description: 'Provides a list of steps for the cluster in reverse order unless you specify <code>stepIds</code> with the request or filter by <code>StepStates</code>. You can specify a maximum of 10 <code>stepIDs</code>. The CLI automatically paginates results to return a list greater than 50 steps. To return more than 50 steps using the CLI, specify a <code>Marker</code>, which is a pagination token that indicates the next set of steps to retrieve.'
       responses:
         '200':
           description: Success
@@ -1441,7 +1543,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.ListStudios:
     post:
       operationId: ListStudios
-      description: 'Returns a list of all Amazon EMR Studios associated with the AWS account. The list includes details such as ID, Studio Access URL, and creation time for each Studio.'
+      description: 'Returns a list of all Amazon EMR Studios associated with the account. The list includes details such as ID, Studio Access URL, and creation time for each Studio.'
       responses:
         '200':
           description: Success
@@ -1646,7 +1748,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.PutBlockPublicAccessConfiguration:
     post:
       operationId: PutBlockPublicAccessConfiguration
-      description: 'Creates or updates an Amazon EMR block public access configuration for your AWS account in the current Region. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html">Configure Block Public Access for Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.'
+      description: 'Creates or updates an Amazon EMR block public access configuration for your account in the current Region. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html">Configure Block Public Access for Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.'
       responses:
         '200':
           description: Success
@@ -1909,7 +2011,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.SetVisibleToAllUsers:
     post:
       operationId: SetVisibleToAllUsers
-      description: 'Sets the <a>Cluster$VisibleToAllUsers</a> value, which determines whether the cluster is visible to all IAM users of the AWS account associated with the cluster. Only the IAM user who created the cluster or the AWS account root user can call this action. The default value, <code>true</code>, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If set to <code>false</code>, only the IAM user that created the cluster can perform actions. This action works on running clusters. You can override the default <code>true</code> setting when you create a cluster by using the <code>VisibleToAllUsers</code> parameter with <code>RunJobFlow</code>.'
+      description: '<p>Sets the <a>Cluster$VisibleToAllUsers</a> value for an EMR cluster. When <code>true</code>, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals.</p> <p>This action works on running clusters. When you create a cluster, use the <a>RunJobFlowInput$VisibleToAllUsers</a> parameter.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMR Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -2410,7 +2512,7 @@ components:
         ServiceRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: The IAM role that will be assumed by the Amazon EMR Studio. The service role provides a way for Amazon EMR Studio to interoperate with other AWS services.
+            - description: The IAM role that will be assumed by the Amazon EMR Studio. The service role provides a way for Amazon EMR Studio to interoperate with other Amazon Web Services services.
         UserRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
@@ -2446,11 +2548,11 @@ components:
         IdentityId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The globally unique identifier (GUID) of the user or group from the AWS SSO Identity Store. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserId</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId">GroupId</a> in the <i>AWS SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
+            - description: 'The globally unique identifier (GUID) of the user or group from the Amazon Web Services SSO Identity Store. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserId</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId">GroupId</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
         IdentityName:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The name of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
+            - description: 'The name of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
         IdentityType:
           allOf:
             - $ref: '#/components/schemas/IdentityType'
@@ -2458,7 +2560,7 @@ components:
         SessionPolicyArn:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.
+            - description: 'The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. You should specify the ARN for the session policy that you want to apply, not the ARN of your user role. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-user-role.html">Create an EMR Studio User Role with Session Policies</a>.'
     DeleteSecurityConfigurationOutput:
       type: object
       properties: {}
@@ -2496,11 +2598,11 @@ components:
         IdentityId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The globally unique identifier (GUID) of the user or group to remove from the Amazon EMR Studio. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserId</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId">GroupId</a> in the <i>AWS SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
+            - description: 'The globally unique identifier (GUID) of the user or group to remove from the Amazon EMR Studio. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserId</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId">GroupId</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
         IdentityName:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The name of the user name or group to remove from the Amazon EMR Studio. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
+            - description: 'The name of the user name or group to remove from the Amazon EMR Studio. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>Amazon Web Services SSO Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
         IdentityType:
           allOf:
             - $ref: '#/components/schemas/IdentityType'
@@ -2570,6 +2672,37 @@ components:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
             - description: The unique identifier of the notebook execution.
+    DescribeReleaseLabelOutput:
+      type: object
+      properties:
+        ReleaseLabel:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The target release label described in the response.
+        Applications:
+          allOf:
+            - $ref: '#/components/schemas/SimplifiedApplicationList'
+            - description: The list of applications available for the target release label. <code>Name</code> is the name of the application. <code>Version</code> is the concise version of the application.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token. Reserved for future use. Currently set to null.
+    DescribeReleaseLabelInput:
+      type: object
+      title: DescribeReleaseLabelInput
+      properties:
+        ReleaseLabel:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The target release label to be described.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token. Reserved for future use. Currently set to null.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsNumber'
+            - description: Reserved for future use. Currently set to null.
     DescribeSecurityConfigurationOutput:
       type: object
       properties:
@@ -2649,7 +2782,7 @@ components:
         BlockPublicAccessConfigurationMetadata:
           allOf:
             - $ref: '#/components/schemas/BlockPublicAccessConfigurationMetadata'
-            - description: 'Properties that describe the AWS principal that created the <code>BlockPublicAccessConfiguration</code> using the <code>PutBlockPublicAccessConfiguration</code> action as well as the date and time that the configuration was created. Each time a configuration for block public access is updated, Amazon EMR updates this metadata.'
+            - description: 'Properties that describe the Amazon Web Services principal that created the <code>BlockPublicAccessConfiguration</code> using the <code>PutBlockPublicAccessConfiguration</code> action as well as the date and time that the configuration was created. Each time a configuration for block public access is updated, Amazon EMR updates this metadata.'
     GetBlockPublicAccessConfigurationInput:
       type: object
       title: GetBlockPublicAccessConfigurationInput
@@ -2692,11 +2825,11 @@ components:
         IdentityId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The globally unique identifier (GUID) of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserId</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId">GroupId</a> in the <i>AWS SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
+            - description: 'The globally unique identifier (GUID) of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserId</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId">GroupId</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
         IdentityName:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The name of the user or group to fetch. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
+            - description: 'The name of the user or group to fetch. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
         IdentityType:
           allOf:
             - $ref: '#/components/schemas/IdentityType'
@@ -2755,7 +2888,7 @@ components:
         ClusterStates:
           allOf:
             - $ref: '#/components/schemas/ClusterStateList'
-            - description: The cluster state filters to apply when listing clusters.
+            - description: The cluster state filters to apply when listing clusters. Clusters that change state while this action runs may be not be returned as expected in the list of clusters.
         Marker:
           allOf:
             - $ref: '#/components/schemas/Marker'
@@ -2895,6 +3028,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/Marker'
             - description: 'The pagination token, returned by a previous <code>ListNotebookExecutions</code> call, that indicates the start of the list for this <code>ListNotebookExecutions</code> call.'
+    ListReleaseLabelsOutput:
+      type: object
+      properties:
+        ReleaseLabels:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The returned release labels.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Used to paginate the next page of results if specified in the next <code>ListReleaseLabels</code> request.
+    ListReleaseLabelsInput:
+      type: object
+      title: ListReleaseLabelsInput
+      properties:
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/ReleaseLabelFilter'
+            - description: Filters the results of the request. <code>Prefix</code> specifies the prefix of release labels to return. <code>Application</code> specifies the application (with/without version) of release labels to return.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Specifies the next page of results. If <code>NextToken</code> is not specified, which is usually the case for the first request of ListReleaseLabels, the first page of results are determined by other filtering parameters or by the latest version. The <code>ListReleaseLabels</code> request fails if the identity (AWS AccountID) and all filtering parameters are different from the original request, or if the <code>NextToken</code> is expired or tampered with.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsNumber'
+            - description: Defines the maximum number of release labels to return in a single response. The default is <code>100</code>.
     ListSecurityConfigurationsOutput:
       type: object
       properties:
@@ -2924,7 +3084,7 @@ components:
         Marker:
           allOf:
             - $ref: '#/components/schemas/Marker'
-            - description: The pagination token that indicates the next set of results to retrieve.
+            - description: 'The maximum number of steps that a single <code>ListSteps</code> action returns is 50. To return a longer list of steps, use multiple <code>ListSteps</code> actions along with the <code>Marker</code> parameter, which is a pagination token that indicates the next set of results to retrieve.'
       description: This output contains the list of steps returned in reverse order. This means that the last step is the first element in the list.
     ListStepsInput:
       type: object
@@ -2947,7 +3107,7 @@ components:
         Marker:
           allOf:
             - $ref: '#/components/schemas/Marker'
-            - description: The pagination token that indicates the next set of results to retrieve.
+            - description: 'The maximum number of steps that a single <code>ListSteps</code> action returns is 50. To return a longer list of steps, use multiple <code>ListSteps</code> actions along with the <code>Marker</code> parameter, which is a pagination token that indicates the next set of results to retrieve.'
       description: This input determines which steps to list.
     ListStudioSessionMappingsOutput:
       type: object
@@ -3015,7 +3175,7 @@ components:
         StepConcurrencyLevel:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: 'The number of steps that can be executed concurrently. You can specify a minimum of 1 step and a maximum of 256 steps. '
+            - description: The number of steps that can be executed concurrently. You can specify a minimum of 1 step and a maximum of 256 steps. We recommend that you do not change this parameter while steps are running or the <code>ActionOnFailure</code> setting may not behave as expected. For more information see <a>Step$ActionOnFailure</a>.
     ModifyInstanceFleetInput:
       type: object
       required:
@@ -3030,7 +3190,7 @@ components:
         InstanceFleet:
           allOf:
             - $ref: '#/components/schemas/InstanceFleetModifyConfig'
-            - description: The unique identifier of the instance fleet.
+            - description: The configuration parameters of the instance fleet.
     ModifyInstanceGroupsInput:
       type: object
       title: ModifyInstanceGroupsInput
@@ -3195,7 +3355,7 @@ components:
         LogEncryptionKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: 'The AWS KMS customer master key (CMK) used for encrypting log files. If a value is not provided, the logs remain encrypted by AES-256. This attribute is only available with Amazon EMR version 5.30.0 and later, excluding Amazon EMR 6.0.0.'
+            - description: 'The KMS key used for encrypting log files. If a value is not provided, the logs remain encrypted by AES-256. This attribute is only available with Amazon EMR version 5.30.0 and later, excluding Amazon EMR 6.0.0.'
         AdditionalInfo:
           allOf:
             - $ref: '#/components/schemas/XmlString'
@@ -3239,7 +3399,7 @@ components:
         VisibleToAllUsers:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: A value of <code>true</code> indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. This is the default. A value of <code>false</code> indicates that only the IAM user who created the cluster can perform actions.
+            - description: '<p>Set this value to <code>true</code> so that IAM principals in the account associated with the cluster can perform EMR actions on the cluster that their IAM policies allow. This value defaults to <code>false</code> for clusters created using the EMR API or the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command.</p> <p>When set to <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions for the cluster, regardless of the IAM permissions policies attached to other IAM principals. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMR Management Guide</i>.</p>'
         JobFlowRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
@@ -3247,7 +3407,7 @@ components:
         ServiceRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: The IAM role that will be assumed by the Amazon EMR service to access AWS resources on your behalf.
+            - description: The IAM role that will be assumed by the Amazon EMR service to access Amazon Web Services resources on your behalf.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -3323,7 +3483,7 @@ components:
         VisibleToAllUsers:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: A value of <code>true</code> indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. This is the default. A value of <code>false</code> indicates that only the IAM user who created the cluster can perform actions.
+            - description: A value of <code>true</code> indicates that an IAM principal in the account can perform EMR actions on the cluster that the IAM policies attached to the principal allow. A value of <code>false</code> indicates that only the IAM principal that created the cluster and the Amazon Web Services root user can perform EMR actions on the cluster.
       description: The input to the SetVisibleToAllUsers action.
     StartNotebookExecutionOutput:
       type: object
@@ -3435,11 +3595,11 @@ components:
         IdentityId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The globally unique identifier (GUID) of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserId</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId">GroupId</a> in the <i>AWS SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
+            - description: 'The globally unique identifier (GUID) of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserId</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId">GroupId</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
         IdentityName:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The name of the user or group to update. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
+            - description: 'The name of the user or group to update. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
         IdentityType:
           allOf:
             - $ref: '#/components/schemas/IdentityType'
@@ -3689,7 +3849,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ArnType'
             - description: The Amazon Resource Name that created or last modified the configuration.
-      description: 'Properties that describe the AWS principal that created the <code>BlockPublicAccessConfiguration</code> using the <code>PutBlockPublicAccessConfiguration</code> action as well as the date and time that the configuration was created. Each time a configuration for block public access is updated, Amazon EMR updates this metadata.'
+      description: 'Properties that describe the Amazon Web Services principal that created the <code>BlockPublicAccessConfiguration</code> using the <code>PutBlockPublicAccessConfiguration</code> action as well as the date and time that the configuration was created. Each time a configuration for block public access is updated, Amazon EMR updates this metadata.'
     BooleanObject:
       type: boolean
     ScriptBootstrapActionConfig:
@@ -3700,7 +3860,7 @@ components:
         Path:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: Location of the script to run during a bootstrap action. Can be either a location in Amazon S3 or on a local file system.
+            - description: Location in Amazon S3 of the script to run during a bootstrap action.
         Args:
           allOf:
             - $ref: '#/components/schemas/XmlStringList'
@@ -4024,7 +4184,7 @@ components:
         LogEncryptionKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: ' The AWS KMS customer master key (CMK) used for encrypting log files. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0. '
+            - description: ' The KMS key used for encrypting log files. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0. '
         RequestedAmiVersion:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -4048,7 +4208,7 @@ components:
         VisibleToAllUsers:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. The default value, <code>true</code>, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If this value is <code>false</code>, only the IAM user that created the cluster can perform actions. This value can be changed on a running cluster by using the <a>SetVisibleToAllUsers</a> action. You can override the default value of <code>true</code> when you create a cluster by using the <code>VisibleToAllUsers</code> parameter of the <code>RunJobFlow</code> action.'
+            - description: '<p>Indicates whether the cluster is visible to IAM principals in the account associated with the cluster. When <code>true</code>, IAM principals in the account can perform EMR cluster actions on the cluster that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p> <p>The default value is <code>false</code> if a value is not provided when creating a cluster using the EMR API <a>RunJobFlow</a> command or the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command. The default value is <code>true</code> when a cluster is created using the Management Console. IAM principals that are allowed to perform actions on the cluster can use the <a>SetVisibleToAllUsers</a> action to change the value on a running cluster. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMR Management Guide</i>.</p>'
         Applications:
           allOf:
             - $ref: '#/components/schemas/ApplicationList'
@@ -4060,7 +4220,7 @@ components:
         ServiceRole:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The IAM role that will be assumed by the Amazon EMR service to access AWS resources on your behalf.
+            - description: The IAM role that will be assumed by the Amazon EMR service to access Amazon Web Services resources on your behalf.
         NormalizedInstanceHours:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -4350,6 +4510,14 @@ components:
             - $ref: '#/components/schemas/TagList'
             - description: A list of tags associated with a notebook execution. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters and an optional value string with a maximum of 256 characters.
       description: A notebook execution. An execution is a specific instance that an EMR Notebook is run using the <code>StartNotebookExecution</code> action.
+    MaxResultsNumber:
+      type: integer
+      minimum: 1
+      maximum: 100
+    SimplifiedApplicationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SimplifiedApplication'
     Step:
       type: object
       properties:
@@ -4368,7 +4536,7 @@ components:
         ActionOnFailure:
           allOf:
             - $ref: '#/components/schemas/ActionOnFailure'
-            - description: 'The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided for backward compatibility. We recommend using TERMINATE_CLUSTER instead.'
+            - description: '<p>The action to take when the cluster step fails. Possible values are <code>TERMINATE_CLUSTER</code>, <code>CANCEL_AND_WAIT</code>, and <code>CONTINUE</code>. <code>TERMINATE_JOB_FLOW</code> is provided for backward compatibility. We recommend using <code>TERMINATE_CLUSTER</code> instead.</p> <p>If a cluster''s <code>StepConcurrencyLevel</code> is greater than <code>1</code>, do not use <code>AddJobFlowSteps</code> to submit a step with this parameter set to <code>CANCEL_AND_WAIT</code> or <code>TERMINATE_CLUSTER</code>. The step is not submitted and the action fails with a message that the <code>ActionOnFailure</code> setting is not valid.</p> <p>If you change a cluster''s <code>StepConcurrencyLevel</code> to be greater than 1 while a step is running, the <code>ActionOnFailure</code> parameter may not behave as you expect. In this case, for a step that fails with this parameter set to <code>CANCEL_AND_WAIT</code>, pending steps and the running step are not canceled; for a step that fails with this parameter set to <code>TERMINATE_CLUSTER</code>, the cluster does not terminate.</p>'
         Status:
           allOf:
             - $ref: '#/components/schemas/StepStatus'
@@ -4593,7 +4761,7 @@ components:
         IdentityName:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The name of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.'
+            - description: 'The name of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>.'
         IdentityType:
           allOf:
             - $ref: '#/components/schemas/IdentityType'
@@ -4733,7 +4901,7 @@ components:
         EbsVolumes:
           allOf:
             - $ref: '#/components/schemas/EbsVolumeList'
-            - description: The list of EBS volumes that are attached to this instance.
+            - description: The list of Amazon EBS volumes that are attached to this instance.
       description: Represents an EC2 instance provisioned as part of cluster.
     InstanceFleetStatus:
       type: object
@@ -4814,7 +4982,7 @@ components:
         InstanceTypeSpecifications:
           allOf:
             - $ref: '#/components/schemas/InstanceTypeSpecificationList'
-            - description: 'The specification for the instance types that comprise an instance fleet. Up to five unique instance specifications may be defined for each instance fleet. '
+            - description: An array of specifications for the instance types that comprise an instance fleet.
         LaunchSpecifications:
           allOf:
             - $ref: '#/components/schemas/InstanceFleetProvisioningSpecifications'
@@ -5012,7 +5180,7 @@ components:
         Configurations:
           allOf:
             - $ref: '#/components/schemas/ConfigurationList'
-            - description: '<note> <p>Amazon EMR releases 4.x or later.</p> </note> <p>The list of configurations supplied for an EMR cluster instance group. You can specify a separate configuration for each instance group (master, core, and task).</p>'
+            - description: '<note> <p>Amazon EMR releases 4.x or later.</p> </note> <p>The list of configurations supplied for an Amazon EMR cluster instance group. You can specify a separate configuration for each instance group (master, core, and task).</p>'
         ConfigurationsVersion:
           allOf:
             - $ref: '#/components/schemas/Long'
@@ -5343,12 +5511,12 @@ components:
         EbsConfiguration:
           allOf:
             - $ref: '#/components/schemas/EbsConfiguration'
-            - description: 'The configuration of Amazon Elastic Block Storage (Amazon EBS) attached to each instance as defined by <code>InstanceType</code>. '
+            - description: 'The configuration of Amazon Elastic Block Store (Amazon EBS) attached to each instance as defined by <code>InstanceType</code>. '
         Configurations:
           allOf:
             - $ref: '#/components/schemas/ConfigurationList'
             - description: 'A configuration classification that applies when provisioning cluster instances, which can include configurations for applications and software that run on the cluster.'
-      description: '<p>An instance type configuration for each instance type in an instance fleet, which determines the EC2 instances Amazon EMR attempts to provision to fulfill On-Demand and Spot target capacities. There can be a maximum of five instance type configurations in a fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+      description: '<p>An instance type configuration for each instance type in an instance fleet, which determines the EC2 instances Amazon EMR attempts to provision to fulfill On-Demand and Spot target capacities. When you use an allocation strategy, you can include a maximum of 30 instance type configurations for a fleet. For more information about how to use an allocation strategy, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-instance-fleet.html">Configure Instance Fleets</a>. Without an allocation strategy, you may specify a maximum of five instance type configurations for a fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
     InstanceTypeSpecification:
       type: object
       properties:
@@ -5375,7 +5543,7 @@ components:
         EbsBlockDevices:
           allOf:
             - $ref: '#/components/schemas/EbsBlockDeviceList'
-            - description: The configuration of Amazon Elastic Block Storage (Amazon EBS) attached to each instance as defined by <code>InstanceType</code>.
+            - description: The configuration of Amazon Elastic Block Store (Amazon EBS) attached to each instance as defined by <code>InstanceType</code>.
         EbsOptimized:
           allOf:
             - $ref: '#/components/schemas/BooleanObject'
@@ -5503,7 +5671,7 @@ components:
         LogEncryptionKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: 'The AWS KMS customer master key (CMK) used for encrypting log files. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0.'
+            - description: 'The KMS key used for encrypting log files. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0.'
         AmiVersion:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
@@ -5531,7 +5699,7 @@ components:
         VisibleToAllUsers:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. The default value, <code>true</code>, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If this value is <code>false</code>, only the IAM user that created the cluster can perform actions. This value can be changed on a running cluster by using the <a>SetVisibleToAllUsers</a> action. You can override the default value of <code>true</code> when you create a cluster by using the <code>VisibleToAllUsers</code> parameter of the <code>RunJobFlow</code> action.'
+            - description: '<p>Indicates whether the cluster is visible to IAM principals in the account associated with the cluster. When <code>true</code>, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p> <p>The default value is <code>false</code> if a value is not provided when creating a cluster using the EMR API <a>RunJobFlow</a> command or the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command. The default value is <code>true</code> when a cluster is created using the Management Console. IAM principals that are authorized to perform actions on the cluster can use the <a>SetVisibleToAllUsers</a> action to change the value on a running cluster. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMR Management Guide</i>.</p>'
         JobFlowRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
@@ -5539,7 +5707,7 @@ components:
         ServiceRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: The IAM role that is assumed by the Amazon EMR service to access AWS resources on your behalf.
+            - description: The IAM role that is assumed by the Amazon EMR service to access Amazon Web Services resources on your behalf.
         AutoScalingRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
@@ -5611,7 +5779,7 @@ components:
         KeepJobFlowAliveWhenNoSteps:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Specifies whether the cluster should remain available after completing all steps.
+            - description: 'Specifies whether the cluster should remain available after completing all steps. Defaults to <code>true</code>. For more information about configuring cluster termination, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html">Control Cluster Termination</a> in the <i>EMR Management Guide</i>.'
         TerminationProtected:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -5631,11 +5799,11 @@ components:
         EmrManagedMasterSecurityGroup:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: The identifier of the Amazon EC2 security group for the master node.
+            - description: 'The identifier of the Amazon EC2 security group for the master node. If you specify <code>EmrManagedMasterSecurityGroup</code>, you must also specify <code>EmrManagedSlaveSecurityGroup</code>.'
         EmrManagedSlaveSecurityGroup:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: The identifier of the Amazon EC2 security group for the core and task nodes.
+            - description: 'The identifier of the Amazon EC2 security group for the core and task nodes. If you specify <code>EmrManagedSlaveSecurityGroup</code>, you must also specify <code>EmrManagedMasterSecurityGroup</code>.'
         ServiceAccessSecurityGroup:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
@@ -5680,6 +5848,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/NotebookExecutionSummary'
+    ReleaseLabelFilter:
+      type: object
+      properties:
+        Prefix:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Optional release label version prefix filter. For example, <code>emr-5</code>.'
+        Application:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Optional release label application filter. For example, <code>spark@2.1.0</code>.'
+      description: The release label filters by application or version prefix.
     SecurityConfigurationList:
       type: array
       items:
@@ -5755,7 +5935,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Date'
             - description: The timestamp when notebook execution started.
-      description: <p/>
+      description: Details for a notebook execution. The details include information such as the unique ID and status of the notebook execution.
     OnDemandCapacityReservationUsageStrategy:
       type: string
       enum:
@@ -5771,7 +5951,7 @@ components:
         UsageStrategy:
           allOf:
             - $ref: '#/components/schemas/OnDemandCapacityReservationUsageStrategy'
-            - description: '<p>Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity.</p> <p>If you specify <code>use-capacity-reservations-first</code>, the fleet uses unused Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand capacity. If multiple instance pools have unused Capacity Reservations, the On-Demand allocation strategy (<code>lowest-price</code>) is applied. If the number of unused Capacity Reservations is less than the On-Demand target capacity, the remaining On-Demand target capacity is launched according to the On-Demand allocation strategy (<code>lowest-price</code>).</p> <p>If you do not specify a value, the fleet fulfils the On-Demand capacity according to the chosen On-Demand allocation strategy.</p>'
+            - description: '<p>Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity.</p> <p>If you specify <code>use-capacity-reservations-first</code>, the fleet uses unused Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand capacity. If multiple instance pools have unused Capacity Reservations, the On-Demand allocation strategy (<code>lowest-price</code>) is applied. If the number of unused Capacity Reservations is less than the On-Demand target capacity, the remaining On-Demand target capacity is launched according to the On-Demand allocation strategy (<code>lowest-price</code>).</p> <p>If you do not specify a value, the fleet fulfills the On-Demand capacity according to the chosen On-Demand allocation strategy.</p>'
         CapacityReservationPreference:
           allOf:
             - $ref: '#/components/schemas/OnDemandCapacityReservationPreference'
@@ -5912,11 +6092,11 @@ components:
         IdentityId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: The globally unique identifier (GUID) of the user or group from the AWS SSO Identity Store.
+            - description: The globally unique identifier (GUID) of the user or group from the Amazon Web Services SSO Identity Store.
         IdentityName:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The name of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.'
+            - description: 'The name of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>.'
         IdentityType:
           allOf:
             - $ref: '#/components/schemas/IdentityType'
@@ -5930,6 +6110,18 @@ components:
             - $ref: '#/components/schemas/Date'
             - description: The time the session mapping was created.
       description: Details for an Amazon EMR Studio session mapping. The details do not include the time the session mapping was last modified.
+    SimplifiedApplication:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The returned release label application name. For example, <code>hadoop</code>.'
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The returned release label application version. For example, <code>3.2.1</code>.'
+      description: The returned release label application names or versions.
     SpotProvisioningAllocationStrategy:
       type: string
       enum:
@@ -5972,12 +6164,12 @@ components:
         ActionOnFailure:
           allOf:
             - $ref: '#/components/schemas/ActionOnFailure'
-            - description: 'The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided for backward compatibility. We recommend using TERMINATE_CLUSTER instead.'
+            - description: '<p>The action to take when the step fails. Use one of the following values:</p> <ul> <li> <p> <code>TERMINATE_CLUSTER</code> - Shuts down the cluster.</p> </li> <li> <p> <code>CANCEL_AND_WAIT</code> - Cancels any pending steps and returns the cluster to the <code>WAITING</code> state.</p> </li> <li> <p> <code>CONTINUE</code> - Continues to the next step in the queue.</p> </li> <li> <p> <code>TERMINATE_JOB_FLOW</code> - Shuts down the cluster. <code>TERMINATE_JOB_FLOW</code> is provided for backward compatibility. We recommend using <code>TERMINATE_CLUSTER</code> instead.</p> </li> </ul> <p>If a cluster''s <code>StepConcurrencyLevel</code> is greater than <code>1</code>, do not use <code>AddJobFlowSteps</code> to submit a step with this parameter set to <code>CANCEL_AND_WAIT</code> or <code>TERMINATE_CLUSTER</code>. The step is not submitted and the action fails with a message that the <code>ActionOnFailure</code> setting is not valid.</p> <p>If you change a cluster''s <code>StepConcurrencyLevel</code> to be greater than 1 while a step is running, the <code>ActionOnFailure</code> parameter may not behave as you expect. In this case, for a step that fails with this parameter set to <code>CANCEL_AND_WAIT</code>, pending steps and the running step are not canceled; for a step that fails with this parameter set to <code>TERMINATE_CLUSTER</code>, the cluster does not terminate.</p>'
         HadoopJarStep:
           allOf:
             - $ref: '#/components/schemas/HadoopJarStepConfig'
             - description: The JAR file used for the step.
-      description: Specification of a cluster (job flow) step.
+      description: Specification for a cluster (job flow) step.
     StepExecutionStatusDetail:
       type: object
       required:
@@ -6090,7 +6282,7 @@ components:
         ActionOnFailure:
           allOf:
             - $ref: '#/components/schemas/ActionOnFailure'
-            - description: 'The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is available for backward compatibility. We recommend using TERMINATE_CLUSTER instead.'
+            - description: 'The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is available for backward compatibility.'
         Status:
           allOf:
             - $ref: '#/components/schemas/StepStatus'

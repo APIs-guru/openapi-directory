@@ -849,14 +849,14 @@ paths:
                   minItems: 1
                   maxItems: 1
                 SourceAccessConfigurations:
-                  description: 'An array of the authentication protocol, or the VPC components to secure your event source.'
+                  description: An array of authentication protocols or VPC components required to secure your event source.
                   type: array
                   items:
                     $ref: '#/components/schemas/SourceAccessConfiguration'
                   minItems: 0
                   maxItems: 22
                 SelfManagedEventSource:
-                  description: The Self-Managed Apache Kafka cluster for your event source.
+                  description: The self-managed Apache Kafka cluster for your event source.
                   type: object
                   properties:
                     Endpoints:
@@ -938,7 +938,7 @@ paths:
         - name: MaxItems
           in: query
           required: false
-          description: The maximum number of event source mappings to return.
+          description: 'The maximum number of event source mappings to return. Note that ListEventSourceMappings returns a maximum of 100 items in each response, even if you set the number higher.'
           schema:
             type: integer
             minimum: 1
@@ -1761,7 +1761,7 @@ paths:
                   minimum: 1
                   maximum: 10
                 SourceAccessConfigurations:
-                  description: 'An array of the authentication protocol, or the VPC components to secure your event source.'
+                  description: An array of authentication protocols or VPC components required to secure your event source.
                   type: array
                   items:
                     $ref: '#/components/schemas/SourceAccessConfiguration'
@@ -2220,6 +2220,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: ResourceConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceConflictException'
       parameters:
         - name: FunctionName
           in: path
@@ -2334,6 +2340,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: ResourceConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceConflictException'
       parameters:
         - name: FunctionName
           in: path
@@ -2416,6 +2428,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: ResourceConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceConflictException'
       parameters:
         - name: FunctionName
           in: path
@@ -4745,7 +4763,7 @@ components:
         StartingPosition:
           allOf:
             - $ref: '#/components/schemas/EventSourcePosition'
-            - description: 'The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.'
+            - description: 'The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK stream sources. <code>AT_TIMESTAMP</code> is supported only for Amazon Kinesis streams.'
         StartingPositionTimestamp:
           allOf:
             - $ref: '#/components/schemas/Date'
@@ -4757,11 +4775,11 @@ components:
         MaximumBatchingWindowInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaximumBatchingWindowInSeconds'
-            - description: '(Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds. The default value is zero.'
+            - description: '(Streams and Amazon SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds. The default value is zero.'
         ParallelizationFactor:
           allOf:
             - $ref: '#/components/schemas/ParallelizationFactor'
-            - description: (Streams only) The number of batches to process from each shard concurrently. The default value is 1.
+            - description: (Streams only) The number of batches to process concurrently from each shard. The default value is 1.
         EventSourceArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -4773,11 +4791,11 @@ components:
         LastModified:
           allOf:
             - $ref: '#/components/schemas/Date'
-            - description: 'The date that the event source mapping was last updated, or its state changed.'
+            - description: The date that the event source mapping was last updated or that its state changed.
         LastProcessingResult:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The result of the last Lambda invocation of your Lambda function.
+            - description: The result of the last Lambda invocation of your function.
         State:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -4785,7 +4803,7 @@ components:
         StateTransitionReason:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'Indicates whether the last change to the event source mapping was made by a user, or by the Lambda service.'
+            - description: Indicates whether a user or Lambda made the last change to the event source mapping.
         DestinationConfig:
           allOf:
             - $ref: '#/components/schemas/DestinationConfig'
@@ -4797,15 +4815,15 @@ components:
         Queues:
           allOf:
             - $ref: '#/components/schemas/Queues'
-            - description: ' (MQ) The name of the Amazon MQ broker destination queue to consume. '
+            - description: ' (Amazon MQ) The name of the Amazon MQ broker destination queue to consume.'
         SourceAccessConfigurations:
           allOf:
             - $ref: '#/components/schemas/SourceAccessConfigurations'
-            - description: 'An array of the authentication protocol, or the VPC components to secure your event source.'
+            - description: 'An array of the authentication protocol, VPC components, or virtual host to secure and define your event source.'
         SelfManagedEventSource:
           allOf:
             - $ref: '#/components/schemas/SelfManagedEventSource'
-            - description: The Self-Managed Apache Kafka cluster for your event source.
+            - description: The self-managed Apache Kafka cluster for your event source.
         MaximumRecordAgeInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaximumRecordAgeInSeconds'
@@ -4821,12 +4839,12 @@ components:
         TumblingWindowInSeconds:
           allOf:
             - $ref: '#/components/schemas/TumblingWindowInSeconds'
-            - description: (Streams only) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
+            - description: (Streams only) The duration in seconds of a processing window. The range is 1–900 seconds.
         FunctionResponseTypes:
           allOf:
             - $ref: '#/components/schemas/FunctionResponseTypeList'
             - description: (Streams only) A list of current response type enums applied to the event source mapping.
-      description: A mapping between an Amazon Web Services resource and an Lambda function. See <a>CreateEventSourceMapping</a> for details.
+      description: 'A mapping between an Amazon Web Services resource and a Lambda function. For details, see <a>CreateEventSourceMapping</a>.'
     OnSuccess:
       type: object
       properties:
@@ -4859,12 +4877,12 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/SourceAccessType'
-            - description: '<p>The type of authentication protocol or the VPC components for your event source. For example: <code>"Type":"SASL_SCRAM_512_AUTH"</code>.</p> <ul> <li> <p> <code>BASIC_AUTH</code> - (MQ) The Secrets Manager secret that stores your broker credentials.</p> </li> <li> <p> <code>VPC_SUBNET</code> - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your Self-Managed Apache Kafka cluster.</p> </li> <li> <p> <code>VPC_SECURITY_GROUP</code> - The VPC security group used to manage access to your Self-Managed Apache Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_256_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your Self-Managed Apache Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_512_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your Self-Managed Apache Kafka brokers.</p> </li> <li> <p> <code>VIRTUAL_HOST</code> - The name of the virtual host in your RabbitMQ broker. Lambda will use this host as the event source.</p> </li> </ul>'
+            - description: '<p>The type of authentication protocol, VPC components, or virtual host for your event source. For example: <code>"Type":"SASL_SCRAM_512_AUTH"</code>.</p> <ul> <li> <p> <code>BASIC_AUTH</code> - (Amazon MQ) The Secrets Manager secret that stores your broker credentials.</p> </li> <li> <p> <code>BASIC_AUTH</code> - (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.</p> </li> <li> <p> <code>VPC_SUBNET</code> - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.</p> </li> <li> <p> <code>VPC_SECURITY_GROUP</code> - The VPC security group used to manage access to your self-managed Apache Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_256_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_512_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.</p> </li> <li> <p> <code>VIRTUAL_HOST</code> - (Amazon MQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source.</p> </li> </ul>'
         URI:
           allOf:
             - $ref: '#/components/schemas/URI'
             - description: 'The value for your chosen configuration in <code>Type</code>. For example: <code>"URI": "arn:aws:secretsmanager:us-east-1:01234567890:secret:MyBrokerSecretName"</code>.'
-      description: 'You can specify the authentication protocol, or the VPC components to secure access to your event source.'
+      description: 'To secure and define access to your event source, you can specify the authentication protocol, VPC components, or virtual host.'
     Endpoints:
       type: object
       minProperties: 1
@@ -5914,7 +5932,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Endpoints'
             - description: 'The list of bootstrap servers for your Kafka brokers in the following format: <code>"KAFKA_BOOTSTRAP_SERVERS": ["abc.xyz.com:xxxx","abc2.xyz.com:xxxx"]</code>.'
-      description: The Self-Managed Apache Kafka cluster for your event source.
+      description: The self-managed Apache Kafka cluster for your event source.
     FunctionResponseTypeList:
       type: array
       items:
@@ -5990,7 +6008,7 @@ components:
         SourceAccessConfigurations:
           allOf:
             - $ref: '#/components/schemas/SourceAccessConfigurations'
-            - description: 'An array of the authentication protocol, or the VPC components to secure your event source.'
+            - description: An array of authentication protocols or VPC components required to secure your event source.
         SelfManagedEventSource:
           allOf:
             - $ref: '#/components/schemas/SelfManagedEventSource'
@@ -6985,7 +7003,7 @@ components:
         SourceAccessConfigurations:
           allOf:
             - $ref: '#/components/schemas/SourceAccessConfigurations'
-            - description: 'An array of the authentication protocol, or the VPC components to secure your event source.'
+            - description: An array of authentication protocols or VPC components required to secure your event source.
         TumblingWindowInSeconds:
           allOf:
             - $ref: '#/components/schemas/TumblingWindowInSeconds'
