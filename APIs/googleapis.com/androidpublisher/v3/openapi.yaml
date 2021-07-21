@@ -669,7 +669,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Must be set to true if the bundle installation may trigger a warning on user devices (for example, if installation size may be over a threshold, typically 100 MB).
+        - description: Must be set to true if the app bundle installation may trigger a warning on user devices (for example, if installation size may be over a threshold, typically 100 MB).
           in: query
           name: ackBundleInstallationWarning
           schema:
@@ -2875,7 +2875,7 @@ components:
           type: string
       type: object
     Bundle:
-      description: Information about a bundle. The resource for BundlesService.
+      description: Information about an app bundle. The resource for BundlesService.
       properties:
         sha1:
           description: A sha1 hash of the upload payload, encoded as a hex string and matching the output of the sha1sum command.
@@ -2889,10 +2889,10 @@ components:
           type: integer
       type: object
     BundlesListResponse:
-      description: Response listing all bundles.
+      description: Response listing all app bundles.
       properties:
         bundles:
-          description: All bundles.
+          description: All app bundles.
           items:
             $ref: "#/components/schemas/Bundle"
           type: array

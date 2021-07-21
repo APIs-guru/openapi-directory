@@ -28,7 +28,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: admin
 externalDocs:
-  url: http://developers.google.com/admin-sdk/
+  url: https://developers.google.com/admin-sdk/
 tags:
   - name: asps
   - name: channels
@@ -156,7 +156,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Move or insert multiple Chrome OS devices to an organizational unit. You can move up to 50 devices at once.
+      description: Moves or inserts multiple Chrome OS devices to an organizational unit. You can move up to 50 devices at once.
       operationId: directory.chromeosdevices.moveDevicesToOu
       parameters:
         - description: Immutable ID of the Google Workspace account
@@ -925,7 +925,7 @@ paths:
         - orgunits
   "/admin/directory/v1/customer/{customerId}/schemas":
     get:
-      description: Retrieve all schemas for a customer
+      description: Retrieves all schemas for a customer.
       operationId: directory.schemas.list
       parameters:
         - description: Immutable ID of the Google Workspace account.
@@ -965,7 +965,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Create schema.
+      description: Creates a schema.
       operationId: directory.schemas.insert
       parameters:
         - description: Immutable ID of the Google Workspace account.
@@ -995,7 +995,7 @@ paths:
         - schemas
   "/admin/directory/v1/customer/{customerId}/schemas/{schemaKey}":
     delete:
-      description: Delete schema
+      description: Deletes a schema.
       operationId: directory.schemas.delete
       parameters:
         - description: Immutable ID of the Google Workspace account.
@@ -1021,7 +1021,7 @@ paths:
       tags:
         - schemas
     get:
-      description: Retrieve schema
+      description: Retrieves a schema.
       operationId: directory.schemas.get
       parameters:
         - description: Immutable ID of the Google Workspace account.
@@ -1067,7 +1067,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Patch Schema via Apiary Patch Orchestration
+      description: Patches a schema.
       operationId: directory.schemas.patch
       parameters:
         - description: Immutable ID of the Google Workspace account.
@@ -1102,7 +1102,7 @@ paths:
       tags:
         - schemas
     put:
-      description: Update schema
+      description: Updates a schema.
       operationId: directory.schemas.update
       parameters:
         - description: Immutable ID of the Google Workspace account.
@@ -1592,7 +1592,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Patches a building via Apiary Patch Orchestration.
+      description: Patches a building.
       operationId: directory.resources.buildings.patch
       parameters:
         - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
@@ -1845,7 +1845,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Patches a calendar resource via Apiary Patch Orchestration.
+      description: Patches a calendar resource.
       operationId: directory.resources.calendars.patch
       parameters:
         - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
@@ -2070,7 +2070,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Patches a feature via Apiary Patch Orchestration.
+      description: Patches a feature.
       operationId: directory.resources.features.patch
       parameters:
         - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
@@ -2303,7 +2303,7 @@ paths:
       tags:
         - roleAssignments
     get:
-      description: Retrieve a role assignment.
+      description: Retrieves a role assignment.
       operationId: directory.roleAssignments.get
       parameters:
         - description: Immutable ID of the Google Workspace account.
@@ -2545,7 +2545,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Patch role via Apiary Patch Orchestration
+      description: Patches a role.
       operationId: directory.roles.patch
       parameters:
         - description: Immutable ID of the Google Workspace account.
@@ -2656,7 +2656,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Patch Customers via Apiary Patch Orchestration
+      description: Patches a customer.
       operationId: directory.customers.patch
       parameters:
         - description: Id of the customer to be updated
@@ -2715,7 +2715,7 @@ paths:
         - customers
   /admin/directory/v1/groups:
     get:
-      description: Retrieve all groups of a domain or of a user given a userKey (paginated)
+      description: Retrieves all groups of a domain or of a user given a userKey (paginated).
       operationId: directory.groups.list
       parameters:
         - description: The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, fill this field instead of domain. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users](/admin-sdk/directory/v1/reference/users)
@@ -3522,7 +3522,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Watch for changes in users list
+      description: Watches for changes in users list.
       operationId: directory.users.watch
       parameters:
         - description: Comma-separated list of schema names. All fields from these schemas are fetched. This should only be set when projection=custom.
@@ -3879,7 +3879,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Watch for changes in users list.
+      description: Watches for changes in users list.
       operationId: directory.users.aliases.watch
       parameters:
         - description: Email or immutable ID of the user
@@ -3972,7 +3972,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/users/{userKey}/asps":
     get:
-      description: List the ASPs issued by a user.
+      description: Lists the ASPs issued by a user.
       operationId: directory.asps.list
       parameters:
         - description: Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
@@ -4009,7 +4009,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/users/{userKey}/asps/{codeId}":
     delete:
-      description: Delete an ASP issued by a user.
+      description: Deletes an ASP issued by a user.
       operationId: directory.asps.delete
       parameters:
         - description: Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
@@ -4035,7 +4035,7 @@ paths:
       tags:
         - asps
     get:
-      description: Get information about an ASP issued by a user.
+      description: Gets information about an ASP issued by a user.
       operationId: directory.asps.get
       parameters:
         - description: Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
@@ -4247,7 +4247,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Sign a user out of all web and device sessions and reset their sign-in cookies. User will have to sign in by authenticating again.
+      description: Signs a user out of all web and device sessions and reset their sign-in cookies. User will have to sign in by authenticating again.
       operationId: directory.users.signOut
       parameters:
         - description: Identifies the target user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
@@ -4305,7 +4305,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/users/{userKey}/tokens/{clientId}":
     delete:
-      description: Delete all access tokens issued by a user for an application.
+      description: Deletes all access tokens issued by a user for an application.
       operationId: directory.tokens.delete
       parameters:
         - description: Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
@@ -4331,7 +4331,7 @@ paths:
       tags:
         - tokens
     get:
-      description: Get information about an access token issued by a user.
+      description: Gets information about an access token issued by a user.
       operationId: directory.tokens.get
       parameters:
         - description: Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
@@ -4386,7 +4386,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Turn off 2-Step Verification for user.
+      description: Turns off 2-Step Verification for user.
       operationId: directory.twoStepVerification.turnOff
       parameters:
         - description: Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
@@ -4494,7 +4494,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Generate new backup verification codes for the user.
+      description: Generates new backup verification codes for the user.
       operationId: directory.verificationCodes.generate
       parameters:
         - description: Email or immutable ID of the user
@@ -4527,7 +4527,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Invalidate the current backup verification codes for the user.
+      description: Invalidates the current backup verification codes for the user.
       operationId: directory.verificationCodes.invalidate
       parameters:
         - description: Email or immutable ID of the user
@@ -4894,7 +4894,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Stop watching resources through this channel.
+      description: Stops watching resources through this channel.
       operationId: admin.channels.stop
       requestBody:
         content:

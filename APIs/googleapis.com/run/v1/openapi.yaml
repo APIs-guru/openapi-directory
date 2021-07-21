@@ -175,7 +175,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional encoded string to continue paging.
+        - description: Optional. Encoded string to continue paging.
           in: query
           name: continue
           schema:
@@ -195,7 +195,7 @@ paths:
           name: labelSelector
           schema:
             type: string
-        - description: The maximum number of records that should be returned.
+        - description: Optional. The maximum number of records that should be returned.
           in: query
           name: limit
           schema:
@@ -396,7 +396,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional encoded string to continue paging.
+        - description: Optional. Encoded string to continue paging.
           in: query
           name: continue
           schema:
@@ -416,7 +416,7 @@ paths:
           name: labelSelector
           schema:
             type: string
-        - description: The maximum number of records that should be returned.
+        - description: Optional. The maximum number of records that should be returned.
           in: query
           name: limit
           schema:
@@ -468,7 +468,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional encoded string to continue paging.
+        - description: Optional. Encoded string to continue paging.
           in: query
           name: continue
           schema:
@@ -488,7 +488,7 @@ paths:
           name: labelSelector
           schema:
             type: string
-        - description: The maximum number of records that should be returned.
+        - description: Optional. The maximum number of records that should be returned.
           in: query
           name: limit
           schema:
@@ -540,7 +540,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional encoded string to continue paging.
+        - description: Optional. Encoded string to continue paging.
           in: query
           name: continue
           schema:
@@ -560,7 +560,7 @@ paths:
           name: labelSelector
           schema:
             type: string
-        - description: The maximum number of records that should be returned.
+        - description: Optional. The maximum number of records that should be returned.
           in: query
           name: limit
           schema:
@@ -612,7 +612,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional encoded string to continue paging.
+        - description: Optional. Encoded string to continue paging.
           in: query
           name: continue
           schema:
@@ -632,7 +632,7 @@ paths:
           name: labelSelector
           schema:
             type: string
-        - description: The maximum number of records that should be returned.
+        - description: Optional. The maximum number of records that should be returned.
           in: query
           name: limit
           schema:
@@ -932,7 +932,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional encoded string to continue paging.
+        - description: Optional. Encoded string to continue paging.
           in: query
           name: continue
           schema:
@@ -952,7 +952,7 @@ paths:
           name: labelSelector
           schema:
             type: string
-        - description: The maximum number of records that should be returned.
+        - description: Optional. The maximum number of records that should be returned.
           in: query
           name: limit
           schema:
@@ -1004,7 +1004,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional encoded string to continue paging.
+        - description: Optional. Encoded string to continue paging.
           in: query
           name: continue
           schema:
@@ -1024,7 +1024,7 @@ paths:
           name: labelSelector
           schema:
             type: string
-        - description: The maximum number of records that should be returned.
+        - description: Optional. The maximum number of records that should be returned.
           in: query
           name: limit
           schema:
@@ -1110,7 +1110,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional encoded string to continue paging.
+        - description: Optional. Encoded string to continue paging.
           in: query
           name: continue
           schema:
@@ -1130,7 +1130,7 @@ paths:
           name: labelSelector
           schema:
             type: string
-        - description: The maximum number of records that should be returned.
+        - description: Optional. The maximum number of records that should be returned.
           in: query
           name: limit
           schema:
@@ -1182,7 +1182,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional encoded string to continue paging.
+        - description: Optional. Encoded string to continue paging.
           in: query
           name: continue
           schema:
@@ -1202,7 +1202,7 @@ paths:
           name: labelSelector
           schema:
             type: string
-        - description: The maximum number of records that should be returned.
+        - description: Optional. The maximum number of records that should be returned.
           in: query
           name: limit
           schema:
@@ -1254,7 +1254,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional encoded string to continue paging.
+        - description: Optional. Encoded string to continue paging.
           in: query
           name: continue
           schema:
@@ -1274,7 +1274,7 @@ paths:
           name: labelSelector
           schema:
             type: string
-        - description: The maximum number of records that should be returned.
+        - description: Optional. The maximum number of records that should be returned.
           in: query
           name: limit
           schema:
@@ -1841,7 +1841,7 @@ components:
             $ref: "#/components/schemas/ResourceRecord"
           type: array
         url:
-          description: "Cloud Run fully managed: not supported Cloud Run on GKE: supported Holds the URL that will serve the traffic of the DomainMapping. +optional"
+          description: "Optional. Cloud Run fully managed: not supported Cloud Run on GKE: supported Holds the URL that will serve the traffic of the DomainMapping."
           type: string
       type: object
     EnvFromSource:
@@ -2345,7 +2345,7 @@ components:
       description: RevisionSpec holds the desired state of the Revision (from the client).
       properties:
         containerConcurrency:
-          description: "(Optional) ContainerConcurrency specifies the maximum allowed in-flight (concurrent) requests per container instance of the Revision. Cloud Run fully managed: supported, defaults to 80 Cloud Run for Anthos: supported, defaults to 0, which means concurrency to the application is not limited, and the system decides the target concurrency for the autoscaler."
+          description: "Optional. ContainerConcurrency specifies the maximum allowed in-flight (concurrent) requests per container instance of the Revision. Cloud Run fully managed: supported, defaults to 80 Cloud Run for Anthos: supported, defaults to 0, which means concurrency to the application is not limited, and the system decides the target concurrency for the autoscaler."
           format: int32
           type: integer
         containers:
@@ -2377,7 +2377,7 @@ components:
           description: ImageDigest holds the resolved digest for the image specified within .Spec.Container.Image. The digest is resolved during the creation of Revision. This field holds the digest value regardless of whether a tag or digest was originally specified in the Container object.
           type: string
         logUrl:
-          description: Specifies the generated logging url for this particular revision based on the revision url template specified in the controller's config. +optional
+          description: Optional. Specifies the generated logging url for this particular revision based on the revision url template specified in the controller's config.
           type: string
         observedGeneration:
           description: ObservedGeneration is the 'Generation' of the Revision that was last processed by the controller. Clients polling for completed reconciliation should poll until observedGeneration = metadata.generation, and the Ready condition's status is True or False.
@@ -2674,7 +2674,7 @@ components:
           description: ConfigurationName of a configuration to whose latest revision we will send this portion of traffic. When the "status.latestReadyRevisionName" of the referenced configuration changes, we will automatically migrate traffic from the prior "latest ready" revision to the new one. This field is never set in Route's status, only its spec. This is mutually exclusive with RevisionName. Cloud Run currently supports a single ConfigurationName.
           type: string
         latestRevision:
-          description: LatestRevision may be optionally provided to indicate that the latest ready Revision of the Configuration should be used for this traffic target. When provided LatestRevision must be true if RevisionName is empty; it must be false when RevisionName is non-empty. +optional
+          description: Optional. LatestRevision may be provided to indicate that the latest ready Revision of the Configuration should be used for this traffic target. When provided LatestRevision must be true if RevisionName is empty; it must be false when RevisionName is non-empty.
           type: boolean
         percent:
           description: Percent specifies percent of the traffic to this Revision or Configuration. This defaults to zero if unspecified. Cloud Run currently requires 100 percent for a single ConfigurationName TrafficTarget entry.
@@ -2684,7 +2684,7 @@ components:
           description: RevisionName of a specific revision to which to send this portion of traffic. This is mutually exclusive with ConfigurationName. Providing RevisionName in spec is not currently supported by Cloud Run.
           type: string
         tag:
-          description: Tag is optionally used to expose a dedicated url for referencing this target exclusively. +optional
+          description: Optional. Tag is used to expose a dedicated url for referencing this target exclusively.
           type: string
         url:
           description: Output only. URL displays the URL for accessing tagged traffic targets. URL is displayed in status, and is disallowed on spec. URL must contain a scheme (e.g. http://) and a hostname, but may not contain anything else (e.g. basic auth, url path, etc.)
