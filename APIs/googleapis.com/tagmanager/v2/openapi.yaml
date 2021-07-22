@@ -249,6 +249,9 @@ paths:
                 - requestMethod
                 - clientName
                 - queryString
+                - serverPageLocationUrl
+                - serverPageLocationPath
+                - serverPageLocationHostname
               type: string
             type: array
           style: form
@@ -1277,6 +1280,9 @@ paths:
                 - requestMethod
                 - clientName
                 - queryString
+                - serverPageLocationUrl
+                - serverPageLocationPath
+                - serverPageLocationHostname
               type: string
             type: array
           style: form
@@ -1511,6 +1517,9 @@ paths:
               - requestMethod
               - clientName
               - queryString
+              - serverPageLocationUrl
+              - serverPageLocationPath
+              - serverPageLocationHostname
             type: string
       responses:
         "200":
@@ -2275,6 +2284,9 @@ components:
             - requestMethod
             - clientName
             - queryString
+            - serverPageLocationUrl
+            - serverPageLocationPath
+            - serverPageLocationHostname
           type: string
         workspaceId:
           description: GTM Workspace ID.
