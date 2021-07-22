@@ -8348,6 +8348,29 @@ components:
                 name: streamName
               description: 'Used for MS Smooth and Apple HLS outputs. Indicates the name displayed by the player (eg. English, or Director Commentary).'
       description: Audio Description
+    __stringMin1:
+      type: string
+      description: Placeholder documentation for __stringMin1
+      minLength: 1
+    AudioHlsRenditionSelection:
+      type: object
+      required:
+        - Name
+        - GroupId
+      properties:
+        GroupId:
+          allOf:
+            - $ref: '#/components/schemas/__stringMin1'
+            - xml:
+                name: groupId
+              description: 'Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/__stringMin1'
+            - xml:
+                name: name
+              description: 'Specifies the NAME in the #EXT-X-MEDIA tag of the target HLS audio rendition.'
+      description: Audio Hls Rendition Selection
     AudioLanguageSelectionPolicy:
       type: string
       enum:
@@ -8486,13 +8509,14 @@ components:
                 name: pid
               description: Selects a specific PID from within a source.
       description: Audio Pid Selection
-    __stringMin1:
-      type: string
-      description: Placeholder documentation for __stringMin1
-      minLength: 1
     AudioSelectorSettings:
       type: object
       properties:
+        AudioHlsRenditionSelection:
+          allOf:
+            - $ref: '#/components/schemas/AudioHlsRenditionSelection'
+            - xml:
+                name: audioHlsRenditionSelection
         AudioLanguageSelection:
           allOf:
             - $ref: '#/components/schemas/AudioLanguageSelection'
@@ -9368,7 +9392,13 @@ components:
       description: Ttml Destination Settings
     WebvttDestinationSettings:
       type: object
-      properties: {}
+      properties:
+        StyleControl:
+          allOf:
+            - $ref: '#/components/schemas/WebvttDestinationStyleControl'
+            - xml:
+                name: styleControl
+              description: Controls whether the color and position of the source captions is passed through to the WebVTT output captions.  PASSTHROUGH - Valid only if the source captions are EMBEDDED or TELETEXT.  NO_STYLE_DATA - Don't pass through the style. The output captions will not contain any font styling information.
       description: Webvtt Destination Settings
     __stringMin3Max3:
       type: string
@@ -16860,5 +16890,11 @@ components:
         - CODING_MODE_4_0
         - CODING_MODE_8_0
       description: Wav Coding Mode
+    WebvttDestinationStyleControl:
+      type: string
+      enum:
+        - NO_STYLE_DATA
+        - PASSTHROUGH
+      description: Webvtt Destination Style Control
 security:
   - hmac: []

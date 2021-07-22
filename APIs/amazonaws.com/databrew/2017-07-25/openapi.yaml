@@ -444,6 +444,22 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/Key'
                         - description: The unique name of the object in the bucket.
+                Configuration:
+                  description: 'Configuration for profile jobs. Configuration can be used to select columns, do evaluations, and override default parameters of evaluations. When configuration is undefined, the profile job will apply default settings to all supported columns. '
+                  type: object
+                  properties:
+                    DatasetStatisticsConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/StatisticsConfiguration'
+                        - description: 'Configuration for inter-column evaluations. Configuration can be used to select evaluations and override parameters of evaluations. When configuration is undefined, the profile job will run all supported inter-column evaluations. '
+                    ProfileColumns:
+                      allOf:
+                        - $ref: '#/components/schemas/ColumnSelectorList'
+                        - description: 'List of column selectors. ProfileColumns can be used to select columns from the dataset. When ProfileColumns is undefined, the profile job will profile all supported columns. '
+                    ColumnStatisticsConfigurations:
+                      allOf:
+                        - $ref: '#/components/schemas/ColumnStatisticsConfigurationList'
+                        - description: 'List of configurations for column evaluations. ColumnStatisticsConfigurations are used to select evaluations and override parameters of evaluations for particular columns. When ColumnStatisticsConfigurations is undefined, the profile job will profile all supported columns and run all supported evaluations. '
                 RoleArn:
                   description: The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
                   type: string
@@ -835,10 +851,16 @@ paths:
                     $ref: '#/components/schemas/Output'
                   minItems: 1
                 DataCatalogOutputs:
-                  description: One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
+                  description: One or more artifacts that represent the Glue Data Catalog output from running the job.
                   type: array
                   items:
                     $ref: '#/components/schemas/DataCatalogOutput'
+                  minItems: 1
+                DatabaseOutputs:
+                  description: 'Represents a list of JDBC database output objects which defines the output destination for a DataBrew recipe job to write to. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DatabaseOutput'
                   minItems: 1
                 ProjectName:
                   description: 'Either the name of an existing project, or a combination of a recipe and a dataset to associate with the recipe.'
@@ -2436,6 +2458,22 @@ paths:
                 - OutputLocation
                 - RoleArn
               properties:
+                Configuration:
+                  description: 'Configuration for profile jobs. Configuration can be used to select columns, do evaluations, and override default parameters of evaluations. When configuration is undefined, the profile job will apply default settings to all supported columns. '
+                  type: object
+                  properties:
+                    DatasetStatisticsConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/StatisticsConfiguration'
+                        - description: 'Configuration for inter-column evaluations. Configuration can be used to select evaluations and override parameters of evaluations. When configuration is undefined, the profile job will run all supported inter-column evaluations. '
+                    ProfileColumns:
+                      allOf:
+                        - $ref: '#/components/schemas/ColumnSelectorList'
+                        - description: 'List of column selectors. ProfileColumns can be used to select columns from the dataset. When ProfileColumns is undefined, the profile job will profile all supported columns. '
+                    ColumnStatisticsConfigurations:
+                      allOf:
+                        - $ref: '#/components/schemas/ColumnStatisticsConfigurationList'
+                        - description: 'List of configurations for column evaluations. ColumnStatisticsConfigurations are used to select evaluations and override parameters of evaluations for particular columns. When ColumnStatisticsConfigurations is undefined, the profile job will profile all supported columns and run all supported evaluations. '
                 EncryptionKeyArn:
                   description: The Amazon Resource Name (ARN) of an encryption key that is used to protect the job.
                   type: string
@@ -2579,10 +2617,16 @@ paths:
                     $ref: '#/components/schemas/Output'
                   minItems: 1
                 DataCatalogOutputs:
-                  description: One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
+                  description: One or more artifacts that represent the Glue Data Catalog output from running the job.
                   type: array
                   items:
                     $ref: '#/components/schemas/DataCatalogOutput'
+                  minItems: 1
+                DatabaseOutputs:
+                  description: Represents a list of JDBC database output objects which defines the output destination for a DataBrew recipe job to write into.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DatabaseOutput'
                   minItems: 1
                 RoleArn:
                   description: The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
@@ -2834,6 +2878,28 @@ components:
       type: string
       minLength: 1
       maxLength: 1280
+    StatisticsConfiguration:
+      type: object
+      properties:
+        IncludedStatistics:
+          allOf:
+            - $ref: '#/components/schemas/StatisticList'
+            - description: 'List of included evaluations. When the list is undefined, all supported evaluations will be included.'
+        Overrides:
+          allOf:
+            - $ref: '#/components/schemas/StatisticOverrideList'
+            - description: List of overrides for evaluations.
+      description: 'Configuration of evaluations for a profile job. This configuration can be used to select evaluations and override the parameters of selected evaluations. '
+    ColumnSelectorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ColumnSelector'
+      minItems: 1
+    ColumnStatisticsConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ColumnStatisticsConfiguration'
+      minItems: 1
     SampleMode:
       type: string
       enum:
@@ -2922,7 +2988,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/OutputFormatOptions'
             - description: Represents options that define how DataBrew formats job output files.
-      description: Represents options that specify how and where DataBrew writes the output generated by recipe jobs or profile jobs.
+      description: Represents options that specify how and where in Amazon S3 DataBrew writes the output generated by recipe jobs or profile jobs.
     DataCatalogOutput:
       type: object
       required:
@@ -2932,7 +2998,7 @@ components:
         CatalogId:
           allOf:
             - $ref: '#/components/schemas/CatalogId'
-            - description: The unique identifier of the AWS account that holds the Data Catalog that stores the data.
+            - description: The unique identifier of the Amazon Web Services account that holds the Data Catalog that stores the data.
         DatabaseName:
           allOf:
             - $ref: '#/components/schemas/DatabaseName'
@@ -2944,7 +3010,7 @@ components:
         S3Options:
           allOf:
             - $ref: '#/components/schemas/S3TableOutputOptions'
-            - description: Represents options that specify how and where DataBrew writes the S3 output generated by recipe jobs.
+            - description: Represents options that specify how and where DataBrew writes the Amazon S3 output generated by recipe jobs.
         DatabaseOptions:
           allOf:
             - $ref: '#/components/schemas/DatabaseTableOutputOptions'
@@ -2953,7 +3019,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/OverwriteOutput'
             - description: 'A value that, if true, means that any data in the location specified for output is overwritten with new output. Not supported with DatabaseOptions.'
-      description: Represents options that specify how and where DataBrew writes the output generated by recipe jobs.
+      description: Represents options that specify how and where in the Glue Data Catalog DataBrew writes the output generated by recipe jobs.
+    DatabaseOutput:
+      type: object
+      required:
+        - GlueConnectionName
+        - DatabaseOptions
+      properties:
+        GlueConnectionName:
+          allOf:
+            - $ref: '#/components/schemas/GlueConnectionName'
+            - description: The Glue connection that stores the connection information for the target database.
+        DatabaseOptions:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseTableOutputOptions'
+            - description: Represents options that specify how and where DataBrew writes the database output generated by recipe jobs.
+        DatabaseOutputMode:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseOutputMode'
+            - description: 'The output mode to write into the database. Currently supported option: NEW_TABLE.'
+      description: Represents a JDBC database output object which defines the output destination for a DataBrew recipe job to write into.
     RecipeName:
       type: string
       minLength: 1
@@ -3131,11 +3216,19 @@ components:
         DataCatalogOutputs:
           allOf:
             - $ref: '#/components/schemas/DataCatalogOutputList'
-            - description: One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
+            - description: One or more artifacts that represent the Glue Data Catalog output from running the job.
+        DatabaseOutputs:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseOutputList'
+            - description: Represents a list of JDBC database output objects which defines the output destination for a DataBrew recipe job to write into.
         ProjectName:
           allOf:
             - $ref: '#/components/schemas/ProjectName'
             - description: The DataBrew project associated with this job.
+        ProfileConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ProfileConfiguration'
+            - description: 'Configuration for profile jobs. Used to select columns, do evaluations, and override default parameters of evaluations. When configuration is null, the profile job will run with default settings.'
         RecipeReference:
           $ref: '#/components/schemas/RecipeReference'
         ResourceArn:
@@ -3187,6 +3280,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobName'
             - description: The name of the job being processed during this run.
+        ProfileConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ProfileConfiguration'
+            - description: 'Configuration for profile jobs. Used to select columns, do evaluations, and override default parameters of evaluations. When configuration is null, the profile job will run with default settings.'
         RunId:
           allOf:
             - $ref: '#/components/schemas/JobRunId'
@@ -3210,7 +3307,11 @@ components:
         DataCatalogOutputs:
           allOf:
             - $ref: '#/components/schemas/DataCatalogOutputList'
-            - description: One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
+            - description: One or more artifacts that represent the Glue Data Catalog output from running the job.
+        DatabaseOutputs:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseOutputList'
+            - description: Represents a list of JDBC database output objects which defines the output destination for a DataBrew recipe job to write into.
         RecipeReference:
           $ref: '#/components/schemas/RecipeReference'
         StartedBy:
@@ -3685,6 +3786,32 @@ components:
       items:
         $ref: '#/components/schemas/ColumnName'
       maxItems: 200
+    ColumnSelector:
+      type: object
+      properties:
+        Regex:
+          allOf:
+            - $ref: '#/components/schemas/ColumnName'
+            - description: A regular expression for selecting a column from a dataset.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ColumnName'
+            - description: The name of a column from a dataset.
+      description: Selector of a column from a dataset for profile job configuration. One selector includes either a column name or a regular expression.
+    ColumnStatisticsConfiguration:
+      type: object
+      required:
+        - Statistics
+      properties:
+        Selectors:
+          allOf:
+            - $ref: '#/components/schemas/ColumnSelectorList'
+            - description: 'List of column selectors. Selectors can be used to select columns from the dataset. When selectors are undefined, configuration will be applied to all supported columns. '
+        Statistics:
+          allOf:
+            - $ref: '#/components/schemas/StatisticsConfiguration'
+            - description: 'Configuration for evaluations. Statistics can be used to select evaluations and override parameters of evaluations. '
+      description: 'Configuration for column evaluations for a profile job. ColumnStatisticsConfiguration can be used to select evaluations and override parameters of evaluations for particular columns. '
     CompressionFormat:
       type: string
       enum:
@@ -3841,6 +3968,22 @@ components:
     MaxRetries:
       type: integer
       minimum: 0
+    ProfileConfiguration:
+      type: object
+      properties:
+        DatasetStatisticsConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/StatisticsConfiguration'
+            - description: 'Configuration for inter-column evaluations. Configuration can be used to select evaluations and override parameters of evaluations. When configuration is undefined, the profile job will run all supported inter-column evaluations. '
+        ProfileColumns:
+          allOf:
+            - $ref: '#/components/schemas/ColumnSelectorList'
+            - description: 'List of column selectors. ProfileColumns can be used to select columns from the dataset. When ProfileColumns is undefined, the profile job will profile all supported columns. '
+        ColumnStatisticsConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/ColumnStatisticsConfigurationList'
+            - description: 'List of configurations for column evaluations. ColumnStatisticsConfigurations are used to select evaluations and override parameters of evaluations for particular columns. When ColumnStatisticsConfigurations is undefined, the profile job will profile all supported columns and run all supported evaluations. '
+      description: 'Configuration for profile jobs. Configuration can be used to select columns, do evaluations, and override default parameters of evaluations. When configuration is undefined, the profile job will apply default settings to all supported columns. '
     Timeout:
       type: integer
       minimum: 0
@@ -3895,6 +4038,10 @@ components:
             - description: The maximum number of times to retry the job after a job run fails.
         OutputLocation:
           $ref: '#/components/schemas/S3Location'
+        Configuration:
+          allOf:
+            - $ref: '#/components/schemas/ProfileConfiguration'
+            - description: 'Configuration for profile jobs. Used to select columns, do evaluations, and override default parameters of evaluations. When configuration is null, the profile job will run with default settings.'
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -3970,6 +4117,11 @@ components:
       items:
         $ref: '#/components/schemas/DataCatalogOutput'
       minItems: 1
+    DatabaseOutputList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatabaseOutput'
+      minItems: 1
     RecipeReference:
       type: object
       required:
@@ -4026,7 +4178,11 @@ components:
         DataCatalogOutputs:
           allOf:
             - $ref: '#/components/schemas/DataCatalogOutputList'
-            - description: One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
+            - description: One or more artifacts that represent the Glue Data Catalog output from running the job.
+        DatabaseOutputs:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseOutputList'
+            - description: 'Represents a list of JDBC database output objects which defines the output destination for a DataBrew recipe job to write to. '
         ProjectName:
           allOf:
             - $ref: '#/components/schemas/ProjectName'
@@ -4144,7 +4300,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3Location'
             - description: Represents an Amazon S3 location (bucket name and object key) where DataBrew can write output from a job.
-      description: Represents options that specify how and where DataBrew writes the S3 output generated by recipe jobs.
+      description: Represents options that specify how and where DataBrew writes the Amazon S3 output generated by recipe jobs.
     DatabaseTableOutputOptions:
       type: object
       required:
@@ -4169,6 +4325,10 @@ components:
       type: string
       minLength: 1
       maxLength: 255
+    DatabaseOutputMode:
+      type: string
+      enum:
+        - NEW_TABLE
     Date:
       type: string
       format: date-time
@@ -4502,7 +4662,11 @@ components:
         DataCatalogOutputs:
           allOf:
             - $ref: '#/components/schemas/DataCatalogOutputList'
-            - description: One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
+            - description: One or more artifacts that represent the Glue Data Catalog output from running the job.
+        DatabaseOutputs:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseOutputList'
+            - description: Represents a list of JDBC database output objects which defines the output destination for a DataBrew recipe job to write into.
         ProjectName:
           allOf:
             - $ref: '#/components/schemas/ProjectName'
@@ -4586,7 +4750,11 @@ components:
         DataCatalogOutputs:
           allOf:
             - $ref: '#/components/schemas/DataCatalogOutputList'
-            - description: One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
+            - description: One or more artifacts that represent the Glue Data Catalog output from running the job.
+        DatabaseOutputs:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseOutputList'
+            - description: Represents a list of JDBC database output objects which defines the output destination for a DataBrew recipe job to write into.
         RecipeReference:
           allOf:
             - $ref: '#/components/schemas/RecipeReference'
@@ -4688,7 +4856,7 @@ components:
     ParameterValue:
       type: string
       minLength: 1
-      maxLength: 12288
+      maxLength: 32768
     ParameterMap:
       type: object
       additionalProperties:
@@ -4956,6 +5124,36 @@ components:
           allOf:
             - $ref: '#/components/schemas/AssumeControl'
             - description: 'A value that, if true, enables you to take control of a session, even if a different client is currently accessing the project.'
+    Statistic:
+      type: string
+      pattern: '^[A-Z\_]+$'
+      minLength: 1
+      maxLength: 128
+    StatisticList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Statistic'
+      minItems: 1
+    StatisticOverride:
+      type: object
+      required:
+        - Statistic
+        - Parameters
+      properties:
+        Statistic:
+          allOf:
+            - $ref: '#/components/schemas/Statistic'
+            - description: The name of an evaluation
+        Parameters:
+          allOf:
+            - $ref: '#/components/schemas/ParameterMap'
+            - description: A map that includes overrides of an evaluation’s parameters.
+      description: 'Override of a particular evaluation for a profile job. '
+    StatisticOverrideList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StatisticOverride'
+      minItems: 1
     StopJobRunRequest:
       type: object
       title: StopJobRunRequest
@@ -5005,6 +5203,10 @@ components:
         - RoleArn
       title: UpdateProfileJobRequest
       properties:
+        Configuration:
+          allOf:
+            - $ref: '#/components/schemas/ProfileConfiguration'
+            - description: 'Configuration for profile jobs. Used to select columns, do evaluations, and override default parameters of evaluations. When configuration is null, the profile job will run with default settings.'
         EncryptionKeyArn:
           allOf:
             - $ref: '#/components/schemas/EncryptionKeyArn'
@@ -5084,7 +5286,11 @@ components:
         DataCatalogOutputs:
           allOf:
             - $ref: '#/components/schemas/DataCatalogOutputList'
-            - description: One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
+            - description: One or more artifacts that represent the Glue Data Catalog output from running the job.
+        DatabaseOutputs:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseOutputList'
+            - description: Represents a list of JDBC database output objects which defines the output destination for a DataBrew recipe job to write into.
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
