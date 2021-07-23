@@ -3,7 +3,7 @@ info:
   version: '2018-10-26'
   x-release: v4
   title: AWS SecurityHub
-  description: '<p>Security Hub provides you with a comprehensive view of the security state of your AWS environment and resources. It also provides you with the readiness status of your environment based on controls from supported security standards. Security Hub collects security data from AWS accounts, services, and integrated third-party products and helps you analyze security trends in your environment to identify the highest priority security issues. For more information about Security Hub, see the <i> <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html">AWS Security Hub User Guide</a> </i>.</p> <p>When you use operations in the Security Hub API, the requests are executed only in the AWS Region that is currently active or in the specific AWS Region that you specify in your request. Any configuration or settings change that results from the operation is applied only to that Region. To make the same change in other Regions, execute the same command for each Region to apply the change to.</p> <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code> <a>CreateMembers</a> </code> to add a member account to Security Hub, the association of the member account with the administrator account is created only in the <code>us-west-2</code> Region. Security Hub must be enabled for the member account in the same Region that the invitation was sent from.</p> <p>The following throttling limits apply to using Security Hub API operations.</p> <ul> <li> <p> <code> <a>BatchEnableStandards</a> </code> - <code>RateLimit</code> of 1 request per second, <code>BurstLimit</code> of 1 request per second.</p> </li> <li> <p> <code> <a>GetFindings</a> </code> - <code>RateLimit</code> of 3 requests per second. <code>BurstLimit</code> of 6 requests per second.</p> </li> <li> <p> <code> <a>UpdateFindings</a> </code> - <code>RateLimit</code> of 1 request per second. <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p> <code> <a>UpdateStandardsControl</a> </code> - <code>RateLimit</code> of 1 request per second, <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p>All other operations - <code>RateLimit</code> of 10 requests per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> </ul>'
+  description: '<p>Security Hub provides you with a comprehensive view of the security state of your Amazon Web Services environment and resources. It also provides you with the readiness status of your environment based on controls from supported security standards. Security Hub collects security data from Amazon Web Services accounts, services, and integrated third-party products and helps you analyze security trends in your environment to identify the highest priority security issues. For more information about Security Hub, see the <i>Security Hub<a href="https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html">User Guide</a> </i>.</p> <p>When you use operations in the Security Hub API, the requests are executed only in the Amazon Web Services Region that is currently active or in the specific Amazon Web Services Region that you specify in your request. Any configuration or settings change that results from the operation is applied only to that Region. To make the same change in other Regions, execute the same command for each Region to apply the change to.</p> <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code>CreateMembers</code> to add a member account to Security Hub, the association of the member account with the administrator account is created only in the <code>us-west-2</code> Region. Security Hub must be enabled for the member account in the same Region that the invitation was sent from.</p> <p>The following throttling limits apply to using Security Hub API operations.</p> <ul> <li> <p> <code>BatchEnableStandards</code> - <code>RateLimit</code> of 1 request per second, <code>BurstLimit</code> of 1 request per second.</p> </li> <li> <p> <code>GetFindings</code> - <code>RateLimit</code> of 3 requests per second. <code>BurstLimit</code> of 6 requests per second.</p> </li> <li> <p> <code>UpdateFindings</code> - <code>RateLimit</code> of 1 request per second. <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p> <code>UpdateStandardsControl</code> - <code>RateLimit</code> of 1 request per second, <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p>All other operations - <code>RateLimit</code> of 10 requests per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -338,7 +338,7 @@ paths:
   /standards/deregister:
     post:
       operationId: BatchDisableStandards
-      description: '<p>Disables the standards specified by the provided <code>StandardsSubscriptionArns</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html">Security Standards</a> section of the <i>AWS Security Hub User Guide</i>.</p>'
+      description: '<p>Disables the standards specified by the provided <code>StandardsSubscriptionArns</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html">Security Standards</a> section of the <i>Security Hub User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -398,7 +398,7 @@ paths:
   /standards/register:
     post:
       operationId: BatchEnableStandards
-      description: '<p>Enables the standards specified by the provided <code>StandardsArn</code>. To obtain the ARN for a standard, use the <code> <a>DescribeStandards</a> </code> operation.</p> <p>For more information, see the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html">Security Standards</a> section of the <i>AWS Security Hub User Guide</i>.</p>'
+      description: '<p>Enables the standards specified by the provided <code>StandardsArn</code>. To obtain the ARN for a standard, use the <code>DescribeStandards</code> operation.</p> <p>For more information, see the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html">Security Standards</a> section of the <i>Security Hub User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -501,7 +501,7 @@ paths:
                 - Findings
               properties:
                 Findings:
-                  description: 'A list of findings to import. To successfully import a finding, it must follow the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html">AWS Security Finding Format</a>. Maximum of 100 findings per request.'
+                  description: 'A list of findings to import. To successfully import a finding, it must follow the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html">Amazon Web Services Security Finding Format</a>. Maximum of 100 findings per request.'
                   type: array
                   items:
                     $ref: '#/components/schemas/AwsSecurityFinding'
@@ -518,7 +518,7 @@ paths:
   /findings/batchupdate:
     patch:
       operationId: BatchUpdateFindings
-      description: '<p>Used by Security Hub customers to update information about their investigation into a finding. Requested by administrator accounts or member accounts. Administrator accounts can update findings for their account and their member accounts. Member accounts can update findings for their account.</p> <p>Updates from <code>BatchUpdateFindings</code> do not affect the value of <code>UpdatedAt</code> for a finding.</p> <p>Administrator and member accounts can use <code>BatchUpdateFindings</code> to update the following finding fields and objects.</p> <ul> <li> <p> <code>Confidence</code> </p> </li> <li> <p> <code>Criticality</code> </p> </li> <li> <p> <code>Note</code> </p> </li> <li> <p> <code>RelatedFindings</code> </p> </li> <li> <p> <code>Severity</code> </p> </li> <li> <p> <code>Types</code> </p> </li> <li> <p> <code>UserDefinedFields</code> </p> </li> <li> <p> <code>VerificationState</code> </p> </li> <li> <p> <code>Workflow</code> </p> </li> </ul> <p>You can configure IAM policies to restrict access to fields and field values. For example, you might not want member accounts to be able to suppress findings or change the finding severity. See <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchupdatefindings.html#batchupdatefindings-configure-access">Configuring access to BatchUpdateFindings</a> in the <i>AWS Security Hub User Guide</i>.</p>'
+      description: '<p>Used by Security Hub customers to update information about their investigation into a finding. Requested by administrator accounts or member accounts. Administrator accounts can update findings for their account and their member accounts. Member accounts can update findings for their account.</p> <p>Updates from <code>BatchUpdateFindings</code> do not affect the value of <code>UpdatedAt</code> for a finding.</p> <p>Administrator and member accounts can use <code>BatchUpdateFindings</code> to update the following finding fields and objects.</p> <ul> <li> <p> <code>Confidence</code> </p> </li> <li> <p> <code>Criticality</code> </p> </li> <li> <p> <code>Note</code> </p> </li> <li> <p> <code>RelatedFindings</code> </p> </li> <li> <p> <code>Severity</code> </p> </li> <li> <p> <code>Types</code> </p> </li> <li> <p> <code>UserDefinedFields</code> </p> </li> <li> <p> <code>VerificationState</code> </p> </li> <li> <p> <code>Workflow</code> </p> </li> </ul> <p>You can configure IAM policies to restrict access to fields and field values. For example, you might not want member accounts to be able to suppress findings or change the finding severity. See <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchupdatefindings.html#batchupdatefindings-configure-access">Configuring access to BatchUpdateFindings</a> in the <i>Security Hub User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -588,7 +588,7 @@ paths:
                     Product:
                       allOf:
                         - $ref: '#/components/schemas/Double'
-                        - description: The native severity as defined by the AWS service or integrated partner product that generated the finding.
+                        - description: The native severity as defined by the Amazon Web Services service or integrated partner product that generated the finding.
                     Label:
                       allOf:
                         - $ref: '#/components/schemas/SeverityLabel'
@@ -783,7 +783,7 @@ paths:
                     AwsAccountId:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The AWS account ID that a finding is generated in.
+                        - description: The Amazon Web Services account ID that a finding is generated in.
                     Id:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -792,6 +792,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
                         - description: 'The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers'' solutions, this generator can be called a rule, a check, a detector, a plugin, etc.'
+                    Region:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The Region from which the finding was generated.
                     Type:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -816,12 +820,12 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
                         - deprecated: true
-                          description: 'The native severity as defined by the security-findings provider''s solution that generated the finding.This filter is deprecated, use FindingProviiltersSeverityOriginal instead.'
+                          description: 'The native severity as defined by the security-findings provider''s solution that generated the finding.This filter is deprecated. Instead, use FindingProviderSeverityOriginal.'
                     SeverityNormalized:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
                         - deprecated: true
-                          description: 'The normalized severity of a finding.This filter is deprecated, use SeverityLabel or FindingProviderFieldsSeverityLabel instead.'
+                          description: 'The normalized severity of a finding.This filter is deprecated. Instead, use SeverityLabel or FindingProviderFieldsSeverityLabel.'
                     SeverityLabel:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -857,11 +861,11 @@ paths:
                     ProductName:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The name of the solution (product) that generates findings.
+                        - description: <p>The name of the solution (product) that generates findings.</p> <p>Note that this is a filter against the <code>aws/securityhub/ProductName</code> field in <code>ProductFields</code>. It is not a filter for the top-level <code>ProductName</code> field.</p>
                     CompanyName:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The name of the findings provider (company) that owns the solution (product) that generates findings.
+                        - description: <p>The name of the findings provider (company) that owns the solution (product) that generates findings.</p> <p>Note that this is a filter against the <code>aws/securityhub/CompanyName</code> field in <code>ProductFields</code>. It is not a filter for the top-level <code>CompanyName</code> field.</p>
                     UserDefinedFields:
                       allOf:
                         - $ref: '#/components/schemas/MapFilterList'
@@ -985,15 +989,15 @@ paths:
                     ResourcePartition:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The canonical AWS partition name that the Region is assigned to.
+                        - description: The canonical Amazon Web Services partition name that the Region is assigned to.
                     ResourceRegion:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The canonical AWS external Region name where this resource is located.
+                        - description: The canonical Amazon Web Services external Region name where this resource is located.
                     ResourceTags:
                       allOf:
                         - $ref: '#/components/schemas/MapFilterList'
-                        - description: A list of AWS tags associated with a resource at the time the finding was processed.
+                        - description: A list of Amazon Web Services tags associated with a resource at the time the finding was processed.
                     ResourceAwsEc2InstanceType:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -1041,7 +1045,12 @@ paths:
                     ResourceAwsIamAccessKeyUserName:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The user associated with the IAM access key related to a finding.
+                        - deprecated: true
+                          description: 'The user associated with the IAM access key related to a finding.This filter is deprecated. Instead, use ResourceAwsIamAccessKeyPrincipalName.'
+                    ResourceAwsIamAccessKeyPrincipalName:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The name of the principal that is associated with an IAM access key.
                     ResourceAwsIamAccessKeyStatus:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -1050,6 +1059,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
                         - description: The creation date/time of the IAM access key related to a finding.
+                    ResourceAwsIamUserUserName:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The name of an IAM user.
                     ResourceContainerName:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -1073,7 +1086,7 @@ paths:
                     ComplianceStatus:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains security standard-related finding details.'
+                        - description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS Amazon Web Services Foundations. Contains security standard-related finding details.'
                     VerificationState:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -1158,7 +1171,7 @@ paths:
   /members:
     post:
       operationId: CreateMembers
-      description: '<p>Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the administrator account. If you are integrated with Organizations, then the administrator account is designated by the organization management account.</p> <p> <code>CreateMembers</code> is always used to add accounts that are not organization members.</p> <p>For accounts that are part of an organization, <code>CreateMembers</code> is only used in the following cases:</p> <ul> <li> <p>Security Hub is not configured to automatically add new accounts in an organization.</p> </li> <li> <p>The account was disassociated or deleted in Security Hub.</p> </li> </ul> <p>This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you can use the <code> <a>EnableSecurityHub</a> </code> operation.</p> <p>For accounts that are not organization members, you create the account association and then send an invitation to the member account. To send the invitation, you use the <code> <a>InviteMembers</a> </code> operation. If the account owner accepts the invitation, the account becomes a member account in Security Hub.</p> <p>Accounts that are part of an organization do not receive an invitation. They automatically become a member account in Security Hub.</p> <p>A permissions policy is added that permits the administrator account to view the findings generated in the member account. When Security Hub is enabled in a member account, the member account findings are also visible to the administrator account. </p> <p>To remove the association between the administrator and member accounts, use the <code> <a>DisassociateFromMasterAccount</a> </code> or <code> <a>DisassociateMembers</a> </code> operation.</p>'
+      description: '<p>Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the administrator account. If you are integrated with Organizations, then the administrator account is designated by the organization management account.</p> <p> <code>CreateMembers</code> is always used to add accounts that are not organization members.</p> <p>For accounts that are managed using Organizations, <code>CreateMembers</code> is only used in the following cases:</p> <ul> <li> <p>Security Hub is not configured to automatically add new organization accounts.</p> </li> <li> <p>The account was disassociated or deleted in Security Hub.</p> </li> </ul> <p>This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you can use the <code>EnableSecurityHub</code> operation.</p> <p>For accounts that are not organization members, you create the account association and then send an invitation to the member account. To send the invitation, you use the <code>InviteMembers</code> operation. If the account owner accepts the invitation, the account becomes a member account in Security Hub.</p> <p>Accounts that are managed using Organizations do not receive an invitation. They automatically become a member account in Security Hub, and Security Hub is automatically enabled for those accounts. Note that Security Hub cannot be enabled automatically for the organization management account. The organization management account must enable Security Hub before the administrator account enables it as a member account.</p> <p>A permissions policy is added that permits the administrator account to view the findings generated in the member account. When Security Hub is enabled in a member account, the member account findings are also visible to the administrator account. </p> <p>To remove the association between the administrator and member accounts, use the <code>DisassociateFromMasterAccount</code> or <code>DisassociateMembers</code> operation.</p>'
       responses:
         '200':
           description: Success
@@ -1573,7 +1586,7 @@ paths:
                     AwsAccountId:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The AWS account ID that a finding is generated in.
+                        - description: The Amazon Web Services account ID that a finding is generated in.
                     Id:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -1582,6 +1595,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
                         - description: 'The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers'' solutions, this generator can be called a rule, a check, a detector, a plugin, etc.'
+                    Region:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The Region from which the finding was generated.
                     Type:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -1606,12 +1623,12 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
                         - deprecated: true
-                          description: 'The native severity as defined by the security-findings provider''s solution that generated the finding.This filter is deprecated, use FindingProviiltersSeverityOriginal instead.'
+                          description: 'The native severity as defined by the security-findings provider''s solution that generated the finding.This filter is deprecated. Instead, use FindingProviderSeverityOriginal.'
                     SeverityNormalized:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
                         - deprecated: true
-                          description: 'The normalized severity of a finding.This filter is deprecated, use SeverityLabel or FindingProviderFieldsSeverityLabel instead.'
+                          description: 'The normalized severity of a finding.This filter is deprecated. Instead, use SeverityLabel or FindingProviderFieldsSeverityLabel.'
                     SeverityLabel:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -1647,11 +1664,11 @@ paths:
                     ProductName:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The name of the solution (product) that generates findings.
+                        - description: <p>The name of the solution (product) that generates findings.</p> <p>Note that this is a filter against the <code>aws/securityhub/ProductName</code> field in <code>ProductFields</code>. It is not a filter for the top-level <code>ProductName</code> field.</p>
                     CompanyName:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The name of the findings provider (company) that owns the solution (product) that generates findings.
+                        - description: <p>The name of the findings provider (company) that owns the solution (product) that generates findings.</p> <p>Note that this is a filter against the <code>aws/securityhub/CompanyName</code> field in <code>ProductFields</code>. It is not a filter for the top-level <code>CompanyName</code> field.</p>
                     UserDefinedFields:
                       allOf:
                         - $ref: '#/components/schemas/MapFilterList'
@@ -1775,15 +1792,15 @@ paths:
                     ResourcePartition:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The canonical AWS partition name that the Region is assigned to.
+                        - description: The canonical Amazon Web Services partition name that the Region is assigned to.
                     ResourceRegion:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The canonical AWS external Region name where this resource is located.
+                        - description: The canonical Amazon Web Services external Region name where this resource is located.
                     ResourceTags:
                       allOf:
                         - $ref: '#/components/schemas/MapFilterList'
-                        - description: A list of AWS tags associated with a resource at the time the finding was processed.
+                        - description: A list of Amazon Web Services tags associated with a resource at the time the finding was processed.
                     ResourceAwsEc2InstanceType:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -1831,7 +1848,12 @@ paths:
                     ResourceAwsIamAccessKeyUserName:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The user associated with the IAM access key related to a finding.
+                        - deprecated: true
+                          description: 'The user associated with the IAM access key related to a finding.This filter is deprecated. Instead, use ResourceAwsIamAccessKeyPrincipalName.'
+                    ResourceAwsIamAccessKeyPrincipalName:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The name of the principal that is associated with an IAM access key.
                     ResourceAwsIamAccessKeyStatus:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -1840,6 +1862,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
                         - description: The creation date/time of the IAM access key related to a finding.
+                    ResourceAwsIamUserUserName:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The name of an IAM user.
                     ResourceContainerName:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -1863,7 +1889,7 @@ paths:
                     ComplianceStatus:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains security standard-related finding details.'
+                        - description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS Amazon Web Services Foundations. Contains security standard-related finding details.'
                     VerificationState:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -1940,7 +1966,7 @@ paths:
   /invitations/delete:
     post:
       operationId: DeleteInvitations
-      description: <p>Deletes invitations received by the AWS account to become a member account.</p> <p>This operation is only used by accounts that are not part of an organization. Organization accounts do not receive invitations.</p>
+      description: <p>Deletes invitations received by the Amazon Web Services account to become a member account.</p> <p>This operation is only used by accounts that are not part of an organization. Organization accounts do not receive invitations.</p>
       responses:
         '200':
           description: Success
@@ -2235,7 +2261,7 @@ paths:
       parameters: []
     post:
       operationId: EnableSecurityHub
-      description: '<p>Enables Security Hub for your account in the current Region or the Region you specify in the request.</p> <p>When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub.</p> <p>When you use the <code>EnableSecurityHub</code> operation to enable Security Hub, you also automatically enable the following standards.</p> <ul> <li> <p>CIS AWS Foundations</p> </li> <li> <p>AWS Foundational Security Best Practices</p> </li> </ul> <p>You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. </p> <p>To not enable the automatically enabled standards, set <code>EnableDefaultStandards</code> to <code>false</code>.</p> <p>After you enable Security Hub, to enable a standard, use the <code> <a>BatchEnableStandards</a> </code> operation. To disable a standard, use the <code> <a>BatchDisableStandards</a> </code> operation.</p> <p>To learn more, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html">Setting Up AWS Security Hub</a> in the <i>AWS Security Hub User Guide</i>.</p>'
+      description: '<p>Enables Security Hub for your account in the current Region or the Region you specify in the request.</p> <p>When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub.</p> <p>When you use the <code>EnableSecurityHub</code> operation to enable Security Hub, you also automatically enable the following standards.</p> <ul> <li> <p>CIS Amazon Web Services Foundations</p> </li> <li> <p>Amazon Web Services Foundational Security Best Practices</p> </li> </ul> <p>You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. </p> <p>To not enable the automatically enabled standards, set <code>EnableDefaultStandards</code> to <code>false</code>.</p> <p>After you enable Security Hub, to enable a standard, use the <code>BatchEnableStandards</code> operation. To disable a standard, use the <code>BatchDisableStandards</code> operation.</p> <p>To learn more, see the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html">setup information</a> in the <i>Security Hub User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -2589,7 +2615,7 @@ paths:
         - name: StandardsSubscriptionArn
           in: path
           required: true
-          description: 'The ARN of a resource that represents your subscription to a supported standard. To get the subscription ARNs of the standards you have enabled, use the <code> <a>GetEnabledStandards</a> </code> operation.'
+          description: 'The ARN of a resource that represents your subscription to a supported standard. To get the subscription ARNs of the standards you have enabled, use the <code>GetEnabledStandards</code> operation.'
           schema:
             type: string
             pattern: .*\S.*
@@ -2718,7 +2744,7 @@ paths:
                 - AdminAccountId
               properties:
                 AdminAccountId:
-                  description: The AWS account identifier of the Security Hub administrator account.
+                  description: The Amazon Web Services account identifier of the Security Hub administrator account.
                   type: string
                   pattern: .*\S.*
     parameters:
@@ -3046,7 +3072,7 @@ paths:
                 - AdminAccountId
               properties:
                 AdminAccountId:
-                  description: The AWS account identifier of the account to designate as the Security Hub administrator account.
+                  description: The Amazon Web Services account identifier of the account to designate as the Security Hub administrator account.
                   type: string
                   pattern: .*\S.*
     parameters:
@@ -3201,7 +3227,7 @@ paths:
                     AwsAccountId:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The AWS account ID that a finding is generated in.
+                        - description: The Amazon Web Services account ID that a finding is generated in.
                     Id:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3210,6 +3236,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
                         - description: 'The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers'' solutions, this generator can be called a rule, a check, a detector, a plugin, etc.'
+                    Region:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The Region from which the finding was generated.
                     Type:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3234,12 +3264,12 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
                         - deprecated: true
-                          description: 'The native severity as defined by the security-findings provider''s solution that generated the finding.This filter is deprecated, use FindingProviiltersSeverityOriginal instead.'
+                          description: 'The native severity as defined by the security-findings provider''s solution that generated the finding.This filter is deprecated. Instead, use FindingProviderSeverityOriginal.'
                     SeverityNormalized:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
                         - deprecated: true
-                          description: 'The normalized severity of a finding.This filter is deprecated, use SeverityLabel or FindingProviderFieldsSeverityLabel instead.'
+                          description: 'The normalized severity of a finding.This filter is deprecated. Instead, use SeverityLabel or FindingProviderFieldsSeverityLabel.'
                     SeverityLabel:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3275,11 +3305,11 @@ paths:
                     ProductName:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The name of the solution (product) that generates findings.
+                        - description: <p>The name of the solution (product) that generates findings.</p> <p>Note that this is a filter against the <code>aws/securityhub/ProductName</code> field in <code>ProductFields</code>. It is not a filter for the top-level <code>ProductName</code> field.</p>
                     CompanyName:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The name of the findings provider (company) that owns the solution (product) that generates findings.
+                        - description: <p>The name of the findings provider (company) that owns the solution (product) that generates findings.</p> <p>Note that this is a filter against the <code>aws/securityhub/CompanyName</code> field in <code>ProductFields</code>. It is not a filter for the top-level <code>CompanyName</code> field.</p>
                     UserDefinedFields:
                       allOf:
                         - $ref: '#/components/schemas/MapFilterList'
@@ -3403,15 +3433,15 @@ paths:
                     ResourcePartition:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The canonical AWS partition name that the Region is assigned to.
+                        - description: The canonical Amazon Web Services partition name that the Region is assigned to.
                     ResourceRegion:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The canonical AWS external Region name where this resource is located.
+                        - description: The canonical Amazon Web Services external Region name where this resource is located.
                     ResourceTags:
                       allOf:
                         - $ref: '#/components/schemas/MapFilterList'
-                        - description: A list of AWS tags associated with a resource at the time the finding was processed.
+                        - description: A list of Amazon Web Services tags associated with a resource at the time the finding was processed.
                     ResourceAwsEc2InstanceType:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3459,7 +3489,12 @@ paths:
                     ResourceAwsIamAccessKeyUserName:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The user associated with the IAM access key related to a finding.
+                        - deprecated: true
+                          description: 'The user associated with the IAM access key related to a finding.This filter is deprecated. Instead, use ResourceAwsIamAccessKeyPrincipalName.'
+                    ResourceAwsIamAccessKeyPrincipalName:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The name of the principal that is associated with an IAM access key.
                     ResourceAwsIamAccessKeyStatus:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3468,6 +3503,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
                         - description: The creation date/time of the IAM access key related to a finding.
+                    ResourceAwsIamUserUserName:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The name of an IAM user.
                     ResourceContainerName:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3491,7 +3530,7 @@ paths:
                     ComplianceStatus:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains security standard-related finding details.'
+                        - description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS Amazon Web Services Foundations. Contains security standard-related finding details.'
                     VerificationState:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3643,7 +3682,7 @@ paths:
                     AwsAccountId:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The AWS account ID that a finding is generated in.
+                        - description: The Amazon Web Services account ID that a finding is generated in.
                     Id:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3652,6 +3691,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
                         - description: 'The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers'' solutions, this generator can be called a rule, a check, a detector, a plugin, etc.'
+                    Region:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The Region from which the finding was generated.
                     Type:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3676,12 +3719,12 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
                         - deprecated: true
-                          description: 'The native severity as defined by the security-findings provider''s solution that generated the finding.This filter is deprecated, use FindingProviiltersSeverityOriginal instead.'
+                          description: 'The native severity as defined by the security-findings provider''s solution that generated the finding.This filter is deprecated. Instead, use FindingProviderSeverityOriginal.'
                     SeverityNormalized:
                       allOf:
                         - $ref: '#/components/schemas/NumberFilterList'
                         - deprecated: true
-                          description: 'The normalized severity of a finding.This filter is deprecated, use SeverityLabel or FindingProviderFieldsSeverityLabel instead.'
+                          description: 'The normalized severity of a finding.This filter is deprecated. Instead, use SeverityLabel or FindingProviderFieldsSeverityLabel.'
                     SeverityLabel:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3717,11 +3760,11 @@ paths:
                     ProductName:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The name of the solution (product) that generates findings.
+                        - description: <p>The name of the solution (product) that generates findings.</p> <p>Note that this is a filter against the <code>aws/securityhub/ProductName</code> field in <code>ProductFields</code>. It is not a filter for the top-level <code>ProductName</code> field.</p>
                     CompanyName:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The name of the findings provider (company) that owns the solution (product) that generates findings.
+                        - description: <p>The name of the findings provider (company) that owns the solution (product) that generates findings.</p> <p>Note that this is a filter against the <code>aws/securityhub/CompanyName</code> field in <code>ProductFields</code>. It is not a filter for the top-level <code>CompanyName</code> field.</p>
                     UserDefinedFields:
                       allOf:
                         - $ref: '#/components/schemas/MapFilterList'
@@ -3845,15 +3888,15 @@ paths:
                     ResourcePartition:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The canonical AWS partition name that the Region is assigned to.
+                        - description: The canonical Amazon Web Services partition name that the Region is assigned to.
                     ResourceRegion:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The canonical AWS external Region name where this resource is located.
+                        - description: The canonical Amazon Web Services external Region name where this resource is located.
                     ResourceTags:
                       allOf:
                         - $ref: '#/components/schemas/MapFilterList'
-                        - description: A list of AWS tags associated with a resource at the time the finding was processed.
+                        - description: A list of Amazon Web Services tags associated with a resource at the time the finding was processed.
                     ResourceAwsEc2InstanceType:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3901,7 +3944,12 @@ paths:
                     ResourceAwsIamAccessKeyUserName:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: The user associated with the IAM access key related to a finding.
+                        - deprecated: true
+                          description: 'The user associated with the IAM access key related to a finding.This filter is deprecated. Instead, use ResourceAwsIamAccessKeyPrincipalName.'
+                    ResourceAwsIamAccessKeyPrincipalName:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The name of the principal that is associated with an IAM access key.
                     ResourceAwsIamAccessKeyStatus:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3910,6 +3958,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/DateFilterList'
                         - description: The creation date/time of the IAM access key related to a finding.
+                    ResourceAwsIamUserUserName:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The name of an IAM user.
                     ResourceContainerName:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3933,7 +3985,7 @@ paths:
                     ComplianceStatus:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains security standard-related finding details.'
+                        - description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS Amazon Web Services Foundations. Contains security standard-related finding details.'
                     VerificationState:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -4271,7 +4323,7 @@ paths:
   /members/invite:
     post:
       operationId: InviteMembers
-      description: '<p>Invites other AWS accounts to become member accounts for the Security Hub administrator account that the invitation is sent from.</p> <p>This operation is only used to invite accounts that do not belong to an organization. Organization accounts do not receive invitations.</p> <p>Before you can use this action to invite a member, you must first use the <code> <a>CreateMembers</a> </code> action to create the member account in Security Hub.</p> <p>When the account owner enables Security Hub and accepts the invitation to become a member account, the administrator account can view the findings generated from the member account.</p>'
+      description: '<p>Invites other Amazon Web Services accounts to become member accounts for the Security Hub administrator account that the invitation is sent from.</p> <p>This operation is only used to invite accounts that do not belong to an organization. Organization accounts do not receive invitations.</p> <p>Before you can use this action to invite a member, you must first use the <code>CreateMembers</code> action to create the member account in Security Hub.</p> <p>When the account owner enables Security Hub and accepts the invitation to become a member account, the administrator account can view the findings generated from the member account.</p>'
       responses:
         '200':
           description: Success
@@ -4320,7 +4372,7 @@ paths:
                 - AccountIds
               properties:
                 AccountIds:
-                  description: 'The list of account IDs of the AWS accounts to invite to Security Hub as members. '
+                  description: 'The list of account IDs of the Amazon Web Services accounts to invite to Security Hub as members. '
                   type: array
                   items:
                     $ref: '#/components/schemas/NonEmptyString'
@@ -4335,7 +4387,7 @@ paths:
   /invitations:
     get:
       operationId: ListInvitations
-      description: <p>Lists all Security Hub membership invitations that were sent to the current AWS account.</p> <p>This operation is only used by accounts that are managed by invitation. Accounts that are managed using the integration with AWS Organizations do not receive invitations.</p>
+      description: <p>Lists all Security Hub membership invitations that were sent to the current Amazon Web Services account.</p> <p>This operation is only used by accounts that are managed by invitation. Accounts that are managed using the integration with Organizations do not receive invitations.</p>
       responses:
         '200':
           description: Success
@@ -4756,7 +4808,7 @@ components:
         StandardsArn:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The ARN of the standard that you want to enable. To view the list of available standards and their ARNs, use the <code> <a>DescribeStandards</a> </code> operation.'
+            - description: 'The ARN of the standard that you want to enable. To view the list of available standards and their ARNs, use the <code>DescribeStandards</code> operation.'
         StandardsInput:
           allOf:
             - $ref: '#/components/schemas/StandardsInputParameterMap'
@@ -4806,6 +4858,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: 'The ARN generated by Security Hub that uniquely identifies a product that generates findings. This can be the ARN for a third-party product that is integrated with Security Hub, or the ARN for a custom integration.'
+        ProductName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The name of the product that generated the finding.</p> <p>Security Hub populates this attribute automatically for each finding. You cannot update it using <code>BatchImportFindings</code> or <code>BatchUpdateFindings</code>. The exception to this is when you use a custom integration.</p> <p>When you use the Security Hub console to filter findings by product name, you use this attribute.</p> <p>When you use the Security Hub API to filter findings by product name, you use the <code>aws/securityhub/ProductyName</code> attribute under <code>ProductFields</code>.</p> <p>Security Hub does not synchronize those two attributes.</p>'
+        CompanyName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The name of the company for the product that generated the finding.</p> <p>Security Hub populates this attribute automatically for each finding. You cannot be updated using <code>BatchImportFindings</code> or <code>BatchUpdateFindings</code>. The exception to this is when you use a custom integration.</p> <p>When you use the Security Hub console to filter findings by company name, you use this attribute.</p> <p>When you use the Security Hub API to filter findings by company name, you use the <code>aws/securityhub/CompanyName</code> attribute under <code>ProductFields</code>.</p> <p>Security Hub does not synchronize those two attributes.</p>'
+        Region:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: <p>The Region from which the finding was generated.</p> <p>Security Hub populates this attribute automatically for each finding. You cannot update it using <code>BatchImportFindings</code> or <code>BatchUpdateFindings</code>.</p>
         GeneratorId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -4813,7 +4877,7 @@ components:
         AwsAccountId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The AWS account ID that a finding is generated in.
+            - description: The Amazon Web Services account ID that a finding is generated in.
         Types:
           allOf:
             - $ref: '#/components/schemas/TypeList'
@@ -4865,7 +4929,7 @@ components:
         ProductFields:
           allOf:
             - $ref: '#/components/schemas/FieldMap'
-            - description: A data type where security-findings providers can include additional solution-specific details that aren't part of the defined <code>AwsSecurityFinding</code> format.
+            - description: '<p>A data type where security-findings providers can include additional solution-specific details that aren''t part of the defined <code>AwsSecurityFinding</code> format.</p> <p>Can contain up to 50 key-value pairs. For each key-value pair, the key can contain up to 128 characters, and the value can contain up to 2048 characters.</p>'
         UserDefinedFields:
           allOf:
             - $ref: '#/components/schemas/FieldMap'
@@ -4897,7 +4961,7 @@ components:
         Compliance:
           allOf:
             - $ref: '#/components/schemas/Compliance'
-            - description: 'This data type is exclusive to findings that are generated as the result of a check run against a specific rule in a supported security standard, such as CIS AWS Foundations. Contains security standard-related finding details.'
+            - description: 'This data type is exclusive to findings that are generated as the result of a check run against a specific rule in a supported security standard, such as CIS Amazon Web Services Foundations. Contains security standard-related finding details.'
         VerificationState:
           allOf:
             - $ref: '#/components/schemas/VerificationState'
@@ -4938,7 +5002,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/FindingProviderFields'
             - description: 'In a <code>BatchImportFindings</code> request, finding providers use <code>FindingProviderFields</code> to provide and update their own values for confidence, criticality, related findings, severity, and types.'
-      description: '<p>Provides consistent format for the contents of the Security Hub-aggregated findings. <code>AwsSecurityFinding</code> format enables you to share findings between AWS security services and third-party solutions, and security standards checks.</p> <note> <p>A finding is a potential security issue generated either by AWS services (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by the integrated third-party solutions and standards checks.</p> </note>'
+      description: '<p>Provides consistent format for the contents of the Security Hub-aggregated findings. <code>AwsSecurityFinding</code> format enables you to share findings between Amazon Web Services security services and third-party solutions, and security standards checks.</p> <note> <p>A finding is a potential security issue generated either by Amazon Web Services services or by the integrated third-party solutions and standards checks.</p> </note>'
     BatchUpdateFindingsResponse:
       type: object
       required:
@@ -5054,7 +5118,7 @@ components:
         UnprocessedAccounts:
           allOf:
             - $ref: '#/components/schemas/ResultList'
-            - description: 'The list of AWS accounts that were not processed. For each account, the list includes the account ID and the email address.'
+            - description: 'The list of Amazon Web Services accounts that were not processed. For each account, the list includes the account ID and the email address.'
     AccountDetails:
       type: object
       required:
@@ -5063,19 +5127,19 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The ID of an AWS account.
+            - description: The ID of an Amazon Web Services account.
         Email:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The email of an AWS account.
-      description: The details of an AWS account.
+            - description: The email of an Amazon Web Services account.
+      description: The details of an Amazon Web Services account.
     DeclineInvitationsResponse:
       type: object
       properties:
         UnprocessedAccounts:
           allOf:
             - $ref: '#/components/schemas/ResultList'
-            - description: 'The list of AWS accounts that were not processed. For each account, the list includes the account ID and the email address.'
+            - description: 'The list of Amazon Web Services accounts that were not processed. For each account, the list includes the account ID and the email address.'
     DeleteActionTargetResponse:
       type: object
       required:
@@ -5100,14 +5164,14 @@ components:
         UnprocessedAccounts:
           allOf:
             - $ref: '#/components/schemas/ResultList'
-            - description: 'The list of AWS accounts for which the invitations were not deleted. For each account, the list includes the account ID and the email address.'
+            - description: 'The list of Amazon Web Services accounts for which the invitations were not deleted. For each account, the list includes the account ID and the email address.'
     DeleteMembersResponse:
       type: object
       properties:
         UnprocessedAccounts:
           allOf:
             - $ref: '#/components/schemas/ResultList'
-            - description: 'The list of AWS accounts that were not deleted. For each account, the list includes the account ID and the email address.'
+            - description: 'The list of Amazon Web Services accounts that were not deleted. For each account, the list includes the account ID and the email address.'
     DescribeActionTargetsResponse:
       type: object
       required:
@@ -5304,14 +5368,14 @@ components:
         UnprocessedAccounts:
           allOf:
             - $ref: '#/components/schemas/ResultList'
-            - description: 'The list of AWS accounts that could not be processed. For each account, the list includes the account ID and the email address.'
+            - description: 'The list of Amazon Web Services accounts that could not be processed. For each account, the list includes the account ID and the email address.'
     InviteMembersResponse:
       type: object
       properties:
         UnprocessedAccounts:
           allOf:
             - $ref: '#/components/schemas/ResultList'
-            - description: 'The list of AWS accounts that could not be processed. For each account, the list includes the account ID and the email address.'
+            - description: 'The list of Amazon Web Services accounts that could not be processed. For each account, the list includes the account ID and the email address.'
     ListEnabledProductsForImportResponse:
       type: object
       properties:
@@ -5470,7 +5534,7 @@ components:
         ServiceName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The name of the AWS service that the API method belongs to.
+            - description: The name of the Amazon Web Services service that the API method belongs to.
         CallerType:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -5547,7 +5611,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/PortProbeAction'
             - description: 'Included if <code>ActionType</code> is <code>PORT_PROBE</code>. Provides details about the port probe that was detected. '
-      description: '<p>Provides details about one of the following actions that affects or that was taken on a resource:</p> <ul> <li> <p>A remote IP address issued an AWS API call</p> </li> <li> <p>A DNS request was received</p> </li> <li> <p>A remote IP address attempted to connect to an EC2 instance</p> </li> <li> <p>A remote IP address attempted a port probe on an EC2 instance</p> </li> </ul>'
+      description: '<p>Provides details about one of the following actions that affects or that was taken on a resource:</p> <ul> <li> <p>A remote IP address issued an Amazon Web Services API call</p> </li> <li> <p>A DNS request was received</p> </li> <li> <p>A remote IP address attempted to connect to an EC2 instance</p> </li> <li> <p>A remote IP address attempted a port probe on an EC2 instance</p> </li> </ul>'
     ActionLocalIpDetails:
       type: object
       properties:
@@ -5693,7 +5757,7 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The AWS account identifier of the Security Hub administrator account.
+            - description: The Amazon Web Services account identifier of the Security Hub administrator account.
         Status:
           allOf:
             - $ref: '#/components/schemas/AdminStatus'
@@ -5935,7 +5999,7 @@ components:
         TracingEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether active tracing with AWS X-Ray is enabled for the stage.
+            - description: Indicates whether active tracing with X-Ray is enabled for the stage.
         CreatedDate:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -6155,11 +6219,11 @@ components:
         DomainValidationOptions:
           allOf:
             - $ref: '#/components/schemas/AwsCertificateManagerCertificateDomainValidationOptions'
-            - description: 'Information about the validation of each domain name in the certificate, as it pertains to AWS Certificate Manager managed renewal. Provided only when the certificate type is <code>AMAZON_ISSUED</code>.'
+            - description: 'Information about the validation of each domain name in the certificate, as it pertains to Certificate Manager managed renewal. Provided only when the certificate type is <code>AMAZON_ISSUED</code>.'
         RenewalStatus:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The status of the AWS Certificate Manager managed renewal of the certificate.</p> <p>Valid values: <code>PENDING_AUTO_RENEWAL</code> | <code>PENDING_VALIDATION</code> | <code>SUCCESS</code> | <code>FAILED</code> </p>'
+            - description: '<p>The status of the Certificate Manager managed renewal of the certificate.</p> <p>Valid values: <code>PENDING_AUTO_RENEWAL</code> | <code>PENDING_VALIDATION</code> | <code>SUCCESS</code> | <code>FAILED</code> </p>'
         RenewalStatusReason:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -6168,7 +6232,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: '<p>Indicates when the renewal summary was last updated.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
-      description: Contains information about the AWS Certificate Manager managed renewal for an <code>AMAZON_ISSUED</code> certificate.
+      description: Contains information about the Certificate Manager managed renewal for an <code>AMAZON_ISSUED</code> certificate.
     AwsCertificateManagerCertificateDetails:
       type: object
       properties:
@@ -6203,7 +6267,7 @@ components:
         InUseBy:
           allOf:
             - $ref: '#/components/schemas/StringList'
-            - description: The list of ARNs for the AWS resources that use the certificate.
+            - description: The list of ARNs for the Amazon Web Services resources that use the certificate.
         IssuedAt:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -6239,7 +6303,7 @@ components:
         RenewalSummary:
           allOf:
             - $ref: '#/components/schemas/AwsCertificateManagerCertificateRenewalSummary'
-            - description: Information about the status of the AWS Certificate Manager managed renewal for the certificate. Provided only when the certificate type is <code>AMAZON_ISSUED</code>.
+            - description: Information about the status of the Certificate Manager managed renewal for the certificate. Provided only when the certificate type is <code>AMAZON_ISSUED</code>.
         Serial:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -6263,8 +6327,8 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The source of the certificate. For certificates that AWS Certificate Manager provides, <code>Type</code> is <code>AMAZON_ISSUED</code>. For certificates that are imported with <code>ImportCertificate</code>, <code>Type</code> is <code>IMPORTED</code>.</p> <p>Valid values: <code>IMPORTED</code> | <code>AMAZON_ISSUED</code> | <code>PRIVATE</code> </p>'
-      description: Provides details about an AWS Certificate Manager certificate.
+            - description: '<p>The source of the certificate. For certificates that Certificate Manager provides, <code>Type</code> is <code>AMAZON_ISSUED</code>. For certificates that are imported with <code>ImportCertificate</code>, <code>Type</code> is <code>IMPORTED</code>.</p> <p>Valid values: <code>IMPORTED</code> | <code>AMAZON_ISSUED</code> | <code>PRIVATE</code> </p>'
+      description: Provides details about an Certificate Manager certificate.
     AwsCertificateManagerCertificateResourceRecord:
       type: object
       properties:
@@ -6295,11 +6359,11 @@ components:
         ValidationDomain:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The domain name that AWS Certificate Manager uses to send domain validation emails.
+            - description: The domain name that Certificate Manager uses to send domain validation emails.
         ValidationEmails:
           allOf:
             - $ref: '#/components/schemas/StringList'
-            - description: A list of email addresses that AWS Certificate Manager uses to send domain validation emails.
+            - description: A list of email addresses that Certificate Manager uses to send domain validation emails.
         ValidationMethod:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -6308,7 +6372,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The validation status of the domain name.
-      description: '<p>Contains information about one of the following:</p> <ul> <li> <p>The initial validation of each domain name that occurs as a result of the <code>RequestCertificate</code> request</p> </li> <li> <p>The validation of each domain name in the certificate, as it pertains to AWS Certificate Manager managed renewal</p> </li> </ul>'
+      description: '<p>Contains information about one of the following:</p> <ul> <li> <p>The initial validation of each domain name that occurs as a result of the <code>RequestCertificate</code> request</p> </li> <li> <p>The validation of each domain name in the certificate, as it pertains to Certificate Manager managed renewal</p> </li> </ul>'
     AwsCertificateManagerCertificateExtendedKeyUsage:
       type: object
       properties:
@@ -6363,7 +6427,7 @@ components:
         Bucket:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The Amazon S3 bucket to store the access logs in.
+            - description: The S3 bucket to store the access logs in.
         Enabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -6439,7 +6503,7 @@ components:
         WebAclId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'A unique identifier that specifies the AWS WAF web ACL, if any, to associate with this distribution.'
+            - description: 'A unique identifier that specifies the WAF web ACL, if any, to associate with this distribution.'
       description: A distribution configuration.
     AwsCloudFrontDistributionOriginGroupFailover:
       type: object
@@ -6491,7 +6555,7 @@ components:
         DomainName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'Amazon S3 origins: The DNS name of the Amazon S3 bucket from which you want CloudFront to get objects for this origin.'
+            - description: 'Amazon S3 origins: The DNS name of the S3 bucket from which you want CloudFront to get objects for this origin.'
         Id:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -6504,7 +6568,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsCloudFrontDistributionOriginS3OriginConfig'
             - description: An origin that is an S3 bucket that is not configured with static website hosting.
-      description: 'A complex type that describes the Amazon S3 bucket, HTTP server (for example, a web server), Amazon Elemental MediaStore, or other server from which CloudFront gets your files.'
+      description: 'A complex type that describes the S3 bucket, HTTP server (for example, a web server), AWS Elemental MediaStore, or other server from which CloudFront gets your files.'
     AwsCloudFrontDistributionOriginItemList:
       type: array
       items:
@@ -6519,7 +6583,7 @@ components:
         CloudWatchLogsRoleArn:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ARN of the role that the CloudWatch Logs endpoint assumes when it writes to the log group.
+            - description: The ARN of the role that the CloudWatch Events endpoint assumes when it writes to the log group.
         HasCustomEventSelectors:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -6539,11 +6603,11 @@ components:
         IsOrganizationTrail:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'Whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account.'
+            - description: 'Whether the trail is created for all accounts in an organization in Organizations, or only for the current Amazon Web Services account.'
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The AWS KMS key ID to use to encrypt the logs.
+            - description: The KMS key ID to use to encrypt the logs.
         LogFileValidationEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -6583,7 +6647,7 @@ components:
         ImagePullCredentialsType:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The type of credentials AWS CodeBuild uses to pull images in your build.</p> <p>Valid values:</p> <ul> <li> <p> <code>CODEBUILD</code> specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust the AWS CodeBuild service principal.</p> </li> <li> <p> <code>SERVICE_ROLE</code> specifies that AWS CodeBuild uses your build project''s service role.</p> </li> </ul> <p>When you use a cross-account or private registry image, you must use <code>SERVICE_ROLE</code> credentials. When you use an AWS CodeBuild curated image, you must use <code>CODEBUILD</code> credentials.</p>'
+            - description: '<p>The type of credentials CodeBuild uses to pull images in your build.</p> <p>Valid values:</p> <ul> <li> <p> <code>CODEBUILD</code> specifies that CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust the CodeBuild service principal.</p> </li> <li> <p> <code>SERVICE_ROLE</code> specifies that CodeBuild uses your build project''s service role.</p> </li> </ul> <p>When you use a cross-account or private registry image, you must use <code>SERVICE_ROLE</code> credentials. When you use an CodeBuild curated image, you must use <code>CODEBUILD</code> credentials.</p>'
         RegistryCredential:
           allOf:
             - $ref: '#/components/schemas/AwsCodeBuildProjectEnvironmentRegistryCredential'
@@ -6599,11 +6663,11 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The type of repository that contains the source code to be built. Valid values are:</p> <ul> <li> <p> <code>BITBUCKET</code> - The source code is in a Bitbucket repository.</p> </li> <li> <p> <code>CODECOMMIT</code> - The source code is in an AWS CodeCommit repository.</p> </li> <li> <p> <code>CODEPIPELINE</code> - The source code settings are specified in the source action of a pipeline in AWS CodePipeline.</p> </li> <li> <p> <code>GITHUB</code> - The source code is in a GitHub repository.</p> </li> <li> <p> <code>GITHUB_ENTERPRISE</code> - The source code is in a GitHub Enterprise repository.</p> </li> <li> <p> <code>NO_SOURCE</code> - The project does not have input source code.</p> </li> <li> <p> <code>S3</code> - The source code is in an S3 input bucket. </p> </li> </ul>'
+            - description: '<p>The type of repository that contains the source code to be built. Valid values are:</p> <ul> <li> <p> <code>BITBUCKET</code> - The source code is in a Bitbucket repository.</p> </li> <li> <p> <code>CODECOMMIT</code> - The source code is in an CodeCommit repository.</p> </li> <li> <p> <code>CODEPIPELINE</code> - The source code settings are specified in the source action of a pipeline in CodePipeline.</p> </li> <li> <p> <code>GITHUB</code> - The source code is in a GitHub repository.</p> </li> <li> <p> <code>GITHUB_ENTERPRISE</code> - The source code is in a GitHub Enterprise repository.</p> </li> <li> <p> <code>NO_SOURCE</code> - The project does not have input source code.</p> </li> <li> <p> <code>S3</code> - The source code is in an S3 input bucket. </p> </li> </ul>'
         Location:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Information about the location of the source code to be built.</p> <p>Valid values include:</p> <ul> <li> <p>For source code settings that are specified in the source action of a pipeline in AWS CodePipeline, location should not be specified. If it is specified, AWS CodePipeline ignores it. This is because AWS CodePipeline uses the settings in a pipeline''s source action instead of this value.</p> </li> <li> <p>For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the build spec file (for example, <code>https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name</code> ).</p> </li> <li> <p>For source code in an S3 input bucket, one of the following.</p> <ul> <li> <p>The path to the ZIP file that contains the source code (for example, <code>bucket-name/path/to/object-name.zip</code>).</p> </li> <li> <p> The path to the folder that contains the source code (for example, <code>bucket-name/path/to/source-code/folder/</code>).</p> </li> </ul> </li> <li> <p>For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the build spec file.</p> </li> <li> <p>For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the build spec file. </p> </li> </ul>'
+            - description: '<p>Information about the location of the source code to be built.</p> <p>Valid values include:</p> <ul> <li> <p>For source code settings that are specified in the source action of a pipeline in CodePipeline, location should not be specified. If it is specified, CodePipeline ignores it. This is because CodePipeline uses the settings in a pipeline''s source action instead of this value.</p> </li> <li> <p>For source code in an CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the build spec file (for example, <code>https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name</code> ).</p> </li> <li> <p>For source code in an S3 input bucket, one of the following.</p> <ul> <li> <p>The path to the ZIP file that contains the source code (for example, <code>bucket-name/path/to/object-name.zip</code>).</p> </li> <li> <p> The path to the folder that contains the source code (for example, <code>bucket-name/path/to/source-code/folder/</code>).</p> </li> </ul> </li> <li> <p>For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the build spec file.</p> </li> <li> <p>For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the build spec file. </p> </li> </ul>'
         GitCloneDepth:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -6623,19 +6687,19 @@ components:
         Subnets:
           allOf:
             - $ref: '#/components/schemas/NonEmptyStringList'
-            - description: A list of one or more subnet IDs in your Amazon VPC.
+            - description: A list of one or more subnet IDs in your VPC.
         SecurityGroupIds:
           allOf:
             - $ref: '#/components/schemas/NonEmptyStringList'
-            - description: A list of one or more security group IDs in your Amazon VPC.
-      description: Information about the VPC configuration that AWS CodeBuild accesses.
+            - description: A list of one or more security group IDs in your VPC.
+      description: Information about the VPC configuration that CodeBuild accesses.
     AwsCodeBuildProjectDetails:
       type: object
       properties:
         EncryptionKey:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) used to encrypt the build output artifacts.</p> <p>You can specify either the ARN of the CMK or, if available, the CMK alias (using the format alias/alias-name). </p>'
+            - description: '<p>The KMS customer master key (CMK) used to encrypt the build output artifacts.</p> <p>You can specify either the ARN of the CMK or, if available, the CMK alias (using the format alias/alias-name). </p>'
         Environment:
           allOf:
             - $ref: '#/components/schemas/AwsCodeBuildProjectEnvironment'
@@ -6651,23 +6715,23 @@ components:
         ServiceRole:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ARN of the IAM role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
+            - description: The ARN of the IAM role that enables CodeBuild to interact with dependent Amazon Web Services services on behalf of the Amazon Web Services account.
         VpcConfig:
           allOf:
             - $ref: '#/components/schemas/AwsCodeBuildProjectVpcConfig'
-            - description: Information about the VPC configuration that AWS CodeBuild accesses.
-      description: Information about an AWS CodeBuild project.
+            - description: Information about the VPC configuration that CodeBuild accesses.
+      description: Information about an CodeBuild project.
     AwsCodeBuildProjectEnvironmentRegistryCredential:
       type: object
       properties:
         Credential:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: <p>The ARN or name of credentials created using AWS Secrets Manager.</p> <note> <p>The credential can use the name of the credentials only if they exist in your current AWS Region. </p> </note>
+            - description: <p>The ARN or name of credentials created using Secrets Manager.</p> <note> <p>The credential can use the name of the credentials only if they exist in your current Amazon Web Services Region. </p> </note>
         CredentialProvider:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The service that created the credentials to access a private Docker registry.</p> <p>The valid value,<code> SECRETS_MANAGER</code>, is for AWS Secrets Manager.</p>'
+            - description: '<p>The service that created the credentials to access a private Docker registry.</p> <p>The valid value,<code> SECRETS_MANAGER</code>, is for Secrets Manager.</p>'
       description: The credentials for access to a private registry.
     AwsDynamoDbTableAttributeDefinition:
       type: object
@@ -6775,7 +6839,7 @@ components:
         KmsMasterKeyArn:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ARN of the AWS KMS customer master key (CMK) that is used for the AWS KMS encryption.
+            - description: The ARN of the KMS customer master key (CMK) that is used for the KMS encryption.
       description: Information about the server-side encryption for the table.
     AwsDynamoDbTableStreamSpecification:
       type: object
@@ -6977,7 +7041,7 @@ components:
         KmsMasterKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The identifier of the AWS KMS customer master key (CMK) that will be used for AWS KMS encryption for the replica.
+            - description: The identifier of the KMS customer master key (CMK) that will be used for KMS encryption for the replica.
         ProvisionedThroughputOverride:
           allOf:
             - $ref: '#/components/schemas/AwsDynamoDbTableProvisionedThroughputOverride'
@@ -7021,7 +7085,7 @@ components:
         AllocationId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The identifier that AWS assigns to represent the allocation of the Elastic IP address for use with Amazon VPC.
+            - description: The identifier that Amazon Web Services assigns to represent the allocation of the Elastic IP address for use with Amazon VPC.
         AssociationId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -7045,7 +7109,7 @@ components:
         NetworkInterfaceOwnerId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The AWS account ID of the owner of the network interface.
+            - description: The Amazon Web Services account ID of the owner of the network interface.
         PrivateIpAddress:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -7145,7 +7209,7 @@ components:
         OwnerId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The identifier of the AWS account that owns the network ACL.
+            - description: The identifier of the Amazon Web Services account that owns the network ACL.
         VpcId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -7245,7 +7309,7 @@ components:
         InstanceOwnerId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The AWS account ID of the owner of the instance.
+            - description: The Amazon Web Services account ID of the owner of the instance.
         Status:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -7349,7 +7413,7 @@ components:
         OwnerId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The AWS account ID of the owner of the security group.
+            - description: The Amazon Web Services account ID of the owner of the security group.
         VpcId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -7397,7 +7461,7 @@ components:
         UserIdGroupPairs:
           allOf:
             - $ref: '#/components/schemas/AwsEc2SecurityGroupUserIdGroupPairList'
-            - description: The security group and AWS account ID pairs.
+            - description: The security group and Amazon Web Services account ID pairs.
         IpRanges:
           allOf:
             - $ref: '#/components/schemas/AwsEc2SecurityGroupIpRangeList'
@@ -7409,7 +7473,7 @@ components:
         PrefixListIds:
           allOf:
             - $ref: '#/components/schemas/AwsEc2SecurityGroupPrefixListIdList'
-            - description: '[VPC only] The prefix list IDs for an AWS service. With outbound rules, this is the AWS service to access through a VPC endpoint from instances associated with the security group.'
+            - description: '[VPC only] The prefix list IDs for an Amazon Web Services service. With outbound rules, this is the Amazon Web Services service to access through a VPC endpoint from instances associated with the security group.'
       description: An IP permission for an EC2 security group.
     AwsEc2SecurityGroupIpRange:
       type: object
@@ -7453,7 +7517,7 @@ components:
         UserId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The ID of an AWS account.</p> <p>For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response. If the referenced security group is deleted, this value is not returned.</p> <p>[EC2-Classic] Required when adding or removing rules that reference a security group in another VPC. </p>'
+            - description: '<p>The ID of an Amazon Web Services account.</p> <p>For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response. If the referenced security group is deleted, this value is not returned.</p> <p>[EC2-Classic] Required when adding or removing rules that reference a security group in another VPC. </p>'
         VpcId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -7501,7 +7565,7 @@ components:
         OwnerId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The identifier of the AWS account that owns the subnet.
+            - description: The identifier of the Amazon Web Services account that owns the subnet.
         State:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -7522,7 +7586,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Ipv6CidrBlockAssociationList'
             - description: The IPV6 CIDR blocks that are associated with the subnet.
-      description: Contains information about a subnet in EC2.
+      description: Contains information about a subnet in Amazon EC2.
     AwsEc2VolumeAttachment:
       type: object
       properties:
@@ -7542,7 +7606,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The attachment state of the volume.
-      description: An attachment to an AWS EC2 volume.
+      description: An attachment to an Amazon EC2 volume.
     AwsEc2VolumeAttachmentList:
       type: array
       items:
@@ -7573,7 +7637,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the volume encryption key for the volume.
+            - description: The ARN of the KMS customer master key (CMK) that was used to protect the volume encryption key for the volume.
         Attachments:
           allOf:
             - $ref: '#/components/schemas/AwsEc2VolumeAttachmentList'
@@ -7707,6 +7771,258 @@ components:
             - $ref: '#/components/schemas/AwsEcsClusterDefaultCapacityProviderStrategyList'
             - description: The default capacity provider strategy for the cluster. The default capacity provider strategy is used when services or tasks are run without a specified launch type or capacity provider strategy.
       description: provides details about an ECS cluster.
+    AwsEcsServiceCapacityProviderStrategyDetails:
+      type: object
+      properties:
+        Base:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: <p>The minimum number of tasks to run on the capacity provider. Only one strategy item can specify a value for <code>Base</code>.</p> <p>The value must be between 0 and 100000.</p>
+        CapacityProvider:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The short name of the capacity provider.
+        Weight:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: '<p>The relative percentage of the total number of tasks that should use the capacity provider.</p> <p>If no weight is specified, the default value is 0. At least one capacity provider must have a weight greater than 0.</p> <p>The value can be between 0 and 1000.</p>'
+      description: Strategy item for the capacity provider strategy that the service uses.
+    AwsEcsServiceCapacityProviderStrategyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsServiceCapacityProviderStrategyDetails'
+    AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails:
+      type: object
+      properties:
+        Enable:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether to enable the deployment circuit breaker logic for the service.
+        Rollback:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Whether to roll back the service if a service deployment fails. If rollback is enabled, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.'
+      description: Determines whether a service deployment fails if a service cannot reach a steady state.
+    AwsEcsServiceDeploymentConfigurationDetails:
+      type: object
+      properties:
+        DeploymentCircuitBreaker:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails'
+            - description: Determines whether a service deployment fails if a service cannot reach a steady state.
+        MaximumPercent:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: '<p>For a service that uses the rolling update (<code>ECS</code>) deployment type, the maximum number of tasks in a service that are allowed in the <code>RUNNING</code> or <code>PENDING</code> state during a deployment, and for tasks that use the EC2 launch type, when any container instances are in the <code>DRAINING</code> state. Provided as a percentage of the desired number of tasks. The default value is 200%.</p> <p>For a service that uses the blue/green (<code>CODE_DEPLOY</code>) or <code>EXTERNAL</code> deployment types, and tasks that use the EC2 launch type, the maximum number of tasks in the service that remain in the <code>RUNNING</code> state while the container instances are in the <code>DRAINING</code> state.</p> <p>For the Fargate launch type, the maximum percent value is not used.</p>'
+        MinimumHealthyPercent:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: '<p>For a service that uses the rolling update (<code>ECS</code>) deployment type, the minimum number of tasks in a service that must remain in the <code>RUNNING</code> state during a deployment, and while any container instances are in the <code>DRAINING</code> state if the service contains tasks using the EC2 launch type. Expressed as a percentage of the desired number of tasks. The default value is 100%.</p> <p>For a service that uses the blue/green (<code>CODE_DEPLOY</code>) or <code>EXTERNAL</code> deployment types and tasks that use the EC2 launch type, the minimum number of the tasks in the service that remain in the <code>RUNNING</code> state while the container instances are in the <code>DRAINING</code> state.</p> <p>For the Fargate launch type, the minimum healthy percent value is not used.</p>'
+      description: Optional deployment parameters for the service.
+    AwsEcsServiceDeploymentControllerDetails:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The rolling update (<code>ECS</code>) deployment type replaces the current running version of the container with the latest version.</p> <p>The blue/green (<code>CODE_DEPLOY</code>) deployment type uses the blue/green deployment model that is powered by CodeDeploy. This deployment model a new deployment of a service can be verified before production traffic is sent to it.</p> <p>The external (<code>EXTERNAL</code>) deployment type allows the use of any third-party deployment controller for full control over the deployment process for an Amazon ECS service.</p> <p>Valid values: <code>ECS</code> | <code>CODE_DEPLOY</code> | <code>EXTERNAL</code> </p>'
+      description: Information about the deployment controller type that the service uses.
+    AwsEcsServiceLoadBalancersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsServiceLoadBalancersDetails'
+    AwsEcsServiceNetworkConfigurationDetails:
+      type: object
+      properties:
+        AwsVpcConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails'
+            - description: The VPC subnet and security group configuration.
+      description: 'For tasks that use the <code>awsvpc</code> networking mode, the VPC subnet and security group configuration.'
+    AwsEcsServicePlacementConstraintsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsServicePlacementConstraintsDetails'
+    AwsEcsServicePlacementStrategiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsServicePlacementStrategiesDetails'
+    AwsEcsServiceServiceRegistriesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsEcsServiceServiceRegistriesDetails'
+    AwsEcsServiceDetails:
+      type: object
+      properties:
+        CapacityProviderStrategy:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsServiceCapacityProviderStrategyList'
+            - description: The capacity provider strategy that the service uses.
+        Cluster:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the cluster that hosts the service.
+        DeploymentConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsServiceDeploymentConfigurationDetails'
+            - description: Deployment parameters for the service. Includes the number of tasks that run and the order in which to start and stop tasks.
+        DeploymentController:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsServiceDeploymentControllerDetails'
+            - description: Contains the deployment controller type that the service uses.
+        DesiredCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of instantiations of the task definition to run on the service.
+        EnableEcsManagedTags:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether to enable Amazon ECS managed tags for the tasks in the service.
+        EnableExecuteCommand:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the execute command functionality is enabled for the service.
+        HealthCheckGracePeriodSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'After a task starts, the amount of time in seconds that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing target health checks.'
+        LaunchType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The launch type that the service uses.</p> <p>Valid values: <code>EC2</code> | <code>FARGATE</code> | <code>EXTERNAL</code> </p>'
+        LoadBalancers:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsServiceLoadBalancersList'
+            - description: Information about the load balancers that the service uses.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the service.
+        NetworkConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsServiceNetworkConfigurationDetails'
+            - description: 'For tasks that use the <code>awsvpc</code> networking mode, the VPC subnet and security group configuration.'
+        PlacementConstraints:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsServicePlacementConstraintsList'
+            - description: The placement constraints for the tasks in the service.
+        PlacementStrategies:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsServicePlacementStrategiesList'
+            - description: Information about how tasks for the service are placed.
+        PlatformVersion:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The platform version on which to run the service. Only specified for tasks that are hosted on Fargate. If a platform version is not specified, the <code>LATEST</code> platform version is used by default.'
+        PropagateTags:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Indicates whether to propagate the tags from the task definition to the task or from the service to the task. If no value is provided, then tags are not propagated.</p> <p>Valid values: <code>TASK_DEFINITION</code> | <code>SERVICE</code> </p>'
+        Role:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the IAM role that is associated with the service. The role allows the Amazon ECS container agent to register container instances with an Elastic Load Balancing load balancer.
+        SchedulingStrategy:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The scheduling strategy to use for the service.</p> <p>The <code>REPLICA</code> scheduling strategy places and maintains the desired number of tasks across the cluster. By default, the service scheduler spreads tasks across Availability Zones. Task placement strategies and constraints are used to customize task placement decisions.</p> <p>The <code>DAEMON</code> scheduling strategy deploys exactly one task on each active container instance that meets all of the task placement constraints that are specified in the cluster. The service scheduler also evaluates the task placement constraints for running tasks and stops tasks that do not meet the placement constraints.</p> <p>Valid values: <code>REPLICA</code> | <code>DAEMON</code> </p>'
+        ServiceArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the service.
+        ServiceName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The name of the service.</p> <p>The name can contain up to 255 characters. It can use letters, numbers, underscores, and hyphens.</p>'
+        ServiceRegistries:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsServiceServiceRegistriesList'
+            - description: Information about the service discovery registries to assign to the service.
+        TaskDefinition:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The task definition to use for tasks in the service.
+      description: Provides details about a service within an ECS cluster.
+    AwsEcsServiceLoadBalancersDetails:
+      type: object
+      properties:
+        ContainerName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the container to associate with the load balancer.
+        ContainerPort:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The port on the container to associate with the load balancer. This port must correspond to a <code>containerPort</code> in the task definition the tasks in the service are using. For tasks that use the EC2 launch type, the container instance they are launched on must allow ingress traffic on the <code>hostPort</code> of the port mapping.'
+        LoadBalancerName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The name of the load balancer to associate with the Amazon ECS service or task set.</p> <p>Only specified when using a Classic Load Balancer. For an Application Load Balancer or a Network Load Balancer, the load balancer name is omitted.</p>'
+        TargetGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The ARN of the Elastic Load Balancing target group or groups associated with a service or task set.</p> <p>Only specified when using an Application Load Balancer or a Network Load Balancer. For a Classic Load Balancer, the target group ARN is omitted.</p>'
+      description: Information about a load balancer that the service uses.
+    AwsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails:
+      type: object
+      properties:
+        AssignPublicIp:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>Whether the task''s elastic network interface receives a public IP address. The default value is <code>DISABLED</code>.</p> <p>Valid values: <code>ENABLED</code> | <code>DISABLED</code> </p>'
+        SecurityGroups:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: <p>The IDs of the security groups associated with the task or service.</p> <p>You can provide up to five security groups.</p>
+        Subnets:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: <p>The IDs of the subnets associated with the task or service.</p> <p>You can provide up to 16 subnets.</p>
+      description: 'For tasks that use the <code>awsvpc</code> networking mode, the VPC subnet and security group configuration.'
+    AwsEcsServicePlacementConstraintsDetails:
+      type: object
+      properties:
+        Expression:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is <code>distinctInstance</code>.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The type of constraint. Use <code>distinctInstance</code> to run each task in a particular group on a different container instance. Use <code>memberOf</code> to restrict the selection to a group of valid candidates.</p> <p>Valid values: <code>distinctInstance</code> | <code>memberOf</code> </p>'
+      description: A placement constraint for the tasks in the service.
+    AwsEcsServicePlacementStrategiesDetails:
+      type: object
+      properties:
+        Field:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The field to apply the placement strategy against.</p> <p>For the <code>spread</code> placement strategy, valid values are <code>instanceId</code> (or <code>host</code>, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as <code>attribute:ecs.availability-zone</code>.</p> <p>For the <code>binpack</code> placement strategy, valid values are <code>cpu</code> and <code>memory</code>.</p> <p>For the <code>random</code> placement strategy, this attribute is not used.</p>'
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The type of placement strategy.</p> <p>The <code>random</code> placement strategy randomly places tasks on available candidates.</p> <p>The <code>spread</code> placement strategy spreads placement across available candidates evenly based on the value of <code>Field</code>.</p> <p>The <code>binpack</code> strategy places tasks on available candidates that have the least available amount of the resource that is specified in <code>Field</code>.</p> <p>Valid values: <code>random</code> | <code>spread</code> | <code>binpack</code> </p>'
+      description: A placement strategy that determines how to place the tasks for the service.
+    AwsEcsServiceServiceRegistriesDetails:
+      type: object
+      properties:
+        ContainerName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The container name value to use for the service discovery service.</p> <p>If the task definition uses the <code>bridge</code> or <code>host</code> network mode, you must specify <code>ContainerName</code> and <code>ContainerPort</code>.</p> <p>If the task definition uses the <code>awsvpc</code> network mode and a type SRV DNS record, you must specify either <code>ContainerName</code> and <code>ContainerPort</code>, or <code>Port</code> , but not both.</p>'
+        ContainerPort:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: '<p>The port value to use for the service discovery service.</p> <p>If the task definition uses the <code>bridge</code> or <code>host</code> network mode, you must specify <code>ContainerName</code> and <code>ContainerPort</code>.</p> <p>If the task definition uses the <code>awsvpc</code> network mode and a type SRV DNS record, you must specify either <code>ContainerName</code> and <code>ContainerPort</code>, or <code>Port</code> , but not both.</p>'
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The port value to use for a service discovery service that specifies an SRV record. This field can be used if both the <code>awsvpc</code>awsvpc network mode and SRV records are used.
+        RegistryArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the service registry.
+      description: Information about a service discovery registry to assign to the service.
     AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails:
       type: object
       properties:
@@ -8301,7 +8617,7 @@ components:
         TaskRoleArn:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The short name or ARN of the IAM role that grants containers in the task permission to call AWS API operations on your behalf.
+            - description: The short name or ARN of the IAM role that grants containers in the task permission to call Amazon Web Services API operations on your behalf.
         Volumes:
           allOf:
             - $ref: '#/components/schemas/AwsEcsTaskDefinitionVolumesList'
@@ -8571,6 +8887,38 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: '<p>The TLS security policy to apply to the HTTPS endpoint of the Elasticsearch domain.</p> <p>Valid values:</p> <ul> <li> <p> <code>Policy-Min-TLS-1-0-2019-07</code>, which supports TLSv1.0 and higher</p> </li> <li> <p> <code>Policy-Min-TLS-1-2-2019-07</code>, which only supports TLSv1.2</p> </li> </ul>'
       description: 'Additional options for the domain endpoint, such as whether to require HTTPS for all traffic.'
+    AwsElasticsearchDomainElasticsearchClusterConfigDetails:
+      type: object
+      properties:
+        DedicatedMasterCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The number of instances to use for the master node. If this attribute is specified, then <code>DedicatedMasterEnabled</code> must be <code>true</code>.'
+        DedicatedMasterEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Whether to use a dedicated master node for the Elasticsearch domain. A dedicated master node performs cluster management tasks, but doesn''t hold data or respond to data upload requests.'
+        DedicatedMasterType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The hardware configuration of the computer that hosts the dedicated master node. For example, <code>m3.medium.elasticsearch</code>. If this attribute is specified, then <code>DedicatedMasterEnabled</code> must be <code>true</code>.'
+        InstanceCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of data nodes to use in the Elasticsearch domain.
+        InstanceType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The instance type for your data nodes. For example, <code>m3.medium.elasticsearch</code>.'
+        ZoneAwarenessConfig:
+          allOf:
+            - $ref: '#/components/schemas/AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails'
+            - description: Configuration options for zone awareness. Provided if <code>ZoneAwarenessEnabled</code> is <code>true</code>.
+        ZoneAwarenessEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Whether to enable zone awareness for the Elasticsearch domain. When zone awareness is enabled, Elasticsearch allocates the cluster''s nodes and replica index shards across Availability Zones in the same Region. This prevents data loss and minimizes downtime if a node or data center fails.'
+      description: details about the configuration of an Elasticsearch cluster.
     AwsElasticsearchDomainEncryptionAtRestOptions:
       type: object
       properties:
@@ -8594,6 +8942,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsElasticsearchDomainLogPublishingOptionsLogConfig'
             - description: Configures the Elasticsearch search slow log publishing.
+        AuditLogs:
+          $ref: '#/components/schemas/AwsElasticsearchDomainLogPublishingOptionsLogConfig'
       description: configures the CloudWatch Logs to publish for the Elasticsearch domain.
     AwsElasticsearchDomainNodeToNodeEncryptionOptions:
       type: object
@@ -8654,14 +9004,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: ID for the VPC.
-      description: Information that Amazon ES derives based on <code>VPCOptions</code> for the domain.
+      description: Information that Elasticsearch derives based on <code>VPCOptions</code> for the domain.
     AwsElasticsearchDomainDetails:
       type: object
       properties:
         AccessPolicies:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: IAM policy document specifying the access policies for the new Amazon ES domain.
+            - description: IAM policy document specifying the access policies for the new Elasticsearch domain.
         DomainEndpointOptions:
           allOf:
             - $ref: '#/components/schemas/AwsElasticsearchDomainDomainEndpointOptions'
@@ -8669,23 +9019,27 @@ components:
         DomainId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: Unique identifier for an Amazon ES domain.
+            - description: Unique identifier for an Elasticsearch domain.
         DomainName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Name of an Amazon ES domain.</p> <p>Domain names are unique across all domains owned by the same account within an AWS Region.</p> <p>Domain names must start with a lowercase letter and must be between 3 and 28 characters.</p> <p>Valid characters are a-z (lowercase only), 0-9, and – (hyphen). </p>'
+            - description: '<p>Name of an Elasticsearch domain.</p> <p>Domain names are unique across all domains owned by the same account within an Amazon Web Services Region.</p> <p>Domain names must start with a lowercase letter and must be between 3 and 28 characters.</p> <p>Valid characters are a-z (lowercase only), 0-9, and – (hyphen). </p>'
         Endpoint:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Domain-specific endpoint used to submit index, search, and data upload requests to an Amazon ES domain.</p> <p>The endpoint is a service URL. </p>'
+            - description: '<p>Domain-specific endpoint used to submit index, search, and data upload requests to an Elasticsearch domain.</p> <p>The endpoint is a service URL. </p>'
         Endpoints:
           allOf:
             - $ref: '#/components/schemas/FieldMap'
-            - description: The key-value pair that exists if the Amazon ES domain uses VPC endpoints.
+            - description: The key-value pair that exists if the Elasticsearch domain uses VPC endpoints.
         ElasticsearchVersion:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: Elasticsearch version.
+        ElasticsearchClusterConfig:
+          allOf:
+            - $ref: '#/components/schemas/AwsElasticsearchDomainElasticsearchClusterConfigDetails'
+            - description: Information about an Elasticsearch cluster configuration.
         EncryptionAtRestOptions:
           allOf:
             - $ref: '#/components/schemas/AwsElasticsearchDomainEncryptionAtRestOptions'
@@ -8705,8 +9059,16 @@ components:
         VPCOptions:
           allOf:
             - $ref: '#/components/schemas/AwsElasticsearchDomainVPCOptions'
-            - description: Information that Amazon ES derives based on <code>VPCOptions</code> for the domain.
-      description: Information about an Elasticsearch domain.
+            - description: Information that Elasticsearch derives based on <code>VPCOptions</code> for the domain.
+      description: Information about an Amazon Elasticsearch Service domain.
+    AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails:
+      type: object
+      properties:
+        AvailabilityZoneCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: he number of Availability Zones that the domain uses. Valid values are 2 and 3. The default is 2.
+      description: Configuration options for zone awareness.
     AwsElasticsearchDomainLogPublishingOptionsLogConfig:
       type: object
       properties:
@@ -9121,7 +9483,7 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The AWS account ID of the account for the key.
+            - description: The Amazon Web Services account ID of the account for the key.
         AccessKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -9161,7 +9523,7 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The identifier of the AWS account that created the session.
+            - description: The identifier of the Amazon Web Services account that created the session.
         UserName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -9480,7 +9842,7 @@ components:
         AWSAccountId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The twelve-digit account ID of the AWS account that owns the CMK.
+            - description: The twelve-digit account ID of the Amazon Web Services account that owns the CMK.
         CreationDate:
           allOf:
             - $ref: '#/components/schemas/Double'
@@ -9492,7 +9854,7 @@ components:
         KeyManager:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The manager of the CMK. CMKs in your AWS account are either customer managed or AWS managed.
+            - description: The manager of the CMK. CMKs in your Amazon Web Services account are either customer managed or Amazon Web Services managed.
         KeyState:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -9500,7 +9862,7 @@ components:
         Origin:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The source of the CMK''s key material.</p> <p>When this value is <code>AWS_KMS</code>, AWS KMS created the key material.</p> <p>When this value is <code>EXTERNAL</code>, the key material was imported from your existing key management infrastructure or the CMK lacks key material.</p> <p>When this value is <code>AWS_CLOUDHSM</code>, the key material was created in the AWS CloudHSM cluster associated with a custom key store.</p>'
+            - description: '<p>The source of the CMK''s key material.</p> <p>When this value is <code>AWS_KMS</code>, KMS created the key material.</p> <p>When this value is <code>EXTERNAL</code>, the key material was imported from your existing key management infrastructure or the CMK lacks key material.</p> <p>When this value is <code>AWS_CLOUDHSM</code>, the key material was created in the CloudHSM cluster associated with a custom key store.</p>'
         Description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -9512,7 +9874,7 @@ components:
         S3Bucket:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.
+            - description: An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different Amazon Web Services account.
         S3Key:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -9524,7 +9886,7 @@ components:
         ZipFile:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The base64-encoded contents of the deployment package. AWS SDK and AWS CLI clients handle the encoding for you.
+            - description: The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.
       description: 'The code for the Lambda function. You can specify either an object in Amazon S3, or upload a deployment package directly.'
     AwsLambdaFunctionDeadLetterConfig:
       type: object
@@ -9532,7 +9894,7 @@ components:
         TargetArn:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ARN of an Amazon SQS queue or Amazon SNS topic.
+            - description: The ARN of an SQS queue or SNS topic.
       description: The dead-letter queue for failed asynchronous invocations.
     AwsLambdaFunctionEnvironment:
       type: object
@@ -9557,7 +9919,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The tracing mode.
-      description: The function's AWS X-Ray tracing configuration.
+      description: The function's X-Ray tracing configuration.
     AwsLambdaFunctionVpcConfig:
       type: object
       properties:
@@ -9604,7 +9966,7 @@ components:
         KmsKeyArn:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The KMS key that's used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed CMK.
+            - description: The KMS key that is used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed CMK.
         LastModified:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -9640,7 +10002,7 @@ components:
         TracingConfig:
           allOf:
             - $ref: '#/components/schemas/AwsLambdaFunctionTracingConfig'
-            - description: The function's AWS X-Ray tracing configuration.
+            - description: The function's X-Ray tracing configuration.
         VpcConfig:
           allOf:
             - $ref: '#/components/schemas/AwsLambdaFunctionVpcConfig'
@@ -9673,7 +10035,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Integer'
             - description: The size of the layer archive in bytes.
-      description: An AWS Lambda layer.
+      description: An Lambda layer.
     AwsLambdaLayerVersionNumber:
       type: integer
     AwsLambdaLayerVersionDetails:
@@ -9806,11 +10168,11 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ARN of the AWS KMS master key that is used to encrypt the database instances in the DB cluster.
+            - description: The ARN of the KMS master key that is used to encrypt the database instances in the DB cluster.
         DbClusterResourceId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The identifier of the DB cluster. The identifier must be unique within each AWS Region and is immutable.
+            - description: The identifier of the DB cluster. The identifier must be unique within each Amazon Web Services Region and is immutable.
         AssociatedRoles:
           allOf:
             - $ref: '#/components/schemas/AwsRdsDbClusterAssociatedRoles'
@@ -9846,7 +10208,7 @@ components:
         CrossAccountClone:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Whether the DB cluster is a clone of a DB cluster owned by a different AWS account.
+            - description: Whether the DB cluster is a clone of a DB cluster owned by a different Amazon Web Services account.
         DomainMemberships:
           allOf:
             - $ref: '#/components/schemas/AwsRdsDbDomainMemberships'
@@ -9970,7 +10332,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ARN of the AWS KMS master key that is used to encrypt the database instances in the DB cluster.
+            - description: The ARN of the KMS master key that is used to encrypt the database instances in the DB cluster.
         DbClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -10014,12 +10376,12 @@ components:
         FeatureName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The name of the feature associated with the IAM)role.
+            - description: The name of the feature associated with the IAM role.
         Status:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Describes the state of the association between the IAM role and the DB instance. The <code>Status</code> property returns one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - The IAM role ARN is associated with the DB instance and can be used to access other AWS services on your behalf.</p> </li> <li> <p> <code>PENDING</code> - The IAM role ARN is being associated with the DB instance.</p> </li> <li> <p> <code>INVALID</code> - The IAM role ARN is associated with the DB instance. But the DB instance is unable to assume the IAM role in order to access other AWS services on your behalf. </p> </li> </ul>'
-      description: An AWS Identity and Access Management (IAM) role associated with the DB instance.
+            - description: '<p>Describes the state of the association between the IAM role and the DB instance. The <code>Status</code> property returns one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - The IAM role ARN is associated with the DB instance and can be used to access other Amazon Web Services services on your behalf.</p> </li> <li> <p> <code>PENDING</code> - The IAM role ARN is being associated with the DB instance.</p> </li> <li> <p> <code>INVALID</code> - The IAM role ARN is associated with the DB instance. But the DB instance is unable to assume the IAM role in order to access other Amazon Web Services services on your behalf. </p> </li> </ul>'
+      description: An IAM role associated with the DB instance.
     AwsRdsDbInstanceAssociatedRoles:
       type: array
       items:
@@ -10154,7 +10516,7 @@ components:
         AssociatedRoles:
           allOf:
             - $ref: '#/components/schemas/AwsRdsDbInstanceAssociatedRoles'
-            - description: The AWS Identity and Access Management (IAM) roles associated with the DB instance.
+            - description: The IAM roles associated with the DB instance.
         CACertificateIdentifier:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -10178,7 +10540,7 @@ components:
         DbiResourceId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The AWS Region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB instance is accessed. '
+            - description: 'The Amazon Web Services Region-unique, immutable identifier for the DB instance. This identifier is found in CloudTrail log entries whenever the KMS key for the DB instance is accessed. '
         DBName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -10202,7 +10564,7 @@ components:
         IAMDatabaseAuthenticationEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.</p> <p>IAM database authentication can be enabled for the following database engines.</p> <ul> <li> <p>For MySQL 5.6, minor version 5.6.34 or higher</p> </li> <li> <p>For MySQL 5.7, minor version 5.7.16 or higher</p> </li> <li> <p>Aurora 5.6 or higher</p> </li> </ul>'
+            - description: '<p>True if mapping of IAM accounts to database accounts is enabled, and otherwise false.</p> <p>IAM database authentication can be enabled for the following database engines.</p> <ul> <li> <p>For MySQL 5.6, minor version 5.6.34 or higher</p> </li> <li> <p>For MySQL 5.7, minor version 5.7.16 or higher</p> </li> <li> <p>Aurora 5.6 or higher</p> </li> </ul>'
         InstanceCreateTime:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -10210,7 +10572,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'If <code>StorageEncrypted</code> is true, the AWS KMS key identifier for the encrypted DB instance.'
+            - description: 'If <code>StorageEncrypted</code> is true, the KMS key identifier for the encrypted DB instance.'
         PubliclyAccessible:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -10358,7 +10720,7 @@ components:
         PerformanceInsightsKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The identifier of the AWS KMS key used to encrypt the Performance Insights data.
+            - description: The identifier of the KMS key used to encrypt the Performance Insights data.
         PerformanceInsightsRetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -10512,7 +10874,7 @@ components:
         SourceRegion:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The AWS Region that the DB snapshot was created in or copied from.
+            - description: The Amazon Web Services Region that the DB snapshot was created in or copied from.
         SourceDbSnapshotIdentifier:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -10532,7 +10894,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'If <code>Encrypted</code> is <code>true</code>, the AWS KMS key identifier for the encrypted DB snapshot.'
+            - description: 'If <code>Encrypted</code> is <code>true</code>, the KMS key identifier for the encrypted DB snapshot.'
         Timezone:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -10598,6 +10960,50 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The status of a subnet in the subnet group.
       description: Information about a subnet in a subnet group.
+    AwsRdsEventSubscriptionDetails:
+      type: object
+      properties:
+        CustSubscriptionId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the account that is associated with the event notification subscription.
+        CustomerAwsId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier of the event notification subscription.
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the event notification subscription is enabled.
+        EventCategoriesList:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: The list of event categories for the event notification subscription.
+        EventSubscriptionArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the event notification subscription.
+        SnsTopicArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ARN of the SNS topic to post the event notifications to.
+        SourceIdsList:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyStringList'
+            - description: A list of source identifiers for the event notification subscription.
+        SourceType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The source type for the event notification subscription.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The status of the event notification subscription.</p> <p>Valid values: <code>creating</code> | <code>modifying</code> | <code>deleting</code> | <code>active</code> | <code>no-permission</code> | <code>topic-not-exist</code> </p>'
+        SubscriptionCreationTime:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: '<p>The datetime when the event notification subscription was created.</p> <p>Uses the <code>date-time</code> format specified in <a href="https://tools.ietf.org/html/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>'
+      description: Details about an Amazon RDS event notification subscription. The subscription allows Amazon RDS to post events to an SNS topic.
     AwsRedshiftClusterClusterNode:
       type: object
       properties:
@@ -10956,11 +11362,11 @@ components:
         IamRoles:
           allOf:
             - $ref: '#/components/schemas/AwsRedshiftClusterIamRoles'
-            - description: A list of IAM roles that the cluster can use to access other AWS services.
+            - description: A list of IAM roles that the cluster can use to access other Amazon Web Services services.
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The identifier of the AWS KMS encryption key that is used to encrypt data in the cluster.
+            - description: The identifier of the KMS encryption key that is used to encrypt data in the cluster.
         MaintenanceTrackName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -11037,7 +11443,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The ARN of the IAM role.
-      description: An IAM role that the cluster can use to access other AWS services.
+      description: An IAM role that the cluster can use to access other Amazon Web Services services.
     AwsRedshiftClusterVpcSecurityGroup:
       type: object
       properties:
@@ -11068,7 +11474,7 @@ components:
         RestrictPublicBuckets:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether to restrict access to an access point or S3 bucket that has a public policy to only AWS service principals and authorized users within the S3 bucket owner's account.
+            - description: Indicates whether to restrict access to an access point or S3 bucket that has a public policy to only Amazon Web Services service principals and authorized users within the S3 bucket owner's account.
       description: provides information about the Amazon S3 Public Access Block configuration for accounts.
     AwsS3BucketBucketLifecycleConfigurationRulesList:
       type: array
@@ -11292,7 +11698,7 @@ components:
         KMSMasterKeyID:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: AWS KMS customer master key (CMK) ID to use for the default encryption.
+            - description: KMS customer master key (CMK) ID to use for the default encryption.
       description: Specifies the default server-side encryption to apply to new objects in the bucket.
     AwsS3BucketServerSideEncryptionRules:
       type: array
@@ -11332,7 +11738,7 @@ components:
         SSEKMSKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The identifier of the AWS Key Management Service (AWS KMS) symmetric customer managed customer master key (CMK) that was used for the object.
+            - description: The identifier of the KMS symmetric customer managed customer master key (CMK) that was used for the object.
       description: Details about an Amazon S3 object.
     AwsSecretsManagerSecretRotationRules:
       type: object
@@ -11356,7 +11762,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The ARN, Key ID, or alias of the AWS KMS customer master key (CMK) used to encrypt the <code>SecretString</code> or <code>SecretBinary</code> values for versions of this secret.'
+            - description: 'The ARN, Key ID, or alias of the KMS customer master key (CMK) used to encrypt the <code>SecretString</code> or <code>SecretBinary</code> values for versions of this secret.'
         RotationEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -11377,7 +11783,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The user-provided description of the secret.
-      description: Details about an AWS Secrets Manager secret.
+      description: Details about an Secrets Manager secret.
     TypeList:
       type: array
       items:
@@ -11388,7 +11794,7 @@ components:
         Product:
           allOf:
             - $ref: '#/components/schemas/Double'
-            - description: '<p>Deprecated. This attribute is being deprecated. Instead of providing <code>Product</code>, provide <code>Original</code>.</p> <p>The native severity as defined by the AWS service or integrated partner product that generated the finding.</p>'
+            - description: '<p>Deprecated. This attribute is being deprecated. Instead of providing <code>Product</code>, provide <code>Original</code>.</p> <p>The native severity as defined by the Amazon Web Services service or integrated partner product that generated the finding.</p>'
         Label:
           allOf:
             - $ref: '#/components/schemas/SeverityLabel'
@@ -11512,7 +11918,7 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/ComplianceStatus'
-            - description: '<p>The result of a standards check.</p> <p>The valid values for <code>Status</code> are as follows.</p> <ul> <li> <ul> <li> <p> <code>PASSED</code> - Standards check passed for all evaluated resources.</p> </li> <li> <p> <code>WARNING</code> - Some information is missing or this check is not supported for your configuration.</p> </li> <li> <p> <code>FAILED</code> - Standards check failed for at least one evaluated resource.</p> </li> <li> <p> <code>NOT_AVAILABLE</code> - Check could not be performed due to a service outage, API error, or because the result of the AWS Config evaluation was <code>NOT_APPLICABLE</code>. If the AWS Config evaluation result was <code>NOT_APPLICABLE</code>, then after 3 days, Security Hub automatically archives the finding.</p> </li> </ul> </li> </ul>'
+            - description: '<p>The result of a standards check.</p> <p>The valid values for <code>Status</code> are as follows.</p> <ul> <li> <ul> <li> <p> <code>PASSED</code> - Standards check passed for all evaluated resources.</p> </li> <li> <p> <code>WARNING</code> - Some information is missing or this check is not supported for your configuration.</p> </li> <li> <p> <code>FAILED</code> - Standards check failed for at least one evaluated resource.</p> </li> <li> <p> <code>NOT_AVAILABLE</code> - Check could not be performed due to a service outage, API error, or because the result of the Config evaluation was <code>NOT_APPLICABLE</code>. If the Config evaluation result was <code>NOT_APPLICABLE</code>, then after 3 days, Security Hub automatically archives the finding.</p> </li> </ul> </li> </ul>'
         RelatedRequirements:
           allOf:
             - $ref: '#/components/schemas/RelatedRequirementsList'
@@ -11520,7 +11926,7 @@ components:
         StatusReasons:
           allOf:
             - $ref: '#/components/schemas/StatusReasonsList'
-            - description: 'For findings generated from controls, a list of reasons behind the value of <code>Status</code>. For the list of status reason codes and their meanings, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff">Standards-related information in the ASFF</a> in the <i>AWS Security Hub User Guide</i>. '
+            - description: 'For findings generated from controls, a list of reasons behind the value of <code>Status</code>. For the list of status reason codes and their meanings, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff">Standards-related information in the ASFF</a> in the <i>Security Hub User Guide</i>. '
       description: Contains finding details that are specific to control-based findings. Only returned for findings generated from controls.
     VerificationState:
       type: string
@@ -11664,7 +12070,7 @@ components:
         AwsAccountId:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
-            - description: The AWS account ID that a finding is generated in.
+            - description: The Amazon Web Services account ID that a finding is generated in.
         Id:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
@@ -11673,6 +12079,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
             - description: 'The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers'' solutions, this generator can be called a rule, a check, a detector, a plugin, etc.'
+        Region:
+          allOf:
+            - $ref: '#/components/schemas/StringFilterList'
+            - description: The Region from which the finding was generated.
         Type:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
@@ -11697,12 +12107,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/NumberFilterList'
             - deprecated: true
-              description: 'The native severity as defined by the security-findings provider''s solution that generated the finding.This filter is deprecated, use FindingProviiltersSeverityOriginal instead.'
+              description: 'The native severity as defined by the security-findings provider''s solution that generated the finding.This filter is deprecated. Instead, use FindingProviderSeverityOriginal.'
         SeverityNormalized:
           allOf:
             - $ref: '#/components/schemas/NumberFilterList'
             - deprecated: true
-              description: 'The normalized severity of a finding.This filter is deprecated, use SeverityLabel or FindingProviderFieldsSeverityLabel instead.'
+              description: 'The normalized severity of a finding.This filter is deprecated. Instead, use SeverityLabel or FindingProviderFieldsSeverityLabel.'
         SeverityLabel:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
@@ -11738,11 +12148,11 @@ components:
         ProductName:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
-            - description: The name of the solution (product) that generates findings.
+            - description: <p>The name of the solution (product) that generates findings.</p> <p>Note that this is a filter against the <code>aws/securityhub/ProductName</code> field in <code>ProductFields</code>. It is not a filter for the top-level <code>ProductName</code> field.</p>
         CompanyName:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
-            - description: The name of the findings provider (company) that owns the solution (product) that generates findings.
+            - description: <p>The name of the findings provider (company) that owns the solution (product) that generates findings.</p> <p>Note that this is a filter against the <code>aws/securityhub/CompanyName</code> field in <code>ProductFields</code>. It is not a filter for the top-level <code>CompanyName</code> field.</p>
         UserDefinedFields:
           allOf:
             - $ref: '#/components/schemas/MapFilterList'
@@ -11866,15 +12276,15 @@ components:
         ResourcePartition:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
-            - description: The canonical AWS partition name that the Region is assigned to.
+            - description: The canonical Amazon Web Services partition name that the Region is assigned to.
         ResourceRegion:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
-            - description: The canonical AWS external Region name where this resource is located.
+            - description: The canonical Amazon Web Services external Region name where this resource is located.
         ResourceTags:
           allOf:
             - $ref: '#/components/schemas/MapFilterList'
-            - description: A list of AWS tags associated with a resource at the time the finding was processed.
+            - description: A list of Amazon Web Services tags associated with a resource at the time the finding was processed.
         ResourceAwsEc2InstanceType:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
@@ -11922,7 +12332,12 @@ components:
         ResourceAwsIamAccessKeyUserName:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
-            - description: The user associated with the IAM access key related to a finding.
+            - deprecated: true
+              description: 'The user associated with the IAM access key related to a finding.This filter is deprecated. Instead, use ResourceAwsIamAccessKeyPrincipalName.'
+        ResourceAwsIamAccessKeyPrincipalName:
+          allOf:
+            - $ref: '#/components/schemas/StringFilterList'
+            - description: The name of the principal that is associated with an IAM access key.
         ResourceAwsIamAccessKeyStatus:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
@@ -11931,6 +12346,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DateFilterList'
             - description: The creation date/time of the IAM access key related to a finding.
+        ResourceAwsIamUserUserName:
+          allOf:
+            - $ref: '#/components/schemas/StringFilterList'
+            - description: The name of an IAM user.
         ResourceContainerName:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
@@ -11954,7 +12373,7 @@ components:
         ComplianceStatus:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
-            - description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains security standard-related finding details.'
+            - description: 'Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS Amazon Web Services Foundations. Contains security standard-related finding details.'
         VerificationState:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
@@ -12043,11 +12462,11 @@ components:
         KmsMasterKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ID of an AWS managed customer master key (CMK) for Amazon SNS or a custom CMK.
+            - description: The ID of an Amazon Web Services managed customer master key (CMK) for Amazon SNS or a custom CMK.
         Subscription:
           allOf:
             - $ref: '#/components/schemas/AwsSnsTopicSubscriptionList'
-            - description: Subscription is an embedded property that describes the subscription endpoints of an Amazon SNS topic.
+            - description: Subscription is an embedded property that describes the subscription endpoints of an SNS topic.
         TopicName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -12075,11 +12494,11 @@ components:
         KmsDataKeyReusePeriodSeconds:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: 'The length of time, in seconds, for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling AWS KMS again.'
+            - description: 'The length of time, in seconds, for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling KMS again.'
         KmsMasterKeyId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The ID of an AWS managed customer master key (CMK) for Amazon SQS or a custom CMK.
+            - description: The ID of an Amazon Web Services managed customer master key (CMK) for Amazon SQS or a custom CMK.
         QueueName:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -12204,15 +12623,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: A unique identifier for a WebACL.
-      description: Details about a WAF WebACL.
+      description: Details about an WAF WebACL.
     WafAction:
       type: object
       properties:
         Type:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>Specifies how you want AWS WAF to respond to requests that match the settings in a rule.</p> <p>Valid settings include the following:</p> <ul> <li> <p> <code>ALLOW</code> - AWS WAF allows requests</p> </li> <li> <p> <code>BLOCK</code> - AWS WAF blocks requests</p> </li> <li> <p> <code>COUNT</code> - AWS WAF increments a counter of the requests that match all of the conditions in the rule. AWS WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can''t specify <code>COUNT</code> for the default action for a WebACL.</p> </li> </ul>'
-      description: 'Details about the action that CloudFront or AWS WAF takes when a web request matches the conditions in the rule. '
+            - description: '<p>Specifies how you want WAF to respond to requests that match the settings in a rule.</p> <p>Valid settings include the following:</p> <ul> <li> <p> <code>ALLOW</code> - WAF allows requests</p> </li> <li> <p> <code>BLOCK</code> - WAF blocks requests</p> </li> <li> <p> <code>COUNT</code> - WAF increments a counter of the requests that match all of the conditions in the rule. WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can''t specify <code>COUNT</code> for the default action for a WebACL.</p> </li> </ul>'
+      description: 'Details about the action that CloudFront or WAF takes when a web request matches the conditions in the rule. '
     WafExcludedRuleList:
       type: array
       items:
@@ -12231,7 +12650,7 @@ components:
         Action:
           allOf:
             - $ref: '#/components/schemas/WafAction'
-            - description: 'Specifies the action that CloudFront or AWS WAF takes when a web request matches the conditions in the rule. '
+            - description: 'Specifies the action that CloudFront or WAF takes when a web request matches the conditions in the rule. '
         ExcludedRules:
           allOf:
             - $ref: '#/components/schemas/WafExcludedRuleList'
@@ -12252,7 +12671,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: '<p>The rule type.</p> <p>Valid values: <code>REGULAR</code> | <code>RATE_BASED</code> | <code>GROUP</code> </p> <p>The default is <code>REGULAR</code>.</p>'
-      description: Details for a rule in a WAF WebACL.
+      description: Details for a rule in an WAF WebACL.
     StandardsSubscriptionArns:
       type: array
       items:
@@ -12304,7 +12723,7 @@ components:
         Findings:
           allOf:
             - $ref: '#/components/schemas/BatchImportFindingsRequestFindingList'
-            - description: 'A list of findings to import. To successfully import a finding, it must follow the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html">AWS Security Finding Format</a>. Maximum of 100 findings per request.'
+            - description: 'A list of findings to import. To successfully import a finding, it must follow the <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html">Amazon Web Services Security Finding Format</a>. Maximum of 100 findings per request.'
     ImportFindingsErrorList:
       type: array
       items:
@@ -12334,7 +12753,7 @@ components:
         Product:
           allOf:
             - $ref: '#/components/schemas/Double'
-            - description: The native severity as defined by the AWS service or integrated partner product that generated the finding.
+            - description: The native severity as defined by the Amazon Web Services service or integrated partner product that generated the finding.
         Label:
           allOf:
             - $ref: '#/components/schemas/SeverityLabel'
@@ -12831,7 +13250,7 @@ components:
         AdminAccountId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The AWS account identifier of the Security Hub administrator account.
+            - description: The Amazon Web Services account identifier of the Security Hub administrator account.
     DisableSecurityHubRequest:
       type: object
       title: DisableSecurityHubRequest
@@ -12873,7 +13292,7 @@ components:
         AdminAccountId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The AWS account identifier of the account to designate as the Security Hub administrator account.
+            - description: The Amazon Web Services account identifier of the account to designate as the Security Hub administrator account.
     TagMap:
       type: object
       minProperties: 1
@@ -13124,7 +13543,7 @@ components:
         AccountIds:
           allOf:
             - $ref: '#/components/schemas/AccountIdList'
-            - description: 'The list of account IDs of the AWS accounts to invite to Security Hub as members. '
+            - description: 'The list of account IDs of the Amazon Web Services accounts to invite to Security Hub as members. '
     IpFilter:
       type: object
       properties:
@@ -13257,7 +13676,7 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The AWS account ID of the member account.
+            - description: The Amazon Web Services account ID of the member account.
         Email:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -13266,15 +13685,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - deprecated: true
-              description: '<p>This is replaced by <code>AdministratorID</code>.</p> <p>The AWS account ID of the Security Hub administrator account associated with this member account.</p>This field is deprecated, use AdministratorId instead.'
+              description: '<p>This is replaced by <code>AdministratorID</code>.</p> <p>The Amazon Web Services account ID of the Security Hub administrator account associated with this member account.</p>This field is deprecated, use AdministratorId instead.'
         AdministratorId:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The AWS account ID of the Security Hub administrator account associated with this member account.
+            - description: The Amazon Web Services account ID of the Security Hub administrator account associated with this member account.
         MemberStatus:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The status of the relationship between the member account and its administrator account. </p> <p>The status can have one of the following values:</p> <ul> <li> <p> <code>CREATED</code> - Indicates that the administrator account added the member account, but has not yet invited the member account.</p> </li> <li> <p> <code>INVITED</code> - Indicates that the administrator account invited the member account. The member account has not yet responded to the invitation.</p> </li> <li> <p> <code>ENABLED</code> - Indicates that the member account is currently active. For manually invited member accounts, indicates that the member account accepted the invitation.</p> </li> <li> <p> <code>REMOVED</code> - Indicates that the administrator account disassociated the member account.</p> </li> <li> <p> <code>RESIGNED</code> - Indicates that the member account disassociated themselves from the administrator account.</p> </li> <li> <p> <code>DELETED</code> - Indicates that the administrator account deleted the member account.</p> </li> </ul>'
+            - description: '<p>The status of the relationship between the member account and its administrator account. </p> <p>The status can have one of the following values:</p> <ul> <li> <p> <code>CREATED</code> - Indicates that the administrator account added the member account, but has not yet invited the member account.</p> </li> <li> <p> <code>INVITED</code> - Indicates that the administrator account invited the member account. The member account has not yet responded to the invitation.</p> </li> <li> <p> <code>ENABLED</code> - Indicates that the member account is currently active. For manually invited member accounts, indicates that the member account accepted the invitation.</p> </li> <li> <p> <code>REMOVED</code> - Indicates that the administrator account disassociated the member account.</p> </li> <li> <p> <code>RESIGNED</code> - Indicates that the member account disassociated themselves from the administrator account.</p> </li> <li> <p> <code>DELETED</code> - Indicates that the administrator account deleted the member account.</p> </li> <li> <p> <code>ACCOUNT_SUSPENDED</code> - Indicates that an organization account was suspended from Amazon Web Services at the same time that the administrator account tried to enable the organization account as a member account.</p> </li> </ul>'
         InvitedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -13471,7 +13890,7 @@ components:
         MarketplaceUrl:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>For integrations with AWS services, the AWS Console URL from which to activate the service.</p> <p>For integrations with third-party products, the AWS Marketplace URL from which to subscribe to or purchase the product.</p>'
+            - description: '<p>For integrations with Amazon Web Services services, the Amazon Web Services Console URL from which to activate the service.</p> <p>For integrations with third-party products, the Marketplace URL from which to subscribe to or purchase the product.</p>'
         ActivationUrl:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -13515,7 +13934,7 @@ components:
         AwsCodeBuildProject:
           allOf:
             - $ref: '#/components/schemas/AwsCodeBuildProjectDetails'
-            - description: Details for an AWS CodeBuild project.
+            - description: Details for an CodeBuild project.
         AwsCloudFrontDistribution:
           allOf:
             - $ref: '#/components/schemas/AwsCloudFrontDistributionDetails'
@@ -13527,7 +13946,7 @@ components:
         AwsEc2NetworkInterface:
           allOf:
             - $ref: '#/components/schemas/AwsEc2NetworkInterfaceDetails'
-            - description: Details for an Amazon EC2 network interface.
+            - description: Details for an EC2 network interface.
         AwsEc2SecurityGroup:
           allOf:
             - $ref: '#/components/schemas/AwsEc2SecurityGroupDetails'
@@ -13547,7 +13966,7 @@ components:
         AwsEc2Subnet:
           allOf:
             - $ref: '#/components/schemas/AwsEc2SubnetDetails'
-            - description: Details about a subnet in EC2.
+            - description: Details about a subnet in Amazon EC2.
         AwsEc2NetworkAcl:
           allOf:
             - $ref: '#/components/schemas/AwsEc2NetworkAclDetails'
@@ -13567,7 +13986,7 @@ components:
         AwsS3Bucket:
           allOf:
             - $ref: '#/components/schemas/AwsS3BucketDetails'
-            - description: Details about an Amazon S3 bucket related to a finding.
+            - description: Details about an S3 bucket related to a finding.
         AwsS3AccountPublicAccessBlock:
           allOf:
             - $ref: '#/components/schemas/AwsS3AccountPublicAccessBlockDetails'
@@ -13575,7 +13994,7 @@ components:
         AwsS3Object:
           allOf:
             - $ref: '#/components/schemas/AwsS3ObjectDetails'
-            - description: Details about an Amazon S3 object related to a finding.
+            - description: Details about an S3 object related to a finding.
         AwsSecretsManagerSecret:
           allOf:
             - $ref: '#/components/schemas/AwsSecretsManagerSecretDetails'
@@ -13623,7 +14042,7 @@ components:
         AwsCertificateManagerCertificate:
           allOf:
             - $ref: '#/components/schemas/AwsCertificateManagerCertificateDetails'
-            - description: Provides details about an AWS Certificate Manager (ACM) certificate.
+            - description: Provides details about an Certificate Manager certificate.
         AwsRedshiftCluster:
           allOf:
             - $ref: '#/components/schemas/AwsRedshiftClusterDetails'
@@ -13643,7 +14062,7 @@ components:
         AwsKmsKey:
           allOf:
             - $ref: '#/components/schemas/AwsKmsKeyDetails'
-            - description: Details about a KMS key.
+            - description: Details about an KMS key.
         AwsLambdaFunction:
           allOf:
             - $ref: '#/components/schemas/AwsLambdaFunctionDetails'
@@ -13667,7 +14086,7 @@ components:
         AwsWafWebAcl:
           allOf:
             - $ref: '#/components/schemas/AwsWafWebAclDetails'
-            - description: Details for a WAF WebACL.
+            - description: Details for an WAF WebACL.
         AwsRdsDbSnapshot:
           allOf:
             - $ref: '#/components/schemas/AwsRdsDbSnapshotDetails'
@@ -13696,6 +14115,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/FieldMap'
             - description: '<p>Details about a resource that are not available in a type-specific details object. Use the <code>Other</code> object in the following cases.</p> <ul> <li> <p>The type-specific object does not contain all of the fields that you want to populate. In this case, first use the type-specific object to populate those fields. Use the <code>Other</code> object to populate the fields that are missing from the type-specific object.</p> </li> <li> <p>The resource type does not have a corresponding object. This includes resources for which the type is <code>Other</code>. </p> </li> </ul>'
+        AwsRdsEventSubscription:
+          allOf:
+            - $ref: '#/components/schemas/AwsRdsEventSubscriptionDetails'
+            - description: Details about an RDS event notification subscription.
+        AwsEcsService:
+          allOf:
+            - $ref: '#/components/schemas/AwsEcsServiceDetails'
+            - description: Details about a service within an ECS cluster.
       description: '<p>Additional details about a resource related to a finding.</p> <p>To provide the details, use the object that corresponds to the resource type. For example, if the resource type is <code>AwsEc2Instance</code>, then you use the <code>AwsEc2Instance</code> object to provide the details.</p> <p>If the type-specific object does not contain all of the fields you want to populate, then you use the <code>Other</code> object to populate those additional fields.</p> <p>You also use the <code>Other</code> object to populate the details when the selected type does not have a corresponding object.</p>'
     Resource:
       type: object
@@ -13714,11 +14141,11 @@ components:
         Partition:
           allOf:
             - $ref: '#/components/schemas/Partition'
-            - description: The canonical AWS partition name that the Region is assigned to.
+            - description: The canonical Amazon Web Services partition name that the Region is assigned to.
         Region:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The canonical AWS external Region name where this resource is located.
+            - description: The canonical Amazon Web Services external Region name where this resource is located.
         ResourceRole:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -13726,7 +14153,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/FieldMap'
-            - description: A list of AWS tags associated with a resource at the time the finding was processed.
+            - description: A list of Amazon Web Services tags associated with a resource at the time the finding was processed.
         DataClassification:
           allOf:
             - $ref: '#/components/schemas/DataClassificationDetails'
@@ -13742,7 +14169,7 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: An AWS account ID of the account that was not processed.
+            - description: An Amazon Web Services account ID of the account that was not processed.
         ProcessingResult:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -13882,7 +14309,7 @@ components:
         SeverityRating:
           allOf:
             - $ref: '#/components/schemas/SeverityRating'
-            - description: <p>The severity of findings generated from this security standard control.</p> <p>The finding severity is based on an assessment of how easy it would be to compromise AWS resources if the issue is detected.</p>
+            - description: <p>The severity of findings generated from this security standard control.</p> <p>The finding severity is based on an assessment of how easy it would be to compromise Amazon Web Services resources if the issue is detected.</p>
         RelatedRequirements:
           allOf:
             - $ref: '#/components/schemas/RelatedRequirementsList'
@@ -13933,7 +14360,7 @@ components:
         ReasonCode:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'A code that represents a reason for the control status. For the list of status reason codes and their meanings, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff">Standards-related information in the ASFF</a> in the <i>AWS Security Hub User Guide</i>. '
+            - description: 'A code that represents a reason for the control status. For the list of status reason codes and their meanings, see <a href="https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff">Standards-related information in the ASFF</a> in the <i>Security Hub User Guide</i>. '
         Description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
