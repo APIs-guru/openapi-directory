@@ -2097,7 +2097,7 @@ components:
           type: number
       type: object
     DistributionCut:
-      description: A DistributionCut defines a TimeSeries and thresholds used for measuring good service and total service. The TimeSeries must have ValueType = DISTRIBUTION and MetricKind = DELTA or MetricKind = CUMULATIVE. The computed good_service will be the count of values x in the Distribution such that range.min <= x < range.max.
+      description: A DistributionCut defines a TimeSeries and thresholds used for measuring good service and total service. The TimeSeries must have ValueType = DISTRIBUTION and MetricKind = DELTA or MetricKind = CUMULATIVE. The computed good_service will be the estimated count of values in the Distribution that fall within the specified min and max.
       properties:
         distributionFilter:
           description: A monitoring filter (https://cloud.google.com/monitoring/api/v3/filters) specifying a TimeSeries aggregating values. Must have ValueType = DISTRIBUTION and MetricKind = DELTA or MetricKind = CUMULATIVE.
@@ -2268,7 +2268,7 @@ components:
           type: string
       type: object
     GoogleMonitoringV3Range:
-      description: Range of numerical values, inclusive of min and exclusive of max. If the open range "< range.max" is desired, set range.min = -infinity. If the open range ">= range.min" is desired, set range.max = infinity.
+      description: Range of numerical values within min and max. If the open range "< range.max" is desired, set range.min = -infinity. If the open range ">= range.min" is desired, set range.max = infinity.
       properties:
         max:
           description: Range maximum.
@@ -2749,7 +2749,7 @@ components:
           type: string
       type: object
     MetricRange:
-      description: A MetricRange is used when each window is good when the value x of a single TimeSeries satisfies range.min <= x < range.max. The provided TimeSeries must have ValueType = INT64 or ValueType = DOUBLE and MetricKind = GAUGE.
+      description: A MetricRange is used when each window is good when the value x of a single TimeSeries satisfies range.min <= x <= range.max. The provided TimeSeries must have ValueType = INT64 or ValueType = DOUBLE and MetricKind = GAUGE.
       properties:
         range:
           $ref: "#/components/schemas/GoogleMonitoringV3Range"

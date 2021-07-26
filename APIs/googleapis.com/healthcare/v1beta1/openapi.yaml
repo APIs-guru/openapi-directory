@@ -1133,7 +1133,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Analyze heathcare entity in a document. Its response includes the recognized entity mentions and the relationships between them. AnalyzeEntities uses context aware models to detect entities.
+      description: Analyze heathcare entity in a document. Its response includes the recognized entity mentions and the relationships between them. AnalyzeEntities uses context aware models to detect entities. This method can only analyze documents written in English.
       operationId: healthcare.projects.locations.services.nlp.analyzeEntities
       parameters:
         - description: 'The resource name of the service of the form: "projects/{project_id}/locations/{location_id}/services/nlp".'

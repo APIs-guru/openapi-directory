@@ -224,9 +224,36 @@ paths:
           $ref: "#/components/responses/Unprocessable"
         default:
           $ref: "#/components/responses/UnexpectedError"
-      security:
-        - apiKey: []
+      security: null
       summary: Authorize
+      tags:
+        - Connections
+  /vault/callback:
+    get:
+      description: |
+        This endpoint gets called after the triggering the authorize flow.
+
+        Callback links need a state and code parameter to verify the validity of the request.
+      operationId: callback
+      parameters:
+        - $ref: "#/components/parameters/state"
+      responses:
+        "301":
+          description: callback
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security: null
+      summary: Callback
       tags:
         - Connections
   /vault/connections:
@@ -537,11 +564,11 @@ paths:
       tags:
         - Logs
   /vault/proxy:
-    post:
+    delete:
       deprecated: true
       description: |
         **Note**: This endpoint is deprecated in favor of the [Proxy API](https://docs.apideck.com/apis/proxy). Please use the new API as documented at https://docs.apideck.com/apis/proxy
-      operationId: proxyCall
+      operationId: deleteProxy
       parameters:
         - $ref: "#/components/parameters/x-apideck-consumer-id"
         - $ref: "#/components/parameters/x-apideck-app-id"
@@ -553,30 +580,7 @@ paths:
         content:
           application/json:
             schema:
-              example:
-                account_sid: ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                api_version: 2010-04-01
-                body: This is the ship that made the Kessel Run in fourteen parsecs?
-                date_created: Thu, 30 Jul 2015 20:12:31 +0000
-                date_sent: Thu, 30 Jul 2015 20:12:33 +0000
-                date_updated: Thu, 30 Jul 2015 20:12:33 +0000
-                direction: outbound-api
-                error_code: null
-                error_message: null
-                from: "+15017122661"
-                messaging_service_sid: MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                num_media: "0"
-                num_segments: "1"
-                price: null
-                price_unit: null
-                sid: SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                status: sent
-                subresource_uris:
-                  media: /2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Media.json
-                to: "+15558675310"
-                uri: /2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.json
-              properties: {}
-              type: object
+              $ref: "#/components/schemas/ProxyRequest"
         description: Depending on the verb/method of the request this will contain the request body you want to POST/PATCH/PUT.
         required: false
       responses:
@@ -586,7 +590,116 @@ paths:
           $ref: "#/components/responses/ProxyError"
       security:
         - apiKey: []
-      summary: Proxy call
+      summary: DELETE
+      tags:
+        - Proxy
+    get:
+      deprecated: true
+      description: |
+        **Note**: This endpoint is deprecated in favor of the [Proxy API](https://docs.apideck.com/apis/proxy). Please use the new API as documented at https://docs.apideck.com/apis/proxy
+      operationId: getProxy
+      parameters:
+        - $ref: "#/components/parameters/x-apideck-consumer-id"
+        - $ref: "#/components/parameters/x-apideck-app-id"
+        - $ref: "#/components/parameters/x-apideck-service-id"
+        - $ref: "#/components/parameters/x-apideck-downstream-authorization"
+        - $ref: "#/components/parameters/x-apideck-downstream-url"
+        - $ref: "#/components/parameters/x-apideck-downstream-method"
+      responses:
+        "200":
+          $ref: "#/components/responses/Ok"
+        default:
+          $ref: "#/components/responses/ProxyError"
+      security:
+        - apiKey: []
+      summary: GET
+      tags:
+        - Proxy
+    patch:
+      deprecated: true
+      description: |
+        **Note**: This endpoint is deprecated in favor of the [Proxy API](https://docs.apideck.com/apis/proxy). Please use the new API as documented at https://docs.apideck.com/apis/proxy
+      operationId: patchProxy
+      parameters:
+        - $ref: "#/components/parameters/x-apideck-consumer-id"
+        - $ref: "#/components/parameters/x-apideck-app-id"
+        - $ref: "#/components/parameters/x-apideck-service-id"
+        - $ref: "#/components/parameters/x-apideck-downstream-authorization"
+        - $ref: "#/components/parameters/x-apideck-downstream-url"
+        - $ref: "#/components/parameters/x-apideck-downstream-method"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProxyRequest"
+        description: Depending on the verb/method of the request this will contain the request body you want to POST/PATCH/PUT.
+        required: false
+      responses:
+        "200":
+          $ref: "#/components/responses/Ok"
+        default:
+          $ref: "#/components/responses/ProxyError"
+      security:
+        - apiKey: []
+      summary: PATCH
+      tags:
+        - Proxy
+    post:
+      deprecated: true
+      description: |
+        **Note**: This endpoint is deprecated in favor of the [Proxy API](https://docs.apideck.com/apis/proxy). Please use the new API as documented at https://docs.apideck.com/apis/proxy
+      operationId: postProxy
+      parameters:
+        - $ref: "#/components/parameters/x-apideck-consumer-id"
+        - $ref: "#/components/parameters/x-apideck-app-id"
+        - $ref: "#/components/parameters/x-apideck-service-id"
+        - $ref: "#/components/parameters/x-apideck-downstream-authorization"
+        - $ref: "#/components/parameters/x-apideck-downstream-url"
+        - $ref: "#/components/parameters/x-apideck-downstream-method"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProxyRequest"
+        description: Depending on the verb/method of the request this will contain the request body you want to POST/PATCH/PUT.
+        required: false
+      responses:
+        "200":
+          $ref: "#/components/responses/Ok"
+        default:
+          $ref: "#/components/responses/ProxyError"
+      security:
+        - apiKey: []
+      summary: POST
+      tags:
+        - Proxy
+    put:
+      deprecated: true
+      description: |
+        **Note**: This endpoint is deprecated in favor of the [Proxy API](https://docs.apideck.com/apis/proxy). Please use the new API as documented at https://docs.apideck.com/apis/proxy
+      operationId: putProxy
+      parameters:
+        - $ref: "#/components/parameters/x-apideck-consumer-id"
+        - $ref: "#/components/parameters/x-apideck-app-id"
+        - $ref: "#/components/parameters/x-apideck-service-id"
+        - $ref: "#/components/parameters/x-apideck-downstream-authorization"
+        - $ref: "#/components/parameters/x-apideck-downstream-url"
+        - $ref: "#/components/parameters/x-apideck-downstream-method"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProxyRequest"
+        description: Depending on the verb/method of the request this will contain the request body you want to POST/PATCH/PUT.
+        required: false
+      responses:
+        "200":
+          $ref: "#/components/responses/Ok"
+        default:
+          $ref: "#/components/responses/ProxyError"
+      security:
+        - apiKey: []
+      summary: PUT
       tags:
         - Proxy
   "/vault/revoke/{service_id}/{application_id}":
@@ -699,7 +812,6 @@ components:
       in: query
       name: cursor
       schema:
-        default: null
         nullable: true
         type: string
     end_datetime:
@@ -1169,14 +1281,9 @@ components:
           nullable: true
           properties:
             account:
-              properties:
-                id:
-                  type: string
-                name:
-                  type: string
-              type: object
+              $ref: "#/components/schemas/ConnectionMetadata"
             ecosystem:
-              $ref: "#/components/schemas/Connection/properties/metadata/properties/account"
+              $ref: "#/components/schemas/ConnectionMetadata"
           type: object
         name:
           example: Salesforce
@@ -1234,9 +1341,17 @@ components:
           type: string
         updated_at:
           example: 1616662325753
+          nullable: true
           type: number
         website:
           example: https://www.salesforce.com
+          type: string
+      type: object
+    ConnectionMetadata:
+      properties:
+        id:
+          type: string
+        name:
           type: string
       type: object
     ConsumerRequestCountsInDateRangeResponse:
@@ -1278,11 +1393,29 @@ components:
       additionalProperties: false
       properties:
         enabled:
-          $ref: "#/components/schemas/Connection/properties/enabled"
+          example: true
+          type: boolean
         metadata:
-          $ref: "#/components/schemas/Connection/properties/metadata"
+          example:
+            account:
+              id: c01458a5-7276-41ce-bc19-639906b0450a
+              name: My Company
+            ecosystem:
+              id: a6469332-7948-46a6-abc2-87ba3f005025
+              name: My Ecosystem
+          nullable: true
+          properties:
+            account:
+              $ref: "#/components/schemas/ConnectionMetadata"
+            ecosystem:
+              $ref: "#/components/schemas/ConnectionMetadata"
+          type: object
         settings:
-          $ref: "#/components/schemas/Connection/properties/settings"
+          description: Connection settings. Values will persist to `form_fields` with corresponding id
+          example:
+            instance_url: https://eu28.salesforce.com
+          nullable: true
+          type: object
       type: object
     CreateConnectionResponse:
       properties:
@@ -1507,6 +1640,7 @@ components:
                     type: string
                   updated_at:
                     example: 2020-09-19T12:18:37.071Z
+                    nullable: true
                     type: string
                 type: object
               type: array
@@ -1865,6 +1999,31 @@ components:
           description: The type of error returned
           example: RequestLimitError
           type: string
+    ProxyRequest:
+      example:
+        account_sid: ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        api_version: 2010-04-01
+        body: This is the ship that made the Kessel Run in fourteen parsecs?
+        date_created: Thu, 30 Jul 2015 20:12:31 +0000
+        date_sent: Thu, 30 Jul 2015 20:12:33 +0000
+        date_updated: Thu, 30 Jul 2015 20:12:33 +0000
+        direction: outbound-api
+        error_code: null
+        error_message: null
+        from: "+15017122661"
+        messaging_service_sid: MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        num_media: "0"
+        num_segments: "1"
+        price: null
+        price_unit: null
+        sid: SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        status: sent
+        subresource_uris:
+          media: /2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Media.json
+        to: "+15558675310"
+        uri: /2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.json
+      properties: {}
+      type: object
     RequestCountAllocation:
       properties:
         proxy:

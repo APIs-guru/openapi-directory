@@ -721,6 +721,34 @@ components:
           description: Rule name
           type: string
       type: object
+    AppsOutage:
+      description: An outage incident reported by Google for a Google Workspace (formerly G Suite) application.
+      properties:
+        dashboardUri:
+          description: Link to the outage event in Google Workspace Status Dashboard
+          type: string
+        nextUpdateTime:
+          description: Timestamp by which the next update shall be provided.
+          format: google-datetime
+          type: string
+        products:
+          description: List of products impacted by the outage.
+          items:
+            type: string
+          type: array
+        resolutionTime:
+          description: Timestamp of the outage expected or confirmed resolution. (Used only when known).
+          format: google-datetime
+          type: string
+        status:
+          description: Current outage status.
+          enum:
+            - STATUS_UNSPECIFIED
+            - NEW
+            - ONGOING
+            - RESOLVED
+          type: string
+      type: object
     Attachment:
       description: Attachment with application-specific information about an alert.
       properties:
@@ -1037,23 +1065,6 @@ components:
         cloudPubsubTopic:
           $ref: "#/components/schemas/CloudPubsubTopic"
           description: A Google Cloud Pub/sub topic destination.
-      type: object
-    OutOfDomainForwarding:
-      description: An alert that gets triggered when a user enables autoforwarding to an email which is outside of its domain
-      properties:
-        actorEmail:
-          description: Email of the actor who triggered the alert.
-          type: string
-        enableTime:
-          description: The time the email forwarding was enabled
-          format: google-datetime
-          type: string
-        forwardeeEmail:
-          description: Email to which emails are being forwarded
-          type: string
-        ipAddress:
-          description: IP address of the user while enabling forwarding
-          type: string
       type: object
     PhishingSpike:
       description: "Alert for a spike in user reported phishing. *Warning*: This type has been deprecated. Use [MailPhishing](/admin-sdk/alertcenter/reference/rest/v1beta1/MailPhishing) instead."

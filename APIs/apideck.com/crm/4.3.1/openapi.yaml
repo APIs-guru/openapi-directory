@@ -267,7 +267,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 4.2.0
+  version: 4.3.1
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -1648,7 +1648,6 @@ components:
       in: query
       name: cursor
       schema:
-        default: null
         nullable: true
         type: string
     id:
@@ -2307,7 +2306,7 @@ components:
           type: string
           x-graphql-type-name: CompaniesSortBy
         direction:
-          $ref: "#/components/schemas/LeadsSort/properties/direction"
+          $ref: "#/components/schemas/SortDirection"
       required:
         - by
       type: object
@@ -2587,7 +2586,7 @@ components:
           type: string
           x-graphql-type-name: ContactsSortBy
         direction:
-          $ref: "#/components/schemas/LeadsSort/properties/direction"
+          $ref: "#/components/schemas/SortDirection"
       required:
         - by
       type: object
@@ -3879,12 +3878,7 @@ components:
           type: string
           x-graphql-type-name: LeadsSortBy
         direction:
-          default: asc
-          description: The direction in which to sort the results
-          enum:
-            - asc
-            - desc
-          type: string
+          $ref: "#/components/schemas/SortDirection"
       required:
         - by
       type: object
@@ -4072,7 +4066,7 @@ components:
           type: string
           x-graphql-type-name: OpportunitiesSortBy
         direction:
-          $ref: "#/components/schemas/LeadsSort/properties/direction"
+          $ref: "#/components/schemas/SortDirection"
       required:
         - by
       type: object
@@ -4346,6 +4340,13 @@ components:
       required:
         - url
       type: object
+    SortDirection:
+      default: asc
+      description: The direction in which to sort the results
+      enum:
+        - asc
+        - desc
+      type: string
     Tags:
       example:
         - New
