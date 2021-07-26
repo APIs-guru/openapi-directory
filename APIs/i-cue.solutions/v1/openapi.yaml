@@ -1,6 +1,4 @@
 openapi: 3.0.1
-servers:
-  - url: https://api.i-cue.solutions/
 info:
   title: Growth Services
   version: v1
@@ -109,6 +107,37 @@ paths:
         "200":
           description: Success
       summary: Lock planning level
+      tags:
+        - Administration
+  /administration/planning-levels:
+    get:
+      description: Get all planning levels.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PlanningLevelInfoResponse"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PlanningLevelInfoResponse"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PlanningLevelInfoResponse"
+                type: array
+          description: Success
+      summary: Get all planning levels
       tags:
         - Administration
   /administration/token:
@@ -375,7 +404,7 @@ paths:
       summary: History and forecast utilizing advanced machine learning models
       tags:
         - Insight-Driven Planning (Forecast & Optimization)
-  /forecast/file-upload:
+  /forecast/file-to-forecast:
     post:
       description: Forecast from file allows for quick analysis via Microsoft Excel and CSV file format. Please check documentation link for help.
       parameters:
@@ -583,6 +612,42 @@ paths:
                 $ref: "#/components/schemas/OptimalParameterResponse"
           description: Success
       summary: Get optimal parameter per method
+      tags:
+        - Insight-Driven Planning (Forecast & Optimization)
+  /forecast/rerun:
+    post:
+      description: Rerun previously uploaded planning level.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelReRunRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelReRunRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelReRunRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForecastResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ForecastResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ForecastResponse"
+          description: Success
+      summary: Rerun previously uploaded planning level
       tags:
         - Insight-Driven Planning (Forecast & Optimization)
   "/forecast/result/{jobId}":
@@ -1211,21 +1276,6 @@ paths:
       summary: Get usage statistics per organization
       tags:
         - Reporting and Monitoring
-  /report/performance/inventory-overview:
-    get:
-      description: Inventory overview
-      parameters:
-        - description: User Authentication Token
-          in: header
-          name: Token
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Success
-      summary: Inventory overview
-      tags:
-        - Reporting and Monitoring
   /report/performance/sku-rationalization:
     get:
       description: SKU rationalization report
@@ -1400,6 +1450,10 @@ components:
     ForecastPerformanceRequest:
       additionalProperties: false
       properties:
+        costOfError:
+          example: 200
+          format: double
+          type: number
         data:
           items:
             $ref: "#/components/schemas/ForecastPerformanceDataRequest"
@@ -1639,6 +1693,34 @@ components:
           format: double
           type: number
       type: object
+    PlanningLevelHyperparameterModel:
+      additionalProperties: false
+      properties:
+        errorMeasureId:
+          format: int32
+          nullable: true
+          type: integer
+        errorType:
+          enum:
+            - MeanAbsolutePercentageError
+            - MeanSquaredError
+            - MeanAbsoluteError
+            - MedianAbsoluteDeviation
+            - None
+          type: string
+        holdOutPeriod:
+          format: int32
+          nullable: true
+          type: integer
+        noFcst:
+          format: int32
+          nullable: true
+          type: integer
+        periodicity:
+          format: int32
+          nullable: true
+          type: integer
+      type: object
     PlanningLevelInfoRequest:
       additionalProperties: false
       properties:
@@ -1667,6 +1749,72 @@ components:
           format: int32
           nullable: true
           type: integer
+      type: object
+    PlanningLevelInfoResponse:
+      additionalProperties: false
+      properties:
+        action:
+          nullable: true
+          type: string
+        dateCreated:
+          format: date-time
+          type: string
+        externalId:
+          nullable: true
+          type: string
+        filename:
+          nullable: true
+          type: string
+        hyperparameters:
+          $ref: "#/components/schemas/PlanningLevelHyperparameterModel"
+        id:
+          format: int32
+          type: integer
+        noTimeseries:
+          format: int32
+          nullable: true
+          type: integer
+        status:
+          enum:
+            - Unproccessed
+            - Running
+            - Complete
+            - Failed
+          nullable: true
+          type: string
+      type: object
+    PlanningLevelReRunRequest:
+      additionalProperties: false
+      properties:
+        method:
+          enum:
+            - AutoBestPick
+            - BoxJenkins
+            - BoxJenkinsOptimized
+            - Croston
+            - CrostonOptimized
+            - DoubleExponentialSmoothing
+            - DoubleExponentialSmoothingOptimized
+            - HoltWinters
+            - HoltWintersOptimized
+            - SingleExponentialSmoothing
+            - SingleExponentialSmoothingOptimized
+            - iCUE1
+            - iCUE1Optimized
+            - iCUEgamma
+            - SimpleMovingAverage
+            - External
+            - iCUEbeta
+          example: iCUE1
+          type: string
+        params:
+          $ref: "#/components/schemas/PlanningLevelInfoRequest"
+        planningLevelId:
+          format: int32
+          type: integer
+      required:
+        - method
+        - planningLevelId
       type: object
     PlanningLevelRequest:
       additionalProperties: false
@@ -1846,6 +1994,11 @@ components:
     RewindHyperparameterResponse:
       additionalProperties: false
       properties:
+        costOfError:
+          example: 200
+          format: double
+          nullable: true
+          type: number
         errorType:
           enum:
             - MeanAbsolutePercentageError
@@ -1885,6 +2038,9 @@ components:
             $ref: "#/components/schemas/RewindTimeSeriesResponse"
           nullable: true
           type: array
+        totalCost:
+          format: double
+          type: number
       type: object
     RewindTimeSeriesResponse:
       additionalProperties: false
@@ -1903,6 +2059,10 @@ components:
         timeSeries:
           nullable: true
           type: string
+        totalCost:
+          format: double
+          nullable: true
+          type: number
         useIcue:
           nullable: true
           type: boolean

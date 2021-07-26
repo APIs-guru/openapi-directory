@@ -289,6 +289,7 @@ info:
       "org": { ... }, // org object matching API responses
       "group": { ... }, // group object matching API responses
       "newIssues": [], // array of issues object matching API responses
+      "removedIssues": [], // array of issues object matching API responses
     }
     ```
 
@@ -2004,6 +2005,19 @@ paths:
                                 - registryBase
                               type: object
                         - properties:
+                            GoogleArtifactCrCredentials:
+                              properties:
+                                password:
+                                  description: JSON key file
+                                  type: string
+                                registryBase:
+                                  description: "e.g.: `us-east1-docker.pkg.dev`, `europe-west1-docker.pkg.dev`"
+                                  type: string
+                              required:
+                                - password
+                                - registryBase
+                              type: object
+                        - properties:
                             HarborCrCredentials:
                               properties:
                                 password:
@@ -2067,6 +2081,7 @@ paths:
                         - github-enterprise
                         - gitlab
                         - gitlab-cr
+                        - google-artifact-cr
                         - harbor-cr
                         - nexus-cr
                         - quay-cr
@@ -2103,6 +2118,7 @@ paths:
                         - github-enterprise
                         - gitlab
                         - gitlab-cr
+                        - google-artifact-cr
                         - harbor-cr
                         - nexus-cr
                         - quay-cr
@@ -2188,6 +2204,7 @@ paths:
                         - github-enterprise
                         - gitlab
                         - gitlab-cr
+                        - google-artifact-cr
                         - harbor-cr
                         - nexus-cr
                         - quay-cr
@@ -2378,6 +2395,19 @@ paths:
                                 - registryBase
                               type: object
                         - properties:
+                            GoogleArtifactCrCredentials:
+                              properties:
+                                password:
+                                  description: JSON key file
+                                  type: string
+                                registryBase:
+                                  description: "e.g.: `us-east1-docker.pkg.dev`, `europe-west1-docker.pkg.dev`"
+                                  type: string
+                              required:
+                                - password
+                                - registryBase
+                              type: object
+                        - properties:
                             HarborCrCredentials:
                               properties:
                                 password:
@@ -2441,6 +2471,7 @@ paths:
                         - github-enterprise
                         - gitlab
                         - gitlab-cr
+                        - google-artifact-cr
                         - harbor-cr
                         - nexus-cr
                         - quay-cr
@@ -2639,6 +2670,19 @@ paths:
                                 - registryBase
                               type: object
                         - properties:
+                            GoogleArtifactCrCredentials:
+                              properties:
+                                password:
+                                  description: JSON key file
+                                  type: string
+                                registryBase:
+                                  description: "e.g.: `us-east1-docker.pkg.dev`, `europe-west1-docker.pkg.dev`"
+                                  type: string
+                              required:
+                                - password
+                                - registryBase
+                              type: object
+                        - properties:
                             HarborCrCredentials:
                               properties:
                                 password:
@@ -2702,6 +2746,7 @@ paths:
                         - github-enterprise
                         - gitlab
                         - gitlab-cr
+                        - google-artifact-cr
                         - harbor-cr
                         - nexus-cr
                         - quay-cr
@@ -5712,7 +5757,7 @@ paths:
         - Projects
   "/org/{orgId}/project/{projectId}/ignores":
     get:
-      description: ""
+      description: Temporary ignores include an `expires` attribute, while permanent ignores do not.
       operationId: List all ignores
       parameters:
         - description: The organization ID to list ignores for. The `API_KEY` must have access to this organization.
@@ -5760,6 +5805,7 @@ paths:
                       - "*":
                           created: 2017-10-31T11:24:00.932Z
                           disregardIfFixable: true
+                          expires: 2017-12-10T15:39:38.099Z
                           ignoredBy:
                             email: jbloggs@gmail.com
                             id: a3952187-0d8e-45d8-9aa2-036642857b4f
@@ -19352,6 +19398,7 @@ components:
         - github-enterprise
         - gitlab
         - gitlab-cr
+        - google-artifact-cr
         - harbor-cr
         - nexus-cr
         - quay-cr

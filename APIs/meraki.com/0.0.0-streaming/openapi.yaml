@@ -9,7 +9,7 @@ info:
   description: |
     The Cisco Meraki Dashboard API is a modern REST API based on the OpenAPI specification.
 
-    > Date: 19 July, 2021
+    > Date: 26 July, 2021
     >
     > [What's New](https://meraki.io/whats-new/)
 
@@ -376,7 +376,7 @@ paths:
                   - 2058x2058
                 type: string
               restrictedBandwidthModeEnabled:
-                description: Boolean indicating if restricted bandwidth is enabled(true) or disabled(false) on the camera
+                description: Boolean indicating if restricted bandwidth is enabled(true) or disabled(false) on the camera. This setting does not apply to MV2 cameras.
                 type: boolean
             type: object
       responses:
@@ -2066,7 +2066,7 @@ paths:
                 description: The maximum number of days for which the data will be stored, or 'null' to keep data until storage space runs out. If the former, it can be one of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 30, 60, 90] days.
                 type: integer
               motionBasedRetentionEnabled:
-                description: Deletes footage older than 3 days in which no motion was detected. Can be either true or false. Defaults to false.
+                description: Deletes footage older than 3 days in which no motion was detected. Can be either true or false. Defaults to false. This setting does not apply to MV2 cameras.
                 type: boolean
               motionDetectorVersion:
                 description: The version of the motion detector that will be used by the camera. Only applies to Gen 2 cameras. Defaults to v2.
@@ -2075,7 +2075,7 @@ paths:
                 description: The name of the new profile. Must be unique. This parameter is required.
                 type: string
               restrictedBandwidthModeEnabled:
-                description: Disable features that require additional bandwidth such as Motion Recap. Can be either true or false. Defaults to false.
+                description: Disable features that require additional bandwidth such as Motion Recap. Can be either true or false. Defaults to false. This setting does not apply to MV2 cameras.
                 type: boolean
               scheduleId:
                 description: Schedule for which this camera will record video, or 'null' to always record.
@@ -2311,7 +2311,7 @@ paths:
                 description: The maximum number of days for which the data will be stored, or 'null' to keep data until storage space runs out. If the former, it can be one of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 30, 60, 90] days.
                 type: integer
               motionBasedRetentionEnabled:
-                description: Deletes footage older than 3 days in which no motion was detected. Can be either true or false. Defaults to false.
+                description: Deletes footage older than 3 days in which no motion was detected. Can be either true or false. Defaults to false. This setting does not apply to MV2 cameras.
                 type: boolean
               motionDetectorVersion:
                 description: The version of the motion detector that will be used by the camera. Only applies to Gen 2 cameras. Defaults to v2.
@@ -2320,7 +2320,7 @@ paths:
                 description: The name of the new profile. Must be unique.
                 type: string
               restrictedBandwidthModeEnabled:
-                description: Disable features that require additional bandwidth such as Motion Recap. Can be either true or false. Defaults to false.
+                description: Disable features that require additional bandwidth such as Motion Recap. Can be either true or false. Defaults to false. This setting does not apply to MV2 cameras.
                 type: boolean
               scheduleId:
                 description: Schedule for which this camera will record video, or 'null' to always record.

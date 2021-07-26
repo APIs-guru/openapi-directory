@@ -40,6 +40,8 @@ tags:
     name: v1-nif-verification
   - description: IBAN Verification methods
     name: v1-iban-verification
+  - description: TIN Verification methods
+    name: v1-tin-verification
 paths:
   "/api/v1/company/announcement/{id}":
     get:
@@ -378,6 +380,9 @@ paths:
                 changeType:
                   description: ChangeType to monitor
                   type: string
+              required:
+                - callbackUrl
+                - changeType
               type: object
         description: Callback URL where the notifications will be sent to
       responses:
@@ -487,6 +492,8 @@ paths:
                 callbackUrl:
                   description: Callback URL
                   type: string
+              required:
+                - callbackUrl
               type: object
         description: Callback URL where the notifications will be sent to
       responses:
@@ -2366,6 +2373,10 @@ paths:
             application/json:
               schema:
                 properties:
+                  candidate:
+                    items:
+                      $ref: "#/paths/~1api~1v1~1company~1deepsearch~1lei~1%7Bnumber%7D/get/responses/200/content/application~1json/schema/properties/company"
+                    type: array
                   company:
                     $ref: "#/paths/~1api~1v1~1company~1deepsearch~1lei~1%7Bnumber%7D/get/responses/200/content/application~1json/schema/properties/company"
                   confidenceScore:

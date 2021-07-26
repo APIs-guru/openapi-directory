@@ -110,7 +110,7 @@ paths:
         "409":
           description: Business error
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -243,7 +243,7 @@ paths:
                 description: "The criterion type is required for criterion based campaigns. Valid values are: {criterionTypeValues}."
                 domain: API_MARKETING
         "409":
-          description: Business error
+          description: Conflict
           x-response-codes:
             errors:
               "35051":
@@ -287,7 +287,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -358,7 +358,7 @@ paths:
         "409":
           description: Business error
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -418,7 +418,7 @@ paths:
         "409":
           description: Business error
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -476,7 +476,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -520,7 +520,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Business error
+          description: Conflict
           x-response-codes:
             errors:
               "35077":
@@ -532,7 +532,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -620,7 +620,7 @@ paths:
                 description: You have exceeded the maximum number of listing IDs. Only {maxSupportedNumber} listings are supported per call.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -829,7 +829,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -889,7 +889,7 @@ paths:
         "409":
           description: Business error
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -1001,7 +1001,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -1080,7 +1080,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35061":
@@ -1445,7 +1445,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Business error
+          description: Conflict
           x-response-codes:
             errors:
               "35061":
@@ -1473,7 +1473,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -1671,7 +1671,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35052":
@@ -1715,7 +1715,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -1813,7 +1813,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Business error
+          description: Conflict
           x-response-codes:
             errors:
               "35062":
@@ -2092,7 +2092,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -2169,7 +2169,7 @@ paths:
                 description: This operation is only supported for key based campaigns.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -2215,7 +2215,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35056":
@@ -2239,7 +2239,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -2284,7 +2284,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business error
           x-response-codes:
             errors:
               "35056":
@@ -2308,7 +2308,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -2413,7 +2413,7 @@ paths:
                 description: To gain access to Promoted Listings, you must be in good standing with recent sales activity.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -2458,7 +2458,7 @@ paths:
         "404":
           description: Not Found
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -2482,7 +2482,7 @@ paths:
                 $ref: "#/components/schemas/ReportMetadatas"
           description: Success
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -2523,7 +2523,7 @@ paths:
         "404":
           description: Not Found
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -2582,7 +2582,7 @@ paths:
                 description: "The 'report_task_statuses' {invalid_report_task_statuses} is invalid. Valid values are: {supportedReportTaskStatuses}."
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -2713,7 +2713,7 @@ paths:
                 description: The maximum number {maxSupportedInventoryReferences} of inventory references has been exceeded.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -2758,7 +2758,7 @@ paths:
                 description: The Report Task with 'report_task_id' {report_task_id} is being modified. Please wait a few minutes and try the call again.
                 domain: API_MARKETING
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -2798,7 +2798,7 @@ paths:
         "404":
           description: Not found
         "500":
-          description: Internal Server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "35001":
@@ -3017,7 +3017,7 @@ paths:
                 description: You cannot specify a child Store Category ID when the parent Store Category ID is already specified. Please refer to the API documentation to source allowed values.
                 domain: API_MARKETING
         "409":
-          description: Business Error
+          description: Conflict
           x-response-codes:
             errors:
               "38248":
@@ -3382,7 +3382,7 @@ paths:
         "404":
           description: Not Found
         "409":
-          description: Conflict
+          description: Business Error
           x-response-codes:
             errors:
               "38248":
@@ -3408,7 +3408,7 @@ paths:
         - item_price_markdown
   /item_promotion:
     post:
-      description: "This method creates an item promotion, where the buyer receives a discount when they meet the buying criteria that's set for the promotion. Known here as &quot;threshold promotions&quot;, these promotions trigger when a threshold is met. eBay highlights promoted items by placing teasers for the promoted items throughout the online buyer flows. Discounts are specified as either a monetary amount or a percentage off the standard sales price of a listing, letting you offer deals such as &quot;Buy 1 Get 1&quot; and &quot;Buy $50, get 20% off&quot;. Volume pricing promotions increase the value of the discount as the buyer increases the quantity they purchase. Coded Coupons provide unique codes that a buyer can use during checkout to receive a discount. The seller can specify the number of times a buyer can use the coupon and the maximum amount across all purchases that can be discounted using the coupon. The coupon code can also be made public (appearing on the seller&rsquo;s Offer page, search pages, the item listing, and the checkout page) or private (only on the seller&rsquo;s Offer page, but the seller can include the code in email and social media). There are two ways to add items to a threshold promotion: Key-based promotions select items using either the listing IDs or inventory reference IDs of the items you want to promote. Note that if you use inventory reference IDs, you must specify both the inventoryReferenceId and the associated inventoryReferenceType of the item(s) you want to include the promotion. Rule-based promotions select items using a list of eBay category IDs or seller Store category IDs. Rules can further constrain items in a promotion by minimum and maximum prices, brands, and item conditions. You must create a new promotion in either a DRAFT or SCHEDULED state. Use the DRAFT state when you are initially creating a promotion and you want to be sure it's correctly configured before scheduling it to run. When you create a promotion, the promotion ID is returned in the Location response header. Use this ID to reference the promotion in subsequent requests. Tip: Refer to the Selling Integration Guide for details and examples showing how to create and manage threshold promotions using the Promotions Manager. For information on the eBay marketplaces that support item promotions, see Promotions Manager requirements and restrictions."
+      description: "This method creates an item promotion, where the buyer receives a discount when they meet the buying criteria that's set for the promotion. Known here as &quot;threshold promotions&quot;, these promotions trigger when a threshold is met. eBay highlights promoted items by placing teasers for the promoted items throughout the online buyer flows. Discounts are specified as either a monetary amount or a percentage off the standard sales price of a listing, letting you offer deals such as &quot;Buy 1 Get 1&quot; and &quot;Buy $50, get 20% off&quot;. Volume pricing promotions increase the value of the discount as the buyer increases the quantity they purchase. Coded Coupons provide unique codes that a buyer can use during checkout to receive a discount. The seller can specify the number of times a buyer can use the coupon and the maximum amount across all purchases that can be discounted using the coupon. The coupon code can also be made public (appearing on the seller&rsquo;s Offer page, search pages, the item listing, and the checkout page) or private (only on the seller&rsquo;s Offer page, but the seller can include the code in email and social media). Note: Coded Coupons are currently available in the US, UK, DE, FR, IT, ES, and AU marketplaces. There are two ways to add items to a threshold promotion: Key-based promotions select items using either the listing IDs or inventory reference IDs of the items you want to promote. Note that if you use inventory reference IDs, you must specify both the inventoryReferenceId and the associated inventoryReferenceType of the item(s) you want to include the promotion. Rule-based promotions select items using a list of eBay category IDs or seller Store category IDs. Rules can further constrain items in a promotion by minimum and maximum prices, brands, and item conditions. You must create a new promotion in either a DRAFT or SCHEDULED state. Use the DRAFT state when you are initially creating a promotion and you want to be sure it's correctly configured before scheduling it to run. When you create a promotion, the promotion ID is returned in the Location response header. Use this ID to reference the promotion in subsequent requests. Tip: Refer to the Selling Integration Guide for details and examples showing how to create and manage threshold promotions using the Promotions Manager. For information on the eBay marketplaces that support item promotions, see Promotions Manager requirements and restrictions."
       operationId: createItemPromotion
       requestBody:
         content:
@@ -5474,7 +5474,7 @@ components:
           description: This field is ignored in markdown promotions. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionPriorityEnum'>eBay API documentation</a>
           type: string
         promotionImageUrl:
-          description: Required for MARKDOWN_SALE promotions, populate this field with a URL that points to an image to be used with the promotion. This image is displayed on the seller's All Offers page. The URL must point to either JPEG or PNG image and it must be a minimum of 500x500 pixels in dimension and cannot exceed 12Mb in size.
+          description: Required for CODED_COUPON and MARKDOWN_SALE promotions, and optional for ORDER_DISCOUNT promotions, populate this field with a URL that points to an image to be used with the promotion. This image is displayed on the seller's All Offers page. The URL must point to either JPEG or PNG image and it must be a minimum of 500x500 pixels in dimension and cannot exceed 12Mb in size.
           type: string
         promotionStatus:
           description: The current status of the promotion. When creating a new promotion, you must set this value to either DRAFT or SCHEDULED. Note that you must set this value to SCHEDULED when you update a RUNNING promotion. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionStatusEnum'>eBay API documentation</a>
@@ -5501,7 +5501,7 @@ components:
           $ref: "#/components/schemas/CouponConfiguration"
           description: The configuration of a coded coupon promotion.
         description:
-          description: "This is the seller-defined &quot;tag line&quot; for the offer, such as &quot;Save on designer shoes.&quot; The tag line appears under the &quot;offer-type text&quot; that is generated for the promotion and is displayed on the offer tile that's shown on the seller's All Offers page, and on the event page for the promotion. Note: Offer-type text is a teaser that's presented throughout the buyer's journey through the sales flow and is generated by eBay. The offer-type text is not editable by the seller&mdash;it's derived from the settings in the discountRules and discountSpecification fields&mdash;and can be, for example, &quot;Extra 20% off when you buy 3+&quot;. Maximum length: 50 Required if you are configuring ORDER_DISCOUNT or MARKDOWN_SALE promotions (and not valid for VOLUME_DISCOUNT promotions)."
+          description: "This is the seller-defined &quot;tag line&quot; for the offer, such as &quot;Save on designer shoes.&quot; The tag line appears under the &quot;offer-type text&quot; that is generated for the promotion and is displayed on the offer tile that's shown on the seller's All Offers page, and on the event page for the promotion. Note: Offer-type text is a teaser that's presented throughout the buyer's journey through the sales flow and is generated by eBay. The offer-type text is not editable by the seller&mdash;it's derived from the settings in the discountRules and discountSpecification fields&mdash;and can be, for example, &quot;Extra 20% off when you buy 3+&quot;. Maximum length: 50 Required if you are configuring CODED_COUPON, ORDER_DISCOUNT, or MARKDOWN_SALE promotions (and not valid for VOLUME_DISCOUNT promotions)."
           type: string
         discountRules:
           description: "This container defines a promotion using the following two required fields: discountBenefit &ndash; Defines a discount as either a monetary amount or a percentage that is subtracted from the sales price of an item, a set of items, or an order. discountSpecification &ndash; Defines a set of rules that determine when the promotion is applied. Note: For volume pricing, you must specify at least two and not more than four discountBenefit/discountSpecification pairs. In addition, you must define each set of rules with a ruleOrder value that corresponds with the order of volume discounts you present. Tip: Refer to Specifying item promotion discounts for information and examples on how to combine discountBenefit and discountSpecification to create different types of promotions."
@@ -5524,7 +5524,7 @@ components:
           description: Applicable for only ORDER_DISCOUNT promotions, this field indicates the precedence of the promotion, which is used to determine the position of a promotion on the seller's All Offers page. If an item is associated with multiple promotions, the promotion with the higher priority takes precedence. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionPriorityEnum'>eBay API documentation</a>
           type: string
         promotionImageUrl:
-          description: This field is optional for ORDER_DISCOUNT promotions, but is not valid for VOLUME_DISCOUNT promotions. Populate this field with a URL that points to an image to be used with the promotion. This image is displayed on the seller's All Offers page. The URL must point to either JPEG or PNG image and it must be a minimum of 500x500 pixels in dimension and cannot exceed 12Mb in size.
+          description: This field is required for CODED_COUPON and MARKDOWN_SALE promotions, optional for ORDER_DISCOUNT promotions, and not valid for VOLUME_DISCOUNT promotions. Populate this field with a URL that points to an image to be used with the promotion. This image is displayed on the seller's All Offers page. The URL must point to either JPEG or PNG image and it must be a minimum of 500x500 pixels in dimension and cannot exceed 12Mb in size.
           type: string
         promotionStatus:
           description: The current status of the promotion. When creating a new promotion, this value must be set to either DRAFT or SCHEDULED. Note that you must set this value to SCHEDULED when you update a RUNNING promotion. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionStatusEnum'>eBay API documentation</a>
@@ -5549,7 +5549,7 @@ components:
           $ref: "#/components/schemas/CouponConfiguration"
           description: The configuration of a coded coupon promotion.
         description:
-          description: "This is the seller-defined &quot;tag line&quot; for the offer, such as &quot;Save on designer shoes.&quot; The tag line appears under the &quot;offer-type text&quot; that is generated for the promotion and is displayed under the offer tile that is shown on the seller's All Offers page and on the event page for the promotion. This tag line is not used with volume pricing promotions. Note: Offer-type text is a teaser that's presented throughout the buyer's journey through the sales flow and is generated by eBay. This text is not editable by the seller&mdash;it's derived from the settings in the discountRules and discountSpecification fields&mdash;and can be, for example, &quot;Extra 20% off when you buy 3+&quot;. Maximum length: 50"
+          description: "Required for CODED_COUPON promotions, this is the seller-defined &quot;tag line&quot; for the offer, such as &quot;Save on designer shoes.&quot; The tag line appears under the &quot;offer-type text&quot; that is generated for the promotion and is displayed under the offer tile that is shown on the seller's All Offers page and on the event page for the promotion. This tag line is not used with volume pricing promotions. Note: Offer-type text is a teaser that's presented throughout the buyer's journey through the sales flow and is generated by eBay. This text is not editable by the seller&mdash;it's derived from the settings in the discountRules and discountSpecification fields&mdash;and can be, for example, &quot;Extra 20% off when you buy 3+&quot;. Maximum length: 50"
           type: string
         discountRules:
           description: A list containing the promotion benefits (discountRule) and the rules that define when the benefit is applied (discountSpecification).
@@ -5575,7 +5575,7 @@ components:
           description: A unique eBay-assigned ID for the promotion that's generated when the promotion is created.
           type: string
         promotionImageUrl:
-          description: Not applicable for VOLUME_DISCOUNT promotions, this field is a URL that points to an image for the promotion. This image is displayed on the seller's All Offers page. The URL must point to either JPEG or PNG image and it must be a minimum of 500x500 pixels in dimension and cannot exceed 12Mb in size.
+          description: Required for CODED_COUPON and MARKDOWN_SALE promotions, optional for ORDER_DISCOUNT promotions, and not applicable for VOLUME_DISCOUNT promotions, this field is a URL that points to an image for the promotion. This image is displayed on the seller's All Offers page. The URL must point to either JPEG or PNG image and it must be a minimum of 500x500 pixels in dimension and cannot exceed 12Mb in size.
           type: string
         promotionStatus:
           description: The current status of the promotion. When creating a new promotion, this value must be set to either DRAFT or SCHEDULED. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionStatusEnum'>eBay API documentation</a>
@@ -5625,7 +5625,7 @@ components:
           description: A unique eBay-assigned ID for the promotion that's generated when the promotion is created.
           type: string
         promotionImageUrl:
-          description: Not applicable for VOLUME_DISCOUNT promotions, this field is a URL that points to an image for the promotion. This image is displayed on the seller's All Offers page. The URL must point to either JPEG or PNG image and it must be a minimum of 500x500 pixels in dimension and cannot exceed 12Mb in size.
+          description: Required for CODED_COUPON and MARKDOWN_SALE promotions, optional for ORDER_DISCOUNT promotions, and not applicable for VOLUME_DISCOUNT promotions, this field is a URL that points to an image for the promotion. This image is displayed on the seller's All Offers page. The URL must point to either JPEG or PNG image and it must be a minimum of 500x500 pixels in dimension and cannot exceed 12Mb in size.
           type: string
         promotionStatus:
           description: The current status of the promotion. When creating a new promotion, you must set this value to either DRAFT or SCHEDULED. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/marketing/types/sme:PromotionStatusEnum'>eBay API documentation</a>

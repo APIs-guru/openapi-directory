@@ -279,7 +279,7 @@ paths:
                       type: object
                     - maxLength: 5000
                       type: string
-                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary containing a user's bank account details.
+                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary containing a user's bank account details.
                 business_profile:
                   description: Business information about the account.
                   properties:
@@ -700,7 +700,7 @@ paths:
                     type: string
                   type: array
                 external_account:
-                  description: A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
+                  description: A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
                   maxLength: 5000
                   type: string
                   x-stripeBypassValidation: true
@@ -1071,7 +1071,7 @@ paths:
                       type: object
                     - maxLength: 5000
                       type: string
-                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary containing a user's bank account details.
+                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary containing a user's bank account details.
                 default_for_currency:
                   description: When set to true, or if this is the first external account added in this currency, this account becomes the default external account for its currency.
                   type: boolean
@@ -1584,7 +1584,7 @@ paths:
                       type: object
                     - maxLength: 5000
                       type: string
-                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary containing a user's bank account details.
+                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary containing a user's bank account details.
                 default_for_currency:
                   description: When set to true, or if this is the first external account added in this currency, this account becomes the default external account for its currency.
                   type: boolean
@@ -2143,7 +2143,7 @@ paths:
                   description: The person's gender (International regulations require either "male" or "female").
                   type: string
                 id_number:
-                  description: The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/stripe.js#collecting-pii-data).
+                  description: The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
                   maxLength: 5000
                   type: string
                 last_name:
@@ -2528,7 +2528,7 @@ paths:
                   description: The person's gender (International regulations require either "male" or "female").
                   type: string
                 id_number:
-                  description: The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/stripe.js#collecting-pii-data).
+                  description: The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
                   maxLength: 5000
                   type: string
                 last_name:
@@ -2931,7 +2931,7 @@ paths:
                   description: The person's gender (International regulations require either "male" or "female").
                   type: string
                 id_number:
-                  description: The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/stripe.js#collecting-pii-data).
+                  description: The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
                   maxLength: 5000
                   type: string
                 last_name:
@@ -3316,7 +3316,7 @@ paths:
                   description: The person's gender (International regulations require either "male" or "female").
                   type: string
                 id_number:
-                  description: The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/stripe.js#collecting-pii-data).
+                  description: The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
                   maxLength: 5000
                   type: string
                 last_name:
@@ -3670,7 +3670,7 @@ paths:
                       type: object
                     - maxLength: 5000
                       type: string
-                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary containing a user's bank account details.
+                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary containing a user's bank account details.
                 business_profile:
                   description: Business information about the account.
                   properties:
@@ -4095,7 +4095,7 @@ paths:
                     type: string
                   type: array
                 external_account:
-                  description: A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
+                  description: A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
                   maxLength: 5000
                   type: string
                   x-stripeBypassValidation: true
@@ -4591,7 +4591,7 @@ paths:
                       type: object
                     - maxLength: 5000
                       type: string
-                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary containing a user's bank account details.
+                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary containing a user's bank account details.
                 business_profile:
                   description: Business information about the account.
                   properties:
@@ -5012,7 +5012,7 @@ paths:
                     type: string
                   type: array
                 external_account:
-                  description: A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
+                  description: A card or bank account to attach to the account for receiving [payouts](https://stripe.com/docs/connect/bank-debit-card-payouts) (you won’t be able to use it for top-ups). You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.
                   maxLength: 5000
                   type: string
                   x-stripeBypassValidation: true
@@ -5391,7 +5391,7 @@ paths:
                       type: object
                     - maxLength: 5000
                       type: string
-                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary containing a user's bank account details.
+                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary containing a user's bank account details.
                 default_for_currency:
                   description: When set to true, or if this is the first external account added in this currency, this account becomes the default external account for its currency.
                   type: boolean
@@ -5961,7 +5961,7 @@ paths:
                       type: object
                     - maxLength: 5000
                       type: string
-                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary containing a user's bank account details.
+                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary containing a user's bank account details.
                 default_for_currency:
                   description: When set to true, or if this is the first external account added in this currency, this account becomes the default external account for its currency.
                   type: boolean
@@ -6556,7 +6556,7 @@ paths:
                   description: The person's gender (International regulations require either "male" or "female").
                   type: string
                 id_number:
-                  description: The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/stripe.js#collecting-pii-data).
+                  description: The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
                   maxLength: 5000
                   type: string
                 last_name:
@@ -6959,7 +6959,7 @@ paths:
                   description: The person's gender (International regulations require either "male" or "female").
                   type: string
                 id_number:
-                  description: The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/stripe.js#collecting-pii-data).
+                  description: The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
                   maxLength: 5000
                   type: string
                 last_name:
@@ -7374,7 +7374,7 @@ paths:
                   description: The person's gender (International regulations require either "male" or "female").
                   type: string
                 id_number:
-                  description: The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/stripe.js#collecting-pii-data).
+                  description: The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
                   maxLength: 5000
                   type: string
                 last_name:
@@ -7777,7 +7777,7 @@ paths:
                   description: The person's gender (International regulations require either "male" or "female").
                   type: string
                 id_number:
-                  description: The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/stripe.js#collecting-pii-data).
+                  description: The person's ID number, as appropriate for their country. For example, a social security number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you can also provide a [PII token provided by Stripe.js](https://stripe.com/docs/js/tokens_sources/create_token?type=pii).
                   maxLength: 5000
                   type: string
                 last_name:
@@ -10230,7 +10230,7 @@ paths:
                       type: object
                     - maxLength: 5000
                       type: string
-                  description: A token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js).
+                  description: A token, like the ones returned by [Stripe.js](https://stripe.com/docs/js).
                   x-stripeBypassValidation: true
                 currency:
                   description: Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
@@ -11577,10 +11577,12 @@ paths:
                     - fi
                     - fr
                     - fr-CA
+                    - hr
                     - hu
                     - id
                     - it
                     - ja
+                    - ko
                     - lt
                     - lv
                     - ms
@@ -11597,6 +11599,7 @@ paths:
                     - sv
                     - th
                     - tr
+                    - vi
                     - zh
                     - zh-HK
                     - zh-TW
@@ -14205,7 +14208,7 @@ paths:
                       type: object
                     - maxLength: 5000
                       type: string
-                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary containing a user's bank account details.
+                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary containing a user's bank account details.
                 card:
                   anyOf:
                     - properties:
@@ -14257,7 +14260,7 @@ paths:
                       type: object
                     - maxLength: 5000
                       type: string
-                  description: A token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js).
+                  description: A token, like the ones returned by [Stripe.js](https://stripe.com/docs/js).
                   x-stripeBypassValidation: true
                 coupon:
                   maxLength: 5000
@@ -14858,7 +14861,7 @@ paths:
               additionalProperties: false
               properties:
                 alipay_account:
-                  description: A token returned by [Stripe.js](https://stripe.com/docs/stripe.js) representing the user’s Alipay account details.
+                  description: A token returned by [Stripe.js](https://stripe.com/docs/js) representing the user’s Alipay account details.
                   maxLength: 5000
                   type: string
                 bank_account:
@@ -14896,7 +14899,7 @@ paths:
                       type: object
                     - maxLength: 5000
                       type: string
-                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary containing a user's bank account details.
+                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary containing a user's bank account details.
                 card:
                   anyOf:
                     - properties:
@@ -14948,7 +14951,7 @@ paths:
                       type: object
                     - maxLength: 5000
                       type: string
-                  description: A token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js).
+                  description: A token, like the ones returned by [Stripe.js](https://stripe.com/docs/js).
                   x-stripeBypassValidation: true
                 expand:
                   description: Specifies which fields in the response should be expanded.
@@ -15422,7 +15425,7 @@ paths:
               additionalProperties: false
               properties:
                 alipay_account:
-                  description: A token returned by [Stripe.js](https://stripe.com/docs/stripe.js) representing the user’s Alipay account details.
+                  description: A token returned by [Stripe.js](https://stripe.com/docs/js) representing the user’s Alipay account details.
                   maxLength: 5000
                   type: string
                 bank_account:
@@ -15460,7 +15463,7 @@ paths:
                       type: object
                     - maxLength: 5000
                       type: string
-                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary containing a user's bank account details.
+                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary containing a user's bank account details.
                 card:
                   anyOf:
                     - properties:
@@ -15512,7 +15515,7 @@ paths:
                       type: object
                     - maxLength: 5000
                       type: string
-                  description: A token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js).
+                  description: A token, like the ones returned by [Stripe.js](https://stripe.com/docs/js).
                   x-stripeBypassValidation: true
                 expand:
                   description: Specifies which fields in the response should be expanded.
@@ -16017,7 +16020,7 @@ paths:
               additionalProperties: false
               properties:
                 alipay_account:
-                  description: A token returned by [Stripe.js](https://stripe.com/docs/stripe.js) representing the user’s Alipay account details.
+                  description: A token returned by [Stripe.js](https://stripe.com/docs/js) representing the user’s Alipay account details.
                   maxLength: 5000
                   type: string
                 bank_account:
@@ -16055,7 +16058,7 @@ paths:
                       type: object
                     - maxLength: 5000
                       type: string
-                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary containing a user's bank account details.
+                  description: Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/js), or a dictionary containing a user's bank account details.
                 card:
                   anyOf:
                     - properties:
@@ -16107,7 +16110,7 @@ paths:
                       type: object
                     - maxLength: 5000
                       type: string
-                  description: A token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js).
+                  description: A token, like the ones returned by [Stripe.js](https://stripe.com/docs/js).
                   x-stripeBypassValidation: true
                 expand:
                   description: Specifies which fields in the response should be expanded.
@@ -16579,6 +16582,9 @@ paths:
               metadata:
                 explode: true
                 style: deepObject
+              payment_settings:
+                explode: true
+                style: deepObject
               pending_invoice_item_interval:
                 explode: true
                 style: deepObject
@@ -16805,7 +16811,7 @@ paths:
                   description: |-
                     Use `allow_incomplete` to create subscriptions with `status=incomplete` if the first invoice cannot be paid. Creating subscriptions with this status allows you to manage scenarios where additional user actions are needed to pay a subscription's invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.
 
-                    Use `default_incomplete` to create Subscriptions with `status=incomplete` when the first invoice requires payment, otherwise start as active. Subscriptions transition to `status=active` when successfully confirming the payment intent on the first invoice. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method. If the payment intent is not confirmed within 23 hours subscriptions transition to `status=expired_incomplete`, which is a terminal state.
+                    Use `default_incomplete` to create Subscriptions with `status=incomplete` when the first invoice requires payment, otherwise start as active. Subscriptions transition to `status=active` when successfully confirming the payment intent on the first invoice. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method. If the payment intent is not confirmed within 23 hours subscriptions transition to `status=incomplete_expired`, which is a terminal state.
 
                     Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's first invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not create a subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
 
@@ -16816,6 +16822,66 @@ paths:
                     - error_if_incomplete
                     - pending_if_incomplete
                   type: string
+                payment_settings:
+                  description: Payment settings to pass to invoices created by the subscription.
+                  properties:
+                    payment_method_options:
+                      properties:
+                        bancontact:
+                          anyOf:
+                            - properties:
+                                preferred_language:
+                                  enum:
+                                    - de
+                                    - en
+                                    - fr
+                                    - nl
+                                  type: string
+                              title: invoice_payment_method_options_param
+                              type: object
+                            - enum:
+                                - ""
+                              type: string
+                        card:
+                          anyOf:
+                            - properties:
+                                request_three_d_secure:
+                                  enum:
+                                    - any
+                                    - automatic
+                                  type: string
+                              title: invoice_payment_method_options_param
+                              type: object
+                            - enum:
+                                - ""
+                              type: string
+                      title: payment_method_options
+                      type: object
+                    payment_method_types:
+                      anyOf:
+                        - items:
+                            enum:
+                              - ach_credit_transfer
+                              - ach_debit
+                              - au_becs_debit
+                              - bacs_debit
+                              - bancontact
+                              - boleto
+                              - card
+                              - fpx
+                              - giropay
+                              - ideal
+                              - sepa_debit
+                              - sofort
+                              - wechat_pay
+                            type: string
+                            x-stripeBypassValidation: true
+                          type: array
+                        - enum:
+                            - ""
+                          type: string
+                  title: payment_settings
+                  type: object
                 pending_invoice_item_interval:
                   anyOf:
                     - properties:
@@ -17050,6 +17116,9 @@ paths:
                 explode: true
                 style: deepObject
               pause_collection:
+                explode: true
+                style: deepObject
+              payment_settings:
                 explode: true
                 style: deepObject
               pending_invoice_item_interval:
@@ -17323,6 +17392,66 @@ paths:
                     - error_if_incomplete
                     - pending_if_incomplete
                   type: string
+                payment_settings:
+                  description: Payment settings to pass to invoices created by the subscription.
+                  properties:
+                    payment_method_options:
+                      properties:
+                        bancontact:
+                          anyOf:
+                            - properties:
+                                preferred_language:
+                                  enum:
+                                    - de
+                                    - en
+                                    - fr
+                                    - nl
+                                  type: string
+                              title: invoice_payment_method_options_param
+                              type: object
+                            - enum:
+                                - ""
+                              type: string
+                        card:
+                          anyOf:
+                            - properties:
+                                request_three_d_secure:
+                                  enum:
+                                    - any
+                                    - automatic
+                                  type: string
+                              title: invoice_payment_method_options_param
+                              type: object
+                            - enum:
+                                - ""
+                              type: string
+                      title: payment_method_options
+                      type: object
+                    payment_method_types:
+                      anyOf:
+                        - items:
+                            enum:
+                              - ach_credit_transfer
+                              - ach_debit
+                              - au_becs_debit
+                              - bacs_debit
+                              - bancontact
+                              - boleto
+                              - card
+                              - fpx
+                              - giropay
+                              - ideal
+                              - sepa_debit
+                              - sofort
+                              - wechat_pay
+                            type: string
+                            x-stripeBypassValidation: true
+                          type: array
+                        - enum:
+                            - ""
+                          type: string
+                  title: payment_settings
+                  type: object
                 pending_invoice_item_interval:
                   anyOf:
                     - properties:
@@ -30384,6 +30513,14 @@ paths:
                         - enum:
                             - ""
                           type: string
+                    ideal:
+                      anyOf:
+                        - properties: {}
+                          title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
                     oxxo:
                       anyOf:
                         - properties:
@@ -31169,6 +31306,14 @@ paths:
                             - ""
                           type: string
                     card_present:
+                      anyOf:
+                        - properties: {}
+                          title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    ideal:
                       anyOf:
                         - properties: {}
                           title: payment_method_options_param
@@ -32095,6 +32240,14 @@ paths:
                             - ""
                           type: string
                     card_present:
+                      anyOf:
+                        - properties: {}
+                          title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    ideal:
                       anyOf:
                         - properties: {}
                           title: payment_method_options_param
@@ -43130,6 +43283,9 @@ paths:
               metadata:
                 explode: true
                 style: deepObject
+              payment_settings:
+                explode: true
+                style: deepObject
               pending_invoice_item_interval:
                 explode: true
                 style: deepObject
@@ -43360,7 +43516,7 @@ paths:
                   description: |-
                     Use `allow_incomplete` to create subscriptions with `status=incomplete` if the first invoice cannot be paid. Creating subscriptions with this status allows you to manage scenarios where additional user actions are needed to pay a subscription's invoice. For example, SCA regulation may require 3DS authentication to complete payment. See the [SCA Migration Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to learn more. This is the default behavior.
 
-                    Use `default_incomplete` to create Subscriptions with `status=incomplete` when the first invoice requires payment, otherwise start as active. Subscriptions transition to `status=active` when successfully confirming the payment intent on the first invoice. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method. If the payment intent is not confirmed within 23 hours subscriptions transition to `status=expired_incomplete`, which is a terminal state.
+                    Use `default_incomplete` to create Subscriptions with `status=incomplete` when the first invoice requires payment, otherwise start as active. Subscriptions transition to `status=active` when successfully confirming the payment intent on the first invoice. This allows simpler management of scenarios where additional user actions are needed to pay a subscription’s invoice. Such as failed payments, [SCA regulation](https://stripe.com/docs/billing/migration/strong-customer-authentication), or collecting a mandate for a bank debit payment method. If the payment intent is not confirmed within 23 hours subscriptions transition to `status=incomplete_expired`, which is a terminal state.
 
                     Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a subscription's first invoice cannot be paid. For example, if a payment method requires 3DS authentication due to SCA regulation and further user action is needed, this parameter does not create a subscription and returns an error instead. This was the default behavior for API versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
 
@@ -43371,6 +43527,66 @@ paths:
                     - error_if_incomplete
                     - pending_if_incomplete
                   type: string
+                payment_settings:
+                  description: Payment settings to pass to invoices created by the subscription.
+                  properties:
+                    payment_method_options:
+                      properties:
+                        bancontact:
+                          anyOf:
+                            - properties:
+                                preferred_language:
+                                  enum:
+                                    - de
+                                    - en
+                                    - fr
+                                    - nl
+                                  type: string
+                              title: invoice_payment_method_options_param
+                              type: object
+                            - enum:
+                                - ""
+                              type: string
+                        card:
+                          anyOf:
+                            - properties:
+                                request_three_d_secure:
+                                  enum:
+                                    - any
+                                    - automatic
+                                  type: string
+                              title: invoice_payment_method_options_param
+                              type: object
+                            - enum:
+                                - ""
+                              type: string
+                      title: payment_method_options
+                      type: object
+                    payment_method_types:
+                      anyOf:
+                        - items:
+                            enum:
+                              - ach_credit_transfer
+                              - ach_debit
+                              - au_becs_debit
+                              - bacs_debit
+                              - bancontact
+                              - boleto
+                              - card
+                              - fpx
+                              - giropay
+                              - ideal
+                              - sepa_debit
+                              - sofort
+                              - wechat_pay
+                            type: string
+                            x-stripeBypassValidation: true
+                          type: array
+                        - enum:
+                            - ""
+                          type: string
+                  title: payment_settings
+                  type: object
                 pending_invoice_item_interval:
                   anyOf:
                     - properties:
@@ -43586,6 +43802,9 @@ paths:
                 explode: true
                 style: deepObject
               pause_collection:
+                explode: true
+                style: deepObject
+              payment_settings:
                 explode: true
                 style: deepObject
               pending_invoice_item_interval:
@@ -43859,6 +44078,66 @@ paths:
                     - error_if_incomplete
                     - pending_if_incomplete
                   type: string
+                payment_settings:
+                  description: Payment settings to pass to invoices created by the subscription.
+                  properties:
+                    payment_method_options:
+                      properties:
+                        bancontact:
+                          anyOf:
+                            - properties:
+                                preferred_language:
+                                  enum:
+                                    - de
+                                    - en
+                                    - fr
+                                    - nl
+                                  type: string
+                              title: invoice_payment_method_options_param
+                              type: object
+                            - enum:
+                                - ""
+                              type: string
+                        card:
+                          anyOf:
+                            - properties:
+                                request_three_d_secure:
+                                  enum:
+                                    - any
+                                    - automatic
+                                  type: string
+                              title: invoice_payment_method_options_param
+                              type: object
+                            - enum:
+                                - ""
+                              type: string
+                      title: payment_method_options
+                      type: object
+                    payment_method_types:
+                      anyOf:
+                        - items:
+                            enum:
+                              - ach_credit_transfer
+                              - ach_debit
+                              - au_becs_debit
+                              - bacs_debit
+                              - bancontact
+                              - boleto
+                              - card
+                              - fpx
+                              - giropay
+                              - ideal
+                              - sepa_debit
+                              - sofort
+                              - wechat_pay
+                            type: string
+                            x-stripeBypassValidation: true
+                          type: array
+                        - enum:
+                            - ""
+                          type: string
+                  title: payment_settings
+                  type: object
                 pending_invoice_item_interval:
                   anyOf:
                     - properties:
@@ -48515,15 +48794,12 @@ components:
             - $ref: "#/components/schemas/source"
           description: The source object for errors returned on a request involving a source.
         type:
-          description: The type of error returned. One of `api_connection_error`, `api_error`, `authentication_error`, `card_error`, `idempotency_error`, `invalid_request_error`, or `rate_limit_error`
+          description: The type of error returned. One of `api_error`, `card_error`, `idempotency_error`, or `invalid_request_error`
           enum:
-            - api_connection_error
             - api_error
-            - authentication_error
             - card_error
             - idempotency_error
             - invalid_request_error
-            - rate_limit_error
           type: string
       required:
         - type
@@ -50267,10 +50543,12 @@ components:
             - fi
             - fr
             - fr-CA
+            - hr
             - hu
             - id
             - it
             - ja
+            - ko
             - lt
             - lv
             - ms
@@ -50287,6 +50565,7 @@ components:
             - sv
             - th
             - tr
+            - vi
             - zh
             - zh-HK
             - zh-TW
@@ -55383,6 +55662,14 @@ components:
             - refund
           type: string
           x-stripeBypassValidation: true
+        wallet:
+          description: The digital wallet used for this transaction. One of `apple_pay`, `google_pay`, or `samsung_pay`.
+          enum:
+            - apple_pay
+            - google_pay
+            - samsung_pay
+          nullable: true
+          type: string
       required:
         - amount
         - card
@@ -59782,6 +60069,8 @@ components:
           $ref: "#/components/schemas/payment_intent_payment_method_options_card"
         card_present:
           $ref: "#/components/schemas/payment_method_options_card_present"
+        ideal:
+          $ref: "#/components/schemas/payment_method_options_ideal"
         oxxo:
           $ref: "#/components/schemas/payment_method_options_oxxo"
         p24:
@@ -59802,6 +60091,7 @@ components:
         - boleto
         - card
         - card_present
+        - ideal
         - oxxo
         - p24
         - sepa_debit
@@ -61877,6 +62167,12 @@ components:
       description: ""
       properties: {}
       title: payment_method_options_card_present
+      type: object
+      x-expandableFields: []
+    payment_method_options_ideal:
+      description: ""
+      properties: {}
+      title: payment_method_options_ideal
       type: object
       x-expandableFields: []
     payment_method_options_oxxo:
@@ -67297,6 +67593,11 @@ components:
             - $ref: "#/components/schemas/subscriptions_resource_pause_collection"
           description: If specified, payment collection for this subscription will be paused.
           nullable: true
+        payment_settings:
+          anyOf:
+            - $ref: "#/components/schemas/subscriptions_resource_payment_settings"
+          description: Payment settings passed on to invoices created by the subscription.
+          nullable: true
         pending_invoice_item_interval:
           anyOf:
             - $ref: "#/components/schemas/subscription_pending_invoice_item_interval"
@@ -67394,6 +67695,7 @@ components:
         - items
         - latest_invoice
         - pause_collection
+        - payment_settings
         - pending_invoice_item_interval
         - pending_setup_intent
         - pending_update
@@ -67940,6 +68242,57 @@ components:
       title: SubscriptionsResourcePauseCollection
       type: object
       x-expandableFields: []
+    subscriptions_resource_payment_method_options:
+      description: ""
+      properties:
+        bancontact:
+          anyOf:
+            - $ref: "#/components/schemas/invoice_payment_method_options_bancontact"
+          description: This sub-hash contains details about the Bancontact payment method options to pass to invoices created by the subscription.
+          nullable: true
+        card:
+          anyOf:
+            - $ref: "#/components/schemas/invoice_payment_method_options_card"
+          description: This sub-hash contains details about the Card payment method options to pass to invoices created by the subscription.
+          nullable: true
+      title: SubscriptionsResourcePaymentMethodOptions
+      type: object
+      x-expandableFields:
+        - bancontact
+        - card
+    subscriptions_resource_payment_settings:
+      description: ""
+      properties:
+        payment_method_options:
+          anyOf:
+            - $ref: "#/components/schemas/subscriptions_resource_payment_method_options"
+          description: Payment-method-specific configuration to provide to invoices created by the subscription.
+          nullable: true
+        payment_method_types:
+          description: The list of payment method types to provide to every invoice created by the subscription. If not set, Stripe attempts to automatically determine the types to use by looking at the invoice’s default payment method, the subscription’s default payment method, the customer’s default payment method, and your [invoice template settings](https://dashboard.stripe.com/settings/billing/invoice).
+          items:
+            enum:
+              - ach_credit_transfer
+              - ach_debit
+              - au_becs_debit
+              - bacs_debit
+              - bancontact
+              - boleto
+              - card
+              - fpx
+              - giropay
+              - ideal
+              - sepa_debit
+              - sofort
+              - wechat_pay
+            type: string
+            x-stripeBypassValidation: true
+          nullable: true
+          type: array
+      title: SubscriptionsResourcePaymentSettings
+      type: object
+      x-expandableFields:
+        - payment_method_options
     subscriptions_resource_pending_update:
       description: |-
         Pending Updates store the changes pending from a previous update that will be applied

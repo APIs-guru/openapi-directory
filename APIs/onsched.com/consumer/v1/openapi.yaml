@@ -2449,6 +2449,8 @@ components:
           type: array
         customerId:
           type: string
+        customerMessage:
+          type: string
         email:
           type: string
         endDateTime:
@@ -2463,6 +2465,8 @@ components:
         locationId:
           type: string
         name:
+          type: string
+        notes:
           type: string
         phone:
           type: string
@@ -4106,6 +4110,8 @@ components:
         calendarAvailability:
           format: int32
           type: integer
+        conferenceInfo:
+          type: string
         contact:
           $ref: "#/components/schemas/ContactViewModel"
         customFields:

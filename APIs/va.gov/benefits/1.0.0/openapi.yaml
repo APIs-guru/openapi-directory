@@ -14,12 +14,6 @@ info:
   contact:
     name: va.gov
   description: |
-    # Benefits Intake
-
-    Are you a Veteran? [Check your benefits or appeals claim status](https://www.va.gov/claim-or-appeal-status/).
-
-    https://api.va.gov/services/vba_documents/docs/v1/api
-
     The Benefits Intake API allows authorized third-party systems used by Veteran Service Organizations (VSOs), agencies, and Veterans to digitally submit VA benefits claim documents directly to the Veterans Benefits Administration's (VBA) claims intake process. This API handles documents related to the following benefit claim types: 
 
     * Compensation
@@ -33,16 +27,14 @@ info:
     This API also provides submission status updates until documents are successfully established for VBA claim processing, eliminating the need for users to switch between systems to manually check whether documents have been successfully uploaded.
 
     ## Background 
-    This API provides a secure, efficient, and tracked alternative to mail or fax for VA benefit claim document submissions. Documents are uploaded directly to the VBA system, where they can then be processed. Compared to mail or fax, these documents are processed faster, ultimately providing Veterans with claim decisions more quickly. 
-
-    All successfully submitted documents are routed to the correct office for processing. 
+    This API provides a secure, efficient, and tracked alternative to mail or fax for VA benefit claim document submissions. Documents are uploaded directly to the VBA so they can be processed as quickly as possible.
 
     ## Technical overview
     The Benefits Intake API first provides an upload location and unique submission identifier, and then accepts a payload consisting of a document in PDF format, zero or more optional attachments in PDF format, and some JSON metadata. 
 
     The metadata describes the document and attachments, and identifies the person for whom it is being submitted. This payload is encoded as binary multipart/form-data (not base64). The unique identifier supplied with the payload can subsequently be used to request the processing status of the uploaded document package.
 
-    API consumers are encouraged to validate the `zipcode`,`fileNumber`, `veteranFirstName`, and 'veteranLastName' fields before submission according to their description in the DocumentUploadMetadata model and use the 'businessLine' attribute for the most efficient processing. Additionally, please ensure no PDF user or owner passwords are used in submitted PDFs. 
+    To avoid errors and processing delays, API consumers are encouraged to validate the `zipcode`,`fileNumber`, `veteranFirstName`, `veteranLastName` and `businessLine` fields before submission according to their description in the DocumentUploadMetadata model and use the 'businessLine' attribute for the most efficient processing. Additionally, please ensure no PDF user or owner passwords are used in submitted PDFs. 
 
     ### Attachment & file size limits
     There is no limit on the number of files a payload can contain, but size limits do apply.
@@ -52,7 +44,7 @@ info:
     * No single file in a payload can exceed 100 MB
 
     ### Date of receipt
-    The date and time that documents are successfully submitted through the Benefits Intake API is used as the official VA date of receipt. However, note that until a document status of `received`, `processing`, `success`, or `vbms` is returned, a client cannot consider the document received by VA. 
+    The date that documents are successfully submitted through the Benefits Intake API is used as the official VA date of receipt. However, note that until a document status of `received`, `processing`, `success`, or `vbms` is returned, a client cannot consider the document received by VA. 
 
     A status of `received` means that the document package has been transmitted, but may not be validated. Any errors with the document package, such as unreadable PDFs or a Veteran not found, will cause the status to change to `error`.
 

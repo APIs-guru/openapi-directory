@@ -4474,6 +4474,10 @@ components:
         user_id: 2946512
         username: fred gibson
       properties:
+        about_me:
+          description: |
+            A short bio a user has written about themselves to help other members get to know them better. May be null if the user has not written anything about themselves.
+          type: string
         country:
           description: |
             A 2 letter country code for the country that has been automatically detected for the user (see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 ). May be null if no country has been set.
@@ -4499,10 +4503,6 @@ components:
                 The feedback score of this user.  Higher scores are better.   Scores are calculated by substracting the total number of negative feedback from the total number of positive feedback that a user has received.  May be null if a user has not received enough feedback to calculate a score.
               type: integer
           type: object
-          x-about_me:
-            description: |
-              A short bio a user has written about themselves to help other members get to know them better. May be null if the user has not written anything about themselves.
-            type: string
         firstname:
           description: The first name of the user (may be null).
           type: string

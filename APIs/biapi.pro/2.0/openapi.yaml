@@ -189,7 +189,7 @@ info:
     {
        "banks" : [
           {
-             "id_weboob" : "bnporc",
+             "id_weboob" : "bnp",
              "name" : "BNP Paribas",
              "id" : 3,
              "hidden" : false,
@@ -2572,28 +2572,11 @@ paths:
       tags:
         - Administration
     post:
-      description: 'Request: { "connection.disable_new": "0", "search": "connection.disable_new" }<br><br>'
-      parameters:
-        - description: limit the results to keys matching the given value
-          in: query
-          name: search
-          required: false
-          schema:
-            type: string
+      description: ""
       responses:
         "200":
-          content:
-            application/json:
-              schema:
-                required:
-                  - connection.disable_new
-                type: object
-            connection.disable_new:
-              examples:
-                response:
-                  value: "0"
-          description: ""
-      summary: Set a configuration value on the API.
+          description: standard HTTP response
+      summary: Insert/update configuration key(s)/value(s) on the API.
       tags:
         - Administration
   /config/logs:
@@ -7935,8 +7918,8 @@ components:
         coming: 0
         company_name: ""
         currency: ""
-        deleted: 2021-07-16 16:39:46.372842
-        disabled: 2021-07-16 16:39:46.372907
+        deleted: 2021-07-23 18:34:29.394465
+        disabled: 2021-07-23 18:34:29.394618
         display: true
         error: ""
         iban: ""
@@ -7946,10 +7929,10 @@ components:
         id_source: 0
         id_type: 0
         id_user: 0
-        last_update: 2021-07-16 16:39:46.372773
+        last_update: 2021-07-23 18:34:29.394317
         name: ""
         number: ""
-        opening_date: 2021-07-16
+        opening_date: 2021-07-23
         original_name: ""
         ownership: ""
         usage: ""
@@ -8053,7 +8036,7 @@ components:
         id_account: 0
         id_connection_log: 0
         id_connector: 0
-        timestamp: <function datetime.now at 0x7f68d15088c8>
+        timestamp: <function datetime.now at 0x7f68d15068c8>
       properties:
         balance:
           description: Balanced recorded
@@ -8083,7 +8066,7 @@ components:
           description: provider id
           type: integer
         timestamp:
-          default: <function datetime.now at 0x7f68d15088c8>
+          default: <function datetime.now at 0x7f68d15068c8>
           description: Timestamp of log
           format: date-time
           type: string
@@ -8148,7 +8131,7 @@ components:
         id_investment: 0
         id_transaction: 0
         id_user: 0
-        timestamp: <function datetime.now at 0x7f68d1344268>
+        timestamp: <function datetime.now at 0x7f68d1345268>
         type: ""
         value: 0
       properties:
@@ -8167,7 +8150,7 @@ components:
           description: ID of the related user
           type: integer
         timestamp:
-          default: <function datetime.now at 0x7f68d1344268>
+          default: <function datetime.now at 0x7f68d1345268>
           description: Date of the alerts emission
           format: date-time
           type: string
@@ -8257,7 +8240,7 @@ components:
       type: object
     Certificate:
       example:
-        created: 2021-07-16 16:39:46.220365
+        created: 2021-07-23 18:34:29.202363
         id: 0
         id_private_key_file: 0
         id_public_key_file: 0
@@ -8328,7 +8311,7 @@ components:
         new_value: ""
         origin: ""
         previous_value: ""
-        timestamp: <function datetime.now at 0x7f68d1231d90>
+        timestamp: <function datetime.now at 0x7f68d1232d90>
         type: ""
       properties:
         id:
@@ -8343,7 +8326,7 @@ components:
         previous_value:
           type: string
         timestamp:
-          default: <function datetime.now at 0x7f68d1231d90>
+          default: <function datetime.now at 0x7f68d1232d90>
           description: Timestamp of when the configuration key was changed
           format: date-time
           type: string
@@ -8359,20 +8342,20 @@ components:
     Connection:
       example:
         active: true
-        created: <function datetime.now at 0x7f68d154a158>
+        created: <function datetime.now at 0x7f68d154b158>
         id: 0
         id_connector: 0
         id_user: 0
-        last_push: 2021-07-16 16:39:46.192269
-        last_update: 2021-07-16 16:39:46.192023
-        next_try: 2021-07-16 16:39:46.192339
+        last_push: 2021-07-23 18:34:29.175233
+        last_update: 2021-07-23 18:34:29.174974
+        next_try: 2021-07-23 18:34:29.175310
       properties:
         active:
           default: true
           description: This connection is active and will be automatically synced
           type: boolean
         created:
-          default: <function datetime.now at 0x7f68d154a158>
+          default: <function datetime.now at 0x7f68d154b158>
           description: Creation date
           format: date-time
           type: string
@@ -8414,9 +8397,9 @@ components:
         id_user: 0
         login: ""
         nb_accounts: 0
-        next_try: 2021-07-16 16:39:46.200901
+        next_try: 2021-07-23 18:34:29.183147
         session_folder_id: ""
-        start: 2021-07-16 16:39:46.202079
+        start: 2021-07-23 18:34:29.184326
         statut: 0
         timestamp: <function datetime.now at 0x7f68d158ea60>
         worker: ""
@@ -8483,16 +8466,16 @@ components:
       type: object
     ConnectionSource:
       example:
-        access_expire: 2021-07-16 16:39:46.209066
+        access_expire: 2021-07-23 18:34:29.192104
         created: <function datetime.now at 0x7f68d156dd08>
-        disabled: 2021-07-16 16:39:46.208825
-        expire: 2021-07-16 16:39:46.209133
+        disabled: 2021-07-23 18:34:29.191863
+        expire: 2021-07-23 18:34:29.192170
         id: 0
         id_connection: 0
         id_connector_source: 0
-        last_update: 2021-07-16 16:39:46.208749
+        last_update: 2021-07-23 18:34:29.191773
         name: ""
-        next_try: 2021-07-16 16:39:46.209342
+        next_try: 2021-07-23 18:34:29.192543
         state: ""
       properties:
         access_expire:
@@ -8655,7 +8638,7 @@ components:
     ConnectorSource:
       example:
         auth_mechanism: ""
-        disabled: 2021-07-16 16:39:46.194315
+        disabled: 2021-07-23 18:34:29.176672
         disabled_capabilities: ""
         fallback: ""
         id: 0
@@ -8742,7 +8725,7 @@ components:
     Currency:
       example:
         crypto: false
-        datetime: 2021-07-16 16:39:46.235754
+        datetime: 2021-07-23 18:34:29.220550
         id: ""
         marketcap: 0
         precision: 2
@@ -8785,7 +8768,7 @@ components:
         debug: false
         id: 0
         id_token: 0
-        last_update: <function datetime.now at 0x7f68d13441e0>
+        last_update: <function datetime.now at 0x7f68d13451e0>
         notification_token: ""
         type: ""
         version: ""
@@ -8798,7 +8781,7 @@ components:
         id_token:
           type: integer
         last_update:
-          default: <function datetime.now at 0x7f68d13441e0>
+          default: <function datetime.now at 0x7f68d13451e0>
           format: date-time
           type: string
         notification_token:
@@ -8819,8 +8802,8 @@ components:
     Document:
       example:
         currency: ""
-        date: 2021-07-16 16:39:46.252668
-        duedate: 2021-07-16
+        date: 2021-07-23 18:34:29.234704
+        duedate: 2021-07-23
         has_file_on_website: true
         id: 0
         id_category: 0
@@ -8831,11 +8814,11 @@ components:
         id_user: 0
         income: true
         issuer: ""
-        last_update: 2021-07-16 16:39:46.254695
+        last_update: 2021-07-23 18:34:29.236049
         name: ""
         number: ""
         readonly: true
-        timestamp: <function datetime.now at 0x7f68d0b23048>
+        timestamp: <function datetime.now at 0x7f68d0b1f1e0>
         total_amount: 0
         untaxed_amount: 0
         vat: 0
@@ -8885,7 +8868,7 @@ components:
           default: true
           type: boolean
         timestamp:
-          default: <function datetime.now at 0x7f68d0b23048>
+          default: <function datetime.now at 0x7f68d0b1f1e0>
           format: date-time
           type: string
         total_amount:
@@ -9091,7 +9074,7 @@ components:
       example:
         code: ""
         code_type: ""
-        deleted: 2021-07-16 16:39:46.331046
+        deleted: 2021-07-23 18:34:29.338070
         description: ""
         diff: 0
         diff_percent: 0
@@ -9099,7 +9082,7 @@ components:
         id_account: 0
         id_security: 0
         label: ""
-        last_update: 2021-07-16 16:39:46.330977
+        last_update: 2021-07-23 18:34:29.337998
         original_currency: ""
         original_diff: 0
         original_unitprice: 0
@@ -9107,13 +9090,13 @@ components:
         original_valuation: 0
         portfolio_share: 0
         prev_diff: 0
-        prev_vdate: 2021-07-16
+        prev_vdate: 2021-07-23
         quantity: 0
         source: ""
         unitprice: 0
         unitvalue: 0
         valuation: 0
-        vdate: 2021-07-16
+        vdate: 2021-07-23
       properties:
         code:
           description: Investment code
@@ -9224,7 +9207,7 @@ components:
         original_currency: ""
         original_unitvalue: 0
         unitvalue: 0
-        vdate: 2021-07-16
+        vdate: 2021-07-23
       properties:
         id:
           description: ID of the value
@@ -9281,13 +9264,13 @@ components:
     LockedUser:
       example:
         id_user: 0
-        timestamp: <function datetime.now at 0x7f68d12d3950>
+        timestamp: <function datetime.now at 0x7f68d12d4950>
         worker: ""
       properties:
         id_user:
           type: integer
         timestamp:
-          default: <function datetime.now at 0x7f68d12d3950>
+          default: <function datetime.now at 0x7f68d12d4950>
           format: date-time
           type: string
         worker:
@@ -9300,14 +9283,14 @@ components:
       example:
         amount: 0
         code: ""
-        created: 2021-07-16 16:39:46.325454
-        date: 2021-07-16
-        deleted: 2021-07-16 16:39:46.325526
-        execution_date: 2021-07-16
+        created: 2021-07-23 18:34:29.329477
+        date: 2021-07-23
+        deleted: 2021-07-23 18:34:29.329630
+        execution_date: 2021-07-23
         id: 0
         id_account: 0
         label: ""
-        last_update: 2021-07-16 16:39:46.325366
+        last_update: 2021-07-23 18:34:29.329300
         ordervalue: 0
         payment_method: ""
         quantity: 0
@@ -9315,7 +9298,7 @@ components:
         stock_market: ""
         unitprice: 0
         unitvalue: 0
-        validity_date: 2021-07-16
+        validity_date: 2021-07-23
         webid: ""
       properties:
         amount:
@@ -9417,7 +9400,7 @@ components:
         error_code: ""
         error_description: ""
         id: 0
-        register_date: 2021-07-16 16:39:46.177787
+        register_date: 2021-07-23 18:34:29.160416
         state: ""
         validate_uri: ""
       properties:
@@ -9447,7 +9430,7 @@ components:
       type: object
     PaymentAccount:
       example:
-        disabled_date: 2021-07-16 16:39:46.166846
+        disabled_date: 2021-07-23 18:34:29.150529
         id: 0
         id_account: 0
         identification: ""
@@ -9487,7 +9470,7 @@ components:
         id_file: 0
         id_payment: 0
         state: ""
-        timestamp: <function datetime.now at 0x7f68d0617400>
+        timestamp: <function datetime.now at 0x7f68d0617620>
       properties:
         error_code:
           description: In case of error, the error code
@@ -9507,7 +9490,7 @@ components:
           description: State of the payment
           type: string
         timestamp:
-          default: <function datetime.now at 0x7f68d0617400>
+          default: <function datetime.now at 0x7f68d0617620>
           description: Timestamp of the log
           format: date-time
           type: string
@@ -9517,14 +9500,14 @@ components:
       type: object
     Pocket:
       example:
-        availability_date: 2021-07-16
+        availability_date: 2021-07-23
         condition: inconnu
-        deleted: 2021-07-16 16:39:46.280314
+        deleted: 2021-07-23 18:34:29.263817
         id: 0
         id_account: 0
         id_investment: 0
         label: ""
-        last_update: 2021-07-16 16:39:46.280242
+        last_update: 2021-07-23 18:34:29.263749
         quantity: 0
         value: 0
       properties:
@@ -9638,7 +9621,7 @@ components:
              - the list of PSD2 API to create (needed when a new connector is added)
              - the list of broken connectors
       example:
-        created_at: 2021-07-16 16:39:46.568416
+        created_at: 2021-07-23 18:34:29.585011
         error_message: ""
         id: 0
         id_psd2registration: 0
@@ -9670,18 +9653,18 @@ components:
         bank_name: ""
         category: ""
         currency: ""
-        deleted: 2021-07-16 16:39:46.332664
-        enabled_at: 2021-07-16 16:39:46.332828
+        deleted: 2021-07-23 18:34:29.340582
+        enabled_at: 2021-07-23 18:34:29.340866
         error: ""
-        expire: 2021-07-16 16:39:46.332734
+        expire: 2021-07-23 18:34:29.340728
         iban: ""
         id: 0
         id_account: 0
         id_target_account: 0
         label: ""
-        last_update: 2021-07-16 16:39:46.332476
+        last_update: 2021-07-23 18:34:29.340259
         state: ""
-        time_scraped: 2021-07-16 16:39:46.332570
+        time_scraped: 2021-07-23 18:34:29.340432
         webid: ""
       properties:
         add_verified:
@@ -9757,7 +9740,7 @@ components:
         id_recipient: 0
         request_data: ""
         step: ""
-        timestamp: <function datetime.now at 0x7f68d1508268>
+        timestamp: <function datetime.now at 0x7f68d1506268>
       properties:
         error:
           description: Error message during recipient addition, if any
@@ -9781,7 +9764,7 @@ components:
           description: Step of recipient addition, (add_recipient, asking_field, recipient addition validated, creation, storing_files)
           type: string
         timestamp:
-          default: <function datetime.now at 0x7f68d1508268>
+          default: <function datetime.now at 0x7f68d1506268>
           description: Timestamp of the log
           format: date-time
           type: string
@@ -9794,7 +9777,7 @@ components:
         code: ""
         id: 0
         id_type: 0
-        last_update: 2021-07-16 16:39:46.163457
+        last_update: 2021-07-23 18:34:29.147845
         name: ""
       properties:
         code:
@@ -9819,19 +9802,19 @@ components:
       type: object
     Subscription:
       example:
-        deleted: 2021-07-16 16:39:46.365096
-        disabled: 2021-07-16 16:39:46.365173
+        deleted: 2021-07-23 18:34:29.380957
+        disabled: 2021-07-23 18:34:29.381037
         error: ""
         id: 0
         id_connection: 0
         id_source: 0
         id_user: 0
         label: ""
-        last_update: 2021-07-16 16:39:46.365024
+        last_update: 2021-07-23 18:34:29.380884
         number: ""
-        renewdate: 2021-07-16
+        renewdate: 2021-07-23
         subscriber: ""
-        validity: 2021-07-16
+        validity: 2021-07-23
       properties:
         deleted:
           description: This subscription is not found on the website anymore
@@ -9891,7 +9874,7 @@ components:
         id_source: 0
         id_subscription: 0
         nb_docs: 0
-        timestamp: <function datetime.now at 0x7f68d11c99d8>
+        timestamp: <function datetime.now at 0x7f68d11c9d90>
       properties:
         error:
           description: If fail, contains the error code
@@ -9915,7 +9898,7 @@ components:
           description: Number of docs on the subscription
           type: integer
         timestamp:
-          default: <function datetime.now at 0x7f68d11c99d8>
+          default: <function datetime.now at 0x7f68d11c9d90>
           description: Timestamp of log
           format: date-time
           type: string
@@ -9926,8 +9909,8 @@ components:
       type: object
     TermsOfService:
       example:
-        created: 2021-07-16 16:39:46.420990
-        deleted: 2021-07-16 16:39:46.421096
+        created: 2021-07-23 18:34:29.453407
+        deleted: 2021-07-23 18:34:29.453484
         id: 0
         version: ""
       properties:
@@ -9949,9 +9932,9 @@ components:
     Transaction:
       example:
         active: true
-        application_date: 2021-07-16
-        bdate: 2021-07-16
-        bdatetime: 2021-07-16 16:39:46.275498
+        application_date: 2021-07-23
+        bdate: 2021-07-23
+        bdatetime: 2021-07-23 18:34:29.259107
         card: ""
         coming: false
         comment: ""
@@ -9959,26 +9942,26 @@ components:
         commission_currency: ""
         counterparty: ""
         country: ""
-        date: 2021-07-16
-        date_scraped: 2021-07-16 16:39:46.274199
-        datetime: 2021-07-16 16:39:46.273273
-        deleted: 2021-07-16 16:39:46.275958
+        date: 2021-07-23
+        date_scraped: 2021-07-23 18:34:29.257795
+        datetime: 2021-07-23 18:34:29.256668
+        deleted: 2021-07-23 18:34:29.259615
         gross_value: 0
         id: 0
         id_account: 0
         id_category: 0
         id_cluster: 0
-        last_update: 2021-07-16 16:39:46.275887
+        last_update: 2021-07-23 18:34:29.259519
         nature: inconnu
         original_currency: ""
         original_gross_value: 0
         original_value: 0
-        rdate: 2021-07-16
-        rdatetime: 2021-07-16 16:39:46.274659
+        rdate: 2021-07-23
+        rdatetime: 2021-07-23 18:34:29.258226
         state: new
         value: 0
-        vdate: 2021-07-16
-        vdatetime: 2021-07-16 16:39:46.275083
+        vdate: 2021-07-23
+        vdatetime: 2021-07-23 18:34:29.258690
         webid: ""
         wording: ""
       properties:
@@ -10157,7 +10140,7 @@ components:
         id_category: 0
         mean_amount: 0
         median_increment: 0
-        next_date: 2021-07-16
+        next_date: 2021-07-23
         wording: ""
       properties:
         created_by:
@@ -10199,7 +10182,7 @@ components:
         beneficiary_type: recipient
         currency: ""
         error: ""
-        exec_date: 2021-07-16
+        exec_date: 2021-07-23
         fees: 0
         id: 0
         id_account: 0
@@ -10208,7 +10191,7 @@ components:
         id_user: 0
         label: ""
         recipient_iban: ""
-        register_date: 2021-07-16 16:39:46.282731
+        register_date: 2021-07-23 18:34:29.266444
         state: ""
         validate_mechanism: ""
         webid: ""
@@ -10298,7 +10281,7 @@ components:
         id_transfer: 0
         request_data: ""
         state: ""
-        timestamp: <function datetime.now at 0x7f68d1508d08>
+        timestamp: <function datetime.now at 0x7f68d1506d08>
       properties:
         error:
           description: Error message during transfer, if any
@@ -10322,7 +10305,7 @@ components:
           description: State of the transfer (created, scheduled, validating, pending, done, canceled, error, bug)
           type: string
         timestamp:
-          default: <function datetime.now at 0x7f68d1508d08>
+          default: <function datetime.now at 0x7f68d1506d08>
           description: Timestamp of the log
           format: date-time
           type: string
@@ -10432,14 +10415,14 @@ components:
       type: object
     Webhook:
       example:
-        created: 2021-07-16 16:39:46.557827
-        deleted: 2021-07-16 16:39:46.558012
+        created: 2021-07-23 18:34:29.574305
+        deleted: 2021-07-23 18:34:29.574504
         id: 0
         id_auth: 0
         id_event: 0
         id_service: 0
         id_user: 0
-        updated: 2021-07-16 16:39:46.557929
+        updated: 2021-07-23 18:34:29.574414
         url: ""
       properties:
         add_to_data:
@@ -10485,14 +10468,14 @@ components:
       type: object
     WebhookData:
       example:
-        created: 2021-07-16 16:39:46.561126
+        created: 2021-07-23 18:34:29.577435
         id: 0
         id_resource: 0
         id_service: 0
         id_user: 0
         id_webhook: 0
         mimetype: ""
-        success: 2021-07-16 16:39:46.561220
+        success: 2021-07-23 18:34:29.577511
       properties:
         created:
           description: Timestamp when the hook data was generated
@@ -10533,10 +10516,10 @@ components:
         id_service: 0
         id_user: 0
         id_webhook_data: 0
-        next_try: 2021-07-16 16:39:46.562454
+        next_try: 2021-07-23 18:34:29.578797
         response_code: 0
-        response_date: 2021-07-16 16:39:46.561979
-        timestamp: 2021-07-16 16:39:46.561910
+        response_date: 2021-07-23 18:34:29.578308
+        timestamp: 2021-07-23 18:34:29.578221
       properties:
         id:
           description: ID of the log
@@ -10581,7 +10564,6 @@ x-query-services:
   - pfm
   - providers
   - recipients
-  - service
   - terms
   - timeline
   - transfer

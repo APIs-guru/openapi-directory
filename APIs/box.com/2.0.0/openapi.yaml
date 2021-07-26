@@ -146,6 +146,8 @@ tags:
     x-box-tag: web_links
   - name: Webhooks
     x-box-tag: webhooks
+  - name: Workflows
+    x-box-tag: workflows
   - name: Zip Downloads
     x-box-tag: zip_downloads
 paths:
@@ -2103,99 +2105,6 @@ paths:
       tags:
         - File version legal holds
       x-box-tag: file_version_legal_holds
-  /file_version_retentions:
-    get:
-      description: Retrieves all file version retentions for the given enterprise.
-      operationId: get_file_version_retentions
-      parameters:
-        - description: Filters results by files with this ID.
-          example: "43123123"
-          in: query
-          name: file_id
-          required: false
-          schema:
-            type: string
-        - description: Filters results by file versions with this ID.
-          example: "1"
-          in: query
-          name: file_version_id
-          required: false
-          schema:
-            type: string
-        - description: Filters results by the retention policy with this ID.
-          example: "982312"
-          in: query
-          name: policy_id
-          required: false
-          schema:
-            type: string
-        - description: |-
-            Filters results by the retention policy with this disposition
-            action.
-          example: permanently_delete
-          in: query
-          name: disposition_action
-          required: false
-          schema:
-            enum:
-              - permanently_delete
-              - remove_retention
-            type: string
-        - description: |-
-            Filters results by files that will have their disposition
-            come into effect before this date.
-          example: 2012-12-12T10:53:43-08:00
-          in: query
-          name: disposition_before
-          required: false
-          schema:
-            type: string
-        - description: |-
-            Filters results by files that will have their disposition
-            come into effect after this date.
-          example: 2012-12-19T10:34:23-08:00
-          in: query
-          name: disposition_after
-          required: false
-          schema:
-            type: string
-        - description: The maximum number of items to return per page.
-          example: 1000
-          in: query
-          name: limit
-          required: false
-          schema:
-            format: int64
-            maximum: 1000
-            type: integer
-        - description: |-
-            Defines the position marker at which to begin returning results. This is
-            used when paginating using marker-based pagination.
-
-            This requires `usemarker` to be set to `true`.
-          example: JV9IRGZmieiBasejOG9yDCRNgd2ymoZIbjsxbJMjIs3kioVii
-          in: query
-          name: marker
-          required: false
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/FileVersionRetentions"
-          description: Returns a list of all file version retentions for the enterprise.
-        default:
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ClientError"
-          description: An unexpected client error.
-      summary: List file version retentions
-      tags:
-        - File version retentions
-      x-box-tag: file_version_retentions
   "/file_version_retentions/{file_version_retention_id}":
     get:
       description: Returns information about a file version retention.
@@ -6695,7 +6604,7 @@ paths:
       summary: Create folder lock
       tags:
         - Folder Locks
-      x-box-enable-explorer: true
+      x-box-enable-explorer: false
       x-box-sanitized: true
       x-box-tag: folder_locks
   "/folder_locks/{folder_lock_id}":
@@ -13864,6 +13773,122 @@ paths:
       tags:
         - Retention policy assignments
       x-box-tag: retention_policy_assignments
+  "/retention_policy_assignments/{retention_policy_assignment_id}/file_versions_under_retention":
+    get:
+      description: |-
+        Returns a list of file versions under retention for a retention policy
+        assignment.
+      operationId: get_retention_policy_assignments_id_file_versions_under_retention
+      parameters:
+        - description: The ID of the retention policy assignment.
+          example: "1233123"
+          in: path
+          name: retention_policy_assignment_id
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Defines the position marker at which to begin returning results. This is
+            used when paginating using marker-based pagination.
+
+            This requires `usemarker` to be set to `true`.
+          example: JV9IRGZmieiBasejOG9yDCRNgd2ymoZIbjsxbJMjIs3kioVii
+          in: query
+          name: marker
+          required: false
+          schema:
+            type: string
+        - description: The maximum number of items to return per page.
+          example: 1000
+          in: query
+          name: limit
+          required: false
+          schema:
+            format: int64
+            maximum: 1000
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileVersionRetentions"
+          description: |-
+            Returns a list of file versions under retention that are associated with
+            the specified retention policy assignment.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returns an error if `retention_policy_assignment_id` is not specified.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Get file versions under retention
+      tags:
+        - Retention policy assignments
+      x-box-tag: retention_policy_assignments
+  "/retention_policy_assignments/{retention_policy_assignment_id}/files_under_retention":
+    get:
+      description: Returns a list of files under retention for a retention policy assignment.
+      operationId: get_retention_policy_assignments_id_files_under_retention
+      parameters:
+        - description: The ID of the retention policy assignment.
+          example: "1233123"
+          in: path
+          name: retention_policy_assignment_id
+          required: true
+          schema:
+            type: string
+        - description: |-
+            Defines the position marker at which to begin returning results. This is
+            used when paginating using marker-based pagination.
+
+            This requires `usemarker` to be set to `true`.
+          example: JV9IRGZmieiBasejOG9yDCRNgd2ymoZIbjsxbJMjIs3kioVii
+          in: query
+          name: marker
+          required: false
+          schema:
+            type: string
+        - description: The maximum number of items to return per page.
+          example: 1000
+          in: query
+          name: limit
+          required: false
+          schema:
+            format: int64
+            maximum: 1000
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileVersionRetentions"
+          description: |-
+            Returns a list of files under retention that are associated with the
+            specified retention policy assignment.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returns an error if `retention_policy_assignment_id` is not specified.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Get files under retention
+      tags:
+        - Retention policy assignments
+      x-box-tag: retention_policy_assignments
   /search:
     get:
       description: |-
@@ -17621,6 +17646,225 @@ paths:
       tags:
         - Webhooks
       x-box-tag: webhooks
+  /workflows:
+    get:
+      description: |-
+        Returns list of workflows that act on a given `folder ID`, and
+        have a flow with a trigger type of `WORKFLOW_MANUAL_START`.
+      operationId: get_workflows
+      parameters:
+        - description: |-
+            The unique identifier that represent a folder.
+
+            The ID for any folder can be determined
+            by visiting this folder in the web application
+            and copying the ID from the URL. For example,
+            for the URL `https://*.app.box.com/folder/123`
+            the `folder_id` is `123`.
+
+            The root folder of a Box account is
+            always represented by the ID `0`.
+          example: "12345"
+          in: query
+          name: folder_id
+          required: true
+          schema:
+            nullable: false
+            type: string
+        - description: Type of trigger to search for.
+          example: WORKFLOW_MANUAL_START
+          in: query
+          name: trigger_type
+          required: false
+          schema:
+            nullable: false
+            type: string
+        - description: The maximum number of items to return per page.
+          example: 1000
+          in: query
+          name: limit
+          required: false
+          schema:
+            format: int64
+            maximum: 1000
+            type: integer
+        - description: |-
+            Defines the position marker at which to begin returning results. This is
+            used when paginating using marker-based pagination.
+
+            This requires `usemarker` to be set to `true`.
+          example: JV9IRGZmieiBasejOG9yDCRNgd2ymoZIbjsxbJMjIs3kioVii
+          in: query
+          name: marker
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Workflows"
+          description: Returns the workflow.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returned if the trigger type is not `WORKFLOW_MANUAL_START`.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: |-
+            Returned if the folder is not found, or the user does not
+            have access to the folder.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: List workflows
+      tags:
+        - Workflows
+      x-box-tag: workflows
+  "/workflows/{workflow_id}/start":
+    post:
+      description: Initiates a flow with a trigger type of `WORKFLOW_MANUAL_START`.
+      operationId: post_workflows_id_start
+      parameters:
+        - description: The ID of the workflow.
+          example: "12345"
+          in: path
+          name: workflow_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                files:
+                  description: |-
+                    The array of files for which the workflow should start. All files
+                    must be in the workflow's configured folder.
+                  items:
+                    description: A file the workflow should start for
+                    properties:
+                      id:
+                        description: The id of the file
+                        example: "12345678"
+                        type: string
+                      type:
+                        description: The type of the file object
+                        enum:
+                          - file
+                        example: file
+                        type: string
+                    type: object
+                  type: array
+                flow:
+                  description: The flow that will be triggered
+                  properties:
+                    id:
+                      description: The id of the flow
+                      example: "123456789"
+                      type: string
+                    type:
+                      description: The type of the flow object
+                      example: flow
+                      type: string
+                  type: object
+                folder:
+                  description: The folder object for which the workflow is configured.
+                  properties:
+                    id:
+                      description: The id of the folder
+                      example: "87654321"
+                      type: string
+                    type:
+                      description: The type of the folder object
+                      enum:
+                        - folder
+                      example: folder
+                      type: string
+                  type: object
+                outcomes:
+                  description: A list of outcomes required to be configured at start time.
+                  items:
+                    description: |-
+                      A configurable outcome the workflow should complete. If you
+                      have a `task_completion_rule`, you may input `all_assignees` or
+                      `any_assignee` in the `variable_value` field. Similarly, if you
+                      have a `collaborator_role`, you may input `editor`, `viewer`,
+                      `previewer`, `uploader`, `previewer uploader`, `viewer uploader`
+                      , `co-owner` in the `variable_value` field.
+                    type: object
+                  type: array
+                type:
+                  description: The type of the parameters object
+                  enum:
+                    - WORKFLOW_PARAMETERS
+                  example: WORKFLOW_PARAMETERS
+                  type: string
+              required:
+                - flow
+                - files
+                - folder
+              type: object
+      responses:
+        "204":
+          description: Starts the workflow.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: |-
+            Returns an error if some of the parameters are missing or
+            not valid.
+
+            * `workflow_is_not_enabled` when the workflow is not enabled
+            * `workflow_not_active_on_provided_folder` when the workflow is not
+              enabled for the specified folder id
+            * `parameters_provided_do_not_match_target_outcome` when the provided
+              parameters do not match the expected parameters
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: |-
+            Returns an error if there are insufficient permissions.
+
+            * `insufficient_access` when the user does not have access rights to file
+              or folder
+            * `missing_relay_full_access` when the user does not have access to Relay
+              Full
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: |-
+            Returns an error if the workflow could not be found,
+            or the authenticated user does not have access to the workflow.
+
+            * `workflow_not_found` when the workflow is not found
+            * `flow_missing_or_inaccessible` when the flow is not a manual start flow
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Starts workflow based on request body
+      tags:
+        - Workflows
+      x-box-tag: workflows
   /zip_downloads:
     post:
       description: |-
@@ -17630,8 +17874,8 @@ paths:
         returns a `download_url` and a `status_url` that can be used to download the
         archive.
 
-        The limit for an archive is either 32GB or 10,000 files, whichever
-        limitation is met first.
+        The limit for an archive is either the Account's upload limit or
+        10,000 files, whichever is met first
       operationId: post_zip_downloads
       requestBody:
         content:
@@ -17687,9 +17931,9 @@ paths:
             request will have to be split into multiple requests to reduce the number
             of files per archive.
             * `zip_download_pre_compressed_bytes_exceeded_limit` - the requested files
-            and folders would result in an archive with more than 32GB of content. The
-            request will have to be split into multiple requests to reduce the size of
-            the archive.
+            and folders would result in an archive with more than the allowed download
+            limit. The request will have to be split into multiple requests to reduce
+            the size of the archive.
         "401":
           content:
             application/json:
@@ -26195,6 +26439,304 @@ components:
       type: object
       x-box-resource-id: webhooks
       x-box-tag: webhooks
+    Workflow:
+      allOf:
+        - $ref: "#/components/schemas/Workflow--Mini"
+        - properties:
+            flows:
+              description: A list of flows assigned to a workflow.
+              items:
+                description: |-
+                  A step in a Box Relay Workflow. Each flow contains a `Trigger` and
+                  a collection of Outcomes to perform once the conditions of a
+                  `Trigger` are met
+                properties:
+                  created_at:
+                    description: When this flow was created
+                    example: 2012-12-12T10:53:43-08:00
+                    format: date-time
+                    type: string
+                  created_by:
+                    allOf:
+                      - $ref: "#/components/schemas/User--Base"
+                      - description: The user who created this flow
+                  id:
+                    description: The identifier of the flow
+                    example: "12345"
+                    type: string
+                  outcomes:
+                    allOf:
+                      - items:
+                          description: List of outcomes to perform once the conditions of trigger are met.
+                          properties:
+                            action_type:
+                              allOf:
+                                - description: The type of outcome
+                                  enum:
+                                    - add_metadata
+                                    - assign_task
+                                    - copy_file
+                                    - copy_folder
+                                    - create_folder
+                                    - delete_file
+                                    - delete_folder
+                                    - lock_file
+                                    - move_file
+                                    - move_folder
+                                    - remove_watermark_file
+                                    - rename_folder
+                                    - restore_folder
+                                    - share_file
+                                    - share_folder
+                                    - unlock_file
+                                    - upload_file
+                                    - wait_for_task
+                                    - watermark_file
+                                    - go_back_to_step
+                                    - apply_file_classification
+                                    - apply_folder_classification
+                                    - send_notification
+                                  example: assign_task
+                                  title: Action Type
+                                  type: string
+                                - description: The type of outcome
+                            id:
+                              description: The identifier of the outcome
+                              example: "12345"
+                              type: string
+                            if_rejected:
+                              description: |-
+                                If `action_type` is `assign_task` and the task is rejected, returns a
+                                list of outcomes to complete
+                              items:
+                                properties:
+                                  action_type:
+                                    allOf:
+                                      - description: The type of outcome
+                                        enum:
+                                          - add_metadata
+                                          - assign_task
+                                          - copy_file
+                                          - copy_folder
+                                          - create_folder
+                                          - delete_file
+                                          - delete_folder
+                                          - lock_file
+                                          - move_file
+                                          - move_folder
+                                          - remove_watermark_file
+                                          - rename_folder
+                                          - restore_folder
+                                          - share_file
+                                          - share_folder
+                                          - unlock_file
+                                          - upload_file
+                                          - wait_for_task
+                                          - watermark_file
+                                          - go_back_to_step
+                                          - apply_file_classification
+                                          - apply_folder_classification
+                                          - send_notification
+                                        example: assign_task
+                                        title: Action Type
+                                        type: string
+                                      - description: The type of outcome
+                                  id:
+                                    description: The identifier of the outcome
+                                    example: "12345"
+                                    type: string
+                                  name:
+                                    description: The name of the outcome
+                                    example: Approval Rejection Outcome
+                                    type: string
+                                  outcome_parameters:
+                                    description: |-
+                                      Information about how to complete the outcome which varies based on
+                                      `action_type` selected
+                                    type: object
+                                  type:
+                                    description: The outcomes resource type
+                                    enum:
+                                      - outcome
+                                    example: outcome
+                                    type: string
+                                type: object
+                              type: array
+                            name:
+                              description: The name of the outcome
+                              example: Task Approval Outcome
+                              type: string
+                            outcome_parameters:
+                              description: |-
+                                Information about how to complete the outcome which varies based on
+                                `action_type` selected
+                              type: object
+                            type:
+                              description: The outcomes resource type
+                              enum:
+                                - outcome
+                              example: outcome
+                              type: string
+                          type: object
+                        type: array
+                      - description: Actions that are completed once the flow is triggered
+                  trigger:
+                    allOf:
+                      - properties:
+                          scope:
+                            description: List of trigger scopes
+                            items:
+                              description: Object that describes where and how a Trigger condition is met
+                              properties:
+                                object:
+                                  description: The object the `ref` points to
+                                  properties:
+                                    id:
+                                      description: The id of the object
+                                      example: "12345"
+                                      type: string
+                                    type:
+                                      description: The type of the object
+                                      enum:
+                                        - folder
+                                      example: folder
+                                      type: string
+                                  type: object
+                                ref:
+                                  description: Indicates the path of the condition value to check
+                                  example: /event/source/parameters/folder
+                                  type: string
+                                type:
+                                  description: The trigger scope's resource type
+                                  enum:
+                                    - trigger_scope
+                                  example: trigger_scope
+                                  type: string
+                              type: object
+                            type: array
+                          trigger_type:
+                            description: The type of trigger selected for this flow
+                            enum:
+                              - WORKFLOW_MANUAL_START
+                            example: WORKFLOW_MANUAL_START
+                            type: string
+                          type:
+                            description: The trigger's resource type
+                            enum:
+                              - trigger
+                            example: trigger
+                            type: string
+                        type: object
+                      - description: Trigger that initiates flow
+                  type:
+                    description: The flow's resource type
+                    enum:
+                      - flow
+                    example: flow
+                    type: string
+                type: object
+              type: array
+      description: Box Relay Workflows are objects that represent a named collection of flows
+      title: Workflow
+      type: object
+      x-box-resource-id: workflow
+      x-box-variant: standard
+    Workflow--Full:
+      allOf:
+        - $ref: "#/components/schemas/Workflow"
+        - properties:
+            created_at:
+              description: The date and time when the workflow was created on Box
+              example: 2012-12-12T10:53:43-08:00
+              format: date-time
+              type: string
+            created_by:
+              allOf:
+                - $ref: "#/components/schemas/User--Base"
+                - description: The user who created this workflow
+            modified_at:
+              description: The date and time when the workflow was last updated on Box
+              example: 2012-12-12T10:53:43-08:00
+              format: date-time
+              type: string
+            modified_by:
+              allOf:
+                - $ref: "#/components/schemas/User--Base"
+                - description: The user who last modified this workflow
+      description: Box Relay Workflows are objects that represent a named collection of flows
+      title: Workflow (Full)
+      type: object
+      x-box-resource-id: workflow--full
+      x-box-variant: full
+    Workflow--Mini:
+      description: Box Relay Workflows are objects that represent a named collection of flows
+      properties:
+        description:
+          description: The description for a workflow.
+          example: This workflow sets off a new hire approval flow
+          type: string
+        id:
+          description: The unique identifier for the workflow
+          example: "11446498"
+          type: string
+        is_enabled:
+          description: Specifies if this workflow is enabled
+          example: true
+          type: boolean
+        name:
+          description: The name of the workflow
+          example: New Hire Workflow
+          type: string
+        type:
+          description: "`workflow`"
+          enum:
+            - workflow
+          example: workflow
+          type: string
+      title: Workflow (Mini)
+      type: object
+      x-box-resource-id: workflow--mini
+      x-box-tag: workflows
+      x-box-variant: mini
+      x-box-variants:
+        - mini
+        - standard
+        - full
+    Workflows:
+      allOf:
+        - description: |-
+            The part of an API response that describes marker
+            based pagination
+          properties:
+            limit:
+              description: |-
+                The limit that was used for these entries. This will be the same as the
+                `limit` query parameter unless that value exceeded the maximum value
+                allowed. The maximum value varies by API.
+              example: 1000
+              format: int64
+              type: integer
+            next_marker:
+              description: The marker for the start of the next page of results.
+              example: 3000
+              format: int64
+              type: integer
+            prev_marker:
+              description: The marker for the start of the previous page of results.
+              example: 1000
+              format: int64
+              type: integer
+          type: object
+        - properties:
+            entries:
+              items:
+                $ref: "#/components/schemas/Workflow"
+              type: array
+      description: A list of workflows
+      title: Workflows
+      type: object
+      x-box-resource-id: workflows
+      x-box-tag: workflows
     ZipDownload:
       description: |-
         Represents a successful request to create a `zip` archive of a list of files

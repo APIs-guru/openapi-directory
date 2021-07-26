@@ -670,7 +670,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/OperationCreateOrUpdate"
+              $ref: "#/components/schemas/OperatorConfiguration"
         required: true
       responses:
         "200":
@@ -2226,21 +2226,12 @@ components:
           type: string
         operatorConfiguration:
           $ref: "#/components/schemas/OperatorConfiguration"
+        workspaceId:
+          $ref: "#/components/schemas/WorkspaceId"
       required:
         - name
         - operatorConfiguration
-      type: object
-    OperationCreateOrUpdate:
-      properties:
-        name:
-          type: string
-        operationId:
-          $ref: "#/components/schemas/OperationId"
-        operatorConfiguration:
-          $ref: "#/components/schemas/OperatorConfiguration"
-      required:
-        - name
-        - operatorConfiguration
+        - workspaceId
       type: object
     OperationId:
       format: uuid
@@ -2260,10 +2251,13 @@ components:
           $ref: "#/components/schemas/OperationId"
         operatorConfiguration:
           $ref: "#/components/schemas/OperatorConfiguration"
+        workspaceId:
+          $ref: "#/components/schemas/WorkspaceId"
       required:
         - operationId
         - name
         - operatorConfiguration
+        - workspaceId
       type: object
     OperationReadList:
       properties:
@@ -2681,11 +2675,23 @@ components:
         - properties:
             operations:
               items:
-                $ref: "#/components/schemas/OperationCreateOrUpdate"
+                $ref: "#/components/schemas/WebBackendOperationCreateOrUpdate"
               type: array
             withRefreshedCatalog:
               type: boolean
           type: object
+    WebBackendOperationCreateOrUpdate:
+      properties:
+        name:
+          type: string
+        operationId:
+          $ref: "#/components/schemas/OperationId"
+        operatorConfiguration:
+          $ref: "#/components/schemas/OperatorConfiguration"
+      required:
+        - name
+        - operatorConfiguration
+      type: object
     WorkspaceCreate:
       properties:
         anonymousDataCollection:

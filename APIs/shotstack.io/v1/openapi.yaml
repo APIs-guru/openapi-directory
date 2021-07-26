@@ -8,8 +8,16 @@ servers:
         enum:
           - v1
           - stage
+  - url: https://api.shotstack.io/serve/{version}
+    variables:
+      version:
+        default: v1
+        description: Set the stage to `v1` for production usage. Set to `stage` to use the development sandbox.
+        enum:
+          - v1
+          - stage
 info:
-  description: The Shotstack API is a video editing service that allows for the automated creation of videos using JSON. You can configure an edit and POST it to the Shotstack API which will render your video and provide a file location when complete. For more details visit [shotstack.io](https://shotstack.io) or checkout our [getting started](https://shotstack.gitbook.io/docs/guides/getting-started) documentation.
+  description: "<p>Shotstack is a video editing service that allows for the automated creation of videos using JSON. You can configure an edit and POST it to the API which will render your video and provide a file location when complete. For more details visit [shotstack.io](https://shotstack.io) or checkout our [getting started](https://shotstack.gitbook.io/docs/guides/getting-started) documentation. </p> <p> There are two main API's, one for editing videos and images (Edit API) and one for managing hosted assets (Serve API). </p> <p> The Edit API base URL is: <b>https://api.shotstack.io/{version}</b> </p> <p> The Serve API base URL is: <b>https://api.shotstack.io/serve/{version}</b> </p>"
   title: Shotstack
   version: v1
   x-apisguru-categories:
@@ -20,18 +28,124 @@ info:
       version: "3.0"
   x-providerName: shotstack.io
 paths:
+  "/assets/render/{id}":
+    get:
+      description: A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are created the only known id is the render id returned by the original [render request](#render-video), status  request or webhook. This endpoint lets you look up one or more assets by the render id.
+      operationId: getAssetByRenderId
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                response:
+                  data:
+                    - attributes:
+                        created: 2021-05-06T03:33:48.600Z
+                        filename: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+                        id: a4482cbf-e321-42a2-ac8b-947d26886840
+                        owner: 5ca6hu7s9k
+                        region: au
+                        renderId: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+                        status: ready
+                        updated: 2021-05-06T03:33:49.521Z
+                        url: https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+                      type: asset
+              schema:
+                $ref: "#/components/schemas/AssetRenderResponse"
+          description: Get one or more assets by render id
+      security:
+        - DeveloperKey: []
+      servers:
+        - url: https://api.shotstack.io/serve/{version}
+          variables:
+            version:
+              default: v1
+              description: Set the stage to `v1` for production usage. Set to `stage` to use the development sandbox.
+              enum:
+                - v1
+                - stage
+      summary: Get Asset by Render ID
+      tags:
+        - Serve
+    parameters:
+      - description: The render id associated with the asset in UUID format
+        in: path
+        name: id
+        required: true
+        schema:
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+  "/assets/{id}":
+    delete:
+      description: Delete an asset by its asset id. If a render creates multiple assets, such as thumbnail and poster images, each asset must be deleted individually by the asset id.
+      operationId: deleteAsset
+      responses:
+        "204":
+          description: An empty response signifying the asset has been deleted
+      security:
+        - DeveloperKey: []
+      servers:
+        - url: https://api.shotstack.io/serve/{version}
+          variables:
+            version:
+              default: v1
+              description: Set the stage to `v1` for production usage. Set to `stage` to use the development sandbox.
+              enum:
+                - v1
+                - stage
+      summary: Delete Asset
+      tags:
+        - Serve
+    get:
+      description: The Serve API is used to interact with, and delete hosted assets including videos, images, audio files,  thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique for each asset and different from the render id.
+      operationId: getAsset
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                response:
+                  data:
+                    attributes:
+                      created: 2021-05-06T03:33:48.600Z
+                      filename: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+                      id: a4482cbf-e321-42a2-ac8b-947d26886840
+                      owner: 5ca6hu7s9k
+                      region: au
+                      renderId: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
+                      status: ready
+                      updated: 2021-05-06T03:33:49.521Z
+                      url: https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
+                    type: asset
+              schema:
+                $ref: "#/components/schemas/AssetResponse"
+          description: Get asset by asset id
+      security:
+        - DeveloperKey: []
+      servers:
+        - url: https://legacy.shotstack.io/{version}
+          variables:
+            version:
+              default: v1
+              description: Set the stage to `v1` for production usage. Set to `stage` to use the development sandbox.
+              enum:
+                - v1
+                - stage
+      summary: Get Asset
+      tags:
+        - Serve
+    parameters:
+      - description: The id of the asset in UUID format
+        in: path
+        name: id
+        required: true
+        schema:
+          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
   /render:
     post:
       description: Queue and render the contents of a timeline as a video file.
       operationId: postRender
-      parameters:
-        - description: The id of a dedicated queue (enterprise customers only).
-          example: ENTERPRISE_QUEUE_ID
-          in: header
-          name: x-api-queue-id
-          required: false
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
@@ -99,7 +213,7 @@ paths:
         - DeveloperKey: []
       summary: Render Video
       tags:
-        - Editing API
+        - Edit
   "/render/{id}":
     get:
       description: Get the rendering status, video url and details of a timeline by ID.
@@ -168,96 +282,9 @@ paths:
         - DeveloperKey: []
       summary: Get Render Status
       tags:
-        - Editing API
+        - Edit
     parameters:
       - description: The id of the timeline render task in UUID format
-        in: path
-        name: id
-        required: true
-        schema:
-          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
-          type: string
-  "/serve/assets/render/{id}":
-    get:
-      description: A render may generate more than one file, such as a video, thumbnail and poster image. When the assets are created the only known id is the render id returned by the original [render request](#render-video), status  request or webhook. This endpoint lets you look up one or more assets by the render id.
-      operationId: getAssetByRenderId
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                response:
-                  data:
-                    - attributes:
-                        created: 2021-05-06T03:33:48.600Z
-                        filename: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
-                        id: a4482cbf-e321-42a2-ac8b-947d26886840
-                        owner: 5ca6hu7s9k
-                        region: au
-                        renderId: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
-                        status: ready
-                        updated: 2021-05-06T03:33:49.521Z
-                        url: https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
-                      type: asset
-              schema:
-                $ref: "#/components/schemas/AssetRenderResponse"
-          description: Get one or more assets by render id
-      security:
-        - DeveloperKey: []
-      summary: Get Asset by Render ID
-      tags:
-        - Serve API
-    parameters:
-      - description: The render id associated with the asset in UUID format
-        in: path
-        name: id
-        required: true
-        schema:
-          pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
-          type: string
-  "/serve/assets/{id}":
-    delete:
-      description: Delete an asset by it's render id. If a render creates multiple assets, such as thumbnail and poster images, each asset must be deleted individually by the asset id.
-      operationId: deleteAsset
-      responses:
-        "204":
-          description: An empty response signifying the asset has been deleted
-      security:
-        - DeveloperKey: []
-      summary: Delete Asset
-      tags:
-        - Serve API
-    get:
-      description: The Serve API is used to interact with, and delete hosted assets including videos, images, audio files,  thumbnails and poster images. Use this endpoint to fetch an asset by asset id. Note that an asset id is unique for each asset and different from the render id.
-      operationId: getAsset
-      responses:
-        "200":
-          content:
-            application/json:
-              example:
-                response:
-                  data:
-                    attributes:
-                      created: 2021-05-06T03:33:48.600Z
-                      filename: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
-                      id: a4482cbf-e321-42a2-ac8b-947d26886840
-                      owner: 5ca6hu7s9k
-                      region: au
-                      renderId: 2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7
-                      status: ready
-                      updated: 2021-05-06T03:33:49.521Z
-                      url: https://cdn.shotstack.io/au/v1/msgtwx8iw6/2abd5c11-0f3d-4c6d-ba20-235fc9b8e8b7.mp4
-                    type: asset
-              schema:
-                $ref: "#/components/schemas/AssetResponse"
-          description: Get asset by asset id
-      security:
-        - DeveloperKey: []
-      summary: Get Asset
-      tags:
-        - Serve API
-    parameters:
-      - description: The id of the asset in UUID format
         in: path
         name: id
         required: true
@@ -458,7 +485,7 @@ components:
           type: number
         offset:
           $ref: "#/components/schemas/Offset"
-          description: Offset the location of the asset relative to it's position on the viewport. The offset distance is relative to the width of the viewport - for example an x offset of 0.5 will move the asset half the viewport width to the right.
+          description: Offset the location of the asset relative to its position on the viewport. The offset distance is relative to the width of the viewport - for example an x offset of 0.5 will move the asset half the viewport width to the right.
         opacity:
           default: 1
           description: Sets the opacity of the Clip where 1 is opaque and 0 is transparent.
@@ -1011,7 +1038,7 @@ components:
           type: string
         offset:
           $ref: "#/components/schemas/Offset"
-          description: Offset the location of the title relative to it's position on the screen.
+          description: Offset the location of the title relative to its position on the screen.
         position:
           default: center
           description: |-

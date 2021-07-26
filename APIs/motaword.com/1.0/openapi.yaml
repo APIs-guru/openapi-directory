@@ -4524,6 +4524,26 @@ paths:
       tags:
         - Strings
       x-cli-cmd-group: strings
+    put:
+      description: Update a translation by adding a new translation memory unit item
+      operationId: updateTranslationMemoryUnit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TranslationMemoryUnit"
+      responses:
+        "200":
+          description: Translation updated by adding new translation memory unit
+        "400":
+          description: Corporate id, source language, target language, source string or target string is not provided
+        "404":
+          description: Source language or target language is not found
+        "500":
+          description: Something went wrong and translation unit is not updated
+      summary: Update translation
+      tags:
+        - Strings
   "/strings/{languageCode}/package":
     post:
       operationId: packageUserTranslationMemory
@@ -7422,6 +7442,17 @@ components:
                 - course
               type: string
           type: object
+    TranslationMemoryUnit:
+      properties:
+        sourceLanguage:
+          type: string
+        sourceText:
+          type: string
+        targetLanguage:
+          type: string
+        targetText:
+          type: string
+      type: object
     UpdatePaymentInfo:
       allOf:
         - $ref: "#/components/schemas/Address"

@@ -2621,22 +2621,24 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              apply_to:
-                - server:
-                    id: 42
-                  type: server
-              labels:
-                env: dev
-              name: Corporate Intranet Protection
-              rules:
-                - direction: in
-                  port: "80"
-                  protocol: tcp
-                  source_ips:
-                    - 28.239.13.1/32
-                    - 28.239.14.0/24
-                    - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
+            examples:
+              request:
+                value:
+                  apply_to:
+                    - server:
+                        id: 42
+                      type: server
+                  labels:
+                    env: dev
+                  name: Corporate Intranet Protection
+                  rules:
+                    - direction: in
+                      port: "80"
+                      protocol: tcp
+                      source_ips:
+                        - 28.239.13.1/32
+                        - 28.239.14.0/24
+                        - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
             schema:
               properties:
                 apply_to:
@@ -3956,11 +3958,10 @@ paths:
       requestBody:
         content:
           application/json:
-            schema:
-              properties:
-                rules:
-                  description: Array of rules
-                  example:
+            examples:
+              rules:
+                value:
+                  rules:
                     - direction: in
                       port: "80"
                       protocol: tcp
@@ -3968,6 +3969,10 @@ paths:
                         - 28.239.13.1/32
                         - 28.239.14.0/24
                         - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
+            schema:
+              properties:
+                rules:
+                  description: Array of rules
                   items:
                     properties:
                       destination_ips:
@@ -7798,10 +7803,10 @@ paths:
                                   type: object
                                 type: array
                               ip:
-                                description: IP targets where the traffic should be routed through. Currently it is only possible to use the IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
+                                description: IP targets where the traffic should be routed through. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
                                 properties:
                                   ip:
-                                    description: IP of a server that belongs to the same customer (public IPv4/IPv6).
+                                    description: IP of a server that belongs to the same customer (public IPv4/IPv6) or private IP in a Subnetwork type vswitch.
                                     example: 203.0.113.1
                                     type: string
                                 required:
@@ -8155,10 +8160,10 @@ paths:
                           type: object
                         type: array
                       ip:
-                        description: IP targets where the traffic should be routed through. Currently it is only possible to use the IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
+                        description: IP targets where the traffic should be routed through. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
                         properties:
                           ip:
-                            description: IP of a server that belongs to the same customer (public IPv4/IPv6).
+                            description: IP of a server that belongs to the same customer (public IPv4/IPv6) or private IP in a Subnetwork type vswitch.
                             example: 203.0.113.1
                             type: string
                         required:
@@ -8798,10 +8803,10 @@ paths:
                                 type: object
                               type: array
                             ip:
-                              description: IP targets where the traffic should be routed through. Currently it is only possible to use the IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
+                              description: IP targets where the traffic should be routed through. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
                               properties:
                                 ip:
-                                  description: IP of a server that belongs to the same customer (public IPv4/IPv6).
+                                  description: IP of a server that belongs to the same customer (public IPv4/IPv6) or private IP in a Subnetwork type vswitch.
                                   example: 203.0.113.1
                                   type: string
                               required:
@@ -9307,10 +9312,10 @@ paths:
                                 type: object
                               type: array
                             ip:
-                              description: IP targets where the traffic should be routed through. Currently it is only possible to use the IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
+                              description: IP targets where the traffic should be routed through. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
                               properties:
                                 ip:
-                                  description: IP of a server that belongs to the same customer (public IPv4/IPv6).
+                                  description: IP of a server that belongs to the same customer (public IPv4/IPv6) or private IP in a Subnetwork type vswitch.
                                   example: 203.0.113.1
                                   type: string
                               required:
@@ -9914,10 +9919,10 @@ paths:
                                 type: object
                               type: array
                             ip:
-                              description: IP targets where the traffic should be routed through. Currently it is only possible to use the IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
+                              description: IP targets where the traffic should be routed through. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
                               properties:
                                 ip:
-                                  description: IP of a server that belongs to the same customer (public IPv4/IPv6).
+                                  description: IP of a server that belongs to the same customer (public IPv4/IPv6) or private IP in a Subnetwork type vswitch.
                                   example: 203.0.113.1
                                   type: string
                               required:
@@ -10487,10 +10492,10 @@ paths:
             schema:
               properties:
                 ip:
-                  description: IP targets where the traffic should be routed through. Currently it is only possible to use the IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
+                  description: IP targets where the traffic should be routed through. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
                   properties:
                     ip:
-                      description: IP of a server that belongs to the same customer (public IPv4/IPv6).
+                      description: IP of a server that belongs to the same customer (public IPv4/IPv6) or private IP in a Subnetwork type vswitch.
                       example: 203.0.113.1
                       type: string
                   required:
@@ -11651,10 +11656,10 @@ paths:
             schema:
               properties:
                 ip:
-                  description: IP targets where the traffic should be routed through. Currently it is only possible to use the IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
+                  description: IP targets where the traffic should be routed through. It is only possible to use the (Public or vSwitch) IPs of Hetzner Online Root Servers belonging to the project owner. IPs belonging to other users are blocked. Additionally IPs belonging to services provided by Hetzner Cloud (Servers, Load Balancers, ...) are blocked as well.
                   properties:
                     ip:
-                      description: IP of a server that belongs to the same customer (public IPv4/IPv6).
+                      description: IP of a server that belongs to the same customer (public IPv4/IPv6) or private IP in a Subnetwork type vswitch.
                       example: 203.0.113.1
                       type: string
                   required:

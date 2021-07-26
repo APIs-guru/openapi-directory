@@ -8473,6 +8473,24 @@ paths:
           required: false
           schema:
             type: string
+        - description: Defines product's height
+          in: query
+          name: height
+          required: false
+          schema:
+            type: number
+        - description: Defines product's length
+          in: query
+          name: length
+          required: false
+          schema:
+            type: number
+        - description: Defines product's width
+          in: query
+          name: width
+          required: false
+          schema:
+            type: number
       responses:
         "200":
           content:
@@ -9045,6 +9063,12 @@ paths:
         - description: Defines new product's variant special price
           in: query
           name: special_price
+          required: false
+          schema:
+            type: number
+        - description: Defines new product's retail price
+          in: query
+          name: retail_price
           required: false
           schema:
             type: number
@@ -9883,15 +9907,19 @@ components:
               storeIds:
                 items:
                   type: string
+                minItems: 1
                 type: array
-                x-not_empty: true
               uid:
                 type: string
               url:
                 type: string
+            required:
+              - uid
+              - url
+              - storeIds
             type: object
+          minItems: 1
           type: array
-          x-not_empty: true
         lightspeed_api_key:
           description: LightSpeed api key
           type: string
@@ -11348,6 +11376,8 @@ components:
           type: string
         modified_at:
           $ref: "#/components/schemas/A2CDateTime"
+        order_details_url:
+          type: string
         order_id:
           type: string
         order_products:
@@ -12352,6 +12382,9 @@ components:
           type: string
         model:
           description: Defines product's model that has to be added
+          type: string
+        mpn:
+          description: Manufacturer Part Number. A MPN is an identifier of a particular part design or material used.
           type: string
         name:
           description: Defines product's name that has to be added

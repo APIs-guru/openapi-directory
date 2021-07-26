@@ -1186,6 +1186,87 @@ paths:
       summary: List Organizations
       tags:
         - Organizations
+  "/v1/organizations/{organizationId}/auditlogs":
+    get:
+      description: |-
+        This endpoint returns the list of Audit log items for a given Organization 
+        and the result can be optionally filtered by Product and/or Config and/or Environment.
+      operationId: get-organization-auditlogs
+      parameters:
+        - description: The identifier of the Organization.
+          in: path
+          name: organizationId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The identifier of the Product.
+          in: query
+          name: productId
+          schema:
+            format: uuid
+            nullable: true
+            type: string
+        - description: The identifier of the Config.
+          in: query
+          name: configId
+          schema:
+            format: uuid
+            nullable: true
+            type: string
+        - description: The identifier of the Environment.
+          in: query
+          name: environmentId
+          schema:
+            format: uuid
+            nullable: true
+            type: string
+        - description: Filter Audit logs by Audit log type.
+          in: query
+          name: auditLogType
+          schema:
+            allOf:
+              - $ref: "#/components/schemas/AuditLogType"
+            nullable: true
+        - description: Filter Audit logs by starting UTC date.
+          in: query
+          name: fromUtcDateTime
+          schema:
+            format: date-time
+            nullable: true
+            type: string
+        - description: Filter Audit logs by ending UTC date.
+          in: query
+          name: toUtcDateTime
+          schema:
+            format: date-time
+            nullable: true
+            type: string
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/AuditLogItemModel"
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/AuditLogItemModel"
+                type: array
+          description: ""
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: List Audit log items for Organization
+      tags:
+        - Audit logs
   "/v1/organizations/{organizationId}/members":
     get:
       description: |-
@@ -1542,7 +1623,7 @@ paths:
   "/v1/products/{productId}/auditlogs":
     get:
       description: |-
-        This endpoint returns the list of Audit logs for a given Product 
+        This endpoint returns the list of Audit log items for a given Product 
         and the result can be optionally filtered by Config and/or Environment.
       operationId: get-auditlogs
       parameters:
@@ -1610,7 +1691,7 @@ paths:
           description: Not found.
         "429":
           description: Too many requests. In case of the request rate exceeds the rate limits.
-      summary: List Audit logs
+      summary: List Audit log items for Product
       tags:
         - Audit logs
   "/v1/products/{productId}/configs":

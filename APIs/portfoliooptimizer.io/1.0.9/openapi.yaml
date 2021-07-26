@@ -49,13 +49,13 @@ info:
     * The API requests are restricted to a subset of all the available endpoints and/or endpoints features  
     * The API requests are limited to 1 request per second for all the anonymous users combined, with concurrent requests rejected 
     * The API requests are limited to 1 second of execution time
-    * The API requests are limited to 20 assets, 100 portfolios, 500 series data points
+    * The API requests are limited to 20 assets, 100 portfolios, 500 series data points and 5 factors
 
     For authenticated users with an [API key](#overview--api-key):  
     * The API requests have access to all the available endpoints and endpoints features
     * The API requests are limited to 10000 requests per 24 hour per API key, with concurrent requests queued
     * The API requests are limited to 2.5 seconds of execution time
-    * The API requests are limited to 100 assets, 500 portfolios, 2500 series data points
+    * The API requests are limited to 100 assets, 500 portfolios, 2500 series data points and 25 factors
 
     > **Notes:** 
     > * It is possible to further relax the API limits, or to disable the API limits alltogether; please [contact the support](https://portfoliooptimizer.io/contact/) for more details.
@@ -118,6 +118,7 @@ tags:
   - name: Assets Returns
   - name: Assets Variance
   - name: Assets Volatility
+  - name: Factors
   - name: Portfolio Analysis
   - name: Portfolio Construction
   - name: Portfolio Generation
@@ -166,7 +167,7 @@ paths:
                       items:
                         properties:
                           assetReturns:
-                            description: assetReturns[t] is the return of the asset from the time t to the time t+1, in percentage; all the assetReturns arrays must have the same length
+                            description: assetReturns[t] is the return of the asset at the time t, in percentage; all the assetReturns arrays must have the same length
                             items:
                               type: number
                             minItems: 2
@@ -475,7 +476,7 @@ paths:
                       items:
                         properties:
                           assetReturns:
-                            description: assetReturns[t] is the return of the asset from the time t to the time t+1, in percentage; all the assetReturns arrays must have the same length
+                            description: assetReturns[t] is the return of the asset at the time t, in percentage; all the assetReturns arrays must have the same length
                             items:
                               type: number
                             minItems: 2
@@ -622,7 +623,7 @@ paths:
                   items:
                     properties:
                       assetReturns:
-                        description: assetReturns[t] is the return of the asset from the time t to the time t+1, in percentage; all the assetReturns arrays must have the same length
+                        description: assetReturns[t] is the return of the asset at the time t, in percentage; all the assetReturns arrays must have the same length
                         items:
                           type: number
                         minItems: 2
@@ -799,7 +800,7 @@ paths:
                     items:
                       properties:
                         assetReturns:
-                          description: assetReturns[t] is the arithmetic return of the asset from the time t to the time t+1, in percentage
+                          description: assetReturns[t] is the arithmetic return of the asset from the time t-1 to the time t, in percentage
                           items:
                             type: number
                           type: array
@@ -843,7 +844,7 @@ paths:
                   items:
                     properties:
                       assetReturns:
-                        description: assetReturns[t] is the return of the asset from the time t to the time t+1, in percentage
+                        description: assetReturns[t] is the return of the asset at the time t, in percentage
                         items:
                           type: number
                         minItems: 1
@@ -938,7 +939,7 @@ paths:
                       items:
                         properties:
                           assetReturns:
-                            description: assetReturns[t] is the return of the asset from the time t to the time t+1, in percentage
+                            description: assetReturns[t] is the return of the asset at the time t, in percentage
                             items:
                               type: number
                             minItems: 2
@@ -1062,7 +1063,7 @@ paths:
                   items:
                     properties:
                       assetReturns:
-                        description: assetReturns[t] is the return of the asset from the time t to the time t+1, in percentage
+                        description: assetReturns[t] is the return of the asset at the time t, in percentage
                         items:
                           type: number
                         minItems: 2
@@ -1158,7 +1159,7 @@ paths:
                       items:
                         properties:
                           assetReturns:
-                            description: assetReturns[t] is the return of the asset from the time t to the time t+1, in percentage
+                            description: assetReturns[t] is the return of the asset at the time t, in percentage
                             items:
                               type: number
                             minItems: 2
@@ -1282,7 +1283,7 @@ paths:
                   items:
                     properties:
                       assetReturns:
-                        description: assetReturns[t] is the return of the asset from the time t to the time t+1, in percentage
+                        description: assetReturns[t] is the return of the asset at the time t, in percentage
                         items:
                           type: number
                         minItems: 2
@@ -1328,6 +1329,83 @@ paths:
       summary: Sample volatility
       tags:
         - Assets Volatility
+      x-codegen-request-body-name: body
+  /factors/residualization:
+    post:
+      description: |
+        Compute the residuals of a factor against a set of factors, using a returns-based linear regression analysis.
+
+        References
+        * [Factor Research, Factor Exposure Analysis: Exploring Residualization](https://insights.factorresearch.com/research-factor-exposure-analysis-exploring-residualization/)
+        * [Catalina B. Garcia, Román Salmeron, Claudia Garcia & Jose Garcia (2019): Residualization: justification, properties and application, Journal of Applied Statistics](https://doi.org/10.1080/02664763.2019.1701638)
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                description: Residualize the returns of the first factor among a set of 2 factors, observed during 3 time periods
+                value:
+                  factors:
+                    - factorReturns:
+                        - 0.01
+                        - 0.02
+                        - -0.01
+                    - factorReturns:
+                        - 0.025
+                        - 0.005
+                        - -0.02
+                  residualizedFactor: 1
+            schema:
+              properties:
+                factors:
+                  items:
+                    properties:
+                      factorReturns:
+                        description: factorReturns[t] is the return of the factor at the time t; all the factorReturns arrays must have the same length
+                        items:
+                          type: number
+                        minItems: 2
+                        type: array
+                    required:
+                      - factorReturns
+                    type: object
+                  minItems: 2
+                  type: array
+                residualizedFactor:
+                  description: The index of the factor to residualize
+                  minimum: 1
+                  type: integer
+              required:
+                - factors
+                - residualizedFactor
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  description: Computed returns of a residualized factor, observed during 3 time periods
+                  value:
+                    residualizedFactorReturns:
+                      - -0.001885245901639342
+                      - 0.017622950819672134
+                      - -0.0004918032786885261
+              schema:
+                properties:
+                  residualizedFactorReturns:
+                    description: residualizedFactorReturns[t] is the return of the residualized factor at the time t
+                    items:
+                      type: number
+                    type: array
+                required:
+                  - residualizedFactorReturns
+                type: object
+          description: OK
+      summary: Residualization
+      tags:
+        - Factors
       x-codegen-request-body-name: body
   /portfolio/analysis/contributions/return:
     post:
@@ -1771,6 +1849,115 @@ paths:
                 type: object
           description: OK
       summary: Drawdowns
+      tags:
+        - Portfolio Analysis
+      x-codegen-request-body-name: body
+  /portfolio/analysis/factor/exposures:
+    post:
+      description: |
+        Compute the exposures of one or several portfolio(s) to a set of factors, using a returns-based linear regression analysis.
+
+        References
+        * [Measuring Factor Exposures: Uses and Abuses, Ronen Israel and Adrienne Ross, The Journal of Alternative Investments Summer 2017, 20 (1) 10-25](https://jai.pm-research.com/content/20/1/10.short) 
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                description: Compute the exposures of one portfolio to two factors
+                value:
+                  factors:
+                    - factorReturns:
+                        - -0.00414169934
+                        - 0.01201656108
+                        - 0.0087181369
+                    - factorReturns:
+                        - -0.01387258782
+                        - -0.01097961581
+                        - 0.01742002062
+                  portfolios:
+                    - portfolioReturns:
+                        - -0.04302
+                        - 0.01310372213
+                        - 0.06482589323
+            schema:
+              properties:
+                factors:
+                  items:
+                    properties:
+                      factorReturns:
+                        description: factorReturns[t] is the return of the factor at the time t; all the factorReturns arrays must have the same length, equal to the common length of the portfolioReturns arrays
+                        items:
+                          type: number
+                        minItems: 2
+                        type: array
+                    required:
+                      - factorReturns
+                    type: object
+                  minItems: 1
+                  type: array
+                portfolios:
+                  items:
+                    properties:
+                      portfolioReturns:
+                        description: portfolioReturns[t] is the return of the portfolio at the time t, all the portfolioReturns arrays must have the same length, equal to the common length of the factorReturns arrays
+                        items:
+                          type: number
+                        minItems: 2
+                        type: array
+                    required:
+                      - portfolioReturns
+                    type: object
+                  minItems: 1
+                  type: array
+              required:
+                - factorReturns
+                - portfolios
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example:
+                  description: Computed exposures of one portfolio to two factors
+                  value:
+                    portfolios:
+                      - portfolioAlpha: -0.000017563172006410804
+                        portfolioBetas:
+                          - 3.083191766752847
+                          - 2.17931822921701
+                        portfolioRSquared: 1
+              schema:
+                properties:
+                  portfolios:
+                    items:
+                      properties:
+                        portfolioAlpha:
+                          description: The portfolio alpha, which correponds to the portion of the portfolio returns that cannot be explained by the portfolio factor exposures
+                          type: number
+                        portfolioBetas:
+                          description: The portfolio betas, which correspond to the portfolio factor exposures
+                          items:
+                            type: number
+                          minItems: 1
+                          type: array
+                        portfolioRSquared:
+                          description: The portfolio R^2, which indicates how much of the variability in the portfolio returns can be explained by the portfolio factor exposures; generally, the higher the R^2 the better the portfolio factor exposures explain the portfolio returns
+                          type: number
+                      required:
+                        - portfolioAlpha
+                        - portfolioBetas
+                        - portfolioRSquared
+                      type: object
+                    minItems: 1
+                    type: array
+                required:
+                  - portfolios
+                type: object
+          description: OK
+      summary: Factor Exposures
       tags:
         - Portfolio Analysis
       x-codegen-request-body-name: body
@@ -2552,7 +2739,7 @@ paths:
             schema:
               properties:
                 benchmarkReturns:
-                  description: benchmarkReturns[t] is the return of the benchmark from the time t to the time t+1; the benchmarkReturns array must have the same length as all the portfolioReturns arrays
+                  description: benchmarkReturns[t] is the return of the benchmark at the time t; the benchmarkReturns array must have the same length as all the portfolioReturns arrays
                   items:
                     type: number
                   minItems: 2
@@ -2561,7 +2748,7 @@ paths:
                   items:
                     properties:
                       portfolioReturns:
-                        description: portfolioReturns[t] is the return of the portfolio from the time t to the time t+1, the portfolioReturns must have the same length as the benchmarkReturns array
+                        description: portfolioReturns[t] is the return of the portfolio at the time t, the portfolioReturns must have the same length as the benchmarkReturns array
                         items:
                           type: number
                         minItems: 2
@@ -2947,6 +3134,7 @@ paths:
         * Minimum and maximum portfolio exposure constraints
 
         References 
+        * [Sharpe, W. (1992), “Asset Allocation: Management Style and Performance Measurement.” Journal of Portfolio Management, Winter, 7-19](https://web.stanford.edu/~wfsharpe/art/sa/sa.htm)
         * Konstantinos Benidis, Yiyong Feng, Daniel P. Palomar, Optimization Methods for Financial Index Tracking: From Theory to Practice, now publishers Inc (7 juin 2018)
       requestBody:
         content:
@@ -3000,7 +3188,7 @@ paths:
                   items:
                     properties:
                       assetReturns:
-                        description: assetReturns[t] is the return of the asset from the time t to the time t+1, in percentage; all the assetReturns arrays must have the same length
+                        description: assetReturns[t] is the return of the asset at the time t, in percentage; all the assetReturns arrays must have the same length
                         items:
                           type: number
                         minItems: 2
@@ -3011,7 +3199,7 @@ paths:
                   minItems: 2
                   type: array
                 benchmarkReturns:
-                  description: benchmarkReturns[t] is the return of the benchmark from the time t to the time t+1; the benchmarkReturns array must have the same length as all the assetReturns arrays
+                  description: benchmarkReturns[t] is the return of the benchmark at the time t; the benchmarkReturns array must have the same length as all the assetReturns arrays
                   items:
                     type: number
                   minItems: 2

@@ -454,6 +454,31 @@ paths:
       summary: Meter Reading
       tags:
         - Metering (Decorator)
+  /quittung/commit:
+    post:
+      description: |
+        Uses collected fields or provided fields to create a final receipt (Strom-Quittung).
+      operationId: quittungComit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                account:
+                  type: string
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: Unique ID of a receipt. It might be used via https://api.corrently.io/v2.0/quittung/pdf?token= to retrieve a PDF version of receipt or via   https://corrently.de/service/quittung.html?token= to get online version.
+                type: string
+          description: Success
+      summary: Finishs a collection of data and finalizes receipt. Use this method after collecting all data via quittung/prepare
+      tags:
+        - Strom-Quittung
   /quittung/create:
     post:
       description: |
