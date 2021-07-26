@@ -8,20 +8,18 @@ info:
     url: https://www.ably.io/contact
     x-twitter: ablyrealtime
   description: The [REST API specification](https://www.ably.io/documentation/rest-api) for Ably.
-  title: Ably REST API
+  title: Platform API
   version: 1.1.0
   x-apisguru-categories:
     - cloud
   x-logo:
     url: https://twitter.com/ablyrealtime/profile_image?size=original
   x-origin:
-    - converter:
-        url: https://github.com/mermade/oas-kit
-        version: 7.0.4
-      format: openapi
-      url: https://raw.githubusercontent.com/ably/open-specs/main/swagger.yaml
+    - format: openapi
+      url: https://raw.githubusercontent.com/ably/open-specs/main/definitions/platform-v1.yaml
       version: "3.0"
   x-providerName: ably.io
+  x-serviceName: platform
 security:
   - basicAuth: []
   - bearerAuth: []
