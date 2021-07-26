@@ -573,6 +573,25 @@ components:
         - format
         - transport
       type: object
+    Destination:
+      properties:
+        itemCount:
+          description: The number of reports being sent to this destination
+          type: integer
+        organization:
+          description: The name of the organization reciving the report
+          type: string
+        organization_id:
+          description: The organization id (i.e. {state abbreviation}-phd)
+          type: string
+        sending_at:
+          description: The time at which the report will be sent
+          format: date-time
+          type: string
+        service:
+          description: The service used for delivering the report
+          type: string
+      type: object
     Detail:
       properties:
         detail:
@@ -587,6 +606,20 @@ components:
             - Parameter
             - Report
             - Item
+          type: string
+      type: object
+    ItemRouting:
+      properties:
+        destinations:
+          description: The organization and service destinations
+          items:
+            type: string
+          type: array
+        reportIndex:
+          description: the index of the item in the submitted report (0 based)
+          type: integer
+        trackingId:
+          description: The tracking id provided by the sender defined in the schema, null otherwise
           type: string
       type: object
     NullTransport:
@@ -733,10 +766,13 @@ components:
       type: object
     Report:
       properties:
+        destinationCount:
+          description: total destinations recieving the report(s)
+          type: integer
         destinations:
           description: where the report is being sent to
           items:
-            type: string
+            $ref: "#/components/schemas/Destination"
           type: array
         errorCount:
           description: total errors found during initial validation.  There may be multiple errors per item.
@@ -752,6 +788,11 @@ components:
         reportItemCount:
           description: total number of individual reports sent to the Hub (in a csv, the number of data lines sent)
           type: integer
+        routing:
+          description: The receiver destination names for each item in the report. This is displayed when verbose=true is present on the query string.
+          items:
+            $ref: "#/components/schemas/ItemRouting"
+          type: array
         timestamp:
           description: the timestamp for this report submission
           format: time-date
