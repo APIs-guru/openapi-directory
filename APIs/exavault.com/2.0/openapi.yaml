@@ -19,7 +19,7 @@ info:
         url: https://github.com/mermade/oas-kit
         version: 2.6.0
       format: openapi
-      url: https://www.exavault.com/api/docs/evapi_2.0_public.yaml
+      url: https://exavault-website.cdn.prismic.io/exavault-website/2d2d871e-394d-433e-9305-f38b6656f279_evapi_2.0_public.yaml
       version: "3.0"
   x-providerName: exavault.com
 externalDocs:
@@ -460,7 +460,7 @@ paths:
           name: limit
           schema:
             type: integer
-        - description: Comma separated list sort params. The sort order for each sort field is ascending unless it is prefixed with a minus (“-“), in which case it will be descending. <br> Sort options are; **date**, **ip_address**, **username**, **file**, **sort_logs_file_source**, **type**, **duration**, **size**, and **protocol**
+        - description: Comma separated list sort params
           in: query
           name: sort
           schema:
@@ -592,7 +592,7 @@ paths:
           schema:
             example: 100
             type: integer
-        - description: Comma separated list sort params. The sort order for each sort field is ascending unless it is prefixed with a minus (“-“), in which case it will be descending. <br> Sort options are; **endpoint_url**, **event**, **status**, **username**, **attempt_id**, and **resource_path**
+        - description: Comma separated list sort params
           example: -date,event
           in: query
           name: sort
@@ -3355,7 +3355,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Endpoint support multiple sort fields by allowing array of sort params. Sort fields should be applied in the order specified. The sort order for each sort field is ascending unless it is prefixed with a minus (“-“), in which case it will be descending. <br> Sort values are; **name**, **size**, **date**, **type**, and **timeline**.
+        - description: Endpoint support multiple sort fields by allowing array of sort params. Sort fields should be applied in the order specified. The sort order for each sort field is ascending unless it is prefixed with a minus (“-“), in which case it will be descending.
           in: query
           name: sort
           schema:
@@ -3670,7 +3670,7 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: Endpoint support multiple sort fields by allowing array of sort params. Sort fields should be applied in the order specified. The sort order for each sort field is ascending unless it is prefixed with a minus (“-“), in which case it will be descending. <br> Sort values are; **name**, **size**, **date**, **type**, and **timeline**.
+        - description: Endpoint support multiple sort fields by allowing array of sort params. Sort fields should be applied in the order specified. The sort order for each sort field is ascending unless it is prefixed with a minus (“-“), in which case it will be descending.
           in: query
           name: sort
           schema:
@@ -4758,7 +4758,7 @@ paths:
               - active
               - currentUser
             type: string
-        - description: What order the list of matches should be in. <br> Sort values are; **sort_shares_name**, **created**, **sort_shares_user**, and **sort_shares_access_mode**.
+        - description: What order the list of matches should be in.
           example: created
           in: query
           name: sort
@@ -6512,7 +6512,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/apiKeyParam"
         - $ref: "#/components/parameters/accessTokenParam"
-        - description: List of related record types to include in the response. Valid options are `owningAccount` and `resource`
+        - description: List of related record types to include. Valid options are `owningAccount` and `resource`
           in: query
           name: include
           schema:
@@ -6542,12 +6542,7 @@ paths:
       tags:
         - Webhooks
     post:
-      description: |-
-        Create a new Webhook on your account. Creating a Webhook will require an endpoint URL, a path, what events should trigger a webhook, and what request version to use. 
-
-        **Notes:**
-
-        While you can use our v1 request body, it will be deprecated in the future. 
+      description: "Create a new Webhook on your account. Creating a Webhook will require an endpoint URL, a path, what events should trigger a webhook, and what request version to use. "
       operationId: addWebhook
       parameters:
         - $ref: "#/components/parameters/apiKeyParam"
@@ -6555,25 +6550,7 @@ paths:
       requestBody:
         content:
           application/json:
-            examples:
-              Sample Request:
-                value:
-                  endpointUrl: https://example.com/webhook
-                  resource: /uploads-folder
-                  responseVersion: v1
-                  triggers:
-                    resources:
-                      compress: true
-                      copy: true
-                      createFolder: true
-                      delete: true
-                      download: true
-                      extract: true
-                      move: true
-                      rename: true
-                      upload: true
-                    shares:
-                      formSubmit: true
+            examples: {}
             schema:
               properties:
                 endpointUrl:
@@ -6598,11 +6575,6 @@ paths:
                 - endpointUrl
               title: AddWebhookRequestBody
               type: object
-          application/xml:
-            schema:
-              properties: {}
-              type: object
-        description: ""
       responses:
         "201":
           content:
@@ -6772,110 +6744,6 @@ paths:
         "200":
           content:
             application/json:
-              examples:
-                Operation Success:
-                  value:
-                    data:
-                      - attributes:
-                          created: 2021-03-04T22:22:00-08:00
-                          endpointUrl: https://example.com/webhook
-                          failed: true
-                          modified: 2021-03-04T22:23:03-08:00
-                          responseVersion: v2
-                          triggers:
-                            resources:
-                              compress: true
-                              copy: true
-                              createFolder: true
-                              delete: true
-                              download: true
-                              extract: true
-                              move: true
-                              rename: true
-                              upload: true
-                            shares:
-                              formSubmit: true
-                          verificationToken: 8df8200f7dee90ba4a41abe39c858c6c
-                        id: 0
-                        relationships:
-                          ownerAccount:
-                            data:
-                              id: 23422
-                              type: account
-                          resource:
-                            data:
-                              id: 134122
-                              type: resource
-                        type: webhook
-                    included:
-                      - attributes:
-                          accountName: string
-                          accountOnboarding: false
-                          allowedIp:
-                            - ipEnd: 192.30.24.5
-                              ipStart: 192.30.23.2
-                          branding: true
-                          brandingSettings:
-                            companyName: null
-                            customEmail: custom@example.com
-                            logo: examplelogo.png
-                            logoExt: png
-                            theme: default
-                            verifiedDomain: string
-                            verifiedDomainId: string
-                            verifiedDomainValid: true
-                          clientId: 1
-                          complexPasswords: false
-                          created: 2017-01-12T09:06:21Z
-                          customDomain: true
-                          customSignature: null
-                          externalDomains: []
-                          maxUsers: 1000
-                          modified: 2017-06-03T20:42:05Z
-                          planDetails:
-                            apiKeys: 0
-                            apiTokens: 0
-                            colorSchema: true
-                            customDomain: true
-                            customName: true
-                            directLinks: true
-                            ipWhitelist: true
-                            sharingOptions:
-                              - string
-                            sshKeys: 0
-                            storageAddOn: 0
-                            unlimitedUsers: true
-                            userExpiration: true
-                            userImport: true
-                            webhookOptions:
-                              amount: 0
-                              includeTriggers: string
-                              restrictionTypes:
-                                - string
-                          quota:
-                            bandwidthLimit: 0
-                            bandwidthUsed: 0
-                            diskLimit: 375809638400
-                            diskUsed: 1225352192
-                            noticeEnabled: true
-                            noticeThreshold: 80
-                            transactionsLimit: 0
-                            transactionsNoticeEnabled: true
-                            transactionsNoticeThreshold: 0
-                          secureOnly: false
-                          showReferralLinks: true
-                          status: 1
-                          userCount: 3
-                          welcomeEmailContent: Welcome to your new account!
-                          welcomeEmailSubject: ExaVault File Sharing Account
-                        id: 13758
-                        relationships:
-                          masterUser:
-                            data:
-                              id: 0
-                              type: user
-                        type: account
-                    responseStatus: 200
               schema:
                 $ref: "#/components/schemas/WebhookResponse"
           description: Successful Operation
