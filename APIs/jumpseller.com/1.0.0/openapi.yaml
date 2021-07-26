@@ -1508,7 +1508,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/App"
           description: OK
-      summary: Retrieve all the Store's JSApps
+      summary: Retrieve all the Store's JSApps.
       tags:
         - Apps
     post:
@@ -1529,7 +1529,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/JSApp"
           description: OK
-      summary: Create a Store JSApp
+      summary: Create a Store JSApp.
       tags:
         - Apps
   "/jsapps/{code}.json":
@@ -1576,7 +1576,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/JSApp"
           description: OK
-      summary: Retrieve a JSApp
+      summary: Retrieve a JSApp.
       tags:
         - Apps
   /orders.json:
@@ -1947,6 +1947,44 @@ paths:
       summary: Update a Page.
       tags:
         - Pages
+  /partners/stores.json:
+    get:
+      parameters:
+        - $ref: "#/components/parameters/PartnerCodeParam"
+        - $ref: "#/components/parameters/PartnerAuthtokenParam"
+        - $ref: "#/components/parameters/PageParam"
+        - description: Statistics start date. Should be in format 'Y-m-d'.
+          in: query
+          name: from
+          required: true
+          schema:
+            format: string
+            type: string
+        - description: Statistics end date. Should be in format 'Y-m-d'.
+          in: query
+          name: to
+          required: true
+          schema:
+            format: sting
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/type"
+                type: array
+          description: Array of partner stores statistics.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PartnerError"
+          description: Bad Request.
+      summary: Retrieve statistics.
+      tags:
+        - Partners
   /payment_methods.json:
     get:
       parameters:
@@ -2656,7 +2694,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/NotFound"
           description: Product Not Found.
-      summary: Add an existing Custom Field to a Product .
+      summary: Add an existing Custom Field to a Product.
       tags:
         - Product Custom Fields
   "/products/{id}/fields/count.json":
@@ -3620,6 +3658,72 @@ paths:
       summary: Update a Shipping Method.
       tags:
         - Shipping Methods
+  /store/check_status.json:
+    get:
+      parameters:
+        - $ref: "#/components/parameters/PartnerCodeParam"
+        - $ref: "#/components/parameters/PartnerAuthtokenParam"
+        - description: Store Code
+          in: query
+          name: store_code
+          required: true
+          schema:
+            format: string
+            type: string
+        - description: ISO 3166-2 code of the language used in the response messages.
+          in: query
+          name: locale
+          required: false
+          schema:
+            default: en
+            format: string
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/PartnerStoreStatus"
+                  - $ref: "#/components/schemas/NewPartnerStore"
+          description: A Store status object if creation is still in progress. A new Partner Store object when creation is done.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PartnerError"
+          description: Bad Request.
+      summary: Retrive store creation status.
+      tags:
+        - Partners
+  /store/create.json:
+    post:
+      parameters:
+        - $ref: "#/components/parameters/PartnerCodeParam"
+        - $ref: "#/components/parameters/PartnerAuthtokenParam"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PartnerStoreCreate"
+        description: New partnered Store parameters.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PartnerStoreCode"
+          description: A Partner Store object.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PartnerError"
+          description: Bad Request.
+      summary: Create a Partnered Store
+      tags:
+        - Partners
   /store/info.json:
     get:
       parameters:
@@ -3632,7 +3736,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Store"
           description: OK
-      summary: Retrieve Store Information
+      summary: Retrieve Store Information.
       tags:
         - Stores
   /store/languages.json:
@@ -3650,7 +3754,7 @@ paths:
                   $ref: "#/components/schemas/Language"
                 type: array
           description: OK
-      summary: Retrieve Store Languages
+      summary: Retrieve Store Languages.
       tags:
         - Stores
   /taxes.json:
@@ -3778,6 +3882,22 @@ components:
         default: 1
         format: integer
         type: integer
+    PartnerAuthtokenParam:
+      description: Partner authentication token.
+      in: query
+      name: auth_token
+      required: true
+      schema:
+        format: string
+        type: string
+    PartnerCodeParam:
+      description: Partner code.
+      in: query
+      name: partner_code
+      required: true
+      schema:
+        format: string
+        type: string
     ProductIDParam:
       description: Id of the Product
       in: path
@@ -3935,6 +4055,22 @@ components:
       properties:
         message:
           type: string
+    BestSold:
+      properties:
+        count:
+          description: Quantity sold.
+          type: integer
+        product_id:
+          type: integer
+          x-descriprtion: Product ID.
+        product_name:
+          type: string
+          x-descriprtion: Product name.
+        total:
+          description: Total sold amount.
+          format: float
+          type: number
+      type: object
     BillingAddress:
       properties:
         address:
@@ -4103,6 +4239,23 @@ components:
           type: string
         name:
           type: string
+    CountryOrders:
+      properties:
+        code:
+          type: string
+          x-descriprtion: Country code.
+        count:
+          description: Number of country orders.
+          type: integer
+        country:
+          type: string
+          x-descriprtion: Country name.
+        orders:
+          description: Orders per region.
+          items:
+            $ref: "#/components/schemas/RegionOrders"
+          type: array
+      type: object
     CustomField:
       properties:
         custom_field:
@@ -4387,6 +4540,15 @@ components:
             $ref: "#/components/schemas/CustomerToCustomerCategory"
           type: array
       type: object
+    DailyVisits:
+      properties:
+        date:
+          type: string
+          x-descriprtion: Date
+        visits:
+          type: integer
+          x-descriprtion: Total number of visits for the specified date.
+      type: object
     DigitalProduct:
       properties:
         digital_product:
@@ -4532,6 +4694,38 @@ components:
           type: string
         name:
           type: string
+    NewPartnerStore:
+      properties:
+        store:
+          properties:
+            code:
+              description: New Store code.
+              type: string
+            email_partner:
+              description: Partner email.
+              format: email
+              type: string
+            name:
+              description: New Store name.
+              type: string
+            redirect_url:
+              description: New Store redirect url.
+              format: uri
+              type: string
+          type: object
+      type: object
+    NewVsReturning:
+      properties:
+        date:
+          type: string
+          x-descriprtion: Date.
+        new:
+          type: integer
+          x-descriprtion: Total number of new.
+        returning:
+          type: integer
+          x-descriprtion: Total number of returning.
+      type: object
     NotFound:
       properties:
         message:
@@ -4690,6 +4884,9 @@ components:
           type: number
         duplicate_url:
           description: Duplicate Order URL for the given Order
+          type: string
+        external_shipping_rate_id:
+          description: Rate id for selected External Shipping Method rate
           type: string
         id:
           description: Unique identifier of the Order
@@ -4957,6 +5154,32 @@ components:
           description: False if shipping tax is not included on shipping price
           type: boolean
       type: object
+    OrdersData:
+      properties:
+        average:
+          format: float
+          type: number
+          x-descriprtion: Average order total.
+        count:
+          format: float
+          type: number
+          x-descriprtion: Total number of placed orders.
+        date:
+          type: string
+          x-descriprtion: Date
+        paid:
+          description: Total amount paid.
+          format: float
+          type: number
+        pending:
+          format: float
+          type: number
+          x-descriprtion: Total amount in pending orders.
+        total:
+          format: float
+          type: number
+          x-descriprtion: Total amount in placed orders.
+      type: object
     Page:
       properties:
         page:
@@ -5071,6 +5294,72 @@ components:
         name:
           type: string
       type: object
+    PartnerError:
+      properties:
+        error:
+          description: True when an error occurs.
+          type: boolean
+        field:
+          description: Field causing the error.
+          type: string
+        message:
+          description: Message describing the error.
+          type: string
+      type: object
+    PartnerStoreCode:
+      properties:
+        store:
+          properties:
+            code:
+              description: Store code.
+              type: string
+          type: object
+      type: object
+    PartnerStoreCreate:
+      properties:
+        aff:
+          description: Partner code.
+          type: string
+        email:
+          description: New Store administrator email.
+          format: email
+          type: string
+        locale:
+          default: en
+          description: ISO3166-2 code for the store langauge.
+          type: string
+        password:
+          description: New Store administrator password.
+          format: string
+          type: string
+        plan_name:
+          default: pro
+          description: New Store plan name.
+          enum:
+            - pro
+            - plus
+            - premium
+          type: string
+        reject_duplicates:
+          default: false
+          description: Indicates whether the request should fail if the Store name provided is already in use.
+          type: boolean
+        store_name:
+          description: New Store name.
+          type: string
+      type: object
+    PartnerStoreStatus:
+      properties:
+        status:
+          properties:
+            message:
+              description: Message describing the current creation status.
+              type: string
+            percentage:
+              description: Percentage of the creation process that was already completed.
+              type: string
+          type: object
+      type: object
     PaymentMethod:
       properties:
         payment_method:
@@ -5106,6 +5395,15 @@ components:
             - payu
             - servipag
           type: string
+      type: object
+    PaymentMethodFreq:
+      properties:
+        count:
+          type: string
+          x-descriprtion: Number of times payment method was used.
+        name:
+          type: string
+          x-descriprtion: Payment method name.
       type: object
     Product:
       properties:
@@ -5626,12 +5924,33 @@ components:
           format: int32
           type: integer
       type: object
+    Referrer:
+      properties:
+        count:
+          type: integer
+          x-descriprtion: Number of times referrer source was used.
+        source:
+          type: string
+          x-descriprtion: Referrer source.
+      type: object
     Region:
       properties:
         code:
           type: string
         name:
           type: string
+    RegionOrders:
+      properties:
+        city:
+          type: string
+          x-descriprtion: City name.
+        code:
+          type: integer
+          x-descriprtion: Region code.
+        country:
+          type: integer
+          x-descriprtion: Number of region orders.
+      type: object
     ShippingAddress:
       properties:
         address:
@@ -5731,6 +6050,15 @@ components:
             - external
           type: string
       type: object
+    ShippingMethodFreq:
+      properties:
+        count:
+          type: string
+          x-descriprtion: Number of times shipping method was used.
+        name:
+          type: string
+          x-descriprtion: Shipping method name.
+      type: object
     ShippingService:
       properties:
         id:
@@ -5806,6 +6134,128 @@ components:
         region_code:
           description: Region code of the Store's Address
           type: string
+    StoreStats:
+      properties:
+        best_sold:
+          description: Top 10 best sold products.
+          items:
+            $ref: "#/components/schemas/BestSold"
+          type: array
+        conversions:
+          properties:
+            added_to_cart:
+              description: Total add to cart conversions.
+              format: float
+              type: number
+            checkout:
+              description: Total checkout conversions.
+              format: float
+              type: number
+            paid:
+              description: Total paid conversions.
+              format: float
+              type: number
+          type: object
+        currency:
+          description: Store currency.
+          type: string
+        daily_visits:
+          description: Visits per day.
+          items:
+            $ref: "#/components/schemas/DailyVisits"
+          type: array
+        from:
+          description: Statistics start date.
+          type: string
+          x-fromat: iso8601
+        new_vs_returning_customers:
+          properties:
+            global:
+              description: Global percentage of new vs returning customers.
+              type: integer
+            per_day:
+              description: Numbers of new and returning customers per day.
+              items:
+                $ref: "#/components/schemas/NewVsReturning"
+              type: array
+          type: object
+        new_vs_returning_orders:
+          properties:
+            global:
+              description: Global percentage of new vs returning customers.
+              type: integer
+            per_day:
+              description: Numbers of new and returning customers per day.
+              items:
+                $ref: "#/components/schemas/NewVsReturning"
+              type: array
+          type: object
+        orders:
+          properties:
+            average:
+              description: Average order amount.
+              format: float
+              type: number
+            count:
+              description: Total number of orders.
+              type: integer
+            data:
+              description: Orders data.
+              items:
+                $ref: "#/components/schemas/OrdersData"
+              type: array
+            total:
+              description: Total amount from all orders.
+              format: float
+              type: number
+          type: object
+        payment_methods:
+          description: Store payment methods and their frequency.
+          items:
+            $ref: "#/components/schemas/PaymentMethodFreq"
+          type: array
+        referrers:
+          description: Top 10 referrer sources and their frequency.
+          items:
+            $ref: "#/components/schemas/Referrer"
+          type: array
+        region_orders:
+          properties:
+            display_mode:
+              description: Can be 'regions' when orders are specific of 1 country or 'auto'.
+              type: string
+            regions_orders:
+              description: Orders per country and region(inside the country).
+              items:
+                $ref: "#/components/schemas/CountryOrders"
+              type: array
+          type: object
+        search_frequencies_all:
+          description: Number of times each search was conducted under the form of an aggregation query.
+          items: {}
+          type: array
+        search_frequencies_without_results:
+          description: Number of times each search with zero results was conducted under the form of an aggregation query.
+          items: {}
+          type: array
+        shipping_methods:
+          description: Store shipping methods and their frequency.
+          items:
+            $ref: "#/components/schemas/ShippingMethodFreq"
+          type: array
+        to:
+          description: Statistics end date.
+          type: string
+          x-fromat: iso8601
+        traffic_type:
+          description: Type of store traffic and its frequency.
+          items:
+            $ref: "#/components/schemas/TrafficType"
+          type: array
+        visits:
+          description: Total number of visits.
+          type: integer
+      type: object
     Tax:
       properties:
         tax:
@@ -5905,6 +6355,15 @@ components:
         user_agent:
           description: User agent of the referred request to checkout
           type: string
+    TrafficType:
+      properties:
+        count:
+          type: integer
+          x-descriprtion: Frequency of the specified traffic type.
+        name:
+          type: string
+          x-descriprtion: Traffic name.
+      type: object
     Variant:
       properties:
         variant:
@@ -5968,4 +6427,12 @@ components:
         stock_unlimited:
           description: True if the Product's Variant has unlimited stock
           type: boolean
+      type: object
+    type:
+      properties:
+        code:
+          description: Store code.
+          type: string
+        stats:
+          $ref: "#/components/schemas/StoreStats"
       type: object
