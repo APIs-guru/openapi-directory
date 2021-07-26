@@ -166,7 +166,7 @@ paths:
                     S3Bucket:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: 'If your canary script is located in S3, specify the full bucket name here. The bucket must already exist. Specify the full bucket name, including <code>s3://</code> as the start of the bucket name.'
+                        - description: 'If your canary script is located in S3, specify the bucket name here. Do not include <code>s3://</code> as the start of the bucket name.'
                     S3Key:
                       allOf:
                         - $ref: '#/components/schemas/String'
@@ -178,13 +178,13 @@ paths:
                     ZipFile:
                       allOf:
                         - $ref: '#/components/schemas/Blob'
-                        - description: 'If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the .zip file that contains the script. It can be up to 5 MB.'
+                        - description: 'If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It can be up to 5 MB.'
                     Handler:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: The entry point to use for the source code when running the canary. This value must end with the string <code>.handler</code>.
+                        - description: The entry point to use for the source code when running the canary. This value must end with the string <code>.handler</code>. The string is limited to 29 characters or fewer.
                 ArtifactS3Location:
-                  description: 'The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files.'
+                  description: 'The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files. The name of the S3 bucket can''t include a period (.).'
                   type: string
                   minLength: 1
                   maxLength: 1024
@@ -201,7 +201,7 @@ paths:
                     Expression:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: '<p>A rate expression that defines how often the canary is to run. The syntax is <code>rate(<i>number unit</i>)</code>. <i>unit</i> can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p> <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every 10 minutes, and <code>rate(1 hour)</code> runs it once every hour. You can specify a frequency between <code>rate(1 minute)</code> and <code>rate(1 hour)</code>.</p> <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value that causes the canary to run only once when it is started.</p>'
+                        - description: '<p>A <code>rate</code> expression or a <code>cron</code> expression that defines how often the canary is to run.</p> <p>For a rate expression, The syntax is <code>rate(<i>number unit</i>)</code>. <i>unit</i> can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p> <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every 10 minutes, and <code>rate(1 hour)</code> runs it once every hour. You can specify a frequency between <code>rate(1 minute)</code> and <code>rate(1 hour)</code>.</p> <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value that causes the canary to run only once when it is started.</p> <p>Use <code>cron(<i>expression</i>)</code> to specify a cron expression. You can''t schedule a canary to wait for more than a year before running. For information about the syntax for cron expressions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html"> Scheduling canary runs using cron</a>.</p>'
                     DurationInSeconds:
                       allOf:
                         - $ref: '#/components/schemas/MaxOneYearInSeconds'
@@ -221,7 +221,7 @@ paths:
                     ActiveTracing:
                       allOf:
                         - $ref: '#/components/schemas/NullableBoolean'
-                        - description: '<p>Specifies whether this canary is to use active AWS X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html"> Canaries and X-Ray tracing</a>.</p> <p>You can enable active tracing only for canaries that use version <code>syn-nodejs-2.0</code> or later for their canary runtime.</p>'
+                        - description: '<p>Specifies whether this canary is to use active X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-Ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html"> Canaries and X-Ray tracing</a>.</p> <p>You can enable active tracing only for canaries that use version <code>syn-nodejs-2.0</code> or later for their canary runtime.</p>'
                     EnvironmentVariables:
                       allOf:
                         - $ref: '#/components/schemas/EnvironmentVariablesMap'
@@ -411,7 +411,7 @@ paths:
                     S3Bucket:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: 'If your canary script is located in S3, specify the full bucket name here. The bucket must already exist. Specify the full bucket name, including <code>s3://</code> as the start of the bucket name.'
+                        - description: 'If your canary script is located in S3, specify the bucket name here. Do not include <code>s3://</code> as the start of the bucket name.'
                     S3Key:
                       allOf:
                         - $ref: '#/components/schemas/String'
@@ -423,11 +423,11 @@ paths:
                     ZipFile:
                       allOf:
                         - $ref: '#/components/schemas/Blob'
-                        - description: 'If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the .zip file that contains the script. It can be up to 5 MB.'
+                        - description: 'If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It can be up to 5 MB.'
                     Handler:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: The entry point to use for the source code when running the canary. This value must end with the string <code>.handler</code>.
+                        - description: The entry point to use for the source code when running the canary. This value must end with the string <code>.handler</code>. The string is limited to 29 characters or fewer.
                 ExecutionRoleArn:
                   description: '<p>The ARN of the IAM role to be used to run the canary. This role must already exist, and must include <code>lambda.amazonaws.com</code> as a principal in the trust policy. The role must also have the following permissions:</p> <ul> <li> <p> <code>s3:PutObject</code> </p> </li> <li> <p> <code>s3:GetBucketLocation</code> </p> </li> <li> <p> <code>s3:ListAllMyBuckets</code> </p> </li> <li> <p> <code>cloudwatch:PutMetricData</code> </p> </li> <li> <p> <code>logs:CreateLogGroup</code> </p> </li> <li> <p> <code>logs:CreateLogStream</code> </p> </li> <li> <p> <code>logs:CreateLogStream</code> </p> </li> </ul>'
                   type: string
@@ -446,7 +446,7 @@ paths:
                     Expression:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: '<p>A rate expression that defines how often the canary is to run. The syntax is <code>rate(<i>number unit</i>)</code>. <i>unit</i> can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p> <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every 10 minutes, and <code>rate(1 hour)</code> runs it once every hour. You can specify a frequency between <code>rate(1 minute)</code> and <code>rate(1 hour)</code>.</p> <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value that causes the canary to run only once when it is started.</p>'
+                        - description: '<p>A <code>rate</code> expression or a <code>cron</code> expression that defines how often the canary is to run.</p> <p>For a rate expression, The syntax is <code>rate(<i>number unit</i>)</code>. <i>unit</i> can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p> <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every 10 minutes, and <code>rate(1 hour)</code> runs it once every hour. You can specify a frequency between <code>rate(1 minute)</code> and <code>rate(1 hour)</code>.</p> <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value that causes the canary to run only once when it is started.</p> <p>Use <code>cron(<i>expression</i>)</code> to specify a cron expression. You can''t schedule a canary to wait for more than a year before running. For information about the syntax for cron expressions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html"> Scheduling canary runs using cron</a>.</p>'
                     DurationInSeconds:
                       allOf:
                         - $ref: '#/components/schemas/MaxOneYearInSeconds'
@@ -466,7 +466,7 @@ paths:
                     ActiveTracing:
                       allOf:
                         - $ref: '#/components/schemas/NullableBoolean'
-                        - description: '<p>Specifies whether this canary is to use active AWS X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html"> Canaries and X-Ray tracing</a>.</p> <p>You can enable active tracing only for canaries that use version <code>syn-nodejs-2.0</code> or later for their canary runtime.</p>'
+                        - description: '<p>Specifies whether this canary is to use active X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-Ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html"> Canaries and X-Ray tracing</a>.</p> <p>You can enable active tracing only for canaries that use version <code>syn-nodejs-2.0</code> or later for their canary runtime.</p>'
                     EnvironmentVariables:
                       allOf:
                         - $ref: '#/components/schemas/EnvironmentVariablesMap'
@@ -493,6 +493,14 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/SecurityGroupIds'
                         - description: The IDs of the security groups for this canary.
+                VisualReference:
+                  description: ''
+                  type: object
+                  properties:
+                    BaseScreenshots:
+                      $ref: '#/components/schemas/BaseScreenshots'
+                    BaseCanaryRunId:
+                      $ref: '#/components/schemas/String'
   /canaries:
     post:
       operationId: DescribeCanaries
@@ -801,7 +809,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: '<p>Assigns one or more tags (key-value pairs) to the specified canary. </p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don''t have any semantic meaning to AWS and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a canary.</p>'
+      description: '<p>Assigns one or more tags (key-value pairs) to the specified canary. </p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don''t have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a canary.</p>'
       responses:
         '200':
           description: Success
@@ -1201,6 +1209,28 @@ components:
     UpdateCanaryResponse:
       type: object
       properties: {}
+    BaseScreenshots:
+      type: array
+      items:
+        $ref: '#/components/schemas/BaseScreenshot'
+    BaseScreenshotIgnoreCoordinates:
+      type: array
+      items:
+        $ref: '#/components/schemas/BaseScreenshotConfigIgnoreCoordinate'
+      minItems: 0
+      maxItems: 20
+    BaseScreenshot:
+      type: object
+      required:
+        - ScreenshotName
+      properties:
+        ScreenshotName:
+          $ref: '#/components/schemas/String'
+        IgnoreCoordinates:
+          $ref: '#/components/schemas/BaseScreenshotIgnoreCoordinates'
+    BaseScreenshotConfigIgnoreCoordinate:
+      type: string
+      pattern: '^(-?\d{1,5}\.?\d{0,2},){3}(-?\d{1,5}\.?\d{0,2}){1}$'
     Canary:
       type: object
       properties:
@@ -1254,6 +1284,8 @@ components:
             - description: 'Specifies the runtime version to use for the canary. For more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
         VpcConfig:
           $ref: '#/components/schemas/VpcConfigOutput'
+        VisualReference:
+          $ref: '#/components/schemas/VisualReferenceOutput'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -1310,7 +1342,7 @@ components:
         Expression:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>A rate expression that defines how often the canary is to run. The syntax is <code>rate(<i>number unit</i>)</code>. <i>unit</i> can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p> <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every 10 minutes, and <code>rate(1 hour)</code> runs it once every hour.</p> <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value that causes the canary to run only once when it is started.</p>'
+            - description: '<p>A <code>rate</code> expression or a <code>cron</code> expression that defines how often the canary is to run.</p> <p>For a rate expression, The syntax is <code>rate(<i>number unit</i>)</code>. <i>unit</i> can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p> <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every 10 minutes, and <code>rate(1 hour)</code> runs it once every hour. You can specify a frequency between <code>rate(1 minute)</code> and <code>rate(1 hour)</code>.</p> <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value that causes the canary to run only once when it is started.</p> <p>Use <code>cron(<i>expression</i>)</code> to specify a cron expression. For information about the syntax for cron expressions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html"> Scheduling canary runs using cron</a>.</p>'
         DurationInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaxOneYearInSeconds'
@@ -1330,7 +1362,7 @@ components:
         ActiveTracing:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
-            - description: 'Displays whether this canary run used active AWS X-Ray tracing. '
+            - description: 'Displays whether this canary run used active X-Ray tracing. '
       description: A structure that contains information about a canary run.
     MaxSize1024:
       type: integer
@@ -1393,6 +1425,13 @@ components:
             - $ref: '#/components/schemas/SecurityGroupIds'
             - description: The IDs of the security groups for this canary.
       description: 'If this canary is to test an endpoint in a VPC, this structure contains information about the subnets and security groups of the VPC endpoint. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html"> Running a Canary in a VPC</a>.'
+    VisualReferenceOutput:
+      type: object
+      properties:
+        BaseScreenshots:
+          $ref: '#/components/schemas/BaseScreenshots'
+        BaseCanaryRunId:
+          $ref: '#/components/schemas/String'
     TagMap:
       type: object
       minProperties: 1
@@ -1412,7 +1451,7 @@ components:
         S3Bucket:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'If your canary script is located in S3, specify the full bucket name here. The bucket must already exist. Specify the full bucket name, including <code>s3://</code> as the start of the bucket name.'
+            - description: 'If your canary script is located in S3, specify the bucket name here. Do not include <code>s3://</code> as the start of the bucket name.'
         S3Key:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1424,11 +1463,11 @@ components:
         ZipFile:
           allOf:
             - $ref: '#/components/schemas/Blob'
-            - description: 'If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the .zip file that contains the script. It can be up to 5 MB.'
+            - description: 'If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It can be up to 5 MB.'
         Handler:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The entry point to use for the source code when running the canary. This value must end with the string <code>.handler</code>.
+            - description: The entry point to use for the source code when running the canary. This value must end with the string <code>.handler</code>. The string is limited to 29 characters or fewer.
       description: 'Use this structure to input your script code for the canary. This structure contains the Lambda handler with the location where the canary should start running the script. If the script is stored in an S3 bucket, the bucket name, key, and version are also included. If the script was passed into the canary directly, the script code is contained in the value of <code>Zipfile</code>. '
     CanaryRun:
       type: object
@@ -1496,7 +1535,7 @@ components:
         ActiveTracing:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
-            - description: '<p>Specifies whether this canary is to use active AWS X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html"> Canaries and X-Ray tracing</a>.</p> <p>You can enable active tracing only for canaries that use version <code>syn-nodejs-2.0</code> or later for their canary runtime.</p>'
+            - description: '<p>Specifies whether this canary is to use active X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-Ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html"> Canaries and X-Ray tracing</a>.</p> <p>You can enable active tracing only for canaries that use version <code>syn-nodejs-2.0</code> or later for their canary runtime.</p>'
         EnvironmentVariables:
           allOf:
             - $ref: '#/components/schemas/EnvironmentVariablesMap'
@@ -1528,7 +1567,7 @@ components:
         Expression:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>A rate expression that defines how often the canary is to run. The syntax is <code>rate(<i>number unit</i>)</code>. <i>unit</i> can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p> <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every 10 minutes, and <code>rate(1 hour)</code> runs it once every hour. You can specify a frequency between <code>rate(1 minute)</code> and <code>rate(1 hour)</code>.</p> <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value that causes the canary to run only once when it is started.</p>'
+            - description: '<p>A <code>rate</code> expression or a <code>cron</code> expression that defines how often the canary is to run.</p> <p>For a rate expression, The syntax is <code>rate(<i>number unit</i>)</code>. <i>unit</i> can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p> <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every 10 minutes, and <code>rate(1 hour)</code> runs it once every hour. You can specify a frequency between <code>rate(1 minute)</code> and <code>rate(1 hour)</code>.</p> <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value that causes the canary to run only once when it is started.</p> <p>Use <code>cron(<i>expression</i>)</code> to specify a cron expression. You can''t schedule a canary to wait for more than a year before running. For information about the syntax for cron expressions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html"> Scheduling canary runs using cron</a>.</p>'
         DurationInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaxOneYearInSeconds'
@@ -1584,7 +1623,7 @@ components:
         ArtifactS3Location:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files.'
+            - description: 'The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files. The name of the S3 bucket can''t include a period (.).'
         ExecutionRoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
@@ -1750,6 +1789,15 @@ components:
       type: object
       title: UntagResourceRequest
       properties: {}
+    VisualReferenceInput:
+      type: object
+      required:
+        - BaseCanaryRunId
+      properties:
+        BaseScreenshots:
+          $ref: '#/components/schemas/BaseScreenshots'
+        BaseCanaryRunId:
+          $ref: '#/components/schemas/String'
     UpdateCanaryRequest:
       type: object
       title: UpdateCanaryRequest
@@ -1786,6 +1834,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcConfigInput'
             - description: 'If this canary is to test an endpoint in a VPC, this structure contains information about the subnet and security groups of the VPC endpoint. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html"> Running a Canary in a VPC</a>.'
+        VisualReference:
+          $ref: '#/components/schemas/VisualReferenceInput'
     VpcId:
       type: string
 security:

@@ -142,7 +142,7 @@ paths:
           schema:
             type: string
             minLength: 3
-            maxLength: 50
+            maxLength: 63
       requestBody:
         required: true
         content:
@@ -215,7 +215,7 @@ paths:
           schema:
             type: string
             minLength: 3
-            maxLength: 50
+            maxLength: 63
     get:
       operationId: GetAccessPoint
       description: '<p>Returns configuration information about the specified access point.</p> <p/> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html#API_control_GetAccessPoint_Examples">Examples</a> section.</p> <p>The following actions are related to <code>GetAccessPoint</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html">CreateAccessPoint</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html">DeleteAccessPoint</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html">ListAccessPoints</a> </p> </li> </ul>'
@@ -242,7 +242,7 @@ paths:
           schema:
             type: string
             minLength: 3
-            maxLength: 50
+            maxLength: 63
   '/v20180820/accesspointforobjectlambda/{name}#x-amz-account-id':
     put:
       operationId: CreateAccessPointForObjectLambda
@@ -731,7 +731,7 @@ paths:
           schema:
             type: string
             minLength: 3
-            maxLength: 50
+            maxLength: 63
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -766,7 +766,7 @@ paths:
           schema:
             type: string
             minLength: 3
-            maxLength: 50
+            maxLength: 63
     put:
       operationId: PutAccessPointPolicy
       description: '<p>Associates an access policy with the specified access point. Each access point can have only one policy, so a request made to this API replaces any existing policy associated with the specified access point.</p> <p/> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html#API_control_PutAccessPointPolicy_Examples">Examples</a> section.</p> <p>The following actions are related to <code>PutAccessPointPolicy</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicy.html">GetAccessPointPolicy</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html">DeleteAccessPointPolicy</a> </p> </li> </ul>'
@@ -789,7 +789,7 @@ paths:
           schema:
             type: string
             minLength: 3
-            maxLength: 50
+            maxLength: 63
       requestBody:
         required: true
         content:
@@ -1940,7 +1940,7 @@ paths:
           schema:
             type: string
             minLength: 3
-            maxLength: 50
+            maxLength: 63
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2422,6 +2422,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3AccessPointArn'
             - description: <p>The ARN of the access point.</p> <note> <p>This is only supported by Amazon S3 on Outposts.</p> </note>
+        Alias:
+          allOf:
+            - $ref: '#/components/schemas/Alias'
+            - description: The name or alias of the access point.
     VpcId:
       type: string
       minLength: 1
@@ -2731,6 +2735,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/CreationDate'
             - description: The date and time when the specified access point was created.
+        Alias:
+          allOf:
+            - $ref: '#/components/schemas/Alias'
+            - description: The name or alias of the access point.
+        AccessPointArn:
+          allOf:
+            - $ref: '#/components/schemas/S3AccessPointArn'
+            - description: The ARN of the access point.
+        Endpoints:
+          allOf:
+            - $ref: '#/components/schemas/Endpoints'
+            - description: The VPC endpoint for the access point.
     GetAccessPointConfigurationForObjectLambdaResult:
       type: object
       properties:
@@ -3065,7 +3081,7 @@ components:
     AccessPointName:
       type: string
       minLength: 3
-      maxLength: 50
+      maxLength: 63
     NetworkOrigin:
       type: string
       enum:
@@ -3089,6 +3105,10 @@ components:
       type: string
       minLength: 4
       maxLength: 128
+    Alias:
+      type: string
+      pattern: '^[0-9a-z\\-]{63}'
+      maxLength: 63
     AccessPoint:
       type: object
       required:
@@ -3116,6 +3136,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3AccessPointArn'
             - description: The ARN for the access point.
+        Alias:
+          allOf:
+            - $ref: '#/components/schemas/Alias'
+            - description: The name or alias of the access point.
       description: An access point used to access a bucket.
     AccessPointList:
       type: array
@@ -3595,6 +3619,14 @@ components:
             - $ref: '#/components/schemas/SuspendedCause'
             - description: 'The reason why the specified job was suspended. A job is only suspended if you create it through the Amazon S3 console. When you create the job, it enters the <code>Suspended</code> state to await confirmation before running. After you confirm the job, it automatically exits the <code>Suspended</code> state.'
       description: A container element for the job configuration and status information returned by a <code>Describe Job</code> request.
+    NonEmptyMaxLength1024String:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    Endpoints:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/NonEmptyMaxLength1024String'
     Regions:
       type: array
       items:
@@ -3877,10 +3909,6 @@ components:
       type: string
       minLength: 1
       maxLength: 2000
-    NonEmptyMaxLength1024String:
-      type: string
-      minLength: 1
-      maxLength: 1024
     JobNumberOfTasksFailed:
       type: integer
       minimum: 0

@@ -207,6 +207,93 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Textract.AnalyzeExpense:
+    post:
+      operationId: AnalyzeExpense
+      description: '<p>Analyzes an input document for financially related relationships between text.</p> <p>Information is returned as <code>ExpenseDocuments</code> and seperated as follows.</p> <ul> <li> <p> <code>LineItemGroups</code>- A data set containing <code>LineItems</code> which store information about the lines of text, such as an item purchased and its price on a receipt.</p> </li> <li> <p> <code>SummaryFields</code>- Contains all other information a receipt, such as header information or the vendors name.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyzeExpenseResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: InvalidS3ObjectException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidS3ObjectException'
+        '482':
+          description: UnsupportedDocumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedDocumentException'
+        '483':
+          description: DocumentTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentTooLargeException'
+        '484':
+          description: BadDocumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadDocumentException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '487':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '488':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnalyzeExpenseRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Textract.AnalyzeExpense
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Textract.DetectDocumentText:
     post:
       operationId: DetectDocumentText
@@ -347,6 +434,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidS3ObjectException'
+        '487':
+          description: InvalidKMSKeyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidKMSKeyException'
       requestBody:
         required: true
         content:
@@ -422,6 +515,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidS3ObjectException'
+        '487':
+          description: InvalidKMSKeyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidKMSKeyException'
       requestBody:
         required: true
         content:
@@ -754,6 +853,23 @@ components:
     InternalServerError: {}
     ThrottlingException: {}
     HumanLoopQuotaExceededException: {}
+    AnalyzeExpenseResponse:
+      type: object
+      properties:
+        DocumentMetadata:
+          $ref: '#/components/schemas/DocumentMetadata'
+        ExpenseDocuments:
+          allOf:
+            - $ref: '#/components/schemas/ExpenseDocumentList'
+            - description: The expenses detected by Amazon Textract.
+    AnalyzeExpenseRequest:
+      type: object
+      required:
+        - Document
+      title: AnalyzeExpenseRequest
+      properties:
+        Document:
+          $ref: '#/components/schemas/Document'
     DetectDocumentTextResponse:
       type: object
       properties:
@@ -829,6 +945,7 @@ components:
             - $ref: '#/components/schemas/PaginationToken'
             - description: 'If the previous response was incomplete (because there are more blocks to retrieve), Amazon Textract returns a pagination token in the response. You can use this pagination token to retrieve the next set of blocks.'
     InvalidJobIdException: {}
+    InvalidKMSKeyException: {}
     GetDocumentTextDetectionResponse:
       type: object
       properties:
@@ -920,7 +1037,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/KMSKeyId'
             - description: 'The KMS key used to encrypt the inference results. This can be in either Key ID or Key Alias format. When a KMS key is provided, the KMS key will be used for server-side encryption of the objects in the customer bucket. When this parameter is not enabled, the result will be encrypted server side,using SSE-S3.'
-    InvalidKMSKeyException: {}
     IdempotentParameterMismatchException: {}
     LimitExceededException: {}
     StartDocumentTextDetectionResponse:
@@ -1025,6 +1141,10 @@ components:
       description: 'Shows the results of the human in the loop evaluation. If there is no HumanLoopArn, the input did not trigger human review.'
     String:
       type: string
+    ExpenseDocumentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExpenseDocument'
     BlockType:
       type: string
       enum:
@@ -1184,7 +1304,7 @@ components:
         Bucket:
           allOf:
             - $ref: '#/components/schemas/S3Bucket'
-            - description: The name of the S3 bucket.
+            - description: 'The name of the S3 bucket. Note that the # character is not valid in the file name.'
         Name:
           allOf:
             - $ref: '#/components/schemas/S3ObjectName'
@@ -1209,6 +1329,76 @@ components:
         - VALUE
     ErrorCode:
       type: string
+    ExpenseDetection:
+      type: object
+      properties:
+        Text:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The word or line of text recognized by Amazon Textract
+        Geometry:
+          $ref: '#/components/schemas/Geometry'
+        Confidence:
+          allOf:
+            - $ref: '#/components/schemas/Percent'
+            - description: 'The confidence in detection, as a percentage'
+      description: An object used to store information about the Value or Label detected by Amazon Textract.
+    ExpenseFieldList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExpenseField'
+    LineItemGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LineItemGroup'
+    ExpenseDocument:
+      type: object
+      properties:
+        ExpenseIndex:
+          allOf:
+            - $ref: '#/components/schemas/UInteger'
+            - description: 'Denotes which invoice or receipt in the document the information is coming from. First document will be 1, the second 2, and so on.'
+        SummaryFields:
+          allOf:
+            - $ref: '#/components/schemas/ExpenseFieldList'
+            - description: Any information found outside of a table by Amazon Textract.
+        LineItemGroups:
+          allOf:
+            - $ref: '#/components/schemas/LineItemGroupList'
+            - description: 'Information detected on each table of a document, seperated into <code>LineItems</code>.'
+      description: The structure holding all the information returned by AnalyzeExpense
+    ExpenseType:
+      type: object
+      properties:
+        Text:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The word or line of text detected by Amazon Textract.
+        Confidence:
+          allOf:
+            - $ref: '#/components/schemas/Percent'
+            - description: 'The confidence of accuracy, as a percentage.'
+      description: An object used to store information about the Type detected by Amazon Textract.
+    ExpenseField:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ExpenseType'
+            - description: The implied label of a detected element. Present alongside LabelDetection for explicit elements.
+        LabelDetection:
+          allOf:
+            - $ref: '#/components/schemas/ExpenseDetection'
+            - description: The explicitly stated label of a detected element.
+        ValueDetection:
+          allOf:
+            - $ref: '#/components/schemas/ExpenseDetection'
+            - description: The value of a detected element. Present in explicit and implicit elements.
+        PageNumber:
+          allOf:
+            - $ref: '#/components/schemas/UInteger'
+            - description: The page number the value was detected on.
+      description: 'Breakdown of detected information, seperated into the catagories Type, LableDetection, and ValueDetection'
     FeatureType:
       type: string
       enum:
@@ -1287,6 +1477,30 @@ components:
       pattern: '^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,2048}$'
       minLength: 1
       maxLength: 2048
+    LineItemFields:
+      type: object
+      properties:
+        LineItemExpenseFields:
+          allOf:
+            - $ref: '#/components/schemas/ExpenseFieldList'
+            - description: ExpenseFields used to show information from detected lines on a table.
+      description: A structure that holds information about the different lines found in a document's tables.
+    LineItemList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LineItemFields'
+    LineItemGroup:
+      type: object
+      properties:
+        LineItemGroupIndex:
+          allOf:
+            - $ref: '#/components/schemas/UInteger'
+            - description: 'The number used to identify a specific table in a document. The first table encountered will have a LineItemGroupIndex of 1, the second 2, etc.'
+        LineItems:
+          allOf:
+            - $ref: '#/components/schemas/LineItemList'
+            - description: 'The breakdown of information on a particular line of a table. '
+      description: 'A grouping of tables which contain LineItems, with each table identified by the table''s <code>LineItemGroupIndex</code>.'
     SNSTopicArn:
       type: string
       pattern: '(^arn:([a-z\d-]+):sns:[a-zA-Z\d-]{1,20}:\w{12}:.+$)'
@@ -1335,7 +1549,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3ObjectName'
             - description: 'The prefix of the object key that the output will be saved to. When not enabled, the prefix will be “textract_output".'
-      description: 'Sets whether or not your output will go to a user created bucket. Used to set the name of the bucket, and the prefix on the output file.'
+      description: '<p>Sets whether or not your output will go to a user created bucket. Used to set the name of the bucket, and the prefix on the output file.</p> <p> <code>OutputConfig</code> is an optional parameter which lets you adjust where your output will be placed. By default, Amazon Textract will store the results internally and can only be accessed by the Get API operations. With OutputConfig enabled, you can set the name of the bucket the output will be sent to and the file prefix of the results where you can download your results. Additionally, you can set the <code>KMSKeyID</code> parameter to a customer master key (CMK) to encrypt your output. Without this parameter set Amazon Textract will encrypt server-side using the AWS managed CMK for Amazon S3.</p> <p>Decryption of Customer Content is necessary for processing of the documents by Amazon Textract. If your account is opted out under an AI services opt out policy then all unencrypted Customer Content is immediately and permanently deleted after the Customer Content has been processed by the service. No copy of of the output is retained by Amazon Textract. For information about how to opt out, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html"> Managing AI services opt-out policy. </a> </p> <p>For more information on data privacy, see the <a href="https://aws.amazon.com/compliance/data-privacy-faq/">Data Privacy FAQ</a>.</p>'
     Pages:
       type: array
       items:
