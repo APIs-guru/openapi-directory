@@ -2896,7 +2896,7 @@ paths:
   /log-levels:
     get:
       operationId: GetLogLevelsByResourceTypes
-      description: 'Returns current default log-levels, or log levels by resource types, could be for wireless device log options or wireless gateway log options.'
+      description: 'Returns current default log levels or log levels by resource types. Based on resource types, log levels can be for wireless device log options or wireless gateway log options.'
       responses:
         '200':
           description: Success
@@ -2945,7 +2945,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: ResetAllResourceLogLevels
-      description: Remove log-level overrides if any for all resources (both wireless devices and wireless gateways).
+      description: Removes the log-level overrides for all resources; both wireless devices and wireless gateways.
       responses:
         '204':
           description: Success
@@ -2986,7 +2986,7 @@ paths:
       parameters: []
     post:
       operationId: UpdateLogLevelsByResourceTypes
-      description: 'Set default log level, or log levels by resource types, could be for wireless device log options or wireless gateways log options. This is to control the log messages that will be displayed in CloudWatch.'
+      description: 'Set default log level, or log levels by resource types. This can be for wireless device log options or wireless gateways log options and is used to control the log messages that''ll be displayed in CloudWatch.'
       responses:
         '200':
           description: Success
@@ -3058,7 +3058,7 @@ paths:
   '/log-levels/{ResourceIdentifier}#resourceType':
     get:
       operationId: GetResourceLogLevel
-      description: 'Fetches the log-level override if any for a given resource-ID and resource-type, coulde be a wireless device or a wireless gateway.'
+      description: 'Fetches the log-level override, if any, for a given resource-ID and resource-type. It can be used for a wireless device or a wireless gateway.'
       responses:
         '200':
           description: Success
@@ -3103,12 +3103,12 @@ paths:
           description: ''
           schema:
             type: string
-            description: 'The identifier of the resource. For a Wireless Device, it is the wireless device id. For a wireless gateway, it is the wireless gateway id.'
+            description: 'The identifier of the resource. For a Wireless Device, it is the wireless device ID. For a wireless gateway, it is the wireless gateway ID.'
             maxLength: 256
         - name: resourceType
           in: query
           required: true
-          description: 'The type of the resource, currently support WirelessDevice and WirelessGateway.'
+          description: 'The type of the resource, which can be <code>WirelessDevice</code> or <code>WirelessGateway</code>.'
           schema:
             type: string
     parameters:
@@ -3121,7 +3121,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
       operationId: PutResourceLogLevel
-      description: 'Sets the log-level override for a resource-ID and resource-type, could be a wireless gateway or a wireless device.'
+      description: Sets the log-level override for a resource-ID and resource-type. This option can be specified for a wireless gateway or a wireless device. A limit of 200 log level override can be set per account.
       responses:
         '200':
           description: Success
@@ -3166,12 +3166,12 @@ paths:
           description: ''
           schema:
             type: string
-            description: 'The identifier of the resource. For a Wireless Device, it is the wireless device id. For a wireless gateway, it is the wireless gateway id.'
+            description: 'The identifier of the resource. For a Wireless Device, it is the wireless device ID. For a wireless gateway, it is the wireless gateway ID.'
             maxLength: 256
         - name: resourceType
           in: query
           required: true
-          description: 'The type of the resource, currently support WirelessDevice and WirelessGateway.'
+          description: 'The type of the resource, which can be <code>WirelessDevice</code> or <code>WirelessGateway</code>.'
           schema:
             type: string
       requestBody:
@@ -3192,7 +3192,7 @@ paths:
                     - DISABLED
     delete:
       operationId: ResetResourceLogLevel
-      description: 'Remove log-level override if any for a specific resource-ID and resource-type, could be a wireless device or a wireless gateway.'
+      description: 'Removes the log-level override, if any, for a specific resource-ID and resource-type. It can be used for a wireless device or a wireless gateway.'
       responses:
         '204':
           description: Success
@@ -3237,12 +3237,12 @@ paths:
           description: ''
           schema:
             type: string
-            description: 'The identifier of the resource. For a Wireless Device, it is the wireless device id. For a wireless gateway, it is the wireless gateway id.'
+            description: 'The identifier of the resource. For a Wireless Device, it is the wireless device ID. For a wireless gateway, it is the wireless gateway ID.'
             maxLength: 256
         - name: resourceType
           in: query
           required: true
-          description: 'The type of the resource, currently support WirelessDevice and WirelessGateway.'
+          description: 'The type of the resource, which can be <code>WirelessDevice</code> or <code>WirelessGateway</code>.'
           schema:
             type: string
   /service-endpoint:
@@ -3357,6 +3357,7 @@ paths:
               - WirelessDeviceId
               - DevEui
               - ThingName
+              - SidewalkManufacturingSn
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3791,7 +3792,7 @@ paths:
                   minimum: 0
                   maximum: 1
                 PayloadData:
-                  description: The message payload to send.
+                  description: 'The binary to be sent to the end device, encoded in base64.'
                   type: string
                   pattern: '^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$'
                   maxLength: 2048
@@ -3999,6 +4000,7 @@ components:
             - description: The Amazon Resource Name of the resource.
     AmazonId:
       type: string
+      description: The Sidewalk Amazon ID.
       maxLength: 2048
     AppServerPrivateKey:
       type: string
@@ -4757,7 +4759,7 @@ components:
           $ref: '#/components/schemas/LogLevel'
         Events:
           $ref: '#/components/schemas/WirelessDeviceEventLogOptionList'
-      description: The log option for wireless devices. Can be used to set log level for a specific type of wireless device.
+      description: The log options for wireless devices and can be used to set log levels for a specific type of wireless device.
     WirelessGatewayLogOption:
       type: object
       required:
@@ -4770,7 +4772,7 @@ components:
           $ref: '#/components/schemas/LogLevel'
         Events:
           $ref: '#/components/schemas/WirelessGatewayEventLogOptionList'
-      description: The log option for wireless gateways. Can be used to set log level for a specific type of wireless gateway.
+      description: The log options for wireless gateways and can be used to set log levels for a specific type of wireless gateway.
     UpdatePartnerAccountResponse:
       type: object
       properties: {}
@@ -5594,7 +5596,7 @@ components:
       description: Information about a Sidewalk account.
     ResourceIdentifier:
       type: string
-      description: 'The identifier of the resource. For a Wireless Device, it is the wireless device id. For a wireless gateway, it is the wireless gateway id.'
+      description: 'The identifier of the resource. For a Wireless Device, it is the wireless device ID. For a wireless gateway, it is the wireless gateway ID.'
       maxLength: 256
     ResourceType:
       type: string
@@ -5704,6 +5706,7 @@ components:
         - WirelessDeviceId
         - DevEui
         - ThingName
+        - SidewalkManufacturingSn
     GetWirelessDeviceRequest:
       type: object
       title: GetWirelessDeviceRequest
@@ -5713,6 +5716,8 @@ components:
     SidewalkDevice:
       type: object
       properties:
+        AmazonId:
+          $ref: '#/components/schemas/AmazonId'
         SidewalkId:
           allOf:
             - $ref: '#/components/schemas/SidewalkId'
@@ -6011,7 +6016,7 @@ components:
         - CUSTOM_COMMAND_ID_GET
         - CUSTOM_COMMAND_ID_SET
         - CUSTOM_COMMAND_ID_RESP
-      description: Sidewalk device message type.
+      description: Sidewalk device message type. Default value is <code>CUSTOM_COMMAND_ID_NOTIFY</code>.
     NwkKey:
       type: string
       pattern: '[a-fA-F0-9]{32}'
@@ -6077,7 +6082,7 @@ components:
         PayloadData:
           allOf:
             - $ref: '#/components/schemas/PayloadData'
-            - description: The message payload to send.
+            - description: 'The binary to be sent to the end device, encoded in base64.'
         WirelessMetadata:
           allOf:
             - $ref: '#/components/schemas/WirelessMetadata'
@@ -6281,7 +6286,7 @@ components:
           $ref: '#/components/schemas/WirelessDeviceEvent'
         LogLevel:
           $ref: '#/components/schemas/LogLevel'
-      description: 'The log option for a wireless device event. Can be used to set log level for a specific wireless device event. For a LoRaWAN device, the possible events for a log messsage are: Join, Rejoin, Downlink_Data, Uplink_Data. For a Sidewalk device, the possible events for a log message are: Registration, Downlink_Data, Uplink_Data.'
+      description: '<p>The log options for a wireless device event and can be used to set log levels for a specific wireless device event.</p> <p>For a LoRaWAN device, possible events for a log messsage are: <code>Join</code>, <code>Rejoin</code>, <code>Downlink_Data</code>, and <code>Uplink_Data</code>. For a Sidewalk device, possible events for a log message are <code>Registration</code>, <code>Downlink_Data</code>, and <code>Uplink_Data</code>.</p>'
     WirelessDeviceEventLogOptionList:
       type: array
       description: The list of wireless device event log options.
@@ -6339,7 +6344,7 @@ components:
           $ref: '#/components/schemas/WirelessGatewayEvent'
         LogLevel:
           $ref: '#/components/schemas/LogLevel'
-      description: 'The log option for a wireless gateway event. Can be used to set log level for a specific wireless gateway event. For a LoRaWAN gateway, the possible events for a log message are: CUPS_Request, Certificate.'
+      description: '<p>The log options for a wireless gateway event and can be used to set log levels for a specific wireless gateway event.</p> <p>For a LoRaWAN gateway, possible events for a log message are <code>CUPS_Request</code> and <code>Certificate</code>.</p>'
     WirelessGatewayEventLogOptionList:
       type: array
       description: The list of wireless gateway event log options.

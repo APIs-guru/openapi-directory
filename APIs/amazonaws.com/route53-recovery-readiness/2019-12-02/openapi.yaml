@@ -1,0 +1,3459 @@
+openapi: 3.0.0
+info:
+  version: '2019-12-02'
+  x-release: v4
+  title: AWS Route53 Recovery Readiness
+  description: AWS Route53 Recovery Readiness
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: route53-recovery-readiness
+  x-aws-signingName: route53-recovery-readiness
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/route53-recovery-readiness-2019-12-02.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/route53-recovery-readiness/'
+servers:
+  - url: 'http://route53-recovery-readiness.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Route53 Recovery Readiness multi-region endpoint
+  - url: 'https://route53-recovery-readiness.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Route53 Recovery Readiness multi-region endpoint
+  - url: 'http://route53-recovery-readiness.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Route53 Recovery Readiness endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://route53-recovery-readiness.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Route53 Recovery Readiness endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /cells:
+    post:
+      operationId: CreateCell
+      description: Creates a new Cell.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCellResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - cellName
+              properties:
+                cellName:
+                  description: The name of the Cell to create
+                  type: string
+                cells:
+                  description: 'A list of Cell arns contained within this Cell (for use in nested Cells, e.g. regions within which AZs)'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+                tags:
+                  description: A collection of tags associated with a resource
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/__string'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListCells
+      description: Returns a collection of Cells.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCellsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Upper bound on number of records to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: A token used to resume pagination from the end of a previous request.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  /crossaccountauthorizations:
+    post:
+      operationId: CreateCrossAccountAuthorization
+      description: Create a new cross account readiness authorization.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCrossAccountAuthorizationResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - crossAccountAuthorization
+              properties:
+                crossAccountAuthorization:
+                  description: 'A cross-account authorization, e.g. arn:aws:iam::123456789012:root'
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListCrossAccountAuthorizations
+      description: Returns a collection of cross account readiness authorizations.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCrossAccountAuthorizationsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Upper bound on number of records to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: A token used to resume pagination from the end of a previous request.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  /readinesschecks:
+    post:
+      operationId: CreateReadinessCheck
+      description: Creates a new Readiness Check.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateReadinessCheckResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - readinessCheckName
+                - resourceSetName
+              properties:
+                readinessCheckName:
+                  description: The name of the ReadinessCheck to create
+                  type: string
+                resourceSetName:
+                  description: The name of the ResourceSet to check
+                  type: string
+                tags:
+                  description: A collection of tags associated with a resource
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/__string'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListReadinessChecks
+      description: Returns a collection of Readiness Checks.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListReadinessChecksResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Upper bound on number of records to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: A token used to resume pagination from the end of a previous request.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  /recoverygroups:
+    post:
+      operationId: CreateRecoveryGroup
+      description: Creates a new Recovery Group.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRecoveryGroupResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - recoveryGroupName
+              properties:
+                cells:
+                  description: A list of Cell arns
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+                recoveryGroupName:
+                  description: The name of the RecoveryGroup to create
+                  type: string
+                tags:
+                  description: A collection of tags associated with a resource
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/__string'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListRecoveryGroups
+      description: Returns a collection of Recovery Groups.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRecoveryGroupsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Upper bound on number of records to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: A token used to resume pagination from the end of a previous request.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  /resourcesets:
+    post:
+      operationId: CreateResourceSet
+      description: Creates a new Resource Set.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateResourceSetResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - resourceSetName
+                - resourceSetType
+                - resources
+              properties:
+                resourceSetName:
+                  description: The name of the ResourceSet to create
+                  type: string
+                resourceSetType:
+                  description: AWS Resource type of the resources in the ResourceSet
+                  type: string
+                  pattern: 'AWS::[A-Za-z0-9]+::[A-Za-z0-9]+'
+                resources:
+                  description: A list of Resource objects
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Resource'
+                tags:
+                  description: A collection of tags associated with a resource
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/__string'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListResourceSets
+      description: Returns a collection of Resource Sets.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResourceSetsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Upper bound on number of records to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: A token used to resume pagination from the end of a previous request.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  '/cells/{cellName}':
+    delete:
+      operationId: DeleteCell
+      description: Deletes an existing Cell.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: cellName
+          in: path
+          required: true
+          description: The Cell to delete
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetCell
+      description: Returns information about a Cell.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCellResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: cellName
+          in: path
+          required: true
+          description: The Cell to get
+          schema:
+            type: string
+    put:
+      operationId: UpdateCell
+      description: Updates an existing Cell.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCellResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: cellName
+          in: path
+          required: true
+          description: The Cell to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - cells
+              properties:
+                cells:
+                  description: 'A list of Cell arns, completely replaces previous list'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+  '/crossaccountauthorizations/{crossAccountAuthorization}':
+    delete:
+      operationId: DeleteCrossAccountAuthorization
+      description: Delete cross account readiness authorization
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCrossAccountAuthorizationResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: crossAccountAuthorization
+          in: path
+          required: true
+          description: The cross account authorization
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/readinesschecks/{readinessCheckName}':
+    delete:
+      operationId: DeleteReadinessCheck
+      description: Deletes an existing Readiness Check.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: readinessCheckName
+          in: path
+          required: true
+          description: The ReadinessCheck to delete
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetReadinessCheck
+      description: Returns information about a ReadinessCheck.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReadinessCheckResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: readinessCheckName
+          in: path
+          required: true
+          description: The ReadinessCheck to get
+          schema:
+            type: string
+    put:
+      operationId: UpdateReadinessCheck
+      description: Updates an exisiting Readiness Check.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateReadinessCheckResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: readinessCheckName
+          in: path
+          required: true
+          description: The ReadinessCheck to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - resourceSetName
+              properties:
+                resourceSetName:
+                  description: The name of the ResourceSet to check
+                  type: string
+  '/recoverygroups/{recoveryGroupName}':
+    delete:
+      operationId: DeleteRecoveryGroup
+      description: Deletes an existing Recovery Group.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: recoveryGroupName
+          in: path
+          required: true
+          description: The RecoveryGroup to delete
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetRecoveryGroup
+      description: Returns information about a Recovery Group.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRecoveryGroupResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: recoveryGroupName
+          in: path
+          required: true
+          description: The RecoveryGroup to get
+          schema:
+            type: string
+    put:
+      operationId: UpdateRecoveryGroup
+      description: Updates an existing Recovery Group.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRecoveryGroupResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: recoveryGroupName
+          in: path
+          required: true
+          description: The RecoveryGroup to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - cells
+              properties:
+                cells:
+                  description: 'A list of Cell arns, completely replaces previous list'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+  '/resourcesets/{resourceSetName}':
+    delete:
+      operationId: DeleteResourceSet
+      description: Deletes an existing Resource Set.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: resourceSetName
+          in: path
+          required: true
+          description: The ResourceSet to delete
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetResourceSet
+      description: Returns information about a Resource Set.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetResourceSetResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: resourceSetName
+          in: path
+          required: true
+          description: The ResourceSet to get
+          schema:
+            type: string
+    put:
+      operationId: UpdateResourceSet
+      description: Updates an existing Resource Set.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateResourceSetResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: resourceSetName
+          in: path
+          required: true
+          description: The ResourceSet to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - resourceSetType
+                - resources
+              properties:
+                resourceSetType:
+                  description: AWS Resource Type of the resources in the ResourceSet
+                  type: string
+                  pattern: 'AWS::[A-Za-z0-9]+::[A-Za-z0-9]+'
+                resources:
+                  description: A list of Resource objects
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Resource'
+  '/recoverygroups/{recoveryGroupName}/architectureRecommendations':
+    get:
+      operationId: GetArchitectureRecommendations
+      description: Returns a collection of recommendations to improve resilliance and readiness check quality for a Recovery Group.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetArchitectureRecommendationsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Upper bound on number of records to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: A token that can be used to resume pagination from the end of the collection.
+          schema:
+            type: string
+        - name: recoveryGroupName
+          in: path
+          required: true
+          description: Name of RecoveryGroup (top level resource) to be analyzed.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/cellreadiness/{cellName}':
+    get:
+      operationId: GetCellReadinessSummary
+      description: Returns information about readiness of a Cell.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCellReadinessSummaryResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: cellName
+          in: path
+          required: true
+          description: The name of the Cell
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: Upper bound on number of records to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: A token used to resume pagination from the end of a previous request.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/readinesschecks/{readinessCheckName}/resource/{resourceIdentifier}/status':
+    get:
+      operationId: GetReadinessCheckResourceStatus
+      description: Returns detailed information about the status of an individual resource within a Readiness Check's Resource Set.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReadinessCheckResourceStatusResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Upper bound on number of records to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: A token used to resume pagination from the end of a previous request.
+          schema:
+            type: string
+        - name: readinessCheckName
+          in: path
+          required: true
+          description: The ReadinessCheck to get
+          schema:
+            type: string
+        - name: resourceIdentifier
+          in: path
+          required: true
+          description: The resource ARN or component Id to get
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/readinesschecks/{readinessCheckName}/status':
+    get:
+      operationId: GetReadinessCheckStatus
+      description: Returns information about the status of a Readiness Check.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReadinessCheckStatusResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Upper bound on number of records to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: A token used to resume pagination from the end of a previous request.
+          schema:
+            type: string
+        - name: readinessCheckName
+          in: path
+          required: true
+          description: The ReadinessCheck to get
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/recoverygroupreadiness/{recoveryGroupName}':
+    get:
+      operationId: GetRecoveryGroupReadinessSummary
+      description: Returns information about a Recovery Group.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRecoveryGroupReadinessSummaryResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Upper bound on number of records to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: A token used to resume pagination from the end of a previous request.
+          schema:
+            type: string
+        - name: recoveryGroupName
+          in: path
+          required: true
+          description: The name of the RecoveryGroup
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /rules:
+    get:
+      operationId: ListRules
+      description: Returns a collection of rules that are applied as part of Readiness Checks.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRulesResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: Upper bound on number of records to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: A token used to resume pagination from the end of a previous request.
+          schema:
+            type: string
+        - name: resourceType
+          in: query
+          required: false
+          description: Filter parameter which specifies the rules to return given a resource type.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resource-arn}':
+    get:
+      operationId: ListTagsForResources
+      description: Returns a list of the tags assigned to the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourcesResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Adds tags to the specified resource. You can specify one or more tags to add.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: A collection of tags associated with a resource
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/__string'
+  '/tags/{resource-arn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes tags from the specified resource. You can specify one or more tags to remove.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: resource-arn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.
+          schema:
+            type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: A comma-separated list of the tag keys to remove from the resource.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/__string'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateCellResponse:
+      type: object
+      properties:
+        CellArn:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax256'
+            - xml:
+                name: cellArn
+              description: The arn for the Cell
+        CellName:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: cellName
+              description: The name of the Cell
+        Cells:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: cells
+              description: A list of Cell arns
+        ParentReadinessScopes:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: parentReadinessScopes
+              description: A list of Cell ARNs and/or RecoveryGroup ARNs
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+    __string:
+      type: string
+    ThrottlingException: {}
+    ValidationException: {}
+    InternalServerException: {}
+    ConflictException: {}
+    AccessDeniedException: {}
+    CreateCrossAccountAuthorizationResponse:
+      type: object
+      properties:
+        CrossAccountAuthorization:
+          allOf:
+            - $ref: '#/components/schemas/CrossAccountAuthorization'
+            - xml:
+                name: crossAccountAuthorization
+              description: The cross account authorization
+    CreateReadinessCheckResponse:
+      type: object
+      properties:
+        ReadinessCheckArn:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax256'
+            - xml:
+                name: readinessCheckArn
+              description: Arn associated with ReadinessCheck
+        ReadinessCheckName:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: readinessCheckName
+              description: Name for a ReadinessCheck
+        ResourceSet:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: resourceSet
+              description: Name of the ResourceSet to be checked
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+    CreateRecoveryGroupResponse:
+      type: object
+      properties:
+        Cells:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: cells
+              description: A list of Cell arns
+        RecoveryGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax256'
+            - xml:
+                name: recoveryGroupArn
+              description: The arn for the RecoveryGroup
+        RecoveryGroupName:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: recoveryGroupName
+              description: The name of the RecoveryGroup
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+    CreateResourceSetResponse:
+      type: object
+      properties:
+        ResourceSetArn:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax256'
+            - xml:
+                name: resourceSetArn
+              description: The arn for the ResourceSet
+        ResourceSetName:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: resourceSetName
+              description: The name of the ResourceSet
+        ResourceSetType:
+          allOf:
+            - $ref: '#/components/schemas/__stringPatternAWSAZaZ09AZaZ09'
+            - xml:
+                name: resourceSetType
+              description: AWS Resource Type of the resources in the ResourceSet
+        Resources:
+          allOf:
+            - $ref: '#/components/schemas/__listOfResource'
+            - xml:
+                name: resources
+              description: A list of Resource objects
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+    Resource:
+      type: object
+      properties:
+        ComponentId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: componentId
+              description: 'The component id of the resource, generated by the service when dnsTargetResource is used'
+        DnsTargetResource:
+          allOf:
+            - $ref: '#/components/schemas/DNSTargetResource'
+            - xml:
+                name: dnsTargetResource
+        ReadinessScopes:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: readinessScopes
+              description: A list of RecoveryGroup ARNs and/or Cell ARNs that this resource is contained within.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: resourceArn
+              description: 'The ARN of the AWS resource, can be skipped if dnsTargetResource is used'
+      description: The resource element of a ResourceSet
+    ResourceNotFoundException: {}
+    DeleteCrossAccountAuthorizationResponse:
+      type: object
+      properties: {}
+    GetArchitectureRecommendationsResponse:
+      type: object
+      properties:
+        LastAuditTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/LastAuditTimestamp'
+            - xml:
+                name: lastAuditTimestamp
+              description: The time a Recovery Group was last assessed for recommendations in UTC ISO-8601 format.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: A token that can be used to resume pagination from the end of the collection
+        Recommendations:
+          allOf:
+            - $ref: '#/components/schemas/__listOfRecommendation'
+            - xml:
+                name: recommendations
+              description: A list of recommendations for the customer's application
+    GetCellResponse:
+      type: object
+      properties:
+        CellArn:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax256'
+            - xml:
+                name: cellArn
+              description: The arn for the Cell
+        CellName:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: cellName
+              description: The name of the Cell
+        Cells:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: cells
+              description: A list of Cell arns
+        ParentReadinessScopes:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: parentReadinessScopes
+              description: A list of Cell ARNs and/or RecoveryGroup ARNs
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+    GetCellReadinessSummaryResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: A token that can be used to resume pagination from the end of the collection.
+        Readiness:
+          allOf:
+            - $ref: '#/components/schemas/Readiness'
+            - xml:
+                name: readiness
+              description: The readiness at Cell level.
+        ReadinessChecks:
+          allOf:
+            - $ref: '#/components/schemas/__listOfReadinessCheckSummary'
+            - xml:
+                name: readinessChecks
+              description: Summaries for the ReadinessChecks making up the Cell
+    GetReadinessCheckResponse:
+      type: object
+      properties:
+        ReadinessCheckArn:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax256'
+            - xml:
+                name: readinessCheckArn
+              description: Arn associated with ReadinessCheck
+        ReadinessCheckName:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: readinessCheckName
+              description: Name for a ReadinessCheck
+        ResourceSet:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: resourceSet
+              description: Name of the ResourceSet to be checked
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+    GetReadinessCheckResourceStatusResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: A token that can be used to resume pagination from the end of the collection.
+        Readiness:
+          allOf:
+            - $ref: '#/components/schemas/Readiness'
+            - xml:
+                name: readiness
+              description: The readiness at rule level.
+        Rules:
+          allOf:
+            - $ref: '#/components/schemas/__listOfRuleResult'
+            - xml:
+                name: rules
+              description: Details of the rules's results
+    GetReadinessCheckStatusResponse:
+      type: object
+      properties:
+        Messages:
+          allOf:
+            - $ref: '#/components/schemas/__listOfMessage'
+            - xml:
+                name: messages
+              description: Top level messages for readiness check status
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: A token that can be used to resume pagination from the end of the collection.
+        Readiness:
+          allOf:
+            - $ref: '#/components/schemas/Readiness'
+            - xml:
+                name: readiness
+              description: The readiness at rule level.
+        Resources:
+          allOf:
+            - $ref: '#/components/schemas/__listOfResourceResult'
+            - xml:
+                name: resources
+              description: Summary of resources's readiness
+    GetRecoveryGroupResponse:
+      type: object
+      properties:
+        Cells:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: cells
+              description: A list of Cell arns
+        RecoveryGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax256'
+            - xml:
+                name: recoveryGroupArn
+              description: The arn for the RecoveryGroup
+        RecoveryGroupName:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: recoveryGroupName
+              description: The name of the RecoveryGroup
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+    GetRecoveryGroupReadinessSummaryResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: A token that can be used to resume pagination from the end of the collection.
+        Readiness:
+          allOf:
+            - $ref: '#/components/schemas/Readiness'
+            - xml:
+                name: readiness
+              description: The readiness at RecoveryGroup level.
+        ReadinessChecks:
+          allOf:
+            - $ref: '#/components/schemas/__listOfReadinessCheckSummary'
+            - xml:
+                name: readinessChecks
+              description: Summaries for the ReadinessChecks making up the RecoveryGroup
+    GetResourceSetResponse:
+      type: object
+      properties:
+        ResourceSetArn:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax256'
+            - xml:
+                name: resourceSetArn
+              description: The arn for the ResourceSet
+        ResourceSetName:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: resourceSetName
+              description: The name of the ResourceSet
+        ResourceSetType:
+          allOf:
+            - $ref: '#/components/schemas/__stringPatternAWSAZaZ09AZaZ09'
+            - xml:
+                name: resourceSetType
+              description: AWS Resource Type of the resources in the ResourceSet
+        Resources:
+          allOf:
+            - $ref: '#/components/schemas/__listOfResource'
+            - xml:
+                name: resources
+              description: A list of Resource objects
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+    ListCellsResponse:
+      type: object
+      properties:
+        Cells:
+          allOf:
+            - $ref: '#/components/schemas/__listOfCellOutput'
+            - xml:
+                name: cells
+              description: A list of Cells
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: A token that can be used to resume pagination from the end of the collection.
+    ListCrossAccountAuthorizationsResponse:
+      type: object
+      properties:
+        CrossAccountAuthorizations:
+          allOf:
+            - $ref: '#/components/schemas/__listOfCrossAccountAuthorization'
+            - xml:
+                name: crossAccountAuthorizations
+              description: A list of CrossAccountAuthorizations
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: A token that can be used to resume pagination from the end of the collection.
+    ListReadinessChecksResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: A token that can be used to resume pagination from the end of the collection.
+        ReadinessChecks:
+          allOf:
+            - $ref: '#/components/schemas/__listOfReadinessCheckOutput'
+            - xml:
+                name: readinessChecks
+              description: A list of ReadinessCheck associated with the account
+    ListRecoveryGroupsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: A token that can be used to resume pagination from the end of the collection.
+        RecoveryGroups:
+          allOf:
+            - $ref: '#/components/schemas/__listOfRecoveryGroupOutput'
+            - xml:
+                name: recoveryGroups
+              description: A list of RecoveryGroups
+    ListResourceSetsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: A token that can be used to resume pagination from the end of the collection.
+        ResourceSets:
+          allOf:
+            - $ref: '#/components/schemas/__listOfResourceSetOutput'
+            - xml:
+                name: resourceSets
+              description: A list of ResourceSets associated with the account
+    ListRulesResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: A token that can be used to resume pagination from the end of the collection.
+        Rules:
+          allOf:
+            - $ref: '#/components/schemas/__listOfListRulesOutput'
+            - xml:
+                name: rules
+              description: A list of rules
+    ListTagsForResourcesResponse:
+      type: object
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UpdateCellResponse:
+      type: object
+      properties:
+        CellArn:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax256'
+            - xml:
+                name: cellArn
+              description: The arn for the Cell
+        CellName:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: cellName
+              description: The name of the Cell
+        Cells:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: cells
+              description: A list of Cell arns
+        ParentReadinessScopes:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: parentReadinessScopes
+              description: A list of Cell ARNs and/or RecoveryGroup ARNs
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+    UpdateReadinessCheckResponse:
+      type: object
+      properties:
+        ReadinessCheckArn:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax256'
+            - xml:
+                name: readinessCheckArn
+              description: Arn associated with ReadinessCheck
+        ReadinessCheckName:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: readinessCheckName
+              description: Name for a ReadinessCheck
+        ResourceSet:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: resourceSet
+              description: Name of the ResourceSet to be checked
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+    UpdateRecoveryGroupResponse:
+      type: object
+      properties:
+        Cells:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: cells
+              description: A list of Cell arns
+        RecoveryGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax256'
+            - xml:
+                name: recoveryGroupArn
+              description: The arn for the RecoveryGroup
+        RecoveryGroupName:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: recoveryGroupName
+              description: The name of the RecoveryGroup
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+    UpdateResourceSetResponse:
+      type: object
+      properties:
+        ResourceSetArn:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax256'
+            - xml:
+                name: resourceSetArn
+              description: The arn for the ResourceSet
+        ResourceSetName:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: resourceSetName
+              description: The name of the ResourceSet
+        ResourceSetType:
+          allOf:
+            - $ref: '#/components/schemas/__stringPatternAWSAZaZ09AZaZ09'
+            - xml:
+                name: resourceSetType
+              description: AWS Resource Type of the resources in the ResourceSet
+        Resources:
+          allOf:
+            - $ref: '#/components/schemas/__listOfResource'
+            - xml:
+                name: resources
+              description: A list of Resource objects
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+    __stringMax256:
+      type: string
+      maxLength: 256
+    __stringMax64PatternAAZAZ09Z:
+      type: string
+      pattern: '\A[a-zA-Z0-9_]+\z'
+      maxLength: 64
+    __listOf__string:
+      type: array
+      items:
+        $ref: '#/components/schemas/__string'
+    Tags:
+      type: object
+      description: A collection of tags associated with a resource
+      additionalProperties:
+        $ref: '#/components/schemas/__string'
+    CellOutput:
+      type: object
+      required:
+        - ParentReadinessScopes
+        - CellArn
+        - CellName
+        - Cells
+      properties:
+        CellArn:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax256'
+            - xml:
+                name: cellArn
+              description: The arn for the Cell
+        CellName:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: cellName
+              description: The name of the Cell
+        Cells:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: cells
+              description: A list of Cell arns
+        ParentReadinessScopes:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: parentReadinessScopes
+              description: A list of Cell ARNs and/or RecoveryGroup ARNs
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+      description: A Cell and its properties
+    CreateCellRequest:
+      type: object
+      required:
+        - CellName
+      title: CreateCellRequest
+      properties:
+        CellName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: cellName
+              description: The name of the Cell to create
+        Cells:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: cells
+              description: 'A list of Cell arns contained within this Cell (for use in nested Cells, e.g. regions within which AZs)'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+      description: The Cell to create
+    CrossAccountAuthorization:
+      type: string
+      description: 'A cross-account authorization, e.g. arn:aws:iam::123456789012:root'
+    CreateCrossAccountAuthorizationRequest:
+      type: object
+      required:
+        - CrossAccountAuthorization
+      title: CreateCrossAccountAuthorizationRequest
+      properties:
+        CrossAccountAuthorization:
+          allOf:
+            - $ref: '#/components/schemas/CrossAccountAuthorization'
+            - xml:
+                name: crossAccountAuthorization
+              description: The cross account authorization
+      description: The cross account authorization
+    CreateReadinessCheckRequest:
+      type: object
+      required:
+        - ResourceSetName
+        - ReadinessCheckName
+      title: CreateReadinessCheckRequest
+      properties:
+        ReadinessCheckName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: readinessCheckName
+              description: The name of the ReadinessCheck to create
+        ResourceSetName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: resourceSetName
+              description: The name of the ResourceSet to check
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+      description: The ReadinessCheck to create
+    CreateRecoveryGroupRequest:
+      type: object
+      required:
+        - RecoveryGroupName
+      title: CreateRecoveryGroupRequest
+      properties:
+        Cells:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: cells
+              description: A list of Cell arns
+        RecoveryGroupName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: recoveryGroupName
+              description: The name of the RecoveryGroup to create
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+      description: The RecoveryGroup to create
+    __stringPatternAWSAZaZ09AZaZ09:
+      type: string
+      pattern: 'AWS::[A-Za-z0-9]+::[A-Za-z0-9]+'
+    __listOfResource:
+      type: array
+      items:
+        $ref: '#/components/schemas/Resource'
+    CreateResourceSetRequest:
+      type: object
+      required:
+        - ResourceSetType
+        - ResourceSetName
+        - Resources
+      title: CreateResourceSetRequest
+      properties:
+        ResourceSetName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: resourceSetName
+              description: The name of the ResourceSet to create
+        ResourceSetType:
+          allOf:
+            - $ref: '#/components/schemas/__stringPatternAWSAZaZ09AZaZ09'
+            - xml:
+                name: resourceSetType
+              description: AWS Resource type of the resources in the ResourceSet
+        Resources:
+          allOf:
+            - $ref: '#/components/schemas/__listOfResource'
+            - xml:
+                name: resources
+              description: A list of Resource objects
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+      description: The ResourceSet to create
+    TargetResource:
+      type: object
+      properties:
+        NLBResource:
+          allOf:
+            - $ref: '#/components/schemas/NLBResource'
+            - xml:
+                name: nLBResource
+        R53Resource:
+          allOf:
+            - $ref: '#/components/schemas/R53ResourceRecord'
+            - xml:
+                name: r53Resource
+      description: The target resource the R53 record points to
+    DNSTargetResource:
+      type: object
+      properties:
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: domainName
+              description: The DNS Name that acts as ingress point to a portion of application
+        HostedZoneArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: hostedZoneArn
+              description: The Hosted Zone ARN that contains the DNS record with the provided name of target resource.
+        RecordSetId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: recordSetId
+              description: The R53 Set Id to uniquely identify a record given a Name and a Type
+        RecordType:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: recordType
+              description: The Type of DNS Record of target resource
+        TargetResource:
+          allOf:
+            - $ref: '#/components/schemas/TargetResource'
+            - xml:
+                name: targetResource
+      description: A component for DNS/Routing Control Readiness Checks
+    DeleteCellRequest:
+      type: object
+      title: DeleteCellRequest
+      properties: {}
+    DeleteCrossAccountAuthorizationRequest:
+      type: object
+      title: DeleteCrossAccountAuthorizationRequest
+      properties: {}
+    DeleteReadinessCheckRequest:
+      type: object
+      title: DeleteReadinessCheckRequest
+      properties: {}
+    DeleteRecoveryGroupRequest:
+      type: object
+      title: DeleteRecoveryGroupRequest
+      properties: {}
+    DeleteResourceSetRequest:
+      type: object
+      title: DeleteResourceSetRequest
+      properties: {}
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 1000
+    GetArchitectureRecommendationsRequest:
+      type: object
+      title: GetArchitectureRecommendationsRequest
+      properties: {}
+    LastAuditTimestamp:
+      type: string
+      description: The time a Recovery Group was last assessed for recommendations in UTC ISO-8601 format
+      format: date-time
+    __listOfRecommendation:
+      type: array
+      items:
+        $ref: '#/components/schemas/Recommendation'
+    GetCellReadinessSummaryRequest:
+      type: object
+      title: GetCellReadinessSummaryRequest
+      properties: {}
+    Readiness:
+      type: string
+      enum:
+        - READY
+        - NOT_READY
+        - UNKNOWN
+        - NOT_AUTHORIZED
+      description: The readiness of an entire ReadinessCheck or an individual resource ARN.
+    __listOfReadinessCheckSummary:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReadinessCheckSummary'
+    GetCellRequest:
+      type: object
+      title: GetCellRequest
+      properties: {}
+    GetReadinessCheckRequest:
+      type: object
+      title: GetReadinessCheckRequest
+      properties: {}
+    GetReadinessCheckResourceStatusRequest:
+      type: object
+      title: GetReadinessCheckResourceStatusRequest
+      properties: {}
+    __listOfRuleResult:
+      type: array
+      items:
+        $ref: '#/components/schemas/RuleResult'
+    GetReadinessCheckStatusRequest:
+      type: object
+      title: GetReadinessCheckStatusRequest
+      properties: {}
+    __listOfMessage:
+      type: array
+      items:
+        $ref: '#/components/schemas/Message'
+    __listOfResourceResult:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceResult'
+    GetRecoveryGroupReadinessSummaryRequest:
+      type: object
+      title: GetRecoveryGroupReadinessSummaryRequest
+      properties: {}
+    GetRecoveryGroupRequest:
+      type: object
+      title: GetRecoveryGroupRequest
+      properties: {}
+    GetResourceSetRequest:
+      type: object
+      title: GetResourceSetRequest
+      properties: {}
+    ListCellsRequest:
+      type: object
+      title: ListCellsRequest
+      properties: {}
+    __listOfCellOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/CellOutput'
+    ListCrossAccountAuthorizationsRequest:
+      type: object
+      title: ListCrossAccountAuthorizationsRequest
+      properties: {}
+    __listOfCrossAccountAuthorization:
+      type: array
+      items:
+        $ref: '#/components/schemas/CrossAccountAuthorization'
+    ListReadinessChecksRequest:
+      type: object
+      title: ListReadinessChecksRequest
+      properties: {}
+    __listOfReadinessCheckOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReadinessCheckOutput'
+    ListRecoveryGroupsRequest:
+      type: object
+      title: ListRecoveryGroupsRequest
+      properties: {}
+    __listOfRecoveryGroupOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecoveryGroupOutput'
+    ListResourceSetsRequest:
+      type: object
+      title: ListResourceSetsRequest
+      properties: {}
+    __listOfResourceSetOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceSetOutput'
+    __stringMax64:
+      type: string
+      maxLength: 64
+    ListRulesOutput:
+      type: object
+      required:
+        - RuleDescription
+        - RuleId
+        - ResourceType
+      properties:
+        ResourceType:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64'
+            - xml:
+                name: resourceType
+              description: The resource type the rule applies to.
+        RuleDescription:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax256'
+            - xml:
+                name: ruleDescription
+              description: A description of the rule
+        RuleId:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64'
+            - xml:
+                name: ruleId
+              description: The Rule's ID.
+      description: A collection of rules used in a readiness check
+    ListRulesRequest:
+      type: object
+      title: ListRulesRequest
+      properties: {}
+    __listOfListRulesOutput:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListRulesOutput'
+    ListTagsForResourcesRequest:
+      type: object
+      title: ListTagsForResourcesRequest
+      properties: {}
+    Message:
+      type: object
+      properties:
+        MessageText:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: messageText
+              description: The text of a readiness check message
+      description: Information relating to readiness check status
+    NLBResource:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: arn
+              description: An NLB resource arn
+      description: The NLB resource a DNS Target Resource points to
+    R53ResourceRecord:
+      type: object
+      properties:
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: domainName
+              description: The DNS target name
+        RecordSetId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: recordSetId
+              description: The Resource Record set id
+      description: The Route 53 resource a DNS Target Resource record points to
+    ReadinessCheckOutput:
+      type: object
+      required:
+        - ReadinessCheckArn
+        - ResourceSet
+      properties:
+        ReadinessCheckArn:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax256'
+            - xml:
+                name: readinessCheckArn
+              description: Arn associated with ReadinessCheck
+        ReadinessCheckName:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: readinessCheckName
+              description: Name for a ReadinessCheck
+        ResourceSet:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: resourceSet
+              description: Name of the ResourceSet to be checked
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+      description: A resource used for checking the readiness of a Resource Set
+    ReadinessCheckSummary:
+      type: object
+      properties:
+        Readiness:
+          allOf:
+            - $ref: '#/components/schemas/Readiness'
+            - xml:
+                name: readiness
+              description: The readiness of this ReadinessCheck
+        ReadinessCheckName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: readinessCheckName
+              description: The name of a ReadinessCheck which is part of the given RecoveryGroup or Cell
+      description: 'Summary of ReadinessCheck status, paginated in GetRecoveryGroupReadinessSummary and GetCellReadinessSummary'
+    ReadinessCheckTimestamp:
+      type: string
+      description: 'The time the Cell was last checked for readiness, in ISO-8601 format, UTC.'
+      format: date-time
+    Recommendation:
+      type: object
+      required:
+        - RecommendationText
+      properties:
+        RecommendationText:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: recommendationText
+              description: Guidance text for recommendation
+      description: Guidance for improving Recovery Group resilliancy
+    RecoveryGroupOutput:
+      type: object
+      required:
+        - RecoveryGroupArn
+        - RecoveryGroupName
+        - Cells
+      properties:
+        Cells:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: cells
+              description: A list of Cell arns
+        RecoveryGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax256'
+            - xml:
+                name: recoveryGroupArn
+              description: The arn for the RecoveryGroup
+        RecoveryGroupName:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: recoveryGroupName
+              description: The name of the RecoveryGroup
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+      description: A Recovery Group generally containing multiple Cells
+    ResourceResult:
+      type: object
+      required:
+        - Readiness
+        - LastCheckedTimestamp
+      properties:
+        ComponentId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: componentId
+              description: The component id of the resource
+        LastCheckedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/ReadinessCheckTimestamp'
+            - xml:
+                name: lastCheckedTimestamp
+              description: 'The time the resource was last checked for readiness, in ISO-8601 format, UTC.'
+        Readiness:
+          allOf:
+            - $ref: '#/components/schemas/Readiness'
+            - xml:
+                name: readiness
+              description: The readiness of the resource.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: resourceArn
+              description: The ARN of the resource
+      description: Result with status for an individual resource.
+    ResourceSetOutput:
+      type: object
+      required:
+        - ResourceSetType
+        - ResourceSetName
+        - ResourceSetArn
+        - Resources
+      properties:
+        ResourceSetArn:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax256'
+            - xml:
+                name: resourceSetArn
+              description: The arn for the ResourceSet
+        ResourceSetName:
+          allOf:
+            - $ref: '#/components/schemas/__stringMax64PatternAAZAZ09Z'
+            - xml:
+                name: resourceSetName
+              description: The name of the ResourceSet
+        ResourceSetType:
+          allOf:
+            - $ref: '#/components/schemas/__stringPatternAWSAZaZ09AZaZ09'
+            - xml:
+                name: resourceSetType
+              description: AWS Resource Type of the resources in the ResourceSet
+        Resources:
+          allOf:
+            - $ref: '#/components/schemas/__listOfResource'
+            - xml:
+                name: resources
+              description: A list of Resource objects
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+      description: A collection of resources of the same type
+    RuleResult:
+      type: object
+      required:
+        - Messages
+        - Readiness
+        - RuleId
+        - LastCheckedTimestamp
+      properties:
+        LastCheckedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/ReadinessCheckTimestamp'
+            - xml:
+                name: lastCheckedTimestamp
+              description: 'The time the resource was last checked for readiness, in ISO-8601 format, UTC.'
+        Messages:
+          allOf:
+            - $ref: '#/components/schemas/__listOfMessage'
+            - xml:
+                name: messages
+              description: Details about the resource's readiness
+        Readiness:
+          allOf:
+            - $ref: '#/components/schemas/Readiness'
+            - xml:
+                name: readiness
+              description: The readiness at rule level.
+        RuleId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: ruleId
+              description: The identifier of the rule.
+      description: Result with status for an individual rule..
+    TagResourceRequest:
+      type: object
+      required:
+        - Tags
+      title: TagResourceRequest
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - xml:
+                name: tags
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+    UpdateCellRequest:
+      type: object
+      required:
+        - Cells
+      title: UpdateCellRequest
+      properties:
+        Cells:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: cells
+              description: 'A list of Cell arns, completely replaces previous list'
+      description: Parameters to update for the Cell
+    UpdateReadinessCheckRequest:
+      type: object
+      required:
+        - ResourceSetName
+      title: UpdateReadinessCheckRequest
+      properties:
+        ResourceSetName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: resourceSetName
+              description: The name of the ResourceSet to check
+      description: The new Readiness Check values
+    UpdateRecoveryGroupRequest:
+      type: object
+      required:
+        - Cells
+      title: UpdateRecoveryGroupRequest
+      properties:
+        Cells:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: cells
+              description: 'A list of Cell arns, completely replaces previous list'
+      description: Parameters to update for the RecoveryGroup
+    UpdateResourceSetRequest:
+      type: object
+      required:
+        - ResourceSetType
+        - Resources
+      title: UpdateResourceSetRequest
+      properties:
+        ResourceSetType:
+          allOf:
+            - $ref: '#/components/schemas/__stringPatternAWSAZaZ09AZaZ09'
+            - xml:
+                name: resourceSetType
+              description: AWS Resource Type of the resources in the ResourceSet
+        Resources:
+          allOf:
+            - $ref: '#/components/schemas/__listOfResource'
+            - xml:
+                name: resources
+              description: A list of Resource objects
+      description: configuration for the desired
+security:
+  - hmac: []

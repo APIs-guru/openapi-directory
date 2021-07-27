@@ -1,0 +1,481 @@
+openapi: 3.0.0
+info:
+  version: '2019-12-02'
+  x-release: v4
+  title: Route53 Recovery Cluster
+  description: '<p>Welcome to the Amazon Route 53 Application Recovery Controller API Reference Guide for Recovery Control Data Plane .</p> <p>Recovery control in Route 53 Application Recovery Controller includes extremely reliable routing controls that enable you to recover applications by rerouting traffic, for example, across Availability Zones or AWS Regions. Routing controls are simple on/off switches hosted on a cluster. A cluster is a set of five redundant regional endpoints against which you can execute API calls to update or get the state of routing controls. You use routing controls to failover traffic to recover your application across Availability Zones or Regions.</p> <p>This API guide includes information about how to get and update routing control states in Route 53 Application Recovery Controller.</p> <p>For more information about Route 53 Application Recovery Controller, see the following:</p> <ul> <li> <p>You can create clusters, routing controls, and control panels by using the control plane API for Recovery Control. For more information, see <a href="https://docs.aws.amazon.com/recovery-cluster/latest/api/">Amazon Route 53 Application Recovery Controller Recovery Control API Reference</a>.</p> </li> <li> <p>Route 53 Application Recovery Controller also provides continuous readiness checks to ensure that your applications are scaled to handle failover traffic. For more information about the related API actions, see <a href="https://docs.aws.amazon.com/recovery-readiness/latest/api/">Amazon Route 53 Application Recovery Controller Recovery Readiness API Reference</a>.</p> </li> <li> <p>For more information about creating resilient applications and preparing for recovery readiness with Route 53 Application Recovery Controller, see the <a href="r53recovery/latest/dg/">Amazon Route 53 Application Recovery Controller Developer Guide</a>.</p> </li> </ul>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: route53-recovery-cluster
+  x-aws-signingName: route53-recovery-cluster
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/route53-recovery-cluster-2019-12-02.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/route53-recovery-cluster/'
+servers:
+  - url: 'http://route53-recovery-cluster.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Route53 Recovery Cluster multi-region endpoint
+  - url: 'https://route53-recovery-cluster.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Route53 Recovery Cluster multi-region endpoint
+  - url: 'http://route53-recovery-cluster.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Route53 Recovery Cluster endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://route53-recovery-cluster.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Route53 Recovery Cluster endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /#X-Amz-Target=ToggleCustomerAPI.GetRoutingControlState:
+    post:
+      operationId: GetRoutingControlState
+      description: '<p>Get the state for a routing control. A routing control is a simple on/off switch that you can use to route traffic to cells. When the state is On, traffic flows to a cell. When it''s off, traffic does not flow. </p> <p>Before you can create a routing control, you first must create a cluster to host the control. For more information, see <a href="https://docs.aws.amazon.com/recovery-cluster/latest/api/cluster.html">CreateCluster</a>. Access one of the endpoints for the cluster to get or update the routing control state to redirect traffic.</p> <p>For more information about working with routing controls, see <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html">Routing control</a> in the Route 53 Application Recovery Controller Developer Guide.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRoutingControlStateResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: EndpointTemporarilyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EndpointTemporarilyUnavailableException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRoutingControlStateRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ToggleCustomerAPI.GetRoutingControlState
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ToggleCustomerAPI.UpdateRoutingControlState:
+    post:
+      operationId: UpdateRoutingControlState
+      description: '<p>Set the state of the routing control to reroute traffic. You can set the value to be On or Off. When the state is On, traffic flows to a cell. When it''s off, traffic does not flow.</p> <p>For more information about working with routing controls, see <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html">Routing control</a> in the Route 53 Application Recovery Controller Developer Guide.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRoutingControlStateResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: EndpointTemporarilyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EndpointTemporarilyUnavailableException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoutingControlStateRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ToggleCustomerAPI.UpdateRoutingControlState
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ToggleCustomerAPI.UpdateRoutingControlStates:
+    post:
+      operationId: UpdateRoutingControlStates
+      description: '<p>Set multiple routing control states. You can set the value for each state to be On or Off. When the state is On, traffic flows to a cell. When it''s off, traffic does not flow.</p> <p>For more information about working with routing controls, see <a href="https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html">Routing control</a> in the Route 53 Application Recovery Controller Developer Guide.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRoutingControlStatesResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: EndpointTemporarilyUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EndpointTemporarilyUnavailableException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoutingControlStatesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ToggleCustomerAPI.UpdateRoutingControlStates
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    GetRoutingControlStateResponse:
+      type: object
+      required:
+        - RoutingControlArn
+        - RoutingControlState
+      properties:
+        RoutingControlArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Number (ARN) of the response.
+        RoutingControlState:
+          allOf:
+            - $ref: '#/components/schemas/RoutingControlState'
+            - description: The state of the routing control.
+    GetRoutingControlStateRequest:
+      type: object
+      required:
+        - RoutingControlArn
+      title: GetRoutingControlStateRequest
+      properties:
+        RoutingControlArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Number (ARN) for the routing control that you want to get the state for.
+    AccessDeniedException: {}
+    InternalServerException: {}
+    ResourceNotFoundException: {}
+    ValidationException: {}
+    ThrottlingException: {}
+    EndpointTemporarilyUnavailableException: {}
+    UpdateRoutingControlStateResponse:
+      type: object
+      properties: {}
+    UpdateRoutingControlStateRequest:
+      type: object
+      required:
+        - RoutingControlArn
+        - RoutingControlState
+      title: UpdateRoutingControlStateRequest
+      properties:
+        RoutingControlArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Number (ARN) for the routing control that you want to update the state for.
+        RoutingControlState:
+          allOf:
+            - $ref: '#/components/schemas/RoutingControlState'
+            - description: The state of the routing control. You can set the value to be On or Off.
+    ConflictException: {}
+    UpdateRoutingControlStatesResponse:
+      type: object
+      properties: {}
+    UpdateRoutingControlStatesRequest:
+      type: object
+      required:
+        - UpdateRoutingControlStateEntries
+      title: UpdateRoutingControlStatesRequest
+      properties:
+        UpdateRoutingControlStateEntries:
+          allOf:
+            - $ref: '#/components/schemas/UpdateRoutingControlStateEntries'
+            - description: A set of routing control entries that you want to update.
+    Arn:
+      type: string
+      pattern: '^[A-Za-z0-9:\/_-]*$'
+      minLength: 1
+      maxLength: 255
+    RoutingControlState:
+      type: string
+      enum:
+        - 'On'
+        - 'Off'
+    UpdateRoutingControlStateEntry:
+      type: object
+      required:
+        - RoutingControlArn
+        - RoutingControlState
+      properties:
+        RoutingControlArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Number (ARN) for the routing control state entry.
+        RoutingControlState:
+          allOf:
+            - $ref: '#/components/schemas/RoutingControlState'
+            - description: The routing control state in a set of routing control state entries.
+      description: A routing control state.
+    UpdateRoutingControlStateEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/UpdateRoutingControlStateEntry'
+security:
+  - hmac: []
