@@ -163,7 +163,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 4.3.1
+  version: 4.3.2
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -228,6 +228,7 @@ paths:
       summary: Authorize
       tags:
         - Connections
+      x-graphql-exclude: true
   /vault/callback:
     get:
       description: |
@@ -288,6 +289,7 @@ paths:
       summary: Get all connections
       tags:
         - Connections
+      x-graphql-field-name: connections
   "/vault/connections/{unified_api}/{service_id}":
     delete:
       description: Deletes a connection
@@ -317,6 +319,7 @@ paths:
       summary: Deletes a connection
       tags:
         - Connections
+      x-graphql-field-name: connectionsDelete
     patch:
       description: Update a connection
       operationId: connectionsUpdate
@@ -409,6 +412,7 @@ paths:
       summary: Get settings
       tags:
         - Connections
+      x-graphql-field-name: connectionSettings
     patch:
       description: Update default values for a connection's resource settings
       operationId: updateConnectionSettings
@@ -445,6 +449,7 @@ paths:
       summary: Update settings
       tags:
         - Connections
+      x-graphql-field-name: connectionSettingsUpdate
   /vault/consumers:
     get:
       description: |
@@ -474,6 +479,7 @@ paths:
       summary: Get all consumers
       tags:
         - Consumers
+      x-graphql-field-name: consumers
   "/vault/consumers/{consumer_id}":
     get:
       description: |
@@ -502,6 +508,7 @@ paths:
       summary: Get consumer
       tags:
         - Consumers
+      x-graphql-field-name: consumer
   "/vault/consumers/{consumer_id}/stats":
     get:
       description: |
@@ -532,6 +539,7 @@ paths:
       summary: Consumer request counts
       tags:
         - Consumers
+      x-graphql-field-name: consumerRequestCounts
   /vault/logs:
     get:
       description: |
@@ -563,6 +571,7 @@ paths:
       summary: Get all consumer request logs
       tags:
         - Logs
+      x-graphql-field-name: logs
   /vault/proxy:
     delete:
       deprecated: true
@@ -593,6 +602,7 @@ paths:
       summary: DELETE
       tags:
         - Proxy
+      x-graphql-exclude: true
     get:
       deprecated: true
       description: |
@@ -615,6 +625,7 @@ paths:
       summary: GET
       tags:
         - Proxy
+      x-graphql-exclude: true
     patch:
       deprecated: true
       description: |
@@ -644,6 +655,7 @@ paths:
       summary: PATCH
       tags:
         - Proxy
+      x-graphql-exclude: true
     post:
       deprecated: true
       description: |
@@ -673,6 +685,7 @@ paths:
       summary: POST
       tags:
         - Proxy
+      x-graphql-exclude: true
     put:
       deprecated: true
       description: |
@@ -702,6 +715,7 @@ paths:
       summary: PUT
       tags:
         - Proxy
+      x-graphql-exclude: true
   "/vault/revoke/{service_id}/{application_id}":
     get:
       description: |
@@ -738,6 +752,7 @@ paths:
       summary: Revoke
       tags:
         - Connections
+      x-graphql-exclude: true
   /vault/sessions:
     post:
       description: |
@@ -824,6 +839,7 @@ components:
         type: string
     filter:
       description: Filter results
+      explode: true
       in: query
       name: filter
       schema:
@@ -833,17 +849,15 @@ components:
             nullable: true
             type: string
           exclude_unified_apis:
-            example:
-              - vault
-              - proxy
-            items:
-              type: string
-            type: array
+            example: vault,proxy
+            nullable: true
+            type: string
           status_code:
             example: 201
             nullable: true
             type: number
         type: object
+      style: deepObject
     id:
       description: ID of the record you are acting upon.
       in: path
@@ -1127,6 +1141,13 @@ components:
           schema: {}
       description: Resource updated
   schemas:
+    AuthType:
+      enum:
+        - oauth2
+        - apiKey
+        - basic
+        - none
+      type: string
     BadRequest:
       properties:
         detail:
@@ -1161,12 +1182,7 @@ components:
     Connection:
       properties:
         auth_type:
-          enum:
-            - oauth2
-            - apiKey
-            - basic
-          nullable: true
-          type: string
+          $ref: "#/components/schemas/AuthType"
         authorize_url:
           example: https://unify.apideck.com/vault/authorize/salesforce/<application-id>?state=<state>
           nullable: true
@@ -1191,21 +1207,7 @@ components:
                       type: string
                     options:
                       items:
-                        anyOf:
-                          - $ref: "#/components/schemas/FormFieldOption"
-                            type: object
-                          - properties:
-                              id:
-                                example: "1234"
-                                type: string
-                              label:
-                                example: General Channel
-                                type: string
-                              options:
-                                items:
-                                  $ref: "#/components/schemas/FormFieldOption"
-                                type: array
-                            type: object
+                        $ref: "#/components/schemas/FormFieldOption"
                       type: array
                     target:
                       enum:
@@ -1320,13 +1322,7 @@ components:
             type: string
           type: array
         state:
-          enum:
-            - available
-            - callable
-            - added
-            - authorized
-          example: authorized
-          type: string
+          $ref: "#/components/schemas/ConnectionState"
         status:
           enum:
             - live
@@ -1352,6 +1348,107 @@ components:
         id:
           type: string
         name:
+          type: string
+      type: object
+    ConnectionState:
+      enum:
+        - available
+        - callable
+        - added
+        - authorized
+      example: authorized
+      type: string
+    Consumer:
+      properties:
+        aggregated_request_count:
+          example: 101
+          type: number
+        application_id:
+          example: "1111"
+          type: string
+        connections:
+          items:
+            properties:
+              auth_type:
+                $ref: "#/components/schemas/AuthType"
+              created_at:
+                example: 2020-09-19T12:18:37.071Z
+                type: string
+              enabled:
+                example: true
+                type: boolean
+              icon:
+                example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
+                type: string
+              id:
+                example: 1111+test_user_id
+                readOnly: true
+                type: string
+              logo:
+                example: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
+                type: string
+              name:
+                example: Salesforce
+                type: string
+              service_id:
+                example: teamleader
+                type: string
+              state:
+                enum:
+                  - available
+                  - callable
+                  - added
+                  - configured
+                  - authorized
+                example: authorized
+                type: string
+              unified_api:
+                example: crm
+                type: string
+              updated_at:
+                example: 2020-09-19T12:18:37.071Z
+                nullable: true
+                type: string
+            type: object
+          type: array
+        consumer_id:
+          example: test_consumer_id
+          type: string
+        created:
+          example: 2021-05-07T12:55:42.242Z
+          type: string
+        metadata:
+          $ref: "#/components/schemas/ConsumerMetadata"
+        modified:
+          example: 2021-05-07T12:55:42.242Z
+          type: string
+        request_count_updated:
+          example: 2021-05-07T12:55:42.242Z
+          type: string
+        request_counts:
+          $ref: "#/components/schemas/RequestCountAllocation"
+        services:
+          example:
+            - salesforce
+            - stripe
+          items:
+            example: salesforce
+            type: string
+          type: array
+      type: object
+    ConsumerMetadata:
+      properties:
+        account_name:
+          example: SpaceX
+          type: string
+        email:
+          example: elon@musk.com
+          type: string
+        image:
+          example: https://www.spacex.com/static/images/share.jpg
+          type: string
+        user_name:
+          example: Elon Musk
           type: string
       type: object
     ConsumerRequestCountsInDateRangeResponse:
@@ -1437,9 +1534,7 @@ components:
     CreateSessionResponse:
       properties:
         data:
-          properties:
-            data:
-              $ref: "#/components/schemas/Session"
+          $ref: "#/components/schemas/Session"
         status:
           description: HTTP Response Status
           example: OK
@@ -1477,30 +1572,7 @@ components:
           type: string
         options:
           items:
-            properties:
-              label:
-                example: General Channel
-                type: string
-              value:
-                anyOf:
-                  - example: general
-                    type: string
-                  - example: 123
-                    type: integer
-                  - example: 12.5
-                    type: number
-                  - example: true
-                    type: boolean
-                  - example:
-                      - team
-                      - general
-                    items:
-                      anyOf:
-                        - type: string
-                        - type: integer
-                        - type: number
-                    type: array
-            type: object
+            $ref: "#/components/schemas/FormFieldOption"
           type: array
         placeholder:
           example: Select a channel
@@ -1525,36 +1597,26 @@ components:
             - number
       type: object
     FormFieldOption:
+      anyOf:
+        - $ref: "#/components/schemas/SimpleFormFieldOption"
+        - $ref: "#/components/schemas/FormFieldOptionGroup"
+    FormFieldOptionGroup:
       properties:
+        id:
+          example: "1234"
+          type: string
         label:
           example: General Channel
           type: string
-        value:
-          anyOf:
-            - example: general
-              type: string
-            - example: 123
-              type: integer
-            - example: 12.5
-              type: number
-            - example: true
-              type: boolean
-            - example:
-                - team
-                - general
-              items:
-                anyOf:
-                  - type: string
-                  - type: integer
-                  - type: number
-              type: array
+        options:
+          items:
+            $ref: "#/components/schemas/SimpleFormFieldOption"
+          type: array
       type: object
     GetConnectionResponse:
       properties:
         data:
-          properties:
-            data:
-              $ref: "#/components/schemas/Connection"
+          $ref: "#/components/schemas/Connection"
         status:
           description: HTTP Response Status
           example: OK
@@ -1590,69 +1652,7 @@ components:
     GetConsumerResponse:
       properties:
         data:
-          properties:
-            aggregated_request_count:
-              example: 101
-              type: number
-            connections:
-              items:
-                properties:
-                  auth_type:
-                    enum:
-                      - oauth2
-                      - apiKey
-                      - basic
-                    nullable: true
-                    type: string
-                  created_at:
-                    example: 2020-09-19T12:18:37.071Z
-                    type: string
-                  enabled:
-                    example: true
-                    type: boolean
-                  icon:
-                    example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
-                    type: string
-                  id:
-                    example: 1111+test_user_id
-                    readOnly: true
-                    type: string
-                  logo:
-                    example: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
-                    type: string
-                  name:
-                    example: Salesforce
-                    type: string
-                  service_id:
-                    example: teamleader
-                    type: string
-                  state:
-                    enum:
-                      - available
-                      - callable
-                      - added
-                      - configured
-                      - authorized
-                    example: authorized
-                    type: string
-                  unified_api:
-                    example: crm
-                    type: string
-                  updated_at:
-                    example: 2020-09-19T12:18:37.071Z
-                    nullable: true
-                    type: string
-                type: object
-              type: array
-            consumer_id:
-              example: test_consumer_id
-              type: string
-            request_count_updated:
-              example: 2021-05-07T12:55:42.242Z
-              type: string
-            request_counts:
-              $ref: "#/components/schemas/RequestCountAllocation"
-          type: object
+          $ref: "#/components/schemas/Consumer"
         status:
           description: HTTP Response Status
           example: OK
@@ -1674,8 +1674,19 @@ components:
               aggregated_request_count:
                 example: 101
                 type: number
+              application_id:
+                example: "1111"
+                type: string
               consumer_id:
                 example: test_consumer_id
+                type: string
+              created:
+                example: 2021-05-07T12:55:42.242Z
+                type: string
+              metadata:
+                $ref: "#/components/schemas/ConsumerMetadata"
+              modified:
+                example: 2021-05-07T12:55:42.242Z
                 type: string
               request_count_updated:
                 example: 2021-05-07T12:55:42.242Z
@@ -1728,6 +1739,7 @@ components:
         - status
         - data
       type: object
+      x-graphql-type-name: LogList
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -2045,20 +2057,7 @@ components:
     SessionRequest:
       properties:
         consumer_metadata:
-          properties:
-            account_name:
-              example: SpaceX
-              type: string
-            email:
-              example: elon@musk.com
-              type: string
-            image:
-              example: https://www.spacex.com/static/images/share.jpg
-              type: string
-            user_name:
-              example: Elon Musk
-              type: string
-          type: object
+          $ref: "#/components/schemas/ConsumerMetadata"
         redirect_uri:
           example: https://mysaas.com/dashboard
           type: string
@@ -2086,6 +2085,31 @@ components:
               example: Intercom
               type: string
           type: object
+      type: object
+    SimpleFormFieldOption:
+      properties:
+        label:
+          example: General Channel
+          type: string
+        value:
+          anyOf:
+            - example: general
+              type: string
+            - example: 123
+              type: integer
+            - example: 12.5
+              type: number
+            - example: true
+              type: boolean
+            - example:
+                - team
+                - general
+              items:
+                anyOf:
+                  - type: string
+                  - type: integer
+                  - type: number
+              type: array
       type: object
     Unauthorized:
       properties:
