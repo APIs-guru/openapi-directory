@@ -861,6 +861,12 @@ components:
         name:
           description: Immutable. The relative resource name of the backup, in the following form:projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}
           type: string
+        restoringServices:
+          description: Output only. Services that are restoring from the backup.
+          items:
+            type: string
+          readOnly: true
+          type: array
         serviceRevision:
           $ref: "#/components/schemas/Service"
           description: Output only. The revision of the service at the time of backup.

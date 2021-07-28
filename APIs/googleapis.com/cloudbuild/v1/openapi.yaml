@@ -36,6 +36,7 @@ externalDocs:
 tags:
   - name: operations
   - name: projects
+  - name: v1
 paths:
   "/v1/projects/{projectId}/builds":
     get:
@@ -582,6 +583,36 @@ paths:
           description: Successful response
       tags:
         - projects
+  /v1/webhook:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: ReceiveWebhook is called when the API receives a GitHub webhook.
+      operationId: cloudbuild.webhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HttpBody"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      tags:
+        - v1
   "/v1/{name}":
     delete:
       description: Deletes a `WorkerPool`.
@@ -962,6 +993,82 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Build"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/githubEnterpriseConfigs":
+    get:
+      description: List all GitHubEnterpriseConfigs for a given project. This API is experimental.
+      operationId: cloudbuild.projects.locations.githubEnterpriseConfigs.list
+      parameters:
+        - description: "Name of the parent project. For example: projects/{$project_number} or projects/{$project_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: ID of the project
+          in: query
+          name: projectId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListGithubEnterpriseConfigsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create an association between a GCP project and a GitHub Enterprise server. This API is experimental.
+      operationId: cloudbuild.projects.locations.githubEnterpriseConfigs.create
+      parameters:
+        - description: "Name of the parent project. For example: projects/{$project_number} or projects/{$project_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: ID of the project.
+          in: query
+          name: projectId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GitHubEnterpriseConfig"
       responses:
         "200":
           content:
@@ -1438,7 +1545,7 @@ components:
         timing:
           additionalProperties:
             $ref: "#/components/schemas/TimeSpan"
-          description: "Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps * PUSH: time to push all specified images. * FETCHSOURCE: time to fetch source. If the build does not specify source or images, these keys will not be included."
+          description: "Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps. * PUSH: time to push all specified images. * FETCHSOURCE: time to fetch source. * SETUPBUILD: time to set up build. If the build does not specify source or images, these keys will not be included."
           readOnly: true
           type: object
         warnings:
@@ -1653,6 +1760,9 @@ components:
         resourceName:
           description: "The `Trigger` name with format: `projects/{project}/locations/{location}/triggers/{trigger}`, where {trigger} is a unique identifier generated by the service."
           type: string
+        serviceAccount:
+          description: "Optional. The service account used for all user-controlled operations including UpdateBuildTrigger, RunBuildTrigger, CreateBuild, and CancelBuild. If no service account is set, then the standard Cloud Build service account ([PROJECT_NUM]@system.gserviceaccount.com) will be used instead. Format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT_ID_OR_EMAIL}`"
+          type: string
         sourceToBuild:
           $ref: "#/components/schemas/GitRepoSource"
           description: The repo and ref of the repository from which to build. This field is used only for those triggers that do not respond to SCM events. Triggers that respond to such events build source at whatever commit caused the event. This field is currently only used by Webhook, Pub/Sub, Manual, and Cron triggers.
@@ -1704,6 +1814,21 @@ components:
       description: The request message for Operations.CancelOperation.
       properties: {}
       type: object
+    CreateGitHubEnterpriseConfigOperationMetadata:
+      description: Metadata for `CreateGithubEnterpriseConfig` operation.
+      properties:
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+        githubEnterpriseConfig:
+          description: "The resource name of the GitHubEnterprise to be created. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`."
+          type: string
+      type: object
     CreateWorkerPoolOperationMetadata:
       description: Metadata for the `CreateWorkerPool` operation.
       properties:
@@ -1717,6 +1842,21 @@ components:
           type: string
         workerPool:
           description: "The resource name of the `WorkerPool` to create. Format: `projects/{project}/locations/{location}/workerPools/{worker_pool}`."
+          type: string
+      type: object
+    DeleteGitHubEnterpriseConfigOperationMetadata:
+      description: Metadata for `DeleteGitHubEnterpriseConfig` operation.
+      properties:
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+        githubEnterpriseConfig:
+          description: "The resource name of the GitHubEnterprise to be deleted. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`."
           type: string
       type: object
     DeleteWorkerPoolOperationMetadata:
@@ -1765,9 +1905,74 @@ components:
             $ref: "#/components/schemas/Hash"
           type: array
       type: object
-    GitHubEventsConfig:
-      description: GitHubEventsConfig describes the configuration of a trigger that creates a build whenever a GitHub event is received. This message is experimental.
+    GitHubEnterpriseConfig:
+      description: GitHubEnterpriseConfig represents a configuration for a GitHub Enterprise server.
       properties:
+        appId:
+          description: Required. The GitHub app id of the Cloud Build app on the GitHub Enterprise server.
+          format: int64
+          type: string
+        createTime:
+          description: Output only. Time when the installation was associated with the project.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: Name to display for this config.
+          type: string
+        hostUrl:
+          description: The URL of the github enterprise host the configuration is for.
+          type: string
+        name:
+          description: 'Optional. The full resource name for the GitHubEnterpriseConfig For example: "projects/{$project_id}/githubEnterpriseConfig/{$config_id}"'
+          type: string
+        peeredNetwork:
+          description: Optional. The network to be used when reaching out to the GitHub Enterprise server. The VPC network must be enabled for private service connection. This should be set if the GitHub Enterprise server is hosted on-premises and not reachable by public internet. If this field is left empty, no network peering will occur and calls to the GitHub Enterprise server will be made over the public internet. Must be in the format `projects/{project}/global/networks/{network}`, where {project} is a project number or id and {network} is the name of a VPC network in the project.
+          type: string
+        secrets:
+          $ref: "#/components/schemas/GitHubEnterpriseSecrets"
+          description: Names of secrets in Secret Manager.
+        sslCa:
+          description: Optional. SSL certificate to use for requests to GitHub Enterprise.
+          type: string
+        webhookKey:
+          description: The key that should be attached to webhook calls to the ReceiveWebhook endpoint.
+          type: string
+      type: object
+    GitHubEnterpriseSecrets:
+      description: "GitHubEnterpriseSecrets represents the names of all necessary secrets in Secret Manager for a GitHub Enterprise server. Format is: projects//secrets/."
+      properties:
+        oauthClientIdName:
+          description: The resource name for the OAuth client ID secret in Secret Manager.
+          type: string
+        oauthClientIdVersionName:
+          description: The resource name for the OAuth client ID secret version in Secret Manager.
+          type: string
+        oauthSecretName:
+          description: The resource name for the OAuth secret in Secret Manager.
+          type: string
+        oauthSecretVersionName:
+          description: The resource name for the OAuth secret secret version in Secret Manager.
+          type: string
+        privateKeyName:
+          description: The resource name for the private key secret.
+          type: string
+        privateKeyVersionName:
+          description: The resource name for the private key secret version.
+          type: string
+        webhookSecretName:
+          description: The resource name for the webhook secret in Secret Manager.
+          type: string
+        webhookSecretVersionName:
+          description: The resource name for the webhook secret secret version in Secret Manager.
+          type: string
+      type: object
+    GitHubEventsConfig:
+      description: GitHubEventsConfig describes the configuration of a trigger that creates a build whenever a GitHub event is received.
+      properties:
+        enterpriseConfigResourceName:
+          description: 'Optional. The resource name of the github enterprise config that should be applied to this installation. For example: "projects/{$project_id}/githubEnterpriseConfig/{$config_id}"'
+          type: string
         installationId:
           description: The installationID that emits the GitHub event.
           format: int64
@@ -1912,6 +2117,15 @@ components:
         nextPageToken:
           description: Token to receive the next page of results. This will be absent if the end of the response list has been reached.
           type: string
+      type: object
+    ListGithubEnterpriseConfigsResponse:
+      description: RPC response object returned by ListGithubEnterpriseConfigs RPC method.
+      properties:
+        configs:
+          description: A list of GitHubEnterpriseConfigs
+          items:
+            $ref: "#/components/schemas/GitHubEnterpriseConfig"
+          type: array
       type: object
     ListWorkerPoolsResponse:
       description: Response containing existing `WorkerPools`.
@@ -2088,6 +2302,21 @@ components:
         workerConfig:
           $ref: "#/components/schemas/WorkerConfig"
           description: Machine configuration for the workers in the pool.
+      type: object
+    ProcessAppManifestCallbackOperationMetadata:
+      description: Metadata for `ProcessAppManifestCallback` operation.
+      properties:
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+        githubEnterpriseConfig:
+          description: "The resource name of the GitHubEnterprise to be created. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`."
+          type: string
       type: object
     PubsubConfig:
       description: PubsubConfig describes the configuration of a trigger that creates a build whenever a Pub/Sub message is published.
@@ -2388,6 +2617,21 @@ components:
         startTime:
           description: Start of time span.
           format: google-datetime
+          type: string
+      type: object
+    UpdateGitHubEnterpriseConfigOperationMetadata:
+      description: Metadata for `UpdateGitHubEnterpriseConfig` operation.
+      properties:
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+        githubEnterpriseConfig:
+          description: "The resource name of the GitHubEnterprise to be updated. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`."
           type: string
       type: object
     UpdateWorkerPoolOperationMetadata:

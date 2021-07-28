@@ -1225,7 +1225,7 @@ components:
           type: array
         memoryInfo:
           $ref: "#/components/schemas/MemoryInfo"
-          description: Memory information. This information is only available if memoryInfoEnabled is true in the device's policy.
+          description: "Memory information: contains information about device memory and storage."
         name:
           description: The name of the device in the form enterprises/{enterpriseId}/devices/{deviceId}.
           type: string
@@ -2651,7 +2651,7 @@ components:
           description: Whether hardware status reporting is enabled. Report data is not available for personally owned devices with work profiles.
           type: boolean
         memoryInfoEnabled:
-          description: Whether memory reporting is enabled.
+          description: Whether memory event reporting is enabled.
           type: boolean
         networkInfoEnabled:
           description: Whether network info reporting is enabled.

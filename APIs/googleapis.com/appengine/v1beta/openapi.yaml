@@ -2745,6 +2745,13 @@ components:
           items:
             type: string
           type: array
+        instanceIpMode:
+          description: The IP mode for instances. Only applicable in the App Engine flexible environment.
+          enum:
+            - INSTANCE_IP_MODE_UNSPECIFIED
+            - EXTERNAL
+            - INTERNAL
+          type: string
         instanceTag:
           description: Tag to apply to the instance during creation. Only applicable in the App Engine flexible environment.
           type: string

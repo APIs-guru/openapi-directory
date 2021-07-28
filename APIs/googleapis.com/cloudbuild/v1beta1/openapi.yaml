@@ -478,7 +478,7 @@ components:
         timing:
           additionalProperties:
             $ref: "#/components/schemas/TimeSpan"
-          description: "Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps * PUSH: time to push all specified images. * FETCHSOURCE: time to fetch source. If the build does not specify source or images, these keys will not be included."
+          description: "Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps. * PUSH: time to push all specified images. * FETCHSOURCE: time to fetch source. * SETUPBUILD: time to set up build. If the build does not specify source or images, these keys will not be included."
           readOnly: true
           type: object
         warnings:
@@ -659,6 +659,21 @@ components:
       description: The request message for Operations.CancelOperation.
       properties: {}
       type: object
+    CreateGitHubEnterpriseConfigOperationMetadata:
+      description: Metadata for `CreateGithubEnterpriseConfig` operation.
+      properties:
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+        githubEnterpriseConfig:
+          description: "The resource name of the GitHubEnterprise to be created. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`."
+          type: string
+      type: object
     CreateWorkerPoolOperationMetadata:
       description: Metadata for the `CreateWorkerPool` operation.
       properties:
@@ -672,6 +687,21 @@ components:
           type: string
         workerPool:
           description: "The resource name of the `WorkerPool` to create. Format: `projects/{project}/locations/{location}/workerPools/{worker_pool}`."
+          type: string
+      type: object
+    DeleteGitHubEnterpriseConfigOperationMetadata:
+      description: Metadata for `DeleteGitHubEnterpriseConfig` operation.
+      properties:
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+        githubEnterpriseConfig:
+          description: "The resource name of the GitHubEnterprise to be deleted. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`."
           type: string
       type: object
     DeleteWorkerPoolOperationMetadata:
@@ -945,6 +975,21 @@ components:
           description: The `WorkerPool` resource to execute the build on. You must have `cloudbuild.workerpools.use` on the project hosting the WorkerPool. Format projects/{project}/locations/{location}/workerPools/{workerPoolId}
           type: string
       type: object
+    ProcessAppManifestCallbackOperationMetadata:
+      description: Metadata for `ProcessAppManifestCallback` operation.
+      properties:
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+        githubEnterpriseConfig:
+          description: "The resource name of the GitHubEnterprise to be created. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`."
+          type: string
+      type: object
     RepoSource:
       description: Location of the source in a Google Cloud Source Repository.
       properties:
@@ -1161,6 +1206,21 @@ components:
         startTime:
           description: Start of time span.
           format: google-datetime
+          type: string
+      type: object
+    UpdateGitHubEnterpriseConfigOperationMetadata:
+      description: Metadata for `UpdateGitHubEnterpriseConfig` operation.
+      properties:
+        completeTime:
+          description: Time the operation was completed.
+          format: google-datetime
+          type: string
+        createTime:
+          description: Time the operation was created.
+          format: google-datetime
+          type: string
+        githubEnterpriseConfig:
+          description: "The resource name of the GitHubEnterprise to be updated. Format: `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`."
           type: string
       type: object
     UpdateWorkerPoolOperationMetadata:
