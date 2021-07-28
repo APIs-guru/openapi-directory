@@ -3,6 +3,7 @@ info:
   version: '2020-07-20'
   x-release: v4
   title: AWS Single Sign-On Admin
+  description: '<p>Amazon Web Services Single Sign On (SSO) is a cloud SSO service that makes it easy to centrally manage SSO access to multiple Amazon Web Services accounts and business applications. This guide provides information on SSO operations which could be used for access management of Amazon Web Services accounts. For information about Amazon Web Services SSO features, see the <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html">Amazon Web Services Single Sign-On User Guide</a>.</p> <p>Many operations in the SSO APIs rely on identifiers for users and groups, known as principals. For more information about how to work with principals and principal IDs in Amazon Web Services SSO, see the <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html">Amazon Web Services SSO Identity Store API Reference</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -117,7 +118,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.AttachManagedPolicyToPermissionSet:
     post:
       operationId: AttachManagedPolicyToPermissionSet
-      description: '<p>Attaches an IAM managed policy ARN to a permission set.</p> <note> <p>If the permission set is already referenced by one or more account assignments, you will need to call <code> <a>ProvisionPermissionSet</a> </code> after this action to apply the corresponding IAM policy updates to all assigned accounts.</p> </note>'
+      description: '<p>Attaches an IAM managed policy ARN to a permission set.</p> <note> <p>If the permission set is already referenced by one or more account assignments, you will need to call <code> <a>ProvisionPermissionSet</a> </code> after this operation. Calling <code>ProvisionPermissionSet</code> applies the corresponding IAM policy updates to all assigned accounts.</p> </note>'
       responses:
         '200':
           description: Success
@@ -192,7 +193,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.CreateAccountAssignment:
     post:
       operationId: CreateAccountAssignment
-      description: '<p>Assigns access to a principal for a specified AWS account using a specified permission set.</p> <note> <p>The term <i>principal</i> here refers to a user or group that is defined in AWS SSO.</p> </note> <note> <p>As part of a successful <code>CreateAccountAssignment</code> call, the specified permission set will automatically be provisioned to the account in the form of an IAM policy attached to the SSO-created IAM role. If the permission set is subsequently updated, the corresponding IAM policies attached to roles in your accounts will not be updated automatically. In this case, you will need to call <code> <a>ProvisionPermissionSet</a> </code> to make these updates.</p> </note>'
+      description: '<p>Assigns access to a principal for a specified Amazon Web Services account using a specified permission set.</p> <note> <p>The term <i>principal</i> here refers to a user or group that is defined in Amazon Web Services SSO.</p> </note> <note> <p>As part of a successful <code>CreateAccountAssignment</code> call, the specified permission set will automatically be provisioned to the account in the form of an IAM policy. That policy is attached to the SSO-created IAM role. If the permission set is subsequently updated, the corresponding IAM policies attached to roles in your accounts will not be updated automatically. In this case, you must call <code> <a>ProvisionPermissionSet</a> </code> to make these updates.</p> </note>'
       responses:
         '200':
           description: Success
@@ -267,7 +268,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.CreateInstanceAccessControlAttributeConfiguration:
     post:
       operationId: CreateInstanceAccessControlAttributeConfiguration
-      description: 'Enables the attributes-based access control (ABAC) feature for the specified AWS SSO instance. You can also specify new attributes to add to your ABAC configuration during the enabling process. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>AWS SSO User Guide</i>.'
+      description: 'Enables the attributes-based access control (ABAC) feature for the specified Amazon Web Services SSO instance. You can also specify new attributes to add to your ABAC configuration during the enabling process. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -336,7 +337,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.CreatePermissionSet:
     post:
       operationId: CreatePermissionSet
-      description: '<p>Creates a permission set within a specified SSO instance.</p> <note> <p>To grant users and groups access to AWS account resources, use <code> <a>CreateAccountAssignment</a> </code>.</p> </note>'
+      description: '<p>Creates a permission set within a specified SSO instance.</p> <note> <p>To grant users and groups access to Amazon Web Services account resources, use <code> <a>CreateAccountAssignment</a> </code>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -411,7 +412,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.DeleteAccountAssignment:
     post:
       operationId: DeleteAccountAssignment
-      description: Deletes a principal's access from a specified AWS account using a specified permission set.
+      description: Deletes a principal's access from a specified Amazon Web Services account using a specified permission set.
       responses:
         '200':
           description: Success
@@ -549,7 +550,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.DeleteInstanceAccessControlAttributeConfiguration:
     post:
       operationId: DeleteInstanceAccessControlAttributeConfiguration
-      description: 'Disables the attributes-based access control (ABAC) feature for the specified AWS SSO instance and deletes all of the attribute mappings that have been configured. Once deleted, any attributes that are received from an identity source and any custom attributes you have previously configured will not be passed. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>AWS SSO User Guide</i>.'
+      description: 'Disables the attributes-based access control (ABAC) feature for the specified Amazon Web Services SSO instance and deletes all of the attribute mappings that have been configured. Once deleted, any attributes that are received from an identity source and any custom attributes you have previously configured will not be passed. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -813,7 +814,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.DescribeInstanceAccessControlAttributeConfiguration:
     post:
       operationId: DescribeInstanceAccessControlAttributeConfiguration
-      description: 'Returns the list of AWS SSO identity store attributes that have been configured to work with attributes-based access control (ABAC) for the specified AWS SSO instance. This will not return attributes configured and sent by an external identity provider. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>AWS SSO User Guide</i>.'
+      description: 'Returns the list of Amazon Web Services SSO identity store attributes that have been configured to work with attributes-based access control (ABAC) for the specified Amazon Web Services SSO instance. This will not return attributes configured and sent by an external identity provider. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -1134,7 +1135,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.ListAccountAssignmentCreationStatus:
     post:
       operationId: ListAccountAssignmentCreationStatus
-      description: Lists the status of the AWS account assignment creation requests for a specified SSO instance.
+      description: Lists the status of the Amazon Web Services account assignment creation requests for a specified SSO instance.
       responses:
         '200':
           description: Success
@@ -1209,7 +1210,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.ListAccountAssignmentDeletionStatus:
     post:
       operationId: ListAccountAssignmentDeletionStatus
-      description: Lists the status of the AWS account assignment deletion requests for a specified SSO instance.
+      description: Lists the status of the Amazon Web Services account assignment deletion requests for a specified SSO instance.
       responses:
         '200':
           description: Success
@@ -1284,7 +1285,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.ListAccountAssignments:
     post:
       operationId: ListAccountAssignments
-      description: Lists the assignee of the specified AWS account with the specified permission set.
+      description: Lists the assignee of the specified Amazon Web Services account with the specified permission set.
       responses:
         '200':
           description: Success
@@ -1359,7 +1360,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.ListAccountsForProvisionedPermissionSet:
     post:
       operationId: ListAccountsForProvisionedPermissionSet
-      description: Lists all the AWS accounts where the specified permission set is provisioned.
+      description: Lists all the Amazon Web Services accounts where the specified permission set is provisioned.
       responses:
         '200':
           description: Success
@@ -1728,7 +1729,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.ListPermissionSetsProvisionedToAccount:
     post:
       operationId: ListPermissionSetsProvisionedToAccount
-      description: Lists all the permission sets that are provisioned to a specified AWS account.
+      description: Lists all the permission sets that are provisioned to a specified Amazon Web Services account.
       responses:
         '200':
           description: Success
@@ -2160,7 +2161,7 @@ paths:
   /#X-Amz-Target=SWBExternalService.UpdateInstanceAccessControlAttributeConfiguration:
     post:
       operationId: UpdateInstanceAccessControlAttributeConfiguration
-      description: 'Updates the AWS SSO identity store attributes to use with the AWS SSO instance for attributes-based access control (ABAC). When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the AWS SSO identity store. If a SAML assertion passes any of these attributes, AWS SSO will replace the attribute value with the value from the AWS SSO identity store. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>AWS SSO User Guide</i>.'
+      description: 'Updates the Amazon Web Services SSO identity store attributes that you can use with the Amazon Web Services SSO instance for attributes-based access control (ABAC). When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the Amazon Web Services SSO identity store. If a SAML assertion passes any of these attributes, Amazon Web Services SSO replaces the attribute value with the value from the Amazon Web Services SSO identity store. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>Amazon Web Services SSO User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -2361,7 +2362,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
@@ -2398,11 +2399,11 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         TargetId:
           allOf:
             - $ref: '#/components/schemas/TargetId'
-            - description: 'TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).'
+            - description: 'TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).'
         TargetType:
           allOf:
             - $ref: '#/components/schemas/TargetType'
@@ -2418,7 +2419,7 @@ components:
         PrincipalId:
           allOf:
             - $ref: '#/components/schemas/PrincipalId'
-            - description: 'An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">AWS SSO Identity Store API Reference</a>.'
+            - description: 'An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">Amazon Web Services SSO Identity Store API Reference</a>.'
     CreateInstanceAccessControlAttributeConfigurationResponse:
       type: object
       properties: {}
@@ -2436,14 +2437,14 @@ components:
         InstanceAccessControlAttributeConfiguration:
           allOf:
             - $ref: '#/components/schemas/InstanceAccessControlAttributeConfiguration'
-            - description: 'Specifies the AWS SSO identity store attributes to add to your ABAC configuration. When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the AWS SSO identity store. If a SAML assertion passes any of these attributes, AWS SSO will replace the attribute value with the value from the AWS SSO identity store.'
+            - description: 'Specifies the Amazon Web Services SSO identity store attributes to add to your ABAC configuration. When using an external identity provider as an identity source, you can pass attributes through the SAML assertion. Doing so provides an alternative to configuring attributes from the Amazon Web Services SSO identity store. If a SAML assertion passes any of these attributes, Amazon Web Services SSO will replace the attribute value with the value from the Amazon Web Services SSO identity store.'
     CreatePermissionSetResponse:
       type: object
       properties:
         PermissionSet:
           allOf:
             - $ref: '#/components/schemas/PermissionSet'
-            - description: Defines the level of access on an AWS account.
+            - description: Defines the level of access on an Amazon Web Services account.
     CreatePermissionSetRequest:
       type: object
       required:
@@ -2462,7 +2463,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         SessionDuration:
           allOf:
             - $ref: '#/components/schemas/Duration'
@@ -2496,11 +2497,11 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         TargetId:
           allOf:
             - $ref: '#/components/schemas/TargetId'
-            - description: 'TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).'
+            - description: 'TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).'
         TargetType:
           allOf:
             - $ref: '#/components/schemas/TargetType'
@@ -2516,7 +2517,7 @@ components:
         PrincipalId:
           allOf:
             - $ref: '#/components/schemas/PrincipalId'
-            - description: 'An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">AWS SSO Identity Store API Reference</a>.'
+            - description: 'An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">Amazon Web Services SSO Identity Store API Reference</a>.'
     DeleteInlinePolicyFromPermissionSetResponse:
       type: object
       properties: {}
@@ -2530,7 +2531,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
@@ -2561,7 +2562,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
@@ -2583,7 +2584,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         AccountAssignmentCreationRequestId:
           allOf:
             - $ref: '#/components/schemas/UUId'
@@ -2605,7 +2606,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         AccountAssignmentDeletionRequestId:
           allOf:
             - $ref: '#/components/schemas/UUId'
@@ -2624,7 +2625,7 @@ components:
         InstanceAccessControlAttributeConfiguration:
           allOf:
             - $ref: '#/components/schemas/InstanceAccessControlAttributeConfiguration'
-            - description: Gets the list of AWS SSO identity store attributes added to your ABAC configuration.
+            - description: Gets the list of Amazon Web Services SSO identity store attributes that have been added to your ABAC configuration.
     DescribeInstanceAccessControlAttributeConfigurationRequest:
       type: object
       required:
@@ -2641,7 +2642,7 @@ components:
         PermissionSet:
           allOf:
             - $ref: '#/components/schemas/PermissionSet'
-            - description: Describes the level of access on an AWS account.
+            - description: Describes the level of access on an Amazon Web Services account.
     DescribePermissionSetRequest:
       type: object
       required:
@@ -2652,7 +2653,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
@@ -2674,7 +2675,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         ProvisionPermissionSetRequestId:
           allOf:
             - $ref: '#/components/schemas/UUId'
@@ -2693,7 +2694,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
@@ -2719,7 +2720,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
@@ -2744,7 +2745,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
@@ -2777,7 +2778,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
@@ -2796,7 +2797,7 @@ components:
         AccountAssignments:
           allOf:
             - $ref: '#/components/schemas/AccountAssignmentList'
-            - description: The list of assignments that match the input AWS account and permission set.
+            - description: The list of assignments that match the input Amazon Web Services account and permission set.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
@@ -2812,11 +2813,11 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         AccountId:
           allOf:
             - $ref: '#/components/schemas/TargetId'
-            - description: The identifier of the AWS account from which to list the assignments.
+            - description: The identifier of the Amazon Web Services account from which to list the assignments.
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
@@ -2835,7 +2836,7 @@ components:
         AccountIds:
           allOf:
             - $ref: '#/components/schemas/AccountList'
-            - description: The list of AWS <code>AccountIds</code>.
+            - description: The list of Amazon Web Services <code>AccountIds</code>.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
@@ -2850,15 +2851,15 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
-            - description: The ARN of the <a>PermissionSet</a> from which the associated AWS accounts will be listed.
+            - description: The ARN of the <a>PermissionSet</a> from which the associated Amazon Web Services accounts will be listed.
         ProvisioningStatus:
           allOf:
             - $ref: '#/components/schemas/ProvisioningStatus'
-            - description: The permission set provisioning status for an AWS account.
+            - description: The permission set provisioning status for an Amazon Web Services account.
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
@@ -2911,7 +2912,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
@@ -2944,7 +2945,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
@@ -2963,7 +2964,7 @@ components:
         PermissionSets:
           allOf:
             - $ref: '#/components/schemas/PermissionSetList'
-            - description: Defines the level of access on an AWS account.
+            - description: Defines the level of access on an Amazon Web Services account.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
@@ -2977,7 +2978,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/Token'
@@ -2996,7 +2997,7 @@ components:
         PermissionSets:
           allOf:
             - $ref: '#/components/schemas/PermissionSetList'
-            - description: Defines the level of access that an AWS account has.
+            - description: Defines the level of access that an Amazon Web Services account has.
     ListPermissionSetsProvisionedToAccountRequest:
       type: object
       required:
@@ -3007,11 +3008,11 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         AccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The identifier of the AWS account from which to list the assignments.
+            - description: The identifier of the Amazon Web Services account from which to list the assignments.
         ProvisioningStatus:
           allOf:
             - $ref: '#/components/schemas/ProvisioningStatus'
@@ -3045,7 +3046,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         ResourceArn:
           allOf:
             - $ref: '#/components/schemas/GeneralArn'
@@ -3072,7 +3073,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
@@ -3080,7 +3081,7 @@ components:
         TargetId:
           allOf:
             - $ref: '#/components/schemas/TargetId'
-            - description: 'TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).'
+            - description: 'TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).'
         TargetType:
           allOf:
             - $ref: '#/components/schemas/ProvisionTargetType'
@@ -3099,7 +3100,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
@@ -3122,7 +3123,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         ResourceArn:
           allOf:
             - $ref: '#/components/schemas/GeneralArn'
@@ -3145,7 +3146,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         ResourceArn:
           allOf:
             - $ref: '#/components/schemas/GeneralArn'
@@ -3185,7 +3186,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
@@ -3215,7 +3216,7 @@ components:
         Source:
           allOf:
             - $ref: '#/components/schemas/AccessControlAttributeValueSourceList'
-            - description: The identity source to use when mapping a specified attribute to AWS SSO.
+            - description: The identity source to use when mapping a specified attribute to Amazon Web Services SSO.
       description: The value used for mapping a specified attribute to an identity source.
     AccessControlAttribute:
       type: object
@@ -3226,12 +3227,12 @@ components:
         Key:
           allOf:
             - $ref: '#/components/schemas/AccessControlAttributeKey'
-            - description: The name of the attribute associated with your identities in your identity source. This is used to map a specified attribute in your identity source with an attribute in AWS SSO.
+            - description: The name of the attribute associated with your identities in your identity source. This is used to map a specified attribute in your identity source with an attribute in Amazon Web Services SSO.
         Value:
           allOf:
             - $ref: '#/components/schemas/AccessControlAttributeValue'
             - description: The value used for mapping a specified attribute to an identity source.
-      description: 'These are AWS SSO identity store attributes that you can configure for use in attributes-based access control (ABAC). You can create permission policies that determine who can access your AWS resources based upon the configured attribute value(s). When you enable ABAC and specify AccessControlAttributes, AWS SSO passes the attribute(s) value of the authenticated user into IAM for use in policy evaluation.'
+      description: 'These are Amazon Web Services SSO identity store attributes that you can configure for use in attributes-based access control (ABAC). You can create permissions policies that determine who can access your Amazon Web Services resources based upon the configured attribute values. When you enable ABAC and specify <code>AccessControlAttributes</code>, Amazon Web Services SSO passes the attribute values of the authenticated user into IAM for use in policy evaluation.'
     AccessControlAttributeList:
       type: array
       items:
@@ -3273,11 +3274,11 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The identifier of the AWS account.
+            - description: The identifier of the Amazon Web Services account.
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
-            - description: 'The ARN of the permission set. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the permission set. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         PrincipalType:
           allOf:
             - $ref: '#/components/schemas/PrincipalType'
@@ -3285,8 +3286,8 @@ components:
         PrincipalId:
           allOf:
             - $ref: '#/components/schemas/PrincipalId'
-            - description: 'An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">AWS SSO Identity Store API Reference</a>.'
-      description: <p>The assignment that indicates a principal's limited access to a specified AWS account with a specified permission set.</p> <note> <p>The term <i>principal</i> here refers to a user or group that is defined in AWS SSO.</p> </note>
+            - description: 'An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">Amazon Web Services SSO Identity Store API Reference</a>.'
+      description: <p>The assignment that indicates a principal's limited access to a specified Amazon Web Services account with a specified permission set.</p> <note> <p>The term <i>principal</i> here refers to a user or group that is defined in Amazon Web Services SSO.</p> </note>
     AccountAssignmentList:
       type: array
       items:
@@ -3331,7 +3332,7 @@ components:
         TargetId:
           allOf:
             - $ref: '#/components/schemas/TargetId'
-            - description: 'TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).'
+            - description: 'TargetID is an Amazon Web Services account identifier, typically a 10-12 digit string (For example, 123456789012).'
         TargetType:
           allOf:
             - $ref: '#/components/schemas/TargetType'
@@ -3339,7 +3340,7 @@ components:
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
-            - description: 'The ARN of the permission set. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the permission set. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         PrincipalType:
           allOf:
             - $ref: '#/components/schemas/PrincipalType'
@@ -3347,7 +3348,7 @@ components:
         PrincipalId:
           allOf:
             - $ref: '#/components/schemas/PrincipalId'
-            - description: 'An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">AWS SSO Identity Store API Reference</a>.'
+            - description: 'An identifier for an object in Amazon Web Services SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in Amazon Web Services SSO, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">Amazon Web Services SSO Identity Store API Reference</a>.'
         CreatedDate:
           allOf:
             - $ref: '#/components/schemas/Date'
@@ -3400,7 +3401,7 @@ components:
         Arn:
           allOf:
             - $ref: '#/components/schemas/ManagedPolicyArn'
-            - description: 'The ARN of the IAM managed policy. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the IAM managed policy. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
       description: A structure that stores the details of the IAM managed policy.
     AttachedManagedPolicyList:
       type: array
@@ -3414,7 +3415,7 @@ components:
         AccessControlAttributes:
           allOf:
             - $ref: '#/components/schemas/AccessControlAttributeList'
-            - description: Lists the attributes that are configured for ABAC in the specified AWS SSO instance.
+            - description: Lists the attributes that are configured for ABAC in the specified Amazon Web Services SSO instance.
       description: Specifies the attributes to add to your attribute-based access control (ABAC) configuration.
     PermissionSetName:
       type: string
@@ -3452,7 +3453,7 @@ components:
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
-            - description: 'The ARN of the permission set. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the permission set. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         Description:
           allOf:
             - $ref: '#/components/schemas/PermissionSetDescription'
@@ -3492,11 +3493,11 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The identifier of the AWS account from which to list the assignments.
+            - description: The identifier of the Amazon Web Services account from which to list the assignments.
         PermissionSetArn:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
-            - description: 'The ARN of the permission set that is being provisioned. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the permission set that is being provisioned. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         FailureReason:
           allOf:
             - $ref: '#/components/schemas/Reason'
@@ -3528,7 +3529,7 @@ components:
         InstanceArn:
           allOf:
             - $ref: '#/components/schemas/InstanceArn'
-            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.'
+            - description: 'The ARN of the SSO instance under which the operation will be executed. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.'
         IdentityStoreId:
           allOf:
             - $ref: '#/components/schemas/Id'
@@ -3609,7 +3610,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagValue'
             - description: The value of the tag.
-      description: A set of key-value pairs that are used to manage the resource. Tags can only be applied to permission sets and cannot be applied to corresponding roles that AWS SSO creates in AWS accounts.
+      description: A set of key-value pairs that are used to manage the resource. Tags can only be applied to permission sets and cannot be applied to corresponding roles that Amazon Web Services SSO creates in Amazon Web Services accounts.
     TagKeyList:
       type: array
       items:
