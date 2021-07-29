@@ -94,6 +94,9 @@ paths:
                 code:
                   type: string
                 grant_type:
+                  enum:
+                    - authorization_code
+                    - refresh_token
                   type: string
                 redirect_uri:
                   type: string
@@ -277,12 +280,17 @@ components:
         expires_in:
           format: int32
           type: integer
+        id_token:
+          type: string
         refresh_token:
+          type: string
+        token_type:
           type: string
       required:
         - access_token
         - expires_in
         - refresh_token
+        - token_type
       type: object
 x-hubspot-available-client-libraries:
   - PHP

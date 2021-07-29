@@ -97,16 +97,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates the settings of a specific instance.
-      operationId: file.projects.locations.instances.patch
+      description: Updates the settings of a specific snapshot.
+      operationId: file.projects.locations.instances.snapshots.patch
       parameters:
-        - description: Output only. The resource name of the instance, in the format projects/{project_id}/locations/{location_id}/instances/{instance_id}.
+        - description: Output only. The resource name of the snapshot, in the format projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: 'Required. Mask of fields to update. At least one path must be supplied in this field. The elements of the repeated paths field may only include these fields: * "description" * "file_shares" * "labels"'
+        - description: Required. Mask of fields to update. At least one path must be supplied in this field.
           in: query
           name: updateMask
           schema:
@@ -115,7 +115,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Instance"
+              $ref: "#/components/schemas/Snapshot"
       responses:
         "200":
           content:
@@ -491,6 +491,97 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/Instance"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{parent}/snapshots":
+    get:
+      description: Lists all snapshots in a project for either a specified location or for all locations.
+      operationId: file.projects.locations.instances.snapshots.list
+      parameters:
+        - description: Required. The instance for which to retrieve snapshot information, in the format projects/{project_id}/locations/{location}/instances/{instance_id}.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: List filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Sort results. Supported values are "name", "name desc" or "" (unsorted).
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value to use if there are additional results to retrieve for this list request.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSnapshotsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a snapshot.
+      operationId: file.projects.locations.instances.snapshots.create
+      parameters:
+        - description: Required. The Filestore Instance to create the snapshots of, in the format projects/{project_id}/locations/{location}/instances/{instance_id}
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for the snapshot. The ID must be unique within the specified instance. This value must start with a lowercase letter followed by up to 62 lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
+          in: query
+          name: snapshotId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Snapshot"
       responses:
         "200":
           content:
@@ -1038,6 +1129,18 @@ components:
             $ref: "#/components/schemas/Operation"
           type: array
       type: object
+    ListSnapshotsResponse:
+      description: ListSnapshotsResponse is the result of ListSnapshotsRequest.
+      properties:
+        nextPageToken:
+          description: The token you can use to retrieve the next page of results. Not returned if there are no more results in the list.
+          type: string
+        snapshots:
+          description: A list of snapshots in the project for the specified instance.
+          items:
+            $ref: "#/components/schemas/Snapshot"
+          type: array
+      type: object
     Location:
       description: A resource that represents Google Cloud Platform location.
       properties:
@@ -1132,7 +1235,7 @@ components:
           description: The name of the Google Compute Engine [VPC network](/compute/docs/networks-and-firewalls#networks) to which the instance is connected.
           type: string
         reservedIpRange:
-          description: A /29 CIDR block for Basic or a /23 CIDR block for High Scale in one of the [internal IP address ranges](https://www.arin.net/knowledge/address_filters.html) that identifies the range of IP addresses reserved for this instance. For example, 10.0.0.0/29 or 192.168.0.0/23. The range you specify can't overlap with either existing subnets or assigned IP address ranges for other Cloud Filestore instances in the selected VPC network.
+          description: Optional, reserved_ip_range can have one of the following two types of values. * CIDR range value when using DIRECT_PEERING connect mode. * [Named Address Range](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-internal-ip-address) when using PRIVATE_SERVICE_ACCESS connect mode. For both cases, the range value (direct CIDR value or the range value with which the named range was created) must be a /29 CIDR block for Basic tier or a /23 CIDR block for High Scale or Enterprise tier in one of the [internal IP address ranges](https://www.arin.net/knowledge/address_filters.html) that identifies the range of IP addresses reserved for this instance. For example, 10.0.0.0/29 or 192.168.0.0/23. The range you specify can't overlap with either existing subnets or assigned IP address ranges for other Cloud Filestore instances in the selected VPC network.
           type: string
       type: object
     NfsExportOptions:
@@ -1259,6 +1362,41 @@ components:
           $ref: "#/components/schemas/TimeOfDay"
           description: Time within the window to start the operations.
       type: object
+    Snapshot:
+      description: A Cloud Filestore snapshot.
+      properties:
+        createTime:
+          description: Output only. The time when the snapshot was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: A description of the snapshot with 2048 characters or less. Requests with longer descriptions will be rejected.
+          type: string
+        filesystemUsedBytes:
+          description: Output only. The amount of bytes needed to allocate a full copy of the snapshot content
+          format: int64
+          readOnly: true
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Resource labels to represent user provided metadata.
+          type: object
+        name:
+          description: Output only. The resource name of the snapshot, in the format projects/{project_id}/locations/{location_id}/instances/{instance_id}/snapshots/{snapshot_id}.
+          readOnly: true
+          type: string
+        state:
+          description: Output only. The snapshot state.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - READY
+            - DELETING
+          readOnly: true
+          type: string
+      type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
       properties:
@@ -1308,7 +1446,7 @@ components:
             - LATER
           type: string
         denyMaintenancePeriods:
-          description: Deny Maintenance Period that is applied to resource to indicate when maintenance is forbidden. User can specify zero or more non-overlapping deny periods. For V1, Maximum number of deny_maintenance_periods is expected to be one.
+          description: Deny Maintenance Period that is applied to resource to indicate when maintenance is forbidden. User can specify zero or more non-overlapping deny periods. Maximum number of deny_maintenance_periods expected is one.
           items:
             $ref: "#/components/schemas/DenyMaintenancePeriod"
           type: array

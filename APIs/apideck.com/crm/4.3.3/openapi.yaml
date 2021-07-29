@@ -267,7 +267,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 4.3.1
+  version: 4.3.3
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -290,20 +290,36 @@ security:
 tags:
   - description: ""
     name: Companies
+    x-apideck-model:
+      $ref: "#/components/schemas/Company"
   - description: ""
     name: Opportunities
+    x-apideck-model:
+      $ref: "#/components/schemas/Opportunity"
   - description: ""
     name: Leads
+    x-apideck-model:
+      $ref: "#/components/schemas/Lead"
   - description: ""
     name: Contacts
+    x-apideck-model:
+      $ref: "#/components/schemas/Contact"
   - description: ""
     name: Pipelines
+    x-apideck-model:
+      $ref: "#/components/schemas/Pipeline"
   - description: ""
     name: Notes
+    x-apideck-model:
+      $ref: "#/components/schemas/Note"
   - description: ""
     name: Users
+    x-apideck-model:
+      $ref: "#/components/schemas/User"
   - description: ""
     name: Activities
+    x-apideck-model:
+      $ref: "#/components/schemas/Activity"
 paths:
   /crm/activities:
     get:

@@ -163,7 +163,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 4.3.2
+  version: 4.3.3
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -185,12 +185,20 @@ security:
 tags:
   - description: ""
     name: Sessions
+    x-apideck-model:
+      $ref: "#/components/schemas/Session"
   - description: ""
     name: Connections
+    x-apideck-model:
+      $ref: "#/components/schemas/Connection"
   - description: ""
     name: Consumers
+    x-apideck-model:
+      $ref: "#/components/schemas/Consumer"
   - description: ""
     name: Logs
+    x-apideck-model:
+      $ref: "#/components/schemas/Log"
 paths:
   "/vault/authorize/{service_id}/{application_id}":
     get:
@@ -238,6 +246,7 @@ paths:
       operationId: callback
       parameters:
         - $ref: "#/components/parameters/state"
+        - $ref: "#/components/parameters/code"
       responses:
         "301":
           description: callback
@@ -804,6 +813,14 @@ components:
       description: Application ID of the resource to return
       in: path
       name: application_id
+      required: true
+      schema:
+        type: string
+    code:
+      description: An authorization code from the connector which Apideck Vault will later exchange for an access token.
+      example: g0ZGZmNjVmOWI
+      in: query
+      name: code
       required: true
       schema:
         type: string

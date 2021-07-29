@@ -1876,6 +1876,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: If set to true, and the in-app product with the given package_name and sku doesn't exist, the in-app product will be created.
+          in: query
+          name: allowMissing
+          schema:
+            type: boolean
         - description: If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
           in: query
           name: autoConvertMissingPrices

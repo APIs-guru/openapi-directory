@@ -440,6 +440,98 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
+  "/v1/{name}:macSign":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Signs data using a CryptoKeyVersion with CryptoKey.purpose MAC, producing a tag that can be verified by another source with the same key.
+      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.macSign
+      parameters:
+        - description: Required. The resource name of the CryptoKeyVersion to use for signing.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MacSignRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MacSignResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloudkms
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloudkms
+      tags:
+        - projects
+  "/v1/{name}:macVerify":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Verifies MAC tag using a CryptoKeyVersion with CryptoKey.purpose MAC, and returns a response that indicates whether or not the verification was successful.
+      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.macVerify
+      parameters:
+        - description: Required. The resource name of the CryptoKeyVersion to use for verification.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MacVerifyRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MacVerifyResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloudkms
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloudkms
+      tags:
+        - projects
   "/v1/{name}:restore":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1371,6 +1463,7 @@ components:
             - ENCRYPT_DECRYPT
             - ASYMMETRIC_SIGN
             - ASYMMETRIC_DECRYPT
+            - MAC
           type: string
         rotationPeriod:
           description: next_rotation_time will be advanced by this period when the service automatically rotates a key. Must be at least 24 hours and at most 876,000 hours. If rotation_period is set, next_rotation_time must also be set. Keys with purpose ENCRYPT_DECRYPT support automatic rotation. For other keys, this field must be omitted.
@@ -1403,6 +1496,7 @@ components:
             - EC_SIGN_P256_SHA256
             - EC_SIGN_P384_SHA384
             - EC_SIGN_SECP256K1_SHA256
+            - HMAC_SHA256
             - EXTERNAL_SYMMETRIC_ENCRYPTION
           readOnly: true
           type: string
@@ -1495,6 +1589,7 @@ components:
             - EC_SIGN_P256_SHA256
             - EC_SIGN_P384_SHA384
             - EC_SIGN_SECP256K1_SHA256
+            - HMAC_SHA256
             - EXTERNAL_SYMMETRIC_ENCRYPTION
           type: string
         protectionLevel:
@@ -1664,6 +1759,7 @@ components:
             - EC_SIGN_P256_SHA256
             - EC_SIGN_P384_SHA384
             - EC_SIGN_SECP256K1_SHA256
+            - HMAC_SHA256
             - EXTERNAL_SYMMETRIC_ENCRYPTION
           type: string
         importJob:
@@ -1877,6 +1973,91 @@ components:
           description: Indicates whether CryptoKeys with protection_level HSM can be created in this location.
           type: boolean
       type: object
+    MacSignRequest:
+      description: Request message for KeyManagementService.MacSign.
+      properties:
+        data:
+          description: Required. The data to sign. The MAC tag is computed over this data field based on the specific algorithm.
+          format: byte
+          type: string
+        dataCrc32c:
+          description: "Optional. An optional CRC32C checksum of the MacSignRequest.data. If specified, KeyManagementService will verify the integrity of the received MacSignRequest.data using this checksum. KeyManagementService will report an error if the checksum verification fails. If you receive a checksum error, your client should verify that CRC32C(MacSignRequest.data) is equal to MacSignRequest.data_crc32c, and if so, perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type."
+          format: int64
+          type: string
+      type: object
+    MacSignResponse:
+      description: Response message for KeyManagementService.MacSign.
+      properties:
+        mac:
+          description: The created signature.
+          format: byte
+          type: string
+        macCrc32c:
+          description: "Integrity verification field. A CRC32C checksum of the returned MacSignResponse.mac. An integrity check of MacSignResponse.mac can be performed by computing the CRC32C checksum of MacSignResponse.mac and comparing your results to this field. Discard the response in case of non-matching checksum values, and perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type."
+          format: int64
+          type: string
+        name:
+          description: The resource name of the CryptoKeyVersion used for signing. Check this field to verify that the intended resource was used for signing.
+          type: string
+        protectionLevel:
+          description: The ProtectionLevel of the CryptoKeyVersion used for signing.
+          enum:
+            - PROTECTION_LEVEL_UNSPECIFIED
+            - SOFTWARE
+            - HSM
+            - EXTERNAL
+          type: string
+        verifiedDataCrc32c:
+          description: Integrity verification field. A flag indicating whether MacSignRequest.data_crc32c was received by KeyManagementService and used for the integrity verification of the data. A false value of this field indicates either that MacSignRequest.data_crc32c was left unset or that it was not delivered to KeyManagementService. If you've set MacSignRequest.data_crc32c but this field is still false, discard the response and perform a limited number of retries.
+          type: boolean
+      type: object
+    MacVerifyRequest:
+      description: Request message for KeyManagementService.MacVerify.
+      properties:
+        data:
+          description: Required. The data used previously as a MacSignRequest.data to generate the MAC tag.
+          format: byte
+          type: string
+        dataCrc32c:
+          description: "Optional. An optional CRC32C checksum of the MacVerifyRequest.data. If specified, KeyManagementService will verify the integrity of the received MacVerifyRequest.data using this checksum. KeyManagementService will report an error if the checksum verification fails. If you receive a checksum error, your client should verify that CRC32C(MacVerifyRequest.data) is equal to MacVerifyRequest.data_crc32c, and if so, perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type."
+          format: int64
+          type: string
+        mac:
+          description: Required. The signature to verify.
+          format: byte
+          type: string
+        macCrc32c:
+          description: "Optional. An optional CRC32C checksum of the MacVerifyRequest.mac. If specified, KeyManagementService will verify the integrity of the received MacVerifyRequest.mac using this checksum. KeyManagementService will report an error if the checksum verification fails. If you receive a checksum error, your client should verify that CRC32C(MacVerifyRequest.tag) is equal to MacVerifyRequest.mac_crc32c, and if so, perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type."
+          format: int64
+          type: string
+      type: object
+    MacVerifyResponse:
+      description: Response message for KeyManagementService.MacVerify.
+      properties:
+        name:
+          description: The resource name of the CryptoKeyVersion used for verification. Check this field to verify that the intended resource was used for verification.
+          type: string
+        protectionLevel:
+          description: The ProtectionLevel of the CryptoKeyVersion used for verification.
+          enum:
+            - PROTECTION_LEVEL_UNSPECIFIED
+            - SOFTWARE
+            - HSM
+            - EXTERNAL
+          type: string
+        success:
+          description: This field indicates whether or not the verification operation for MacVerifyRequest.mac over MacVerifyRequest.data was successful.
+          type: boolean
+        verifiedDataCrc32c:
+          description: Integrity verification field. A flag indicating whether MacVerifyRequest.data_crc32c was received by KeyManagementService and used for the integrity verification of the data. A false value of this field indicates either that MacVerifyRequest.data_crc32c was left unset or that it was not delivered to KeyManagementService. If you've set MacVerifyRequest.data_crc32c but this field is still false, discard the response and perform a limited number of retries.
+          type: boolean
+        verifiedMacCrc32c:
+          description: Integrity verification field. A flag indicating whether MacVerifyRequest.mac_crc32c was received by KeyManagementService and used for the integrity verification of the data. A false value of this field indicates either that MacVerifyRequest.mac_crc32c was left unset or that it was not delivered to KeyManagementService. If you've set MacVerifyRequest.mac_crc32c but this field is still false, discard the response and perform a limited number of retries.
+          type: boolean
+        verifiedSuccessIntegrity:
+          description: Integrity verification field. This value is used for the integrity verification of [MacVerifyResponse.success]. If the value of this field contradicts the value of [MacVerifyResponse.success], discard the response and perform a limited number of retries.
+          type: boolean
+      type: object
     Policy:
       description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') - etag: BwWWja0YfJA= - version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
       properties:
@@ -1922,6 +2103,7 @@ components:
             - EC_SIGN_P256_SHA256
             - EC_SIGN_P384_SHA384
             - EC_SIGN_SECP256K1_SHA256
+            - HMAC_SHA256
             - EXTERNAL_SYMMETRIC_ENCRYPTION
           type: string
         name:
