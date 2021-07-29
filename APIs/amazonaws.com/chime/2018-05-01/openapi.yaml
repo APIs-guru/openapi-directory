@@ -14943,6 +14943,197 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/meetings/{meetingId}/transcription#operation=start':
+    post:
+      operationId: StartMeetingTranscription
+      description: 'Start transcription for the specified <code>meetingId</code>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartMeetingTranscriptionResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '483':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '486':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '487':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '488':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          description: The unique ID of the meeting being transcribed.
+          schema:
+            type: string
+            pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - start
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - TranscriptionConfiguration
+              properties:
+                TranscriptionConfiguration:
+                  description: The configuration for the current transcription operation. Must contain <code>EngineTranscribeSettings</code> or <code>EngineTranscribeMedicalSettings</code>.
+                  type: object
+                  properties:
+                    EngineTranscribeSettings:
+                      allOf:
+                        - $ref: '#/components/schemas/EngineTranscribeSettings'
+                        - description: The transcription configuration settings passed to Amazon Transcribe.
+                    EngineTranscribeMedicalSettings:
+                      allOf:
+                        - $ref: '#/components/schemas/EngineTranscribeMedicalSettings'
+                        - description: The transcription configuration settings passed to Amazon Transcribe.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/meetings/{meetingId}/transcription#operation=stop':
+    post:
+      operationId: StopMeetingTranscription
+      description: Stops transcription for the specified <code>meetingId</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopMeetingTranscriptionResponse'
+        '480':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          description: The unique ID of the meeting for which you stop transcription.
+          schema:
+            type: string
+            pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - stop
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/meetings/{meetingId}/attendees/{attendeeId}/tags#operation=add':
     post:
       operationId: TagAttendee
@@ -17056,6 +17247,66 @@ components:
           allOf:
             - $ref: '#/components/schemas/MessageId'
             - description: The ID string assigned to each message.
+    StartMeetingTranscriptionResponse:
+      type: object
+      properties: {}
+    EngineTranscribeSettings:
+      type: object
+      required:
+        - LanguageCode
+      properties:
+        LanguageCode:
+          allOf:
+            - $ref: '#/components/schemas/TranscribeLanguageCode'
+            - description: The language code specified for the Amazon Transcribe engine.
+        VocabularyFilterMethod:
+          allOf:
+            - $ref: '#/components/schemas/TranscribeVocabularyFilterMethod'
+            - description: The filtering method passed to Amazon Transcribe.
+        VocabularyFilterName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the vocabulary filter passed to Amazon Transcribe.
+        VocabularyName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the vocabulary passed to Amazon Transcribe.
+        Region:
+          allOf:
+            - $ref: '#/components/schemas/TranscribeRegion'
+            - description: 'The AWS Region passed to Amazon Transcribe. If you don''t specify a Region, Amazon Chime uses the Region closest to the meeting''s Region.'
+      description: Settings specific to the Amazon Transcribe engine.
+    EngineTranscribeMedicalSettings:
+      type: object
+      required:
+        - LanguageCode
+        - Specialty
+        - Type
+      properties:
+        LanguageCode:
+          allOf:
+            - $ref: '#/components/schemas/TranscribeMedicalLanguageCode'
+            - description: The language code specified for the Amazon Transcribe Medical engine.
+        Specialty:
+          allOf:
+            - $ref: '#/components/schemas/TranscribeMedicalSpecialty'
+            - description: The specialty specified for the Amazon Transcribe Medical engine.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/TranscribeMedicalType'
+            - description: The type of transcription.
+        VocabularyName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the vocabulary passed to Amazon Transcribe Medical.
+        Region:
+          allOf:
+            - $ref: '#/components/schemas/TranscribeMedicalRegion'
+            - description: 'The AWS Region passed to Amazon Transcribe Medical. If you don''t specify a Region, Amazon Chime uses the Region closest to the meeting''s Region.'
+      description: Settings specific to the Amazon Transcribe Medical engine.
+    StopMeetingTranscriptionResponse:
+      type: object
+      properties: {}
     TagKey:
       type: string
       minLength: 1
@@ -17273,7 +17524,7 @@ components:
         AccountStatus:
           allOf:
             - $ref: '#/components/schemas/AccountStatus'
-            - description: 'The status of the account, <code>Suspended</code> or <code>Active</code>.'
+            - description: The status of the account.
         SigninDelegateGroups:
           allOf:
             - $ref: '#/components/schemas/SigninDelegateGroupList'
@@ -19456,6 +19707,68 @@ components:
             - $ref: '#/components/schemas/DNISEmergencyCallingConfigurationList'
             - description: The Dialed Number Identification Service (DNIS) emergency calling configuration details.
       description: The emergency calling configuration details associated with an Amazon Chime Voice Connector.
+    TranscribeMedicalLanguageCode:
+      type: string
+      enum:
+        - en-US
+    TranscribeMedicalSpecialty:
+      type: string
+      enum:
+        - PRIMARYCARE
+        - CARDIOLOGY
+        - NEUROLOGY
+        - ONCOLOGY
+        - RADIOLOGY
+        - UROLOGY
+    TranscribeMedicalType:
+      type: string
+      enum:
+        - CONVERSATION
+        - DICTATION
+    TranscribeMedicalRegion:
+      type: string
+      enum:
+        - us-east-1
+        - us-east-2
+        - us-west-2
+        - ap-southeast-2
+        - ca-central-1
+        - eu-west-1
+    TranscribeLanguageCode:
+      type: string
+      enum:
+        - en-US
+        - en-GB
+        - es-US
+        - fr-CA
+        - fr-FR
+        - en-AU
+        - it-IT
+        - de-DE
+        - pt-BR
+        - ja-JP
+        - ko-KR
+        - zh-CN
+    TranscribeVocabularyFilterMethod:
+      type: string
+      enum:
+        - remove
+        - mask
+        - tag
+    TranscribeRegion:
+      type: string
+      enum:
+        - us-east-2
+        - us-east-1
+        - us-west-2
+        - ap-northeast-2
+        - ap-southeast-2
+        - ap-northeast-1
+        - ca-central-1
+        - eu-central-1
+        - eu-west-1
+        - eu-west-2
+        - sa-east-1
     EventsConfiguration:
       type: object
       properties:
@@ -20122,8 +20435,8 @@ components:
         EventIngestionUrl:
           allOf:
             - $ref: '#/components/schemas/UriType'
-            - description: The event ingestion URL.
-      description: A set of endpoints used by clients to connect to the media service group for a Amazon Chime SDK meeting.
+            - description: The URL of the S3 bucket used to store the captured media.
+      description: A set of endpoints used by clients to connect to the media service group for an Amazon Chime SDK meeting.
     MeetingTagKeyList:
       type: array
       items:
@@ -20576,6 +20889,32 @@ components:
     SipApplicationPriority:
       type: integer
       minimum: 1
+    TranscriptionConfiguration:
+      type: object
+      properties:
+        EngineTranscribeSettings:
+          allOf:
+            - $ref: '#/components/schemas/EngineTranscribeSettings'
+            - description: The transcription configuration settings passed to Amazon Transcribe.
+        EngineTranscribeMedicalSettings:
+          allOf:
+            - $ref: '#/components/schemas/EngineTranscribeMedicalSettings'
+            - description: The transcription configuration settings passed to Amazon Transcribe.
+      description: The configuration for the current transcription operation. Must contain <code>EngineTranscribeSettings</code> or <code>EngineTranscribeMedicalSettings</code>.
+    StartMeetingTranscriptionRequest:
+      type: object
+      required:
+        - TranscriptionConfiguration
+      title: StartMeetingTranscriptionRequest
+      properties:
+        TranscriptionConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/TranscriptionConfiguration'
+            - description: The configuration for the current transcription operation. Must contain <code>EngineTranscribeSettings</code> or <code>EngineTranscribeMedicalSettings</code>.
+    StopMeetingTranscriptionRequest:
+      type: object
+      title: StopMeetingTranscriptionRequest
+      properties: {}
     StreamingNotificationTarget:
       type: object
       required:

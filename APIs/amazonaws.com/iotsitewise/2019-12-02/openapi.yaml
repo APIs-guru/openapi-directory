@@ -1128,6 +1128,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/Greengrass'
                         - description: A gateway that runs on IoT Greengrass.
+                    greengrassV2:
+                      allOf:
+                        - $ref: '#/components/schemas/GreengrassV2'
+                        - description: A gateway that runs on IoT Greengrass V2.
                 tags:
                   description: 'A list of key-value pairs that contain metadata for the gateway. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html">Tagging your IoT SiteWise resources</a> in the <i>IoT SiteWise User Guide</i>.'
                   type: object
@@ -3223,7 +3227,7 @@ paths:
   /configuration/account/storage:
     get:
       operationId: DescribeStorageConfiguration
-      description: Retrieves information about the storage configuration for IoT SiteWise.
+      description: '<p>Retrieves information about the storage configuration for IoT SiteWise.</p> <note> <p>Exporting data to Amazon S3 is currently in preview release and is subject to change. We recommend that you use this feature only with test data, and not in production environments.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3278,7 +3282,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: PutStorageConfiguration
-      description: Configures storage settings for IoT SiteWise.
+      description: '<p>Configures storage settings for IoT SiteWise.</p> <note> <p>Exporting data to Amazon S3 is currently in preview release and is subject to change. We recommend that you use this feature only with test data, and not in production environments.</p> </note>'
       responses:
         '200':
           description: Success
@@ -4945,6 +4949,16 @@ components:
             - $ref: '#/components/schemas/ARN'
             - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the Greengrass group. For more information about how to find a group''s ARN, see <a href="https://docs.aws.amazon.com/greengrass/latest/apireference/listgroups-get.html">ListGroups</a> and <a href="https://docs.aws.amazon.com/greengrass/latest/apireference/getgroup-get.html">GetGroup</a> in the <i>IoT Greengrass API Reference</i>.'
       description: 'Contains details for a gateway that runs on IoT Greengrass. To create a gateway that runs on IoT Greengrass, you must add the IoT SiteWise connector to a Greengrass group and deploy it. Your Greengrass group must also have permissions to upload data to IoT SiteWise. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gateway-connector.html">Ingesting data using a gateway</a> in the <i>IoT SiteWise User Guide</i>.'
+    GreengrassV2:
+      type: object
+      required:
+        - coreDeviceThingName
+      properties:
+        coreDeviceThingName:
+          allOf:
+            - $ref: '#/components/schemas/CoreDeviceThingName'
+            - description: The name of the IoT thing for your IoT Greengrass V2 core device.
+      description: 'Contains details for a gateway that runs on IoT Greengrass V2. To create a gateway that runs on IoT Greengrass V2, you must deploy the IoT SiteWise Edge component to your gateway device. Your <a href="https://docs.aws.amazon.com/greengrass/v2/developerguide/device-service-role.html">Greengrass device role</a> must use the <code>AWSIoTSiteWiseEdgeAccess</code> policy. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/sw-gateways.html">Using IoT SiteWise at the edge</a> in the <i>IoT SiteWise User Guide</i>.'
     CreatePortalResponse:
       type: object
       required:
@@ -6205,6 +6219,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ErrorMessage'
             - description: The error message.
+        details:
+          allOf:
+            - $ref: '#/components/schemas/DetailedErrors'
+            - description: ' A list of detailed errors. '
       description: Contains the details of an IoT SiteWise error.
     AssetModelStatus:
       type: object
@@ -6710,6 +6728,7 @@ components:
         - IN_SYNC
         - OUT_OF_SYNC
         - SYNC_FAILED
+        - UNKNOWN
     Property:
       type: object
       required:
@@ -6764,6 +6783,11 @@ components:
         assetProperty:
           $ref: '#/components/schemas/Property'
       description: Contains information about a composite model property on an asset.
+    ComputeLocation:
+      type: string
+      enum:
+        - EDGE
+        - CLOUD
     ErrorCode:
       type: string
       enum:
@@ -6804,6 +6828,10 @@ components:
             - $ref: '#/components/schemas/ConfigurationErrorDetails'
             - description: 'Contains associated error information, if any.'
       description: Contains current status information for the configuration.
+    CoreDeviceThingName:
+      type: string
+      minLength: 1
+      maxLength: 128
     TagMap:
       type: object
       minProperties: 1
@@ -6934,13 +6962,15 @@ components:
             - description: 'A list of key-value pairs that contain metadata for the dashboard. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html">Tagging your IoT SiteWise resources</a> in the <i>IoT SiteWise User Guide</i>.'
     GatewayPlatform:
       type: object
-      required:
-        - greengrass
       properties:
         greengrass:
           allOf:
             - $ref: '#/components/schemas/Greengrass'
             - description: A gateway that runs on IoT Greengrass.
+        greengrassV2:
+          allOf:
+            - $ref: '#/components/schemas/GreengrassV2'
+            - description: A gateway that runs on IoT Greengrass V2.
       description: Contains a gateway's platform information.
     CreateGatewayRequest:
       type: object
@@ -7226,6 +7256,32 @@ components:
             - $ref: '#/components/schemas/CustomerManagedS3Storage'
             - description: Contains information about a customer managed Amazon S3 bucket.
       description: Contains information about the storage destination.
+    DetailedErrorCode:
+      type: string
+      enum:
+        - INCOMPATIBLE_COMPUTE_LOCATION
+        - INCOMPATIBLE_FORWARDING_CONFIGURATION
+    DetailedErrorMessage:
+      type: string
+    DetailedError:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          allOf:
+            - $ref: '#/components/schemas/DetailedErrorCode'
+            - description: 'The error code. '
+        message:
+          allOf:
+            - $ref: '#/components/schemas/DetailedErrorMessage'
+            - description: 'The error message. '
+      description: 'Contains detailed error information. '
+    DetailedErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/DetailedError'
     DisassociateAssetsRequest:
       type: object
       required:
@@ -7287,6 +7343,21 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ExpressionVariable'
+    ForwardingConfigState:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+    ForwardingConfig:
+      type: object
+      required:
+        - state
+      properties:
+        state:
+          allOf:
+            - $ref: '#/components/schemas/ForwardingConfigState'
+            - description: 'The forwarding state for the given property. '
+      description: The forwarding configuration for a given property.
     GatewayCapabilitySummary:
       type: object
       required:
@@ -7318,6 +7389,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/Name'
             - description: The name of the asset.
+        gatewayPlatform:
+          $ref: '#/components/schemas/GatewayPlatform'
         gatewayCapabilitySummaries:
           allOf:
             - $ref: '#/components/schemas/GatewayCapabilitySummaries'
@@ -7516,9 +7589,23 @@ components:
       pattern: '[^\u0000-\u001F\u007F]+'
       minLength: 1
       maxLength: 256
+    MeasurementProcessingConfig:
+      type: object
+      required:
+        - forwardingConfig
+      properties:
+        forwardingConfig:
+          allOf:
+            - $ref: '#/components/schemas/ForwardingConfig'
+            - description: 'The forwarding configuration for the given measurement property. '
+      description: 'The processing configuration for the given measurement property. You can configure measurements to be kept at the edge or forwarded to the Amazon Web Services Cloud. By default, measurements are forwarded to the cloud.'
     Measurement:
       type: object
-      properties: {}
+      properties:
+        processingConfig:
+          allOf:
+            - $ref: '#/components/schemas/MeasurementProcessingConfig'
+            - description: 'The processing configuration for the given measurement property. You can configure measurements to be kept at the edge or forwarded to the Amazon Web Services Cloud. By default, measurements are forwarded to the cloud.'
       description: 'Contains an asset measurement property. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#measurements">Measurements</a> in the <i>IoT SiteWise User Guide</i>.'
     MetricWindow:
       type: object
@@ -7528,6 +7615,16 @@ components:
             - $ref: '#/components/schemas/TumblingWindow'
             - description: The tumbling time interval window.
       description: 'Contains a time interval window used for data aggregate computations (for example, average, sum, count, and so on).'
+    MetricProcessingConfig:
+      type: object
+      required:
+        - computeLocation
+      properties:
+        computeLocation:
+          allOf:
+            - $ref: '#/components/schemas/ComputeLocation'
+            - description: 'The compute location for the given metric property. '
+      description: 'The processing configuration for the given metric property. You can configure metrics to be computed at the edge or in the Amazon Web Services Cloud. By default, metrics are forwarded to the cloud.'
     Metric:
       type: object
       required:
@@ -7547,6 +7644,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MetricWindow'
             - description: The window (time interval) over which IoT SiteWise computes the metric's aggregation expression. IoT SiteWise computes one data point per <code>window</code>.
+        processingConfig:
+          allOf:
+            - $ref: '#/components/schemas/MetricProcessingConfig'
+            - description: 'The processing configuration for the given metric property. You can configure metrics to be computed at the edge or in the Amazon Web Services Cloud. By default, metrics are forwarded to the cloud.'
       description: '<p>Contains an asset metric property. With metrics, you can calculate aggregate functions, such as an average, maximum, or minimum, as specified through an expression. A metric maps several values to a single value (such as a sum).</p> <p>The maximum number of dependent/cascading variables used in any one metric calculation is 10. Therefore, a <i>root</i> metric can have up to 10 cascading metrics in its computational dependency tree. Additionally, a metric can only have a data type of <code>DOUBLE</code> and consume properties with data types of <code>INTEGER</code> or <code>DOUBLE</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#metrics">Metrics</a> in the <i>IoT SiteWise User Guide</i>.</p>'
     TumblingWindow:
       type: object
@@ -7673,6 +7774,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ExpressionVariables'
             - description: The list of variables used in the expression.
+        processingConfig:
+          allOf:
+            - $ref: '#/components/schemas/TransformProcessingConfig'
+            - description: The processing configuration for the given transform property. You can configure transforms to be kept at the edge or forwarded to the Amazon Web Services Cloud. You can also configure transforms to be computed at the edge or in the cloud.
       description: '<p>Contains an asset transform property. A transform is a one-to-one mapping of a property''s data points from one form to another. For example, you can use a transform to convert a Celsius data stream to Fahrenheit by applying the transformation expression to each data point of the Celsius stream. A transform can only have a data type of <code>DOUBLE</code> and consume properties with data types of <code>INTEGER</code> or <code>DOUBLE</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#transforms">Transforms</a> in the <i>IoT SiteWise User Guide</i>.</p>'
     PropertyValueBooleanValue:
       type: boolean
@@ -7738,6 +7843,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'A list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html">Tagging your IoT SiteWise resources</a> in the <i>IoT SiteWise User Guide</i>.'
+    TransformProcessingConfig:
+      type: object
+      required:
+        - computeLocation
+      properties:
+        computeLocation:
+          allOf:
+            - $ref: '#/components/schemas/ComputeLocation'
+            - description: 'The compute location for the given transform property. '
+        forwardingConfig:
+          $ref: '#/components/schemas/ForwardingConfig'
+      description: The processing configuration for the given transform property. You can configure transforms to be kept at the edge or forwarded to the Amazon Web Services Cloud. You can also configure transforms to be computed at the edge or in the cloud.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest

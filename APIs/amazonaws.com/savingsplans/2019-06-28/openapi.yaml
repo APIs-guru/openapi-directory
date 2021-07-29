@@ -885,7 +885,7 @@ components:
             - description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
     UUID:
       type: string
-      pattern: '^(([0-9a-f]+)(-?))+$'
+      pattern: '[a-f0-9]+(-[a-f0-9]+)*'
     SavingsPlanPaymentOption:
       type: string
       enum:

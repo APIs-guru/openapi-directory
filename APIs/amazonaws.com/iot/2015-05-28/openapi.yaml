@@ -420,7 +420,7 @@ paths:
   '/target-policies/{policyName}':
     put:
       operationId: AttachPolicy
-      description: Attaches a policy to the specified target.
+      description: Attaches the specified policy to the specified principal (certificate or other credential).
       responses:
         '200':
           description: Success
@@ -5444,7 +5444,7 @@ paths:
                   description: How long (in seconds) the credentials will be valid.
                   type: integer
                   minimum: 900
-                  maximum: 3600
+                  maximum: 43200
                 tags:
                   description: '<p>Metadata which can be used to manage the role alias.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..."</p> <p>For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..."</p> </note>'
                   type: array
@@ -5648,7 +5648,7 @@ paths:
                   description: The number of seconds the credential will be valid.
                   type: integer
                   minimum: 900
-                  maximum: 3600
+                  maximum: 43200
   '/audit/scheduledaudits/{scheduledAuditName}':
     post:
       operationId: CreateScheduledAudit
@@ -22418,7 +22418,7 @@ components:
     CredentialDurationSeconds:
       type: integer
       minimum: 900
-      maximum: 3600
+      maximum: 43200
     CreateRoleAliasRequest:
       type: object
       required:
