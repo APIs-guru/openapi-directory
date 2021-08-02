@@ -1793,17 +1793,21 @@ components:
         - connectionConfiguration
       type: object
     DestinationCreate:
-      allOf:
-        - $ref: "#/components/schemas/DestinationCoreConfig"
-        - properties:
-            name:
-              type: string
-            workspaceId:
-              $ref: "#/components/schemas/WorkspaceId"
-          required:
-            - workspaceId
-            - name
-          type: object
+      properties:
+        connectionConfiguration:
+          $ref: "#/components/schemas/DestinationConfiguration"
+        destinationDefinitionId:
+          $ref: "#/components/schemas/DestinationDefinitionId"
+        name:
+          type: string
+        workspaceId:
+          $ref: "#/components/schemas/WorkspaceId"
+      required:
+        - workspaceId
+        - name
+        - destinationDefinitionId
+        - connectionConfiguration
+      type: object
     DestinationDefinitionCreate:
       properties:
         dockerImageTag:
@@ -2365,17 +2369,21 @@ components:
         - connectionConfiguration
       type: object
     SourceCreate:
-      allOf:
-        - $ref: "#/components/schemas/SourceCoreConfig"
-        - properties:
-            name:
-              type: string
-            workspaceId:
-              $ref: "#/components/schemas/WorkspaceId"
-          required:
-            - workspaceId
-            - name
-          type: object
+      properties:
+        connectionConfiguration:
+          $ref: "#/components/schemas/SourceConfiguration"
+        name:
+          type: string
+        sourceDefinitionId:
+          $ref: "#/components/schemas/SourceDefinitionId"
+        workspaceId:
+          $ref: "#/components/schemas/WorkspaceId"
+      required:
+        - workspaceId
+        - name
+        - sourceDefinitionId
+        - connectionConfiguration
+      type: object
     SourceDefinitionCreate:
       properties:
         dockerImageTag:
@@ -2584,14 +2592,46 @@ components:
         - succeeded
       type: object
     WebBackendConnectionCreate:
-      allOf:
-        - $ref: "#/components/schemas/ConnectionCreate"
-        - properties:
-            operations:
-              items:
-                $ref: "#/components/schemas/OperationCreate"
-              type: array
-          type: object
+      properties:
+        destinationId:
+          $ref: "#/components/schemas/DestinationId"
+        name:
+          description: Optional name of the connection
+          type: string
+        namespaceDefinition:
+          $ref: "#/components/schemas/NamespaceDefinitionType"
+        namespaceFormat:
+          default: null
+          description: Used when namespaceDefinition is 'customformat'. If blank then behaves like namespaceDefinition = 'destination'. If "${SOURCE_NAMESPACE}" then behaves like namespaceDefinition = 'source'.
+          example: ${SOURCE_NAMESPACE}
+          type: string
+        operationIds:
+          items:
+            $ref: "#/components/schemas/OperationId"
+          type: array
+        operations:
+          items:
+            $ref: "#/components/schemas/OperationCreate"
+          type: array
+        prefix:
+          description: Prefix that will be prepended to the name of each stream when it is written to the destination.
+          type: string
+        resourceRequirements:
+          $ref: "#/components/schemas/ResourceRequirements"
+        schedule:
+          $ref: "#/components/schemas/ConnectionSchedule"
+        sourceId:
+          $ref: "#/components/schemas/SourceId"
+        status:
+          $ref: "#/components/schemas/ConnectionStatus"
+        syncCatalog:
+          $ref: "#/components/schemas/AirbyteCatalog"
+      required:
+        - connection
+        - sourceId
+        - destinationId
+        - status
+      type: object
     WebBackendConnectionRead:
       properties:
         connectionId:
@@ -2670,16 +2710,42 @@ components:
         - connectionId
       type: object
     WebBackendConnectionUpdate:
-      allOf:
-        - $ref: "#/components/schemas/ConnectionUpdate"
-        - properties:
-            operations:
-              items:
-                $ref: "#/components/schemas/WebBackendOperationCreateOrUpdate"
-              type: array
-            withRefreshedCatalog:
-              type: boolean
-          type: object
+      properties:
+        connectionId:
+          $ref: "#/components/schemas/ConnectionId"
+        namespaceDefinition:
+          $ref: "#/components/schemas/NamespaceDefinitionType"
+        namespaceFormat:
+          default: null
+          description: Used when namespaceDefinition is 'customformat'. If blank then behaves like namespaceDefinition = 'destination'. If "${SOURCE_NAMESPACE}" then behaves like namespaceDefinition = 'source'.
+          example: ${SOURCE_NAMESPACE}
+          type: string
+        operationIds:
+          items:
+            $ref: "#/components/schemas/OperationId"
+          type: array
+        operations:
+          items:
+            $ref: "#/components/schemas/WebBackendOperationCreateOrUpdate"
+          type: array
+        prefix:
+          description: Prefix that will be prepended to the name of each stream when it is written to the destination.
+          type: string
+        resourceRequirements:
+          $ref: "#/components/schemas/ResourceRequirements"
+        schedule:
+          $ref: "#/components/schemas/ConnectionSchedule"
+        status:
+          $ref: "#/components/schemas/ConnectionStatus"
+        syncCatalog:
+          $ref: "#/components/schemas/AirbyteCatalog"
+        withRefreshedCatalog:
+          type: boolean
+      required:
+        - connectionId
+        - syncCatalog
+        - status
+      type: object
     WebBackendOperationCreateOrUpdate:
       properties:
         name:
@@ -2688,9 +2754,12 @@ components:
           $ref: "#/components/schemas/OperationId"
         operatorConfiguration:
           $ref: "#/components/schemas/OperatorConfiguration"
+        workspaceId:
+          $ref: "#/components/schemas/WorkspaceId"
       required:
         - name
         - operatorConfiguration
+        - workspaceId
       type: object
     WorkspaceCreate:
       properties:
