@@ -36,6 +36,8 @@ tags:
   - name: Authorization
     x-box-priority: true
     x-box-tag: authorization
+  - name: Box Sign
+    x-box-tag: sign_requests
   - name: Classifications
     x-box-tag: classifications
   - name: Classifications on files
@@ -108,9 +110,9 @@ tags:
     x-box-tag: shared_links_folders
   - name: Skills
     x-box-tag: skills
-  - name: Storage policies
+  - name: Standard and Zones Storage Policies
     x-box-tag: storage_policies
-  - name: Storage policy assignments
+  - name: Standard and Zones Storage Policy Assignments
     x-box-tag: storage_policy_assignments
   - name: Task assignments
     x-box-tag: task_assignments
@@ -14520,6 +14522,184 @@ paths:
         - Shared links (Folders)
       x-box-enable-explorer: true
       x-box-tag: shared_links_folders
+  /sign_requests:
+    get:
+      description: Gets sign requests created by a user.
+      operationId: get_sign_requests
+      parameters:
+        - description: |-
+            Defines the position marker at which to begin returning results. This is
+            used when paginating using marker-based pagination.
+
+            This requires `usemarker` to be set to `true`.
+          example: JV9IRGZmieiBasejOG9yDCRNgd2ymoZIbjsxbJMjIs3kioVii
+          in: query
+          name: marker
+          required: false
+          schema:
+            type: string
+        - description: The maximum number of items to return per page.
+          example: 1000
+          in: query
+          name: limit
+          required: false
+          schema:
+            format: int64
+            maximum: 1000
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SignRequests"
+          description: Returns a collection of sign requests
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: List sign requests
+      tags:
+        - Box Sign
+      x-box-tag: sign_requests
+    post:
+      description: |-
+        Creates a sign request. This involves preparing a document for signing and
+        sending the sign request to signers.
+      operationId: post_sign_requests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignRequestCreateRequest"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SignRequest"
+          description: Returns a Sign Request object.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Create sign request
+      tags:
+        - Box Sign
+      x-box-tag: sign_requests
+  "/sign_requests/{sign_request_id}":
+    get:
+      description: Gets a sign request by ID.
+      operationId: get_sign_requests_id
+      parameters:
+        - description: The ID of the sign request
+          example: "33243242"
+          in: path
+          name: sign_request_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SignRequest"
+          description: Returns a sign request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: |-
+            Returns an error when the sign request cannot be found or the user does
+            not have access to the sign request.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Get sign request by ID
+      tags:
+        - Box Sign
+      x-box-tag: sign_requests
+  "/sign_requests/{sign_request_id}/cancel":
+    post:
+      description: Cancels a sign request.
+      operationId: post_sign_requests_id_cancel
+      parameters:
+        - description: The ID of the sign request
+          example: "33243242"
+          in: path
+          name: sign_request_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SignRequest"
+          description: Returns a Sign Request object.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: |-
+            Returns an error when the sign request cannot be found or the user does
+            not have access to the sign request.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Cancel sign request
+      tags:
+        - Box Sign
+      x-box-tag: sign_requests
+  "/sign_requests/{sign_request_id}/resend":
+    post:
+      description: Resends a sign request email to all outstanding signers.
+      operationId: post_sign_requests_id_resend
+      parameters:
+        - description: The ID of the sign request
+          example: "33243242"
+          in: path
+          name: sign_request_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "202":
+          description: |-
+            Returns an empty response when the API call was successful.
+            The email notifications will be sent asynchronously.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: |-
+            Returns an error when the sign request cannot be found or the user does
+            not have access to the sign request.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Resend sign request
+      tags:
+        - Box Sign
+      x-box-tag: sign_requests
   "/skill_invocations/{skill_id}":
     put:
       description: |-
@@ -17651,6 +17831,9 @@ paths:
       description: |-
         Returns list of workflows that act on a given `folder ID`, and
         have a flow with a trigger type of `WORKFLOW_MANUAL_START`.
+
+        You application must be authorized to use the `Manage Box Relay` application
+        scope within the developer console in to use this endpoint.
       operationId: get_workflows
       parameters:
         - description: |-
@@ -17732,7 +17915,11 @@ paths:
       x-box-tag: workflows
   "/workflows/{workflow_id}/start":
     post:
-      description: Initiates a flow with a trigger type of `WORKFLOW_MANUAL_START`.
+      description: |-
+        Initiates a flow with a trigger type of `WORKFLOW_MANUAL_START`.
+
+        You application must be authorized to use the `Manage Box Relay` application
+        scope within the developer console.
       operationId: post_workflows_id_start
       parameters:
         - description: The ID of the workflow.
@@ -17807,8 +17994,8 @@ paths:
                 type:
                   description: The type of the parameters object
                   enum:
-                    - WORKFLOW_PARAMETERS
-                  example: WORKFLOW_PARAMETERS
+                    - workflow_parameters
+                  example: workflow_parameters
                   type: string
               required:
                 - flow
@@ -18384,6 +18571,7 @@ components:
             - internal_server_error
             - unavailable
             - item_name_invalid
+            - insufficient_scope
           example: item_name_invalid
           type: string
         context_info:
@@ -20471,7 +20659,7 @@ components:
           description: |-
             The generated URL for this file request. This URL can be shared
             with users to let them upload files to the associated folder.
-          example: https://cloud.app.box.com/f/19e57f40ace247278a8e3d336678c64a
+          example: /f/19e57f40ace247278a8e3d336678c64a
           readOnly: true
           type: string
       title: File Request
@@ -24092,6 +24280,309 @@ components:
       type: object
       x-box-resource-id: search_results_with_shared_links
       x-box-tag: search
+    SignRequest:
+      allOf:
+        - $ref: "#/components/schemas/SignRequestCreateRequest"
+        - properties:
+            auto_expire_at:
+              description: Uses `days_valid` to calculate the date and time, in GMT, the sign request will expire if unsigned.
+              example: 2021-04-26T08:12:13.982Z
+              format: date-time
+              type: string
+            id:
+              description: Sign request ID
+              example: "12345"
+              type: string
+            prepare_url:
+              description: |-
+                This URL is returned if `is_document_preparation_needed` is
+                set to `true` in the request. It is used to prepare the sign request
+                via UI. The sign request is not sent until preparation is complete.
+              example: https://prepareurl.com
+              type: string
+            sign_files:
+              description: |-
+                List of files that will be signed, which are copies of the original
+                source files. A new version of these files are created as signers sign
+                and can be downloaded at any point in the signing process.
+              properties:
+                files:
+                  items:
+                    $ref: "#/components/schemas/File--Mini"
+                  type: array
+                is_ready_for_download:
+                  description: |-
+                    Indicates whether the `sign_files` documents are processing
+                    and the PDFs may be out of date. A change to any document
+                    requires processing on all `sign_files`. We
+                    recommended waiting until processing is finished
+                    (and this value is true) before downloading the PDFs.
+                  example: true
+                  type: boolean
+              type: object
+            signers:
+              description: Array of signers for the sign request
+              items:
+                $ref: "#/components/schemas/SignRequestSigner"
+              type: array
+            signing_log:
+              allOf:
+                - $ref: "#/components/schemas/File--Mini"
+                - description: |-
+                    Reference to a file that holds a log of all signer activity for
+                    the request
+            status:
+              description: Describes the status of the sign request
+              enum:
+                - converting
+                - created
+                - sent
+                - viewed
+                - signed
+                - cancelled
+                - declined
+                - error_converting
+                - error_sending
+                - expired
+              example: converting
+              type: string
+            type:
+              description: object type
+              enum:
+                - sign-request
+              example: sign-request
+              type: string
+      description: A Sign Request Object
+      title: Sign Request
+      type: object
+      x-box-resource-id: sign_requests
+      x-box-tag: sign_requests
+    SignRequestCreateRequest:
+      description: A request to create a sign request object
+      properties:
+        are_reminders_enabled:
+          description: Reminds signers to sign a document on day 3, 8, 13 and 18. Reminders are only sent to outstanding signers.
+          example: true
+          type: boolean
+        are_text_signatures_enabled:
+          default: true
+          description: Disables the usage of signatures generated by typing (text)
+          example: true
+          type: boolean
+        days_valid:
+          description: Number of days after which this request will automatically expire if not completed
+          example: 2
+          maximum: 730
+          minimum: 1
+          type: integer
+        email_message:
+          description: Message to include in sign request email. The field is cleaned through sanitization of specific characters. However, some html tags are allowed. Links included in the message are also converted to hyperlinks in the email. The message may contain the following html tags including `a`, `abbr`, `acronym`, `b`, `blockquote`, `code`, `em`, `i`, `ul`, `li`, `ol`, and `strong`. Be aware that when the text to html ratio is too high, the email may end up in spam filters. Custom styles on these tags are not allowed. If this field is not passed, a default message will be used.
+          example: Hello! Please sign the document below
+          type: string
+        email_subject:
+          description: Subject of sign request email. This is cleaned by sign request. If this field is not passed, a default subject will be used.
+          example: Sign Request from Acme
+          type: string
+        external_id:
+          description: This can be used to reference an ID in an external system that the sign request is related to.
+          example: "123"
+          type: string
+        is_document_preparation_needed:
+          description: Indicates if the sender should receive a `prepare_url` in the response to complete document preparation via UI.
+          example: true
+          type: boolean
+        parent_folder:
+          allOf:
+            - $ref: "#/components/schemas/Folder--Mini"
+            - description: |-
+                The destination folder to place final, signed document and signing
+                log. Only `ID` and `type` fields are required. The root folder,
+                folder ID `0`, cannot be used.
+        prefill_tags:
+          description: When a document contains sign related tags in the content, you can prefill them using this `prefill_tags` by referencing the 'id' of the tag as the `external_id` field of the prefill tag.
+          items:
+            $ref: "#/components/schemas/SignRequestPrefillTag"
+          type: array
+        signers:
+          description: Array of signers for the sign request. 35 is the max number of signers permitted.
+          items:
+            $ref: "#/components/schemas/SignRequestCreateSigner"
+          type: array
+        source_files:
+          description: List of files to create a signing document from. This is currently limited to one file. Only the ID and type fields are required for each file.
+          items:
+            $ref: "#/components/schemas/File--Mini"
+          type: array
+      required:
+        - signers
+        - source_files
+        - parent_folder
+      title: Create a sign request
+      type: object
+    SignRequestCreateSigner:
+      description: The schema for a Signer in a POST Sign Request request body
+      properties:
+        email:
+          description: Email address of the signer
+          example: example@gmail.com
+          type: string
+        embed_url_external_user_id:
+          description: |-
+            User ID for the signer in an external application responsible
+            for authentication when accessing the embed URL.
+          example: "1234"
+          type: string
+        is_in_person:
+          description: |-
+            Used in combination with an embed URL for a sender. After the
+            sender signs, they will be redirected to the next `in_person` signer.
+          example: true
+          type: boolean
+        order:
+          description: Order of the signer
+          example: 2
+          minimum: 0
+          type: integer
+        role:
+          default: signer
+          description: |-
+            Defines the role of the signer in the sign request. A `signer`
+            must sign the document and an `approver` must approve the document. A
+            `final_copy_reader` only receives the final signed document and signing
+            log.
+          enum:
+            - signer
+            - approver
+            - final_copy_reader
+          example: signer
+          type: string
+      required:
+        - email
+      title: Signer fields for Create Sign Request
+      type: object
+    SignRequestPrefillTag:
+      description: |-
+        Prefill tags are used to prefill placeholders with signer input data. Only
+        one value field can be included.
+      properties:
+        checkbox_value:
+          description: Checkbox prefill value
+          example: true
+          type: boolean
+        date_value:
+          description: Date prefill value
+          example: 2021-04-26T08:12:13.982Z
+          format: date-time
+          type: string
+        document_tag_id:
+          description: This references the ID of a specific tag contained in a file of the sign request.
+          example: "1234"
+          type: string
+        text_value:
+          description: Text prefill value
+          example: text
+          type: string
+      title: Sign Request Prefill Tag
+      type: object
+    SignRequestSigner:
+      allOf:
+        - $ref: "#/components/schemas/SignRequestCreateSigner"
+        - properties:
+            embed_url:
+              description: URL to direct a signer to for signing
+              example: https://example.com
+              readOnly: true
+              type: string
+            has_viewed_document:
+              description: Set to `true` if the signer views the document
+              example: true
+              readOnly: true
+              type: boolean
+            inputs:
+              items:
+                $ref: "#/components/schemas/SignRequestSignerInput"
+              readOnly: true
+              type: array
+            signer_decision:
+              description: Final decision made by the signer
+              properties:
+                finalized_at:
+                  description: Date and Time that the decision was made
+                  example: 2021-04-26T08:12:13.982Z
+                  format: date-time
+                  type: string
+                type:
+                  description: Type of decision made by the signer
+                  enum:
+                    - signed
+                    - declined
+                  example: signed
+                  type: string
+              type: object
+      description: The schema for a Signer in a GET Sign Request request body
+      required:
+        - email
+      title: Signer fields for GET Sign Request response
+      type: object
+    SignRequestSignerInput:
+      allOf:
+        - $ref: "#/components/schemas/SignRequestPrefillTag"
+        - properties:
+            page_index:
+              description: Index of page that the input is on
+              example: 4
+              type: integer
+            type:
+              description: Type of input
+              enum:
+                - signature
+                - date
+                - text
+                - checkbox
+              example: text
+              type: string
+      description: Input created by a Signer on a Sign Request
+      required:
+        - page_index
+      title: Sign Request Signer Input
+      type: object
+    SignRequests:
+      allOf:
+        - description: |-
+            The part of an API response that describes marker
+            based pagination
+          properties:
+            limit:
+              description: |-
+                The limit that was used for these entries. This will be the same as the
+                `limit` query parameter unless that value exceeded the maximum value
+                allowed. The maximum value varies by API.
+              example: 1000
+              format: int64
+              type: integer
+            next_marker:
+              description: The marker for the start of the next page of results.
+              example: 3000
+              format: int64
+              type: integer
+            prev_marker:
+              description: The marker for the start of the previous page of results.
+              example: 1000
+              format: int64
+              type: integer
+          type: object
+        - properties:
+            entries:
+              items:
+                $ref: "#/components/schemas/SignRequest"
+              type: array
+      description: |-
+        A standard representation of a sign request, as returned from any Box Sign
+        API endpoints by default.
+      title: Box Sign
+      type: object
+      x-box-resource-id: sign_requests
+      x-box-tag: sign_requests
     SkillCard:
       description: A generic Box Skill metadata card.
       properties:
@@ -26636,7 +27127,11 @@ components:
                     type: string
                 type: object
               type: array
-      description: Box Relay Workflows are objects that represent a named collection of flows
+      description: |-
+        Box Relay Workflows are objects that represent a named collection of flows.
+
+        You application must be authorized to use the `Manage Box Relay` application
+        scope within the developer console in order to use this resource.
       title: Workflow
       type: object
       x-box-resource-id: workflow
@@ -26663,13 +27158,21 @@ components:
               allOf:
                 - $ref: "#/components/schemas/User--Base"
                 - description: The user who last modified this workflow
-      description: Box Relay Workflows are objects that represent a named collection of flows
+      description: |-
+        Box Relay Workflows are objects that represent a named collection of flows.
+
+        You application must be authorized to use the `Manage Box Relay` application
+        scope within the developer console in order to use this resource.
       title: Workflow (Full)
       type: object
       x-box-resource-id: workflow--full
       x-box-variant: full
     Workflow--Mini:
-      description: Box Relay Workflows are objects that represent a named collection of flows
+      description: |-
+        Box Relay Workflows are objects that represent a named collection of flows.
+
+        You application must be authorized to use the `Manage Box Relay` application
+        scope within the developer console in order to use this resource.
       properties:
         description:
           description: The description for a workflow.
@@ -26732,7 +27235,11 @@ components:
               items:
                 $ref: "#/components/schemas/Workflow"
               type: array
-      description: A list of workflows
+      description: |-
+        A list of workflows.
+
+        You application must be authorized to use the `Manage Box Relay` application
+        scope within the developer console in order to use this resource.
       title: Workflows
       type: object
       x-box-resource-id: workflows

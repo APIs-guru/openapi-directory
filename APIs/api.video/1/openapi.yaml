@@ -1817,25 +1817,38 @@ paths:
     post:
       description: |
         To create a video, you create its container&parameters first, before adding the video file (exception - when using an existing HTTP source). Videos are public by default. Mp4 encoded versions are created at the highest quality (max 1080p) by default.
+
          ```shell
         $ curl https://ws.api.video/videos \ -H 'Authorization: Bearer {access_token} \ -d '{"title":"My video", 
              "description":"so many details",
              "mp4Support":true
         }'
-        ```  
-        ### Creating a hosted video 
-        You can also create a video directly from one hosted on a third-party server by giving its URI in `source` parameter: ```shell $ curl https://ws.api.video/videos \ -H 'Authorization: Bearer {access_token} \ -d '{"source":"http://uri/to/video.mp4", "title":"My video"}' ```
-        In this case, the service will respond `202 Accepted` and download the video asynchronously. ### Track users with [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata)
-        Metadata values can be a key:value where the values are predefined, but Dynamic metadata allows you to enter *any* value for a defined key.  To define a dynamic metadata pair use: ``` "metadata":[{"dynamicKey": "__dynamicKey__"}] ```
-        The double underscore on both sides of the value allows any variable to be added for a given video session. Added the the url you might have: ``` <iframe type="text/html" src="https://embed.api.video/vod/vi6QvU9dhYCzW3BpPvPsZUa8?metadata[classUserName]=Doug" width="960" height="320" frameborder="0" scrollling="no"></iframe> ```
-        This video session will be tagged as watched by Doug - allowing for in-depth analysis on how each viewer interacts with the videos.
 
-         We have tutorials on:
+        ```  
+
+        ### Creating a hosted video 
+        You can also create a video directly from one hosted on a third-party server by giving its URI in `source` parameter:
+        ```shell $ curl https://ws.api.video/videos \ -H 'Authorization: Bearer {access_token} \ -d '{"source":"http://uri/to/video.mp4", "title":"My video"}' ```
+
+        In this case, the service will respond `202 Accepted` and download the video asynchronously.
+        ### Track users with Dynamic Metadata
+        Metadata values can be a key:value where the values are predefined, but Dynamic metadata allows you to enter *any* value for a defined key.  To defined a dynamic metadata pair use:
+        ``` "metadata":[{"dynamicKey": "__dynamicKey__"}] ```
+
+        The double underscore on both sides of the value allows any variable to be added for a given video session. Added the the url you might have:
+        ``` <iframe type="text/html" src="https://embed.api.video/vod/vi6QvU9dhYCzW3BpPvPsZUa8?metadata[classUserName]=Doug" width="960" height="320" frameborder="0" scrollling="no"></iframe> ```
+
+
+        This video session will be tagged as watched by Doug - allowing for in-depth analysis on how each viewer interacts with the videos.
+        ### We have tutorials on:
         * [Creating and uploading videos](https://api.video/blog/tutorials/video-upload-tutorial)
         * [Uploading large videos](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)
+
+
         * [Using tags with videos](https://api.video/blog/tutorials/video-tagging-best-practices)
         * [Private videos](https://api.video/blog/tutorials/tutorial-private-videos)
         * [Using Dynamic Metadata](https://api.video/blog/tutorials/dynamic-metadata)
+
         * Full list of [tutorials](https://api.video/blog/endpoints/video-create) that demonstrate this endpoint.
       operationId: POST-video
       requestBody:
@@ -2609,9 +2622,11 @@ paths:
     post:
       description: |-
         To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
-        ```bash curl https://ws.api.video/videos/{videoId}/source \
+        ```bash
+        curl https://ws.api.video/videos/{videoId}/source \
           -H 'Authorization: Bearer {access_token}' \
           -F file=@/path/to/video.mp4
+
           ```
         Tutorials using [video upload](https://api.video/blog/endpoints/video-upload).
       operationId: POST_videos-videoId-source
@@ -3021,7 +3036,12 @@ paths:
       x-client-paginated: true
       x-group-parameters: true
     post:
-      description: 'Webhooks can push notifications to your server, rather than polling api.video for changes. We currently offer one event, the ```video.encoding.quality.completed``` event.  When a new video is uploaded into your account, it will be encoded into several different HLS sizes/bitrates.  When each version is encoded, your webhook will get a notification.  It will look like ```{ \"type\": \"video.encoding.quality.completed\", \"emittedAt\": \"2021-01-29T16:46:25.217+01:00\", \"videoId\": \"viXXXXXXXX\", \"encoding\": \"hls\", \"quality\": \"720p\"} ```. This request says that the 720p HLS encoding was completed.'
+      description: |-
+        Webhooks can push notifications to your server, rather than polling api.video for changes. We currently offer four events: 
+        * ```video.encoding.quality.completed```  When a new video is uploaded into your account, it will be encoded into several different HLS sizes/bitrates.  When each version is encoded, your webhook will get a notification.  It will look like ```{ \"type\": \"video.encoding.quality.completed\", \"emittedAt\": \"2021-01-29T16:46:25.217+01:00\", \"videoId\": \"viXXXXXXXX\", \"encoding\": \"hls\", \"quality\": \"720p\"} ```. This request says that the 720p HLS encoding was completed.
+        * ```live-stream.broadcast.started```  When a livestream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires.
+        * ```live-stream.broadcast.ended```  This event fores when the livestream has finished broadcasting, and the broadcasting parameter flips from false to true.
+        * ```video.source.recorded```  This event is similar to ```video.encoding.quality.completed```, but tells you if a livestream has been recorded as a VOD.
       operationId: POST-webhooks
       requestBody:
         content:
@@ -4543,7 +4563,12 @@ components:
         url: http://clientnotificationserver.com/notif?myquery=query
       properties:
         events:
-          description: A list of the webhooks that you are subscribing to. Currently "video.encoding.quality.completed" is the only option. video.encoding.quality.completed - a video encoding quality is ready for the video (for example the 720p quality hls encoding video is ready.)
+          description: |-
+            A list of the webhooks that you are subscribing to. There are Currently four webhook options:
+            * ```video.encoding.quality.completed```  When a new video is uploaded into your account, it will be encoded into several different HLS sizes/bitrates.  When each version is encoded, your webhook will get a notification.  It will look like ```{ \"type\": \"video.encoding.quality.completed\", \"emittedAt\": \"2021-01-29T16:46:25.217+01:00\", \"videoId\": \"viXXXXXXXX\", \"encoding\": \"hls\", \"quality\": \"720p\"} ```. This request says that the 720p HLS encoding was completed.
+            * ```live-stream.broadcast.started```  When a livestream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires.
+            * ```live-stream.broadcast.ended```  This event fores when the livestream has finished broadcasting, and the broadcasting parameter flips from false to true.
+            * ```video.source.recorded```  This event is similar to ```video.encoding.quality.completed```, but tells you if a livestream has been recorded as a VOD.
           example: video.encoding.quality.completed
           items:
             type: string

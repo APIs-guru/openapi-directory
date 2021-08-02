@@ -2360,6 +2360,10 @@ definitions:
         type: string
       ExportDescription:
         type: string
+      ExportDescriptionMultiLanguage:
+        items:
+          $ref: "#/definitions/Billbee.Interfaces.Order.MultiLanguageString"
+        type: array
       HeightCm:
         format: double
         type: number
@@ -3208,6 +3212,9 @@ definitions:
       GetPriceFromArticleIfAny:
         description: If true, the price will be overwritten by the known article price in billbee if available
         type: boolean
+      InvoiceSKU:
+        description: Contains the SKU from OrderDetail (if available) or from Product
+        type: string
       IsCoupon:
         description: Determines if it is a coupon, which is interpreted as tax-free payment
         type: boolean
@@ -5448,9 +5455,6 @@ definitions:
       EMail:
         description: The Email address of the user to create
         type: string
-      Newsletter:
-        description: Gets or sets if the user is interested in the Billbee newsletter
-        type: boolean
       Password:
         type: string
       Vat1Rate:

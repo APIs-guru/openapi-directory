@@ -12313,6 +12313,9 @@ components:
         categories_ids:
           description: Defines product add that is specified by comma-separated categories id
           type: string
+        category_id:
+          description: Defines product add that is specified by category id
+          type: string
         clear_cache:
           default: true
           description: Is cache clear required
@@ -12370,6 +12373,10 @@ components:
           type: string
         manufacturer:
           description: Defines product's manufacturer
+          type: string
+        marketplace_item_properties:
+          default: false
+          description: String containing the JSON representation of the supplied data
           type: string
         meta_description:
           description: Defines unique meta description of a entity

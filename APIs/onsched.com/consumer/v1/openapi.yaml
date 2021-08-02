@@ -3252,6 +3252,8 @@ components:
           type: string
         businessPhoneExt:
           type: string
+        conferenceInfo:
+          type: string
         homePhone:
           type: string
         mobilePhone:
@@ -3268,6 +3270,8 @@ components:
           type: string
         businessPhoneExt:
           type: string
+        conferenceInfo:
+          type: string
         homePhone:
           type: string
         mobilePhone:
@@ -3283,6 +3287,8 @@ components:
         businessPhone:
           type: string
         businessPhoneExt:
+          type: string
+        conferenceInfo:
           type: string
         homePhone:
           type: string
@@ -4110,8 +4116,6 @@ components:
         calendarAvailability:
           format: int32
           type: integer
-        conferenceInfo:
-          type: string
         contact:
           $ref: "#/components/schemas/ContactViewModel"
         customFields:

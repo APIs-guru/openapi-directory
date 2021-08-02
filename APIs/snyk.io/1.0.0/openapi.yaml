@@ -71,7 +71,7 @@ info:
     | paths          | array         | The paths to the dependencies which have an issue, and their corresponding upgrade path (if an upgrade is available). [More information about from and upgrade paths](#introduction/overview-and-entities/from-and-upgrade-paths) | [<br>&nbsp;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;"from": ["a@1.0.0", "b@4.8.1"],<br>&nbsp;&nbsp;&nbsp;&nbsp;"upgrade": [false, "b@4.8.2"]<br>&nbsp;&nbsp;}<br>] |
     | package        | string        | The package identifier according to its package manager                                                                    | "backbone", "org.apache.flex.blazeds:blazeds"|
     | version        | string        | The package version this issue is applicable to.                                                                           | "0.4.0"                                |
-    | severity       | string        | The Snyk defined severity level: "critical", "high", "medium" or "low". - critical in beta until June 28th 2021, to activate critical please follow these instructions: https://updates.snyk.io/critical-severity-level-195891                                                               | "high"                                 |
+    | severity       | string        | The Snyk defined severity level: "critical", "high", "medium" or "low".                                                    | "high"                                 |
     | language       | string        | The package's programming language                                                                                         | "js"                                   |
     | packageManager | string        | The package manager                                                                                                        | "npm"                                  |
     | semver         | array[string] OR map[string]array[string] | One or more [semver](https://semver.org) ranges this issue is applicable to. The format varies according to package manager. | ["<0.5.0, >=0.4.0", "<0.3.8, >=0.3.6"] OR { "vulnerable": ["[2.0.0, 3.0.0)"], "unaffected": ["[1, 2)", "[3, )"] } |
@@ -1637,7 +1637,7 @@ paths:
                           description: True if the latest version of the package is marked as deprecated; False otherwise.
                           type: boolean
                         issuesCritical:
-                          description: "The number of critical severity issues in this dependency - note 'critical' is in beta until June 28th 2021, to activate critical please follow these instructions: https://updates.snyk.io/critical-severity-level-195891."
+                          description: The number of critical severity issues in this dependency
                           type: number
                         issuesHigh:
                           description: The number of high severity issues in this dependency
@@ -4227,7 +4227,7 @@ paths:
                     description: Number of known vulnerabilities in the project, not including ignored issues
                     properties:
                       critical:
-                        description: "Number of critical severity vulnerabilities - in beta until June 28th 2021, to activate critical please follow these instructions: https://updates.snyk.io/critical-severity-level-195891"
+                        description: Number of critical severity vulnerabilities
                         type: number
                       high:
                         description: Number of high severity vulnerabilities
@@ -4474,7 +4474,7 @@ paths:
                     description: Number of known vulnerabilities in the project, not including ignored issues
                     properties:
                       critical:
-                        description: "Number of critical severity vulnerabilities - in beta until June 28th 2021, to activate critical please follow these instructions: https://updates.snyk.io/critical-severity-level-195891"
+                        description: Number of critical severity vulnerabilities
                         type: number
                       high:
                         description: Number of high severity vulnerabilities
@@ -5476,6 +5476,7 @@ paths:
                           high: 13
                           low: 8
                           medium: 15
+                        method: web-test
                         snapshotId: 6d5813be-7e6d-4ab8-80c2-1e3e2a454545
                         totalDependencies: 438
                       - baseImageName: fedora:32
@@ -5487,6 +5488,7 @@ paths:
                           high: 13
                           low: 8
                           medium: 15
+                        method: web-test
                         snapshotId: 6d5813be-7e6d-4ab8-80c2-1e3e2a454553
                         totalDependencies: 438
                     total: 2
@@ -5528,6 +5530,10 @@ paths:
                             - high
                             - critical
                           type: object
+                        method:
+                          description: test', 'cli', 'api', 'wizard']
+                          items: {}
+                          type: array
                         snapshotId:
                           description: The snapshot identifier
                           type: string
@@ -5888,6 +5894,82 @@ paths:
           description: OK
           headers: {}
       summary: Create jira issue
+      tags:
+        - Projects
+  "/org/{orgId}/project/{projectId}/issue/{issueId}/paths?snapshotId={snapshotId}&perPage={perPage}&page={page}":
+    get:
+      description: ""
+      operationId: List all affected paths
+      parameters:
+        - description: The organization ID. The `API_KEY` must have access to this organization.
+          example: 4a18d42f-0706-4ad0-b127-24078731fbed
+          in: path
+          name: orgId
+          required: true
+          schema:
+            type: string
+        - description: The project ID for which to return affected paths.
+          example: 6d5813be-7e6d-4ab8-80c2-1e3e2a454545
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - description: The issue ID for which to return affected paths.
+          example: SNYK-JS-LODASH-590103
+          in: path
+          name: issueId
+          required: true
+          schema:
+            type: string
+        - description: The snapshot ID for which to return affected paths. If not specified, the latest snapshot will be used.
+          example: 6d5813be-7e6d-4ab8-80c2-1e3e2a454553
+          in: path
+          name: snapshotId
+          required: true
+          schema:
+            type: string
+        - description: The number of results to return per page (1 - 1000, inclusive).
+          example: "3"
+          in: path
+          name: perPage
+          required: true
+          schema:
+            default: 10
+            type: number
+        - description: The page of results to return.
+          example: "2"
+          in: path
+          name: page
+          required: true
+          schema:
+            default: 1
+            type: number
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                properties:
+                  paths:
+                    description: A list of the dependency paths that introduce the issue
+                    items:
+                      items: {}
+                      type: array
+                    type: array
+                  snapshotId:
+                    description: The identifier of the snapshot for which the paths have been found
+                    type: string
+                  total:
+                    description: The total number of results
+                    type: number
+                type: object
+          description: OK
+          headers:
+            Link:
+              schema:
+                type: string
+      summary: List all affected paths
       tags:
         - Projects
   "/org/{orgId}/project/{projectId}/issues":
@@ -6731,7 +6813,7 @@ paths:
                     description: If set to `true`, fail Snyk Test if the repo has any vulnerabilities. Otherwise, fail only when the PR is adding a vulnerable dependency.
                     type: boolean
                   pullRequestFailOnlyForHighSeverity:
-                    description: "If set to `true`, fail Snyk Test only for high and critical severity vulnerabilities - critical is in beta until June 28th 2021, to activate critical please follow these instructions: https://updates.snyk.io/critical-severity-level-195891"
+                    description: If set to `true`, fail Snyk Test only for high and critical severity vulnerabilities
                     type: boolean
                   pullRequestTestEnabled:
                     description: If set to `true`, Snyk Test checks PRs for vulnerabilities.:cq
@@ -6829,7 +6911,7 @@ paths:
                   description: If set to `true`, fail Snyk Test if the repo has any vulnerabilities. Otherwise, fail only when the PR is adding a vulnerable dependency.
                   type: boolean
                 pullRequestFailOnlyForHighSeverity:
-                  description: "If set to `true`, fail Snyk Test only for high and critical severity vulnerabilities - critical is in beta until June 28th 2021, to activate critical please follow these instructions: https://updates.snyk.io/critical-severity-level-195891"
+                  description: If set to `true`, fail Snyk Test only for high and critical severity vulnerabilities
                   type: boolean
                 pullRequestTestEnabled:
                   description: If set to `true`, Snyk Test checks PRs for vulnerabilities.:cq
@@ -6909,7 +6991,7 @@ paths:
                     description: If set to `true`, fail Snyk Test if the repo has any vulnerabilities. Otherwise, fail only when the PR is adding a vulnerable dependency.
                     type: boolean
                   pullRequestFailOnlyForHighSeverity:
-                    description: "If set to `true`, fail Snyk Test only for high and critical severity vulnerabilities - critical is in beta until June 28th 2021, to activate critical please follow these instructions: https://updates.snyk.io/critical-severity-level-195891"
+                    description: If set to `true`, fail Snyk Test only for high and critical severity vulnerabilities
                     type: boolean
                   pullRequestTestEnabled:
                     description: If set to `true`, Snyk Test checks PRs for vulnerabilities.:cq
@@ -7254,7 +7336,7 @@ paths:
                           description: Number of known vulnerabilities in the project, not including ignored issues
                           properties:
                             critical:
-                              description: "Number of critical severity vulnerabilities - in beta until June 28th 2021, to activate critical please follow these instructions: https://updates.snyk.io/critical-severity-level-195891"
+                              description: Number of critical severity vulnerabilities
                               type: number
                             high:
                               description: Number of high severity vulnerabilities
@@ -7680,7 +7762,7 @@ paths:
                         severity:
                           properties:
                             critical:
-                              description: "The number of critical severity issues - note 'critical' is in beta until June 28th 2021, to activate critical please follow these instructions: https://updates.snyk.io/critical-severity-level-195891."
+                              description: The number of critical severity issues
                               type: number
                             high:
                               description: The number of high severity issues
@@ -7789,7 +7871,7 @@ paths:
                         severity:
                           properties:
                             critical:
-                              description: "The number of critical severity issues - note 'critical' is in beta until June 28th 2021, to activate critical please follow these instructions: https://updates.snyk.io/critical-severity-level-195891."
+                              description: The number of critical severity issues
                               type: number
                             high:
                               description: The number of high severity issues
@@ -18654,6 +18736,22 @@ components:
           description: The id of the user.
           type: string
       type: object
+    Affected_paths:
+      properties:
+        paths:
+          description: A list of the dependency paths that introduce the issue
+          items:
+            items:
+              type: string
+            type: array
+          type: array
+        snapshotId:
+          description: The identifier of the snapshot for which the paths have been found
+          type: string
+        total:
+          description: The total number of results
+          type: number
+      type: object
     Aggregated_Project_Snapshot_Issues: {}
     Aggregated_Project_issues: {}
     Aggregated_project_issues:
@@ -18996,7 +19094,7 @@ components:
                 description: True if the latest version of the package is marked as deprecated; False otherwise.
                 type: boolean
               issuesCritical:
-                description: "The number of critical severity issues in this dependency - note 'critical' is in beta until June 28th 2021, to activate critical please follow these instructions: https://updates.snyk.io/critical-severity-level-195891."
+                description: The number of critical severity issues in this dependency
                 type: number
               issuesHigh:
                 description: The number of high severity issues in this dependency
@@ -19494,7 +19592,7 @@ components:
               severity:
                 properties:
                   critical:
-                    description: "The number of critical severity issues - note 'critical' is in beta until June 28th 2021, to activate critical please follow these instructions: https://updates.snyk.io/critical-severity-level-195891."
+                    description: The number of critical severity issues
                     type: number
                   high:
                     description: The number of high severity issues
@@ -20455,7 +20553,7 @@ components:
           description: Number of known vulnerabilities in the project, not including ignored issues
           properties:
             critical:
-              description: "Number of critical severity vulnerabilities - in beta until June 28th 2021, to activate critical please follow these instructions: https://updates.snyk.io/critical-severity-level-195891"
+              description: Number of critical severity vulnerabilities
               type: number
             high:
               description: Number of high severity vulnerabilities
@@ -20944,6 +21042,7 @@ components:
           description: The ID of the organization that the project should be moved to. The API_KEY must have admin access to this organization.
           type: string
       type: object
+    Project_paths_by_issue: {}
     Project_settings:
       properties:
         autoDepUpgradeEnabled:
@@ -20967,7 +21066,7 @@ components:
           description: If set to `true`, fail Snyk Test if the repo has any vulnerabilities. Otherwise, fail only when the PR is adding a vulnerable dependency.
           type: boolean
         pullRequestFailOnlyForHighSeverity:
-          description: "If set to `true`, fail Snyk Test only for high and critical severity vulnerabilities - critical is in beta until June 28th 2021, to activate critical please follow these instructions: https://updates.snyk.io/critical-severity-level-195891"
+          description: If set to `true`, fail Snyk Test only for high and critical severity vulnerabilities
           type: boolean
         pullRequestTestEnabled:
           description: If set to `true`, Snyk Test checks PRs for vulnerabilities.:cq
@@ -21011,6 +21110,10 @@ components:
                   - high
                   - critical
                 type: object
+              method:
+                description: test', 'cli', 'api', 'wizard']
+                items: {}
+                type: array
               snapshotId:
                 description: The snapshot identifier
                 type: string
@@ -21270,7 +21373,7 @@ components:
         semver:
           $ref: "#/components/schemas/SemverObject"
         severity:
-          description: "Snyk severity for this issue. One of: `critical`, `medium`, `high`, `medium` or `low`. - critical in beta until June 28th 2021, to activate critical please follow these instructions: https://updates.snyk.io/critical-severity-level-195891"
+          description: "Snyk severity for this issue. One of: `critical`, `medium`, `high`, `medium` or `low`."
           type: string
         title:
           description: The title of the vulnerability

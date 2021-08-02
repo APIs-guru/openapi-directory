@@ -1162,6 +1162,11 @@ components:
         AssignedTo:
           description: AssignedTo
           type: string
+        ClosedDate:
+          description: Job Closed Date:-
+          format: date-time
+          readOnly: true
+          type: string
         Description:
           description: Description
           type: string

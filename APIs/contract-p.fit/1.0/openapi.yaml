@@ -22,6 +22,18 @@ tags:
 paths:
   /documents/:
     post:
+      description: |-
+        This endpoint is a simplified version of the upload document to inbox one - synchronous mode.
+
+        The upload file will be upload to the given inbox if provided, else fallback to the **invoice** inbox.
+        The file will be processed synchronously, ie the request will blocks until the document was processed
+        *or* until it timeout; in this case the document might **not** be correctly processed.
+
+
+        For a more reliable processing use the /documents/{inbox_id} endpoint in async mode
+
+
+        **Permission required:** upload
       operationId: post_simple_documents_resource
       requestBody:
         content:
@@ -29,13 +41,15 @@ paths:
             schema:
               properties:
                 file:
-                  description: File to handle
+                  description: File to process
                   format: binary
                   type: string
                 inbox_id:
+                  description: Inbox to use. Default to the **invoice** inbox
                   type: string
                 key_value_flag:
                   default: true
+                  description: If true the result will only contains mapping of prediction = value
                   type: boolean
               required:
                 - file
@@ -44,17 +58,34 @@ paths:
       responses:
         "200":
           description: Success
+        "403":
+          description: Permission insufficient
+      summary: Upload a new document
       tags:
         - documents
   "/documents/{document_id}":
     delete:
+      description: |-
+        Completely delete the document.
+
+        **WARNING** This removes the document from our system: it will not be recoverable
+
+
+        **Permission required:** review
       operationId: delete_document_resource
       responses:
         "200":
           description: Success
+        "403":
+          description: Permission insufficient
+      summary: Delete the document
       tags:
         - documents
     get:
+      description: |-
+        Simple endpoint that will fetch the given document
+
+        **Permission required:** review
       operationId: get_document_resource
       parameters:
         - description: An optional fields mask
@@ -70,6 +101,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/DocumentModelGet"
           description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get the document
       tags:
         - documents
     parameters:
@@ -80,10 +114,17 @@ paths:
           type: string
   "/documents/{document_id}/original_file":
     get:
+      description: |-
+        Return the document original file, as attachment.
+
+        **Permission required:** review
       operationId: get_document_original_file_resource
       responses:
         "200":
-          description: Success
+          description: File attached
+        "403":
+          description: Permission insufficient
+      summary: Get document original file
       tags:
         - documents
     parameters:
@@ -98,6 +139,8 @@ paths:
       responses:
         "200":
           description: Success
+        "403":
+          description: Permission insufficient
       tags:
         - documents
     parameters:
@@ -114,10 +157,16 @@ paths:
           type: string
   "/documents/{document_id}/text":
     get:
+      description: |-
+        Return the optimal text for the document; will either be the OCR text, the native text,
+        the raw text or a translated version.
+
+        **Permission required:** review
       operationId: get_document_text_resource
       responses:
-        "200":
-          description: Success
+        "403":
+          description: Permission insufficient
+      summary: Get the document text
       tags:
         - documents
     parameters:
@@ -134,14 +183,33 @@ paths:
         schema:
           type: string
     post:
-      operationId: post_documents_resource
+      description: |-
+        This endpoint uploads a new file to the given inbox and will process the file.
+
+        ## Upload mode: sync
+
+        When sync=true (default), the call will block and wait for the processing to complete.
+
+        If you have a custom output configured (this is set by Contract Fit team),
+        passing mimetype *application/vnd.cf.custom* will allow you to get the custom output formatted result
+
+        Since it might yield inconsistent results if a timeout is raised while waiting,
+        it is recommended to use the **async** mode.
+
+        ## Upload mode: async
+
+        When sync=false, the call will schedule the processing and return without waiting for completion.
+        It will return the document ID, so that the processed document can be retrieved at a later date.
+
+        **Permission required:** upload
+      operationId: post_documents_simple_api_resource
       requestBody:
         content:
           multipart/form-data:
             schema:
               properties:
                 file:
-                  description: File to handle
+                  description: File to process
                   format: binary
                   type: string
                 hints:
@@ -149,9 +217,11 @@ paths:
                   type: string
                 key_value_flag:
                   default: false
+                  description: If true the result will only contains mapping of prediction = value
                   type: boolean
                 sync:
                   default: true
+                  description: Flag enable sync or async processing
                   type: boolean
               required:
                 - file
@@ -160,6 +230,11 @@ paths:
       responses:
         "200":
           description: Success
+        "403":
+          description: Permission insufficient
+        "415":
+          description: Image Recognition Error
+      summary: Upload a new doc to the inbox
       tags:
         - documents
 components:

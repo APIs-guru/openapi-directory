@@ -32,7 +32,7 @@ paths:
               example:
                 data:
                   - attributes:
-                      category: content
+                      channel: content
                       key: post:created
                       name: Created content
                       short_name: Content created
@@ -40,7 +40,7 @@ paths:
                     id: "7"
                     type: activity_type
                   - attributes:
-                      category: discord
+                      channel: discord
                       key: discord:message:sent
                       name: Sent a message in Discord
                       short_name: Discord message
@@ -48,7 +48,7 @@ paths:
                     id: "16"
                     type: activity_type
                   - attributes:
-                      category: discord
+                      channel: discord
                       key: discord:message:replied
                       name: Replied to a message in Discord
                       short_name: Discord message reply
@@ -56,7 +56,7 @@ paths:
                     id: "17"
                     type: activity_type
                   - attributes:
-                      category: discord
+                      channel: discord
                       key: discord:server:joined
                       name: Joined a server in Discord
                       short_name: Discord server join
@@ -64,7 +64,7 @@ paths:
                     id: "18"
                     type: activity_type
                   - attributes:
-                      category: discourse
+                      channel: discourse
                       key: discourse:post:created
                       name: Created a Discourse post
                       short_name: Discourse post
@@ -72,7 +72,7 @@ paths:
                     id: "11"
                     type: activity_type
                   - attributes:
-                      category: discourse
+                      channel: discourse
                       key: discourse:topic:created
                       name: Created a Discourse topic
                       short_name: Discourse topic
@@ -80,7 +80,7 @@ paths:
                     id: "12"
                     type: activity_type
                   - attributes:
-                      category: github
+                      channel: github
                       key: star:created
                       name: Starred a repository
                       short_name: GitHub star
@@ -88,7 +88,7 @@ paths:
                     id: "4"
                     type: activity_type
                   - attributes:
-                      category: github
+                      channel: github
                       key: issue_comment:created
                       name: Commented on an issue
                       short_name: Issue comment
@@ -96,7 +96,7 @@ paths:
                     id: "5"
                     type: activity_type
                   - attributes:
-                      category: github
+                      channel: github
                       key: issues:opened
                       name: Opened an issue
                       short_name: Issue opened
@@ -104,7 +104,7 @@ paths:
                     id: "1"
                     type: activity_type
                   - attributes:
-                      category: github
+                      channel: github
                       key: pull_requests:merged
                       name: Had a pull request merged
                       short_name: Merged pull request
@@ -112,7 +112,7 @@ paths:
                     id: "3"
                     type: activity_type
                   - attributes:
-                      category: github
+                      channel: github
                       key: pull_requests:opened
                       name: Opened a pull request
                       short_name: Opened pull request
@@ -120,7 +120,7 @@ paths:
                     id: "2"
                     type: activity_type
                   - attributes:
-                      category: slack
+                      channel: slack
                       key: slack:channel:joined
                       name: Joined a channel in Slack
                       short_name: Slack channel join
@@ -128,7 +128,7 @@ paths:
                     id: "14"
                     type: activity_type
                   - attributes:
-                      category: slack
+                      channel: slack
                       key: slack:message:sent
                       name: Sent a message in Slack
                       short_name: Slack message
@@ -136,7 +136,7 @@ paths:
                     id: "13"
                     type: activity_type
                   - attributes:
-                      category: slack
+                      channel: slack
                       key: slack:thread:replied
                       name: Replied to a thread in Slack
                       short_name: Slack thread reply
@@ -144,7 +144,7 @@ paths:
                     id: "15"
                     type: activity_type
                   - attributes:
-                      category: twitter
+                      channel: twitter
                       key: twitter:followed
                       name: Followed on twitter
                       short_name: Twitter follow
@@ -152,7 +152,7 @@ paths:
                     id: "10"
                     type: activity_type
                   - attributes:
-                      category: twitter
+                      channel: twitter
                       key: tweet:sent
                       name: Tweeted
                       short_name: Twitter mention
@@ -174,11 +174,11 @@ paths:
               example:
                 data:
                   attributes:
-                    created_at: 2021-06-23T11:48:21.179Z
-                    email: orville_windler@jones.name
-                    name: StanDibbertMD
-                    updated_at: 2021-06-23T11:48:21.179Z
-                  id: "11"
+                    created_at: 2021-07-30T11:57:58.640Z
+                    email: carolynn_cruickshank@walter.co
+                    name: StaciaCronin
+                    updated_at: 2021-07-30T11:57:58.640Z
+                  id: "19"
                   type: user
           description: success
       security:
@@ -195,13 +195,16 @@ paths:
               example:
                 data:
                   - attributes:
-                      created_at: 2021-06-23T11:48:26.786Z
+                      created_at: 2021-07-30T11:58:05.238Z
                       name: Fake Workspace
                       slug: fake-workspace
-                      updated_at: 2021-06-23T11:48:26.794Z
-                    id: "101"
-                    relationships: {}
+                      updated_at: 2021-07-30T11:58:05.247Z
+                    id: "108"
+                    relationships:
+                      repositories:
+                        data: []
                     type: workspace
+                included: []
           description: success
       security:
         - bearer: []
@@ -224,22 +227,24 @@ paths:
                 data:
                   attributes:
                     activities_count: 1
-                    created_at: 2021-06-23T11:48:26.825Z
+                    created_at: 2021-07-30T11:58:05.279Z
                     members_count: 1
                     name: Fake Workspace
                     slug: fake-workspace
                     tags: {}
-                    updated_at: 2021-06-23T11:48:26.876Z
-                  id: "102"
+                    updated_at: 2021-07-30T11:58:05.338Z
+                  id: "109"
                   relationships:
                     last_activity:
                       data:
-                        id: "36"
+                        id: "38"
                         type: activity
                     last_member:
                       data:
-                        id: "53"
+                        id: "55"
                         type: member
+                    repositories:
+                      data: []
                   type: workspace
                 included:
                   - attributes:
@@ -249,29 +254,29 @@ paths:
                       birthday: null
                       company: null
                       created: false
-                      created_at: 2021-06-23T11:48:26.863Z
+                      created_at: 2021-07-30T11:58:05.324Z
                       deleted_at: null
                       devto: null
                       discord: null
                       discourse: null
                       email: null
-                      first_activity_occurred_at: 2021-06-23T11:48:26.856Z
+                      first_activity_occurred_at: 2021-07-30T11:58:05.316Z
                       github: null
                       github_followers: null
-                      id: 53
+                      id: 55
                       languages: null
-                      last_activity_occurred_at: 2021-06-23T11:48:26.856Z
+                      last_activity_occurred_at: 2021-07-30T11:58:05.316Z
                       linkedin: null
                       location: null
-                      love: 1
+                      love: null
                       merged_at: null
-                      name: FernandaSchowalterJr
-                      orbit_level: 3
-                      orbit_url: http://localhost:3000/fake-workspace/members/fernandaschowalterjr
+                      name: DennyDeckow
+                      orbit_level: null
+                      orbit_url: http://localhost:3000/fake-workspace/members/dennydeckow
                       pronouns: null
                       reach: 0
                       shipping_address: null
-                      slug: fernandaschowalterjr
+                      slug: dennydeckow
                       source: installation
                       tag_list: []
                       tags: []
@@ -281,9 +286,9 @@ paths:
                       tshirt: null
                       twitter: null
                       twitter_followers: null
-                      updated_at: 2021-06-23T11:48:26.874Z
+                      updated_at: 2021-07-30T11:58:05.336Z
                       url: null
-                    id: "53"
+                    id: "55"
                     relationships:
                       identities:
                         data: []
@@ -291,27 +296,27 @@ paths:
                   - attributes:
                       action: opened
                       activity_link: https://github.com/
-                      created_at: 2021-06-23T11:48:26.864Z
-                      key: sukmurazik/rodrigomoriette#63
-                      occurred_at: 2021-06-23T11:48:26.856Z
-                      orbit_url: http://localhost:3000/fake-workspace/activities/36
+                      created_at: 2021-07-30T11:58:05.325Z
+                      key: eusebia/earnestine#88
+                      occurred_at: 2021-07-30T11:58:05.316Z
+                      orbit_url: http://localhost:3000/fake-workspace/activities/38
                       tags:
                         - channel:github
-                        - github_organization:sukmurazik
-                        - github_repository:sukmurazik/rodrigomoriette
-                        - github_pull_request:sukmurazik/rodrigomoriette/#63
+                        - github_organization:eusebia
+                        - github_repository:eusebia/earnestine
+                        - github_pull_request:eusebia/earnestine/#88
                       type: PullRequestActivity
-                      updated_at: 2021-06-23T11:48:26.864Z
+                      updated_at: 2021-07-30T11:58:05.325Z
                       weight: "1.0"
-                    id: "36"
+                    id: "38"
                     relationships:
                       activity_type:
                         data:
-                          id: "48"
+                          id: "70"
                           type: activity_type
                       member:
                         data:
-                          id: "53"
+                          id: "55"
                           type: member
                       repository:
                         data:
@@ -361,6 +366,10 @@ paths:
           name: activity_type
           schema:
             enum:
+              - discourse:post:created
+              - slack:message:sent
+              - post:created
+              - note:created
               - issues:opened
               - issue_comment:created
               - pull_requests:opened
@@ -368,17 +377,13 @@ paths:
               - star:created
               - discord:message:sent
               - tweet:sent
-              - discord:message:replied
-              - custom:happened
-              - discord:server:joined
               - twitter:followed
+              - discord:message:replied
+              - discord:server:joined
+              - custom:happened
               - slack:channel:joined
               - slack:thread:replied
               - discourse:topic:created
-              - discourse:post:created
-              - slack:message:sent
-              - note:created
-              - post:created
             type: string
         - in: query
           name: weight
@@ -451,21 +456,21 @@ paths:
                 data:
                   - attributes:
                       action: spec_action
-                      created_at: 2021-06-23T11:48:21.808Z
+                      created_at: 2021-07-30T11:57:59.382Z
                       key: spec_activity_key#2
-                      occurred_at: 2021-06-23T11:48:21.806Z
-                      orbit_url: http://localhost:3000/jaredlang/activities/7
+                      occurred_at: 2021-07-30T11:57:59.380Z
+                      orbit_url: http://localhost:3000/mrscelestejacobson/activities/7
                       tags:
                         - spec-tag-1
                         - spec-tag-2
                       type: SpecActivity
-                      updated_at: 2021-06-23T11:48:21.808Z
+                      updated_at: 2021-07-30T11:57:59.382Z
                       weight: "1.0"
                     id: "7"
                     relationships:
                       activity_type:
                         data:
-                          id: "26"
+                          id: "44"
                           type: activity_type
                       member:
                         data:
@@ -474,12 +479,12 @@ paths:
                     type: spec_activity
                 included:
                   - attributes:
-                      category: spec_category
+                      channel: spec_channel
                       key: spec:activity
                       name: Did spec activity
-                      short_name: Spec Activity
+                      short_name: Spec Channel
                       weight: "1.0"
-                    id: "26"
+                    id: "44"
                     type: activity_type
                   - attributes:
                       activities_count: 2
@@ -488,29 +493,29 @@ paths:
                       birthday: null
                       company: null
                       created: false
-                      created_at: 2021-06-23T11:48:21.789Z
+                      created_at: 2021-07-30T11:57:59.362Z
                       deleted_at: null
                       devto: null
                       discord: null
                       discourse: null
                       email: null
-                      first_activity_occurred_at: 2021-06-23T11:48:21.806Z
+                      first_activity_occurred_at: 2021-07-30T11:57:59.380Z
                       github: null
                       github_followers: null
                       id: 4
                       languages: null
-                      last_activity_occurred_at: 2021-06-23T11:48:21.836Z
+                      last_activity_occurred_at: 2021-07-30T11:57:59.409Z
                       linkedin: null
                       location: null
-                      love: 1.2
+                      love: null
                       merged_at: null
-                      name: VeronikaLeannon
-                      orbit_level: 2
-                      orbit_url: http://localhost:3000/jaredlang/members/veronikaleannon
+                      name: ShaniquaSanford
+                      orbit_level: null
+                      orbit_url: http://localhost:3000/mrscelestejacobson/members/shaniquasanford
                       pronouns: null
                       reach: 0
                       shipping_address: null
-                      slug: veronikaleannon
+                      slug: shaniquasanford
                       source: installation
                       tag_list:
                         - ruby
@@ -522,7 +527,7 @@ paths:
                       tshirt: null
                       twitter: null
                       twitter_followers: null
-                      updated_at: 2021-06-23T11:48:21.849Z
+                      updated_at: 2021-07-30T11:57:59.420Z
                       url: null
                     id: "4"
                     relationships:
@@ -530,7 +535,7 @@ paths:
                         data: []
                     type: member
                 links:
-                  first: http://localhost:3000/api/v1/jaredlang/activities?activity_tags=&activity_type=spec%3Aactivity&affiliation=&company=&direction=DESC&end_date=&filters=true&identity=&items=10&location=&member_tags=&page=1&sort=occurred_at&start_date=&weight=
+                  first: http://localhost:3000/api/v1/mrscelestejacobson/activities?activity_tags=&activity_type=spec%3Aactivity&affiliation=&company=&direction=DESC&end_date=&filters=true&identity=&items=10&location=&member_tags=&page=1&sort=occurred_at&start_date=&weight=
                   next: null
                   prev: null
           description: success
@@ -560,15 +565,15 @@ paths:
                 data:
                   attributes:
                     action: happened
-                    created_at: 2021-06-23T11:48:22.705Z
+                    created_at: 2021-07-30T11:58:00.548Z
                     custom_description: More info about the thing
                     custom_link: http://link.com/
                     custom_link_text: See the thing
                     custom_title: Did a thing
                     custom_type: custom-type
                     key: thing-123
-                    occurred_at: 2021-06-23T11:48:22.703Z
-                    orbit_url: http://localhost:3000/deonroberts/activities/13
+                    occurred_at: 2021-07-30T11:58:00.546Z
+                    orbit_url: http://localhost:3000/kristinbeattyii/activities/13
                     tags:
                       - product
                       - enterprise
@@ -576,7 +581,7 @@ paths:
                       - custom_type:custom-type
                       - custom_title:did-a-thing
                     type: CustomActivity
-                    updated_at: 2021-06-23T11:48:22.705Z
+                    updated_at: 2021-07-30T11:58:00.548Z
                     weight: "0.2"
                   id: "13"
                   relationships:
@@ -590,12 +595,12 @@ paths:
                         type: member
                     user:
                       data:
-                        id: "42"
+                        id: "50"
                         type: user
                   type: custom_activity
                 included:
                   - attributes:
-                      category: custom
+                      channel: custom
                       key: custom:happened
                       name: Something happened
                       short_name: Custom
@@ -645,25 +650,25 @@ paths:
                       birthday: null
                       company: Orbit
                       created: true
-                      created_at: 2021-06-23T11:48:22.659Z
+                      created_at: 2021-07-30T11:58:00.506Z
                       deleted_at: null
                       devto: null
                       discord: null
                       discourse: null
                       email: josh@orbit.love
-                      first_activity_occurred_at: 2021-06-23T11:48:22.703Z
+                      first_activity_occurred_at: 2021-07-30T11:58:00.546Z
                       github: dzello
                       github_followers: null
                       id: 9
                       languages: null
-                      last_activity_occurred_at: 2021-06-23T11:48:22.703Z
+                      last_activity_occurred_at: 2021-07-30T11:58:00.546Z
                       linkedin: dzello
                       location: Paris, Île-de-France, FR
-                      love: 1
+                      love: null
                       merged_at: null
                       name: Josh Dzielak
-                      orbit_level: 3
-                      orbit_url: http://localhost:3000/deonroberts/members/dzello
+                      orbit_level: null
+                      orbit_url: http://localhost:3000/kristinbeattyii/members/dzello
                       pronouns: null
                       reach: 8
                       shipping_address: null
@@ -676,12 +681,12 @@ paths:
                         - one
                         - two
                       teammate: false
-                      title: Co-founder & CTO
+                      title: null
                       topics: null
                       tshirt: null
                       twitter: dzello
                       twitter_followers: 4598
-                      updated_at: 2021-06-23T11:48:22.716Z
+                      updated_at: 2021-07-30T11:58:00.558Z
                       url: https://orbit.love/
                     id: "9"
                     relationships:
@@ -697,10 +702,10 @@ paths:
                             type: linkedin_identity
                     type: member
                   - attributes:
-                      created_at: 2021-06-23T11:48:22.574Z
-                      name: LoriHane
-                      updated_at: 2021-06-23T11:48:22.578Z
-                    id: "42"
+                      created_at: 2021-07-30T11:58:00.413Z
+                      name: EdmondSteuber
+                      updated_at: 2021-07-30T11:58:00.417Z
+                    id: "50"
                     type: user
           description: success
         "422":
@@ -743,21 +748,21 @@ paths:
                 data:
                   attributes:
                     action: spec_action
-                    created_at: 2021-06-23T11:48:21.937Z
+                    created_at: 2021-07-30T11:57:59.519Z
                     key: clé
-                    occurred_at: 2021-06-23T11:48:21.931Z
-                    orbit_url: http://localhost:3000/bettiebrown/activities/9
+                    occurred_at: 2021-07-30T11:57:59.513Z
+                    orbit_url: http://localhost:3000/raymondbartondvm/activities/9
                     tags:
                       - spec-tag-1
                       - spec-tag-2
                     type: SpecActivity
-                    updated_at: 2021-06-23T11:48:21.937Z
+                    updated_at: 2021-07-30T11:57:59.519Z
                     weight: "1.0"
                   id: "9"
                   relationships:
                     activity_type:
                       data:
-                        id: "28"
+                        id: "46"
                         type: activity_type
                     member:
                       data:
@@ -769,17 +774,17 @@ paths:
                         type: repository
                     user:
                       data:
-                        id: "30"
+                        id: "38"
                         type: user
                   type: spec_activity
                 included:
                   - attributes:
-                      category: spec_category
-                      key: spec:happened#4
+                      channel: spec_channel
+                      key: spec:happened#22
                       name: Did spec activity
-                      short_name: Spec Activity
+                      short_name: Spec Channel
                       weight: "1.0"
-                    id: "28"
+                    id: "46"
                     type: activity_type
                   - attributes:
                       activities_count: 1
@@ -788,29 +793,29 @@ paths:
                       birthday: null
                       company: null
                       created: false
-                      created_at: 2021-06-23T11:48:21.935Z
+                      created_at: 2021-07-30T11:57:59.518Z
                       deleted_at: null
                       devto: null
                       discord: null
                       discourse: null
                       email: null
-                      first_activity_occurred_at: 2021-06-23T11:48:21.931Z
+                      first_activity_occurred_at: 2021-07-30T11:57:59.513Z
                       github: null
                       github_followers: null
                       id: 5
                       languages: null
-                      last_activity_occurred_at: 2021-06-23T11:48:21.931Z
+                      last_activity_occurred_at: 2021-07-30T11:57:59.513Z
                       linkedin: null
                       location: null
-                      love: 1
+                      love: null
                       merged_at: null
-                      name: ParisHermiston
-                      orbit_level: 3
-                      orbit_url: http://localhost:3000/bettiebrown/members/parishermiston
+                      name: MsJeromeHalvorson
+                      orbit_level: null
+                      orbit_url: http://localhost:3000/raymondbartondvm/members/msjeromehalvorson
                       pronouns: null
                       reach: 0
                       shipping_address: null
-                      slug: parishermiston
+                      slug: msjeromehalvorson
                       source: installation
                       tag_list: []
                       tags: []
@@ -820,7 +825,7 @@ paths:
                       tshirt: null
                       twitter: null
                       twitter_followers: null
-                      updated_at: 2021-06-23T11:48:21.947Z
+                      updated_at: 2021-07-30T11:57:59.530Z
                       url: null
                     id: "5"
                     relationships:
@@ -828,18 +833,18 @@ paths:
                         data: []
                     type: member
                   - attributes:
-                      created_at: 2021-06-23T11:48:21.915Z
-                      full_name: angila/winfordrogahn
-                      name: winfordrogahn
-                      owner: angila
-                      updated_at: 2021-06-23T11:48:21.915Z
+                      created_at: 2021-07-30T11:57:59.497Z
+                      full_name: koryward/telma
+                      name: telma
+                      owner: koryward
+                      updated_at: 2021-07-30T11:57:59.497Z
                     id: "6"
                     type: repository
                   - attributes:
-                      created_at: 2021-06-23T11:48:21.902Z
-                      name: MrsMichealParker
-                      updated_at: 2021-06-23T11:48:21.902Z
-                    id: "30"
+                      created_at: 2021-07-30T11:57:59.484Z
+                      name: MarilynDaniel
+                      updated_at: 2021-07-30T11:57:59.484Z
+                    id: "38"
                     type: user
           description: success
       security:
@@ -847,6 +852,47 @@ paths:
       summary: Get an activity in the workspace
       tags:
         - Activities
+  "/{workspace_id}/activity_types":
+    get:
+      parameters:
+        - in: path
+          name: workspace_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                data:
+                  - attributes:
+                      channel: spec_channel
+                      key: post-created
+                      name: Created content
+                      short_name: Content created
+                      weight: "7.0"
+                    id: "47"
+                    type: activity_type
+                  - attributes:
+                      channel: spec_channel
+                      key: activated-accountd
+                      name: Activated their account on product
+                      short_name: Activated account
+                      weight: "4.0"
+                    id: "48"
+                    type: activity_type
+                links:
+                  first: /evamcdermottsr/activity_types?page=1
+                  last: /evamcdermottsr/activity_types?page=1
+                  next: null
+                  prev: null
+          description: success
+      security:
+        - bearer: []
+      summary: List all activity types for a workspace
+      tags:
+        - Activity Types
   "/{workspace_id}/members":
     get:
       parameters:
@@ -884,6 +930,10 @@ paths:
           name: activity_type
           schema:
             enum:
+              - discourse:post:created
+              - slack:message:sent
+              - post:created
+              - note:created
               - issues:opened
               - issue_comment:created
               - pull_requests:opened
@@ -891,17 +941,13 @@ paths:
               - star:created
               - discord:message:sent
               - tweet:sent
-              - discord:message:replied
-              - custom:happened
-              - discord:server:joined
               - twitter:followed
+              - discord:message:replied
+              - discord:server:joined
+              - custom:happened
               - slack:channel:joined
               - slack:thread:replied
               - discourse:topic:created
-              - discourse:post:created
-              - slack:message:sent
-              - note:created
-              - post:created
             type: string
         - in: query
           name: weight
@@ -1004,29 +1050,29 @@ paths:
                       birthday: null
                       company: null
                       created: false
-                      created_at: 2021-06-23T11:48:24.060Z
+                      created_at: 2021-07-30T11:58:02.229Z
                       deleted_at: null
                       devto: null
                       discord: null
                       discourse: null
                       email: null
-                      first_activity_occurred_at: 2021-06-23T11:48:24.108Z
+                      first_activity_occurred_at: 2021-07-29T11:58:02.255Z
                       github: null
                       github_followers: null
-                      id: 29
+                      id: 30
                       languages: null
-                      last_activity_occurred_at: 2021-06-23T11:48:24.108Z
+                      last_activity_occurred_at: 2021-07-29T11:58:02.255Z
                       linkedin: null
                       location: null
-                      love: 1
+                      love: null
                       merged_at: null
-                      name: Sally
-                      orbit_level: 3
-                      orbit_url: http://localhost:3000/royceschneider/members/sally
+                      name: Josh
+                      orbit_level: null
+                      orbit_url: http://localhost:3000/ismaeleffertzdds/members/josh
                       pronouns: null
                       reach: 0
                       shipping_address: null
-                      slug: sally
+                      slug: josh
                       source: installation
                       tag_list:
                         - ruby
@@ -1038,20 +1084,20 @@ paths:
                       tshirt: null
                       twitter: null
                       twitter_followers: null
-                      updated_at: 2021-06-23T11:48:24.118Z
+                      updated_at: 2021-07-30T11:58:02.280Z
                       url: null
-                    id: "29"
+                    id: "30"
                     relationships:
                       identities:
                         data:
-                          - id: "18"
+                          - id: "19"
                             type: spec_identity
                     type: member
                 included:
-                  - id: "18"
+                  - id: "19"
                     type: spec_identity
                 links:
-                  first: http://localhost:3000/api/v1/royceschneider/members?activities_count_max=99&activities_count_min=1&activity_tags=&activity_type=spec%3Aactivity&affiliation=&company=&direction=&end_date=&filters=true&identity=&items=10&location=&member_tags=&page=1&query=&sort=&start_date=&weight=
+                  first: http://localhost:3000/api/v1/ismaeleffertzdds/members?activities_count_max=99&activities_count_min=1&activity_tags=&activity_type=&affiliation=&company=&direction=&end_date=&filters=true&identity=&items=10&location=&member_tags=&page=1&query=Josh&sort=&start_date=&weight=
                   next: null
                   prev: null
           description: success
@@ -1086,7 +1132,7 @@ paths:
                     birthday: null
                     company: "@orbit-love"
                     created: false
-                    created_at: 2021-06-23T11:48:25.168Z
+                    created_at: 2021-07-30T11:58:03.412Z
                     deleted_at: null
                     devto: null
                     discord: null
@@ -1095,20 +1141,20 @@ paths:
                     first_activity_occurred_at: null
                     github: dzello
                     github_followers: 171
-                    id: 39
+                    id: 41
                     languages: null
                     last_activity_occurred_at: null
                     linkedin: null
                     location: Paris
-                    love: 0
+                    love: null
                     merged_at: null
-                    name: MrsJordonCummerata
+                    name: RebekahPaucek
                     orbit_level: null
-                    orbit_url: http://localhost:3000/arturokessler/members/mrsjordoncummerata
+                    orbit_url: http://localhost:3000/jeraldlakin/members/rebekahpaucek
                     pronouns: null
                     reach: 8
                     shipping_address: null
-                    slug: mrsjordoncummerata
+                    slug: rebekahpaucek
                     source: api
                     tag_list:
                       - one
@@ -1117,20 +1163,20 @@ paths:
                       - one
                       - two
                     teammate: false
-                    title: Co-founder & CTO
+                    title: null
                     topics: null
                     tshirt: null
                     twitter: dzello
                     twitter_followers: null
-                    updated_at: 2021-06-23T11:48:25.259Z
+                    updated_at: 2021-07-30T11:58:03.550Z
                     url: https://dzello.com/
-                  id: "39"
+                  id: "41"
                   relationships:
                     identities:
                       data:
-                        - id: "26"
-                          type: twitter_identity
                         - id: "28"
+                          type: twitter_identity
+                        - id: "30"
                           type: github_identity
                   type: member
                 included:
@@ -1139,9 +1185,9 @@ paths:
                       name: null
                       source: twitter
                       source_host: twitter.com
-                      uid: uid-12
+                      uid: uid-14
                       username: dzello
-                    id: "26"
+                    id: "28"
                     type: twitter_identity
                   - attributes:
                       email: null
@@ -1150,7 +1196,7 @@ paths:
                       source_host: github.com
                       uid: "174777"
                       username: dzello
-                    id: "28"
+                    id: "30"
                     type: github_identity
           description: success
         "201":
@@ -1165,7 +1211,7 @@ paths:
                     birthday: null
                     company: "@orbit-love"
                     created: true
-                    created_at: 2021-06-23T11:48:26.124Z
+                    created_at: 2021-07-30T11:58:04.528Z
                     deleted_at: null
                     devto: null
                     discord: null
@@ -1174,16 +1220,16 @@ paths:
                     first_activity_occurred_at: null
                     github: dzello
                     github_followers: 171
-                    id: 48
+                    id: 50
                     languages: null
                     last_activity_occurred_at: null
                     linkedin: null
                     location: Paris
-                    love: 0
+                    love: null
                     merged_at: null
                     name: Josh Dzielak
                     orbit_level: null
-                    orbit_url: http://localhost:3000/mechelleshanahan/members/dzello
+                    orbit_url: http://localhost:3000/misselviracruickshank/members/dzello
                     pronouns: null
                     reach: 8
                     shipping_address: null
@@ -1192,22 +1238,22 @@ paths:
                     tag_list: []
                     tags: []
                     teammate: false
-                    title: Co-founder & CTO
+                    title: null
                     topics: null
                     tshirt: null
                     twitter: dzello
                     twitter_followers: null
-                    updated_at: 2021-06-23T11:48:26.151Z
+                    updated_at: 2021-07-30T11:58:04.556Z
                     url: https://dzello.com/
-                  id: "48"
+                  id: "50"
                   relationships:
                     identities:
                       data:
-                        - id: "47"
-                          type: github_identity
-                        - id: "48"
-                          type: twitter_identity
                         - id: "49"
+                          type: github_identity
+                        - id: "50"
+                          type: twitter_identity
+                        - id: "51"
                           type: email_identity
                   type: member
                 included:
@@ -1218,7 +1264,7 @@ paths:
                       source_host: github.com
                       uid: "174777"
                       username: dzello
-                    id: "47"
+                    id: "49"
                     type: github_identity
                   - attributes:
                       email: null
@@ -1227,7 +1273,7 @@ paths:
                       source_host: twitter.com
                       uid: null
                       username: dzello
-                    id: "48"
+                    id: "50"
                     type: twitter_identity
                   - attributes:
                       email: josh@orbit.love
@@ -1236,7 +1282,7 @@ paths:
                       source_host: email.host
                       uid: josh@orbit.love
                       username: null
-                    id: "49"
+                    id: "51"
                     type: email_identity
           description: created
         "422":
@@ -1305,7 +1351,7 @@ paths:
                     birthday: null
                     company: null
                     created: false
-                    created_at: 2021-06-23T11:48:26.375Z
+                    created_at: 2021-07-30T11:58:04.780Z
                     deleted_at: null
                     devto: null
                     discord: null
@@ -1314,20 +1360,20 @@ paths:
                     first_activity_occurred_at: null
                     github: dzello
                     github_followers: null
-                    id: 50
+                    id: 52
                     languages: null
                     last_activity_occurred_at: null
                     linkedin: null
                     location: null
-                    love: 0
+                    love: null
                     merged_at: null
-                    name: LindseyMacejkovic
+                    name: TatyanaMertz
                     orbit_level: null
-                    orbit_url: http://localhost:3000/kirstengreen/members/lindseymacejkovic
+                    orbit_url: http://localhost:3000/terrencejones/members/tatyanamertz
                     pronouns: null
                     reach: 0
                     shipping_address: null
-                    slug: lindseymacejkovic
+                    slug: tatyanamertz
                     source: installation
                     tag_list: []
                     tags: []
@@ -1337,13 +1383,13 @@ paths:
                     tshirt: null
                     twitter: null
                     twitter_followers: null
-                    updated_at: 2021-06-23T11:48:26.375Z
+                    updated_at: 2021-07-30T11:58:04.780Z
                     url: null
-                  id: "50"
+                  id: "52"
                   relationships:
                     identities:
                       data:
-                        - id: "52"
+                        - id: "54"
                           type: github_identity
                   type: member
                 included:
@@ -1352,9 +1398,9 @@ paths:
                       name: null
                       source: github
                       source_host: github.com
-                      uid: uid-16
+                      uid: uid-18
                       username: dzello
-                    id: "52"
+                    id: "54"
                     type: github_identity
           description: success
         "404":
@@ -1414,7 +1460,7 @@ paths:
                     birthday: null
                     company: null
                     created: false
-                    created_at: 2021-06-23T11:48:24.169Z
+                    created_at: 2021-07-30T11:58:02.375Z
                     deleted_at: null
                     devto: null
                     discord: null
@@ -1423,16 +1469,16 @@ paths:
                     first_activity_occurred_at: null
                     github: null
                     github_followers: null
-                    id: 30
+                    id: 32
                     languages: null
                     last_activity_occurred_at: null
                     linkedin: null
                     location: null
-                    love: 0
+                    love: null
                     merged_at: null
                     name: Josh
                     orbit_level: null
-                    orbit_url: http://localhost:3000/franciscowalsh/members/josh
+                    orbit_url: http://localhost:3000/dariakonopelski/members/josh
                     pronouns: null
                     reach: 0
                     shipping_address: null
@@ -1446,17 +1492,17 @@ paths:
                     tshirt: null
                     twitter: null
                     twitter_followers: null
-                    updated_at: 2021-06-23T11:48:24.169Z
+                    updated_at: 2021-07-30T11:58:02.375Z
                     url: null
-                  id: "30"
+                  id: "32"
                   relationships:
                     identities:
                       data:
-                        - id: "19"
+                        - id: "21"
                           type: spec_identity
                   type: member
                 included:
-                  - id: "19"
+                  - id: "21"
                     type: spec_identity
           description: success
       security:
@@ -1544,21 +1590,21 @@ paths:
                 data:
                   - attributes:
                       action: spec_action
-                      created_at: 2021-06-23T11:48:22.921Z
+                      created_at: 2021-07-30T11:58:00.847Z
                       key: spec_activity_key#6
-                      occurred_at: 2021-06-23T11:48:22.920Z
-                      orbit_url: http://localhost:3000/carlenadonnelly/activities/18
+                      occurred_at: 2021-07-30T11:58:00.846Z
+                      orbit_url: http://localhost:3000/catharinedibbert/activities/18
                       tags:
                         - spec-tag-1
                         - spec-tag-2
                       type: SpecActivity
-                      updated_at: 2021-06-23T11:48:22.921Z
+                      updated_at: 2021-07-30T11:58:00.847Z
                       weight: "1.0"
                     id: "18"
                     relationships:
                       activity_type:
                         data:
-                          id: "33"
+                          id: "53"
                           type: activity_type
                       member:
                         data:
@@ -1567,12 +1613,12 @@ paths:
                     type: spec_activity
                 included:
                   - attributes:
-                      category: spec_category
+                      channel: spec_channel
                       key: bar:activity
                       name: Did spec activity
-                      short_name: Spec Activity
+                      short_name: Spec Channel
                       weight: "1.0"
-                    id: "33"
+                    id: "53"
                     type: activity_type
                   - attributes:
                       activities_count: 3
@@ -1581,29 +1627,29 @@ paths:
                       birthday: null
                       company: null
                       created: false
-                      created_at: 2021-06-23T11:48:22.847Z
+                      created_at: 2021-07-30T11:58:00.759Z
                       deleted_at: null
                       devto: null
                       discord: null
                       discourse: null
                       email: null
-                      first_activity_occurred_at: 2021-06-23T11:48:22.862Z
+                      first_activity_occurred_at: 2021-07-30T11:58:00.785Z
                       github: null
                       github_followers: null
                       id: 11
                       languages: null
-                      last_activity_occurred_at: 2021-06-23T11:48:22.920Z
+                      last_activity_occurred_at: 2021-07-30T11:58:00.846Z
                       linkedin: null
                       location: null
-                      love: 1.4
+                      love: null
                       merged_at: null
-                      name: FrankieFritschDDS
-                      orbit_level: 2
-                      orbit_url: http://localhost:3000/carlenadonnelly/members/frankiefritschdds
+                      name: MsAmadoJohnston
+                      orbit_level: null
+                      orbit_url: http://localhost:3000/catharinedibbert/members/msamadojohnston
                       pronouns: null
                       reach: 0
                       shipping_address: null
-                      slug: frankiefritschdds
+                      slug: msamadojohnston
                       source: installation
                       tag_list: []
                       tags: []
@@ -1613,7 +1659,7 @@ paths:
                       tshirt: null
                       twitter: null
                       twitter_followers: null
-                      updated_at: 2021-06-23T11:48:22.932Z
+                      updated_at: 2021-07-30T11:58:00.856Z
                       url: null
                     id: "11"
                     relationships:
@@ -1621,8 +1667,8 @@ paths:
                         data: []
                     type: member
                 links:
-                  first: /carlenadonnelly/members/frankiefritschdds/activities?page=1&direction=DESC&items=10&sort=occurred_at&activity_type=bar%3Aactivity
-                  last: /carlenadonnelly/members/frankiefritschdds/activities?page=1&direction=DESC&items=10&sort=occurred_at&activity_type=bar%3Aactivity
+                  first: /catharinedibbert/members/msamadojohnston/activities?page=1&direction=DESC&items=10&sort=occurred_at&activity_type=bar%3Aactivity
+                  last: /catharinedibbert/members/msamadojohnston/activities?page=1&direction=DESC&items=10&sort=occurred_at&activity_type=bar%3Aactivity
                   next: null
                   prev: null
           description: success
@@ -1656,15 +1702,15 @@ paths:
                 data:
                   attributes:
                     action: happened
-                    created_at: 2021-06-23T11:48:23.015Z
+                    created_at: 2021-07-30T11:58:00.945Z
                     custom_description: More info about the thing
                     custom_link: http://link.com/
                     custom_link_text: See the thing
                     custom_title: Did a thing
                     custom_type: custom-type
                     key: thing-123
-                    occurred_at: 2021-06-23T11:48:23.014Z
-                    orbit_url: http://localhost:3000/misssherrilhirthe/activities/19
+                    occurred_at: 2021-07-30T11:58:00.943Z
+                    orbit_url: http://localhost:3000/jessedenesik/activities/19
                     tags:
                       - product
                       - enterprise
@@ -1672,7 +1718,7 @@ paths:
                       - custom_type:custom-type
                       - custom_title:did-a-thing
                     type: CustomActivity
-                    updated_at: 2021-06-23T11:48:23.015Z
+                    updated_at: 2021-07-30T11:58:00.945Z
                     weight: "8.0"
                   id: "19"
                   relationships:
@@ -1686,12 +1732,12 @@ paths:
                         type: member
                     user:
                       data:
-                        id: "50"
+                        id: "59"
                         type: user
                   type: custom_activity
                 included:
                   - attributes:
-                      category: custom
+                      channel: custom
                       key: custom:happened
                       name: Something happened
                       short_name: Custom
@@ -1705,29 +1751,29 @@ paths:
                       birthday: null
                       company: null
                       created: false
-                      created_at: 2021-06-23T11:48:22.987Z
+                      created_at: 2021-07-30T11:58:00.913Z
                       deleted_at: null
                       devto: null
                       discord: null
                       discourse: null
                       email: null
-                      first_activity_occurred_at: 2021-06-23T11:48:23.014Z
+                      first_activity_occurred_at: 2021-07-30T11:58:00.943Z
                       github: null
                       github_followers: null
                       id: 12
                       languages: null
-                      last_activity_occurred_at: 2021-06-23T11:48:23.014Z
+                      last_activity_occurred_at: 2021-07-30T11:58:00.943Z
                       linkedin: null
                       location: null
-                      love: 1
+                      love: null
                       merged_at: null
-                      name: JanisGislason
-                      orbit_level: 3
-                      orbit_url: http://localhost:3000/misssherrilhirthe/members/janisgislason
+                      name: MarcelCarter
+                      orbit_level: null
+                      orbit_url: http://localhost:3000/jessedenesik/members/marcelcarter
                       pronouns: null
                       reach: 0
                       shipping_address: null
-                      slug: janisgislason
+                      slug: marcelcarter
                       source: installation
                       tag_list: []
                       tags: []
@@ -1737,7 +1783,7 @@ paths:
                       tshirt: null
                       twitter: null
                       twitter_followers: null
-                      updated_at: 2021-06-23T11:48:23.026Z
+                      updated_at: 2021-07-30T11:58:00.955Z
                       url: null
                     id: "12"
                     relationships:
@@ -1745,10 +1791,10 @@ paths:
                         data: []
                     type: member
                   - attributes:
-                      created_at: 2021-06-23T11:48:22.980Z
-                      name: TomasFisher
-                      updated_at: 2021-06-23T11:48:22.983Z
-                    id: "50"
+                      created_at: 2021-07-30T11:58:00.905Z
+                      name: OdeliaGaylord
+                      updated_at: 2021-07-30T11:58:00.909Z
+                    id: "59"
                     type: user
           description: success
         "422":
@@ -1931,8 +1977,8 @@ paths:
                 data:
                   - attributes:
                       body: heyo
-                      created_at: 2021-06-23T11:48:23.768Z
-                      updated_at: 2021-06-23T11:48:23.768Z
+                      created_at: 2021-07-30T11:58:01.779Z
+                      updated_at: 2021-07-30T11:58:01.779Z
                     id: "2"
                     relationships:
                       member:
@@ -1941,7 +1987,7 @@ paths:
                           type: member
                       user:
                         data:
-                          id: "67"
+                          id: "76"
                           type: user
                     type: note
                 included:
@@ -1952,7 +1998,7 @@ paths:
                       birthday: null
                       company: null
                       created: false
-                      created_at: 2021-06-23T11:48:23.761Z
+                      created_at: 2021-07-30T11:58:01.771Z
                       deleted_at: null
                       devto: null
                       discord: null
@@ -1966,15 +2012,15 @@ paths:
                       last_activity_occurred_at: null
                       linkedin: null
                       location: null
-                      love: 0
+                      love: null
                       merged_at: null
-                      name: RoscoeKoch
+                      name: RashidaNicolasIII
                       orbit_level: null
-                      orbit_url: http://localhost:3000/donteschowalter/members/roscoekoch
+                      orbit_url: http://localhost:3000/joshmcclure/members/rashidanicolasiii
                       pronouns: null
                       reach: 0
                       shipping_address: null
-                      slug: roscoekoch
+                      slug: rashidanicolasiii
                       source: installation
                       tag_list: []
                       tags: []
@@ -1984,7 +2030,7 @@ paths:
                       tshirt: null
                       twitter: null
                       twitter_followers: null
-                      updated_at: 2021-06-23T11:48:23.761Z
+                      updated_at: 2021-07-30T11:58:01.771Z
                       url: null
                     id: "24"
                     relationships:
@@ -1992,14 +2038,14 @@ paths:
                         data: []
                     type: member
                   - attributes:
-                      created_at: 2021-06-23T11:48:23.766Z
-                      name: MrBlaineKoss
-                      updated_at: 2021-06-23T11:48:23.766Z
-                    id: "67"
+                      created_at: 2021-07-30T11:58:01.778Z
+                      name: AnnmarieReynoldsJr
+                      updated_at: 2021-07-30T11:58:01.778Z
+                    id: "76"
                     type: user
                 links:
-                  first: /donteschowalter/members/roscoekoch/notes?page=1
-                  last: /donteschowalter/members/roscoekoch/notes?page=1
+                  first: /joshmcclure/members/rashidanicolasiii/notes?page=1
+                  last: /joshmcclure/members/rashidanicolasiii/notes?page=1
                   next: null
                   prev: null
           description: success
@@ -2033,8 +2079,8 @@ paths:
                 data:
                   attributes:
                     body: heyo
-                    created_at: 2021-06-23T11:48:23.714Z
-                    updated_at: 2021-06-23T11:48:23.714Z
+                    created_at: 2021-07-30T11:58:01.730Z
+                    updated_at: 2021-07-30T11:58:01.730Z
                   id: "1"
                   relationships:
                     member:
@@ -2043,7 +2089,7 @@ paths:
                         type: member
                     user:
                       data:
-                        id: "65"
+                        id: "74"
                         type: user
                   type: note
           description: note created
@@ -2120,7 +2166,7 @@ paths:
                   attributes:
                     activities:
                       foo:activity:
-                        category: spec_category
+                        channel: spec_channel
                         count: 1
                         delta: 1
                         members:
@@ -2131,7 +2177,7 @@ paths:
                           returning_count: 0
                           returning_delta: 0
                       spec:activity:
-                        category: spec_category
+                        channel: spec_channel
                         count: 0
                         delta: 0
                         members:
@@ -2158,12 +2204,12 @@ paths:
                       members_on_orbit_level_none_count: 0
                       total_members_count: 1
                     timeframe:
-                      end_date: 2021-06-23
-                      end_date_last: 2021-05-23
-                      start_date: 2021-05-23
-                      start_date_last: 2021-04-21
-                    workspace_id: 97
-                  id: "97"
+                      end_date: 2021-07-30
+                      end_date_last: 2021-06-30
+                      start_date: 2021-06-30
+                      start_date_last: 2021-05-30
+                    workspace_id: 104
+                  id: "104"
                   type: statistics
           description: success
       security:

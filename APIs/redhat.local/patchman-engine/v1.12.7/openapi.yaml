@@ -409,6 +409,20 @@ paths:
           name: filter[packages_updatable]
           schema:
             type: string
+        - description: Filter only SAP systems
+          in: query
+          name: filter[system_profile][sap_system]
+          schema:
+            type: string
+        - description: Filter systems by their SAP SIDs
+          explode: true
+          in: query
+          name: filter[system_profile][sap_sids][in]
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
         - description: Tag filter
           explode: true
           in: query
@@ -475,29 +489,6 @@ paths:
           name: filter[summary]
           schema:
             type: string
-        - description: Tag filter
-          explode: true
-          in: query
-          name: tags
-          schema:
-            items:
-              type: string
-            type: array
-          style: form
-        - description: Filter only SAP systems
-          in: query
-          name: filter[system_profile][sap_system]
-          schema:
-            type: string
-        - description: Filter systems by their SAP SIDs
-          explode: true
-          in: query
-          name: filter[system_profile][sap_sids][in]
-          schema:
-            items:
-              type: string
-            type: array
-          style: form
       responses:
         "200":
           content:
@@ -526,15 +517,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: Tag filter
-          explode: true
-          in: query
-          name: tags
-          schema:
-            items:
-              type: string
-            type: array
-          style: form
         - description: Filter only SAP systems
           in: query
           name: filter[system_profile][sap_system]
@@ -544,6 +526,15 @@ paths:
           explode: true
           in: query
           name: filter[system_profile][sap_sids][in]
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        - description: Tag filter
+          explode: true
+          in: query
+          name: tags
           schema:
             items:
               type: string
@@ -621,6 +612,20 @@ paths:
           name: filter[packages_updatable]
           schema:
             type: string
+        - description: Filter only SAP systems
+          in: query
+          name: filter[system_profile][sap_system]
+          schema:
+            type: string
+        - description: Filter systems by their SAP SIDs
+          explode: true
+          in: query
+          name: filter[system_profile][sap_sids][in]
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
         - description: Tag filter
           explode: true
           in: query

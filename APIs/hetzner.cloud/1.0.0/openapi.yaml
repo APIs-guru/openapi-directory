@@ -10535,6 +10535,7 @@ paths:
                   type: boolean
               required:
                 - type
+              title: AddTargetRequest
               type: object
       responses:
         "201":
@@ -11051,6 +11052,7 @@ paths:
                   type: string
               required:
                 - load_balancer_type
+              title: ChangeTypeRequest
               type: object
       responses:
         "201":
@@ -11695,6 +11697,7 @@ paths:
                   type: string
               required:
                 - type
+              title: RemoveTargetRequest
               type: object
       responses:
         "201":
@@ -14233,6 +14236,50 @@ paths:
                         required:
                           - price_monthly
                         type: object
+                      floating_ips:
+                        description: Costs of Floating IPs types per Location and type
+                        items:
+                          properties:
+                            prices:
+                              description: Floating IP type costs per Location
+                              items:
+                                properties:
+                                  location:
+                                    description: Name of the Location the price is for
+                                    example: fsn1
+                                    type: string
+                                  price_monthly:
+                                    description: Monthly costs for a Floating IP type in this Location
+                                    properties:
+                                      gross:
+                                        description: Price with VAT added
+                                        example: "1.1900000000000000"
+                                        type: string
+                                      net:
+                                        description: Price without VAT
+                                        example: "1.0000000000"
+                                        type: string
+                                    required:
+                                      - net
+                                      - gross
+                                    type: object
+                                required:
+                                  - location
+                                  - price_monthly
+                                type: object
+                              type: array
+                            type:
+                              description: The type of the Floating IP
+                              enum:
+                                - ipv4
+                                - ipv6
+                              example: ipv4
+                              type: string
+                          required:
+                            - type
+                            - prices
+                          type: object
+                        type: array
                       image:
                         description: The cost of Image per GB/month
                         properties:
@@ -14436,6 +14483,7 @@ paths:
                       - vat_rate
                       - image
                       - floating_ip
+                      - floating_ips
                       - traffic
                       - server_backup
                       - volume

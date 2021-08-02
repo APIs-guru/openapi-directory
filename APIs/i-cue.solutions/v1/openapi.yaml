@@ -1,4 +1,5 @@
 openapi: 3.0.1
+x-hasEquivalentPaths: true
 info:
   title: Growth Services
   version: v1
@@ -13,7 +14,7 @@ info:
   x-providerName: i-cue.solutions
 paths:
   /administration/entity:
-    delete:
+    get:
       description: This is a iCUE only endpoint or Enterprise feature.
       parameters:
         - description: User Authentication Token
@@ -23,8 +24,24 @@ paths:
             type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Entity"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Entity"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Entity"
+                type: array
           description: Success
-      summary: Delete organization
+      summary: Get all organizations
       tags:
         - Administration
     post:
@@ -73,10 +90,42 @@ paths:
           name: Token
           schema:
             type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ToggleRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ToggleRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ToggleRequest"
       responses:
         "200":
           description: Success
       summary: Pause organization
+      tags:
+        - Administration
+  "/administration/entity/{id}":
+    delete:
+      description: This is a iCUE only endpoint or Enterprise feature.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Delete organization
       tags:
         - Administration
   /administration/planning-level:
@@ -180,20 +229,6 @@ paths:
       tags:
         - Administration
   /administration/user:
-    delete:
-      description: Delete user
-      parameters:
-        - description: User Authentication Token
-          in: header
-          name: Token
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Success
-      summary: Delete user
-      tags:
-        - Administration
     post:
       description: Create new user for entity/organization. This can be done by entity administrator.
       parameters:
@@ -246,21 +281,6 @@ paths:
       summary: Update user
       tags:
         - Administration
-  /administration/user/from-list:
-    post:
-      description: Create multiple users at once.
-      parameters:
-        - description: User Authentication Token
-          in: header
-          name: Token
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Success
-      summary: Create list of users with given input array
-      tags:
-        - Administration
   /administration/user/lock:
     put:
       description: After lock user won't be able to use iCUE API endpoints.
@@ -270,16 +290,80 @@ paths:
           name: Token
           schema:
             type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ToggleUserRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ToggleUserRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ToggleUserRequest"
       responses:
         "200":
           description: Success
       summary: Lock user
       tags:
         - Administration
-  "/administration/user/{username}":
+  "/administration/user/{entityId}":
+    get:
+      description: Get all users
+      parameters:
+        - in: path
+          name: entityId
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Get all users
+      tags:
+        - Administration
+  "/administration/user/{entityId}/{id}":
+    delete:
+      description: Delete user
+      parameters:
+        - in: path
+          name: entityId
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - in: path
+          name: id
+          required: true
+          schema:
+            format: int32
+            type: integer
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+      summary: Delete user
+      tags:
+        - Administration
+  "/administration/user/{entityId}/{username}":
     get:
       description: Get user by username
       parameters:
+        - in: path
+          name: entityId
+          required: true
+          schema:
+            type: string
         - in: path
           name: username
           required: true
@@ -417,6 +501,8 @@ paths:
         content:
           multipart/form-data:
             encoding:
+              DiscardData:
+                style: form
               ErrorType:
                 style: form
               File:
@@ -431,6 +517,8 @@ paths:
                 style: form
             schema:
               properties:
+                DiscardData:
+                  type: boolean
                 ErrorType:
                   enum:
                     - MeanAbsolutePercentageError
@@ -521,25 +609,31 @@ paths:
           name: Token
           schema:
             type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FullDetailsForecastResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/FullDetailsForecastResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/FullDetailsForecastResponse"
           description: Success
       summary: Full forecast result details, including error, trend seasonality and outlier
-      tags:
-        - Insight-Driven Planning (Forecast & Optimization)
-  /forecast/full-detail-async:
-    post:
-      description: Asynchronous response provides full forecast result details, including error, trend seasonality and outlier. Great for advanced analysis.
-      parameters:
-        - description: User Authentication Token
-          in: header
-          name: Token
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Success
-      summary: Full forecast results details, including error, trend seasonality and outlier async
       tags:
         - Insight-Driven Planning (Forecast & Optimization)
   /forecast/history-and-forecast:
@@ -1384,9 +1478,37 @@ components:
         - planningLevelId
         - startDate
       type: object
+    Entity:
+      additionalProperties: false
+      properties:
+        address:
+          nullable: true
+          type: string
+        dbConnection:
+          nullable: true
+          type: string
+        email:
+          nullable: true
+          type: string
+        id:
+          format: int32
+          type: integer
+        isActive:
+          type: boolean
+        name:
+          nullable: true
+          type: string
+        token:
+          format: uuid
+          type: string
+      type: object
     ForecastHyperparameterResponse:
       additionalProperties: false
       properties:
+        discardData:
+          example: false
+          nullable: true
+          type: boolean
         errorType:
           enum:
             - MeanAbsolutePercentageError
@@ -1508,6 +1630,17 @@ components:
           nullable: true
           type: array
       type: object
+    FullDetailsForecastResponse:
+      additionalProperties: false
+      properties:
+        hyperparameters:
+          $ref: "#/components/schemas/ForecastHyperparameterResponse"
+        timeSeries:
+          items:
+            $ref: "#/components/schemas/TimeSeriesFullDetailsResponse"
+          nullable: true
+          type: array
+      type: object
     HistoryAndForecastResponse:
       additionalProperties: false
       properties:
@@ -1537,6 +1670,10 @@ components:
           format: double
           nullable: true
           type: number
+        discardData:
+          example: false
+          nullable: true
+          type: boolean
         errorType:
           enum:
             - MeanAbsolutePercentageError
@@ -1693,13 +1830,12 @@ components:
           format: double
           type: number
       type: object
-    PlanningLevelHyperparameterModel:
+    PlanningLevelHyperparameterResponse:
       additionalProperties: false
       properties:
-        errorMeasureId:
-          format: int32
+        discardData:
           nullable: true
-          type: integer
+          type: boolean
         errorType:
           enum:
             - MeanAbsolutePercentageError
@@ -1724,6 +1860,10 @@ components:
     PlanningLevelInfoRequest:
       additionalProperties: false
       properties:
+        discardData:
+          example: false
+          nullable: true
+          type: boolean
         errorType:
           enum:
             - MeanAbsolutePercentageError
@@ -1766,10 +1906,13 @@ components:
           nullable: true
           type: string
         hyperparameters:
-          $ref: "#/components/schemas/PlanningLevelHyperparameterModel"
+          $ref: "#/components/schemas/PlanningLevelHyperparameterResponse"
         id:
           format: int32
           type: integer
+        method:
+          nullable: true
+          type: string
         noTimeseries:
           format: int32
           nullable: true
@@ -1845,6 +1988,9 @@ components:
             - iCUEbeta
           example: iCUE1
           type: string
+        override:
+          example: false
+          type: boolean
         params:
           $ref: "#/components/schemas/PlanningLevelInfoRequest"
         planningLevelId:
@@ -1999,6 +2145,10 @@ components:
           format: double
           nullable: true
           type: number
+        discardData:
+          example: false
+          nullable: true
+          type: boolean
         errorType:
           enum:
             - MeanAbsolutePercentageError
@@ -2086,6 +2236,37 @@ components:
           nullable: true
           type: string
       type: object
+    TimeSeriesFullDetailsResponse:
+      additionalProperties: false
+      properties:
+        error:
+          format: double
+          nullable: true
+          type: number
+        forecastData:
+          items:
+            $ref: "#/components/schemas/PlanningLevelForecastResultData"
+          nullable: true
+          type: array
+        historyData:
+          items:
+            $ref: "#/components/schemas/PlanningLevelForecastResultData"
+          nullable: true
+          type: array
+        method:
+          nullable: true
+          type: string
+        optimalParameters:
+          $ref: "#/components/schemas/ForecastOptimalParametersResponse"
+        outliers:
+          items:
+            $ref: "#/components/schemas/OutlierResponse"
+          nullable: true
+          type: array
+        timeSeriesId:
+          nullable: true
+          type: string
+      type: object
     TimeSeriesHistoryAndForecastResponse:
       additionalProperties: false
       properties:
@@ -2133,4 +2314,25 @@ components:
         timeSeriesId:
           nullable: true
           type: string
+      type: object
+    ToggleRequest:
+      additionalProperties: false
+      properties:
+        id:
+          format: int32
+          type: integer
+        isActive:
+          type: boolean
+      type: object
+    ToggleUserRequest:
+      additionalProperties: false
+      properties:
+        entityId:
+          format: int32
+          type: integer
+        id:
+          format: int32
+          type: integer
+        isActive:
+          type: boolean
       type: object

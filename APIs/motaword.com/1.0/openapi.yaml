@@ -284,6 +284,39 @@ paths:
       x-cli-aliases:
         - get
       x-cli-cmd-group: continuous-projects
+    post:
+      description: Update continuous project
+      operationId: updateContinuousProject
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: id
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContinuousProjectUpdateContent"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContinuousProject"
+          description: Update continuous project operation status
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound
+      summary: Update continuous project
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
   "/continuous_projects/{id}/analytics-token":
     get:
       description: Get JWT token to be used in analytics dashboards
@@ -387,6 +420,219 @@ paths:
                 type: object
           description: Instant translation result. It may return a list of translated strings, or a list of translated files.
       summary: Instantly translate your content with your existing TM and MT resources.
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+  "/continuous_projects/{projectId}/widgets":
+    get:
+      description: Get widgets for this Active project
+      operationId: getActiveWidgets
+      parameters:
+        - description: Continuous Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActiveWidgetList"
+          description: List of widgets
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound
+      summary: Get widgets for this Active project
+      tags:
+        - ContinuousProject
+      x-cli-aliases:
+        - widgets
+      x-cli-cmd-group: continuous-projects
+    post:
+      description: Create a new Active widget. This does not create a new Active project, just a separate widget.
+      operationId: createActiveWidget
+      parameters:
+        - description: Continuous project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActiveWidget"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActiveWidget"
+          description: Updated widget details
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound | ActiveWidgetNotFound | UnauthorizedUser
+      summary: Create a new Active widget. This does not create a new Active project, just a separate widget.
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+  "/continuous_projects/{projectId}/widgets/{widgetId}":
+    delete:
+      description: Delete a single widget for this Active project
+      operationId: deleteActiveWidget
+      parameters:
+        - description: Continuous Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: Active widget ID belonging to this Continuous Project
+          in: path
+          name: widgetId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationStatus"
+          description: Delete operation result
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound | ActiveWidgetNotFound | UnauthorizedUser
+      summary: Delete a single widget for this Active project
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+    get:
+      description: Get a single widget for this Active project
+      operationId: getActiveWidget
+      parameters:
+        - description: Continuous Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: Active widget ID belonging to this Continuous Project
+          in: path
+          name: widgetId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActiveWidget"
+          description: Active widget details
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound | ActiveWidgetNotFound
+      summary: Get a single widget for this Active project
+      tags:
+        - ContinuousProject
+      x-cli-aliases:
+        - widget
+      x-cli-cmd-group: continuous-projects
+    post:
+      description: Update Active widget settings.
+      operationId: updateActiveWidget
+      parameters:
+        - description: Continuous Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: Active widget ID belonging to this Continuous Project
+          in: path
+          name: widgetId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActiveWidget"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActiveWidget"
+          description: Updated widget details
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound | ActiveWidgetNotFound | UnauthorizedUser
+      summary: Update Active widget settings.
+      tags:
+        - ContinuousProject
+      x-cli-cmd-group: continuous-projects
+  "/continuous_projects/{projectId}/widgets/{widgetId}/reset-token":
+    post:
+      description: Resets the access token of the Active widget.
+      operationId: resetActiveWidgetToken
+      parameters:
+        - description: Continuous Project ID
+          in: path
+          name: projectId
+          required: true
+          schema:
+            format: int64
+            type: integer
+        - description: Active widget ID belonging to this Continuous Project
+          in: path
+          name: widgetId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActiveWidget"
+          description: Updated widget details
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: ProjectNotFound | ActiveWidgetNotFound | UnauthorizedUser
+      summary: Resets the access token of the Active widget.
       tags:
         - ContinuousProject
       x-cli-cmd-group: continuous-projects
@@ -5823,6 +6069,57 @@ paths:
     x-internal: true
 components:
   schemas:
+    ActiveWidget:
+      properties:
+        created_at:
+          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
+          format: date-time
+          type: string
+        follow_user:
+          description: Specify whether we should follow the user around in your website and automatically translate pages.
+          type: boolean
+        force_cache_refresh_interval:
+          description: Determines whether to force-refresh local browser cache of your translations in certain period of times, no matter if there is a new activity in the project.
+          type: boolean
+        id:
+          format: int64
+          type: integer
+        modify_links:
+          description: We can automatically localize the same-domain URLs in your page. The way we localize the URL depends on urlMode configuration. We can either add/update the locale query parameter, or add/update the path of the URL.
+          type: boolean
+        name:
+          type: string
+        position:
+          description: Options are "bottom-left", "bottom-right", "in-place"
+          type: string
+        theme:
+          description: \"light\", \"dark\" OR custom JSON.
+          type: string
+        token:
+          description: Token that you should use when you are using this widget on your website.
+          type: string
+        url_change_mode:
+          description: When a user changes locale (or when we automatically detect and change it for them), we will change the URL of the page they are in. We can do this by actually redirecting the user to the new page, or by simply changing the URL in the address bar via browser's History API. When NULL, we won't apply any URL changes.
+          type: string
+        url_mode:
+          description: When a user changes locale (or when we automatically detect and change it for them), we will change the URL of the page they are in. We can either change the path of the URL to prefix it with the locale code, or we can add a query parameter to the URL. We also use this mode to detect the locale for the current page when a user directly loads a page. When NULL, locale detection from URL will be disabled (even then, if the user has selected a locale manually, and followUser is enabled, we will still automatically translate the page in user's locale.
+          type: string
+        use_cache:
+          description: Should we make use of local browser cache for your visitors? We will refresh the cache when Active JS detects new activity in your project.
+          type: boolean
+        use_dummy_translations:
+          description: When enabled, we will translate your website with dummy content, rather than actually using MT/TM.
+          type: boolean
+      type: object
+    ActiveWidgetList:
+      properties:
+        meta:
+          $ref: "#/components/schemas/PagingMeta"
+        widgets:
+          items:
+            $ref: "#/components/schemas/ActiveWidget"
+          type: array
+      type: object
     Activity:
       properties:
         activity_at:
@@ -6314,6 +6611,8 @@ components:
         id:
           format: int64
           type: integer
+        is_enabled:
+          type: boolean
         mt_enabled:
           description: Immediately apply MT on translation requests if they are missing from TM.
           type: boolean
@@ -6331,6 +6630,32 @@ components:
         type:
           description: Continuous project type. We currently have only 2 types, NULL and "active".
           type: string
+      type: object
+    ContinuousProjectLanguage:
+      properties:
+        code:
+          type: string
+        is_enabled:
+          type: boolean
+      type: object
+    ContinuousProjectUpdateContent:
+      properties:
+        analytics_enabled:
+          type: boolean
+        auto_start_postedit:
+          type: boolean
+        is_enabled:
+          type: boolean
+        languages:
+          items:
+            $ref: "#/components/schemas/ContinuousProjectLanguage"
+          type: array
+        mt_enabled:
+          type: boolean
+        name:
+          type: string
+        postedit_enabled:
+          type: boolean
       type: object
     ContinuousProjectsList:
       properties:
@@ -7015,6 +7340,8 @@ components:
           format: int64
           type: integer
         is_api_project:
+          type: boolean
+        is_certified:
           type: boolean
         is_manual:
           type: boolean

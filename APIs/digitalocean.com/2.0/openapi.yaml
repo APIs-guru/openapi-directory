@@ -8528,6 +8528,11 @@ paths:
                         description: Array of volumes.
                         items:
                           properties:
+                            ip_address:
+                              description: This optional attribute may contain an IP address. When provided, an A record will be automatically created pointing to the apex domain.
+                              example: 192.0.2.1
+                              type: string
+                              writeOnly: true
                             name:
                               description: The name of the domain itself. This should follow the standard domain format of domain.TLD. For instance, `example.com` is a valid domain name.
                               example: example.com
@@ -8639,20 +8644,8 @@ paths:
       requestBody:
         content:
           application/json:
-            examples:
-              All Domain Records:
-                value:
-                  domain_record:
-                    data: 162.10.66.0
-                    flags: null
-                    id: 28448433
-                    name: www
-                    port: null
-                    priority: null
-                    tag: null
-                    ttl: 1800
-                    type: A
-                    weight: null
+            example:
+              name: example.com
             schema:
               $ref: "#/paths/~1v2~1domains/get/responses/200/content/application~1json/schema/allOf/0/properties/domains/items"
       responses:

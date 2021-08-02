@@ -303,7 +303,7 @@ paths:
                 required:
                   - errors
                 type: object
-          description: Forbidden
+          description: Unprocessable Entity
         "429":
           content:
             application/json:
@@ -433,7 +433,7 @@ paths:
                 required:
                   - errors
                 type: object
-          description: Forbidden
+          description: Unprocessable Entity
         "429":
           content:
             application/json:
@@ -611,7 +611,7 @@ paths:
                 required:
                   - errors
                 type: object
-          description: Forbidden
+          description: Unprocessable Entity
         "429":
           content:
             application/json:
@@ -945,7 +945,7 @@ components:
       properties:
         businessLine:
           description: |
-            Optional parameter (can be missing or empty).  The values are:<br><br>
+            Optional parameter (can be missing or empty). The values are:<br><br>
             CMP - Compensation requests such as those related to disability, unemployment, and pandemic claims<br><br>
             PMC - Pension requests including survivor’s pension<br><br>
             INS - Insurance such as life insurance, disability insurance, and other health insurance<br><br>

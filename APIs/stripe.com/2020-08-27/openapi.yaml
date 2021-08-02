@@ -259,6 +259,14 @@ paths:
                         account_number:
                           maxLength: 5000
                           type: string
+                        account_type:
+                          enum:
+                            - checking
+                            - futsu
+                            - savings
+                            - toza
+                          maxLength: 5000
+                          type: string
                         country:
                           maxLength: 5000
                           type: string
@@ -1051,6 +1059,14 @@ paths:
                         account_number:
                           maxLength: 5000
                           type: string
+                        account_type:
+                          enum:
+                            - checking
+                            - futsu
+                            - savings
+                            - toza
+                          maxLength: 5000
+                          type: string
                         country:
                           maxLength: 5000
                           type: string
@@ -1218,6 +1234,15 @@ paths:
                     - ""
                     - company
                     - individual
+                  maxLength: 5000
+                  type: string
+                account_type:
+                  description: The bank account type. This can only be `checking` or `savings` in most countries. In Japan, this can only be `futsu` or `toza`.
+                  enum:
+                    - checking
+                    - futsu
+                    - savings
+                    - toza
                   maxLength: 5000
                   type: string
                 address_city:
@@ -1564,6 +1589,14 @@ paths:
                         account_number:
                           maxLength: 5000
                           type: string
+                        account_type:
+                          enum:
+                            - checking
+                            - futsu
+                            - savings
+                            - toza
+                          maxLength: 5000
+                          type: string
                         country:
                           maxLength: 5000
                           type: string
@@ -1731,6 +1764,15 @@ paths:
                     - ""
                     - company
                     - individual
+                  maxLength: 5000
+                  type: string
+                account_type:
+                  description: The bank account type. This can only be `checking` or `savings` in most countries. In Japan, this can only be `futsu` or `toza`.
+                  enum:
+                    - checking
+                    - futsu
+                    - savings
+                    - toza
                   maxLength: 5000
                   type: string
                 address_city:
@@ -3650,6 +3692,14 @@ paths:
                         account_number:
                           maxLength: 5000
                           type: string
+                        account_type:
+                          enum:
+                            - checking
+                            - futsu
+                            - savings
+                            - toza
+                          maxLength: 5000
+                          type: string
                         country:
                           maxLength: 5000
                           type: string
@@ -4571,6 +4621,14 @@ paths:
                         account_number:
                           maxLength: 5000
                           type: string
+                        account_type:
+                          enum:
+                            - checking
+                            - futsu
+                            - savings
+                            - toza
+                          maxLength: 5000
+                          type: string
                         country:
                           maxLength: 5000
                           type: string
@@ -5371,6 +5429,14 @@ paths:
                         account_number:
                           maxLength: 5000
                           type: string
+                        account_type:
+                          enum:
+                            - checking
+                            - futsu
+                            - savings
+                            - toza
+                          maxLength: 5000
+                          type: string
                         country:
                           maxLength: 5000
                           type: string
@@ -5559,6 +5625,15 @@ paths:
                     - ""
                     - company
                     - individual
+                  maxLength: 5000
+                  type: string
+                account_type:
+                  description: The bank account type. This can only be `checking` or `savings` in most countries. In Japan, this can only be `futsu` or `toza`.
+                  enum:
+                    - checking
+                    - futsu
+                    - savings
+                    - toza
                   maxLength: 5000
                   type: string
                 address_city:
@@ -5941,6 +6016,14 @@ paths:
                         account_number:
                           maxLength: 5000
                           type: string
+                        account_type:
+                          enum:
+                            - checking
+                            - futsu
+                            - savings
+                            - toza
+                          maxLength: 5000
+                          type: string
                         country:
                           maxLength: 5000
                           type: string
@@ -6129,6 +6212,15 @@ paths:
                     - ""
                     - company
                     - individual
+                  maxLength: 5000
+                  type: string
+                account_type:
+                  description: The bank account type. This can only be `checking` or `savings` in most countries. In Japan, this can only be `futsu` or `toza`.
+                  enum:
+                    - checking
+                    - futsu
+                    - savings
+                    - toza
                   maxLength: 5000
                   type: string
                 address_city:
@@ -10301,9 +10393,7 @@ paths:
                         state:
                           maxLength: 5000
                           type: string
-                      required:
-                        - line1
-                      title: address
+                      title: optional_fields_address
                       type: object
                     carrier:
                       maxLength: 5000
@@ -10320,7 +10410,7 @@ paths:
                   required:
                     - address
                     - name
-                  title: shipping
+                  title: optional_fields_shipping
                   type: object
                 source:
                   description: A payment source to be charged. This can be the ID of a [card](https://stripe.com/docs/api#cards) (i.e., credit or debit card), a [bank account](https://stripe.com/docs/api#bank_accounts), a [source](https://stripe.com/docs/api#sources), a [token](https://stripe.com/docs/api#tokens), or a [connected account](https://stripe.com/docs/connect/account-debits#charging-a-connected-account). For certain sources---namely, [cards](https://stripe.com/docs/api#cards), [bank accounts](https://stripe.com/docs/api#bank_accounts), and attached [sources](https://stripe.com/docs/api#sources)---you must also pass the ID of the associated customer.
@@ -10504,9 +10594,7 @@ paths:
                         state:
                           maxLength: 5000
                           type: string
-                      required:
-                        - line1
-                      title: address
+                      title: optional_fields_address
                       type: object
                     carrier:
                       maxLength: 5000
@@ -10523,7 +10611,7 @@ paths:
                   required:
                     - address
                     - name
-                  title: shipping
+                  title: optional_fields_shipping
                   type: object
                 transfer_group:
                   description: A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-options) for details.
@@ -11358,6 +11446,7 @@ paths:
                   description: Enables user redeemable promotion codes.
                   type: boolean
                 automatic_tax:
+                  description: Settings for automatic tax lookup for this session and resulting payments, invoices, and subscriptions.
                   properties:
                     enabled:
                       type: boolean
@@ -13900,9 +13989,7 @@ paths:
                             state:
                               maxLength: 5000
                               type: string
-                          required:
-                            - line1
-                          title: address
+                          title: optional_fields_address
                           type: object
                         name:
                           maxLength: 5000
@@ -14387,9 +14474,7 @@ paths:
                             state:
                               maxLength: 5000
                               type: string
-                          required:
-                            - line1
-                          title: address
+                          title: optional_fields_address
                           type: object
                         name:
                           maxLength: 5000
@@ -20803,7 +20888,7 @@ paths:
             maxLength: 5000
             type: string
           style: form
-        - description: Details about the customer you want to invoice
+        - description: Details about the customer you want to invoice or overrides for an existing customer.
           explode: true
           in: query
           name: customer_details
@@ -20859,9 +20944,7 @@ paths:
                           state:
                             maxLength: 5000
                             type: string
-                        required:
-                          - line1
-                        title: address
+                        title: optional_fields_address
                         type: object
                       name:
                         maxLength: 5000
@@ -21362,7 +21445,7 @@ paths:
             maxLength: 5000
             type: string
           style: form
-        - description: Details about the customer you want to invoice
+        - description: Details about the customer you want to invoice or overrides for an existing customer.
           explode: true
           in: query
           name: customer_details
@@ -21418,9 +21501,7 @@ paths:
                           state:
                             maxLength: 5000
                             type: string
-                        required:
-                          - line1
-                        title: address
+                        title: optional_fields_address
                         type: object
                       name:
                         maxLength: 5000
@@ -29478,9 +29559,7 @@ paths:
                         state:
                           maxLength: 5000
                           type: string
-                      required:
-                        - line1
-                      title: address
+                      title: optional_fields_address
                       type: object
                     name:
                       maxLength: 5000
@@ -30639,9 +30718,7 @@ paths:
                         state:
                           maxLength: 5000
                           type: string
-                      required:
-                        - line1
-                      title: address
+                      title: optional_fields_address
                       type: object
                     carrier:
                       maxLength: 5000
@@ -30658,7 +30735,7 @@ paths:
                   required:
                     - address
                     - name
-                  title: shipping
+                  title: optional_fields_shipping
                   type: object
                 statement_descriptor:
                   description: For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
@@ -31443,9 +31520,7 @@ paths:
                             state:
                               maxLength: 5000
                               type: string
-                          required:
-                            - line1
-                          title: address
+                          title: optional_fields_address
                           type: object
                         carrier:
                           maxLength: 5000
@@ -31462,7 +31537,7 @@ paths:
                       required:
                         - address
                         - name
-                      title: shipping
+                      title: optional_fields_shipping
                       type: object
                     - enum:
                         - ""
@@ -32383,9 +32458,7 @@ paths:
                             state:
                               maxLength: 5000
                               type: string
-                          required:
-                            - line1
-                          title: address
+                          title: optional_fields_address
                           type: object
                         carrier:
                           maxLength: 5000
@@ -32402,7 +32475,7 @@ paths:
                       required:
                         - address
                         - name
-                      title: shipping
+                      title: optional_fields_shipping
                       type: object
                     - enum:
                         - ""
@@ -41807,7 +41880,7 @@ paths:
                     - pending_if_incomplete
                   type: string
                 price:
-                  description: The ID of the price object.
+                  description: The ID of the price object. When changing a subscription item's price, `quantity` is set to 1 unless a `quantity` parameter is provided.
                   maxLength: 5000
                   type: string
                 price_data:
@@ -45778,6 +45851,14 @@ paths:
                     account_number:
                       maxLength: 5000
                       type: string
+                    account_type:
+                      enum:
+                        - checking
+                        - futsu
+                        - savings
+                        - toza
+                      maxLength: 5000
+                      type: string
                     country:
                       maxLength: 5000
                       type: string
@@ -49302,6 +49383,11 @@ components:
           maxLength: 5000
           nullable: true
           type: string
+        account_type:
+          description: The bank account type. This can only be `checking` or `savings` in most countries. In Japan, this can only be `futsu` or `toza`.
+          maxLength: 5000
+          nullable: true
+          type: string
         available_payout_methods:
           description: A set of available payout methods for this bank account. Only values from this set should be passed as the `method` when creating a payout.
           items:
@@ -50718,7 +50804,7 @@ components:
           maxLength: 5000
           type: string
         interval_description:
-          description: Description of the interval. Only required if 'payment_schedule' parmeter is 'interval' or 'combined'.
+          description: Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.
           maxLength: 5000
           nullable: true
           type: string
@@ -55712,6 +55798,10 @@ components:
           description: A categorization of the seller's type of business. See our [merchant categories guide](https://stripe.com/docs/issuing/merchant-categories) for a list of possible values.
           maxLength: 5000
           type: string
+        category_code:
+          description: The merchant category code for the seller’s business
+          maxLength: 5000
+          type: string
         city:
           description: City where the seller is located
           maxLength: 5000
@@ -55743,6 +55833,7 @@ components:
           type: string
       required:
         - category
+        - category_code
         - network_id
       title: IssuingAuthorizationMerchantData
       type: object
@@ -59013,7 +59104,7 @@ components:
       description: ""
       properties:
         interval_description:
-          description: Description of the interval. Only required if 'payment_schedule' parmeter is 'interval' or 'combined'.
+          description: Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.
           maxLength: 5000
           nullable: true
           type: string
@@ -60160,7 +60251,7 @@ components:
           maxLength: 5000
           type: string
         interval_description:
-          description: Description of the interval. Only required if 'payment_schedule' parmeter is 'interval' or 'combined'.
+          description: Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.
           maxLength: 5000
           nullable: true
           type: string
@@ -64093,6 +64184,7 @@ components:
       required:
         - amount_subtotal
         - amount_total
+        - automatic_tax
         - collection_method
         - computed
         - created
@@ -65114,10 +65206,11 @@ components:
             oneOf:
               - $ref: "#/components/schemas/charge"
         closed_reason:
-          description: The reason the review was closed, or null if it has not yet been closed. One of `approved`, `refunded`, `refunded_as_fraud`, or `disputed`.
+          description: The reason the review was closed, or null if it has not yet been closed. One of `approved`, `refunded`, `refunded_as_fraud`, `disputed`, or `redacted`.
           enum:
             - approved
             - disputed
+            - redacted
             - refunded
             - refunded_as_fraud
           nullable: true
@@ -65167,7 +65260,7 @@ components:
             oneOf:
               - $ref: "#/components/schemas/payment_intent"
         reason:
-          description: The reason the review is currently open or closed. One of `rule`, `manual`, `approved`, `refunded`, `refunded_as_fraud`, or `disputed`.
+          description: The reason the review is currently open or closed. One of `rule`, `manual`, `approved`, `refunded`, `refunded_as_fraud`, `disputed`, or `redacted`.
           maxLength: 5000
           type: string
         session:
@@ -66046,7 +66139,7 @@ components:
           maxLength: 5000
           type: string
         interval_description:
-          description: Description of the interval. Only required if 'payment_schedule' parmeter is 'interval' or 'combined'.
+          description: Description of the interval. Only required if the 'payment_schedule' parameter is 'interval' or 'combined'.
           maxLength: 5000
           nullable: true
           type: string

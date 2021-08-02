@@ -434,7 +434,7 @@ paths:
   /api_key:
     delete:
       description: Delete current API key.  (Requires current API connection to be using an API key.)
-      operationId: DeleteCurrent
+      operationId: ApiKeyDeleteCurrent
       responses:
         "204":
           description: No body.
@@ -477,7 +477,7 @@ paths:
         - office_integration
     get:
       description: Show information about current API key.  (Requires current API connection to be using an API key.)
-      operationId: FindCurrent
+      operationId: ApiKeyFindCurrent
       responses:
         "200":
           content:
@@ -524,7 +524,7 @@ paths:
         - office_integration
     patch:
       description: Update current API key.  (Requires current API connection to be using an API key.)
-      operationId: UpdateCurrent
+      operationId: ApiKeyUpdateCurrent
       requestBody:
         content:
           multipart/form-data:
@@ -2025,7 +2025,7 @@ paths:
   "/behaviors/folders/{path}":
     get:
       description: List Behaviors by path
-      operationId: ListForPath
+      operationId: BehaviorListForPath
       parameters:
         - description: Used for pagination.  Send a cursor value to resume an existing list from the point at which you left off.  Get a cursor from an existing list via the X-Files-Cursor-Next header.
           in: query
@@ -2778,7 +2778,7 @@ paths:
         - description: ID of the associated Bundle
           in: query
           name: bundle_id
-          required: true
+          required: false
           schema:
             format: int32
             type: integer
@@ -3974,7 +3974,7 @@ paths:
   "/file_actions/begin_upload/{path}":
     post:
       description: Begin file upload
-      operationId: BeginUpload
+      operationId: FileActionBeginUpload
       parameters:
         - description: Path to operate on.
           in: path
@@ -4065,7 +4065,7 @@ paths:
   "/file_actions/copy/{path}":
     post:
       description: Copy file/folder
-      operationId: Copy
+      operationId: FileActionCopy
       parameters:
         - description: Path to operate on.
           in: path
@@ -4138,7 +4138,7 @@ paths:
   "/file_actions/move/{path}":
     post:
       description: Move file/folder
-      operationId: Move
+      operationId: FileActionMove
       parameters:
         - description: Path to operate on.
           in: path
@@ -4391,6 +4391,7 @@ paths:
   "/file_comments/files/{path}":
     get:
       description: List File Comments by path
+      operationId: FileCommentListForPath
       parameters:
         - description: Used for pagination.  Send a cursor value to resume an existing list from the point at which you left off.  Get a cursor from an existing list via the X-Files-Cursor-Next header.
           in: query
@@ -4683,7 +4684,7 @@ paths:
         - no_readonly
     get:
       description: Download file
-      operationId: Download
+      operationId: FileDownload
       parameters:
         - description: Path to operate on.
           in: path
@@ -4967,6 +4968,7 @@ paths:
   "/folders/{path}":
     get:
       description: List Folders by path
+      operationId: FolderListForPath
       parameters:
         - description: Send cursor to resume an existing list from the point at which you left off.  Get a cursor from an existing list via the X-Files-Cursor header.
           in: query
@@ -6670,7 +6672,7 @@ paths:
   /history:
     get:
       description: List site full action history.
-      operationId: List
+      operationId: HistoryList
       parameters:
         - description: Leave blank or set to a date/time to filter earlier entries.
           in: query
@@ -6807,7 +6809,7 @@ paths:
   "/history/files/{path}":
     get:
       description: List history for specific file.
-      operationId: ListForFile
+      operationId: HistoryListForFile
       parameters:
         - description: Leave blank or set to a date/time to filter earlier entries.
           in: query
@@ -6908,7 +6910,7 @@ paths:
   "/history/folders/{path}":
     get:
       description: List history for specific folder.
-      operationId: ListForFolder
+      operationId: HistoryListForFolder
       parameters:
         - description: Leave blank or set to a date/time to filter earlier entries.
           in: query
@@ -7009,7 +7011,7 @@ paths:
   /history/login:
     get:
       description: List site login history.
-      operationId: ListLogins
+      operationId: HistoryListLogins
       parameters:
         - description: Leave blank or set to a date/time to filter earlier entries.
           in: query
@@ -7104,7 +7106,7 @@ paths:
   "/history/users/{user_id}":
     get:
       description: List history for specific user.
-      operationId: ListForUser
+      operationId: HistoryListForUser
       parameters:
         - description: Leave blank or set to a date/time to filter earlier entries.
           in: query
@@ -8239,6 +8241,7 @@ paths:
         - office_integration
     get:
       description: List Locks by path
+      operationId: LockListForPath
       parameters:
         - description: Used for pagination.  Send a cursor value to resume an existing list from the point at which you left off.  Get a cursor from an existing list via the X-Files-Cursor-Next header.
           in: query
@@ -16051,6 +16054,11 @@ components:
                 example: s3.us-west-001.backblazeb2.com
                 type: string
                 x-ms-summary: Backblaze B2 Cloud Storage S3 Endpoint
+              enable_dedicated_ips:
+                description: "`true` if remote server only accepts connections from dedicated IPs"
+                example: true
+                type: boolean
+                x-ms-summary: "`true` if remote server only accepts connections from dedicated IPs"
               google_cloud_storage_bucket:
                 description: Google Cloud Storage bucket name
                 example: my-bucket
@@ -18799,6 +18807,10 @@ components:
           description: Backblaze B2 Cloud Storage S3 Endpoint
           example: s3.us-west-001.backblazeb2.com
           type: string
+        enable_dedicated_ips:
+          description: "`true` if remote server only accepts connections from dedicated IPs"
+          example: true
+          type: boolean
         google_cloud_storage_bucket:
           description: Google Cloud Storage bucket name
           example: my-bucket
@@ -20415,6 +20427,8 @@ x-behaviors:
       `method` | Default: `GET`.  May also be set to `POST`.
       `triggers` | Leave blank to send webhooks on any action on this folder.  Or, for specific actions, you may specify an array of action types.  Valid values are: `create`, `read`, `update`, `destroy`, `move`, `copy`.
       `encoding` | May be `JSON`, `XML`, or `RAW`.  If set to `RAW` or left blank, we will deliver the webhook using the HTTP GET params or POST body.  If JSON or XML, we will encode the payload accordingly and send a matching `Content-Type` header.
+      `file_form_field` | A string specifying the name of a form field containing the contents of the file that triggered this webhook send. If this value is present, the webhook will submit a `multipart/form-data` POST with no request body encoding.
+      `file_as_body` | When sending webhook requests, submit the contents of the file that triggered this webhook send as the request body.
     requires_attachment: false
     supports_mounted_folders: true
     unique_per_folder: false

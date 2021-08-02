@@ -632,6 +632,27 @@ paths:
           name: canonical
           schema:
             type: boolean
+        - description: Specifies the description of artifact being added. Description must be ASCII-only string. If this is not provided, the server will extract the description from the artifact content.
+          in: header
+          name: X-Registry-Description
+          required: false
+          schema:
+            $ref: "#/components/schemas/ArtifactDescription"
+        - description: Specifies the description of artifact being added. Value of this must be Base64 encoded string. If this is not provided, the server will extract the description from the artifact content.
+          in: header
+          name: X-Registry-Description-Encoded
+          schema:
+            $ref: "#/components/schemas/EncodedArtifactDescription"
+        - description: Specifies the name of artifact being added. Name must be ASCII-only string. If this is not provided, the server will extract the name from the artifact content.
+          in: header
+          name: X-Registry-Name
+          schema:
+            $ref: "#/components/schemas/ArtifactName"
+        - description: Specifies the name of artifact being added. Value of this must be Base64 encoded string. If this is not provided, the server will extract the name from the artifact content.
+          in: header
+          name: X-Registry-Name-Encoded
+          schema:
+            $ref: "#/components/schemas/EncodedArtifactName"
       requestBody:
         content:
           "*/*":
@@ -782,7 +803,29 @@ paths:
           in: header
           name: X-Registry-Version
           schema:
-            type: string
+            $ref: "#/components/schemas/Version"
+        - description: |-
+            Specifies the artifact name of this new version of the artifact content. Name must be ASCII-only string. If this is not
+            provided, the server will extract the name from the artifact content.
+          in: header
+          name: X-Registry-Name
+          schema:
+            $ref: "#/components/schemas/ArtifactName"
+        - description: Specifies the artifact name of this new version of the artifact content. Value of this must be Base64 encoded string. If this is not provided, the server will extract the name from the artifact content.
+          in: header
+          name: X-Registry-Name-Encoded
+          schema:
+            $ref: "#/components/schemas/EncodedArtifactName"
+        - description: Specifies the artifact description of this new version of the artifact content. Description must be ASCII-only string. If this is not provided, the server will extract the description from the artifact content.
+          in: header
+          name: X-Registry-Description
+          schema:
+            $ref: "#/components/schemas/ArtifactDescription"
+        - description: Specifies the artifact description of this new version of the artifact content. Value of this must be Base64 encoded string. If this is not provided, the server will extract the description from the artifact content.
+          in: header
+          name: X-Registry-Description-Encoded
+          schema:
+            $ref: "#/components/schemas/EncodedArtifactDescription"
       requestBody:
         content:
           "*/*":
@@ -1392,6 +1435,28 @@ paths:
           name: X-Registry-Version
           schema:
             $ref: "#/components/schemas/Version"
+        - description: |-
+            Specifies the artifact name of this new version of the artifact content. Name must be ASCII-only string. If this is not
+            provided, the server will extract the name from the artifact content.
+          in: header
+          name: X-Registry-Name
+          schema:
+            $ref: "#/components/schemas/ArtifactName"
+        - description: Specifies the artifact description of this new version of the artifact content. Description must be ASCII-only string. If this is not provided, the server will extract the description from the artifact content.
+          in: header
+          name: X-Registry-Description
+          schema:
+            $ref: "#/components/schemas/ArtifactDescription"
+        - description: Specifies the artifact description of this new version of the artifact content. Value of this must be Base64 encoded string. If this is not provided, the server will extract the description from the artifact content.
+          in: header
+          name: X-Registry-Description-Encoded
+          schema:
+            $ref: "#/components/schemas/EncodedArtifactDescription"
+        - description: Specifies the artifact name of this new version of the artifact content. Value of this must be Base64 encoded string. If this is not provided, the server will extract the name from the artifact content.
+          in: header
+          name: X-Registry-Name-Encoded
+          schema:
+            $ref: "#/components/schemas/EncodedArtifactName"
       requestBody:
         content:
           "*/*":
@@ -2009,6 +2074,11 @@ components:
             $ref: "#/components/schemas/Error"
       description: Common response for all operations that can fail with an unexpected server error.
   schemas:
+    ArtifactDescription:
+      description: Description of the artifact.
+      example: '"Artifact description"'
+      type: string
+      x-codegen-inline: true
     ArtifactId:
       description: The ID of a single artifact.
       example: '"example-artifact"'
@@ -2094,6 +2164,11 @@ components:
         - contentId
       title: Root Type for ArtifactMetaData
       type: object
+    ArtifactName:
+      description: Name of the artifact.
+      example: '"Artifact name"'
+      type: string
+      x-codegen-inline: true
     ArtifactSearchResults:
       description: Describes the response received when searching for artifacts.
       properties:
@@ -2167,6 +2242,16 @@ components:
           description: ""
       title: Root Type for EditableArtifactMetaData
       type: object
+    EncodedArtifactDescription:
+      description: Base64 encoded description of the artifact.
+      example: '"QXJ0aWZhY3QgZGVzY3JpcHRpb24K"'
+      type: string
+      x-codegen-inline: true
+    EncodedArtifactName:
+      description: Base64 encoded name of the artifact.
+      example: '"QXJ0aWZhY3QgbmFtZQo="'
+      type: string
+      x-codegen-inline: true
     Error:
       description: |-
         All error responses, whether `4xx` or `5xx` will include one of these as the response

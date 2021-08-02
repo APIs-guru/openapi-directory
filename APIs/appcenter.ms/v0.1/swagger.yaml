@@ -22080,6 +22080,9 @@ paths:
               active:
                 description: Is the subscription currently active?
                 type: boolean
+              concurrentDevicesLimit:
+                description: Customer limits on concurrent devices
+                type: integer
               daysLeft:
                 description: The number of days left in the subscription
                 type: number
@@ -22091,6 +22094,9 @@ paths:
                 description: Id of the subscription
                 format: uuid
                 type: string
+              runningDevices:
+                description: Current device concurrency utilization
+                type: integer
               startsAt:
                 description: The date the subscription began
                 format: dateTime
@@ -22133,6 +22139,9 @@ paths:
               active:
                 description: Is the subscription currently active?
                 type: boolean
+              concurrentDevicesLimit:
+                description: Customer limits on concurrent devices
+                type: integer
               daysLeft:
                 description: The number of days left in the subscription
                 type: number
@@ -22144,6 +22153,9 @@ paths:
                 description: Id of the subscription
                 format: uuid
                 type: string
+              runningDevices:
+                description: Current device concurrency utilization
+                type: integer
               startsAt:
                 description: The date the subscription began
                 format: dateTime
@@ -58878,6 +58890,9 @@ definitions:
       active:
         description: Is the subscription currently active?
         type: boolean
+      concurrentDevicesLimit:
+        description: Customer limits on concurrent devices
+        type: integer
       daysLeft:
         description: The number of days left in the subscription
         type: number
@@ -58889,6 +58904,9 @@ definitions:
         description: Id of the subscription
         format: uuid
         type: string
+      runningDevices:
+        description: Current device concurrency utilization
+        type: integer
       startsAt:
         description: The date the subscription began
         format: dateTime

@@ -459,7 +459,7 @@ paths:
         - Courses
   "/courses/{rootContentId}/permissions/{userEmail}":
     post:
-      description: Provide an array of users with access to a specific course.
+      description: Provide a user with access to a specific course by rootContentId.
       parameters:
         - description: The content Id
           in: path
@@ -3465,6 +3465,8 @@ components:
       type: object
     Badge:
       properties:
+        badgeExpiry:
+          $ref: "#/components/schemas/BadgeExpiry"
         badgeUrl:
           type: string
         criterias:
@@ -3472,15 +3474,31 @@ components:
             - $ref: "#/components/schemas/Criteria"
         description:
           type: string
+        openBadge:
+          allOf:
+            - $ref: "#/components/schemas/OpenBadgeClass"
+        title:
+          type: string
+      type: object
+    BadgeExpiry:
+      properties:
         expirationDate:
           format: date-time
           type: string
         expires:
           type: boolean
-        openBadge:
-          allOf:
-            - $ref: "#/components/schemas/OpenBadgeClass"
-        title:
+        expiryType:
+          enum:
+            - date
+            - timeframe
+          type: string
+        timeframeAmount:
+          type: number
+        timeframeUnit:
+          enum:
+            - days
+            - months
+            - years
           type: string
       type: object
     Channel:
@@ -3756,10 +3774,9 @@ components:
         badge:
           additionalProperties: false
           properties:
+            badgeExpiry:
+              $ref: "#/components/schemas/BadgeExpiry"
             description:
-              type: string
-            expirationDate:
-              format: date-time
               type: string
             requiresApproval:
               type: boolean
@@ -3906,10 +3923,9 @@ components:
         badge:
           additionalProperties: false
           properties:
+            badgeExpiry:
+              $ref: "#/components/schemas/BadgeExpiry"
             description:
-              type: string
-            expirationDate:
-              format: date-time
               type: string
             requiresApproval:
               type: boolean
@@ -4423,13 +4439,31 @@ components:
           type: boolean
       type: object
     UserBadge:
-      allOf:
-        - $ref: "#/components/schemas/Badge"
       properties:
         awardedAt:
           format: date-time
           type: string
+        badgeExpiry:
+          properties:
+            expirationDate:
+              format: date-time
+              type: string
+            expires:
+              type: boolean
+          type: object
+        badgeUrl:
+          type: string
+        criterias:
+          allOf:
+            - $ref: "#/components/schemas/Criteria"
+        description:
+          type: string
         offeringId:
+          type: string
+        openBadge:
+          allOf:
+            - $ref: "#/components/schemas/OpenBadgeClass"
+        title:
           type: string
       type: object
     UserMetadata:

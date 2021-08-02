@@ -690,6 +690,19 @@ paths:
                   name:
                     nullable: true
                     type: string
+                  next_penalty:
+                    type: string
+                  penalty_counts:
+                    additionalProperties: false
+                    properties:
+                      silenced:
+                        type: integer
+                      suspended:
+                        type: integer
+                    required:
+                      - silenced
+                      - suspended
+                    type: object
                   post_count:
                     type: integer
                   posts_read_count:
@@ -909,6 +922,33 @@ paths:
       tags:
         - Users
         - Admin
+  "/admin/users/{id}/anonymize.json":
+    put:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  success:
+                    type: string
+                  username:
+                    type: string
+                required:
+                  - success
+                  - username
+          description: response
+      summary: Anonymize a user
+      tags:
+        - Users
+        - Admin
   "/admin/users/{id}/log_out.json":
     post:
       parameters:
@@ -1048,6 +1088,9 @@ paths:
                         type: object
                       default_list_filter:
                         type: string
+                      default_slow_mode_seconds:
+                        nullable: true
+                        type: string
                       default_top_period:
                         type: string
                       default_view:
@@ -1183,6 +1226,7 @@ paths:
                       - auto_close_hours
                       - auto_close_based_on_last_post
                       - allow_unlimited_owner_edits_on_first_post
+                      - default_slow_mode_seconds
                       - group_permissions
                       - email_in
                       - email_in_allow_strangers
@@ -1603,6 +1647,9 @@ paths:
                         type: object
                       default_list_filter:
                         type: string
+                      default_slow_mode_seconds:
+                        nullable: true
+                        type: string
                       default_top_period:
                         type: string
                       default_view:
@@ -1738,6 +1785,7 @@ paths:
                       - auto_close_hours
                       - auto_close_based_on_last_post
                       - allow_unlimited_owner_edits_on_first_post
+                      - default_slow_mode_seconds
                       - group_permissions
                       - email_in
                       - email_in_allow_strangers
@@ -1828,6 +1876,9 @@ paths:
                         type: object
                       default_list_filter:
                         type: string
+                      default_slow_mode_seconds:
+                        nullable: true
+                        type: string
                       default_top_period:
                         type: string
                       default_view:
@@ -1963,6 +2014,7 @@ paths:
                       - auto_close_hours
                       - auto_close_based_on_last_post
                       - allow_unlimited_owner_edits_on_first_post
+                      - default_slow_mode_seconds
                       - group_permissions
                       - email_in
                       - email_in_allow_strangers
@@ -2909,8 +2961,6 @@ paths:
                               type: integer
                             liked:
                               type: boolean
-                            new_posts:
-                              type: integer
                             notification_level:
                               type: integer
                             op_like_count:
@@ -2944,7 +2994,7 @@ paths:
                             unpinned:
                               nullable: true
                               type: string
-                            unread:
+                            unread_posts:
                               type: integer
                             unseen:
                               type: boolean
@@ -3130,6 +3180,18 @@ paths:
                   edit_reason:
                     nullable: true
                     type: string
+                  flair_bg_color:
+                    nullable: true
+                    type: string
+                  flair_color:
+                    nullable: true
+                    type: string
+                  flair_name:
+                    nullable: true
+                    type: string
+                  flair_url:
+                    nullable: true
+                    type: string
                   hidden:
                     type: boolean
                   id:
@@ -3146,15 +3208,6 @@ paths:
                     type: integer
                   post_type:
                     type: integer
-                  primary_group_flair_bg_color:
-                    nullable: true
-                    type: string
-                  primary_group_flair_color:
-                    nullable: true
-                    type: string
-                  primary_group_flair_url:
-                    nullable: true
-                    type: string
                   primary_group_name:
                     nullable: true
                     type: string
@@ -3267,6 +3320,18 @@ paths:
                         edit_reason:
                           nullable: true
                           type: string
+                        flair_bg_color:
+                          nullable: true
+                          type: string
+                        flair_color:
+                          nullable: true
+                          type: string
+                        flair_name:
+                          nullable: true
+                          type: string
+                        flair_url:
+                          nullable: true
+                          type: string
                         hidden:
                           type: boolean
                         id:
@@ -3281,15 +3346,6 @@ paths:
                           type: integer
                         post_type:
                           type: integer
-                        primary_group_flair_bg_color:
-                          nullable: true
-                          type: string
-                        primary_group_flair_color:
-                          nullable: true
-                          type: string
-                        primary_group_flair_url:
-                          nullable: true
-                          type: string
                         primary_group_name:
                           nullable: true
                           type: string
@@ -3439,6 +3495,18 @@ paths:
                   edit_reason:
                     nullable: true
                     type: string
+                  flair_bg_color:
+                    nullable: true
+                    type: string
+                  flair_color:
+                    nullable: true
+                    type: string
+                  flair_name:
+                    nullable: true
+                    type: string
+                  flair_url:
+                    nullable: true
+                    type: string
                   hidden:
                     type: boolean
                   id:
@@ -3454,15 +3522,6 @@ paths:
                     type: integer
                   post_type:
                     type: integer
-                  primary_group_flair_bg_color:
-                    nullable: true
-                    type: string
-                  primary_group_flair_color:
-                    nullable: true
-                    type: string
-                  primary_group_flair_url:
-                    nullable: true
-                    type: string
                   primary_group_name:
                     nullable: true
                     type: string
@@ -3535,9 +3594,10 @@ paths:
                   - topic_slug
                   - display_username
                   - primary_group_name
-                  - primary_group_flair_url
-                  - primary_group_flair_bg_color
-                  - primary_group_flair_color
+                  - flair_name
+                  - flair_url
+                  - flair_bg_color
+                  - flair_color
                   - version
                   - can_edit
                   - can_delete
@@ -3627,6 +3687,18 @@ paths:
                   edit_reason:
                     nullable: true
                     type: string
+                  flair_bg_color:
+                    nullable: true
+                    type: string
+                  flair_color:
+                    nullable: true
+                    type: string
+                  flair_name:
+                    nullable: true
+                    type: string
+                  flair_url:
+                    nullable: true
+                    type: string
                   hidden:
                     type: boolean
                   id:
@@ -3642,15 +3714,6 @@ paths:
                     type: integer
                   post_type:
                     type: integer
-                  primary_group_flair_bg_color:
-                    nullable: true
-                    type: string
-                  primary_group_flair_color:
-                    nullable: true
-                    type: string
-                  primary_group_flair_url:
-                    nullable: true
-                    type: string
                   primary_group_name:
                     nullable: true
                     type: string
@@ -3784,6 +3847,15 @@ paths:
                       edit_reason:
                         nullable: true
                         type: string
+                      flair_bg_color:
+                        nullable: true
+                        type: string
+                      flair_color:
+                        nullable: true
+                        type: string
+                      flair_url:
+                        nullable: true
+                        type: string
                       hidden:
                         type: boolean
                       id:
@@ -3799,15 +3871,6 @@ paths:
                         type: integer
                       post_type:
                         type: integer
-                      primary_group_flair_bg_color:
-                        nullable: true
-                        type: string
-                      primary_group_flair_color:
-                        nullable: true
-                        type: string
-                      primary_group_flair_url:
-                        nullable: true
-                        type: string
                       primary_group_name:
                         nullable: true
                         type: string
@@ -4211,21 +4274,24 @@ paths:
                           properties:
                             avatar_template:
                               type: string
+                            flair_bg_color:
+                              nullable: true
+                              type: string
+                            flair_color:
+                              nullable: true
+                              type: string
+                            flair_name:
+                              nullable: true
+                              type: string
+                            flair_url:
+                              nullable: true
+                              type: string
                             id:
                               type: integer
                             name:
                               type: string
                             post_count:
                               type: integer
-                            primary_group_flair_bg_color:
-                              nullable: true
-                              type: string
-                            primary_group_flair_color:
-                              nullable: true
-                              type: string
-                            primary_group_flair_url:
-                              nullable: true
-                              type: string
                             primary_group_name:
                               nullable: true
                               type: string
@@ -4317,6 +4383,18 @@ paths:
                             edit_reason:
                               nullable: true
                               type: string
+                            flair_bg_color:
+                              nullable: true
+                              type: string
+                            flair_color:
+                              nullable: true
+                              type: string
+                            flair_name:
+                              nullable: true
+                              type: string
+                            flair_url:
+                              nullable: true
+                              type: string
                             hidden:
                               type: boolean
                             id:
@@ -4344,15 +4422,6 @@ paths:
                               type: integer
                             post_type:
                               type: integer
-                            primary_group_flair_bg_color:
-                              nullable: true
-                              type: string
-                            primary_group_flair_color:
-                              nullable: true
-                              type: string
-                            primary_group_flair_url:
-                              nullable: true
-                              type: string
                             primary_group_name:
                               nullable: true
                               type: string
@@ -4456,8 +4525,6 @@ paths:
                           type: integer
                         liked:
                           type: boolean
-                        new_posts:
-                          type: integer
                         notification_level:
                           type: integer
                         pinned:
@@ -4493,7 +4560,7 @@ paths:
                           type: string
                         unpinned:
                           type: boolean
-                        unread:
+                        unread_posts:
                           type: integer
                         unseen:
                           type: boolean
@@ -4773,6 +4840,18 @@ paths:
                             edit_reason:
                               nullable: true
                               type: string
+                            flair_bg_color:
+                              nullable: true
+                              type: string
+                            flair_color:
+                              nullable: true
+                              type: string
+                            flair_name:
+                              nullable: true
+                              type: string
+                            flair_url:
+                              nullable: true
+                              type: string
                             hidden:
                               type: boolean
                             id:
@@ -4788,15 +4867,6 @@ paths:
                               type: integer
                             post_type:
                               type: integer
-                            primary_group_flair_bg_color:
-                              nullable: true
-                              type: string
-                            primary_group_flair_color:
-                              nullable: true
-                              type: string
-                            primary_group_flair_url:
-                              nullable: true
-                              type: string
                             primary_group_name:
                               nullable: true
                               type: string
@@ -5060,8 +5130,6 @@ paths:
                               type: integer
                             liked:
                               type: boolean
-                            new_posts:
-                              type: integer
                             notification_level:
                               type: integer
                             pinned:
@@ -5096,7 +5164,7 @@ paths:
                             unpinned:
                               nullable: true
                               type: string
-                            unread:
+                            unread_posts:
                               type: integer
                             unseen:
                               type: boolean
@@ -5414,8 +5482,6 @@ paths:
                               type: integer
                             liked:
                               type: boolean
-                            new_posts:
-                              type: integer
                             notification_level:
                               type: integer
                             op_like_count:
@@ -5449,7 +5515,7 @@ paths:
                               type: string
                             unpinned:
                               type: boolean
-                            unread:
+                            unread_posts:
                               type: integer
                             unseen:
                               type: boolean
@@ -5478,7 +5544,7 @@ paths:
       summary: Get the top topics
       tags:
         - Topics
-  "/top/{flag}.json":
+  "/top.json?period={flag}":
     get:
       parameters:
         - in: header
@@ -5564,8 +5630,6 @@ paths:
                               type: integer
                             liked:
                               type: boolean
-                            new_posts:
-                              type: integer
                             notification_level:
                               type: integer
                             op_like_count:
@@ -5599,7 +5663,7 @@ paths:
                               type: string
                             unpinned:
                               type: boolean
-                            unread:
+                            unread_posts:
                               type: integer
                             unseen:
                               type: boolean
@@ -5704,8 +5768,6 @@ paths:
                               type: integer
                             liked:
                               type: boolean
-                            new_posts:
-                              type: integer
                             notification_level:
                               type: integer
                             participants:
@@ -5740,7 +5802,7 @@ paths:
                             unpinned:
                               nullable: true
                               type: string
-                            unread:
+                            unread_posts:
                               type: integer
                             unseen:
                               type: boolean
@@ -5846,8 +5908,6 @@ paths:
                               type: integer
                             liked:
                               type: boolean
-                            new_posts:
-                              type: integer
                             notification_level:
                               type: integer
                             participants:
@@ -5894,7 +5954,7 @@ paths:
                             unpinned:
                               nullable: true
                               type: string
-                            unread:
+                            unread_posts:
                               type: integer
                             unseen:
                               type: boolean
@@ -5999,6 +6059,15 @@ paths:
                       featured_user_badge_ids:
                         items: {}
                         type: array
+                      flair_bg_color:
+                        nullable: true
+                        type: string
+                      flair_color:
+                        nullable: true
+                        type: string
+                      flair_url:
+                        nullable: true
+                        type: string
                       group_users:
                         items:
                           properties:
@@ -6126,15 +6195,6 @@ paths:
                         type: integer
                       post_count:
                         type: integer
-                      primary_group_flair_bg_color:
-                        nullable: true
-                        type: string
-                      primary_group_flair_color:
-                        nullable: true
-                        type: string
-                      primary_group_flair_url:
-                        nullable: true
-                        type: string
                       primary_group_id:
                         nullable: true
                         type: string
@@ -6383,6 +6443,15 @@ paths:
                       featured_user_badge_ids:
                         items: {}
                         type: array
+                      flair_bg_color:
+                        nullable: true
+                        type: string
+                      flair_color:
+                        nullable: true
+                        type: string
+                      flair_url:
+                        nullable: true
+                        type: string
                       group_users:
                         items:
                           properties:
@@ -6510,15 +6579,6 @@ paths:
                         type: integer
                       post_count:
                         type: integer
-                      primary_group_flair_bg_color:
-                        nullable: true
-                        type: string
-                      primary_group_flair_color:
-                        nullable: true
-                        type: string
-                      primary_group_flair_url:
-                        nullable: true
-                        type: string
                       primary_group_id:
                         nullable: true
                         type: string
@@ -6759,6 +6819,15 @@ paths:
                       featured_user_badge_ids:
                         items: {}
                         type: array
+                      flair_bg_color:
+                        nullable: true
+                        type: string
+                      flair_color:
+                        nullable: true
+                        type: string
+                      flair_url:
+                        nullable: true
+                        type: string
                       group_users:
                         items:
                           properties:
@@ -6886,15 +6955,6 @@ paths:
                         type: integer
                       post_count:
                         type: integer
-                      primary_group_flair_bg_color:
-                        nullable: true
-                        type: string
-                      primary_group_flair_color:
-                        nullable: true
-                        type: string
-                      primary_group_flair_url:
-                        nullable: true
-                        type: string
                       primary_group_id:
                         nullable: true
                         type: string
@@ -7498,6 +7558,15 @@ components:
             featured_user_badge_ids:
               items: {}
               type: array
+            flair_bg_color:
+              nullable: true
+              type: string
+            flair_color:
+              nullable: true
+              type: string
+            flair_url:
+              nullable: true
+              type: string
             group_users:
               items:
                 properties:
@@ -7625,15 +7694,6 @@ components:
               type: integer
             post_count:
               type: integer
-            primary_group_flair_bg_color:
-              nullable: true
-              type: string
-            primary_group_flair_color:
-              nullable: true
-              type: string
-            primary_group_flair_url:
-              nullable: true
-              type: string
             primary_group_id:
               nullable: true
               type: string
