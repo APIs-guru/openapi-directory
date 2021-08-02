@@ -3497,7 +3497,7 @@ components:
 
             * For `type` **organization**, the values can be **proofOfAddress**, **registrationDocument**, **taxDocument**. 
 
-            * For `type` **individual**, the values can be **driversLicense**, **identityCard**, **nationalIdNumber**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **ssn**.
+            * For `type` **individual**, the values can be **driversLicense**, **identityCard**, **nationalIdNumber**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**
 
             When uploading a document owned by a [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/documents__reqParam_owner), use **bankStatement**.
           enum:
@@ -3510,7 +3510,6 @@ components:
             - proofOfNationalIdNumber
             - proofOfResidency
             - registrationDocument
-            - ssn
             - taxDocument
           type: string
     Entity:
@@ -3578,7 +3577,7 @@ components:
 
             * For `type` **organization**, the values can be **proofOfAddress**, **registrationDocument**, **taxDocument**. 
 
-            * For `type` **individual**, the values can be **driversLicense**, **identityCard**, **nationalIdNumber**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **ssn**.
+            * For `type` **individual**, the values can be **driversLicense**, **identityCard**, **nationalIdNumber**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**.
 
             When uploading a document owned by a [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/documents__reqParam_owner), use **bankStatement**.
           enum:

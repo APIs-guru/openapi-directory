@@ -267,7 +267,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 4.3.3
+  version: 5.0.0
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -2334,12 +2334,18 @@ components:
           items:
             $ref: "#/components/schemas/Address"
           type: array
+        annual_revenue:
+          description: Annual Revenue
+          example: +$35m
+          nullable: true
+          type: string
         bank_accounts:
           items:
             $ref: "#/components/schemas/BankAccount"
           type: array
         created_at:
           example: 2020-09-30T07:43:32.000Z
+          format: date-time
           readOnly: true
           type: string
         created_by:
@@ -2355,8 +2361,12 @@ components:
           items:
             $ref: "#/components/schemas/CustomField"
           type: array
+        deleted:
+          example: false
+          readOnly: true
+          type: boolean
         description:
-          example: A crm that works for you, so you can spend time on relationships instead of data.
+          example: Space Exploration Technologies Corp. is an American aerospace manufacturer, space transportation services and communications company headquartered in Hawthorne, California.
           nullable: true
           type: string
         emails:
@@ -2371,8 +2381,13 @@ components:
           example: "12345"
           readOnly: true
           type: string
-        image_url:
+        image:
           example: https://www.spacex.com/static/images/share.jpg
+          nullable: true
+          type: string
+        industry:
+          description: Industry
+          example: Apparel
           nullable: true
           type: string
         interaction_count:
@@ -2380,12 +2395,33 @@ components:
           nullable: true
           readOnly: true
           type: integer
+        last_activity_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
         name:
-          example: Copper
+          example: SpaceX
           minLength: 1
+          type: string
+        number_of_employees:
+          description: Number of employees
+          example: 500-1000
+          nullable: true
           type: string
         owner_id:
           example: "12345"
+          type: string
+        ownership:
+          description: Ownership
+          example: Public
+          nullable: true
+          type: string
+        parent_id:
+          description: Parent ID
+          example: "22345"
+          readOnly: true
           type: string
         phone_numbers:
           items:
@@ -2404,6 +2440,7 @@ components:
           $ref: "#/components/schemas/Tags"
         updated_at:
           example: 2020-09-30T07:43:32.000Z
+          format: date-time
           readOnly: true
           type: string
         updated_by:
@@ -2444,6 +2481,7 @@ components:
           type: string
         created_at:
           example: 2017-08-12T20:43:21.291Z
+          format: date-time
           readOnly: true
           type: string
         custom_fields:
@@ -2466,6 +2504,18 @@ components:
           example: "+12129876543"
           nullable: true
           type: string
+        first_call_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        first_email_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
         first_name:
           example: Elon
           nullable: true
@@ -2483,13 +2533,19 @@ components:
           readOnly: true
           type: string
         image:
-          example: https://logo.clearbit.com/spacex.com?s=128
+          example: https://unavatar.io/elon-musk
           nullable: true
           type: string
         language:
           description: language code according to ISO 639-1. For the United States - EN
           example: EN
           nullable: true
+          type: string
+        last_activity_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          nullable: true
+          readOnly: true
           type: string
         last_name:
           example: Musk
@@ -2544,6 +2600,7 @@ components:
           type: string
         updated_at:
           example: 2017-08-12T20:43:21.291Z
+          format: date-time
           readOnly: true
           type: string
         websites:
@@ -4143,11 +4200,21 @@ components:
           nullable: true
           readOnly: true
           type: string
+        deleted:
+          example: false
+          readOnly: true
+          type: boolean
         description:
           example: Opportunities are created for People and Companies that are interested in buying your products or services. Create Opportunities for People and Companies to move them through one of your Pipelines.
           minLength: 1
           nullable: true
           type: string
+        expected_revenue:
+          description: Expected Revenue
+          example: 75000
+          nullable: true
+          readOnly: true
+          type: number
         id:
           example: "12345"
           readOnly: true
@@ -4157,8 +4224,18 @@ components:
           nullable: true
           readOnly: true
           type: number
+        last_activity_at:
+          example: 2020-09-30T07:43:32.000Z
+          nullable: true
+          readOnly: true
+          type: string
         lead_id:
           example: "12345"
+          nullable: true
+          type: string
+        lead_source:
+          description: Lead source
+          example: Website
           nullable: true
           type: string
         loss_reason:
@@ -4198,6 +4275,11 @@ components:
           example: "12345"
           nullable: true
           type: string
+        stage_last_changed_at:
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          nullable: true
+          type: string
         status:
           example: Open
           minLength: 1
@@ -4212,6 +4294,11 @@ components:
         title:
           example: New Rocket
           minLength: 1
+          type: string
+        type:
+          example: Existing Customer - Upgrade
+          minLength: 1
+          nullable: true
           type: string
         updated_at:
           example: 2020-09-30T07:43:32.000Z
