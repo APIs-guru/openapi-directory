@@ -3,7 +3,7 @@ info:
   version: '2021-05-03'
   x-release: v4
   title: AWS Systems Manager Incident Manager Contacts
-  description: <p/>
+  description: '<p>AWS Systems Manager Incident Manager is an incident management console designed to help users mitigate and recover from incidents affecting their AWS-hosted applications. An incident is any unplanned interruption or reduction in quality of services. </p> <p>Incident Manager increases incident resolution by notifying responders of impact, highlighting relevant troubleshooting data, and providing collaboration tools to get services back up and running. To achieve the primary goal of reducing the time-to-resolution of critical incidents, Incident Manager automates response plans and enables responder team escalation. </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -2061,6 +2061,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AcceptCode'
             - description: The accept code is a 6-digit code used to acknowledge the page.
+        AcceptCodeValidation:
+          allOf:
+            - $ref: '#/components/schemas/AcceptCodeValidation'
+            - description: '<p>An optional field that Incident Manager uses to <code>ENFORCE</code> <code>AcceptCode</code> validation when acknowledging an page. Acknowledgement can occur by replying to a page, or when entering the AcceptCode in the console. Enforcing AcceptCode validation causes Incident Manager to verify that the code entered by the user matches the code sent by Incident Manager with the page.</p> <p>Incident Manager can also <code>IGNORE</code> <code>AcceptCode</code> validation. Ignoring <code>AcceptCode</code> validation causes Incident Manager to accept any value entered for the <code>AcceptCode</code>.</p>'
     AccessDeniedException: {}
     InternalServerException: {}
     ResourceNotFoundException: {}
@@ -2822,6 +2826,11 @@ components:
       pattern: '^[0-9]*$'
       minLength: 6
       maxLength: 10
+    AcceptCodeValidation:
+      type: string
+      enum:
+        - IGNORE
+        - ENFORCE
     SsmContactsArn:
       type: string
       pattern: 'arn:(aws|aws-cn|aws-us-gov):ssm-contacts:[-\w+=\/,.@]*:[0-9]+:([\w+=\/,.@:-]+)*'
@@ -3204,7 +3213,7 @@ components:
         DurationInMinutes:
           allOf:
             - $ref: '#/components/schemas/StageDurationInMins'
-            - description: The time to wait until beginning the next stage.
+            - description: The time to wait until beginning the next stage. The duration can only be set to 0 if a target is specified.
         Targets:
           allOf:
             - $ref: '#/components/schemas/TargetsList'
@@ -3241,7 +3250,7 @@ components:
       items:
         $ref: '#/components/schemas/TagKey'
       minItems: 0
-      maxItems: 200
+      maxItems: 50
     Target:
       type: object
       properties:
