@@ -1637,6 +1637,14 @@ components:
             $ref: "#/components/schemas/BindingDelta"
           type: array
       type: object
+    PolicyOperationMetadata:
+      description: Metadata for long-running Policy operations.
+      properties:
+        createTime:
+          description: Timestamp when the google.longrunning.Operation was created.
+          format: google-datetime
+          type: string
+      type: object
     QueryAuditableServicesRequest:
       description: A request to get the list of auditable services for a resource.
       properties:
