@@ -417,6 +417,12 @@ paths:
                         - xml:
                             name: esam
                           description: 'Settings for Event Signaling And Messaging (ESAM). If you don''t do ad insertion, you can ignore these settings.'
+                    ExtendedDataServices:
+                      allOf:
+                        - $ref: '#/components/schemas/ExtendedDataServices'
+                        - xml:
+                            name: extendedDataServices
+                          description: 'Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h Content Advisory.'
                     Inputs:
                       allOf:
                         - $ref: '#/components/schemas/__listOfInput'
@@ -722,6 +728,12 @@ paths:
                         - xml:
                             name: esam
                           description: 'Settings for Event Signaling And Messaging (ESAM). If you don''t do ad insertion, you can ignore these settings.'
+                    ExtendedDataServices:
+                      allOf:
+                        - $ref: '#/components/schemas/ExtendedDataServices'
+                        - xml:
+                            name: extendedDataServices
+                          description: 'Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h Content Advisory.'
                     Inputs:
                       allOf:
                         - $ref: '#/components/schemas/__listOfInputTemplate'
@@ -1539,6 +1551,12 @@ paths:
                         - xml:
                             name: esam
                           description: 'Settings for Event Signaling And Messaging (ESAM). If you don''t do ad insertion, you can ignore these settings.'
+                    ExtendedDataServices:
+                      allOf:
+                        - $ref: '#/components/schemas/ExtendedDataServices'
+                        - xml:
+                            name: extendedDataServices
+                          description: 'Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h Content Advisory.'
                     Inputs:
                       allOf:
                         - $ref: '#/components/schemas/__listOfInputTemplate'
@@ -2509,6 +2527,22 @@ components:
                 name: signalProcessingNotification
               description: Specifies an ESAM SignalProcessingNotification XML as per OC-SP-ESAM-API-I03-131025. The transcoder uses the signal processing instructions that you provide in the setting SCC XML (sccXml).
       description: 'Settings for Event Signaling And Messaging (ESAM). If you don''t do ad insertion, you can ignore these settings.'
+    ExtendedDataServices:
+      type: object
+      properties:
+        CopyProtectionAction:
+          allOf:
+            - $ref: '#/components/schemas/CopyProtectionAction'
+            - xml:
+                name: copyProtectionAction
+              description: 'The action to take on copy and redistribution control XDS packets.  If you select PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will be removed in output captions.'
+        VchipAction:
+          allOf:
+            - $ref: '#/components/schemas/VchipAction'
+            - xml:
+                name: vchipAction
+              description: 'The action to take on content advisory XDS packets.  If you select PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will be removed in output captions.'
+      description: 'Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h Content Advisory.'
     __listOfInput:
       type: array
       items:
@@ -6771,6 +6805,12 @@ components:
                 name: xavcProfileSettings
               description: Specify the XAVC profile settings for MXF outputs when you set your MXF profile to XAVC.
       description: These settings relate to your MXF output container.
+    CopyProtectionAction:
+      type: string
+      enum:
+        - PASSTHROUGH
+        - STRIP
+      description: 'The action to take on copy and redistribution control XDS packets.  If you select PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will be removed in output captions.'
     __listOfHopDestination:
       type: array
       items:
@@ -6800,6 +6840,12 @@ components:
             - xml:
                 name: esam
               description: 'Settings for Event Signaling And Messaging (ESAM). If you don''t do ad insertion, you can ignore these settings.'
+        ExtendedDataServices:
+          allOf:
+            - $ref: '#/components/schemas/ExtendedDataServices'
+            - xml:
+                name: extendedDataServices
+              description: 'Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h Content Advisory.'
         Inputs:
           allOf:
             - $ref: '#/components/schemas/__listOfInput'
@@ -7141,6 +7187,12 @@ components:
             - xml:
                 name: esam
               description: 'Settings for Event Signaling And Messaging (ESAM). If you don''t do ad insertion, you can ignore these settings.'
+        ExtendedDataServices:
+          allOf:
+            - $ref: '#/components/schemas/ExtendedDataServices'
+            - xml:
+                name: extendedDataServices
+              description: 'Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h Content Advisory.'
         Inputs:
           allOf:
             - $ref: '#/components/schemas/__listOfInputTemplate'
@@ -8403,6 +8455,12 @@ components:
     __stringPatternSNSignalProcessingNotificationNS:
       type: string
       pattern: ^\s*<(.|\n)*SignalProcessingNotification(.|\n)*>\s*$
+    VchipAction:
+      type: string
+      enum:
+        - PASSTHROUGH
+        - STRIP
+      description: 'The action to take on content advisory XDS packets.  If you select PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will be removed in output captions.'
     F4vMoovPlacement:
       type: string
       enum:

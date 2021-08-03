@@ -312,7 +312,7 @@ paths:
         - name: AccountId
           in: query
           required: true
-          description: The Region ID that owns the cluster.
+          description: The Amazon Web Services account ID that owns the cluster.
           schema:
             type: string
             pattern: '^[0-9]+$'
@@ -413,11 +413,121 @@ paths:
             type: string
             enum:
               - '2012-12-01'
+  /#Action=AssociateDataShareConsumer:
+    get:
+      x-aws-operation-name: AssociateDataShareConsumer
+      operationId: GET_AssociateDataShareConsumer
+      description: 'From a datashare consumer account, associates a datashare with the account (AssociateEntireAccount) or the specified namespace (ConsumerArn). If you make this association, the consumer can consume the datashare.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DataShare'
+        '480':
+          description: InvalidDataShareFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDataShareFault'
+        '481':
+          description: InvalidNamespaceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidNamespaceFault'
+      parameters:
+        - name: DataShareArn
+          in: query
+          required: true
+          description: The Amazon Resource Name (ARN) of the datashare that the consumer is to use with the account or the namespace.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: AssociateEntireAccount
+          in: query
+          required: false
+          description: A value that specifies whether the datashare is associated with the entire account.
+          schema:
+            type: boolean
+        - name: ConsumerArn
+          in: query
+          required: false
+          description: The Amazon Resource Name (ARN) of the consumer that is associated with the datashare.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - AssociateDataShareConsumer
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: AssociateDataShareConsumer
+      operationId: POST_AssociateDataShareConsumer
+      description: 'From a datashare consumer account, associates a datashare with the account (AssociateEntireAccount) or the specified namespace (ConsumerArn). If you make this association, the consumer can consume the datashare.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DataShare'
+        '480':
+          description: InvalidDataShareFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDataShareFault'
+        '481':
+          description: InvalidNamespaceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidNamespaceFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AssociateDataShareConsumerMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - AssociateDataShareConsumer
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
   /#Action=AuthorizeClusterSecurityGroupIngress:
     get:
       x-aws-operation-name: AuthorizeClusterSecurityGroupIngress
       operationId: GET_AuthorizeClusterSecurityGroupIngress
-      description: '<p>Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group.</p> <p>If you authorize access to an Amazon EC2 security group, specify <i>EC2SecurityGroupName</i> and <i>EC2SecurityGroupOwnerId</i>. The Amazon EC2 security group and Amazon Redshift cluster must be in the same Region. </p> <p>If you authorize access to a CIDR/IP address range, specify <i>CIDRIP</i>. For an overview of CIDR blocks, see the Wikipedia article on <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Classless Inter-Domain Routing</a>. </p> <p>You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Working with Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
+      description: '<p>Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group.</p> <p>If you authorize access to an Amazon EC2 security group, specify <i>EC2SecurityGroupName</i> and <i>EC2SecurityGroupOwnerId</i>. The Amazon EC2 security group and Amazon Redshift cluster must be in the same Amazon Web Services Region. </p> <p>If you authorize access to a CIDR/IP address range, specify <i>CIDRIP</i>. For an overview of CIDR blocks, see the Wikipedia article on <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Classless Inter-Domain Routing</a>. </p> <p>You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Working with Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -474,7 +584,7 @@ paths:
         - name: EC2SecurityGroupOwnerId
           in: query
           required: false
-          description: '<p>The account number of the owner of the security group specified by the <i>EC2SecurityGroupName</i> parameter. The Amazon Web Services Access Key ID is not an acceptable value. </p> <p>Example: <code>111122223333</code> </p>'
+          description: '<p>The Amazon Web Services account number of the owner of the security group specified by the <i>EC2SecurityGroupName</i> parameter. The Amazon Web Services Access Key ID is not an acceptable value. </p> <p>Example: <code>111122223333</code> </p>'
           schema:
             type: string
             maxLength: 2147483647
@@ -503,7 +613,7 @@ paths:
     post:
       x-aws-operation-name: AuthorizeClusterSecurityGroupIngress
       operationId: POST_AuthorizeClusterSecurityGroupIngress
-      description: '<p>Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group.</p> <p>If you authorize access to an Amazon EC2 security group, specify <i>EC2SecurityGroupName</i> and <i>EC2SecurityGroupOwnerId</i>. The Amazon EC2 security group and Amazon Redshift cluster must be in the same Region. </p> <p>If you authorize access to a CIDR/IP address range, specify <i>CIDRIP</i>. For an overview of CIDR blocks, see the Wikipedia article on <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Classless Inter-Domain Routing</a>. </p> <p>You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Working with Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
+      description: '<p>Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group.</p> <p>If you authorize access to an Amazon EC2 security group, specify <i>EC2SecurityGroupName</i> and <i>EC2SecurityGroupOwnerId</i>. The Amazon EC2 security group and Amazon Redshift cluster must be in the same Amazon Web Services Region. </p> <p>If you authorize access to a CIDR/IP address range, specify <i>CIDRIP</i>. For an overview of CIDR blocks, see the Wikipedia article on <a href="http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Classless Inter-Domain Routing</a>. </p> <p>You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html">Working with Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -548,6 +658,98 @@ paths:
             type: string
             enum:
               - AuthorizeClusterSecurityGroupIngress
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+  /#Action=AuthorizeDataShare:
+    get:
+      x-aws-operation-name: AuthorizeDataShare
+      operationId: GET_AuthorizeDataShare
+      description: 'From a data producer account, authorizes the sharing of a datashare with one or more consumer accounts. To authorize a datashare for a data consumer, the producer account must have the correct access privileges.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DataShare'
+        '480':
+          description: InvalidDataShareFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDataShareFault'
+      parameters:
+        - name: DataShareArn
+          in: query
+          required: true
+          description: The Amazon Resource Name (ARN) of the datashare that producers are to authorize sharing for.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: ConsumerIdentifier
+          in: query
+          required: true
+          description: The identifier of the data consumer that is authorized to access the datashare. This identifier is an AWS account ID.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - AuthorizeDataShare
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: AuthorizeDataShare
+      operationId: POST_AuthorizeDataShare
+      description: 'From a data producer account, authorizes the sharing of a datashare with one or more consumer accounts. To authorize a datashare for a data consumer, the producer account must have the correct access privileges.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DataShare'
+        '480':
+          description: InvalidDataShareFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDataShareFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AuthorizeDataShareMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - AuthorizeDataShare
         - name: Version
           in: query
           required: true
@@ -614,7 +816,7 @@ paths:
         - name: Account
           in: query
           required: true
-          description: The account ID to grant access to.
+          description: The Amazon Web Services account ID to grant access to.
           schema:
             type: string
             maxLength: 2147483647
@@ -722,7 +924,7 @@ paths:
     get:
       x-aws-operation-name: AuthorizeSnapshotAccess
       operationId: GET_AuthorizeSnapshotAccess
-      description: '<p>Authorizes the specified account to restore the specified snapshot.</p> <p> For more information about working with snapshots, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
+      description: '<p>Authorizes the specified Amazon Web Services account to restore the specified snapshot.</p> <p> For more information about working with snapshots, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -784,7 +986,7 @@ paths:
         - name: AccountWithRestoreAccess
           in: query
           required: true
-          description: '<p>The identifier of the account authorized to restore the specified snapshot.</p> <p>To share a snapshot with Amazon Web Services Support, specify amazon-redshift-support.</p>'
+          description: '<p>The identifier of the Amazon Web Services account authorized to restore the specified snapshot.</p> <p>To share a snapshot with Amazon Web Services Support, specify amazon-redshift-support.</p>'
           schema:
             type: string
             maxLength: 2147483647
@@ -813,7 +1015,7 @@ paths:
     post:
       x-aws-operation-name: AuthorizeSnapshotAccess
       operationId: POST_AuthorizeSnapshotAccess
-      description: '<p>Authorizes the specified account to restore the specified snapshot.</p> <p> For more information about working with snapshots, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
+      description: '<p>Authorizes the specified Amazon Web Services account to restore the specified snapshot.</p> <p> For more information about working with snapshots, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1260,7 +1462,7 @@ paths:
         - name: TargetSnapshotIdentifier
           in: query
           required: true
-          description: '<p>The identifier given to the new manual snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank.</p> </li> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for the account that is making the request.</p> </li> </ul>'
+          description: '<p>The identifier given to the new manual snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank.</p> </li> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for the Amazon Web Services account that is making the request.</p> </li> </ul>'
           schema:
             type: string
             maxLength: 2147483647
@@ -1625,7 +1827,7 @@ paths:
         - name: ClusterIdentifier
           in: query
           required: true
-          description: '<p>A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. The identifier also appears in the Amazon Redshift console.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an account.</p> </li> </ul> <p>Example: <code>myexamplecluster</code> </p>'
+          description: '<p>A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. The identifier also appears in the Amazon Redshift console.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an Amazon Web Services account.</p> </li> </ul> <p>Example: <code>myexamplecluster</code> </p>'
           schema:
             type: string
             maxLength: 2147483647
@@ -1842,7 +2044,7 @@ paths:
         - name: AquaConfigurationStatus
           in: query
           required: false
-          description: <p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
+          description: <p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
           schema:
             type: string
             enum:
@@ -2074,14 +2276,14 @@ paths:
         - name: ParameterGroupName
           in: query
           required: true
-          description: '<p>The name of the cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 alphanumeric characters or hyphens</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique withing your account.</p> </li> </ul> <note> <p>This value is stored as a lower-case string.</p> </note>'
+          description: '<p>The name of the cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 alphanumeric characters or hyphens</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique withing your Amazon Web Services account.</p> </li> </ul> <note> <p>This value is stored as a lower-case string.</p> </note>'
           schema:
             type: string
             maxLength: 2147483647
         - name: ParameterGroupFamily
           in: query
           required: true
-          description: '<p>The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters.</p> <p>To get a list of valid parameter group family names, you can call <a>DescribeClusterParameterGroups</a>. By default, Amazon Redshift returns a list of all the parameter groups that are owned by your account, including the default parameter groups for each Amazon Redshift engine version. The parameter group family names associated with the default parameter groups provide you the valid values. For example, a valid family name is "redshift-1.0". </p>'
+          description: '<p>The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters.</p> <p>To get a list of valid parameter group family names, you can call <a>DescribeClusterParameterGroups</a>. By default, Amazon Redshift returns a list of all the parameter groups that are owned by your Amazon Web Services account, including the default parameter groups for each Amazon Redshift engine version. The parameter group family names associated with the default parameter groups provide you the valid values. For example, a valid family name is "redshift-1.0". </p>'
           schema:
             type: string
             maxLength: 2147483647
@@ -2220,7 +2422,7 @@ paths:
         - name: ClusterSecurityGroupName
           in: query
           required: true
-          description: '<p>The name for the security group. Amazon Redshift stores the value as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain no more than 255 alphanumeric characters or hyphens.</p> </li> <li> <p>Must not be "Default".</p> </li> <li> <p>Must be unique for all security groups that are created by your account.</p> </li> </ul> <p>Example: <code>examplesecuritygroup</code> </p>'
+          description: '<p>The name for the security group. Amazon Redshift stores the value as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain no more than 255 alphanumeric characters or hyphens.</p> </li> <li> <p>Must not be "Default".</p> </li> <li> <p>Must be unique for all security groups that are created by your Amazon Web Services account.</p> </li> </ul> <p>Example: <code>examplesecuritygroup</code> </p>'
           schema:
             type: string
             maxLength: 2147483647
@@ -2377,7 +2579,7 @@ paths:
         - name: SnapshotIdentifier
           in: query
           required: true
-          description: '<p>A unique identifier for the snapshot that you are requesting. This identifier must be unique for all snapshots within the account.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank</p> </li> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens</p> </li> </ul> <p>Example: <code>my-snapshot-id</code> </p>'
+          description: '<p>A unique identifier for the snapshot that you are requesting. This identifier must be unique for all snapshots within the Amazon Web Services account.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank</p> </li> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens</p> </li> </ul> <p>Example: <code>my-snapshot-id</code> </p>'
           schema:
             type: string
             maxLength: 2147483647
@@ -2564,7 +2766,7 @@ paths:
         - name: ClusterSubnetGroupName
           in: query
           required: true
-          description: '<p>The name for the subnet group. Amazon Redshift stores the value as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain no more than 255 alphanumeric characters or hyphens.</p> </li> <li> <p>Must not be "Default".</p> </li> <li> <p>Must be unique for all subnet groups that are created by your account.</p> </li> </ul> <p>Example: <code>examplesubnetgroup</code> </p>'
+          description: '<p>The name for the subnet group. Amazon Redshift stores the value as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain no more than 255 alphanumeric characters or hyphens.</p> </li> <li> <p>Must not be "Default".</p> </li> <li> <p>Must be unique for all subnet groups that are created by your Amazon Web Services account.</p> </li> </ul> <p>Example: <code>examplesubnetgroup</code> </p>'
           schema:
             type: string
             maxLength: 2147483647
@@ -2781,7 +2983,7 @@ paths:
         - name: ResourceOwner
           in: query
           required: false
-          description: The account ID of the owner of the cluster. This is only required if the cluster is in another account.
+          description: The Amazon Web Services account ID of the owner of the cluster. This is only required if the cluster is in another Amazon Web Services account.
           schema:
             type: string
             maxLength: 2147483647
@@ -2927,7 +3129,7 @@ paths:
     get:
       x-aws-operation-name: CreateEventSubscription
       operationId: GET_CreateEventSubscription
-      description: '<p>Creates an Amazon Redshift event notification subscription. This action requires an ARN (Amazon Resource Name) of an Amazon SNS topic created by either the Amazon Redshift console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console.</p> <p>You can specify the source type, and lists of Amazon Redshift source IDs, event categories, and event severities. Notifications will be sent for all events you want that match those criteria. For example, you can specify source type = cluster, source ID = my-cluster-1 and mycluster2, event categories = Availability, Backup, and severity = ERROR. The subscription will only send notifications for those ERROR events in the Availability and Backup categories for the specified clusters.</p> <p>If you specify both the source type and source IDs, such as source type = cluster and source identifier = my-cluster-1, notifications will be sent for all the cluster events for my-cluster-1. If you specify a source type but do not specify a source identifier, you will receive notice of the events for the objects of that type in your account. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events generated from all Amazon Redshift sources belonging to your account. You must specify a source type if you specify a source ID.</p>'
+      description: '<p>Creates an Amazon Redshift event notification subscription. This action requires an ARN (Amazon Resource Name) of an Amazon SNS topic created by either the Amazon Redshift console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console.</p> <p>You can specify the source type, and lists of Amazon Redshift source IDs, event categories, and event severities. Notifications will be sent for all events you want that match those criteria. For example, you can specify source type = cluster, source ID = my-cluster-1 and mycluster2, event categories = Availability, Backup, and severity = ERROR. The subscription will only send notifications for those ERROR events in the Availability and Backup categories for the specified clusters.</p> <p>If you specify both the source type and source IDs, such as source type = cluster and source identifier = my-cluster-1, notifications will be sent for all the cluster events for my-cluster-1. If you specify a source type but do not specify a source identifier, you will receive notice of the events for the objects of that type in your Amazon Web Services account. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events generated from all Amazon Redshift sources belonging to your Amazon Web Services account. You must specify a source type if you specify a source ID.</p>'
       responses:
         '200':
           description: Success
@@ -3019,7 +3221,7 @@ paths:
         - name: SourceType
           in: query
           required: false
-          description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>'
+          description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your Amazon Web Services account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>'
           schema:
             type: string
             maxLength: 2147483647
@@ -3037,7 +3239,7 @@ paths:
         - name: EventCategories
           in: query
           required: false
-          description: '<p>Specifies the Amazon Redshift event categories to be published by the event notification subscription.</p> <p>Values: configuration, management, monitoring, security</p>'
+          description: '<p>Specifies the Amazon Redshift event categories to be published by the event notification subscription.</p> <p>Values: configuration, management, monitoring, security, pending</p>'
           schema:
             type: array
             items:
@@ -3094,7 +3296,7 @@ paths:
     post:
       x-aws-operation-name: CreateEventSubscription
       operationId: POST_CreateEventSubscription
-      description: '<p>Creates an Amazon Redshift event notification subscription. This action requires an ARN (Amazon Resource Name) of an Amazon SNS topic created by either the Amazon Redshift console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console.</p> <p>You can specify the source type, and lists of Amazon Redshift source IDs, event categories, and event severities. Notifications will be sent for all events you want that match those criteria. For example, you can specify source type = cluster, source ID = my-cluster-1 and mycluster2, event categories = Availability, Backup, and severity = ERROR. The subscription will only send notifications for those ERROR events in the Availability and Backup categories for the specified clusters.</p> <p>If you specify both the source type and source IDs, such as source type = cluster and source identifier = my-cluster-1, notifications will be sent for all the cluster events for my-cluster-1. If you specify a source type but do not specify a source identifier, you will receive notice of the events for the objects of that type in your account. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events generated from all Amazon Redshift sources belonging to your account. You must specify a source type if you specify a source ID.</p>'
+      description: '<p>Creates an Amazon Redshift event notification subscription. This action requires an ARN (Amazon Resource Name) of an Amazon SNS topic created by either the Amazon Redshift console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console.</p> <p>You can specify the source type, and lists of Amazon Redshift source IDs, event categories, and event severities. Notifications will be sent for all events you want that match those criteria. For example, you can specify source type = cluster, source ID = my-cluster-1 and mycluster2, event categories = Availability, Backup, and severity = ERROR. The subscription will only send notifications for those ERROR events in the Availability and Backup categories for the specified clusters.</p> <p>If you specify both the source type and source IDs, such as source type = cluster and source identifier = my-cluster-1, notifications will be sent for all the cluster events for my-cluster-1. If you specify a source type but do not specify a source identifier, you will receive notice of the events for the objects of that type in your Amazon Web Services account. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events generated from all Amazon Redshift sources belonging to your Amazon Web Services account. You must specify a source type if you specify a source ID.</p>'
       responses:
         '200':
           description: Success
@@ -3745,7 +3947,7 @@ paths:
         - name: SnapshotCopyGrantName
           in: query
           required: true
-          description: '<p>The name of the snapshot copy grant. This name must be unique in the region for the account.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an account.</p> </li> </ul>'
+          description: '<p>The name of the snapshot copy grant. This name must be unique in the region for the Amazon Web Services account.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an Amazon Web Services account.</p> </li> </ul>'
           schema:
             type: string
             maxLength: 2147483647
@@ -4371,6 +4573,98 @@ paths:
             type: string
             enum:
               - CreateUsageLimit
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+  /#Action=DeauthorizeDataShare:
+    get:
+      x-aws-operation-name: DeauthorizeDataShare
+      operationId: GET_DeauthorizeDataShare
+      description: 'From the producer account, removes authorization from the specified datashare. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DataShare'
+        '480':
+          description: InvalidDataShareFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDataShareFault'
+      parameters:
+        - name: DataShareArn
+          in: query
+          required: true
+          description: The Amazon Resource Name (ARN) of the datashare to remove authorization from.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: ConsumerIdentifier
+          in: query
+          required: true
+          description: The identifier of the data consumer that is to have authorization removed from the datashare. This identifier is an AWS account ID.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeauthorizeDataShare
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeauthorizeDataShare
+      operationId: POST_DeauthorizeDataShare
+      description: 'From the producer account, removes authorization from the specified datashare. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DataShare'
+        '480':
+          description: InvalidDataShareFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDataShareFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeauthorizeDataShareMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeauthorizeDataShare
         - name: Version
           in: query
           required: true
@@ -5445,7 +5739,7 @@ paths:
         - name: AccountId
           in: query
           required: true
-          description: The Region ID that owns the cluster.
+          description: The Amazon Web Services account ID that owns the cluster.
           schema:
             type: string
             pattern: '^[0-9]+$'
@@ -6708,7 +7002,7 @@ paths:
     get:
       x-aws-operation-name: DescribeClusterSnapshots
       operationId: GET_DescribeClusterSnapshots
-      description: '<p>Returns one or more snapshot objects, which contain metadata about your cluster snapshots. By default, this operation returns information about all snapshots of all clusters that are owned by your account. No information is returned for snapshots owned by inactive accounts.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all snapshots that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all snapshots that have any combination of those values are returned. Only snapshots that you own are returned in the response; shared snapshots are not returned with the tag key and tag value request parameters.</p> <p>If both tag keys and values are omitted from the request, snapshots are returned regardless of whether they have tag keys or values associated with them.</p>'
+      description: '<p>Returns one or more snapshot objects, which contain metadata about your cluster snapshots. By default, this operation returns information about all snapshots of all clusters that are owned by your Amazon Web Services account. No information is returned for snapshots owned by inactive Amazon Web Services accounts.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all snapshots that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all snapshots that have any combination of those values are returned. Only snapshots that you own are returned in the response; shared snapshots are not returned with the tag key and tag value request parameters.</p> <p>If both tag keys and values are omitted from the request, snapshots are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
           description: Success
@@ -6786,7 +7080,7 @@ paths:
         - name: OwnerAccount
           in: query
           required: false
-          description: 'The account used to create or copy the snapshot. Use this field to filter the results to snapshots owned by a particular account. To describe snapshots you own, either specify your account, or do not specify the parameter.'
+          description: 'The Amazon Web Services account used to create or copy the snapshot. Use this field to filter the results to snapshots owned by a particular account. To describe snapshots you own, either specify your Amazon Web Services account, or do not specify the parameter.'
           schema:
             type: string
             maxLength: 2147483647
@@ -6854,7 +7148,7 @@ paths:
     post:
       x-aws-operation-name: DescribeClusterSnapshots
       operationId: POST_DescribeClusterSnapshots
-      description: '<p>Returns one or more snapshot objects, which contain metadata about your cluster snapshots. By default, this operation returns information about all snapshots of all clusters that are owned by your account. No information is returned for snapshots owned by inactive accounts.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all snapshots that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all snapshots that have any combination of those values are returned. Only snapshots that you own are returned in the response; shared snapshots are not returned with the tag key and tag value request parameters.</p> <p>If both tag keys and values are omitted from the request, snapshots are returned regardless of whether they have tag keys or values associated with them.</p>'
+      description: '<p>Returns one or more snapshot objects, which contain metadata about your cluster snapshots. By default, this operation returns information about all snapshots of all clusters that are owned by your Amazon Web Services account. No information is returned for snapshots owned by inactive Amazon Web Services accounts.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all snapshots that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all snapshots that have any combination of those values are returned. Only snapshots that you own are returned in the response; shared snapshots are not returned with the tag key and tag value request parameters.</p> <p>If both tag keys and values are omitted from the request, snapshots are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
           description: Success
@@ -6916,7 +7210,7 @@ paths:
     get:
       x-aws-operation-name: DescribeClusterSubnetGroups
       operationId: GET_DescribeClusterSubnetGroups
-      description: '<p>Returns one or more cluster subnet group objects, which contain metadata about your cluster subnet groups. By default, this operation returns information about all cluster subnet groups that are defined in your account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all subnet groups that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all subnet groups that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, subnet groups are returned regardless of whether they have tag keys or values associated with them.</p>'
+      description: '<p>Returns one or more cluster subnet group objects, which contain metadata about your cluster subnet groups. By default, this operation returns information about all cluster subnet groups that are defined in your Amazon Web Services account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all subnet groups that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all subnet groups that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, subnet groups are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
           description: Success
@@ -7004,7 +7298,7 @@ paths:
     post:
       x-aws-operation-name: DescribeClusterSubnetGroups
       operationId: POST_DescribeClusterSubnetGroups
-      description: '<p>Returns one or more cluster subnet group objects, which contain metadata about your cluster subnet groups. By default, this operation returns information about all cluster subnet groups that are defined in your account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all subnet groups that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all subnet groups that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, subnet groups are returned regardless of whether they have tag keys or values associated with them.</p>'
+      description: '<p>Returns one or more cluster subnet group objects, which contain metadata about your cluster subnet groups. By default, this operation returns information about all cluster subnet groups that are defined in your Amazon Web Services account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all subnet groups that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all subnet groups that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, subnet groups are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
           description: Success
@@ -7427,6 +7721,321 @@ paths:
             type: string
             enum:
               - '2012-12-01'
+  /#Action=DescribeDataShares:
+    get:
+      x-aws-operation-name: DescribeDataShares
+      operationId: GET_DescribeDataShares
+      description: Shows the status of any inbound or outbound datashares available in the specified account.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeDataSharesResult'
+        '480':
+          description: InvalidDataShareFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDataShareFault'
+      parameters:
+        - name: DataShareArn
+          in: query
+          required: false
+          description: The identifier of the datashare to describe details of.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: MaxRecords
+          in: query
+          required: false
+          description: 'The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. '
+          schema:
+            type: integer
+        - name: Marker
+          in: query
+          required: false
+          description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeDataShares
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeDataShares
+      operationId: POST_DescribeDataShares
+      description: Shows the status of any inbound or outbound datashares available in the specified account.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeDataSharesResult'
+        '480':
+          description: InvalidDataShareFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDataShareFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeDataSharesMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeDataShares
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+  /#Action=DescribeDataSharesForConsumer:
+    get:
+      x-aws-operation-name: DescribeDataSharesForConsumer
+      operationId: GET_DescribeDataSharesForConsumer
+      description: Returns a list of datashares where the account identifier being called is a consumer account identifier.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeDataSharesForConsumerResult'
+        '480':
+          description: InvalidNamespaceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidNamespaceFault'
+      parameters:
+        - name: ConsumerArn
+          in: query
+          required: false
+          description: The Amazon Resource Name (ARN) of the consumer that returns in the list of datashares.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Status
+          in: query
+          required: false
+          description: 'An identifier giving the status of a datashare in the consumer cluster. If this field is specified, Amazon Redshift returns the list of datashares that have the specified status.'
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - AVAILABLE
+        - name: MaxRecords
+          in: query
+          required: false
+          description: 'The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. '
+          schema:
+            type: integer
+        - name: Marker
+          in: query
+          required: false
+          description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForConsumer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeDataSharesForConsumer
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeDataSharesForConsumer
+      operationId: POST_DescribeDataSharesForConsumer
+      description: Returns a list of datashares where the account identifier being called is a consumer account identifier.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeDataSharesForConsumerResult'
+        '480':
+          description: InvalidNamespaceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidNamespaceFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeDataSharesForConsumerMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeDataSharesForConsumer
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+  /#Action=DescribeDataSharesForProducer:
+    get:
+      x-aws-operation-name: DescribeDataSharesForProducer
+      operationId: GET_DescribeDataSharesForProducer
+      description: Returns a list of datashares when the account identifier being called is a producer account identifier.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeDataSharesForProducerResult'
+        '480':
+          description: InvalidNamespaceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidNamespaceFault'
+      parameters:
+        - name: ProducerArn
+          in: query
+          required: false
+          description: The Amazon Resource Name (ARN) of the producer that returns in the list of datashares.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Status
+          in: query
+          required: false
+          description: 'An identifier giving the status of a datashare in the producer. If this field is specified, Amazon Redshift returns the list of datashares that have the specified status.'
+          schema:
+            type: string
+            enum:
+              - ACTIVE
+              - AUTHORIZED
+              - PENDING_AUTHORIZATION
+              - DEAUTHORIZED
+              - REJECTED
+        - name: MaxRecords
+          in: query
+          required: false
+          description: 'The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. '
+          schema:
+            type: integer
+        - name: Marker
+          in: query
+          required: false
+          description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForProducer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeDataSharesForProducer
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeDataSharesForProducer
+      operationId: POST_DescribeDataSharesForProducer
+      description: Returns a list of datashares when the account identifier being called is a producer account identifier.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeDataSharesForProducerResult'
+        '480':
+          description: InvalidNamespaceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidNamespaceFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeDataSharesForProducerMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeDataSharesForProducer
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
   /#Action=DescribeDefaultClusterParameters:
     get:
       x-aws-operation-name: DescribeDefaultClusterParameters
@@ -7566,7 +8175,7 @@ paths:
         - name: ResourceOwner
           in: query
           required: false
-          description: The account ID of the owner of the cluster.
+          description: The Amazon Web Services account ID of the owner of the cluster.
           schema:
             type: string
             maxLength: 2147483647
@@ -7715,7 +8324,7 @@ paths:
         - name: Account
           in: query
           required: false
-          description: 'The Aaccount ID of either the cluster owner (grantor) or grantee. If <code>Grantee</code> parameter is true, then the <code>Account</code> value is of the grantor.'
+          description: 'The AAmazon Web Services account ID of either the cluster owner (grantor) or grantee. If <code>Grantee</code> parameter is true, then the <code>Account</code> value is of the grantor.'
           schema:
             type: string
             maxLength: 2147483647
@@ -8166,7 +8775,7 @@ paths:
     get:
       x-aws-operation-name: DescribeHsmClientCertificates
       operationId: GET_DescribeHsmClientCertificates
-      description: '<p>Returns information about the specified HSM client certificate. If no certificate ID is specified, returns information about all the HSM certificates owned by your account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM client certificates that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all HSM client certificates that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, HSM client certificates are returned regardless of whether they have tag keys or values associated with them.</p>'
+      description: '<p>Returns information about the specified HSM client certificate. If no certificate ID is specified, returns information about all the HSM certificates owned by your Amazon Web Services account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM client certificates that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all HSM client certificates that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, HSM client certificates are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
           description: Success
@@ -8190,7 +8799,7 @@ paths:
         - name: HsmClientCertificateIdentifier
           in: query
           required: false
-          description: 'The identifier of a specific HSM client certificate for which you want information. If no identifier is specified, information is returned for all HSM client certificates owned by your account.'
+          description: 'The identifier of a specific HSM client certificate for which you want information. If no identifier is specified, information is returned for all HSM client certificates owned by your Amazon Web Services account.'
           schema:
             type: string
             maxLength: 2147483647
@@ -8254,7 +8863,7 @@ paths:
     post:
       x-aws-operation-name: DescribeHsmClientCertificates
       operationId: POST_DescribeHsmClientCertificates
-      description: '<p>Returns information about the specified HSM client certificate. If no certificate ID is specified, returns information about all the HSM certificates owned by your account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM client certificates that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all HSM client certificates that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, HSM client certificates are returned regardless of whether they have tag keys or values associated with them.</p>'
+      description: '<p>Returns information about the specified HSM client certificate. If no certificate ID is specified, returns information about all the HSM certificates owned by your Amazon Web Services account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM client certificates that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all HSM client certificates that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, HSM client certificates are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
           description: Success
@@ -8310,7 +8919,7 @@ paths:
     get:
       x-aws-operation-name: DescribeHsmConfigurations
       operationId: GET_DescribeHsmConfigurations
-      description: '<p>Returns information about the specified Amazon Redshift HSM configuration. If no configuration ID is specified, returns information about all the HSM configurations owned by your account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM connections that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all HSM connections that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, HSM connections are returned regardless of whether they have tag keys or values associated with them.</p>'
+      description: '<p>Returns information about the specified Amazon Redshift HSM configuration. If no configuration ID is specified, returns information about all the HSM configurations owned by your Amazon Web Services account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM connections that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all HSM connections that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, HSM connections are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
           description: Success
@@ -8334,7 +8943,7 @@ paths:
         - name: HsmConfigurationIdentifier
           in: query
           required: false
-          description: 'The identifier of a specific Amazon Redshift HSM configuration to be described. If no identifier is specified, information is returned for all HSM configurations owned by your account.'
+          description: 'The identifier of a specific Amazon Redshift HSM configuration to be described. If no identifier is specified, information is returned for all HSM configurations owned by your Amazon Web Services account.'
           schema:
             type: string
             maxLength: 2147483647
@@ -8398,7 +9007,7 @@ paths:
     post:
       x-aws-operation-name: DescribeHsmConfigurations
       operationId: POST_DescribeHsmConfigurations
-      description: '<p>Returns information about the specified Amazon Redshift HSM configuration. If no configuration ID is specified, returns information about all the HSM configurations owned by your account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM connections that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all HSM connections that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, HSM connections are returned regardless of whether they have tag keys or values associated with them.</p>'
+      description: '<p>Returns information about the specified Amazon Redshift HSM configuration. If no configuration ID is specified, returns information about all the HSM configurations owned by your Amazon Web Services account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM connections that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all HSM connections that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, HSM connections are returned regardless of whether they have tag keys or values associated with them.</p>'
       responses:
         '200':
           description: Success
@@ -8599,7 +9208,7 @@ paths:
         - name: OwnerAccount
           in: query
           required: false
-          description: 'The account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.'
+          description: 'The Amazon Web Services account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.'
           schema:
             type: string
             maxLength: 2147483647
@@ -8720,7 +9329,7 @@ paths:
     get:
       x-aws-operation-name: DescribeOrderableClusterOptions
       operationId: GET_DescribeOrderableClusterOptions
-      description: 'Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.'
+      description: 'Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific Amazon Web Services Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.'
       responses:
         '200':
           description: Success
@@ -8781,7 +9390,7 @@ paths:
     post:
       x-aws-operation-name: DescribeOrderableClusterOptions
       operationId: POST_DescribeOrderableClusterOptions
-      description: 'Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.'
+      description: 'Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific Amazon Web Services Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.'
       responses:
         '200':
           description: Success
@@ -8849,7 +9458,7 @@ paths:
         - name: AccountId
           in: query
           required: true
-          description: The Region ID that owns the cluster.
+          description: The Amazon Web Services account ID that owns the cluster.
           schema:
             type: string
             pattern: '^[0-9]+$'
@@ -9228,7 +9837,7 @@ paths:
         - name: ClusterIdentifier
           in: query
           required: true
-          description: '<p>The unique identifier of a cluster whose resize progress you are requesting. This parameter is case-sensitive.</p> <p>By default, resize operations for all clusters defined for an account are returned.</p>'
+          description: '<p>The unique identifier of a cluster whose resize progress you are requesting. This parameter is case-sensitive.</p> <p>By default, resize operations for all clusters defined for an Amazon Web Services account are returned.</p>'
           schema:
             type: string
             maxLength: 2147483647
@@ -9464,7 +10073,7 @@ paths:
     get:
       x-aws-operation-name: DescribeSnapshotCopyGrants
       operationId: GET_DescribeSnapshotCopyGrants
-      description: '<p>Returns a list of snapshot copy grants owned by the account in the destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
+      description: '<p>Returns a list of snapshot copy grants owned by the Amazon Web Services account in the destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -9552,7 +10161,7 @@ paths:
     post:
       x-aws-operation-name: DescribeSnapshotCopyGrants
       operationId: POST_DescribeSnapshotCopyGrants
-      description: '<p>Returns a list of snapshot copy grants owned by the account in the destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
+      description: '<p>Returns a list of snapshot copy grants owned by the Amazon Web Services account in the destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -10450,6 +11059,116 @@ paths:
             type: string
             enum:
               - '2012-12-01'
+  /#Action=DisassociateDataShareConsumer:
+    get:
+      x-aws-operation-name: DisassociateDataShareConsumer
+      operationId: GET_DisassociateDataShareConsumer
+      description: 'From a consumer account, remove association for the specified datashare. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DataShare'
+        '480':
+          description: InvalidDataShareFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDataShareFault'
+        '481':
+          description: InvalidNamespaceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidNamespaceFault'
+      parameters:
+        - name: DataShareArn
+          in: query
+          required: true
+          description: 'The Amazon Resource Name (ARN) of the datashare to remove association for. '
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: DisassociateEntireAccount
+          in: query
+          required: false
+          description: A value that specifies whether association for the datashare is removed from the entire account.
+          schema:
+            type: boolean
+        - name: ConsumerArn
+          in: query
+          required: false
+          description: The Amazon Resource Name (ARN) of the consumer that association for the datashare is removed from.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DisassociateDataShareConsumer
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DisassociateDataShareConsumer
+      operationId: POST_DisassociateDataShareConsumer
+      description: 'From a consumer account, remove association for the specified datashare. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DataShare'
+        '480':
+          description: InvalidDataShareFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDataShareFault'
+        '481':
+          description: InvalidNamespaceFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidNamespaceFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DisassociateDataShareConsumerMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DisassociateDataShareConsumer
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
   /#Action=EnableLogging:
     get:
       x-aws-operation-name: EnableLogging
@@ -10698,7 +11417,7 @@ paths:
         - name: DestinationRegion
           in: query
           required: true
-          description: '<p>The destination Region that you want to copy snapshots to.</p> <p>Constraints: Must be the name of a valid Region. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region">Regions and Endpoints</a> in the Amazon Web Services General Reference. </p>'
+          description: '<p>The destination Amazon Web Services Region that you want to copy snapshots to.</p> <p>Constraints: Must be the name of a valid Amazon Web Services Region. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region">Regions and Endpoints</a> in the Amazon Web Services General Reference. </p>'
           schema:
             type: string
             maxLength: 2147483647
@@ -10718,7 +11437,7 @@ paths:
         - name: ManualSnapshotRetentionPeriod
           in: query
           required: false
-          description: '<p>The number of days to retain newly copied snapshots in the destination Region after they are copied from the source Region. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>'
+          description: '<p>The number of days to retain newly copied snapshots in the destination Amazon Web Services Region after they are copied from the source Amazon Web Services Region. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>'
           schema:
             type: integer
         - name: Action
@@ -11185,7 +11904,7 @@ paths:
         - name: AquaConfigurationStatus
           in: query
           required: false
-          description: <p>The new value of AQUA configuration status. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
+          description: <p>The new value of AQUA configuration status. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
           schema:
             type: string
             enum:
@@ -11619,7 +12338,7 @@ paths:
         - name: NewClusterIdentifier
           in: query
           required: false
-          description: '<p>The new identifier for the cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an account.</p> </li> </ul> <p>Example: <code>examplecluster</code> </p>'
+          description: '<p>The new identifier for the cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an Amazon Web Services account.</p> </li> </ul> <p>Example: <code>examplecluster</code> </p>'
           schema:
             type: string
             maxLength: 2147483647
@@ -12217,7 +12936,7 @@ paths:
     get:
       x-aws-operation-name: ModifyClusterParameterGroup
       operationId: GET_ModifyClusterParameterGroup
-      description: '<p>Modifies the parameters of a parameter group.</p> <p> For more information about parameters and parameter groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
+      description: '<p>Modifies the parameters of a parameter group. For the parameters parameter, it can''t contain ASCII characters.</p> <p> For more information about parameters and parameter groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -12281,7 +13000,7 @@ paths:
     post:
       x-aws-operation-name: ModifyClusterParameterGroup
       operationId: POST_ModifyClusterParameterGroup
-      description: '<p>Modifies the parameters of a parameter group.</p> <p> For more information about parameters and parameter groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
+      description: '<p>Modifies the parameters of a parameter group. For the parameters parameter, it can''t contain ASCII characters.</p> <p> For more information about parameters and parameter groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -12959,7 +13678,7 @@ paths:
         - name: SourceType
           in: query
           required: false
-          description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>'
+          description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your Amazon Web Services account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>'
           schema:
             type: string
             maxLength: 2147483647
@@ -12977,7 +13696,7 @@ paths:
         - name: EventCategories
           in: query
           required: false
-          description: '<p>Specifies the Amazon Redshift event categories to be published by the event notification subscription.</p> <p>Values: configuration, management, monitoring, security</p>'
+          description: '<p>Specifies the Amazon Redshift event categories to be published by the event notification subscription.</p> <p>Values: configuration, management, monitoring, security, pending</p>'
           schema:
             type: array
             items:
@@ -13303,7 +14022,7 @@ paths:
     get:
       x-aws-operation-name: ModifySnapshotCopyRetentionPeriod
       operationId: GET_ModifySnapshotCopyRetentionPeriod
-      description: 'Modifies the number of days to retain snapshots in the destination Region after they are copied from the source Region. By default, this operation only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots are updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option, only newly copied manual snapshots have the new retention period. '
+      description: 'Modifies the number of days to retain snapshots in the destination Amazon Web Services Region after they are copied from the source Amazon Web Services Region. By default, this operation only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots are updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option, only newly copied manual snapshots have the new retention period. '
       responses:
         '200':
           description: Success
@@ -13345,14 +14064,14 @@ paths:
         - name: ClusterIdentifier
           in: query
           required: true
-          description: '<p>The unique identifier of the cluster for which you want to change the retention period for either automated or manual snapshots that are copied to a destination Region.</p> <p>Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.</p>'
+          description: '<p>The unique identifier of the cluster for which you want to change the retention period for either automated or manual snapshots that are copied to a destination Amazon Web Services Region.</p> <p>Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.</p>'
           schema:
             type: string
             maxLength: 2147483647
         - name: RetentionPeriod
           in: query
           required: true
-          description: '<p>The number of days to retain automated snapshots in the destination Region after they are copied from the source Region.</p> <p>By default, this only changes the retention period of copied automated snapshots. </p> <p>If you decrease the retention period for automated snapshots that are copied to a destination Region, Amazon Redshift deletes any existing automated snapshots that were copied to the destination Region and that fall outside of the new retention period.</p> <p>Constraints: Must be at least 1 and no more than 35 for automated snapshots. </p> <p>If you specify the <code>manual</code> option, only newly copied manual snapshots will have the new retention period. </p> <p>If you specify the value of -1 newly copied manual snapshots are retained indefinitely.</p> <p>Constraints: The number of days must be either -1 or an integer between 1 and 3,653 for manual snapshots.</p>'
+          description: '<p>The number of days to retain automated snapshots in the destination Amazon Web Services Region after they are copied from the source Amazon Web Services Region.</p> <p>By default, this only changes the retention period of copied automated snapshots. </p> <p>If you decrease the retention period for automated snapshots that are copied to a destination Amazon Web Services Region, Amazon Redshift deletes any existing automated snapshots that were copied to the destination Amazon Web Services Region and that fall outside of the new retention period.</p> <p>Constraints: Must be at least 1 and no more than 35 for automated snapshots. </p> <p>If you specify the <code>manual</code> option, only newly copied manual snapshots will have the new retention period. </p> <p>If you specify the value of -1 newly copied manual snapshots are retained indefinitely.</p> <p>Constraints: The number of days must be either -1 or an integer between 1 and 3,653 for manual snapshots.</p>'
           schema:
             type: integer
         - name: Manual
@@ -13386,7 +14105,7 @@ paths:
     post:
       x-aws-operation-name: ModifySnapshotCopyRetentionPeriod
       operationId: POST_ModifySnapshotCopyRetentionPeriod
-      description: 'Modifies the number of days to retain snapshots in the destination Region after they are copied from the source Region. By default, this operation only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots are updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option, only newly copied manual snapshots have the new retention period. '
+      description: 'Modifies the number of days to retain snapshots in the destination Amazon Web Services Region after they are copied from the source Amazon Web Services Region. By default, this operation only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots are updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option, only newly copied manual snapshots have the new retention period. '
       responses:
         '200':
           description: Success
@@ -14010,6 +14729,91 @@ paths:
             type: string
             enum:
               - '2012-12-01'
+  /#Action=RejectDataShare:
+    get:
+      x-aws-operation-name: RejectDataShare
+      operationId: GET_RejectDataShare
+      description: 'From the consumer account, rejects the specified datashare.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DataShare'
+        '480':
+          description: InvalidDataShareFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDataShareFault'
+      parameters:
+        - name: DataShareArn
+          in: query
+          required: true
+          description: The Amazon Resource Name (ARN) of the datashare to reject.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - RejectDataShare
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: RejectDataShare
+      operationId: POST_RejectDataShare
+      description: 'From the consumer account, rejects the specified datashare.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DataShare'
+        '480':
+          description: InvalidDataShareFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDataShareFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/RejectDataShareMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - RejectDataShare
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
   /#Action=ResetClusterParameterGroup:
     get:
       x-aws-operation-name: ResetClusterParameterGroup
@@ -14497,7 +15301,7 @@ paths:
         - name: ClusterIdentifier
           in: query
           required: true
-          description: '<p>The identifier of the cluster that will be created from restoring the snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an account.</p> </li> </ul>'
+          description: '<p>The identifier of the cluster that will be created from restoring the snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an Amazon Web Services account.</p> </li> </ul>'
           schema:
             type: string
             maxLength: 2147483647
@@ -14550,7 +15354,7 @@ paths:
         - name: OwnerAccount
           in: query
           required: false
-          description: 'The account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.'
+          description: 'The Amazon Web Services account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.'
           schema:
             type: string
             maxLength: 2147483647
@@ -14690,7 +15494,7 @@ paths:
         - name: AquaConfigurationStatus
           in: query
           required: false
-          description: <p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
+          description: <p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
           schema:
             type: string
             enum:
@@ -15276,7 +16080,7 @@ paths:
         - name: EC2SecurityGroupOwnerId
           in: query
           required: false
-          description: '<p>The account number of the owner of the security group specified in the <code>EC2SecurityGroupName</code> parameter. The Amazon Web Services access key ID is not an acceptable value. If <code>EC2SecurityGroupOwnerId</code> is specified, <code>EC2SecurityGroupName</code> must also be provided. and <code>CIDRIP</code> cannot be provided. </p> <p>Example: <code>111122223333</code> </p>'
+          description: '<p>The Amazon Web Services account number of the owner of the security group specified in the <code>EC2SecurityGroupName</code> parameter. The Amazon Web Services access key ID is not an acceptable value. If <code>EC2SecurityGroupOwnerId</code> is specified, <code>EC2SecurityGroupName</code> must also be provided. and <code>CIDRIP</code> cannot be provided. </p> <p>Example: <code>111122223333</code> </p>'
           schema:
             type: string
             maxLength: 2147483647
@@ -15416,7 +16220,7 @@ paths:
         - name: Account
           in: query
           required: false
-          description: The account ID whose access is to be revoked.
+          description: The Amazon Web Services account ID whose access is to be revoked.
           schema:
             type: string
             maxLength: 2147483647
@@ -15536,7 +16340,7 @@ paths:
     get:
       x-aws-operation-name: RevokeSnapshotAccess
       operationId: GET_RevokeSnapshotAccess
-      description: '<p>Removes the ability of the specified account to restore the specified snapshot. If the account is currently restoring the snapshot, the restore will run to completion.</p> <p> For more information about working with snapshots, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
+      description: '<p>Removes the ability of the specified Amazon Web Services account to restore the specified snapshot. If the account is currently restoring the snapshot, the restore will run to completion.</p> <p> For more information about working with snapshots, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -15580,7 +16384,7 @@ paths:
         - name: AccountWithRestoreAccess
           in: query
           required: true
-          description: The identifier of the account that can no longer restore the specified snapshot.
+          description: The identifier of the Amazon Web Services account that can no longer restore the specified snapshot.
           schema:
             type: string
             maxLength: 2147483647
@@ -15609,7 +16413,7 @@ paths:
     post:
       x-aws-operation-name: RevokeSnapshotAccess
       operationId: POST_RevokeSnapshotAccess
-      description: '<p>Removes the ability of the specified account to restore the specified snapshot. If the account is currently restoring the snapshot, the restore will run to completion.</p> <p> For more information about working with snapshots, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
+      description: '<p>Removes the ability of the specified Amazon Web Services account to restore the specified snapshot. If the account is currently restoring the snapshot, the restore will run to completion.</p> <p> For more information about working with snapshots, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -15798,7 +16602,7 @@ paths:
         - name: AccountId
           in: query
           required: true
-          description: The Region ID that owns the cluster.
+          description: The Amazon Web Services account ID that owns the cluster.
           schema:
             type: string
             pattern: '^[0-9]+$'
@@ -15998,6 +16802,27 @@ components:
     PartnerNotFoundFault: {}
     ClusterNotFoundFault: {}
     UnauthorizedPartnerIntegrationFault: {}
+    DataShare:
+      type: object
+      properties:
+        DataShareArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An Amazon Resource Name (ARN) that references the datashare that is owned by a specific namespace of the producer cluster. A datashare ARN is in the <code>arn:aws:redshift:{region}:{account-id}:{datashare}:{namespace-guid}/{datashare-name}</code> format.'
+        ProducerArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the producer.
+        AllowPubliclyAccessibleConsumers:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A value that specifies whether the datashare can be shared to a publicly accessible cluster.
+        DataShareAssociations:
+          allOf:
+            - $ref: '#/components/schemas/DataShareAssociationList'
+            - description: A value that specifies when the datashare has an association between a producer and data consumers.
+    InvalidDataShareFault: {}
+    InvalidNamespaceFault: {}
     AuthorizeClusterSecurityGroupIngressResult:
       type: object
       properties:
@@ -16013,11 +16838,11 @@ components:
         Grantor:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The account ID of the cluster owner.
+            - description: The Amazon Web Services account ID of the cluster owner.
         Grantee:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The account ID of the grantee of the cluster.
+            - description: The Amazon Web Services account ID of the grantee of the cluster.
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -16046,7 +16871,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Integer'
             - description: The number of Redshift-managed VPC endpoints created for the authorization.
-      description: Describes an endpoint authorization for authorizing Redshift-managed VPC endpoint access to a cluster across accounts.
+      description: Describes an endpoint authorization for authorizing Redshift-managed VPC endpoint access to a cluster across Amazon Web Services accounts.
     String:
       type: string
       maxLength: 2147483647
@@ -16265,7 +17090,7 @@ components:
         ResourceOwner:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The account ID of the owner of the cluster.
+            - description: The Amazon Web Services account ID of the owner of the cluster.
         SubnetGroupName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -16669,6 +17494,39 @@ components:
             - $ref: '#/components/schemas/ClusterList'
             - description: 'A list of <code>Cluster</code> objects, where each object describes one cluster. '
       description: 'Contains the output from the <a>DescribeClusters</a> action. '
+    DescribeDataSharesResult:
+      type: object
+      properties:
+        DataShares:
+          allOf:
+            - $ref: '#/components/schemas/DataShareList'
+            - description: The results returned from describing datashares.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+    DescribeDataSharesForConsumerResult:
+      type: object
+      properties:
+        DataShares:
+          allOf:
+            - $ref: '#/components/schemas/DataShareList'
+            - description: Shows the results of datashares available for consumers.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForConsumer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+    DescribeDataSharesForProducerResult:
+      type: object
+      properties:
+        DataShares:
+          allOf:
+            - $ref: '#/components/schemas/DataShareList'
+            - description: Shows the results of datashares available for producers.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForProducer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
     DescribeDefaultClusterParametersResult:
       type: object
       properties:
@@ -17270,12 +18128,12 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The identifier of an account authorized to restore a snapshot.
+            - description: The identifier of an Amazon Web Services account authorized to restore a snapshot.
         AccountAlias:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The identifier of an Amazon Web Services support account authorized to restore a snapshot. For Amazon Web Services Support, the identifier is <code>amazon-redshift-support</code>. '
-      description: Describes an account authorized to restore a snapshot.
+      description: Describes an Amazon Web Services account authorized to restore a snapshot.
     AccountsWithRestoreAccessList:
       type: array
       items:
@@ -17311,8 +18169,28 @@ components:
         AquaConfigurationStatus:
           allOf:
             - $ref: '#/components/schemas/AquaConfigurationStatus'
-            - description: <p>The value represents how the cluster is configured to use AQUA. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
+            - description: <p>The value represents how the cluster is configured to use AQUA. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
       description: The AQUA (Advanced Query Accelerator) configuration of the cluster.
+    BooleanOptional:
+      type: boolean
+    AssociateDataShareConsumerMessage:
+      type: object
+      required:
+        - DataShareArn
+      title: AssociateDataShareConsumerMessage
+      properties:
+        DataShareArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the datashare that the consumer is to use with the account or the namespace.
+        AssociateEntireAccount:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: A value that specifies whether the datashare is associated with the entire account.
+        ConsumerArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the consumer that is associated with the datashare.
     ClusterAssociatedToSchedule:
       type: object
       properties:
@@ -17393,7 +18271,7 @@ components:
         EC2SecurityGroupOwnerId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The account number of the owner of the security group specified by the <i>EC2SecurityGroupName</i> parameter. The Amazon Web Services Access Key ID is not an acceptable value. </p> <p>Example: <code>111122223333</code> </p>'
+            - description: '<p>The Amazon Web Services account number of the owner of the security group specified by the <i>EC2SecurityGroupName</i> parameter. The Amazon Web Services Access Key ID is not an acceptable value. </p> <p>Example: <code>111122223333</code> </p>'
       description: <p/>
     ClusterSecurityGroup:
       type: object
@@ -17419,6 +18297,21 @@ components:
             - $ref: '#/components/schemas/TagList'
             - description: The list of tags for the cluster security group.
       description: Describes a security group.
+    AuthorizeDataShareMessage:
+      type: object
+      required:
+        - DataShareArn
+        - ConsumerIdentifier
+      title: AuthorizeDataShareMessage
+      properties:
+        DataShareArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the datashare that producers are to authorize sharing for.
+        ConsumerIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the data consumer that is authorized to access the datashare. This identifier is an AWS account ID.
     VpcIdentifierList:
       type: array
       items:
@@ -17439,7 +18332,7 @@ components:
         Account:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The account ID to grant access to.
+            - description: The Amazon Web Services account ID to grant access to.
         VpcIds:
           allOf:
             - $ref: '#/components/schemas/VpcIdentifierList'
@@ -17462,7 +18355,7 @@ components:
         AccountWithRestoreAccess:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The identifier of the account authorized to restore the specified snapshot.</p> <p>To share a snapshot with Amazon Web Services Support, specify amazon-redshift-support.</p>'
+            - description: '<p>The identifier of the Amazon Web Services account authorized to restore the specified snapshot.</p> <p>To share a snapshot with Amazon Web Services Support, specify amazon-redshift-support.</p>'
       description: <p/>
     Snapshot:
       type: object
@@ -17542,11 +18435,11 @@ components:
         AccountsWithRestoreAccess:
           allOf:
             - $ref: '#/components/schemas/AccountsWithRestoreAccessList'
-            - description: 'A list of the accounts authorized to restore the snapshot. Returns <code>null</code> if no accounts are authorized. Visible only to the snapshot owner. '
+            - description: 'A list of the Amazon Web Services accounts authorized to restore the snapshot. Returns <code>null</code> if no accounts are authorized. Visible only to the snapshot owner. '
         OwnerAccount:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'For manual snapshots, the account used to create or copy the snapshot. For automatic snapshots, the owner of the cluster. The owner can perform all snapshot actions, such as sharing a manual snapshot.'
+            - description: 'For manual snapshots, the Amazon Web Services account used to create or copy the snapshot. For automatic snapshots, the owner of the cluster. The owner can perform all snapshot actions, such as sharing a manual snapshot.'
         TotalBackupSizeInMegaBytes:
           allOf:
             - $ref: '#/components/schemas/Double'
@@ -17710,8 +18603,6 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The text message describing the error.
       description: Describes the errors returned by a snapshot.
-    BooleanOptional:
-      type: boolean
     CancelResizeMessage:
       type: object
       required:
@@ -18436,7 +19327,7 @@ components:
         TargetSnapshotIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The identifier given to the new manual snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank.</p> </li> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for the account that is making the request.</p> </li> </ul>'
+            - description: '<p>The identifier given to the new manual snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank.</p> </li> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for the Amazon Web Services account that is making the request.</p> </li> </ul>'
         ManualSnapshotRetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -18487,7 +19378,7 @@ components:
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. The identifier also appears in the Amazon Redshift console.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an account.</p> </li> </ul> <p>Example: <code>myexamplecluster</code> </p>'
+            - description: '<p>A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. The identifier also appears in the Amazon Redshift console.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an Amazon Web Services account.</p> </li> </ul> <p>Example: <code>myexamplecluster</code> </p>'
         ClusterType:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -18607,7 +19498,7 @@ components:
         AquaConfigurationStatus:
           allOf:
             - $ref: '#/components/schemas/AquaConfigurationStatus'
-            - description: <p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
+            - description: <p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
       description: <p/>
     CreateClusterParameterGroupMessage:
       type: object
@@ -18620,11 +19511,11 @@ components:
         ParameterGroupName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The name of the cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 alphanumeric characters or hyphens</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique withing your account.</p> </li> </ul> <note> <p>This value is stored as a lower-case string.</p> </note>'
+            - description: '<p>The name of the cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 alphanumeric characters or hyphens</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique withing your Amazon Web Services account.</p> </li> </ul> <note> <p>This value is stored as a lower-case string.</p> </note>'
         ParameterGroupFamily:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters.</p> <p>To get a list of valid parameter group family names, you can call <a>DescribeClusterParameterGroups</a>. By default, Amazon Redshift returns a list of all the parameter groups that are owned by your account, including the default parameter groups for each Amazon Redshift engine version. The parameter group family names associated with the default parameter groups provide you the valid values. For example, a valid family name is "redshift-1.0". </p>'
+            - description: '<p>The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters.</p> <p>To get a list of valid parameter group family names, you can call <a>DescribeClusterParameterGroups</a>. By default, Amazon Redshift returns a list of all the parameter groups that are owned by your Amazon Web Services account, including the default parameter groups for each Amazon Redshift engine version. The parameter group family names associated with the default parameter groups provide you the valid values. For example, a valid family name is "redshift-1.0". </p>'
         Description:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -18644,7 +19535,7 @@ components:
         ClusterSecurityGroupName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The name for the security group. Amazon Redshift stores the value as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain no more than 255 alphanumeric characters or hyphens.</p> </li> <li> <p>Must not be "Default".</p> </li> <li> <p>Must be unique for all security groups that are created by your account.</p> </li> </ul> <p>Example: <code>examplesecuritygroup</code> </p>'
+            - description: '<p>The name for the security group. Amazon Redshift stores the value as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain no more than 255 alphanumeric characters or hyphens.</p> </li> <li> <p>Must not be "Default".</p> </li> <li> <p>Must be unique for all security groups that are created by your Amazon Web Services account.</p> </li> </ul> <p>Example: <code>examplesecuritygroup</code> </p>'
         Description:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -18664,7 +19555,7 @@ components:
         SnapshotIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>A unique identifier for the snapshot that you are requesting. This identifier must be unique for all snapshots within the account.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank</p> </li> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens</p> </li> </ul> <p>Example: <code>my-snapshot-id</code> </p>'
+            - description: '<p>A unique identifier for the snapshot that you are requesting. This identifier must be unique for all snapshots within the Amazon Web Services account.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank</p> </li> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens</p> </li> </ul> <p>Example: <code>my-snapshot-id</code> </p>'
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -18696,7 +19587,7 @@ components:
         ClusterSubnetGroupName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The name for the subnet group. Amazon Redshift stores the value as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain no more than 255 alphanumeric characters or hyphens.</p> </li> <li> <p>Must not be "Default".</p> </li> <li> <p>Must be unique for all subnet groups that are created by your account.</p> </li> </ul> <p>Example: <code>examplesubnetgroup</code> </p>'
+            - description: '<p>The name for the subnet group. Amazon Redshift stores the value as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain no more than 255 alphanumeric characters or hyphens.</p> </li> <li> <p>Must not be "Default".</p> </li> <li> <p>Must be unique for all subnet groups that are created by your Amazon Web Services account.</p> </li> </ul> <p>Example: <code>examplesubnetgroup</code> </p>'
         Description:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -18724,7 +19615,7 @@ components:
         ResourceOwner:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The account ID of the owner of the cluster. This is only required if the cluster is in another account.
+            - description: The Amazon Web Services account ID of the owner of the cluster. This is only required if the cluster is in another Amazon Web Services account.
         EndpointName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -18769,7 +19660,7 @@ components:
         SourceType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>'
+            - description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your Amazon Web Services account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>'
         SourceIds:
           allOf:
             - $ref: '#/components/schemas/SourceIdsList'
@@ -18777,7 +19668,7 @@ components:
         EventCategories:
           allOf:
             - $ref: '#/components/schemas/EventCategoriesList'
-            - description: '<p>Specifies the Amazon Redshift event categories to be published by the event notification subscription.</p> <p>Values: configuration, management, monitoring, security</p>'
+            - description: '<p>Specifies the Amazon Redshift event categories to be published by the event notification subscription.</p> <p>Values: configuration, management, monitoring, security, pending</p>'
         Severity:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -18797,7 +19688,7 @@ components:
         CustomerAwsId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The account associated with the Amazon Redshift event notification subscription.
+            - description: The Amazon Web Services account associated with the Amazon Redshift event notification subscription.
         CustSubscriptionId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -18825,7 +19716,7 @@ components:
         EventCategoriesList:
           allOf:
             - $ref: '#/components/schemas/EventCategoriesList'
-            - description: '<p>The list of Amazon Redshift event categories specified in the event notification subscription.</p> <p>Values: Configuration, Management, Monitoring, Security</p>'
+            - description: '<p>The list of Amazon Redshift event categories specified in the event notification subscription.</p> <p>Values: Configuration, Management, Monitoring, Security, Pending</p>'
         Severity:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -19000,7 +19891,7 @@ components:
         SnapshotCopyGrantName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The name of the snapshot copy grant. This name must be unique in the region for the account.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an account.</p> </li> </ul>'
+            - description: '<p>The name of the snapshot copy grant. This name must be unique in the region for the Amazon Web Services account.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an Amazon Web Services account.</p> </li> </ul>'
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -19139,6 +20030,56 @@ components:
     Double:
       type: number
       format: double
+    DataShareAssociationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataShareAssociation'
+    DataShareStatus:
+      type: string
+      enum:
+        - ACTIVE
+        - PENDING_AUTHORIZATION
+        - AUTHORIZED
+        - DEAUTHORIZED
+        - REJECTED
+        - AVAILABLE
+    DataShareAssociation:
+      type: object
+      properties:
+        ConsumerIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the consumer accounts that have an association with a producer datashare.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/DataShareStatus'
+            - description: The status of the datashare that is associated.
+        CreatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The creation date of the datashare that is associated.
+        StatusChangeDate:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The status change data of the datashare that is associated.
+      description: 'The association of a datashare from a producer account with a data consumer. '
+    DataShareList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataShare'
+    DataShareStatusForConsumer:
+      type: string
+      enum:
+        - ACTIVE
+        - AVAILABLE
+    DataShareStatusForProducer:
+      type: string
+      enum:
+        - ACTIVE
+        - AUTHORIZED
+        - PENDING_AUTHORIZATION
+        - DEAUTHORIZED
+        - REJECTED
     DoubleOptional:
       type: number
       format: double
@@ -19149,6 +20090,21 @@ components:
           - $ref: '#/components/schemas/String'
           - xml:
               name: DbGroup
+    DeauthorizeDataShareMessage:
+      type: object
+      required:
+        - DataShareArn
+        - ConsumerIdentifier
+      title: DeauthorizeDataShareMessage
+      properties:
+        DataShareArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the datashare to remove authorization from.
+        ConsumerIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the data consumer that is to have authorization removed from the datashare. This identifier is an AWS account ID.
     DefaultClusterParameters:
       type: object
       properties:
@@ -19508,7 +20464,7 @@ components:
         OwnerAccount:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The account used to create or copy the snapshot. Use this field to filter the results to snapshots owned by a particular account. To describe snapshots you own, either specify your account, or do not specify the parameter.'
+            - description: 'The Amazon Web Services account used to create or copy the snapshot. Use this field to filter the results to snapshots owned by a particular account. To describe snapshots you own, either specify your Amazon Web Services account, or do not specify the parameter.'
         TagKeys:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
@@ -19613,6 +20569,62 @@ components:
             - $ref: '#/components/schemas/TagValueList'
             - description: 'A tag value or values for which you want to return all matching clusters that are associated with the specified tag value or values. For example, suppose that you have clusters that are tagged with values called <code>admin</code> and <code>test</code>. If you specify both of these tag values in the request, Amazon Redshift returns a response with the clusters that have either or both of these tag values associated with them.'
       description: <p/>
+    DescribeDataSharesForConsumerMessage:
+      type: object
+      title: DescribeDataSharesForConsumerMessage
+      properties:
+        ConsumerArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the consumer that returns in the list of datashares.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/DataShareStatusForConsumer'
+            - description: 'An identifier giving the status of a datashare in the consumer cluster. If this field is specified, Amazon Redshift returns the list of datashares that have the specified status.'
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. '
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForConsumer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+    DescribeDataSharesForProducerMessage:
+      type: object
+      title: DescribeDataSharesForProducerMessage
+      properties:
+        ProducerArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the producer that returns in the list of datashares.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/DataShareStatusForProducer'
+            - description: 'An identifier giving the status of a datashare in the producer. If this field is specified, Amazon Redshift returns the list of datashares that have the specified status.'
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. '
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataSharesForProducer</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
+    DescribeDataSharesMessage:
+      type: object
+      title: DescribeDataSharesMessage
+      properties:
+        DataShareArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the datashare to describe details of.
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. '
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
     DescribeDefaultClusterParametersMessage:
       type: object
       required:
@@ -19643,7 +20655,7 @@ components:
         ResourceOwner:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The account ID of the owner of the cluster.
+            - description: The Amazon Web Services account ID of the owner of the cluster.
         EndpointName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -19671,7 +20683,7 @@ components:
         Account:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The Aaccount ID of either the cluster owner (grantor) or grantee. If <code>Grantee</code> parameter is true, then the <code>Account</code> value is of the grantor.'
+            - description: 'The AAmazon Web Services account ID of either the cluster owner (grantor) or grantee. If <code>Grantee</code> parameter is true, then the <code>Account</code> value is of the grantor.'
         Grantee:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -19766,7 +20778,7 @@ components:
         HsmClientCertificateIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The identifier of a specific HSM client certificate for which you want information. If no identifier is specified, information is returned for all HSM client certificates owned by your account.'
+            - description: 'The identifier of a specific HSM client certificate for which you want information. If no identifier is specified, information is returned for all HSM client certificates owned by your Amazon Web Services account.'
         MaxRecords:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -19791,7 +20803,7 @@ components:
         HsmConfigurationIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The identifier of a specific Amazon Redshift HSM configuration to be described. If no identifier is specified, information is returned for all HSM configurations owned by your account.'
+            - description: 'The identifier of a specific Amazon Redshift HSM configuration to be described. If no identifier is specified, information is returned for all HSM configurations owned by your Amazon Web Services account.'
         MaxRecords:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -19848,7 +20860,7 @@ components:
         OwnerAccount:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.'
+            - description: 'The Amazon Web Services account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.'
         Filters:
           allOf:
             - $ref: '#/components/schemas/NodeConfigurationOptionsFilterList'
@@ -19911,7 +20923,7 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/PartnerIntegrationAccountId'
-            - description: The Region ID that owns the cluster.
+            - description: The Amazon Web Services account ID that owns the cluster.
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/PartnerIntegrationClusterIdentifier'
@@ -19974,7 +20986,7 @@ components:
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The unique identifier of a cluster whose resize progress you are requesting. This parameter is case-sensitive.</p> <p>By default, resize operations for all clusters defined for an account are returned.</p>'
+            - description: '<p>The unique identifier of a cluster whose resize progress you are requesting. This parameter is case-sensitive.</p> <p>By default, resize operations for all clusters defined for an Amazon Web Services account are returned.</p>'
       description: <p/>
     ScheduledActionTypeValues:
       type: string
@@ -20189,6 +21201,24 @@ components:
             - $ref: '#/components/schemas/String'
             - description: '<p>The unique identifier of the source cluster that you want to disable copying of snapshots to a destination region.</p> <p>Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.</p>'
       description: <p/>
+    DisassociateDataShareConsumerMessage:
+      type: object
+      required:
+        - DataShareArn
+      title: DisassociateDataShareConsumerMessage
+      properties:
+        DataShareArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Amazon Resource Name (ARN) of the datashare to remove association for. '
+        DisassociateEntireAccount:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: A value that specifies whether association for the datashare is removed from the entire account.
+        ConsumerArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the consumer that association for the datashare is removed from.
     EC2SecurityGroup:
       type: object
       properties:
@@ -20203,7 +21233,7 @@ components:
         EC2SecurityGroupOwnerId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The account ID of the owner of the EC2 security group specified in the <code>EC2SecurityGroupName</code> field. '
+            - description: 'The Amazon Web Services account ID of the owner of the EC2 security group specified in the <code>EC2SecurityGroupName</code> field. '
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -20266,7 +21296,7 @@ components:
         DestinationRegion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The destination Region that you want to copy snapshots to.</p> <p>Constraints: Must be the name of a valid Region. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region">Regions and Endpoints</a> in the Amazon Web Services General Reference. </p>'
+            - description: '<p>The destination Amazon Web Services Region that you want to copy snapshots to.</p> <p>Constraints: Must be the name of a valid Amazon Web Services Region. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region">Regions and Endpoints</a> in the Amazon Web Services General Reference. </p>'
         RetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -20278,7 +21308,7 @@ components:
         ManualSnapshotRetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
-            - description: '<p>The number of days to retain newly copied snapshots in the destination Region after they are copied from the source Region. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>'
+            - description: '<p>The number of days to retain newly copied snapshots in the destination Amazon Web Services Region after they are copied from the source Amazon Web Services Region. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>'
       description: <p/>
     VpcEndpointsList:
       type: array
@@ -20329,7 +21359,7 @@ components:
         EventCategories:
           allOf:
             - $ref: '#/components/schemas/EventCategoriesList'
-            - description: '<p>A list of the event categories.</p> <p>Values: Configuration, Management, Monitoring, Security</p>'
+            - description: '<p>A list of the event categories.</p> <p>Values: Configuration, Management, Monitoring, Security, Pending</p>'
         Severity:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -20537,7 +21567,7 @@ components:
         AquaConfigurationStatus:
           allOf:
             - $ref: '#/components/schemas/AquaConfigurationStatus'
-            - description: <p>The new value of AQUA configuration status. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
+            - description: <p>The new value of AQUA configuration status. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
     ModifyAuthenticationProfileMessage:
       type: object
       required:
@@ -20686,7 +21716,7 @@ components:
         NewClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The new identifier for the cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an account.</p> </li> </ul> <p>Example: <code>examplecluster</code> </p>'
+            - description: '<p>The new identifier for the cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an Amazon Web Services account.</p> </li> </ul> <p>Example: <code>examplecluster</code> </p>'
         PubliclyAccessible:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -20827,7 +21857,7 @@ components:
         SourceType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>'
+            - description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your Amazon Web Services account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>'
         SourceIds:
           allOf:
             - $ref: '#/components/schemas/SourceIdsList'
@@ -20835,7 +21865,7 @@ components:
         EventCategories:
           allOf:
             - $ref: '#/components/schemas/EventCategoriesList'
-            - description: '<p>Specifies the Amazon Redshift event categories to be published by the event notification subscription.</p> <p>Values: configuration, management, monitoring, security</p>'
+            - description: '<p>Specifies the Amazon Redshift event categories to be published by the event notification subscription.</p> <p>Values: configuration, management, monitoring, security, pending</p>'
         Severity:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -20893,11 +21923,11 @@ components:
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The unique identifier of the cluster for which you want to change the retention period for either automated or manual snapshots that are copied to a destination Region.</p> <p>Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.</p>'
+            - description: '<p>The unique identifier of the cluster for which you want to change the retention period for either automated or manual snapshots that are copied to a destination Amazon Web Services Region.</p> <p>Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.</p>'
         RetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: '<p>The number of days to retain automated snapshots in the destination Region after they are copied from the source Region.</p> <p>By default, this only changes the retention period of copied automated snapshots. </p> <p>If you decrease the retention period for automated snapshots that are copied to a destination Region, Amazon Redshift deletes any existing automated snapshots that were copied to the destination Region and that fall outside of the new retention period.</p> <p>Constraints: Must be at least 1 and no more than 35 for automated snapshots. </p> <p>If you specify the <code>manual</code> option, only newly copied manual snapshots will have the new retention period. </p> <p>If you specify the value of -1 newly copied manual snapshots are retained indefinitely.</p> <p>Constraints: The number of days must be either -1 or an integer between 1 and 3,653 for manual snapshots.</p>'
+            - description: '<p>The number of days to retain automated snapshots in the destination Amazon Web Services Region after they are copied from the source Amazon Web Services Region.</p> <p>By default, this only changes the retention period of copied automated snapshots. </p> <p>If you decrease the retention period for automated snapshots that are copied to a destination Amazon Web Services Region, Amazon Redshift deletes any existing automated snapshots that were copied to the destination Amazon Web Services Region and that fall outside of the new retention period.</p> <p>Constraints: Must be at least 1 and no more than 35 for automated snapshots. </p> <p>If you specify the <code>manual</code> option, only newly copied manual snapshots will have the new retention period. </p> <p>If you specify the value of -1 newly copied manual snapshots are retained indefinitely.</p> <p>Constraints: The number of days must be either -1 or an integer between 1 and 3,653 for manual snapshots.</p>'
         Manual:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -21097,7 +22127,7 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/PartnerIntegrationAccountId'
-            - description: The Region ID that owns the cluster.
+            - description: The Amazon Web Services account ID that owns the cluster.
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/PartnerIntegrationClusterIdentifier'
@@ -21155,6 +22185,16 @@ components:
           - $ref: '#/components/schemas/RecurringCharge'
           - xml:
               name: RecurringCharge
+    RejectDataShareMessage:
+      type: object
+      required:
+        - DataShareArn
+      title: RejectDataShareMessage
+      properties:
+        DataShareArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the datashare to reject.
     ReservedNodeOfferingType:
       type: string
       enum:
@@ -21243,7 +22283,7 @@ components:
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The identifier of the cluster that will be created from restoring the snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an account.</p> </li> </ul>'
+            - description: '<p>The identifier of the cluster that will be created from restoring the snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an Amazon Web Services account.</p> </li> </ul>'
         SnapshotIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -21275,7 +22315,7 @@ components:
         OwnerAccount:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.'
+            - description: 'The Amazon Web Services account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.'
         HsmClientCertificateIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -21351,7 +22391,7 @@ components:
         AquaConfigurationStatus:
           allOf:
             - $ref: '#/components/schemas/AquaConfigurationStatus'
-            - description: <p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
+            - description: <p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>
       description: <p/>
     RestoreTableFromClusterSnapshotMessage:
       type: object
@@ -21497,7 +22537,7 @@ components:
         EC2SecurityGroupOwnerId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The account number of the owner of the security group specified in the <code>EC2SecurityGroupName</code> parameter. The Amazon Web Services access key ID is not an acceptable value. If <code>EC2SecurityGroupOwnerId</code> is specified, <code>EC2SecurityGroupName</code> must also be provided. and <code>CIDRIP</code> cannot be provided. </p> <p>Example: <code>111122223333</code> </p>'
+            - description: '<p>The Amazon Web Services account number of the owner of the security group specified in the <code>EC2SecurityGroupName</code> parameter. The Amazon Web Services access key ID is not an acceptable value. If <code>EC2SecurityGroupOwnerId</code> is specified, <code>EC2SecurityGroupName</code> must also be provided. and <code>CIDRIP</code> cannot be provided. </p> <p>Example: <code>111122223333</code> </p>'
       description: <p/>
     RevokeEndpointAccessMessage:
       type: object
@@ -21510,7 +22550,7 @@ components:
         Account:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The account ID whose access is to be revoked.
+            - description: The Amazon Web Services account ID whose access is to be revoked.
         VpcIds:
           allOf:
             - $ref: '#/components/schemas/VpcIdentifierList'
@@ -21537,7 +22577,7 @@ components:
         AccountWithRestoreAccess:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The identifier of the account that can no longer restore the specified snapshot.
+            - description: The identifier of the Amazon Web Services account that can no longer restore the specified snapshot.
       description: <p/>
     RotateEncryptionKeyMessage:
       type: object
@@ -21703,7 +22743,7 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/PartnerIntegrationAccountId'
-            - description: The Region ID that owns the cluster.
+            - description: The Amazon Web Services account ID that owns the cluster.
         ClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/PartnerIntegrationClusterIdentifier'

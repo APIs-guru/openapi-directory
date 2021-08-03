@@ -1163,6 +1163,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GlueEncryptionException'
+        '486':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
       requestBody:
         required: true
         content:
@@ -1865,6 +1871,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GlueEncryptionException'
+        '487':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
       requestBody:
         required: true
         content:
@@ -2420,6 +2432,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OperationTimeoutException'
+        '484':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
       requestBody:
         required: true
         content:
@@ -3059,6 +3077,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OperationTimeoutException'
+        '484':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
       requestBody:
         required: true
         content:
@@ -9053,6 +9077,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GlueEncryptionException'
+        '485':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
       requestBody:
         required: true
         content:
@@ -10302,6 +10332,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/DatabaseInput'
             - description: The metadata for the database.
+    ConcurrentModificationException: {}
     CreateDevEndpointResponse:
       type: object
       properties:
@@ -10542,7 +10573,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkerType'
             - description: '<p>The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> </ul>'
-    ConcurrentModificationException: {}
     CreateMLTransformResponse:
       type: object
       properties:
@@ -13289,7 +13319,7 @@ components:
         EnableHybrid:
           allOf:
             - $ref: '#/components/schemas/EnableHybridValues'
-            - description: '<p>If <code>''TRUE''</code>, indicates that you are using both methods to grant cross-account access to Data Catalog resources:</p> <ul> <li> <p>By directly updating the resource policy with <code>PutResourePolicy</code> </p> </li> <li> <p>By using the <b>Grant permissions</b> command on the Management Console.</p> </li> </ul> <p>Must be set to <code>''TRUE''</code> if you have already used the Management Console to grant cross-account access, otherwise the call fails. Default is ''FALSE''.</p>'
+            - description: '<p>If <code>''TRUE''</code>, indicates that you are using both methods to grant cross-account access to Data Catalog resources:</p> <ul> <li> <p>By directly updating the resource policy with <code>PutResourePolicy</code> </p> </li> <li> <p>By using the <b>Grant permissions</b> command on the Amazon Web Services Management Console.</p> </li> </ul> <p>Must be set to <code>''TRUE''</code> if you have already used the Management Console to grant cross-account access, otherwise the call fails. Default is ''FALSE''.</p>'
     PutSchemaVersionMetadataResponse:
       type: object
       properties:
@@ -15713,7 +15743,7 @@ components:
         ConnectionType:
           allOf:
             - $ref: '#/components/schemas/ConnectionType'
-            - description: '<p>The type of the connection. Currently, these types are supported:</p> <ul> <li> <p> <code>JDBC</code> - Designates a connection to a database through Java Database Connectivity (JDBC).</p> </li> <li> <p> <code>KAFKA</code> - Designates a connection to an Apache Kafka streaming platform.</p> </li> <li> <p> <code>MONGODB</code> - Designates a connection to a MongoDB document database.</p> </li> <li> <p> <code>NETWORK</code> - Designates a network connection to a data source within an Amazon Virtual Private Cloud environment (Amazon VPC).</p> </li> <li> <p> <code>MARKETPLACE</code> - Uses configuration settings contained in a connector purchased from Marketplace to read from and write to data stores that are not natively supported by Glue.</p> </li> <li> <p> <code>CUSTOM</code> - Uses configuration settings contained in a custom connector to read from and write to data stores that are not natively supported by Glue.</p> </li> </ul> <p>SFTP is not supported.</p>'
+            - description: '<p>The type of the connection. Currently, these types are supported:</p> <ul> <li> <p> <code>JDBC</code> - Designates a connection to a database through Java Database Connectivity (JDBC).</p> </li> <li> <p> <code>KAFKA</code> - Designates a connection to an Apache Kafka streaming platform.</p> </li> <li> <p> <code>MONGODB</code> - Designates a connection to a MongoDB document database.</p> </li> <li> <p> <code>NETWORK</code> - Designates a network connection to a data source within an Amazon Virtual Private Cloud environment (Amazon VPC).</p> </li> <li> <p> <code>MARKETPLACE</code> - Uses configuration settings contained in a connector purchased from Amazon Web Services Marketplace to read from and write to data stores that are not natively supported by Glue.</p> </li> <li> <p> <code>CUSTOM</code> - Uses configuration settings contained in a custom connector to read from and write to data stores that are not natively supported by Glue.</p> </li> </ul> <p>SFTP is not supported.</p>'
         MatchCriteria:
           allOf:
             - $ref: '#/components/schemas/MatchCriteria'
