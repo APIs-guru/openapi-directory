@@ -301,7 +301,7 @@ paths:
                     notificationTargets:
                       allOf:
                         - $ref: '#/components/schemas/NotificationTargetSet'
-                        - description: 'The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel using the SNS topics. '
+                        - description: The SNS targets that are notified when updates are made to an incident.
                     summary:
                       allOf:
                         - $ref: '#/components/schemas/IncidentSummary'
@@ -386,7 +386,6 @@ paths:
             schema:
               type: object
               required:
-                - clientToken
                 - eventData
                 - eventTime
                 - eventType
@@ -398,7 +397,7 @@ paths:
                   minLength: 0
                   maxLength: 128
                 eventData:
-                  description: A short description of the event.
+                  description: A valid JSON string. There is no other schema imposed. A short description of the event.
                   type: string
                   minLength: 0
                   maxLength: 6000
@@ -2023,7 +2022,7 @@ paths:
                   minimum: 1
                   maximum: 5
                 notificationTargets:
-                  description: <p>The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel using the SNS topics. </p> <p>Using multiple SNS topics creates redundancy in the case that a Region is down during the incident.</p>
+                  description: <p>The SNS targets that are notified when updates are made to an incident.</p> <p>Using multiple SNS topics creates redundancy in the case that a Region is down during the incident.</p>
                   type: array
                   items:
                     $ref: '#/components/schemas/NotificationTargetItem'
@@ -2330,7 +2329,7 @@ paths:
                   minimum: 1
                   maximum: 5
                 incidentTemplateNotificationTargets:
-                  description: The SNS targets that AWS Chatbot uses to notify the chat channels and perform actions on the incident record.
+                  description: The SNS targets that are notified when updates are made to an incident.
                   type: array
                   items:
                     $ref: '#/components/schemas/NotificationTargetItem'
@@ -2409,7 +2408,6 @@ paths:
             schema:
               type: object
               required:
-                - clientToken
                 - eventId
                 - incidentRecordArn
               properties:
@@ -2851,7 +2849,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the SNS topic.
-      description: The SNS topic that's used by AWS Chatbot to notify the incidents chat channel.
+      description: The SNS targets that are notified when updates are made to an incident.
     UpdateRelatedItemsOutput:
       type: object
       properties: {}
@@ -3069,7 +3067,7 @@ components:
         notificationTargets:
           allOf:
             - $ref: '#/components/schemas/NotificationTargetSet'
-            - description: 'The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel using the SNS topics. '
+            - description: The SNS targets that are notified when updates are made to an incident.
         summary:
           allOf:
             - $ref: '#/components/schemas/IncidentSummary'
@@ -3140,7 +3138,6 @@ components:
     CreateTimelineEventInput:
       type: object
       required:
-        - clientToken
         - eventData
         - eventTime
         - eventType
@@ -3154,7 +3151,7 @@ components:
         eventData:
           allOf:
             - $ref: '#/components/schemas/EventData'
-            - description: A short description of the event.
+            - description: A valid JSON string. There is no other schema imposed. A short description of the event.
         eventTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -3341,7 +3338,7 @@ components:
         notificationTargets:
           allOf:
             - $ref: '#/components/schemas/NotificationTargetSet'
-            - description: The SNS targets that AWS Chatbot uses to notify the chat channels and perform actions on the incident record.
+            - description: The SNS targets that are notified when updates are made to an incident.
         resolvedTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -3374,6 +3371,10 @@ components:
         - regionMap
         - status
       properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the replication set.
         createdBy:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -3973,7 +3974,7 @@ components:
         notificationTargets:
           allOf:
             - $ref: '#/components/schemas/NotificationTargetSet'
-            - description: <p>The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel using the SNS topics. </p> <p>Using multiple SNS topics creates redundancy in the case that a Region is down during the incident.</p>
+            - description: <p>The SNS targets that are notified when updates are made to an incident.</p> <p>Using multiple SNS topics creates redundancy in the case that a Region is down during the incident.</p>
         status:
           allOf:
             - $ref: '#/components/schemas/IncidentRecordStatus'
@@ -4047,7 +4048,7 @@ components:
         chatChannel:
           allOf:
             - $ref: '#/components/schemas/ChatChannel'
-            - description: The AWS Chatbot chat channel used for collaboration during an incident.
+            - description: <p>The AWS Chatbot chat channel used for collaboration during an incident.</p> <p>Use the empty structure to remove the chat channel from the response plan.</p>
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
@@ -4071,7 +4072,7 @@ components:
         incidentTemplateNotificationTargets:
           allOf:
             - $ref: '#/components/schemas/NotificationTargetSet'
-            - description: The SNS targets that AWS Chatbot uses to notify the chat channels and perform actions on the incident record.
+            - description: The SNS targets that are notified when updates are made to an incident.
         incidentTemplateSummary:
           allOf:
             - $ref: '#/components/schemas/IncidentSummary'
@@ -4083,7 +4084,6 @@ components:
     UpdateTimelineEventInput:
       type: object
       required:
-        - clientToken
         - eventId
         - incidentRecordArn
       title: UpdateTimelineEventInput

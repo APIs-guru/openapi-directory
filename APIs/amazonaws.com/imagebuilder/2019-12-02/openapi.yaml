@@ -2793,7 +2793,7 @@ paths:
                     - Shared
                     - Amazon
                 filters:
-                  description: The filters.
+                  description: '<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>description</code> </p> </li> <li> <p> <code>name</code> </p> </li> <li> <p> <code>platform</code> </p> </li> <li> <p> <code>supportedOsVersion</code> </p> </li> <li> <p> <code>type</code> </p> </li> <li> <p> <code>version</code> </p> </li> </ul>'
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
@@ -2901,7 +2901,7 @@ paths:
                     - Shared
                     - Amazon
                 filters:
-                  description: Request filters that are used to narrow the list of container images that are returned.
+                  description: '<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>containerType</code> </p> </li> <li> <p> <code>name</code> </p> </li> <li> <p> <code>parentImage</code> </p> </li> <li> <p> <code>platform</code> </p> </li> </ul>'
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
@@ -2999,7 +2999,7 @@ paths:
               type: object
               properties:
                 filters:
-                  description: <p>The filters.</p> <ul> <li> <p> <code>name</code> - The name of this distribution configuration.</p> </li> </ul>
+                  description: You can filter on <code>name</code> to streamline results.
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
@@ -3103,7 +3103,7 @@ paths:
                   type: string
                   pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
                 filters:
-                  description: The filters.
+                  description: '<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>name</code> </p> </li> <li> <p> <code>osVersion</code> </p> </li> <li> <p> <code>platform</code> </p> </li> <li> <p> <code>type</code> </p> </li> <li> <p> <code>version</code> </p> </li> </ul>'
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
@@ -3316,7 +3316,7 @@ paths:
                   type: string
                   pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image-pipeline/[a-z0-9-_]+$'
                 filters:
-                  description: The filters.
+                  description: '<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>name</code> </p> </li> <li> <p> <code>version</code> </p> </li> </ul>'
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
@@ -3414,7 +3414,7 @@ paths:
               type: object
               properties:
                 filters:
-                  description: The filters.
+                  description: '<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>description</code> </p> </li> <li> <p> <code>distributionConfigurationArn</code> </p> </li> <li> <p> <code>imageRecipeArn</code> </p> </li> <li> <p> <code>infrastructureConfigurationArn</code> </p> </li> <li> <p> <code>name</code> </p> </li> <li> <p> <code>status</code> </p> </li> </ul>'
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
@@ -3519,7 +3519,7 @@ paths:
                     - Shared
                     - Amazon
                 filters:
-                  description: The filters.
+                  description: '<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>name</code> </p> </li> <li> <p> <code>parentImage</code> </p> </li> <li> <p> <code>platform</code> </p> </li> </ul>'
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
@@ -3624,7 +3624,7 @@ paths:
                     - Shared
                     - Amazon
                 filters:
-                  description: The filters.
+                  description: '<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>name</code> </p> </li> <li> <p> <code>osVersion</code> </p> </li> <li> <p> <code>platform</code> </p> </li> <li> <p> <code>type</code> </p> </li> <li> <p> <code>version</code> </p> </li> </ul>'
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
@@ -3728,7 +3728,7 @@ paths:
               type: object
               properties:
                 filters:
-                  description: The filters.
+                  description: You can filter on <code>name</code> to streamline results.
                   type: array
                   items:
                     $ref: '#/components/schemas/Filter'
@@ -5598,7 +5598,7 @@ components:
         region:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: The Region of the Amazon EC2 AMI.
+            - description: The Amazon Web Services Region of the Amazon EC2 AMI.
         image:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
@@ -5635,7 +5635,7 @@ components:
         userIds:
           allOf:
             - $ref: '#/components/schemas/AccountList'
-            - description: The account ID.
+            - description: The Amazon Web Services account ID.
         userGroups:
           allOf:
             - $ref: '#/components/schemas/StringList'
@@ -5667,7 +5667,7 @@ components:
         launchPermission:
           allOf:
             - $ref: '#/components/schemas/LaunchPermissionConfiguration'
-            - description: ' Launch permissions can be used to configure which accounts can use the AMI to launch instances.'
+            - description: ' Launch permissions can be used to configure which Amazon Web Services accounts can use the AMI to launch instances.'
       description: ' Define and configure the output AMIs of the pipeline.'
     AmiList:
       type: array
@@ -5968,7 +5968,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/DateTime'
             - description: The date that the component was created.
-      description: The defining characteristics of a specific version of an TOE component.
+      description: The defining characteristics of a specific version of an Amazon Web Services TOE component.
     ComponentVersionArn:
       type: string
       pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):component/[a-z0-9-_]+/[0-9]+\.[0-9]+\.[0-9]+$'
@@ -7485,7 +7485,7 @@ components:
         filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: The filters.
+            - description: '<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>description</code> </p> </li> <li> <p> <code>name</code> </p> </li> <li> <p> <code>platform</code> </p> </li> <li> <p> <code>supportedOsVersion</code> </p> </li> <li> <p> <code>type</code> </p> </li> <li> <p> <code>version</code> </p> </li> </ul>'
         byName:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -7509,7 +7509,7 @@ components:
         filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: Request filters that are used to narrow the list of container images that are returned.
+            - description: '<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>containerType</code> </p> </li> <li> <p> <code>name</code> </p> </li> <li> <p> <code>parentImage</code> </p> </li> <li> <p> <code>platform</code> </p> </li> </ul>'
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'
@@ -7525,7 +7525,7 @@ components:
         filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: <p>The filters.</p> <ul> <li> <p> <code>name</code> - The name of this distribution configuration.</p> </li> </ul>
+            - description: You can filter on <code>name</code> to streamline results.
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'
@@ -7547,7 +7547,7 @@ components:
         filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: The filters.
+            - description: '<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>name</code> </p> </li> <li> <p> <code>osVersion</code> </p> </li> <li> <p> <code>platform</code> </p> </li> <li> <p> <code>type</code> </p> </li> <li> <p> <code>version</code> </p> </li> </ul>'
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'
@@ -7587,7 +7587,7 @@ components:
         filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: The filters.
+            - description: '<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>name</code> </p> </li> <li> <p> <code>version</code> </p> </li> </ul>'
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'
@@ -7603,7 +7603,7 @@ components:
         filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: The filters.
+            - description: '<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>description</code> </p> </li> <li> <p> <code>distributionConfigurationArn</code> </p> </li> <li> <p> <code>imageRecipeArn</code> </p> </li> <li> <p> <code>infrastructureConfigurationArn</code> </p> </li> <li> <p> <code>name</code> </p> </li> <li> <p> <code>status</code> </p> </li> </ul>'
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'
@@ -7623,7 +7623,7 @@ components:
         filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: The filters.
+            - description: '<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>name</code> </p> </li> <li> <p> <code>parentImage</code> </p> </li> <li> <p> <code>platform</code> </p> </li> </ul>'
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'
@@ -7643,7 +7643,7 @@ components:
         filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: The filters.
+            - description: '<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>name</code> </p> </li> <li> <p> <code>osVersion</code> </p> </li> <li> <p> <code>platform</code> </p> </li> <li> <p> <code>type</code> </p> </li> <li> <p> <code>version</code> </p> </li> </ul>'
         byName:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -7667,7 +7667,7 @@ components:
         filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: The filters.
+            - description: You can filter on <code>name</code> to streamline results.
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'

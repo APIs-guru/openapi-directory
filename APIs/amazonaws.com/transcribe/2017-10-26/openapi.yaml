@@ -115,6 +115,63 @@ servers:
     description: The Amazon Transcribe Service endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /#X-Amz-Target=Transcribe.CreateCallAnalyticsCategory:
+    post:
+      operationId: CreateCallAnalyticsCategory
+      description: 'Creates an analytics category. Amazon Transcribe applies the conditions specified by your analytics categories to your call analytics jobs. For each analytics category, you specify one or more rules. For example, you can specify a rule that the customer sentiment was neutral or negative within that category. If you start a call analytics job, Amazon Transcribe applies the category to the analytics job that you''ve specified.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCallAnalyticsCategoryResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCallAnalyticsCategoryRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Transcribe.CreateCallAnalyticsCategory
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Transcribe.CreateLanguageModel:
     post:
       operationId: CreateLanguageModel
@@ -335,6 +392,114 @@ paths:
             type: string
             enum:
               - Transcribe.CreateVocabularyFilter
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Transcribe.DeleteCallAnalyticsCategory:
+    post:
+      operationId: DeleteCallAnalyticsCategory
+      description: Deletes a call analytics category using its name.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCallAnalyticsCategoryResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteCallAnalyticsCategoryRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Transcribe.DeleteCallAnalyticsCategory
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Transcribe.DeleteCallAnalyticsJob:
+    post:
+      operationId: DeleteCallAnalyticsJob
+      description: Deletes a call analytics job using its name.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCallAnalyticsJobResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteCallAnalyticsJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Transcribe.DeleteCallAnalyticsJob
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -646,7 +811,7 @@ paths:
   /#X-Amz-Target=Transcribe.DescribeLanguageModel:
     post:
       operationId: DescribeLanguageModel
-      description: 'Gets information about a single custom language model. Use this information to see details about the language model in your AWS account. You can also see whether the base language model used to create your custom language model has been updated. If Amazon Transcribe has updated the base model, you can create a new custom language model using the updated base model. If the language model wasn''t created, you can use this operation to understand why Amazon Transcribe couldn''t create it. '
+      description: 'Gets information about a single custom language model. Use this information to see details about the language model in your Amazon Web Services account. You can also see whether the base language model used to create your custom language model has been updated. If Amazon Transcribe has updated the base model, you can create a new custom language model using the updated base model. If the language model wasn''t created, you can use this operation to understand why Amazon Transcribe couldn''t create it. '
       responses:
         '200':
           description: Success
@@ -692,6 +857,120 @@ paths:
             type: string
             enum:
               - Transcribe.DescribeLanguageModel
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Transcribe.GetCallAnalyticsCategory:
+    post:
+      operationId: GetCallAnalyticsCategory
+      description: Retrieves information about a call analytics category.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCallAnalyticsCategoryResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCallAnalyticsCategoryRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Transcribe.GetCallAnalyticsCategory
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Transcribe.GetCallAnalyticsJob:
+    post:
+      operationId: GetCallAnalyticsJob
+      description: 'Returns information about a call analytics job. To see the status of the job, check the <code>CallAnalyticsJobStatus</code> field. If the status is <code>COMPLETED</code>, the job is finished and you can find the results at the location specified in the <code>TranscriptFileUri</code> field. If you enable personally identifiable information (PII) redaction, the redacted transcript appears in the <code>RedactedTranscriptFileUri</code> field.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCallAnalyticsJobResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCallAnalyticsJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Transcribe.GetCallAnalyticsJob
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -977,6 +1256,132 @@ paths:
             type: string
             enum:
               - Transcribe.GetVocabularyFilter
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Transcribe.ListCallAnalyticsCategories:
+    post:
+      operationId: ListCallAnalyticsCategories
+      description: Provides more information about the call analytics categories that you've created. You can use the information in this list to find a specific category. You can then use the operation to get more information about it.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCallAnalyticsCategoriesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListCallAnalyticsCategoriesRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Transcribe.ListCallAnalyticsCategories
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Transcribe.ListCallAnalyticsJobs:
+    post:
+      operationId: ListCallAnalyticsJobs
+      description: List call analytics jobs with a specified status or substring that matches their names.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCallAnalyticsJobsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListCallAnalyticsJobsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Transcribe.ListCallAnalyticsJobs
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1363,6 +1768,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Transcribe.StartCallAnalyticsJob:
+    post:
+      operationId: StartCallAnalyticsJob
+      description: 'Starts an asynchronous analytics job that not only transcribes the audio recording of a caller and agent, but also returns additional insights. These insights include how quickly or loudly the caller or agent was speaking. To retrieve additional insights with your analytics jobs, create categories. A category is a way to classify analytics jobs based on attributes, such as a customer''s sentiment or a particular phrase being used during the call. For more information, see the operation. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartCallAnalyticsJobResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartCallAnalyticsJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Transcribe.StartCallAnalyticsJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Transcribe.StartMedicalTranscriptionJob:
     post:
       operationId: StartMedicalTranscriptionJob
@@ -1469,6 +1931,69 @@ paths:
             type: string
             enum:
               - Transcribe.StartTranscriptionJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Transcribe.UpdateCallAnalyticsCategory:
+    post:
+      operationId: UpdateCallAnalyticsCategory
+      description: 'Updates the call analytics category with new values. The <code>UpdateCallAnalyticsCategory</code> operation overwrites all of the existing information with the values that you provide in the request. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCallAnalyticsCategoryResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCallAnalyticsCategoryRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Transcribe.UpdateCallAnalyticsCategory
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1712,6 +2237,32 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    CreateCallAnalyticsCategoryResponse:
+      type: object
+      properties:
+        CategoryProperties:
+          allOf:
+            - $ref: '#/components/schemas/CategoryProperties'
+            - description: The rules and associated metadata used to create a category.
+    CreateCallAnalyticsCategoryRequest:
+      type: object
+      required:
+        - CategoryName
+        - Rules
+      title: CreateCallAnalyticsCategoryRequest
+      properties:
+        CategoryName:
+          allOf:
+            - $ref: '#/components/schemas/CategoryName'
+            - description: 'The name that you choose for your category when you create it. '
+        Rules:
+          allOf:
+            - $ref: '#/components/schemas/RuleList'
+            - description: 'To create a category, you must specify between 1 and 20 rules. For each rule, you specify a filter to be applied to the attributes of the call. For example, you can specify a sentiment filter to detect if the customer''s sentiment was negative or neutral. '
+    BadRequestException: {}
+    LimitExceededException: {}
+    InternalFailureException: {}
+    ConflictException: {}
     CreateLanguageModelResponse:
       type: object
       properties:
@@ -1760,17 +2311,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/InputDataConfig'
             - description: Contains the data access role and the Amazon S3 prefixes to read the required input files to create a custom language model.
-    BadRequestException: {}
-    LimitExceededException: {}
-    InternalFailureException: {}
-    ConflictException: {}
     CreateMedicalVocabularyResponse:
       type: object
       properties:
         VocabularyName:
           allOf:
             - $ref: '#/components/schemas/VocabularyName'
-            - description: The name of the vocabulary. The name must be unique within an AWS account and is case sensitive.
+            - description: The name of the vocabulary. The name must be unique within an Amazon Web Services account and is case sensitive.
         LanguageCode:
           allOf:
             - $ref: '#/components/schemas/LanguageCode'
@@ -1798,7 +2345,7 @@ components:
         VocabularyName:
           allOf:
             - $ref: '#/components/schemas/VocabularyName'
-            - description: 'The name of the custom vocabulary. This case-sensitive name must be unique within an AWS account. If you try to create a vocabulary with the same name as a previous vocabulary, you get a <code>ConflictException</code> error.'
+            - description: 'The name of the custom vocabulary. This case-sensitive name must be unique within an Amazon Web Services account. If you try to create a vocabulary with the same name as a previous vocabulary, you get a <code>ConflictException</code> error.'
         LanguageCode:
           allOf:
             - $ref: '#/components/schemas/LanguageCode'
@@ -1806,7 +2353,7 @@ components:
         VocabularyFileUri:
           allOf:
             - $ref: '#/components/schemas/Uri'
-            - description: '<p>The location in Amazon S3 of the text file you use to define your custom vocabulary. The URI must be in the same AWS Region as the resource that you''re calling. Enter information about your <code>VocabularyFileUri</code> in the following format:</p> <p> <code> https://s3.&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt; </code> </p> <p>The following is an example URI for a vocabulary file that is stored in Amazon S3:</p> <p> <code>https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt</code> </p> <p>For more information about Amazon S3 object names, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more information about custom vocabularies, see <a href="http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary-med">Medical Custom Vocabularies</a>.</p>'
+            - description: '<p>The location in Amazon S3 of the text file you use to define your custom vocabulary. The URI must be in the same Amazon Web Services Region as the resource that you''re calling. Enter information about your <code>VocabularyFileUri</code> in the following format:</p> <p> <code> https://s3.&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt; </code> </p> <p>The following is an example URI for a vocabulary file that is stored in Amazon S3:</p> <p> <code>https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt</code> </p> <p>For more information about Amazon S3 object names, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more information about custom vocabularies, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary-med">Medical Custom Vocabularies</a>.</p>'
     CreateVocabularyResponse:
       type: object
       properties:
@@ -1840,7 +2387,7 @@ components:
         VocabularyName:
           allOf:
             - $ref: '#/components/schemas/VocabularyName'
-            - description: The name of the vocabulary. The name must be unique within an AWS account. The name is case sensitive. If you try to create a vocabulary with the same name as a previous vocabulary you will receive a <code>ConflictException</code> error.
+            - description: The name of the vocabulary. The name must be unique within an Amazon Web Services account. The name is case sensitive. If you try to create a vocabulary with the same name as a previous vocabulary you will receive a <code>ConflictException</code> error.
         LanguageCode:
           allOf:
             - $ref: '#/components/schemas/LanguageCode'
@@ -1852,7 +2399,7 @@ components:
         VocabularyFileUri:
           allOf:
             - $ref: '#/components/schemas/Uri'
-            - description: '<p>The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is </p> <p>For more information about S3 object names, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more information about custom vocabularies, see <a href="http://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary">Custom Vocabularies</a>.</p>'
+            - description: '<p>The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is </p> <p>For more information about S3 object names, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more information about custom vocabularies, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary">Custom Vocabularies</a>.</p>'
     CreateVocabularyFilterResponse:
       type: object
       properties:
@@ -1891,6 +2438,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/Uri'
             - description: '<p>The Amazon S3 location of a text file used as input to create the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets">Character Sets for Custom Vocabularies</a>.</p> <p>The specified file must be less than 50 KB of UTF-8 characters.</p> <p>If you provide the location of a list of words in the <code>VocabularyFilterFileUri</code> parameter, you can''t use the <code>Words</code> parameter.</p>'
+    DeleteCallAnalyticsCategoryResponse:
+      type: object
+      properties: {}
+    DeleteCallAnalyticsCategoryRequest:
+      type: object
+      required:
+        - CategoryName
+      title: DeleteCallAnalyticsCategoryRequest
+      properties:
+        CategoryName:
+          allOf:
+            - $ref: '#/components/schemas/CategoryName'
+            - description: 'The name of the call analytics category that you''re choosing to delete. The value is case sensitive. '
+    NotFoundException: {}
+    DeleteCallAnalyticsJobResponse:
+      type: object
+      properties: {}
+    DeleteCallAnalyticsJobRequest:
+      type: object
+      required:
+        - CallAnalyticsJobName
+      title: DeleteCallAnalyticsJobRequest
+      properties:
+        CallAnalyticsJobName:
+          allOf:
+            - $ref: '#/components/schemas/CallAnalyticsJobName'
+            - description: The name of the call analytics job you want to delete.
     DeleteLanguageModelRequest:
       type: object
       required:
@@ -1921,7 +2495,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/VocabularyName'
             - description: The name of the vocabulary that you want to delete.
-    NotFoundException: {}
     DeleteTranscriptionJobRequest:
       type: object
       required:
@@ -1969,6 +2542,40 @@ components:
           allOf:
             - $ref: '#/components/schemas/ModelName'
             - description: The name of the custom language model you submit to get more information.
+    GetCallAnalyticsCategoryResponse:
+      type: object
+      properties:
+        CategoryProperties:
+          allOf:
+            - $ref: '#/components/schemas/CategoryProperties'
+            - description: The rules you've defined for a category.
+    GetCallAnalyticsCategoryRequest:
+      type: object
+      required:
+        - CategoryName
+      title: GetCallAnalyticsCategoryRequest
+      properties:
+        CategoryName:
+          allOf:
+            - $ref: '#/components/schemas/CategoryName'
+            - description: The name of the category you want information about. This value is case sensitive.
+    GetCallAnalyticsJobResponse:
+      type: object
+      properties:
+        CallAnalyticsJob:
+          allOf:
+            - $ref: '#/components/schemas/CallAnalyticsJob'
+            - description: An object that contains the results of your call analytics job.
+    GetCallAnalyticsJobRequest:
+      type: object
+      required:
+        - CallAnalyticsJobName
+      title: GetCallAnalyticsJobRequest
+      properties:
+        CallAnalyticsJobName:
+          allOf:
+            - $ref: '#/components/schemas/CallAnalyticsJobName'
+            - description: 'The name of the analytics job you want information about. This value is case sensitive. '
     GetMedicalTranscriptionJobResponse:
       type: object
       properties:
@@ -2106,6 +2713,64 @@ components:
           allOf:
             - $ref: '#/components/schemas/VocabularyFilterName'
             - description: The name of the vocabulary filter for which to return information.
+    ListCallAnalyticsCategoriesResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The operation returns a page of jobs at a time. The maximum size of the list is set by the <code>MaxResults</code> parameter. If there are more categories in the list than the page size, Amazon Transcribe returns the <code>NextPage</code> token. Include the token in the next request to the operation to return the next page of analytics categories.'
+        Categories:
+          allOf:
+            - $ref: '#/components/schemas/CategoryPropertiesList'
+            - description: A list of objects containing information about analytics categories.
+    ListCallAnalyticsCategoriesRequest:
+      type: object
+      title: ListCallAnalyticsCategoriesRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'When included, <code>NextToken</code>fetches the next set of categories if the result of the previous request was truncated.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of categories to return in the response. If there are fewer results in the list, the response contains only the actual results.'
+    ListCallAnalyticsJobsResponse:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/CallAnalyticsJobStatus'
+            - description: 'When specified, returns only call analytics jobs with that status. Jobs are ordered by creation date, with the most recent jobs returned first. If you don''t specify a status, Amazon Transcribe returns all transcription jobs ordered by creation date.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The operation returns a page of jobs at a time. The maximum size of the page is set by the <code>MaxResults</code> parameter. If there are more jobs in the list than the page size, Amazon Transcribe returns the <code>NextPage</code> token. Include the token in your next request to the operation to return next page of jobs.'
+        CallAnalyticsJobSummaries:
+          allOf:
+            - $ref: '#/components/schemas/CallAnalyticsJobSummaries'
+            - description: A list of objects containing summary information for a transcription job.
+    ListCallAnalyticsJobsRequest:
+      type: object
+      title: ListCallAnalyticsJobsRequest
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/CallAnalyticsJobStatus'
+            - description: 'When specified, returns only call analytics jobs with the specified status. Jobs are ordered by creation date, with the most recent jobs returned first. If you don''t specify a status, Amazon Transcribe returns all analytics jobs ordered by creation date.'
+        JobNameContains:
+          allOf:
+            - $ref: '#/components/schemas/CallAnalyticsJobName'
+            - description: 'When specified, the jobs returned in the list are limited to jobs whose name contains the specified string.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If you receive a truncated result in the previous request of , include <code>NextToken</code> to fetch the next set of jobs.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of call analytics jobs to return in the response. If there are fewer results in the list, this response contains only the actual results. '
     ListLanguageModelsResponse:
       type: object
       properties:
@@ -2304,6 +2969,47 @@ components:
           allOf:
             - $ref: '#/components/schemas/VocabularyFilterName'
             - description: Filters the response so that it only contains vocabulary filters whose name contains the specified string.
+    StartCallAnalyticsJobResponse:
+      type: object
+      properties:
+        CallAnalyticsJob:
+          allOf:
+            - $ref: '#/components/schemas/CallAnalyticsJob'
+            - description: An object containing the details of the asynchronous call analytics job.
+    StartCallAnalyticsJobRequest:
+      type: object
+      required:
+        - CallAnalyticsJobName
+        - Media
+        - DataAccessRoleArn
+      title: StartCallAnalyticsJobRequest
+      properties:
+        CallAnalyticsJobName:
+          allOf:
+            - $ref: '#/components/schemas/CallAnalyticsJobName'
+            - description: 'The name of the call analytics job. You can''t use the string "." or ".." by themselves as the job name. The name must also be unique within an AWS account. If you try to create a call analytics job with the same name as a previous call analytics job, you get a <code>ConflictException</code> error.'
+        Media:
+          $ref: '#/components/schemas/Media'
+        OutputLocation:
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: '<p>The Amazon S3 location where the output of the call analytics job is stored. You can provide the following location types to store the output of call analytics job:</p> <ul> <li> <p>s3://DOC-EXAMPLE-BUCKET1</p> <p> If you specify a bucket, Amazon Transcribe saves the output of the analytics job as a JSON file at the root level of the bucket.</p> </li> <li> <p>s3://DOC-EXAMPLE-BUCKET1/folder/</p> <p>f you specify a path, Amazon Transcribe saves the output of the analytics job as s3://DOC-EXAMPLE-BUCKET1/folder/your-transcription-job-name.json</p> <p>If you specify a folder, you must provide a trailing slash.</p> </li> <li> <p>s3://DOC-EXAMPLE-BUCKET1/folder/filename.json</p> <p> If you provide a path that has the filename specified, Amazon Transcribe saves the output of the analytics job as s3://DOC-EXAMPLEBUCKET1/folder/filename.json</p> </li> </ul> <p>You can specify an AWS Key Management Service key to encrypt the output of our analytics job using the <code>OutputEncryptionKMSKeyId</code> parameter. If you don''t specify a KMS key, Amazon Transcribe uses the default Amazon S3 key for server-side encryption of the analytics job output that is placed in your S3 bucket. </p>'
+        OutputEncryptionKMSKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KMSKeyId'
+            - description: '<p>The Amazon Resource Name (ARN) of the AWS Key Management Service key used to encrypt the output of the call analytics job. The user calling the operation must have permission to use the specified KMS key.</p> <p>You use either of the following to identify an AWS KMS key in the current account:</p> <ul> <li> <p>KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"</p> </li> <li> <p>KMS Key Alias: "alias/ExampleAlias"</p> </li> </ul> <p> You can use either of the following to identify a KMS key in the current account or another account:</p> <ul> <li> <p>Amazon Resource Name (ARN) of a KMS key in the current account or another account: "arn:aws:kms:region:account ID:key/1234abcd-12ab-34cd-56ef1234567890ab"</p> </li> <li> <p>ARN of a KMS Key Alias: "arn:aws:kms:region:account ID:alias/ExampleAlias"</p> </li> </ul> <p>If you don''t specify an encryption key, the output of the call analytics job is encrypted with the default Amazon S3 key (SSE-S3).</p> <p>If you specify a KMS key to encrypt your output, you must also specify an output location in the <code>OutputLocation</code> parameter. </p>'
+        DataAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/DataAccessRoleArn'
+            - description: 'The Amazon Resource Name (ARN) of a role that has access to the S3 bucket that contains your input files. Amazon Transcribe assumes this role to read queued audio files. If you have specified an output S3 bucket for your transcription results, this role should have access to the output bucket as well.'
+        Settings:
+          allOf:
+            - $ref: '#/components/schemas/CallAnalyticsJobSettings'
+            - description: 'A <code>Settings</code> object that provides optional settings for a call analytics job. '
+        ChannelDefinitions:
+          allOf:
+            - $ref: '#/components/schemas/ChannelDefinitions'
+            - description: 'When you start a call analytics job, you must pass an array that maps the agent and the customer to specific audio channels. The values you can assign to a channel are 0 and 1. The agent and the customer must each have their own channel. You can''t assign more than one channel to an agent or customer. '
     StartMedicalTranscriptionJobResponse:
       type: object
       properties:
@@ -2325,7 +3031,7 @@ components:
         MedicalTranscriptionJobName:
           allOf:
             - $ref: '#/components/schemas/TranscriptionJobName'
-            - description: 'The name of the medical transcription job. You can''t use the strings "<code>.</code>" or "<code>..</code>" by themselves as the job name. The name must also be unique within an AWS account. If you try to create a medical transcription job with the same name as a previous medical transcription job, you get a <code>ConflictException</code> error.'
+            - description: 'The name of the medical transcription job. You can''t use the strings "<code>.</code>" or "<code>..</code>" by themselves as the job name. The name must also be unique within an Amazon Web Services account. If you try to create a medical transcription job with the same name as a previous medical transcription job, you get a <code>ConflictException</code> error.'
         LanguageCode:
           allOf:
             - $ref: '#/components/schemas/LanguageCode'
@@ -2343,7 +3049,7 @@ components:
         OutputBucketName:
           allOf:
             - $ref: '#/components/schemas/OutputBucketName'
-            - description: '<p>The Amazon S3 location where the transcription is stored.</p> <p>You must set <code>OutputBucketName</code> for Amazon Transcribe Medical to store the transcription results. Your transcript appears in the S3 location you specify. When you call the <a>GetMedicalTranscriptionJob</a>, the operation returns this location in the <code>TranscriptFileUri</code> field. The S3 bucket must have permissions that allow Amazon Transcribe Medical to put files in the bucket. For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user">Permissions Required for IAM User Roles</a>.</p> <p>You can specify an AWS Key Management Service (KMS) key to encrypt the output of your transcription using the <code>OutputEncryptionKMSKeyId</code> parameter. If you don''t specify a KMS key, Amazon Transcribe Medical uses the default Amazon S3 key for server-side encryption of transcripts that are placed in your S3 bucket.</p>'
+            - description: '<p>The Amazon S3 location where the transcription is stored.</p> <p>You must set <code>OutputBucketName</code> for Amazon Transcribe Medical to store the transcription results. Your transcript appears in the S3 location you specify. When you call the <a>GetMedicalTranscriptionJob</a>, the operation returns this location in the <code>TranscriptFileUri</code> field. The S3 bucket must have permissions that allow Amazon Transcribe Medical to put files in the bucket. For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user">Permissions Required for IAM User Roles</a>.</p> <p>You can specify an Amazon Web Services Key Management Service (KMS) key to encrypt the output of your transcription using the <code>OutputEncryptionKMSKeyId</code> parameter. If you don''t specify a KMS key, Amazon Transcribe Medical uses the default Amazon S3 key for server-side encryption of transcripts that are placed in your S3 bucket.</p>'
         OutputKey:
           allOf:
             - $ref: '#/components/schemas/OutputKey'
@@ -2351,7 +3057,7 @@ components:
         OutputEncryptionKMSKeyId:
           allOf:
             - $ref: '#/components/schemas/KMSKeyId'
-            - description: '<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) key used to encrypt the output of the transcription job. The user calling the <a>StartMedicalTranscriptionJob</a> operation must have permission to use the specified KMS key.</p> <p>You use either of the following to identify a KMS key in the current account:</p> <ul> <li> <p>KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"</p> </li> <li> <p>KMS Key Alias: "alias/ExampleAlias"</p> </li> </ul> <p>You can use either of the following to identify a KMS key in the current account or another account:</p> <ul> <li> <p>Amazon Resource Name (ARN) of a KMS key in the current account or another account: "arn:aws:kms:region:account ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"</p> </li> <li> <p>ARN of a KMS Key Alias: "arn:aws:kms:region:account ID:alias/ExampleAlias"</p> </li> </ul> <p>If you don''t specify an encryption key, the output of the medical transcription job is encrypted with the default Amazon S3 key (SSE-S3).</p> <p>If you specify a KMS key to encrypt your output, you must also specify an output location in the <code>OutputBucketName</code> parameter.</p>'
+            - description: '<p>The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service (KMS) key used to encrypt the output of the transcription job. The user calling the <a>StartMedicalTranscriptionJob</a> operation must have permission to use the specified KMS key.</p> <p>You use either of the following to identify a KMS key in the current account:</p> <ul> <li> <p>KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"</p> </li> <li> <p>KMS Key Alias: "alias/ExampleAlias"</p> </li> </ul> <p>You can use either of the following to identify a KMS key in the current account or another account:</p> <ul> <li> <p>Amazon Resource Name (ARN) of a KMS key in the current account or another account: "arn:aws:kms:region:account ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"</p> </li> <li> <p>ARN of a KMS Key Alias: "arn:aws:kms:region:account ID:alias/ExampleAlias"</p> </li> </ul> <p>If you don''t specify an encryption key, the output of the medical transcription job is encrypted with the default Amazon S3 key (SSE-S3).</p> <p>If you specify a KMS key to encrypt your output, you must also specify an output location in the <code>OutputBucketName</code> parameter.</p>'
         Settings:
           allOf:
             - $ref: '#/components/schemas/MedicalTranscriptionSetting'
@@ -2385,7 +3091,7 @@ components:
         TranscriptionJobName:
           allOf:
             - $ref: '#/components/schemas/TranscriptionJobName'
-            - description: 'The name of the job. You can''t use the strings "<code>.</code>" or "<code>..</code>" by themselves as the job name. The name must also be unique within an AWS account. If you try to create a transcription job with the same name as a previous transcription job, you get a <code>ConflictException</code> error.'
+            - description: 'The name of the job. You can''t use the strings "<code>.</code>" or "<code>..</code>" by themselves as the job name. The name must also be unique within an Amazon Web Services account. If you try to create a transcription job with the same name as a previous transcription job, you get a <code>ConflictException</code> error.'
         LanguageCode:
           allOf:
             - $ref: '#/components/schemas/LanguageCode'
@@ -2405,7 +3111,7 @@ components:
         OutputBucketName:
           allOf:
             - $ref: '#/components/schemas/OutputBucketName'
-            - description: '<p>The location where the transcription is stored.</p> <p>If you set the <code>OutputBucketName</code>, Amazon Transcribe puts the transcript in the specified S3 bucket. When you call the <a>GetTranscriptionJob</a> operation, the operation returns this location in the <code>TranscriptFileUri</code> field. If you enable content redaction, the redacted transcript appears in <code>RedactedTranscriptFileUri</code>. If you enable content redaction and choose to output an unredacted transcript, that transcript''s location still appears in the <code>TranscriptFileUri</code>. The S3 bucket must have permissions that allow Amazon Transcribe to put files in the bucket. For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user">Permissions Required for IAM User Roles</a>.</p> <p>You can specify an AWS Key Management Service (KMS) key to encrypt the output of your transcription using the <code>OutputEncryptionKMSKeyId</code> parameter. If you don''t specify a KMS key, Amazon Transcribe uses the default Amazon S3 key for server-side encryption of transcripts that are placed in your S3 bucket.</p> <p>If you don''t set the <code>OutputBucketName</code>, Amazon Transcribe generates a pre-signed URL, a shareable URL that provides secure access to your transcription, and returns it in the <code>TranscriptFileUri</code> field. Use this URL to download the transcription.</p>'
+            - description: '<p>The location where the transcription is stored.</p> <p>If you set the <code>OutputBucketName</code>, Amazon Transcribe puts the transcript in the specified S3 bucket. When you call the <a>GetTranscriptionJob</a> operation, the operation returns this location in the <code>TranscriptFileUri</code> field. If you enable content redaction, the redacted transcript appears in <code>RedactedTranscriptFileUri</code>. If you enable content redaction and choose to output an unredacted transcript, that transcript''s location still appears in the <code>TranscriptFileUri</code>. The S3 bucket must have permissions that allow Amazon Transcribe to put files in the bucket. For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user">Permissions Required for IAM User Roles</a>.</p> <p>You can specify an Amazon Web Services Key Management Service (KMS) key to encrypt the output of your transcription using the <code>OutputEncryptionKMSKeyId</code> parameter. If you don''t specify a KMS key, Amazon Transcribe uses the default Amazon S3 key for server-side encryption of transcripts that are placed in your S3 bucket.</p> <p>If you don''t set the <code>OutputBucketName</code>, Amazon Transcribe generates a pre-signed URL, a shareable URL that provides secure access to your transcription, and returns it in the <code>TranscriptFileUri</code> field. Use this URL to download the transcription.</p>'
         OutputKey:
           allOf:
             - $ref: '#/components/schemas/OutputKey'
@@ -2413,7 +3119,7 @@ components:
         OutputEncryptionKMSKeyId:
           allOf:
             - $ref: '#/components/schemas/KMSKeyId'
-            - description: '<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) key used to encrypt the output of the transcription job. The user calling the <code>StartTranscriptionJob</code> operation must have permission to use the specified KMS key.</p> <p>You can use either of the following to identify a KMS key in the current account:</p> <ul> <li> <p>KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"</p> </li> <li> <p>KMS Key Alias: "alias/ExampleAlias"</p> </li> </ul> <p>You can use either of the following to identify a KMS key in the current account or another account:</p> <ul> <li> <p>Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:region:account ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"</p> </li> <li> <p>ARN of a KMS Key Alias: "arn:aws:kms:region:account ID:alias/ExampleAlias"</p> </li> </ul> <p>If you don''t specify an encryption key, the output of the transcription job is encrypted with the default Amazon S3 key (SSE-S3). </p> <p>If you specify a KMS key to encrypt your output, you must also specify an output location in the <code>OutputBucketName</code> parameter.</p>'
+            - description: '<p>The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service (KMS) key used to encrypt the output of the transcription job. The user calling the <code>StartTranscriptionJob</code> operation must have permission to use the specified KMS key.</p> <p>You can use either of the following to identify a KMS key in the current account:</p> <ul> <li> <p>KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"</p> </li> <li> <p>KMS Key Alias: "alias/ExampleAlias"</p> </li> </ul> <p>You can use either of the following to identify a KMS key in the current account or another account:</p> <ul> <li> <p>Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:region:account ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"</p> </li> <li> <p>ARN of a KMS Key Alias: "arn:aws:kms:region:account ID:alias/ExampleAlias"</p> </li> </ul> <p>If you don''t specify an encryption key, the output of the transcription job is encrypted with the default Amazon S3 key (SSE-S3). </p> <p>If you specify a KMS key to encrypt your output, you must also specify an output location in the <code>OutputBucketName</code> parameter.</p>'
         Settings:
           allOf:
             - $ref: '#/components/schemas/Settings'
@@ -2437,7 +3143,29 @@ components:
         LanguageOptions:
           allOf:
             - $ref: '#/components/schemas/LanguageOptions'
-            - description: An object containing a list of languages that might be present in your collection of audio files. Automatic language identification chooses a language that best matches the source audio from that list.
+            - description: '<p>An object containing a list of languages that might be present in your collection of audio files. Automatic language identification chooses a language that best matches the source audio from that list.</p> <p>To transcribe speech in Modern Standard Arabic (ar-SA), your audio or video file must be encoded at a sample rate of 16000 Hz or higher.</p>'
+    UpdateCallAnalyticsCategoryResponse:
+      type: object
+      properties:
+        CategoryProperties:
+          allOf:
+            - $ref: '#/components/schemas/CategoryProperties'
+            - description: 'The attributes describing the analytics category. You can see information such as the rules that you''ve used to update the category and when the category was originally created. '
+    UpdateCallAnalyticsCategoryRequest:
+      type: object
+      required:
+        - CategoryName
+        - Rules
+      title: UpdateCallAnalyticsCategoryRequest
+      properties:
+        CategoryName:
+          allOf:
+            - $ref: '#/components/schemas/CategoryName'
+            - description: 'The name of the analytics category to update. The name is case sensitive. If you try to update a call analytics category with the same name as a previous category you will receive a <code>ConflictException</code> error. '
+        Rules:
+          allOf:
+            - $ref: '#/components/schemas/RuleList'
+            - description: 'The rules used for the updated analytics category. The rules that you provide in this field replace the ones that are currently being used. '
     UpdateMedicalVocabularyResponse:
       type: object
       properties:
@@ -2475,7 +3203,7 @@ components:
         VocabularyFileUri:
           allOf:
             - $ref: '#/components/schemas/Uri'
-            - description: '<p>The location in Amazon S3 of the text file that contains the you use for your custom vocabulary. The URI must be in the same AWS Region as the resource that you are calling. The following is the format for a URI:</p> <p> <code> https://s3.&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt; </code> </p> <p>For example:</p> <p> <code>https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt</code> </p> <p>For more information about Amazon S3 object names, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more information about custom vocabularies in Amazon Transcribe Medical, see <a href="http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary">Medical Custom Vocabularies</a>.</p>'
+            - description: '<p>The location in Amazon S3 of the text file that contains the you use for your custom vocabulary. The URI must be in the same Amazon Web Services Region as the resource that you are calling. The following is the format for a URI:</p> <p> <code> https://s3.&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt; </code> </p> <p>For example:</p> <p> <code>https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt</code> </p> <p>For more information about Amazon S3 object names, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more information about custom vocabularies in Amazon Transcribe Medical, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary">Medical Custom Vocabularies</a>.</p>'
     UpdateVocabularyResponse:
       type: object
       properties:
@@ -2517,7 +3245,7 @@ components:
         VocabularyFileUri:
           allOf:
             - $ref: '#/components/schemas/Uri'
-            - description: '<p>The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is </p> <p>For example:</p> <p>For more information about S3 object names, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more information about custom vocabularies, see <a href="http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary">Custom Vocabularies</a>.</p>'
+            - description: '<p>The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is </p> <p>For example:</p> <p>For more information about S3 object names, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more information about custom vocabularies, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary">Custom Vocabularies</a>.</p>'
     UpdateVocabularyFilterResponse:
       type: object
       properties:
@@ -2551,6 +3279,30 @@ components:
           allOf:
             - $ref: '#/components/schemas/Uri'
             - description: '<p>The Amazon S3 location of a text file used as input to create the vocabulary filter. Only use characters from the character set defined for custom vocabularies. For a list of character sets, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets">Character Sets for Custom Vocabularies</a>.</p> <p>The specified file must be less than 50 KB of UTF-8 characters.</p> <p>If you provide the location of a list of words in the <code>VocabularyFilterFileUri</code> parameter, you can''t use the <code>Words</code> parameter.</p>'
+    TimestampMilliseconds:
+      type: integer
+      minimum: 0
+      maximum: 14400000
+    AbsoluteTimeRange:
+      type: object
+      properties:
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/TimestampMilliseconds'
+            - description: '<p>A value that indicates the beginning of the time range in seconds. To set absolute time range, you must specify a start time and an end time. For example, if you specify the following values:</p> <ul> <li> <p>StartTime - 10000</p> </li> <li> <p>Endtime - 50000</p> </li> </ul> <p>The time range is set between 10,000 milliseconds and 50,000 milliseconds into the call.</p>'
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/TimestampMilliseconds'
+            - description: '<p>A value that indicates the end of the time range in milliseconds. To set absolute time range, you must specify a start time and an end time. For example, if you specify the following values:</p> <ul> <li> <p>StartTime - 10000</p> </li> <li> <p>Endtime - 50000</p> </li> </ul> <p>The time range is set between 10,000 milliseconds and 50,000 milliseconds into the call. </p>'
+        First:
+          allOf:
+            - $ref: '#/components/schemas/TimestampMilliseconds'
+            - description: 'A time range from the beginning of the call to the value that you''ve specified. For example, if you specify 100000, the time range is set to the first 100,000 milliseconds of the call.'
+        Last:
+          allOf:
+            - $ref: '#/components/schemas/TimestampMilliseconds'
+            - description: 'A time range from the value that you''ve specified to the end of the call. For example, if you specify 100000, the time range is set to the last 100,000 milliseconds of the call.'
+      description: 'A time range, set in seconds, between two points in the call.'
     BaseModelName:
       type: string
       enum:
@@ -2566,65 +3318,18 @@ components:
         - es-US
         - en-GB
         - en-AU
-    RedactionType:
-      type: string
-      enum:
-        - PII
-    RedactionOutput:
-      type: string
-      enum:
-        - redacted
-        - redacted_and_unredacted
-    ContentRedaction:
-      type: object
-      required:
-        - RedactionType
-        - RedactionOutput
-      properties:
-        RedactionType:
-          allOf:
-            - $ref: '#/components/schemas/RedactionType'
-            - description: Request parameter that defines the entities to be redacted. The only accepted value is <code>PII</code>.
-        RedactionOutput:
-          allOf:
-            - $ref: '#/components/schemas/RedactionOutput'
-            - description: <p>The output transcript file stored in either the default S3 bucket or in a bucket you specify.</p> <p>When you choose <code>redacted</code> Amazon Transcribe outputs only the redacted transcript.</p> <p>When you choose <code>redacted_and_unredacted</code> Amazon Transcribe outputs both the redacted and unredacted transcripts.</p>
-      description: Settings for content redaction within a transcription job.
-    ModelName:
+    CallAnalyticsJobName:
       type: string
       pattern: '^[0-9a-zA-Z._-]+'
       minLength: 1
       maxLength: 200
-    InputDataConfig:
-      type: object
-      required:
-        - S3Uri
-        - DataAccessRoleArn
-      properties:
-        S3Uri:
-          allOf:
-            - $ref: '#/components/schemas/Uri'
-            - description: The Amazon S3 prefix you specify to access the plain text files that you use to train your custom language model.
-        TuningDataS3Uri:
-          allOf:
-            - $ref: '#/components/schemas/Uri'
-            - description: The Amazon S3 prefix you specify to access the plain text files that you use to tune your custom language model.
-        DataAccessRoleArn:
-          allOf:
-            - $ref: '#/components/schemas/DataAccessRoleArn'
-            - description: The Amazon Resource Name (ARN) that uniquely identifies the permissions you've given Amazon Transcribe to access your Amazon S3 buckets containing your media files or text data.
-      description: The object that contains the Amazon S3 object location and access role required to train and tune your custom language model.
-    ModelStatus:
+    CallAnalyticsJobStatus:
       type: string
       enum:
+        - QUEUED
         - IN_PROGRESS
         - FAILED
         - COMPLETED
-    VocabularyName:
-      type: string
-      pattern: '^[0-9a-zA-Z._-]+'
-      minLength: 1
-      maxLength: 200
     LanguageCode:
       type: string
       enum:
@@ -2664,6 +3369,316 @@ components:
         - te-IN
         - tr-TR
         - zh-CN
+    MediaSampleRateHertz:
+      type: integer
+      minimum: 8000
+      maximum: 48000
+    MediaFormat:
+      type: string
+      enum:
+        - mp3
+        - mp4
+        - wav
+        - flac
+        - ogg
+        - amr
+        - webm
+    Media:
+      type: object
+      properties:
+        MediaFileUri:
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: '<p>The S3 object location of the input media file. The URI must be in the same region as the API endpoint that you are calling. The general form is:</p> <p>For example:</p> <p>For more information about S3 object names, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p>'
+        RedactedMediaFileUri:
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: ' The S3 object location for your redacted output media file. This is only supported for call analytics jobs.'
+      description: Describes the input media file in a transcription request.
+    Transcript:
+      type: object
+      properties:
+        TranscriptFileUri:
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: '<p>The S3 object location of the transcript.</p> <p>Use this URI to access the transcript. If you specified an S3 bucket in the <code>OutputBucketName</code> field when you created the job, this is the URI of that bucket. If you chose to store the transcript in Amazon Transcribe, this is a shareable URL that provides secure access to that location.</p>'
+        RedactedTranscriptFileUri:
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: '<p>The S3 object location of the redacted transcript.</p> <p>Use this URI to access the redacted transcript. If you specified an S3 bucket in the <code>OutputBucketName</code> field when you created the job, this is the URI of that bucket. If you chose to store the transcript in Amazon Transcribe, this is a shareable URL that provides secure access to that location.</p>'
+      description: Identifies the location of a transcription.
+    DateTime:
+      type: string
+      format: date-time
+    FailureReason:
+      type: string
+    DataAccessRoleArn:
+      type: string
+      pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):iam::[0-9]{0,63}:role/[A-Za-z0-9:_/+=,@.-]{0,1024}$'
+      minLength: 20
+      maxLength: 2048
+    IdentifiedLanguageScore:
+      type: number
+      format: float
+    CallAnalyticsJobSettings:
+      type: object
+      properties:
+        VocabularyName:
+          allOf:
+            - $ref: '#/components/schemas/VocabularyName'
+            - description: The name of a vocabulary to use when processing the call analytics job.
+        VocabularyFilterName:
+          allOf:
+            - $ref: '#/components/schemas/VocabularyFilterName'
+            - description: The name of the vocabulary filter to use when running a call analytics job. The filter that you specify must have the same language code as the analytics job.
+        VocabularyFilterMethod:
+          allOf:
+            - $ref: '#/components/schemas/VocabularyFilterMethod'
+            - description: 'Set to mask to remove filtered text from the transcript and replace it with three asterisks ("***") as placeholder text. Set to <code>remove</code> to remove filtered text from the transcript without using placeholder text. Set to <code>tag</code> to mark the word in the transcription output that matches the vocabulary filter. When you set the filter method to <code>tag</code>, the words matching your vocabulary filter are not masked or removed.'
+        LanguageModelName:
+          allOf:
+            - $ref: '#/components/schemas/ModelName'
+            - description: The structure used to describe a custom language model.
+        ContentRedaction:
+          $ref: '#/components/schemas/ContentRedaction'
+        LanguageOptions:
+          allOf:
+            - $ref: '#/components/schemas/LanguageOptions'
+            - description: '<p>When you run a call analytics job, you can specify the language spoken in the audio, or you can have Amazon Transcribe identify the language for you.</p> <p>To specify a language, specify an array with one language code. If you don''t know the language, you can leave this field blank and Amazon Transcribe will use machine learning to identify the language for you. To improve the ability of Amazon Transcribe to correctly identify the language, you can provide an array of the languages that can be present in the audio.</p> <p>The following list shows the supported languages and corresponding language codes for call analytics jobs:</p> <ul> <li> <p>Gulf Arabic (ar-AE)</p> </li> <li> <p>Mandarin Chinese, Mainland (zh-CN)</p> </li> <li> <p>Australian English (en-AU)</p> </li> <li> <p>British English (en-GB)</p> </li> <li> <p>Indian English (en-IN)</p> </li> <li> <p>Irish English (en-IE)</p> </li> <li> <p>Scottish English (en-AB)</p> </li> <li> <p>US English (en-US)</p> </li> <li> <p>Welsh English (en-WL)</p> </li> <li> <p>Spanish (es-ES)</p> </li> <li> <p>US Spanish (es-US)</p> </li> <li> <p>French (fr-FR)</p> </li> <li> <p>Canadian French (fr-CA)</p> </li> <li> <p>German (de-DE)</p> </li> <li> <p>Swiss German (de-CH)</p> </li> <li> <p>Indian Hindi (hi-IN)</p> </li> <li> <p>Italian (it-IT)</p> </li> <li> <p>Japanese (ja-JP)</p> </li> <li> <p>Korean (ko-KR)</p> </li> <li> <p>Portuguese (pt-PT)</p> </li> <li> <p>Brazilian Portuguese (pt-BR)</p> </li> </ul>'
+      description: 'Provides optional settings for the <code>CallAnalyticsJob</code> operation. '
+    ChannelDefinitions:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChannelDefinition'
+      minItems: 2
+      maxItems: 2
+    CallAnalyticsJob:
+      type: object
+      properties:
+        CallAnalyticsJobName:
+          allOf:
+            - $ref: '#/components/schemas/CallAnalyticsJobName'
+            - description: The name of the call analytics job.
+        CallAnalyticsJobStatus:
+          allOf:
+            - $ref: '#/components/schemas/CallAnalyticsJobStatus'
+            - description: The status of the analytics job.
+        LanguageCode:
+          allOf:
+            - $ref: '#/components/schemas/LanguageCode'
+            - description: '<p>If you know the language spoken between the customer and the agent, specify a language code for this field.</p> <p>If you don''t know the language, you can leave this field blank, and Amazon Transcribe will use machine learning to automatically identify the language. To improve the accuracy of language identification, you can provide an array containing the possible language codes for the language spoken in your audio.</p> <p>The following list shows the supported languages and corresponding language codes for call analytics jobs:</p> <ul> <li> <p>Gulf Arabic (ar-AE)</p> </li> <li> <p>Mandarin Chinese, Mainland (zh-CN)</p> </li> <li> <p>Australian English (en-AU)</p> </li> <li> <p>British English (en-GB)</p> </li> <li> <p>Indian English (en-IN)</p> </li> <li> <p>Irish English (en-IE)</p> </li> <li> <p>Scottish English (en-AB)</p> </li> <li> <p>US English (en-US)</p> </li> <li> <p>Welsh English (en-WL)</p> </li> <li> <p>Spanish (es-ES)</p> </li> <li> <p>US Spanish (es-US)</p> </li> <li> <p>French (fr-FR)</p> </li> <li> <p>Canadian French (fr-CA)</p> </li> <li> <p>German (de-DE)</p> </li> <li> <p>Swiss German (de-CH)</p> </li> <li> <p>Indian Hindi (hi-IN)</p> </li> <li> <p>Italian (it-IT)</p> </li> <li> <p>Japanese (ja-JP)</p> </li> <li> <p>Korean (ko-KR)</p> </li> <li> <p>Portuguese (pt-PT)</p> </li> <li> <p>Brazilian Portuguese (pt-BR)</p> </li> </ul>'
+        MediaSampleRateHertz:
+          allOf:
+            - $ref: '#/components/schemas/MediaSampleRateHertz'
+            - description: 'The sample rate, in Hertz, of the audio.'
+        MediaFormat:
+          allOf:
+            - $ref: '#/components/schemas/MediaFormat'
+            - description: 'The format of the input audio file. Note: for call analytics jobs, only the following media formats are supported: MP3, MP4, WAV, FLAC, OGG, and WebM. '
+        Media:
+          $ref: '#/components/schemas/Media'
+        Transcript:
+          $ref: '#/components/schemas/Transcript'
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: A timestamp that shows when the analytics job started processing.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: A timestamp that shows when the analytics job was created.
+        CompletionTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: A timestamp that shows when the analytics job was completed.
+        FailureReason:
+          allOf:
+            - $ref: '#/components/schemas/FailureReason'
+            - description: '<p>If the <code>AnalyticsJobStatus</code> is <code>FAILED</code>, this field contains information about why the job failed.</p> <p>The <code>FailureReason</code> field can contain one of the following values:</p> <ul> <li> <p> <code>Unsupported media format</code>: The media format specified in the <code>MediaFormat</code> field of the request isn''t valid. See the description of the <code>MediaFormat</code> field for a list of valid values.</p> </li> <li> <p> <code>The media format provided does not match the detected media format</code>: The media format of the audio file doesn''t match the format specified in the <code>MediaFormat</code> field in the request. Check the media format of your media file and make sure the two values match.</p> </li> <li> <p> <code>Invalid sample rate for audio file</code>: The sample rate specified in the <code>MediaSampleRateHertz</code> of the request isn''t valid. The sample rate must be between 8000 and 48000 Hertz.</p> </li> <li> <p> <code>The sample rate provided does not match the detected sample rate</code>: The sample rate in the audio file doesn''t match the sample rate specified in the <code>MediaSampleRateHertz</code> field in the request. Check the sample rate of your media file and make sure that the two values match.</p> </li> <li> <p> <code>Invalid file size: file size too large</code>: The size of your audio file is larger than what Amazon Transcribe Medical can process. For more information, see <i>Guidelines and Quotas</i> in the Amazon Transcribe Medical Guide</p> </li> <li> <p> <code>Invalid number of channels: number of channels too large</code>: Your audio contains more channels than Amazon Transcribe Medical is configured to process. To request additional channels, see Amazon Transcribe Medical Endpoints and Quotas in the <a href="https://docs.aws.amazon.com/general/latest/gr/Welcome.html">Amazon Web Services General Reference</a>.</p> </li> </ul>'
+        DataAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/DataAccessRoleArn'
+            - description: The Amazon Resource Number (ARN) that you use to get access to the analytics job.
+        IdentifiedLanguageScore:
+          allOf:
+            - $ref: '#/components/schemas/IdentifiedLanguageScore'
+            - description: A value between zero and one that Amazon Transcribe assigned to the language that it identified in the source audio. This value appears only when you don't provide a single language code. Larger values indicate that Amazon Transcribe has higher confidence in the language that it identified
+        Settings:
+          allOf:
+            - $ref: '#/components/schemas/CallAnalyticsJobSettings'
+            - description: Provides information about the settings used to run a transcription job.
+        ChannelDefinitions:
+          allOf:
+            - $ref: '#/components/schemas/ChannelDefinitions'
+            - description: 'Shows numeric values to indicate the channel assigned to the agent''s audio and the channel assigned to the customer''s audio. '
+      description: Describes an asynchronous analytics job that was created with the <code>StartAnalyticsJob</code> operation.
+    VocabularyName:
+      type: string
+      pattern: '^[0-9a-zA-Z._-]+'
+      minLength: 1
+      maxLength: 200
+    VocabularyFilterName:
+      type: string
+      pattern: '^[0-9a-zA-Z._-]+'
+      minLength: 1
+      maxLength: 200
+    VocabularyFilterMethod:
+      type: string
+      enum:
+        - remove
+        - mask
+        - tag
+    ModelName:
+      type: string
+      pattern: '^[0-9a-zA-Z._-]+'
+      minLength: 1
+      maxLength: 200
+    ContentRedaction:
+      type: object
+      required:
+        - RedactionType
+        - RedactionOutput
+      properties:
+        RedactionType:
+          allOf:
+            - $ref: '#/components/schemas/RedactionType'
+            - description: Request parameter that defines the entities to be redacted. The only accepted value is <code>PII</code>.
+        RedactionOutput:
+          allOf:
+            - $ref: '#/components/schemas/RedactionOutput'
+            - description: <p>The output transcript file stored in either the default S3 bucket or in a bucket you specify.</p> <p>When you choose <code>redacted</code> Amazon Transcribe outputs only the redacted transcript.</p> <p>When you choose <code>redacted_and_unredacted</code> Amazon Transcribe outputs both the redacted and unredacted transcripts.</p>
+      description: Settings for content redaction within a transcription job.
+    LanguageOptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/LanguageCode'
+      minItems: 1
+    CallAnalyticsJobSummary:
+      type: object
+      properties:
+        CallAnalyticsJobName:
+          allOf:
+            - $ref: '#/components/schemas/CallAnalyticsJobName'
+            - description: The name of the call analytics job.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: A timestamp that shows when the call analytics job was created.
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: A timestamp that shows when the job began processing.
+        CompletionTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: A timestamp that shows when the job was completed.
+        LanguageCode:
+          allOf:
+            - $ref: '#/components/schemas/LanguageCode'
+            - description: The language of the transcript in the source audio file.
+        CallAnalyticsJobStatus:
+          allOf:
+            - $ref: '#/components/schemas/CallAnalyticsJobStatus'
+            - description: The status of the call analytics job.
+        FailureReason:
+          allOf:
+            - $ref: '#/components/schemas/FailureReason'
+            - description: 'If the <code>CallAnalyticsJobStatus</code> is <code>FAILED</code>, a description of the error.'
+      description: Provides summary information about a call analytics job.
+    CallAnalyticsJobSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/CallAnalyticsJobSummary'
+    CategoryName:
+      type: string
+      pattern: '^[0-9a-zA-Z._-]+'
+      minLength: 1
+      maxLength: 200
+    RuleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Rule'
+      minItems: 1
+      maxItems: 20
+    CategoryProperties:
+      type: object
+      properties:
+        CategoryName:
+          allOf:
+            - $ref: '#/components/schemas/CategoryName'
+            - description: The name of the call analytics category.
+        Rules:
+          allOf:
+            - $ref: '#/components/schemas/RuleList'
+            - description: The rules used to create a call analytics category.
+        CreateTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: A timestamp that shows when the call analytics category was created.
+        LastUpdateTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: A timestamp that shows when the call analytics category was most recently updated.
+      description: An object that contains the rules and additional information about a call analytics category.
+    CategoryPropertiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CategoryProperties'
+    ChannelId:
+      type: integer
+      minimum: 0
+      maximum: 1
+    ParticipantRole:
+      type: string
+      enum:
+        - AGENT
+        - CUSTOMER
+    ChannelDefinition:
+      type: object
+      properties:
+        ChannelId:
+          allOf:
+            - $ref: '#/components/schemas/ChannelId'
+            - description: A value that indicates the audio channel.
+        ParticipantRole:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantRole'
+            - description: Indicates whether the person speaking on the audio channel is the agent or customer.
+      description: 'For a call analytics job, an object that indicates the audio channel that belongs to the agent and the audio channel that belongs to the customer.'
+    RedactionType:
+      type: string
+      enum:
+        - PII
+    RedactionOutput:
+      type: string
+      enum:
+        - redacted
+        - redacted_and_unredacted
+    InputDataConfig:
+      type: object
+      required:
+        - S3Uri
+        - DataAccessRoleArn
+      properties:
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: The Amazon S3 prefix you specify to access the plain text files that you use to train your custom language model.
+        TuningDataS3Uri:
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: The Amazon S3 prefix you specify to access the plain text files that you use to tune your custom language model.
+        DataAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/DataAccessRoleArn'
+            - description: The Amazon Resource Name (ARN) that uniquely identifies the permissions you've given Amazon Transcribe to access your Amazon S3 buckets containing your media files or text data.
+      description: The object that contains the Amazon S3 object location and access role required to train and tune your custom language model.
+    ModelStatus:
+      type: string
+      enum:
+        - IN_PROGRESS
+        - FAILED
+        - COMPLETED
     Uri:
       type: string
       pattern: '(s3://|http(s*)://).+'
@@ -2675,16 +3690,6 @@ components:
         - PENDING
         - READY
         - FAILED
-    DateTime:
-      type: string
-      format: date-time
-    FailureReason:
-      type: string
-    VocabularyFilterName:
-      type: string
-      pattern: '^[0-9a-zA-Z._-]+'
-      minLength: 1
-      maxLength: 200
     Words:
       type: array
       items:
@@ -2694,11 +3699,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Phrase'
-    DataAccessRoleArn:
-      type: string
-      pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):iam::[0-9]{0,63}:role/[A-Za-z0-9:_/+=,@.-]{0,1024}$'
-      minLength: 20
-      maxLength: 2048
     TranscriptionJobName:
       type: string
       pattern: '^[0-9a-zA-Z._-]+'
@@ -2762,7 +3762,7 @@ components:
         MediaSampleRateHertz:
           allOf:
             - $ref: '#/components/schemas/MediaSampleRateHertz'
-            - description: '<p>The sample rate, in Hertz, of the source audio containing medical information.</p> <p>If you don''t specify the sample rate, Amazon Transcribe Medical determines it for you. If you choose to specify the sample rate, it must match the rate detected by Amazon Transcribe Medical. In most cases, you should leave the <code>MediaSampleHertz</code> blank and let Amazon Transcribe Medical determine the sample rate.</p>'
+            - description: '<p>The sample rate, in Hertz, of the source audio containing medical information.</p> <p>If you don''t specify the sample rate, Amazon Transcribe Medical determines it for you. If you choose to specify the sample rate, it must match the rate detected by Amazon Transcribe Medical. In most cases, you should leave the <code>MedicalMediaSampleHertz</code> blank and let Amazon Transcribe Medical determine the sample rate.</p>'
         MediaFormat:
           allOf:
             - $ref: '#/components/schemas/MediaFormat'
@@ -2804,7 +3804,7 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/Type'
-            - description: 'The type of speech in the transcription job. <code>CONVERSATION</code> is generally used for patient-physician dialogues. <code>DICTATION</code> is the setting for physicians speaking their notes after seeing a patient. For more information, see <a>how-it-works-med</a> '
+            - description: 'The type of speech in the transcription job. <code>CONVERSATION</code> is generally used for patient-physician dialogues. <code>DICTATION</code> is the setting for physicians speaking their notes after seeing a patient. For more information, see <a href="https://docs.aws.amazon.com/transcribe/latest/dg/what-is-transcribe-med.html">What is Amazon Transcribe Medical?</a>.'
       description: The data structure that contains the information for a medical transcription job.
     TranscriptionJob:
       type: object
@@ -2882,9 +3882,50 @@ components:
             - $ref: '#/components/schemas/IdentifiedLanguageScore'
             - description: A value between zero and one that Amazon Transcribe assigned to the language that it identified in the source audio. Larger values indicate that Amazon Transcribe has higher confidence in the language it identified.
       description: 'Describes an asynchronous transcription job that was created with the <code>StartTranscriptionJob</code> operation. '
-    IdentifiedLanguageScore:
-      type: number
-      format: float
+    RelativeTimeRange:
+      type: object
+      properties:
+        StartPercentage:
+          allOf:
+            - $ref: '#/components/schemas/Percentage'
+            - description: '<p>A value that indicates the percentage of the beginning of the time range. To set a relative time range, you must specify a start percentage and an end percentage. For example, if you specify the following values:</p> <ul> <li> <p>StartPercentage - 10</p> </li> <li> <p>EndPercentage - 50</p> </li> </ul> <p>This looks at the time range starting from 10% of the way into the call to 50% of the way through the call. For a call that lasts 100,000 milliseconds, this example range would apply from the 10,000 millisecond mark to the 50,000 millisecond mark. </p>'
+        EndPercentage:
+          allOf:
+            - $ref: '#/components/schemas/Percentage'
+            - description: '<p>A value that indicates the percentage of the end of the time range. To set a relative time range, you must specify a start percentage and an end percentage. For example, if you specify the following values:</p> <ul> <li> <p>StartPercentage - 10</p> </li> <li> <p>EndPercentage - 50</p> </li> </ul> <p>This looks at the time range starting from 10% of the way into the call to 50% of the way through the call. For a call that lasts 100,000 milliseconds, this example range would apply from the 10,000 millisecond mark to the 50,000 millisecond mark.</p>'
+        First:
+          allOf:
+            - $ref: '#/components/schemas/Percentage'
+            - description: 'A range that takes the portion of the call up to the time in milliseconds set by the value that you''ve specified. For example, if you specify <code>120000</code>, the time range is set for the first 120,000 milliseconds of the call.'
+        Last:
+          allOf:
+            - $ref: '#/components/schemas/Percentage'
+            - description: 'A range that takes the portion of the call from the time in milliseconds set by the value that you''ve specified to the end of the call. For example, if you specify <code>120000</code>, the time range is set for the last 120,000 milliseconds of the call.'
+      description: 'An object that allows percentages to specify the proportion of the call where you would like to apply a filter. For example, you can specify the first half of the call. You can also specify the period of time between halfway through to three-quarters of the way through the call. Because the length of conversation can vary between calls, you can apply relative time ranges across all calls. '
+    InterruptionFilter:
+      type: object
+      properties:
+        Threshold:
+          allOf:
+            - $ref: '#/components/schemas/TimestampMilliseconds'
+            - description: The duration of the interruption.
+        ParticipantRole:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantRole'
+            - description: Indicates whether the caller or customer was interrupting.
+        AbsoluteTimeRange:
+          allOf:
+            - $ref: '#/components/schemas/AbsoluteTimeRange'
+            - description: 'An object you can use to specify a time range (in milliseconds) for when you''d want to find the interruption. For example, you could search for an interruption between the 30,000 millisecond mark and the 45,000 millisecond mark. You could also specify the time period as the first 15,000 milliseconds or the last 15,000 milliseconds. '
+        RelativeTimeRange:
+          allOf:
+            - $ref: '#/components/schemas/RelativeTimeRange'
+            - description: 'An object that allows percentages to specify the proportion of the call where there was a interruption. For example, you can specify the first half of the call. You can also specify the period of time between halfway through to three-quarters of the way through the call. Because the length of conversation can vary between calls, you can apply relative time ranges across all calls.'
+        Negate:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Set to <code>TRUE</code> to look for a time period where there was no interruption.
+      description: An object that enables you to configure your category to be applied to call analytics jobs where either the customer or agent was interrupted.
     JobExecutionSettings:
       type: object
       properties:
@@ -2902,11 +3943,6 @@ components:
       pattern: '^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,2048}$'
       minLength: 1
       maxLength: 2048
-    LanguageOptions:
-      type: array
-      items:
-        $ref: '#/components/schemas/LanguageCode'
-      minItems: 2
     NextToken:
       type: string
       pattern: .+
@@ -2950,28 +3986,6 @@ components:
       type: integer
       minimum: 2
       maximum: 10
-    Media:
-      type: object
-      properties:
-        MediaFileUri:
-          allOf:
-            - $ref: '#/components/schemas/Uri'
-            - description: '<p>The S3 object location of the input media file. The URI must be in the same region as the API endpoint that you are calling. The general form is:</p> <p>For example:</p> <p>For more information about S3 object names, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p>'
-      description: Describes the input media file in a transcription request.
-    MediaFormat:
-      type: string
-      enum:
-        - mp3
-        - mp4
-        - wav
-        - flac
-        - ogg
-        - amr
-        - webm
-    MediaSampleRateHertz:
-      type: integer
-      minimum: 8000
-      maximum: 48000
     MedicalContentIdentificationType:
       type: string
       enum:
@@ -3082,6 +4096,31 @@ components:
             - $ref: '#/components/schemas/ModelName'
             - description: The name of your custom language model.
       description: The object used to call your custom language model to your transcription job.
+    NonEmptyString:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 2000
+    NonTalkTimeFilter:
+      type: object
+      properties:
+        Threshold:
+          allOf:
+            - $ref: '#/components/schemas/TimestampMilliseconds'
+            - description: The duration of the period when neither the customer nor agent was talking.
+        AbsoluteTimeRange:
+          allOf:
+            - $ref: '#/components/schemas/AbsoluteTimeRange'
+            - description: 'An object you can use to specify a time range (in milliseconds) for when no one is talking. For example, you could specify a time period between the 30,000 millisecond mark and the 45,000 millisecond mark. You could also specify the time period as the first 15,000 milliseconds or the last 15,000 milliseconds.'
+        RelativeTimeRange:
+          allOf:
+            - $ref: '#/components/schemas/RelativeTimeRange'
+            - description: 'An object that allows percentages to specify the proportion of the call where there was silence. For example, you can specify the first half of the call. You can also specify the period of time between halfway through to three-quarters of the way through the call. Because the length of conversation can vary between calls, you can apply relative time ranges across all calls.'
+        Negate:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Set to <code>TRUE</code> to look for a time period when people were talking.
+      description: An object that enables you to configure your category to be applied to call analytics jobs where either the customer or agent was interrupted.
     OutputBucketName:
       type: string
       pattern: '[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9]'
@@ -3091,17 +4130,104 @@ components:
       pattern: '[a-zA-Z0-9-_.!*''()/]{1,1024}$'
       minLength: 1
       maxLength: 1024
+    Percentage:
+      type: integer
+      minimum: 0
+      maximum: 100
     Phrase:
       type: string
       pattern: .+
       minLength: 0
       maxLength: 256
-    VocabularyFilterMethod:
+    TranscriptFilter:
+      type: object
+      required:
+        - TranscriptFilterType
+        - Targets
+      properties:
+        TranscriptFilterType:
+          allOf:
+            - $ref: '#/components/schemas/TranscriptFilterType'
+            - description: 'Matches the phrase to the transcription output in a word for word fashion. For example, if you specify the phrase "I want to speak to the manager." Amazon Transcribe attempts to match that specific phrase to the transcription.'
+        AbsoluteTimeRange:
+          allOf:
+            - $ref: '#/components/schemas/AbsoluteTimeRange'
+            - description: 'A time range, set in seconds, between two points in the call.'
+        RelativeTimeRange:
+          allOf:
+            - $ref: '#/components/schemas/RelativeTimeRange'
+            - description: 'An object that allows percentages to specify the proportion of the call where you would like to apply a filter. For example, you can specify the first half of the call. You can also specify the period of time between halfway through to three-quarters of the way through the call. Because the length of conversation can vary between calls, you can apply relative time ranges across all calls.'
+        ParticipantRole:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantRole'
+            - description: Determines whether the customer or the agent is speaking the phrases that you've specified.
+        Negate:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'If <code>TRUE</code>, the rule that you specify is applied to everything except for the phrases that you specify.'
+        Targets:
+          allOf:
+            - $ref: '#/components/schemas/StringTargetList'
+            - description: The phrases that you're specifying for the transcript filter to match.
+      description: 'Matches the output of the transcription to either the specific phrases that you specify, or the intent of the phrases that you specify.'
+    SentimentFilter:
+      type: object
+      required:
+        - Sentiments
+      properties:
+        Sentiments:
+          allOf:
+            - $ref: '#/components/schemas/SentimentValueList'
+            - description: An array that enables you to specify sentiments for the customer or agent. You can specify one or more values.
+        AbsoluteTimeRange:
+          allOf:
+            - $ref: '#/components/schemas/AbsoluteTimeRange'
+            - description: 'The time range, measured in seconds, of the sentiment.'
+        RelativeTimeRange:
+          allOf:
+            - $ref: '#/components/schemas/RelativeTimeRange'
+            - description: 'The time range, set in percentages, that correspond to proportion of the call.'
+        ParticipantRole:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantRole'
+            - description: A value that determines whether the sentiment belongs to the customer or the agent.
+        Negate:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Set to <code>TRUE</code> to look for sentiments that weren''t specified in the request. '
+      description: 'An object that enables you to specify a particular customer or agent sentiment. If at least 50 percent of the conversation turns (the back-and-forth between two speakers) in a specified time period match the specified sentiment, Amazon Transcribe will consider the sentiment a match.'
+    Rule:
+      type: object
+      properties:
+        NonTalkTimeFilter:
+          allOf:
+            - $ref: '#/components/schemas/NonTalkTimeFilter'
+            - description: A condition for a time period when neither the customer nor the agent was talking.
+        InterruptionFilter:
+          allOf:
+            - $ref: '#/components/schemas/InterruptionFilter'
+            - description: 'A condition for a time period when either the customer or agent was interrupting the other person. '
+        TranscriptFilter:
+          allOf:
+            - $ref: '#/components/schemas/TranscriptFilter'
+            - description: 'A condition that catches particular words or phrases based on a exact match. For example, if you set the phrase "I want to speak to the manager", only that exact phrase will be returned.'
+        SentimentFilter:
+          allOf:
+            - $ref: '#/components/schemas/SentimentFilter'
+            - description: A condition that is applied to a particular customer sentiment.
+      description: A condition in the call between the customer and the agent that you want to filter for.
+    SentimentValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SentimentValue'
+      minItems: 1
+    SentimentValue:
       type: string
       enum:
-        - remove
-        - mask
-        - tag
+        - POSITIVE
+        - NEGATIVE
+        - NEUTRAL
+        - MIXED
     Settings:
       type: object
       properties:
@@ -3138,18 +4264,15 @@ components:
             - $ref: '#/components/schemas/VocabularyFilterMethod'
             - description: 'Set to <code>mask</code> to remove filtered text from the transcript and replace it with three asterisks ("***") as placeholder text. Set to <code>remove</code> to remove filtered text from the transcript without using placeholder text. Set to <code>tag</code> to mark the word in the transcription output that matches the vocabulary filter. When you set the filter method to <code>tag</code>, the words matching your vocabulary filter are not masked or removed.'
       description: Provides optional settings for the <code>StartTranscriptionJob</code> operation.
-    Transcript:
-      type: object
-      properties:
-        TranscriptFileUri:
-          allOf:
-            - $ref: '#/components/schemas/Uri'
-            - description: '<p>The S3 object location of the transcript.</p> <p>Use this URI to access the transcript. If you specified an S3 bucket in the <code>OutputBucketName</code> field when you created the job, this is the URI of that bucket. If you chose to store the transcript in Amazon Transcribe, this is a shareable URL that provides secure access to that location.</p>'
-        RedactedTranscriptFileUri:
-          allOf:
-            - $ref: '#/components/schemas/Uri'
-            - description: '<p>The S3 object location of the redacted transcript.</p> <p>Use this URI to access the redacted transcript. If you specified an S3 bucket in the <code>OutputBucketName</code> field when you created the job, this is the URI of that bucket. If you chose to store the transcript in Amazon Transcribe, this is a shareable URL that provides secure access to that location.</p>'
-      description: Identifies the location of a transcription.
+    StringTargetList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
+      minItems: 1
+    TranscriptFilterType:
+      type: string
+      enum:
+        - EXACT
     TranscriptionJobSummary:
       type: object
       properties:
