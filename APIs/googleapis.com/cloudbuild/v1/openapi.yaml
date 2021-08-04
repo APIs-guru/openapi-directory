@@ -599,6 +599,12 @@ paths:
     post:
       description: ReceiveWebhook is called when the API receives a GitHub webhook.
       operationId: cloudbuild.webhook
+      parameters:
+        - description: For GitHub Enterprise webhooks, this key is used to associate the webhook request with the GitHubEnterpriseConfig to use for validation.
+          in: query
+          name: webhookKey
+          schema:
+            type: string
       requestBody:
         content:
           application/json:

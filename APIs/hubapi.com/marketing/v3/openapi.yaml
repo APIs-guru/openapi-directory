@@ -29,10 +29,10 @@ tags:
   - description: Operations to mark HubSpot contacts as registered, attended or cancelled a registration to a Marketing Event.
     name: Subscriber State Changes
 paths:
-  /marketing/v3/marketing-events-beta/events:
+  /marketing/v3/marketing-events/events:
     post:
       description: Creates a new marketing event in HubSpot
-      operationId: post-/marketing/v3/marketing-events-beta/events
+      operationId: post-/marketing/v3/marketing-events/events
       requestBody:
         content:
           application/json:
@@ -56,10 +56,10 @@ paths:
       summary: Create a marketing event
       tags:
         - Basic
-  /marketing/v3/marketing-events-beta/events/delete:
+  /marketing/v3/marketing-events/events/delete:
     post:
       description: Bulk delete a number of marketing events in HubSpot
-      operationId: post-/marketing/v3/marketing-events-beta/events/delete
+      operationId: post-/marketing/v3/marketing-events/events/delete
       requestBody:
         content:
           application/json:
@@ -77,10 +77,10 @@ paths:
       summary: Delete multiple marketing events
       tags:
         - Batch
-  /marketing/v3/marketing-events-beta/events/search:
+  /marketing/v3/marketing-events/events/search:
     get:
       description: Search for marketing events that have an event id that starts with the query string
-      operationId: get-/marketing/v3/marketing-events-beta/events/search
+      operationId: get-/marketing/v3/marketing-events/events/search
       parameters:
         - description: The partial event id to search for
           explode: true
@@ -106,10 +106,10 @@ paths:
       summary: Search for marketing events
       tags:
         - Search
-  /marketing/v3/marketing-events-beta/events/upsert:
+  /marketing/v3/marketing-events/events/upsert:
     post:
       description: Upset multiple Marketing Event. If there is an existing Marketing event with the specified id, it will be updated; otherwise a new event will be created.
-      operationId: post-/marketing/v3/marketing-events-beta/events/upsert
+      operationId: post-/marketing/v3/marketing-events/events/upsert
       requestBody:
         content:
           application/json:
@@ -133,10 +133,10 @@ paths:
       summary: Create or update multiple marketing events
       tags:
         - Batch
-  "/marketing/v3/marketing-events-beta/events/{externalEventId}":
+  "/marketing/v3/marketing-events/events/{externalEventId}":
     delete:
       description: Deletes an existing Marketing Event with the specified id, if one exists.
-      operationId: delete-/marketing/v3/marketing-events-beta/events/{externalEventId}
+      operationId: delete-/marketing/v3/marketing-events/events/{externalEventId}
       parameters:
         - description: The id of the marketing event to delete
           explode: false
@@ -169,7 +169,7 @@ paths:
         - Basic
     get:
       description: Returns the details of the Marketing Event with the specified id, if one exists.
-      operationId: get-/marketing/v3/marketing-events-beta/events/{externalEventId}
+      operationId: get-/marketing/v3/marketing-events/events/{externalEventId}
       parameters:
         - description: The id of the marketing event to return
           explode: false
@@ -205,7 +205,7 @@ paths:
         - Basic
     patch:
       description: Updates an existing Marketing Event with the specified id, if one exists.
-      operationId: patch-/marketing/v3/marketing-events-beta/events/{externalEventId}
+      operationId: patch-/marketing/v3/marketing-events/events/{externalEventId}
       parameters:
         - description: The id of the marketing event to update
           explode: false
@@ -248,7 +248,7 @@ paths:
         - Basic
     put:
       description: Upsets a Marketing Event. If there is an existing Marketing event with the specified id, it will be updated; otherwise a new event will be created.
-      operationId: put-/marketing/v3/marketing-events-beta/events/{externalEventId}
+      operationId: put-/marketing/v3/marketing-events/events/{externalEventId}
       parameters:
         - description: The id of the marketing event to upsert
           explode: false
@@ -281,10 +281,10 @@ paths:
       summary: Create or update a marketing event
       tags:
         - Basic
-  "/marketing/v3/marketing-events-beta/events/{externalEventId}/cancel":
+  "/marketing/v3/marketing-events/events/{externalEventId}/cancel":
     post:
       description: Mark a marketing event as cancelled.
-      operationId: post-/marketing/v3/marketing-events-beta/events/{externalEventId}/cancel
+      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/cancel
       parameters:
         - description: The id of the marketing event to mark as cancelled
           explode: false
@@ -318,10 +318,10 @@ paths:
       summary: Mark a marketing event as cancelled
       tags:
         - Basic
-  "/marketing/v3/marketing-events-beta/events/{externalEventId}/{subscriberState}/email-upsert":
+  "/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/email-upsert":
     post:
       description: Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses.
-      operationId: post-/marketing/v3/marketing-events-beta/events/{externalEventId}/{subscriberState}/email-upsert
+      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/email-upsert
       parameters:
         - description: The id of the marketing event
           explode: false
@@ -364,10 +364,10 @@ paths:
       summary: Record
       tags:
         - Subscriber State Changes
-  "/marketing/v3/marketing-events-beta/events/{externalEventId}/{subscriberState}/upsert":
+  "/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/upsert":
     post:
       description: Record a subscription state between multiple HubSpot contacts and a marketing event, using HubSpot contact ids.
-      operationId: post-/marketing/v3/marketing-events-beta/events/{externalEventId}/{subscriberState}/upsert
+      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/upsert
       parameters:
         - description: The id of the marketing event
           explode: false
@@ -410,10 +410,10 @@ paths:
       summary: Record
       tags:
         - Subscriber State Changes
-  "/marketing/v3/marketing-events-beta/{appId}/settings":
+  "/marketing/v3/marketing-events/{appId}/settings":
     get:
       description: Retrieve the current settings for the application.
-      operationId: get-/marketing/v3/marketing-events-beta/{appId}/settings
+      operationId: get-/marketing/v3/marketing-events/{appId}/settings
       parameters:
         - description: The id of the application to retrieve the settings for.
           explode: false
@@ -441,7 +441,7 @@ paths:
         - Settings
     post:
       description: Create or update the current settings for the application.
-      operationId: post-/marketing/v3/marketing-events-beta/{appId}/settings
+      operationId: post-/marketing/v3/marketing-events/{appId}/settings
       parameters:
         - description: The id of the application to update the settings for.
           explode: false
@@ -785,7 +785,6 @@ components:
           format: date-time
           type: string
       required:
-        - customProperties
         - eventName
         - eventOrganizer
         - externalAccountId
@@ -827,7 +826,6 @@ components:
           format: date-time
           type: string
       required:
-        - customProperties
         - eventName
         - eventOrganizer
       type: object
@@ -906,7 +904,6 @@ components:
           type: string
       required:
         - createdAt
-        - customProperties
         - eventName
         - eventOrganizer
         - id
@@ -978,7 +975,6 @@ components:
         - attendees
         - cancellations
         - createdAt
-        - customProperties
         - eventName
         - eventOrganizer
         - externalEventId
@@ -998,7 +994,6 @@ components:
           type: integer
       required:
         - interactionDateTime
-        - vid
       type: object
     MarketingEventUpdateRequestParams:
       properties:
@@ -1035,8 +1030,6 @@ components:
           description: The start date and time of the marketing event.
           format: date-time
           type: string
-      required:
-        - customProperties
       type: object
     PropertyValue:
       properties:
@@ -1122,6 +1115,7 @@ components:
             - PAYMENTS
             - GOALS
             - PORTAL_OBJECT_SYNC
+            - APPROVALS
           type: string
         sourceId:
           type: string
@@ -1154,7 +1148,6 @@ components:
         - sourceMetadata
         - sourceVid
         - timestamp
-        - updatedByUserId
         - value
       type: object
     StandardError:

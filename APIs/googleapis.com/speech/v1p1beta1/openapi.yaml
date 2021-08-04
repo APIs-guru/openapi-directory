@@ -651,6 +651,10 @@ components:
           items:
             $ref: "#/components/schemas/SpeechRecognitionResult"
           type: array
+        totalBilledTime:
+          description: When available, billed audio seconds for the corresponding request.
+          format: google-duration
+          type: string
       type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
@@ -877,6 +881,10 @@ components:
           items:
             $ref: "#/components/schemas/SpeechRecognitionResult"
           type: array
+        totalBilledTime:
+          description: When available, billed audio seconds for the corresponding request.
+          format: google-duration
+          type: string
       type: object
     SpeakerDiarizationConfig:
       description: Config to enable speaker diarization.
