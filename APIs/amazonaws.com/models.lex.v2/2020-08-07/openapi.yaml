@@ -1495,6 +1495,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ResponseSpecification'
                         - description: 'When the user answers "no" to the question defined in <code>promptSpecification</code>, Amazon Lex responds with this response to acknowledge that the intent was canceled. '
+                    active:
+                      allOf:
+                        - $ref: '#/components/schemas/BoxedBoolean'
+                        - description: 'Specifies whether the intent''s confirmation is sent to the user. When this field is false, confirmation and declination responses aren''t sent and processing continues as if the responses aren''t present. If the <code>active</code> field isn''t specified, the default is true.'
                 intentClosingSetting:
                   description: Provides a statement the Amazon Lex conveys to the user when the intent is successfully fulfilled.
                   type: object
@@ -1503,6 +1507,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ResponseSpecification'
                         - description: The response that Amazon Lex sends to the user when the intent is complete.
+                    active:
+                      allOf:
+                        - $ref: '#/components/schemas/BoxedBoolean'
+                        - description: 'Specifies whether an intent''s closing response is used. When this field is false, the closing response isn''t sent to the user and no closing input from the user is used. If the <code>active</code> field isn''t specified, the default is true.'
                 inputContexts:
                   description: '<p>A list of contexts that must be active for this intent to be considered by Amazon Lex.</p> <p>When an intent has an input context list, Amazon Lex only considers using the intent in an interaction with the user when the specified contexts are included in the active context list for the session. If the contexts are not active, then Amazon Lex will not use the intent.</p> <p>A context can be automatically activated using the <code>outputContexts</code> property or it can be set at runtime.</p> <p> For example, if there are two intents with different input contexts that respond to the same utterances, only the intent with the active context will respond.</p> <p>An intent may have up to 5 input contexts. If an intent has multiple input contexts, all of the contexts must be active to consider the intent.</p>'
                   type: array
@@ -3745,6 +3753,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ResponseSpecification'
                         - description: 'When the user answers "no" to the question defined in <code>promptSpecification</code>, Amazon Lex responds with this response to acknowledge that the intent was canceled. '
+                    active:
+                      allOf:
+                        - $ref: '#/components/schemas/BoxedBoolean'
+                        - description: 'Specifies whether the intent''s confirmation is sent to the user. When this field is false, confirmation and declination responses aren''t sent and processing continues as if the responses aren''t present. If the <code>active</code> field isn''t specified, the default is true.'
                 intentClosingSetting:
                   description: Provides a statement the Amazon Lex conveys to the user when the intent is successfully fulfilled.
                   type: object
@@ -3753,6 +3765,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ResponseSpecification'
                         - description: The response that Amazon Lex sends to the user when the intent is complete.
+                    active:
+                      allOf:
+                        - $ref: '#/components/schemas/BoxedBoolean'
+                        - description: 'Specifies whether an intent''s closing response is used. When this field is false, the closing response isn''t sent to the user and no closing input from the user is used. If the <code>active</code> field isn''t specified, the default is true.'
                 inputContexts:
                   description: A new list of contexts that must be active in order for Amazon Lex to consider the intent.
                   type: array
@@ -5326,7 +5342,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/BotVersion'
             - description: The version of the bot that was exported. This will be either <code>DRAFT</code> or the version number.
-      description: Provided the identity of a the bot that was exported.
+      description: Provides the identity of a the bot that was exported.
     BotLocaleExportSpecification:
       type: object
       required:
@@ -5458,6 +5474,8 @@ components:
             - $ref: '#/components/schemas/BoxedBoolean'
             - description: Indicates whether the user can interrupt a speech response from Amazon Lex.
       description: Specifies a list of message groups that Amazon Lex uses to respond the user input.
+    BoxedBoolean:
+      type: boolean
     InputContext:
       type: object
       required:
@@ -5630,6 +5648,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/StillWaitingResponseSpecification'
             - description: A response that Amazon Lex sends periodically to the user to indicate that the bot is still waiting for input from the user.
+        active:
+          allOf:
+            - $ref: '#/components/schemas/BoxedBoolean'
+            - description: 'Specifies whether the bot will wait for a user to respond. When this field is false, wait and continue responses for a slot aren''t used and the bot expects an appropriate response within the configured timeout. If the <code>active</code> field isn''t specified, the default is true.'
       description: 'Specifies the prompts that Amazon Lex uses while a bot is waiting for customer input. '
     ObfuscationSettingType:
       type: string
@@ -7558,8 +7580,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/BotVersionSummary'
-    BoxedBoolean:
-      type: boolean
     BuildBotLocaleRequest:
       type: object
       title: BuildBotLocaleRequest
@@ -7944,6 +7964,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResponseSpecification'
             - description: 'When the user answers "no" to the question defined in <code>promptSpecification</code>, Amazon Lex responds with this response to acknowledge that the intent was canceled. '
+        active:
+          allOf:
+            - $ref: '#/components/schemas/BoxedBoolean'
+            - description: 'Specifies whether the intent''s confirmation is sent to the user. When this field is false, confirmation and declination responses aren''t sent and processing continues as if the responses aren''t present. If the <code>active</code> field isn''t specified, the default is true.'
       description: Provides a prompt for making sure that the user is ready for the intent to be fulfilled.
     IntentClosingSetting:
       type: object
@@ -7954,6 +7978,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResponseSpecification'
             - description: The response that Amazon Lex sends to the user when the intent is complete.
+        active:
+          allOf:
+            - $ref: '#/components/schemas/BoxedBoolean'
+            - description: 'Specifies whether an intent''s closing response is used. When this field is false, the closing response isn''t sent to the user and no closing input from the user is used. If the <code>active</code> field isn''t specified, the default is true.'
       description: Provides a statement the Amazon Lex conveys to the user when the intent is successfully fulfilled.
     InputContextsList:
       type: array
@@ -8955,7 +8983,7 @@ components:
     PriorityValue:
       type: integer
       minimum: 0
-      maximum: 25
+      maximum: 100
     PromptMaxRetries:
       type: integer
       minimum: 0
