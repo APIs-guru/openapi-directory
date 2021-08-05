@@ -3866,9 +3866,6 @@ components:
         advancedApiOpsConfig:
           $ref: "#/components/schemas/GoogleCloudApigeeV1AdvancedApiOpsConfig"
           description: Configuration for the Advanced API Ops add-on.
-        integrationConfig:
-          $ref: "#/components/schemas/GoogleCloudApigeeV1IntegrationConfig"
-          description: Configuration for the Integration add-on.
         monetizationConfig:
           $ref: "#/components/schemas/GoogleCloudApigeeV1MonetizationConfig"
           description: Configuration for the Monetization add-on.
@@ -5565,13 +5562,6 @@ components:
           description: Percentage of ingress replicas reporting this route.
           format: int32
           type: integer
-      type: object
-    GoogleCloudApigeeV1IntegrationConfig:
-      description: Configuration for the Integration add-on.
-      properties:
-        enabled:
-          description: Flag that specifies whether the Integration add-on is enabled.
-          type: boolean
       type: object
     GoogleCloudApigeeV1KeyAliasReference:
       properties:

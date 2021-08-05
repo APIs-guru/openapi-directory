@@ -1744,20 +1744,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: Whether to skip the verification step (VESS).
-          in: query
-          name: skipVerification
-          schema:
-            type: boolean
-        - description: External sync mode.
-          in: query
-          name: syncMode
-          schema:
-            enum:
-              - EXTERNAL_SYNC_MODE_UNSPECIFIED
-              - ONLINE
-              - OFFLINE
-            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SqlInstancesStartExternalSyncRequest"
       responses:
         "200":
           content:
@@ -2130,20 +2121,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: External sync mode
-          in: query
-          name: syncMode
-          schema:
-            enum:
-              - EXTERNAL_SYNC_MODE_UNSPECIFIED
-              - ONLINE
-              - OFFLINE
-            type: string
-        - description: Flag to enable verifying connection only
-          in: query
-          name: verifyConnectionOnly
-          schema:
-            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SqlInstancesVerifyExternalSyncSettingsRequest"
       responses:
         "200":
           content:
@@ -3323,6 +3305,9 @@ components:
     IpConfiguration:
       description: IP Management configuration.
       properties:
+        allocatedIpRange:
+          description: 'The name of the allocated ip range for the private ip CloudSQL instance. For example: "google-managed-services-default". If set, the instance ip will be created in the allocated range. The range name must comply with [RFC 1035](https://tools.ietf.org/html/rfc1035). Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])?. Reserved for future use.'
+          type: string
         authorizedNetworks:
           description: "The list of external networks that are allowed to connect to the instance using the IP. In 'CIDR' notation, also known as 'slash' notation (for example: *192.168.100.0/24*)."
           items:
@@ -3434,6 +3419,10 @@ components:
         verifyServerCertificate:
           description: Whether or not to check the primary instance's Common Name value in the certificate that it sends during the SSL handshake.
           type: boolean
+      type: object
+    MySqlSyncConfig:
+      description: MySQL-specific external server sync settings.
+      properties: {}
       type: object
     OnPremisesConfiguration:
       description: On-premises instance configuration.
@@ -3816,6 +3805,38 @@ components:
         reschedule:
           $ref: "#/components/schemas/Reschedule"
           description: Required. The type of the reschedule the user wants.
+      type: object
+    SqlInstancesStartExternalSyncRequest:
+      properties:
+        mysqlSyncConfig:
+          $ref: "#/components/schemas/MySqlSyncConfig"
+          description: MySQL-specific settings for start external sync.
+        skipVerification:
+          description: Whether to skip the verification step (VESS).
+          type: boolean
+        syncMode:
+          description: External sync mode.
+          enum:
+            - EXTERNAL_SYNC_MODE_UNSPECIFIED
+            - ONLINE
+            - OFFLINE
+          type: string
+      type: object
+    SqlInstancesVerifyExternalSyncSettingsRequest:
+      properties:
+        mysqlSyncConfig:
+          $ref: "#/components/schemas/MySqlSyncConfig"
+          description: Optional. MySQL-specific settings for start external sync.
+        syncMode:
+          description: External sync mode
+          enum:
+            - EXTERNAL_SYNC_MODE_UNSPECIFIED
+            - ONLINE
+            - OFFLINE
+          type: string
+        verifyConnectionOnly:
+          description: Flag to enable verifying connection only
+          type: boolean
       type: object
     SqlInstancesVerifyExternalSyncSettingsResponse:
       description: Instance verify external sync settings response.

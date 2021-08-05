@@ -3102,6 +3102,9 @@ components:
           items:
             type: string
           type: array
+        consentSettings:
+          $ref: "#/components/schemas/TagConsentSetting"
+          description: Consent settings of a tag. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
         containerId:
           description: GTM Container ID.
           type: string
@@ -3188,6 +3191,19 @@ components:
         workspaceId:
           description: GTM Workspace ID.
           type: string
+      type: object
+    TagConsentSetting:
+      properties:
+        consentStatus:
+          description: The tag's consent status. If set to NEEDED, the runtime will check that the consent types specified by the consent_type field have been granted.
+          enum:
+            - notSet
+            - notNeeded
+            - needed
+          type: string
+        consentType:
+          $ref: "#/components/schemas/Parameter"
+          description: The type of consents to check for during tag firing if in the consent NEEDED state. This parameter must be of type LIST where each list item is of type STRING.
       type: object
     TeardownTag:
       description: Represents a tag that fires after another tag in order to tear down dependencies.

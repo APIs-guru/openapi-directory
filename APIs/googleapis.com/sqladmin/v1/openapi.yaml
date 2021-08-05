@@ -1742,20 +1742,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: Whether to skip the verification step (VESS).
-          in: query
-          name: skipVerification
-          schema:
-            type: boolean
-        - description: External sync mode.
-          in: query
-          name: syncMode
-          schema:
-            enum:
-              - EXTERNAL_SYNC_MODE_UNSPECIFIED
-              - ONLINE
-              - OFFLINE
-            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SqlInstancesStartExternalSyncRequest"
       responses:
         "200":
           content:
@@ -1981,64 +1972,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: This field is deprecated and will be removed from a future version of the API.
-          in: query
-          name: body.etag
-          schema:
-            type: string
-        - description: The host name from which the user can connect. For *insert* operations, host defaults to an empty string. For *update* operations, host is specified as part of the request URL. The host name cannot be updated after insertion.
-          in: query
-          name: body.host
-          schema:
-            type: string
-        - description: The name of the Cloud SQL instance. This does not include the project ID. Can be omitted for *update* since it is already specified on the URL.
-          in: query
-          name: body.instance
-          schema:
-            type: string
-        - description: This is always *sql#user*.
-          in: query
-          name: body.kind
-          schema:
-            type: string
-        - description: The name of the user in the Cloud SQL instance. Can be omitted for *update* since it is already specified in the URL.
-          in: query
-          name: body.name
-          schema:
-            type: string
-        - description: The password for the user.
-          in: query
-          name: body.password
-          schema:
-            type: string
-        - description: The project ID of the project containing the Cloud SQL database. The Google apps domain is prefixed if applicable. Can be omitted for *update* since it is already specified on the URL.
-          in: query
-          name: body.project
-          schema:
-            type: string
-        - description: If the user has been disabled
-          in: query
-          name: body.sqlserverUserDetails.disabled
-          schema:
-            type: boolean
-        - description: The server roles for this user
-          explode: true
-          in: query
-          name: body.sqlserverUserDetails.serverRoles
-          schema:
-            items:
-              type: string
-            type: array
-          style: form
-        - description: The user type. It determines the method to authenticate the user during login. The default is the database's built-in user type.
-          in: query
-          name: body.type
-          schema:
-            enum:
-              - BUILT_IN
-              - CLOUD_IAM_USER
-              - CLOUD_IAM_SERVICE_ACCOUNT
-            type: string
       responses:
         "200":
           content:
@@ -2186,20 +2119,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: External sync mode
-          in: query
-          name: syncMode
-          schema:
-            enum:
-              - EXTERNAL_SYNC_MODE_UNSPECIFIED
-              - ONLINE
-              - OFFLINE
-            type: string
-        - description: Flag to enable verifying connection only
-          in: query
-          name: verifyConnectionOnly
-          schema:
-            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SqlInstancesVerifyExternalSyncSettingsRequest"
       responses:
         "200":
           content:
@@ -3376,6 +3300,9 @@ components:
     IpConfiguration:
       description: IP Management configuration.
       properties:
+        allocatedIpRange:
+          description: 'The name of the allocated ip range for the private ip CloudSQL instance. For example: "google-managed-services-default". If set, the instance ip will be created in the allocated range. The range name must comply with [RFC 1035](https://tools.ietf.org/html/rfc1035). Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])?. Reserved for future use.'
+          type: string
         authorizedNetworks:
           description: "The list of external networks that are allowed to connect to the instance using the IP. In 'CIDR' notation, also known as 'slash' notation (for example: **192.168.100.0/24**)."
           items:
@@ -3487,6 +3414,10 @@ components:
         verifyServerCertificate:
           description: Whether or not to check the primary instance's Common Name value in the certificate that it sends during the SSL handshake.
           type: boolean
+      type: object
+    MySqlSyncConfig:
+      description: MySQL-specific external server sync settings.
+      properties: {}
       type: object
     OnPremisesConfiguration:
       description: On-premises instance configuration.
@@ -3869,6 +3800,40 @@ components:
         reschedule:
           $ref: "#/components/schemas/Reschedule"
           description: Required. The type of the reschedule the user wants.
+      type: object
+    SqlInstancesStartExternalSyncRequest:
+      description: Instance start external sync request.
+      properties:
+        mysqlSyncConfig:
+          $ref: "#/components/schemas/MySqlSyncConfig"
+          description: MySQL-specific settings for start external sync.
+        skipVerification:
+          description: Whether to skip the verification step (VESS).
+          type: boolean
+        syncMode:
+          description: External sync mode.
+          enum:
+            - EXTERNAL_SYNC_MODE_UNSPECIFIED
+            - ONLINE
+            - OFFLINE
+          type: string
+      type: object
+    SqlInstancesVerifyExternalSyncSettingsRequest:
+      description: Instance verify external sync settings request.
+      properties:
+        mysqlSyncConfig:
+          $ref: "#/components/schemas/MySqlSyncConfig"
+          description: Optional. MySQL-specific settings for start external sync.
+        syncMode:
+          description: External sync mode
+          enum:
+            - EXTERNAL_SYNC_MODE_UNSPECIFIED
+            - ONLINE
+            - OFFLINE
+          type: string
+        verifyConnectionOnly:
+          description: Flag to enable verifying connection only
+          type: boolean
       type: object
     SqlInstancesVerifyExternalSyncSettingsResponse:
       description: Instance verify external sync settings response.
