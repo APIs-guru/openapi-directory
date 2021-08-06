@@ -1,0 +1,1979 @@
+openapi: 3.0.0
+info:
+  version: '2021-04-20'
+  x-release: v4
+  title: Amazon Chime SDK Identity
+  description: 'The Amazon Chime SDK Identity APIs in this section allow software developers to create and manage unique instances of their messaging applications. These APIs provide the overarching framework for creating and sending messages. For more information about the identity APIs, refer to .'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: chime-sdk-identity
+  x-aws-signingName: chime
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/chime-sdk-identity-2021-04-20.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/identity-chime/'
+servers:
+  - url: 'http://identity-chime.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon Chime SDK Identity multi-region endpoint
+  - url: 'https://identity-chime.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon Chime SDK Identity multi-region endpoint
+  - url: 'http://identity-chime.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Chime SDK Identity endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://identity-chime.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Chime SDK Identity endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /app-instances:
+    post:
+      operationId: CreateAppInstance
+      description: <p>Creates an Amazon Chime SDK messaging <code>AppInstance</code> under an AWS account. Only SDK messaging customers use this API. <code>CreateAppInstance</code> supports idempotency behavior as described in the AWS API Standard.</p> <p>identity</p>
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAppInstanceResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - ClientRequestToken
+              properties:
+                Name:
+                  description: The name of the <code>AppInstance</code>.
+                  type: string
+                  pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+                  minLength: 1
+                  maxLength: 256
+                  format: password
+                Metadata:
+                  description: The metadata of the <code>AppInstance</code>. Limited to a 1KB string in UTF-8.
+                  type: string
+                  pattern: .*
+                  minLength: 0
+                  maxLength: 1024
+                  format: password
+                ClientRequestToken:
+                  description: The <code>ClientRequestToken</code> of the <code>AppInstance</code>.
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 2
+                  maxLength: 64
+                  format: password
+                Tags:
+                  description: Tags assigned to the <code>AppInstanceUser</code>.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListAppInstances
+      description: Lists all Amazon Chime <code>AppInstance</code>s created under a single AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAppInstancesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of <code>AppInstance</code>s that you want to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: next-token
+          in: query
+          required: false
+          description: The token passed by previous API requests until you reach the maximum number of <code>AppInstances</code>.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 2048
+            format: password
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  '/app-instances/{appInstanceArn}/admins':
+    post:
+      operationId: CreateAppInstanceAdmin
+      description: <p>Promotes an <code>AppInstanceUser</code> to an <code>AppInstanceAdmin</code>. The promoted user can perform the following actions. </p> <ul> <li> <p> <code>ChannelModerator</code> actions across all channels in the <code>AppInstance</code>.</p> </li> <li> <p> <code>DeleteChannelMessage</code> actions.</p> </li> </ul> <p>Only an <code>AppInstanceUser</code> can be promoted to an <code>AppInstanceAdmin</code> role.</p>
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAppInstanceAdminResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstance</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AppInstanceAdminArn
+              properties:
+                AppInstanceAdminArn:
+                  description: The ARN of the administrator of the current <code>AppInstance</code>.
+                  type: string
+                  pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+                  minLength: 5
+                  maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListAppInstanceAdmins
+      description: Returns a list of the administrators in the <code>AppInstance</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAppInstanceAdminsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstance</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of administrators that you want to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: next-token
+          in: query
+          required: false
+          description: The token returned from previous API requests until the number of administrators is reached.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 2048
+            format: password
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  /app-instance-users:
+    post:
+      operationId: CreateAppInstanceUser
+      description: Creates a user under an Amazon Chime <code>AppInstance</code>. The request consists of a unique <code>appInstanceUserId</code> and <code>Name</code> for that user.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAppInstanceUserResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AppInstanceArn
+                - AppInstanceUserId
+                - Name
+                - ClientRequestToken
+              properties:
+                AppInstanceArn:
+                  description: The ARN of the <code>AppInstance</code> request.
+                  type: string
+                  pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+                  minLength: 5
+                  maxLength: 1600
+                AppInstanceUserId:
+                  description: The user ID of the <code>AppInstance</code>.
+                  type: string
+                  pattern: '[A-Za-z0-9]([A-Za-z0-9\:\-\_\.\@]{0,62}[A-Za-z0-9])?'
+                  minLength: 1
+                  maxLength: 64
+                  format: password
+                Name:
+                  description: The user's name.
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 100
+                  format: password
+                Metadata:
+                  description: The request's metadata. Limited to a 1KB string in UTF-8.
+                  type: string
+                  pattern: .*
+                  minLength: 0
+                  maxLength: 1024
+                  format: password
+                ClientRequestToken:
+                  description: The token assigned to the user requesting an <code>AppInstance</code>.
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 2
+                  maxLength: 64
+                  format: password
+                Tags:
+                  description: Tags assigned to the <code>AppInstanceUser</code>.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/app-instances/{appInstanceArn}':
+    delete:
+      operationId: DeleteAppInstance
+      description: Deletes an <code>AppInstance</code> and all associated data asynchronously.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstance</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeAppInstance
+      description: Returns the full details of an <code>AppInstance</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAppInstanceResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstance</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    put:
+      operationId: UpdateAppInstance
+      description: Updates <code>AppInstance</code> metadata.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAppInstanceResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstance</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - Metadata
+              properties:
+                Name:
+                  description: The name that you want to change.
+                  type: string
+                  pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+                  minLength: 1
+                  maxLength: 256
+                  format: password
+                Metadata:
+                  description: The metadata that you want to change.
+                  type: string
+                  pattern: .*
+                  minLength: 0
+                  maxLength: 1024
+                  format: password
+  '/app-instances/{appInstanceArn}/admins/{appInstanceAdminArn}':
+    delete:
+      operationId: DeleteAppInstanceAdmin
+      description: Demotes an <code>AppInstanceAdmin</code> to an <code>AppInstanceUser</code>. This action does not delete the user.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceAdminArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstance</code>'s administrator.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: appInstanceArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstance</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeAppInstanceAdmin
+      description: Returns the full details of an <code>AppInstanceAdmin</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAppInstanceAdminResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceAdminArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstanceAdmin</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: appInstanceArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstance</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+  '/app-instance-users/{appInstanceUserArn}':
+    delete:
+      operationId: DeleteAppInstanceUser
+      description: Deletes an <code>AppInstanceUser</code>.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceUserArn
+          in: path
+          required: true
+          description: The ARN of the user request being deleted.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeAppInstanceUser
+      description: Returns the full details of an <code>AppInstanceUser</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAppInstanceUserResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceUserArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstanceUser</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    put:
+      operationId: UpdateAppInstanceUser
+      description: Updates the details of an <code>AppInstanceUser</code>. You can update names and metadata.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAppInstanceUserResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceUserArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstanceUser</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - Metadata
+              properties:
+                Name:
+                  description: The name of the <code>AppInstanceUser</code>.
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 100
+                  format: password
+                Metadata:
+                  description: The metadata of the <code>AppInstanceUser</code>.
+                  type: string
+                  pattern: .*
+                  minLength: 0
+                  maxLength: 1024
+                  format: password
+  '/app-instances/{appInstanceArn}/retention-settings':
+    get:
+      operationId: GetAppInstanceRetentionSettings
+      description: Gets the retention settings for an <code>AppInstance</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAppInstanceRetentionSettingsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstance</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: PutAppInstanceRetentionSettings
+      description: Sets the amount of time in days that a given <code>AppInstance</code> retains data.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutAppInstanceRetentionSettingsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: appInstanceArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstance</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AppInstanceRetentionSettings
+              properties:
+                AppInstanceRetentionSettings:
+                  description: The details of the data-retention settings for an <code>AppInstance</code>.
+                  type: object
+                  properties:
+                    ChannelRetentionSettings:
+                      allOf:
+                        - $ref: '#/components/schemas/ChannelRetentionSettings'
+                        - description: The length of time in days to retain the messages in a channel.
+  /app-instance-users#app-instance-arn:
+    get:
+      operationId: ListAppInstanceUsers
+      description: List all <code>AppInstanceUsers</code> created under a single <code>AppInstance</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAppInstanceUsersResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: app-instance-arn
+          in: query
+          required: true
+          description: The ARN of the <code>AppInstance</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of requests that you want returned.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: next-token
+          in: query
+          required: false
+          description: The token passed by previous API calls until all requested users are returned.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 2048
+            format: password
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateAppInstanceResponse:
+      type: object
+      properties:
+        AppInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The Amazon Resource Number (ARN) of the <code>AppInstance</code>.
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The key of the tag.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The value of the tag.
+      description: Describes a tag applied to a resource.
+    BadRequestException: {}
+    ConflictException: {}
+    ForbiddenException: {}
+    ResourceLimitExceededException: {}
+    ThrottledClientException: {}
+    UnauthorizedClientException: {}
+    ServiceUnavailableException: {}
+    ServiceFailureException: {}
+    CreateAppInstanceAdminResponse:
+      type: object
+      properties:
+        AppInstanceAdmin:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The name and ARN of the admin for the <code>AppInstance</code>.
+        AppInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the of the admin for the <code>AppInstance</code>.
+    CreateAppInstanceUserResponse:
+      type: object
+      properties:
+        AppInstanceUserArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The user's ARN.
+    DescribeAppInstanceResponse:
+      type: object
+      properties:
+        AppInstance:
+          allOf:
+            - $ref: '#/components/schemas/AppInstance'
+            - description: 'The ARN, metadata, created and last-updated timestamps, and the name of the <code>AppInstance</code>. All timestamps use epoch milliseconds.'
+    DescribeAppInstanceAdminResponse:
+      type: object
+      properties:
+        AppInstanceAdmin:
+          allOf:
+            - $ref: '#/components/schemas/AppInstanceAdmin'
+            - description: 'The ARN and name of the <code>AppInstanceUser</code>, the ARN of the <code>AppInstance</code>, and the created and last-updated timestamps. All timestamps use epoch milliseconds.'
+    DescribeAppInstanceUserResponse:
+      type: object
+      properties:
+        AppInstanceUser:
+          allOf:
+            - $ref: '#/components/schemas/AppInstanceUser'
+            - description: The name of the <code>AppInstanceUser</code>.
+    GetAppInstanceRetentionSettingsResponse:
+      type: object
+      properties:
+        AppInstanceRetentionSettings:
+          allOf:
+            - $ref: '#/components/schemas/AppInstanceRetentionSettings'
+            - description: The retention settings for the <code>AppInstance</code>.
+        InitiateDeletionTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The timestamp representing the time at which the specified items are retained, in Epoch Seconds.'
+    ListAppInstanceAdminsResponse:
+      type: object
+      properties:
+        AppInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the <code>AppInstance</code>.
+        AppInstanceAdmins:
+          allOf:
+            - $ref: '#/components/schemas/AppInstanceAdminList'
+            - description: The information for each administrator.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token returned from previous API requests until the number of administrators is reached.
+    ListAppInstanceUsersResponse:
+      type: object
+      properties:
+        AppInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the <code>AppInstance</code>.
+        AppInstanceUsers:
+          allOf:
+            - $ref: '#/components/schemas/AppInstanceUserList'
+            - description: The information for each requested <code>AppInstanceUser</code>.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token passed by previous API calls until all requested users are returned.
+    ListAppInstancesResponse:
+      type: object
+      properties:
+        AppInstances:
+          allOf:
+            - $ref: '#/components/schemas/AppInstanceList'
+            - description: The information for each <code>AppInstance</code>.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token passed by previous API requests until the maximum number of <code>AppInstance</code>s is reached.
+    PutAppInstanceRetentionSettingsResponse:
+      type: object
+      properties:
+        AppInstanceRetentionSettings:
+          allOf:
+            - $ref: '#/components/schemas/AppInstanceRetentionSettings'
+            - description: 'The time in days to retain data. Data type: number.'
+        InitiateDeletionTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the API deletes data.
+    ChannelRetentionSettings:
+      type: object
+      properties:
+        RetentionDays:
+          allOf:
+            - $ref: '#/components/schemas/RetentionDays'
+            - description: The time in days to retain the messages in a channel.
+      description: The details of the retention settings for a channel.
+    UpdateAppInstanceResponse:
+      type: object
+      properties:
+        AppInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the <code>AppInstance</code>.
+    UpdateAppInstanceUserResponse:
+      type: object
+      properties:
+        AppInstanceUserArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the <code>AppInstanceUser</code>.
+    ChimeArn:
+      type: string
+      pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+      minLength: 5
+      maxLength: 1600
+    NonEmptyResourceName:
+      type: string
+      pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+      minLength: 1
+      maxLength: 256
+      format: password
+    Timestamp:
+      type: string
+      format: date-time
+    Metadata:
+      type: string
+      pattern: .*
+      minLength: 0
+      maxLength: 1024
+      format: password
+    AppInstance:
+      type: object
+      properties:
+        AppInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the messaging instance.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyResourceName'
+            - description: The name of an <code>AppInstance</code>.
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which an <code>AppInstance</code> was created. In epoch milliseconds.
+        LastUpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time an <code>AppInstance</code> was last updated. In epoch milliseconds.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The metadata of an <code>AppInstance</code>.
+      description: 'The details of an <code>AppInstance</code>, an instance of an Amazon Chime SDK messaging application.'
+    Identity:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN in an Identity.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name in an Identity.
+      description: The details of a user.
+    AppInstanceAdmin:
+      type: object
+      properties:
+        Admin:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The <code>AppInstanceAdmin</code> data.
+        AppInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the <code>AppInstance</code> for which the user is an administrator.
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which an administrator was created.
+      description: The details of an <code>AppInstanceAdmin</code>.
+    AppInstanceAdminSummary:
+      type: object
+      properties:
+        Admin:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The details of the <code>AppInstanceAdmin</code>.
+      description: Summary of the details of an <code>AppInstanceAdmin</code>.
+    AppInstanceAdminList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AppInstanceAdminSummary'
+    AppInstanceSummary:
+      type: object
+      properties:
+        AppInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The <code>AppInstance</code> ARN.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyResourceName'
+            - description: The name of the <code>AppInstance</code>.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The metadata of the <code>AppInstance</code>.
+      description: Summary of the data for an <code>AppInstance</code>.
+    AppInstanceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AppInstanceSummary'
+    AppInstanceRetentionSettings:
+      type: object
+      properties:
+        ChannelRetentionSettings:
+          allOf:
+            - $ref: '#/components/schemas/ChannelRetentionSettings'
+            - description: The length of time in days to retain the messages in a channel.
+      description: The details of the data-retention settings for an <code>AppInstance</code>.
+    UserName:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 100
+      format: password
+    AppInstanceUser:
+      type: object
+      properties:
+        AppInstanceUserArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the <code>AppInstanceUser</code>.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/UserName'
+            - description: The name of the <code>AppInstanceUser</code>.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The metadata of the <code>AppInstanceUser</code>.
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the <code>AppInstanceUser</code> was created.
+        LastUpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the <code>AppInstanceUser</code> was last updated.
+      description: The details of an <code>AppInstanceUser</code>.
+    AppInstanceUserSummary:
+      type: object
+      properties:
+        AppInstanceUserArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the <code>AppInstanceUser</code>.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/UserName'
+            - description: The name of an <code>AppInstanceUser</code>.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The metadata of the <code>AppInstanceUser</code>.
+      description: Summary of the details of an <code>AppInstanceUser</code>.
+    AppInstanceUserList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AppInstanceUserSummary'
+    RetentionDays:
+      type: integer
+      minimum: 1
+      maximum: 5475
+    ClientRequestToken:
+      type: string
+      pattern: '[-_a-zA-Z0-9]*'
+      minLength: 2
+      maxLength: 64
+      format: password
+    CreateAppInstanceAdminRequest:
+      type: object
+      required:
+        - AppInstanceAdminArn
+      title: CreateAppInstanceAdminRequest
+      properties:
+        AppInstanceAdminArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the administrator of the current <code>AppInstance</code>.
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 1
+      maxItems: 50
+    CreateAppInstanceRequest:
+      type: object
+      required:
+        - Name
+        - ClientRequestToken
+      title: CreateAppInstanceRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyResourceName'
+            - description: The name of the <code>AppInstance</code>.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The metadata of the <code>AppInstance</code>. Limited to a 1KB string in UTF-8.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: The <code>ClientRequestToken</code> of the <code>AppInstance</code>.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: Tags assigned to the <code>AppInstanceUser</code>.
+    UserId:
+      type: string
+      pattern: '[A-Za-z0-9]([A-Za-z0-9\:\-\_\.\@]{0,62}[A-Za-z0-9])?'
+      minLength: 1
+      maxLength: 64
+      format: password
+    CreateAppInstanceUserRequest:
+      type: object
+      required:
+        - AppInstanceArn
+        - AppInstanceUserId
+        - Name
+        - ClientRequestToken
+      title: CreateAppInstanceUserRequest
+      properties:
+        AppInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the <code>AppInstance</code> request.
+        AppInstanceUserId:
+          allOf:
+            - $ref: '#/components/schemas/UserId'
+            - description: The user ID of the <code>AppInstance</code>.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/UserName'
+            - description: The user's name.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The request's metadata. Limited to a 1KB string in UTF-8.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: The token assigned to the user requesting an <code>AppInstance</code>.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: Tags assigned to the <code>AppInstanceUser</code>.
+    DeleteAppInstanceAdminRequest:
+      type: object
+      title: DeleteAppInstanceAdminRequest
+      properties: {}
+    DeleteAppInstanceRequest:
+      type: object
+      title: DeleteAppInstanceRequest
+      properties: {}
+    DeleteAppInstanceUserRequest:
+      type: object
+      title: DeleteAppInstanceUserRequest
+      properties: {}
+    DescribeAppInstanceAdminRequest:
+      type: object
+      title: DescribeAppInstanceAdminRequest
+      properties: {}
+    DescribeAppInstanceRequest:
+      type: object
+      title: DescribeAppInstanceRequest
+      properties: {}
+    DescribeAppInstanceUserRequest:
+      type: object
+      title: DescribeAppInstanceUserRequest
+      properties: {}
+    GetAppInstanceRetentionSettingsRequest:
+      type: object
+      title: GetAppInstanceRetentionSettingsRequest
+      properties: {}
+    ResourceName:
+      type: string
+      pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+      minLength: 0
+      maxLength: 256
+      format: password
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 50
+    NextToken:
+      type: string
+      pattern: .*
+      minLength: 0
+      maxLength: 2048
+      format: password
+    ListAppInstanceAdminsRequest:
+      type: object
+      title: ListAppInstanceAdminsRequest
+      properties: {}
+    ListAppInstanceUsersRequest:
+      type: object
+      title: ListAppInstanceUsersRequest
+      properties: {}
+    ListAppInstancesRequest:
+      type: object
+      title: ListAppInstancesRequest
+      properties: {}
+    PutAppInstanceRetentionSettingsRequest:
+      type: object
+      required:
+        - AppInstanceRetentionSettings
+      title: PutAppInstanceRetentionSettingsRequest
+      properties:
+        AppInstanceRetentionSettings:
+          allOf:
+            - $ref: '#/components/schemas/AppInstanceRetentionSettings'
+            - description: 'The time in days to retain data. Data type: number.'
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+      format: password
+    TagValue:
+      type: string
+      minLength: 1
+      maxLength: 256
+      format: password
+    UpdateAppInstanceRequest:
+      type: object
+      required:
+        - Name
+        - Metadata
+      title: UpdateAppInstanceRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyResourceName'
+            - description: The name that you want to change.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The metadata that you want to change.
+    UpdateAppInstanceUserRequest:
+      type: object
+      required:
+        - Name
+        - Metadata
+      title: UpdateAppInstanceUserRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/UserName'
+            - description: The name of the <code>AppInstanceUser</code>.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The metadata of the <code>AppInstanceUser</code>.
+security:
+  - hmac: []

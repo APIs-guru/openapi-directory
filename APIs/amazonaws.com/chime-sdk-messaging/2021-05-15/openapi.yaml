@@ -1,0 +1,3979 @@
+openapi: 3.0.0
+info:
+  version: '2021-05-15'
+  x-release: v4
+  title: Amazon Chime SDK Messaging
+  description: 'The Amazon Chime SDK Messaging APIs in this section allow software developers to send and receive messages in custom messaging applications. These APIs depend on the frameworks provided by the Amazon Chime SDK Identity APIs. For more information about the messaging APIs, see .'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: chime-sdk-messaging
+  x-aws-signingName: chime
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/chime-sdk-messaging-2021-05-15.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/messaging-chime/'
+servers:
+  - url: 'http://messaging-chime.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon Chime SDK Messaging multi-region endpoint
+  - url: 'https://messaging-chime.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon Chime SDK Messaging multi-region endpoint
+  - url: 'http://messaging-chime.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Chime SDK Messaging endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://messaging-chime.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Chime SDK Messaging endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  '/channels/{channelArn}/memberships#operation=batch-create&x-amz-chime-bearer':
+    post:
+      operationId: BatchCreateChannelMembership
+      description: 'Adds a specified number of users to a channel. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchCreateChannelMembershipResponse'
+        '480':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+        '481':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '485':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel to which you're adding users.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - batch-create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - MemberArns
+              properties:
+                Type:
+                  description: 'The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported by moderators.'
+                  type: string
+                  enum:
+                    - DEFAULT
+                    - HIDDEN
+                MemberArns:
+                  description: The ARNs of the members you want to add to the channel.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ChimeArn'
+                  minItems: 1
+                  maxItems: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /channels#x-amz-chime-bearer:
+    post:
+      operationId: CreateChannel
+      description: '<p>Creates a channel to which you can add users and send messages.</p> <p> <b>Restriction</b>: You can''t change a channel''s privacy.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateChannelResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '485':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AppInstanceArn
+                - Name
+                - ClientRequestToken
+              properties:
+                AppInstanceArn:
+                  description: The ARN of the channel request.
+                  type: string
+                  pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+                  minLength: 5
+                  maxLength: 1600
+                Name:
+                  description: The name of the channel.
+                  type: string
+                  pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+                  minLength: 1
+                  maxLength: 256
+                  format: password
+                Mode:
+                  description: 'The channel mode: <code>UNRESTRICTED</code> or <code>RESTRICTED</code>. Administrators, moderators, and channel members can add themselves and other members to unrestricted channels. Only administrators and moderators can add members to restricted channels.'
+                  type: string
+                  enum:
+                    - UNRESTRICTED
+                    - RESTRICTED
+                Privacy:
+                  description: 'The channel''s privacy level: <code>PUBLIC</code> or <code>PRIVATE</code>. Private channels aren''t discoverable by users outside the channel. Public channels are discoverable by anyone in the <code>AppInstance</code>.'
+                  type: string
+                  enum:
+                    - PUBLIC
+                    - PRIVATE
+                Metadata:
+                  description: The metadata of the creation request. Limited to 1KB and UTF-8.
+                  type: string
+                  pattern: .*
+                  minLength: 0
+                  maxLength: 1024
+                  format: password
+                ClientRequestToken:
+                  description: The client token for the request. An <code>Idempotency</code> token.
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 2
+                  maxLength: 64
+                  format: password
+                Tags:
+                  description: The tags for the creation request.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/channels/{channelArn}/bans#x-amz-chime-bearer':
+    post:
+      operationId: CreateChannelBan
+      description: '<p>Permanently bans a member from a channel. Moderators can''t add banned members to a channel. To undo a ban, you first have to <code>DeleteChannelBan</code>, and then <code>CreateChannelMembership</code>. Bans are cleaned up when you delete users or channels.</p> <p>If you ban a user who is already part of a channel, that user is automatically kicked from the channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateChannelBanResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '485':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the ban request.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - MemberArn
+              properties:
+                MemberArn:
+                  description: The ARN of the member being banned.
+                  type: string
+                  pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+                  minLength: 5
+                  maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListChannelBans
+      description: <p>Lists all the users banned from a particular channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListChannelBansResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of bans that you want returned.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: next-token
+          in: query
+          required: false
+          description: The token passed by previous API calls until all requested bans are returned.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 2048
+            format: password
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  '/channels/{channelArn}/memberships#x-amz-chime-bearer':
+    post:
+      operationId: CreateChannelMembership
+      description: '<p>Adds a user to a channel. The <code>InvitedBy</code> response field is derived from the request header. A channel member can:</p> <ul> <li> <p>List messages</p> </li> <li> <p>Send messages</p> </li> <li> <p>Receive messages</p> </li> <li> <p>Edit their own messages</p> </li> <li> <p>Leave the channel</p> </li> </ul> <p>Privacy settings impact this action as follows:</p> <ul> <li> <p>Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.</p> </li> <li> <p>Private Channels: You must be a member to list or send messages.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateChannelMembershipResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '485':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel to which you're adding users.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - MemberArn
+                - Type
+              properties:
+                MemberArn:
+                  description: The ARN of the member you want to add to the channel.
+                  type: string
+                  pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+                  minLength: 5
+                  maxLength: 1600
+                Type:
+                  description: 'The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported by moderators.'
+                  type: string
+                  enum:
+                    - DEFAULT
+                    - HIDDEN
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListChannelMemberships
+      description: <p>Lists all channel memberships in a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListChannelMembershipsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The maximum number of channel memberships that you want returned.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: type
+          in: query
+          required: false
+          description: 'The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals <code>HIDDEN</code>. Otherwise hidden members are not returned.'
+          schema:
+            type: string
+            enum:
+              - DEFAULT
+              - HIDDEN
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of channel memberships that you want returned.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: next-token
+          in: query
+          required: false
+          description: The token passed by previous API calls until all requested channel memberships are returned.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 2048
+            format: password
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  '/channels/{channelArn}/moderators#x-amz-chime-bearer':
+    post:
+      operationId: CreateChannelModerator
+      description: '<p>Creates a new <code>ChannelModerator</code>. A channel moderator can:</p> <ul> <li> <p>Add and remove other members of the channel.</p> </li> <li> <p>Add and remove other moderators of the channel.</p> </li> <li> <p>Add and remove user bans for the channel.</p> </li> <li> <p>Redact messages in the channel.</p> </li> <li> <p>List messages in the channel.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateChannelModeratorResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '485':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ChannelModeratorArn
+              properties:
+                ChannelModeratorArn:
+                  description: The ARN of the moderator.
+                  type: string
+                  pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+                  minLength: 5
+                  maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListChannelModerators
+      description: <p>Lists all the moderators for a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListChannelModeratorsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of moderators that you want returned.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: next-token
+          in: query
+          required: false
+          description: The token passed by previous API calls until all requested moderators are returned.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 2048
+            format: password
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  '/channels/{channelArn}#x-amz-chime-bearer':
+    delete:
+      operationId: DeleteChannel
+      description: <p>Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel being deleted.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeChannel
+      description: <p>Returns the full details of a channel in an Amazon Chime <code>AppInstance</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeChannelResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    put:
+      operationId: UpdateChannel
+      description: '<p>Update a channel''s attributes.</p> <p> <b>Restriction</b>: You can''t change a channel''s privacy. </p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateChannelResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - Mode
+              properties:
+                Name:
+                  description: The name of the channel.
+                  type: string
+                  pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+                  minLength: 1
+                  maxLength: 256
+                  format: password
+                Mode:
+                  description: The mode of the update request.
+                  type: string
+                  enum:
+                    - UNRESTRICTED
+                    - RESTRICTED
+                Metadata:
+                  description: The metadata for the update request.
+                  type: string
+                  pattern: .*
+                  minLength: 0
+                  maxLength: 1024
+                  format: password
+  '/channels/{channelArn}/bans/{memberArn}#x-amz-chime-bearer':
+    delete:
+      operationId: DeleteChannelBan
+      description: <p>Removes a user from a channel's ban list.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel from which the <code>AppInstanceUser</code> was banned.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: memberArn
+          in: path
+          required: true
+          description: The ARN of the <code>AppInstanceUser</code> that you want to reinstate.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeChannelBan
+      description: <p>Returns the full details of a channel ban.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeChannelBanResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel from which the user is banned.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: memberArn
+          in: path
+          required: true
+          description: The ARN of the member being banned.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+  '/channels/{channelArn}/memberships/{memberArn}#x-amz-chime-bearer':
+    delete:
+      operationId: DeleteChannelMembership
+      description: <p>Removes a member from a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel from which you want to remove the user.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: memberArn
+          in: path
+          required: true
+          description: The ARN of the member that you're removing from the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeChannelMembership
+      description: <p>Returns the full details of a user's channel membership.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeChannelMembershipResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: memberArn
+          in: path
+          required: true
+          description: The ARN of the member.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+  '/channels/{channelArn}/messages/{messageId}#x-amz-chime-bearer':
+    delete:
+      operationId: DeleteChannelMessage
+      description: <p>Deletes a channel message. Only admins can perform this action. Deletion makes messages inaccessible immediately. A background process deletes any revisions created by <code>UpdateChannelMessage</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: messageId
+          in: path
+          required: true
+          description: The ID of the message being deleted.
+          schema:
+            type: string
+            pattern: '[-_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 128
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetChannelMessage
+      description: <p>Gets the full details of a channel message.</p> <note> <p>The x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetChannelMessageResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: messageId
+          in: path
+          required: true
+          description: The ID of the message.
+          schema:
+            type: string
+            pattern: '[-_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 128
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    put:
+      operationId: UpdateChannelMessage
+      description: <p>Updates the content of a message.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateChannelMessageResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: messageId
+          in: path
+          required: true
+          description: The ID string of the message being updated.
+          schema:
+            type: string
+            pattern: '[-_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 128
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Content:
+                  description: The content of the message being updated.
+                  type: string
+                  pattern: '[\s\S]*'
+                  minLength: 0
+                  maxLength: 4096
+                  format: password
+                Metadata:
+                  description: The metadata of the message being updated.
+                  type: string
+                  pattern: .*
+                  minLength: 0
+                  maxLength: 1024
+                  format: password
+  '/channels/{channelArn}/moderators/{channelModeratorArn}#x-amz-chime-bearer':
+    delete:
+      operationId: DeleteChannelModerator
+      description: <p>Deletes a channel moderator.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: channelModeratorArn
+          in: path
+          required: true
+          description: The ARN of the moderator being deleted.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeChannelModerator
+      description: <p>Returns the full details of a single ChannelModerator.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeChannelModeratorResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: channelModeratorArn
+          in: path
+          required: true
+          description: The ARN of the channel moderator.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+  '/channels/{channelArn}#scope=app-instance-user-membership&app-instance-user-arn&x-amz-chime-bearer':
+    get:
+      operationId: DescribeChannelMembershipForAppInstanceUser
+      description: <p> Returns the details of a channel based on the membership of the specified <code>AppInstanceUser</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeChannelMembershipForAppInstanceUserResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel to which the user belongs.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: app-instance-user-arn
+          in: query
+          required: true
+          description: The ARN of the user in a channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: scope
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - app-instance-user-membership
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/channels/{channelArn}#scope=app-instance-user-moderated-channel&app-instance-user-arn&x-amz-chime-bearer':
+    get:
+      operationId: DescribeChannelModeratedByAppInstanceUser
+      description: <p>Returns the full details of a channel moderated by the specified <code>AppInstanceUser</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeChannelModeratedByAppInstanceUserResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the moderated channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: app-instance-user-arn
+          in: query
+          required: true
+          description: The ARN of the <code>AppInstanceUser</code> in the moderated channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: scope
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - app-instance-user-moderated-channel
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /endpoints/messaging-session:
+    get:
+      operationId: GetMessagingSessionEndpoint
+      description: The details of the endpoint for the messaging session.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMessagingSessionEndpointResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '483':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '484':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /channels#scope=app-instance-user-memberships&x-amz-chime-bearer:
+    get:
+      operationId: ListChannelMembershipsForAppInstanceUser
+      description: <p> Lists all channels that a particular <code>AppInstanceUser</code> is a part of. Only an <code>AppInstanceAdmin</code> can call the API with a user ARN that is not their own. </p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListChannelMembershipsForAppInstanceUserResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: app-instance-user-arn
+          in: query
+          required: false
+          description: The ARN of the <code>AppInstanceUser</code>s
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of users that you want returned.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: next-token
+          in: query
+          required: false
+          description: The token returned from previous API requests until the number of channel memberships is reached.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 2048
+            format: password
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: scope
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - app-instance-user-memberships
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/channels/{channelArn}/messages#x-amz-chime-bearer':
+    get:
+      operationId: ListChannelMessages
+      description: '<p>List all the messages in a channel. Returns a paginated list of <code>ChannelMessages</code>. By default, sorted by creation timestamp in descending order.</p> <note> <p>Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message.</p> <p>Also, the x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListChannelMessagesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: sort-order
+          in: query
+          required: false
+          description: 'The order in which you want messages sorted. Default is Descending, based on time created.'
+          schema:
+            type: string
+            enum:
+              - ASCENDING
+              - DESCENDING
+        - name: not-before
+          in: query
+          required: false
+          description: The initial or starting time stamp for your requested messages.
+          schema:
+            type: string
+            format: date-time
+        - name: not-after
+          in: query
+          required: false
+          description: The final or ending time stamp for your requested messages.
+          schema:
+            type: string
+            format: date-time
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of messages that you want returned.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: next-token
+          in: query
+          required: false
+          description: The token passed by previous API calls until all requested messages are returned.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 2048
+            format: password
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: SendChannelMessage
+      description: '<p>Sends a message to a particular channel that the member is a part of.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> <p>Also, <code>STANDARD</code> messages can contain 4KB of data and the 1KB of metadata. <code>CONTROL</code> messages can contain 30 bytes of data and no metadata.</p> </note>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendChannelMessageResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Content
+                - Type
+                - Persistence
+                - ClientRequestToken
+              properties:
+                Content:
+                  description: The content of the message.
+                  type: string
+                  pattern: '[\s\S]*'
+                  minLength: 1
+                  format: password
+                Type:
+                  description: 'The type of message, <code>STANDARD</code> or <code>CONTROL</code>.'
+                  type: string
+                  enum:
+                    - STANDARD
+                    - CONTROL
+                Persistence:
+                  description: Boolean that controls whether the message is persisted on the back end. Required.
+                  type: string
+                  enum:
+                    - PERSISTENT
+                    - NON_PERSISTENT
+                Metadata:
+                  description: The optional metadata for each message.
+                  type: string
+                  pattern: .*
+                  minLength: 0
+                  maxLength: 1024
+                  format: password
+                ClientRequestToken:
+                  description: The <code>Idempotency</code> token for each client request.
+                  type: string
+                  pattern: '[-_a-zA-Z0-9]*'
+                  minLength: 2
+                  maxLength: 64
+                  format: password
+  /channels#app-instance-arn&x-amz-chime-bearer:
+    get:
+      operationId: ListChannels
+      description: <p>Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.</p> <p class="title"> <b>Functionality &amp; restrictions</b> </p> <ul> <li> <p>Use privacy = <code>PUBLIC</code> to retrieve all public channels in the account.</p> </li> <li> <p>Only an <code>AppInstanceAdmin</code> can set privacy = <code>PRIVATE</code> to list the private channels in an account.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListChannelsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: app-instance-arn
+          in: query
+          required: true
+          description: The ARN of the <code>AppInstance</code>.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: privacy
+          in: query
+          required: false
+          description: 'The privacy setting. <code>PUBLIC</code> retrieves all the public channels. <code>PRIVATE</code> retrieves private channels. Only an <code>AppInstanceAdmin</code> can retrieve private channels. '
+          schema:
+            type: string
+            enum:
+              - PUBLIC
+              - PRIVATE
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of channels that you want to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: next-token
+          in: query
+          required: false
+          description: The token passed by previous API calls until all requested channels are returned.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 2048
+            format: password
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /channels#scope=app-instance-user-moderated-channels&x-amz-chime-bearer:
+    get:
+      operationId: ListChannelsModeratedByAppInstanceUser
+      description: <p>A list of the channels moderated by an <code>AppInstanceUser</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListChannelsModeratedByAppInstanceUserResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: app-instance-user-arn
+          in: query
+          required: false
+          description: The ARN of the user in the moderated channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of channels in the request.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: next-token
+          in: query
+          required: false
+          description: The token returned from previous API requests until the number of channels moderated by the user is reached.
+          schema:
+            type: string
+            pattern: .*
+            minLength: 0
+            maxLength: 2048
+            format: password
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: scope
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - app-instance-user-moderated-channels
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/channels/{channelArn}/messages/{messageId}#operation=redact&x-amz-chime-bearer':
+    post:
+      operationId: RedactChannelMessage
+      description: '<p>Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RedactChannelMessageResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel containing the messages that you want to redact.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: messageId
+          in: path
+          required: true
+          description: The ID of the message being redacted.
+          schema:
+            type: string
+            pattern: '[-_a-zA-Z0-9]*'
+            minLength: 1
+            maxLength: 128
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: operation
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - redact
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/channels/{channelArn}/readMarker#x-amz-chime-bearer':
+    put:
+      operationId: UpdateChannelReadMarker
+      description: <p>The details of the time when a user last read messages in a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateChannelReadMarkerResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: channelArn
+          in: path
+          required: true
+          description: The ARN of the channel.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+        - name: x-amz-chime-bearer
+          in: header
+          required: true
+          description: The <code>AppInstanceUserArn</code> of the user that makes the API call.
+          schema:
+            type: string
+            pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+            minLength: 5
+            maxLength: 1600
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    BatchCreateChannelMembershipResponse:
+      type: object
+      properties:
+        BatchChannelMemberships:
+          allOf:
+            - $ref: '#/components/schemas/BatchChannelMemberships'
+            - description: The list of channel memberships in the response.
+        Errors:
+          allOf:
+            - $ref: '#/components/schemas/BatchCreateChannelMembershipErrors'
+            - description: 'If the action fails for one or more of the memberships in the request, a list of the memberships is returned, along with error codes and error messages.'
+    ChimeArn:
+      type: string
+      pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+      minLength: 5
+      maxLength: 1600
+    ServiceFailureException: {}
+    ServiceUnavailableException: {}
+    UnauthorizedClientException: {}
+    BadRequestException: {}
+    ForbiddenException: {}
+    ThrottledClientException: {}
+    CreateChannelResponse:
+      type: object
+      properties:
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel.
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: The key of the tag.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: The value of the tag.
+      description: Describes a tag applied to a resource.
+    ConflictException: {}
+    ResourceLimitExceededException: {}
+    CreateChannelBanResponse:
+      type: object
+      properties:
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the response to the ban request.
+        Member:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The <code>ChannelArn</code> and <code>BannedIdentity</code> of the member in the ban response.
+    CreateChannelMembershipResponse:
+      type: object
+      properties:
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel.
+        Member:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The ARN and metadata of the member being added.
+    CreateChannelModeratorResponse:
+      type: object
+      properties:
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel.
+        ChannelModerator:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The ARNs of the channel and the moderator.
+    DescribeChannelResponse:
+      type: object
+      properties:
+        Channel:
+          allOf:
+            - $ref: '#/components/schemas/Channel'
+            - description: The channel details.
+    DescribeChannelBanResponse:
+      type: object
+      properties:
+        ChannelBan:
+          allOf:
+            - $ref: '#/components/schemas/ChannelBan'
+            - description: The details of the ban.
+    NotFoundException: {}
+    DescribeChannelMembershipResponse:
+      type: object
+      properties:
+        ChannelMembership:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMembership'
+            - description: The details of the membership.
+    DescribeChannelMembershipForAppInstanceUserResponse:
+      type: object
+      properties:
+        ChannelMembership:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMembershipForAppInstanceUserSummary'
+            - description: The channel to which a user belongs.
+    DescribeChannelModeratedByAppInstanceUserResponse:
+      type: object
+      properties:
+        Channel:
+          allOf:
+            - $ref: '#/components/schemas/ChannelModeratedByAppInstanceUserSummary'
+            - description: The moderated channel.
+    DescribeChannelModeratorResponse:
+      type: object
+      properties:
+        ChannelModerator:
+          allOf:
+            - $ref: '#/components/schemas/ChannelModerator'
+            - description: The details of the channel moderator.
+    GetChannelMessageResponse:
+      type: object
+      properties:
+        ChannelMessage:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMessage'
+            - description: The details of and content in the message.
+    GetMessagingSessionEndpointResponse:
+      type: object
+      properties:
+        Endpoint:
+          allOf:
+            - $ref: '#/components/schemas/MessagingSessionEndpoint'
+            - description: The endpoint returned in the response.
+    ListChannelBansResponse:
+      type: object
+      properties:
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token passed by previous API calls until all requested bans are returned.
+        ChannelBans:
+          allOf:
+            - $ref: '#/components/schemas/ChannelBanSummaryList'
+            - description: The information for each requested ban.
+    ListChannelMembershipsResponse:
+      type: object
+      properties:
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel.
+        ChannelMemberships:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMembershipSummaryList'
+            - description: The information for the requested channel memberships.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token passed by previous API calls until all requested channel memberships are returned.
+    ListChannelMembershipsForAppInstanceUserResponse:
+      type: object
+      properties:
+        ChannelMemberships:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMembershipForAppInstanceUserSummaryList'
+            - description: The token passed by previous API calls until all requested users are returned.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token passed by previous API calls until all requested users are returned.
+    ListChannelMessagesResponse:
+      type: object
+      properties:
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel containing the requested messages.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token passed by previous API calls until all requested messages are returned.
+        ChannelMessages:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMessageSummaryList'
+            - description: 'The information about, and content of, each requested message.'
+    ListChannelModeratorsResponse:
+      type: object
+      properties:
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token passed by previous API calls until all requested moderators are returned.
+        ChannelModerators:
+          allOf:
+            - $ref: '#/components/schemas/ChannelModeratorSummaryList'
+            - description: The information about and names of each moderator.
+    ListChannelsResponse:
+      type: object
+      properties:
+        Channels:
+          allOf:
+            - $ref: '#/components/schemas/ChannelSummaryList'
+            - description: The information about each channel.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token returned from previous API requests until the number of channels is reached.
+    ListChannelsModeratedByAppInstanceUserResponse:
+      type: object
+      properties:
+        Channels:
+          allOf:
+            - $ref: '#/components/schemas/ChannelModeratedByAppInstanceUserSummaryList'
+            - description: The moderated channels in the request.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token returned from previous API requests until the number of channels moderated by the user is reached.
+    RedactChannelMessageResponse:
+      type: object
+      properties:
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel containing the messages that you want to redact.
+        MessageId:
+          allOf:
+            - $ref: '#/components/schemas/MessageId'
+            - description: The ID of the message being redacted.
+    SendChannelMessageResponse:
+      type: object
+      properties:
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel.
+        MessageId:
+          allOf:
+            - $ref: '#/components/schemas/MessageId'
+            - description: The ID string assigned to each message.
+    UpdateChannelResponse:
+      type: object
+      properties:
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel.
+    UpdateChannelMessageResponse:
+      type: object
+      properties:
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel.
+        MessageId:
+          allOf:
+            - $ref: '#/components/schemas/MessageId'
+            - description: The ID string of the message being updated.
+    UpdateChannelReadMarkerResponse:
+      type: object
+      properties:
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel.
+    ChannelMembershipType:
+      type: string
+      enum:
+        - DEFAULT
+        - HIDDEN
+    Timestamp:
+      type: string
+      format: date-time
+    AppInstanceUserMembershipSummary:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMembershipType'
+            - description: The type of <code>ChannelMembership</code>.
+        ReadMarkerTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which a message was last read.
+      description: Summary of the membership details of an <code>AppInstanceUser</code>.
+    Identity:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN in an Identity.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name in an Identity.
+      description: The details of a user.
+    Members:
+      type: array
+      items:
+        $ref: '#/components/schemas/Identity'
+    BatchChannelMemberships:
+      type: object
+      properties:
+        InvitedBy:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The identifier of the member who invited another member.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMembershipType'
+            - description: The membership types set for the channel users.
+        Members:
+          allOf:
+            - $ref: '#/components/schemas/Members'
+            - description: The users successfully added to the request.
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel to which you're adding users.
+      description: 'The membership information, including member ARNs, the channel ARN, and membership types.'
+    ErrorCode:
+      type: string
+      enum:
+        - BadRequest
+        - Conflict
+        - Forbidden
+        - NotFound
+        - PreconditionFailed
+        - ResourceLimitExceeded
+        - ServiceFailure
+        - AccessDenied
+        - ServiceUnavailable
+        - Throttled
+        - Throttling
+        - Unauthorized
+        - Unprocessable
+        - VoiceConnectorGroupAssociationsExist
+        - PhoneNumberAssociationsExist
+    String:
+      type: string
+    BatchCreateChannelMembershipError:
+      type: object
+      properties:
+        MemberArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the member that the service couldn't add.
+        ErrorCode:
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: The error code.
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error message.
+      description: 'A list of failed member ARNs, error codes, and error messages.'
+    BatchCreateChannelMembershipErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchCreateChannelMembershipError'
+    MemberArns:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChimeArn'
+      minItems: 1
+      maxItems: 100
+    BatchCreateChannelMembershipRequest:
+      type: object
+      required:
+        - MemberArns
+      title: BatchCreateChannelMembershipRequest
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMembershipType'
+            - description: 'The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported by moderators.'
+        MemberArns:
+          allOf:
+            - $ref: '#/components/schemas/MemberArns'
+            - description: The ARNs of the members you want to add to the channel.
+    NonEmptyResourceName:
+      type: string
+      pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+      minLength: 1
+      maxLength: 256
+      format: password
+    ChannelMode:
+      type: string
+      enum:
+        - UNRESTRICTED
+        - RESTRICTED
+    ChannelPrivacy:
+      type: string
+      enum:
+        - PUBLIC
+        - PRIVATE
+    Metadata:
+      type: string
+      pattern: .*
+      minLength: 0
+      maxLength: 1024
+      format: password
+    Channel:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyResourceName'
+            - description: The name of a channel.
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of a channel.
+        Mode:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMode'
+            - description: The mode of the channel.
+        Privacy:
+          allOf:
+            - $ref: '#/components/schemas/ChannelPrivacy'
+            - description: The channel's privacy setting.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The channel's metadata.
+        CreatedBy:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The <code>AppInstanceUser</code> who created the channel.
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the <code>AppInstanceUser</code> created the channel.
+        LastMessageTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which a member sent the last message in the channel.
+        LastUpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which a channel was last updated.
+      description: The details of a channel.
+    ChannelBan:
+      type: object
+      properties:
+        Member:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The member being banned from the channel.
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel from which a member is being banned.
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the ban was created.
+        CreatedBy:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The <code>AppInstanceUser</code> who created the ban.
+      description: The details of a channel ban.
+    ChannelBanSummary:
+      type: object
+      properties:
+        Member:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The member being banned from a channel.
+      description: Summary of the details of a <code>ChannelBan</code>.
+    ChannelBanSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChannelBanSummary'
+    ChannelMembership:
+      type: object
+      properties:
+        InvitedBy:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The identifier of the member who invited another member.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMembershipType'
+            - description: The membership type set for the channel member.
+        Member:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The data of the channel member.
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the member's channel.
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the channel membership was created.
+        LastUpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which a channel membership was last updated.
+      description: The details of a channel member.
+    ChannelSummary:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyResourceName'
+            - description: The name of the channel.
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel.
+        Mode:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMode'
+            - description: The mode of the channel.
+        Privacy:
+          allOf:
+            - $ref: '#/components/schemas/ChannelPrivacy'
+            - description: The privacy setting of the channel.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The metadata of the channel.
+        LastMessageTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the last message in a channel was sent.
+      description: Summary of the details of a <code>Channel</code>.
+    ChannelMembershipForAppInstanceUserSummary:
+      type: object
+      properties:
+        ChannelSummary:
+          allOf:
+            - $ref: '#/components/schemas/ChannelSummary'
+            - description: Returns the channel data for an <code>AppInstance</code>.
+        AppInstanceUserMembershipSummary:
+          allOf:
+            - $ref: '#/components/schemas/AppInstanceUserMembershipSummary'
+            - description: Returns the channel membership data for an <code>AppInstance</code>.
+      description: Summary of the channel membership details of an <code>AppInstanceUser</code>.
+    ChannelMembershipForAppInstanceUserSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChannelMembershipForAppInstanceUserSummary'
+    ChannelMembershipSummary:
+      type: object
+      properties:
+        Member:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: A member's summary data.
+      description: Summary of the details of a <code>ChannelMembership</code>.
+    ChannelMembershipSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChannelMembershipSummary'
+    MessageId:
+      type: string
+      pattern: '[-_a-zA-Z0-9]*'
+      minLength: 1
+      maxLength: 128
+    Content:
+      type: string
+      pattern: '[\s\S]*'
+      minLength: 0
+      maxLength: 4096
+      format: password
+    ChannelMessageType:
+      type: string
+      enum:
+        - STANDARD
+        - CONTROL
+    NonNullableBoolean:
+      type: boolean
+    ChannelMessagePersistenceType:
+      type: string
+      enum:
+        - PERSISTENT
+        - NON_PERSISTENT
+    ChannelMessage:
+      type: object
+      properties:
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel.
+        MessageId:
+          allOf:
+            - $ref: '#/components/schemas/MessageId'
+            - description: The ID of a message.
+        Content:
+          allOf:
+            - $ref: '#/components/schemas/Content'
+            - description: The message content.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The message metadata.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMessageType'
+            - description: The message type.
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the message was created.
+        LastEditedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which a message was edited.
+        LastUpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which a message was updated.
+        Sender:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The message sender.
+        Redacted:
+          allOf:
+            - $ref: '#/components/schemas/NonNullableBoolean'
+            - description: Hides the content of a message.
+        Persistence:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMessagePersistenceType'
+            - description: The persistence setting for a channel message.
+      description: The details of a message in a channel.
+    ChannelMessageSummary:
+      type: object
+      properties:
+        MessageId:
+          allOf:
+            - $ref: '#/components/schemas/MessageId'
+            - description: The ID of the message.
+        Content:
+          allOf:
+            - $ref: '#/components/schemas/Content'
+            - description: The content of the message.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The metadata of the message.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMessageType'
+            - description: The type of message.
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the message summary was created.
+        LastUpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which a message was last updated.
+        LastEditedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which a message was last edited.
+        Sender:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The message sender.
+        Redacted:
+          allOf:
+            - $ref: '#/components/schemas/NonNullableBoolean'
+            - description: Indicates whether a message was redacted.
+      description: Summary of the messages in a <code>Channel</code>.
+    ChannelMessageSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChannelMessageSummary'
+    ChannelModeratedByAppInstanceUserSummary:
+      type: object
+      properties:
+        ChannelSummary:
+          allOf:
+            - $ref: '#/components/schemas/ChannelSummary'
+            - description: Summary of the details of a <code>Channel</code>.
+      description: Summary of the details of a moderated channel.
+    ChannelModeratedByAppInstanceUserSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChannelModeratedByAppInstanceUserSummary'
+    ChannelModerator:
+      type: object
+      properties:
+        Moderator:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The moderator's data.
+        ChannelArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the moderator's channel.
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the moderator was created.
+        CreatedBy:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The <code>AppInstanceUser</code> who created the moderator.
+      description: The details of a channel moderator.
+    ChannelModeratorSummary:
+      type: object
+      properties:
+        Moderator:
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The data for a moderator.
+      description: Summary of the details of a <code>ChannelModerator</code>.
+    ChannelModeratorSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChannelModeratorSummary'
+    ChannelSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChannelSummary'
+    ClientRequestToken:
+      type: string
+      pattern: '[-_a-zA-Z0-9]*'
+      minLength: 2
+      maxLength: 64
+      format: password
+    CreateChannelBanRequest:
+      type: object
+      required:
+        - MemberArn
+      title: CreateChannelBanRequest
+      properties:
+        MemberArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the member being banned.
+    CreateChannelMembershipRequest:
+      type: object
+      required:
+        - MemberArn
+        - Type
+      title: CreateChannelMembershipRequest
+      properties:
+        MemberArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the member you want to add to the channel.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMembershipType'
+            - description: 'The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported by moderators.'
+    CreateChannelModeratorRequest:
+      type: object
+      required:
+        - ChannelModeratorArn
+      title: CreateChannelModeratorRequest
+      properties:
+        ChannelModeratorArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the moderator.
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 1
+      maxItems: 50
+    CreateChannelRequest:
+      type: object
+      required:
+        - AppInstanceArn
+        - Name
+        - ClientRequestToken
+      title: CreateChannelRequest
+      properties:
+        AppInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/ChimeArn'
+            - description: The ARN of the channel request.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyResourceName'
+            - description: The name of the channel.
+        Mode:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMode'
+            - description: 'The channel mode: <code>UNRESTRICTED</code> or <code>RESTRICTED</code>. Administrators, moderators, and channel members can add themselves and other members to unrestricted channels. Only administrators and moderators can add members to restricted channels.'
+        Privacy:
+          allOf:
+            - $ref: '#/components/schemas/ChannelPrivacy'
+            - description: 'The channel''s privacy level: <code>PUBLIC</code> or <code>PRIVATE</code>. Private channels aren''t discoverable by users outside the channel. Public channels are discoverable by anyone in the <code>AppInstance</code>.'
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The metadata of the creation request. Limited to 1KB and UTF-8.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: The client token for the request. An <code>Idempotency</code> token.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags for the creation request.
+    DeleteChannelBanRequest:
+      type: object
+      title: DeleteChannelBanRequest
+      properties: {}
+    DeleteChannelMembershipRequest:
+      type: object
+      title: DeleteChannelMembershipRequest
+      properties: {}
+    DeleteChannelMessageRequest:
+      type: object
+      title: DeleteChannelMessageRequest
+      properties: {}
+    DeleteChannelModeratorRequest:
+      type: object
+      title: DeleteChannelModeratorRequest
+      properties: {}
+    DeleteChannelRequest:
+      type: object
+      title: DeleteChannelRequest
+      properties: {}
+    DescribeChannelBanRequest:
+      type: object
+      title: DescribeChannelBanRequest
+      properties: {}
+    DescribeChannelMembershipForAppInstanceUserRequest:
+      type: object
+      title: DescribeChannelMembershipForAppInstanceUserRequest
+      properties: {}
+    DescribeChannelMembershipRequest:
+      type: object
+      title: DescribeChannelMembershipRequest
+      properties: {}
+    DescribeChannelModeratedByAppInstanceUserRequest:
+      type: object
+      title: DescribeChannelModeratedByAppInstanceUserRequest
+      properties: {}
+    DescribeChannelModeratorRequest:
+      type: object
+      title: DescribeChannelModeratorRequest
+      properties: {}
+    DescribeChannelRequest:
+      type: object
+      title: DescribeChannelRequest
+      properties: {}
+    GetChannelMessageRequest:
+      type: object
+      title: GetChannelMessageRequest
+      properties: {}
+    GetMessagingSessionEndpointRequest:
+      type: object
+      title: GetMessagingSessionEndpointRequest
+      properties: {}
+    MessagingSessionEndpoint:
+      type: object
+      properties:
+        Url:
+          allOf:
+            - $ref: '#/components/schemas/UrlType'
+            - description: The endpoint to which you establish a websocket connection.
+      description: The websocket endpoint used to connect to Amazon Chime SDK messaging.
+    ResourceName:
+      type: string
+      pattern: '[\u0009\u000A\u000D\u0020-\u007E\u0085\u00A0-\uD7FF\uE000-\uFFFD\u10000-\u10FFFF]*'
+      minLength: 0
+      maxLength: 256
+      format: password
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 50
+    NextToken:
+      type: string
+      pattern: .*
+      minLength: 0
+      maxLength: 2048
+      format: password
+    ListChannelBansRequest:
+      type: object
+      title: ListChannelBansRequest
+      properties: {}
+    ListChannelMembershipsForAppInstanceUserRequest:
+      type: object
+      title: ListChannelMembershipsForAppInstanceUserRequest
+      properties: {}
+    ListChannelMembershipsRequest:
+      type: object
+      title: ListChannelMembershipsRequest
+      properties: {}
+    SortOrder:
+      type: string
+      enum:
+        - ASCENDING
+        - DESCENDING
+    ListChannelMessagesRequest:
+      type: object
+      title: ListChannelMessagesRequest
+      properties: {}
+    ListChannelModeratorsRequest:
+      type: object
+      title: ListChannelModeratorsRequest
+      properties: {}
+    ListChannelsModeratedByAppInstanceUserRequest:
+      type: object
+      title: ListChannelsModeratedByAppInstanceUserRequest
+      properties: {}
+    ListChannelsRequest:
+      type: object
+      title: ListChannelsRequest
+      properties: {}
+    UrlType:
+      type: string
+      maxLength: 4096
+    NonEmptyContent:
+      type: string
+      pattern: '[\s\S]*'
+      minLength: 1
+      format: password
+    RedactChannelMessageRequest:
+      type: object
+      title: RedactChannelMessageRequest
+      properties: {}
+    SendChannelMessageRequest:
+      type: object
+      required:
+        - Content
+        - Type
+        - Persistence
+        - ClientRequestToken
+      title: SendChannelMessageRequest
+      properties:
+        Content:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyContent'
+            - description: The content of the message.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMessageType'
+            - description: 'The type of message, <code>STANDARD</code> or <code>CONTROL</code>.'
+        Persistence:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMessagePersistenceType'
+            - description: Boolean that controls whether the message is persisted on the back end. Required.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The optional metadata for each message.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: The <code>Idempotency</code> token for each client request.
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+      format: password
+    TagValue:
+      type: string
+      minLength: 1
+      maxLength: 256
+      format: password
+    UpdateChannelMessageRequest:
+      type: object
+      title: UpdateChannelMessageRequest
+      properties:
+        Content:
+          allOf:
+            - $ref: '#/components/schemas/Content'
+            - description: The content of the message being updated.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The metadata of the message being updated.
+    UpdateChannelReadMarkerRequest:
+      type: object
+      title: UpdateChannelReadMarkerRequest
+      properties: {}
+    UpdateChannelRequest:
+      type: object
+      required:
+        - Name
+        - Mode
+      title: UpdateChannelRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyResourceName'
+            - description: The name of the channel.
+        Mode:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMode'
+            - description: The mode of the update request.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: The metadata for the update request.
+security:
+  - hmac: []
