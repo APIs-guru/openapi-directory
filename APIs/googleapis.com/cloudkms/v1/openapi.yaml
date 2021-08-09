@@ -34,6 +34,52 @@ externalDocs:
 tags:
   - name: projects
 paths:
+  "/v1/{location}:generateRandomBytes":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Generate random bytes using the Cloud KMS randomness source in the provided location.
+      operationId: cloudkms.projects.locations.generateRandomBytes
+      parameters:
+        - description: The project-specific location in which to generate random bytes. For example, "projects/my-project/locations/us-central1".
+          in: path
+          name: location
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenerateRandomBytesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenerateRandomBytesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloudkms
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloudkms
+      tags:
+        - projects
   "/v1/{name}":
     get:
       description: Returns metadata for a given ImportJob.
@@ -1439,6 +1485,13 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        destroyScheduledDuration:
+          description: Immutable. The period of time that versions of this key spend in the DESTROY_SCHEDULED state before transitioning to DESTROYED. If not specified at creation time, the default duration is 24 hours.
+          format: google-duration
+          type: string
+        importOnly:
+          description: Immutable. Whether this key may contain imported versions only.
+          type: boolean
         labels:
           additionalProperties:
             type: string
@@ -1734,6 +1787,34 @@ components:
       properties:
         externalKeyUri:
           description: The URI for an external resource that this CryptoKeyVersion represents.
+          type: string
+      type: object
+    GenerateRandomBytesRequest:
+      description: Request message for KeyManagementService.GenerateRandomBytes.
+      properties:
+        lengthBytes:
+          description: The length in bytes of the amount of randomness to retrieve. Minimum 8 bytes, maximum 1024 bytes.
+          format: int32
+          type: integer
+        protectionLevel:
+          description: The ProtectionLevel to use when generating the random data. Defaults to SOFTWARE.
+          enum:
+            - PROTECTION_LEVEL_UNSPECIFIED
+            - SOFTWARE
+            - HSM
+            - EXTERNAL
+          type: string
+      type: object
+    GenerateRandomBytesResponse:
+      description: Response message for KeyManagementService.GenerateRandomBytes.
+      properties:
+        data:
+          description: The generated data.
+          format: byte
+          type: string
+        dataCrc32c:
+          description: "Integrity verification field. A CRC32C checksum of the returned GenerateRandomBytesResponse.data. An integrity check of GenerateRandomBytesResponse.data can be performed by computing the CRC32C checksum of GenerateRandomBytesResponse.data and comparing your results to this field. Discard the response in case of non-matching checksum values, and perform a limited number of retries. A persistent mismatch may indicate an issue in your computation of the CRC32C checksum. Note: This field is defined as int64 for reasons of compatibility across different languages. However, it is a non-negative integer, which will never exceed 2^32-1, and can be safely downconverted to uint32 in languages that support this type."
+          format: int64
           type: string
       type: object
     ImportCryptoKeyVersionRequest:

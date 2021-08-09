@@ -62,8 +62,8 @@ paths:
           content:
             application/json:
               examples:
-                basic-200:
-                  $ref: "#/components/examples/post-createNotificationConfiguration-basic-200"
+                basic:
+                  $ref: "#/components/examples/post-createNotificationConfiguration-basic"
               schema:
                 $ref: "#/components/schemas/GetNotificationConfigurationResponse"
           description: OK - the request has succeeded.
@@ -101,6 +101,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Subscribe to notifications.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 1
   /deleteNotificationConfigurations:
@@ -153,6 +155,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Delete an existing notification subscription configuration.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 6
   /getNotificationConfiguration:
@@ -205,6 +209,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve an existing notification subscription configuration.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 2
   /getNotificationConfigurationList:
@@ -257,6 +263,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve a list of existing notification subscription configurations.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 3
   /testNotificationConfiguration:
@@ -309,6 +317,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Test an existing notification configuration.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 4
   /updateNotificationConfiguration:
@@ -328,8 +338,8 @@ paths:
           content:
             application/json:
               examples:
-                basic-200:
-                  $ref: "#/components/examples/post-updateNotificationConfiguration-basic-200"
+                basic:
+                  $ref: "#/components/examples/post-updateNotificationConfiguration-basic"
               schema:
                 $ref: "#/components/schemas/GetNotificationConfigurationResponse"
           description: OK - the request has succeeded.
@@ -367,6 +377,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Update an existing notification subscription configuration.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 5
 components:
@@ -387,23 +399,6 @@ components:
           notifyUsername: testUserName
           sendActionHeader: true
           sslProtocol: SSL
-    post-createNotificationConfiguration-basic-200:
-      summary: Example response for request 'basic'
-      value:
-        configurationDetails:
-          active: "true"
-          description: Test notification769551
-          eventConfigs:
-            - NotificationEventConfiguration:
-                eventType: ACCOUNT_HOLDER_VERIFICATION
-                includeMode: INCLUDE
-          messageFormat: SOAP
-          notificationId: 28467
-          notifyURL: https://www.adyen.com/notification-handler
-          sendActionHeader: "true"
-          sslProtocol: SSLInsecureCiphers
-        pspReference: "8616178952143018"
-        submittedAsync: "false"
     post-updateNotificationConfiguration-basic:
       summary: Update notification configurations
       value:
@@ -423,26 +418,6 @@ components:
           notifyUsername: testUserName2
           sendActionHeader: false
           sslProtocol: TLSv10
-    post-updateNotificationConfiguration-basic-200:
-      summary: Example response for request 'basic'
-      value:
-        configurationDetails:
-          active: "false"
-          description: new description799847
-          eventConfigs:
-            - NotificationEventConfiguration:
-                eventType: ACCOUNT_CREATED
-                includeMode: INCLUDE
-            - NotificationEventConfiguration:
-                eventType: ACCOUNT_HOLDER_CREATED
-                includeMode: EXCLUDE
-          messageFormat: JSON
-          notificationId: 21259
-          notifyURL: http://www.adyen.com
-          sendActionHeader: "false"
-          sslProtocol: TLSv10
-        pspReference: "8516178951636344"
-        submittedAsync: "false"
   schemas:
     CreateNotificationConfigurationRequest:
       properties:
@@ -543,7 +518,7 @@ components:
           description: A description of the notification subscription configuration.
           type: string
         eventConfigs:
-          description: The types of events whose notifications apply to this configuration.
+          description: Contains objects that define event types and their subscription settings.
           items:
             $ref: "#/components/schemas/NotificationEventConfiguration"
           type: array
@@ -557,9 +532,7 @@ components:
             - SOAP
           type: string
         notificationId:
-          description: |-
-            The ID of the configuration.
-            >Required if updating an existing configuration, ignored during the creation of a configuration.
+          description: Adyen-generated ID for the entry, returned in the response when you create a notification configuration. Required when updating an existing configuration using [`/updateNotificationConfiguration`](https://docs.adyen.com/api-explorer/#/NotificationConfigurationService/latest/post/updateNotificationConfiguration).
           format: int64
           type: integer
         notifyPassword:
@@ -597,8 +570,9 @@ components:
       properties:
         eventType:
           description: |-
-            The type of event triggering the notification.
-            >Permitted values: `ACCOUNT_HOLDER_CREATED`, `ACCOUNT_CREATED`, `ACCOUNT_UPDATED`, `ACCOUNT_HOLDER_UPDATED`, `ACCOUNT_HOLDER_STATUS_CHANGE`, `ACCOUNT_HOLDER_STORE_STATUS_CHANGE`, `ACCOUNT_HOLDER_VERIFICATION`, `ACCOUNT_HOLDER_LIMIT_REACHED`, `ACCOUNT_HOLDER_PAYOUT`, `PAYMENT_FAILURE`, `SCHEDULED_REFUNDS`, `REPORT_AVAILABLE`, `TRANSFER_FUNDS`, `BENEFICIARY_SETUP`, `COMPENSATE_NEGATIVE_BALANCE`.
+            The type of event.
+
+            Possible values: **ACCOUNT_CLOSED**, **ACCOUNT_CREATED**, **ACCOUNT_FUNDS_BELOW_THRESHOLD**, **ACCOUNT_HOLDER_CREATED**, **ACCOUNT_HOLDER_LIMIT_REACHED**, **ACCOUNT_HOLDER_PAYOUT**, **ACCOUNT_HOLDER_STATUS_CHANGE**, **ACCOUNT_HOLDER_STORE_STATUS_CHANGE**, **ACCOUNT_HOLDER_UPCOMING_DEADLINE**, **ACCOUNT_HOLDER_UPDATED**, **ACCOUNT_HOLDER_VERIFICATION**, **ACCOUNT_UPDATED**, **BENEFICIARY_SETUP**, **COMPENSATE_NEGATIVE_BALANCE**, **DIRECT_DEBIT_INITIATED**, **PAYMENT_FAILURE**, **REFUND_FUNDS_TRANSFER**, **REPORT_AVAILABLE**, **SCHEDULED_REFUNDS**, **TRANSFER_FUNDS**.
           enum:
             - ACCOUNT_CLOSED
             - ACCOUNT_CREATED
@@ -624,10 +598,10 @@ components:
           type: string
         includeMode:
           description: |-
-            Indicates whether the specified eventType is to be sent to the endpoint or all events other than the specified eventType (and other specified eventTypes) are to be sent.
-            >Permitted values: `INCLUDE`, `EXCLUDE`.
-            >- `INCLUDE`: send the specified eventType.
-            >- `EXCLUDE`: send all eventTypes other than the specified eventType (and other eventTypes marked with `EXCLUDE`).
+            Indicates whether the specified `eventType` is sent to your webhook endpoint.
+            Possible values:
+            * **INCLUDE**: Send the specified `eventType`.
+            * **EXCLUDE**: Send all event types except the specified `eventType` and other event types with the `includeMode` set to **EXCLUDE**.
           enum:
             - EXCLUDE
             - INCLUDE

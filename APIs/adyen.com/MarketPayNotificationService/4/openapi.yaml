@@ -65,7 +65,7 @@ components:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -94,7 +94,7 @@ components:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -145,7 +145,7 @@ components:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -194,7 +194,7 @@ components:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -256,6 +256,9 @@ components:
             > The values being stored have a maximum length of eighty (80) characters and will be truncated if necessary.
             > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
           type: object
+        principalBusinessAddress:
+          $ref: "#/components/schemas/ViasAddress"
+          description: The principal business address of the account holder.
         webAddress:
           description: The URL of the website of the account holder.
           type: string
@@ -272,7 +275,7 @@ components:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -317,7 +320,7 @@ components:
         merchantReference:
           description: The merchant reference.
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         status:
           $ref: "#/components/schemas/OperationStatus"
           description: The payout status.
@@ -361,7 +364,7 @@ components:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -388,11 +391,11 @@ components:
         newStatus:
           $ref: "#/components/schemas/AccountHolderStatus"
           description: The new status of the account holder.
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         oldStatus:
           $ref: "#/components/schemas/AccountHolderStatus"
           description: The former status of the account holder.
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         reason:
           description: The reason for the status change.
           type: string
@@ -409,7 +412,7 @@ components:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -438,7 +441,7 @@ components:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -502,7 +505,7 @@ components:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -531,7 +534,7 @@ components:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -568,7 +571,7 @@ components:
         statusSummary:
           $ref: "#/components/schemas/KYCCheckSummary"
           description: A summary of the verification status.
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         verificationStatus:
           description: The status of verification.
           enum:
@@ -615,7 +618,7 @@ components:
           description: The payout tier that the account holder occupies.
           format: int32
           type: integer
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
     AccountProcessingState:
       properties:
         disableReason:
@@ -634,7 +637,7 @@ components:
           description: The processing tier that the account holder occupies.
           format: int32
           type: integer
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
     AccountUpdateNotification:
       properties:
         content:
@@ -644,7 +647,7 @@ components:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -838,7 +841,7 @@ components:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -898,10 +901,15 @@ components:
         legalBusinessName:
           description: The legal name of the company.
           type: string
+        listedUltimateParentCompany:
+          description: Information about the parent public company. Required if the account holder is 100% owned by a publicly listed company.
+          items:
+            $ref: "#/components/schemas/UltimateParentCompany"
+          type: array
         registrationNumber:
           description: The registration number of the company.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         shareholders:
           description: Array containing information about individuals associated with the account holder either through ownership or control. For details about how you can identify them, refer to [Identity check](https://docs.adyen.com/platforms/verification-checks/identity-check).
           items:
@@ -935,7 +943,7 @@ components:
             - Inactive
             - Suspended
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         submittedAsync:
           description: |-
             Indicates whether the request is processed asynchronously. Depending on the request's platform settings, the following scenarios may be applied:
@@ -953,7 +961,7 @@ components:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -1011,27 +1019,25 @@ components:
         accountHolderStatus:
           $ref: "#/components/schemas/AccountHolderStatus"
           description: The status of the new account holder.
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         description:
           description: The description of the new account holder.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         invalidFields:
           description: A list of fields that caused the `/createAccountHolder` request to fail.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         legalEntity:
           description: The type of legal entity of the new account holder.
           enum:
             - Business
             - Individual
             - NonProfit
-            - Partnership
-            - PublicCompany
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -1047,7 +1053,7 @@ components:
         verification:
           $ref: "#/components/schemas/KYCVerificationResult2"
           description: The details of KYC Verification of the account holder.
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
       required:
         - accountHolderCode
         - accountHolderStatus
@@ -1065,7 +1071,7 @@ components:
         description:
           description: The description of the account.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         payoutSchedule:
           $ref: "#/components/schemas/PayoutScheduleResponse"
           description: The payout schedule of the account.
@@ -1085,7 +1091,7 @@ components:
             - Inactive
             - Suspended
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         submittedAsync:
           description: |-
             Indicates whether the request is processed asynchronously. Depending on the request's platform settings, the following scenarios may be applied:
@@ -1105,7 +1111,7 @@ components:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -1265,6 +1271,7 @@ components:
             - passport
             - passportNumber
             - payoutMethodCode
+            - payoutSchedule
             - personalData
             - phoneCountryCode
             - phoneNumber
@@ -1285,6 +1292,7 @@ components:
             - socialSecurityNumber
             - sourceAccountCode
             - splitAccount
+            - splitConfigurationUUID
             - splitCurrency
             - splitValue
             - splits
@@ -1503,7 +1511,7 @@ components:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -1621,7 +1629,7 @@ components:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -1681,7 +1689,7 @@ components:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -1728,7 +1736,7 @@ components:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -1956,11 +1964,11 @@ components:
         paymentPspReference:
           description: The psp reference of the related authorisation or transfer.
           type: string
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
         payoutPspReference:
           description: The psp reference of the related payout.
           type: string
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
         pspReference:
           description: The psp reference of a transaction.
           type: string
@@ -2026,7 +2034,7 @@ components:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -2057,7 +2065,7 @@ components:
         merchantReference:
           description: The reference provided by the merchant.
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         sourceAccountCode:
           description: The code of the Account from which funds were debited.
           type: string
@@ -2072,6 +2080,34 @@ components:
         - destinationAccountCode
         - amount
         - transferCode
+    UltimateParentCompany:
+      properties:
+        address:
+          $ref: "#/components/schemas/ViasAddress"
+          description: Address of the ultimate parent company.
+        businessDetails:
+          $ref: "#/components/schemas/UltimateParentCompanyBusinessDetails"
+          description: Details about the ultimate parent company's business.
+        ultimateParentCompanyCode:
+          description: Adyen-generated unique alphanumeric identifier (UUID) for the entry, returned in the response when you create an ultimate parent company. Required when updating an existing entry in an `/updateAccountHolder` request.
+          type: string
+    UltimateParentCompanyBusinessDetails:
+      properties:
+        legalBusinessName:
+          description: The legal name of the company.
+          type: string
+        registrationNumber:
+          description: The registration number of the company.
+          type: string
+        stockExchange:
+          description: Market Identifier Code (MIC).
+          type: string
+        stockNumber:
+          description: International Securities Identification Number (ISIN).
+          type: string
+        stockTicker:
+          description: Stock Ticker symbol.
+          type: string
     UpdateAccountHolderResponse:
       properties:
         accountHolderCode:
@@ -2083,27 +2119,25 @@ components:
         accountHolderStatus:
           $ref: "#/components/schemas/AccountHolderStatus"
           description: The new status of the account holder.
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         description:
           description: The description of the account holder.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         invalidFields:
           description: in case the account holder has not been updated, contains account holder fields, that did not pass the validation.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         legalEntity:
           description: The legal entity of the account holder.
           enum:
             - Business
             - Individual
             - NonProfit
-            - Partnership
-            - PublicCompany
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -2124,7 +2158,7 @@ components:
         verification:
           $ref: "#/components/schemas/KYCVerificationResult2"
           description: The details of KYC Verification of the account holder.
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
       required:
         - accountHolderStatus
         - verification
@@ -2137,7 +2171,7 @@ components:
         description:
           description: The description of the account.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         payoutSchedule:
           $ref: "#/components/schemas/PayoutScheduleResponse"
           description: The payout schedule of the account.
@@ -2226,7 +2260,7 @@ components:
           items:
             $ref: "#/components/schemas/PersonalDocumentData"
           type: array
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
         idNumber:
           deprecated: true
           description: An ID number of the person.
@@ -2297,6 +2331,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the closure of an account.
+      tags:
+        - Accounts
       x-groupName: Accounts
       x-sortIndex: 3
   /ACCOUNT_CREATED:
@@ -2319,6 +2355,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the creation of an account.
+      tags:
+        - Accounts
       x-groupName: Accounts
       x-sortIndex: 1
   /ACCOUNT_FUNDS_BELOW_THRESHOLD:
@@ -2341,6 +2379,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered when a liable account current funds are below configured threshold.
+      tags:
+        - Fund management
       x-groupName: Fund management
       x-sortIndex: 7
   /ACCOUNT_HOLDER_CREATED:
@@ -2363,6 +2403,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the creation of an account holder.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 1
   /ACCOUNT_HOLDER_PAYOUT:
@@ -2385,6 +2427,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon a payout to an account holder.
+      tags:
+        - Fund management
       x-groupName: Fund management
       x-sortIndex: 1
   /ACCOUNT_HOLDER_STATUS_CHANGE:
@@ -2407,6 +2451,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the status change of an account holder.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 4
   /ACCOUNT_HOLDER_STORE_STATUS_CHANGE:
@@ -2429,6 +2475,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the status change of a store tied to an account holder.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 4
   /ACCOUNT_HOLDER_UPCOMING_DEADLINE:
@@ -2451,6 +2499,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon an upcoming deadline.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 1
   /ACCOUNT_HOLDER_UPDATED:
@@ -2473,6 +2523,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the update of an account holder.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 2
   /ACCOUNT_HOLDER_VERIFICATION:
@@ -2495,6 +2547,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the receipt of KYC Verification results.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 3
   /ACCOUNT_UPDATED:
@@ -2517,6 +2571,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the update of an account.
+      tags:
+        - Accounts
       x-groupName: Accounts
       x-sortIndex: 2
   /BENEFICIARY_SETUP:
@@ -2539,6 +2595,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the setup of a beneficiary.
+      tags:
+        - Fund management
       x-groupName: Fund management
       x-sortIndex: 3
   /COMPENSATE_NEGATIVE_BALANCE:
@@ -2561,6 +2619,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the compensation of negative account balances.
+      tags:
+        - Fund management
       x-groupName: Fund management
       x-sortIndex: 5
   /DIRECT_DEBIT_INITIATED:
@@ -2583,6 +2643,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered when an automated direct debit is initiated.
+      tags:
+        - Fund management
       x-groupName: Fund management
       x-sortIndex: 7
   /PAYMENT_FAILURE:
@@ -2605,6 +2667,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered when a booking for a capture or refund fails.
+      tags:
+        - Other
       x-groupName: Other
       x-sortIndex: 1
   /REFUND_FUNDS_TRANSFER:
@@ -2627,6 +2691,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the transfer refund of funds between accounts.
+      tags:
+        - Fund management
       x-groupName: Fund management
       x-sortIndex: 6
   /REPORT_AVAILABLE:
@@ -2649,6 +2715,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered when a report is made available.
+      tags:
+        - Other
       x-groupName: Other
       x-sortIndex: 2
   /SCHEDULED_REFUNDS:
@@ -2671,6 +2739,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the scheduling of refunds requested by a 'Refund Transfers Not Paid Out' call.
+      tags:
+        - Fund management
       x-groupName: Fund management
       x-sortIndex: 4
   /TRANSFER_FUNDS:
@@ -2693,6 +2763,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the transfer of funds between accounts.
+      tags:
+        - Fund management
       x-groupName: Fund management
       x-sortIndex: 2
 x-groups:

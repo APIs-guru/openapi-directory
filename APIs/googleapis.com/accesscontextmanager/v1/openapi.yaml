@@ -700,6 +700,10 @@ components:
       schema:
         type: string
   schemas:
+    AccessContextManagerOperationMetadata:
+      description: Metadata of Access Context Manager's Long Running Operations.
+      properties: {}
+      type: object
     AccessLevel:
       description: An `AccessLevel` is a label that can be applied to requests to Google Cloud services, along with a list of requirements necessary for the label to be applied.
       properties:
@@ -713,7 +717,7 @@ components:
           description: Description of the `AccessLevel` and its use. Does not affect behavior.
           type: string
         name:
-          description: "Required. Resource name for the Access Level. The `short_name` component must begin with a letter and only include alphanumeric and '_'. Format: `accessPolicies/{policy_id}/accessLevels/{short_name}`. The maximum length of the `short_name` component is 50 characters."
+          description: "Required. Resource name for the Access Level. The `short_name` component must begin with a letter and only include alphanumeric and '_'. Format: `accessPolicies/{access_policy}/accessLevels/{access_level}`. The maximum length of the `access_level` component is 50 characters."
           type: string
         title:
           description: Human readable title. Must be unique within the Policy.
@@ -726,7 +730,7 @@ components:
           description: Output only. An opaque identifier for the current version of the `AccessPolicy`. This will always be a strongly validated etag, meaning that two Access Polices will be identical if and only if their etags are identical. Clients should not expect this to be in any specific format.
           type: string
         name:
-          description: "Output only. Resource name of the `AccessPolicy`. Format: `accessPolicies/{policy_id}`"
+          description: "Output only. Resource name of the `AccessPolicy`. Format: `accessPolicies/{access_policy}`"
           type: string
         parent:
           description: "Required. The parent of this `AccessPolicy` in the Cloud Resource Hierarchy. Currently immutable once created. Format: `organizations/{organization_id}`"
@@ -932,6 +936,10 @@ components:
         name:
           description: 'Immutable. Assigned by the server during creation. The last segment has an arbitrary length and has only URI unreserved characters (as defined by [RFC 3986 Section 2.3](https://tools.ietf.org/html/rfc3986#section-2.3)). Should not be specified by the client during creation. Example: "organizations/256/gcpUserAccessBindings/b3-BhcX_Ud5N"'
           type: string
+      type: object
+    GcpUserAccessBindingOperationMetadata:
+      description: Currently, a completed operation means nothing. In the future, this metadata and a completed operation may indicate that the binding has taken effect and is affecting access decisions for all users.
+      properties: {}
       type: object
     IngressFrom:
       description: Defines the conditions under which an IngressPolicy matches a request. Conditions are based on information about the source of the request. The request must satisfy what is defined in `sources` AND identity related fields in order to match.
@@ -1152,7 +1160,7 @@ components:
           description: Description of the `ServicePerimeter` and its use. Does not affect behavior.
           type: string
         name:
-          description: "Required. Resource name for the ServicePerimeter. The `short_name` component must begin with a letter and only include alphanumeric and '_'. Format: `accessPolicies/{policy_id}/servicePerimeters/{short_name}`"
+          description: "Required. Resource name for the ServicePerimeter. The `short_name` component must begin with a letter and only include alphanumeric and '_'. Format: `accessPolicies/{access_policy}/servicePerimeters/{service_perimeter}`"
           type: string
         perimeterType:
           description: Perimeter type indicator. A single project is allowed to be a member of single regular perimeter, but multiple service perimeter bridges. A project cannot be a included in a perimeter bridge without being included in regular perimeter. For perimeter bridges, the restricted service list as well as access level lists must be empty.

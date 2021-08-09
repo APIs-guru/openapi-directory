@@ -87,8 +87,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -96,8 +96,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -105,8 +105,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -114,8 +114,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -126,8 +126,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -135,6 +135,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Cancels an authorised payment.
+      tags:
+        - Modifications
       x-groupName: Modifications
       x-sortIndex: 3
   /orders:
@@ -156,8 +158,8 @@ paths:
           content:
             application/json:
               examples:
-                basic-200:
-                  $ref: "#/components/examples/post-orders-basic-200"
+                basic:
+                  $ref: "#/components/examples/post-orders-basic"
               schema:
                 $ref: "#/components/schemas/CheckoutCreateOrderResponse"
           description: OK - the request has succeeded.
@@ -168,8 +170,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -177,8 +179,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -186,8 +188,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -195,8 +197,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -207,8 +209,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -216,6 +218,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Creates an order for the given amount.
+      tags:
+        - Orders
       x-groupName: Orders
       x-sortIndex: 2
   /orders/cancel:
@@ -237,8 +241,8 @@ paths:
           content:
             application/json:
               examples:
-                basic-200:
-                  $ref: "#/components/examples/post-orders-cancel-basic-200"
+                basic:
+                  $ref: "#/components/examples/post-orders-cancel-basic"
               schema:
                 $ref: "#/components/schemas/CheckoutCancelOrderResponse"
           description: OK - the request has succeeded.
@@ -249,8 +253,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -258,8 +262,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -267,8 +271,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -276,8 +280,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -288,8 +292,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -297,6 +301,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Cancels the given order.
+      tags:
+        - Orders
       x-groupName: Orders
       x-sortIndex: 3
   /originKeys:
@@ -320,8 +326,8 @@ paths:
           content:
             application/json:
               examples:
-                basic-200:
-                  $ref: "#/components/examples/post-originKeys-basic-200"
+                basic:
+                  $ref: "#/components/examples/post-originKeys-basic"
               schema:
                 $ref: "#/components/schemas/CheckoutUtilityResponse"
           description: OK - the request has succeeded.
@@ -332,8 +338,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -341,8 +347,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -350,8 +356,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -359,8 +365,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -371,8 +377,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -380,6 +386,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Create originKey values for one or more merchant domains.
+      tags:
+        - Utility
       x-groupName: Utility
       x-sortIndex: 1
   /paymentLinks:
@@ -404,8 +412,8 @@ paths:
           content:
             application/json:
               examples:
-                basic-200:
-                  $ref: "#/components/examples/post-paymentLinks-basic-200"
+                basic:
+                  $ref: "#/components/examples/post-paymentLinks-basic"
               schema:
                 $ref: "#/components/schemas/PaymentLinkResource"
           description: OK - the request has succeeded.
@@ -425,8 +433,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -434,8 +442,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -443,8 +451,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -452,8 +460,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -464,8 +472,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -473,6 +481,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Creates a payment link.
+      tags:
+        - Payment links
       x-groupName: Payment links
       x-sortIndex: 1
   "/paymentLinks/{linkId}":
@@ -492,8 +502,8 @@ paths:
           content:
             application/json:
               examples:
-                basic-200:
-                  $ref: "#/components/examples/get-paymentLinks-linkId-basic-200"
+                basic:
+                  $ref: "#/components/examples/get-paymentLinks-linkId-basic"
               schema:
                 $ref: "#/components/schemas/PaymentLinkResource"
           description: OK - the request has succeeded.
@@ -504,8 +514,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -513,8 +523,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -522,8 +532,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -531,8 +541,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -543,8 +553,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -552,6 +562,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve a payment link.
+      tags:
+        - Payment links
       x-groupName: Payment links
       x-sortIndex: 2
     patch:
@@ -578,8 +590,8 @@ paths:
           content:
             application/json:
               examples:
-                basic-200:
-                  $ref: "#/components/examples/patch-paymentLinks-linkId-basic-200"
+                basic:
+                  $ref: "#/components/examples/patch-paymentLinks-linkId-basic"
               schema:
                 $ref: "#/components/schemas/PaymentLinkResource"
           description: OK - the request has succeeded.
@@ -590,8 +602,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -599,8 +611,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -608,8 +620,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -617,8 +629,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -629,8 +641,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -638,6 +650,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Update the status of a payment link
+      tags:
+        - Payment links
       x-groupName: Payment links
       x-sortIndex: 3
   /paymentMethods:
@@ -666,12 +680,12 @@ paths:
           content:
             application/json:
               examples:
-                basic-200:
-                  $ref: "#/components/examples/post-paymentMethods-basic-200"
-                filtered-200:
-                  $ref: "#/components/examples/post-paymentMethods-filtered-200"
-                include-oneclick-200:
-                  $ref: "#/components/examples/post-paymentMethods-include-oneclick-200"
+                basic:
+                  $ref: "#/components/examples/post-paymentMethods-basic"
+                filtered:
+                  $ref: "#/components/examples/post-paymentMethods-filtered"
+                include-oneclick:
+                  $ref: "#/components/examples/post-paymentMethods-include-oneclick"
               schema:
                 $ref: "#/components/schemas/PaymentMethodsResponse"
           description: OK - the request has succeeded.
@@ -682,8 +696,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -691,8 +705,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -700,8 +714,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -709,8 +723,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -721,8 +735,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -730,6 +744,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Returns available payment methods.
+      tags:
+        - Payments
       x-groupName: Payments
       x-sortIndex: 1
   /paymentMethods/balance:
@@ -753,8 +769,8 @@ paths:
           content:
             application/json:
               examples:
-                plastix-200:
-                  $ref: "#/components/examples/post-paymentMethods-balance-plastix-200"
+                plastix:
+                  $ref: "#/components/examples/post-paymentMethods-balance-plastix"
               schema:
                 $ref: "#/components/schemas/CheckoutBalanceCheckResponse"
           description: OK - the request has succeeded.
@@ -765,8 +781,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -774,8 +790,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -783,8 +799,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -792,8 +808,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -804,8 +820,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -813,6 +829,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Returns the available balance on gift card.
+      tags:
+        - Orders
       x-groupName: Orders
       x-sortIndex: 1
   /paymentSession:
@@ -845,10 +863,10 @@ paths:
           content:
             application/json:
               examples:
-                enableOneClick-200:
-                  $ref: "#/components/examples/post-paymentSession-enableOneClick-200"
-                web-200:
-                  $ref: "#/components/examples/post-paymentSession-web-200"
+                enableOneClick:
+                  $ref: "#/components/examples/post-paymentSession-enableOneClick"
+                web:
+                  $ref: "#/components/examples/post-paymentSession-web"
               schema:
                 $ref: "#/components/schemas/PaymentSetupResponse"
           description: OK - the request has succeeded.
@@ -859,8 +877,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -868,8 +886,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -877,8 +895,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -886,8 +904,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -898,8 +916,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -907,6 +925,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Creates a payment session.
+      tags:
+        - Classic Checkout SDK
       x-groupName: Classic Checkout SDK
       x-sortIndex: 1
   /payments:
@@ -960,22 +980,22 @@ paths:
           content:
             application/json:
               examples:
-                card-3d-secure-direct-200:
-                  $ref: "#/components/examples/post-payments-card-3d-secure-direct-200"
-                card-3d-secure-securedfields-200:
-                  $ref: "#/components/examples/post-payments-card-3d-secure-securedfields-200"
-                card-direct-200:
-                  $ref: "#/components/examples/post-payments-card-direct-200"
-                card-securedfields-200:
-                  $ref: "#/components/examples/post-payments-card-securedfields-200"
-                enableOneClick-raw-200:
-                  $ref: "#/components/examples/post-payments-enableOneClick-raw-200"
-                giropay-200:
-                  $ref: "#/components/examples/post-payments-giropay-200"
-                ideal-200:
-                  $ref: "#/components/examples/post-payments-ideal-200"
-                sofort-200:
-                  $ref: "#/components/examples/post-payments-sofort-200"
+                card-3d-secure-direct:
+                  $ref: "#/components/examples/post-payments-card-3d-secure-direct"
+                card-3d-secure-securedfields:
+                  $ref: "#/components/examples/post-payments-card-3d-secure-securedfields"
+                card-direct:
+                  $ref: "#/components/examples/post-payments-card-direct"
+                card-securedfields:
+                  $ref: "#/components/examples/post-payments-card-securedfields"
+                enableOneClick-raw:
+                  $ref: "#/components/examples/post-payments-enableOneClick-raw"
+                giropay:
+                  $ref: "#/components/examples/post-payments-giropay"
+                ideal:
+                  $ref: "#/components/examples/post-payments-ideal"
+                sofort:
+                  $ref: "#/components/examples/post-payments-sofort"
               schema:
                 $ref: "#/components/schemas/PaymentResponse"
           description: OK - the request has succeeded.
@@ -986,8 +1006,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -995,8 +1015,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -1004,8 +1024,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1013,8 +1033,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1025,8 +1045,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -1034,6 +1054,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Starts a transaction.
+      tags:
+        - Payments
       x-groupName: Payments
       x-sortIndex: 2
   /payments/details:
@@ -1068,8 +1090,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1077,8 +1099,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -1086,8 +1108,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1095,8 +1117,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1107,8 +1129,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -1116,6 +1138,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Submits details for a payment.
+      tags:
+        - Payments
       x-groupName: Payments
       x-sortIndex: 3
   /payments/result:
@@ -1149,8 +1173,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1158,8 +1182,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -1167,8 +1191,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1176,8 +1200,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1188,8 +1212,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -1197,6 +1221,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Verifies payment result.
+      tags:
+        - Classic Checkout SDK
       x-groupName: Classic Checkout SDK
       x-sortIndex: 2
   "/payments/{paymentPspReference}/amountUpdates":
@@ -1246,8 +1272,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1255,8 +1281,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -1264,8 +1290,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1273,8 +1299,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1285,8 +1311,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -1294,6 +1320,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Increases or decreases the authorised amount.
+      tags:
+        - Modifications
       x-groupName: Modifications
       x-sortIndex: 6
   "/payments/{paymentPspReference}/cancels":
@@ -1343,8 +1371,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1352,8 +1380,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -1361,8 +1389,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1370,8 +1398,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1382,8 +1410,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -1391,6 +1419,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Cancels an authorised payment.
+      tags:
+        - Modifications
       x-groupName: Modifications
       x-sortIndex: 2
   "/payments/{paymentPspReference}/captures":
@@ -1440,8 +1470,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1449,8 +1479,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -1458,8 +1488,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1467,8 +1497,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1479,8 +1509,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -1488,6 +1518,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Captures an authorised payment.
+      tags:
+        - Modifications
       x-groupName: Modifications
       x-sortIndex: 1
   "/payments/{paymentPspReference}/refunds":
@@ -1539,8 +1571,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1548,8 +1580,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -1557,8 +1589,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1566,8 +1598,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1578,8 +1610,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -1587,6 +1619,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Refunds a captured payment.
+      tags:
+        - Modifications
       x-groupName: Modifications
       x-sortIndex: 4
   "/payments/{paymentPspReference}/reversals":
@@ -1635,8 +1669,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1644,8 +1678,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -1653,8 +1687,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1662,8 +1696,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1674,8 +1708,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
@@ -1683,47 +1717,20 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Cancels or refunds a payment.
+      tags:
+        - Modifications
       x-groupName: Modifications
       x-sortIndex: 5
 components:
   examples:
-    generic-400:
-      summary: Response code 400. Bad request.
-      value:
-        errorCode: "702"
-        errorType: validation
-        message: 'Unexpected input: ", expected: }'
-        status: 400
-    generic-401:
+    generic:
       summary: Response code 401. Unauthorized.
       value:
         errorCode: "000"
         errorType: security
         message: HTTP Status Response - Unauthorized
         status: 401
-    generic-403:
-      summary: Response code 403. Forbidden.
-      value:
-        errorCode: "901"
-        errorType: security
-        message: Invalid Merchant Account
-        status: 403
-    generic-422:
-      summary: Response code 422. Unprocessable entity.
-      value:
-        errorCode: 14_030
-        errorType: validation
-        message: Return URL is missing.
-        status: 422
-    generic-500:
-      summary: Response code 500. Internal server error.
-      value:
-        errorCode: "905"
-        errorType: configuration
-        message: Payment details are not supported
-        pspReference: "8516091485743033"
-        status: 500
-    get-paymentLinks-linkId-basic-200:
+    get-paymentLinks-linkId-basic:
       summary: Example response for request 'basic'
       value:
         amount:
@@ -1741,20 +1748,6 @@ components:
       summary: Update the status of a payment link
       value:
         status: expired
-    patch-paymentLinks-linkId-basic-200:
-      summary: Example response for request 'basic'
-      value:
-        amount:
-          currency: EUR
-          value: 8700
-        countryCode: NL
-        expiresAt: 2021-04-08T14:06:39Z
-        merchantAccount: TestMerchantCheckout
-        reference: shopper-reference-ekvL83
-        shopperLocale: hu-HU
-        shopperReference: shopper-reference-LZfdWZ
-        status: expired
-        url: https://test.adyen.link/PL61C53A8B97E6915A
     post-orders-basic:
       summary: Create an order
       value:
@@ -1763,17 +1756,6 @@ components:
           value: 2500
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         reference: YOUR_ORDER_REFERENCE
-    post-orders-basic-200:
-      summary: Example response for request 'basic'
-      value:
-        expiresAt: 2021-04-09T14:16:46Z
-        orderData: Ab02b4c0!BQABAgCxXvknCldOcRElkxY8Za7iyym4Wv8aDzyNwmj/3nh4G6YtwnUIJHaK62NlN4oIsACdkn1FEjBwKlheG40jvXcYGBk4KFV5WvOhTVCpv/KXnkrI7xQv/u2lE7U4wA+HPB6K4Zj2L8xO/ogZi+zGZqFs5m16jmkH7ku6FzXygXLNuUCuOlmlXSZhdkHHTNVQSq1MELDK9OL74y532ETRPTCNxx8WlEiZB+LDqYrPvH9GgigtD5kw8Do45jfFfG72kWBEgfYqp4mbUmBB9ebXFYZKfF0qvW1x7A2Y9+/MFlTIdXfKW484bJeDBCTTrmKGXIj+U4r5imr5fXTyNLcrxyUqwrb9jg+5B4qg1XB6Cgj5UPlSI4O62I7v0s5TTj69dzLwUQRxSQbwLrZVGYavXzeVKI54BVLRV3d/+BbPvTqnTo34UhfZbPlOx9F2eyaS0ZXdOKnHw89uGUgxUpLsMqnbRysi/pxpZaulel+0mExb68wVxb/7Teob5eRG4gp7cfZVZs6tLXOYWL+W0TqIlsa3hWsfM0LeaovzkoDtW/pK5JABXwMtLig9tsxoEh9ONYtIzkXC21LZ8ebiuSIMaPizjF8yca+QxrCZalQsu6uKnBz/mm8nnsflaGU2QS5zcoxk1RudL1Bl36LM9UZGPpFEYWiYA4sUsnNLw7peJjWCGhDepnwMv4TlgsEtoDtz1T54AEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifRslOdmfgUHTXl66WPD9xoW2whIeRx/jR++2MqNE16x6zQy+KtDN8/h60crZwmqkjVTQYqQlsYSYDHSIyb4wnnay16/5il1yS7vN3UCLaTXjYBIAyyx6Wr9j4P3CI/etB+PpviHoESC4mV6ZN4whMDQyziQ8s230GtboXbh42qND7rk9phySBogowQlXrtF+l2n2F46nyif0owEgik5fGARfvjZtY2w23s30KMLNwU4gWSvX4H6RMVS8TfZH2fKfNrwB3tZUXwYkELs5ntaHysswq5Mn5aq2BKAMHu/Rh/wureMSI73Qi0avjrzWCwzt3JH4wnzErMnOZwSdgA==
-        pspReference: "8616178914061985"
-        reference: shopper-reference-ekvL83
-        remainingAmount:
-          currency: EUR
-          value: 2500
-        resultCode: Success
     post-orders-cancel-basic:
       summary: Cancel an order
       value:
@@ -1781,11 +1763,6 @@ components:
         order:
           orderData: 823fh892f8f18f4...148f13f9f3f
           pspReference: "8815517812932012"
-    post-orders-cancel-basic-200:
-      summary: Example response for request 'basic'
-      value:
-        pspReference: "8816178914079738"
-        resultCode: Received
     post-originKeys-basic:
       summary: Get origin keys
       value:
@@ -1793,13 +1770,6 @@ components:
           - https://www.your-domain1.com
           - https://www.your-domain2.com
           - https://www.your-domain3.com
-    post-originKeys-basic-200:
-      summary: Example response for request 'basic'
-      value:
-        originKeys:
-          https://www.your-domain1.com: pub.v2.8116178901076090.aHR0cHM6Ly93d3cueW91ci1kb21haW4xLmNvbQ.pvbYlrXz0ICP4kwMJXDGDLVMqALhwXr1MSRjT-fkhvw
-          https://www.your-domain2.com: pub.v2.8116178901076090.aHR0cHM6Ly93d3cueW91ci1kb21haW4yLmNvbQ.LdN9kvJ35fYFFiBSJA4idMnwwxJ5_yXpeNS__Ap5wkg
-          https://www.your-domain3.com: pub.v2.8116178901076090.aHR0cHM6Ly93d3cueW91ci1kb21haW4zLmNvbQ.FrTpVz7_RzAywKasM0kXCRoMfoMkKIKaxjFymRGORIc
     post-paymentLinks-basic:
       summary: Create a payment link
       value:
@@ -1826,15 +1796,6 @@ components:
         shopperEmail: test@email.com
         shopperLocale: pt-BR
         shopperReference: YOUR_UNIQUE_SHOPPER_ID
-    post-paymentLinks-basic-200:
-      summary: Example response for request 'basic'
-      value:
-        amount:
-          currency: EUR
-          value: 1250
-        expiresAt: 2021-04-09T14:17:31Z
-        reference: shopper-reference-ekvL83
-        url: https://test.adyen.link/PL6DB3157D27FFBBCF
     post-paymentMethods-balance-basic:
       summary: Retrieve gift card balance
       value:
@@ -1852,1485 +1813,11 @@ components:
           holderName: BALANCE EUR 888
           number: "4010100000000000000"
           type: plastix
-    post-paymentMethods-balance-plastix-200:
-      summary: Example response for request 'plastix'
-      value:
-        additionalData:
-          nonScheme.transactionLimit: "5000"
-          nonScheme.transactionLimitCcy: EUR
-        balance:
-          currency: EUR
-          value: 888
-        pspReference: 851617891188737F
-        resultCode: Success
     post-paymentMethods-basic:
       summary: Get available payment methods
       value:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
-    post-paymentMethods-basic-200:
-      summary: Example response for request 'basic'
-      value:
-        paymentMethods:
-          - details:
-              - details:
-                  - key: ownerName
-                    type: text
-                  - key: bankLocationId
-                    type: text
-                  - key: bankAccountNumber
-                    type: text
-                key: bankAccount
-                type: bankAccount
-            name: ACH Direct Debit
-            type: ach
-          - name: Adyen Voucher
-            type: adyen_test_voucher
-          - details:
-              - details:
-                  - key: firstName
-                    type: text
-                  - key: lastName
-                    type: text
-                  - items:
-                      - id: M
-                        name: male
-                      - id: F
-                        name: female
-                    key: gender
-                    type: radio
-                  - key: dateOfBirth
-                    type: date
-                  - key: telephoneNumber
-                    type: tel
-                  - key: shopperEmail
-                    type: emailAddress
-                key: personalDetails
-                type: fieldSet
-              - details:
-                  - key: street
-                    type: text
-                  - key: houseNumberOrName
-                    type: text
-                  - key: city
-                    type: text
-                  - key: postalCode
-                    type: text
-                  - key: stateOrProvince
-                    optional: true
-                    type: text
-                  - items:
-                      - id: NL
-                        name: Netherlands
-                      - id: BE
-                        name: Belgium
-                    key: country
-                    type: select
-                key: billingAddress
-                type: address
-              - key: separateDeliveryAddress
-                optional: true
-                type: boolean
-                value: "false"
-              - details:
-                  - key: street
-                    type: text
-                  - key: houseNumberOrName
-                    type: text
-                  - key: city
-                    type: text
-                  - key: postalCode
-                    type: text
-                  - key: stateOrProvince
-                    optional: true
-                    type: text
-                  - items:
-                      - id: NL
-                        name: Netherlands
-                      - id: BE
-                        name: Belgium
-                    key: country
-                    type: select
-                key: deliveryAddress
-                optional: true
-                type: address
-            name: AfterPay Invoice
-            type: afterpay_default
-          - name: AfterPay DirectDebit
-            type: afterpay_directdebit
-          - name: Afterpay
-            type: afterpaytouch
-          - details:
-              - key: encryptedCardNumber
-                type: cardToken
-              - key: encryptedSecurityCode
-                type: cardToken
-              - key: encryptedExpiryMonth
-                type: cardToken
-              - key: encryptedExpiryYear
-                type: cardToken
-              - key: holderName
-                optional: true
-                type: text
-            name: Credit Card
-            type: scheme
-          - name: AliPay
-            type: alipay
-          - name: AliPay HK
-            type: alipay_hk
-          - name: AliPay
-            type: alipay_wap
-          - details:
-              - key: additionalData.androidpay.token
-                type: androidPayToken
-            name: Android Pay
-            type: androidpay
-          - details:
-              - key: additionalData.applepay.token
-                type: applePayToken
-            name: Apple Pay
-            type: applepay
-          - name: Credit Card via AsiaPay
-            type: asiapay
-          - name: China UnionPay
-            type: asiapay_unionpay
-          - name: Baby Gift Card
-            type: babygiftcard
-          - name: Baloto
-            type: baloto
-          - name: BancNet
-            type: bancnet
-          - name: Bank Transfer (BG)
-            type: bankTransfer_BG
-          - name: Bank Transfer (CH)
-            type: bankTransfer_CH
-          - name: Bank Transfer (DE)
-            type: bankTransfer_DE
-          - name: Bank Transfer (FI)
-            type: bankTransfer_FI
-          - name: Bank Transfer (GB)
-            type: bankTransfer_GB
-          - name: Bank Transfer (HU)
-            type: bankTransfer_HU
-          - name: SEPA Bank Transfer
-            type: bankTransfer_IBAN
-          - name: Bank Transfer (IE)
-            type: bankTransfer_IE
-          - name: Electronic Bank Transfer (MX)
-            type: bankTransfer_MX_linked
-          - name: Bank Transfer (MX)
-            type: bankTransfer_MX_offline
-          - name: Bank Transfer (NL)
-            type: bankTransfer_NL
-          - name: Bank Transfer (PL)
-            type: bankTransfer_PL
-          - name: Bank Transfer (SE)
-            type: bankTransfer_SE
-          - name: Bank Transfer (US)
-            type: bankTransfer_US
-          - name: Payconiq by Bancontact
-            type: bcmc_mobile
-          - name: Bijenkorf Cadeaucard
-            type: bijcadeaucard
-          - name: 99Bill
-            type: bill99
-          - details:
-              - items:
-                  - id: AUB_DIRECT
-                    name: AU Small Finance Bank
-                  - id: ALB_DIRECT
-                    name: "Allahabad Bank "
-                  - id: APG_DIRECT
-                    name: Andhra Pragathi Grameena Bank
-                  - id: BDN_DIRECT
-                    name: Bandhan bank
-                  - id: BBK_DIRECT
-                    name: Bank of Bahrain and Kuwait
-                  - id: BBR_DIRECT
-                    name: Bank of Baroda - Retail Banking
-                  - id: BCB_DIRECT
-                    name: "Bassien Catholic Co-Operative Bank "
-                  - id: CNB_DIRECT
-                    name: Canara Bank
-                  - id: SYD_DIRECT
-                    name: Canara Bank (e-Syndicate)
-                  - id: CSB_DIRECT
-                    name: Catholic Syrian Bank
-                  - id: CBI_DIRECT
-                    name: Central Bank of India
-                  - id: CUB_DIRECT
-                    name: City Union Bank
-                  - id: COB_DIRECT
-                    name: Cosmos Bank
-                  - id: DEN_DIRECT
-                    name: Dena Bank
-                  - id: DBK_DIRECT
-                    name: Deutsche Bank
-                  - id: DCB_DIRECT
-                    name: Development Credit Bank
-                  - id: DLB_DIRECT
-                    name: Dhanlakshmi Bank - Retail Net Banking
-                  - id: ESF_DIRECT
-                    name: ESAF Small Finance Bank
-                  - id: EQB_DIRECT
-                    name: Equitas Small Finance Bank
-                  - id: FBK_DIRECT
-                    name: Federal Bank
-                  - id: FNC_DIRECT
-                    name: Fincare Bank
-                  - id: HDF_DIRECT
-                    name: HDFC Bank
-                  - id: ICI_DIRECT
-                    name: "ICICI Bank "
-                  - id: IDB_DIRECT
-                    name: IDBI Bank - Retail Net Banking
-                  - id: IDN_DIRECT
-                    name: IDFC FIRST Bank
-                  - id: INB_DIRECT
-                    name: Indian Bank
-                  - id: IOB_DIRECT
-                    name: Indian Overseas Bank
-                  - id: IDS_DIRECT
-                    name: IndusInd Bank
-                  - id: JKB_DIRECT
-                    name: Jammu & Kashmir Bank
-                  - id: JNB_DIRECT
-                    name: Jana Small Finance Bank
-                  - id: JSB_DIRECT
-                    name: Janata Sahakari Bank Ltd Pune
-                  - id: KJB_DIRECT
-                    name: Kalyan Janata Sahakari Bank
-                  - id: KBL_DIRECT
-                    name: Karnataka Bank Ltd
-                  - id: KVB_DIRECT
-                    name: Karur Vysya Bank
-                  - id: 162_DIRECT
-                    name: Kotak Bank
-                  - id: LVR_DIRECT
-                    name: Laxmi Vilas Bank - Retail
-                  - id: NKB_DIRECT
-                    name: NKGSB Co-op Bank
-                  - id: NEB_DIRECT
-                    name: North East Small Finance Bank
-                  - id: OBC_DIRECT
-                    name: PNB (Erstwhile-Oriental Bank of Commerce)
-                  - id: UNI_DIRECT
-                    name: PNB (Erstwhile-United Bank of India)
-                  - id: PMC_DIRECT
-                    name: Punjab & Maharastra Co-op Bank
-                  - id: PSB_DIRECT
-                    name: Punjab & Sind Bank
-                  - id: CPN_DIRECT
-                    name: "Punjab National Bank - Corporate "
-                  - id: PNB_DIRECT
-                    name: Punjab National Bank - Retail Banking
-                  - id: RBL_DIRECT
-                    name: RBL Bank Limited
-                  - id: SWB_DIRECT
-                    name: Saraswat Bank
-                  - id: SHB_DIRECT
-                    name: Shivalik Mercantile Cooperative Bank Ltd
-                  - id: SIB_DIRECT
-                    name: South Indian Bank
-                  - id: SCB_DIRECT
-                    name: Standard Chartered Bank
-                  - id: SBI_DIRECT
-                    name: State Bank of India
-                  - id: SRB_DIRECT
-                    name: Suryoday Small Finance Bank
-                  - id: TJB_DIRECT
-                    name: TJSB Bank
-                  - id: TNC_DIRECT
-                    name: Tamil Nadu State Co-operative Bank
-                  - id: TMB_DIRECT
-                    name: Tamilnad Mercantile Bank Ltd
-                  - id: TBB_DIRECT
-                    name: Thane Bharat Sahakari Bank Ltd
-                  - id: MSB_DIRECT
-                    name: The Mehsana Urban Co Op Bank Ltd
-                  - id: UCO_DIRECT
-                    name: UCO Bank
-                  - id: UBI_DIRECT
-                    name: Union Bank of India
-                  - id: ADB_DIRECT
-                    name: Union Bank of India (Erstwhile Andhra Bank)
-                  - id: CRP_DIRECT
-                    name: Union Bank of India (Erstwhile Corporation Bank)
-                  - id: VRB_DIRECT
-                    name: Varachha Co-operative Bank Limited
-                  - id: VJB_DIRECT
-                    name: Vijaya Bank
-                  - id: YBK_DIRECT
-                    name: Yes Bank
-                  - id: ZOB_DIRECT
-                    name: Zoroastrian Co-operative Bank Limited
-                  - id: DBS_DIRECT
-                    name: digibank by DBS
-                key: issuer
-                type: select
-            name: Online Banking India
-            type: billdesk_online
-          - name: UPI
-            type: billdesk_upi
-          - details:
-              - items:
-                  - id: DCW_DIRECT
-                    name: DCB Cippy
-                  - id: ICC_DIRECT
-                    name: ICC Cash Card
-                  - id: OXY_DIRECT
-                    name: Oxigen Wallet
-                  - id: PCH_DIRECT
-                    name: Pay World Money
-                key: issuer
-                type: select
-            name: Wallets India
-            type: billdesk_wallet
-          - name: Blik
-            type: blik
-          - name: Bloemen Giftcard
-            type: bloemengiftcard
-          - name: Boekenbon Giftcard
-            type: boekenbon
-          - name: Boleto
-            type: boleto
-          - name: Boleto Bancario
-            type: boletobancario_santander
-          - name: Bradesco
-            type: bradesco
-          - name: Cash-Ticket
-            type: cashticket
-          - name: CashU
-            type: cashu
-          - name: CCAvenue
-            type: ccavenue
-          - name: Mula Checkout
-            type: cellulant
-          - name: Chasin Giftcard
-            type: chasingiftcard
-          - name: Clearpay
-            type: clearpay
-          - name: ClickandBuy
-            type: clickandbuy
-          - name: Paiement en 3 fois par Cartes Bancaires
-            type: cofinoga_3xcb
-          - name: Costes Giftcard
-            type: costesgiftcard
-          - name: custom_settlement
-            type: custom_settlement
-          - name: DANA
-            type: dana
-          - name: DineroMail
-            type: dineromail
-          - name: Online bank transfer.
-            type: directEbanking
-          - name: Direct Debit Brazil - Banco do Brazil
-            type: directdebit_BR_bancodobrasil
-          - name: Direct Debit Brazil - Bradesco
-            type: directdebit_BR_bradesco
-          - name: Direct Debit Brazil - Caixa Economica Federal
-            type: directdebit_BR_caixa
-          - name: Direct Debit Brazil - HSBC
-            type: directdebit_BR_hsbc
-          - name: Direct Debit Brazil - Itau
-            type: directdebit_BR_itau
-          - name: Direct Debit Brazil - Santander
-            type: directdebit_BR_santander
-          - name: BACS Direct Debit
-            type: directdebit_GB
-          - details:
-              - key: shopperEmail
-                type: emailAddress
-              - key: firstName
-                type: text
-              - key: lastName
-                type: text
-              - key: infix
-                optional: true
-                type: text
-            name: Alfamart
-            type: doku_alfamart
-          - details:
-              - key: shopperEmail
-                type: emailAddress
-              - key: firstName
-                type: text
-              - key: lastName
-                type: text
-              - key: infix
-                optional: true
-                type: text
-            name: BCA Bank Transfer
-            type: doku_bca_va
-          - details:
-              - key: shopperEmail
-                type: emailAddress
-              - key: firstName
-                type: text
-              - key: lastName
-                type: text
-              - key: infix
-                optional: true
-                type: text
-            name: BNI VA
-            type: doku_bni_va
-          - details:
-              - key: shopperEmail
-                type: emailAddress
-              - key: firstName
-                type: text
-              - key: lastName
-                type: text
-              - key: infix
-                optional: true
-                type: text
-            name: BRI VA
-            type: doku_bri_va
-          - details:
-              - key: shopperEmail
-                type: emailAddress
-              - key: firstName
-                type: text
-              - key: lastName
-                type: text
-              - key: infix
-                optional: true
-                type: text
-            name: CIMB VA
-            type: doku_cimb_va
-          - details:
-              - key: shopperEmail
-                type: emailAddress
-              - key: firstName
-                type: text
-              - key: lastName
-                type: text
-              - key: infix
-                optional: true
-                type: text
-            name: Danamon VA
-            type: doku_danamon_va
-          - details:
-              - key: shopperEmail
-                type: emailAddress
-              - key: firstName
-                type: text
-              - key: lastName
-                type: text
-              - key: infix
-                optional: true
-                type: text
-            name: Indomaret
-            type: doku_indomaret
-          - details:
-              - key: shopperEmail
-                type: emailAddress
-              - key: firstName
-                type: text
-              - key: lastName
-                type: text
-              - key: infix
-                optional: true
-                type: text
-            name: Mandiri VA
-            type: doku_mandiri_va
-          - details:
-              - key: ovoId
-                type: text
-            name: OVO
-            type: doku_ovo
-          - details:
-              - key: shopperEmail
-                type: emailAddress
-              - key: firstName
-                type: text
-              - key: lastName
-                type: text
-              - key: infix
-                optional: true
-                type: text
-            name: Bank Transfer
-            type: doku_permata_lite_atm
-          - details:
-              - key: shopperEmail
-                type: emailAddress
-              - key: firstName
-                type: text
-              - key: lastName
-                type: text
-              - key: infix
-                optional: true
-                type: text
-            name: DOKU wallet
-            type: doku_wallet
-          - details:
-              - items:
-                  - id: "66"
-                    name: Bank Nowy BFG S.A.
-                  - id: "92"
-                    name: Bank Spółdzielczy w Brodnicy
-                  - id: "11"
-                    name: Bank transfer / postal
-                  - id: "74"
-                    name: Banki Spółdzielcze
-                  - id: "73"
-                    name: BLIK
-                  - id: "90"
-                    name: BNP Paribas - płacę z Pl@net
-                  - id: "59"
-                    name: CinkciarzPAY
-                  - id: "87"
-                    name: Credit Agricole PBL
-                  - id: "83"
-                    name: EnveloBank
-                  - id: "76"
-                    name: Getin Bank PBL
-                  - id: "81"
-                    name: Idea Cloud
-                  - id: "7"
-                    name: ING Corporate customers
-                  - id: "93"
-                    name: Kasa Stefczyka
-                  - id: "44"
-                    name: Millennium - Płatności Internetowe
-                  - id: "10"
-                    name: Millennium Corporate customers
-                  - id: "68"
-                    name: mRaty
-                  - id: "1"
-                    name: mTransfer
-                  - id: "91"
-                    name: Nest Bank
-                  - id: "80"
-                    name: Noble Pay
-                  - id: "50"
-                    name: Pay Way Toyota Bank
-                  - id: "45"
-                    name: Pay with Alior Bank
-                  - id: "36"
-                    name: Pekao24Przelew
-                  - id: "70"
-                    name: Pocztowy24
-                  - id: "6"
-                    name: Przelew24
-                  - id: "46"
-                    name: Płacę z Citi Handlowy
-                  - id: "38"
-                    name: Płacę z ING
-                  - id: "2"
-                    name: Płacę z Inteligo
-                  - id: "4"
-                    name: Płacę z iPKO
-                  - id: "75"
-                    name: Płacę z Plus Bank
-                  - id: "51"
-                    name: Płać z BOŚ
-                  - id: "55"
-                    name: Raty z Alior Bankiem PLN
-                  - id: "89"
-                    name: Santander
-                  - id: "52"
-                    name: SkyCash
-                key: issuer
-                type: select
-            name: Local Polish Payment Methods
-            type: dotpay
-          - name: Dragonpay Prepaid Credits
-            type: dragonpay_credits
-          - name: Online Banking
-            type: dragonpay_ebanking
-          - name: GCash
-            type: dragonpay_gcash
-          - name: Over The Counter Banks
-            type: dragonpay_otc_banking
-          - name: OTC non-Bank via Dragonpay
-            type: dragonpay_otc_non_banking
-          - name: Convenience Stores
-            type: dragonpay_otc_philippines
-          - name: 7/11
-            type: dragonpay_seveneleven
-          - name: eagleeye_voucher
-            type: eagleeye_voucher
-          - name: Finnish E-Banking
-            type: ebanking_FI
-          - name: Pay-easy ATM
-            type: econtext_atm
-          - name: Online Banking
-            type: econtext_online
-          - name: 7-Eleven
-            type: econtext_seven_eleven
-          - name: Convenience Stores
-            type: econtext_stores
-          - name: eft_directdebit_CA
-            type: eft_directdebit_CA
-          - name: Lastschrift (ELV)
-            type: elv
-          - details:
-              - items:
-                  - id: "231"
-                    name: POP Pankki
-                  - id: "551"
-                    name: Komerční banka
-                  - id: "232"
-                    name: Aktia
-                  - id: "552"
-                    name: Raiffeisen
-                  - id: "233"
-                    name: Säästöpankki
-                  - id: "750"
-                    name: Swedbank
-                  - id: "211"
-                    name: Nordea
-                  - id: "553"
-                    name: ČSOB
-                  - id: "234"
-                    name: S-Pankki
-                  - id: "751"
-                    name: SEB
-                  - id: "554"
-                    name: Moneta
-                  - id: "235"
-                    name: OmaSP
-                  - id: "752"
-                    name: Nordea
-                  - id: "213"
-                    name: Op-Pohjola
-                  - id: "555"
-                    name: UniCredit
-                  - id: "753"
-                    name: LHV
-                  - id: "556"
-                    name: Fio
-                  - id: "557"
-                    name: mBank
-                  - id: "216"
-                    name: Handelsbanken
-                  - id: "558"
-                    name: Air Bank
-                  - id: "260"
-                    name: Länsförsäkringar
-                  - id: "240"
-                    name: BankDeposit
-                  - id: "265"
-                    name: Sparbanken
-                  - id: "640"
-                    name: BankDeposit
-                  - id: "200"
-                    name: Ålandsbanken
-                  - id: "940"
-                    name: Swedbank
-                  - id: "500"
-                    name: Česká spořitelna
-                  - id: "720"
-                    name: Swedbank
-                  - id: "941"
-                    name: SEB
-                  - id: "204"
-                    name: Danske Bank
-                  - id: "721"
-                    name: SEB
-                  - id: "942"
-                    name: Citadele
-                  - id: "205"
-                    name: Handelsbanken
-                  - id: "722"
-                    name: DNB
-                  - id: "943"
-                    name: DNB
-                  - id: "206"
-                    name: Nordea
-                  - id: "723"
-                    name: Šiaulių bankas
-                  - id: "207"
-                    name: SEB
-                  - id: "724"
-                    name: Nordea
-                  - id: "505"
-                    name: Komerční banka
-                  - id: "208"
-                    name: Skandiabanken
-                  - id: "209"
-                    name: Swedbank
-                key: issuer
-                type: select
-            name: Bank Payment
-            type: entercash
-          - name: Nationale Entertainment Card
-            type: entertainmentcard
-          - details:
-              - items:
-                  - id: d5d5b133-1c0d-4c08-b2be-3c9b116dc326
-                    name: Dolomitenbank
-                  - id: ee9fc487-ebe0-486c-8101-17dce5141a67
-                    name: Raiffeissen Bankengruppe
-                  - id: 6765e225-a0dc-4481-9666-e26303d4f221
-                    name: Hypo Tirol Bank AG
-                  - id: 8b0bfeea-fbb0-4337-b3a1-0e25c0f060fc
-                    name: Sparda Bank Wien
-                  - id: 1190c4d1-b37a-487e-9355-e0a067f54a9f
-                    name: Schoellerbank AG
-                  - id: e2e97aaa-de4c-4e18-9431-d99790773433
-                    name: Volksbank Gruppe
-                  - id: bb7d223a-17d5-48af-a6ef-8a2bf5a4e5d9
-                    name: Immo-Bank
-                  - id: e6819e7a-f663-414b-92ec-cf7c82d2f4e5
-                    name: Bank Austria
-                  - id: eff103e6-843d-48b7-a6e6-fbd88f511b11
-                    name: Easybank AG
-                  - id: 25942cc9-617d-42a1-89ba-d1ab5a05770a
-                    name: VR-BankBraunau
-                  - id: 4a0a975b-0594-4b40-9068-39f77b3a91f9
-                    name: Volkskreditbank
-                  - id: 3fdc41fc-3d3d-4ee3-a1fe-cd79cfd58ea3
-                    name: Erste Bank und Sparkassen
-                  - id: ba7199cc-f057-42f2-9856-2378abf21638
-                    name: BAWAG P.S.K. Gruppe
-                key: issuer
-                type: select
-            name: EPS
-            type: eps
-          - name: Expert Cadeaukaart
-            type: expertgiftcard
-          - details:
-              - details:
-                  - key: firstName
-                    type: text
-                  - key: lastName
-                    type: text
-                  - items:
-                      - id: M
-                        name: male
-                      - id: F
-                        name: female
-                    key: gender
-                    type: radio
-                  - key: telephoneNumber
-                    type: tel
-                  - key: shopperEmail
-                    type: emailAddress
-                key: personalDetails
-                type: fieldSet
-              - details:
-                  - key: street
-                    type: text
-                  - key: houseNumberOrName
-                    type: text
-                  - key: city
-                    type: text
-                  - key: postalCode
-                    type: text
-                  - key: stateOrProvince
-                    optional: true
-                    type: text
-                  - items:
-                      - id: FR
-                        name: France
-                      - id: ES
-                        name: Spain
-                    key: country
-                    type: select
-                key: billingAddress
-                type: address
-              - key: separateDeliveryAddress
-                optional: true
-                type: boolean
-                value: "false"
-              - details:
-                  - key: street
-                    type: text
-                  - key: houseNumberOrName
-                    type: text
-                  - key: city
-                    type: text
-                  - key: postalCode
-                    type: text
-                  - key: stateOrProvince
-                    optional: true
-                    type: text
-                  - items:
-                      - id: FR
-                        name: France
-                      - id: ES
-                        name: Spain
-                    key: country
-                    type: select
-                key: deliveryAddress
-                optional: true
-                type: address
-            name: 3x Oney
-            type: facilypay_3x
-          - details:
-              - details:
-                  - key: firstName
-                    type: text
-                  - key: lastName
-                    type: text
-                  - items:
-                      - id: M
-                        name: male
-                      - id: F
-                        name: female
-                    key: gender
-                    type: radio
-                  - key: telephoneNumber
-                    type: tel
-                  - key: shopperEmail
-                    type: emailAddress
-                key: personalDetails
-                type: fieldSet
-              - details:
-                  - key: street
-                    type: text
-                  - key: houseNumberOrName
-                    type: text
-                  - key: city
-                    type: text
-                  - key: postalCode
-                    type: text
-                  - key: stateOrProvince
-                    optional: true
-                    type: text
-                  - items:
-                      - id: FR
-                        name: France
-                      - id: ES
-                        name: Spain
-                    key: country
-                    type: select
-                key: billingAddress
-                type: address
-              - key: separateDeliveryAddress
-                optional: true
-                type: boolean
-                value: "false"
-              - details:
-                  - key: street
-                    type: text
-                  - key: houseNumberOrName
-                    type: text
-                  - key: city
-                    type: text
-                  - key: postalCode
-                    type: text
-                  - key: stateOrProvince
-                    optional: true
-                    type: text
-                  - items:
-                      - id: FR
-                        name: France
-                      - id: ES
-                        name: Spain
-                    key: country
-                    type: select
-                key: deliveryAddress
-                optional: true
-                type: address
-            name: 4x Oney
-            type: facilypay_4x
-          - name: Fashioncheque
-            type: fashioncheque
-          - details:
-              - key: shopper.firstName
-                type: text
-              - key: shopper.lastName
-                type: text
-              - key: shopper.gender
-                type: text
-              - key: shopperEmail
-                type: emailAddress
-              - key: telephoneNumber
-                type: tel
-              - key: countryCode
-                type: text
-            name: Fawry
-            type: fawry
-          - name: FijnCadeau
-            type: fijncadeau
-          - name: Fleurop Bloemenbon
-            type: fleuropbloemenbon
-          - name: Fonq Giftcard
-            type: fonqgiftcard
-          - name: Gall & Gall
-            type: gallgall
-          - name: GCash
-            type: gcash
-          - name: Generic GiftCard
-            type: genericgiftcard
-          - name: GiftFor2
-            type: giftfor2card
-          - details:
-              - key: bic
-                type: text
-            name: GiroPay
-            type: giropay
-          - name: Givex
-            type: givex
-          - name: Globe GCash
-            type: globegcash
-          - name: Goldsmiths Card
-            type: goldsmithscard
-          - name: GoPay Wallet
-            type: gopay_wallet
-          - name: OVO
-            type: grabpay_ID
-          - name: GrabPay
-            type: grabpay_PH
-          - name: GrabPay
-            type: grabpay_SG
-          - name: Hallmark Card
-            type: hallmarkcard
-          - name: HDFC
-            type: hdfc
-          - name: Hunkemoller Member Card
-            type: hmclub
-          - name: Hunkemoller Lingerie Card
-            type: hmlingerie
-          - details:
-              - items:
-                  - id: "1121"
-                    name: Test Issuer
-                  - id: "1154"
-                    name: Test Issuer 5
-                  - id: "1153"
-                    name: Test Issuer 4
-                  - id: "1152"
-                    name: Test Issuer 3
-                  - id: "1151"
-                    name: Test Issuer 2
-                  - id: "1162"
-                    name: Test Issuer Cancelled
-                  - id: "1161"
-                    name: Test Issuer Pending
-                  - id: "1160"
-                    name: Test Issuer Refused
-                  - id: "1159"
-                    name: Test Issuer 10
-                  - id: "1158"
-                    name: Test Issuer 9
-                  - id: "1157"
-                    name: Test Issuer 8
-                  - id: "1156"
-                    name: Test Issuer 7
-                  - id: "1155"
-                    name: Test Issuer 6
-                key: issuer
-                type: select
-            name: iDEAL
-            type: ideal
-          - name: igive
-            type: igive
-          - name: Korean Account Transfer (IniPay)
-            type: inicisIniPay_accounttransfer
-          - name: Korean Credit Cards (IniPay)
-            type: inicisIniPay_creditcard
-          - name: Korean Mobile Phone (IniPay)
-            type: inicisIniPay_mobilephone
-          - name: Korean Virtual Account (IniPay)
-            type: inicisIniPay_virtualaccount
-          - name: Korean Account Transfer (Mobile)
-            type: inicisMobile_accounttransfer
-          - name: Korean Credit Cards (Mobile)
-            type: inicisMobile_creditcard
-          - name: Korean Mobile Phone (Mobile)
-            type: inicisMobile_mobilephone
-          - name: Korean Virtual Account (Mobile)
-            type: inicisMobile_virtualaccount
-          - name: Korean Credit Cards
-            type: inicis_creditcard
-          - name: Interac® Online
-            type: interac
-          - name: Instant EFT
-            type: ipay
-          - name: iPay88
-            type: ipay88
-          - name: isracard
-            type: isracard
-          - name: Phone Payment
-            type: ivr
-          - name: Landline phone
-            type: ivrLandline
-          - name: Mobile phone
-            type: ivrMobile
-          - name: Kado Wereld
-            type: kadowereld
-          - name: KakaoPay
-            type: kakaopay
-          - name: Karen Millen Card
-            type: karenmillen
-          - name: Karen Millen GiftCard
-            type: karenmillengiftcard
-          - name: Bank Transfer
-            type: kcp_banktransfer
-          - name: Korea–issued cards
-            type: kcp_creditcard
-          - name: PayCo
-            type: kcp_payco
-          - name: Naver Pay
-            type: kcp_naverpay
-          - name: Virtual Account via KCP
-            type: kcp_va
-          - name: Pay later with Klarna.
-            type: klarna
-          - name: Pay over time with Klarna.
-            type: klarna_account
-          - name: Klarna B2B
-            type: klarna_b2b
-          - name: Pay now with Klarna.
-            type: klarna_paynow
-          - name: Leisure Card
-            type: leisurecard
-          - name: China Credit Card
-            type: lianlianpay_creditcard
-          - name: China Debit Card
-            type: lianlianpay_debitcard
-          - details:
-              - key: telephoneNumber
-                type: tel
-            name: China Online Banking - Credit Card
-            type: lianlianpay_ebanking_credit
-          - details:
-              - items:
-                  - id: "01030000"
-                    name: Agricultural Bank of China
-                  - id: "4031000"
-                    name: Bank of Beijing
-                  - id: "01040000"
-                    name: Bank of China
-                  - id: "03020000"
-                    name: China Citic Bank
-                  - id: "01050000"
-                    name: China Construction Bank
-                  - id: "03030000"
-                    name: China Everbright Bank
-                  - id: "03080000"
-                    name: China Merchants Bank
-                  - id: "03050000"
-                    name: China Minsheng Banking Group
-                  - id: "03040000"
-                    name: Hua Xia Bank Co
-                  - id: "01020000"
-                    name: Industrial and Commercial Bank of China
-                  - id: "03070000"
-                    name: PingAn Bank
-                  - id: "1000000"
-                    name: Postal Savings Bank of China
-                key: issuer
-                type: select
-              - key: telephoneNumber
-                type: tel
-            name: China Online Banking - Debit Card
-            type: lianlianpay_ebanking_debit
-          - details:
-              - items:
-                  - id: "01030000"
-                    name: Agricultural Bank of China
-                  - id: "01050000"
-                    name: China Construction Bank
-                  - id: "03080000"
-                    name: China Merchants Bank
-                  - id: "01020000"
-                    name: Industrial and Commercial Bank of China
-                  - id: "03100000"
-                    name: Shanghai Pudong Development Bank
-                key: issuer
-                type: select
-              - key: telephoneNumber
-                type: tel
-            name: China Online Banking - Enterprise
-            type: lianlianpay_ebanking_enterprise
-          - name: Loods5 Cadeaukaart
-            type: loods5giftcard
-          - name: Loods5 Tegoedbon
-            type: loods5prepaidcard
-          - name: Love2Shop GiftCard
-            type: love2shop
-          - details:
-              - key: shopper.firstName
-                type: text
-              - key: shopper.lastName
-                type: text
-              - key: shopper.gender
-                type: text
-              - key: shopperEmail
-                type: emailAddress
-              - key: telephoneNumber
-                type: tel
-              - key: countryCode
-                type: text
-            name: mada
-            type: mada
-          - name: Mappin & Webb Card
-            type: mappinwebbcard
-          - name: MB WAY
-            type: mbway
-          - details:
-              - key: additionalData.amazonPayToken
-                type: text
-            name: Amazon Pay
-            supportsRecurring: true
-            type: amazonpay
-          - name: Mercado Pago
-            type: mercadopago
-          - name: MobilePay
-            type: mobilepay
-          - name: AliPay via Razer Merchant Services
-            type: molpay_alipay
-          - name: 7-Eleven
-            type: molpay_cash
-          - name: CIMB Virtual Account
-            type: molpay_cimb_va
-          - name: Malaysia E-Banking via Razer Merchant Services
-            type: molpay_ebanking_MY
-          - details:
-              - items:
-                  - id: vtcpay-vietinbank
-                    name: Vietinbank
-                  - id: vtcpay-bidv
-                    name: BIDV
-                  - id: vtcpay-agribank
-                    name: Agribank
-                  - id: vtcpay-mb
-                    name: MB Bank
-                  - id: vtcpay-sacombank
-                    name: Sacombank
-                  - id: vtcpay-dongabank
-                    name: DongABank
-                  - id: vtcpay-maritimebank
-                    name: MaritimeBank
-                  - id: vtcpay-vietcombank
-                    name: Vietcombank
-                  - id: vtcpay-acb
-                    name: ACB
-                  - id: vtcpay-techcombank
-                    name: Techcombank
-                key: issuer
-                type: select
-            name: Vietnam E-Banking
-            type: molpay_ebanking_VN
-          - details:
-              - items:
-                  - id: fpx_bimb
-                    name: Bank Islam
-                  - id: fpx_uob
-                    name: UOB Bank
-                  - id: fpx_cimbclicks
-                    name: CIMB Clicks
-                  - id: fpx_kfh
-                    name: Kuwait Finance House
-                  - id: fpx_rhb
-                    name: RHB Now
-                  - id: fpx_abmb
-                    name: Alliance Bank
-                  - id: fpx_amb
-                    name: Am Online
-                  - id: fpx_hsbc
-                    name: HSBC
-                  - id: fpx_abb
-                    name: Affin Bank
-                  - id: fpx_ocbc
-                    name: OCBC Bank
-                  - id: fpx_pbb
-                    name: Public Bank
-                  - id: fpx_scb
-                    name: Standard Chartered Bank
-                  - id: fpx_bsn
-                    name: Bank Simpanan Nasional
-                  - id: fpx_mb2u
-                    name: Maybank2u
-                  - id: fpx_hlb
-                    name: Hong Leong Connect
-                  - id: fpx_bmmb
-                    name: Bank Muamalat
-                  - id: fpx_bkrm
-                    name: Bank Rakyat
-                key: issuer
-                type: select
-            name: Malaysia E-Banking
-            type: molpay_ebanking_fpx_MY
-          - name: eNETS Debit
-            type: molpay_enetsd
-          - name: epay
-            type: molpay_epay
-          - name: Esapay
-            type: molpay_esapay
-          - name: MyClear FPX
-            type: molpay_fpx
-          - name: Maybank2u
-            type: molpay_maybank2u
-          - name: Nganluong
-            type: molpay_nganluong
-          - name: Tesco Lotus
-            type: molpay_paysbuy
-          - name: MOLPoints
-            type: molpay_points
-          - name: RHB Now
-            type: molpay_rhb
-          - name: SAM by SingPost
-            type: molpay_singpost
-          - name: MOLWallet
-            type: molpay_wallet
-          - name: MoMo ATM
-            type: momo_atm
-          - name: Momo Wallet
-            type: momo_wallet
-          - name: Moneybookers
-            type: moneybookers
-          - name: Multibanco
-            type: multibanco
-          - name: De Nationale Musicalcard
-            type: musicalcard
-          - name: Nationale Bioscoopbon
-            type: nationalebioscoopbon
-          - name: Nationale Tuinbon
-            type: nationaletuinbon
-          - name: Nationale Verwen Cadeaubon
-            type: nationaleverwencadeaubon
-          - name: BankAxess
-            type: netaxept_bankaxess
-          - name: NETELLER
-            type: neteller
-          - name: Onebip
-            type: onebip
-          - name: One Two Three
-            type: onetwothree
-          - name: Local Polish Payment Methods (P24)
-            type: onlineBanking_PL
-          - details:
-              - items:
-                  - id: "1"
-                    name: Model Bank v2
-                key: issuer
-                type: select
-            name: Online banking
-            type: openbanking_UK
-          - name: Oxxo
-            type: oxxo
-          - name: Pathe Giftcard
-            type: pathegiftcard
-          - name: PayBright
-            type: paybright
-          - name: PayMaya Wallet
-            type: paymaya_wallet
-          - name: PayPal
-            type: paypal
-          - name: Paysafecard
-            type: paysafecard
-          - name: Payshop
-            type: payshop
-          - name: PayD AMT via Paythru
-            type: paythru_amt
-          - name: EFT via Paythru
-            type: paythru_eft
-          - name: PayTM
-            type: paytm
-          - details:
-              - key: virtualPaymentAddress
-                type: text
-            name: PayU UPI
-            type: payu_IN_upi
-          - name: EFT Pro via PayU
-            type: payu_ZA_eftpro
-          - details:
-              - key: additionalData.paywithgoogle.token
-                type: payWithGoogleToken
-            name: Google Pay
-            type: paywithgoogle
-          - name: pix
-            type: pix
-          - name: Plastix
-            type: plastix
-          - name: Pluim
-            type: pluimgiftcard
-          - name: Podium Card
-            type: podiumcard
-          - name: POLi
-            type: poli
-          - name: PPS
-            type: pps
-          - name: Primera Cadeaukaart
-            type: primeracadeaucard
-          - name: Illicado Gift Card
-            type: prosodie_illicado
-          - name: PSE
-            type: pse
-          - details:
-              - items:
-                  - id: "+7"
-                    name: RU
-                  - id: "+9955"
-                    name: GE
-                  - id: "+507"
-                    name: PA
-                  - id: "+44"
-                    name: GB
-                  - id: "+992"
-                    name: TJ
-                  - id: "+370"
-                    name: LT
-                  - id: "+972"
-                    name: IL
-                  - id: "+996"
-                    name: KG
-                  - id: "+380"
-                    name: UA
-                  - id: "+84"
-                    name: VN
-                  - id: "+90"
-                    name: TR
-                  - id: "+994"
-                    name: AZ
-                  - id: "+374"
-                    name: AM
-                  - id: "+371"
-                    name: LV
-                  - id: "+91"
-                    name: IN
-                  - id: "+66"
-                    name: TH
-                  - id: "+373"
-                    name: MD
-                  - id: "+1"
-                    name: US
-                  - id: "+81"
-                    name: JP
-                  - id: "+998"
-                    name: UZ
-                  - id: "+77"
-                    name: KZ
-                  - id: "+375"
-                    name: BY
-                  - id: "+372"
-                    name: EE
-                  - id: "+40"
-                    name: RO
-                  - id: "+82"
-                    name: KR
-                key: qiwiwallet.telephoneNumberPrefix
-                type: select
-              - key: qiwiwallet.telephoneNumber
-                type: text
-            name: Qiwi Wallet
-            type: qiwiwallet
-          - name: RatePay Invoice
-            type: ratepay
-          - name: RatePay Direct Debit
-            type: ratepay_directdebit
-          - name: Rituals Giftcard
-            type: rituals
-          - name: Rob Peetoom Giftcard
-            type: robpeetoomgiftcard
-          - name: SafetyPay
-            type: safetypay
-          - name: SafetyPay Cash
-            type: safetypay_cash
-          - name: Shoes&Accessories Cadeau
-            type: sagiftcard
-          - name: Score Giftcard
-            type: scoregiftcard
-          - name: SEB Direktbetalning
-            type: sebdirectpayment
-          - details:
-              - key: sepa.ownerName
-                type: text
-              - key: sepa.ibanNumber
-                type: text
-            name: SEPA Direct Debit
-            type: sepadirectdebit
-          - name: 7-Eleven
-            type: seveneleven
-          - name: Premium SMS
-            type: sms
-          - name: SVS
-            type: svs
-          - name: Swish
-            type: swish
-          - name: TCS Test GiftCard
-            type: tcstestgiftcard
-          - name: TenPay
-            type: tenpay
-          - name: The Sting Giftcard
-            type: thestinggiftcard
-          - name: TrueMoney
-            type: truemoney
-          - name: Trustly
-            type: trustly
-          - name: Online Banking by Trustpay
-            type: trustpay
-          - name: TWINT
-            type: twint
-          - name: Ukash
-            type: ukash
-          - name: UnionPay
-            type: unionpay
-          - details:
-              - key: virtualPaymentAddress
-                type: text
-            name: UPI Collect
-            type: upi_collect
-          - name: Valuelink
-            type: valuelink
-          - name: V&D Cadeaukaart
-            type: vdcadeaucard
-          - details:
-              - key: telephoneNumber
-                optional: true
-                type: tel
-            name: Vipps
-            type: vipps
-          - details:
-              - key: additionalData.visacheckout.callId
-                type: text
-            name: Visa Checkout
-            type: visacheckout
-          - name: VVV Cadeaubon
-            type: vvvcadeaubon
-          - name: VVV Giftcard
-            type: vvvgiftcard
-          - name: Webshop Giftcard
-            type: webshopgiftcard
-          - name: WeChat Pay
-            type: wechatpayMiniProgram
-          - name: WeChat Pay
-            type: wechatpayQR
-          - name: WeChat Pay
-            type: wechatpayWeb
-          - name: WE Fashion Giftcard
-            type: wefashiongiftcard
-          - name: Western Union
-            type: westernunion
-          - name: Winkel Cheque
-            type: winkelcheque
-          - name: WOS Card
-            type: woscard
-          - name: Alfa-Click
-            type: yandex_alfaclick
-          - name: Pay using bank card
-            type: yandex_bank_card
-          - name: Cash terminals
-            type: yandex_cash
-          - name: Pay using installments
-            type: yandex_installments
-          - name: YooMoney
-            type: yandex_money
-          - name: Promsvyazbank
-            type: yandex_promsvyazbank
-          - name: Sberbank Online
-            type: yandex_sberbank
-          - name: WebMoney
-            type: yandex_webmoney
-          - name: Your Gift
-            type: yourgift
-          - name: Zip
-            type: zip
     post-paymentMethods-filtered:
-      summary: Get payment methods based on the country and amount
-      value:
-        amount:
-          currency: EUR
-          value: 1000
-        countryCode: NL
-        merchantAccount: YOUR_MERCHANT_ACCOUNT
-        shopperLocale: nl-NL
-    post-paymentMethods-filtered-200:
       summary: Example response for request 'filtered'
       value:
         paymentMethods:
@@ -3646,313 +2133,6 @@ components:
         countryCode: NL
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
-    post-paymentMethods-include-oneclick-200:
-      summary: Example response for request 'include-oneclick'
-      value:
-        paymentMethods:
-          - details:
-              - items:
-                  - id: "1121"
-                    name: Test Issuer
-                  - id: "1154"
-                    name: Test Issuer 5
-                  - id: "1153"
-                    name: Test Issuer 4
-                  - id: "1152"
-                    name: Test Issuer 3
-                  - id: "1151"
-                    name: Test Issuer 2
-                  - id: "1162"
-                    name: Test Issuer Cancelled
-                  - id: "1161"
-                    name: Test Issuer Pending
-                  - id: "1160"
-                    name: Test Issuer Refused
-                  - id: "1159"
-                    name: Test Issuer 10
-                  - id: "1158"
-                    name: Test Issuer 9
-                  - id: "1157"
-                    name: Test Issuer 8
-                  - id: "1156"
-                    name: Test Issuer 7
-                  - id: "1155"
-                    name: Test Issuer 6
-                key: issuer
-                type: select
-            name: iDEAL
-            type: ideal
-          - details:
-              - key: encryptedCardNumber
-                type: cardToken
-              - key: encryptedSecurityCode
-                type: cardToken
-              - key: encryptedExpiryMonth
-                type: cardToken
-              - key: encryptedExpiryYear
-                type: cardToken
-              - key: holderName
-                optional: true
-                type: text
-            name: Credit Card
-            type: scheme
-          - name: PayPal
-            type: paypal
-          - details:
-              - details:
-                  - key: firstName
-                    type: text
-                  - key: lastName
-                    type: text
-                  - items:
-                      - id: M
-                        name: male
-                      - id: F
-                        name: female
-                    key: gender
-                    type: radio
-                  - key: dateOfBirth
-                    type: date
-                  - key: telephoneNumber
-                    type: tel
-                  - key: shopperEmail
-                    type: emailAddress
-                key: personalDetails
-                type: fieldSet
-              - details:
-                  - key: street
-                    type: text
-                  - key: houseNumberOrName
-                    type: text
-                  - key: city
-                    type: text
-                  - key: postalCode
-                    type: text
-                  - key: stateOrProvince
-                    optional: true
-                    type: text
-                  - items:
-                      - id: NL
-                        name: Netherlands
-                      - id: BE
-                        name: Belgium
-                    key: country
-                    type: select
-                    value: NL
-                key: billingAddress
-                type: address
-              - key: separateDeliveryAddress
-                optional: true
-                type: boolean
-                value: "false"
-              - details:
-                  - key: street
-                    type: text
-                  - key: houseNumberOrName
-                    type: text
-                  - key: city
-                    type: text
-                  - key: postalCode
-                    type: text
-                  - key: stateOrProvince
-                    optional: true
-                    type: text
-                  - items:
-                      - id: NL
-                        name: Netherlands
-                      - id: BE
-                        name: Belgium
-                    key: country
-                    type: select
-                    value: NL
-                key: deliveryAddress
-                optional: true
-                type: address
-            name: AfterPay Invoice
-            type: afterpay_default
-          - name: Pay later with Klarna.
-            type: klarna
-          - details:
-              - key: sepa.ownerName
-                type: text
-              - key: sepa.ibanNumber
-                type: text
-            name: SEPA Direct Debit
-            type: sepadirectdebit
-          - name: Paysafecard
-            type: paysafecard
-          - name: Bijenkorf Cadeaucard
-            type: bijcadeaucard
-          - name: Fonq Giftcard
-            type: fonqgiftcard
-          - name: Bank Transfer (NL)
-            type: bankTransfer_NL
-          - name: Pathe Giftcard
-            type: pathegiftcard
-          - name: VVV Giftcard
-            type: vvvgiftcard
-          - name: Podium Card
-            type: podiumcard
-          - name: RatePay Direct Debit
-            type: ratepay_directdebit
-          - name: Rituals Giftcard
-            type: rituals
-          - name: Hunkemoller Lingerie Card
-            type: hmlingerie
-          - name: Primera Cadeaukaart
-            type: primeracadeaucard
-          - name: Fashioncheque
-            type: fashioncheque
-          - name: NETELLER
-            type: neteller
-          - name: Adyen Voucher
-            type: adyen_test_voucher
-          - name: AfterPay B2B
-            type: afterpay_b2b
-          - name: AfterPay DirectDebit
-            type: afterpay_directdebit
-          - name: AliPay
-            type: alipay
-          - name: AliPay
-            type: alipay_wap
-          - details:
-              - key: additionalData.androidpay.token
-                type: androidPayToken
-            name: Android Pay
-            type: androidpay
-          - details:
-              - key: additionalData.applepay.token
-                type: applePayToken
-            name: Apple Pay
-            type: applepay
-          - name: Baby Gift Card
-            type: babygiftcard
-          - name: SEPA Bank Transfer
-            type: bankTransfer_IBAN
-          - name: Bloemen Giftcard
-            type: bloemengiftcard
-          - name: Boekenbon Giftcard
-            type: boekenbon
-          - name: Cash-Ticket
-            type: cashticket
-          - name: Chasin Giftcard
-            type: chasingiftcard
-          - name: ClickandBuy
-            type: clickandbuy
-          - name: Costes Giftcard
-            type: costesgiftcard
-          - name: custom_settlement
-            type: custom_settlement
-          - name: eft_directdebit_CA
-            type: eft_directdebit_CA
-          - name: Nationale Entertainment Card
-            type: entertainmentcard
-          - name: Expert Cadeaukaart
-            type: expertgiftcard
-          - name: FijnCadeau
-            type: fijncadeau
-          - name: Fleurop Bloemenbon
-            type: fleuropbloemenbon
-          - name: Gall & Gall
-            type: gallgall
-          - name: Generic GiftCard
-            type: genericgiftcard
-          - name: GiftFor2
-            type: giftfor2card
-          - name: Givex
-            type: givex
-          - name: Goldsmiths Card
-            type: goldsmithscard
-          - name: Hunkemoller Member Card
-            type: hmclub
-          - name: Phone Payment
-            type: ivr
-          - name: Landline phone
-            type: ivrLandline
-          - name: Mobile phone
-            type: ivrMobile
-          - name: Kado Wereld
-            type: kadowereld
-          - name: Karen Millen GiftCard
-            type: karenmillengiftcard
-          - name: Leisure Card
-            type: leisurecard
-          - name: Loods5 Cadeaukaart
-            type: loods5giftcard
-          - name: Loods5 Tegoedbon
-            type: loods5prepaidcard
-          - details:
-              - key: additionalData.amazonPayToken
-                type: text
-            name: Amazon Pay
-            supportsRecurring: true
-            type: amazonpay
-          - name: MOLPoints
-            type: molpay_points
-          - name: Moneybookers
-            type: moneybookers
-          - name: De Nationale Musicalcard
-            type: musicalcard
-          - name: Nationale Bioscoopbon
-            type: nationalebioscoopbon
-          - name: Nationale Tuinbon
-            type: nationaletuinbon
-          - name: Nationale Verwen Cadeaubon
-            type: nationaleverwencadeaubon
-          - name: Onebip
-            type: onebip
-          - details:
-              - key: additionalData.paywithgoogle.token
-                type: payWithGoogleToken
-            name: Google Pay
-            type: paywithgoogle
-          - name: Plastix
-            type: plastix
-          - name: Pluim
-            type: pluimgiftcard
-          - name: Illicado Gift Card
-            type: prosodie_illicado
-          - name: RatePay Invoice
-            type: ratepay
-          - name: Rob Peetoom Giftcard
-            type: robpeetoomgiftcard
-          - name: Shoes&Accessories Cadeau
-            type: sagiftcard
-          - name: Score Giftcard
-            type: scoregiftcard
-          - name: Premium SMS
-            type: sms
-          - name: SVS
-            type: svs
-          - name: TCS Test GiftCard
-            type: tcstestgiftcard
-          - name: The Sting Giftcard
-            type: thestinggiftcard
-          - name: Ukash
-            type: ukash
-          - name: UnionPay
-            type: unionpay
-          - name: Valuelink
-            type: valuelink
-          - name: V&D Cadeaukaart
-            type: vdcadeaucard
-          - details:
-              - key: additionalData.visacheckout.callId
-                type: text
-            name: Visa Checkout
-            type: visacheckout
-          - name: VVV Cadeaubon
-            type: vvvcadeaubon
-          - name: Webshop Giftcard
-            type: webshopgiftcard
-          - name: WE Fashion Giftcard
-            type: wefashiongiftcard
-          - name: Western Union
-            type: westernunion
-          - name: Winkel Cheque
-            type: winkelcheque
-          - name: Your Gift
-            type: yourgift
     post-paymentSession-android:
       summary: Set up a payment session (Android)
       value:
@@ -3969,24 +2149,6 @@ components:
         shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
         token: TOKEN_YOU_GET_FROM_CHECKOUT_SDK
     post-paymentSession-enableOneClick:
-      summary: Set up a payment session with the option to store card details
-      value:
-        amount:
-          currency: EUR
-          value: 17408
-        channel: Web
-        countryCode: NL
-        enableOneClick: true
-        enableRecurring: true
-        html: true
-        merchantAccount: YOUR_MERCHANT_ACCOUNT
-        origin: https://www.yourwebsite.com
-        reference: Your order number
-        returnUrl: https://www.yourshop.com/checkout/result
-        sdkVersion: 1.7.0
-        shopperLocale: nl_NL
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
-    post-paymentSession-enableOneClick-200:
       summary: Example response for request 'enableOneClick'
       value:
         paymentSession: eyJjaGVja291dHNob3BwZXJCYXN...
@@ -4034,22 +2196,6 @@ components:
         shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
         token: TOKEN_YOU_GET_FROM_CHECKOUT_SDK
     post-paymentSession-web:
-      summary: Set up a payment session (Web)
-      value:
-        amount:
-          currency: EUR
-          value: 17408
-        channel: Web
-        countryCode: NL
-        html: true
-        merchantAccount: YOUR_MERCHANT_ACCOUNT
-        origin: https://www.yourwebsite.com
-        reference: Your order number
-        returnUrl: https://www.yourshop.com/checkout/result
-        sdkVersion: 1.3.0
-        shopperLocale: nl_NL
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
-    post-paymentSession-web-200:
       summary: Example response for request 'web'
       value:
         paymentSession: eyJjaGVja291dHNob3BwZXJCYXN...
@@ -4084,20 +2230,6 @@ components:
           type: scheme
         reference: Your order number
         returnUrl: https://your-company.com/...
-    post-payments-card-3d-secure-direct-200:
-      summary: Example response for request 'card-3d-secure-direct'
-      value:
-        additionalData:
-          acquirerCode: TestPmmAcquirer
-          acquirerReference: 8PQMP9T5R43
-          authCode: "097963"
-          avsResult: 4 AVS not supported for this card type
-          avsResultRaw: "4"
-          cvcResult: 1 Matches
-          cvcResultRaw: M
-          refusalReasonRaw: AUTHORISED
-        pspReference: 993617894965500A
-        resultCode: Authorised
     post-payments-card-3d-secure-securedfields:
       summary: Make a payment with 3D Secure 2 native authentication
       value:
@@ -4117,20 +2249,6 @@ components:
           type: scheme
         reference: Your order number
         returnUrl: https://your-company.com/...
-    post-payments-card-3d-secure-securedfields-200:
-      summary: Example response for request 'card-3d-secure-securedfields'
-      value:
-        additionalData:
-          acquirerCode: TestPmmAcquirer
-          acquirerReference: 8PQMP9T01IN
-          authCode: "024236"
-          avsResult: 4 AVS not supported for this card type
-          avsResultRaw: "4"
-          cvcResult: 1 Matches
-          cvcResultRaw: M
-          refusalReasonRaw: AUTHORISED
-        pspReference: 993617894945494B
-        resultCode: Authorised
     post-payments-card-direct:
       summary: Make a card payment
       value:
@@ -4147,36 +2265,7 @@ components:
           type: scheme
         reference: Your order number
         returnUrl: https://your-company.com/...
-    post-payments-card-direct-200:
-      summary: Example response for request 'card-direct'
-      value:
-        additionalData:
-          acquirerCode: TestPmmAcquirer
-          acquirerReference: 8PQMP9T2PF5
-          authCode: "048531"
-          avsResult: 4 AVS not supported for this card type
-          avsResultRaw: "4"
-          cvcResult: 1 Matches
-          cvcResultRaw: M
-          refusalReasonRaw: AUTHORISED
-        pspReference: 993617894954499J
-        resultCode: Authorised
     post-payments-card-securedfields:
-      summary: Make a card payment (using encrypted card details)
-      value:
-        amount:
-          currency: USD
-          value: 1000
-        merchantAccount: YOUR_MERCHANT_ACCOUNT
-        paymentMethod:
-          encryptedCardNumber: test_4111111111111111
-          encryptedExpiryMonth: test_03
-          encryptedExpiryYear: test_2030
-          encryptedSecurityCode: test_737
-          type: scheme
-        reference: Your order number
-        returnUrl: https://your-company.com/...
-    post-payments-card-securedfields-200:
       summary: Example response for request 'card-securedfields'
       value:
         additionalData:
@@ -4238,23 +2327,6 @@ components:
         reference: Your order number
         returnUrl: https://your-company.com/...
         shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
-    post-payments-enableOneClick-raw-200:
-      summary: Example response for request 'enableOneClick-raw'
-      value:
-        additionalData:
-          acquirerCode: TestPmmAcquirer
-          acquirerReference: 8PQMP9T0BB6
-          authCode: "022966"
-          avsResult: 4 AVS not supported for this card type
-          avsResultRaw: "4"
-          cvcResult: 1 Matches
-          cvcResultRaw: M
-          recurring.recurringDetailReference: "9916178934434753"
-          recurring.shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
-          recurringProcessingModel: CardOnFile
-          refusalReasonRaw: AUTHORISED
-        pspReference: 993617894947495G
-        resultCode: Authorised
     post-payments-giropay:
       summary: Make a giropay payment
       value:
@@ -4266,17 +2338,6 @@ components:
           type: giropay
         reference: Your order number
         returnUrl: https://your-company.com/...
-    post-payments-giropay-200:
-      summary: Example response for request 'giropay'
-      value:
-        details:
-          - key: payload
-            type: text
-        paymentData: Ab02b4c0!BQABAgBdNcOUwhrokraZtM/nJSduq+zXt1Hub2wGGxDvL/j8D63+t+oTWtpsKPus73V1DRhbeEsPDRc6MTCmNRFNlYzRB9+Qmedoot2ccLZvIeIp9JFNURi4eLi70MEjNsT0Me1nkbkkP8btIWrk5UzulQbYCPHUurWCXgIG84Nc5/SQH7t3cpVLWiZeuXDKTUiwFjOP05jgS96jWzZ9w8WYla+tJyOST94mC246dlveWuQCDb70MxoPVi9BcVdppUBtaIXPIXYAa4YbxLAHyi3lw5STnhI0y8/k3tc+dBAFL+vezYDWLZ8czUdl/uqDzsPEe/ewz6TyS9vXZvZOAjcJhJ4wDRwZ5AFQBRBNwSANMswOBXCyh/jJsp9ycJSAT+ahWmSWKaU4oe1jlWBmQ8rxnQNOSWkV9/ZpLsrN36eLCPo6VgQnNKhWx5zkkR5xMS0pVx+Ff7ZdFeKtl0Trc4OyON8lBHTFNd7Pyhl74C21dlZUNGxA5gIc1xNXNFOvCNJQvyO9sR2giM1dEAKXpOm7Ez2u7eDvlpQa2zwPxulu3vQ2xSDVmqboSPx6Wp7ywyiYIIJzUwphVu3IulMjWnmHQOTYatiO9l1O50tqepaFB3/mwdesPw1cJD6UYq+v8kshrYya4w4ojMmQy++0L8UxUBHis71ftJM+nIhXZBpJ3cXtehBMZx+06hofQjgUgsuP+rKKAEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMiffpA9iAv0lzUkDkBzjQG0XzMpxNd9Z7Jl1zf68QhTbJ53cSWhqs9FLu4XbuwyQ3ie/rNaLX7uypr+FmxHIZgehW2wSS0XKs7qp6b6z9OiTbZgcUEVtsyZ/Il3HrI+PZnavI3MB//BC5kjX/KE56BEIytAmQIovNHW7i+4YRVCjpNKAuBLr/DcSkLSqTb7HwV51btGbyhB9NwwSqO2rHUwjl+2WScEkbd5b+EUxc0jN7gdc4mu96Ak9ATN/2J/AHoiEdXDaZRkOBU6fSYOEQKpXw1UW9SOJdUji1+T7b8uVuC6gXAzS+wUXkA4ZsvW9UM5yyhaF6UgF3jY700Ufme7r98pjdBydAGGWSNVu9BdZmzDEiUke0eL2k7rYv2IfxtVvyacVNKnYmwmPpWRqvxQF+PJN2KqcVEWbNal5fleujujNZ6LACeSO5a5eREJ6bmdyKR82So08hMEwV9Ky+Sb1REXAMXY3o/FvwzN4HwHNaqi2pYNw37JkLEQTEIeWntLyC+pvc1cVhILipMx2bbBCx/CijEFGJSxVzma1mhv5Q+RJ8XtaqyzJoFOkoIoy63cq6IVYHEy47vgCfKjdnK8jDFfOU4ONDjaTb01vJYwF3XnWxNFspb7oq2ZMbmBtLDGkERkMmcrZV4XIhzF3uhbo8PEjrFhjMepOT/gB1/Tq5XkUAIViviWYaFgGByHjwzFPufEdu4ycZiG5KC0MFJ6Y+T6YrF++U9FRmeJpbdfF2oOM5Rc4jqg90YI3fi7FeKY125Dnl/uGKJhI07uaf5SRt9R3xwJJgUsGadj/AL
-        redirect:
-          method: GET
-          url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUl1vozAQ-DXwFmQ*AuTBD0lKr9ylvSsHVa8vlWs2gBpsYhsU8utv4XJRVVWy1tbMandm12*KiXIrS6BVo2THRpv3SoHg4wwmRWa3oHjNhFlzLnthaA7a3F*wK5kKA5VippHCMWMHdHuXbH-8LPLXb8lDkqXbLzMHUBpvGpArncEepv5AtVGNqD4QplfihhlGVys3dKN4FayCIPSXyTXnd1PR3aPl3W6qh-bIwH0*RUXH63W2yZsz33VPskh1anmbF7L-k*mkfLT8Gxttt4AG29mfSwixFegi29HamM7y11gRz0FydqilNojEJCYI8Rr4u*yNrmXXgUJEgxoaDhqfv-6VTQWXLTrJoGwUcIPM4P4vd8m5B1PL0vJvPw0b1X0ct*WFah4DakNqUoeNlpPA5SQRwyh7tcCGHROjg-cMOo5ja9DTrJ-YoSkbM1KPeO6CBAsS526IjtwlhiB4sS9epj0pxqc90QQLTcrA1u*NmH9G1785g*dcVhGFURS5sR8453R49vPvYRkPY*LV69MrL*v6VJC0OO*D4*6Y3O2SCsaylH8BlM7anA
-        resultCode: RedirectShopper
     post-payments-ideal:
       summary: Make an iDEAL payment
       value:
@@ -4289,17 +2350,6 @@ components:
           type: ideal
         reference: Your order number
         returnUrl: https://your-company.com/...
-    post-payments-ideal-200:
-      summary: Example response for request 'ideal'
-      value:
-        details:
-          - key: payload
-            type: text
-        paymentData: Ab02b4c0!BQABAgBOBkMn4vBx6T3DgxR+OR/a1zEA0xbGaYKP9mh/vWDSADlyktW39HZckwcm4Wr9kw2TvE9SYngEf9f6kZb1OimKls3+HEn3dRGOrTbWZZ8/tpmlS62YoDh1eQIE3EHZsUm7CQxhXjm8F0HQCelzIkVgj8DpLgtxwM3nFZxfpzl91HSt9CP/GIsx8S/RPVG2Fwg2S/jtdQ4MlFeG89S+icDvTecTyGoYFZlS/KL77Q4zJCR8Vgn4M9DJZEGRxv6kApLwDMkMyUMQngN95xDSCdLSW7fKkVusSub2+2hB7rzWxtj1E8R9dbtkCxgTe0F/G7tqrzUfEmseiHoKmaF6F8bN0j6BZiFhQJ/KHXJ6Pb+a7f0qYbQCAZmwYmeSSfNzqIDehyufpL0bP3w38spuso3QlhtPIqSHrIHDIQzbYmxPtt/I6A/RCMXJ7VN4nB6JigEygV383lnr8wd7mEynOQXnq9zEF+GGJy0Ool05WEy8L/mATgg++6bpsuSB2Wea5/VffvG6KcMyzs7OBG9zLAdYcrfqlsyXz/42UBJTeA2s6kVb1sBUfd6CQuQRF+37sjMwKiNIxwVaNWIYZMiWhbqPXOS4ozt0kNCtruhHqHgULPfF6aia/BnZKib6n+pBSepTdS47wZ31xC8VPqsoPia8RGNziLO/MmSMpW2fQRdgrhCrSniHb8qrh0vwgbPB4S7vAEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifTMy2HjS+Bb81E9m0fQAZJXCA1BJgLgstBw3wxbdpZevF8c+pSBGUYNUm9ZbwrD93dGdCU2RvlI1gcyKke0cEEqKGjqWFXOWIYkSNzfLrgP3ERdp5t9VGZi6BDQko2CFzP4uAR3jwgR3AP0/mQ/4YWDrBrnYZCWjOpo7izGhNbHYvWbBOqVDvnfReoCrSNSLSo8OfSxuFrN6sJLXrajGu1qbPqQtxFIRyqLgbOfHLHw/DN3I+BZKGrNYynRfM2NparXTQ6ZRgC8E5xIodApr4JHMNeiPTjMlReaLBQwbcqaBzzRNLdV0v8/ZSXexS68WBeUMt7OkomYJBFrpwmpzgx/nzRzV87MZ9TGhZht/1zjcyaSi0Toc6r7UhbADuDX5RH5L0T8Q3iGJfjrYuS5h9aiYSg8oaVJ5DZhJAicDbb8eLvdAGXFTIV+EXbD+4e9Xl+c5um4FdKfufcrrUEo2s6lUuSBSJ3Gf6r+yJMxkamWwfnRUtxt+axRcXfmywYqU7O1r0zzW+RKCbV2qZeUWWeN1u5UIPdJbQbH4633ukPp//aGh8R4IWckBp7DGH4M5P1ZiYJB8OQRS5gD/y+iuwensnq1rKFBOK4gFNSpKmuDQYLeWb5VljHgE1sS4DRhl0fl8UCabehP+3tZu/2i88JTWbdUuvPLmkyv8zQdY36YeSDWmwC40vvbB+lo2e8MgVpfDwn+xyQFpFhasbEyr4VVoPwHq1sGR/QEutxmeoJi1Zux48jSHoGOj5RZ4ei+b8Lxp4rj45wwm0AiROghLnZJZfJaySp/LVxQ=
-        redirect:
-          method: GET
-          url: https://test.adyen.com/hpp/checkout.shtml?u=redirectIdeal&p=eJxtUl1vozAQ-DXwFmQDAfLgh4jSC730Q1yoqr5Urr0NXIlNbUPj-PozXC6qqpOstTWz2p3Z9auigueSA2k50M5ng1IgmJ2hoq78VusBVMkJxiH2D6BYQ4VZMyYHYcgOtLk9YxeyFAb2ippWisDYHki*KfKf9-Xu5UdxV1Rl-t-MEZR2N4nRha7gDSY1QLRRrdh-IcygxBU1lKxWOMFptopXcZZEyc0l51e7J9XdcHpeDTxC4edG1pFF5WMHnw95FtHf3N5z1MWqipKjF17XXnTl99QewNk7zO4wQshXoOtqSxpjei9au0R3Oslo10htHJKhDDmINcDe5WB0I-selEM0qLFloN3z4W-ZUjB5cD4q4K0CZhwz4n-lzjm3YBrJvej626iduq-D9sJEzUNw2hw1qXONlpPA5STRBSsHtXANeyps4O4ZDILA16CnST-SruWtsSREIV6geIGyHU6cI7x0Ic6e-bOXaUuKsmlLpHCFJmXg6-dWzL*kH16DMQzOi0iTNE1xFsXBqRyfot1NwrPRFmGzPr4w3jTHGpX16S3*2H4Um22xB8u5-ANWgt0s
-        resultCode: RedirectShopper
     post-payments-klarna:
       summary: Make a Klarna payment
       value:
@@ -4407,17 +2457,6 @@ components:
           type: directEbanking
         reference: Your order number
         returnUrl: https://your-company.com/...
-    post-payments-sofort-200:
-      summary: Example response for request 'sofort'
-      value:
-        details:
-          - key: payload
-            type: text
-        paymentData: Ab02b4c0!BQABAgCrbmh+OQiaXUY3sofxY5aXEujSd/zIwdZ/zDiV440FsfTI6tfDuXPzi9jOQgmGr5UFM7mnTNjHY5fwFD9FmKQre5ewthnSTsBVmC0RxupWRh7OeHYCcLp+G8+vxR680uJwp1stzdzq/lXmyIinV6aC22NzapolomfBvxS3cANwHE4IC65sXt5eyzItZbHIxJqMC7ADM/dX9Qw9HolgxLQXZlmjdHjfEHEmTvvPHXe5cBv4cfKPJ2gp+RH1J4hds1BJxKwobazQ+a/fauTj5N0a2uotli9I+06B5Y9fR8+SFyOIT3X2jHVDrGMMiVTjBSVDYB6/76A6q6GPXUv3cPgLBRdYOxKJewp5o7raTYs39Tp69iZTPF/9+E9TvmSIjcc5yekrt3kUUxnJTITAN5EJa2AnmfdJBro7O5c0C4OQ43MIgMhiMUKzBewWb5rDzfDiUCQKkSdWEbJUWDEZSS3TPChvP6smI8m80rbgig/0IXgt7Zc2UT1GLdai0t30AoX0gcnbZJnS+4o07WivKPI9aagD68dYJZy3VN64p7Q84vzj4IzwftzKW3lWDf2gt6Reo3x4Sgo2KzznEfCeSRB3QtK8Tuk5ibgVgjkCx2p7KaxKtj1Mqdi+DgA63sM4juy2IAf/23TA4fu42OWovbF9DmXf4v8aSvLmCw3NYX0VyxBEf4xCIC8T14KfCMGbP4N9AEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifYDX5Nt00CX5QJ7OLRtmg5wXbL8+ctpyuEOjPJt2DpH30H0klwHPxbTfbVgctpO7GFGrUgl+mqy/pTDTlfKGmt2SRWGbo9cDMbUTrcKNh2MiEI7yOroy4iL/DYnvqbqQ3kQTjxtYtyM7qKI5/NbPotypE2Z6UlscFJnMYaaZCXenBnXU7e52p4tk1hQ5KkdZTbkjdZvNkEL7yGvoVgBNRPmTr7fZJib0XPyrAK76VL5yBq0A3mcwSMChj2Uu0ri7lp/g4yO1JNljWTxtEwaTCxGOY3tDF3IqnqELIHtZ3hyqG1n80muT4wVUX6kmCc5zeHybbZTJhPG2Q+fPAqvNXA0y4Zg3JOC51gGRhmN3m7L3eil3ks70Ejx6gpNzLnLZWpzZy/tff7coZGYW1Xo3973NOJcDkEA1QjhKiPycsHy3ZHZ04ShINLc2UssmV0o68FQ0R6sOVbjOevBaK27EySDaZfQnUjDSfgJdtIFDIEVzZtVyUWGo6w+cYLUYZCpeE9VQac1DinR/NH3w5nqHKyTBf9YqoqYZh3CuOA4jGbwadiG1HhAmZg6TOY7GZ+91hB1yOs4fsDfR42Rj6MEWOaqoH/yggwtjdNhdyeSIc0z3vfjsWJCLy4Uy0haQ7ww+81mqalJBILsTJuS3cwpuGuai68o4ApraA/8sXd+wJ7HBuCqaqJ1r9ZdPppgK+9QbZzGA8xvc5IzHqyOgPZ9oRCTbYOmENJO1grH15TyBHBB7N1Eu/76ojkCsdDEK/hu69T/jLin+x7X+aNuWVILJ4Je8HOdI8ddtr79R6WX88cU=
-        redirect:
-          method: GET
-          url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUl1vozAQ-DXwFmS*4YGHXEpbemmvR6CK8lIZs8UoiU1sg0J*-RmaS6vTSchGM6vdmVlXArN6xWtI6lYAUWmF2b5ljUl6IYCRcebSMjePIAjFTC0J4T1TSQFSPV*xG5kxBY3AquXMUmMHyeoxXf38VRbvD*lLmmer-1YOIKS*Ew-d6Bw*YJoPiVRi0vNFqF6wO6xwEsd2YIdR7MV*HLjx061m0zZJ1W2bTf7juHfbZVFc3i77cdfsthuPxg8HStH51XupTvn5d1ca7p3Z4fEI2txx9mYjhEwBsszXCVWqM9yl4dzr78AJPlAulUYiFCENEQpkz3slKe86EBqRIIaWgNS-r59tM0b4UbvI4TNlzQz233bXmmdQlNeGe-9P0Frd96gNJxBzBFqbpiZ1epA-CfQnifoYeS8WemCH2WjpewYtyzIlyCnnN3xo61aNiYMce4G8BYoKO9CObF8ffrwzr16mHQlMph0lqW40KQNT6vcxv4qur6zBsa5rCIMwDO3I9axLNmzd4imoo2FMHbo8v5Oa0nOJsvLy4Z3Wp-RxnTYw1jX-A42b3RY
-        resultCode: RedirectShopper
     post-payments-split:
       summary: Split a payment between a sub-merchant and a platform account
       value:
@@ -5061,6 +3100,11 @@ components:
             - NoShow
             - DelayedCharge
           type: string
+          x-enum:
+            - description: An incremental charge is carried out because of a no-show for a guaranteed reservation.
+              value: NoShow
+            - description: An incremental charge is carried out to process an additional payment after the original services have been rendered and the respective payment has been processed.
+              value: DelayedCharge
         networkTxReference:
           description: |-
             Allows you to link the transaction to the original or previous one in a subscription/card-on-file chain. This field is required for token-based transactions where Adyen does not tokenize the card.
@@ -5438,15 +3482,6 @@ components:
         "openinvoicedataLine[itemNr].trackingUri":
           description: URI where the customer can track their shipment.
           type: string
-        "openinvoicedataLine[itemNr].vatCategory":
-          description: |-
-            Required for AfterPay. The country-specific VAT category a product falls under.
-
-            Allowed values:
-            * High
-            * Low
-            * None.
-          type: string
     AdditionalDataOpi:
       properties:
         opi.includeTransToken:
@@ -5635,60 +3670,6 @@ components:
             Required for transactions performed by registered payment facilitators. The three-letter country code of the sub-merchant's address. For example, **BRA** for Brazil. 
             * Format: [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)
             * Fixed length: 3 characters
-          type: string
-        "subMerchant.subSeller[subSellerNr].creditSettlementAccount":
-          description: |-
-            The sub-merchant's bank account number with the check digit number and without punctuations or dashes.
-            * Format: Numeric
-            * Maximum length: 12 digits
-          type: string
-        "subMerchant.subSeller[subSellerNr].creditSettlementAccountType":
-          description: |
-            A two-letter indicator of the type of the sub-merchant's bank account.
-            Possible values:
-              - **CC** - Checking account
-             - **CD** - Deposit account
-             - **PG** - Payments account
-             - **PP** - Savings account
-          type: string
-        "subMerchant.subSeller[subSellerNr].creditSettlementAgency":
-          description: |-
-            The four-digit branch code of the sub-merchant's bank, without the check digit, slashes, or dashes.
-            * Format: Numeric
-            * Fixed length: 4 digits
-          type: string
-        "subMerchant.subSeller[subSellerNr].creditSettlementBank":
-          description: |-
-            The identifier of the sub-merchant's bank. In Brazil, this is the three-digit bank number format specified by the Central Bank of Brazil (BACEN).
-            * Format: Numeric
-            * Fixed length: 3 digits
-          type: string
-        "subMerchant.subSeller[subSellerNr].debitSettlementAccount":
-          description: |-
-            The sub-merchant's bank account number with the check digit number and without punctuations or dashes.
-            * Format: Numeric
-            * Maximum length: 12 digits
-          type: string
-        "subMerchant.subSeller[subSellerNr].debitSettlementAccountType":
-          description: |
-            A two-letter indicator of the type of the sub-merchant's bank account.
-            Possible values:
-              - **CC** - Checking account
-             - **CD** - Deposit account
-             - **PG** - Payments account
-             - **PP** - Savings account
-          type: string
-        "subMerchant.subSeller[subSellerNr].debitSettlementAgency":
-          description: |-
-            The four-digit branch code of the sub-merchant's bank, without the check digit, slashes, or dashes.
-            * Format: Numeric
-            * Fixed length: 4 digits
-          type: string
-        "subMerchant.subSeller[subSellerNr].debitSettlementBank":
-          description: |-
-            The identifier of the sub-merchant's bank. In Brazil, this is the three-digit bank number format specified by the Central Bank of Brazil (BACEN).
-            * Format: Numeric
-            * Fixed length: 3 digits
           type: string
         "subMerchant.subSeller[subSellerNr].id":
           description: |-
@@ -5980,7 +3961,7 @@ components:
         bankCity:
           description: The bank city.
           type: string
-          x-addedInVersion: 18
+          x-addedInVersion: "18"
         bankLocationId:
           description: The location id of the bank. The field value is `nil` in most cases.
           type: string
@@ -6016,7 +3997,7 @@ components:
         taxId:
           description: The bank account holder's tax ID.
           type: string
-          x-addedInVersion: 18
+          x-addedInVersion: "18"
     BillDeskDetails:
       additionalProperties: false
       properties:
@@ -6059,35 +4040,35 @@ components:
           description: "The color depth of the shopper's browser in bits per pixel. This should be obtained by using the browser's `screen.colorDepth` property. Accepted values: 1, 4, 8, 15, 16, 24, 30, 32 or 48 bit color depth."
           format: int32
           type: integer
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         javaEnabled:
           description: Boolean value indicating if the shopper's browser is able to execute Java.
           type: boolean
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         javaScriptEnabled:
           default: true
           description: Boolean value indicating if the shopper's browser is able to execute JavaScript. A default 'true' value is assumed if the field is not present.
           type: boolean
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         language:
           description: The `navigator.language` value of the shopper's browser (as defined in IETF BCP 47).
           type: string
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         screenHeight:
           description: The total height of the shopper's device screen in pixels.
           format: int32
           type: integer
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         screenWidth:
           description: The total width of the shopper's device screen in pixels.
           format: int32
           type: integer
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         timeZoneOffset:
           description: Time difference between UTC time and the shopper's browser local time, in minutes.
           format: int32
           type: integer
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         userAgent:
           description: The user agent value of the shopper's browser.
           maxLength: 50
@@ -6266,7 +4247,7 @@ components:
           description: |-
             Shopper account information for 3D Secure 2.
             > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         additionalAmount:
           $ref: "#/components/schemas/Amount"
           description: |-
@@ -6302,13 +4283,13 @@ components:
         applicationInfo:
           $ref: "#/components/schemas/ApplicationInfo"
           description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         billingAddress:
           $ref: "#/components/schemas/Address"
           description: |-
             The address where to send the invoice.
             > For 3D Secure 2 transactions, schemes require `billingAddress` for all browser-based and mobile implementations. Include all of the fields within this object.
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         browserInfo:
           $ref: "#/components/schemas/BrowserInfo"
           description: |-
@@ -6318,7 +4299,7 @@ components:
           description: The delay between the authorisation and scheduled auto-capture, specified in hours.
           format: int32
           type: integer
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         dateOfBirth:
           description: |-
             The shopper's date of birth.
@@ -6326,7 +4307,7 @@ components:
             Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
           format: date-time
           type: string
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         dccQuote:
           $ref: "#/components/schemas/ForexQuote"
           description: The forex quote as returned in the response of the forex service.
@@ -6342,12 +4323,12 @@ components:
             Example: 2017-07-17T13:42:40.428+01:00
           format: date-time
           type: string
-          x-addedInVersion: 8
+          x-addedInVersion: "8"
         deviceFingerprint:
           description: A string containing the shopper's device fingerprint. For more information, refer to [Device fingerprinting](https://docs.adyen.com/risk-management/device-fingerprinting).
           maxLength: 5000
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         fraudOffset:
           description: An integer value that is added to the normal fraud score. The value can be either positive or negative.
           format: int32
@@ -6355,11 +4336,11 @@ components:
         installments:
           $ref: "#/components/schemas/Installments"
           description: Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         mcc:
           description: The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
           type: string
-          x-addedInVersion: 12
+          x-addedInVersion: "12"
         merchantAccount:
           description: The merchant account identifier, with which you want to process the transaction.
           type: string
@@ -6369,13 +4350,13 @@ components:
             The same merchant order reference should never be reused after the first authorised attempt. If used, this field should be supplied for all incoming authorisations.
             > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
           type: string
-          x-addedInVersion: 9
+          x-addedInVersion: "9"
         merchantRiskIndicator:
           $ref: "#/components/schemas/MerchantRiskIndicator"
           description: |-
             Additional risk fields for 3D Secure 2.
             > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         metadata:
           additionalProperties:
             type: string
@@ -6386,7 +4367,7 @@ components:
             * Maximum 20 characters per key.
             * Maximum 80 characters per value. 
           type: object
-          x-addedInVersion: 17
+          x-addedInVersion: "17"
         orderReference:
           description: When you are doing multiple partial (gift card) payments, this is the `pspReference` of the first payment. We use this to link the multiple payments to each other. As your own reference for linking multiple payments, use the `merchantOrderReference`instead.
           type: string
@@ -6410,7 +4391,7 @@ components:
             - Subscription
             - UnscheduledCardOnFile
           type: string
-          x-addedInVersion: 30
+          x-addedInVersion: "30"
         reference:
           description: |-
             The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement.
@@ -6461,11 +4442,11 @@ components:
         shopperLocale:
           description: The combination of a language code and a country code to specify the language to be used in the payment.
           type: string
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         shopperName:
           $ref: "#/components/schemas/Name"
           description: The shopper's full name.
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         shopperReference:
           description: |-
             Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters.
@@ -6479,37 +4460,37 @@ components:
         socialSecurityNumber:
           description: The shopper's social security number.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         splits:
           description: An array of objects specifying how the payment should be split when using [Adyen for Platforms](https://docs.adyen.com/platforms/processing-payments#providing-split-information) or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
           items:
             $ref: "#/components/schemas/Split"
           type: array
-          x-addedInVersion: 37
+          x-addedInVersion: "37"
         store:
-          description: The physical store, for which this payment is processed.
+          description: The ecommerce or point-of-sale store that is processing the payment. Used in [partner arrangement integrations](https://docs.adyen.com/platforms/platforms-for-partners#route-payments) for Adyen for Platforms.
           maxLength: 16
           minLength: 1
           type: string
-          x-addedInVersion: 23
+          x-addedInVersion: "23"
         telephoneNumber:
           description: The shopper's telephone number.
           type: string
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         threeDS2RequestData:
           $ref: "#/components/schemas/ThreeDS2RequestData"
           description: Request fields for 3D Secure 2. To check if any of the following fields are required for your integration, refer to [Online payments](https://docs.adyen.com/online-payments) or [Classic integration](https://docs.adyen.com/classic-integration) documentation.
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         totalsGroup:
           description: The reference value to aggregate sales totals in reporting. When not specified, the store field is used (if available).
           maxLength: 16
           minLength: 1
           type: string
-          x-addedInVersion: 23
+          x-addedInVersion: "23"
         trustedShopper:
           description: Set to true if the payment should be routed to a trusted MID.
           type: boolean
-          x-addedInVersion: 37
+          x-addedInVersion: "37"
       required:
         - merchantAccount
         - reference
@@ -6715,7 +4696,7 @@ components:
             type: string
           description: The list of origin keys for all requested domains. For each list item, the key is the domain and the value is the origin key.
           type: object
-          x-addedInVersion: 1
+          x-addedInVersion: "1"
     CommonField:
       properties:
         name:
@@ -6762,14 +4743,14 @@ components:
             - OPTIONAL
             - REQUIRED
           type: string
-          x-addedInVersion: 37
+          x-addedInVersion: "37"
         installments:
           $ref: "#/components/schemas/InstallmentsNumber"
           description: Describes the configuration for [installment payments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
         shopperInput:
           $ref: "#/components/schemas/ShopperInput"
           description: Determines how to display the details fields.
-          x-addedInVersion: 37
+          x-addedInVersion: "37"
     CreatePaymentAmountUpdateRequest:
       properties:
         amount:
@@ -6880,7 +4861,7 @@ components:
         lineItems:
           description: |-
             Price and product information about the purchased items, to be included on the invoice sent to the shopper.
-            This parameter is required for open invoice (_buy now, pay later_) payment methods such AfterPay, Klarna, RatePay, and Zip.
+            This parameter is required for open invoice (_buy now, pay later_) payment methods such Afterpay, Clearpay, Klarna, RatePay, and Zip.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array
@@ -7005,7 +4986,7 @@ components:
         threeDSAuthenticationOnly:
           description: Change the `authenticationOnly` indicator originally set in the `/payments` request. Only needs to be set if you want to modify the value set previously.
           type: boolean
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
       required:
         - details
     DeviceRenderOptions:
@@ -7461,14 +5442,6 @@ components:
           description: Tax amount, in minor units.
           format: int64
           type: integer
-        taxCategory:
-          description: "Required for AfterPay. Tax category: High, Low, None, Zero"
-          enum:
-            - High
-            - Low
-            - None
-            - Zero
-          type: string
         taxPercentage:
           description: Tax percentage, in minor units.
           format: int64
@@ -8011,7 +5984,7 @@ components:
             type: string
           description: "Contains `threeds2.fingerprint` or `threeds2.challengeToken` values to be used in further calls to `/payments/details` endpoint. "
           type: object
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         details:
           description: When non-empty, contains all the fields that you must submit to the `/payments/details` endpoint.
           items:
@@ -8023,7 +5996,7 @@ components:
         merchantReference:
           description: The reference used during the /payments request.
           type: string
-          x-addedInVersion: 49
+          x-addedInVersion: "49"
         order:
           $ref: "#/components/schemas/CheckoutOrderResponse"
           description: Contains updated information regarding the order in case order information was provided in the request.
@@ -8053,7 +6026,7 @@ components:
         refusalReasonCode:
           description: Code that specifies the refusal reason. For more information, see [Authorisation refusal reasons](https://docs.adyen.com/development-resources/refusal-reasons).
           type: string
-          x-addedInVersion: 37
+          x-addedInVersion: "37"
         resultCode:
           description: |-
             The result of the payment. For more information, see [Result codes](https://docs.adyen.com/online-payments/payment-result-codes).
@@ -8137,7 +6110,7 @@ components:
         lineItems:
           description: |-
             Price and product information about the purchased items, to be included on the invoice sent to the shopper.
-            This parameter is required for open invoice (_buy now, pay later_) payment methods such AfterPay, Klarna, RatePay, and Zip.
+            This parameter is required for open invoice (_buy now, pay later_) payment methods such Afterpay, Clearpay, Klarna, RatePay, and Zip.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array
@@ -8304,7 +6277,7 @@ components:
           items:
             type: string
           type: array
-          x-addedInVersion: 33
+          x-addedInVersion: "33"
         amount:
           $ref: "#/components/schemas/Amount"
           description: The amount information for the transaction (in [minor units](https://docs.adyen.com/development-resources/currency-codes)). For [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) requests, set amount to 0 (zero).
@@ -8316,7 +6289,7 @@ components:
           items:
             type: string
           type: array
-          x-addedInVersion: 33
+          x-addedInVersion: "33"
         channel:
           description: |-
             The platform where a payment transaction takes place. This field can be used for filtering out payment methods that are only available on specific platforms. Possible values:
@@ -8337,18 +6310,18 @@ components:
         shopperLocale:
           description: The combination of a language code and a country code to specify the language to be used in the payment.
           type: string
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         shopperReference:
           description: |-
             Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters.
             > This field is required for recurring payments.
           type: string
         store:
-          description: The physical store, for which this payment is processed.
+          description: The ecommerce or point-of-sale store that is processing the payment. Used in [partner arrangement integrations](https://docs.adyen.com/platforms/platforms-for-partners#route-payments) for Adyen for Platforms.
           maxLength: 16
           minLength: 1
           type: string
-          x-addedInVersion: 23
+          x-addedInVersion: "23"
       required:
         - merchantAccount
     PaymentMethodsResponse:
@@ -8408,7 +6381,7 @@ components:
           description: |-
             Shopper account information for 3D Secure 2.
             > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         additionalData:
           additionalProperties:
             type: string
@@ -8439,13 +6412,13 @@ components:
         applicationInfo:
           $ref: "#/components/schemas/ApplicationInfo"
           description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         billingAddress:
           $ref: "#/components/schemas/Address"
           description: |-
             The address where to send the invoice.
             > For 3D Secure 2 transactions, schemes require `billingAddress` for all browser-based and mobile implementations. Include all of the fields within this object.
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         browserInfo:
           $ref: "#/components/schemas/BrowserInfo"
           description: |-
@@ -8455,7 +6428,7 @@ components:
           description: The delay between the authorisation and scheduled auto-capture, specified in hours.
           format: int32
           type: integer
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         channel:
           description: |-
             The platform where a payment transaction takes place. This field is optional for filtering out payment methods that are only available on specific platforms. If this value is not set, then we will try to infer it from the `sdkVersion` or `token`.
@@ -8472,7 +6445,7 @@ components:
         company:
           $ref: "#/components/schemas/Company"
           description: Information regarding the company.
-          x-addedInVersion: 32
+          x-addedInVersion: "32"
         countryCode:
           description: |-
             The shopper country.
@@ -8487,7 +6460,7 @@ components:
             Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
           format: date-time
           type: string
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         dccQuote:
           $ref: "#/components/schemas/ForexQuote"
           description: The forex quote as returned in the response of the forex service.
@@ -8503,31 +6476,31 @@ components:
             Example: 2017-07-17T13:42:40.428+01:00
           format: date-time
           type: string
-          x-addedInVersion: 8
+          x-addedInVersion: "8"
         deviceFingerprint:
           description: A string containing the shopper's device fingerprint. For more information, refer to [Device fingerprinting](https://docs.adyen.com/risk-management/device-fingerprinting).
           maxLength: 5000
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         enableOneClick:
           description: When true and `shopperReference` is provided, the shopper will be asked if the payment details should be stored for future one-click payments.
           type: boolean
-          x-addedInVersion: 32
+          x-addedInVersion: "32"
         enablePayOut:
           description: When true and `shopperReference` is provided, the payment details will be tokenized for payouts.
           type: boolean
-          x-addedInVersion: 32
+          x-addedInVersion: "32"
         enableRecurring:
           description: When true and `shopperReference` is provided, the payment details will be tokenized for recurring payments.
           type: boolean
-          x-addedInVersion: 32
+          x-addedInVersion: "32"
         entityType:
           description: The type of the entity the payment is processed for.
           enum:
             - NaturalPerson
             - CompanyName
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         fraudOffset:
           description: An integer value that is added to the normal fraud score. The value can be either positive or negative.
           format: int32
@@ -8535,22 +6508,22 @@ components:
         installments:
           $ref: "#/components/schemas/Installments"
           description: Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         lineItems:
           description: |-
             Price and product information about the purchased items, to be included on the invoice sent to the shopper.
-            > This field is required for 3x 4x Oney, Affirm, AfterPay, Klarna, RatePay, and Zip.
+            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Zip.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array
-          x-addedInVersion: 32
+          x-addedInVersion: "32"
         mandate:
           $ref: "#/components/schemas/Mandate"
           description: The mandate details to initiate recurring transaction.
         mcc:
           description: The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
           type: string
-          x-addedInVersion: 12
+          x-addedInVersion: "12"
         merchantAccount:
           description: The merchant account identifier, with which you want to process the transaction.
           type: string
@@ -8560,13 +6533,13 @@ components:
             The same merchant order reference should never be reused after the first authorised attempt. If used, this field should be supplied for all incoming authorisations.
             > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
           type: string
-          x-addedInVersion: 9
+          x-addedInVersion: "9"
         merchantRiskIndicator:
           $ref: "#/components/schemas/MerchantRiskIndicator"
           description: |-
             Additional risk fields for 3D Secure 2.
             > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         metadata:
           additionalProperties:
             type: string
@@ -8577,7 +6550,7 @@ components:
             * Maximum 20 characters per key.
             * Maximum 80 characters per value. 
           type: object
-          x-addedInVersion: 17
+          x-addedInVersion: "17"
         mpiData:
           $ref: "#/components/schemas/ThreeDSecureData"
           description: Authentication data produced by an MPI (Mastercard SecureCode or Visa Secure).
@@ -8594,7 +6567,7 @@ components:
             Set this parameter to the origin URL of the page that you are loading the 3D Secure Component from.
           maxLength: 8000
           type: string
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         paymentMethod:
           description: The type and required details of a payment method to use.
           oneOf:
@@ -8657,15 +6630,15 @@ components:
             - Subscription
             - UnscheduledCardOnFile
           type: string
-          x-addedInVersion: 30
+          x-addedInVersion: "30"
         redirectFromIssuerMethod:
           description: Specifies the redirect method (GET or POST) when redirecting back from the issuer.
           type: string
-          x-addedInVersion: 32
+          x-addedInVersion: "32"
         redirectToIssuerMethod:
           description: Specifies the redirect method (GET or POST) when redirecting to the issuer.
           type: string
-          x-addedInVersion: 32
+          x-addedInVersion: "32"
         reference:
           description: |-
             The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement.
@@ -8723,11 +6696,11 @@ components:
         shopperLocale:
           description: The combination of a language code and a country code to specify the language to be used in the payment.
           type: string
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         shopperName:
           $ref: "#/components/schemas/Name"
           description: The shopper's full name.
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         shopperReference:
           description: |-
             Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters.
@@ -8741,31 +6714,31 @@ components:
         socialSecurityNumber:
           description: The shopper's social security number.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         splits:
           description: An array of objects specifying how the payment should be split when using [Adyen for Platforms](https://docs.adyen.com/platforms/processing-payments#providing-split-information) or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
           items:
             $ref: "#/components/schemas/Split"
           type: array
-          x-addedInVersion: 37
+          x-addedInVersion: "37"
         store:
-          description: The physical store, for which this payment is processed.
+          description: The ecommerce or point-of-sale store that is processing the payment. Used in [partner arrangement integrations](https://docs.adyen.com/platforms/platforms-for-partners#route-payments) for Adyen for Platforms.
           maxLength: 16
           minLength: 1
           type: string
-          x-addedInVersion: 23
+          x-addedInVersion: "23"
         telephoneNumber:
           description: The shopper's telephone number.
           type: string
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         threeDS2RequestData:
           $ref: "#/components/schemas/ThreeDS2RequestData"
           description: Request fields for 3D Secure 2. To check if any of the following fields are required for your integration, refer to [Online payments](https://docs.adyen.com/online-payments) or [Classic integration](https://docs.adyen.com/classic-integration) documentation.
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         trustedShopper:
           description: Set to true if the payment should be routed to a trusted MID.
           type: boolean
-          x-addedInVersion: 37
+          x-addedInVersion: "37"
       required:
         - merchantAccount
         - reference
@@ -8795,7 +6768,7 @@ components:
             type: string
           description: "Contains `threeds2.fingerprint` or `threeds2.challengeToken` values to be used in further calls to `/payments/details` endpoint. "
           type: object
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         details:
           description: When non-empty, contains all the fields that you must submit to the `/payments/details` endpoint.
           items:
@@ -8833,7 +6806,7 @@ components:
         refusalReasonCode:
           description: Code that specifies the refusal reason. For more information, see [Authorisation refusal reasons](https://docs.adyen.com/development-resources/refusal-reasons).
           type: string
-          x-addedInVersion: 37
+          x-addedInVersion: "37"
         resultCode:
           description: |-
             The result of the payment. For more information, see [Result codes](https://docs.adyen.com/online-payments/payment-result-codes).
@@ -8924,20 +6897,20 @@ components:
           items:
             type: string
           type: array
-          x-addedInVersion: 33
+          x-addedInVersion: "33"
         amount:
           $ref: "#/components/schemas/Amount"
           description: The amount information for the transaction (in [minor units](https://docs.adyen.com/development-resources/currency-codes)). For [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) requests, set amount to 0 (zero).
         applicationInfo:
           $ref: "#/components/schemas/ApplicationInfo"
           description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         billingAddress:
           $ref: "#/components/schemas/Address"
           description: |-
             The address where to send the invoice.
             > For 3D Secure 2 transactions, schemes require `billingAddress` for all browser-based and mobile implementations. Include all of the fields within this object.
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         blockedPaymentMethods:
           description: |-
             List of payment methods to be hidden from the shopper. To refer to payment methods, use their `paymentMethod.type`from [Payment methods overview](https://docs.adyen.com/payment-methods).
@@ -8946,12 +6919,12 @@ components:
           items:
             type: string
           type: array
-          x-addedInVersion: 33
+          x-addedInVersion: "33"
         captureDelayHours:
           description: The delay between the authorisation and scheduled auto-capture, specified in hours.
           format: int32
           type: integer
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         channel:
           description: |-
             The platform where a payment transaction takes place. This field is optional for filtering out payment methods that are only available on specific platforms. If this value is not set, then we will try to infer it from the `sdkVersion` or `token`.
@@ -8968,7 +6941,7 @@ components:
         company:
           $ref: "#/components/schemas/Company"
           description: Information regarding the company.
-          x-addedInVersion: 32
+          x-addedInVersion: "32"
         configuration:
           $ref: "#/components/schemas/Configuration"
           description: Specify configurations to enable additional features.
@@ -8986,7 +6959,7 @@ components:
             Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
           format: date-time
           type: string
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         dccQuote:
           $ref: "#/components/schemas/ForexQuote"
           description: The forex quote as returned in the response of the forex service.
@@ -9002,26 +6975,26 @@ components:
             Example: 2017-07-17T13:42:40.428+01:00
           format: date-time
           type: string
-          x-addedInVersion: 8
+          x-addedInVersion: "8"
         enableOneClick:
           description: When true and `shopperReference` is provided, the shopper will be asked if the payment details should be stored for future one-click payments.
           type: boolean
-          x-addedInVersion: 32
+          x-addedInVersion: "32"
         enablePayOut:
           description: When true and `shopperReference` is provided, the payment details will be tokenized for payouts.
           type: boolean
-          x-addedInVersion: 32
+          x-addedInVersion: "32"
         enableRecurring:
           description: When true and `shopperReference` is provided, the payment details will be tokenized for recurring payments.
           type: boolean
-          x-addedInVersion: 32
+          x-addedInVersion: "32"
         entityType:
           description: The type of the entity the payment is processed for.
           enum:
             - NaturalPerson
             - CompanyName
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         fraudOffset:
           description: An integer value that is added to the normal fraud score. The value can be either positive or negative.
           format: int32
@@ -9029,22 +7002,22 @@ components:
         installments:
           $ref: "#/components/schemas/Installments"
           description: Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         lineItems:
           description: |-
             Price and product information about the purchased items, to be included on the invoice sent to the shopper.
-            > This field is required for 3x 4x Oney, Affirm, AfterPay, Klarna, RatePay, and Zip.
+            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Zip.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array
-          x-addedInVersion: 32
+          x-addedInVersion: "32"
         mandate:
           $ref: "#/components/schemas/Mandate"
           description: The mandate details to initiate recurring transaction.
         mcc:
           description: The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
           type: string
-          x-addedInVersion: 12
+          x-addedInVersion: "12"
         merchantAccount:
           description: The merchant account identifier, with which you want to process the transaction.
           type: string
@@ -9054,7 +7027,7 @@ components:
             The same merchant order reference should never be reused after the first authorised attempt. If used, this field should be supplied for all incoming authorisations.
             > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
           type: string
-          x-addedInVersion: 9
+          x-addedInVersion: "9"
         metadata:
           additionalProperties:
             type: string
@@ -9065,7 +7038,7 @@ components:
             * Maximum 20 characters per key.
             * Maximum 80 characters per value. 
           type: object
-          x-addedInVersion: 17
+          x-addedInVersion: "17"
         orderReference:
           description: When you are doing multiple partial (gift card) payments, this is the `pspReference` of the first payment. We use this to link the multiple payments to each other. As your own reference for linking multiple payments, use the `merchantOrderReference`instead.
           type: string
@@ -9105,7 +7078,7 @@ components:
         sdkVersion:
           description: The version of the SDK you are using (for Web SDK integrations only).
           type: string
-          x-addedInVersion: 32
+          x-addedInVersion: "32"
         sessionValidity:
           description: |-
             The date and time until when the session remains valid, in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format.
@@ -9142,11 +7115,11 @@ components:
         shopperLocale:
           description: The combination of a language code and a country code to specify the language to be used in the payment.
           type: string
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         shopperName:
           $ref: "#/components/schemas/Name"
           description: The shopper's full name.
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         shopperReference:
           description: |-
             Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters.
@@ -9160,23 +7133,23 @@ components:
         socialSecurityNumber:
           description: The shopper's social security number.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         splits:
           description: An array of objects specifying how the payment should be split when using [Adyen for Platforms](https://docs.adyen.com/platforms/processing-payments#providing-split-information) or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
           items:
             $ref: "#/components/schemas/Split"
           type: array
-          x-addedInVersion: 37
+          x-addedInVersion: "37"
         store:
-          description: The physical store, for which this payment is processed.
+          description: The ecommerce or point-of-sale store that is processing the payment. Used in [partner arrangement integrations](https://docs.adyen.com/platforms/platforms-for-partners#route-payments) for Adyen for Platforms.
           maxLength: 16
           minLength: 1
           type: string
-          x-addedInVersion: 23
+          x-addedInVersion: "23"
         telephoneNumber:
           description: The shopper's telephone number.
           type: string
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         token:
           description: |-
             The token obtained when initializing the SDK.
@@ -9186,7 +7159,7 @@ components:
         trustedShopper:
           description: Set to true if the payment should be routed to a trusted MID.
           type: boolean
-          x-addedInVersion: 37
+          x-addedInVersion: "37"
       required:
         - merchantAccount
         - reference
@@ -9254,7 +7227,7 @@ components:
         refusalReasonCode:
           description: Code that specifies the refusal reason. For more information, see [Authorisation refusal reasons](https://docs.adyen.com/development-resources/refusal-reasons).
           type: string
-          x-addedInVersion: 37
+          x-addedInVersion: "37"
         resultCode:
           description: |-
             The result of the payment. For more information, see [Result codes](https://docs.adyen.com/online-payments/payment-result-codes).
@@ -9358,18 +7331,18 @@ components:
           description: Date after which no further authorisations shall be performed. Only for 3D Secure 2.
           format: date-time
           type: string
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         recurringFrequency:
           description: Minimum number of days between authorisations. Only for 3D Secure 2.
           type: string
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         tokenService:
           description: The name of the token service.
           enum:
             - VISATOKENSERVICE
             - MCTOKENSERVICE
           type: string
-          x-addedInVersion: 25
+          x-addedInVersion: "25"
     RecurringDetail:
       properties:
         configuration:
@@ -9446,6 +7419,9 @@ components:
             * **trustedBeneficiary** 
             * **transactionRiskAnalysis** 
           type: string
+        threeds2.cardEnrolled:
+          description: Indicates whether a card is enrolled for 3D Secure 2.
+          type: boolean
     ResponseAdditionalDataBillingAddress:
       properties:
         billingAddress.city:
@@ -9701,6 +7677,29 @@ components:
 
             > Contact Support Team to enable this field.
           type: string
+        merchantAdviceCode:
+          description: |+
+            A code and message that issuers send to provide more details about the payment. This field is especially useful when implementing a retry logic for declined payments.
+
+            Possible values:
+
+            * **01: New account information available**
+
+            * **02: Cannot approve at this time, try again later**
+
+            * **03: Do not try again**
+
+            * **04: Token requirements not fulfilled for this token type**
+
+            * **21: Payment Cancellation** (only for Mastercard)
+
+          enum:
+            - "01: New account information available"
+            - "02: Cannot approve at this time, try again later"
+            - "03: Do not try again"
+            - "04: Token requirements not fulfilled for this token type"
+            - "21: Payment Cancellation"
+          type: string
         merchantReference:
           description: The reference provided for the transaction.
           type: string
@@ -9768,7 +7767,7 @@ components:
         recurring.contractTypes:
           description: The recurring contract types applicable to the transaction.
           type: string
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         recurring.firstPspReference:
           description: |-
             The `pspReference`, of the first recurring payment that created the recurring detail.
@@ -9781,7 +7780,7 @@ components:
         recurring.shopperReference:
           description: The provided reference of the shopper for a recurring transaction.
           type: string
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         recurringProcessingModel:
           description: The processing model used for the recurring transaction.
           enum:
@@ -9789,7 +7788,7 @@ components:
             - Subscription
             - UnscheduledCardOnFile
           type: string
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         referred:
           description: |-
             If the payment is referred, this field is set to true.
@@ -10254,7 +8253,6 @@ components:
             - grabpay_TH
             - grabpay_ID
             - grabpay_VN
-            - grabpay_VN
             - grabpay_PH
             - oxxo
             - gcash
@@ -10362,7 +8360,7 @@ components:
             Version of the 3D Secure 2 mobile SDK. 
             Only for `deviceChannel` set to **app**.
           type: string
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         threeDSCompInd:
           description: Completion indicator for the device fingerprinting.
           type: string
@@ -10415,14 +8413,14 @@ components:
         dsTransID:
           description: Supported for 3D Secure 2. The unique transaction identifier assigned by the Directory Server (DS) to identify a single transaction.
           type: string
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         eci:
           description: The electronic commerce indicator.
           type: string
         threeDSVersion:
           description: The version of the 3D Secure protocol.
           type: string
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         xid:
           description: Supported for 3D Secure 1. The transaction identifier (Base64-encoded, 20 bytes in a decoded form).
           format: byte

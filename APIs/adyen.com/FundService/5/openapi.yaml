@@ -101,6 +101,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve the balance(s) of an account holder.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 1
   /accountHolderTransactionList:
@@ -158,6 +160,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve a list of transactions.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 2
   /payoutAccountHolder:
@@ -219,6 +223,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Disburse a specified amount from an account to the account holder.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 3
   /refundFundsTransfer:
@@ -280,6 +286,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Make a refund of the existing transfer funds transfer.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 5
   /refundNotPaidOutTransfers:
@@ -341,6 +349,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Refund all transactions of an account since the most recent payout.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 7
   /setupBeneficiary:
@@ -402,6 +412,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Designate an account to be the beneficiary of a separate account and transfer the benefactor's current balance to the beneficiary.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 6
   /transferFunds:
@@ -463,6 +475,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Transfer funds from one platform account to another.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 4
 components:
@@ -555,7 +569,7 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -658,7 +672,7 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -713,7 +727,7 @@ components:
         bankAccountReference:
           description: Merchant reference to the bank account.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         bankAccountUUID:
           description: |
             The unique identifier (UUID) of the Bank Account.
@@ -859,7 +873,7 @@ components:
           items:
             $ref: "#/components/schemas/Amount"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pendingBalance:
           description: The list of pending balances held by the account.
           items:
@@ -975,6 +989,7 @@ components:
             - passport
             - passportNumber
             - payoutMethodCode
+            - payoutSchedule
             - personalData
             - phoneCountryCode
             - phoneNumber
@@ -995,6 +1010,7 @@ components:
             - socialSecurityNumber
             - sourceAccountCode
             - splitAccount
+            - splitConfigurationUUID
             - splitCurrency
             - splitValue
             - splits
@@ -1061,13 +1077,13 @@ components:
         merchantReference:
           description: A value that can be supplied at the discretion of the executing user in order to link multiple transactions to one another.
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         payoutMethodCode:
           description: |-
             The unique ID of the payout method held by the Account Holder to which the payout is to be made.
             If left blank, a payout instrument is automatically selected.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         payoutSpeed:
           default: STANDARD
           description: "Speed with which payouts for this account are processed. Permitted values: `STANDARD`, `SAME_DAY`."
@@ -1076,7 +1092,7 @@ components:
             - SAME_DAY
             - STANDARD
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
       required:
         - accountHolderCode
         - accountCode
@@ -1091,11 +1107,11 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         merchantReference:
           description: The value supplied by the executing user when initiating the transfer; may be used to link multiple transactions.
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         payoutSpeed:
           default: STANDARD
           description: "Speed with which payouts for this account are processed. Permitted values: `STANDARD`, `SAME_DAY`."
@@ -1104,7 +1120,7 @@ components:
             - SAME_DAY
             - STANDARD
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -1132,7 +1148,7 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         merchantReference:
           description: The value supplied by the executing user when initiating the transfer refund; may be used to link multiple transactions.
           type: string
@@ -1166,7 +1182,7 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -1212,7 +1228,7 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -1255,11 +1271,11 @@ components:
         paymentPspReference:
           description: The psp reference of the related authorisation or transfer.
           type: string
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
         payoutPspReference:
           description: The psp reference of the related payout.
           type: string
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
         pspReference:
           description: The psp reference of a transaction.
           type: string
@@ -1343,7 +1359,7 @@ components:
         merchantReference:
           description: A value that can be supplied at the discretion of the executing user in order to link multiple transactions to one another.
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         sourceAccountCode:
           description: |-
             The code of the account from which the funds are to be debited.
@@ -1366,11 +1382,11 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         merchantReference:
           description: The value supplied by the executing user when initiating the transfer; may be used to link multiple transactions.
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string

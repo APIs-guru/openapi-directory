@@ -282,7 +282,7 @@ paths:
       description: List inventory data for all VM instances in the specified zone.
       operationId: osconfig.projects.locations.instances.inventories.list
       parameters:
-        - description: "Required. The parent resource name. Format: `projects/{project}/locations/{location}/instances/{instance}` For `{project}`, either `project-number` or `project-id` can be provided. For `{instance}`, only hyphen or dash character is supported to list inventories across VMs."
+        - description: "Required. The parent resource name. Format: `projects/{project}/locations/{location}/instances/-` For `{project}`, either `project-number` or `project-id` can be provided."
           in: path
           name: parent
           required: true
@@ -424,7 +424,7 @@ paths:
       description: List vulnerability reports for all VM instances in the specified zone.
       operationId: osconfig.projects.locations.instances.vulnerabilityReports.list
       parameters:
-        - description: "Required. The parent resource name. Format: `projects/{project}/locations/{location}/instances/{instance}` For `{project}`, either `project-number` or `project-id` can be provided. For `{instance}`, only `-` character is supported to list vulnerability reports across VMs."
+        - description: "Required. The parent resource name. Format: `projects/{project}/locations/{location}/instances/-` For `{project}`, either `project-number` or `project-id` can be provided."
           in: path
           name: parent
           required: true
@@ -1059,6 +1059,9 @@ components:
         description:
           description: OS policy assignment description. Length of the description is limited to 1024 characters.
           type: string
+        etag:
+          description: The etag for this OS policy assignment. If this is provided on update, it must match the server's etag.
+          type: string
         instanceFilter:
           $ref: "#/components/schemas/OSPolicyAssignmentInstanceFilter"
           description: Required. Filter to select VMs.
@@ -1102,13 +1105,13 @@ components:
           type: string
       type: object
     OSPolicyAssignmentInstanceFilter:
-      description: Message to represent the filters to select VMs for an assignment
+      description: Filters to select target VMs for an assignment. If more than one filter criteria is specified below, a VM will be selected if and only if it satisfies all of them.
       properties:
         all:
           description: Target all VMs in the project. If true, no other criteria is permitted.
           type: boolean
         exclusionLabels:
-          description: List of label sets used for VM exclusion. If the list has more than one label set, the VM is excluded if any of the label sets are applicable for the VM. This filter is applied last in the filtering chain and therefore a VM is guaranteed to be excluded if it satisfies one of the below label sets.
+          description: List of label sets used for VM exclusion. If the list has more than one label set, the VM is excluded if any of the label sets are applicable for the VM.
           items:
             $ref: "#/components/schemas/OSPolicyAssignmentLabelSet"
           type: array
@@ -1117,11 +1120,26 @@ components:
           items:
             $ref: "#/components/schemas/OSPolicyAssignmentLabelSet"
           type: array
+        inventories:
+          description: List of inventories to select VMs. A VM is selected if its inventory data matches at least one of the following inventories.
+          items:
+            $ref: "#/components/schemas/OSPolicyAssignmentInstanceFilterInventory"
+          type: array
         osShortNames:
-          description: A VM is included if it's OS short name matches with any of the values provided in this list.
+          description: A VM is selected if it's OS short name matches with any of the values provided in this list.
           items:
             type: string
           type: array
+      type: object
+    OSPolicyAssignmentInstanceFilterInventory:
+      description: VM inventory details.
+      properties:
+        osShortName:
+          description: Required. The OS short name
+          type: string
+        osVersion:
+          description: The OS version Prefix matches are supported if asterisk(*) is provided as the last character. For example, to match all versions with a major version of `7`, specify the following value for this field `7.*` An empty string matches all OS versions.
+          type: string
       type: object
     OSPolicyAssignmentLabelSet:
       description: "Message representing label set. * A label is a key value pair set for a VM. * A LabelSet is a set of labels. * Labels within a LabelSet are ANDed. In other words, a LabelSet is applicable for a VM only if it matches all the labels in the LabelSet. * Example: A LabelSet with 2 labels: `env=prod` and `type=webserver` will only be applicable for those VMs with both labels present."
@@ -1175,8 +1193,18 @@ components:
           format: google-duration
           type: string
       type: object
+    OSPolicyInventoryFilter:
+      description: Filtering criteria to select VMs based on inventory details.
+      properties:
+        osShortName:
+          description: Required. The OS short name
+          type: string
+        osVersion:
+          description: The OS version Prefix matches are supported if asterisk(*) is provided as the last character. For example, to match all versions with a major version of `7`, specify the following value for this field `7.*` An empty string matches all OS versions.
+          type: string
+      type: object
     OSPolicyOSFilter:
-      description: The `OSFilter` is used to specify the OS filtering criteria for the resource group.
+      description: Filtering criteria to select VMs based on OS details.
       properties:
         osShortName:
           description: This should match OS short name emitted by the OS inventory agent. An empty value matches any OS.
@@ -1362,6 +1390,11 @@ components:
     OSPolicyResourceGroup:
       description: Resource groups provide a mechanism to group OS policy resources. Resource groups enable OS policy authors to create a single OS policy to be applied to VMs running different operating Systems. When the OS policy is applied to a target VM, the appropriate resource group within the OS policy is selected based on the `OSFilter` specified within the resource group.
       properties:
+        inventoryFilters:
+          description: "List of inventory filters for the resource group. The resources in this resource group are applied to the target VM if it satisfies at least one of the following inventory filters. For example, to apply this resource group to VMs running either `RHEL` or `CentOS` operating systems, specify 2 items for the list with following values: inventory_filters[0].os_short_name='rhel' and inventory_filters[1].os_short_name='centos' If the list is empty, this resource group will be applied to the target VM unconditionally."
+          items:
+            $ref: "#/components/schemas/OSPolicyInventoryFilter"
+          type: array
         osFilter:
           $ref: "#/components/schemas/OSPolicyOSFilter"
           description: Used to specify the OS filter for a resource group
@@ -1663,6 +1696,9 @@ components:
     VulnerabilityReportVulnerabilityDetailsReference:
       description: A reference for this vulnerability.
       properties:
+        source:
+          description: The source of the reference e.g. NVD.
+          type: string
         url:
           description: The url of the reference.
           type: string

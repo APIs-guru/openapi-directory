@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 servers:
   - url: https://pal-test.adyen.com/pal/servlet/Payout/v30
 info:
@@ -37,7 +37,7 @@ info:
         version: 7.0.4
       format: openapi
       url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/PayoutService-v30.json
-      version: "3.0"
+      version: "3.1"
   x-preferred: false
   x-providerName: adyen.com
   x-publicVersion: true
@@ -63,8 +63,8 @@ paths:
           content:
             application/json:
               examples:
-                confirmThirdParty-200:
-                  $ref: "#/components/examples/post-confirmThirdParty-confirmThirdParty-200"
+                confirmThirdParty:
+                  $ref: "#/components/examples/post-confirmThirdParty-confirmThirdParty"
               schema:
                 $ref: "#/components/schemas/ModifyResponse"
           description: OK - the request has succeeded.
@@ -72,8 +72,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -101,8 +101,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Confirms a payout.
-      x-addedInVersion: 10
+      tags:
+        - Reviewing
+      x-addedInVersion: "10"
       x-groupName: Reviewing
       x-sortIndex: 1
   /declineThirdParty:
@@ -125,8 +130,8 @@ paths:
           content:
             application/json:
               examples:
-                declineThirdParty-200:
-                  $ref: "#/components/examples/post-declineThirdParty-declineThirdParty-200"
+                declineThirdParty:
+                  $ref: "#/components/examples/post-declineThirdParty-declineThirdParty"
               schema:
                 $ref: "#/components/schemas/ModifyResponse"
           description: OK - the request has succeeded.
@@ -134,8 +139,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -163,8 +168,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Cancels a payout.
-      x-addedInVersion: 10
+      tags:
+        - Reviewing
+      x-addedInVersion: "10"
       x-groupName: Reviewing
       x-sortIndex: 2
   /payout:
@@ -192,8 +202,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -221,8 +231,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Pay out directly.
-      x-addedInVersion: 11
+      tags:
+        - Instant payouts
+      x-addedInVersion: "11"
       x-groupName: Instant payouts
       x-sortIndex: 1
   /storeDetail:
@@ -242,8 +257,8 @@ paths:
           content:
             application/json:
               examples:
-                storeDetail-200:
-                  $ref: "#/components/examples/post-storeDetail-storeDetail-200"
+                storeDetail:
+                  $ref: "#/components/examples/post-storeDetail-storeDetail"
               schema:
                 $ref: "#/components/schemas/StoreDetailResponse"
           description: OK - the request has succeeded.
@@ -251,8 +266,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -280,7 +295,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Stores payout details.
+      tags:
+        - Initialization
       x-groupName: Initialization
       x-sortIndex: 2
   /storeDetailAndSubmitThirdParty:
@@ -317,8 +337,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -346,8 +366,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Stores details and submits a payout.
-      x-addedInVersion: 10
+      tags:
+        - Initialization
+      x-addedInVersion: "10"
       x-groupName: Initialization
       x-sortIndex: 1
   /submitThirdParty:
@@ -376,8 +401,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -405,13 +430,18 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Submits a payout.
-      x-addedInVersion: 10
+      tags:
+        - Initialization
+      x-addedInVersion: "10"
       x-groupName: Initialization
       x-sortIndex: 3
 components:
   examples:
-    generic-400:
+    generic:
       summary: Response code 400. Bad Request.
       value:
         errorCode: "702"
@@ -424,22 +454,12 @@ components:
       value:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         originalReference: "9913140798220028"
-    post-confirmThirdParty-confirmThirdParty-200:
-      summary: Example response for request 'confirmThirdParty'
-      value:
-        pspReference: 991617894325358C
-        response: "[payout-confirm-received]"
     post-declineThirdParty-declineThirdParty:
       description: Cancel a previously submitted payout
       summary: Cancel a payout
       value:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         originalReference: "9913140798220028"
-    post-declineThirdParty-declineThirdParty-200:
-      summary: Example response for request 'declineThirdParty'
-      value:
-        pspReference: 991617894325360J
-        response: "[payout-decline-received]"
     post-payout-payout-b2c:
       description: Pay out to your sellers, customers, freelancers, etc
       summary: Instant card payout (B2C)
@@ -502,37 +522,6 @@ components:
           lastName: Smith
         shopperStatement: Payer Name
     post-storeDetail-storeDetail:
-      description: Store payment details under the PAYOUT recurring contract
-      summary: Store payout details
-      value:
-        bank:
-          bankCity: Amsterdam
-          bankName: AbnAmro
-          bic: ABNANL2A
-          countryCode: NL
-          iban: NL32ABNA0515071439
-          ownerName: Adyen
-          taxId: bankTaxId
-        billingAddress:
-          city: Amsterdam
-          country: US
-          houseNumberOrName: "17"
-          postalCode: "12345"
-          stateOrProvince: NY
-          street: Teststreet 1
-        dateOfBirth: 1990-01-01
-        entityType: Company
-        merchantAccount: YOUR_MERCHANT_ACCOUNT
-        nationality: NL
-        recurring:
-          contract: PAYOUT
-        shopperEmail: shopper@email.com
-        shopperName:
-          firstName: Adyen
-          gender: MALE
-          lastName: Test
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
-    post-storeDetail-storeDetail-200:
       summary: Example response for request 'storeDetail'
       value:
         pspReference: 991617894326362D
@@ -1118,6 +1107,11 @@ components:
             - NoShow
             - DelayedCharge
           type: string
+          x-enum:
+            - description: An incremental charge is carried out because of a no-show for a guaranteed reservation.
+              value: NoShow
+            - description: An incremental charge is carried out to process an additional payment after the original services have been rendered and the respective payment has been processed.
+              value: DelayedCharge
         networkTxReference:
           description: |-
             Allows you to link the transaction to the original or previous one in a subscription/card-on-file chain. This field is required for token-based transactions where Adyen does not tokenize the card.
@@ -1495,15 +1489,6 @@ components:
         "openinvoicedataLine[itemNr].trackingUri":
           description: URI where the customer can track their shipment.
           type: string
-        "openinvoicedataLine[itemNr].vatCategory":
-          description: |-
-            Required for AfterPay. The country-specific VAT category a product falls under.
-
-            Allowed values:
-            * High
-            * Low
-            * None.
-          type: string
     AdditionalDataOpi:
       properties:
         opi.includeTransToken:
@@ -1693,60 +1678,6 @@ components:
             * Format: [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)
             * Fixed length: 3 characters
           type: string
-        "subMerchant.subSeller[subSellerNr].creditSettlementAccount":
-          description: |-
-            The sub-merchant's bank account number with the check digit number and without punctuations or dashes.
-            * Format: Numeric
-            * Maximum length: 12 digits
-          type: string
-        "subMerchant.subSeller[subSellerNr].creditSettlementAccountType":
-          description: |
-            A two-letter indicator of the type of the sub-merchant's bank account.
-            Possible values:
-              - **CC** - Checking account
-             - **CD** - Deposit account
-             - **PG** - Payments account
-             - **PP** - Savings account
-          type: string
-        "subMerchant.subSeller[subSellerNr].creditSettlementAgency":
-          description: |-
-            The four-digit branch code of the sub-merchant's bank, without the check digit, slashes, or dashes.
-            * Format: Numeric
-            * Fixed length: 4 digits
-          type: string
-        "subMerchant.subSeller[subSellerNr].creditSettlementBank":
-          description: |-
-            The identifier of the sub-merchant's bank. In Brazil, this is the three-digit bank number format specified by the Central Bank of Brazil (BACEN).
-            * Format: Numeric
-            * Fixed length: 3 digits
-          type: string
-        "subMerchant.subSeller[subSellerNr].debitSettlementAccount":
-          description: |-
-            The sub-merchant's bank account number with the check digit number and without punctuations or dashes.
-            * Format: Numeric
-            * Maximum length: 12 digits
-          type: string
-        "subMerchant.subSeller[subSellerNr].debitSettlementAccountType":
-          description: |
-            A two-letter indicator of the type of the sub-merchant's bank account.
-            Possible values:
-              - **CC** - Checking account
-             - **CD** - Deposit account
-             - **PG** - Payments account
-             - **PP** - Savings account
-          type: string
-        "subMerchant.subSeller[subSellerNr].debitSettlementAgency":
-          description: |-
-            The four-digit branch code of the sub-merchant's bank, without the check digit, slashes, or dashes.
-            * Format: Numeric
-            * Fixed length: 4 digits
-          type: string
-        "subMerchant.subSeller[subSellerNr].debitSettlementBank":
-          description: |-
-            The identifier of the sub-merchant's bank. In Brazil, this is the three-digit bank number format specified by the Central Bank of Brazil (BACEN).
-            * Format: Numeric
-            * Fixed length: 3 digits
-          type: string
         "subMerchant.subSeller[subSellerNr].id":
           description: |-
             Required for transactions performed by registered payment facilitators. A unique identifier that you create for the sub-merchant, used by schemes to identify the sub-merchant. 
@@ -1913,7 +1844,7 @@ components:
         bankCity:
           description: The bank city.
           type: string
-          x-addedInVersion: 18
+          x-addedInVersion: "18"
         bankLocationId:
           description: The location id of the bank. The field value is `nil` in most cases.
           type: string
@@ -1949,7 +1880,7 @@ components:
         taxId:
           description: The bank account holder's tax ID.
           type: string
-          x-addedInVersion: 18
+          x-addedInVersion: "18"
     BrowserInfo:
       properties:
         acceptHeader:
@@ -2291,7 +2222,7 @@ components:
           description: |-
             The address where to send the invoice.
             > For 3D Secure 2 transactions, schemes require `billingAddress` for all browser-based and mobile implementations. Include all of the fields within this object.
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         browserInfo:
           $ref: "#/components/schemas/BrowserInfo"
           description: |-
@@ -2301,7 +2232,7 @@ components:
           description: The delay between the authorisation and scheduled auto-capture, specified in hours.
           format: int32
           type: integer
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         card:
           $ref: "#/components/schemas/Card"
           description: |-
@@ -2314,7 +2245,7 @@ components:
             Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
           format: date-time
           type: string
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         dccQuote:
           $ref: "#/components/schemas/ForexQuote"
           description: The forex quote as returned in the response of the forex service.
@@ -2330,19 +2261,19 @@ components:
             Example: 2017-07-17T13:42:40.428+01:00
           format: date-time
           type: string
-          x-addedInVersion: 8
+          x-addedInVersion: "8"
         deviceFingerprint:
           description: A string containing the shopper's device fingerprint. For more information, refer to [Device fingerprinting](https://docs.adyen.com/risk-management/device-fingerprinting).
           maxLength: 5000
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         entityType:
           description: The type of the entity the payment is processed for.
           enum:
             - NaturalPerson
             - CompanyName
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         fraudOffset:
           description: An integer value that is added to the normal fraud score. The value can be either positive or negative.
           format: int32
@@ -2353,14 +2284,14 @@ components:
         installments:
           $ref: "#/components/schemas/Installments"
           description: Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         mandate:
           $ref: "#/components/schemas/Mandate"
           description: The mandate details to initiate recurring transaction.
         mcc:
           description: The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
           type: string
-          x-addedInVersion: 12
+          x-addedInVersion: "12"
         merchantAccount:
           description: The merchant account identifier, with which you want to process the transaction.
           type: string
@@ -2370,7 +2301,7 @@ components:
             The same merchant order reference should never be reused after the first authorised attempt. If used, this field should be supplied for all incoming authorisations.
             > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
           type: string
-          x-addedInVersion: 9
+          x-addedInVersion: "9"
         metadata:
           additionalProperties:
             type: string
@@ -2381,7 +2312,7 @@ components:
             * Maximum 20 characters per key.
             * Maximum 80 characters per value. 
           type: object
-          x-addedInVersion: 17
+          x-addedInVersion: "17"
         mpiData:
           $ref: "#/components/schemas/ThreeDSecureData"
           description: Authentication data produced by an MPI (Mastercard SecureCode or Visa Secure).
@@ -2389,7 +2320,7 @@ components:
           description: The two-character country code of the shopper's nationality.
           maxLength: 2
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         orderReference:
           description: When you are doing multiple partial (gift card) payments, this is the `pspReference` of the first payment. We use this to link the multiple payments to each other. As your own reference for linking multiple payments, use the `merchantOrderReference`instead.
           type: string
@@ -2408,7 +2339,7 @@ components:
             - Subscription
             - UnscheduledCardOnFile
           type: string
-          x-addedInVersion: 30
+          x-addedInVersion: "30"
         reference:
           description: |-
             The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement.
@@ -2459,11 +2390,11 @@ components:
         shopperLocale:
           description: The combination of a language code and a country code to specify the language to be used in the payment.
           type: string
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         shopperName:
           $ref: "#/components/schemas/Name"
           description: The shopper's full name.
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         shopperReference:
           description: |-
             Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters.
@@ -2477,23 +2408,23 @@ components:
         socialSecurityNumber:
           description: The shopper's social security number.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         store:
-          description: The physical store, for which this payment is processed.
+          description: The ecommerce or point-of-sale store that is processing the payment. Used in [partner arrangement integrations](https://docs.adyen.com/platforms/platforms-for-partners#route-payments) for Adyen for Platforms.
           maxLength: 16
           minLength: 1
           type: string
-          x-addedInVersion: 23
+          x-addedInVersion: "23"
         telephoneNumber:
           description: The shopper's telephone number.
           type: string
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         totalsGroup:
           description: The reference value to aggregate sales totals in reporting. When not specified, the store field is used (if available).
           maxLength: 16
           minLength: 1
           type: string
-          x-addedInVersion: 23
+          x-addedInVersion: "23"
       required:
         - merchantAccount
         - reference
@@ -2542,7 +2473,7 @@ components:
           type: string
         md:
           description: The payment session.
-          maxLength: 10000
+          maxLength: 20000
           type: string
         paRequest:
           description: |-
@@ -2615,7 +2546,7 @@ components:
             - VISATOKENSERVICE
             - MCTOKENSERVICE
           type: string
-          x-addedInVersion: 25
+          x-addedInVersion: "25"
     ResponseAdditionalData3DSecure:
       properties:
         cardHolderInfo:
@@ -2637,6 +2568,9 @@ components:
             * **trustedBeneficiary** 
             * **transactionRiskAnalysis** 
           type: string
+        threeds2.cardEnrolled:
+          description: Indicates whether a card is enrolled for 3D Secure 2.
+          type: boolean
     ResponseAdditionalDataBillingAddress:
       properties:
         billingAddress.city:
@@ -2891,6 +2825,29 @@ components:
             The `mcBankNetReferenceNumber`, is a minimum of six characters and a maximum of nine characters long.
 
             > Contact Support Team to enable this field.
+          type: string
+        merchantAdviceCode:
+          description: |+
+            A code and message that issuers send to provide more details about the payment. This field is especially useful when implementing a retry logic for declined payments.
+
+            Possible values:
+
+            * **01: New account information available**
+
+            * **02: Cannot approve at this time, try again later**
+
+            * **03: Do not try again**
+
+            * **04: Token requirements not fulfilled for this token type**
+
+            * **21: Payment Cancellation** (only for Mastercard)
+
+          enum:
+            - "01: New account information available"
+            - "02: Cannot approve at this time, try again later"
+            - "03: Do not try again"
+            - "04: Token requirements not fulfilled for this token type"
+            - "21: Payment Cancellation"
           type: string
         merchantReference:
           description: The reference provided for the transaction.
@@ -3217,7 +3174,7 @@ components:
         billingAddress:
           $ref: "#/components/schemas/Address"
           description: The billing address.
-          x-addedInVersion: 18
+          x-addedInVersion: "18"
         card:
           $ref: "#/components/schemas/Card"
           description: |-
@@ -3231,14 +3188,14 @@ components:
             > This field is mandatory for natural persons.
           format: date-time
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         entityType:
           description: The type of the entity the payout is processed for.
           enum:
             - NaturalPerson
             - Company
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         fraudOffset:
           description: An integer value that is added to the normal fraud score. The value can be either positive or negative.
           format: int32
@@ -3253,7 +3210,7 @@ components:
             A valid value is an ISO 2-character country code (e.g. 'NL').
           maxLength: 2
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         recurring:
           $ref: "#/components/schemas/Recurring"
           description: |-
@@ -3269,7 +3226,7 @@ components:
 
             For Paysafecard it must be set to `paysafecard`.
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         shopperEmail:
           description: The shopper's email address.
           type: string
@@ -3279,18 +3236,18 @@ components:
             The shopper's name.
 
             When the `entityType` is `Company`, the `shopperName.lastName` must contain the company name.
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         shopperReference:
           description: The shopper's reference for the payment transaction.
           type: string
         shopperStatement:
           description: The description of this payout. This description is shown on the bank statement of the shopper (if this is supported by the chosen payment method).
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         socialSecurityNumber:
           description: The shopper's social security number.
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
       required:
         - merchantAccount
         - shopperEmail
@@ -3339,7 +3296,7 @@ components:
         billingAddress:
           $ref: "#/components/schemas/Address"
           description: The billing address.
-          x-addedInVersion: 18
+          x-addedInVersion: "18"
         card:
           $ref: "#/components/schemas/Card"
           description: |-
@@ -3353,14 +3310,14 @@ components:
             > This field is mandatory for natural persons.
           format: date-time
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         entityType:
           description: The type of the entity the payout is processed for.
           enum:
             - NaturalPerson
             - Company
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         fraudOffset:
           description: An integer value that is added to the normal fraud score. The value can be either positive or negative.
           format: int32
@@ -3375,7 +3332,7 @@ components:
             A valid value is an ISO 2-character country code (e.g. 'NL').
           maxLength: 2
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         recurring:
           $ref: "#/components/schemas/Recurring"
           description: |-
@@ -3388,7 +3345,7 @@ components:
 
             For Paysafecard it must be set to `paysafecard`.
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         shopperEmail:
           description: The shopper's email address.
           type: string
@@ -3398,14 +3355,14 @@ components:
             The shopper's name.
 
             When the `entityType` is `Company`, the `shopperName.lastName` must contain the company name.
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         shopperReference:
           description: The shopper's reference for the payment transaction.
           type: string
         socialSecurityNumber:
           description: The shopper's social security number.
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
       required:
         - merchantAccount
         - shopperEmail
@@ -3455,7 +3412,7 @@ components:
             > This field is required to update the existing `dateOfBirth` that is associated with this recurring contract.
           format: date-time
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         entityType:
           description: |-
             The type of the entity the payout is processed for.
@@ -3468,7 +3425,7 @@ components:
             - NaturalPerson
             - Company
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         fraudOffset:
           description: An integer value that is added to the normal fraud score. The value can be either positive or negative.
           format: int32
@@ -3484,7 +3441,7 @@ components:
 
             > This field is required to update the existing nationality that is associated with this recurring contract.
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         recurring:
           $ref: "#/components/schemas/Recurring"
           description: |-
@@ -3511,18 +3468,18 @@ components:
             In case the `entityType` is `Company`, the `shopperName.lastName` must contain the company name.
 
             > This field is required to update the existing `shopperName` associated with a recurring contract.
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         shopperReference:
           description: The shopper's reference for the payout transaction.
           type: string
         shopperStatement:
           description: The description of this payout. This description is shown on the bank statement of the shopper (if this is supported by the chosen payment method).
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         socialSecurityNumber:
           description: The shopper's social security number.
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
       required:
         - merchantAccount
         - reference

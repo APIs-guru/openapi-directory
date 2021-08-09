@@ -999,6 +999,48 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
+  "/v1/{parent}/customers:import":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Imports a Customer from the Cloud Identity associated with the provided Cloud Identity ID or domain before a TransferEntitlements call. If a linked Customer already exists and overwrite_if_exists is true, it will update that Customer's data. Possible error codes: * PERMISSION_DENIED: The reseller account making the request is different from the reseller account in the API request. * NOT_FOUND: Cloud Identity doesn't exist or was deleted. * INVALID_ARGUMENT: Required parameters are missing, or the auth_token is expired or invalid. * ALREADY_EXISTS: A customer already exists and has conflicting critical fields. Requires an overwrite. Return value: The Customer."
+      operationId: cloudchannel.accounts.customers.import
+      parameters:
+        - description: "Required. The resource name of the reseller's account. Parent takes the format: accounts/{account_id} or accounts/{account_id}/channelPartnerLinks/{channel_partner_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudChannelV1ImportCustomerRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudChannelV1Customer"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/apps.order
+          Oauth2c:
+            - https://www.googleapis.com/auth/apps.order
+      tags:
+        - accounts
   "/v1/{parent}/entitlements":
     get:
       description: "Lists Entitlements belonging to a customer. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid. Return value: A list of the customer's Entitlements."
@@ -1920,6 +1962,28 @@ components:
             - LICENSE_ASSIGNMENT_CHANGED
             - LICENSE_CAP_CHANGED
           type: string
+      type: object
+    GoogleCloudChannelV1ImportCustomerRequest:
+      description: Request message for CloudChannelService.ImportCustomer
+      properties:
+        authToken:
+          description: Optional. The super admin of the resold customer generates this token to authorize a reseller to access their Cloud Identity and purchase entitlements on their behalf. You can omit this token after authorization. See https://support.google.com/a/answer/7643790 for more details.
+          type: string
+        channelPartnerId:
+          description: Optional. Cloud Identity ID of a channel partner who will be the direct reseller for the customer's order. This field is required for 2-tier transfer scenarios and can be provided via the request Parent binding as well.
+          type: string
+        cloudIdentityId:
+          description: Required. Customer's Cloud Identity ID
+          type: string
+        customer:
+          description: "Optional. Specifies the customer that will receive imported Cloud Identity information. Format: accounts/{account_id}/customers/{customer_id}"
+          type: string
+        domain:
+          description: Required. Customer domain.
+          type: string
+        overwriteIfExists:
+          description: Required. Choose to overwrite an existing customer if found. This must be set to true if there is an existing customer with a conflicting region code or domain.
+          type: boolean
       type: object
     GoogleCloudChannelV1ListChannelPartnerLinksResponse:
       description: Response message for CloudChannelService.ListChannelPartnerLinks.

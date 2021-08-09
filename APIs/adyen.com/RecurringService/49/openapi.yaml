@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 servers:
   - url: https://pal-test.adyen.com/pal/servlet/Recurring/v49
 info:
@@ -39,7 +39,7 @@ info:
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/RecurringService-v49.json
-      version: "3.0"
+      version: "3.1"
   x-preferred: true
   x-providerName: adyen.com
   x-publicVersion: true
@@ -97,7 +97,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Disables stored payment details.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 2
   /listRecurringDetails:
@@ -152,7 +157,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Retrieves stored payment details for a shopper.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 1
   /scheduleAccountUpdater:
@@ -209,8 +219,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Schedules running of the Account Updater.
-      x-addedInVersion: 4
+      tags:
+        - General
+      x-addedInVersion: "4"
       x-groupName: General
       x-sortIndex: 3
 components:
@@ -300,7 +315,7 @@ components:
         bankCity:
           description: The bank city.
           type: string
-          x-addedInVersion: 18
+          x-addedInVersion: "18"
         bankLocationId:
           description: The location id of the bank. The field value is `nil` in most cases.
           type: string
@@ -336,7 +351,7 @@ components:
         taxId:
           description: The bank account holder's tax ID.
           type: string
-          x-addedInVersion: 18
+          x-addedInVersion: "18"
     Card:
       properties:
         cvc:
@@ -409,7 +424,7 @@ components:
             * RECURRING
             * PAYOUT
           type: string
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
         merchantAccount:
           description: The merchant account identifier with which you want to process the transaction.
           type: string
@@ -466,18 +481,18 @@ components:
           description: Date after which no further authorisations shall be performed. Only for 3D Secure 2.
           format: date-time
           type: string
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         recurringFrequency:
           description: Minimum number of days between authorisations. Only for 3D Secure 2.
           type: string
-          x-addedInVersion: 40
+          x-addedInVersion: "40"
         tokenService:
           description: The name of the token service.
           enum:
             - VISATOKENSERVICE
             - MCTOKENSERVICE
           type: string
-          x-addedInVersion: 25
+          x-addedInVersion: "25"
     RecurringDetail:
       properties:
         additionalData:
@@ -488,28 +503,28 @@ components:
 
             The additionalData object consists of entries, each of which includes the key and value.
           type: object
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         alias:
           description: |-
             The alias of the credit card number.
 
             Applies only to recurring contracts storing credit card details
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         aliasType:
           description: |-
             The alias type of the credit card number.
 
             Applies only to recurring contracts storing credit card details.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         bank:
           $ref: "#/components/schemas/BankAccount"
           description: A container for bank account data.
         billingAddress:
           $ref: "#/components/schemas/Address"
           description: The billing address.
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         card:
           $ref: "#/components/schemas/Card"
           description: A container for card data.
@@ -518,7 +533,7 @@ components:
           items:
             type: string
           type: array
-          x-addedInVersion: 12
+          x-addedInVersion: "12"
         creationDate:
           description: The date when the recurring details were created.
           format: date-time
@@ -526,25 +541,25 @@ components:
         firstPspReference:
           description: The `pspReference` of the first recurring payment that created the recurring detail.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         name:
           description: An optional descriptive name for this recurring detail.
           type: string
         paymentMethodVariant:
           description: The  type or sub-brand of a payment method used, e.g. Visa Debit, Visa Corporate, etc. For more information, refer to [PaymentMethodVariant](https://docs.adyen.com/development-resources/paymentmethodvariant).
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         recurringDetailReference:
           description: The reference that uniquely identifies the recurring detail.
           type: string
         shopperName:
           $ref: "#/components/schemas/Name"
           description: The name of the shopper.
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         socialSecurityNumber:
           description: A shopper's social security number (only in countries where it is legal to collect).
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         variant:
           description: The payment method, such as “mc", "visa", "ideal", "paypal".
           type: string
@@ -638,7 +653,7 @@ components:
             type: string
           description: "Contains additional information about the payment. Some data fields are included only if you select them first: Go to **Customer Area** > **Account** > **API URLs**."
           type: object
-          x-addedInVersion: 46
+          x-addedInVersion: "46"
         errorCode:
           description: The error code mapped to the error message.
           type: string

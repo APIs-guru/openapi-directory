@@ -94,6 +94,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a link to a Adyen-hosted onboarding page.
+      tags:
+        - Hosted Onboarding Page
       x-groupName: Hosted Onboarding Page
       x-sortIndex: 1
   /getPciQuestionnaireUrl:
@@ -148,6 +150,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a link to a PCI compliance questionnaire.
+      tags:
+        - PCI Compliance Questionnaire Page
       x-groupName: PCI Compliance Questionnaire Page
       x-sortIndex: 1
 components:
@@ -156,16 +160,19 @@ components:
     CollectInformation:
       properties:
         bankDetails:
-          description: Indicates whether [bank account details](https://docs.adyen.com/platforms/verification-checks/bank-account-check) must be collected. Defaults to **true**.
+          description: Indicates whether [bank account details](https://docs.adyen.com/platforms/verification-checks/bank-account-check) must be collected. Default is **true**.
           type: boolean
         businessDetails:
-          description: Indicates whether [business details](https://docs.adyen.com/platforms/verification-checks/company-check) must be collected. Defaults to **true**.
+          description: Indicates whether [business details](https://docs.adyen.com/platforms/verification-checks/company-check) must be collected. Default is **true**.
           type: boolean
         individualDetails:
-          description: Indicates whether [individual details](https://docs.adyen.com/platforms/verification-checks/identity-check) must be collected. Defaults to **true**.
+          description: Indicates whether [individual details](https://docs.adyen.com/platforms/verification-checks/identity-check) must be collected. Default is **true**.
+          type: boolean
+        legalArrangementDetails:
+          description: Indicates whether [legal arrangement details](https://docs.adyen.com/platforms/verification-checks/legal-arrangements) must be collected. Default is **true**.
           type: boolean
         pciQuestionnaire:
-          description: Indicates whether answers to a PCI questionnaire must be collected. Defaults to **true**.
+          description: Indicates whether answers to a [PCI questionnaire](https://docs.adyen.com/platforms/platforms-for-partners#onboard-partner-platform) must be collected. Applies only to partner platforms. Default is **true**.
           type: boolean
         shareholderDetails:
           description: Indicates whether [shareholder details](https://docs.adyen.com/platforms/verification-checks/identity-check) must be collected. Defaults to **true**.
@@ -280,6 +287,7 @@ components:
             - passport
             - passportNumber
             - payoutMethodCode
+            - payoutSchedule
             - personalData
             - phoneCountryCode
             - phoneNumber
@@ -300,6 +308,7 @@ components:
             - socialSecurityNumber
             - sourceAccountCode
             - splitAccount
+            - splitConfigurationUUID
             - splitCurrency
             - splitValue
             - splits
@@ -376,7 +385,7 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -403,7 +412,7 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string

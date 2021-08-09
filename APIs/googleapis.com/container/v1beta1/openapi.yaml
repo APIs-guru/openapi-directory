@@ -3180,6 +3180,9 @@ components:
           description: Output only. Unique id for the cluster.
           readOnly: true
           type: string
+        identityServiceConfig:
+          $ref: "#/components/schemas/IdentityServiceConfig"
+          description: Configuration for Identity Service component.
         initialClusterVersion:
           description: 'The initial Kubernetes version for this cluster. Valid versions are those found in validMasterVersions returned by getServerConfig. The version can be upgraded over time; such upgrades are reflected in currentMasterVersion and currentNodeVersion. Users may specify either explicit versions offered by Kubernetes Engine or version aliases, which have the following behavior: - "latest": picks the highest valid Kubernetes version - "1.X": picks the highest valid patch+gke.N patch in the 1.X version - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version - "1.X.Y-gke.N": picks an explicit Kubernetes version - "","-": picks the default Kubernetes version'
           type: string
@@ -3209,6 +3212,9 @@ components:
           items:
             type: string
           type: array
+        loggingConfig:
+          $ref: "#/components/schemas/LoggingConfig"
+          description: Logging configuration for the cluster.
         loggingService:
           description: "The logging service the cluster should use to write logs. Currently available options: * `logging.googleapis.com/kubernetes` - The Cloud Logging service with a Kubernetes-native resource model * `logging.googleapis.com` - The legacy Cloud Logging service (no longer available as of GKE 1.15). * `none` - no logs will be exported from the cluster. If left as an empty string,`logging.googleapis.com/kubernetes` will be used for GKE 1.14+ or `logging.googleapis.com` for earlier versions."
           type: string
@@ -3227,6 +3233,9 @@ components:
         masterIpv4CidrBlock:
           description: The IP prefix in CIDR notation to use for the hosted master network. This prefix will be used for assigning private IP addresses to the master or set of masters, as well as the ILB VIP. This field is deprecated, use private_cluster_config.master_ipv4_cidr_block instead.
           type: string
+        monitoringConfig:
+          $ref: "#/components/schemas/MonitoringConfig"
+          description: Monitoring configuration for the cluster.
         monitoringService:
           description: 'The monitoring service the cluster should use to write metrics. Currently available options: * "monitoring.googleapis.com/kubernetes" - The Cloud Monitoring service with a Kubernetes-native resource model * `monitoring.googleapis.com` - The legacy Cloud Monitoring service (no longer available as of GKE 1.15). * `none` - No metrics will be exported from the cluster. If left as an empty string,`monitoring.googleapis.com/kubernetes` will be used for GKE 1.14+ or `monitoring.googleapis.com` for earlier versions.'
           type: string
@@ -3401,6 +3410,9 @@ components:
         desiredDnsConfig:
           $ref: "#/components/schemas/DNSConfig"
           description: DNSConfig contains clusterDNS config for this cluster.
+        desiredIdentityServiceConfig:
+          $ref: "#/components/schemas/IdentityServiceConfig"
+          description: The desired Identity Service component configuration.
         desiredImageType:
           description: 'The desired image type for the node pool. NOTE: Set the "desired_node_pool" field as well.'
           type: string
@@ -3415,6 +3427,9 @@ components:
           items:
             type: string
           type: array
+        desiredLoggingConfig:
+          $ref: "#/components/schemas/LoggingConfig"
+          description: The desired logging configuration.
         desiredLoggingService:
           description: "The logging service the cluster should use to write logs. Currently available options: * `logging.googleapis.com/kubernetes` - The Cloud Logging service with a Kubernetes-native resource model * `logging.googleapis.com` - The legacy Cloud Logging service (no longer available as of GKE 1.15). * `none` - no logs will be exported from the cluster. If left as an empty string,`logging.googleapis.com/kubernetes` will be used for GKE 1.14+ or `logging.googleapis.com` for earlier versions."
           type: string
@@ -3427,6 +3442,9 @@ components:
         desiredMasterVersion:
           description: 'The Kubernetes version to change the master to. The only valid value is the latest supported version. Users may specify either explicit versions offered by Kubernetes Engine or version aliases, which have the following behavior: - "latest": picks the highest valid Kubernetes version - "1.X": picks the highest valid patch+gke.N patch in the 1.X version - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version - "1.X.Y-gke.N": picks an explicit Kubernetes version - "-": picks the default Kubernetes version'
           type: string
+        desiredMonitoringConfig:
+          $ref: "#/components/schemas/MonitoringConfig"
+          description: The desired monitoring configuration.
         desiredMonitoringService:
           description: 'The monitoring service the cluster should use to write metrics. Currently available options: * "monitoring.googleapis.com/kubernetes" - The Cloud Monitoring service with a Kubernetes-native resource model * `monitoring.googleapis.com` - The legacy Cloud Monitoring service (no longer available as of GKE 1.15). * `none` - No metrics will be exported from the cluster. If left as an empty string,`monitoring.googleapis.com/kubernetes` will be used for GKE 1.14+ or `monitoring.googleapis.com` for earlier versions.'
           type: string
@@ -3778,6 +3796,13 @@ components:
           description: Whether routes will be used for pod IPs in the cluster. This is used in conjunction with use_ip_aliases. It cannot be true if use_ip_aliases is true. If both use_ip_aliases and use_routes are false, then the server picks the default IP allocation mode
           type: boolean
       type: object
+    IdentityServiceConfig:
+      description: IdentityServiceConfig is configuration for Identity Service which allows customers to use external identity providers with the K8S API
+      properties:
+        enabled:
+          description: Whether to enable the Identity Service component
+          type: boolean
+      type: object
     IntraNodeVisibilityConfig:
       description: IntraNodeVisibilityConfig contains the desired config of the intra-node visibility on this cluster.
       properties:
@@ -3937,6 +3962,26 @@ components:
             - REGION
           type: string
       type: object
+    LoggingComponentConfig:
+      description: LoggingComponentConfig is cluster logging component configuration.
+      properties:
+        enableComponents:
+          description: Select components to collect logs. An empty set would disable all logging.
+          items:
+            enum:
+              - COMPONENT_UNSPECIFIED
+              - SYSTEM_COMPONENTS
+              - WORKLOADS
+            type: string
+          type: array
+      type: object
+    LoggingConfig:
+      description: LoggingConfig is cluster logging configuration.
+      properties:
+        componentConfig:
+          $ref: "#/components/schemas/LoggingComponentConfig"
+          description: Logging components configuration
+      type: object
     MaintenancePolicy:
       description: MaintenancePolicy defines the maintenance policy to be used for the cluster.
       properties:
@@ -4024,6 +4069,25 @@ components:
         stringValue:
           description: For metrics with custom values (ratios, visual progress, etc.).
           type: string
+      type: object
+    MonitoringComponentConfig:
+      description: MonitoringComponentConfig is cluster monitoring component configuration.
+      properties:
+        enableComponents:
+          description: Select components to collect metrics. An empty set would disable all monitoring.
+          items:
+            enum:
+              - COMPONENT_UNSPECIFIED
+              - SYSTEM_COMPONENTS
+            type: string
+          type: array
+      type: object
+    MonitoringConfig:
+      description: MonitoringConfig is cluster monitoring configuration.
+      properties:
+        componentConfig:
+          $ref: "#/components/schemas/MonitoringComponentConfig"
+          description: Monitoring components configuration
       type: object
     NetworkConfig:
       description: NetworkConfig reports the relative names of network & subnetwork.
@@ -4221,16 +4285,16 @@ components:
           description: Specifies the Auto Upgrade knobs for the node pool.
       type: object
     NodeNetworkConfig:
-      description: Parameters for node pool-level network config. Only applicable if `ip_allocation_policy.use_ip_aliases` is true.
+      description: Parameters for node pool-level network config.
       properties:
         createPodRange:
-          description: Input only. Whether to create a new range for pod IPs in this node pool. Defaults are provided for `pod_range` and `pod_ipv4_cidr_block` if they are not specified. If neither `create_pod_range` or `pod_range` are specified, the cluster-level default (`ip_allocation_policy.cluster_ipv4_cidr_block`) is used.
+          description: Input only. Whether to create a new range for pod IPs in this node pool. Defaults are provided for `pod_range` and `pod_ipv4_cidr_block` if they are not specified. If neither `create_pod_range` or `pod_range` are specified, the cluster-level default (`ip_allocation_policy.cluster_ipv4_cidr_block`) is used. Only applicable if `ip_allocation_policy.use_ip_aliases` is true. This field cannot be changed after the node pool has been created.
           type: boolean
         podIpv4CidrBlock:
-          description: The IP address range for pod IPs in this node pool. Only applicable if `create_pod_range` is true. Set to blank to have a range chosen with the default size. Set to /netmask (e.g. `/14`) to have a range chosen with a specific netmask. Set to a [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) notation (e.g. `10.96.0.0/14`) to pick a specific range to use.
+          description: The IP address range for pod IPs in this node pool. Only applicable if `create_pod_range` is true. Set to blank to have a range chosen with the default size. Set to /netmask (e.g. `/14`) to have a range chosen with a specific netmask. Set to a [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) notation (e.g. `10.96.0.0/14`) to pick a specific range to use. Only applicable if `ip_allocation_policy.use_ip_aliases` is true. This field cannot be changed after the node pool has been created.
           type: string
         podRange:
-          description: The ID of the secondary range for pod IPs. If `create_pod_range` is true, this ID is used for the new range. If `create_pod_range` is false, uses an existing secondary range with this ID.
+          description: The ID of the secondary range for pod IPs. If `create_pod_range` is true, this ID is used for the new range. If `create_pod_range` is false, uses an existing secondary range with this ID. Only applicable if `ip_allocation_policy.use_ip_aliases` is true. This field cannot be changed after the node pool has been created.
           type: string
       type: object
     NodePool:

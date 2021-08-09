@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 servers:
   - url: https://pal-test.adyen.com/pal/services/TestCard/v1
 info:
@@ -18,7 +18,7 @@ info:
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/TestCardService-v1.json
-      version: "3.0"
+      version: "3.1"
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: TestCardService
@@ -69,7 +69,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Creates one or more test card ranges.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 0
 components:

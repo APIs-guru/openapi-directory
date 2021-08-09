@@ -76,8 +76,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/post-accountHolders-success-200"
+                success:
+                  $ref: "#/components/examples/post-accountHolders-success"
               schema:
                 $ref: "#/components/schemas/AccountHolder"
           description: OK - the request has succeeded.
@@ -85,8 +85,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -94,8 +94,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -103,8 +103,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -112,8 +112,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -121,15 +121,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Create an account holder.
-      x-addedInVersion: 1
+      tags:
+        - Account holders
+      x-addedInVersion: "1"
       x-groupName: Account holders
       x-sortIndex: 1
   "/accountHolders/{id}":
@@ -148,8 +151,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/get-accountHolders-id-success-200"
+                success:
+                  $ref: "#/components/examples/get-accountHolders-id-success"
               schema:
                 $ref: "#/components/schemas/AccountHolder"
           description: OK - the request has succeeded.
@@ -157,8 +160,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -166,8 +169,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -175,8 +178,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -184,8 +187,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -193,15 +196,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve an account holder.
-      x-addedInVersion: 1
+      tags:
+        - Account holders
+      x-addedInVersion: "1"
       x-groupName: Account holders
       x-sortIndex: 3
     patch:
@@ -232,8 +238,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/patch-accountHolders-id-success-200"
+                success:
+                  $ref: "#/components/examples/patch-accountHolders-id-success"
               schema:
                 $ref: "#/components/schemas/AccountHolder"
           description: OK - the request has succeeded.
@@ -241,8 +247,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -250,8 +256,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -259,8 +265,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -268,8 +274,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -277,15 +283,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Update an account holder.
-      x-addedInVersion: 1
+      tags:
+        - Account holders
+      x-addedInVersion: "1"
       x-groupName: Account holders
       x-sortIndex: 2
   "/accountHolders/{id}/balanceAccounts":
@@ -321,8 +330,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/get-accountHolders-id-balanceAccounts-success-200"
+                success:
+                  $ref: "#/components/examples/get-accountHolders-id-balanceAccounts-success"
               schema:
                 $ref: "#/components/schemas/PaginatedBalanceAccountsResponse"
           description: OK - the request has succeeded.
@@ -330,8 +339,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -339,8 +348,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -348,8 +357,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -357,8 +366,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -366,15 +375,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve all balance accounts of a specific account holder.
-      x-addedInVersion: 1
+      tags:
+        - Account holders
+      x-addedInVersion: "1"
       x-groupName: Account holders
       x-sortIndex: 4
   /balanceAccounts:
@@ -397,8 +409,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/post-balanceAccounts-success-200"
+                success:
+                  $ref: "#/components/examples/post-balanceAccounts-success"
               schema:
                 $ref: "#/components/schemas/BalanceAccount"
           description: OK - the request has succeeded.
@@ -406,8 +418,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -415,8 +427,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -424,8 +436,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -433,8 +445,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -442,15 +454,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Create a balance account.
-      x-addedInVersion: 1
+      tags:
+        - Balance accounts
+      x-addedInVersion: "1"
       x-groupName: Balance accounts
       x-sortIndex: 1
   "/balanceAccounts/{id}":
@@ -469,8 +484,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/get-balanceAccounts-id-success-200"
+                success:
+                  $ref: "#/components/examples/get-balanceAccounts-id-success"
               schema:
                 $ref: "#/components/schemas/BalanceAccount"
           description: OK - the request has succeeded.
@@ -478,8 +493,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -487,8 +502,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -496,8 +511,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -505,8 +520,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -514,15 +529,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve a balance account.
-      x-addedInVersion: 1
+      tags:
+        - Balance accounts
+      x-addedInVersion: "1"
       x-groupName: Balance accounts
       x-sortIndex: 3
   "/balanceAccounts/{id}/paymentInstruments":
@@ -558,8 +576,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/get-balanceAccounts-id-paymentInstruments-success-200"
+                success:
+                  $ref: "#/components/examples/get-balanceAccounts-id-paymentInstruments-success"
               schema:
                 $ref: "#/components/schemas/PaginatedPaymentInstrumentsResponse"
           description: OK - the request has succeeded.
@@ -567,8 +585,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -576,8 +594,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -585,8 +603,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -594,8 +612,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -603,15 +621,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve all payment instruments for a specific balance account.
-      x-addedInVersion: 1
+      tags:
+        - Balance accounts
+      x-addedInVersion: "1"
       x-groupName: Balance accounts
       x-sortIndex: 4
   "/balancePlatforms/{id}":
@@ -630,8 +651,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/get-balancePlatforms-id-success-200"
+                success:
+                  $ref: "#/components/examples/get-balancePlatforms-id-success"
               schema:
                 $ref: "#/components/schemas/BalancePlatform"
           description: OK - the request has succeeded.
@@ -639,8 +660,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -648,8 +669,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -657,8 +678,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -666,8 +687,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -675,15 +696,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve a balance platform.
-      x-addedInVersion: 1
+      tags:
+        - General
+      x-addedInVersion: "1"
       x-groupName: General
       x-sortIndex: 0
   "/balancePlatforms/{id}/accountHolders":
@@ -719,8 +743,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/get-balancePlatforms-id-accountHolders-success-200"
+                success:
+                  $ref: "#/components/examples/get-balancePlatforms-id-accountHolders-success"
               schema:
                 $ref: "#/components/schemas/PaginatedAccountHoldersResponse"
           description: OK - the request has succeeded.
@@ -728,8 +752,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -737,8 +761,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -746,8 +770,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -755,8 +779,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -764,15 +788,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve all account holders under a specific balance platform.
-      x-addedInVersion: 1
+      tags:
+        - General
+      x-addedInVersion: "1"
       x-groupName: General
       x-sortIndex: 0
   /documents:
@@ -798,8 +825,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -807,8 +834,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -816,8 +843,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -825,8 +852,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -834,15 +861,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Upload a document for verification checks.
-      x-addedInVersion: 1
+      tags:
+        - Documents
+      x-addedInVersion: "1"
       x-groupName: Documents
       x-sortIndex: 4
   "/documents/{id}":
@@ -867,8 +897,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -876,8 +906,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -885,8 +915,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -894,8 +924,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -903,15 +933,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Delete a document.
-      x-addedInVersion: 1
+      tags:
+        - Documents
+      x-addedInVersion: "1"
       x-groupName: Documents
       x-sortIndex: 7
     get:
@@ -935,8 +968,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -944,8 +977,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -953,8 +986,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -962,8 +995,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -971,15 +1004,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve a document.
-      x-addedInVersion: 1
+      tags:
+        - Documents
+      x-addedInVersion: "1"
       x-groupName: Documents
       x-sortIndex: 5
     patch:
@@ -1008,8 +1044,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1017,8 +1053,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -1026,8 +1062,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1035,8 +1071,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1044,15 +1080,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Update a document.
-      x-addedInVersion: 1
+      tags:
+        - Documents
+      x-addedInVersion: "1"
       x-groupName: Documents
       x-sortIndex: 6
   /legalEntities:
@@ -1078,8 +1117,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1087,8 +1126,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -1096,8 +1135,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1105,8 +1144,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1114,15 +1153,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Create a legal entity.
-      x-addedInVersion: 1
+      tags:
+        - Legal entities
+      x-addedInVersion: "1"
       x-groupName: Legal entities
       x-sortIndex: 1
   "/legalEntities/{id}":
@@ -1147,8 +1189,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1156,8 +1198,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -1165,8 +1207,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1174,8 +1216,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1183,15 +1225,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve a legal entity.
-      x-addedInVersion: 1
+      tags:
+        - Legal entities
+      x-addedInVersion: "1"
       x-groupName: Legal entities
       x-sortIndex: 2
     patch:
@@ -1223,8 +1268,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1232,8 +1277,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -1241,8 +1286,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1250,8 +1295,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1259,15 +1304,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Update a legal entity.
-      x-addedInVersion: 1
+      tags:
+        - Legal entities
+      x-addedInVersion: "1"
       x-groupName: Legal entities
       x-sortIndex: 3
   /paymentInstrumentGroups:
@@ -1287,8 +1335,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/post-paymentInstrumentGroups-success-200"
+                success:
+                  $ref: "#/components/examples/post-paymentInstrumentGroups-success"
               schema:
                 $ref: "#/components/schemas/PaymentInstrumentGroup"
           description: OK - the request has succeeded.
@@ -1296,8 +1344,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1305,8 +1353,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -1314,8 +1362,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1323,8 +1371,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1332,15 +1380,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Create a payment instrument group.
-      x-addedInVersion: 1
+      tags:
+        - Payment instrument groups
+      x-addedInVersion: "1"
       x-groupName: Payment instrument groups
       x-sortIndex: 1
   "/paymentInstrumentGroups/{id}":
@@ -1359,8 +1410,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/get-paymentInstrumentGroups-id-success-200"
+                success:
+                  $ref: "#/components/examples/get-paymentInstrumentGroups-id-success"
               schema:
                 $ref: "#/components/schemas/PaymentInstrumentGroup"
           description: OK - the request has succeeded.
@@ -1368,8 +1419,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1377,8 +1428,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -1386,8 +1437,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1395,8 +1446,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1404,15 +1455,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve a payment instrument group.
-      x-addedInVersion: 1
+      tags:
+        - Payment instrument groups
+      x-addedInVersion: "1"
       x-groupName: Payment instrument groups
       x-sortIndex: 2
   "/paymentInstrumentGroups/{id}/transactionRules":
@@ -1431,8 +1485,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/get-paymentInstrumentGroups-id-transactionRules-success-200"
+                success:
+                  $ref: "#/components/examples/get-paymentInstrumentGroups-id-transactionRules-success"
               schema:
                 $ref: "#/components/schemas/TransactionRulesResponse"
           description: OK - the request has succeeded.
@@ -1440,8 +1494,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1449,8 +1503,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -1458,8 +1512,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1467,8 +1521,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1476,15 +1530,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve all transaction rules for a specific payment instruments group.
-      x-addedInVersion: 1
+      tags:
+        - Payment instrument groups
+      x-addedInVersion: "1"
       x-groupName: Payment instrument groups
       x-sortIndex: 3
   /paymentInstruments:
@@ -1509,8 +1566,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/post-paymentInstruments-success-200"
+                success:
+                  $ref: "#/components/examples/post-paymentInstruments-success"
               schema:
                 $ref: "#/components/schemas/PaymentInstrument"
           description: OK - the request has succeeded.
@@ -1518,8 +1575,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1527,8 +1584,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -1536,8 +1593,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1545,8 +1602,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1554,15 +1611,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Create a payment instrument.
-      x-addedInVersion: 1
+      tags:
+        - Payment instruments
+      x-addedInVersion: "1"
       x-groupName: Payment instruments
       x-sortIndex: 11
   "/paymentInstruments/{id}":
@@ -1581,8 +1641,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/get-paymentInstruments-id-success-200"
+                success:
+                  $ref: "#/components/examples/get-paymentInstruments-id-success"
               schema:
                 $ref: "#/components/schemas/PaymentInstrument"
           description: OK - the request has succeeded.
@@ -1590,8 +1650,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1599,8 +1659,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -1608,8 +1668,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1617,8 +1677,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1626,15 +1686,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve a payment instrument.
-      x-addedInVersion: 1
+      tags:
+        - Payment instruments
+      x-addedInVersion: "1"
       x-groupName: Payment instruments
       x-sortIndex: 13
     patch:
@@ -1662,8 +1725,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/patch-paymentInstruments-id-success-200"
+                success:
+                  $ref: "#/components/examples/patch-paymentInstruments-id-success"
               schema:
                 $ref: "#/components/schemas/PaymentInstrument"
           description: OK - the request has succeeded.
@@ -1671,8 +1734,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1680,8 +1743,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -1689,8 +1752,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1698,10 +1761,10 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
-                invalidData-422:
-                  $ref: "#/components/examples/patch-paymentInstruments-id-invalidData-422"
+                generic:
+                  $ref: "#/components/examples/generic"
+                invalidData:
+                  $ref: "#/components/examples/patch-paymentInstruments-id-invalidData"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1709,15 +1772,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Update a payment instrument.
-      x-addedInVersion: 1
+      tags:
+        - Payment instruments
+      x-addedInVersion: "1"
       x-groupName: Payment instruments
       x-sortIndex: 12
   "/paymentInstruments/{id}/transactionRules":
@@ -1736,8 +1802,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/get-paymentInstruments-id-transactionRules-success-200"
+                success:
+                  $ref: "#/components/examples/get-paymentInstruments-id-transactionRules-success"
               schema:
                 $ref: "#/components/schemas/TransactionRulesResponse"
           description: OK - the request has succeeded.
@@ -1745,8 +1811,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1754,8 +1820,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -1763,8 +1829,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1772,8 +1838,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1781,15 +1847,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve all transaction rules for a specific payment instrument.
-      x-addedInVersion: 1
+      tags:
+        - Payment instruments
+      x-addedInVersion: "1"
       x-groupName: Payment instruments
       x-sortIndex: 14
   /transactionRules:
@@ -1812,8 +1881,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/post-transactionRules-success-200"
+                success:
+                  $ref: "#/components/examples/post-transactionRules-success"
               schema:
                 $ref: "#/components/schemas/TransactionRule"
           description: OK - the request has succeeded.
@@ -1821,8 +1890,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1830,8 +1899,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -1839,8 +1908,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1848,8 +1917,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1857,15 +1926,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Create a transaction rule.
-      x-addedInVersion: 1
+      tags:
+        - Transaction rules
+      x-addedInVersion: "1"
       x-groupName: Transaction rules
       x-sortIndex: 1
   "/transactionRules/{transactionRuleId}":
@@ -1884,8 +1956,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/delete-transactionRules-transactionRuleId-success-200"
+                success:
+                  $ref: "#/components/examples/delete-transactionRules-transactionRuleId-success"
               schema:
                 $ref: "#/components/schemas/TransactionRule"
           description: OK - the request has succeeded.
@@ -1893,8 +1965,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1902,8 +1974,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -1911,8 +1983,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1920,8 +1992,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -1929,15 +2001,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Delete a transaction rule.
-      x-addedInVersion: 1
+      tags:
+        - Transaction rules
+      x-addedInVersion: "1"
       x-groupName: Transaction rules
       x-sortIndex: 5
     get:
@@ -1955,8 +2030,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/get-transactionRules-transactionRuleId-success-200"
+                success:
+                  $ref: "#/components/examples/get-transactionRules-transactionRuleId-success"
               schema:
                 $ref: "#/components/schemas/TransactionRuleResponse"
           description: OK - the request has succeeded.
@@ -1964,8 +2039,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1973,8 +2048,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -1982,8 +2057,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1991,8 +2066,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -2000,15 +2075,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve a transaction rule.
-      x-addedInVersion: 1
+      tags:
+        - Transaction rules
+      x-addedInVersion: "1"
       x-groupName: Transaction rules
       x-sortIndex: 2
     patch:
@@ -2039,8 +2117,8 @@ paths:
           content:
             application/json:
               examples:
-                success-200:
-                  $ref: "#/components/examples/patch-transactionRules-transactionRuleId-success-200"
+                success:
+                  $ref: "#/components/examples/patch-transactionRules-transactionRuleId-success"
               schema:
                 $ref: "#/components/schemas/TransactionRule"
           description: OK - the request has succeeded.
@@ -2048,8 +2126,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -2057,8 +2135,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unauthorized - authentication required.
@@ -2066,8 +2144,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -2075,8 +2153,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -2084,15 +2162,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Update a transaction rule.
-      x-addedInVersion: 1
+      tags:
+        - Transaction rules
+      x-addedInVersion: "1"
       x-groupName: Transaction rules
       x-sortIndex: 3
   /transferInstruments:
@@ -2118,8 +2199,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -2127,8 +2208,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -2136,8 +2217,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -2145,8 +2226,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -2154,15 +2235,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Create a transfer instrument.
-      x-addedInVersion: 1
+      tags:
+        - Transfer instruments
+      x-addedInVersion: "1"
       x-groupName: Transfer instruments
       x-sortIndex: 8
   "/transferInstruments/{id}":
@@ -2187,8 +2271,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -2196,8 +2280,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -2205,8 +2289,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -2214,8 +2298,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -2223,15 +2307,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Delete a transfer instrument
-      x-addedInVersion: 1
+      tags:
+        - Transfer instruments
+      x-addedInVersion: "1"
       x-groupName: Transfer instruments
       x-sortIndex: 11
     get:
@@ -2255,8 +2342,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -2264,8 +2351,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -2273,8 +2360,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -2282,8 +2369,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -2291,15 +2378,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve a transfer instrument.
-      x-addedInVersion: 1
+      tags:
+        - Transfer instruments
+      x-addedInVersion: "1"
       x-groupName: Transfer instruments
       x-sortIndex: 9
     patch:
@@ -2328,8 +2418,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -2337,8 +2427,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -2346,8 +2436,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -2355,8 +2445,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-422:
-                  $ref: "#/components/examples/generic-422"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unprocessable Entity - a request validation error.
@@ -2364,20 +2454,23 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Update a transfer instrument.
-      x-addedInVersion: 1
+      tags:
+        - Transfer instruments
+      x-addedInVersion: "1"
       x-groupName: Transfer instruments
       x-sortIndex: 10
 components:
   examples:
-    delete-transactionRules-transactionRuleId-success-200:
+    delete-transactionRules-transactionRuleId-success:
       description: Example response for successfully deleting a transaction rule
       summary: Response code - 200 OK
       value:
@@ -2392,65 +2485,14 @@ components:
         reference: myRule16378
         startDate: 2021-01-25T12:46:35.476629Z
         type: velocity
-    generic-400:
-      summary: Response code - 400 Bad request
-      value:
-        detail: Empty input which would have resulted in a null result.
-        errorCode: 00_400
-        status: 400
-        title: Bad request
-        type: https://docs.adyen.com/errors/general/bad-request
-    generic-401:
-      summary: Response code - 401 Unauthorized
-      value:
-        errorCode: 00_401
-        status: 401
-        title: Unauthorized
-        type: https://docs.adyen.com/errors/security/unauthorized
-    generic-403:
-      summary: Response code - 403 Forbidden.
-      value:
-        detail: Not the right permission to access this service.
-        errorCode: 00_403
-        status: 403
-        title: Forbidden
-        type: https://docs.adyen.com/errors/security/unauthorized
-    generic-404:
+    generic:
       summary: Response code 404 - Not found
       value:
-        detail: Not the right permission to access this service.
-        errorCode: 00_401
-        status: 401
-        title: Unauthorized
-        type: https://docs.adyen.com/errors/security/unauthorized
-    generic-422:
-      summary: Response code - 422 Unprocessable Entity.
-      value:
-        detail: The balanceAccountId can only be changed when the status is Inactive or Requested
-        errorCode: 30_031
-        requestId: 1W1UI15PLVGC9V8O
-        status: 422
-        title: Invalid Payment Instrument information provided
-        type: https://docs.adyen.com/errors/general/invalid-field-value
-    generic-500:
-      summary: Response code - 500 Internal Server Error
-      value:
-        detail: Unrecoverable error while trying to create payment instrument
-        errorCode: 00_500
-        requestId: 1WAF555PLWNTLYOQ
-        status: 500
-        title: An internal error happened
-        type: https://docs.adyen.com/errors/general/internal
-    generic-503:
-      summary: Response code - 503 Internal Server Error
-      value:
-        detail: Error while determining the payment instrument workflow
-        errorCode: 99_500
-        requestId: 1W1UHY5O2CONU4R7
-        status: 500
-        title: Error processing request
-        type: https://docs.adyen.com/errors/general/processing-error
-    get-accountHolders-id-balanceAccounts-success-200:
+        errorCode: 00_404
+        status: 404
+        title: Not found
+        type: https://docs.adyen.com/errors/general/not-found
+    get-accountHolders-id-balanceAccounts-success:
       description: Example response when retrieving a list of balance accounts under an account holder
       summary: Response code - 200 OK
       value:
@@ -2469,7 +2511,7 @@ components:
             status: Active
         hasNext: true
         hasPrevious: false
-    get-accountHolders-id-success-200:
+    get-accountHolders-id-success:
       description: Example response when retrieving an account holder
       summary: Response code - 200 OK
       value:
@@ -2488,7 +2530,7 @@ components:
         description: S.Hopper - Staff 123
         id: AH32272223222B5CM4MWJ892H
         status: Active
-    get-balanceAccounts-id-paymentInstruments-success-200:
+    get-balanceAccounts-id-paymentInstruments-success:
       description: Example response when retrieving a list of payment instruments under a balance account
       summary: Response code - 200 OK
       value:
@@ -2525,7 +2567,7 @@ components:
             issuingCountryCode: GB
             status: Active
             type: card
-    get-balanceAccounts-id-success-200:
+    get-balanceAccounts-id-success:
       description: Example response when retrieving a balance account
       summary: Response code - 200 OK
       value:
@@ -2540,7 +2582,7 @@ components:
         paymentInstruments:
           - id: PI32272223222B5BRM4FZ7J9J
         status: Active
-    get-balancePlatforms-id-accountHolders-success-200:
+    get-balancePlatforms-id-accountHolders-success:
       description: Example response when retrieving a list of account holders under a balance platform
       summary: Response code - 200 OK
       value:
@@ -2567,20 +2609,20 @@ components:
             status: Active
         hasNext: "true"
         hasPrevious: "false"
-    get-balancePlatforms-id-success-200:
+    get-balancePlatforms-id-success:
       description: Example response when retrieving a balance platform
       summary: Response code - 200 OK
       value:
         id: YOUR_BALANCE_PLATFORM
         status: Active
-    get-paymentInstrumentGroups-id-success-200:
+    get-paymentInstrumentGroups-id-success:
       description: Example response when retrieving a payment instrument group
       summary: Response code - 200 OK
       value:
         balancePlatform: YOUR_BALANCE_PLATFORM
         id: PG3227C223222B5CMD3FJFKGZ
         txVariant: mc
-    get-paymentInstrumentGroups-id-transactionRules-success-200:
+    get-paymentInstrumentGroups-id-transactionRules-success:
       description: Example response when retrieving a list of transaction rules applied to a payment instrument group
       summary: Response code - 200 OK
       value:
@@ -2607,7 +2649,7 @@ components:
             startDate: 2021-01-25T12:46:35.476629Z
             status: active
             type: velocity
-    get-paymentInstruments-id-success-200:
+    get-paymentInstruments-id-success:
       description: Example response when retrieving a payment instrument
       summary: Response code - 200 OK
       value:
@@ -2628,7 +2670,7 @@ components:
         issuingCountryCode: GB
         status: Active
         type: card
-    get-paymentInstruments-id-transactionRules-success-200:
+    get-paymentInstruments-id-transactionRules-success:
       description: Example response when retrieving a list of transaction rules applied to a payment instrument
       summary: Response code - 200 OK
       value:
@@ -2655,7 +2697,7 @@ components:
             startDate: 2021-01-25T12:46:35.476629Z
             status: active
             type: velocity
-    get-transactionRules-transactionRuleId-success-200:
+    get-transactionRules-transactionRuleId-success:
       description: Example response when retrieving a transaction rule
       summary: Response code - 200 OK
       value:
@@ -2670,7 +2712,7 @@ components:
           startDate: 2021-01-25T12:46:35.476629Z
           status: active
           type: velocity
-    patch-accountHolders-id-success-200:
+    patch-accountHolders-id-success:
       description: Example response for successfully updating the status of an account holder
       summary: Response code - 200 OK
       value:
@@ -2694,7 +2736,7 @@ components:
       summary: Update the status of an account holder.
       value:
         status: Suspended
-    patch-paymentInstruments-id-invalidData-422:
+    patch-paymentInstruments-id-invalidData:
       description: Example response for a failed request to update the balance account ID
       summary: Response code - 422 Unprocessable Entity
       value:
@@ -2704,7 +2746,7 @@ components:
         status: 422
         title: Invalid Payment Instrument information provided
         type: https://docs.adyen.com/errors/general/invalid-field-value
-    patch-paymentInstruments-id-success-200:
+    patch-paymentInstruments-id-success:
       description: Example respones for successfully updating the status of a payment instrument
       summary: Response code - 200 OK
       value:
@@ -2734,7 +2776,7 @@ components:
       summary: Update the status of a payment instrument.
       value:
         status: Suspended
-    patch-transactionRules-transactionRuleId-success-200:
+    patch-transactionRules-transactionRuleId-success:
       description: Example response for successfully updating the status of a transaction rule
       summary: Response code - 200 OK
       value:
@@ -2770,7 +2812,7 @@ components:
             number: "+315551231234"
             type: Mobile
         description: S.Hopper - Staff 123
-    post-accountHolders-success-200:
+    post-accountHolders-success:
       description: Example response for successfully creating an account holder
       summary: Response code - 200 OK
       value:
@@ -2795,7 +2837,7 @@ components:
       value:
         accountHolderId: AH32272223222B59K6ZKBBFNQ
         description: S.Hopper - Main balance account
-    post-balanceAccounts-success-200:
+    post-balanceAccounts-success:
       description: Example response for successfully creating a balance account
       summary: Response code - 200 OK
       value:
@@ -2815,7 +2857,7 @@ components:
       value:
         balancePlatform: YOUR_BALANCE_PLATFORM
         txVariant: mc
-    post-paymentInstrumentGroups-success-200:
+    post-paymentInstrumentGroups-success:
       description: Example response for successfully creating a payment instrument group
       summary: Response code - 200 OK
       value:
@@ -2865,7 +2907,7 @@ components:
         description: S. Hopper - Main card
         issuingCountryCode: GB
         type: card
-    post-paymentInstruments-success-200:
+    post-paymentInstruments-success:
       description: Example response for successfully creating a virtual card
       summary: Response code - 200 OK
       value:
@@ -2898,7 +2940,7 @@ components:
         startDate: 2021-01-21T12:46:35.476629Z
         status: inactive
         type: velocity
-    post-transactionRules-success-200:
+    post-transactionRules-success:
       description: Example response for successfully creating a transaction rule
       summary: Response code - 200 OK
       value:
@@ -3083,13 +3125,13 @@ components:
 
              Possible values: **application/pdf**, **image/jpg**, **image/jpeg**, or **image/png**. 
           type: string
-          x-deprecatedInVersion: 1
+          x-deprecatedInVersion: "1"
           x-deprecatedMessage: Field is being deprecated.
         filename:
           deprecated: true
           description: The name of the file including the file extension.
           type: string
-          x-deprecatedInVersion: 1
+          x-deprecatedInVersion: "1"
           x-deprecatedMessage: Field is being deprecated.
         pageType:
           description: |-
@@ -3102,13 +3144,27 @@ components:
     Authentication:
       properties:
         password:
-          description: The password to be used for 3D Secure password-based authentication.
+          description: |-
+            The password used for 3D Secure password-based authentication. The value must be between 1 to 30 characters and must only contain the following supported characters.
+
+            - Characters between **a-z**, **A-Z**, and **0-9**
+
+            - Special characters: **äöüßÄÖÜ+-*/ç%()=?!~#'",;:$&àùòâôûáúó**
           type: string
         phone:
           $ref: "#/components/schemas/Phone"
           description: |-
-            The phone number to be used for payment authentication.
-            >Make sure to verify that the account holder owns the phone number.
+            The phone number where the one-time password (OTP) is sent.
+
+            This object must have:
+
+            - A `type` set to **mobile**.
+
+            - A `number` with a valid country code.
+
+            - A `number` with more than 4 digits, excluding the country code.
+
+            >Make sure to verify that the card user owns the phone number.
     Balance:
       properties:
         available:
@@ -3289,7 +3345,7 @@ components:
       properties:
         authentication:
           $ref: "#/components/schemas/Authentication"
-          description: Authentication details for 3D Secure and SMS one-time password (OTP) for wallet activation.
+          description: Authentication details for 3D Secure and wallet activation.
         bin:
           description: The BIN of the card number.
           type: string
@@ -3371,7 +3427,7 @@ components:
       properties:
         authentication:
           $ref: "#/components/schemas/Authentication"
-          description: Authentication details for 3D Secure and SMS one-time password (OTP) for wallet activation.
+          description: Authentication details for 3D Secure and wallet activation.
         brand:
           description: |-
             The brand for the payment instrument.
@@ -3453,8 +3509,8 @@ components:
         attachment:
           $ref: "#/components/schemas/Attachment"
           deprecated: true
-          description: This object will be deprecated soon. Use the `attachments` array instead.
-          x-deprecatedInVersion: 1
+          description: Object that contains the document.
+          x-deprecatedInVersion: "1"
           x-deprecatedMessage: Use the `attachments` array instead.
         attachments:
           description: Array that contains the document. The array supports multiple attachments for uploading different sides or pages of one document.
@@ -3468,7 +3524,7 @@ components:
           deprecated: true
           description: The expiry date of the document, in YYYY-MM-DD format.
           type: string
-          x-deprecatedInVersion: 1
+          x-deprecatedInVersion: "1"
           x-deprecatedMessage: Field is deprecated.
         id:
           description: Unique identifier of the document.
@@ -3477,13 +3533,13 @@ components:
           deprecated: true
           description: The country where the document was issued, in the two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. For example, **US**.
           type: string
-          x-deprecatedInVersion: 1
+          x-deprecatedInVersion: "1"
           x-deprecatedMessage: Field is deprecated.
         issuerState:
           deprecated: true
           description: The state or province where the document was issued (AU only).
           type: string
-          x-deprecatedInVersion: 1
+          x-deprecatedInVersion: "1"
           x-deprecatedMessage: Field is being deprecated.
         number:
           description: The number in the document.
@@ -3493,13 +3549,16 @@ components:
           description: Contains information about the resource that owns the document.
         type:
           description: |-
-            The type of document. The possible values depend on the legal entity `type`.
+            The type of document, used when providing an ID number or uploading a document. The possible values depend on the legal entity `type`.
 
+            * When providing ID numbers for individuals, the values can be **driversLicense**, **identityCard**, **nationalIdNumber**, or **passport**.
+
+            When uploading documents:
             * For `type` **organization**, the values can be **proofOfAddress**, **registrationDocument**, **taxDocument**. 
 
-            * For `type` **individual**, the values can be **driversLicense**, **identityCard**, **nationalIdNumber**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**
+            * For `type` **individual**, the values can be **identityCard**, **driversLicense**, **proofOfNationalIdNumber**, or **proofOfResidency**.
 
-            When uploading a document owned by a [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/documents__reqParam_owner), use **bankStatement**.
+            * Use **bankStatement** to upload documents for a [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/documents__reqParam_owner).
           enum:
             - bankStatement
             - driversLicense
@@ -3554,13 +3613,13 @@ components:
           deprecated: true
           description: The expiry date of the document, in YYYY-MM-DD format.
           type: string
-          x-deprecatedInVersion: 1
+          x-deprecatedInVersion: "1"
           x-deprecatedMessage: Field is deprecated.
         issuerCountry:
           deprecated: true
           description: The country where the document was issued, in the two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. For example, **US**.
           type: string
-          x-deprecatedInVersion: 1
+          x-deprecatedInVersion: "1"
           x-deprecatedMessage: Field is deprecated.
         issuerState:
           description: The state or province where the document was issued (AU only).
@@ -3573,13 +3632,16 @@ components:
           type: string
         type:
           description: |-
-            The type of document. The possible values depend on the legal entity `type`.
+            The type of document, used when providing an ID number or uploading a document. The possible values depend on the legal entity `type`.
 
+            * When providing ID numbers for individuals, the values can be **driversLicense**, **identityCard**, **nationalIdNumber**, or **passport**.
+
+            When uploading documents:
             * For `type` **organization**, the values can be **proofOfAddress**, **registrationDocument**, **taxDocument**. 
 
-            * For `type` **individual**, the values can be **driversLicense**, **identityCard**, **nationalIdNumber**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**.
+            * For `type` **individual**, the values can be **identityCard**, **driversLicense**, **proofOfNationalIdNumber**, or **proofOfResidency**.
 
-            When uploading a document owned by a [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/documents__reqParam_owner), use **bankStatement**.
+            * Use **bankStatement** to upload documents for a [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/documents__reqParam_owner).
           enum:
             - bankStatement
             - driversLicense
@@ -3590,7 +3652,6 @@ components:
             - proofOfNationalIdNumber
             - proofOfResidency
             - registrationDocument
-            - ssn
             - taxDocument
           type: string
     Individual:
@@ -4386,7 +4447,9 @@ components:
               - ecommerce
               - moto
               - pos
+              - purchaseWithCashback
               - recurring
+              - token
               - unknown
             type: string
           type: array
@@ -4426,6 +4489,15 @@ components:
             - maxUsage
             - velocity
           type: string
+          x-enum:
+            - description: The rule provides categories (such as country and MCC) where payments must be allowed.
+              value: allowList
+            - description: The rule provides categories (such as country and MCC) where payments must be blocked.
+              value: blockList
+            - description: The rule sets limits for the maximum amount or maximum number of transactions for a given time interval.
+              value: velocity
+            - description: The rule sets limits for the maximum amount or maximum number of transactions for the lifetime of the payment instrument.
+              value: maxUsage
       required:
         - type
         - description
@@ -4503,7 +4575,9 @@ components:
               - ecommerce
               - moto
               - pos
+              - purchaseWithCashback
               - recurring
+              - token
               - unknown
             type: string
           type: array
@@ -4543,6 +4617,15 @@ components:
             - maxUsage
             - velocity
           type: string
+          x-enum:
+            - description: The rule provides categories (such as country and MCC) where payments must be allowed.
+              value: allowList
+            - description: The rule provides categories (such as country and MCC) where payments must be blocked.
+              value: blockList
+            - description: The rule sets limits for the maximum amount or maximum number of transactions for a given time interval.
+              value: velocity
+            - description: The rule sets limits for the maximum amount or maximum number of transactions for the lifetime of the payment instrument.
+              value: maxUsage
       required:
         - type
         - description

@@ -101,6 +101,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve the balance(s) of an account holder.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 1
   /accountHolderTransactionList:
@@ -158,6 +160,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Retrieve a list of transactions.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 2
   /payoutAccountHolder:
@@ -219,6 +223,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Disburse a specified amount from an account to the account holder.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 3
   /refundFundsTransfer:
@@ -280,6 +286,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Make a refund of the existing transfer funds transfer.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 5
   /refundNotPaidOutTransfers:
@@ -341,6 +349,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Refund all transactions of an account since the most recent payout.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 7
   /setupBeneficiary:
@@ -402,6 +412,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Designate an account to be the beneficiary of a separate account and transfer the benefactor's current balance to the beneficiary.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 6
   /transferFunds:
@@ -463,6 +475,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Transfer funds from one platform account to another.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 4
 components:
@@ -884,7 +898,7 @@ components:
         merchantReference:
           description: A value that can be supplied at the discretion of the executing user in order to link multiple transactions to one another.
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
       required:
         - accountHolderCode
         - accountCode
@@ -897,7 +911,7 @@ components:
         merchantReference:
           description: The value supplied by the executing user when initiating the transfer; may be used to link multiple transactions.
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -1054,11 +1068,11 @@ components:
         paymentPspReference:
           description: The psp reference of the related authorisation or transfer.
           type: string
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
         payoutPspReference:
           description: The psp reference of the related payout.
           type: string
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
         pspReference:
           description: The psp reference of a transaction.
           type: string
@@ -1142,7 +1156,7 @@ components:
         merchantReference:
           description: A value that can be supplied at the discretion of the executing user in order to link multiple transactions to one another.
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         sourceAccountCode:
           description: |-
             The code of the account from which the funds are to be debited.
@@ -1163,7 +1177,7 @@ components:
         merchantReference:
           description: The value supplied by the executing user when initiating the transfer; may be used to link multiple transactions.
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string

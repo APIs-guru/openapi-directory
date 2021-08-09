@@ -64,12 +64,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -97,12 +97,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -152,12 +152,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -205,12 +205,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -243,7 +243,7 @@ components:
         bankAggregatorDataReference:
           description: The opaque reference value returned by the Adyen API during bank account login.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         businessDetails:
           $ref: "#/components/schemas/BusinessDetails"
           description: |-
@@ -281,13 +281,16 @@ components:
           items:
             $ref: "#/components/schemas/PayoutMethod"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
+        principalBusinessAddress:
+          $ref: "#/components/schemas/ViasAddress"
+          description: The principal business address of the account holder.
         storeDetails:
           description: Array of stores associated with the account holder. Required when onboarding account holders that have an Adyen [point of sale](https://docs.adyen.com/platforms/platforms-for-pos).
           items:
             $ref: "#/components/schemas/StoreDetail"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         webAddress:
           description: The URL of the website of the account holder.
           type: string
@@ -303,12 +306,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -353,21 +356,21 @@ components:
         estimatedArrivalDate:
           $ref: "#/components/schemas/LocalDate"
           description: The estimated date of arrival.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         invalidFields:
           description: Invalid fields list.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         merchantReference:
           description: The merchant reference.
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         originalPspReference:
           description: The PSP reference of the original payout.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         payoutSpeed:
           description: "Speed with which payouts for this account are processed. Permitted values: `STANDARD`, `SAME_DAY`."
           enum:
@@ -375,7 +378,7 @@ components:
             - SAME_DAY
             - STANDARD
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         status:
           $ref: "#/components/schemas/OperationStatus"
           description: The payout status.
@@ -418,12 +421,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -452,15 +455,15 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         newStatus:
           $ref: "#/components/schemas/AccountHolderStatus"
           description: The new status of the account holder.
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         oldStatus:
           $ref: "#/components/schemas/AccountHolderStatus"
           description: The former status of the account holder.
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         reason:
           description: The reason for the status change.
           type: string
@@ -476,12 +479,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -505,13 +508,13 @@ components:
         accountHolderCode:
           description: The code of the account holder.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         invalidFields:
           description: In case the store status has not been updated, contains fields that did not pass the validation.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         newStatus:
           description: The new status of the account holder.
           enum:
@@ -521,7 +524,7 @@ components:
             - InactiveWithModifications
             - Pending
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         oldStatus:
           description: The former status of the account holder.
           enum:
@@ -531,19 +534,19 @@ components:
             - InactiveWithModifications
             - Pending
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         reason:
           description: The reason for the status change.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         store:
           description: Alphanumeric identifier of the store.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         storeReference:
           description: Store store reference.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
       required:
         - accountHolderCode
         - store
@@ -558,12 +561,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -626,12 +629,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -659,12 +662,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -695,7 +698,7 @@ components:
         kycCheckStatusData:
           $ref: "#/components/schemas/KYCCheckStatusData"
           description: Information on the verification status
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         shareholderCode:
           description: The code of the shareholder that has been verified.
           type: string
@@ -718,7 +721,7 @@ components:
         notAllowedReason:
           description: The reason why payouts (to all of the account holder's accounts) have been disabled (by Adyen). If payouts have been disabled by Adyen, this field will explain why. If this field is blank, payouts have not been disabled by Adyen.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         payoutLimit:
           $ref: "#/components/schemas/Amount"
           description: The maximum amount that payouts are limited to. Only applies if payouts are allowed but limited.
@@ -726,7 +729,7 @@ components:
           description: The payout tier that the account holder occupies.
           format: int32
           type: integer
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
     AccountProcessingState:
       properties:
         disableReason:
@@ -745,7 +748,7 @@ components:
           description: The processing tier that the account holder occupies.
           format: int32
           type: integer
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
     AccountUpdateNotification:
       properties:
         content:
@@ -754,12 +757,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -814,7 +817,7 @@ components:
         bankAccountReference:
           description: Merchant reference to the bank account.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         bankAccountUUID:
           description: |
             The unique identifier (UUID) of the Bank Account.
@@ -956,12 +959,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -994,7 +997,7 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         merchantReference:
           description: The reference provided by the merchant.
           type: string
@@ -1022,10 +1025,15 @@ components:
         legalBusinessName:
           description: The legal name of the company.
           type: string
+        listedUltimateParentCompany:
+          description: Information about the parent public company. Required if the account holder is 100% owned by a publicly listed company.
+          items:
+            $ref: "#/components/schemas/UltimateParentCompany"
+          type: array
         registrationNumber:
           description: The registration number of the company.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         shareholders:
           description: Array containing information about individuals associated with the account holder either through ownership or control. For details about how you can identify them, refer to [Identity check](https://docs.adyen.com/platforms/verification-checks/identity-check).
           items:
@@ -1046,13 +1054,13 @@ components:
         accountCode:
           description: The account code of the account that is closed.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         invalidFields:
           description: Contains field validation errors that would prevent requests from being processed.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -1069,7 +1077,7 @@ components:
             - Inactive
             - Suspended
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
       required:
         - status
     CompensateNegativeBalanceNotification:
@@ -1080,12 +1088,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -1143,31 +1151,29 @@ components:
         accountHolderStatus:
           $ref: "#/components/schemas/AccountHolderStatus"
           description: The status of the new account holder.
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         description:
           description: The description of the new account holder.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         invalidFields:
           description: A list of fields that caused the `/createAccountHolder` request to fail.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         legalEntity:
           description: The type of legal entity of the new account holder.
           enum:
             - Business
             - Individual
             - NonProfit
-            - Partnership
-            - PublicCompany
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         primaryCurrency:
           description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes), with which the prospective account holder primarily deals.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -1177,7 +1183,7 @@ components:
         verification:
           $ref: "#/components/schemas/KYCVerificationResult2"
           description: The details of KYC Verification of the account holder.
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
       required:
         - accountHolderCode
         - accountHolderStatus
@@ -1195,27 +1201,27 @@ components:
         bankAccountUUID:
           description: The bankAccountUUID of the bank account held by the account holder to couple the account with. Scheduled payouts in currencies matching the currency of this bank account will be sent to this bank account. Payouts in different currencies will be sent to a matching bank account of the account holder.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         description:
           description: The description of the account.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         invalidFields:
           description: A list of fields that caused the `/createAccount` request to fail.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         metadata:
           additionalProperties:
             type: string
           description: A set of key and value pairs containing metadata.
           type: object
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         payoutMethodCode:
           description: The payout method code held by the account holder to couple the account with. Scheduled card payouts will be sent using this payout method code.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         payoutSchedule:
           $ref: "#/components/schemas/PayoutScheduleResponse"
           description: The payout schedule of the account.
@@ -1226,7 +1232,7 @@ components:
             - SAME_DAY
             - STANDARD
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -1243,7 +1249,7 @@ components:
             - Inactive
             - Suspended
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
       required:
         - accountHolderCode
         - accountCode
@@ -1256,12 +1262,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -1421,6 +1427,7 @@ components:
             - passport
             - passportNumber
             - payoutMethodCode
+            - payoutSchedule
             - personalData
             - phoneCountryCode
             - phoneNumber
@@ -1441,6 +1448,7 @@ components:
             - socialSecurityNumber
             - sourceAccountCode
             - splitAccount
+            - splitConfigurationUUID
             - splitCurrency
             - splitValue
             - splits
@@ -1586,11 +1594,11 @@ components:
           description: The code of the check. For possible values, refer to [Verification codes](https://docs.adyen.com/platforms/verification-codes).
           format: int32
           type: integer
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         kycCheckDescription:
           description: A description of the check.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
     KYCShareholderCheckResult:
       properties:
         checks:
@@ -1626,7 +1634,7 @@ components:
           items:
             $ref: "#/components/schemas/KYCCardCheckResult"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         shareholders:
           description: The results of the checks on the shareholders.
           items:
@@ -1682,12 +1690,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -1822,12 +1830,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -1857,7 +1865,7 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         merchantReference:
           description: A value that can be supplied at the discretion of the executing user in order to link multiple transactions to one another.
           type: string
@@ -1892,12 +1900,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -1943,12 +1951,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -1981,7 +1989,7 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         lastPayout:
           $ref: "#/components/schemas/Transaction"
           description: The most recent payout (after which all transactions were scheduled to be refunded).
@@ -2036,7 +2044,7 @@ components:
         shareholderReference:
           description: Your reference for the shareholder entry.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         shareholderType:
           description: |-
             Specifies how the person is associated with the account holder. 
@@ -2177,11 +2185,11 @@ components:
             - Ecommerce
             - POS
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         splitConfigurationUUID:
           description: The unique reference for the split configuration, returned when you configure splits in your Customer Area. When this is provided, the `virtualAccount` is also required. Adyen uses the configuration and the `virtualAccount` to split funds between accounts in your platform.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         status:
           description: "The status of the store. Possible values: **Pending**, **Active**, **Inactive**, **InactiveWithModifications**, **Closed**."
           enum:
@@ -2208,11 +2216,11 @@ components:
         virtualAccount:
           description: The account holder's `accountCode` where the split amount will be sent. Required when you provide the `splitConfigurationUUID`.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         webAddress:
           description: URL of the ecommerce store.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
       required:
         - storeReference
         - merchantCategoryCode
@@ -2254,11 +2262,11 @@ components:
         paymentPspReference:
           description: The psp reference of the related authorisation or transfer.
           type: string
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
         payoutPspReference:
           description: The psp reference of the related payout.
           type: string
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
         pspReference:
           description: The psp reference of a transaction.
           type: string
@@ -2323,12 +2331,12 @@ components:
         error:
           $ref: "#/components/schemas/NotificationErrorContainer"
           description: Error information of failed request. No value provided here if no error occurred on processing.
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         eventDate:
           description: The date and time when an event has been completed.
           format: date-time
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         eventType:
           description: The event type of the notification.
           type: string
@@ -2361,11 +2369,11 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         merchantReference:
           description: The reference provided by the merchant.
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         sourceAccountCode:
           description: The code of the Account from which funds were debited.
           type: string
@@ -2380,6 +2388,34 @@ components:
         - destinationAccountCode
         - amount
         - transferCode
+    UltimateParentCompany:
+      properties:
+        address:
+          $ref: "#/components/schemas/ViasAddress"
+          description: Address of the ultimate parent company.
+        businessDetails:
+          $ref: "#/components/schemas/UltimateParentCompanyBusinessDetails"
+          description: Details about the ultimate parent company's business.
+        ultimateParentCompanyCode:
+          description: Adyen-generated unique alphanumeric identifier (UUID) for the entry, returned in the response when you create an ultimate parent company. Required when updating an existing entry in an `/updateAccountHolder` request.
+          type: string
+    UltimateParentCompanyBusinessDetails:
+      properties:
+        legalBusinessName:
+          description: The legal name of the company.
+          type: string
+        registrationNumber:
+          description: The registration number of the company.
+          type: string
+        stockExchange:
+          description: Market Identifier Code (MIC).
+          type: string
+        stockNumber:
+          description: International Securities Identification Number (ISIN).
+          type: string
+        stockTicker:
+          description: Stock Ticker symbol.
+          type: string
     UpdateAccountHolderResponse:
       properties:
         accountHolderCode:
@@ -2391,31 +2427,29 @@ components:
         accountHolderStatus:
           $ref: "#/components/schemas/AccountHolderStatus"
           description: The new status of the account holder.
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         description:
           description: The description of the account holder.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         invalidFields:
           description: in case the account holder has not been updated, contains account holder fields, that did not pass the validation.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         legalEntity:
           description: The legal entity of the account holder.
           enum:
             - Business
             - Individual
             - NonProfit
-            - Partnership
-            - PublicCompany
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         primaryCurrency:
           description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes), with which the prospective account holder primarily deals.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -2425,7 +2459,7 @@ components:
         verification:
           $ref: "#/components/schemas/KYCVerificationResult2"
           description: The details of KYC Verification of the account holder.
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
       required:
         - accountHolderStatus
         - verification
@@ -2438,27 +2472,27 @@ components:
         bankAccountUUID:
           description: The bankAccountUUID of the bank account held by the account holder to couple the account with. Scheduled payouts in currencies matching the currency of this bank account will be sent to this bank account. Payouts in different currencies will be sent to a matching bank account of the account holder.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         description:
           description: The description of the account.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         invalidFields:
           description: A list of fields that caused the `/updateAccount` request to fail.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         metadata:
           additionalProperties:
             type: string
           description: A set of key and value pairs containing metadata.
           type: object
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         payoutMethodCode:
           description: The payout method code held by the account holder to couple the account with. Scheduled card payouts will be sent using this payout method code.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         payoutSchedule:
           $ref: "#/components/schemas/PayoutScheduleResponse"
           description: The payout schedule of the account.
@@ -2469,7 +2503,7 @@ components:
             - SAME_DAY
             - STANDARD
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -2549,7 +2583,7 @@ components:
           items:
             $ref: "#/components/schemas/PersonalDocumentData"
           type: array
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
         nationality:
           description: |
             The nationality of the person represented by a two-character country code,  in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. For example, **NL**.
@@ -2616,6 +2650,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the closure of an account.
+      tags:
+        - Accounts
       x-groupName: Accounts
       x-sortIndex: 3
   /ACCOUNT_CREATED:
@@ -2638,6 +2674,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the creation of an account.
+      tags:
+        - Accounts
       x-groupName: Accounts
       x-sortIndex: 1
   /ACCOUNT_FUNDS_BELOW_THRESHOLD:
@@ -2660,6 +2698,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered when a liable account current funds are below configured threshold.
+      tags:
+        - Fund management
       x-groupName: Fund management
       x-sortIndex: 7
   /ACCOUNT_HOLDER_CREATED:
@@ -2682,6 +2722,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the creation of an account holder.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 1
   /ACCOUNT_HOLDER_PAYOUT:
@@ -2704,6 +2746,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon a payout to an account holder.
+      tags:
+        - Fund management
       x-groupName: Fund management
       x-sortIndex: 1
   /ACCOUNT_HOLDER_STATUS_CHANGE:
@@ -2726,6 +2770,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the status change of an account holder.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 4
   /ACCOUNT_HOLDER_STORE_STATUS_CHANGE:
@@ -2748,6 +2794,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the status change of a store tied to an account holder.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 4
   /ACCOUNT_HOLDER_UPCOMING_DEADLINE:
@@ -2770,6 +2818,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon an upcoming deadline.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 1
   /ACCOUNT_HOLDER_UPDATED:
@@ -2792,6 +2842,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the update of an account holder.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 2
   /ACCOUNT_HOLDER_VERIFICATION:
@@ -2814,6 +2866,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the receipt of KYC Verification results.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 3
   /ACCOUNT_UPDATED:
@@ -2836,6 +2890,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the update of an account.
+      tags:
+        - Accounts
       x-groupName: Accounts
       x-sortIndex: 2
   /BENEFICIARY_SETUP:
@@ -2858,6 +2914,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the setup of a beneficiary.
+      tags:
+        - Fund management
       x-groupName: Fund management
       x-sortIndex: 3
   /COMPENSATE_NEGATIVE_BALANCE:
@@ -2880,6 +2938,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the compensation of negative account balances.
+      tags:
+        - Fund management
       x-groupName: Fund management
       x-sortIndex: 5
   /DIRECT_DEBIT_INITIATED:
@@ -2902,6 +2962,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered when an automated direct debit is initiated.
+      tags:
+        - Fund management
       x-groupName: Fund management
       x-sortIndex: 7
   /PAYMENT_FAILURE:
@@ -2924,6 +2986,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered when a booking for a capture or refund fails.
+      tags:
+        - Other
       x-groupName: Other
       x-sortIndex: 1
   /REFUND_FUNDS_TRANSFER:
@@ -2946,6 +3010,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the transfer refund of funds between accounts.
+      tags:
+        - Fund management
       x-groupName: Fund management
       x-sortIndex: 6
   /REPORT_AVAILABLE:
@@ -2968,6 +3034,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered when a report is made available.
+      tags:
+        - Other
       x-groupName: Other
       x-sortIndex: 2
   /SCHEDULED_REFUNDS:
@@ -2990,6 +3058,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the scheduling of refunds requested by a 'Refund Transfers Not Paid Out' call.
+      tags:
+        - Fund management
       x-groupName: Fund management
       x-sortIndex: 4
   /TRANSFER_FUNDS:
@@ -3012,6 +3082,8 @@ webhooks:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Triggered upon the transfer of funds between accounts.
+      tags:
+        - Fund management
       x-groupName: Fund management
       x-sortIndex: 2
 x-groups:

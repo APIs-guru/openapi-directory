@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 servers:
   - url: https://pal-test.adyen.com/pal/servlet/Payment/v30
 info:
@@ -43,7 +43,7 @@ info:
         version: 7.0.4
       format: openapi
       url: https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/PaymentService-v30.json
-      version: "3.0"
+      version: "3.1"
   x-preferred: false
   x-providerName: adyen.com
   x-publicVersion: true
@@ -72,8 +72,8 @@ paths:
           content:
             application/json:
               examples:
-                adjustAuthorisation-200:
-                  $ref: "#/components/examples/post-adjustAuthorisation-adjustAuthorisation-200"
+                adjustAuthorisation:
+                  $ref: "#/components/examples/post-adjustAuthorisation-adjustAuthorisation"
               schema:
                 $ref: "#/components/schemas/ModificationResult"
           description: OK - the request has succeeded.
@@ -81,8 +81,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -90,8 +90,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -111,13 +111,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Increases or decreases the authorised amount.
-      x-addedInVersion: 30
+      tags:
+        - Modifications
+      x-addedInVersion: "30"
       x-groupName: Modifications
       x-sortIndex: 6
   /authorise:
@@ -155,8 +160,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -164,8 +169,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -185,12 +190,17 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Creates a payment authorisation.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 1
   /authorise3d:
@@ -219,8 +229,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -228,8 +238,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -249,12 +259,17 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Completes a 3D Secure payment authorisation.
+      tags:
+        - General
       x-groupName: General
       x-sortIndex: 2
   /cancel:
@@ -285,8 +300,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -294,8 +309,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -315,12 +330,17 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Cancels an authorised payment.
+      tags:
+        - Modifications
       x-groupName: Modifications
       x-sortIndex: 2
   /cancelOrRefund:
@@ -351,8 +371,8 @@ paths:
           content:
             application/json:
               examples:
-                cancelOrRefund-200:
-                  $ref: "#/components/examples/post-cancelOrRefund-cancelOrRefund-200"
+                cancelOrRefund:
+                  $ref: "#/components/examples/post-cancelOrRefund-cancelOrRefund"
               schema:
                 $ref: "#/components/schemas/ModificationResult"
           description: OK - the request has succeeded.
@@ -360,8 +380,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -369,8 +389,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -390,12 +410,17 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Cancels or refunds a payment.
+      tags:
+        - Modifications
       x-groupName: Modifications
       x-sortIndex: 4
   /capture:
@@ -423,8 +448,8 @@ paths:
           content:
             application/json:
               examples:
-                capture-200:
-                  $ref: "#/components/examples/post-capture-capture-200"
+                capture:
+                  $ref: "#/components/examples/post-capture-capture"
               schema:
                 $ref: "#/components/schemas/ModificationResult"
           description: OK - the request has succeeded.
@@ -432,8 +457,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -441,8 +466,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -462,12 +487,17 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Captures an authorised payment.
+      tags:
+        - Modifications
       x-groupName: Modifications
       x-sortIndex: 1
   /refund:
@@ -495,8 +525,8 @@ paths:
           content:
             application/json:
               examples:
-                refund-200:
-                  $ref: "#/components/examples/post-refund-refund-200"
+                refund:
+                  $ref: "#/components/examples/post-refund-refund"
               schema:
                 $ref: "#/components/schemas/ModificationResult"
           description: OK - the request has succeeded.
@@ -504,8 +534,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -513,8 +543,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -534,12 +564,17 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Refunds a captured payment.
+      tags:
+        - Modifications
       x-groupName: Modifications
       x-sortIndex: 3
   /technicalCancel:
@@ -566,8 +601,8 @@ paths:
           content:
             application/json:
               examples:
-                technicalCancel-200:
-                  $ref: "#/components/examples/post-technicalCancel-technicalCancel-200"
+                technicalCancel:
+                  $ref: "#/components/examples/post-technicalCancel-technicalCancel"
               schema:
                 $ref: "#/components/schemas/ModificationResult"
           description: OK - the request has succeeded.
@@ -575,8 +610,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -584,8 +619,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -605,13 +640,18 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Cancels a payment using your custom reference.
-      x-addedInVersion: 30
+      tags:
+        - Modifications
+      x-addedInVersion: "30"
       x-groupName: Modifications
       x-sortIndex: 5
   /voidPendingRefund:
@@ -638,10 +678,10 @@ paths:
           content:
             application/json:
               examples:
-                voidpendingrefund-pspreference-200:
-                  $ref: "#/components/examples/post-voidPendingRefund-voidpendingrefund-pspreference-200"
-                voidpendingrefund-tenderreference-200:
-                  $ref: "#/components/examples/post-voidPendingRefund-voidpendingrefund-tenderreference-200"
+                voidpendingrefund-pspreference:
+                  $ref: "#/components/examples/post-voidPendingRefund-voidpendingrefund-pspreference"
+                voidpendingrefund-tenderreference:
+                  $ref: "#/components/examples/post-voidPendingRefund-voidpendingrefund-tenderreference"
               schema:
                 $ref: "#/components/schemas/ModificationResult"
           description: OK - the request has succeeded.
@@ -649,8 +689,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -658,8 +698,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-401:
-                  $ref: "#/components/examples/generic-401"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Unauthorized - authentication required.
@@ -679,39 +719,29 @@ paths:
           content:
             application/json:
               examples:
-                generic-500:
-                  $ref: "#/components/examples/generic-500"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
       summary: Cancels a POS refund request before it has been completed.
-      x-addedInVersion: 25
+      tags:
+        - Modifications
+      x-addedInVersion: "25"
       x-groupName: Modifications
       x-sortIndex: 7
 components:
   examples:
-    generic-400:
-      summary: Response code 400. Bad request.
-      value:
-        errorCode: "702"
-        errorType: validation
-        message: 'Unexpected input: ", expected: }'
-        status: 400
-    generic-401:
+    generic:
       summary: Response code 401. Unauthorized.
       value:
         errorCode: "000"
         errorType: security
         message: HTTP Status Response - Unauthorized
         status: 401
-    generic-500:
-      summary: Response code 500. Internal server error.
-      value:
-        errorCode: "905"
-        errorType: configuration
-        message: Payment details are not supported
-        pspReference: "8516091485743033"
-        status: 500
     post-adjustAuthorisation-adjustAuthorisation:
       summary: Increases or decreases the authorised amount
       value:
@@ -721,11 +751,6 @@ components:
           value: 1700
         originalReference: COPY_PSP_REFERENCE_FROM_AUTHORISE_RESPONSE
         reference: YourModificationReference
-    post-adjustAuthorisation-adjustAuthorisation-200:
-      summary: Example response for request 'adjustAuthorisation'
-      value:
-        pspReference: 851617892360718D
-        response: "[adjustAuthorisation-received]"
     post-authorise-authorise-3dsecure:
       summary: Initiate a 3D Secure payment
       value:
@@ -854,11 +879,6 @@ components:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         originalReference: COPY_PSP_REFERENCE_FROM_AUTHORISE_RESPONSE
         reference: YourModificationReference
-    post-cancelOrRefund-cancelOrRefund-200:
-      summary: Example response for request 'cancelOrRefund'
-      value:
-        pspReference: 851617892359708H
-        response: "[cancelOrRefund-received]"
     post-capture-capture:
       summary: Capture an authorised payment
       value:
@@ -868,11 +888,6 @@ components:
           value: 500
         originalReference: COPY_PSP_REFERENCE_FROM_AUTHORISE_RESPONSE
         reference: YOUR_REFERENCE
-    post-capture-capture-200:
-      summary: Example response for request 'capture'
-      value:
-        pspReference: 861617892359057J
-        response: "[capture-received]"
     post-refund-refund:
       summary: Refund a captured payment
       value:
@@ -882,18 +897,7 @@ components:
           value: 500
         originalReference: COPY_PSP_REFERENCE_FROM_AUTHORISE_RESPONSE
         reference: YOUR_REFERENCE
-    post-refund-refund-200:
-      summary: Example response for request 'refund'
-      value:
-        pspReference: 861617892360059B
-        response: "[refund-received]"
     post-technicalCancel-technicalCancel:
-      summary: Cancel a payment without a PSP reference
-      value:
-        merchantAccount: YOUR_MERCHANT_ACCOUNT
-        originalMerchantReference: YOUR_MERCHANT_REFERENCE
-        reference: YOUR_MODIFICATION_REFERENCE
-    post-technicalCancel-technicalCancel-200:
       summary: Example response for request 'technicalCancel'
       value:
         pspReference: 881617892361436J
@@ -903,18 +907,7 @@ components:
       value:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         originalReference: "9914748988390044"
-    post-voidPendingRefund-voidpendingrefund-pspreference-200:
-      summary: Example response for request 'voidpendingrefund-pspreference'
-      value:
-        pspReference: 861617892360062F
-        response: "[voidPendingRefund-received]"
     post-voidPendingRefund-voidpendingrefund-tenderreference:
-      summary: Cancels a POS refund request with tender reference before it has been completed
-      value:
-        merchantAccount: YOUR_MERCHANT_ACCOUNT
-        tenderReference: 5Iw8001176969533005
-        uniqueTerminalId: VX820-123456789
-    post-voidPendingRefund-voidpendingrefund-tenderreference-200:
       summary: Example response for request 'voidpendingrefund-tenderreference'
       value:
         pspReference: 881617892360409G
@@ -1355,6 +1348,11 @@ components:
             - NoShow
             - DelayedCharge
           type: string
+          x-enum:
+            - description: An incremental charge is carried out because of a no-show for a guaranteed reservation.
+              value: NoShow
+            - description: An incremental charge is carried out to process an additional payment after the original services have been rendered and the respective payment has been processed.
+              value: DelayedCharge
         networkTxReference:
           description: |-
             Allows you to link the transaction to the original or previous one in a subscription/card-on-file chain. This field is required for token-based transactions where Adyen does not tokenize the card.
@@ -1737,15 +1735,6 @@ components:
         "openinvoicedataLine[itemNr].trackingUri":
           description: URI where the customer can track their shipment.
           type: string
-        "openinvoicedataLine[itemNr].vatCategory":
-          description: |-
-            Required for AfterPay. The country-specific VAT category a product falls under.
-
-            Allowed values:
-            * High
-            * Low
-            * None.
-          type: string
     AdditionalDataOpi:
       properties:
         opi.includeTransToken:
@@ -1935,60 +1924,6 @@ components:
             * Format: [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)
             * Fixed length: 3 characters
           type: string
-        "subMerchant.subSeller[subSellerNr].creditSettlementAccount":
-          description: |-
-            The sub-merchant's bank account number with the check digit number and without punctuations or dashes.
-            * Format: Numeric
-            * Maximum length: 12 digits
-          type: string
-        "subMerchant.subSeller[subSellerNr].creditSettlementAccountType":
-          description: |
-            A two-letter indicator of the type of the sub-merchant's bank account.
-            Possible values:
-              - **CC** - Checking account
-             - **CD** - Deposit account
-             - **PG** - Payments account
-             - **PP** - Savings account
-          type: string
-        "subMerchant.subSeller[subSellerNr].creditSettlementAgency":
-          description: |-
-            The four-digit branch code of the sub-merchant's bank, without the check digit, slashes, or dashes.
-            * Format: Numeric
-            * Fixed length: 4 digits
-          type: string
-        "subMerchant.subSeller[subSellerNr].creditSettlementBank":
-          description: |-
-            The identifier of the sub-merchant's bank. In Brazil, this is the three-digit bank number format specified by the Central Bank of Brazil (BACEN).
-            * Format: Numeric
-            * Fixed length: 3 digits
-          type: string
-        "subMerchant.subSeller[subSellerNr].debitSettlementAccount":
-          description: |-
-            The sub-merchant's bank account number with the check digit number and without punctuations or dashes.
-            * Format: Numeric
-            * Maximum length: 12 digits
-          type: string
-        "subMerchant.subSeller[subSellerNr].debitSettlementAccountType":
-          description: |
-            A two-letter indicator of the type of the sub-merchant's bank account.
-            Possible values:
-              - **CC** - Checking account
-             - **CD** - Deposit account
-             - **PG** - Payments account
-             - **PP** - Savings account
-          type: string
-        "subMerchant.subSeller[subSellerNr].debitSettlementAgency":
-          description: |-
-            The four-digit branch code of the sub-merchant's bank, without the check digit, slashes, or dashes.
-            * Format: Numeric
-            * Fixed length: 4 digits
-          type: string
-        "subMerchant.subSeller[subSellerNr].debitSettlementBank":
-          description: |-
-            The identifier of the sub-merchant's bank. In Brazil, this is the three-digit bank number format specified by the Central Bank of Brazil (BACEN).
-            * Format: Numeric
-            * Fixed length: 3 digits
-          type: string
         "subMerchant.subSeller[subSellerNr].id":
           description: |-
             Required for transactions performed by registered payment facilitators. A unique identifier that you create for the sub-merchant, used by schemes to identify the sub-merchant. 
@@ -2169,7 +2104,7 @@ components:
         originalMerchantReference:
           description: The original merchant reference to cancel.
           type: string
-          x-addedInVersion: 30
+          x-addedInVersion: "30"
         originalReference:
           description: |+
             The original pspReference of the payment to modify.
@@ -2186,11 +2121,11 @@ components:
         tenderReference:
           description: The transaction reference provided by the PED. For point-of-sale integrations only.
           type: string
-          x-addedInVersion: 25
+          x-addedInVersion: "25"
         uniqueTerminalId:
           description: Unique terminal ID for the PED that originally processed the request. For point-of-sale integrations only.
           type: string
-          x-addedInVersion: 25
+          x-addedInVersion: "25"
       required:
         - merchantAccount
         - modificationAmount
@@ -2217,7 +2152,7 @@ components:
         bankCity:
           description: The bank city.
           type: string
-          x-addedInVersion: 18
+          x-addedInVersion: "18"
         bankLocationId:
           description: The location id of the bank. The field value is `nil` in most cases.
           type: string
@@ -2253,7 +2188,7 @@ components:
         taxId:
           description: The bank account holder's tax ID.
           type: string
-          x-addedInVersion: 18
+          x-addedInVersion: "18"
     BrowserInfo:
       properties:
         acceptHeader:
@@ -2302,7 +2237,7 @@ components:
         originalMerchantReference:
           description: The original merchant reference to cancel.
           type: string
-          x-addedInVersion: 30
+          x-addedInVersion: "30"
         originalReference:
           description: |+
             The original pspReference of the payment to modify.
@@ -2319,11 +2254,11 @@ components:
         tenderReference:
           description: The transaction reference provided by the PED. For point-of-sale integrations only.
           type: string
-          x-addedInVersion: 25
+          x-addedInVersion: "25"
         uniqueTerminalId:
           description: Unique terminal ID for the PED that originally processed the request. For point-of-sale integrations only.
           type: string
-          x-addedInVersion: 25
+          x-addedInVersion: "25"
       required:
         - merchantAccount
         - originalReference
@@ -2360,7 +2295,7 @@ components:
         originalMerchantReference:
           description: The original merchant reference to cancel.
           type: string
-          x-addedInVersion: 30
+          x-addedInVersion: "30"
         originalReference:
           description: |+
             The original pspReference of the payment to modify.
@@ -2377,11 +2312,11 @@ components:
         tenderReference:
           description: The transaction reference provided by the PED. For point-of-sale integrations only.
           type: string
-          x-addedInVersion: 25
+          x-addedInVersion: "25"
         uniqueTerminalId:
           description: Unique terminal ID for the PED that originally processed the request. For point-of-sale integrations only.
           type: string
-          x-addedInVersion: 25
+          x-addedInVersion: "25"
       required:
         - merchantAccount
         - originalReference
@@ -2421,7 +2356,7 @@ components:
         originalMerchantReference:
           description: The original merchant reference to cancel.
           type: string
-          x-addedInVersion: 30
+          x-addedInVersion: "30"
         originalReference:
           description: |+
             The original pspReference of the payment to modify.
@@ -2438,11 +2373,11 @@ components:
         tenderReference:
           description: The transaction reference provided by the PED. For point-of-sale integrations only.
           type: string
-          x-addedInVersion: 25
+          x-addedInVersion: "25"
         uniqueTerminalId:
           description: Unique terminal ID for the PED that originally processed the request. For point-of-sale integrations only.
           type: string
-          x-addedInVersion: 25
+          x-addedInVersion: "25"
       required:
         - merchantAccount
         - modificationAmount
@@ -2741,7 +2676,7 @@ components:
           description: |-
             The address where to send the invoice.
             > For 3D Secure 2 transactions, schemes require `billingAddress` for all browser-based and mobile implementations. Include all of the fields within this object.
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         browserInfo:
           $ref: "#/components/schemas/BrowserInfo"
           description: |-
@@ -2751,7 +2686,7 @@ components:
           description: The delay between the authorisation and scheduled auto-capture, specified in hours.
           format: int32
           type: integer
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         card:
           $ref: "#/components/schemas/Card"
           description: |-
@@ -2764,7 +2699,7 @@ components:
             Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
           format: date-time
           type: string
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         dccQuote:
           $ref: "#/components/schemas/ForexQuote"
           description: The forex quote as returned in the response of the forex service.
@@ -2780,19 +2715,19 @@ components:
             Example: 2017-07-17T13:42:40.428+01:00
           format: date-time
           type: string
-          x-addedInVersion: 8
+          x-addedInVersion: "8"
         deviceFingerprint:
           description: A string containing the shopper's device fingerprint. For more information, refer to [Device fingerprinting](https://docs.adyen.com/risk-management/device-fingerprinting).
           maxLength: 5000
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         entityType:
           description: The type of the entity the payment is processed for.
           enum:
             - NaturalPerson
             - CompanyName
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         fraudOffset:
           description: An integer value that is added to the normal fraud score. The value can be either positive or negative.
           format: int32
@@ -2800,14 +2735,14 @@ components:
         installments:
           $ref: "#/components/schemas/Installments"
           description: Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         mandate:
           $ref: "#/components/schemas/Mandate"
           description: The mandate details to initiate recurring transaction.
         mcc:
           description: The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
           type: string
-          x-addedInVersion: 12
+          x-addedInVersion: "12"
         merchantAccount:
           description: The merchant account identifier, with which you want to process the transaction.
           type: string
@@ -2817,7 +2752,7 @@ components:
             The same merchant order reference should never be reused after the first authorised attempt. If used, this field should be supplied for all incoming authorisations.
             > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
           type: string
-          x-addedInVersion: 9
+          x-addedInVersion: "9"
         metadata:
           additionalProperties:
             type: string
@@ -2828,7 +2763,7 @@ components:
             * Maximum 20 characters per key.
             * Maximum 80 characters per value. 
           type: object
-          x-addedInVersion: 17
+          x-addedInVersion: "17"
         mpiData:
           $ref: "#/components/schemas/ThreeDSecureData"
           description: Authentication data produced by an MPI (Mastercard SecureCode or Visa Secure).
@@ -2836,7 +2771,7 @@ components:
           description: The two-character country code of the shopper's nationality.
           maxLength: 2
           type: string
-          x-addedInVersion: 24
+          x-addedInVersion: "24"
         orderReference:
           description: When you are doing multiple partial (gift card) payments, this is the `pspReference` of the first payment. We use this to link the multiple payments to each other. As your own reference for linking multiple payments, use the `merchantOrderReference`instead.
           type: string
@@ -2855,7 +2790,7 @@ components:
             - Subscription
             - UnscheduledCardOnFile
           type: string
-          x-addedInVersion: 30
+          x-addedInVersion: "30"
         reference:
           description: |-
             The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement.
@@ -2906,11 +2841,11 @@ components:
         shopperLocale:
           description: The combination of a language code and a country code to specify the language to be used in the payment.
           type: string
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         shopperName:
           $ref: "#/components/schemas/Name"
           description: The shopper's full name.
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         shopperReference:
           description: |-
             Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters.
@@ -2924,23 +2859,23 @@ components:
         socialSecurityNumber:
           description: The shopper's social security number.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         store:
-          description: The physical store, for which this payment is processed.
+          description: The ecommerce or point-of-sale store that is processing the payment. Used in [partner arrangement integrations](https://docs.adyen.com/platforms/platforms-for-partners#route-payments) for Adyen for Platforms.
           maxLength: 16
           minLength: 1
           type: string
-          x-addedInVersion: 23
+          x-addedInVersion: "23"
         telephoneNumber:
           description: The shopper's telephone number.
           type: string
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         totalsGroup:
           description: The reference value to aggregate sales totals in reporting. When not specified, the store field is used (if available).
           maxLength: 16
           minLength: 1
           type: string
-          x-addedInVersion: 23
+          x-addedInVersion: "23"
       required:
         - merchantAccount
         - reference
@@ -2984,7 +2919,7 @@ components:
           description: |-
             The address where to send the invoice.
             > For 3D Secure 2 transactions, schemes require `billingAddress` for all browser-based and mobile implementations. Include all of the fields within this object.
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         browserInfo:
           $ref: "#/components/schemas/BrowserInfo"
           description: |-
@@ -2994,7 +2929,7 @@ components:
           description: The delay between the authorisation and scheduled auto-capture, specified in hours.
           format: int32
           type: integer
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         dateOfBirth:
           description: |-
             The shopper's date of birth.
@@ -3002,7 +2937,7 @@ components:
             Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
           format: date-time
           type: string
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         dccQuote:
           $ref: "#/components/schemas/ForexQuote"
           description: The forex quote as returned in the response of the forex service.
@@ -3018,12 +2953,12 @@ components:
             Example: 2017-07-17T13:42:40.428+01:00
           format: date-time
           type: string
-          x-addedInVersion: 8
+          x-addedInVersion: "8"
         deviceFingerprint:
           description: A string containing the shopper's device fingerprint. For more information, refer to [Device fingerprinting](https://docs.adyen.com/risk-management/device-fingerprinting).
           maxLength: 5000
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         fraudOffset:
           description: An integer value that is added to the normal fraud score. The value can be either positive or negative.
           format: int32
@@ -3031,11 +2966,11 @@ components:
         installments:
           $ref: "#/components/schemas/Installments"
           description: Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         mcc:
           description: The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
           type: string
-          x-addedInVersion: 12
+          x-addedInVersion: "12"
         md:
           description: The payment session identifier returned by the card issuer.
           type: string
@@ -3048,7 +2983,7 @@ components:
             The same merchant order reference should never be reused after the first authorised attempt. If used, this field should be supplied for all incoming authorisations.
             > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
           type: string
-          x-addedInVersion: 9
+          x-addedInVersion: "9"
         metadata:
           additionalProperties:
             type: string
@@ -3059,7 +2994,7 @@ components:
             * Maximum 20 characters per key.
             * Maximum 80 characters per value. 
           type: object
-          x-addedInVersion: 17
+          x-addedInVersion: "17"
         orderReference:
           description: When you are doing multiple partial (gift card) payments, this is the `pspReference` of the first payment. We use this to link the multiple payments to each other. As your own reference for linking multiple payments, use the `merchantOrderReference`instead.
           type: string
@@ -3081,7 +3016,7 @@ components:
             - Subscription
             - UnscheduledCardOnFile
           type: string
-          x-addedInVersion: 30
+          x-addedInVersion: "30"
         reference:
           description: |-
             The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement.
@@ -3132,11 +3067,11 @@ components:
         shopperLocale:
           description: The combination of a language code and a country code to specify the language to be used in the payment.
           type: string
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         shopperName:
           $ref: "#/components/schemas/Name"
           description: The shopper's full name.
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         shopperReference:
           description: |-
             Your reference to uniquely identify this shopper (for example, user ID or account ID). Minimum length: 3 characters.
@@ -3150,23 +3085,23 @@ components:
         socialSecurityNumber:
           description: The shopper's social security number.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         store:
-          description: The physical store, for which this payment is processed.
+          description: The ecommerce or point-of-sale store that is processing the payment. Used in [partner arrangement integrations](https://docs.adyen.com/platforms/platforms-for-partners#route-payments) for Adyen for Platforms.
           maxLength: 16
           minLength: 1
           type: string
-          x-addedInVersion: 23
+          x-addedInVersion: "23"
         telephoneNumber:
           description: The shopper's telephone number.
           type: string
-          x-addedInVersion: 7
+          x-addedInVersion: "7"
         totalsGroup:
           description: The reference value to aggregate sales totals in reporting. When not specified, the store field is used (if available).
           maxLength: 16
           minLength: 1
           type: string
-          x-addedInVersion: 23
+          x-addedInVersion: "23"
       required:
         - merchantAccount
         - paResponse
@@ -3215,7 +3150,7 @@ components:
           type: string
         md:
           description: The payment session.
-          maxLength: 10000
+          maxLength: 20000
           type: string
         paRequest:
           description: |-
@@ -3288,7 +3223,7 @@ components:
             - VISATOKENSERVICE
             - MCTOKENSERVICE
           type: string
-          x-addedInVersion: 25
+          x-addedInVersion: "25"
     RefundRequest:
       properties:
         additionalData:
@@ -3325,7 +3260,7 @@ components:
         originalMerchantReference:
           description: The original merchant reference to cancel.
           type: string
-          x-addedInVersion: 30
+          x-addedInVersion: "30"
         originalReference:
           description: |+
             The original pspReference of the payment to modify.
@@ -3342,11 +3277,11 @@ components:
         tenderReference:
           description: The transaction reference provided by the PED. For point-of-sale integrations only.
           type: string
-          x-addedInVersion: 25
+          x-addedInVersion: "25"
         uniqueTerminalId:
           description: Unique terminal ID for the PED that originally processed the request. For point-of-sale integrations only.
           type: string
-          x-addedInVersion: 25
+          x-addedInVersion: "25"
       required:
         - merchantAccount
         - modificationAmount
@@ -3372,6 +3307,9 @@ components:
             * **trustedBeneficiary** 
             * **transactionRiskAnalysis** 
           type: string
+        threeds2.cardEnrolled:
+          description: Indicates whether a card is enrolled for 3D Secure 2.
+          type: boolean
     ResponseAdditionalDataBillingAddress:
       properties:
         billingAddress.city:
@@ -3626,6 +3564,29 @@ components:
             The `mcBankNetReferenceNumber`, is a minimum of six characters and a maximum of nine characters long.
 
             > Contact Support Team to enable this field.
+          type: string
+        merchantAdviceCode:
+          description: |+
+            A code and message that issuers send to provide more details about the payment. This field is especially useful when implementing a retry logic for declined payments.
+
+            Possible values:
+
+            * **01: New account information available**
+
+            * **02: Cannot approve at this time, try again later**
+
+            * **03: Do not try again**
+
+            * **04: Token requirements not fulfilled for this token type**
+
+            * **21: Payment Cancellation** (only for Mastercard)
+
+          enum:
+            - "01: New account information available"
+            - "02: Cannot approve at this time, try again later"
+            - "03: Do not try again"
+            - "04: Token requirements not fulfilled for this token type"
+            - "21: Payment Cancellation"
           type: string
         merchantReference:
           description: The reference provided for the transaction.
@@ -3970,7 +3931,7 @@ components:
         originalMerchantReference:
           description: The original merchant reference to cancel.
           type: string
-          x-addedInVersion: 30
+          x-addedInVersion: "30"
         reference:
           description: |-
             Your reference for the payment modification. This reference is visible in Customer Area and in reports.
@@ -3979,11 +3940,11 @@ components:
         tenderReference:
           description: The transaction reference provided by the PED. For point-of-sale integrations only.
           type: string
-          x-addedInVersion: 25
+          x-addedInVersion: "25"
         uniqueTerminalId:
           description: Unique terminal ID for the PED that originally processed the request. For point-of-sale integrations only.
           type: string
-          x-addedInVersion: 25
+          x-addedInVersion: "25"
       required:
         - merchantAccount
         - originalMerchantReference
@@ -4065,7 +4026,7 @@ components:
         originalMerchantReference:
           description: The original merchant reference to cancel.
           type: string
-          x-addedInVersion: 30
+          x-addedInVersion: "30"
         originalReference:
           description: |+
             The original pspReference of the payment to modify.
@@ -4082,11 +4043,11 @@ components:
         tenderReference:
           description: The transaction reference provided by the PED. For point-of-sale integrations only.
           type: string
-          x-addedInVersion: 25
+          x-addedInVersion: "25"
         uniqueTerminalId:
           description: Unique terminal ID for the PED that originally processed the request. For point-of-sale integrations only.
           type: string
-          x-addedInVersion: 25
+          x-addedInVersion: "25"
       required:
         - merchantAccount
   securitySchemes:

@@ -71,10 +71,14 @@ paths:
           required: true
           schema:
             type: string
-        - description: The standard list filter.
+        - description: Inventory view indicating what information should be included in the inventory resource. If unspecified, the default view is BASIC.
           in: query
-          name: filter
+          name: view
           schema:
+            enum:
+              - INVENTORY_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
             type: string
         - description: The standard list page size.
           in: query
@@ -186,6 +190,67 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListPatchJobInstanceDetailsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/inventories":
+    get:
+      description: List inventory data for all VM instances in the specified zone.
+      operationId: osconfig.projects.locations.instances.inventories.list
+      parameters:
+        - description: "Required. The parent resource name. Format: `projects/{project}/locations/{location}/instances/-` For `{project}`, either `project-number` or `project-id` can be provided."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: If provided, this field specifies the criteria that must be met by a `Inventory` API resource to be included in the response.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of results to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A pagination token returned from a previous call to `ListInventories` that indicates where this listing should continue from.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Inventory view indicating what information should be included in the inventory resource. If unspecified, the default view is BASIC.
+          in: query
+          name: view
+          schema:
+            enum:
+              - INVENTORY_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListInventoriesResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -381,6 +446,58 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{parent}/vulnerabilityReports":
+    get:
+      description: List vulnerability reports for all VM instances in the specified zone.
+      operationId: osconfig.projects.locations.instances.vulnerabilityReports.list
+      parameters:
+        - description: "Required. The parent resource name. Format: `projects/{project}/locations/{location}/instances/-` For `{project}`, either `project-number` or `project-id` can be provided."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: If provided, this field specifies the criteria that must be met by a `vulnerabilityReport` API resource to be included in the response.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of results to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A pagination token returned from a previous call to `ListVulnerabilityReports` that indicates where this listing should continue from.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListVulnerabilityReportsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:
@@ -476,6 +593,84 @@ components:
             - TYPE_UNSPECIFIED
             - DIST
             - UPGRADE
+          type: string
+      type: object
+    CVSSv3:
+      description: Common Vulnerability Scoring System version 3. For details, see https://www.first.org/cvss/specification-document
+      properties:
+        attackComplexity:
+          description: This metric describes the conditions beyond the attacker's control that must exist in order to exploit the vulnerability.
+          enum:
+            - ATTACK_COMPLEXITY_UNSPECIFIED
+            - ATTACK_COMPLEXITY_LOW
+            - ATTACK_COMPLEXITY_HIGH
+          type: string
+        attackVector:
+          description: This metric reflects the context by which vulnerability exploitation is possible.
+          enum:
+            - ATTACK_VECTOR_UNSPECIFIED
+            - ATTACK_VECTOR_NETWORK
+            - ATTACK_VECTOR_ADJACENT
+            - ATTACK_VECTOR_LOCAL
+            - ATTACK_VECTOR_PHYSICAL
+          type: string
+        availabilityImpact:
+          description: This metric measures the impact to the availability of the impacted component resulting from a successfully exploited vulnerability.
+          enum:
+            - IMPACT_UNSPECIFIED
+            - IMPACT_HIGH
+            - IMPACT_LOW
+            - IMPACT_NONE
+          type: string
+        baseScore:
+          description: The base score is a function of the base metric scores. https://www.first.org/cvss/specification-document#Base-Metrics
+          format: float
+          type: number
+        confidentialityImpact:
+          description: This metric measures the impact to the confidentiality of the information resources managed by a software component due to a successfully exploited vulnerability.
+          enum:
+            - IMPACT_UNSPECIFIED
+            - IMPACT_HIGH
+            - IMPACT_LOW
+            - IMPACT_NONE
+          type: string
+        exploitabilityScore:
+          description: The Exploitability sub-score equation is derived from the Base Exploitability metrics. https://www.first.org/cvss/specification-document#2-1-Exploitability-Metrics
+          format: float
+          type: number
+        impactScore:
+          description: The Impact sub-score equation is derived from the Base Impact metrics.
+          format: float
+          type: number
+        integrityImpact:
+          description: This metric measures the impact to integrity of a successfully exploited vulnerability.
+          enum:
+            - IMPACT_UNSPECIFIED
+            - IMPACT_HIGH
+            - IMPACT_LOW
+            - IMPACT_NONE
+          type: string
+        privilegesRequired:
+          description: This metric describes the level of privileges an attacker must possess before successfully exploiting the vulnerability.
+          enum:
+            - PRIVILEGES_REQUIRED_UNSPECIFIED
+            - PRIVILEGES_REQUIRED_NONE
+            - PRIVILEGES_REQUIRED_LOW
+            - PRIVILEGES_REQUIRED_HIGH
+          type: string
+        scope:
+          description: The Scope metric captures whether a vulnerability in one vulnerable component impacts resources in components beyond its security scope.
+          enum:
+            - SCOPE_UNSPECIFIED
+            - SCOPE_UNCHANGED
+            - SCOPE_CHANGED
+          type: string
+        userInteraction:
+          description: This metric captures the requirement for a human user, other than the attacker, to participate in the successful compromise of the vulnerable component.
+          enum:
+            - USER_INTERACTION_UNSPECIFIED
+            - USER_INTERACTION_NONE
+            - USER_INTERACTION_REQUIRED
           type: string
       type: object
     CancelPatchJobRequest:
@@ -576,16 +771,25 @@ components:
       properties: {}
       type: object
     Inventory:
-      description: The inventory details of a VM.
+      description: This API resource represents the available inventory data for a Compute Engine virtual machine (VM) instance at a given point in time. You can use this API resource to determine the inventory data of your VM. For more information, see [Information provided by OS inventory management](https://cloud.google.com/compute/docs/instances/os-inventory-management#data-collected).
       properties:
         items:
           additionalProperties:
             $ref: "#/components/schemas/InventoryItem"
           description: Inventory items related to the VM keyed by an opaque unique identifier for each inventory item. The identifier is unique to each distinct and addressable inventory item and will change, when there is a new package version.
           type: object
+        name:
+          description: "Output only. The `Inventory` API resource name. Format: `projects/{project_number}/locations/{location}/instances/{instance_id}/inventory`"
+          readOnly: true
+          type: string
         osInfo:
           $ref: "#/components/schemas/InventoryOsInfo"
           description: Base level operating system information for the VM.
+        updateTime:
+          description: Output only. Timestamp of the last reported inventory for the VM.
+          format: google-datetime
+          readOnly: true
+          type: string
       type: object
     InventoryItem:
       description: A single piece of inventory on a VM.
@@ -772,6 +976,18 @@ components:
           description: Any summary information provided about this patch.
           type: string
       type: object
+    ListInventoriesResponse:
+      description: A response message for listing inventory data for all VMs in a specified location.
+      properties:
+        inventories:
+          description: List of inventory objects.
+          items:
+            $ref: "#/components/schemas/Inventory"
+          type: array
+        nextPageToken:
+          description: The pagination token to retrieve the next page of inventory objects.
+          type: string
+      type: object
     ListOperationsResponse:
       description: The response message for Operations.ListOperations.
       properties:
@@ -818,6 +1034,18 @@ components:
           description: The list of patch jobs.
           items:
             $ref: "#/components/schemas/PatchJob"
+          type: array
+      type: object
+    ListVulnerabilityReportsResponse:
+      description: A response message for listing vulnerability reports for all VM instances in the specified location.
+      properties:
+        nextPageToken:
+          description: The pagination token to retrieve the next page of vulnerabilityReports object.
+          type: string
+        vulnerabilityReports:
+          description: List of vulnerabilityReport objects.
+          items:
+            $ref: "#/components/schemas/VulnerabilityReport"
           type: array
       type: object
     MonthlySchedule:
@@ -1272,6 +1500,85 @@ components:
           type: string
         version:
           description: Optional. IANA Time Zone Database version number, e.g. "2019a".
+          type: string
+      type: object
+    VulnerabilityReport:
+      description: This API resource represents the vulnerability report for a specified Compute Engine virtual machine (VM) instance at a given point in time. For more information, see [Vulnerability reports](https://cloud.google.com/compute/docs/instances/os-inventory-management#vulnerability-reports).
+      properties:
+        name:
+          description: "Output only. The `vulnerabilityReport` API resource name. Format: `projects/{project_number}/locations/{location}/instances/{instance_id}/vulnerabilityReport`"
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The timestamp for when the last vulnerability report was generated for the VM.
+          format: google-datetime
+          readOnly: true
+          type: string
+        vulnerabilities:
+          description: Output only. List of vulnerabilities affecting the VM.
+          items:
+            $ref: "#/components/schemas/VulnerabilityReportVulnerability"
+          readOnly: true
+          type: array
+      type: object
+    VulnerabilityReportVulnerability:
+      description: A vulnerability affecting the VM instance.
+      properties:
+        availableInventoryItemIds:
+          description: Corresponds to the `AVAILABLE_PACKAGE` inventory item on the VM. If the vulnerability report was not updated after the VM inventory update, these values might not display in VM inventory. If there is no available fix, the field is empty. The `inventory_item` value specifies the latest `SoftwarePackage` available to the VM that fixes the vulnerability.
+          items:
+            type: string
+          type: array
+        createTime:
+          description: The timestamp for when the vulnerability was first detected.
+          format: google-datetime
+          type: string
+        details:
+          $ref: "#/components/schemas/VulnerabilityReportVulnerabilityDetails"
+          description: Contains metadata as per the upstream feed of the operating system and NVD.
+        installedInventoryItemIds:
+          description: Corresponds to the `INSTALLED_PACKAGE` inventory item on the VM. This field displays the inventory items affected by this vulnerability. If the vulnerability report was not updated after the VM inventory update, these values might not display in VM inventory. For some distros, this field may be empty.
+          items:
+            type: string
+          type: array
+        updateTime:
+          description: The timestamp for when the vulnerability was last modified.
+          format: google-datetime
+          type: string
+      type: object
+    VulnerabilityReportVulnerabilityDetails:
+      description: Contains metadata information for the vulnerability. This information is collected from the upstream feed of the operating system.
+      properties:
+        cve:
+          description: The CVE of the vulnerability. CVE cannot be empty and the combination of should be unique across vulnerabilities for a VM.
+          type: string
+        cvssV2Score:
+          description: The CVSS V2 score of this vulnerability. CVSS V2 score is on a scale of 0 - 10 where 0 indicates low severity and 10 indicates high severity.
+          format: float
+          type: number
+        cvssV3:
+          $ref: "#/components/schemas/CVSSv3"
+          description: The full description of the CVSSv3 for this vulnerability from NVD.
+        description:
+          description: The note or description describing the vulnerability from the distro.
+          type: string
+        references:
+          description: Corresponds to the references attached to the `VulnerabilityDetails`.
+          items:
+            $ref: "#/components/schemas/VulnerabilityReportVulnerabilityDetailsReference"
+          type: array
+        severity:
+          description: Assigned severity/impact ranking from the distro.
+          type: string
+      type: object
+    VulnerabilityReportVulnerabilityDetailsReference:
+      description: A reference for this vulnerability.
+      properties:
+        source:
+          description: The source of the reference e.g. NVD.
+          type: string
+        url:
+          description: The url of the reference.
           type: string
       type: object
     WeekDayOfMonth:

@@ -95,7 +95,7 @@ paths:
       description: Updates the parameters of a single EndpointPolicy.
       operationId: networkservices.projects.locations.endpointPolicies.patch
       parameters:
-        - description: Required. Name of the EndpointPolicy resource. It matches pattern `projects/*/locations/global/endpointPolicies/`.
+        - description: Required. Name of the EndpointPolicy resource. It matches pattern `projects/{project}/locations/global/endpointPolicies/{endpoint_policy}`.
           in: path
           name: name
           required: true
@@ -639,7 +639,7 @@ components:
           description: Optional. Set of label tags associated with the EndpointPolicy resource.
           type: object
         name:
-          description: Required. Name of the EndpointPolicy resource. It matches pattern `projects/*/locations/global/endpointPolicies/`.
+          description: Required. Name of the EndpointPolicy resource. It matches pattern `projects/{project}/locations/global/endpointPolicies/{endpoint_policy}`.
           type: string
         serverTlsPolicy:
           description: Optional. A URL referring to ServerTlsPolicy resource. ServerTlsPolicy is used to determine the authentication policy to be applied to terminate the inbound traffic at the identified backends. If this field is not set, authentication is disabled(open) for this endpoint.
@@ -903,7 +903,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -911,6 +911,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

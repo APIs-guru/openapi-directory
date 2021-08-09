@@ -77,8 +77,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -92,8 +92,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -113,7 +113,9 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Trigger verification.
-      x-addedInVersion: 5
+      tags:
+        - Verification
+      x-addedInVersion: "5"
       x-groupName: Verification
       x-sortIndex: 3
   /closeAccount:
@@ -145,8 +147,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -160,8 +162,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -181,6 +183,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Close an account.
+      tags:
+        - Accounts
       x-groupName: Accounts
       x-sortIndex: 3
   /closeAccountHolder:
@@ -212,8 +216,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -227,8 +231,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -248,6 +252,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Close an account holder.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 7
   /closeStores:
@@ -270,8 +276,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -285,8 +291,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -306,7 +312,9 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Close stores.
-      x-addedInVersion: 5
+      tags:
+        - Account holders
+      x-addedInVersion: "5"
       x-groupName: Account holders
       x-sortIndex: 9
   /createAccount:
@@ -338,8 +346,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -353,8 +361,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -374,6 +382,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Create a new account.
+      tags:
+        - Accounts
       x-groupName: Accounts
       x-sortIndex: 1
   /createAccountHolder:
@@ -401,8 +411,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -416,8 +426,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -437,6 +447,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Create a new account holder.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 1
   /deleteBankAccounts:
@@ -468,8 +480,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -483,8 +495,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -504,6 +516,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Delete bank accounts.
+      tags:
+        - Verification
       x-groupName: Verification
       x-sortIndex: 4
   /deletePayoutMethods:
@@ -535,8 +549,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -550,8 +564,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -571,7 +585,9 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Delete payout methods.
-      x-addedInVersion: 5
+      tags:
+        - Verification
+      x-addedInVersion: "5"
       x-groupName: Verification
       x-sortIndex: 5
   /deleteShareholders:
@@ -603,8 +619,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -618,8 +634,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -639,6 +655,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Delete shareholders.
+      tags:
+        - Verification
       x-groupName: Verification
       x-sortIndex: 6
   /deleteSignatories:
@@ -667,8 +685,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -682,8 +700,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -703,6 +721,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Delete signatories.
+      tags:
+        - Verification
       x-groupName: Verification
       x-sortIndex: 7
   /getAccountHolder:
@@ -736,8 +756,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -751,8 +771,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -772,6 +792,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get an account holder.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 2
   /getTaxForm:
@@ -797,8 +819,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -812,8 +834,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -833,6 +855,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a tax form.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 8
   /getUploadedDocuments:
@@ -859,8 +883,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -874,8 +898,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -895,6 +919,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get documents.
+      tags:
+        - Verification
       x-groupName: Verification
       x-sortIndex: 2
   /suspendAccountHolder:
@@ -926,8 +952,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -941,8 +967,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -962,6 +988,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Suspend an account holder.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 5
   /unSuspendAccountHolder:
@@ -996,8 +1024,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1011,8 +1039,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1032,6 +1060,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Unsuspend an account holder.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 6
   /updateAccount:
@@ -1063,8 +1093,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1078,8 +1108,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1099,6 +1129,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Update an account.
+      tags:
+        - Accounts
       x-groupName: Accounts
       x-sortIndex: 2
   /updateAccountHolder:
@@ -1156,8 +1188,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1171,8 +1203,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1192,6 +1224,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Update an account holder.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 3
   /updateAccountHolderState:
@@ -1223,8 +1257,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1238,8 +1272,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1259,6 +1293,8 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Update payout or processing state.
+      tags:
+        - Account holders
       x-groupName: Account holders
       x-sortIndex: 4
   /uploadDocument:
@@ -1290,8 +1326,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-400:
-                  $ref: "#/components/examples/generic-400"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Bad Request - a problem reading or understanding the request.
@@ -1305,8 +1341,8 @@ paths:
           content:
             application/json:
               examples:
-                generic-403:
-                  $ref: "#/components/examples/generic-403"
+                generic:
+                  $ref: "#/components/examples/generic"
               schema:
                 $ref: "#/components/schemas/ServiceError"
           description: Forbidden - insufficient permissions to process the request.
@@ -1326,18 +1362,13 @@ paths:
         - BasicAuth: []
         - ApiKeyAuth: []
       summary: Upload a document.
+      tags:
+        - Verification
       x-groupName: Verification
       x-sortIndex: 1
 components:
   examples:
-    generic-400:
-      summary: Response code 400. Bad Request.
-      value:
-        errorCode: "702"
-        errorType: validation
-        message: "Unexpected input: I"
-        status: 400
-    generic-403:
+    generic:
       summary: Response code 401. Forbidden.
       value:
         errorCode: 10_003
@@ -1576,7 +1607,7 @@ components:
         bankAccountUUID:
           description: The bankAccountUUID of the bank account held by the account holder to couple the account with. Scheduled payouts in currencies matching the currency of this bank account will be sent to this bank account. Payouts in different currencies will be sent to a matching bank account of the account holder.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         beneficiaryAccount:
           description: The beneficiary of the account.
           type: string
@@ -1586,7 +1617,7 @@ components:
         description:
           description: A description of the account.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         metadata:
           additionalProperties:
             type: string
@@ -1595,11 +1626,11 @@ components:
             The keys do not have specific names and may be used for storing miscellaneous data as desired.
             > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
           type: object
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         payoutMethodCode:
           description: The payout method code held by the account holder to couple the account with. Scheduled card payouts will be sent using this payout method code.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         payoutSchedule:
           $ref: "#/components/schemas/PayoutScheduleResponse"
           description: The account's payout schedule.
@@ -1610,11 +1641,11 @@ components:
             - SAME_DAY
             - STANDARD
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         status:
           description: "The status of the account. Possible values: `Active`, `Inactive`, `Suspended`, `Closed`."
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
     AccountEvent:
       properties:
         event:
@@ -1650,7 +1681,7 @@ components:
         bankAggregatorDataReference:
           description: The opaque reference value returned by the Adyen API during bank account login.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         businessDetails:
           $ref: "#/components/schemas/BusinessDetails"
           description: |-
@@ -1688,13 +1719,16 @@ components:
           items:
             $ref: "#/components/schemas/PayoutMethod"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
+        principalBusinessAddress:
+          $ref: "#/components/schemas/ViasAddress"
+          description: The principal business address of the account holder.
         storeDetails:
           description: Array of stores associated with the account holder. Required when onboarding account holders that have an Adyen [point of sale](https://docs.adyen.com/platforms/platforms-for-pos).
           items:
             $ref: "#/components/schemas/StoreDetail"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         webAddress:
           description: The URL of the website of the account holder.
           type: string
@@ -1744,7 +1778,7 @@ components:
         notAllowedReason:
           description: The reason why payouts (to all of the account holder's accounts) have been disabled (by Adyen). If payouts have been disabled by Adyen, this field will explain why. If this field is blank, payouts have not been disabled by Adyen.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         payoutLimit:
           $ref: "#/components/schemas/Amount"
           description: The maximum amount that payouts are limited to. Only applies if payouts are allowed but limited.
@@ -1752,7 +1786,7 @@ components:
           description: The payout tier that the account holder occupies.
           format: int32
           type: integer
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
     AccountProcessingState:
       properties:
         disableReason:
@@ -1771,7 +1805,7 @@ components:
           description: The processing tier that the account holder occupies.
           format: int32
           type: integer
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
     Amount:
       properties:
         currency:
@@ -1807,7 +1841,7 @@ components:
         bankAccountReference:
           description: Merchant reference to the bank account.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         bankAccountUUID:
           description: |
             The unique identifier (UUID) of the Bank Account.
@@ -1949,10 +1983,15 @@ components:
         legalBusinessName:
           description: The legal name of the company.
           type: string
+        listedUltimateParentCompany:
+          description: Information about the parent public company. Required if the account holder is 100% owned by a publicly listed company.
+          items:
+            $ref: "#/components/schemas/UltimateParentCompany"
+          type: array
         registrationNumber:
           description: The registration number of the company.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         shareholders:
           description: Array containing information about individuals associated with the account holder either through ownership or control. For details about how you can identify them, refer to [Identity check](https://docs.adyen.com/platforms/verification-checks/identity-check).
           items:
@@ -1985,7 +2024,7 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -2006,13 +2045,13 @@ components:
         accountCode:
           description: The account code of the account that is closed.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         invalidFields:
           description: Contains field validation errors that would prevent requests from being processed.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -2029,7 +2068,7 @@ components:
             - Inactive
             - Suspended
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
       required:
         - status
     CloseStoresRequest:
@@ -2063,7 +2102,7 @@ components:
         description:
           description: A description of the prospective account holder, maximum 256 characters. You can use alphanumeric characters (A-Z, a-z, 0-9), white spaces, and underscores `_`.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         legalEntity:
           description: |-
             The legal entity type of the account holder. This determines the information that should be provided in the request.
@@ -2077,18 +2116,16 @@ components:
             - Business
             - Individual
             - NonProfit
-            - Partnership
-            - PublicCompany
           type: string
         primaryCurrency:
           description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes), with which the prospective account holder primarily deals.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         processingTier:
           description: The starting [processing tier](https://docs.adyen.com/platforms/onboarding-and-verification/precheck-kyc-information) for the prospective account holder.
           format: int32
           type: integer
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
       required:
         - accountHolderCode
         - legalEntity
@@ -2107,31 +2144,29 @@ components:
         accountHolderStatus:
           $ref: "#/components/schemas/AccountHolderStatus"
           description: The status of the new account holder.
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         description:
           description: The description of the new account holder.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         invalidFields:
           description: A list of fields that caused the `/createAccountHolder` request to fail.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         legalEntity:
           description: The type of legal entity of the new account holder.
           enum:
             - Business
             - Individual
             - NonProfit
-            - Partnership
-            - PublicCompany
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         primaryCurrency:
           description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes), with which the prospective account holder primarily deals.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -2141,7 +2176,7 @@ components:
         verification:
           $ref: "#/components/schemas/KYCVerificationResult2"
           description: The details of KYC Verification of the account holder.
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
       required:
         - accountHolderCode
         - accountHolderStatus
@@ -2156,11 +2191,11 @@ components:
         bankAccountUUID:
           description: The bankAccountUUID of the bank account held by the account holder to couple the account with. Scheduled payouts in currencies matching the currency of this bank account will be sent to this bank account. Payouts in different currencies will be sent to a matching bank account of the account holder.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         description:
           description: A description of the account, maximum 256 characters. You can use alphanumeric characters (A-Z, a-z, 0-9), white spaces, and underscores `_`.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         metadata:
           additionalProperties:
             type: string
@@ -2169,11 +2204,11 @@ components:
             The keys do not have specific names and may be used for storing miscellaneous data as desired.
             > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
           type: object
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         payoutMethodCode:
           description: The payout method code held by the account holder to couple the account with. Scheduled card payouts will be sent using this payout method code.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         payoutSchedule:
           description: |-
             The payout schedule of the prospective account.
@@ -2209,7 +2244,7 @@ components:
             - SAME_DAY
             - STANDARD
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
       required:
         - accountHolderCode
     CreateAccountResponse:
@@ -2223,27 +2258,27 @@ components:
         bankAccountUUID:
           description: The bankAccountUUID of the bank account held by the account holder to couple the account with. Scheduled payouts in currencies matching the currency of this bank account will be sent to this bank account. Payouts in different currencies will be sent to a matching bank account of the account holder.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         description:
           description: The description of the account.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         invalidFields:
           description: A list of fields that caused the `/createAccount` request to fail.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         metadata:
           additionalProperties:
             type: string
           description: A set of key and value pairs containing metadata.
           type: object
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         payoutMethodCode:
           description: The payout method code held by the account holder to couple the account with. Scheduled card payouts will be sent using this payout method code.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         payoutSchedule:
           $ref: "#/components/schemas/PayoutScheduleResponse"
           description: The payout schedule of the account.
@@ -2254,7 +2289,7 @@ components:
             - SAME_DAY
             - STANDARD
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -2271,7 +2306,7 @@ components:
             - Inactive
             - Suspended
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
       required:
         - accountHolderCode
         - accountCode
@@ -2333,13 +2368,13 @@ components:
         accountHolderCode:
           description: The code of account holder, to which the document applies.
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         bankAccountUUID:
           description: |
             The Adyen-generated [`bankAccountUUID`](https://docs.adyen.com/api-explorer/#/Account/latest/post/createAccountHolder__resParam_accountHolderDetails-bankAccountDetails-bankAccountUUID) to which the document must be linked. Refer to [Bank account check](https://docs.adyen.com/platforms/verification-checks/bank-account-check#uploading-a-bank-statement) for details on when a document should be submitted.
             >Required if the `documentType` is **BANK_STATEMENT**, where a document is being submitted in order to verify a bank account.
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         description:
           description: Description of the document.
           type: string
@@ -2360,7 +2395,6 @@ components:
             - BANK_STATEMENT
             - BSN
             - COMPANY_REGISTRATION_SCREENING
-            - CONSTITUTIONAL_DOCUMENT
             - DRIVING_LICENCE
             - DRIVING_LICENCE_BACK
             - DRIVING_LICENCE_FRONT
@@ -2379,7 +2413,7 @@ components:
             The Adyen-generated [`shareholderCode`](https://docs.adyen.com/api-explorer/#/Account/latest/post/createAccountHolder__resParam_accountHolderDetails-businessDetails-shareholders-shareholderCode) to which the document must be linked. Refer to [Verification checks](https://docs.adyen.com/platforms/verification-checks) for details on when a document should be submitted.
             >Required if the account holder has a `legalEntity` of type **Business** and the `documentType` is either **PASSPORT**, **ID_CARD_FRONT**, **ID_CARD_BACK**, **DRIVING_LICENCE_FRONT**, or **DRIVING_LICENCE_BACK**. 
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         signatoryCode:
           description: The Adyen-generated [`signatoryCode`](https://docs.adyen.com/api-explorer/#/Account/v6/post/createAccountHolder__resParam_accountHolderDetails-businessDetails-signatories-signatoryCode) to which the document must be linked.
           type: string
@@ -2497,6 +2531,7 @@ components:
             - passport
             - passportNumber
             - payoutMethodCode
+            - payoutSchedule
             - personalData
             - phoneCountryCode
             - phoneNumber
@@ -2517,6 +2552,7 @@ components:
             - socialSecurityNumber
             - sourceAccountCode
             - splitAccount
+            - splitConfigurationUUID
             - splitCurrency
             - splitValue
             - splits
@@ -2563,7 +2599,7 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -2585,7 +2621,7 @@ components:
         showDetails:
           description: True if the request should return the account holder details
           type: boolean
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
     GetAccountHolderResponse:
       properties:
         accountHolderCode:
@@ -2597,7 +2633,7 @@ components:
         accountHolderStatus:
           $ref: "#/components/schemas/AccountHolderStatus"
           description: The status of the account holder.
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         accounts:
           description: A list of the accounts under the account holder.
           items:
@@ -2606,26 +2642,24 @@ components:
         description:
           description: The description of the account holder.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         invalidFields:
           description: Contains field validation errors that would prevent requests from being processed.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         legalEntity:
           description: The legal entity of the account holder.
           enum:
             - Business
             - Individual
             - NonProfit
-            - Partnership
-            - PublicCompany
           type: string
         primaryCurrency:
           description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes), with which the prospective account holder primarily deals.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -2636,11 +2670,11 @@ components:
           description: The time that shows how up to date is the information in the response.
           format: date-time
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         verification:
           $ref: "#/components/schemas/KYCVerificationResult2"
           description: The details of KYC Verification of the account holder.
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
       required:
         - accountHolderCode
         - legalEntity
@@ -2655,13 +2689,13 @@ components:
         accountHolderStatus:
           $ref: "#/components/schemas/AccountHolderStatus"
           description: The status of the Account Holder.
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         invalidFields:
           description: Contains field validation errors that would prevent requests from being processed.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -2701,7 +2735,7 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -2716,7 +2750,7 @@ components:
         bankAccountUUID:
           description: The code of the Bank Account for which to retrieve the documents.
           type: string
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         shareholderCode:
           description: The code of the Shareholder for which to retrieve the documents.
           type: string
@@ -2734,7 +2768,7 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -2847,11 +2881,11 @@ components:
           description: The code of the check. For possible values, refer to [Verification codes](https://docs.adyen.com/platforms/verification-codes).
           format: int32
           type: integer
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         kycCheckDescription:
           description: A description of the check.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
     KYCShareholderCheckResult:
       properties:
         checks:
@@ -2887,7 +2921,7 @@ components:
           items:
             $ref: "#/components/schemas/KYCCardCheckResult"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         shareholders:
           description: The results of the checks on the shareholders.
           items:
@@ -3065,7 +3099,7 @@ components:
         shareholderReference:
           description: Your reference for the shareholder entry.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         shareholderType:
           description: |-
             Specifies how the person is associated with the account holder. 
@@ -3155,11 +3189,11 @@ components:
             - Ecommerce
             - POS
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         splitConfigurationUUID:
           description: The unique reference for the split configuration, returned when you configure splits in your Customer Area. When this is provided, the `virtualAccount` is also required. Adyen uses the configuration and the `virtualAccount` to split funds between accounts in your platform.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         status:
           description: "The status of the store. Possible values: **Pending**, **Active**, **Inactive**, **InactiveWithModifications**, **Closed**."
           enum:
@@ -3186,11 +3220,11 @@ components:
         virtualAccount:
           description: The account holder's `accountCode` where the split amount will be sent. Required when you provide the `splitConfigurationUUID`.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         webAddress:
           description: URL of the ecommerce store.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
       required:
         - storeReference
         - merchantCategoryCode
@@ -3213,7 +3247,7 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -3222,6 +3256,34 @@ components:
           type: string
       required:
         - accountHolderStatus
+    UltimateParentCompany:
+      properties:
+        address:
+          $ref: "#/components/schemas/ViasAddress"
+          description: Address of the ultimate parent company.
+        businessDetails:
+          $ref: "#/components/schemas/UltimateParentCompanyBusinessDetails"
+          description: Details about the ultimate parent company's business.
+        ultimateParentCompanyCode:
+          description: Adyen-generated unique alphanumeric identifier (UUID) for the entry, returned in the response when you create an ultimate parent company. Required when updating an existing entry in an `/updateAccountHolder` request.
+          type: string
+    UltimateParentCompanyBusinessDetails:
+      properties:
+        legalBusinessName:
+          description: The legal name of the company.
+          type: string
+        registrationNumber:
+          description: The registration number of the company.
+          type: string
+        stockExchange:
+          description: Market Identifier Code (MIC).
+          type: string
+        stockNumber:
+          description: International Securities Identification Number (ISIN).
+          type: string
+        stockTicker:
+          description: Stock Ticker symbol.
+          type: string
     UnSuspendAccountHolderRequest:
       properties:
         accountHolderCode:
@@ -3239,7 +3301,7 @@ components:
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -3262,7 +3324,7 @@ components:
         description:
           description: A description of the account holder, maximum 256 characters. You can use alphanumeric characters (A-Z, a-z, 0-9), white spaces, and underscores `_`.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         legalEntity:
           description: |-
             The legal entity type of the account holder. This determines the information that should be provided in the request.
@@ -3276,14 +3338,12 @@ components:
             - Business
             - Individual
             - NonProfit
-            - Partnership
-            - PublicCompany
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         primaryCurrency:
           description: The primary three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes), to which the account holder should be updated.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         processingTier:
           description: |-
             The processing tier to which the Account Holder should be updated.
@@ -3292,7 +3352,7 @@ components:
             >Required if accountHolderDetails are not provided.
           format: int32
           type: integer
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
       required:
         - accountHolderCode
     UpdateAccountHolderResponse:
@@ -3306,31 +3366,29 @@ components:
         accountHolderStatus:
           $ref: "#/components/schemas/AccountHolderStatus"
           description: The new status of the account holder.
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
         description:
           description: The description of the account holder.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         invalidFields:
           description: in case the account holder has not been updated, contains account holder fields, that did not pass the validation.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         legalEntity:
           description: The legal entity of the account holder.
           enum:
             - Business
             - Individual
             - NonProfit
-            - Partnership
-            - PublicCompany
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         primaryCurrency:
           description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes), with which the prospective account holder primarily deals.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -3340,7 +3398,7 @@ components:
         verification:
           $ref: "#/components/schemas/KYCVerificationResult2"
           description: The details of KYC Verification of the account holder.
-          x-addedInVersion: 2
+          x-addedInVersion: "2"
       required:
         - accountHolderStatus
         - verification
@@ -3382,11 +3440,11 @@ components:
         bankAccountUUID:
           description: The bankAccountUUID of the bank account held by the account holder to couple the account with. Scheduled payouts in currencies matching the currency of this bank account will be sent to this bank account. Payouts in different currencies will be sent to a matching bank account of the account holder.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         description:
           description: A description of the account, maximum 256 characters.You can use alphanumeric characters (A-Z, a-z, 0-9), white spaces, and underscores `_`.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         metadata:
           additionalProperties:
             type: string
@@ -3395,11 +3453,11 @@ components:
             The keys do not have specific names and may be used for storing miscellaneous data as desired.
             > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
           type: object
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         payoutMethodCode:
           description: The payout method code held by the account holder to couple the account with. Scheduled card payouts will be sent using this payout method code.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         payoutSchedule:
           $ref: "#/components/schemas/UpdatePayoutScheduleRequest"
           description: The details of the payout schedule, to which the account should be updated.
@@ -3410,7 +3468,7 @@ components:
             - SAME_DAY
             - STANDARD
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
       required:
         - accountCode
     UpdateAccountResponse:
@@ -3421,27 +3479,27 @@ components:
         bankAccountUUID:
           description: The bankAccountUUID of the bank account held by the account holder to couple the account with. Scheduled payouts in currencies matching the currency of this bank account will be sent to this bank account. Payouts in different currencies will be sent to a matching bank account of the account holder.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         description:
           description: The description of the account.
           type: string
-          x-addedInVersion: 4
+          x-addedInVersion: "4"
         invalidFields:
           description: A list of fields that caused the `/updateAccount` request to fail.
           items:
             $ref: "#/components/schemas/ErrorFieldType"
           type: array
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         metadata:
           additionalProperties:
             type: string
           description: A set of key and value pairs containing metadata.
           type: object
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         payoutMethodCode:
           description: The payout method code held by the account holder to couple the account with. Scheduled card payouts will be sent using this payout method code.
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         payoutSchedule:
           $ref: "#/components/schemas/PayoutScheduleResponse"
           description: The payout schedule of the account.
@@ -3452,7 +3510,7 @@ components:
             - SAME_DAY
             - STANDARD
           type: string
-          x-addedInVersion: 5
+          x-addedInVersion: "5"
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
@@ -3591,7 +3649,7 @@ components:
           items:
             $ref: "#/components/schemas/PersonalDocumentData"
           type: array
-          x-addedInVersion: 3
+          x-addedInVersion: "3"
         nationality:
           description: |
             The nationality of the person represented by a two-character country code,  in [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) format. For example, **NL**.
