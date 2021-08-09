@@ -2517,6 +2517,10 @@ paths:
                     enum:
                       - OTHER
                     type: string
+                  webhookUrl:
+                    description: A URL to be called in the background with the details of the payment after the payment is complete
+                    example: https://example.com/webhook
+                    type: string
                 title: PaymentRequest
                 type: object
           description: The Payment Request details object

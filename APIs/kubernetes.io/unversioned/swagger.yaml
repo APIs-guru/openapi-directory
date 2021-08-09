@@ -56603,7 +56603,7 @@ definitions:
         format: int32
         type: integer
       numberReady:
-        description: The number of nodes that should be running the daemon pod and have one or more of the daemon pod running and ready.
+        description: numberReady is the number of nodes that should be running the daemon pod and have one or more of the daemon pod running with a Ready Condition.
         format: int32
         type: integer
       numberUnavailable:
@@ -56765,7 +56765,7 @@ definitions:
         format: int64
         type: integer
       readyReplicas:
-        description: Total number of ready pods targeted by this deployment.
+        description: readyReplicas is the number of pods targeted by this Deployment with a Ready Condition.
         format: int32
         type: integer
       replicas:
@@ -56903,7 +56903,7 @@ definitions:
         format: int64
         type: integer
       readyReplicas:
-        description: The number of ready replicas for this replica set.
+        description: readyReplicas is the number of pods targeted by this ReplicaSet with a Ready Condition.
         format: int32
         type: integer
       replicas:
@@ -57084,7 +57084,7 @@ definitions:
         format: int64
         type: integer
       readyReplicas:
-        description: readyReplicas is the number of Pods created by the StatefulSet controller that have a Ready Condition.
+        description: readyReplicas is the number of pods created for this StatefulSet with a Ready Condition.
         format: int32
         type: integer
       replicas:
@@ -59879,7 +59879,7 @@ definitions:
         description: Container's ID in the format 'docker://<container_id>'.
         type: string
       image:
-        description: "The image the container is running. More info: https://kubernetes.io/docs/concepts/containers/images"
+        description: "The image the container is running. More info: https://kubernetes.io/docs/concepts/containers/images."
         type: string
       imageID:
         description: ImageID of the container's image.
@@ -59894,7 +59894,7 @@ definitions:
         description: Specifies whether the container has passed its readiness probe.
         type: boolean
       restartCount:
-        description: The number of times the container has been restarted, currently based on the number of dead containers that have not yet been removed. Note that this is calculated from dead containers. But those containers are subject to garbage collection. This value will get capped at 5 by GC.
+        description: The number of times the container has been restarted.
         format: int32
         type: integer
       started:

@@ -84,6 +84,8 @@ paths:
           description: API key not valid or no access to resource.
         "402":
           description: Tried to call the deployment API without deployment tracking enabled or trial expired.
+        "404":
+          description: Specified log not found.
         "429":
           description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
       summary: Create a new deployment.
@@ -733,6 +735,57 @@ paths:
       summary: Hide a message by its ID.
       tags:
         - Messages
+  "/v3/sourcemaps/{logId}":
+    post:
+      operationId: SourceMaps_CreateOrUpdate
+      parameters:
+        - description: The ID of the log which should contain the minified JavaScript and source map.
+          in: path
+          name: logId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                MinifiedJavaScript:
+                  description: The minified JavaScript file. Only files with an extension of .js and content type of text/javascript will be accepted.
+                  format: binary
+                  type: string
+                Path:
+                  description: "An URL to the online minified JavaScript file. The URL can be absolute or relative but will always be converted to a relative path (no protocol, domain, and query parameters).\r
+
+                    elmah.io uses this path to lookup any lines in a JS stack trace that will need de-minification."
+                  format: uri
+                  type: string
+                SourceMap:
+                  description: The source source map file. Only files with an extension of .map and content type of application/json will be accepted.
+                  format: binary
+                  type: string
+              required:
+                - Path
+                - SourceMap
+                - MinifiedJavaScript
+              type: object
+        required: true
+      responses:
+        "200":
+          description: Source map was successfully created.
+        "400":
+          description: Something wrong with the query parameters or form.
+        "401":
+          description: API key not valid or no access to resource.
+        "402":
+          description: Tried to call the logs API but the trial expired.
+        "404":
+          description: Log not found.
+        "429":
+          description: A maximum of 500 requests per minute and 3600 requests per hour are permitted
+      summary: Create or update a translation between a minified JavaScript path to the minified JavaScript and source map files.
+      tags:
+        - SourceMaps
   /v3/uptimechecks:
     get:
       operationId: UptimeChecks_GetAll

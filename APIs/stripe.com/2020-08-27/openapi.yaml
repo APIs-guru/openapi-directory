@@ -30637,6 +30637,7 @@ paths:
                         - properties:
                             preferred_language:
                               enum:
+                                - ""
                                 - de
                                 - en
                                 - es
@@ -31435,6 +31436,7 @@ paths:
                         - properties:
                             preferred_language:
                               enum:
+                                - ""
                                 - de
                                 - en
                                 - es
@@ -32367,6 +32369,7 @@ paths:
                         - properties:
                             preferred_language:
                               enum:
+                                - ""
                                 - de
                                 - en
                                 - es
@@ -32621,7 +32624,10 @@ paths:
                 $ref: "#/components/schemas/error"
           description: Error response.
     post:
-      description: <p>Creates a PaymentMethod object. Read the <a href="/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js reference</a> to learn how to create PaymentMethods via Stripe.js.</p>
+      description: |-
+        <p>Creates a PaymentMethod object. Read the <a href="/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js reference</a> to learn how to create PaymentMethods via Stripe.js.</p>
+
+        <p>Instead of creating a PaymentMethod directly, we recommend using the <a href="/docs/payments/accept-a-payment">PaymentIntents</a> API to accept a payment immediately or the <a href="/docs/payments/save-and-reuse">SetupIntent</a> API to collect payment method details ahead of a future payment.</p>
       operationId: PostPaymentMethods
       requestBody:
         content:
@@ -36262,7 +36268,7 @@ paths:
           description: Error response.
   "/v1/quotes/{quote}/computed_upfront_line_items":
     get:
-      description: <p>When retrieving a quote, there is an includable <strong>upfront.line_items</strong> property containing the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of upfront line items.</p>
+      description: <p>When retrieving a quote, there is an includable <a href="https://stripe.com/docs/api/quotes/object#quote_object-computed-upfront-line_items"><strong>computed.upfront.line_items</strong></a> property containing the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of upfront line items.</p>
       operationId: GetQuotesQuoteComputedUpfrontLineItems
       parameters:
         - description: A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
@@ -54052,7 +54058,7 @@ components:
           type: string
           x-stripeBypassValidation: true
         url:
-          description: The short-lived URL that you use to redirect a user to Stripe to submit their identity information. This URL expires after 24 hours and can only be used once. Don’t store it, log it, send it in emails or expose it to anyone other than the user. Refer to our docs on [verifying identity documents](https://stripe.com/docs/identity/verify-identity-documents?platform=web&type=redirect) to learn how to redirect users to Stripe.
+          description: The short-lived URL that you use to redirect a user to Stripe to submit their identity information. This URL expires after 48 hours and can only be used once. Don’t store it, log it, send it in emails or expose it to anyone other than the user. Refer to our docs on [verifying identity documents](https://stripe.com/docs/identity/verify-identity-documents?platform=web&type=redirect) to learn how to redirect users to Stripe.
           maxLength: 5000
           nullable: true
           type: string
@@ -54098,7 +54104,7 @@ components:
         creation to finalize the invoice.
 
         If your invoice is configured to be billed by sending an email, then based on your
-        [email settings](https://dashboard.stripe.com/account/billing/automatic'),
+        [email settings](https://dashboard.stripe.com/account/billing/automatic),
         Stripe will email the invoice to your customer and await payment. These
         emails can contain a link to a hosted page to pay the invoice.
 

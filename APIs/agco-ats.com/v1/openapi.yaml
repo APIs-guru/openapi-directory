@@ -14099,6 +14099,10 @@ components:
           description: A timestamp of when this authorization code was deleted. Read only.
           format: date-time
           type: string
+        EffectiveDate:
+          description: A date at which this code should begin being valid. Optional. Set on create only.
+          format: date-time
+          type: string
         ID:
           description: The identifier for the authorization code. Read only.
           format: int32

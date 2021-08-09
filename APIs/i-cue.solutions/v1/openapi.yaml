@@ -1,5 +1,4 @@
 openapi: 3.0.1
-x-hasEquivalentPaths: true
 info:
   title: Growth Services
   version: v1
@@ -355,31 +354,6 @@ paths:
       summary: Delete user
       tags:
         - Administration
-  "/administration/user/{entityId}/{username}":
-    get:
-      description: Get user by username
-      parameters:
-        - in: path
-          name: entityId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: username
-          required: true
-          schema:
-            type: string
-        - description: User Authentication Token
-          in: header
-          name: Token
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Success
-      summary: Get user by username
-      tags:
-        - Administration
   /forecast:
     post:
       description: To support maximum operation and integration speed, this endpoint only returns the calculated forecast.
@@ -513,6 +487,8 @@ paths:
                 style: form
               NoFcst:
                 style: form
+              OutlierDetection:
+                style: form
               Periodicity:
                 style: form
             schema:
@@ -537,26 +513,19 @@ paths:
                   enum:
                     - AutoBestPick
                     - BoxJenkins
-                    - BoxJenkinsOptimized
                     - Croston
-                    - CrostonOptimized
                     - DoubleExponentialSmoothing
-                    - DoubleExponentialSmoothingOptimized
                     - HoltWinters
-                    - HoltWintersOptimized
                     - SingleExponentialSmoothing
-                    - SingleExponentialSmoothingOptimized
                     - iCUE1
-                    - iCUE1Optimized
-                    - iCUEgamma
                     - SimpleMovingAverage
-                    - External
-                    - iCUEbeta
                   example: iCUE1
                   type: string
                 NoFcst:
                   format: int32
                   type: integer
+                OutlierDetection:
+                  type: boolean
                 Periodicity:
                   format: int32
                   type: integer
@@ -579,8 +548,29 @@ paths:
           name: Token
           schema:
             type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForecastBottomUpResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ForecastBottomUpResponse"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ForecastBottomUpResponse"
           description: Success
       summary: Bottom up forecasting
       tags:
@@ -594,6 +584,17 @@ paths:
           name: Token
           schema:
             type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/PlanningLevelRequest"
       responses:
         "200":
           description: Success
@@ -1031,7 +1032,7 @@ paths:
       summary: Calculate inventory turns
       tags:
         - Inventory Management
-  /lifecycle:
+  /lifecycle/many-to-one:
     post:
       description: Supports the creation of artificial startup history for new products, based on a flexible mapping of old to new. This is an Enterprise feature.
       parameters:
@@ -1040,8 +1041,65 @@ paths:
           name: Token
           schema:
             type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/LifecycleManyToOneRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LifecycleManyToOneRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/LifecycleManyToOneRequest"
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlanningLevelDataDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PlanningLevelDataDto"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/PlanningLevelDataDto"
+          description: Success
+      summary: Map from old product to new product to create artifical history
+      tags:
+        - Product Lifecycle Management
+  /lifecycle/one-to-one:
+    post:
+      description: Supports the creation of artificial startup history for new products, based on a flexible mapping of old to new. This is an Enterprise feature.
+      parameters:
+        - description: User Authentication Token
+          in: header
+          name: Token
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/LifecycleOneToOneRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LifecycleOneToOneRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/LifecycleOneToOneRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlanningLevelDataDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/PlanningLevelDataDto"
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/PlanningLevelDataDto"
           description: Success
       summary: Map from old product to new product to create artifical history
       tags:
@@ -1355,25 +1413,16 @@ paths:
       summary: ""
       tags:
         - Pricing
-  /report:
-    get:
-      description: Get usage statistics per organization
-      parameters:
-        - description: User Authentication Token
-          in: header
-          name: Token
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Success
-      summary: Get usage statistics per organization
-      tags:
-        - Reporting and Monitoring
-  /report/performance/sku-rationalization:
+  "/report/performance/sku-rationalization/{planningLevelId}":
     get:
       description: SKU rationalization report
       parameters:
+        - in: path
+          name: planningLevelId
+          required: true
+          schema:
+            format: int32
+            type: integer
         - description: User Authentication Token
           in: header
           name: Token
@@ -1381,6 +1430,22 @@ paths:
             type: string
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PortfolioModel"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PortfolioModel"
+                type: array
+            text/plain:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PortfolioModel"
+                type: array
           description: Success
       summary: SKU rationalization report
       tags:
@@ -1457,7 +1522,7 @@ components:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/PlanningLevelDataRequest"
+            $ref: "#/components/schemas/PlanningLevelDataDto"
           nullable: true
           type: array
         method:
@@ -1501,6 +1566,17 @@ components:
         token:
           format: uuid
           type: string
+      type: object
+    ForecastBottomUpResponse:
+      additionalProperties: false
+      properties:
+        forecastData:
+          items:
+            $ref: "#/components/schemas/PlanningLevelForecastResultData"
+          nullable: true
+          type: array
+        hyperparameters:
+          $ref: "#/components/schemas/ForecastHyperparameterResponse"
       type: object
     ForecastHyperparameterResponse:
       additionalProperties: false
@@ -1584,18 +1660,18 @@ components:
         method:
           enum:
             - AutoBestPick
+            - BoxJenkinsParameterized
             - BoxJenkins
-            - BoxJenkinsOptimized
+            - CrostonParameterized
             - Croston
-            - CrostonOptimized
+            - DoubleExponentialSmoothingParameterized
             - DoubleExponentialSmoothing
-            - DoubleExponentialSmoothingOptimized
+            - HoltWintersParameterized
             - HoltWinters
-            - HoltWintersOptimized
+            - SingleExponentialSmoothingParameterized
             - SingleExponentialSmoothing
-            - SingleExponentialSmoothingOptimized
+            - iCUE1Parameterized
             - iCUE1
-            - iCUE1Optimized
             - iCUEgamma
             - SimpleMovingAverage
             - External
@@ -1693,6 +1769,10 @@ components:
           format: int32
           nullable: true
           type: integer
+        outlierDetection:
+          example: true
+          nullable: true
+          type: boolean
         periodicity:
           example: 12
           format: int32
@@ -1713,6 +1793,39 @@ components:
           format: double
           nullable: true
           type: number
+      type: object
+    LifecycleManyToOneRequest:
+      additionalProperties: false
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/PlanningLevelDataDto"
+          nullable: true
+          type: array
+        planningLevelId:
+          type: string
+        ratios:
+          items:
+            format: double
+            type: number
+          nullable: true
+          type: array
+      required:
+        - planningLevelId
+      type: object
+    LifecycleOneToOneRequest:
+      additionalProperties: false
+      properties:
+        data:
+          $ref: "#/components/schemas/PlanningLevelDataDto"
+        planningLevelId:
+          type: string
+        ratio:
+          example: 15
+          format: double
+          type: number
+      required:
+        - planningLevelId
       type: object
     NewEntityRequest:
       additionalProperties: false
@@ -1795,7 +1908,7 @@ components:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/PlanningLevelDataRequest"
+            $ref: "#/components/schemas/PlanningLevelDataDto"
           nullable: true
           type: array
         planningLevelId:
@@ -1807,7 +1920,7 @@ components:
         - planningLevelId
         - startDate
       type: object
-    PlanningLevelDataRequest:
+    PlanningLevelDataDto:
       additionalProperties: false
       properties:
         historyValues:
@@ -1884,6 +1997,10 @@ components:
           format: int32
           nullable: true
           type: integer
+        outlierDetection:
+          example: true
+          nullable: true
+          type: boolean
         periodicity:
           example: 12
           format: int32
@@ -1932,18 +2049,18 @@ components:
         method:
           enum:
             - AutoBestPick
+            - BoxJenkinsParameterized
             - BoxJenkins
-            - BoxJenkinsOptimized
+            - CrostonParameterized
             - Croston
-            - CrostonOptimized
+            - DoubleExponentialSmoothingParameterized
             - DoubleExponentialSmoothing
-            - DoubleExponentialSmoothingOptimized
+            - HoltWintersParameterized
             - HoltWinters
-            - HoltWintersOptimized
+            - SingleExponentialSmoothingParameterized
             - SingleExponentialSmoothing
-            - SingleExponentialSmoothingOptimized
+            - iCUE1Parameterized
             - iCUE1
-            - iCUE1Optimized
             - iCUEgamma
             - SimpleMovingAverage
             - External
@@ -1964,24 +2081,24 @@ components:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/PlanningLevelDataRequest"
+            $ref: "#/components/schemas/PlanningLevelDataDto"
           nullable: true
           type: array
         method:
           enum:
             - AutoBestPick
+            - BoxJenkinsParameterized
             - BoxJenkins
-            - BoxJenkinsOptimized
+            - CrostonParameterized
             - Croston
-            - CrostonOptimized
+            - DoubleExponentialSmoothingParameterized
             - DoubleExponentialSmoothing
-            - DoubleExponentialSmoothingOptimized
+            - HoltWintersParameterized
             - HoltWinters
-            - HoltWintersOptimized
+            - SingleExponentialSmoothingParameterized
             - SingleExponentialSmoothing
-            - SingleExponentialSmoothingOptimized
+            - iCUE1Parameterized
             - iCUE1
-            - iCUE1Optimized
             - iCUEgamma
             - SimpleMovingAverage
             - External
@@ -2094,7 +2211,7 @@ components:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/PlanningLevelDataRequest"
+            $ref: "#/components/schemas/PlanningLevelDataDto"
           nullable: true
           type: array
         planningLevelId:

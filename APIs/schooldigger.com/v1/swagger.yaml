@@ -445,7 +445,7 @@ paths:
     get:
       consumes: []
       description: Retrieve a school record from the SchoolDigger database
-      operationId: Schools_GetSchool
+      operationId: Schools_GetSchool10
       parameters:
         - description: The 12 digit School ID (e.g. 064215006903)
           in: path
@@ -470,7 +470,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: "#/definitions/APISchool"
+            $ref: "#/definitions/APISchool10Full"
       summary: Returns a detailed record for one school
       tags:
         - Schools
@@ -529,7 +529,7 @@ definitions:
         readOnly: false
         type: string
       isWithinBoundary:
-        description: Indicates whether this district's boundary includes the specified location from fromLatitude/fromLongitude
+        description: Indicates whether this district's boundary includes the specified location from nearLatitude/nearLongitude
         readOnly: false
         type: boolean
       lowGrade:
@@ -612,11 +612,11 @@ definitions:
         readOnly: false
         type: string
       isWithinBoundary:
-        description: Indicates whether this district's boundary includes the specified location from fromLatitude/fromLongitude
+        description: Indicates whether this district's boundary includes the specified location from nearLatitude/nearLongitude
         readOnly: false
         type: boolean
       locationIsWithinBoundary:
-        description: Indicates whether this school's boundary includes the specified location from fromLatitude/fromLongitude or boundaryAddress (Enterprise API level)
+        description: Indicates whether this school's boundary includes the specified location from nearLatitude/nearLongitude or boundaryAddress (Enterprise API level)
         readOnly: false
         type: boolean
       lowGrade:
@@ -943,7 +943,7 @@ definitions:
         readOnly: false
         type: integer
     type: object
-  APISchool:
+  APISchool10Full:
     properties:
       address:
         $ref: "#/definitions/APILocation"
@@ -1064,8 +1064,8 @@ definitions:
         readOnly: false
         type: string
     type: object
-  APISchool1:
-    description: "APISchool1: A summary of a school record. For the full school record, call /schools/{id}"
+  APISchool1Summary:
+    description: "APISchool1Summary: A summary of a school record. For the full school record, call /schools/{id}"
     properties:
       address:
         $ref: "#/definitions/APILocation"
@@ -1085,7 +1085,8 @@ definitions:
         description: District of school (public schools only)
         readOnly: false
       hasBoundary:
-        description: Indicates that an attendance boundary is available for this school. (To retrieve, look up school with /schools/{id})
+        description: Indicates that an attendance boundary is available for this school.
+        readOnly: false
         type: boolean
       highGrade:
         description: The high grade served by this school
@@ -1115,7 +1116,7 @@ definitions:
         readOnly: false
         type: string
       locationIsWithinBoundary:
-        description: Indicates whether this school's boundary includes the specified location from fromLatitude/fromLongitude or boundaryAddress. (Enterprise API level only)
+        description: Indicates whether this school's boundary includes the specified location from nearLatitude/nearLongitude or boundaryAddress. (Enterprise API level only)
         readOnly: false
         type: boolean
       lowGrade:
@@ -1193,7 +1194,7 @@ definitions:
         type: integer
       schoolList:
         items:
-          $ref: "#/definitions/APISchool1"
+          $ref: "#/definitions/APISchool1Summary"
         type: array
     type: object
   APISchoolListRank:
@@ -1225,7 +1226,7 @@ definitions:
       schoolList:
         description: The schools in the ranking list
         items:
-          $ref: "#/definitions/APISchool1"
+          $ref: "#/definitions/APISchool1Summary"
         readOnly: false
         type: array
     type: object

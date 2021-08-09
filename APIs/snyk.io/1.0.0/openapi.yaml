@@ -835,6 +835,40 @@ paths:
       summary: List all organizations in a group
       tags:
         - Groups
+  "/group/{groupId}/roles":
+    get:
+      description: ""
+      operationId: List all roles in a group
+      parameters:
+        - description: The group ID. The `API_KEY` must have READ access to this group.
+          example: a060a49f-636e-480f-9e14-38e773b2a97f
+          in: path
+          name: groupId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json; charset=utf-8:
+              examples:
+                response:
+                  value:
+                    - created: 2021-04-22T16:02:53.233Z
+                      description: Collaborator
+                      modified: 2021-04-22T16:02:53.332Z
+                      name: Org Collaborator
+                      publicId: 6525b356-a400-465f-b2e5-3eee1161e69f
+                    - created: 2021-04-22T16:02:53.233Z
+                      description: Admin
+                      modified: 2021-04-22T16:02:53.332Z
+                      name: Org Admin
+                      publicId: af047fef-69f3-4bd9-9760-8957ce0d2ece
+          description: OK
+          headers: {}
+      summary: List all roles in a group
+      tags:
+        - Groups
   "/group/{groupId}/settings":
     get:
       description: ""
@@ -5411,6 +5445,82 @@ paths:
       summary: List all project snapshot aggregated issues
       tags:
         - Projects
+  "/org/{orgId}/project/{projectId}/history/{snapshotId}/issue/{issueId}/paths?perPage={perPage}&page={page}":
+    get:
+      description: ""
+      operationId: List all project snapshot issue paths
+      parameters:
+        - description: The organization ID. The `API_KEY` must have access to this organization.
+          example: 4a18d42f-0706-4ad0-b127-24078731fbed
+          in: path
+          name: orgId
+          required: true
+          schema:
+            type: string
+        - description: The project ID for which to return issue paths.
+          example: 6d5813be-7e6d-4ab8-80c2-1e3e2a454545
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - description: The project snapshot ID for which to return issue paths. If set to `latest`, the most recent snapshot will be used. Use the "List all project snapshots" endpoint to find suitable values for this.
+          example: 6d5813be-7e6d-4ab8-80c2-1e3e2a454553
+          in: path
+          name: snapshotId
+          required: true
+          schema:
+            type: string
+        - description: The issue ID for which to return issue paths.
+          example: SNYK-JS-LODASH-590103
+          in: path
+          name: issueId
+          required: true
+          schema:
+            type: string
+        - description: The number of results to return per page (1 - 1000, inclusive).
+          example: "3"
+          in: path
+          name: perPage
+          required: true
+          schema:
+            default: 10
+            type: number
+        - description: The page of results to return.
+          example: "2"
+          in: path
+          name: page
+          required: true
+          schema:
+            default: 1
+            type: number
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                properties:
+                  paths:
+                    description: A list of the dependency paths that introduce the issue
+                    items:
+                      items: {}
+                      type: array
+                    type: array
+                  snapshotId:
+                    description: The identifier of the snapshot for which the paths have been found
+                    type: string
+                  total:
+                    description: The total number of results
+                    type: number
+                type: object
+          description: OK
+          headers:
+            Link:
+              schema:
+                type: string
+      summary: List all project snapshot issue paths
+      tags:
+        - Projects
   "/org/{orgId}/project/{projectId}/history?perPage={perPage}&page={page}":
     post:
       description: ""
@@ -5531,9 +5641,15 @@ paths:
                             - critical
                           type: object
                         method:
-                          description: test', 'cli', 'api', 'wizard']
-                          items: {}
-                          type: array
+                          description: The method by which this snapshot was created.
+                          enum:
+                            - api
+                            - cli
+                            - recurring
+                            - web
+                            - web-test
+                            - wizard
+                          type: string
                         snapshotId:
                           description: The snapshot identifier
                           type: string
@@ -5899,7 +6015,7 @@ paths:
   "/org/{orgId}/project/{projectId}/issue/{issueId}/paths?snapshotId={snapshotId}&perPage={perPage}&page={page}":
     get:
       description: ""
-      operationId: List all affected paths
+      operationId: List all project issue paths
       parameters:
         - description: The organization ID. The `API_KEY` must have access to this organization.
           example: 4a18d42f-0706-4ad0-b127-24078731fbed
@@ -5908,26 +6024,27 @@ paths:
           required: true
           schema:
             type: string
-        - description: The project ID for which to return affected paths.
+        - description: The project ID for which to return issue paths.
           example: 6d5813be-7e6d-4ab8-80c2-1e3e2a454545
           in: path
           name: projectId
           required: true
           schema:
             type: string
-        - description: The issue ID for which to return affected paths.
+        - description: The issue ID for which to return issue paths.
           example: SNYK-JS-LODASH-590103
           in: path
           name: issueId
           required: true
           schema:
             type: string
-        - description: The snapshot ID for which to return affected paths. If not specified, the latest snapshot will be used.
+        - description: The project snapshot ID for which to return issue paths. If set to `latest`, the most recent snapshot will be used. Use the "List all project snapshots" endpoint to find suitable values for this.
           example: 6d5813be-7e6d-4ab8-80c2-1e3e2a454553
           in: path
           name: snapshotId
           required: true
           schema:
+            default: latest
             type: string
         - description: The number of results to return per page (1 - 1000, inclusive).
           example: "3"
@@ -5969,7 +6086,7 @@ paths:
             Link:
               schema:
                 type: string
-      summary: List all affected paths
+      summary: List all project issue paths
       tags:
         - Projects
   "/org/{orgId}/project/{projectId}/issues":
@@ -18736,22 +18853,6 @@ components:
           description: The id of the user.
           type: string
       type: object
-    Affected_paths:
-      properties:
-        paths:
-          description: A list of the dependency paths that introduce the issue
-          items:
-            items:
-              type: string
-            type: array
-          type: array
-        snapshotId:
-          description: The identifier of the snapshot for which the paths have been found
-          type: string
-        total:
-          description: The total number of results
-          type: number
-      type: object
     Aggregated_Project_Snapshot_Issues: {}
     Aggregated_Project_issues: {}
     Aggregated_project_issues:
@@ -19661,6 +19762,22 @@ components:
           type: object
       type: object
     Issue_counts_over_time: {}
+    Issue_paths:
+      properties:
+        paths:
+          description: A list of the dependency paths that introduce the issue
+          items:
+            items:
+              type: string
+            type: array
+          type: array
+        snapshotId:
+          description: The identifier of the snapshot for which the paths have been found
+          type: string
+        total:
+          description: The total number of results
+          type: number
+      type: object
     Issues:
       properties:
         results:
@@ -20052,6 +20169,7 @@ components:
             $ref: "#/components/schemas/Project"
           type: array
       type: object
+    List_all_roles_in_a_group: {}
     List_all_tags_in_a_group: {}
     List_members_in_a_group: {}
     Manage_organization: {}
@@ -20680,6 +20798,8 @@ components:
           type: object
       type: object
     Project_History: {}
+    Project_Issue_Paths: {}
+    Project_Snapshot_Issue_Paths: {}
     Project_attributes:
       properties:
         criticality:
@@ -21042,7 +21162,6 @@ components:
           description: The ID of the organization that the project should be moved to. The API_KEY must have admin access to this organization.
           type: string
       type: object
-    Project_paths_by_issue: {}
     Project_settings:
       properties:
         autoDepUpgradeEnabled:
@@ -21111,9 +21230,15 @@ components:
                   - critical
                 type: object
               method:
-                description: test', 'cli', 'api', 'wizard']
-                items: {}
-                type: array
+                description: The method by which this snapshot was created.
+                enum:
+                  - api
+                  - cli
+                  - recurring
+                  - web
+                  - web-test
+                  - wizard
+                type: string
               snapshotId:
                 description: The snapshot identifier
                 type: string

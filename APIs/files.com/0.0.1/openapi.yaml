@@ -473,7 +473,7 @@ paths:
       tags:
         - api_key
       x-authentication:
-        - desktop_app
+        - native_app
         - office_integration
     get:
       description: Show information about current API key.  (Requires current API connection to be using an API key.)
@@ -520,7 +520,7 @@ paths:
       tags:
         - api_key
       x-authentication:
-        - desktop_app
+        - native_app
         - office_integration
     patch:
       description: Update current API key.  (Requires current API connection to be using an API key.)
@@ -549,6 +549,7 @@ paths:
                     - desktop_app
                     - sync_app
                     - office_integration
+                    - mobile_app
                   example: full
                   type: string
                   x-ms-summary: Permissions for this API Key.  Keys with the `desktop_app` permission set only have the ability to do the functions provided in our Desktop App (File and Share Link operations).  Additional permission sets may become available in the future, such as for a Site Admin to give a key with no administrator privileges.  If you have ideas for permission sets, please let us know.
@@ -595,7 +596,7 @@ paths:
       tags:
         - api_key
       x-authentication:
-        - desktop_app
+        - native_app
         - office_integration
   /api_keys:
     get:
@@ -917,6 +918,7 @@ paths:
                     - desktop_app
                     - sync_app
                     - office_integration
+                    - mobile_app
                   example: full
                   type: string
                   x-ms-summary: Permissions for this API Key.  Keys with the `desktop_app` permission set only have the ability to do the functions provided in our Desktop App (File and Share Link operations).  Additional permission sets may become available in the future, such as for a Site Admin to give a key with no administrator privileges.  If you have ideas for permission sets, please let us know.
@@ -3075,7 +3077,7 @@ paths:
       tags:
         - bundles
       x-authentication:
-        - desktop_app
+        - native_app
   "/bundles/{id}":
     delete:
       description: Delete Bundle
@@ -4059,7 +4061,7 @@ paths:
       tags:
         - file_actions
       x-authentication:
-        - desktop_app
+        - native_app
         - office_integration
         - inbox
   "/file_actions/copy/{path}":
@@ -4133,7 +4135,7 @@ paths:
       tags:
         - file_actions
       x-authentication:
-        - desktop_app
+        - native_app
         - office_integration
   "/file_actions/move/{path}":
     post:
@@ -4202,7 +4204,7 @@ paths:
       tags:
         - file_actions
       x-authentication:
-        - desktop_app
+        - native_app
         - office_integration
   /file_comment_reactions:
     post:
@@ -4621,7 +4623,7 @@ paths:
       tags:
         - file_migrations
       x-authentication:
-        - desktop_app
+        - native_app
   "/files/{path}":
     delete:
       description: Delete file/folder
@@ -4679,7 +4681,7 @@ paths:
       tags:
         - files
       x-authentication:
-        - desktop_app
+        - native_app
         - office_integration
         - no_readonly
     get:
@@ -4763,7 +4765,7 @@ paths:
       tags:
         - files
       x-authentication:
-        - desktop_app
+        - native_app
         - office_integration
         - no_readonly
     patch:
@@ -4835,7 +4837,7 @@ paths:
       tags:
         - files
       x-authentication:
-        - desktop_app
+        - native_app
         - office_integration
         - no_readonly
     post:
@@ -4962,7 +4964,7 @@ paths:
       tags:
         - files
       x-authentication:
-        - desktop_app
+        - native_app
         - office_integration
         - inbox
   "/folders/{path}":
@@ -5078,7 +5080,7 @@ paths:
       tags:
         - folders
       x-authentication:
-        - desktop_app
+        - native_app
     post:
       description: Create folder
       operationId: PostFoldersPath
@@ -5132,7 +5134,7 @@ paths:
       tags:
         - folders
       x-authentication:
-        - desktop_app
+        - native_app
   /form_field_sets:
     get:
       description: List Form Field Sets
@@ -7327,10 +7329,10 @@ paths:
                   type: string
                   x-ms-summary: Return results that are file actions related to files or folders inside this folder path.
                 query_interface:
-                  description: "Filter results by this this interface type. Valid values: `web`, `ftp`, `robot`, `jsapi`, `webdesktopapi`, `sftp`, `dav`, `desktop`, `restapi`, `scim`, `office`"
+                  description: "Filter results by this this interface type. Valid values: `web`, `ftp`, `robot`, `jsapi`, `webdesktopapi`, `sftp`, `dav`, `desktop`, `restapi`, `scim`, `office`, `mobile`"
                   example: ftp
                   type: string
-                  x-ms-summary: "Filter results by this this interface type. Valid values: `web`, `ftp`, `robot`, `jsapi`, `webdesktopapi`, `sftp`, `dav`, `desktop`, `restapi`, `scim`, `office`"
+                  x-ms-summary: "Filter results by this this interface type. Valid values: `web`, `ftp`, `robot`, `jsapi`, `webdesktopapi`, `sftp`, `dav`, `desktop`, `restapi`, `scim`, `office`, `mobile`"
                 query_ip:
                   description: Filter results by this IP address.
                   example: 127.0.0.1
@@ -8237,7 +8239,7 @@ paths:
       tags:
         - locks
       x-authentication:
-        - desktop_app
+        - native_app
         - office_integration
     get:
       description: List Locks by path
@@ -8316,7 +8318,7 @@ paths:
       tags:
         - locks
       x-authentication:
-        - desktop_app
+        - native_app
         - office_integration
     post:
       description: Create Lock
@@ -8394,7 +8396,7 @@ paths:
       tags:
         - locks
       x-authentication:
-        - desktop_app
+        - native_app
         - office_integration
   /message_comment_reactions:
     get:
@@ -11998,6 +12000,19 @@ paths:
                   format: int32
                   type: integer
                   x-ms-summary: Number of prior passwords to disallow
+                mobile_app:
+                  description: Is the mobile app enabled?
+                  type: boolean
+                  x-ms-summary: Is the mobile app enabled?
+                mobile_app_session_ip_pinning:
+                  description: Is mobile app session IP pinning enabled?
+                  type: boolean
+                  x-ms-summary: Is mobile app session IP pinning enabled?
+                mobile_app_session_lifetime:
+                  description: Mobile app session lifetime (in hours)
+                  format: int32
+                  type: integer
+                  x-ms-summary: Mobile app session lifetime (in hours)
                 name:
                   description: Site name
                   type: string
@@ -14808,6 +14823,7 @@ paths:
                     - desktop_app
                     - sync_app
                     - office_integration
+                    - mobile_app
                   example: full
                   type: string
                   x-ms-summary: Permissions for this API Key.  Keys with the `desktop_app` permission set only have the ability to do the functions provided in our Desktop App (File and Share Link operations).  Additional permission sets may become available in the future, such as for a Site Admin to give a key with no administrator privileges.  If you have ideas for permission sets, please let us know.
@@ -15473,7 +15489,59 @@ paths:
       description: Create Webhook Test
       operationId: PostWebhookTests
       requestBody:
-        $ref: "#/components/requestBodies/PostSiteTestWebhook"
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                action:
+                  description: action for test body
+                  example: test
+                  type: string
+                  x-ms-summary: action for test body
+                body:
+                  description: Additional body parameters.
+                  example: test-param => testvalue
+                  type: object
+                  x-ms-summary: Additional body parameters.
+                encoding:
+                  description: HTTP encoding method.  Can be JSON, XML, or RAW (form data).
+                  example: RAW
+                  type: string
+                  x-ms-summary: HTTP encoding method.  Can be JSON, XML, or RAW (form data).
+                file_as_body:
+                  description: Send the file data as the request body?
+                  example: "false"
+                  type: boolean
+                  x-ms-summary: Send the file data as the request body?
+                file_form_field:
+                  description: Send the file data as a named parameter in the request POST body
+                  example: upload_file_data
+                  type: string
+                  x-ms-summary: Send the file data as a named parameter in the request POST body
+                headers:
+                  description: Additional request headers.
+                  example: x-test-header => testvalue
+                  type: object
+                  x-ms-summary: Additional request headers.
+                method:
+                  description: HTTP method(GET or POST).
+                  example: GET
+                  type: string
+                  x-ms-summary: HTTP method(GET or POST).
+                raw_body:
+                  description: raw body text
+                  example: test body
+                  type: string
+                  x-ms-summary: raw body text
+                url:
+                  description: URL for testing the webhook.
+                  example: https://www.site.com/...
+                  type: string
+                  x-ms-summary: URL for testing the webhook.
+              required:
+                - url
+              type: object
+        required: true
       responses:
         "201":
           content:
@@ -15944,6 +16012,7 @@ components:
                   - desktop_app
                   - sync_app
                   - office_integration
+                  - mobile_app
                 example: full
                 type: string
                 x-ms-summary: Permissions for this API Key.  Keys with the `desktop_app` permission set only have the ability to do the functions provided in our Desktop App (File and Share Link operations).  Additional permission sets may become available in the future, such as for a Site Admin to give a key with no administrator privileges.  If you have ideas for permission sets, please let us know.
@@ -16469,6 +16538,7 @@ components:
             - restapi
             - scim
             - office
+            - mobile
           example: web
           type: string
         ip:
@@ -16689,6 +16759,7 @@ components:
             - desktop_app
             - sync_app
             - office_integration
+            - mobile_app
           example: full
           type: string
         platform:
@@ -18030,7 +18101,7 @@ components:
           example: Folder
           type: string
         query_interface:
-          description: "Filter results by this this interface type. Valid values: `web`, `ftp`, `robot`, `jsapi`, `webdesktopapi`, `sftp`, `dav`, `desktop`, `restapi`, `scim`, `office`"
+          description: "Filter results by this this interface type. Valid values: `web`, `ftp`, `robot`, `jsapi`, `webdesktopapi`, `sftp`, `dav`, `desktop`, `restapi`, `scim`, `office`, `mobile`"
           example: ftp
           type: string
         query_ip:
@@ -18161,7 +18232,7 @@ components:
           format: int32
           type: integer
         interface:
-          description: "Inteface through which the action was taken. Valid values: `web`, `ftp`, `robot`, `jsapi`, `webdesktopapi`, `sftp`, `dav`, `desktop`, `restapi`, `scim`, `office`"
+          description: "Inteface through which the action was taken. Valid values: `web`, `ftp`, `robot`, `jsapi`, `webdesktopapi`, `sftp`, `dav`, `desktop`, `restapi`, `scim`, `office`, `mobile`"
           example: ftp
           type: string
         ip:
@@ -19344,6 +19415,19 @@ components:
           $ref: "#/components/schemas/ImageEntity"
         max_prior_passwords:
           description: Number of prior passwords to disallow
+          example: 1
+          format: int32
+          type: integer
+        mobile_app:
+          description: Is the mobile app enabled?
+          example: true
+          type: boolean
+        mobile_app_session_ip_pinning:
+          description: Is mobile app session IP pinning enabled?
+          example: true
+          type: boolean
+        mobile_app_session_lifetime:
+          description: Mobile app session lifetime (in hours)
           example: 1
           format: int32
           type: integer
@@ -20982,6 +21066,9 @@ x-errors:
   - http-code: 403
     title: Api Key Only For Desktop App
     type: not-authorized/api-key-only-for-desktop-app
+  - http-code: 403
+    title: Api Key Only For Mobile App
+    type: not-authorized/api-key-only-for-mobile-app
   - http-code: 403
     title: Api Key Only For Office Integration
     type: not-authorized/api-key-only-for-office-integration

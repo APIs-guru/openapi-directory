@@ -2564,7 +2564,7 @@ paths:
       summary: Creates a new resource object.
       tags:
         - Resources
-  "/setup/v1/resources/allocation/{id}":
+  "/setup/v1/resources/allocations/{id}":
     delete:
       description: Deletes a resource allocation.
       parameters:
@@ -2583,6 +2583,26 @@ paths:
                 $ref: "#/components/schemas/ResourceBlockViewModel"
           description: Success
       summary: Delete a resource allocation object
+      tags:
+        - Resources
+    get:
+      description: ""
+      parameters:
+        - description: Valid id of a resource allocation object
+          in: path
+          name: id
+          required: true
+          schema:
+            default: ""
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceAllocationViewModel"
+          description: Success
+      summary: Update a resource allocation
       tags:
         - Resources
     put:
@@ -2615,27 +2635,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResourceBlockViewModel"
-          description: Success
-      summary: Update a resource allocation
-      tags:
-        - Resources
-  "/setup/v1/resources/allocations/{id}":
-    get:
-      description: ""
-      parameters:
-        - description: Valid id of a resource allocation object
-          in: path
-          name: id
-          required: true
-          schema:
-            default: ""
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResourceAllocationViewModel"
           description: Success
       summary: Update a resource allocation
       tags:
@@ -2925,7 +2924,69 @@ paths:
       summary: Updates a resource object.
       tags:
         - Resources
-  "/setup/v1/resources/{id}/allocation":
+  "/setup/v1/resources/{id}/allocations":
+    get:
+      description: "Resource allocations allow you to specify explicitly the times you are available as opposed to \r
+
+        generating resource availability from the times that are not unavailable.\r
+
+        \r
+
+        The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.\r
+
+        Use the other query parameters to optionally filter the results list."
+      parameters:
+        - description: The id of the resource to list allocations
+          in: path
+          name: id
+          required: true
+          schema:
+            default: ""
+            type: string
+        - description: Format yyyy-mm-dd. Filter allocations on/after startDate
+          in: query
+          name: startDate
+          schema:
+            default: ""
+            format: date-time
+            nullable: true
+            type: string
+        - description: Format yyyy-mm-dd. Filter on/before endDate
+          in: query
+          name: endDate
+          schema:
+            default: ""
+            format: date-time
+            nullable: true
+            type: string
+        - description: Starting row of page, default 0
+          in: query
+          name: offset
+          schema:
+            format: int32
+            type: integer
+        - description: Page limit, default 20. Maximum 100.
+          in: query
+          name: limit
+          schema:
+            format: int32
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceAllocationListViewModel"
+          description: resource allocation objects
+        "400":
+          description: Missing or invalid values in the request
+        "401":
+          description: Authorization error.
+        "404":
+          description: Resource was not found
+      summary: Returns a list of resource allocations.
+      tags:
+        - Resources
     post:
       description: "Creates a new resource allocation. You must specify a StartDateTime and EndDateTime.\r
 
@@ -3004,69 +3065,6 @@ paths:
                 $ref: "#/components/schemas/ResourceBlockViewModel"
           description: Success
       summary: Create a new resource allocation
-      tags:
-        - Resources
-  "/setup/v1/resources/{id}/allocations":
-    get:
-      description: "Resource allocations allow you to specify explicitly the times you are available as opposed to \r
-
-        generating resource availability from the times that are not unavailable.\r
-
-        \r
-
-        The results are returned in pages. Use the offset and limit parameters to control the page start and size. Default offset is 0, and limit is 20.\r
-
-        Use the other query parameters to optionally filter the results list."
-      parameters:
-        - description: The id of the resource to list allocations
-          in: path
-          name: id
-          required: true
-          schema:
-            default: ""
-            type: string
-        - description: Format yyyy-mm-dd. Filter allocations on/after startDate
-          in: query
-          name: startDate
-          schema:
-            default: ""
-            format: date-time
-            nullable: true
-            type: string
-        - description: Format yyyy-mm-dd. Filter on/before endDate
-          in: query
-          name: endDate
-          schema:
-            default: ""
-            format: date-time
-            nullable: true
-            type: string
-        - description: Starting row of page, default 0
-          in: query
-          name: offset
-          schema:
-            format: int32
-            type: integer
-        - description: Page limit, default 20. Maximum 100.
-          in: query
-          name: limit
-          schema:
-            format: int32
-            type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResourceAllocationListViewModel"
-          description: resource allocation objects
-        "400":
-          description: Missing or invalid values in the request
-        "401":
-          description: Authorization error.
-        "404":
-          description: Resource was not found
-      summary: Returns a list of resource allocations.
       tags:
         - Resources
   "/setup/v1/resources/{id}/availability":
@@ -8044,5 +8042,6 @@ components:
         clientCredentials:
           scopes:
             OnSchedApi: Consumer and Setup Interface
+            distance: Travel and Distance calculations
           tokenUrl: https://sandbox-identity.onsched.com/connect/token
       type: oauth2

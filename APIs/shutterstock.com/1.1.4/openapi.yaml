@@ -4349,6 +4349,7 @@ paths:
                         keywords: []
                         rights:
                           countries: CAN,+DEU,+GBR,+USA,-*
+                        special_instructions: Minimum price 50 EUR
                         supplier_code: EPA
                         title: Hong Kong kicks off international e-Sports competition, China - 24 Aug 2018
                         updated_time: 2019-07-15T20:04:44-04:00
@@ -8796,12 +8797,12 @@ paths:
                 response:
                   value:
                     contributor_id: "212"
-                    first_name: firstname
-                    full_name: your name
+                    first_name: John
+                    full_name: John Doe
                     id: "101782699"
                     language: es
-                    last_name: lastname
-                    username: yourusername
+                    last_name: Doe
+                    username: jdoe
               schema:
                 $ref: "#/components/schemas/UserDetails"
           description: OK
@@ -11109,6 +11110,29 @@ components:
   schemas:
     AccessTokenDetails:
       description: Access token details that are currently associated with this user
+      example:
+        client_id: c456b-26230-fa8ed-d19ab-05ce2-bf0aa
+        customer_id: "123456789"
+        expires_in: 3600
+        realm: customer
+        scopes:
+          - user.view
+          - user.email
+          - user.address
+          - user.edit
+          - organization.view
+          - organization.address
+          - collections.view
+          - collections.edit
+          - licenses.view
+          - licenses.create
+          - media.upload
+          - media.submit
+          - media.edit
+          - purchases.view
+          - purchases.create
+        user_id: "123456789"
+        username: jdoe
       properties:
         client_id:
           description: Client ID that is associated with the user
@@ -11146,6 +11170,9 @@ components:
     Album:
       additionalProperties: false
       description: Album metadata
+      example:
+        id: "1234567"
+        title: Happy Music
       properties:
         id:
           description: The album ID
@@ -11159,6 +11186,11 @@ components:
       type: object
     Allotment:
       description: An allotment of credits as part of a subscription
+      example:
+        downloads_left: 5
+        downloads_limit: 10
+        end_time: 2020-05-29T12:10:22-05:00
+        start_time: 2020-05-29T12:10:22-05:00
       properties:
         downloads_left:
           description: Number of credits remaining in the subscription
@@ -11177,6 +11209,8 @@ components:
       type: object
     Artist:
       description: Metadata about the artist that created the media
+      example:
+        name: The Happy Tunes Band
       properties:
         name:
           description: The artist's name
@@ -11191,9 +11225,6 @@ components:
       description: Audio metadata
       example:
         added_date: 2016-08-16
-        album:
-          id: ""
-          title: ""
         artists:
           - name: Klimenko Music
         assets:
@@ -11381,6 +11412,9 @@ components:
       type: object
     AudioAssetDetails:
       description: Information about a file that is part of an audio asset
+      example:
+        file_size: 4453197
+        url: https://ak.picdn.net/shutterstock/audio/442583/preview/preview.mp3
       properties:
         file_size:
           description: File size of the track
@@ -11391,6 +11425,18 @@ components:
       type: object
     AudioAssets:
       description: Files that are available as part of an audio asset
+      example:
+        clean_audio:
+          file_size: 35188408
+        preview_mp3:
+          file_size: 4400203
+          url: https://ak.picdn.net/shutterstock/audio/442583/preview/preview.mp3
+        preview_ogg:
+          file_size: 4453197
+          url: https://ak.picdn.net/shutterstock/audio/442583/preview/preview.ogg
+        waveform:
+          file_size: 18778
+          url: https://ak.picdn.net/shutterstock/audio/442583/waveform/waveform.png
       properties:
         album_art:
           $ref: "#/components/schemas/AudioAssetDetails"
@@ -11410,9 +11456,6 @@ components:
       example:
         data:
           - added_date: 2016-04-12
-            album:
-              id: ""
-              title: ""
             artists:
               - name: Fin Productions
             assets:
@@ -11503,6 +11546,15 @@ components:
           type: integer
     AudioRenderResult:
       description: The output of an audio render in WAV or MP3 format
+      example:
+        created_date: 2021-07-13T16:19:30-04:00
+        files: []
+        id: 2yZp13IhLqnjfh2KquDTOHUHzTiP
+        preset: MASTER_MP3
+        progress_percent: 0
+        status: WAITING_COMPOSE
+        timeline: {}
+        updated_date: 2021-07-13T16:19:30-04:00
       properties:
         created_date:
           description: The time the render was submitted to the API
@@ -11549,6 +11601,33 @@ components:
       type: object
     AudioRenderTimeline:
       description: A timeline object that represents either a request for music to be created or an entire music composition
+      example:
+        spans:
+          - id: 123456
+            instrument_groups:
+              - instrument_group: The instrument ID
+                statuses:
+                  - beat: 12
+                    status: active
+            regions:
+              - beat: 12
+                descriptor: The descriptor ID needed to compose the music
+                end_type:
+                  beat: 12
+                  event: ending
+                  type: ringout
+                id: 123456
+                key:
+                  tonic_accidental: double flat
+                  tonic_note: c
+                  tonic_quality: major
+                region: music
+            span_type: metered
+            tempo: 12345
+            tempo_changes:
+              - tempo: 12345
+                time: 5
+            time: 5
       properties:
         spans:
           description: A span object that represents the beginning of a period of absolute time
@@ -11558,6 +11637,23 @@ components:
       type: object
     AudioRenderTimelineSpan:
       description: The beginning of a non-overlapping period of absolute time
+      example:
+        id: 111
+        regions:
+          - beat: 12
+            descriptor: cinematic_minimal_tense
+            end_type:
+              beat: 24
+              event: ending
+              type: ringout
+            id: 222
+            key:
+              tonic_note: c
+              tonic_quality: major
+            region: music
+        span_type: metered
+        tempo: 76
+        time: 0
       properties:
         id:
           description: An identifier which must be unique within the parent span
@@ -11595,6 +11691,11 @@ components:
       type: object
     AudioRenderTimelineSpanInstrumentGroup:
       description: An instrument and the status objects that specify when that instrument plays
+      example:
+        instrument_group: bright_roomy_kit
+        statuses:
+          - beat: 12
+            status: active
       properties:
         instrument_group:
           description: The instrument ID
@@ -11609,6 +11710,9 @@ components:
       type: object
     AudioRenderTimelineSpanInstrumentGroupStatus:
       description: The status of an instrument at a specific beat
+      example:
+        beat: 12
+        status: active
       properties:
         beat:
           description: The beat, relative to the span, at which the status begins
@@ -11625,6 +11729,18 @@ components:
       type: object
     AudioRenderTimelineSpanRegion:
       description: A period of music or silence, measured in beats
+      example:
+        beat: 12
+        descriptor: cinematic_minimal_tense
+        end_type:
+          beat: 24
+          event: ending
+          type: ringout
+        id: 222
+        key:
+          tonic_note: c
+          tonic_quality: major
+        region: music
       properties:
         beat:
           description: The beat, relative to the span, at which the region object's music begins
@@ -11712,6 +11828,9 @@ components:
       type: object
     AudioRenderTimelineSpanTempoChanges:
       description: An inflection point in a tempo curve; the API creates the overall tempo by using a linear interpolation of the time between each tempo change
+      example:
+        tempo: 86
+        time: 5
       properties:
         tempo:
           description: The tempo, in beats per minute, active at this time
@@ -11725,6 +11844,16 @@ components:
       type: object
     AudioRendersFilesList:
       description: Files associated with the render
+      example:
+        bits_sample: 16
+        content_type: audio/mp3
+        download_url: https://s3.amazonaws.com/prod-amper-inferno-ephemeral/renders/2021/07/13/amper-api-QwAgKqXQAzr622KuXYZ25C9WRH3a/0.mp3
+        filename: My_audio_ai.mp3
+        frequency_hz: 44100
+        kbits_second: 192
+        size_bytes: 481556
+        tracks:
+          - master
       properties:
         bits_sample:
           description: The bit depth of the audio files in bits/sample
@@ -11764,6 +11893,42 @@ components:
       type: object
     AudioRendersListResults:
       description: Audio render data
+      example:
+        audio_renders:
+          - created_date: 2021-07-13T16:19:30-04:00
+            files: []
+            id: 2yZp13IhLqnjfh2KquDTOHUHzTiP
+            preset: MASTER_MP3
+            progress_percent: 20
+            status: WAITING_COMPOSE
+            timeline: {}
+            updated_date: 2021-07-13T16:19:30-04:00
+          - created_date: 2021-07-12T16:39:59-04:00
+            files:
+              - bits_sample: 16
+                content_type: audio/mp3
+                download_url: https://s3.amazonaws.com/prod-amper-inferno-ephemeral/renders/2021/07/13/amper-api-QwAgKqXQAzr622KuXYZ25C9WRH3a/0.mp3
+                filename: My_audio_ai.mp3
+                frequency_hz: 44100
+                kbits_second: 192
+                size_bytes: 481556
+                tracks:
+                  - master
+              - bits_sample: 0
+                content_type: application/vnd.amper.waveform+json
+                download_url: https://s3.amazonaws.com/prod-amper-inferno-ephemeral/renders/2021/07/13/amper-api-QwAgKqXQAzr622KuXYZ25C9WRH3a/1.json
+                filename: render.json
+                frequency_hz: 42
+                kbits_second: 0
+                size_bytes: 4420
+                tracks:
+                  - master
+            id: QwAgKqXQAzr622KuXYZ25C9WRH3a
+            preset: MASTER_MP3
+            progress_percent: 100
+            status: CREATED
+            timeline: {}
+            updated_date: 2021-07-12T16:46:26-04:00
       properties:
         audio_renders:
           description: Audio render results
@@ -11775,6 +11940,77 @@ components:
     AudioSearchResults:
       additionalProperties: false
       description: Audio search results
+      example:
+        data:
+          - added_date: 2016-08-16
+            artists:
+              - name: Klimenko Music
+            assets:
+              clean_audio:
+                file_size: 35188408
+              preview_mp3:
+                file_size: 4400203
+                url: https://ak.picdn.net/shutterstock/audio/442583/preview/preview.mp3
+              preview_ogg:
+                file_size: 4453197
+                url: https://ak.picdn.net/shutterstock/audio/442583/preview/preview.ogg
+              waveform:
+                file_size: 18778
+                url: https://ak.picdn.net/shutterstock/audio/442583/waveform/waveform.png
+            bpm: 110
+            contributor:
+              id: "2847971"
+            description: Pulsing and feel-good, featuring soaring synthesizer, groovy synth bass drums and synth drums that create a euphoric, upbeat mood.
+            duration: 183
+            genres:
+              - Dance/Electronic
+              - Electro Pop
+              - Pop/Rock
+            id: "442583"
+            instruments:
+              - Piano
+              - Synth bass
+              - Synth drums
+              - Synthesizer
+            is_adult: false
+            is_instrumental: true
+            isrc: ""
+            keywords:
+              - celebratory
+              - chic
+              - euphoric
+              - good times
+              - hip
+              - optimistic
+              - party
+              - soaring
+              - upbeat
+            language: en
+            lyrics: ""
+            media_type: audio
+            moods:
+              - Bright
+              - Confident
+              - Fun
+              - Happy
+              - Inspiring
+              - Optimistic
+              - Playful
+              - Sophisticated
+              - Stylish
+              - Uplifting
+            published_time: 2016-08-16T14:30:03-04:00
+            recording_version: ""
+            releases: []
+            similar_artists: []
+            title: Another Tomorrow
+            updated_time: 2016-08-18T17:59:33-04:00
+            url: ""
+            vocal_description: ""
+        page: 1
+        per_page: 5
+        search_id: 749090bb-2967-4a20-b22e-c800dc845e10
+        total_count: 123455
       properties:
         data:
           description: List of tracks
@@ -11803,6 +12039,8 @@ components:
       type: object
     AuthorizeResponse:
       description: Response to Authorize requests
+      example:
+        body: https://accounts.shutterstock.com/login?next=%2Foauth%2Fauthorize%3Fresponse_type%3Dcode%26state%3D1539619928633%26scope%3Dlicenses.create%20licenses.view%20purchases.view%26client_id%3D6d097450b209c6dcd859%26redirect_uri%3Dhttp%3A%2F%2Flocalhost%3A3000%2Fmyapp%2Fauth%2Fcallback%26realm%3Dcustomer
       properties:
         body:
           description: HTML redirect URL that contains the application authorization 'code'
@@ -11812,6 +12050,9 @@ components:
       type: object
     Bands:
       description: A band that can be used to generate music
+      example:
+        id: "1234567"
+        name: The Happy Tunes Band
       properties:
         id:
           description: The ID of the band
@@ -11822,6 +12063,9 @@ components:
       type: object
     Category:
       description: Category information
+      example:
+        id: "1"
+        name: Animals/Wildlife
       properties:
         id:
           description: Category ID
@@ -11832,6 +12076,17 @@ components:
       type: object
     CategoryDataList:
       description: List of categories that images can belong to
+      example:
+        data:
+          - id: "1"
+            name: Animals/Wildlife
+          - id: "11"
+            name: The Arts
+          - id: "15"
+            name: Science
+        page: 1
+        per_page: 5
+        total_count: 13
       properties:
         data:
           description: Categories
@@ -11857,6 +12112,13 @@ components:
           type: integer
     Collection:
       description: Metadata about a collection of assets
+      example:
+        cover_item:
+          id: "297886754"
+        id: "293542904"
+        items_updated_time: 2021-05-20T16:15:22-04:00
+        name: My collection
+        total_item_count: 85
       properties:
         cover_item:
           $ref: "#/components/schemas/CollectionItem"
@@ -11918,31 +12180,12 @@ components:
       description: List of collections
       example:
         data:
-          - created_time: 2014-11-05T19:29:56-05:00
-            id: "5747953"
-            name: Test Collection cdad
-            total_item_count: 0
-            updated_time: 2014-11-05T19:29:56-05:00
-          - created_time: 2014-11-05T19:29:56-05:00
-            id: "5747955"
-            name: Test Collection ff5f
-            total_item_count: 0
-            updated_time: 2014-11-05T19:29:56-05:00
-          - created_time: 2014-11-05T19:29:58-05:00
-            id: "5747957"
-            name: Updated Collection ebc4
-            total_item_count: 0
-            updated_time: 2014-11-05T19:29:58-05:00
-          - created_time: 2014-11-05T19:32:13-05:00
-            id: "5747971"
-            name: Test Collection 0072
-            total_item_count: 0
-            updated_time: 2014-11-05T19:32:13-05:00
-          - created_time: 2014-11-05T19:32:13-05:00
-            id: "5747973"
-            name: Test Collection d332
-            total_item_count: 0
-            updated_time: 2014-11-05T19:32:13-05:00
+          - cover_item:
+              id: "297886754"
+            id: "293542904"
+            items_updated_time: 2021-05-20T16:15:22-04:00
+            name: My collection
+            total_item_count: 85
       properties:
         data:
           description: Collections
@@ -11968,6 +12211,10 @@ components:
           type: integer
     CollectionItem:
       description: Metadata about an item that is part of a collection
+      example:
+        added_time: 2020-05-29T12:10:22-05:00
+        id: "1690105108"
+        media_type: image
       properties:
         added_time:
           description: The date the item was added to the collection
@@ -11986,14 +12233,13 @@ components:
       description: List of items in a collection
       example:
         data:
-          - added_time: 2016-08-18T18:52:59-04:00
-            id: "76688182"
-            media_type: audio
-          - added_time: 2016-08-18T18:52:59-04:00
-            id: "40005859"
-            media_type: audio
+          - added_time: 2021-07-08T12:33:37.000Z
+            id: "1690105108"
+          - added_time: 2021-07-08T12:31:43.000Z
+            id: "1468703072"
         page: 1
-        per_page: 100
+        per_page: 2
+        total_count: 82
       properties:
         data:
           description: Assets in the collection
@@ -12019,6 +12265,11 @@ components:
           type: integer
     CollectionItemRequest:
       description: Request to get a list of items in a collection
+      example:
+        items:
+          - added_time: 2020-05-29T12:10:22-05:00
+            id: "1690105108"
+            media_type: image
       properties:
         items:
           description: List of items
@@ -12041,6 +12292,8 @@ components:
       type: object
     ComputerVisionImageCreateResponse:
       description: Asset upload information
+      example:
+        upload_id: Udb14e1c3540bdbf82b4b3fe12d3a44f2
       properties:
         upload_id:
           type: string
@@ -12049,6 +12302,8 @@ components:
       type: object
     Contributor:
       description: Information about a contributor
+      example:
+        id: "12345678"
       properties:
         id:
           description: ID of the contributor
@@ -12058,6 +12313,35 @@ components:
       type: object
     ContributorProfile:
       description: Contributor profile data
+      example:
+        about: John Doe's photographs
+        contributor_type:
+          - photographer
+        display_name: John Doe
+        equipment:
+          - Nikon
+          - Fuji
+        id: "12345678"
+        location: US
+        portfolio_url: https://www.shutterstock.com/g/jdoe
+        social_media:
+          facebook: http://example.com/jdoe
+          google_plus: http://example.com/jdoe
+          linkedin: http://example.com/jdoe
+          pinterest: http://example.com/jdoe
+          tumblr: http://example.com/jdoe
+          twitter: http://example.com/jdoe
+        styles:
+          - landscape
+          - nature
+          - footage_travel
+        subjects:
+          - animals
+          - landmarks
+          - nature
+          - objects
+          - recreation
+        website: http://example.com/profiles/jdoe
       properties:
         about:
           description: Short description of the contributors' library
@@ -12105,6 +12389,39 @@ components:
       type: object
     ContributorProfileDataList:
       description: List of contributor profiles
+      example:
+        data:
+          - about: John Doe's photographs
+            contributor_type:
+              - photographer
+            display_name: John Doe
+            equipment:
+              - Nikon
+              - Fuji
+            id: "12345678"
+            location: US
+            portfolio_url: https://www.shutterstock.com/g/jdoe
+            social_media:
+              facebook: http://example.com/jdoe
+              google_plus: http://example.com/jdoe
+              linkedin: http://example.com/jdoe
+              pinterest: http://example.com/jdoe
+              tumblr: http://example.com/jdoe
+              twitter: http://example.com/jdoe
+            styles:
+              - landscape
+              - nature
+              - footage_travel
+            subjects:
+              - animals
+              - landmarks
+              - nature
+              - objects
+              - recreation
+            website: http://example.com/profiles/jdoe
+        page: 1
+        per_page: 5
+        total_count: 15
       properties:
         data:
           description: Conributor profiles
@@ -12130,6 +12447,13 @@ components:
           type: integer
     ContributorProfileSocialMedia:
       description: Contributor profile social media links
+      example:
+        facebook: http://example.com/jdoe
+        google_plus: http://example.com/jdoe
+        linkedin: http://example.com/jdoe
+        pinterest: http://example.com/jdoe
+        tumblr: http://example.com/jdoe
+        twitter: http://example.com/jdoe
       properties:
         facebook:
           description: Facebook link for contributor
@@ -12152,6 +12476,9 @@ components:
       type: object
     Cookie:
       description: Cookie object
+      example:
+        name: The name of the cookie
+        value: The value of the cookie
       properties:
         name:
           description: The name of the cookie
@@ -12165,6 +12492,37 @@ components:
       type: object
     CreateAudioRender:
       description: Data required to create an audio render
+      example:
+        filename: My Project.mp3
+        preset: MASTER_MP3
+        timeline:
+          spans:
+            - id: 111
+              instrument_groups:
+                - instrument_group: roomy_kit
+                  statuses:
+                    - beat: 12
+                      status: active
+              regions:
+                - beat: 12
+                  descriptor: cinematic_minimal_tense
+                  end_type:
+                    beat: 24
+                    event: ending
+                    type: ringout
+                  id: 222
+                  key:
+                    tonic_note: c
+                    tonic_quality: major
+                  region: music
+              span_type: metered
+              tempo: 76
+              tempo_changes:
+                - tempo: 86
+                  time: 5
+              time: 5
+            - span_type: unmetered
+              time: 20
       properties:
         filename:
           description: A user-specified file name suggestion; this file name becomes the filename property of the Content-Disposition header when the user downloads the rendered audio file
@@ -12188,6 +12546,38 @@ components:
       type: object
     CreateAudioRendersRequest:
       description: Render request data
+      example:
+        audio_renders:
+          - filename: My Project.mp3
+            preset: MASTER_MP3
+            timeline:
+              spans:
+                - id: 111
+                  instrument_groups:
+                    - instrument_group: roomy_kit
+                      statuses:
+                        - beat: 12
+                          status: active
+                  regions:
+                    - beat: 12
+                      descriptor: cinematic_minimal_tense
+                      end_type:
+                        beat: 24
+                        event: ending
+                        type: ringout
+                      id: 222
+                      key:
+                        tonic_note: c
+                        tonic_quality: major
+                      region: music
+                  span_type: metered
+                  tempo: 76
+                  tempo_changes:
+                    - tempo: 86
+                      time: 5
+                  time: 5
+                - span_type: unmetered
+                  time: 20
       properties:
         audio_renders:
           description: Parameters to create computer audio renders
@@ -12199,6 +12589,9 @@ components:
       type: object
     CustomSizeDimensions:
       description: A custom height or a custom width to resize the image to, but not both (experimental)
+      example:
+        height: 600
+        width: 800
       properties:
         height:
           description: Custom height to resize the image to
@@ -12211,6 +12604,129 @@ components:
       type: object
     Descriptors:
       description: Information about a descriptor
+      example:
+        average_render_speed: 8.242664029014177
+        bands:
+          - id: cinematic_minimal_tense_band_1
+            name: Cinematic Minimal Tense Band 1
+          - id: cinematic_minimal_tense_band_2
+            name: Cinematic Minimal Tense Band 2
+        id: cinematic_minimal_tense
+        instruments:
+          - id: blue_synth_pad
+            name: Warm Pad - Lush
+          - id: direct_round_1_synth_bass
+            name: Direct Round 1 Synth Bass
+          - id: direct_crystal_breath_mid_pad
+            name: Direct Crystal Breath Mid Pad
+        max_tempo: 76
+        min_tempo: 58
+        name: Cinematic Minimal Tense
+        previews:
+          - content_type: audio/mp3
+            url: https://public-cdn.ampermusic.com/bands/previews/cinematic_minimal_tense_band_1_v1.mp3
+          - content_type: audio/mp3
+            url: https://public-cdn.ampermusic.com/bands/previews/cinematic_minimal_tense_band_2_v1.mp3
+        tags:
+          - Tense
+          - Cinematic
+          - Negative
+          - Simple Meter
+          - 4/4
+          - Natural Minor
+          - Dorian
+          - Minimal
+          - Adagio
+          - Single Region
+          - Main
+          - Entertainment
+          - Politics
+          - Keys
+          - Mid Pads
+          - Fast
+          - Slow
+          - Slow
+          - Voice
+          - Medium Bright
+          - Non Noisy
+          - Medium Thick
+          - Angelic
+          - Direct
+          - Percussion
+          - Perc FX
+          - Misc
+          - Acoustic Pianos
+          - Grand
+          - Nice
+          - Roomy
+          - Pop
+          - Upright
+          - Clean
+          - Classic
+          - Keyboards
+          - Digital Keyboard
+          - Strings
+          - Synth Basses
+          - Fast
+          - Dark
+          - Thick
+          - Sub
+          - Synth Mallets
+          - Dull
+          - Mid Synth Beds
+          - Slow
+          - None
+          - Medium Noisy
+          - Harsh
+          - Fast
+          - Airy
+          - Long Textures
+          - Ambience
+          - Synth Texture
+          - Ethereal
+          - Set Kicks
+          - Processed
+          - Hubcap Mallet
+          - Wide
+          - Tickie
+          - Airy
+          - Chamber
+          - Thin
+          - Organ
+          - Cello Ensemble
+          - Sweet
+          - Big
+          - Di
+          - Raw
+          - Bright
+          - Tight
+          - Chorus
+          - Buzzy
+          - Huge
+          - Warm
+          - Jazz
+          - Brass
+          - String
+          - Hollow
+          - Woodwind
+          - Breathy
+          - Crystal
+          - Rhodes
+          - Synth Piano
+          - Noisy
+          - Woody
+          - Metallic
+          - Reverse Piano
+          - Full
+          - Foley
+          - Piano
+          - Clean
+          - Delayed
+          - Reverb
+          - Low Passed
+          - Large
+          - Medium
+          - Small
       properties:
         average_render_speed:
           description: The average ratio of the length of the music to the time it takes to render; for example, a render speed of 3.0 generates 30 seconds of music in about 10 seconds
@@ -12250,6 +12766,132 @@ components:
       type: object
     DescriptorsListResult:
       description: List Descriptors results
+      example:
+        data:
+          - average_render_speed: 8.242664029014177
+            bands:
+              - id: cinematic_minimal_tense_band_1
+                name: Cinematic Minimal Tense Band 1
+              - id: cinematic_minimal_tense_band_2
+                name: Cinematic Minimal Tense Band 2
+            id: cinematic_minimal_tense
+            instruments:
+              - id: blue_synth_pad
+                name: Warm Pad - Lush
+              - id: direct_round_1_synth_bass
+                name: Direct Round 1 Synth Bass
+              - id: direct_crystal_breath_mid_pad
+                name: Direct Crystal Breath Mid Pad
+            max_tempo: 76
+            min_tempo: 58
+            name: Cinematic Minimal Tense
+            previews:
+              - content_type: audio/mp3
+                url: https://public-cdn.ampermusic.com/bands/previews/cinematic_minimal_tense_band_1_v1.mp3
+              - content_type: audio/mp3
+                url: https://public-cdn.ampermusic.com/bands/previews/cinematic_minimal_tense_band_2_v1.mp3
+            tags:
+              - Tense
+              - Cinematic
+              - Negative
+              - Simple Meter
+              - 4/4
+              - Natural Minor
+              - Dorian
+              - Minimal
+              - Adagio
+              - Single Region
+              - Main
+              - Entertainment
+              - Politics
+              - Keys
+              - Mid Pads
+              - Fast
+              - Slow
+              - Slow
+              - Voice
+              - Medium Bright
+              - Non Noisy
+              - Medium Thick
+              - Angelic
+              - Direct
+              - Percussion
+              - Perc FX
+              - Misc
+              - Acoustic Pianos
+              - Grand
+              - Nice
+              - Roomy
+              - Pop
+              - Upright
+              - Clean
+              - Classic
+              - Keyboards
+              - Digital Keyboard
+              - Strings
+              - Synth Basses
+              - Fast
+              - Dark
+              - Thick
+              - Sub
+              - Synth Mallets
+              - Dull
+              - Mid Synth Beds
+              - Slow
+              - None
+              - Medium Noisy
+              - Harsh
+              - Fast
+              - Airy
+              - Long Textures
+              - Ambience
+              - Synth Texture
+              - Ethereal
+              - Set Kicks
+              - Processed
+              - Hubcap Mallet
+              - Wide
+              - Tickie
+              - Airy
+              - Chamber
+              - Thin
+              - Organ
+              - Cello Ensemble
+              - Sweet
+              - Big
+              - Di
+              - Raw
+              - Bright
+              - Tight
+              - Chorus
+              - Buzzy
+              - Huge
+              - Warm
+              - Jazz
+              - Brass
+              - String
+              - Hollow
+              - Woodwind
+              - Breathy
+              - Crystal
+              - Rhodes
+              - Synth Piano
+              - Noisy
+              - Woody
+              - Metallic
+              - Reverse Piano
+              - Full
+              - Foley
+              - Piano
+              - Clean
+              - Delayed
+              - Reverb
+              - Low Passed
+              - Large
+              - Medium
+              - Small
+        page: 1
+        per_page: 5
       properties:
         data:
           description: List of descriptors
@@ -12265,6 +12907,18 @@ components:
       type: object
     DownloadHistory:
       description: Information about a downloaded media item. Applicable for all media types, only one of 'audio', 'image' or 'video' will be in a single DownloadHistory object
+      example:
+        download_time: 2021-05-20T20:31:46.000Z
+        id: a24499ca3ccd912a6d8316d45f953ef092
+        image:
+          format:
+            size: medium
+          id: "1234567"
+        is_downloadable: true
+        license: standard
+        subscription_id: s1234567
+        user:
+          username: jdoe
       properties:
         audio:
           $ref: "#/components/schemas/DownloadHistoryMediaDetails"
@@ -12300,6 +12954,27 @@ components:
       type: object
     DownloadHistoryDataList:
       description: List of download events
+      example:
+        data:
+          - download_time: 2021-07-15T15:46:34.000Z
+            id: e1eba3833793e77188d22caae8bac9f2cd
+            image:
+              format:
+                size: original
+              id: 9763363ao
+            is_downloadable: false
+            license: shutterstock_license
+            metadata:
+              client: Company A
+              job: Important project
+              other: Important media
+              purchase_order: "12345"
+            subscription_id: 1df5d8cfe8394bbebb849a69943b9a7c
+            user:
+              username: jsmith
+        page: 1
+        per_page: 1
+        total_count: 2890
       properties:
         data:
           description: Download events
@@ -12325,6 +13000,9 @@ components:
           type: integer
     DownloadHistoryFormatDetails:
       description: Information about the format of a download
+      example:
+        format: jpg
+        size: medium
       properties:
         format:
           description: The format of the downloaded media
@@ -12335,6 +13013,11 @@ components:
       type: object
     DownloadHistoryMediaDetails:
       description: Information about the downloaded media
+      example:
+        format:
+          format: jpg
+          size: medium
+        id: "1234567"
       properties:
         format:
           $ref: "#/components/schemas/DownloadHistoryFormatDetails"
@@ -12346,6 +13029,8 @@ components:
       type: object
     DownloadHistoryUserDetails:
       description: Information about a user
+      example:
+        username: jdoe
       properties:
         username:
           description: The name of the user who downloaded the item
@@ -12355,6 +13040,38 @@ components:
       type: object
     EditorialAssets:
       description: Asset information, including size and thumbnail URLs
+      example:
+        medium_jpg:
+          display_name: Med
+          height: 617
+          is_licensable: true
+          width: 1000
+        original:
+          display_name: Original
+          height: 3693
+          is_licensable: true
+          width: 5985
+        small_jpg:
+          display_name: Small
+          height: 309
+          is_licensable: true
+          width: 500
+        thumb_170:
+          height: 105
+          url: https://editorial01.qa.shuttercorp.net/thumb/10687730b/272a999e/Shutterstock_10687730b.jpg
+          width: 170
+        thumb_220:
+          height: 136
+          url: https://editorial01.qa.shuttercorp.net/thumb-220/10687730b/927a6ebe/Shutterstock_10687730b.jpg
+          width: 220
+        watermark_1500:
+          height: 926
+          url: https://editorial01.qa.shuttercorp.net/wm-preview-1500/10687730b/ee2d7ae1/Shutterstock_10687730b.jpg
+          width: 1500
+        watermark_450:
+          height: 278
+          url: https://editorial01.qa.shuttercorp.net/wm-preview-450/10687730b/ff2443ad/Shutterstock_10687730b.jpg
+          width: 450
       properties:
         medium_jpg:
           $ref: "#/components/schemas/ImageSizeDetails"
@@ -12373,12 +13090,19 @@ components:
       type: object
     EditorialCategory:
       description: Name of an editorial category
+      example:
+        name: Awards
       properties:
         name:
           type: string
       type: object
     EditorialCategoryResults:
       description: List of editorial categories
+      example:
+        data:
+          - name: Animal
+          - name: Awards
+          - name: Art
       properties:
         data:
           items:
@@ -12387,6 +13111,63 @@ components:
       type: object
     EditorialContent:
       description: Metadata about editorial content
+      example:
+        aspect: 1.621
+        assets:
+          medium_jpg:
+            display_name: Med
+            height: 617
+            is_licensable: true
+            width: 1000
+          original:
+            display_name: Original
+            height: 3693
+            is_licensable: true
+            width: 5985
+          small_jpg:
+            display_name: Small
+            height: 309
+            is_licensable: true
+            width: 500
+          thumb_170:
+            height: 105
+            url: https://editorial01.qa.shuttercorp.net/thumb/10687730b/272a999e/Shutterstock_10687730b.jpg
+            width: 170
+          thumb_220:
+            height: 136
+            url: https://editorial01.qa.shuttercorp.net/thumb-220/10687730b/927a6ebe/Shutterstock_10687730b.jpg
+            width: 220
+          watermark_1500:
+            height: 926
+            url: https://editorial01.qa.shuttercorp.net/wm-preview-1500/10687730b/ee2d7ae1/Shutterstock_10687730b.jpg
+            width: 1500
+          watermark_450:
+            height: 278
+            url: https://editorial01.qa.shuttercorp.net/wm-preview-450/10687730b/ff2443ad/Shutterstock_10687730b.jpg
+            width: 450
+        byline: Jon Super/AP/Shutterstock
+        caption: ""
+        categories:
+          - name: Sport
+        date_taken: 2021-05-11
+        description: Security and stewards stand outside the Old Trafford stadium in Manchester, England, ahead of the English Premier League soccer match between Manchester United and Leicester City. This is the first Manchester United home match since fans protested against American owner Joel Glazer, forcing the postponement of the team's Premier League game against Liverpool. The protests prompted Glazer to publish a letter in which he pledged to accelerate discussions with fans about supporters being able to have a greater say at the club
+        id: 10687730b
+        keywords:
+          - england
+          - europe
+          - leicester city fc
+          - manchester
+          - manchester united fc
+          - men's soccer
+          - men's sports
+          - premier league
+          - professional soccer
+          - soccer
+          - sports
+          - united kingdom
+          - western europe
+          - wsoc
+        title: Soccer Premier League, Manchester, United Kingdom - 11 May 2021
       properties:
         aspect:
           type: number
@@ -12419,6 +13200,67 @@ components:
       type: object
     EditorialContentDataList:
       description: List of editorial items
+      example:
+        data:
+          - aspect: 1.621
+            assets:
+              medium_jpg:
+                display_name: Med
+                height: 617
+                is_licensable: true
+                width: 1000
+              original:
+                display_name: Original
+                height: 3693
+                is_licensable: true
+                width: 5985
+              small_jpg:
+                display_name: Small
+                height: 309
+                is_licensable: true
+                width: 500
+              thumb_170:
+                height: 105
+                url: https://editorial01.qa.shuttercorp.net/thumb/10687730b/272a999e/Shutterstock_10687730b.jpg
+                width: 170
+              thumb_220:
+                height: 136
+                url: https://editorial01.qa.shuttercorp.net/thumb-220/10687730b/927a6ebe/Shutterstock_10687730b.jpg
+                width: 220
+              watermark_1500:
+                height: 926
+                url: https://editorial01.qa.shuttercorp.net/wm-preview-1500/10687730b/ee2d7ae1/Shutterstock_10687730b.jpg
+                width: 1500
+              watermark_450:
+                height: 278
+                url: https://editorial01.qa.shuttercorp.net/wm-preview-450/10687730b/ff2443ad/Shutterstock_10687730b.jpg
+                width: 450
+            byline: Jon Super/AP/Shutterstock
+            caption: ""
+            categories:
+              - name: Sport
+            date_taken: 2021-05-11
+            description: Security and stewards stand outside the Old Trafford stadium in Manchester, England, ahead of the English Premier League soccer match between Manchester United and Leicester City. This is the first Manchester United home match since fans protested against American owner Joel Glazer, forcing the postponement of the team's Premier League game against Liverpool. The protests prompted Glazer to publish a letter in which he pledged to accelerate discussions with fans about supporters being able to have a greater say at the club
+            id: 10687730b
+            keywords:
+              - england
+              - europe
+              - leicester city fc
+              - manchester
+              - manchester united fc
+              - men's soccer
+              - men's sports
+              - premier league
+              - professional soccer
+              - soccer
+              - sports
+              - united kingdom
+              - western europe
+              - wsoc
+            title: Soccer Premier League, Manchester, United Kingdom - 11 May 2021
+        page: 1
+        per_page: 5
+        total_count: 16
       properties:
         data:
           description: Editorial items
@@ -12444,6 +13286,11 @@ components:
           type: integer
     EditorialCoverItem:
       description: Cover image for editorial livefeed
+      example:
+        height: 117
+        id: 9763363q
+        url: https://editorial01.qa.shuttercorp.net/thumb/9763363q/51e28f39/Shutterstock_9763363q.jpg
+        width: 170
       properties:
         height:
           type: integer
@@ -12459,6 +13306,12 @@ components:
       type: object
     EditorialImageCategoryResults:
       description: List of editorial categories
+      example:
+        data:
+          - name: Animal
+          - name: Awards
+          - name: Art
+          - name: Film Stills
       properties:
         data:
           items:
@@ -12467,6 +13320,67 @@ components:
       type: object
     EditorialImageContentDataList:
       description: List of editorial items
+      example:
+        data:
+          - aspect: 1.621
+            assets:
+              medium_jpg:
+                display_name: Med
+                height: 617
+                is_licensable: true
+                width: 1000
+              original:
+                display_name: Original
+                height: 3693
+                is_licensable: true
+                width: 5985
+              small_jpg:
+                display_name: Small
+                height: 309
+                is_licensable: true
+                width: 500
+              thumb_170:
+                height: 105
+                url: https://editorial01.qa.shuttercorp.net/thumb/10687730b/272a999e/Shutterstock_10687730b.jpg
+                width: 170
+              thumb_220:
+                height: 136
+                url: https://editorial01.qa.shuttercorp.net/thumb-220/10687730b/927a6ebe/Shutterstock_10687730b.jpg
+                width: 220
+              watermark_1500:
+                height: 926
+                url: https://editorial01.qa.shuttercorp.net/wm-preview-1500/10687730b/ee2d7ae1/Shutterstock_10687730b.jpg
+                width: 1500
+              watermark_450:
+                height: 278
+                url: https://editorial01.qa.shuttercorp.net/wm-preview-450/10687730b/ff2443ad/Shutterstock_10687730b.jpg
+                width: 450
+            byline: Jon Super/AP/Shutterstock
+            caption: ""
+            categories:
+              - name: Sport
+            date_taken: 2021-05-11
+            description: Security and stewards stand outside the Old Trafford stadium in Manchester, England, ahead of the English Premier League soccer match between Manchester United and Leicester City. This is the first Manchester United home match since fans protested against American owner Joel Glazer, forcing the postponement of the team's Premier League game against Liverpool. The protests prompted Glazer to publish a letter in which he pledged to accelerate discussions with fans about supporters being able to have a greater say at the club
+            id: 10687730b
+            keywords:
+              - england
+              - europe
+              - leicester city fc
+              - manchester
+              - manchester united fc
+              - men's soccer
+              - men's sports
+              - premier league
+              - professional soccer
+              - soccer
+              - sports
+              - united kingdom
+              - western europe
+              - wsoc
+            title: Soccer Premier League, Manchester, United Kingdom - 11 May 2021
+        page: 1
+        per_page: 1
+        total_count: 23
       properties:
         data:
           description: Editorial items
@@ -12492,6 +13406,16 @@ components:
           type: integer
     EditorialImageLivefeed:
       description: Metadata about editorial livefeed
+      example:
+        cover_item:
+          height: 117
+          id: 9763363q
+          url: https://editorial01.qa.shuttercorp.net/thumb/9763363q/51e28f39/Shutterstock_9763363q.jpg
+          width: 170
+        created_time: 2018-07-17T12:42:03+00:00
+        id: 2018%2F07%2F17%2FPrince%20Charles%20and%20Camilla%20Duchess%20of%20Cornwall%20visit%20to%20Cornwall%2C%20Day%202
+        name: Prince Charles and Camilla Duchess of Cornwall visit to Cornwall, Day 2
+        total_item_count: 38
       properties:
         cover_item:
           $ref: "#/components/schemas/EditorialCoverItem"
@@ -12515,6 +13439,20 @@ components:
       type: object
     EditorialImageLivefeedList:
       description: List of editorial livefeeds
+      example:
+        data:
+          - cover_item:
+              height: 117
+              id: 9763363q
+              url: https://editorial01.qa.shuttercorp.net/thumb/9763363q/51e28f39/Shutterstock_9763363q.jpg
+              width: 170
+            created_time: 2018-07-17T12:42:03+00:00
+            id: 2018%2F07%2F17%2FPrince%20Charles%20and%20Camilla%20Duchess%20of%20Cornwall%20visit%20to%20Cornwall%2C%20Day%202
+            name: Prince Charles and Camilla Duchess of Cornwall visit to Cornwall, Day 2
+            total_item_count: 38
+        page: 1
+        per_page: 1
+        total_count: 5300
       properties:
         data:
           description: Editorial livefeeds
@@ -12539,6 +13477,16 @@ components:
       type: object
     EditorialLivefeed:
       description: Metadata about editorial livefeed
+      example:
+        cover_item:
+          height: 117
+          id: 9763363q
+          url: https://editorial01.qa.shuttercorp.net/thumb/9763363q/51e28f39/Shutterstock_9763363q.jpg
+          width: 170
+        created_time: 2018-07-17T12:42:03+00:00
+        id: 2018%2F07%2F17%2FPrince%20Charles%20and%20Camilla%20Duchess%20of%20Cornwall%20visit%20to%20Cornwall%2C%20Day%202
+        name: Prince Charles and Camilla Duchess of Cornwall visit to Cornwall, Day 2
+        total_item_count: 38
       properties:
         cover_item:
           $ref: "#/components/schemas/EditorialCoverItem"
@@ -12562,6 +13510,20 @@ components:
       type: object
     EditorialLivefeedList:
       description: List of editorial livefeeds
+      example:
+        data:
+          - cover_item:
+              height: 117
+              id: 9763363q
+              url: https://editorial01.qa.shuttercorp.net/thumb/9763363q/51e28f39/Shutterstock_9763363q.jpg
+              width: 170
+            created_time: 2018-07-17T12:42:03+00:00
+            id: 2018%2F07%2F17%2FPrince%20Charles%20and%20Camilla%20Duchess%20of%20Cornwall%20visit%20to%20Cornwall%2C%20Day%202
+            name: Prince Charles and Camilla Duchess of Cornwall visit to Cornwall, Day 2
+            total_item_count: 38
+        page: 1
+        per_page: 1
+        total_count: 56
       properties:
         data:
           description: Editorial livefeeds
@@ -12586,6 +13548,69 @@ components:
       type: object
     EditorialSearchResults:
       description: Editorial search results
+      example:
+        data:
+          - aspect: 1.621
+            assets:
+              medium_jpg:
+                display_name: Med
+                height: 617
+                is_licensable: true
+                width: 1000
+              original:
+                display_name: Original
+                height: 3693
+                is_licensable: true
+                width: 5985
+              small_jpg:
+                display_name: Small
+                height: 309
+                is_licensable: true
+                width: 500
+              thumb_170:
+                height: 105
+                url: https://editorial01.qa.shuttercorp.net/thumb/10687730b/272a999e/Shutterstock_10687730b.jpg
+                width: 170
+              thumb_220:
+                height: 136
+                url: https://editorial01.qa.shuttercorp.net/thumb-220/10687730b/927a6ebe/Shutterstock_10687730b.jpg
+                width: 220
+              watermark_1500:
+                height: 926
+                url: https://editorial01.qa.shuttercorp.net/wm-preview-1500/10687730b/ee2d7ae1/Shutterstock_10687730b.jpg
+                width: 1500
+              watermark_450:
+                height: 278
+                url: https://editorial01.qa.shuttercorp.net/wm-preview-450/10687730b/ff2443ad/Shutterstock_10687730b.jpg
+                width: 450
+            byline: Jon Super/AP/Shutterstock
+            caption: ""
+            categories:
+              - name: Sport
+            date_taken: 2021-05-11
+            description: Security and stewards stand outside the Old Trafford stadium in Manchester, England, ahead of the English Premier League soccer match between Manchester United and Leicester City. This is the first Manchester United home match since fans protested against American owner Joel Glazer, forcing the postponement of the team's Premier League game against Liverpool. The protests prompted Glazer to publish a letter in which he pledged to accelerate discussions with fans about supporters being able to have a greater say at the club
+            id: 10687730b
+            keywords:
+              - england
+              - europe
+              - leicester city fc
+              - manchester
+              - manchester united fc
+              - men's soccer
+              - men's sports
+              - premier league
+              - professional soccer
+              - soccer
+              - sports
+              - united kingdom
+              - western europe
+              - wsoc
+            title: Soccer Premier League, Manchester, United Kingdom - 11 May 2021
+        next: eyJ2IjoyLCJzIjoxLCJwIjpbMF19
+        per_page: 1
+        prev: ""
+        search_id: BaMzOAkpHIvfnuWVRFs1ag
+        total_count: 46845
       properties:
         data:
           description: Editorial items
@@ -12619,6 +13644,56 @@ components:
       type: object
     EditorialUpdatedContent:
       description: Metadata about updated editorial content
+      example:
+        aspect: 1.481
+        assets:
+          medium_jpg:
+            display_name: Med
+            height: 675
+            is_licensable: true
+            width: 1000
+          original:
+            display_name: Original
+            height: 3263
+            is_licensable: true
+            width: 4831
+          small_jpg:
+            display_name: Small
+            height: 337
+            is_licensable: true
+            width: 500
+          thumb_170:
+            height: 115
+            url: https://editorial01.shutterstock.com/thumb/9804979n/c4377a53/Shutterstock_9804979n.jpg
+            width: 170
+          thumb_220:
+            height: 149
+            url: https://editorial01.shutterstock.com/thumb-220/9804979n/c57a68c7/Shutterstock_9804979n.jpg
+            width: 220
+          watermark_1500:
+            height: 1500
+            url: https://editorial01.shutterstock.com/wm-preview-1500/9933285a/ab82fea4/Shutterstock_9933285a.jpg
+            width: 1040
+          watermark_450:
+            height: 304
+            url: https://editorial01.shutterstock.com/wm-preview-450/9804979n/37d19dce/Shutterstock_9804979n.jpg
+            width: 450
+        byline: ALEX HOFFORD/EPA-EFE/Shutterstock
+        caption: ""
+        categories: []
+        commercial_status:
+          status: available
+        date_taken: 2018-08-24
+        description: Members of the TyLoo e-Sports team from China prepare to face off against the Kinguin e-Sports team from Poland at the ICBC (Asia) e-Sports and Music Festival Hong Kong 2018, Hong Kong, China, 24 August 2018. The festival runs from 24 to 26 August with professional gamers from around the world competing in international e-sports tournaments.
+        id: 9804979n
+        keywords: []
+        rights:
+          countries: CAN,+DEU,+GBR,+USA,-*
+        supplier_code: EPA
+        title: Hong Kong kicks off international e-Sports competition, China - 24 Aug 2018
+        updated_time: 2019-07-15T20:04:44-04:00
+        updates:
+          - addition
       properties:
         aspect:
           type: number
@@ -12658,6 +13733,8 @@ components:
             countries:
               type: string
           type: object
+        special_instructions:
+          type: string
         supplier_code:
           type: string
         title:
@@ -12674,6 +13751,60 @@ components:
       type: object
     EditorialUpdatedResults:
       description: Editorial updated results
+      example:
+        data:
+          - aspect: 1.481
+            assets:
+              medium_jpg:
+                display_name: Med
+                height: 675
+                is_licensable: true
+                width: 1000
+              original:
+                display_name: Original
+                height: 3263
+                is_licensable: true
+                width: 4831
+              small_jpg:
+                display_name: Small
+                height: 337
+                is_licensable: true
+                width: 500
+              thumb_170:
+                height: 115
+                url: https://editorial01.shutterstock.com/thumb/9804979n/c4377a53/Shutterstock_9804979n.jpg
+                width: 170
+              thumb_220:
+                height: 149
+                url: https://editorial01.shutterstock.com/thumb-220/9804979n/c57a68c7/Shutterstock_9804979n.jpg
+                width: 220
+              watermark_1500:
+                height: 1500
+                url: https://editorial01.shutterstock.com/wm-preview-1500/9933285a/ab82fea4/Shutterstock_9933285a.jpg
+                width: 1040
+              watermark_450:
+                height: 304
+                url: https://editorial01.shutterstock.com/wm-preview-450/9804979n/37d19dce/Shutterstock_9804979n.jpg
+                width: 450
+            byline: ALEX HOFFORD/EPA-EFE/Shutterstock
+            caption: ""
+            categories: []
+            commercial_status:
+              status: available
+            date_taken: 2018-08-24
+            description: Members of the TyLoo e-Sports team from China prepare to face off against the Kinguin e-Sports team from Poland at the ICBC (Asia) e-Sports and Music Festival Hong Kong 2018, Hong Kong, China, 24 August 2018. The festival runs from 24 to 26 August with professional gamers from around the world competing in international e-sports tournaments.
+            id: 9804979n
+            keywords: []
+            rights:
+              countries: CAN,+DEU,+GBR,+USA,-*
+            supplier_code: EPA
+            title: Hong Kong kicks off international e-Sports competition, China - 24 Aug 2018
+            updated_time: 2019-07-15T20:04:44-04:00
+            updates:
+              - addition
+        next: eyJ2IjoxLCJzIjoxfQ==
+        per_page: 1
+        prev: ""
       properties:
         data:
           description: Editorial updated items
@@ -12697,6 +13828,21 @@ components:
       type: object
     EditorialVideoAssets:
       description: Asset information, including size and thumbnail URLs
+      example:
+        original:
+          display_name: HD
+          file_size: 82233387
+          format: avc1
+          fps: 30
+          height: 1080
+          is_licensable: true
+          width: 1080
+        preview_mp4:
+          url: https://qa.editorial-cdn.shuttercorp.net/wm-preview-mp4/10679854a/M0T7A13aNej2g82bMTI4NjY=/Shutterstock_10679854a.mp4
+        preview_webm:
+          url: https://qa.editorial-cdn.shuttercorp.net/wm-preview-webm/10679854a/M4T6A63fN2j5g929MTI4NjY=/Shutterstock_10679854a.webm
+        thumb_jpg:
+          url: https://qa.editorial-cdn.shuttercorp.net/thumb-1/10679854a/M5TcAf30Ncjcge2eMTI4NjY=/Shutterstock_10679854a.jpg
       properties:
         original:
           $ref: "#/components/schemas/VideoSizeDetails"
@@ -12709,6 +13855,12 @@ components:
       type: object
     EditorialVideoCategoryResults:
       description: List of editorial video categories
+      example:
+        data:
+          - name: Animal
+          - name: Awards
+          - name: Art
+          - name: Film Stills
       properties:
         data:
           items:
@@ -12717,6 +13869,62 @@ components:
       type: object
     EditorialVideoContent:
       description: Metadata about editorial content
+      example:
+        aspect: 1
+        assets:
+          original:
+            display_name: HD
+            file_size: 82233387
+            format: avc1
+            fps: 30
+            height: 1080
+            is_licensable: true
+            width: 1080
+          preview_mp4:
+            url: https://qa.editorial-cdn.shuttercorp.net/wm-preview-mp4/10679854a/M0T7A13aNej2g82bMTI4NjY=/Shutterstock_10679854a.mp4
+          preview_webm:
+            url: https://qa.editorial-cdn.shuttercorp.net/wm-preview-webm/10679854a/M4T6A63fN2j5g929MTI4NjY=/Shutterstock_10679854a.webm
+          thumb_jpg:
+            url: https://qa.editorial-cdn.shuttercorp.net/thumb-1/10679854a/M5TcAf30Ncjcge2eMTI4NjY=/Shutterstock_10679854a.jpg
+        byline: ViralHog/Shutterstock
+        caption: ""
+        categories: []
+        date_taken: 2020-11-13
+        description: "Info from Licensor: \"Peeps the Canadian Goose has been raised with our family since a gosling. Peeps has made appearances on our local news channels, TV shows, and local newspapers. He has been trained to fly next to four wheelers, jet ski's, and boats. He has brought joy to many people during the pandemic including those with cancer.\""
+        id: 10679854a
+        keywords:
+          - "2020"
+          - adorable
+          - birds
+          - bizarre
+          - canadian goose
+          - cute
+          - domesticated animals
+          - entertainment
+          - feel good
+          - flew
+          - flies
+          - fly
+          - flying
+          - fun
+          - goose
+          - jet skis
+          - nature
+          - odd
+          - pets
+          - played
+          - playing
+          - plays
+          - prior lake
+          - sports
+          - strange
+          - sweet
+          - usa
+          - viralhog
+          - virals
+          - water sports
+          - weird
+        title: Peeps the Goose Has a Blast on a Jet Ski, Prior Lake, Minnesota, USA - 13 Nov 2020
       properties:
         aspect:
           type: number
@@ -12749,6 +13957,68 @@ components:
       type: object
     EditorialVideoSearchResults:
       description: Editorial search results
+      example:
+        data:
+          - aspect: 1
+            assets:
+              original:
+                display_name: HD
+                file_size: 82233387
+                format: avc1
+                fps: 30
+                height: 1080
+                is_licensable: true
+                width: 1080
+              preview_mp4:
+                url: https://qa.editorial-cdn.shuttercorp.net/wm-preview-mp4/10679854a/M0T7A13aNej2g82bMTI4NjY=/Shutterstock_10679854a.mp4
+              preview_webm:
+                url: https://qa.editorial-cdn.shuttercorp.net/wm-preview-webm/10679854a/M4T6A63fN2j5g929MTI4NjY=/Shutterstock_10679854a.webm
+              thumb_jpg:
+                url: https://qa.editorial-cdn.shuttercorp.net/thumb-1/10679854a/M5TcAf30Ncjcge2eMTI4NjY=/Shutterstock_10679854a.jpg
+            byline: ViralHog/Shutterstock
+            caption: ""
+            categories: []
+            date_taken: 2020-11-13
+            description: "Info from Licensor: \"Peeps the Canadian Goose has been raised with our family since a gosling. Peeps has made appearances on our local news channels, TV shows, and local newspapers. He has been trained to fly next to four wheelers, jet ski's, and boats. He has brought joy to many people during the pandemic including those with cancer.\""
+            id: 10679854a
+            keywords:
+              - "2020"
+              - adorable
+              - birds
+              - bizarre
+              - canadian goose
+              - cute
+              - domesticated animals
+              - entertainment
+              - feel good
+              - flew
+              - flies
+              - fly
+              - flying
+              - fun
+              - goose
+              - jet skis
+              - nature
+              - odd
+              - pets
+              - played
+              - playing
+              - plays
+              - prior lake
+              - sports
+              - strange
+              - sweet
+              - usa
+              - viralhog
+              - virals
+              - water sports
+              - weird
+            title: Peeps the Goose Has a Blast on a Jet Ski, Prior Lake, Minnesota, USA - 13 Nov 2020
+        next: eyJ2IjoyLCJzIjoyMCwicCI6WzBdfQ==
+        per_page: 1
+        prev: ""
+        search_id: zhmz9zLmpQehdTPvg8cacQ
+        total_count: 331
       properties:
         data:
           description: Editorial items
@@ -12782,6 +14052,11 @@ components:
       type: object
     Error:
       description: Error object
+      example:
+        code: VALIDATION_INVALID_TYPE
+        data: "'10'"
+        message: "Invalid type: string should be integer"
+        path: $.query.page
       properties:
         code:
           description: The error code of this error
@@ -12805,6 +14080,15 @@ components:
       type: object
     FeaturedCollection:
       description: Metadata about a featured collection
+      example:
+        cover_item:
+          url: https://ak.picdn.net/assets/cms/b467415246debdab45825d915a548f8f79b57882-Collection_1_Thumnail.jpg
+        created_time: 2021-07-07T13:10:24.000Z
+        id: "19853"
+        items_updated_time: 2021-07-08T12:33:37.000Z
+        name: Exercise & Fitness
+        total_item_count: 82
+        updated_time: 2021-07-07T13:10:24.000Z
       properties:
         cover_item:
           $ref: "#/components/schemas/FeaturedCollectionCoverItem"
@@ -12842,6 +14126,8 @@ components:
       type: object
     FeaturedCollectionCoverItem:
       description: Featured collection cover item metadata
+      example:
+        url: https://ak.picdn.net/assets/cms/b467415246debdab45825d915a548f8f79b57882-Collection_1_Thumnail.jpg
       properties:
         url:
           description: URL of the collection cover item
@@ -12851,6 +14137,19 @@ components:
       type: object
     FeaturedCollectionDataList:
       description: List of featured collections
+      example:
+        data:
+          - cover_item:
+              url: https://ak.picdn.net/assets/cms/b467415246debdab45825d915a548f8f79b57882-Collection_1_Thumnail.jpg
+            created_time: 2021-07-07T13:10:24.000Z
+            id: "19853"
+            items_updated_time: 2021-07-08T12:33:37.000Z
+            name: Exercise & Fitness
+            total_item_count: 82
+            updated_time: 2021-07-07T13:10:24.000Z
+        page: 1
+        per_page: 5
+        total_count: 123455
       properties:
         data:
           description: Featured collections
@@ -12880,6 +14179,9 @@ components:
       example:
         data:
           - Rock
+          - Pop > Singer-Songwriter
+          - Pop > Synth Pop
+          - Production / Film Scores
       properties:
         data:
           description: List of genres
@@ -12891,6 +14193,40 @@ components:
       type: object
     Image:
       description: Information about an image
+      example:
+        aspect: 1.5
+        assets:
+          huge_thumb:
+            height: 260
+            url: https://image.shutterstock.com/image-photo/cropped-image-woman-gardening-260nw-1572478477.jpg
+            width: 390
+          large_thumb:
+            height: 100
+            url: https://thumb7.shutterstock.com/thumb_large/250738318/1572478477/stock-photo-cropped-image-of-woman-gardening-1572478477.jpg
+            width: 150
+          preview:
+            height: 300
+            url: https://image.shutterstock.com/display_pic_with_logo/250738318/1572478477/stock-photo-cropped-image-of-woman-gardening-1572478477.jpg
+            width: 450
+          preview_1000:
+            height: 667
+            url: https://ak.picdn.net/shutterstock/photos/1572478477/watermark_1000/1706028c641ea2f443057287c67d9b91/preview_1000-1572478477.jpg
+            width: 1000
+          preview_1500:
+            height: 1000
+            url: https://image.shutterstock.com/z/stock-photo-cropped-image-of-woman-gardening-1572478477.jpg
+            width: 1500
+          small_thumb:
+            height: 67
+            url: https://thumb7.shutterstock.com/thumb_small/250738318/1572478477/stock-photo-cropped-image-of-woman-gardening-1572478477.jpg
+            width: 100
+        contributor:
+          id: "250738318"
+        description: cropped image of woman gardening
+        has_model_release: true
+        id: "1572478477"
+        image_type: photo
+        media_type: image
       properties:
         added_date:
           description: Date that the image was added by the contributor
@@ -12970,6 +14306,31 @@ components:
       type: object
     ImageAssets:
       description: Information about the assets that are part of an image
+      example:
+        huge_thumb:
+          height: 260
+          url: https://image.shutterstock.com/image-photo/cropped-image-woman-gardening-260nw-1572478477.jpg
+          width: 390
+        large_thumb:
+          height: 100
+          url: https://thumb7.shutterstock.com/thumb_large/250738318/1572478477/stock-photo-cropped-image-of-woman-gardening-1572478477.jpg
+          width: 150
+        preview:
+          height: 300
+          url: https://image.shutterstock.com/display_pic_with_logo/250738318/1572478477/stock-photo-cropped-image-of-woman-gardening-1572478477.jpg
+          width: 450
+        preview_1000:
+          height: 667
+          url: https://ak.picdn.net/shutterstock/photos/1572478477/watermark_1000/1706028c641ea2f443057287c67d9b91/preview_1000-1572478477.jpg
+          width: 1000
+        preview_1500:
+          height: 1000
+          url: https://image.shutterstock.com/z/stock-photo-cropped-image-of-woman-gardening-1572478477.jpg
+          width: 1500
+        small_thumb:
+          height: 67
+          url: https://thumb7.shutterstock.com/thumb_small/250738318/1572478477/stock-photo-cropped-image-of-woman-gardening-1572478477.jpg
+          width: 100
       properties:
         huge_jpg:
           $ref: "#/components/schemas/ImageSizeDetails"
@@ -12996,6 +14357,8 @@ components:
       type: object
     ImageCreateRequest:
       description: Request to upload an image
+      example:
+        base64_image: R0lGODlhgACAAPcAAEwiBLyaLOzNUNmWFNjOrNSuN7x6PPzqeOTMgfKSDMyuTPzwsdi2dHwuBPzbVu
       properties:
         base64_image:
           description: A Base 64 encoded jpeg or png; images can be no larger than 10mb and can be no larger than 10,000 pixels in width or height
@@ -13005,6 +14368,8 @@ components:
       type: object
     ImageCreateResponse:
       description: Image upload information
+      example:
+        id: Udb14e1c3540bdbf82b4b3fe12d3a44f2
       properties:
         id:
           type: string
@@ -13013,6 +14378,44 @@ components:
       type: object
     ImageDataList:
       description: List of images
+      example:
+        data:
+          - aspect: 1.5
+            assets:
+              huge_thumb:
+                height: 260
+                url: https://image.shutterstock.com/image-photo/cropped-image-woman-gardening-260nw-1572478477.jpg
+                width: 390
+              large_thumb:
+                height: 100
+                url: https://thumb7.shutterstock.com/thumb_large/250738318/1572478477/stock-photo-cropped-image-of-woman-gardening-1572478477.jpg
+                width: 150
+              preview:
+                height: 300
+                url: https://image.shutterstock.com/display_pic_with_logo/250738318/1572478477/stock-photo-cropped-image-of-woman-gardening-1572478477.jpg
+                width: 450
+              preview_1000:
+                height: 667
+                url: https://ak.picdn.net/shutterstock/photos/1572478477/watermark_1000/1706028c641ea2f443057287c67d9b91/preview_1000-1572478477.jpg
+                width: 1000
+              preview_1500:
+                height: 1000
+                url: https://image.shutterstock.com/z/stock-photo-cropped-image-of-woman-gardening-1572478477.jpg
+                width: 1500
+              small_thumb:
+                height: 67
+                url: https://thumb7.shutterstock.com/thumb_small/250738318/1572478477/stock-photo-cropped-image-of-woman-gardening-1572478477.jpg
+                width: 100
+            contributor:
+              id: "250738318"
+            description: cropped image of woman gardening
+            has_model_release: true
+            id: "1572478477"
+            image_type: photo
+            media_type: image
+        page: 1
+        per_page: 5
+        total_count: 123455
       properties:
         data:
           description: Images
@@ -13038,6 +14441,46 @@ components:
           type: integer
     ImageSearchResults:
       description: Image search results
+      example:
+        data:
+          - aspect: 1.5
+            assets:
+              huge_thumb:
+                height: 260
+                url: https://image.shutterstock.com/image-photo/cropped-image-woman-gardening-260nw-1572478477.jpg
+                width: 390
+              large_thumb:
+                height: 100
+                url: https://thumb7.shutterstock.com/thumb_large/250738318/1572478477/stock-photo-cropped-image-of-woman-gardening-1572478477.jpg
+                width: 150
+              preview:
+                height: 300
+                url: https://image.shutterstock.com/display_pic_with_logo/250738318/1572478477/stock-photo-cropped-image-of-woman-gardening-1572478477.jpg
+                width: 450
+              preview_1000:
+                height: 667
+                url: https://ak.picdn.net/shutterstock/photos/1572478477/watermark_1000/1706028c641ea2f443057287c67d9b91/preview_1000-1572478477.jpg
+                width: 1000
+              preview_1500:
+                height: 1000
+                url: https://image.shutterstock.com/z/stock-photo-cropped-image-of-woman-gardening-1572478477.jpg
+                width: 1500
+              small_thumb:
+                height: 67
+                url: https://thumb7.shutterstock.com/thumb_small/250738318/1572478477/stock-photo-cropped-image-of-woman-gardening-1572478477.jpg
+                width: 100
+            contributor:
+              id: "250738318"
+            description: cropped image of woman gardening
+            has_model_release: true
+            id: "1572478477"
+            image_type: photo
+            media_type: image
+        page: 1
+        per_page: 5
+        search_id: 749090bb-2967-4a20-b22e-c800dc845e10
+        spellcheck_info: {}
+        total_count: 45
       properties:
         data:
           description: List of images
@@ -13069,6 +14512,14 @@ components:
       type: object
     ImageSizeDetails:
       description: Image size information
+      example:
+        display_name: Med
+        dpi: 300
+        file_size: 860200
+        format: jpg
+        height: 667
+        is_licensable: true
+        width: 1000
       properties:
         display_name:
           description: Display name of this image size
@@ -13093,6 +14544,24 @@ components:
       type: object
     Instrument:
       description: Information about an musical instrument
+      example:
+        id: bright_roomy_kit
+        name: Bright Roomy Kit
+        previews:
+          - content_type: audio/mp3
+            url: https://public-cdn.ampermusic.com/instruments/previews/bright_roomy_kit_v1.mp3
+        tags:
+          - Percussion
+          - Aux Percs
+          - Set Cymbals
+          - Crash
+          - Open
+          - Ride
+          - Set Hi-Hat
+          - Set Kicks
+          - Stick Snare
+          - Quad Toms
+          - Roto Toms
       properties:
         id:
           description: The id of the instrument
@@ -13116,6 +14585,10 @@ components:
       description: List of instruments
       example:
         data:
+          - Orchestra
+          - Organ
+          - Oud
+          - Pads
           - Electric Guitar
       properties:
         data:
@@ -13128,6 +14601,9 @@ components:
       type: object
     Instruments:
       description: Instruments
+      example:
+        id: bright_roomy_kit
+        name: Bright Roomy Kit
       properties:
         id:
           description: The string id of the instrument
@@ -13138,6 +14614,27 @@ components:
       type: object
     InstrumentsListResult:
       description: Image search results
+      example:
+        data:
+          - id: bright_roomy_kit
+            name: Bright Roomy Kit
+            previews:
+              - content_type: audio/mp3
+                url: https://public-cdn.ampermusic.com/instruments/previews/bright_roomy_kit_v1.mp3
+            tags:
+              - Percussion
+              - Aux Percs
+              - Set Cymbals
+              - Crash
+              - Open
+              - Ride
+              - Set Hi-Hat
+              - Set Kicks
+              - Stick Snare
+              - Quad Toms
+              - Roto Toms
+        page: 1
+        per_page: 5
       properties:
         data:
           description: List of instrumnets
@@ -13153,6 +14650,19 @@ components:
       type: object
     KeywordDataList:
       description: List of keywords
+      example:
+        data:
+          - nature
+          - wildlife
+          - animal
+          - cute
+          - bamboo
+          - panda
+          - china
+          - wild
+          - endangered
+          - black
+          - bear
       properties:
         data:
           description: Keywords
@@ -13195,10 +14705,15 @@ components:
         - vi
         - zh
         - zh-Hant
+      example: cs
       title: language
       type: string
     LicenseAudio:
       description: An audio track in a licensing request
+      example:
+        audio_id: "123456789"
+        license: audio_platform
+        search_id: "987654321"
       properties:
         audio_id:
           description: ID of the track being licensed
@@ -13222,7 +14737,10 @@ components:
       description: Audio license request data
       example:
         audio:
-          - audio_id: "1"
+          - audio_id: "591623"
+            license: audio_platform
+            metadata:
+              customer_id: "12345"
       properties:
         audio:
           description: List of audio tracks to license
@@ -13235,6 +14753,10 @@ components:
       type: object
     LicenseAudioResult:
       description: The response to a licensing request for an audio track
+      example:
+        audio_id: "123456789"
+        download:
+          url: http://download2.dev.shutterstock.com/gatekeeper/abc/original.wav
       properties:
         audio_id:
           description: ID of the track that was licensed
@@ -13251,7 +14773,7 @@ components:
       description: List of audio license results
       example:
         data:
-          - audio_id: "1"
+          - audio_id: "123456789"
             download:
               url: http://download2.dev.shutterstock.com/gatekeeper/abc/original.wav
       properties:
@@ -13279,6 +14801,15 @@ components:
           type: integer
     LicenseEditorialContent:
       description: Individual editorial content to license
+      example:
+        editorial_id: 10687730b
+        license: premier_editorial_comp
+        metadata:
+          customer_id: "12345"
+          geo_location: US
+          number_viewed: "15"
+          search_term: dog
+        size: original
       properties:
         editorial_id:
           description: Editorial ID
@@ -13302,6 +14833,17 @@ components:
       type: object
     LicenseEditorialContentRequest:
       description: License editorial content request
+      example:
+        country: USA
+        editorial:
+          - editorial_id: 10687730b
+            license: premier_editorial_comp
+            metadata:
+              customer_id: "12345"
+              geo_location: US
+              number_viewed: "15"
+              search_term: dog
+            size: original
       properties:
         country:
           anyOf:
@@ -13322,6 +14864,11 @@ components:
       type: object
     LicenseEditorialContentResult:
       description: The response to a licensing request for editorial content
+      example:
+        allotment_charge: 1
+        download:
+          url: https://s3-eu-west-1.amazonaws.com/api-downloads.rexfeatures.com/[random-characters].jpg?Expires=1524717323
+        editorial_id: "69656358"
       properties:
         allotment_charge:
           description: For pre-paid plans, how many credits were used for the item license
@@ -13339,6 +14886,15 @@ components:
       type: object
     LicenseEditorialContentResults:
       description: List of editorial license results
+      example:
+        data:
+          - allotment_charge: 1
+            download:
+              url: https://s3-eu-west-1.amazonaws.com/api-downloads.rexfeatures.com/[random-characters].jpg?Expires=1524717323
+            editorial_id: "69656358"
+        page: 1
+        per_page: 1
+        total_count: 12
       properties:
         data:
           description: License results
@@ -13364,6 +14920,12 @@ components:
           type: integer
     LicenseEditorialVideoContent:
       description: Individual editorial video content to license
+      example:
+        editorial_id: 10679854a
+        license: premier_editorial_video_digital_only
+        metadata:
+          purchase_order: "12345"
+        size: original
       properties:
         editorial_id:
           description: Editorial ID
@@ -13390,6 +14952,14 @@ components:
       type: object
     LicenseEditorialVideoContentRequest:
       description: License editorial video content request
+      example:
+        country: USA
+        editorial:
+          - editorial_id: 10679854a
+            license: premier_editorial_video_digital_only
+            metadata:
+              purchase_order: "12345"
+            size: original
       properties:
         country:
           anyOf:
@@ -13410,6 +14980,12 @@ components:
       type: object
     LicenseFormat:
       description: Description of a license
+      example:
+        description: Med
+        format: jpg
+        media_type: image
+        min_resolution: 1000
+        size: medium
       properties:
         description:
           description: Description of the license
@@ -13434,6 +15010,22 @@ components:
       type: object
     LicenseImage:
       description: Data required to license an image
+      example:
+        custom_dimensions:
+          height: 600
+          width: 800
+        editorial_acknowledgement: true
+        format: jpg
+        image_id: "123456789"
+        metadata:
+          customer_id: "12345"
+          geo_location: US
+          number_viewed: "15"
+          search_term: dog
+        price: 12.34
+        show_modal: true
+        size: small
+        subscription_id: s8906043
       properties:
         auth_cookie:
           $ref: "#/components/schemas/Cookie"
@@ -13461,6 +15053,7 @@ components:
           description: ID of the search that led to this licensing transaction
           type: string
         show_modal:
+          deprecated: true
           description: (Deprecated)
           type: boolean
         size:
@@ -13476,6 +15069,7 @@ components:
           description: ID of the subscription to use for the download.
           type: string
         verification_code:
+          deprecated: true
           description: (Deprecated)
           type: string
       required:
@@ -13483,6 +15077,23 @@ components:
       type: object
     LicenseImageRequest:
       description: Image license request data
+      example:
+        images:
+          - custom_dimensions:
+              height: 600
+              width: 800
+            editorial_acknowledgement: true
+            format: jpg
+            image_id: "123456789"
+            metadata:
+              customer_id: "12345"
+              geo_location: US
+              number_viewed: "15"
+              search_term: dog
+            price: 12.34
+            show_modal: true
+            size: small
+            subscription_id: s8906043
       properties:
         images:
           description: Images to create licenses for
@@ -13495,6 +15106,14 @@ components:
       type: object
     LicenseImageResult:
       description: The response to a licensing request for an image
+      example:
+        allotment_charge: 1
+        download:
+          url: https://download.shutterstock.com/gatekeeper/[random-characters]/shutterstock_59656357.jpg
+        image_id: "59656357"
+        price:
+          local_amount: 12.34
+          local_currency: EUR
       properties:
         allotment_charge:
           description: Number of credits that this licensing event used
@@ -13516,6 +15135,15 @@ components:
       type: object
     LicenseImageResultDataList:
       description: List of information about licensed images
+      example:
+        data:
+          - allotment_charge: 1
+            download:
+              url: https://download.shutterstock.com/gatekeeper/[random-characters]/shutterstock_59656357.jpg
+            image_id: "59656357"
+        page: 1
+        per_page: 5
+        total_count: 23
       properties:
         data:
           description: License results
@@ -13570,6 +15198,7 @@ components:
           description: ID of the search that led to this licensing event
           type: string
         show_modal:
+          deprecated: true
           description: (Deprecated)
           type: boolean
         size:
@@ -13591,6 +15220,11 @@ components:
       type: object
     LicenseVideoRequest:
       description: List of videos to license
+      example:
+        videos:
+          - size: hd
+            subscription_id: s8241143
+            video_id: "2140697"
       properties:
         videos:
           description: Videos to license
@@ -13603,6 +15237,14 @@ components:
       type: object
     LicenseVideoResult:
       description: The response to a licensing request for a video
+      example:
+        allotment_charge: 1
+        download:
+          url: https://download.shutterstock.com/gatekeeper/[random-characters]/shutterstock_59656357.mp4
+        price:
+          local_amount: 12.34
+          local_currency: EUR
+        video_id: "123456789"
       properties:
         allotment_charge:
           description: Number of credits that this licensing event used
@@ -13623,6 +15265,18 @@ components:
       type: object
     LicenseVideoResultDataList:
       description: List of video license results
+      example:
+        data:
+          - allotment_charge: 1
+            download:
+              url: https://download.shutterstock.com/gatekeeper/[random-characters]/shutterstock_59656357.mp4
+            price:
+              local_amount: 12.34
+              local_currency: EUR
+            video_id: "123456789"
+        page: 1
+        per_page: 5
+        total_count: 123455
       properties:
         data:
           description: License results
@@ -13648,6 +15302,8 @@ components:
           type: integer
     Model:
       description: Information about a human model or property that appears in media; used to search for assets that this model is in
+      example:
+        id: "123456789"
       properties:
         id:
           description: ID of the model
@@ -13657,6 +15313,8 @@ components:
       type: object
     ModelRelease:
       description: Model and property release metadata
+      example:
+        id: "123456789"
       properties:
         id:
           description: ID of the model or property release
@@ -13667,6 +15325,9 @@ components:
       description: List of audio moods
       example:
         data:
+          - Action / Sports
+          - Adventure / Discovery
+          - Aerobics / Workout
           - Aggressive
       properties:
         data:
@@ -13679,6 +15340,9 @@ components:
       type: object
     OauthAccessTokenResponse:
       description: Access token response to client apps
+      example:
+        access_token: v2/NmQwOTc0NTBiMjA5YzZkY2Q4NTkvMTA4OTg1MDk5L2N1c3RvbWVyLzIvZjB2a0RseGo4Rkt6ZjRmVWJNMm10V2VzcHh1NTBlZWJ6andUQU1NeTVYYnNFTDVWOFRJakItS2RnZTlmbEY1Y3haNWdXLUtYc2JhaXo5djk0V0p2QzZUUWZ4c2FNWm41NkdLYUgyVWlCaVUtQTNVMV9YQWpzd3lpblI3SlZEem8wSG1qQ2NzSkJlX3VQTnNXenBIdkd4SXViVi1rRGJTVENCV0g1U3U0RXRJSV9rSm5lQkl5QXlvbm5JN241UUhv
+        token_type: Bearer
       properties:
         access_token:
           description: Access token that can be used for future requests
@@ -13702,6 +15366,9 @@ components:
       type: object
     Preview:
       description: Preview information
+      example:
+        content_type: audio/mp3
+        url: https://public-cdn.ampermusic.com/instruments/previews/roomy_kit_v1.mp3
       properties:
         content_type:
           description: Content type of the preview, currently audio/mp3
@@ -13714,6 +15381,9 @@ components:
       type: object
     Price:
       description: Price
+      example:
+        local_amount: 12.34
+        local_currency: EUR
       properties:
         local_amount:
           description: Floating-point amount of the calculated rev-share price in the currency local_currency
@@ -13724,6 +15394,8 @@ components:
       type: object
     Recommendation:
       description: Media Recommendation
+      example:
+        id: "123456789"
       properties:
         id:
           description: Media ID
@@ -13733,6 +15405,14 @@ components:
       type: object
     RecommendationDataList:
       description: List of recommended images
+      example:
+        data:
+          - id: "123456789"
+          - id: "99379946"
+          - id: "133918412"
+        page: 1
+        per_page: 5
+        total_count: 12
       properties:
         data:
           description: Recommended images
@@ -13758,6 +15438,8 @@ components:
           type: integer
     RedownloadImage:
       description: Data required to redownload an image
+      example:
+        size: small
       properties:
         auth_cookie:
           $ref: "#/components/schemas/Cookie"
@@ -13783,6 +15465,8 @@ components:
       type: object
     RedownloadVideo:
       description: Data required to redownload a video
+      example:
+        size: web
       properties:
         auth_cookie:
           $ref: "#/components/schemas/Cookie"
@@ -13828,6 +15512,8 @@ components:
       type: object
     SearchEntitiesRequest:
       description: Search entity request data
+      example:
+        text: Planting flowers is a great way to make springtime more beautiful.
       properties:
         text:
           description: Plain text to extract keywords from
@@ -13841,10 +15527,10 @@ components:
       description: The response to a request for keyword analysis
       example:
         keywords:
-          - beach
-          - place
-          - sand
-          - ocean
+          - planting
+          - flowers
+          - springtime
+          - beautiful
       properties:
         keywords:
           description: The top keywords from the submitted text
@@ -13853,6 +15539,33 @@ components:
           type: array
     Subscription:
       description: Subscription information
+      example:
+        allotment:
+          downloads_left: 5
+          downloads_limit: 10
+          end_time: 2020-05-29T12:10:22-05:00
+          start_time: 2020-05-29T12:10:22-05:00
+        asset_type: images
+        description: Annual Subscription
+        expiration_time: 2020-05-29T12:10:22-05:00
+        formats:
+          - description: Small
+            format: jpg
+            media_type: image
+            min_resolution: 500
+            size: small
+          - description: Med
+            format: jpg
+            media_type: image
+            min_resolution: 1000
+            size: medium
+          - description: Vector
+            format: eps
+            media_type: image
+            size: vector
+        id: s8906043
+        license: standard
+        metadata: {}
       properties:
         allotment:
           $ref: "#/components/schemas/Allotment"
@@ -13886,6 +15599,37 @@ components:
       type: object
     SubscriptionDataList:
       description: List of subscriptions
+      example:
+        data:
+          - allotment:
+              downloads_left: 5
+              downloads_limit: 10
+              end_time: 2020-05-29T12:10:22-05:00
+              start_time: 2020-05-29T12:10:22-05:00
+            asset_type: images
+            description: Annual Subscription
+            expiration_time: 2020-05-29T12:10:22-05:00
+            formats:
+              - description: Small
+                format: jpg
+                media_type: image
+                min_resolution: 500
+                size: small
+              - description: Med
+                format: jpg
+                media_type: image
+                min_resolution: 1000
+                size: medium
+              - description: Vector
+                format: eps
+                media_type: image
+                size: vector
+            id: s8906043
+            license: standard
+            metadata: {}
+        page: 1
+        per_page: 5
+        total_count: 123455
       properties:
         data:
           description: Subscriptions retrieved from this user
@@ -13910,10 +15654,32 @@ components:
           description: Total number of subscriptions for this user
           type: integer
     SubscriptionMetadata:
-      description: Subscription metadata
+      description: Subscription metadata; different for each customer
+      example:
+        client:
+          is_required: false
+          name: purchase_order
+        job:
+          is_required: true
+          name: client_name
+        other:
+          is_required: false
+          name: custom_value
       type: object
     Suggestions:
       description: List of search suggestions
+      example:
+        data:
+          - cat scan
+          - cats and dogs
+          - cats playing
+          - catsuit
+          - cat silhouette
+          - catskills
+          - cats eyes
+          - cat sitting
+          - cat sleeping
+          - cats eye
       properties:
         data:
           description: Search suggestions
@@ -13923,12 +15689,21 @@ components:
       type: object
     TestEcho:
       description: Text to echo in the response
+      example:
+        text: Test string
       properties:
         text:
           type: string
       type: object
     TestValidate:
       description: Validation results
+      example:
+        header:
+          user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36
+        query:
+          id: 123456
+          tag:
+            - Test string
       properties:
         header:
           $ref: "#/components/schemas/TestValidateHeader"
@@ -13939,6 +15714,8 @@ components:
       type: object
     TestValidateHeader:
       description: Validation results
+      example:
+        user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36
       properties:
         user-agent:
           description: User agent to expect in the response
@@ -13946,6 +15723,10 @@ components:
       type: object
     TestValidateQuery:
       description: Validation results
+      example:
+        id: 123456
+        tag:
+          - string
       properties:
         id:
           description: Integer ID that was passed in the request
@@ -13960,6 +15741,10 @@ components:
       type: object
     Thumbnail:
       description: Image thumbnail information
+      example:
+        height: 100
+        url: https://thumb7.shutterstock.com/thumb_large/250738318/1572478477/stock-photo-cropped-image-of-woman-gardening-1572478477.jpg
+        width: 150
       properties:
         height:
           description: Height in pixels of the image thumbnail
@@ -13994,6 +15779,12 @@ components:
       type: object
     UpdatedMedia:
       description: Information about a piece of updated media
+      example:
+        id: "123456789"
+        updated_time: 2020-05-29T12:10:22-05:00
+        updates:
+          - addition
+          - edit
       properties:
         id:
           description: ID of the media
@@ -14014,6 +15805,16 @@ components:
       type: object
     UpdatedMediaDataList:
       description: List of updated media
+      example:
+        data:
+          - id: "123456789"
+            updated_time: 2020-05-29T12:10:22-05:00
+            updates:
+              - addition
+              - edit
+        page: 1
+        per_page: 5
+        total_count: 13
       properties:
         data:
           description: Updated media items
@@ -14039,6 +15840,8 @@ components:
           type: integer
     Url:
       description: URL object
+      example:
+        url: https://download.shutterstock.com/gatekeeper/[random-characters]/shutterstock_59656357.jpg
       properties:
         url:
           description: URL that can be used to download the unwatermarked, licensed asset
@@ -14048,6 +15851,9 @@ components:
       type: object
     Urls:
       description: List of URLs
+      example:
+        urls:
+          - string
       properties:
         urls:
           description: URLs
@@ -14059,6 +15865,14 @@ components:
       type: object
     UserDetails:
       description: User details
+      example:
+        contributor_id: "212"
+        first_name: John
+        full_name: John Doe
+        id: "101782699"
+        language: es
+        last_name: Doe
+        username: jdoe
       properties:
         contributor_id:
           description: Unique internal identifier of the user, as a contributor
@@ -14110,6 +15924,130 @@ components:
       type: object
     Video:
       description: Information about a video
+      example:
+        added_date: 2019-07-13
+        aspect: 1.778
+        aspect_ratio: 16:9
+        assets:
+          hd:
+            display_name: Original HD
+            file_size: 110359552
+            format: avc1
+            fps: 29.97
+            height: 1080
+            is_licensable: true
+            width: 1920
+          preview_jpg:
+            url: https://ak.picdn.net/shutterstock/videos/1033184651/thumb/12.jpg
+          preview_mp4:
+            url: https://ak.picdn.net/shutterstock/videos/1033184651/preview/stock-footage-camera-follows-hipster-millennial-young-woman-in-orange-jacket-running-up-on-top-of-mountain-summit.mp4
+          preview_webm:
+            url: https://ak.picdn.net/shutterstock/videos/1033184651/preview/stock-footage-camera-follows-hipster-millennial-young-woman-in-orange-jacket-running-up-on-top-of-mountain-summit.webm
+          sd:
+            display_name: Standard Definition MPEG
+            file_size: 4577280
+            format: mov
+            fps: 29.97
+            height: 480
+            is_licensable: true
+            width: 852
+          thumb_jpg:
+            url: https://ak.picdn.net/shutterstock/videos/1033184651/thumb/12.jpg
+          thumb_jpgs:
+            urls:
+              - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/1.jpg
+              - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/2.jpg
+              - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/3.jpg
+              - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/4.jpg
+              - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/5.jpg
+              - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/6.jpg
+              - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/7.jpg
+              - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/8.jpg
+              - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/9.jpg
+              - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/10.jpg
+              - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/11.jpg
+              - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/12.jpg
+          thumb_mp4:
+            url: https://ak.picdn.net/shutterstock/videos/1033184651/thumb/stock-footage-camera-follows-hipster-millennial-young-woman-in-orange-jacket-running-up-on-top-of-mountain-summit.mp4
+          thumb_webm:
+            url: https://ak.picdn.net/shutterstock/videos/1033184651/thumb/stock-footage-camera-follows-hipster-millennial-young-woman-in-orange-jacket-running-up-on-top-of-mountain-summit.webm
+          web:
+            display_name: Low Resolution MPEG
+            file_size: 1291264
+            format: mov
+            fps: 29.97
+            height: 240
+            is_licensable: true
+            width: 426
+        categories:
+          - id: "12"
+            name: Nature
+          - id: "13"
+            name: People
+        contributor:
+          id: "4411978"
+        description: Camera follows hipster millennial young woman in orange jacket running up on top of mountain summit at sunset, jumps on top of rocks, raises arms into air, happy and drunk on life, youth and happiness
+        duration: 14.081
+        has_model_release: true
+        has_property_release: false
+        id: "1033184651"
+        is_adult: false
+        is_editorial: false
+        keywords:
+          - active
+          - activity
+          - adventure
+          - arms
+          - backpacker
+          - carefree
+          - celebrating
+          - cliff
+          - climate
+          - cloud
+          - discovery
+          - escape
+          - explore
+          - extreme
+          - free
+          - freedom
+          - girl
+          - happy
+          - high
+          - hiker
+          - hiking
+          - hill
+          - independent
+          - inspiration
+          - landscape
+          - leisure
+          - lifestyle
+          - mountain
+          - mountains
+          - nature
+          - outdoor
+          - peak
+          - person
+          - rock
+          - scenic
+          - sky
+          - sport
+          - success
+          - summer
+          - summit
+          - sun
+          - sunset
+          - top
+          - tourism
+          - travel
+          - trekking
+          - vacation
+          - view
+          - winning
+          - woman
+        media_type: video
+        models:
+          - id: "33233810"
+          - id: "25487168"
       properties:
         added_date:
           description: Date this video was added to the Shutterstock library
@@ -14178,6 +16116,57 @@ components:
       type: object
     VideoAssets:
       description: Video asset information
+      example:
+        hd:
+          display_name: Original HD
+          file_size: 110359552
+          format: avc1
+          fps: 29.97
+          height: 1080
+          is_licensable: true
+          width: 1920
+        preview_jpg:
+          url: https://ak.picdn.net/shutterstock/videos/1033184651/thumb/12.jpg
+        preview_mp4:
+          url: https://ak.picdn.net/shutterstock/videos/1033184651/preview/stock-footage-camera-follows-hipster-millennial-young-woman-in-orange-jacket-running-up-on-top-of-mountain-summit.mp4
+        preview_webm:
+          url: https://ak.picdn.net/shutterstock/videos/1033184651/preview/stock-footage-camera-follows-hipster-millennial-young-woman-in-orange-jacket-running-up-on-top-of-mountain-summit.webm
+        sd:
+          display_name: Standard Definition MPEG
+          file_size: 4577280
+          format: mov
+          fps: 29.97
+          height: 480
+          is_licensable: true
+          width: 852
+        thumb_jpg:
+          url: https://ak.picdn.net/shutterstock/videos/1033184651/thumb/12.jpg
+        thumb_jpgs:
+          urls:
+            - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/1.jpg
+            - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/2.jpg
+            - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/3.jpg
+            - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/4.jpg
+            - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/5.jpg
+            - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/6.jpg
+            - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/7.jpg
+            - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/8.jpg
+            - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/9.jpg
+            - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/10.jpg
+            - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/11.jpg
+            - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/12.jpg
+        thumb_mp4:
+          url: https://ak.picdn.net/shutterstock/videos/1033184651/thumb/stock-footage-camera-follows-hipster-millennial-young-woman-in-orange-jacket-running-up-on-top-of-mountain-summit.mp4
+        thumb_webm:
+          url: https://ak.picdn.net/shutterstock/videos/1033184651/thumb/stock-footage-camera-follows-hipster-millennial-young-woman-in-orange-jacket-running-up-on-top-of-mountain-summit.webm
+        web:
+          display_name: Low Resolution MPEG
+          file_size: 1291264
+          format: mov
+          fps: 29.97
+          height: 240
+          is_licensable: true
+          width: 426
       properties:
         4k:
           $ref: "#/components/schemas/VideoSizeDetails"
@@ -14239,6 +16228,134 @@ components:
           type: integer
     VideoDataList:
       description: List of videos
+      example:
+        data:
+          - added_date: 2019-07-13
+            aspect: 1.778
+            aspect_ratio: 16:9
+            assets:
+              hd:
+                display_name: Original HD
+                file_size: 110359552
+                format: avc1
+                fps: 29.97
+                height: 1080
+                is_licensable: true
+                width: 1920
+              preview_jpg:
+                url: https://ak.picdn.net/shutterstock/videos/1033184651/thumb/12.jpg
+              preview_mp4:
+                url: https://ak.picdn.net/shutterstock/videos/1033184651/preview/stock-footage-camera-follows-hipster-millennial-young-woman-in-orange-jacket-running-up-on-top-of-mountain-summit.mp4
+              preview_webm:
+                url: https://ak.picdn.net/shutterstock/videos/1033184651/preview/stock-footage-camera-follows-hipster-millennial-young-woman-in-orange-jacket-running-up-on-top-of-mountain-summit.webm
+              sd:
+                display_name: Standard Definition MPEG
+                file_size: 4577280
+                format: mov
+                fps: 29.97
+                height: 480
+                is_licensable: true
+                width: 852
+              thumb_jpg:
+                url: https://ak.picdn.net/shutterstock/videos/1033184651/thumb/12.jpg
+              thumb_jpgs:
+                urls:
+                  - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/1.jpg
+                  - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/2.jpg
+                  - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/3.jpg
+                  - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/4.jpg
+                  - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/5.jpg
+                  - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/6.jpg
+                  - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/7.jpg
+                  - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/8.jpg
+                  - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/9.jpg
+                  - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/10.jpg
+                  - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/11.jpg
+                  - https://ak.picdn.net/shutterstock/videos/1033184651/thumb/12.jpg
+              thumb_mp4:
+                url: https://ak.picdn.net/shutterstock/videos/1033184651/thumb/stock-footage-camera-follows-hipster-millennial-young-woman-in-orange-jacket-running-up-on-top-of-mountain-summit.mp4
+              thumb_webm:
+                url: https://ak.picdn.net/shutterstock/videos/1033184651/thumb/stock-footage-camera-follows-hipster-millennial-young-woman-in-orange-jacket-running-up-on-top-of-mountain-summit.webm
+              web:
+                display_name: Low Resolution MPEG
+                file_size: 1291264
+                format: mov
+                fps: 29.97
+                height: 240
+                is_licensable: true
+                width: 426
+            categories:
+              - id: "12"
+                name: Nature
+              - id: "13"
+                name: People
+            contributor:
+              id: "4411978"
+            description: Camera follows hipster millennial young woman in orange jacket running up on top of mountain summit at sunset, jumps on top of rocks, raises arms into air, happy and drunk on life, youth and happiness
+            duration: 14.081
+            has_model_release: true
+            has_property_release: false
+            id: "1033184651"
+            is_adult: false
+            is_editorial: false
+            keywords:
+              - active
+              - activity
+              - adventure
+              - arms
+              - backpacker
+              - carefree
+              - celebrating
+              - cliff
+              - climate
+              - cloud
+              - discovery
+              - escape
+              - explore
+              - extreme
+              - free
+              - freedom
+              - girl
+              - happy
+              - high
+              - hiker
+              - hiking
+              - hill
+              - independent
+              - inspiration
+              - landscape
+              - leisure
+              - lifestyle
+              - mountain
+              - mountains
+              - nature
+              - outdoor
+              - peak
+              - person
+              - rock
+              - scenic
+              - sky
+              - sport
+              - success
+              - summer
+              - summit
+              - sun
+              - sunset
+              - top
+              - tourism
+              - travel
+              - trekking
+              - vacation
+              - view
+              - winning
+              - woman
+            media_type: video
+            models:
+              - id: "33233810"
+              - id: "25487168"
+        page: 1
+        per_page: 5
+        total_count: 25
       properties:
         data:
           description: Videos
@@ -14295,6 +16412,8 @@ components:
       type: object
     VideoPreviewUrl:
       description: Video preview information
+      example:
+        url: https://ak.picdn.net/shutterstock/videos/1033184651/thumb/stock-footage-camera-follows-hipster-millennial-young-woman-in-orange-jacket-running-up-on-top-of-mountain-summit.mp4
       properties:
         url:
           description: Direct URL to the image
@@ -14304,6 +16423,34 @@ components:
       type: object
     VideoSearchResults:
       description: Video search results
+      example:
+        data:
+          - aspect: 1.778
+            aspect_ratio: 16:9
+            assets:
+              preview_jpg:
+                url: https://ak.picdn.net/shutterstock/videos/1033184651/thumb/12.jpg
+              preview_mp4:
+                url: https://ak.picdn.net/shutterstock/videos/1033184651/preview/stock-footage-camera-follows-hipster-millennial-young-woman-in-orange-jacket-running-up-on-top-of-mountain-summit.mp4
+              preview_webm:
+                url: https://ak.picdn.net/shutterstock/videos/1033184651/preview/stock-footage-camera-follows-hipster-millennial-young-woman-in-orange-jacket-running-up-on-top-of-mountain-summit.webm
+              thumb_jpg:
+                url: https://ak.picdn.net/shutterstock/videos/1033184651/thumb/12.jpg
+              thumb_mp4:
+                url: https://ak.picdn.net/shutterstock/videos/1033184651/thumb/stock-footage-camera-follows-hipster-millennial-young-woman-in-orange-jacket-running-up-on-top-of-mountain-summit.mp4
+              thumb_webm:
+                url: https://ak.picdn.net/shutterstock/videos/1033184651/thumb/stock-footage-camera-follows-hipster-millennial-young-woman-in-orange-jacket-running-up-on-top-of-mountain-summit.webm
+            contributor:
+              id: "4411978"
+            description: Camera follows hipster millennial young woman in orange jacket running up on top of mountain summit at sunset, jumps on top of rocks, raises arms into air, happy and drunk on life, youth and happiness
+            duration: 14.081
+            has_model_release: true
+            id: "1033184651"
+            media_type: video
+        page: 1
+        per_page: 5
+        search_id: 749090bb-2967-4a20-b22e-c800dc845e10
+        total_count: 123
       properties:
         data:
           description: List of videos
@@ -14332,6 +16479,14 @@ components:
       type: object
     VideoSizeDetails:
       description: Video asset information
+      example:
+        display_name: Original HD
+        file_size: 110359552
+        format: avc1
+        fps: 29.97
+        height: 1080
+        is_licensable: true
+        width: 1920
       properties:
         display_name:
           description: Display name of this video size

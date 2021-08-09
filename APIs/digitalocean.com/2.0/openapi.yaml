@@ -526,6 +526,8 @@ tags:
     name: Kubernetes
   - description: "[DigitalOcean Load Balancers](https://www.digitalocean.com/docs/networking/load-balancers/) provide a way to distribute traffic across multiple Droplets. By sending requests to the `/v2/load_balancers` endpoint, you can list, create, or delete load balancers as well as add or remove Droplets, forwarding rules, and other configuration details."
     name: Load Balancers
+  - description: The DigitalOcean Monitoring API makes it possible to programmatically retrieve metrics as well as configure alert policies based on these metrics. The Monitoring API can help you gain insight into how your apps are performing and consuming resources.
+    name: Monitoring
   - description: |-
       Project Resources are resources that can be grouped into your projects.
       You can group resources (like Droplets, Spaces, load balancers, domains,
@@ -21378,6 +21380,696 @@ paths:
               tls_passthrough: false
             )
             client.load_balancers.add_forwarding_rules([rule], id: '4de7ac8b-495b-4884-9a69-1050c6793cd6')
+  /v2/monitoring/alerts:
+    get:
+      description: Returns all alert policies that are configured for the given account. To List all alert policies, send a GET request to `/v2/monitoring/alerts`.
+      operationId: list_alert_policies
+      parameters:
+        - $ref: "#/paths/~1v2~1account~1keys/get/parameters/0"
+        - $ref: "#/paths/~1v2~1account~1keys/get/parameters/1"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - properties:
+                      policies:
+                        items:
+                          properties:
+                            alerts:
+                              properties:
+                                email:
+                                  description: An email to notify on an alert trigger.
+                                  example:
+                                    - bob@exmaple.com
+                                  items:
+                                    type: string
+                                  type: array
+                                slack:
+                                  description: Slack integration details.
+                                  items:
+                                    properties:
+                                      channel:
+                                        description: Slack channel to notify of an alert trigger.
+                                        example: Production Alerts
+                                        format: string
+                                        type: string
+                                      url:
+                                        description: Slack Webhook URL.
+                                        example: https://hooks.slack.com/services/T1234567/AAAAAAAA/ZZZZZZ
+                                        format: string
+                                        type: string
+                                    required:
+                                      - url
+                                      - channel
+                                    type: object
+                                  type: array
+                              required:
+                                - slack
+                                - email
+                              type: object
+                            compare:
+                              enum:
+                                - GreaterThan
+                                - LessThan
+                              example: GreaterThan
+                              format: string
+                              type: string
+                            description:
+                              example: CPU Alert
+                              format: string
+                              type: string
+                            enabled:
+                              example: true
+                              type: boolean
+                            entities:
+                              example:
+                                - "192018292"
+                              items:
+                                type: string
+                              type: array
+                            tags:
+                              example:
+                                - droplet_tag
+                              items:
+                                type: string
+                              type: array
+                            type:
+                              enum:
+                                - v1/insights/droplet/load_1
+                                - v1/insights/droplet/load_5
+                                - v1/insights/droplet/load_15
+                                - v1/insights/droplet/memory_utilization_percent
+                                - v1/insights/droplet/disk_utilization_percent
+                                - v1/insights/droplet/cpu
+                                - v1/insights/droplet/disk_read
+                                - v1/insights/droplet/disk_write
+                                - v1/insights/droplet/public_outbound_bandwidth
+                              example: v1/insights/droplet/cpu
+                              format: string
+                              type: string
+                            uuid:
+                              example: 78b3da62-27e5-49ba-ac70-5db0b5935c64
+                              format: string
+                              type: string
+                            value:
+                              example: 80
+                              format: float
+                              type: number
+                            window:
+                              enum:
+                                - 5m
+                                - 10m
+                                - 30m
+                                - 1h
+                              example: 5m
+                              format: string
+                              type: string
+                          required:
+                            - uuid
+                            - type
+                            - description
+                            - compare
+                            - value
+                            - window
+                            - entities
+                            - tags
+                            - alerts
+                            - enabled
+                          type: object
+                        type: array
+                    required:
+                      - policies
+                    type: object
+                  - $ref: "#/paths/~1v2~1account~1keys/get/responses/200/content/application~1json/schema/allOf/1"
+                  - $ref: "#/paths/~1v2~1account~1keys/get/responses/200/content/application~1json/schema/allOf/2"
+                example:
+                  links:
+                    first: https//api.digitalocean.com/v2/monitoring/alerts?page=1&per_page=10
+                    last: https//api.digitalocean.com/v2/monitoring/alerts?page=5&per_page=10
+                    next: https//api.digitalocean.com/v2/monitoring/alerts?page=4&per_page=10
+                    prev: https//api.digitalocean.com/v2/monitoring/alerts?page=2&per_page=10
+                  meta:
+                    total: 50
+                  policies:
+                    - alerts:
+                        email:
+                          - bob@example.com
+                        slack:
+                          - channel: Production Alerts
+                            url: https://hooks.slack.com/services/T1234567/AAAAAAAA/ZZZZZZ"
+                      compare: GreaterThan
+                      description: CPU Alert
+                      enabled: true
+                      entities:
+                        - 192018292
+                      tags:
+                        - production_droplets
+                      type: v1/insights/droplet/cpu
+                      uuid: 78b3da62-27e5-49ba-ac70-5db0b5935c64
+                      value: 80
+                      window: 5m
+          description: A list of alert policies.
+          headers:
+            ratelimit-limit:
+              $ref: "#/paths/~1v2~11-clicks/get/responses/200/headers/ratelimit-limit"
+            ratelimit-remaining:
+              $ref: "#/paths/~1v2~11-clicks/get/responses/200/headers/ratelimit-remaining"
+            ratelimit-reset:
+              $ref: "#/paths/~1v2~11-clicks/get/responses/200/headers/ratelimit-reset"
+        "401":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/429"
+        "500":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/500"
+        default:
+          $ref: "#/paths/~1v2~11-clicks/get/responses/default"
+      summary: List Alert Policies
+      tags:
+        - Monitoring
+    post:
+      description: To create a new alert, send a POST request to `/v2/monitoring/alerts`.
+      operationId: create_alert_policy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                alerts:
+                  $ref: "#/paths/~1v2~1monitoring~1alerts/get/responses/200/content/application~1json/schema/allOf/0/properties/policies/items/properties/alerts"
+                compare:
+                  enum:
+                    - GreaterThan
+                    - LessThan
+                  example: GreaterThan
+                  format: string
+                  type: string
+                description:
+                  example: CPU Alert
+                  format: string
+                  type: string
+                enabled:
+                  example: true
+                  type: boolean
+                entities:
+                  example:
+                    - "192018292"
+                  items:
+                    type: string
+                  type: array
+                tags:
+                  example:
+                    - droplet_tag
+                  items:
+                    type: string
+                  type: array
+                type:
+                  enum:
+                    - v1/insights/droplet/load_1
+                    - v1/insights/droplet/load_5
+                    - v1/insights/droplet/load_15
+                    - v1/insights/droplet/memory_utilization_percent
+                    - v1/insights/droplet/disk_utilization_percent
+                    - v1/insights/droplet/cpu
+                    - v1/insights/droplet/disk_read
+                    - v1/insights/droplet/disk_write
+                    - v1/insights/droplet/public_outbound_bandwidth
+                  example: v1/insights/droplet/cpu
+                  format: string
+                  type: string
+                value:
+                  example: 80
+                  format: float
+                  type: number
+                window:
+                  enum:
+                    - 5m
+                    - 10m
+                    - 30m
+                    - 1h
+                  example: 5m
+                  format: string
+                  type: string
+              required:
+                - type
+                - description
+                - compare
+                - value
+                - window
+                - entities
+                - tags
+                - alerts
+                - enabled
+              type: object
+        description: "The 'type' field dictates what type of entity that the alert policy applies to and hence what type of entity is passed in the 'entities' array. If both the 'tags' array and 'entities' array are empty the alert policy applies to all entities of the relevant type that are owned by the user account. Otherwise the following table shows the valid entity types for each type of alert policy: <table><thead><tr><td>Type</td><td>Description</td><td>Valid Entity Type</td></tr></thead><tr><td>v1/insights/droplet/memory_utilization_percent</td><td>alert on the percent of memory utilization</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/disk_read</td><td>alert on the rate of disk read I/O in MBps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/load_5</td><td>alert on the 5 minute load average</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/load_15</td><td>alert on the 15 minute load average</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/disk_utilization_percent</td><td>alert on the percent of disk utilization</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/cpu</td><td>alert on the percent of CPU utilization</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/disk_write</td><td>alert on the rate of disk write I/O in MBps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/public_outbound_bandwidth</td><td>alert on the rate of public outbound bandwidth in Mbps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/load_1</td><td>alert on the 1 minute load average</td><td>droplet ID</td></tr></table>"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/paths/~1v2~1monitoring~1alerts/get/responses/200/content/application~1json/schema/allOf/0/properties/policies/items"
+          description: An alert policy.
+          headers:
+            ratelimit-limit:
+              $ref: "#/paths/~1v2~11-clicks/get/responses/200/headers/ratelimit-limit"
+            ratelimit-remaining:
+              $ref: "#/paths/~1v2~11-clicks/get/responses/200/headers/ratelimit-remaining"
+            ratelimit-reset:
+              $ref: "#/paths/~1v2~11-clicks/get/responses/200/headers/ratelimit-reset"
+        "401":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/429"
+        "500":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/500"
+        default:
+          $ref: "#/paths/~1v2~11-clicks/get/responses/default"
+      summary: Create Alert Policy
+      tags:
+        - Monitoring
+  "/v2/monitoring/alerts/{alert_uuid}":
+    delete:
+      description: To delete an alert policy, send a DELETE request to `/v2/monitoring/alerts/{alert_uuid}`
+      operationId: delete_alert_policy
+      parameters:
+        - $ref: "#/paths/~1v2~1monitoring~1alerts~1%7Balert_uuid%7D/get/parameters/0"
+      responses:
+        "204":
+          $ref: "#/paths/~1v2~1account~1keys~1%7Bssh_key_identifier%7D/delete/responses/204"
+        "401":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/401"
+        "404":
+          $ref: "#/paths/~1v2~1account~1keys~1%7Bssh_key_identifier%7D/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/429"
+        "500":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/500"
+        default:
+          $ref: "#/paths/~1v2~11-clicks/get/responses/default"
+      summary: Delete an Alert Policy
+      tags:
+        - Monitoring
+    get:
+      description: To retrieve a given alert policy, send a GET request to `/v2/monitoring/alerts/{alert_uuid}`
+      operationId: get_alert_policy
+      parameters:
+        - description: A unique identifier for an alert policy.
+          example: 4de7ac8b-495b-4884-9a69-1050c6793cd6
+          in: path
+          name: alert_uuid
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          $ref: "#/paths/~1v2~1monitoring~1alerts/post/responses/200"
+        "401":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/401"
+        "404":
+          $ref: "#/paths/~1v2~1account~1keys~1%7Bssh_key_identifier%7D/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/429"
+        "500":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/500"
+        default:
+          $ref: "#/paths/~1v2~11-clicks/get/responses/default"
+      summary: Retrieve an Existing Alert Policy
+      tags:
+        - Monitoring
+    put:
+      description: To update en existing policy, send a PUT request to `v2/monitoring/alerts/{alert_uuid}`.
+      operationId: update_alert_policy
+      parameters:
+        - $ref: "#/paths/~1v2~1monitoring~1alerts~1%7Balert_uuid%7D/get/parameters/0"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/paths/~1v2~1monitoring~1alerts/post/requestBody/content/application~1json/schema"
+        description: "The 'type' field dictates what type of entity that the alert policy applies to and hence what type of entity is passed in the 'entities' array. If both the 'tags' array and 'entities' array are empty the alert policy applies to all entities of the relevant type that are owned by the user account. Otherwise the following table shows the valid entity types for each type of alert policy: <table><thead><tr><td>Type</td><td>Description</td><td>Valid Entity Type</td></tr></thead><tr><td>v1/insights/droplet/memory_utilization_percent</td><td>alert on the percent of memory utilization</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/disk_read</td><td>alert on the rate of disk read I/O in MBps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/load_5</td><td>alert on the 5 minute load average</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/load_15</td><td>alert on the 15 minute load average</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/disk_utilization_percent</td><td>alert on the percent of disk utilization</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/cpu</td><td>alert on the percent of CPU utilization</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/disk_write</td><td>alert on the rate of disk write I/O in MBps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/public_outbound_bandwidth</td><td>alert on the rate of public outbound bandwidth in Mbps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/load_1</td><td>alert on the 1 minute load average</td><td>droplet ID</td></tr></table>"
+        required: true
+      responses:
+        "200":
+          $ref: "#/paths/~1v2~1monitoring~1alerts/post/responses/200"
+        "401":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/401"
+        "404":
+          $ref: "#/paths/~1v2~1account~1keys~1%7Bssh_key_identifier%7D/get/responses/404"
+        "429":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/429"
+        "500":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/500"
+        default:
+          $ref: "#/paths/~1v2~11-clicks/get/responses/default"
+      summary: Update an Alert Policy
+      tags:
+        - Monitoring
+  /v2/monitoring/metrics/droplet/bandwidth:
+    get:
+      description: To retrieve bandwidth metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/bandwidth`.
+      operationId: get_droplet_bandwidth_metrics
+      parameters:
+        - description: The droplet ID.
+          example: "17209102"
+          in: query
+          name: host_id
+          required: true
+          schema:
+            type: string
+        - description: The network interface.
+          example: private
+          in: query
+          name: interface
+          required: true
+          schema:
+            enum:
+              - private
+              - public
+            type: string
+        - description: The traffic direction.
+          example: inbound
+          in: query
+          name: direction
+          required: true
+          schema:
+            enum:
+              - inbound
+              - outbound
+            type: string
+        - description: Timestamp to start metric window.
+          example: "1620683817"
+          in: query
+          name: start
+          required: true
+          schema:
+            type: string
+        - description: Timestamp to end metric window.
+          example: "1620705417"
+          in: query
+          name: end
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    properties:
+                      result:
+                        description: Result of query.
+                        items:
+                          properties:
+                            metric:
+                              additionalProperties:
+                                type: string
+                              description: An object containing the metric labels.
+                              example:
+                                host_id: "19201920"
+                              type: object
+                            values:
+                              example:
+                                - - 1435781430
+                                  - "1"
+                                - - 1435781445
+                                  - "1"
+                              items:
+                                items:
+                                  oneOf:
+                                    - type: integer
+                                    - type: string
+                                type: array
+                              type: array
+                          required:
+                            - metric
+                            - values
+                          type: object
+                        type: array
+                      resultType:
+                        enum:
+                          - matrix
+                        example: matrix
+                        format: string
+                        type: string
+                    required:
+                      - resultType
+                      - result
+                    type: object
+                  status:
+                    enum:
+                      - success
+                      - error
+                    example: success
+                    format: string
+                    type: string
+                required:
+                  - status
+                  - data
+                type: object
+          description: The response will be a JSON object with a key called `data` and `status`.
+          headers:
+            ratelimit-limit:
+              $ref: "#/paths/~1v2~11-clicks/get/responses/200/headers/ratelimit-limit"
+            ratelimit-remaining:
+              $ref: "#/paths/~1v2~11-clicks/get/responses/200/headers/ratelimit-remaining"
+            ratelimit-reset:
+              $ref: "#/paths/~1v2~11-clicks/get/responses/200/headers/ratelimit-reset"
+        "401":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/429"
+        "500":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/500"
+        default:
+          $ref: "#/paths/~1v2~11-clicks/get/responses/default"
+      summary: Get Droplet Bandwidth Metrics
+      tags:
+        - Monitoring
+  /v2/monitoring/metrics/droplet/cpu:
+    get:
+      description: To retrieve CPU metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/cpu`.
+      operationId: get_droplet_cpu_metrics
+      parameters:
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/0"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/3"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/4"
+      responses:
+        "200":
+          $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/responses/200"
+        "401":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/429"
+        "500":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/500"
+        default:
+          $ref: "#/paths/~1v2~11-clicks/get/responses/default"
+      summary: Get Droplet CPU Metrics
+      tags:
+        - Monitoring
+  /v2/monitoring/metrics/droplet/filesystem_free:
+    get:
+      description: To retrieve filesystem free metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/filesystem_free`.
+      operationId: get_droplet_filesystem_free_metrics
+      parameters:
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/0"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/3"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/4"
+      responses:
+        "200":
+          $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/responses/200"
+        "401":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/429"
+        "500":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/500"
+        default:
+          $ref: "#/paths/~1v2~11-clicks/get/responses/default"
+      summary: Get Droplet Filesystem Free Metrics
+      tags:
+        - Monitoring
+  /v2/monitoring/metrics/droplet/filesystem_size:
+    get:
+      description: To retrieve filesystem size metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/filesystem_size`.
+      operationId: get_droplet_filesystem_size_metrics
+      parameters:
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/0"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/3"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/4"
+      responses:
+        "200":
+          $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/responses/200"
+        "401":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/429"
+        "500":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/500"
+        default:
+          $ref: "#/paths/~1v2~11-clicks/get/responses/default"
+      summary: Get Droplet Filesystem Size Metrics
+      tags:
+        - Monitoring
+  /v2/monitoring/metrics/droplet/load_1:
+    get:
+      description: To retrieve 1 minute load average metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/load_1`.
+      operationId: get_droplet_load1_metrics
+      parameters:
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/0"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/3"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/4"
+      responses:
+        "200":
+          $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/responses/200"
+        "401":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/429"
+        "500":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/500"
+        default:
+          $ref: "#/paths/~1v2~11-clicks/get/responses/default"
+      summary: Get Droplet Load1 Metrics
+      tags:
+        - Monitoring
+  /v2/monitoring/metrics/droplet/load_15:
+    get:
+      description: To retrieve 15 minute load average metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/load_15`.
+      operationId: get_droplet_load15_metrics
+      parameters:
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/0"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/3"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/4"
+      responses:
+        "200":
+          $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/responses/200"
+        "401":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/429"
+        "500":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/500"
+        default:
+          $ref: "#/paths/~1v2~11-clicks/get/responses/default"
+      summary: Get Droplet Load15 Metrics
+      tags:
+        - Monitoring
+  /v2/monitoring/metrics/droplet/load_5:
+    get:
+      description: To retrieve 5 minute load average metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/load_5`.
+      operationId: get_droplet_load5_metrics
+      parameters:
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/0"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/3"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/4"
+      responses:
+        "200":
+          $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/responses/200"
+        "401":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/429"
+        "500":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/500"
+        default:
+          $ref: "#/paths/~1v2~11-clicks/get/responses/default"
+      summary: Get Droplet Load5 Metrics
+      tags:
+        - Monitoring
+  /v2/monitoring/metrics/droplet/memory_available:
+    get:
+      description: To retrieve available memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_available`.
+      operationId: get_droplet_memory_available_metrics
+      parameters:
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/0"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/3"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/4"
+      responses:
+        "200":
+          $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/responses/200"
+        "401":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/429"
+        "500":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/500"
+        default:
+          $ref: "#/paths/~1v2~11-clicks/get/responses/default"
+      summary: Get Droplet Available Memory Metrics
+      tags:
+        - Monitoring
+  /v2/monitoring/metrics/droplet/memory_cached:
+    get:
+      description: To retrieve cached memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_cached`.
+      operationId: get_droplet_memory_cached_metrics
+      parameters:
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/0"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/3"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/4"
+      responses:
+        "200":
+          $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/responses/200"
+        "401":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/429"
+        "500":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/500"
+        default:
+          $ref: "#/paths/~1v2~11-clicks/get/responses/default"
+      summary: Get Droplet Cached Memory Metrics
+      tags:
+        - Monitoring
+  /v2/monitoring/metrics/droplet/memory_free:
+    get:
+      description: To retrieve free memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_free`.
+      operationId: get_droplet_memory_free_metrics
+      parameters:
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/0"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/3"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/4"
+      responses:
+        "200":
+          $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/responses/200"
+        "401":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/429"
+        "500":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/500"
+        default:
+          $ref: "#/paths/~1v2~11-clicks/get/responses/default"
+      summary: Get Droplet Free Memory Metrics
+      tags:
+        - Monitoring
+  /v2/monitoring/metrics/droplet/memory_total:
+    get:
+      description: To retrieve total memory metrics for a given droplet, send a GET request to `/v2/monitoring/metrics/droplet/memory_total`.
+      operationId: get_droplet_memory_total_metrics
+      parameters:
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/0"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/3"
+        - $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/parameters/4"
+      responses:
+        "200":
+          $ref: "#/paths/~1v2~1monitoring~1metrics~1droplet~1bandwidth/get/responses/200"
+        "401":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/401"
+        "429":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/429"
+        "500":
+          $ref: "#/paths/~1v2~11-clicks/get/responses/500"
+        default:
+          $ref: "#/paths/~1v2~11-clicks/get/responses/default"
+      summary: Get Droplet Total Memory Metrics
+      tags:
+        - Monitoring
   /v2/projects:
     get:
       description: To list all your projects, send a GET request to `/v2/projects`.

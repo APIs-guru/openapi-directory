@@ -7,7 +7,7 @@ info:
     NOWPayments is a non-custodial cryptocurrency payment processing platform. Accept payments in a wide range of cryptos and get them instantly converted into a coin of your choice and sent to your wallet. Keeping it simple – no excess.
 
     # Sandbox
-    Before production usage, you can test our API using the Sandbox. Details are [here](https://documenter.getpostman.com/view/7907941/T1LSCRHC)
+    Before production usage, you can test our API using the Sandbox. Details can be found [here](https://documenter.getpostman.com/view/7907941/T1LSCRHC)
 
     # Authentication
     To use the NOWPayments API you should do the following:
@@ -16,7 +16,33 @@ info:
       * Specify your outcome wallet
       * Generate an API key
 
+    # Standard e-commerce flow for NOWPayments API:
+    1. API - Check API availability with the ["GET API status"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#9998079f-dcc8-4e07-9ac7-3d52f0fd733a) method. If required, check the list of available payment currencies with the ["GET available currencies"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#1c268f89-4fe7-471e-81b4-5a3153577b73) method. 
+    2. UI - Ask a customer to select item/items for purchase to determine the total sum;
+    3. UI - Ask a customer to select payment currency
+    4. API - Get the minimum payment amount for the selected currency pair (payment currency to your Outcome Wallet currency) with the ["GET Minimum payment amount"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#41b02221-2d58-4fcf-9529-59d3763d6434) method; 
+    5. API - Get the estimate of the total amount in crypto with ["GET Estimated price"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#7025cacf-7040-4c7b-a83f-f9ff0a22a822) and check that it is larger than the minimum payment amount from step 4;
+    6. API - Call the ["POST Create payment"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#5e37f3ad-0fa1-4292-af51-5c7f95730486) method to create a payment and get the deposit address (in our example, the generated BTC wallet address is returned from this method);
+    7. UI - Ask a customer to send the payment to the generated deposit address (in our example, user has to send BTC coins);
+    8. UI - A customer sends coins, NOWPayments processes and exchanges them (if required), and settles the payment to your Outcome Wallet (in our example, to your ETH address);
+    9. API - You can get the payment status either via our IPN callbacks or manually, using ["GET Payment Status"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#0b77a8e3-2344-4760-a0bd-247da067db6d) and display it to a customer so that they know when their payment has been processed.
+    10. API - you call the list of payments made to your account via the ["GET List of payments"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#c8399c0e-d798-4f01-83ae-ddaa6905c2da) method. Additionally, you can see all of this information in your [Account](https://account.nowpayments.io/payments) on NOWPayments website.
+
+    ## Alternative flow
+    1. API - Check API availability with the ["GET API status"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#9998079f-dcc8-4e07-9ac7-3d52f0fd733a) method. If required, check the list of available payment currencies with the ["GET available currencies"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#1c268f89-4fe7-471e-81b4-5a3153577b73) method. 
+    2. UI - Ask a customer to select item/items for purchase to determine the total sum;
+    3. UI - Ask a customer to select payment currency
+    4. API - Get the minimum payment amount for the selected currency pair (payment currency to your Outcome Wallet currency) with the ["GET Minimum payment amount"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#41b02221-2d58-4fcf-9529-59d3763d6434) method; 
+    5. API - Get the estimate of the total amount in crypto with ["GET Estimated price"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#7025cacf-7040-4c7b-a83f-f9ff0a22a822) and check that it is larger than the minimum payment amount from step 4;
+    6. API - Call the ["POST Create Invoice](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#3e3ce25e-f43f-4636-bbd9-11560e46048b) method to create an invoice. Set "success_url" - parameter so that the user will be redirected to your website after successful payment.
+    7. UI - display the invoice url or redirect the user to the generated link.
+    8. NOWPayments - the customer completes the payment and is redirected back to your website (only if "success_url" parameter is configured correctly!).
+    9. API - You can get the payment status either via our IPN callbacks or manually, using ["GET Payment Status"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#0b77a8e3-2344-4760-a0bd-247da067db6d) and display it to a customer so that they know when their payment has been processed.
+    10. API - you call the list of payments made to your account via the ["GET List of payments"](https://documenter.getpostman.com/view/7907941/S1a32n38?version=latest#c8399c0e-d798-4f01-83ae-ddaa6905c2da) method. Additionally, you can see all of this information in your [Account](https://account.nowpayments.io/invoices) on NOWPayments website.
+
+
     # API Documentation
+
 
     ## Instant Payments Notifications
     IPN (Instant payment notifications, or callbacks) are used to notify you when transaction status is changed.

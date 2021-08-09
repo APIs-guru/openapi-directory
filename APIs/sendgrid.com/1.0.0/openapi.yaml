@@ -9348,13 +9348,13 @@ paths:
                   items:
                     properties:
                       bcc:
-                        description: An array of recipients who will receive a blind carbon copy of your email. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recpient's name.
+                        description: An array of recipients who will receive a blind carbon copy of your email. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recipient's name.
                         items:
                           $ref: "#/components/schemas/cc_bcc_email_object"
                         maxItems: 1000
                         type: array
                       cc:
-                        description: An array of recipients who will receive a copy of your email. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recpient's name.
+                        description: An array of recipients who will receive a copy of your email. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recipient's name.
                         items:
                           $ref: "#/components/schemas/cc_bcc_email_object"
                         maxItems: 1000
@@ -12539,6 +12539,198 @@ paths:
       tags:
         - segmenting contacts
         - Segmenting Contacts
+  /marketing/segments/2.0:
+    get:
+      description: |-
+        **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
+
+        The query param `parent_list_ids` is treated as a filter.  Any match will be returned.  0 matches will return a response code of 200 with an empty `results` array.
+
+        `parent_list_ids` | `no_parent_list_id` | `result`
+        -----------------:|:--------------------:|:-------------
+        empty | false | all segments
+        values | false | segments filtered by list_ids
+        values | true | segments filtered by list_ids and segments with no parent list_ids
+        empty | true | segments with no parent list_ids
+      operationId: GET_segments
+      parameters:
+        - description: A comma separated list up to 50 in size, to filter segments on.  Only segments that have any of these list ids as the parent list will be retrieved. This is different from the parameter of the same name used when creating a segment.
+          in: query
+          name: parent_list_ids
+          required: false
+          schema:
+            type: string
+        - description: If set to `true` segments with an empty value of `parent_list_id` will be returned in the filter.  If the value is not present it defaults to 'false'.
+          in: query
+          name: no_parent_list_id
+          required: false
+          schema:
+            default: false
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/all_segments_response"
+          description: ""
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errors-seg-v2"
+          description: ""
+        "404":
+          description: ""
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errors-seg-v2"
+          description: ""
+      security:
+        - Authorization: []
+      summary: Get List of Segments
+      tags:
+        - Segmenting Contacts V2 - Beta
+    post:
+      description: |-
+        **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
+
+        Segment `name` has to be unique. A user can not create a new segment with an existing segment name.
+      operationId: POST_segments
+      requestBody:
+        $ref: "#/components/requestBodies/segment_write_v2"
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/segment_response"
+          description: ""
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errors-seg-v2"
+          description: ""
+        "404":
+          description: ""
+        "429":
+          description: ""
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errors-seg-v2"
+          description: ""
+      security:
+        - Authorization: []
+      summary: Create Segment
+      tags:
+        - Segmenting Contacts V2 - Beta
+  "/marketing/segments/2.0/{segment_id}":
+    delete:
+      description: "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**"
+      operationId: DELETE_segments-segment_id
+      responses:
+        "202":
+          description: ""
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errors-seg-v2"
+          description: ""
+        "404":
+          description: ""
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errors-seg-v2"
+          description: ""
+      security:
+        - Authorization: []
+      summary: Delete segment
+      tags:
+        - Segmenting Contacts V2 - Beta
+    get:
+      description: "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**"
+      operationId: GET_segments-segment_id
+      parameters:
+        - description: Defaults to `true`. Set to `false` to exclude the contacts_sample in the response.
+          in: query
+          name: contacts_sample
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/segment_response"
+          description: ""
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errors-seg-v2"
+          description: ""
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errors-seg-v2"
+          description: ""
+      security:
+        - Authorization: []
+      summary: Get Segment by ID
+      tags:
+        - Segmenting Contacts V2 - Beta
+    parameters:
+      - in: path
+        name: segment_id
+        required: true
+        schema:
+          type: string
+    patch:
+      description: |-
+        **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
+
+        Segment `name` has to be unique. A user can not create a new segment with an existing segment name.
+      operationId: PATCH_segments-segment_id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/segment_update"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/segment_response"
+          description: ""
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errors-seg-v2"
+          description: ""
+        "429":
+          description: ""
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errors-seg-v2"
+          description: ""
+      security:
+        - Authorization: []
+      summary: Update Segment
+      tags:
+        - Segmenting Contacts V2 - Beta
   /marketing/segments/delete:
     post:
       description: |-
@@ -15451,198 +15643,6 @@ paths:
       summary: Approve access request
       tags:
         - Teammates
-  /segments/2.0:
-    get:
-      description: |-
-        **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
-
-        The query param `parent_list_ids` is treated as a filter.  Any match will be returned.  0 matches will return a response code of 200 with an empty `results` array.
-
-        `parent_list_ids` | `no_parent_list_id` | `result`
-        -----------------:|:--------------------:|:-------------
-        empty | false | all segments
-        values | false | segments filtered by list_ids
-        values | true | segments filtered by list_ids and segments with no parent list_ids
-        empty | true | segments with no parent list_ids
-      operationId: GET_segments
-      parameters:
-        - description: A comma separated list up to 50 in size, to filter segments on.  Only segments that have any of these list ids as the parent list will be retrieved. This is different from the parameter of the same name used when creating a segment.
-          in: query
-          name: parent_list_ids
-          required: false
-          schema:
-            type: string
-        - description: If set to `true` segments with an empty value of `parent_list_id` will be returned in the filter.  If the value is not present it defaults to 'false'.
-          in: query
-          name: no_parent_list_id
-          required: false
-          schema:
-            default: false
-            type: boolean
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/all_segments_response"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/errors-seg-v2"
-          description: ""
-        "404":
-          description: ""
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/errors-seg-v2"
-          description: ""
-      security:
-        - Authorization: []
-      summary: Get List of Segments
-      tags:
-        - Segmenting Contacts V2 - Beta
-    post:
-      description: |-
-        **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
-
-        Segment `name` has to be unique. A user can not create a new segment with an existing segment name.
-      operationId: POST_segments
-      requestBody:
-        $ref: "#/components/requestBodies/segment_write_v2"
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/segment_response"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/errors-seg-v2"
-          description: ""
-        "404":
-          description: ""
-        "429":
-          description: ""
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/errors-seg-v2"
-          description: ""
-      security:
-        - Authorization: []
-      summary: Create Segment
-      tags:
-        - Segmenting Contacts V2 - Beta
-  "/segments/2.0/{segment_id}":
-    delete:
-      description: "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**"
-      operationId: DELETE_segments-segment_id
-      responses:
-        "202":
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/errors-seg-v2"
-          description: ""
-        "404":
-          description: ""
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/errors-seg-v2"
-          description: ""
-      security:
-        - Authorization: []
-      summary: Delete segment
-      tags:
-        - Segmenting Contacts V2 - Beta
-    get:
-      description: "**The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**"
-      operationId: GET_segments-segment_id
-      parameters:
-        - description: Defaults to `true`. Set to `false` to exclude the contacts_sample in the response.
-          in: query
-          name: contacts_sample
-          schema:
-            type: boolean
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/segment_response"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/errors-seg-v2"
-          description: ""
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/errors-seg-v2"
-          description: ""
-      security:
-        - Authorization: []
-      summary: Get Segment by ID
-      tags:
-        - Segmenting Contacts V2 - Beta
-    parameters:
-      - in: path
-        name: segment_id
-        required: true
-        schema:
-          type: string
-    patch:
-      description: |-
-        **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
-
-        Segment `name` has to be unique. A user can not create a new segment with an existing segment name.
-      operationId: PATCH_segments-segment_id
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/segment_update"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/segment_response"
-          description: ""
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/errors-seg-v2"
-          description: ""
-        "429":
-          description: ""
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/errors-seg-v2"
-          description: ""
-      security:
-        - Authorization: []
-      summary: Update Segment
-      tags:
-        - Segmenting Contacts V2 - Beta
   /senders:
     get:
       description: "**This endpoint allows you to retrieve a list of all sender identities that have been created for your account.**"

@@ -1107,7 +1107,7 @@ paths:
               regCode: QX92TAG7
               webJourneyUrl:
                 url: https://pi-verify.credas.co.uk/link/f7ec8ac1-d935-413b-9100-c7b9b498ca1d
-                validUntil: 2021-08-02T08:40:41.8157629Z
+                validUntil: 2021-08-09T09:37:01.9265239Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.Registrations.AddRegistrationResponse"
         "400":
@@ -2753,7 +2753,7 @@ paths:
                 - forename: Edward
                   surname: Roberts
                   url: https://report.credas.co.uk/link/f7ec8ac1-d935-413b-9100-c7b9b498ca1d
-                  validUntil: 2021-08-02T08:40:41.836632Z
+                  validUntil: 2021-08-09T09:37:01.9492403Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.ReportView.GetReportViewResponse"
         "400":
@@ -2811,7 +2811,7 @@ paths:
                 - forename: Mike
                   surname: Jones
                   url: https://report.credas.co.uk/link/66ddf7c2-d3b1-4db3-ac13-2ef44d99da74
-                  validUntil: 2021-08-02T08:40:41.8376586Z
+                  validUntil: 2021-08-09T09:37:01.9503738Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.ReportView.GetReportViewResponse"
         "400":
@@ -2867,7 +2867,7 @@ paths:
               results:
                 - journeyUrl:
                     url: https://pi-verify.credas.co.uk/link/f7ec8ac1-d935-413b-9100-c7b9b498ca1d
-                    validUntil: 2021-08-02T08:40:41.8387033Z
+                    validUntil: 2021-08-09T09:37:01.9516942Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsResponse"
         "400":
@@ -2923,7 +2923,7 @@ paths:
               results:
                 - journeyUrl:
                     url: https://verify.credas.co.uk/link/66ddf7c2-d3b1-4db3-ac13-2ef44d99da74
-                    validUntil: 2021-08-02T08:40:41.8395704Z
+                    validUntil: 2021-08-09T09:37:01.9526486Z
           schema:
             $ref: "#/definitions/Credas.Api.Models.WebVerifications.GetWebVerificationsResponse"
         "400":
@@ -3599,7 +3599,7 @@ definitions:
         format: uuid
         type: string
       status:
-        description: Unknown = 0, Pass = 1, Refer = 2, Fail = 3
+        description: Indicates the verification status of the document itself by combining visual analysis and NFC verification results. </br>Note that this may be a pass even if facial or name matches have failed.<br />  values=> Unknown = 0, Pass = 1, Refer = 2, Fail = 3
         enum:
           - 0
           - 1
@@ -4181,7 +4181,7 @@ definitions:
         format: uuid
         type: string
       status:
-        description: Unknown = 0, Pass = 1, Refer = 2, Fail = 3
+        description: Indicates the verification status of the document itself by combining visual analysis and NFC verification results. </br>Note that this may be a pass even if facial or name matches have failed.<br />  values=> Unknown = 0, Pass = 1, Refer = 2, Fail = 3
         enum:
           - 0
           - 1
@@ -4258,33 +4258,6 @@ definitions:
     properties:
       capturePersonalDetails:
         type: boolean
-      checkProfile:
-        description: None = 0, StandardAml = 1, EnhancedAml = 2, InternationalPepSanctions = 3
-        enum:
-          - 0
-          - 1
-          - 2
-          - 3
-        format: int32
-        type: integer
-      legislation:
-        description: NotSet = 0, RightToRent = 1, RightToWork = 2, AntiMoneyLaundering = 3, KnowYourCustomer = 4, AntiMoneyLaunderingTwoDocuments = 5, AntiMoneyLaunderingOneIdTwoAddressDocuments = 6, AntiMoneyLaunderingOneIdOneAddressOneBankStatement = 7, AntiMoneyLaunderingOneIdOneBankStatement = 8, DisclosureAndBarringService = 9, OnePassportOneDrivingLicence = 10, RightToRentWithAddress = 11, RightToWorkStrict = 12
-        enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 7
-          - 8
-          - 9
-          - 10
-          - 11
-          - 12
-        format: int32
-        type: integer
       nameMatchRoutine:
         description: Fuzzy = 1, Strict = 2
         enum:

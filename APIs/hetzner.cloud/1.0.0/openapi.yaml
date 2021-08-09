@@ -2505,6 +2505,11 @@ paths:
                         rules:
                           items:
                             properties:
+                              description:
+                                description: Description of the Rule
+                                maxLength: 255
+                                nullable: true
+                                type: string
                               destination_ips:
                                 description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use `0.0.0.0/0` to allow all IPv4 addresses and `::/0` to allow all IPv6 addresses. You can specify 100 CIDRs at most.
                                 example:
@@ -2632,7 +2637,8 @@ paths:
                     env: dev
                   name: Corporate Intranet Protection
                   rules:
-                    - direction: in
+                    - description: Allow port 80
+                      direction: in
                       port: "80"
                       protocol: tcp
                       source_ips:
@@ -2692,6 +2698,11 @@ paths:
                         - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
                   items:
                     properties:
+                      description:
+                        description: Description of the Rule
+                        maxLength: 255
+                        nullable: true
+                        type: string
                       destination_ips:
                         description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use `0.0.0.0/0` to allow all IPv4 addresses and `::/0` to allow all IPv6 addresses. You can specify 100 CIDRs at most.
                         example:
@@ -2922,6 +2933,11 @@ paths:
                       rules:
                         items:
                           properties:
+                            description:
+                              description: Description of the Rule
+                              maxLength: 255
+                              nullable: true
+                              type: string
                             destination_ips:
                               description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use `0.0.0.0/0` to allow all IPv4 addresses and `::/0` to allow all IPv6 addresses. You can specify 100 CIDRs at most.
                               example:
@@ -3091,6 +3107,11 @@ paths:
                       rules:
                         items:
                           properties:
+                            description:
+                              description: Description of the Rule
+                              maxLength: 255
+                              nullable: true
+                              type: string
                             destination_ips:
                               description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use `0.0.0.0/0` to allow all IPv4 addresses and `::/0` to allow all IPv6 addresses. You can specify 100 CIDRs at most.
                               example:
@@ -3260,6 +3281,11 @@ paths:
                       rules:
                         items:
                           properties:
+                            description:
+                              description: Description of the Rule
+                              maxLength: 255
+                              nullable: true
+                              type: string
                             destination_ips:
                               description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use `0.0.0.0/0` to allow all IPv4 addresses and `::/0` to allow all IPv6 addresses. You can specify 100 CIDRs at most.
                               example:
@@ -3962,7 +3988,8 @@ paths:
               rules:
                 value:
                   rules:
-                    - direction: in
+                    - description: Allow port 80
+                      direction: in
                       port: "80"
                       protocol: tcp
                       source_ips:
@@ -3975,6 +4002,11 @@ paths:
                   description: Array of rules
                   items:
                     properties:
+                      description:
+                        description: Description of the Rule
+                        maxLength: 255
+                        nullable: true
+                        type: string
                       destination_ips:
                         description: List of permitted IPv4/IPv6 addresses in CIDR notation. Use `0.0.0.0/0` to allow all IPv4 addresses and `::/0` to allow all IPv6 addresses. You can specify 100 CIDRs at most.
                         example:
