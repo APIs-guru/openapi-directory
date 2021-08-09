@@ -873,7 +873,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.CreateResourceDataSync:
     post:
       operationId: CreateResourceDataSync
-      description: '<p>A resource data sync helps you view data from multiple sources in a single location. Amazon Web Services Systems Manager offers two types of resource data sync: <code>SyncToDestination</code> and <code>SyncFromSource</code>.</p> <p>You can configure Systems Manager Inventory to use the <code>SyncToDestination</code> type to synchronize Inventory data from multiple Regions to a single Amazon Simple Storage Service (Amazon S3) bucket. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync.html">Configuring resource data sync for Inventory</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p> <p>You can configure Systems Manager Explorer to use the <code>SyncFromSource</code> type to synchronize operational work items (OpsItems) and operational data (OpsData) from multiple Regions to a single Amazon S3 bucket. This type can synchronize OpsItems and OpsData from multiple accounts and Regions or <code>EntireOrganization</code> by using Organizations. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html">Setting up Systems Manager Explorer to display data from multiple accounts and Regions</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p> <p>A resource data sync is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data. To check the status of a sync, use the <a>ListResourceDataSync</a>.</p> <note> <p>By default, data isn''t encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. </p> </note>'
+      description: '<p>A resource data sync helps you view data from multiple sources in a single location. Amazon Web Services Systems Manager offers two types of resource data sync: <code>SyncToDestination</code> and <code>SyncFromSource</code>.</p> <p>You can configure Systems Manager Inventory to use the <code>SyncToDestination</code> type to synchronize Inventory data from multiple Amazon Web Services Regions to a single Amazon Simple Storage Service (Amazon S3) bucket. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync.html">Configuring resource data sync for Inventory</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p> <p>You can configure Systems Manager Explorer to use the <code>SyncFromSource</code> type to synchronize operational work items (OpsItems) and operational data (OpsData) from multiple Amazon Web Services Regions to a single Amazon S3 bucket. This type can synchronize OpsItems and OpsData from multiple Amazon Web Services accounts and Amazon Web Services Regions or <code>EntireOrganization</code> by using Organizations. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html">Setting up Systems Manager Explorer to display data from multiple accounts and Regions</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p> <p>A resource data sync is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data. To check the status of a sync, use the <a>ListResourceDataSync</a>.</p> <note> <p>By default, data isn''t encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. </p> </note>'
       responses:
         '200':
           description: Success
@@ -987,7 +987,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.DeleteAssociation:
     post:
       operationId: DeleteAssociation
-      description: '<p>Disassociates the specified Amazon Web Services Systems Manager document (SSM document) from the specified instance.</p> <p>When you disassociate a document from an instance, it doesn''t change the configuration of the instance. To change the configuration state of an instance after you disassociate a document, you must create a new document with the desired configuration and associate it with the instance.</p>'
+      description: '<p>Disassociates the specified Amazon Web Services Systems Manager document (SSM document) from the specified instance. If you created the association by using the <code>Targets</code> parameter, then you must delete the association by using the association ID.</p> <p>When you disassociate a document from an instance, it doesn''t change the configuration of the instance. To change the configuration state of an instance after you disassociate a document, you must create a new document with the desired configuration and associate it with the instance.</p>'
       responses:
         '200':
           description: Success
@@ -1260,7 +1260,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.DeleteParameter:
     post:
       operationId: DeleteParameter
-      description: Delete a parameter from the system.
+      description: 'Delete a parameter from the system. After deleting a parameter, wait for at least 30 seconds to create a parameter with the same name.'
       responses:
         '200':
           description: Success
@@ -1305,7 +1305,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.DeleteParameters:
     post:
       operationId: DeleteParameters
-      description: Delete a list of parameters.
+      description: 'Delete a list of parameters. After deleting a parameter, wait for at least 30 seconds to create a parameter with the same name.'
       responses:
         '200':
           description: Success
@@ -1689,7 +1689,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.DescribeAssociation:
     post:
       operationId: DescribeAssociation
-      description: 'Describes the association for the specified target or instance. If you created the association by using the <code>Targets</code> parameter, then you must retrieve the association by using the association ID. If you created the association by specifying an instance ID and an Amazon Web Services Systems Manager document (SSM document), then you retrieve the association by specifying the document name and the instance ID. '
+      description: 'Describes the association for the specified target or instance. If you created the association by using the <code>Targets</code> parameter, then you must retrieve the association by using the association ID.'
       responses:
         '200':
           description: Success
@@ -2130,7 +2130,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.DescribeDocumentPermission:
     post:
       operationId: DescribeDocumentPermission
-      description: 'Describes the permissions for a Amazon Web Services Systems Manager document (SSM document). If you created the document, you are the owner. If a document is shared, it can either be shared privately (by specifying a user''s account ID) or publicly (<i>All</i>). '
+      description: 'Describes the permissions for a Amazon Web Services Systems Manager document (SSM document). If you created the document, you are the owner. If a document is shared, it can either be shared privately (by specifying a user''s Amazon Web Services account ID) or publicly (<i>All</i>). '
       responses:
         '200':
           description: Success
@@ -3051,7 +3051,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.DescribeMaintenanceWindows:
     post:
       operationId: DescribeMaintenanceWindows
-      description: Retrieves the maintenance windows in an account.
+      description: Retrieves the maintenance windows in an Amazon Web Services account.
       responses:
         '200':
           description: Success
@@ -3279,7 +3279,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.DescribePatchBaselines:
     post:
       operationId: DescribePatchBaselines
-      description: Lists the patch baselines in your account.
+      description: Lists the patch baselines in your Amazon Web Services account.
       responses:
         '200':
           description: Success
@@ -3840,7 +3840,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.GetDeployablePatchSnapshotForInstance:
     post:
       operationId: GetDeployablePatchSnapshotForInstance
-      description: '<p>Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the <code>AWS-RunPatchBaseline</code> Systems Manager document (SSM document).</p> <note> <p>If you run the command locally, such as with the Command Line Interface (CLI), the system attempts to use your local AWS credentials and the operation fails. To avoid this, you can run the command in the Amazon Web Services Systems Manager console. Use Run Command, a capability of Amazon Web Services Systems Manager, with an SSM document that enables you to target an instance with a script or command. For example, run the command using the <code>AWS-RunShellScript</code> document or the <code>AWS-RunPowerShellScript</code> document.</p> </note>'
+      description: '<p>Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the <code>AWS-RunPatchBaseline</code> Systems Manager document (SSM document).</p> <note> <p>If you run the command locally, such as with the Command Line Interface (CLI), the system attempts to use your local Amazon Web Services credentials and the operation fails. To avoid this, you can run the command in the Amazon Web Services Systems Manager console. Use Run Command, a capability of Amazon Web Services Systems Manager, with an SSM document that enables you to target an instance with a script or command. For example, run the command using the <code>AWS-RunShellScript</code> document or the <code>AWS-RunPowerShellScript</code> document.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3942,7 +3942,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.GetInventory:
     post:
       operationId: GetInventory
-      description: Query inventory information.
+      description: 'Query inventory information. This includes instance status, such as <code>Stopped</code> or <code>Terminated</code>.'
       responses:
         '200':
           description: Success
@@ -4494,7 +4494,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.GetParameter:
     post:
       operationId: GetParameter
-      description: Get information about a parameter by using the parameter name. Don't confuse this API operation with the <a>GetParameters</a> API operation.
+      description: '<p>Get information about a single parameter by specifying the parameter name.</p> <note> <p>To get information about more than one parameter at a time, use the <a>GetParameters</a> operation.</p> </note>'
       responses:
         '200':
           description: Success
@@ -4620,7 +4620,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.GetParameters:
     post:
       operationId: GetParameters
-      description: Get details of a parameter. Don't confuse this API operation with the <a>GetParameter</a> API operation.
+      description: '<p>Get information about one or more parameters by specifying multiple parameter names.</p> <note> <p>To get information about a single parameter, you can use the <a>GetParameter</a> operation instead.</p> </note>'
       responses:
         '200':
           description: Success
@@ -4836,7 +4836,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.GetServiceSetting:
     post:
       operationId: GetServiceSetting
-      description: '<p> <code>ServiceSetting</code> is an account-level setting for an Amazon Web Services service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an Amazon Web Services service charges money to the account based on feature or service usage, then the Amazon Web Services service team might create a default setting of <code>false</code>. This means the user can''t use this feature unless they change the setting to <code>true</code> and intentionally opt in for a paid feature.</p> <p>Services map a <code>SettingId</code> object to a setting value. Amazon Web Services services teams define the default value for a <code>SettingId</code>. You can''t create a new <code>SettingId</code>, but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code> permission for the setting. Use the <a>UpdateServiceSetting</a> API operation to change the default setting. Or use the <a>ResetServiceSetting</a> to change the value back to the original value defined by the Amazon Web Services service team.</p> <p>Query the current service setting for the account. </p>'
+      description: '<p> <code>ServiceSetting</code> is an account-level setting for an Amazon Web Services service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an Amazon Web Services service charges money to the account based on feature or service usage, then the Amazon Web Services service team might create a default setting of <code>false</code>. This means the user can''t use this feature unless they change the setting to <code>true</code> and intentionally opt in for a paid feature.</p> <p>Services map a <code>SettingId</code> object to a setting value. Amazon Web Services services teams define the default value for a <code>SettingId</code>. You can''t create a new <code>SettingId</code>, but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code> permission for the setting. Use the <a>UpdateServiceSetting</a> API operation to change the default setting. Or use the <a>ResetServiceSetting</a> to change the value back to the original value defined by the Amazon Web Services service team.</p> <p>Query the current service setting for the Amazon Web Services account. </p>'
       responses:
         '200':
           description: Success
@@ -5007,7 +5007,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.ListAssociations:
     post:
       operationId: ListAssociations
-      description: Returns all State Manager associations in the current account and Region. You can limit the results to a specific State Manager association document or instance by specifying a filter. State Manager is a capability of Amazon Web Services Systems Manager.
+      description: Returns all State Manager associations in the current Amazon Web Services account and Amazon Web Services Region. You can limit the results to a specific State Manager association document or instance by specifying a filter. State Manager is a capability of Amazon Web Services Systems Manager.
       responses:
         '200':
           description: Success
@@ -5139,7 +5139,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.ListCommands:
     post:
       operationId: ListCommands
-      description: Lists the commands requested by users of the account.
+      description: Lists the commands requested by users of the Amazon Web Services account.
       responses:
         '200':
           description: Success
@@ -5352,7 +5352,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.ListDocumentMetadataHistory:
     post:
       operationId: ListDocumentMetadataHistory
-      description: Information about approval reviews for a version of an SSM document.
+      description: Information about approval reviews for a version of a change template in Change Manager.
       responses:
         '200':
           description: Success
@@ -5472,7 +5472,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.ListDocuments:
     post:
       operationId: ListDocuments
-      description: Returns all Systems Manager (SSM) documents in the current account and Region. You can limit the results of this request by using a filter.
+      description: Returns all Systems Manager (SSM) documents in the current Amazon Web Services account and Amazon Web Services Region. You can limit the results of this request by using a filter.
       responses:
         '200':
           description: Success
@@ -5598,7 +5598,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.ListOpsItemEvents:
     post:
       operationId: ListOpsItemEvents
-      description: Returns a list of all OpsItem events in the current Region and account. You can limit the results to events associated with specific OpsItems by specifying a filter.
+      description: Returns a list of all OpsItem events in the current Amazon Web Services Region and Amazon Web Services account. You can limit the results to events associated with specific OpsItems by specifying a filter.
       responses:
         '200':
           description: Success
@@ -7371,7 +7371,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.UpdateAssociationStatus:
     post:
       operationId: UpdateAssociationStatus
-      description: Updates the status of the Amazon Web Services Systems Manager document (SSM document) associated with the specified instance.
+      description: <p>Updates the status of the Amazon Web Services Systems Manager document (SSM document) associated with the specified instance.</p> <p> <code>UpdateAssociationStatus</code> is primarily used by the Amazon Web Services Systems Manager Agent (SSM Agent) to report status updates about your associations and is only used for associations created with the <code>InstanceId</code> legacy parameter.</p>
       responses:
         '200':
           description: Success
@@ -7590,7 +7590,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.UpdateDocumentMetadata:
     post:
       operationId: UpdateDocumentMetadata
-      description: Updates information related to approval reviews for a specific version of a document.
+      description: Updates information related to approval reviews for a specific version of a change template in Change Manager.
       responses:
         '200':
           description: Success
@@ -8287,7 +8287,7 @@ components:
         IamRole:
           allOf:
             - $ref: '#/components/schemas/IamRole'
-            - description: 'The Identity and Access Management (IAM) role that you want to assign to the managed instance. This IAMrole must provide AssumeRole permissions for the Amazon Web Services Systems Manager service principal <code>ssm.amazonaws.com</code>. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html">Create an IAM service role for a hybrid environment</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.'
+            - description: 'The name of the Identity and Access Management (IAM) role that you want to assign to the managed instance. This IAM role must provide AssumeRole permissions for the Amazon Web Services Systems Manager service principal <code>ssm.amazonaws.com</code>. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html">Create an IAM service role for a hybrid environment</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.'
         RegistrationLimit:
           allOf:
             - $ref: '#/components/schemas/RegistrationLimit'
@@ -8316,7 +8316,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/DocumentARN'
-            - description: '<p>The name of the SSM Command document or Automation runbook that contains the configuration information for the instance.</p> <p>You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account.</p> <p>For Systems Manager documents (SSM documents) that are shared with you from other accounts, you must specify the complete SSM document ARN, in the following format:</p> <p> <code>arn:<i>partition</i>:ssm:<i>region</i>:<i>account-id</i>:document/<i>document-name</i> </code> </p> <p>For example:</p> <p> <code>arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document</code> </p> <p>For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or <code>My-Document</code>.</p>'
+            - description: '<p>The name of the SSM Command document or Automation runbook that contains the configuration information for the instance.</p> <p>You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account.</p> <p>For Systems Manager documents (SSM documents) that are shared with you from other Amazon Web Services accounts, you must specify the complete SSM document ARN, in the following format:</p> <p> <code>arn:<i>partition</i>:ssm:<i>region</i>:<i>account-id</i>:document/<i>document-name</i> </code> </p> <p>For example:</p> <p> <code>arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document</code> </p> <p>For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or <code>My-Document</code>.</p>'
         DocumentVersion:
           allOf:
             - $ref: '#/components/schemas/DocumentVersion'
@@ -8332,7 +8332,7 @@ components:
         Targets:
           allOf:
             - $ref: '#/components/schemas/Targets'
-            - description: 'The targets for the association. You can target instances by using tags, Amazon Web Services resource groups, all instances in an account, or individual instance IDs. For more information about choosing targets for an association, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html">Using targets and rate controls with State Manager associations</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.'
+            - description: 'The targets for the association. You can target instances by using tags, Amazon Web Services resource groups, all instances in an Amazon Web Services account, or individual instance IDs. For more information about choosing targets for an association, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html">Using targets and rate controls with State Manager associations</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.'
         ScheduleExpression:
           allOf:
             - $ref: '#/components/schemas/ScheduleExpression'
@@ -8376,7 +8376,7 @@ components:
         TargetLocations:
           allOf:
             - $ref: '#/components/schemas/TargetLocations'
-            - description: A location is a combination of Regions and accounts where you want to run the association. Use this action to create an association in multiple Regions and multiple accounts.
+            - description: A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the association. Use this action to create an association in multiple Regions and multiple accounts.
     AssociationAlreadyExists: {}
     AssociationLimitExceeded: {}
     InvalidDocument: {}
@@ -8633,7 +8633,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: '<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for an OpsMetadata object. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an OpsMetadata object to identify an environment or target Region. In this case, you could specify the following key-value pairs:</p> <ul> <li> <p> <code>Key=Environment,Value=Production</code> </p> </li> <li> <p> <code>Key=Region,Value=us-east-2</code> </p> </li> </ul>'
+            - description: '<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for an OpsMetadata object. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an OpsMetadata object to identify an environment or target Amazon Web Services Region. In this case, you could specify the following key-value pairs:</p> <ul> <li> <p> <code>Key=Environment,Value=Production</code> </p> </li> <li> <p> <code>Key=Region,Value=us-east-2</code> </p> </li> </ul>'
     OpsMetadataAlreadyExistsException: {}
     OpsMetadataTooManyUpdatesException: {}
     OpsMetadataInvalidArgumentException: {}
@@ -8723,7 +8723,7 @@ components:
         SyncType:
           allOf:
             - $ref: '#/components/schemas/ResourceDataSyncType'
-            - description: 'Specify <code>SyncToDestination</code> to create a resource data sync that synchronizes data to an S3 bucket for Inventory. If you specify <code>SyncToDestination</code>, you must provide a value for <code>S3Destination</code>. Specify <code>SyncFromSource</code> to synchronize data from a single account and multiple Regions, or multiple accounts and Regions, as listed in Organizations for Explorer. If you specify <code>SyncFromSource</code>, you must provide a value for <code>SyncSource</code>. The default value is <code>SyncToDestination</code>.'
+            - description: 'Specify <code>SyncToDestination</code> to create a resource data sync that synchronizes data to an S3 bucket for Inventory. If you specify <code>SyncToDestination</code>, you must provide a value for <code>S3Destination</code>. Specify <code>SyncFromSource</code> to synchronize data from a single account and multiple Regions, or multiple Amazon Web Services accounts and Amazon Web Services Regions, as listed in Organizations for Explorer. If you specify <code>SyncFromSource</code>, you must provide a value for <code>SyncSource</code>. The default value is <code>SyncToDestination</code>.'
         SyncSource:
           allOf:
             - $ref: '#/components/schemas/ResourceDataSyncSource'
@@ -8760,7 +8760,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The ID of the instance.
+            - description: '<p>The instance ID.</p> <note> <p> <code>InstanceId</code> has been deprecated. To specify an instance ID for an association, use the <code>Targets</code> parameter. Requests that include the parameter <code>InstanceID</code> with Systems Manager documents (SSM documents) that use schema version 2.0 or later will fail. In addition, if you use the parameter <code>InstanceId</code>, you can''t use the parameters <code>AssociationName</code>, <code>DocumentVersion</code>, <code>MaxErrors</code>, <code>MaxConcurrency</code>, <code>OutputLocation</code>, or <code>ScheduleExpression</code>. To use these parameters, you must use the <code>Targets</code> parameter.</p> </note>'
         AssociationId:
           allOf:
             - $ref: '#/components/schemas/AssociationId'
@@ -8899,7 +8899,7 @@ components:
         Names:
           allOf:
             - $ref: '#/components/schemas/ParameterNameList'
-            - description: The names of the parameters to delete.
+            - description: 'The names of the parameters to delete. After deleting a parameter, wait for at least 30 seconds to create a parameter with the same name.'
     DeletePatchBaselineResult:
       type: object
       properties:
@@ -9038,7 +9038,7 @@ components:
         ActivationList:
           allOf:
             - $ref: '#/components/schemas/ActivationList'
-            - description: A list of activations for your account.
+            - description: A list of activations for your Amazon Web Services account.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -9286,11 +9286,11 @@ components:
         AccountIds:
           allOf:
             - $ref: '#/components/schemas/AccountIdList'
-            - description: The account IDs that have permission to use this document. The ID can be either an account or <i>All</i>.
+            - description: The account IDs that have permission to use this document. The ID can be either an Amazon Web Services account or <i>All</i>.
         AccountSharingInfoList:
           allOf:
             - $ref: '#/components/schemas/AccountSharingInfoList'
-            - description: A list of accounts where the current document is shared and the version shared with each account.
+            - description: A list of Amazon Web Services accounts where the current document is shared and the version shared with each account.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -10256,7 +10256,7 @@ components:
         Target:
           allOf:
             - $ref: '#/components/schemas/SessionTarget'
-            - description: The ID of the instance.
+            - description: The instance ID.
     GetDefaultPatchBaselineResult:
       type: object
       properties:
@@ -10282,7 +10282,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The ID of the instance.
+            - description: The instance ID.
         SnapshotId:
           allOf:
             - $ref: '#/components/schemas/SnapshotId'
@@ -10846,7 +10846,7 @@ components:
         Entities:
           allOf:
             - $ref: '#/components/schemas/OpsEntityList'
-            - description: The list of aggregated and filtered OpsData.
+            - description: The list of aggregated details and filtered OpsData.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -10895,7 +10895,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/PSParameterName'
-            - description: The name of the parameter you want to query.
+            - description: '<p>The name of the parameter you want to query.</p> <p>To query by parameter label, use <code>"Name": "name:label"</code>. To query by parameter version, use <code>"Name": "name:version"</code>.</p>'
         WithDecryption:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -10955,7 +10955,7 @@ components:
         Names:
           allOf:
             - $ref: '#/components/schemas/ParameterNameList'
-            - description: Names of the parameters for which you want to query information.
+            - description: '<p>Names of the parameters for which you want to query information.</p> <p>To query by parameter label, use <code>"Name": "name:label"</code>. To query by parameter version, use <code>"Name": "name:version"</code>.</p>'
         WithDecryption:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -11073,7 +11073,7 @@ components:
         BaselineId:
           allOf:
             - $ref: '#/components/schemas/BaselineId'
-            - description: The ID of the patch baseline to retrieve.
+            - description: '<p>The ID of the patch baseline to retrieve.</p> <note> <p>To retrieve information about an Amazon Web Services managed patch baseline, specify the full Amazon Resource Name (ARN) of the baseline. For example, for the baseline <code>AWS-AmazonLinuxDefaultPatchBaseline</code>, specify <code>arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0e392de35e7c563b7</code> instead of <code>pb-0e392de35e7c563b7</code>.</p> </note>'
     GetPatchBaselineForPatchGroupResult:
       type: object
       properties:
@@ -11352,19 +11352,19 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/DocumentName'
-            - description: The name of the document.
+            - description: The name of the change template.
         DocumentVersion:
           allOf:
             - $ref: '#/components/schemas/DocumentVersion'
-            - description: The version of the document.
+            - description: The version of the change template.
         Author:
           allOf:
             - $ref: '#/components/schemas/DocumentAuthor'
-            - description: The user ID of the person in the organization who requested the document review.
+            - description: The user ID of the person in the organization who requested the review of the change template.
         Metadata:
           allOf:
             - $ref: '#/components/schemas/DocumentMetadataResponseInfo'
-            - description: Information about the response to the document approval request.
+            - description: Information about the response to the change template approval request.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -11379,11 +11379,11 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/DocumentName'
-            - description: The name of the document.
+            - description: The name of the change template.
         DocumentVersion:
           allOf:
             - $ref: '#/components/schemas/DocumentVersion'
-            - description: The version of the document.
+            - description: The version of the change template.
         Metadata:
           allOf:
             - $ref: '#/components/schemas/DocumentMetadataEnum'
@@ -11640,7 +11640,7 @@ components:
         SyncType:
           allOf:
             - $ref: '#/components/schemas/ResourceDataSyncType'
-            - description: View a list of resource data syncs according to the sync type. Specify <code>SyncToDestination</code> to view resource data syncs that synchronize data to an Amazon S3 bucket. Specify <code>SyncFromSource</code> to view resource data syncs from Organizations or from multiple Regions.
+            - description: View a list of resource data syncs according to the sync type. Specify <code>SyncToDestination</code> to view resource data syncs that synchronize data to an Amazon S3 bucket. Specify <code>SyncFromSource</code> to view resource data syncs from Organizations or from multiple Amazon Web Services Regions.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -11796,7 +11796,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/PSParameterName'
-            - description: '<p>The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For parameters in a hierarchy, you must include a leading forward slash character (/) when you create or reference a parameter. For example: <code>/Dev/DBServer/MySQL/db-string13</code> </p> <p>Naming Constraints:</p> <ul> <li> <p>Parameter names are case sensitive.</p> </li> <li> <p>A parameter name must be unique within an Region</p> </li> <li> <p>A parameter name can''t be prefixed with "<code>aws</code>" or "<code>ssm</code>" (case-insensitive).</p> </li> <li> <p>Parameter names can include only the following symbols and letters: <code>a-zA-Z0-9_.-</code> </p> <p>In addition, the slash character ( / ) is used to delineate hierarchies in parameter names. For example: <code>/Dev/Production/East/Project-ABC/MyParameter</code> </p> </li> <li> <p>A parameter name can''t include spaces.</p> </li> <li> <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p> </li> </ul> <p>For additional information about valid values for parameter names, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html">Creating Systems Manager parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p> <note> <p>The maximum length constraint listed below includes capacity for additional system attributes that aren''t part of the name. The maximum length for a parameter name, including the full length of the parameter ARN, is 1011 characters. For example, the length of the following parameter name is 65 characters, not 20 characters:</p> <p> <code>arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName</code> </p> </note>'
+            - description: '<p>The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For parameters in a hierarchy, you must include a leading forward slash character (/) when you create or reference a parameter. For example: <code>/Dev/DBServer/MySQL/db-string13</code> </p> <p>Naming Constraints:</p> <ul> <li> <p>Parameter names are case sensitive.</p> </li> <li> <p>A parameter name must be unique within an Amazon Web Services Region</p> </li> <li> <p>A parameter name can''t be prefixed with "<code>aws</code>" or "<code>ssm</code>" (case-insensitive).</p> </li> <li> <p>Parameter names can include only the following symbols and letters: <code>a-zA-Z0-9_.-</code> </p> <p>In addition, the slash character ( / ) is used to delineate hierarchies in parameter names. For example: <code>/Dev/Production/East/Project-ABC/MyParameter</code> </p> </li> <li> <p>A parameter name can''t include spaces.</p> </li> <li> <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p> </li> </ul> <p>For additional information about valid values for parameter names, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html">Creating Systems Manager parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p> <note> <p>The maximum length constraint listed below includes capacity for additional system attributes that aren''t part of the name. The maximum length for a parameter name, including the full length of the parameter ARN, is 1011 characters. For example, the length of the following parameter name is 65 characters, not 20 characters:</p> <p> <code>arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName</code> </p> </note>'
         Description:
           allOf:
             - $ref: '#/components/schemas/ParameterDescription'
@@ -11812,7 +11812,7 @@ components:
         KeyId:
           allOf:
             - $ref: '#/components/schemas/ParameterKeyId'
-            - description: '<p>The Key Management Service (KMS) ID that you want to use to encrypt a parameter. Either the default KMS key automatically assigned to your account or a custom key. Required for parameters that use the <code>SecureString</code> data type.</p> <p>If you don''t specify a key ID, the system uses the default key associated with your account.</p> <ul> <li> <p>To use your default KMS key, choose the <code>SecureString</code> data type, and do <i>not</i> specify the <code>Key ID</code> when you create the parameter. The system automatically populates <code>Key ID</code> with your default KMS key.</p> </li> <li> <p>To use a custom KMS key, choose the <code>SecureString</code> data type with the <code>Key ID</code> parameter.</p> </li> </ul>'
+            - description: '<p>The Key Management Service (KMS) ID that you want to use to encrypt a parameter. Either the default KMS key automatically assigned to your Amazon Web Services account or a custom key. Required for parameters that use the <code>SecureString</code> data type.</p> <p>If you don''t specify a key ID, the system uses the default key associated with your Amazon Web Services account.</p> <ul> <li> <p>To use your default KMS key, choose the <code>SecureString</code> data type, and do <i>not</i> specify the <code>Key ID</code> when you create the parameter. The system automatically populates <code>Key ID</code> with your default KMS key.</p> </li> <li> <p>To use a custom KMS key, choose the <code>SecureString</code> data type with the <code>Key ID</code> parameter.</p> </li> </ul>'
         Overwrite:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -11828,7 +11828,7 @@ components:
         Tier:
           allOf:
             - $ref: '#/components/schemas/ParameterTier'
-            - description: '<p>The parameter tier to assign to a parameter.</p> <p>Parameter Store offers a standard tier and an advanced tier for parameters. Standard parameters have a content size limit of 4 KB and can''t be configured to use parameter policies. You can create a maximum of 10,000 standard parameters for each Region in an account. Standard parameters are offered at no additional cost. </p> <p>Advanced parameters have a content size limit of 8 KB and can be configured to use parameter policies. You can create a maximum of 100,000 advanced parameters for each Region in an account. Advanced parameters incur a charge. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html">Standard and advanced parameter tiers</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p> <p>You can change a standard parameter to an advanced parameter any time. But you can''t revert an advanced parameter to a standard parameter. Reverting an advanced parameter to a standard parameter would result in data loss because the system would truncate the size of the parameter from 8 KB to 4 KB. Reverting would also remove any policies attached to the parameter. Lastly, advanced parameters use a different form of encryption than standard parameters. </p> <p>If you no longer need an advanced parameter, or if you no longer want to incur charges for an advanced parameter, you must delete it and recreate it as a new standard parameter. </p> <p> <b>Using the Default Tier Configuration</b> </p> <p>In <code>PutParameter</code> requests, you can specify the tier to create the parameter in. Whenever you specify a tier in the request, Parameter Store creates or updates the parameter according to that request. However, if you don''t specify a tier in a request, Parameter Store assigns the tier based on the current Parameter Store default tier configuration.</p> <p>The default tier when you begin using Parameter Store is the standard-parameter tier. If you use the advanced-parameter tier, you can specify one of the following as the default:</p> <ul> <li> <p> <b>Advanced</b>: With this option, Parameter Store evaluates all requests as advanced parameters. </p> </li> <li> <p> <b>Intelligent-Tiering</b>: With this option, Parameter Store evaluates each request to determine if the parameter is standard or advanced. </p> <p>If the request doesn''t include any options that require an advanced parameter, the parameter is created in the standard-parameter tier. If one or more options requiring an advanced parameter are included in the request, Parameter Store create a parameter in the advanced-parameter tier.</p> <p>This approach helps control your parameter-related costs by always creating standard parameters unless an advanced parameter is necessary. </p> </li> </ul> <p>Options that require an advanced parameter include the following:</p> <ul> <li> <p>The content size of the parameter is more than 4 KB.</p> </li> <li> <p>The parameter uses a parameter policy.</p> </li> <li> <p>More than 10,000 parameters already exist in your account in the current Region.</p> </li> </ul> <p>For more information about configuring the default tier option, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-default-tier.html">Specifying a default parameter tier</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>'
+            - description: '<p>The parameter tier to assign to a parameter.</p> <p>Parameter Store offers a standard tier and an advanced tier for parameters. Standard parameters have a content size limit of 4 KB and can''t be configured to use parameter policies. You can create a maximum of 10,000 standard parameters for each Region in an Amazon Web Services account. Standard parameters are offered at no additional cost. </p> <p>Advanced parameters have a content size limit of 8 KB and can be configured to use parameter policies. You can create a maximum of 100,000 advanced parameters for each Region in an Amazon Web Services account. Advanced parameters incur a charge. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html">Standard and advanced parameter tiers</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p> <p>You can change a standard parameter to an advanced parameter any time. But you can''t revert an advanced parameter to a standard parameter. Reverting an advanced parameter to a standard parameter would result in data loss because the system would truncate the size of the parameter from 8 KB to 4 KB. Reverting would also remove any policies attached to the parameter. Lastly, advanced parameters use a different form of encryption than standard parameters. </p> <p>If you no longer need an advanced parameter, or if you no longer want to incur charges for an advanced parameter, you must delete it and recreate it as a new standard parameter. </p> <p> <b>Using the Default Tier Configuration</b> </p> <p>In <code>PutParameter</code> requests, you can specify the tier to create the parameter in. Whenever you specify a tier in the request, Parameter Store creates or updates the parameter according to that request. However, if you don''t specify a tier in a request, Parameter Store assigns the tier based on the current Parameter Store default tier configuration.</p> <p>The default tier when you begin using Parameter Store is the standard-parameter tier. If you use the advanced-parameter tier, you can specify one of the following as the default:</p> <ul> <li> <p> <b>Advanced</b>: With this option, Parameter Store evaluates all requests as advanced parameters. </p> </li> <li> <p> <b>Intelligent-Tiering</b>: With this option, Parameter Store evaluates each request to determine if the parameter is standard or advanced. </p> <p>If the request doesn''t include any options that require an advanced parameter, the parameter is created in the standard-parameter tier. If one or more options requiring an advanced parameter are included in the request, Parameter Store create a parameter in the advanced-parameter tier.</p> <p>This approach helps control your parameter-related costs by always creating standard parameters unless an advanced parameter is necessary. </p> </li> </ul> <p>Options that require an advanced parameter include the following:</p> <ul> <li> <p>The content size of the parameter is more than 4 KB.</p> </li> <li> <p>The parameter uses a parameter policy.</p> </li> <li> <p>More than 10,000 parameters already exist in your Amazon Web Services account in the current Amazon Web Services Region.</p> </li> </ul> <p>For more information about configuring the default tier option, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-default-tier.html">Specifying a default parameter tier</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>'
         Policies:
           allOf:
             - $ref: '#/components/schemas/ParameterPolicies'
@@ -11836,7 +11836,7 @@ components:
         DataType:
           allOf:
             - $ref: '#/components/schemas/ParameterDataType'
-            - description: '<p>The data type for a <code>String</code> parameter. Supported data types include plain text and Amazon Machine Image (AMI) IDs.</p> <p> <b>The following data type values are supported.</b> </p> <ul> <li> <p> <code>text</code> </p> </li> <li> <p> <code>aws:ec2:image</code> </p> </li> </ul> <p>When you create a <code>String</code> parameter and specify <code>aws:ec2:image</code>, Amazon Web Services Systems Manager validates the parameter value is in the required format, such as <code>ami-12345abcdeEXAMPLE</code>, and that the specified AMI is available in your account. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html">Native parameter support for Amazon Machine Image (AMI) IDs</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>'
+            - description: '<p>The data type for a <code>String</code> parameter. Supported data types include plain text and Amazon Machine Image (AMI) IDs.</p> <p> <b>The following data type values are supported.</b> </p> <ul> <li> <p> <code>text</code> </p> </li> <li> <p> <code>aws:ec2:image</code> </p> </li> </ul> <p>When you create a <code>String</code> parameter and specify <code>aws:ec2:image</code>, Amazon Web Services Systems Manager validates the parameter value is in the required format, such as <code>ami-12345abcdeEXAMPLE</code>, and that the specified AMI is available in your Amazon Web Services account. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html">Native parameter support for Amazon Machine Image (AMI) IDs</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>'
     ParameterLimitExceeded: {}
     ParameterAlreadyExists: {}
     HierarchyLevelLimitExceededException: {}
@@ -12064,7 +12064,7 @@ components:
         StreamUrl:
           allOf:
             - $ref: '#/components/schemas/StreamUrl'
-            - description: '<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>.</p> <p> <b>region</b> represents the Region identifier for an Region supported by Amazon Web Services Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region. For a list of supported <b>region</b> values, see the <b>Region</b> column in <a href="https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region">Systems Manager service endpoints</a> in the <i>Amazon Web Services General Reference</i>.</p> <p> <b>session-id</b> represents the ID of a Session Manager session, such as <code>1a2b3c4dEXAMPLE</code>.</p>'
+            - description: '<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>.</p> <p> <b>region</b> represents the Region identifier for an Amazon Web Services Region supported by Amazon Web Services Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region. For a list of supported <b>region</b> values, see the <b>Region</b> column in <a href="https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region">Systems Manager service endpoints</a> in the <i>Amazon Web Services General Reference</i>.</p> <p> <b>session-id</b> represents the ID of a Session Manager session, such as <code>1a2b3c4dEXAMPLE</code>.</p>'
     ResumeSessionRequest:
       type: object
       required:
@@ -12151,7 +12151,7 @@ components:
         OutputS3Region:
           allOf:
             - $ref: '#/components/schemas/S3Region'
-            - description: '(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Region of the S3 bucket.'
+            - description: '(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon Web Services Region of the S3 bucket.'
         OutputS3BucketName:
           allOf:
             - $ref: '#/components/schemas/S3BucketName'
@@ -12253,7 +12253,7 @@ components:
         TargetLocations:
           allOf:
             - $ref: '#/components/schemas/TargetLocations'
-            - description: 'A location is a combination of Regions and/or accounts where you want to run the automation. Use this operation to start an automation in multiple Regions and multiple accounts. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html">Running Automation workflows in multiple Regions and accounts</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. '
+            - description: 'A location is a combination of Amazon Web Services Regions and/or Amazon Web Services accounts where you want to run the automation. Use this operation to start an automation in multiple Amazon Web Services Regions and multiple Amazon Web Services accounts. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html">Running Automation workflows in multiple Amazon Web Services Regions and Amazon Web Services accounts</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. '
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -12307,7 +12307,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: '<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for a change request. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a change request to identify an environment or target Region. In this case, you could specify the following key-value pairs:</p> <ul> <li> <p> <code>Key=Environment,Value=Production</code> </p> </li> <li> <p> <code>Key=Region,Value=us-east-2</code> </p> </li> </ul>'
+            - description: '<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for a change request. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a change request to identify an environment or target Amazon Web Services Region. In this case, you could specify the following key-value pairs:</p> <ul> <li> <p> <code>Key=Environment,Value=Production</code> </p> </li> <li> <p> <code>Key=Region,Value=us-east-2</code> </p> </li> </ul>'
         ScheduledEndTime:
           allOf:
             - $ref: '#/components/schemas/DateTime'
@@ -12331,7 +12331,7 @@ components:
         StreamUrl:
           allOf:
             - $ref: '#/components/schemas/StreamUrl'
-            - description: '<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code> </p> <p> <b>region</b> represents the Region identifier for an Region supported by Amazon Web Services Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region. For a list of supported <b>region</b> values, see the <b>Region</b> column in <a href="https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region">Systems Manager service endpoints</a> in the <i>Amazon Web Services General Reference</i>.</p> <p> <b>session-id</b> represents the ID of a Session Manager session, such as <code>1a2b3c4dEXAMPLE</code>.</p>'
+            - description: '<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code> </p> <p> <b>region</b> represents the Region identifier for an Amazon Web Services Region supported by Amazon Web Services Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region. For a list of supported <b>region</b> values, see the <b>Region</b> column in <a href="https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region">Systems Manager service endpoints</a> in the <i>Amazon Web Services General Reference</i>.</p> <p> <b>session-id</b> represents the ID of a Session Manager session, such as <code>1a2b3c4dEXAMPLE</code>.</p>'
     StartSessionRequest:
       type: object
       required:
@@ -12453,7 +12453,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/DocumentARN'
-            - description: '<p>The name of the SSM Command document or Automation runbook that contains the configuration information for the instance.</p> <p>You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account.</p> <p>For Systems Manager document (SSM document) that are shared with you from other accounts, you must specify the complete SSM document ARN, in the following format:</p> <p> <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:document/<i>document-name</i> </code> </p> <p>For example:</p> <p> <code>arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document</code> </p> <p>For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or <code>My-Document</code>.</p>'
+            - description: '<p>The name of the SSM Command document or Automation runbook that contains the configuration information for the instance.</p> <p>You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account.</p> <p>For Systems Manager document (SSM document) that are shared with you from other Amazon Web Services accounts, you must specify the complete SSM document ARN, in the following format:</p> <p> <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:document/<i>document-name</i> </code> </p> <p>For example:</p> <p> <code>arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document</code> </p> <p>For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or <code>My-Document</code>.</p>'
         Targets:
           allOf:
             - $ref: '#/components/schemas/Targets'
@@ -12497,7 +12497,7 @@ components:
         TargetLocations:
           allOf:
             - $ref: '#/components/schemas/TargetLocations'
-            - description: A location is a combination of Regions and accounts where you want to run the association. Use this action to update an association in multiple Regions and multiple accounts.
+            - description: A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the association. Use this action to update an association in multiple Regions and multiple accounts.
     InvalidUpdate: {}
     AssociationVersionLimitExceeded: {}
     UpdateAssociationStatusResult:
@@ -12522,7 +12522,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The ID of the instance.
+            - description: The instance ID.
         AssociationStatus:
           allOf:
             - $ref: '#/components/schemas/AssociationStatus'
@@ -12612,15 +12612,15 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/DocumentName'
-            - description: The name of the document for which a version is to be updated.
+            - description: The name of the change template for which a version's metadata is to be updated.
         DocumentVersion:
           allOf:
             - $ref: '#/components/schemas/DocumentVersion'
-            - description: The version of a document to update.
+            - description: The version of a change template in which to update approval metadata.
         DocumentReviews:
           allOf:
             - $ref: '#/components/schemas/DocumentReviews'
-            - description: The document review details to update.
+            - description: The change template review details to update.
     UpdateMaintenanceWindowResult:
       type: object
       properties:
@@ -13201,15 +13201,15 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The account ID where the current document is shared.
+            - description: The Amazon Web Services account ID where the current document is shared.
         SharedDocumentVersion:
           allOf:
             - $ref: '#/components/schemas/SharedDocumentVersion'
             - description: The version of the current document shared with the account.
-      description: Information includes the account ID where the current document is shared and the version shared with that account.
+      description: Information includes the Amazon Web Services account ID where the current document is shared and the version shared with that account.
     AccountSharingInfoList:
       type: array
-      description: A list of of accounts where the current document is shared and the version shared with each account.
+      description: A list of of Amazon Web Services accounts where the current document is shared and the version shared with each account.
       items:
         $ref: '#/components/schemas/AccountSharingInfo'
     Accounts:
@@ -13401,7 +13401,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The ID of the instance.
+            - description: The instance ID.
         AssociationId:
           allOf:
             - $ref: '#/components/schemas/AssociationId'
@@ -13518,7 +13518,7 @@ components:
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: The ID of the instance.
+            - description: The instance ID.
         AssociationVersion:
           allOf:
             - $ref: '#/components/schemas/AssociationVersion'
@@ -13606,7 +13606,7 @@ components:
         TargetLocations:
           allOf:
             - $ref: '#/components/schemas/TargetLocations'
-            - description: The combination of Regions and accounts where you want to run the association.
+            - description: The combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the association.
       description: Describes the parameters for a document.
     AssociationDescriptionList:
       type: array
@@ -13925,7 +13925,7 @@ components:
         TargetLocations:
           allOf:
             - $ref: '#/components/schemas/TargetLocations'
-            - description: The combination of Regions and accounts where you wanted to run the association when this association version was created.
+            - description: The combination of Amazon Web Services Regions and Amazon Web Services accounts where you wanted to run the association when this association version was created.
       description: Information about the association version.
     AssociationVersionList:
       type: array
@@ -14111,23 +14111,23 @@ components:
         TotalSteps:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The total number of steps run in all specified Regions and accounts for the current Automation execution.
+            - description: The total number of steps run in all specified Amazon Web Services Regions and Amazon Web Services accounts for the current Automation execution.
         SuccessSteps:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The total number of steps that successfully completed in all specified Regions and accounts for the current Automation execution.
+            - description: The total number of steps that successfully completed in all specified Amazon Web Services Regions and Amazon Web Services accounts for the current Automation execution.
         FailedSteps:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The total number of steps that failed to run in all specified Regions and accounts for the current Automation execution.
+            - description: The total number of steps that failed to run in all specified Amazon Web Services Regions and Amazon Web Services accounts for the current Automation execution.
         CancelledSteps:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The total number of steps that the system cancelled in all specified Regions and accounts for the current Automation execution.
+            - description: The total number of steps that the system cancelled in all specified Amazon Web Services Regions and Amazon Web Services accounts for the current Automation execution.
         TimedOutSteps:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The total number of steps that timed out in all specified Regions and accounts for the current Automation execution.
+            - description: The total number of steps that timed out in all specified Amazon Web Services Regions and Amazon Web Services accounts for the current Automation execution.
       description: An aggregate of step execution statuses displayed in the Amazon Web Services Systems Manager console for a multi-Region and multi-account Automation execution.
     AutomationSubtype:
       type: string
@@ -14241,7 +14241,7 @@ components:
         TargetLocations:
           allOf:
             - $ref: '#/components/schemas/TargetLocations'
-            - description: The combination of Regions and/or accounts where you want to run the Automation.
+            - description: The combination of Amazon Web Services Regions and/or Amazon Web Services accounts where you want to run the Automation.
         ProgressCounters:
           allOf:
             - $ref: '#/components/schemas/ProgressCounters'
@@ -14412,7 +14412,7 @@ components:
         AutomationType:
           allOf:
             - $ref: '#/components/schemas/AutomationType'
-            - description: 'Use this filter with <a>DescribeAutomationExecutions</a>. Specify either Local or CrossAccount. CrossAccount is an Automation that runs in multiple Regions and accounts. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html">Running Automation workflows in multiple Regions and accounts</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. '
+            - description: 'Use this filter with <a>DescribeAutomationExecutions</a>. Specify either Local or CrossAccount. CrossAccount is an Automation that runs in multiple Amazon Web Services Regions and Amazon Web Services accounts. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html">Running Automation workflows in multiple Amazon Web Services Regions and accounts</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. '
         AutomationSubtype:
           allOf:
             - $ref: '#/components/schemas/AutomationSubtype'
@@ -14719,7 +14719,7 @@ components:
         OutputS3Region:
           allOf:
             - $ref: '#/components/schemas/S3Region'
-            - description: '(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Region of the S3 bucket.'
+            - description: '(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon Web Services Region of the S3 bucket.'
         OutputS3BucketName:
           allOf:
             - $ref: '#/components/schemas/S3BucketName'
@@ -15265,11 +15265,11 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/DocumentARN'
-            - description: '<p>The name of the SSM document that contains the configuration information for the instance. You can specify Command or Automation runbooks.</p> <p>You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account.</p> <p>For SSM documents that are shared with you from other accounts, you must specify the complete SSM document ARN, in the following format:</p> <p> <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:document/<i>document-name</i> </code> </p> <p>For example:</p> <p> <code>arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document</code> </p> <p>For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or <code>My-Document</code>.</p>'
+            - description: '<p>The name of the SSM document that contains the configuration information for the instance. You can specify Command or Automation runbooks.</p> <p>You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account.</p> <p>For SSM documents that are shared with you from other Amazon Web Services accounts, you must specify the complete SSM document ARN, in the following format:</p> <p> <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:document/<i>document-name</i> </code> </p> <p>For example:</p> <p> <code>arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document</code> </p> <p>For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or <code>My-Document</code>.</p>'
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/InstanceId'
-            - description: 'The ID of the instance. '
+            - description: '<p>The instance ID.</p> <note> <p> <code>InstanceId</code> has been deprecated. To specify an instance ID for an association, use the <code>Targets</code> parameter. Requests that include the parameter <code>InstanceID</code> with Systems Manager documents (SSM documents) that use schema version 2.0 or later will fail. In addition, if you use the parameter <code>InstanceId</code>, you can''t use the parameters <code>AssociationName</code>, <code>DocumentVersion</code>, <code>MaxErrors</code>, <code>MaxConcurrency</code>, <code>OutputLocation</code>, or <code>ScheduleExpression</code>. To use these parameters, you must use the <code>Targets</code> parameter.</p> </note>'
         Parameters:
           allOf:
             - $ref: '#/components/schemas/Parameters'
@@ -15609,7 +15609,7 @@ components:
         Region:
           allOf:
             - $ref: '#/components/schemas/ResourceDataSyncS3Region'
-            - description: The Region with the S3 bucket targeted by the resource data sync.
+            - description: The Amazon Web Services Region with the S3 bucket targeted by the resource data sync.
         AWSKMSKeyARN:
           allOf:
             - $ref: '#/components/schemas/ResourceDataSyncAWSKMSKeyARN'
@@ -15640,15 +15640,15 @@ components:
         SourceRegions:
           allOf:
             - $ref: '#/components/schemas/ResourceDataSyncSourceRegionList'
-            - description: The <code>SyncSource</code> Regions included in the resource data sync.
+            - description: The <code>SyncSource</code> Amazon Web Services Regions included in the resource data sync.
         IncludeFutureRegions:
           allOf:
             - $ref: '#/components/schemas/ResourceDataSyncIncludeFutureRegions'
-            - description: Whether to automatically synchronize and aggregate data from new Regions when those Regions come online.
+            - description: Whether to automatically synchronize and aggregate data from new Amazon Web Services Regions when those Regions come online.
         EnableAllOpsDataSources:
           allOf:
             - $ref: '#/components/schemas/ResourceDataSyncEnableAllOpsDataSources'
-            - description: 'When you create a resource data sync, if you choose one of the Organizations options, then Systems Manager automatically enables all OpsData sources in the selected Regions for all accounts in your organization (or in the selected organization units). For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html">About multiple account and Region resource data syncs</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.'
+            - description: 'When you create a resource data sync, if you choose one of the Organizations options, then Systems Manager automatically enables all OpsData sources in the selected Amazon Web Services Regions for all Amazon Web Services accounts in your organization (or in the selected organization units). For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html">About multiple account and Region resource data syncs</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.'
       description: Information about the source of the data included in the resource data sync.
     DefaultBaseline:
       type: boolean
@@ -16669,7 +16669,7 @@ components:
         S3Region:
           allOf:
             - $ref: '#/components/schemas/S3Region'
-            - description: The Region where the S3 bucket is located.
+            - description: The Amazon Web Services Region where the S3 bucket is located.
       description: '<p>Information about an Amazon Simple Storage Service (Amazon S3) bucket to write instance-level logs to.</p> <note> <p> <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure. For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> </note>'
     OpsItem:
       type: object
@@ -16677,7 +16677,7 @@ components:
         CreatedBy:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The ARN of the account that created the OpsItem.
+            - description: The ARN of the Amazon Web Services account that created the OpsItem.
         OpsItemType:
           allOf:
             - $ref: '#/components/schemas/OpsItemType'
@@ -16693,7 +16693,7 @@ components:
         LastModifiedBy:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The ARN of the account that last updated the OpsItem.
+            - description: The ARN of the Amazon Web Services account that last updated the OpsItem.
         LastModifiedTime:
           allOf:
             - $ref: '#/components/schemas/DateTime'
@@ -16758,7 +16758,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/DateTime'
             - description: The time specified in a change request for a runbook workflow to end. Currently supported only for the OpsItem type <code>/aws/changerequest</code>.
-      description: 'Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their Amazon Web Services resources. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html">OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. '
+      description: '<p>Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and remediate operational work items (OpsItems) impacting the performance and health of their Amazon Web Services resources. OpsCenter is integrated with Amazon EventBridge and Amazon CloudWatch. This means you can configure these services to automatically create an OpsItem in OpsCenter when a CloudWatch alarm enters the ALARM state or when EventBridge processes an event from any Amazon Web Services service that publishes events. Configuring Amazon CloudWatch alarms and EventBridge events to automatically create OpsItems allows you to quickly diagnose and remediate issues with Amazon Web Services resources from a single console.</p> <p>To help you diagnose issues, each OpsItem includes contextually relevant information such as the name and ID of the Amazon Web Services resource that generated the OpsItem, alarm or event details, alarm history, and an alarm timeline graph. For the Amazon Web Services resource, OpsCenter aggregates information from Config, CloudTrail logs, and EventBridge, so you don''t have to navigate across multiple console pages during your investigation. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html">OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>'
     GetOpsMetadataMaxResults:
       type: integer
       minimum: 1
@@ -19394,7 +19394,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceDataSyncOrganizationalUnitList'
             - description: The Organizations organization units included in the sync.
-      description: 'Information about the <code>AwsOrganizationsSource</code> resource data sync source. A sync source of this type can synchronize data from Organizations or, if an Amazon Web Services organization isn''t present, from multiple Regions.'
+      description: 'Information about the <code>AwsOrganizationsSource</code> resource data sync source. A sync source of this type can synchronize data from Organizations or, if an Amazon Web Services organization isn''t present, from multiple Amazon Web Services Regions.'
     ResourceDataSyncCreatedTime:
       type: string
       format: date-time
@@ -19409,7 +19409,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceDataSyncDestinationDataSharingType'
             - description: The sharing data type. Only <code>Organization</code> is supported.
-      description: Synchronize Amazon Web Services Systems Manager Inventory data from multiple accounts defined in Organizations to a centralized Amazon S3 bucket. Data is synchronized to individual key prefixes in the central bucket. Each key prefix represents a different account ID.
+      description: Synchronize Amazon Web Services Systems Manager Inventory data from multiple Amazon Web Services accounts defined in Organizations to a centralized Amazon S3 bucket. Data is synchronized to individual key prefixes in the central bucket. Each key prefix represents a different Amazon Web Services account ID.
     ResourceDataSyncEnableAllOpsDataSources:
       type: boolean
     ResourceDataSyncIncludeFutureRegions:
@@ -19428,11 +19428,11 @@ components:
         SourceRegions:
           allOf:
             - $ref: '#/components/schemas/ResourceDataSyncSourceRegionList'
-            - description: The <code>SyncSource</code> Regions included in the resource data sync.
+            - description: The <code>SyncSource</code> Amazon Web Services Regions included in the resource data sync.
         IncludeFutureRegions:
           allOf:
             - $ref: '#/components/schemas/ResourceDataSyncIncludeFutureRegions'
-            - description: Whether to automatically synchronize and aggregate data from new Regions when those Regions come online.
+            - description: Whether to automatically synchronize and aggregate data from new Amazon Web Services Regions when those Regions come online.
         State:
           allOf:
             - $ref: '#/components/schemas/ResourceDataSyncState'
@@ -19440,7 +19440,7 @@ components:
         EnableAllOpsDataSources:
           allOf:
             - $ref: '#/components/schemas/ResourceDataSyncEnableAllOpsDataSources'
-            - description: 'When you create a resource data sync, if you choose one of the Organizations options, then Systems Manager automatically enables all OpsData sources in the selected Regions for all accounts in your organization (or in the selected organization units). For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html">About multiple account and Region resource data syncs</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.'
+            - description: 'When you create a resource data sync, if you choose one of the Organizations options, then Systems Manager automatically enables all OpsData sources in the selected Amazon Web Services Regions for all Amazon Web Services accounts in your organization (or in the selected organization units). For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html">About multiple account and Region resource data syncs</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.'
       description: '<p>The data type name for including resource data sync state. There are four sync states:</p> <p> <code>OrganizationNotExists</code> (Your organization doesn''t exist)</p> <p> <code>NoPermissions</code> (The system can''t locate the service-linked role. This role is automatically created when a user creates a resource data sync in Amazon Web Services Systems Manager Explorer.)</p> <p> <code>InvalidOrganizationalUnit</code> (You specified or selected an invalid unit in the resource data sync configuration.)</p> <p> <code>TrustedAccessDisabled</code> (You disabled Systems Manager access in the organization in Organizations.)</p>'
     ResourceDataSyncLastModifiedTime:
       type: string
@@ -19455,7 +19455,7 @@ components:
         SyncType:
           allOf:
             - $ref: '#/components/schemas/ResourceDataSyncType'
-            - description: 'The type of resource data sync. If <code>SyncType</code> is <code>SyncToDestination</code>, then the resource data sync synchronizes data to an S3 bucket. If the <code>SyncType</code> is <code>SyncFromSource</code> then the resource data sync synchronizes data from Organizations or from multiple Regions.'
+            - description: 'The type of resource data sync. If <code>SyncType</code> is <code>SyncToDestination</code>, then the resource data sync synchronizes data to an S3 bucket. If the <code>SyncType</code> is <code>SyncFromSource</code> then the resource data sync synchronizes data from Organizations or from multiple Amazon Web Services Regions.'
         SyncSource:
           allOf:
             - $ref: '#/components/schemas/ResourceDataSyncSourceWithState'
@@ -19606,7 +19606,7 @@ components:
         TargetLocations:
           allOf:
             - $ref: '#/components/schemas/TargetLocations'
-            - description: Information about the Regions and accounts targeted by the current Runbook operation.
+            - description: Information about the Amazon Web Services Regions and Amazon Web Services accounts targeted by the current Runbook operation.
       description: <p>Information about an Automation runbook used in a runbook workflow in Change Manager.</p> <note> <p>The Automation runbooks specified for the runbook workflow can't run until all required approvals for the change request have been received.</p> </note>
     ScheduledWindowExecution:
       type: object
@@ -19767,15 +19767,15 @@ components:
         Accounts:
           allOf:
             - $ref: '#/components/schemas/Accounts'
-            - description: The accounts targeted by the current Automation execution.
+            - description: The Amazon Web Services accounts targeted by the current Automation execution.
         Regions:
           allOf:
             - $ref: '#/components/schemas/Regions'
-            - description: The Regions targeted by the current Automation execution.
+            - description: The Amazon Web Services Regions targeted by the current Automation execution.
         TargetLocationMaxConcurrency:
           allOf:
             - $ref: '#/components/schemas/MaxConcurrency'
-            - description: The maximum number of Regions and accounts allowed to run the Automation concurrently.
+            - description: The maximum number of Amazon Web Services Regions and Amazon Web Services accounts allowed to run the Automation concurrently.
         TargetLocationMaxErrors:
           allOf:
             - $ref: '#/components/schemas/MaxErrors'
@@ -19784,7 +19784,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ExecutionRoleName'
             - description: 'The Automation execution role used by the currently running Automation. If not specified, the default value is <code>AWS-SystemsManager-AutomationExecutionRole</code>.'
-      description: The combination of Regions and accounts targeted by the current Automation execution.
+      description: The combination of Amazon Web Services Regions and Amazon Web Services accounts targeted by the current Automation execution.
     StepExecution:
       type: object
       properties:
@@ -19875,7 +19875,7 @@ components:
         TargetLocation:
           allOf:
             - $ref: '#/components/schemas/TargetLocation'
-            - description: The combination of Regions and accounts targeted by the current Automation execution.
+            - description: The combination of Amazon Web Services Regions and Amazon Web Services accounts targeted by the current Automation execution.
       description: Detailed information about an the execution state of an Automation step.
     StepExecutionFilterKey:
       type: string
@@ -19958,7 +19958,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TargetValues'
             - description: '<p>User-defined criteria that maps to <code>Key</code>. For example, if you specified <code>tag:ServerRole</code>, you could specify <code>value:WebServer</code> to run a command on instances that include EC2 tags of <code>ServerRole,WebServer</code>. </p> <p>Depending on the type of target, the maximum number of values for a key might be lower than the global maximum of 50.</p>'
-      description: '<p>An array of search criteria that targets instances using a key-value pair that you specify.</p> <note> <p> One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, Lambda, and Step Functions). For more information about running tasks that don''t specify targets, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html">Registering maintenance window tasks without targets</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p> </note> <p>Supported formats include the following.</p> <ul> <li> <p> <code>Key=InstanceIds,Values=<i>instance-id-1</i>,<i>instance-id-2</i>,<i>instance-id-3</i> </code> </p> </li> <li> <p> <code>Key=tag:<i>my-tag-key</i>,Values=<i>my-tag-value-1</i>,<i>my-tag-value-2</i> </code> </p> </li> <li> <p> <code>Key=tag-key,Values=<i>my-tag-key-1</i>,<i>my-tag-key-2</i> </code> </p> </li> <li> <p> <b>Run Command and Maintenance window targets only</b>: <code>Key=resource-groups:Name,Values=<i>resource-group-name</i> </code> </p> </li> <li> <p> <b>Maintenance window targets only</b>: <code>Key=resource-groups:ResourceTypeFilters,Values=<i>resource-type-1</i>,<i>resource-type-2</i> </code> </p> </li> <li> <p> <b>Automation targets only</b>: <code>Key=ResourceGroup;Values=<i>resource-group-name</i> </code> </p> </li> </ul> <p>For example:</p> <ul> <li> <p> <code>Key=InstanceIds,Values=i-02573cafcfEXAMPLE,i-0471e04240EXAMPLE,i-07782c72faEXAMPLE</code> </p> </li> <li> <p> <code>Key=tag:CostCenter,Values=CostCenter1,CostCenter2,CostCenter3</code> </p> </li> <li> <p> <code>Key=tag-key,Values=Name,Instance-Type,CostCenter</code> </p> </li> <li> <p> <b>Run Command and Maintenance window targets only</b>: <code>Key=resource-groups:Name,Values=ProductionResourceGroup</code> </p> <p>This example demonstrates how to target all resources in the resource group <b>ProductionResourceGroup</b> in your maintenance window.</p> </li> <li> <p> <b>Maintenance window targets only</b>: <code>Key=resource-groups:ResourceTypeFilters,Values=<i>AWS::EC2::INSTANCE</i>,<i>AWS::EC2::VPC</i> </code> </p> <p>This example demonstrates how to target only Amazon Elastic Compute Cloud (Amazon EC2) instances and VPCs in your maintenance window.</p> </li> <li> <p> <b>Automation targets only</b>: <code>Key=ResourceGroup,Values=MyResourceGroup</code> </p> </li> <li> <p> <b>State Manager association targets only</b>: <code>Key=InstanceIds,Values=<i>*</i> </code> </p> <p>This example demonstrates how to target all managed instances in the Region where the association was created.</p> </li> </ul> <p>For more information about how to send commands that target instances using <code>Key,Value</code> parameters, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting">Targeting multiple instances</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>'
+      description: '<p>An array of search criteria that targets instances using a key-value pair that you specify.</p> <note> <p> One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, Lambda, and Step Functions). For more information about running tasks that don''t specify targets, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html">Registering maintenance window tasks without targets</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p> </note> <p>Supported formats include the following.</p> <ul> <li> <p> <code>Key=InstanceIds,Values=<i>instance-id-1</i>,<i>instance-id-2</i>,<i>instance-id-3</i> </code> </p> </li> <li> <p> <code>Key=tag:<i>my-tag-key</i>,Values=<i>my-tag-value-1</i>,<i>my-tag-value-2</i> </code> </p> </li> <li> <p> <code>Key=tag-key,Values=<i>my-tag-key-1</i>,<i>my-tag-key-2</i> </code> </p> </li> <li> <p> <b>Run Command and Maintenance window targets only</b>: <code>Key=resource-groups:Name,Values=<i>resource-group-name</i> </code> </p> </li> <li> <p> <b>Maintenance window targets only</b>: <code>Key=resource-groups:ResourceTypeFilters,Values=<i>resource-type-1</i>,<i>resource-type-2</i> </code> </p> </li> <li> <p> <b>Automation targets only</b>: <code>Key=ResourceGroup;Values=<i>resource-group-name</i> </code> </p> </li> </ul> <p>For example:</p> <ul> <li> <p> <code>Key=InstanceIds,Values=i-02573cafcfEXAMPLE,i-0471e04240EXAMPLE,i-07782c72faEXAMPLE</code> </p> </li> <li> <p> <code>Key=tag:CostCenter,Values=CostCenter1,CostCenter2,CostCenter3</code> </p> </li> <li> <p> <code>Key=tag-key,Values=Name,Instance-Type,CostCenter</code> </p> </li> <li> <p> <b>Run Command and Maintenance window targets only</b>: <code>Key=resource-groups:Name,Values=ProductionResourceGroup</code> </p> <p>This example demonstrates how to target all resources in the resource group <b>ProductionResourceGroup</b> in your maintenance window.</p> </li> <li> <p> <b>Maintenance window targets only</b>: <code>Key=resource-groups:ResourceTypeFilters,Values=<i>AWS::EC2::INSTANCE</i>,<i>AWS::EC2::VPC</i> </code> </p> <p>This example demonstrates how to target only Amazon Elastic Compute Cloud (Amazon EC2) instances and VPCs in your maintenance window.</p> </li> <li> <p> <b>Automation targets only</b>: <code>Key=ResourceGroup,Values=MyResourceGroup</code> </p> </li> <li> <p> <b>State Manager association targets only</b>: <code>Key=InstanceIds,Values=<i>*</i> </code> </p> <p>This example demonstrates how to target all managed instances in the Amazon Web Services Region where the association was created.</p> </li> </ul> <p>For more information about how to send commands that target instances using <code>Key,Value</code> parameters, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting">Targeting multiple instances</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>'
     TargetMapValueList:
       type: array
       items:
