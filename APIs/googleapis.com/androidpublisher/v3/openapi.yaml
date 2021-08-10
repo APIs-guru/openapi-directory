@@ -1919,7 +1919,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Refund a user's subscription or in-app purchase order.
+      description: Refunds a user's subscription or in-app purchase order. Orders older than 1 year cannot be refunded.
       operationId: androidpublisher.orders.refund
       parameters:
         - description: The package name of the application for which this subscription or in-app item was purchased (for example, 'com.some.thing').

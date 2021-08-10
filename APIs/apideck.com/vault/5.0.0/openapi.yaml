@@ -2072,12 +2072,32 @@ components:
           type: string
       type: object
     SessionRequest:
+      additionalProperties: false
       properties:
         consumer_metadata:
           $ref: "#/components/schemas/ConsumerMetadata"
         redirect_uri:
           example: https://mysaas.com/dashboard
           type: string
+        settings:
+          additionalProperties: false
+          properties:
+            hide_resource_settings:
+              default: false
+              type: boolean
+            sandbox_mode:
+              default: false
+              type: boolean
+            session_length:
+              default: 1h
+              description: The duration of time the session is valid for (maximum 1 week).
+              example: 30m
+              type: string
+            show_logs:
+              default: true
+              type: boolean
+          type: object
+          x-graphql-type-name: SessionSettings
         theme:
           properties:
             favicon:

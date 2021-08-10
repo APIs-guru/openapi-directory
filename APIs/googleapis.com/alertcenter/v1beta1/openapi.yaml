@@ -537,6 +537,47 @@ components:
       schema:
         type: string
   schemas:
+    AccountSuspensionDetails:
+      description: Details about why an account is receiving an account suspension warning.
+      properties:
+        abuseReason:
+          description: The reason why this account is receiving an account suspension warning.
+          enum:
+            - ACCOUNT_SUSPENSION_ABUSE_REASON_UNSPECIFIED
+            - TOS_VIOLATION
+            - SPAM
+            - PHISHING
+            - TRAFFIC_PUMPING
+            - FRAUD
+            - NUMBER_HARVESTING
+            - PAYMENTS_FRAUD
+          type: string
+        productName:
+          description: 'The name of the product being abused. This is restricted to only the following values: "Gmail" "Payments" "Voice" "Workspace" "Other"'
+          type: string
+      type: object
+    AccountSuspensionWarning:
+      description: A warning that the customer's account is about to be suspended.
+      properties:
+        appealWindow:
+          description: The amount of time remaining to appeal an imminent suspension. After this window has elapsed, the account will be suspended. Only populated if the account suspension is in WARNING state.
+          format: google-duration
+          type: string
+        state:
+          description: Account suspension warning state.
+          enum:
+            - ACCOUNT_SUSPENSION_WARNING_STATE_UNSPECIFIED
+            - WARNING
+            - SUSPENDED
+            - APPEAL_APPROVED
+            - APPEAL_SUBMITTED
+          type: string
+        suspensionDetails:
+          description: Details about why an account is being suspended.
+          items:
+            $ref: "#/components/schemas/AccountSuspensionDetails"
+          type: array
+      type: object
     AccountWarning:
       description: Alerts for user account warning events.
       properties:
@@ -633,7 +674,7 @@ components:
           description: Output only. An optional [Security Investigation Tool](https://support.google.com/a/answer/7575955) query for this alert.
           type: string
         source:
-          description: "Required. A unique identifier for the system that reported the alert. This is output only after alert is created. Supported sources are any of the following: * Google Operations * Mobile device management * Gmail phishing * Data Loss Prevention * Domain wide takeout * State sponsored attack * Google identity"
+          description: "Required. A unique identifier for the system that reported the alert. This is output only after alert is created. Supported sources are any of the following: * Google Operations * Mobile device management * Gmail phishing * Data Loss Prevention * Domain wide takeout * State sponsored attack * Google identity * Apps outage"
           type: string
         startTime:
           description: Required. The time the event that caused this alert was started or detected.
@@ -722,13 +763,13 @@ components:
           type: string
       type: object
     AppsOutage:
-      description: An outage incident reported by Google for a Google Workspace (formerly G Suite) application.
+      description: An outage incident reported for a Google Workspace service.
       properties:
         dashboardUri:
           description: Link to the outage event in Google Workspace Status Dashboard
           type: string
         nextUpdateTime:
-          description: Timestamp by which the next update shall be provided.
+          description: Timestamp by which the next update is expected to arrive.
           format: google-datetime
           type: string
         products:
@@ -737,7 +778,7 @@ components:
             type: string
           type: array
         resolutionTime:
-          description: Timestamp of the outage expected or confirmed resolution. (Used only when known).
+          description: Timestamp when the outage is expected to be resolved, or has confirmed resolution. Provided only when known.
           format: google-datetime
           type: string
         status:

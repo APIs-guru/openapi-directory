@@ -32,16 +32,16 @@ tags:
 paths:
   "/v1/{parent}/activities:query":
     get:
-      description: Queries policy activities on GCP resources.
+      description: Queries policy activities on Google Cloud resources.
       operationId: policyanalyzer.projects.locations.activityTypes.activities.query
       parameters:
-        - description: "Required. The container resource on which to execute the request. Acceptable formats: `projects/[PROJECT_ID|PROJECT_NUMBER]/locations/[LOCATION]/activityTypes/[ACTIVITY_TYPE]` LOCATION here refers to GCP Locations: https://cloud.google.com/about/locations/"
+        - description: "Required. The container resource on which to execute the request. Acceptable formats: `projects/[PROJECT_ID|PROJECT_NUMBER]/locations/[LOCATION]/activityTypes/[ACTIVITY_TYPE]` LOCATION here refers to Google Cloud Locations: https://cloud.google.com/about/locations/"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: "Optional. Optional filter expression to restrict the activities returned. Supported filters are: - service_account_last_authn.full_resource_name {=} - service_account_key_last_authn.full_resource_name {=} "
+        - description: "Optional. Filter expression to restrict the activities returned. Supported filters are: - service_account_last_authn.full_resource_name {=} [STRING] - service_account_key_last_authn.full_resource_name {=} [STRING]"
           in: query
           name: filter
           schema:
@@ -179,11 +179,11 @@ components:
       description: Represents data observation period.
       properties:
         endTime:
-          description: The observation end time.
+          description: The observation end time. The time in this timestamp is always `07:00:00Z`.
           format: google-datetime
           type: string
         startTime:
-          description: The observation start time.
+          description: The observation start time. The time in this timestamp is always `07:00:00Z`.
           format: google-datetime
           type: string
       type: object
@@ -206,7 +206,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -214,6 +214,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
