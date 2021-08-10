@@ -548,7 +548,7 @@ paths:
   '/channels/{channelArn}/memberships#operation=batch-create':
     post:
       operationId: BatchCreateChannelMembership
-      description: 'Adds a specified number of users to a channel. '
+      description: Adds a specified number of users to a channel.
       responses:
         '200':
           description: Success
@@ -6109,7 +6109,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeAppInstanceUser
-      description: ' Returns the full details of an <code>AppInstanceUser</code> . '
+      description: Returns the full details of an <code>AppInstanceUser</code>.
       responses:
         '200':
           description: Success
@@ -12968,7 +12968,7 @@ paths:
   /app-instance-users#app-instance-arn:
     get:
       operationId: ListAppInstanceUsers
-      description: ' List all <code>AppInstanceUsers</code> created under a single <code>AppInstance</code>. '
+      description: 'List all <code>AppInstanceUsers</code> created under a single <code>AppInstance</code>. '
       responses:
         '200':
           description: Success
@@ -17274,7 +17274,7 @@ components:
         Region:
           allOf:
             - $ref: '#/components/schemas/TranscribeRegion'
-            - description: 'The AWS Region passed to Amazon Transcribe. If you don''t specify a Region, Amazon Chime uses the Region closest to the meeting''s Region.'
+            - description: 'The AWS Region passed to Amazon Transcribe. If you don''t specify a Region, Amazon Chime uses the meeting''s Region.'
       description: Settings specific to the Amazon Transcribe engine.
     EngineTranscribeMedicalSettings:
       type: object
@@ -17302,7 +17302,7 @@ components:
         Region:
           allOf:
             - $ref: '#/components/schemas/TranscribeMedicalRegion'
-            - description: 'The AWS Region passed to Amazon Transcribe Medical. If you don''t specify a Region, Amazon Chime uses the Region closest to the meeting''s Region.'
+            - description: 'The AWS Region passed to Amazon Transcribe Medical. If you don''t specify a Region, Amazon Chime uses the meeting''s Region.'
       description: Settings specific to the Amazon Transcribe Medical engine.
     StopMeetingTranscriptionResponse:
       type: object
@@ -17328,7 +17328,7 @@ components:
         AppInstanceArn:
           allOf:
             - $ref: '#/components/schemas/ChimeArn'
-            - description: The ARN of the <code>AppInstance</code>.
+            - description: 'The ARN of the <code>AppInstance</code>. '
     UpdateAppInstanceUserResponse:
       type: object
       properties:
@@ -17863,7 +17863,9 @@ components:
       type: object
       properties:
         InvitedBy:
-          $ref: '#/components/schemas/Identity'
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - description: The identifier of the member who invited another member.
         Type:
           allOf:
             - $ref: '#/components/schemas/ChannelMembershipType'
@@ -18278,9 +18280,7 @@ components:
         ChannelSummary:
           $ref: '#/components/schemas/ChannelSummary'
         AppInstanceUserMembershipSummary:
-          allOf:
-            - $ref: '#/components/schemas/AppInstanceUserMembershipSummary'
-            - description: Returns the channel membership data for an <code>AppInstance</code>.
+          $ref: '#/components/schemas/AppInstanceUserMembershipSummary'
       description: Summary of the channel membership details of an <code>AppInstanceUser</code>.
     ChannelMembershipForAppInstanceUserSummaryList:
       type: array
@@ -18417,7 +18417,9 @@ components:
       type: object
       properties:
         ChannelSummary:
-          $ref: '#/components/schemas/ChannelSummary'
+          allOf:
+            - $ref: '#/components/schemas/ChannelSummary'
+            - description: Summary of the details of a <code>Channel</code>.
       description: Summary of the details of a moderated channel.
     ChannelModeratedByAppInstanceUserSummaryList:
       type: array
@@ -19734,6 +19736,7 @@ components:
         - ap-southeast-2
         - ca-central-1
         - eu-west-1
+        - auto
     TranscribeLanguageCode:
       type: string
       enum:
@@ -19769,6 +19772,7 @@ components:
         - eu-west-1
         - eu-west-2
         - sa-east-1
+        - auto
     EventsConfiguration:
       type: object
       properties:
