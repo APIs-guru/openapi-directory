@@ -3498,7 +3498,7 @@ components:
         defaultCapacityProviderStrategy:
           allOf:
             - $ref: '#/components/schemas/CapacityProviderStrategy'
-            - description: '<p>The capacity provider strategy to set as the default for the cluster. When a default capacity provider strategy is set for a cluster, when calling the <a>RunTask</a> or <a>CreateService</a> APIs wtih no capacity provider strategy or launch type specified, the default capacity provider strategy for the cluster is used.</p> <p>If a default capacity provider strategy is not defined for a cluster during creation, it can be defined later with the <a>PutClusterCapacityProviders</a> API operation.</p>'
+            - description: '<p>The capacity provider strategy to set as the default for the cluster. When a default capacity provider strategy is set for a cluster, when calling the <a>RunTask</a> or <a>CreateService</a> APIs with no capacity provider strategy or launch type specified, the default capacity provider strategy for the cluster is used.</p> <p>If a default capacity provider strategy is not defined for a cluster during creation, it can be defined later with the <a>PutClusterCapacityProviders</a> API operation.</p>'
     CreateServiceResponse:
       type: object
       example:
@@ -3576,7 +3576,7 @@ components:
         capacityProviderStrategy:
           allOf:
             - $ref: '#/components/schemas/CapacityProviderStrategy'
-            - description: '<p>The capacity provider strategy to use for the service.</p> <p>If a <code>capacityProviderStrategy</code> is specified, the <code>launchType</code> parameter must be omitted. If no <code>capacityProviderStrategy</code> or <code>launchType</code> is specified, the <code>defaultCapacityProviderStrategy</code> for the cluster is used.</p>'
+            - description: '<p>The capacity provider strategy to use for the service.</p> <p>If a <code>capacityProviderStrategy</code> is specified, the <code>launchType</code> parameter must be omitted. If no <code>capacityProviderStrategy</code> or <code>launchType</code> is specified, the <code>defaultCapacityProviderStrategy</code> for the cluster is used.</p> <p>A capacity provider strategy may contain a maximum of 6 capacity providers.</p>'
         platformVersion:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3592,11 +3592,11 @@ components:
         placementConstraints:
           allOf:
             - $ref: '#/components/schemas/PlacementConstraints'
-            - description: 'An array of placement constraint objects to use for tasks in your service. You can specify a maximum of 10 constraints per task (this limit includes constraints in the task definition and those specified at runtime). '
+            - description: An array of placement constraint objects to use for tasks in your service. You can specify a maximum of 10 constraints per task (this limit includes constraints in the task definition and those specified at runtime).
         placementStrategy:
           allOf:
             - $ref: '#/components/schemas/PlacementStrategies'
-            - description: The placement strategy objects to use for tasks in your service. You can specify a maximum of five strategy rules per service.
+            - description: The placement strategy objects to use for tasks in your service. You can specify a maximum of 5 strategy rules per service.
         networkConfiguration:
           allOf:
             - $ref: '#/components/schemas/NetworkConfiguration'
@@ -3876,7 +3876,7 @@ components:
         containerInstance:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The container instance ID or full ARN of the container instance to deregister. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the Region of the container instance, the account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance ID. For example, <code>arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID</code>.'
+            - description: 'The container instance ID or full ARN of the container instance to deregister. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the Region of the container instance, the Amazon Web Services account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance ID. For example, <code>arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID</code>.'
         force:
           allOf:
             - $ref: '#/components/schemas/BoxedBoolean'
@@ -3961,7 +3961,7 @@ components:
         include:
           allOf:
             - $ref: '#/components/schemas/ClusterFieldList'
-            - description: '<p>Whether to include additional information about the clusters in the response. If this field is omitted, this information isn''t included.</p> <p>If <code>ATTACHMENTS</code> is specified, the attachments for the container instances or tasks within the cluster are included.</p> <p>If <code>SETTINGS</code> is specified, the settings for the cluster are included.</p> <p>If <code>STATISTICS</code> is specified, the task and service count is included, separated by launch type.</p> <p>If <code>TAGS</code> is specified, the metadata tags associated with the cluster are included.</p>'
+            - description: '<p>Whether to include additional information about the clusters in the response. If this field is omitted, this information isn''t included.</p> <p>If <code>ATTACHMENTS</code> is specified, the attachments for the container instances or tasks within the cluster are included.</p> <p>If <code>SETTINGS</code> is specified, the settings for the cluster are included.</p> <p>If <code>CONFIGURATIONS</code> is specified, the configuration for the cluster is included.</p> <p>If <code>STATISTICS</code> is specified, the task and service count is included, separated by launch type.</p> <p>If <code>TAGS</code> is specified, the metadata tags associated with the cluster are included.</p>'
     DescribeContainerInstancesResponse:
       type: object
       example:
@@ -4260,7 +4260,7 @@ components:
         containerInstance:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The container instance ID or full ARN of the container instance. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the Region of the container instance, the account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance ID. For example, <code>arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID</code>.'
+            - description: 'The container instance ID or full ARN of the container instance. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the Region of the container instance, the Amazon Web Services account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance ID. For example, <code>arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID</code>.'
         cluster:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -4958,7 +4958,7 @@ components:
         capacityProviderStrategy:
           allOf:
             - $ref: '#/components/schemas/CapacityProviderStrategy'
-            - description: '<p>The capacity provider strategy to use for the task.</p> <p>If a <code>capacityProviderStrategy</code> is specified, the <code>launchType</code> parameter must be omitted. If no <code>capacityProviderStrategy</code> or <code>launchType</code> is specified, the <code>defaultCapacityProviderStrategy</code> for the cluster is used.</p> <p>When you use cluster auto scaling, you must specify <code>capacityProviderStrategy</code> and not <code>launchType</code>. </p>'
+            - description: '<p>The capacity provider strategy to use for the task.</p> <p>If a <code>capacityProviderStrategy</code> is specified, the <code>launchType</code> parameter must be omitted. If no <code>capacityProviderStrategy</code> or <code>launchType</code> is specified, the <code>defaultCapacityProviderStrategy</code> for the cluster is used.</p> <p>When you use cluster auto scaling, you must specify <code>capacityProviderStrategy</code> and not <code>launchType</code>. </p> <p>A capacity provider strategy may contain a maximum of 6 capacity providers.</p>'
         cluster:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -4978,7 +4978,7 @@ components:
         group:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The name of the task group to associate with the task. The default value is the family name of the task definition (for example, family:my-family-name).'
+            - description: 'The name of the task group to associate with the task. The default value is the family name of the task definition (for example, <code>family:my-family-name</code>).'
         launchType:
           allOf:
             - $ref: '#/components/schemas/LaunchType'
@@ -4986,11 +4986,11 @@ components:
         networkConfiguration:
           allOf:
             - $ref: '#/components/schemas/NetworkConfiguration'
-            - description: 'The network configuration for the task. This parameter is required for task definitions that use the <code>awsvpc</code> network mode to receive their own elastic network interface, and it is not supported for other network modes. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html">Task Networking</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+            - description: 'The network configuration for the task. This parameter is required for task definitions that use the <code>awsvpc</code> network mode to receive their own elastic network interface, and it is not supported for other network modes. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html">Task networking</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
         overrides:
           allOf:
             - $ref: '#/components/schemas/TaskOverride'
-            - description: <p>A list of container overrides in JSON format that specify the name of a container in the specified task definition and the overrides it should receive. You can override the default command for a container (that is specified in the task definition or Docker image) with a <code>command</code> override. You can also override existing environment variables (that are specified in the task definition or Docker image) on a container or add new environment variables to it with an <code>environment</code> override.</p> <note> <p>A total of 8192 characters are allowed for overrides. This limit includes the JSON formatting characters of the override structure.</p> </note>
+            - description: <p>A list of container overrides in JSON format that specify the name of a container in the specified task definition and the overrides it should receive. You can override the default command for a container (that is specified in the task definition or Docker image) with a <code>command</code> override. You can also override existing environment variables (that are specified in the task definition or Docker image) on a container or add new environment variables to it with an <code>environment</code> override.</p> <p>A total of 8192 characters are allowed for overrides. This limit includes the JSON formatting characters of the override structure.</p>
         placementConstraints:
           allOf:
             - $ref: '#/components/schemas/PlacementConstraints'
@@ -4998,11 +4998,11 @@ components:
         placementStrategy:
           allOf:
             - $ref: '#/components/schemas/PlacementStrategies'
-            - description: The placement strategy objects to use for the task. You can specify a maximum of five strategy rules per task.
+            - description: The placement strategy objects to use for the task. You can specify a maximum of 5 strategy rules per task.
         platformVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The platform version the task should run. A platform version is only specified for tasks using the Fargate launch type. If one is not specified, the <code>LATEST</code> platform version is used by default. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">Fargate Platform Versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+            - description: 'The platform version the task should use. A platform version is only specified for tasks hosted on Fargate. If one is not specified, the <code>LATEST</code> platform version is used by default. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html">Fargate platform versions</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
         propagateTags:
           allOf:
             - $ref: '#/components/schemas/PropagateTags'
@@ -5010,7 +5010,7 @@ components:
         referenceId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The reference ID to use for the task.
+            - description: The reference ID to use for the task. The reference ID can have a maximum length of 1024 characters.
         startedBy:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -5785,7 +5785,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CapacityProviderStrategyItemBase'
             - description: 'The <i>base</i> value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a <i>base</i> defined. If no value is specified, the default value of <code>0</code> is used.'
-      description: '<p>The details of a capacity provider strategy. A capacity provider strategy can be set when using the <a>RunTask</a> or <a>CreateCluster</a> APIs or as the default capacity provider strategy for a cluster with the <a>CreateCluster</a> API.</p> <p>Only capacity providers that are already associated with a cluster and have an <code>ACTIVE</code> or <code>UPDATING</code> status can be used in a capacity provider strategy. The <a>PutClusterCapacityProviders</a> API is used to associate a capacity provider with a cluster.</p> <p>If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created. New Auto Scaling group capacity providers can be created with the <a>CreateCapacityProvider</a> API operation.</p> <p>To use a Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code> capacity providers. The Fargate capacity providers are available to all accounts and only need to be associated with a cluster to be used in a capacity provider strategy.</p>'
+      description: '<p>The details of a capacity provider strategy. A capacity provider strategy can be set when using the <a>RunTask</a> or <a>CreateCluster</a> APIs or as the default capacity provider strategy for a cluster with the <a>CreateCluster</a> API.</p> <p>Only capacity providers that are already associated with a cluster and have an <code>ACTIVE</code> or <code>UPDATING</code> status can be used in a capacity provider strategy. The <a>PutClusterCapacityProviders</a> API is used to associate a capacity provider with a cluster.</p> <p>If specifying a capacity provider that uses an Auto Scaling group, the capacity provider must already be created. New Auto Scaling group capacity providers can be created with the <a>CreateCapacityProvider</a> API operation.</p> <p>To use a Fargate capacity provider, specify either the <code>FARGATE</code> or <code>FARGATE_SPOT</code> capacity providers. The Fargate capacity providers are available to all accounts and only need to be associated with a cluster to be used in a capacity provider strategy.</p> <p>A capacity provider strategy may contain a maximum of 6 capacity providers.</p>'
     CapacityProviderStrategy:
       type: array
       items:
@@ -5826,7 +5826,7 @@ components:
         clusterArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The Amazon Resource Name (ARN) that identifies the cluster. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the Region of the cluster, the account ID of the cluster owner, the <code>cluster</code> namespace, and then the cluster name. For example, <code>arn:aws:ecs:region:012345678910:cluster/test</code>.'
+            - description: 'The Amazon Resource Name (ARN) that identifies the cluster. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the Region of the cluster, the Amazon Web Services account ID of the cluster owner, the <code>cluster</code> namespace, and then the cluster name. For example, <code>arn:aws:ecs:region:012345678910:cluster/test</code>.'
         clusterName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -6156,7 +6156,7 @@ components:
         command:
           allOf:
             - $ref: '#/components/schemas/StringList'
-            - description: '<p>A string array representing the command that the container runs to determine if it is healthy. The string array must start with <code>CMD</code> to execute the command arguments directly, or <code>CMD-SHELL</code> to run the command with the container''s default shell. For example:</p> <p> <code>[ "CMD-SHELL", "curl -f http://localhost/ || exit 1" ]</code> </p> <p>An exit code of 0 indicates success, and non-zero exit code indicates failure. For more information, see <code>HealthCheck</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a>.</p>'
+            - description: '<p>A string array representing the command that the container runs to determine if it is healthy. The string array must start with <code>CMD</code> to execute the command arguments directly, or <code>CMD-SHELL</code> to run the command with the container''s default shell. </p> <p> When you use the Amazon Web Services Management Console JSON panel, the Command Line Interface, or the APIs, you should enclose the list of commands in brackets, as shown below.</p> <p> <code>[ "CMD-SHELL", "curl -f http://localhost/ || exit 1" ]</code> </p> <p>You do not need to include the brackets when you use the Amazon Web Services Management Consoleas shown below.</p> <p> <code> "CMD-SHELL", "curl -f http://localhost/ || exit 1" </code> </p> <p>An exit code of 0 indicates success, and non-zero exit code indicates failure. For more information, see <code>HealthCheck</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a>.</p>'
         interval:
           allOf:
             - $ref: '#/components/schemas/BoxedInteger'
@@ -6406,7 +6406,7 @@ components:
         containerInstanceArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The Amazon Resource Name (ARN) of the container instance. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the Region of the container instance, the account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance ID. For example, <code>arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID</code>.'
+            - description: 'The Amazon Resource Name (ARN) of the container instance. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the Region of the container instance, the Amazon Web Services account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance ID. For example, <code>arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID</code>.'
         ec2InstanceId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -6644,7 +6644,7 @@ components:
         serviceArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The ARN that identifies the service. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the Region of the service, the account ID of the service owner, the <code>service</code> namespace, and then the service name. For example, <code>arn:aws:ecs:region:012345678910:service/my-service</code>.'
+            - description: 'The ARN that identifies the service. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the Region of the service, the Amazon Web Services account ID of the service owner, the <code>service</code> namespace, and then the service name. For example, <code>arn:aws:ecs:region:012345678910:service/my-service</code>.'
         serviceName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -7662,7 +7662,7 @@ components:
         expression:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is <code>distinctInstance</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html">Cluster Query Language</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
+            - description: 'A cluster query language expression to apply to the constraint. The expression can have a maximum length of 2000 characters. You can''t specify an expression if the constraint type is <code>distinctInstance</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html">Cluster query language</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
       description: '<p>An object representing a constraint on task placement. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html">Task Placement Constraints</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <note> <p>If you are using the Fargate launch type, task placement constraints are not supported.</p> </note>'
     PlacementStrategy:
       type: object

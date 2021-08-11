@@ -1,0 +1,1787 @@
+openapi: 3.0.0
+info:
+  version: '2021-08-04'
+  x-release: v4
+  title: AWS Snow Device Management
+  description: Amazon Web Services Snow Device Management documentation.
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: snow-device-management
+  x-aws-signingName: snow-device-management
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/snow-device-management-2021-08-04.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/snow-device-management/'
+servers:
+  - url: 'http://snow-device-management.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Snow Device Management multi-region endpoint
+  - url: 'https://snow-device-management.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Snow Device Management multi-region endpoint
+  - url: 'http://snow-device-management.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Snow Device Management endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://snow-device-management.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Snow Device Management endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  '/task/{taskId}/cancel':
+    post:
+      operationId: CancelTask
+      description: <p>Sends a cancel request for a specified task. You can cancel a task only if it's still in a <code>QUEUED</code> state. Tasks that are already running can't be cancelled.</p> <note> <p>A task might still run if it's processed from the queue before the <code>CancelTask</code> operation changes the task's state.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelTaskOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          description: The ID of the task that you are attempting to cancel. You can retrieve a task ID by using the <code>ListTasks</code> operation.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /task:
+    post:
+      operationId: CreateTask
+      description: 'Instructs one or more devices to start a task, such as unlocking or rebooting.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTaskOutput'
+        '480':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - command
+                - targets
+              properties:
+                clientToken:
+                  description: A token ensuring that the action is called only once with the specified details.
+                  type: string
+                  pattern: '[!-~]+'
+                  minLength: 1
+                  maxLength: 64
+                command:
+                  description: The command given to the device to execute.
+                  type: object
+                  properties:
+                    reboot:
+                      allOf:
+                        - $ref: '#/components/schemas/Reboot'
+                        - description: Reboots the device.
+                    unlock:
+                      allOf:
+                        - $ref: '#/components/schemas/Unlock'
+                        - description: Unlocks the device.
+                description:
+                  description: A description of the task and its targets.
+                  type: string
+                  pattern: '[A-Za-z0-9 _.,!#]*'
+                  minLength: 1
+                  maxLength: 128
+                tags:
+                  description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment. '
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/String'
+                targets:
+                  description: A list of managed device IDs.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/String'
+                  minItems: 1
+                  maxItems: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/managed-device/{managedDeviceId}/describe':
+    post:
+      operationId: DescribeDevice
+      description: 'Checks device-specific information, such as the device type, software version, IP addresses, and lock status.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDeviceOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: managedDeviceId
+          in: path
+          required: true
+          description: The ID of the device that you are checking the information of.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/managed-device/{managedDeviceId}/resources/ec2/describe':
+    post:
+      operationId: DescribeDeviceEc2Instances
+      description: 'Checks the current state of the Amazon EC2 instances. The output is similar to <code>describeDevice</code>, but the results are sourced from the device cache in the Amazon Web Services Cloud and include a subset of the available fields. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDeviceEc2Output'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: managedDeviceId
+          in: path
+          required: true
+          description: The ID of the managed device.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - instanceIds
+              properties:
+                instanceIds:
+                  description: A list of instance IDs associated with the managed device.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/String'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/task/{taskId}/execution/{managedDeviceId}':
+    post:
+      operationId: DescribeExecution
+      description: Checks the status of a remote task running on one or more target devices.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeExecutionOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: managedDeviceId
+          in: path
+          required: true
+          description: The ID of the managed device.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 64
+        - name: taskId
+          in: path
+          required: true
+          description: The ID of the task that the action is describing.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/task/{taskId}':
+    post:
+      operationId: DescribeTask
+      description: 'Checks the metadata for a given task on a device. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTaskOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          description: The ID of the task to be described.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/managed-device/{managedDeviceId}/resources':
+    get:
+      operationId: ListDeviceResources
+      description: 'Returns a list of the Amazon Web Services resources available for a device. Currently, Amazon EC2 instances are the only supported resource type.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDeviceResourcesOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: managedDeviceId
+          in: path
+          required: true
+          description: The ID of the managed device that you are listing the resources of.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 64
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of resources per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: A pagination token to continue to the next page of results.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9+/=]*'
+            minLength: 1
+            maxLength: 1024
+        - name: type
+          in: query
+          required: false
+          description: A structure used to filter the results by type of resource.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /managed-devices:
+    get:
+      operationId: ListDevices
+      description: Returns a list of all devices on your Amazon Web Services account that have Amazon Web Services Snow Device Management enabled in the Amazon Web Services Region where the command is run.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDevicesOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: jobId
+          in: query
+          required: false
+          description: The ID of the job used to order the device.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 64
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of devices to list per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: A pagination token to continue to the next page of results.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9+/=]*'
+            minLength: 1
+            maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /executions#taskId:
+    get:
+      operationId: ListExecutions
+      description: Returns the status of tasks for one or more target devices.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListExecutionsOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of tasks to list per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: A pagination token to continue to the next page of tasks.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9+/=]*'
+            minLength: 1
+            maxLength: 1024
+        - name: state
+          in: query
+          required: false
+          description: A structure used to filter the tasks by their current state.
+          schema:
+            type: string
+            enum:
+              - QUEUED
+              - IN_PROGRESS
+              - CANCELED
+              - FAILED
+              - SUCCEEDED
+              - REJECTED
+              - TIMED_OUT
+        - name: taskId
+          in: query
+          required: true
+          description: The ID of the task.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Returns a list of tags for a managed device or task.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the device or task.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Adds or replaces tags on a device or task.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the device or task.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment.'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/String'
+  /tasks:
+    get:
+      operationId: ListTasks
+      description: Returns a list of tasks that can be filtered by state.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTasksOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of tasks per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: A pagination token to continue to the next page of tasks.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9+/=]*'
+            minLength: 1
+            maxLength: 1024
+        - name: state
+          in: query
+          required: false
+          description: A structure used to filter the list of tasks.
+          schema:
+            type: string
+            enum:
+              - IN_PROGRESS
+              - CANCELED
+              - COMPLETED
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes a tag from a device or task.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the device or task.
+          schema:
+            type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment.'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CancelTaskOutput:
+      type: object
+      properties:
+        taskId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the task that you are attempting to cancel.
+    ThrottlingException: {}
+    InternalServerException: {}
+    ResourceNotFoundException: {}
+    ValidationException: {}
+    AccessDeniedException: {}
+    CreateTaskOutput:
+      type: object
+      properties:
+        taskArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the task that you created.
+        taskId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the task that you created.
+    Reboot:
+      type: object
+      properties: {}
+      description: A structure used to reboot the device.
+    Unlock:
+      type: object
+      properties: {}
+      description: A structure used to unlock a device.
+    String:
+      type: string
+    ServiceQuotaExceededException: {}
+    DescribeDeviceOutput:
+      type: object
+      properties:
+        associatedWithJob:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the job used when ordering the device.
+        deviceCapacities:
+          allOf:
+            - $ref: '#/components/schemas/CapacityList'
+            - description: 'The hardware specifications of the device. '
+        deviceState:
+          allOf:
+            - $ref: '#/components/schemas/UnlockState'
+            - description: The current state of the device.
+        deviceType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The type of Amazon Web Services Snow Family device.
+        lastReachedOutAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the device last contacted the Amazon Web Services Cloud. Indicates that the device is online.
+        lastUpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the device last pushed an update to the Amazon Web Services Cloud. Indicates when the device cache was refreshed.
+        managedDeviceArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the device.
+        managedDeviceId:
+          allOf:
+            - $ref: '#/components/schemas/ManagedDeviceId'
+            - description: The ID of the device that you checked the information for.
+        physicalNetworkInterfaces:
+          allOf:
+            - $ref: '#/components/schemas/PhysicalNetworkInterfaceList'
+            - description: The network interfaces available on the device.
+        software:
+          allOf:
+            - $ref: '#/components/schemas/SoftwareInformation'
+            - description: The software installed on the device.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment. '
+    DescribeDeviceEc2Output:
+      type: object
+      properties:
+        instances:
+          allOf:
+            - $ref: '#/components/schemas/InstanceSummaryList'
+            - description: 'A list of structures containing information about each instance. '
+    DescribeExecutionOutput:
+      type: object
+      properties:
+        executionId:
+          allOf:
+            - $ref: '#/components/schemas/ExecutionId'
+            - description: The ID of the execution.
+        lastUpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the status of the execution was last updated.
+        managedDeviceId:
+          allOf:
+            - $ref: '#/components/schemas/ManagedDeviceId'
+            - description: The ID of the managed device that the task is being executed on.
+        startedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the execution began.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/ExecutionState'
+            - description: The current state of the execution.
+        taskId:
+          allOf:
+            - $ref: '#/components/schemas/TaskId'
+            - description: The ID of the task being executed on the device.
+    DescribeTaskOutput:
+      type: object
+      properties:
+        completedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the task was completed.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the <code>CreateTask</code> operation was called.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/TaskDescriptionString'
+            - description: The description provided of the task and managed devices.
+        lastUpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the state of the task was last updated.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/TaskState'
+            - description: The current state of the task.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment.'
+        targets:
+          allOf:
+            - $ref: '#/components/schemas/TargetList'
+            - description: The managed devices that the task was sent to.
+        taskArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the task.
+        taskId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the task.
+    ListDeviceResourcesOutput:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A pagination token to continue to the next page of results.
+        resources:
+          allOf:
+            - $ref: '#/components/schemas/ResourceSummaryList'
+            - description: 'A structure defining the resource''s type, Amazon Resource Name (ARN), and ID.'
+    ListDevicesOutput:
+      type: object
+      properties:
+        devices:
+          allOf:
+            - $ref: '#/components/schemas/DeviceSummaryList'
+            - description: A list of device structures that contain information about the device.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A pagination token to continue to the next page of devices.
+    ListExecutionsOutput:
+      type: object
+      properties:
+        executions:
+          allOf:
+            - $ref: '#/components/schemas/ExecutionSummaryList'
+            - description: 'A list of executions. Each execution contains the task ID, the device that the task is executing on, the execution ID, and the status of the execution.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A pagination token to continue to the next page of executions.
+    ListTagsForResourceOutput:
+      type: object
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The list of tags for the device or task.
+    ListTasksOutput:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A pagination token to continue to the next page of tasks.
+        tasks:
+          allOf:
+            - $ref: '#/components/schemas/TaskSummaryList'
+            - description: A list of task structures containing details about each task.
+    AttachmentStatus:
+      type: string
+      enum:
+        - ATTACHING
+        - ATTACHED
+        - DETACHING
+        - DETACHED
+    Boolean:
+      type: boolean
+    TaskId:
+      type: string
+      minLength: 1
+      maxLength: 64
+    CancelTaskInput:
+      type: object
+      title: CancelTaskInput
+      properties: {}
+    Long:
+      type: integer
+    CapacityNameString:
+      type: string
+      minLength: 0
+      maxLength: 100
+    CapacityUnitString:
+      type: string
+      minLength: 0
+      maxLength: 20
+    Capacity:
+      type: object
+      properties:
+        available:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The amount of capacity available for use on the device.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/CapacityNameString'
+            - description: 'The name of the type of capacity, such as memory.'
+        total:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The total capacity on the device.
+        unit:
+          allOf:
+            - $ref: '#/components/schemas/CapacityUnitString'
+            - description: The unit of measure for the type of capacity.
+        used:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The amount of capacity used on the device.
+      description: 'The physical capacity of the Amazon Web Services Snow Family device. '
+    CapacityList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Capacity'
+      minItems: 0
+      maxItems: 100
+    Command:
+      type: object
+      properties:
+        reboot:
+          allOf:
+            - $ref: '#/components/schemas/Reboot'
+            - description: Reboots the device.
+        unlock:
+          allOf:
+            - $ref: '#/components/schemas/Unlock'
+            - description: Unlocks the device.
+      description: The command given to the device to execute.
+    Integer:
+      type: integer
+    CpuOptions:
+      type: object
+      properties:
+        coreCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of cores that the CPU can use.
+        threadsPerCore:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of threads per core in the CPU.
+      description: The options for how a device's CPU is configured.
+    IdempotencyToken:
+      type: string
+      pattern: '[!-~]+'
+      minLength: 1
+      maxLength: 64
+    TaskDescriptionString:
+      type: string
+      pattern: '[A-Za-z0-9 _.,!#]*'
+      minLength: 1
+      maxLength: 128
+    TagMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
+    TargetList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+      minItems: 1
+      maxItems: 10
+    CreateTaskInput:
+      type: object
+      required:
+        - command
+        - targets
+      title: CreateTaskInput
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: A token ensuring that the action is called only once with the specified details.
+        command:
+          allOf:
+            - $ref: '#/components/schemas/Command'
+            - description: The task to be performed. Only one task is executed on a device at a time.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/TaskDescriptionString'
+            - description: A description of the task and its targets.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment. '
+        targets:
+          allOf:
+            - $ref: '#/components/schemas/TargetList'
+            - description: A list of managed device IDs.
+    InstanceIdsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ManagedDeviceId:
+      type: string
+      minLength: 1
+      maxLength: 64
+    DescribeDeviceEc2Input:
+      type: object
+      required:
+        - instanceIds
+      title: DescribeDeviceEc2Input
+      properties:
+        instanceIds:
+          allOf:
+            - $ref: '#/components/schemas/InstanceIdsList'
+            - description: A list of instance IDs associated with the managed device.
+    InstanceSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceSummary'
+    DescribeDeviceInput:
+      type: object
+      title: DescribeDeviceInput
+      properties: {}
+    UnlockState:
+      type: string
+      enum:
+        - UNLOCKED
+        - LOCKED
+        - UNLOCKING
+    Timestamp:
+      type: string
+      format: date-time
+    PhysicalNetworkInterfaceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PhysicalNetworkInterface'
+    SoftwareInformation:
+      type: object
+      properties:
+        installState:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The state of the software that is installed or that is being installed on the device.
+        installedVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The version of the software currently installed on the device.
+        installingVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The version of the software being installed on the device.
+      description: Information about the software on the device.
+    DescribeExecutionInput:
+      type: object
+      title: DescribeExecutionInput
+      properties: {}
+    ExecutionId:
+      type: string
+      minLength: 1
+      maxLength: 64
+    ExecutionState:
+      type: string
+      enum:
+        - QUEUED
+        - IN_PROGRESS
+        - CANCELED
+        - FAILED
+        - SUCCEEDED
+        - REJECTED
+        - TIMED_OUT
+    DescribeTaskInput:
+      type: object
+      title: DescribeTaskInput
+      properties: {}
+    TaskState:
+      type: string
+      enum:
+        - IN_PROGRESS
+        - CANCELED
+        - COMPLETED
+    DeviceSummary:
+      type: object
+      properties:
+        associatedWithJob:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the job used to order the device.
+        managedDeviceArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the device.
+        managedDeviceId:
+          allOf:
+            - $ref: '#/components/schemas/ManagedDeviceId'
+            - description: The ID of the device.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment.'
+      description: Identifying information about the device.
+    DeviceSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeviceSummary'
+    EbsInstanceBlockDevice:
+      type: object
+      properties:
+        attachTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the attachment was initiated.
+        deleteOnTermination:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A value that indicates whether the volume is deleted on instance termination.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/AttachmentStatus'
+            - description: The attachment state.
+        volumeId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the Amazon EBS volume.
+      description: Describes a parameter used to set up an Amazon Elastic Block Store (Amazon EBS) volume in a block device mapping.
+    ExecutionSummary:
+      type: object
+      properties:
+        executionId:
+          allOf:
+            - $ref: '#/components/schemas/ExecutionId'
+            - description: The ID of the execution.
+        managedDeviceId:
+          allOf:
+            - $ref: '#/components/schemas/ManagedDeviceId'
+            - description: The ID of the managed device that the task is being executed on.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/ExecutionState'
+            - description: The state of the execution.
+        taskId:
+          allOf:
+            - $ref: '#/components/schemas/TaskId'
+            - description: The ID of the task.
+      description: The summary of a task execution on a specified device.
+    ExecutionSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExecutionSummary'
+    InstanceBlockDeviceMappingList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceBlockDeviceMapping'
+    SecurityGroupIdentifierList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityGroupIdentifier'
+    InstanceState:
+      type: object
+      properties:
+        code:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: '<p>The state of the instance as a 16-bit unsigned integer. </p> <p>The high byte is all of the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and 65,535. These numerical values are used for internal purposes and should be ignored. </p> <p>The low byte is all of the bits between 2^0 and (2^8)-1, which equals decimal values between 0 and 255. </p> <p>The valid values for the instance state code are all in the range of the low byte. These values are: </p> <ul> <li> <p> <code>0</code> : <code>pending</code> </p> </li> <li> <p> <code>16</code> : <code>running</code> </p> </li> <li> <p> <code>32</code> : <code>shutting-down</code> </p> </li> <li> <p> <code>48</code> : <code>terminated</code> </p> </li> <li> <p> <code>64</code> : <code>stopping</code> </p> </li> <li> <p> <code>80</code> : <code>stopped</code> </p> </li> </ul> <p>You can ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in decimal. </p>'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/InstanceStateName'
+            - description: The current state of the instance.
+      description: The description of the current state of an instance.
+    Instance:
+      type: object
+      properties:
+        amiLaunchIndex:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The Amazon Machine Image (AMI) launch index, which you can use to find this instance in the launch group. '
+        blockDeviceMappings:
+          allOf:
+            - $ref: '#/components/schemas/InstanceBlockDeviceMappingList'
+            - description: Any block device mapping entries for the instance.
+        cpuOptions:
+          allOf:
+            - $ref: '#/components/schemas/CpuOptions'
+            - description: The CPU options for the instance.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the instance was created.
+        imageId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the AMI used to launch the instance.
+        instanceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the instance.
+        instanceType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The instance type.
+        privateIpAddress:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The private IPv4 address assigned to the instance.
+        publicIpAddress:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The public IPv4 address assigned to the instance.
+        rootDeviceName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The device name of the root device volume (for example, <code>/dev/sda1</code>). '
+        securityGroups:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIdentifierList'
+            - description: The security groups for the instance.
+        state:
+          $ref: '#/components/schemas/InstanceState'
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the instance was last updated.
+      description: 'The description of an instance. Currently, Amazon EC2 instances are the only supported instance type.'
+    InstanceBlockDeviceMapping:
+      type: object
+      properties:
+        deviceName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The block device name.
+        ebs:
+          allOf:
+            - $ref: '#/components/schemas/EbsInstanceBlockDevice'
+            - description: 'The parameters used to automatically set up Amazon Elastic Block Store (Amazon EBS) volumes when the instance is launched. '
+      description: The description of a block device mapping.
+    InstanceStateName:
+      type: string
+      enum:
+        - PENDING
+        - RUNNING
+        - SHUTTING_DOWN
+        - TERMINATED
+        - STOPPING
+        - STOPPED
+    InstanceSummary:
+      type: object
+      properties:
+        instance:
+          allOf:
+            - $ref: '#/components/schemas/Instance'
+            - description: A structure containing details about the instance.
+        lastUpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the instance summary was last updated.
+      description: The details about the instance.
+    IpAddressAssignment:
+      type: string
+      enum:
+        - DHCP
+        - STATIC
+    JobId:
+      type: string
+      minLength: 1
+      maxLength: 64
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    NextToken:
+      type: string
+      pattern: '[a-zA-Z0-9+/=]*'
+      minLength: 1
+      maxLength: 1024
+    ListDeviceResourcesInputTypeString:
+      type: string
+      minLength: 1
+      maxLength: 50
+    ListDeviceResourcesInput:
+      type: object
+      title: ListDeviceResourcesInput
+      properties: {}
+    ResourceSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceSummary'
+    ListDevicesInput:
+      type: object
+      title: ListDevicesInput
+      properties: {}
+    ListExecutionsInput:
+      type: object
+      title: ListExecutionsInput
+      properties: {}
+    ListTagsForResourceInput:
+      type: object
+      title: ListTagsForResourceInput
+      properties: {}
+    ListTasksInput:
+      type: object
+      title: ListTasksInput
+      properties: {}
+    TaskSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TaskSummary'
+    PhysicalConnectorType:
+      type: string
+      enum:
+        - RJ45
+        - SFP_PLUS
+        - QSFP
+        - RJ45_2
+        - WIFI
+    PhysicalNetworkInterface:
+      type: object
+      properties:
+        defaultGateway:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The default gateway of the device.
+        ipAddress:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The IP address of the device.
+        ipAddressAssignment:
+          allOf:
+            - $ref: '#/components/schemas/IpAddressAssignment'
+            - description: A value that describes whether the IP address is dynamic or persistent.
+        macAddress:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The MAC address of the device.
+        netmask:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The netmask used to divide the IP address into subnets.
+        physicalConnectorType:
+          allOf:
+            - $ref: '#/components/schemas/PhysicalConnectorType'
+            - description: The physical connector type.
+        physicalNetworkInterfaceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The physical network interface ID.
+      description: The details about the physical network interface for the device.
+    ResourceSummary:
+      type: object
+      required:
+        - resourceType
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the resource.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the resource.
+        resourceType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The resource type.
+      description: A summary of a resource available on the device.
+    SecurityGroupIdentifier:
+      type: object
+      properties:
+        groupId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The security group ID.
+        groupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The security group name.
+      description: Information about the device's security group.
+    TagKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    TagResourceInput:
+      type: object
+      required:
+        - tags
+      title: TagResourceInput
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment.'
+    TaskSummary:
+      type: object
+      required:
+        - taskId
+      properties:
+        state:
+          allOf:
+            - $ref: '#/components/schemas/TaskState'
+            - description: The state of the task assigned to one or many devices.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'Optional metadata that you assign to a resource. You can use tags to categorize a resource in different ways, such as by purpose, owner, or environment.'
+        taskArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the task.
+        taskId:
+          allOf:
+            - $ref: '#/components/schemas/TaskId'
+            - description: The task ID.
+      description: Information about the task assigned to one or many devices.
+    UntagResourceInput:
+      type: object
+      title: UntagResourceInput
+      properties: {}
+security:
+  - hmac: []
