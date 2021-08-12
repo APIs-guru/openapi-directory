@@ -4786,7 +4786,7 @@ components:
             - $ref: '#/components/schemas/DomainNameStatus'
             - xml:
                 name: domainNameStatus
-              description: 'The status of the domain name migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.'
+              description: 'The status of the domain name migration. The valid values are AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, and PENDING_OWNERSHIP_VERIFICATION. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.'
         DomainNameStatusMessage:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -4811,6 +4811,12 @@ components:
             - xml:
                 name: securityPolicy
               description: The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are TLS_1_0 and TLS_1_2.
+        OwnershipVerificationCertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - xml:
+                name: ownershipVerificationCertificateArn
+              description: The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn
       description: The domain name configuration.
     StringWithLengthBetween1And64:
       type: string
@@ -8481,7 +8487,9 @@ components:
       enum:
         - AVAILABLE
         - UPDATING
-      description: 'The status of the domain name migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.'
+        - PENDING_CERTIFICATE_REIMPORT
+        - PENDING_OWNERSHIP_VERIFICATION
+      description: 'The status of the domain name migration. The valid values are AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, and PENDING_OWNERSHIP_VERIFICATION. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.'
     EndpointType:
       type: string
       enum:

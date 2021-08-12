@@ -1044,6 +1044,7 @@ paths:
                     - python3.6
                     - python3.7
                     - python3.8
+                    - python3.9
                     - dotnetcore1.0
                     - dotnetcore2.0
                     - dotnetcore2.1
@@ -3059,6 +3060,7 @@ paths:
                     - python3.6
                     - python3.7
                     - python3.8
+                    - python3.9
                     - dotnetcore1.0
                     - dotnetcore2.0
                     - dotnetcore2.1
@@ -3581,7 +3583,7 @@ paths:
         - name: MasterRegion
           in: query
           required: false
-          description: 'For Lambda@Edge functions, the Region of the master function. For example, <code>us-east-1</code> filters the list of functions to only include Lambda@Edge functions replicated from a master function in US East (N. Virginia). If specified, you must set <code>FunctionVersion</code> to <code>ALL</code>.'
+          description: 'For Lambda@Edge functions, the Amazon Web Services Region of the master function. For example, <code>us-east-1</code> filters the list of functions to only include Lambda@Edge functions replicated from a master function in US East (N. Virginia). If specified, you must set <code>FunctionVersion</code> to <code>ALL</code>.'
           schema:
             type: string
             pattern: 'ALL|[a-z]{2}(-gov)?-[a-z]+-\d{1}'
@@ -3732,6 +3734,7 @@ paths:
               - python3.6
               - python3.7
               - python3.8
+              - python3.9
               - dotnetcore1.0
               - dotnetcore2.0
               - dotnetcore2.1
@@ -3918,6 +3921,7 @@ paths:
               - python3.6
               - python3.7
               - python3.8
+              - python3.9
               - dotnetcore1.0
               - dotnetcore2.0
               - dotnetcore2.1
@@ -5478,6 +5482,7 @@ components:
         - python3.6
         - python3.7
         - python3.8
+        - python3.9
         - dotnetcore1.0
         - dotnetcore2.0
         - dotnetcore2.1
