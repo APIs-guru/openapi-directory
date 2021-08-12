@@ -821,6 +821,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
+  "/v1/{name}:generateDownloadUrl":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Generates a signed URL for downloading the original zip file used to create an Archive Deployment. The URL is only valid for a limited period and should be used within minutes after generation. Each call returns a new upload URL.
+      operationId: apigee.organizations.environments.archiveDeployments.generateDownloadUrl
+      parameters:
+        - description: Required. The name of the Archive Deployment you want to download.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudApigeeV1GenerateDownloadUrlRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1GenerateDownloadUrlResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   "/v1/{name}:getSyncAuthorization":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1576,6 +1618,129 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleCloudApigeeV1DeveloperApp"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+  "/v1/{parent}/archiveDeployments":
+    get:
+      description: Lists the ArchiveDeployments in the specified Environment.
+      operationId: apigee.organizations.environments.archiveDeployments.list
+      parameters:
+        - description: "Required. Name of the Environment for which to list Archive Deployments in the format: `organizations/{org}/environments/{env}`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. An optional query used to return a subset of Archive Deployments using the semantics defined in https://google.aip.dev/160.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Maximum number of Archive Deployments to return. If unspecified, at most 25 deployments will be returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token, returned from a previous ListArchiveDeployments call, that you can use to retrieve the next page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1ListArchiveDeploymentsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new ArchiveDeployment.
+      operationId: apigee.organizations.environments.archiveDeployments.create
+      parameters:
+        - description: Required. The Environment this Archive Deployment will be created in.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudApigeeV1ArchiveDeployment"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+  "/v1/{parent}/archiveDeployments:generateUploadUrl":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Generates a signed URL for uploading an Archive zip file to Google Cloud Storage. Once the upload is complete, the signed URL should be passed to CreateArchiveDeployment. When uploading to the generated signed URL, please follow these restrictions: * Source file type should be a zip file. * Source file size should not exceed 1GB limit. * No credentials should be attached - the signed URLs provide access to the target bucket using internal service identity; if credentials were attached, the identity from the credentials would be used, but that identity does not have permissions to upload files to the URL. When making a HTTP PUT request, these two headers need to be specified: * `content-type: application/zip` * `x-goog-content-length-range: 0,1073741824` And this header SHOULD NOT be specified: * `Authorization: Bearer YOUR_TOKEN`"
+      operationId: apigee.organizations.environments.archiveDeployments.generateUploadUrl
+      parameters:
+        - description: Required. The organization and environment to upload to.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudApigeeV1GenerateUploadUrlRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1GenerateUploadUrlResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -4208,6 +4373,35 @@ components:
           description: Status of the credential.
           type: string
       type: object
+    GoogleCloudApigeeV1ArchiveDeployment:
+      description: Archive Deployment information.
+      properties:
+        createdAt:
+          description: Output only. The time at which the Archive Deployment was created in milliseconds since the epoch.
+          format: int64
+          readOnly: true
+          type: string
+        gcsUri:
+          description: Input only. The Google Cloud Storage signed URL returned from GenerateUploadUrl and used to upload the Archive zip file.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: "User-supplied key-value pairs used to organize ArchiveDeployments. Label keys must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: \\p{Ll}\\p{Lo}{0,62} Label values must be between 1 and 63 characters long, have a UTF-8 encoding of maximum 128 bytes, and must conform to the following PCRE regular expression: [\\p{Ll}\\p{Lo}\\p{N}_-]{0,63} No more than 64 labels can be associated with a given store."
+          type: object
+        name:
+          description: "Name of the Archive Deployment in the following format: `organizations/{org}/environments/{env}/archiveDeployments/{id}`."
+          type: string
+        operation:
+          description: "Output only. A reference to the LRO that created this Archive Deployment in the following format: `organizations/{org}/operations/{id}`"
+          readOnly: true
+          type: string
+        updatedAt:
+          description: Output only. The time at which the Archive Deployment was updated in milliseconds since the epoch.
+          format: int64
+          readOnly: true
+          type: string
+      type: object
     GoogleCloudApigeeV1AsyncQuery:
       properties:
         created:
@@ -5105,10 +5299,24 @@ components:
       type: object
     GoogleCloudApigeeV1Environment:
       properties:
+        apiProxyType:
+          description: Optional. API Proxy type supported by the environment. The type can be set when creating the Environment and cannot be changed.
+          enum:
+            - API_PROXY_TYPE_UNSPECIFIED
+            - PROGRAMMABLE
+            - CONFIGURABLE
+          type: string
         createdAt:
           description: Output only. Creation time of this environment as milliseconds since epoch.
           format: int64
           readOnly: true
+          type: string
+        deploymentType:
+          description: "Optional. Deployment type supported by the environment. The deployment type can be set when creating the environment and cannot be changed. When you enable archive deployment, you will be **prevented from performing** a [subset of actions](/apigee/docs/api-platform/local-development/overview#prevented-actions) within the environment, including: * Managing the deployment of API proxy or shared flow revisions * Creating, updating, or deleting resource files * Creating, updating, or deleting target servers"
+          enum:
+            - DEPLOYMENT_TYPE_UNSPECIFIED
+            - PROXY
+            - ARCHIVE
           type: string
         description:
           description: Optional. Description of the environment.
@@ -5140,6 +5348,9 @@ components:
       type: object
     GoogleCloudApigeeV1EnvironmentConfig:
       properties:
+        arcConfigLocation:
+          description: The location for the config blob of API Runtime Control, aka Envoy Adapter, for op-based authentication as a URI, e.g. a Cloud Storage URI. This is only used by Envoy-based gateways.
+          type: string
         createTime:
           description: Time that the environment configuration was created.
           format: google-datetime
@@ -5167,6 +5378,9 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1FlowHookConfig"
           type: array
+        gatewayConfigLocation:
+          description: The location for the gateway config blob as a URI, e.g. a Cloud Storage URI. This is only used by Envoy-based gateways.
+          type: string
         keystores:
           description: List of keystores in the environment.
           items:
@@ -5371,6 +5585,28 @@ components:
           type: string
         sharedFlowName:
           description: "Name of the shared flow to invoke in the following format: `organizations/{org}/sharedflows/{sharedflow}`"
+          type: string
+      type: object
+    GoogleCloudApigeeV1GenerateDownloadUrlRequest:
+      description: Request for GenerateDownloadUrl method.
+      properties: {}
+      type: object
+    GoogleCloudApigeeV1GenerateDownloadUrlResponse:
+      description: Response for GenerateDownloadUrl method.
+      properties:
+        downloadUri:
+          description: The Google Cloud Storage signed URL that can be used to download the Archive zip file.
+          type: string
+      type: object
+    GoogleCloudApigeeV1GenerateUploadUrlRequest:
+      description: Request for GenerateUploadUrl method.
+      properties: {}
+      type: object
+    GoogleCloudApigeeV1GenerateUploadUrlResponse:
+      description: Response for GenerateUploadUrl method.
+      properties:
+        uploadUri:
+          description: The Google Cloud Storage signed URL that can be used to upload a new Archive zip file.
           type: string
       type: object
     GoogleCloudApigeeV1GetSyncAuthorizationRequest:
@@ -5648,6 +5884,18 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1App"
           type: array
+      type: object
+    GoogleCloudApigeeV1ListArchiveDeploymentsResponse:
+      description: Response for ListArchiveDeployments method.
+      properties:
+        archiveDeployments:
+          description: Archive Deployments in the specified environment.
+          items:
+            $ref: "#/components/schemas/GoogleCloudApigeeV1ArchiveDeployment"
+          type: array
+        nextPageToken:
+          description: Page token that you can include in a ListArchiveDeployments request to retrieve the next page. If omitted, no subsequent pages exist.
+          type: string
       type: object
     GoogleCloudApigeeV1ListAsyncQueriesResponse:
       description: The response for ListAsyncQueries.
@@ -7367,7 +7615,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -7375,6 +7623,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

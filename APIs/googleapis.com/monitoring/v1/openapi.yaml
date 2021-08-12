@@ -576,6 +576,13 @@ components:
             - STACKED_BAR
             - HEATMAP
           type: string
+        targetAxis:
+          description: Optional. The target axis to use for plotting the metric.
+          enum:
+            - TARGET_AXIS_UNSPECIFIED
+            - Y1
+            - Y2
+          type: string
         timeSeriesQuery:
           $ref: "#/components/schemas/TimeSeriesQuery"
           description: Required. Fields for querying time series data from the Stackdriver metrics API.
@@ -976,6 +983,13 @@ components:
         label:
           description: A label for the threshold.
           type: string
+        targetAxis:
+          description: The target axis to use for plotting the threshold. Target axis is not allowed in a Scorecard.
+          enum:
+            - TARGET_AXIS_UNSPECIFIED
+            - Y1
+            - Y2
+          type: string
         value:
           description: The value of the threshold. The value should be defined in the native scale of the metric.
           format: double
@@ -1134,6 +1148,9 @@ components:
         xAxis:
           $ref: "#/components/schemas/Axis"
           description: The properties applied to the X axis.
+        y2Axis:
+          $ref: "#/components/schemas/Axis"
+          description: The properties applied to the Y2 axis.
         yAxis:
           $ref: "#/components/schemas/Axis"
           description: The properties applied to the Y axis.
@@ -1145,7 +1162,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
             https://www.googleapis.com/auth/monitoring: View and write monitoring data for all of your Google and third-party Cloud and API projects
             https://www.googleapis.com/auth/monitoring.read: View monitoring data for all of your Google Cloud and third-party projects
             https://www.googleapis.com/auth/monitoring.write: Publish metric data to your Google Cloud projects
@@ -1156,7 +1173,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
             https://www.googleapis.com/auth/monitoring: View and write monitoring data for all of your Google and third-party Cloud and API projects
             https://www.googleapis.com/auth/monitoring.read: View monitoring data for all of your Google Cloud and third-party projects
             https://www.googleapis.com/auth/monitoring.write: Publish metric data to your Google Cloud projects
