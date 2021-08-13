@@ -203,7 +203,7 @@ paths:
   '/domains/{DomainName}':
     post:
       operationId: CreateDomain
-      description: '<p>Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations.</p> <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain.</p>'
+      description: '<p>Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations.</p> <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain.</p> <p>Use this API or <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html">UpdateDomain</a> to enable <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">identity resolution</a>: set <code>Matching</code> to true. </p>'
       responses:
         '200':
           description: Success
@@ -400,7 +400,7 @@ paths:
             maxLength: 64
     put:
       operationId: UpdateDomain
-      description: '<p>Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key.</p> <p>After a domain is created, the name can’t be changed.</p>'
+      description: '<p>Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key.</p> <p>After a domain is created, the name can’t be changed.</p> <p>Use this API or <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html">CreateDomain</a> to enable <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">identity resolution</a>: set <code>Matching</code> to true. </p>'
       responses:
         '200':
           description: Success
@@ -1942,7 +1942,7 @@ paths:
   '/domains/{DomainName}/matches':
     get:
       operationId: GetMatches
-      description: '<p>This API is in preview release for Amazon Connect and subject to change.</p> <p>Before calling this API, use <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html">CreateDomain</a> or <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html">UpdateDomain</a> to enable identity resolution: set <code>Matching</code> to true.</p> <p>GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process. </p> <important> <p>Amazon Connect runs a batch process every Saturday at 12AM UTC to identify matching profiles. The results are returned up to seven days after the Saturday run.</p> </important> <p>Amazon Connect uses the following profile attributes to identify matches:</p> <ul> <li> <p>PhoneNumber</p> </li> <li> <p>HomePhoneNumber</p> </li> <li> <p>BusinessPhoneNumber</p> </li> <li> <p>MobilePhoneNumber</p> </li> <li> <p>EmailAddress</p> </li> <li> <p>PersonalEmailAddress</p> </li> <li> <p>BusinessEmailAddress</p> </li> <li> <p>FullName</p> </li> <li> <p>BusinessName</p> </li> </ul>'
+      description: '<p>This API is in preview release for Amazon Connect and subject to change.</p> <p>Before calling this API, use <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html">CreateDomain</a> or <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html">UpdateDomain</a> to enable identity resolution: set <code>Matching</code> to true.</p> <p>GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process. </p> <important> <p>Amazon Connect starts a batch process every Saturday at 12AM UTC to identify matching profiles. The results are returned up to seven days after the Saturday run.</p> </important> <p>Amazon Connect uses the following profile attributes to identify matches:</p> <ul> <li> <p>PhoneNumber</p> </li> <li> <p>HomePhoneNumber</p> </li> <li> <p>BusinessPhoneNumber</p> </li> <li> <p>MobilePhoneNumber</p> </li> <li> <p>EmailAddress</p> </li> <li> <p>PersonalEmailAddress</p> </li> <li> <p>BusinessEmailAddress</p> </li> <li> <p>FullName</p> </li> <li> <p>BusinessName</p> </li> </ul> <p>For example, two or more profiles—with spelling mistakes such as <b>John Doe</b> and <b>Jhn Doe</b>, or different casing email addresses such as <b>JOHN_DOE@ANYCOMPANY.COM</b> and <b>johndoe@anycompany.com</b>, or different phone number formats such as <b>555-010-0000</b> and <b>+1-555-010-0000</b>—can be detected as belonging to the same customer <b>John Doe</b> and merged into a unified profile.</p>'
       responses:
         '200':
           description: Success
@@ -2447,6 +2447,18 @@ paths:
                   description: The unique identifier of a customer profile.
                   type: string
                   pattern: '[a-f0-9]{32}'
+                ObjectFilter:
+                  description: The filter applied to ListProfileObjects response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset and _case.
+                  type: object
+                  properties:
+                    KeyName:
+                      allOf:
+                        - $ref: '#/components/schemas/name'
+                        - description: 'A searchable identifier of a standard profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can use to search for _case include: _caseId.'
+                    Values:
+                      allOf:
+                        - $ref: '#/components/schemas/requestValueList'
+                        - description: A list of key values.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3038,7 +3050,7 @@ components:
         Matching:
           allOf:
             - $ref: '#/components/schemas/MatchingResponse'
-            - description: The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+            - description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/timestamp'
@@ -3143,7 +3155,7 @@ components:
         Matching:
           allOf:
             - $ref: '#/components/schemas/MatchingResponse'
-            - description: The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+            - description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/timestamp'
@@ -3351,6 +3363,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/token'
             - description: The pagination token from the previous call to ListProfileObjects.
+    name:
+      type: string
+      pattern: '^[a-zA-Z0-9_-]+$'
+      minLength: 1
+      maxLength: 64
+    requestValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string1To255'
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -3584,7 +3605,7 @@ components:
         Matching:
           allOf:
             - $ref: '#/components/schemas/MatchingResponse'
-            - description: The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+            - description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/timestamp'
@@ -3610,15 +3631,6 @@ components:
       type: string
       minLength: 0
       maxLength: 255
-    name:
-      type: string
-      pattern: '^[a-zA-Z0-9_-]+$'
-      minLength: 1
-      maxLength: 64
-    requestValueList:
-      type: array
-      items:
-        $ref: '#/components/schemas/string1To255'
     AddProfileKeyRequest:
       type: object
       required:
@@ -3880,7 +3892,7 @@ components:
         Matching:
           allOf:
             - $ref: '#/components/schemas/MatchingRequest'
-            - description: The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+            - description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -4473,6 +4485,21 @@ components:
             - $ref: '#/components/schemas/stringifiedJson'
             - description: A JSON representation of a ProfileObject that belongs to a profile.
       description: A ProfileObject in a list of ProfileObjects.
+    ObjectFilter:
+      type: object
+      required:
+        - KeyName
+        - Values
+      properties:
+        KeyName:
+          allOf:
+            - $ref: '#/components/schemas/name'
+            - description: 'A searchable identifier of a standard profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can use to search for _case include: _caseId.'
+        Values:
+          allOf:
+            - $ref: '#/components/schemas/requestValueList'
+            - description: A list of key values.
+      description: The filter applied to ListProfileObjects response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset and _case.
     ListProfileObjectsRequest:
       type: object
       required:
@@ -4488,6 +4515,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/uuid'
             - description: The unique identifier of a customer profile.
+        ObjectFilter:
+          allOf:
+            - $ref: '#/components/schemas/ObjectFilter'
+            - description: Applies a filter to the response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset and _case.
     ProfileObjectList:
       type: array
       items:
@@ -4565,7 +4596,7 @@ components:
         StandardIdentifiers:
           allOf:
             - $ref: '#/components/schemas/StandardIdentifierList'
-            - description: 'The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE means that this key can be used to tie an object to a PROFILE. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.'
+            - description: 'The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE, ASSET or CASE means that this key can be used to tie an object to a PROFILE, ASSET or CASE respectively. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.'
         FieldNames:
           allOf:
             - $ref: '#/components/schemas/FieldNameList'
@@ -4920,6 +4951,8 @@ components:
       type: string
       enum:
         - PROFILE
+        - ASSET
+        - CASE
         - UNIQUE
         - SECONDARY
         - LOOKUP_ONLY
@@ -5066,7 +5099,7 @@ components:
         Matching:
           allOf:
             - $ref: '#/components/schemas/MatchingRequest'
-            - description: The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+            - description: 'The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. '
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'

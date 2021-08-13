@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   version: '2009-03-31'
   x-release: v4
-  title: Amazon Elastic MapReduce
+  title: Amazon EMR
   description: 'Amazon EMR is a web service that makes it easier to process large amounts of data efficiently. Amazon EMR uses Hadoop processing combined with several Amazon Web Services services to do tasks such as web indexing, data mining, log file analysis, machine learning, scientific simulation, and data warehouse management.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
@@ -594,7 +594,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.DescribeCluster:
     post:
       operationId: DescribeCluster
-      description: 'Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on. '
+      description: 'Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on.'
       responses:
         '200':
           description: Success
@@ -2011,7 +2011,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.SetVisibleToAllUsers:
     post:
       operationId: SetVisibleToAllUsers
-      description: '<p>Sets the <a>Cluster$VisibleToAllUsers</a> value for an EMR cluster. When <code>true</code>, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals.</p> <p>This action works on running clusters. When you create a cluster, use the <a>RunJobFlowInput$VisibleToAllUsers</a> parameter.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMR Management Guide</i>.</p>'
+      description: '<p>Sets the <a>Cluster$VisibleToAllUsers</a> value for an EMR cluster. When <code>true</code>, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals.</p> <p>This action works on running clusters. When you create a cluster, use the <a>RunJobFlowInput$VisibleToAllUsers</a> parameter.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMRManagement Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -2548,11 +2548,11 @@ components:
         IdentityId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The globally unique identifier (GUID) of the user or group from the Amazon Web Services SSO Identity Store. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserId</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId">GroupId</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
+            - description: 'The globally unique identifier (GUID) of the user or group from the Amazon Web Services SSO Identity Store. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserId</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId">GroupId</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified, but not both.'
         IdentityName:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The name of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
+            - description: 'The name of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified, but not both.'
         IdentityType:
           allOf:
             - $ref: '#/components/schemas/IdentityType'
@@ -3050,7 +3050,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'Specifies the next page of results. If <code>NextToken</code> is not specified, which is usually the case for the first request of ListReleaseLabels, the first page of results are determined by other filtering parameters or by the latest version. The <code>ListReleaseLabels</code> request fails if the identity (AWS AccountID) and all filtering parameters are different from the original request, or if the <code>NextToken</code> is expired or tampered with.'
+            - description: 'Specifies the next page of results. If <code>NextToken</code> is not specified, which is usually the case for the first request of ListReleaseLabels, the first page of results are determined by other filtering parameters or by the latest version. The <code>ListReleaseLabels</code> request fails if the identity (account ID) and all filtering parameters are different from the original request, or if the <code>NextToken</code> is expired or tampered with.'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResultsNumber'
@@ -3399,7 +3399,7 @@ components:
         VisibleToAllUsers:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Set this value to <code>true</code> so that IAM principals in the account associated with the cluster can perform EMR actions on the cluster that their IAM policies allow. This value defaults to <code>false</code> for clusters created using the EMR API or the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command.</p> <p>When set to <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions for the cluster, regardless of the IAM permissions policies attached to other IAM principals. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMR Management Guide</i>.</p>'
+            - description: '<p>Set this value to <code>true</code> so that IAM principals in the account associated with the cluster can perform EMR actions on the cluster that their IAM policies allow. This value defaults to <code>true</code> for clusters created using the EMR API or the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command.</p> <p>When set to <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions for the cluster, regardless of the IAM permissions policies attached to other IAM principals. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMRManagement Guide</i>.</p>'
         JobFlowRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
@@ -4208,7 +4208,7 @@ components:
         VisibleToAllUsers:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Indicates whether the cluster is visible to IAM principals in the account associated with the cluster. When <code>true</code>, IAM principals in the account can perform EMR cluster actions on the cluster that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p> <p>The default value is <code>false</code> if a value is not provided when creating a cluster using the EMR API <a>RunJobFlow</a> command or the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command. The default value is <code>true</code> when a cluster is created using the Management Console. IAM principals that are allowed to perform actions on the cluster can use the <a>SetVisibleToAllUsers</a> action to change the value on a running cluster. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMR Management Guide</i>.</p>'
+            - description: '<p>Indicates whether the cluster is visible to IAM principals in the account associated with the cluster. When <code>true</code>, IAM principals in the account can perform EMR cluster actions on the cluster that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p> <p>The default value is <code>true</code> if a value is not provided when creating a cluster using the EMR API <a>RunJobFlow</a> command, the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command, or the Management Console. IAM principals that are allowed to perform actions on the cluster can use the <a>SetVisibleToAllUsers</a> action to change the value on a running cluster. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMRManagement Guide</i>.</p>'
         Applications:
           allOf:
             - $ref: '#/components/schemas/ApplicationList'
@@ -5209,6 +5209,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AutoScalingPolicyDescription'
             - description: An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric. See PutAutoScalingPolicy.
+        CustomAmiId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The custom AMI ID to use for the provisioned instance group.
       description: 'This entity represents an instance group, which is a group of instances that have common purpose. For example, CORE instance group is used for HDFS.'
     InstanceRoleType:
       type: string
@@ -5259,6 +5263,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AutoScalingPolicy'
             - description: An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric. See <a>PutAutoScalingPolicy</a>.
+        CustomAmiId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The custom AMI ID to use for the provisioned instance group.
       description: Configuration defining a new instance group.
     InstanceGroupState:
       type: string
@@ -5341,6 +5349,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Date'
             - description: The date/time the instance group was terminated.
+        CustomAmiId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The custom AMI ID to use for the provisioned instance group.
       description: Detailed information about an instance group.
     InstanceGroupDetailList:
       type: array
@@ -5516,6 +5528,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConfigurationList'
             - description: 'A configuration classification that applies when provisioning cluster instances, which can include configurations for applications and software that run on the cluster.'
+        CustomAmiId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The custom AMI ID to use for the instance type.
       description: '<p>An instance type configuration for each instance type in an instance fleet, which determines the EC2 instances Amazon EMR attempts to provision to fulfill On-Demand and Spot target capacities. When you use an allocation strategy, you can include a maximum of 30 instance type configurations for a fleet. For more information about how to use an allocation strategy, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-instance-fleet.html">Configure Instance Fleets</a>. Without an allocation strategy, you may specify a maximum of five instance type configurations for a fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
     InstanceTypeSpecification:
       type: object
@@ -5548,6 +5564,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanObject'
             - description: Evaluates to <code>TRUE</code> when the specified <code>InstanceType</code> is EBS-optimized.
+        CustomAmiId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The custom AMI ID to use for the instance type.
       description: '<p>The configuration specification for each instance type in an instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
     JobFlowExecutionStatusDetail:
       type: object
@@ -5699,7 +5719,7 @@ components:
         VisibleToAllUsers:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Indicates whether the cluster is visible to IAM principals in the account associated with the cluster. When <code>true</code>, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p> <p>The default value is <code>false</code> if a value is not provided when creating a cluster using the EMR API <a>RunJobFlow</a> command or the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command. The default value is <code>true</code> when a cluster is created using the Management Console. IAM principals that are authorized to perform actions on the cluster can use the <a>SetVisibleToAllUsers</a> action to change the value on a running cluster. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMR Management Guide</i>.</p>'
+            - description: '<p>Indicates whether the cluster is visible to IAM principals in the account associated with the cluster. When <code>true</code>, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p> <p>The default value is <code>true</code> if a value is not provided when creating a cluster using the EMR API <a>RunJobFlow</a> command, the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command, or the Management Console. IAM principals that are authorized to perform actions on the cluster can use the <a>SetVisibleToAllUsers</a> action to change the value on a running cluster. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMRManagement Guide</i>.</p>'
         JobFlowRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
