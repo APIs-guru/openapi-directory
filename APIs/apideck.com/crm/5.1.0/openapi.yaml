@@ -1,14 +1,15 @@
-openapi: 3.0.0
+openapi: 3.0.3
 servers:
-  - url: https://unify.apideck.com
+  - description: Production
+    url: https://unify.apideck.com
 info:
   contact:
     email: hello@apideck.com
     url: https://developers.apideck.com
-  description: |+
-    Welcome to the Accounting API.
+  description: |
+    Welcome to the CRM API.
 
-    You can use this API to access all Accounting API endpoints.
+    You can use this API to access all CRM API endpoints.
 
     ## Base URL
 
@@ -38,7 +39,7 @@ info:
 
     ## Pagination
 
-    All API resources have support for bulk retrieval via list APIs. For example, you can list [accounts](#tag/Accounts) and [tax rates](#tag/Tax Rates). Apideck uses cursor-based pagination via the optional `cursor` and `limit` parameters.
+    All API resources have support for bulk retrieval via list APIs. For example, you can list [opportunities](#tag/Opportunities), [companies](#tag/Companies) and [leads](#tag/Leads). Apideck uses cursor-based pagination via the optional `cursor` and `limit` parameters.
 
     To fetch the first page of results, call the list API without a `cursor` parameter. Afterwards you can fetch subsequent pages by providing a cursor parameter. You will find the next cursor in the response body in `meta.cursors.next`. If `meta.cursors.next` is `null` you're at the end of the list.
 
@@ -262,13 +263,12 @@ info:
     ## Support
 
     If you have problems or need help with your case, you can always reach out to our Support.
-
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: Accounting API
-  version: 0.0.1
-  x-apideck-api: accounting
+  title: CRM API
+  version: 5.1.0
+  x-apideck-api: crm
   x-apideck-sdk-support: true
   x-apisguru-categories:
     - developer_tools
@@ -276,10 +276,10 @@ info:
     url: https://developers.apideck.com/icon.png
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/accounting.yml
+      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/crm.yml
       version: "3.0"
   x-providerName: apideck.com
-  x-serviceName: accounting
+  x-serviceName: crm
   x-tags:
     - partner
 externalDocs:
@@ -287,32 +287,46 @@ externalDocs:
   url: https://developers.apideck.com
 security:
   - apiKey: []
+    applicationId: []
+    consumerId: []
 tags:
-  - description: ""
-    name: Tax Rates
-    x-apideck-model:
-      $ref: "#/components/schemas/TaxRate"
-  - description: ""
-    name: Invoices
-    x-apideck-model:
-      $ref: "#/components/schemas/Invoice"
   - description: ""
     name: Companies
     x-apideck-model:
       $ref: "#/components/schemas/Company"
   - description: ""
+    name: Opportunities
+    x-apideck-model:
+      $ref: "#/components/schemas/Opportunity"
+  - description: ""
+    name: Leads
+    x-apideck-model:
+      $ref: "#/components/schemas/Lead"
+  - description: ""
     name: Contacts
     x-apideck-model:
       $ref: "#/components/schemas/Contact"
   - description: ""
-    name: Ledger Accounts
+    name: Pipelines
     x-apideck-model:
-      $ref: "#/components/schemas/LedgerAccount"
+      $ref: "#/components/schemas/Pipeline"
+  - description: ""
+    name: Notes
+    x-apideck-model:
+      $ref: "#/components/schemas/Note"
+  - description: ""
+    name: Users
+    x-apideck-model:
+      $ref: "#/components/schemas/User"
+  - description: ""
+    name: Activities
+    x-apideck-model:
+      $ref: "#/components/schemas/Activity"
 paths:
-  /accounting/companies:
+  /crm/activities:
     get:
-      description: List Companies
-      operationId: companiesAll
+      description: List activities
+      operationId: activitiesAll
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -322,7 +336,7 @@ paths:
         - $ref: "#/components/parameters/limit"
       responses:
         "200":
-          $ref: "#/components/responses/GetCompaniesResponse"
+          $ref: "#/components/responses/GetActivitiesResponse"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -337,10 +351,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: List Companies
+      summary: List activities
       tags:
-        - Companies
-      x-apideck-api: accounting
+        - Activities
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -354,14 +368,370 @@ paths:
             })
 
             try {
-              const { data } = await apideck.accounting.companiesAll({})
+              const { data } = await apideck.crm.activitiesAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: activities
+    post:
+      description: Create activity
+      operationId: activitiesAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Activity"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateActivityResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Create activity
+      tags:
+        - Activities
+      x-apideck-api: crm
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              activity: {
+                activity_datetime: '2021-05-01T12:00:00.000Z',
+                duration_seconds: 1800,
+                account_id: '12345',
+                contact_id: '12345',
+                company_id: '12345',
+                opportunity_id: '12345',
+                lead_id: '12345',
+                owner_id: '12345',
+                campaign_id: '12345',
+                case_id: '12345',
+                asset_id: '12345',
+                contract_id: '12345',
+                product_id: '12345',
+                solution_id: '12345',
+                custom_object_id: '12345',
+                type: 'meeting',
+                title: 'Meeting',
+                description: 'More info about the meeting',
+                location: 'Space',
+                all_day_event: false,
+                private: true,
+                group_event: true,
+                event_sub_type: 'debrief',
+                group_event_type: 'Proposed',
+                child: false,
+                archived: false,
+                deleted: false,
+                show_as: 'busy',
+                activity_date: '2021-05-01',
+                duration_minutes: 30,
+                start_datetime: '2021-05-01T12:00:00.000Z',
+                end_datetime: '2021-05-01T12:30:00.000Z',
+                end_date: '2021-05-01',
+                recurrent: false,
+                reminder_datetime: '2021-05-01T17:00:00.000Z',
+                reminder_set: false,
+                custom_fields: [
+                  {
+                    id: 'custom_technologies',
+                    value: 'Uses Salesforce and Marketo'
+                  }
+                ]
+              }
+            }
+
+            try {
+              const { data } = await apideck.crm.activitiesAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/crm/activities/{id}":
+    delete:
+      description: Delete activity
+      operationId: activitiesDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteActivityResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Delete activity
+      tags:
+        - Activities
+      x-apideck-api: crm
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.crm.activitiesDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get activity
+      operationId: activitiesOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetActivityResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Get activity
+      tags:
+        - Activities
+      x-apideck-api: crm
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.crm.activitiesOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update activity
+      operationId: activitiesUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Activity"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateActivityResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Update activity
+      tags:
+        - Activities
+      x-apideck-api: crm
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              activity: {
+                activity_datetime: '2021-05-01T12:00:00.000Z',
+                duration_seconds: 1800,
+                account_id: '12345',
+                contact_id: '12345',
+                company_id: '12345',
+                opportunity_id: '12345',
+                lead_id: '12345',
+                owner_id: '12345',
+                campaign_id: '12345',
+                case_id: '12345',
+                asset_id: '12345',
+                contract_id: '12345',
+                product_id: '12345',
+                solution_id: '12345',
+                custom_object_id: '12345',
+                type: 'meeting',
+                title: 'Meeting',
+                description: 'More info about the meeting',
+                location: 'Space',
+                all_day_event: false,
+                private: true,
+                group_event: true,
+                event_sub_type: 'debrief',
+                group_event_type: 'Proposed',
+                child: false,
+                archived: false,
+                deleted: false,
+                show_as: 'busy',
+                activity_date: '2021-05-01',
+                duration_minutes: 30,
+                start_datetime: '2021-05-01T12:00:00.000Z',
+                end_datetime: '2021-05-01T12:30:00.000Z',
+                end_date: '2021-05-01',
+                recurrent: false,
+                reminder_datetime: '2021-05-01T17:00:00.000Z',
+                reminder_set: false,
+                custom_fields: [
+                  {
+                    id: 'custom_technologies',
+                    value: 'Uses Salesforce and Marketo'
+                  }
+                ]
+              }
+            }
+
+            try {
+              const { data } = await apideck.crm.activitiesUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  /crm/companies:
+    get:
+      description: List companies
+      operationId: companiesAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/companiesFilter"
+        - $ref: "#/components/parameters/companiesSort"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetCompanies"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: List companies
+      tags:
+        - Companies
+      x-apideck-api: crm
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.crm.companiesAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
       x-graphql-field-name: companies
     post:
-      description: Create Company
+      description: Create company
       operationId: companiesAdd
       parameters:
         - $ref: "#/components/parameters/raw"
@@ -376,7 +746,7 @@ paths:
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateCompanyResponse"
+          $ref: "#/components/responses/CreateCompany"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -391,10 +761,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Create Company
+      summary: Create company
       tags:
         - Companies
-      x-apideck-api: accounting
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -493,24 +863,24 @@ paths:
             }
 
             try {
-              const { data } = await apideck.accounting.companiesAdd(params)
+              const { data } = await apideck.crm.companiesAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/accounting/companies/{id}":
+  "/crm/companies/{id}":
     delete:
-      description: Delete Company
+      description: Delete company
       operationId: companiesDelete
       parameters:
         - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteCompanyResponse"
+          $ref: "#/components/responses/DeleteCompany"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -525,10 +895,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Delete Company
+      summary: Delete company
       tags:
         - Companies
-      x-apideck-api: accounting
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -542,7 +912,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.accounting.companiesDelete({
+              const { data } = await apideck.crm.companiesDelete({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -550,17 +920,17 @@ paths:
               console.error(error)
             }
     get:
-      description: Get Company
+      description: Get company
       operationId: companiesOne
       parameters:
         - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetCompanyResponse"
+          $ref: "#/components/responses/GetCompany"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -575,10 +945,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Get Company
+      summary: Get company
       tags:
         - Companies
-      x-apideck-api: accounting
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -592,7 +962,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.accounting.companiesOne({
+              const { data } = await apideck.crm.companiesOne({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -600,14 +970,14 @@ paths:
               console.error(error)
             }
     patch:
-      description: Update Company
+      description: Update company
       operationId: companiesUpdate
       parameters:
         - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
       requestBody:
         content:
           application/json:
@@ -616,7 +986,7 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateCompanyResponse"
+          $ref: "#/components/responses/UpdateCompany"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -631,10 +1001,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Update Company
+      summary: Update company
       tags:
         - Companies
-      x-apideck-api: accounting
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -734,14 +1104,14 @@ paths:
             }
 
             try {
-              const { data } = await apideck.accounting.companiesUpdate(params)
+              const { data } = await apideck.crm.companiesUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  /accounting/contacts:
+  /crm/contacts:
     get:
-      description: List Contacts
+      description: List contacts
       operationId: contactsAll
       parameters:
         - $ref: "#/components/parameters/raw"
@@ -750,9 +1120,11 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/contactsFilter"
+        - $ref: "#/components/parameters/contactsSort"
       responses:
         "200":
-          $ref: "#/components/responses/GetContactsResponse"
+          $ref: "#/components/responses/GetContacts"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -767,10 +1139,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: List Contacts
+      summary: List contacts
       tags:
         - Contacts
-      x-apideck-api: accounting
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -784,14 +1156,14 @@ paths:
             })
 
             try {
-              const { data } = await apideck.accounting.contactsAll({})
+              const { data } = await apideck.crm.contactsAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
       x-graphql-field-name: contacts
     post:
-      description: Create Contact
+      description: Create contact
       operationId: contactsAdd
       parameters:
         - $ref: "#/components/parameters/raw"
@@ -806,7 +1178,7 @@ paths:
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateContactResponse"
+          $ref: "#/components/responses/CreateContact"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -821,10 +1193,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Create Contact
+      summary: Create contact
       tags:
         - Contacts
-      x-apideck-api: accounting
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -917,14 +1289,14 @@ paths:
             }
 
             try {
-              const { data } = await apideck.accounting.contactsAdd(params)
+              const { data } = await apideck.crm.contactsAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/accounting/contacts/{id}":
+  "/crm/contacts/{id}":
     delete:
-      description: Delete Contact
+      description: Delete contact
       operationId: contactsDelete
       parameters:
         - $ref: "#/components/parameters/id"
@@ -934,7 +1306,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteContactResponse"
+          $ref: "#/components/responses/DeleteContact"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -949,10 +1321,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Delete Contact
+      summary: Delete contact
       tags:
         - Contacts
-      x-apideck-api: accounting
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -966,7 +1338,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.accounting.contactsDelete({
+              const { data } = await apideck.crm.contactsDelete({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -974,7 +1346,7 @@ paths:
               console.error(error)
             }
     get:
-      description: Get Contact
+      description: Get contact
       operationId: contactsOne
       parameters:
         - $ref: "#/components/parameters/id"
@@ -984,7 +1356,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetContactResponse"
+          $ref: "#/components/responses/GetContact"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -999,10 +1371,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Get Contact
+      summary: Get contact
       tags:
         - Contacts
-      x-apideck-api: accounting
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1016,7 +1388,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.accounting.contactsOne({
+              const { data } = await apideck.crm.contactsOne({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -1024,7 +1396,7 @@ paths:
               console.error(error)
             }
     patch:
-      description: Update Contact
+      description: Update contact
       operationId: contactsUpdate
       parameters:
         - $ref: "#/components/parameters/id"
@@ -1040,7 +1412,7 @@ paths:
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateContactResponse"
+          $ref: "#/components/responses/UpdateContact"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -1055,10 +1427,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Update Contact
+      summary: Update contact
       tags:
         - Contacts
-      x-apideck-api: accounting
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1152,15 +1524,15 @@ paths:
             }
 
             try {
-              const { data } = await apideck.accounting.contactsUpdate(params)
+              const { data } = await apideck.crm.contactsUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  /accounting/invoices:
+  /crm/leads:
     get:
-      description: List Invoices
-      operationId: invoicesAll
+      description: List leads
+      operationId: leadsAll
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -1168,9 +1540,11 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/leadsFilter"
+        - $ref: "#/components/parameters/leadsSort"
       responses:
         "200":
-          $ref: "#/components/responses/GetInvoicesResponse"
+          $ref: "#/components/responses/GetLeads"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -1185,10 +1559,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: List Invoices
+      summary: List leads
       tags:
-        - Invoices
-      x-apideck-api: accounting
+        - Leads
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1202,15 +1576,15 @@ paths:
             })
 
             try {
-              const { data } = await apideck.accounting.invoicesAll({})
+              const { data } = await apideck.crm.leadsAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: invoices
+      x-graphql-field-name: leads
     post:
-      description: Create Invoice
-      operationId: invoicesAdd
+      description: Create lead
+      operationId: leadsAdd
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -1220,11 +1594,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Invoice"
+              $ref: "#/components/schemas/Lead"
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateInvoiceResponse"
+          $ref: "#/components/responses/CreateLead"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -1239,10 +1613,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Create Invoice
+      summary: Create lead
       tags:
-        - Invoices
-      x-apideck-api: accounting
+        - Leads
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1256,84 +1630,87 @@ paths:
             })
 
             const params = {
-              invoice: {
-                type: 'Service',
-                number: 'OIT00546',
-                customer: {
-                  company_name: 'The boring company'
-                },
-                date: '2020-09-30',
-                due_date: '2020-10-30',
-                po_number: '90000117',
-                status: 'paid',
+              lead: {
+                name: 'Elon Musk',
+                company_name: 'Spacex',
+                owner_id: '54321',
+                company_id: '2',
+                contact_id: '2',
+                lead_source: 'Cold Call',
+                first_name: 'Elon',
+                last_name: 'Musk',
+                description: 'A thinker',
+                prefix: 'Sir',
+                title: 'CEO',
+                language: 'EN',
+                status: 'New',
+                monetary_amount: 75000,
                 currency: 'USD',
-                sub_total: 27500,
-                total_tax: 1000,
-                total: 28500,
-                balance: 26500,
-                deposit: 2000,
-                customer_memo: 'Thank you for your business and have a great day!',
-                line_items: [
+                fax: '+12129876543',
+                websites: [
                   {
-                    line_number: 1,
-                    description: 'Rock Fountain',
-                    type: 'Transaction',
-                    tax_amount: 27500,
-                    total_amount: 27500,
-                    quantity: 2,
-                    unit_price: 27500,
-                    discount_percentage: 15,
-                    item_id: 12344,
-                    tax_rate: {
-                      name: '15% GST on Expenses',
-                      code: 'ABN'
-                    },
-                    general_ledger_account: {
-                      name: 'Bank account'
-                    }
+                    id: '12345',
+                    url: 'http://example.com',
+                    type: 'primary'
                   }
                 ],
-                billing_address: {
-                  id: '123',
-                  type: 'primary',
-                  string: '25 Spring Street, Blackburn, VIC 3130',
-                  name: 'HQ US',
-                  line1: 'Main street',
-                  line2: 'apt #',
-                  city: 'San Francisco',
-                  state: 'CA',
-                  postal_code: '94104',
-                  country: 'US',
-                  latitude: '40.759211',
-                  longitude: '-73.984638'
-                },
-                shipping_address: {
-                  id: '123',
-                  type: 'primary',
-                  string: '25 Spring Street, Blackburn, VIC 3130',
-                  name: 'HQ US',
-                  line1: 'Main street',
-                  line2: 'apt #',
-                  city: 'San Francisco',
-                  state: 'CA',
-                  postal_code: '94104',
-                  country: 'US',
-                  latitude: '40.759211',
-                  longitude: '-73.984638'
-                }
+                addresses: [
+                  {
+                    id: '123',
+                    type: 'primary',
+                    string: '25 Spring Street, Blackburn, VIC 3130',
+                    name: 'HQ US',
+                    line1: 'Main street',
+                    line2: 'apt #',
+                    city: 'San Francisco',
+                    state: 'CA',
+                    postal_code: '94104',
+                    country: 'US',
+                    latitude: '40.759211',
+                    longitude: '-73.984638'
+                  }
+                ],
+                social_links: [
+                  {
+                    id: '12345',
+                    url: 'https://www.twitter.com/apideck-io',
+                    type: 'twitter'
+                  }
+                ],
+                phone_numbers: [
+                  {
+                    id: '12345',
+                    number: '111-111-1111',
+                    type: 'primary'
+                  }
+                ],
+                emails: [
+                  {
+                    id: '123',
+                    email: 'elon@musk.com',
+                    type: 'primary'
+                  }
+                ],
+                custom_fields: [
+                  {
+                    id: 'custom_technologies',
+                    value: 'Uses Salesforce and Marketo'
+                  }
+                ],
+                tags: ['New']
               }
             }
 
             try {
-              const { data } = await apideck.accounting.invoicesAdd(params)
+              const { data } = await apideck.crm.leadsAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/accounting/invoices/{id}":
+  "/crm/leads/{id}":
     delete:
-      description: Delete Invoice
-      operationId: invoicesDelete
+      description: Delete lead
+      operationId: leadsDelete
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -1342,7 +1719,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteInvoiceResponse"
+          $ref: "#/components/responses/DeleteLead"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -1357,10 +1734,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Delete Invoice
+      summary: Delete lead
       tags:
-        - Invoices
-      x-apideck-api: accounting
+        - Leads
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1374,7 +1751,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.accounting.invoicesDelete({
+              const { data } = await apideck.crm.leadsDelete({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -1382,8 +1759,8 @@ paths:
               console.error(error)
             }
     get:
-      description: Get Invoice
-      operationId: invoicesOne
+      description: Get lead
+      operationId: leadsOne
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -1392,7 +1769,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetInvoiceResponse"
+          $ref: "#/components/responses/GetLead"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -1407,10 +1784,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Get Invoice
+      summary: Get lead
       tags:
-        - Invoices
-      x-apideck-api: accounting
+        - Leads
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1424,7 +1801,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.accounting.invoicesOne({
+              const { data } = await apideck.crm.leadsOne({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -1432,8 +1809,8 @@ paths:
               console.error(error)
             }
     patch:
-      description: Update Invoice
-      operationId: invoicesUpdate
+      description: Update lead
+      operationId: leadsUpdate
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -1444,11 +1821,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Invoice"
+              $ref: "#/components/schemas/Lead"
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateInvoiceResponse"
+          $ref: "#/components/responses/UpdateLead"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -1463,10 +1840,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Update Invoice
+      summary: Update lead
       tags:
-        - Invoices
-      x-apideck-api: accounting
+        - Leads
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1481,84 +1858,87 @@ paths:
 
             const params = {
               id: 'id_example',
-              invoice: {
-                type: 'Service',
-                number: 'OIT00546',
-                customer: {
-                  company_name: 'The boring company'
-                },
-                date: '2020-09-30',
-                due_date: '2020-10-30',
-                po_number: '90000117',
-                status: 'paid',
+              lead: {
+                name: 'Elon Musk',
+                company_name: 'Spacex',
+                owner_id: '54321',
+                company_id: '2',
+                contact_id: '2',
+                lead_source: 'Cold Call',
+                first_name: 'Elon',
+                last_name: 'Musk',
+                description: 'A thinker',
+                prefix: 'Sir',
+                title: 'CEO',
+                language: 'EN',
+                status: 'New',
+                monetary_amount: 75000,
                 currency: 'USD',
-                sub_total: 27500,
-                total_tax: 1000,
-                total: 28500,
-                balance: 26500,
-                deposit: 2000,
-                customer_memo: 'Thank you for your business and have a great day!',
-                line_items: [
+                fax: '+12129876543',
+                websites: [
                   {
-                    line_number: 1,
-                    description: 'Rock Fountain',
-                    type: 'Transaction',
-                    tax_amount: 27500,
-                    total_amount: 27500,
-                    quantity: 2,
-                    unit_price: 27500,
-                    discount_percentage: 15,
-                    item_id: 12344,
-                    tax_rate: {
-                      name: '15% GST on Expenses',
-                      code: 'ABN'
-                    },
-                    general_ledger_account: {
-                      name: 'Bank account'
-                    }
+                    id: '12345',
+                    url: 'http://example.com',
+                    type: 'primary'
                   }
                 ],
-                billing_address: {
-                  id: '123',
-                  type: 'primary',
-                  string: '25 Spring Street, Blackburn, VIC 3130',
-                  name: 'HQ US',
-                  line1: 'Main street',
-                  line2: 'apt #',
-                  city: 'San Francisco',
-                  state: 'CA',
-                  postal_code: '94104',
-                  country: 'US',
-                  latitude: '40.759211',
-                  longitude: '-73.984638'
-                },
-                shipping_address: {
-                  id: '123',
-                  type: 'primary',
-                  string: '25 Spring Street, Blackburn, VIC 3130',
-                  name: 'HQ US',
-                  line1: 'Main street',
-                  line2: 'apt #',
-                  city: 'San Francisco',
-                  state: 'CA',
-                  postal_code: '94104',
-                  country: 'US',
-                  latitude: '40.759211',
-                  longitude: '-73.984638'
-                }
+                addresses: [
+                  {
+                    id: '123',
+                    type: 'primary',
+                    string: '25 Spring Street, Blackburn, VIC 3130',
+                    name: 'HQ US',
+                    line1: 'Main street',
+                    line2: 'apt #',
+                    city: 'San Francisco',
+                    state: 'CA',
+                    postal_code: '94104',
+                    country: 'US',
+                    latitude: '40.759211',
+                    longitude: '-73.984638'
+                  }
+                ],
+                social_links: [
+                  {
+                    id: '12345',
+                    url: 'https://www.twitter.com/apideck-io',
+                    type: 'twitter'
+                  }
+                ],
+                phone_numbers: [
+                  {
+                    id: '12345',
+                    number: '111-111-1111',
+                    type: 'primary'
+                  }
+                ],
+                emails: [
+                  {
+                    id: '123',
+                    email: 'elon@musk.com',
+                    type: 'primary'
+                  }
+                ],
+                custom_fields: [
+                  {
+                    id: 'custom_technologies',
+                    value: 'Uses Salesforce and Marketo'
+                  }
+                ],
+                tags: ['New']
               }
             }
 
             try {
-              const { data } = await apideck.accounting.invoicesUpdate(params)
+              const { data } = await apideck.crm.leadsUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  /accounting/ledger-accounts:
+  /crm/notes:
     get:
-      description: List Ledger Accounts
-      operationId: ledgerAccountsAll
+      description: List notes
+      operationId: notesAll
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -1568,7 +1948,7 @@ paths:
         - $ref: "#/components/parameters/limit"
       responses:
         "200":
-          $ref: "#/components/responses/GetLedgerAccountsResponse"
+          $ref: "#/components/responses/GetNotesResponse"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -1583,10 +1963,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: List Ledger Accounts
+      summary: List notes
       tags:
-        - Ledger Accounts
-      x-apideck-api: accounting
+        - Notes
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1600,15 +1980,15 @@ paths:
             })
 
             try {
-              const { data } = await apideck.accounting.ledgerAccountsAll({})
+              const { data } = await apideck.crm.notesAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: ledgerAccounts
+      x-graphql-field-name: notes
     post:
-      description: Create Ledger Account
-      operationId: ledgerAccountsAdd
+      description: Create note
+      operationId: notesAdd
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -1618,11 +1998,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/LedgerAccount"
+              $ref: "#/components/schemas/Note"
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateLedgerAccountResponse"
+          $ref: "#/components/responses/CreateNoteResponse"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -1637,10 +2017,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Create Ledger Account
+      summary: Create note
       tags:
-        - Ledger Accounts
-      x-apideck-api: accounting
+        - Notes
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1654,45 +2034,23 @@ paths:
             })
 
             const params = {
-              ledgerAccount: {
-                nominal_code: '091',
-                classification: 'asset',
-                type: 'bank',
-                sub_type: 'CHECKING_ACCOUNT',
-                name: 'Bank account',
-                fully_qualified_name: 'Asset.Bank.Checking_Account',
-                description: 'The main checking account',
-                opening_balance: 75000,
-                current_balance: 20000,
-                currency: 'USD',
-                tax_type: 'USD',
-                tax_code: 'N-T',
-                level: '2',
-                active: true,
-                bank_account: {
-                  iban: 'CH2989144532982975332',
-                  bic: 'AUDSCHGGXXX',
-                  bsb_number: '062-001',
-                  bank_code: 'BNH',
-                  account_number: '123456789',
-                  account_name: 'SPACEX LLC'
-                },
-                parent_account: {},
-                sub_account: true,
-                sub_accounts: [{}]
+              note: {
+                title: 'Meeting Notes',
+                content: 'Office hours are 9AM-6PM',
+                owner_id: '12345'
               }
             }
 
             try {
-              const { data } = await apideck.accounting.ledgerAccountsAdd(params)
+              const { data } = await apideck.crm.notesAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/accounting/ledger-accounts/{id}":
+  "/crm/notes/{id}":
     delete:
-      description: Delete Ledger Account
-      operationId: ledgerAccountsDelete
+      description: Delete note
+      operationId: notesDelete
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -1701,7 +2059,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteLedgerAccountResponse"
+          $ref: "#/components/responses/DeleteNoteResponse"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -1716,10 +2074,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Delete Ledger Account
+      summary: Delete note
       tags:
-        - Ledger Accounts
-      x-apideck-api: accounting
+        - Notes
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1733,7 +2091,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.accounting.ledgerAccountsDelete({
+              const { data } = await apideck.crm.notesDelete({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -1741,8 +2099,8 @@ paths:
               console.error(error)
             }
     get:
-      description: Get Ledger Account
-      operationId: ledgerAccountsOne
+      description: Get note
+      operationId: notesOne
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -1751,7 +2109,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetLedgerAccountResponse"
+          $ref: "#/components/responses/GetNoteResponse"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -1766,10 +2124,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Get Ledger Account
+      summary: Get note
       tags:
-        - Ledger Accounts
-      x-apideck-api: accounting
+        - Notes
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1783,7 +2141,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.accounting.ledgerAccountsOne({
+              const { data } = await apideck.crm.notesOne({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -1791,8 +2149,8 @@ paths:
               console.error(error)
             }
     patch:
-      description: Update Ledger Account
-      operationId: ledgerAccountsUpdate
+      description: Update note
+      operationId: notesUpdate
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -1803,11 +2161,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/LedgerAccount"
+              $ref: "#/components/schemas/Note"
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateLedgerAccountResponse"
+          $ref: "#/components/responses/UpdateNoteResponse"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -1822,10 +2180,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Update Ledger Account
+      summary: Update note
       tags:
-        - Ledger Accounts
-      x-apideck-api: accounting
+        - Notes
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1840,45 +2198,23 @@ paths:
 
             const params = {
               id: 'id_example',
-              ledgerAccount: {
-                nominal_code: '091',
-                classification: 'asset',
-                type: 'bank',
-                sub_type: 'CHECKING_ACCOUNT',
-                name: 'Bank account',
-                fully_qualified_name: 'Asset.Bank.Checking_Account',
-                description: 'The main checking account',
-                opening_balance: 75000,
-                current_balance: 20000,
-                currency: 'USD',
-                tax_type: 'USD',
-                tax_code: 'N-T',
-                level: '2',
-                active: true,
-                bank_account: {
-                  iban: 'CH2989144532982975332',
-                  bic: 'AUDSCHGGXXX',
-                  bsb_number: '062-001',
-                  bank_code: 'BNH',
-                  account_number: '123456789',
-                  account_name: 'SPACEX LLC'
-                },
-                parent_account: {},
-                sub_account: true,
-                sub_accounts: [{}]
+              note: {
+                title: 'Meeting Notes',
+                content: 'Office hours are 9AM-6PM',
+                owner_id: '12345'
               }
             }
 
             try {
-              const { data } = await apideck.accounting.ledgerAccountsUpdate(params)
+              const { data } = await apideck.crm.notesUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  /accounting/tax-rates:
+  /crm/opportunities:
     get:
-      description: List Tax Rates
-      operationId: taxRatesAll
+      description: List opportunities
+      operationId: opportunitiesAll
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -1886,9 +2222,11 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/opportunitiesFilter"
+        - $ref: "#/components/parameters/opportunitiesSort"
       responses:
         "200":
-          $ref: "#/components/responses/GetTaxRatesResponse"
+          $ref: "#/components/responses/GetOpportunities"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -1903,10 +2241,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: List Tax Rates
+      summary: List opportunities
       tags:
-        - Tax Rates
-      x-apideck-api: accounting
+        - Opportunities
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1920,15 +2258,15 @@ paths:
             })
 
             try {
-              const { data } = await apideck.accounting.taxRatesAll({})
+              const { data } = await apideck.crm.opportunitiesAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-      x-graphql-field-name: taxRates
+      x-graphql-field-name: opportunities
     post:
-      description: Create Tax Rate
-      operationId: taxRatesAdd
+      description: Create opportunity
+      operationId: opportunitiesAdd
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -1938,11 +2276,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/TaxRate"
+              $ref: "#/components/schemas/Opportunity"
         required: true
       responses:
         "201":
-          $ref: "#/components/responses/CreateTaxRateResponse"
+          $ref: "#/components/responses/CreateOpportunity"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -1957,10 +2295,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Create Tax Rate
+      summary: Create opportunity
       tags:
-        - Tax Rates
-      x-apideck-api: accounting
+        - Opportunities
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1974,35 +2312,53 @@ paths:
             })
 
             const params = {
-              taxRate: {
-                name: '15% GST on Expenses',
-                code: 'ABN',
-                description: 'No ABN Withholding',
-                effective_tax_rate: 10,
-                total_tax_rate: 10,
-                components: [
+              opportunity: {
+                title: 'New Rocket',
+                primary_contact_id: '12345',
+                description:
+                  'Opportunities are created for People and Companies that are interested in buying your products or services. Create Opportunities for People and Companies to move them through one of your Pipelines.',
+                type: 'Existing Customer - Upgrade',
+                monetary_amount: 75000,
+                currency: 'USD',
+                win_probability: 40,
+                close_date: '2020-10-30',
+                loss_reason_id: '12345',
+                loss_reason: 'No budget',
+                won_reason_id: '12345',
+                won_reason: 'Best pitch',
+                pipeline_id: '12345',
+                pipeline_stage_id: '12345',
+                source_id: '12345',
+                lead_id: '12345',
+                lead_source: 'Website',
+                contact_id: '12345',
+                company_id: '12345',
+                company_name: 'Copper',
+                owner_id: '12345',
+                priority: 'None',
+                status: 'Open',
+                status_id: '12345',
+                tags: ['New'],
+                custom_fields: [
                   {
-                    name: 'City tax',
-                    rate: 10,
-                    compound: true
+                    id: 'custom_technologies',
+                    value: 'Uses Salesforce and Marketo'
                   }
                 ],
-                special_tax_type: 'NONE',
-                original_tax_rate_id: '12345',
-                active: true
+                stage_last_changed_at: '2020-09-30T07:43:32.000Z'
               }
             }
 
             try {
-              const { data } = await apideck.accounting.taxRatesAdd(params)
+              const { data } = await apideck.crm.opportunitiesAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/accounting/tax-rates/{id}":
+  "/crm/opportunities/{id}":
     delete:
-      description: Delete Tax Rate
-      operationId: taxRatesDelete
+      description: Delete opportunity
+      operationId: opportunitiesDelete
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -2011,7 +2367,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteTaxRateResponse"
+          $ref: "#/components/responses/DeleteOpportunity"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -2026,10 +2382,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Delete Tax Rate
+      summary: Delete opportunity
       tags:
-        - Tax Rates
-      x-apideck-api: accounting
+        - Opportunities
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -2043,7 +2399,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.accounting.taxRatesDelete({
+              const { data } = await apideck.crm.opportunitiesDelete({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -2051,8 +2407,8 @@ paths:
               console.error(error)
             }
     get:
-      description: Get Tax Rate
-      operationId: taxRatesOne
+      description: Get opportunity
+      operationId: opportunitiesOne
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -2061,7 +2417,7 @@ paths:
         - $ref: "#/components/parameters/raw"
       responses:
         "200":
-          $ref: "#/components/responses/GetTaxRateResponse"
+          $ref: "#/components/responses/GetOpportunity"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -2076,10 +2432,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Get Tax Rate
+      summary: Get opportunity
       tags:
-        - Tax Rates
-      x-apideck-api: accounting
+        - Opportunities
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -2093,7 +2449,7 @@ paths:
             })
 
             try {
-              const { data } = await apideck.accounting.taxRatesOne({
+              const { data } = await apideck.crm.opportunitiesOne({
                 id: 'id_example'
               })
               console.log('API called successfully', data)
@@ -2101,8 +2457,8 @@ paths:
               console.error(error)
             }
     patch:
-      description: Update Tax Rate
-      operationId: taxRatesUpdate
+      description: Update opportunity
+      operationId: opportunitiesUpdate
       parameters:
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
@@ -2113,11 +2469,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/TaxRate"
+              $ref: "#/components/schemas/Opportunity"
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateTaxRateResponse"
+          $ref: "#/components/responses/UpdateOpportunity"
         "400":
           $ref: "#/components/responses/BadRequest"
         "401":
@@ -2132,10 +2488,10 @@ paths:
           $ref: "#/components/responses/UnexpectedError"
       security:
         - apiKey: []
-      summary: Update Tax Rate
+      summary: Update opportunity
       tags:
-        - Tax Rates
-      x-apideck-api: accounting
+        - Opportunities
+      x-apideck-api: crm
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -2150,27 +2506,629 @@ paths:
 
             const params = {
               id: 'id_example',
-              taxRate: {
-                name: '15% GST on Expenses',
-                code: 'ABN',
-                description: 'No ABN Withholding',
-                effective_tax_rate: 10,
-                total_tax_rate: 10,
-                components: [
+              opportunity: {
+                title: 'New Rocket',
+                primary_contact_id: '12345',
+                description:
+                  'Opportunities are created for People and Companies that are interested in buying your products or services. Create Opportunities for People and Companies to move them through one of your Pipelines.',
+                type: 'Existing Customer - Upgrade',
+                monetary_amount: 75000,
+                currency: 'USD',
+                win_probability: 40,
+                close_date: '2020-10-30',
+                loss_reason_id: '12345',
+                loss_reason: 'No budget',
+                won_reason_id: '12345',
+                won_reason: 'Best pitch',
+                pipeline_id: '12345',
+                pipeline_stage_id: '12345',
+                source_id: '12345',
+                lead_id: '12345',
+                lead_source: 'Website',
+                contact_id: '12345',
+                company_id: '12345',
+                company_name: 'Copper',
+                owner_id: '12345',
+                priority: 'None',
+                status: 'Open',
+                status_id: '12345',
+                tags: ['New'],
+                custom_fields: [
                   {
-                    name: 'City tax',
-                    rate: 10,
-                    compound: true
+                    id: 'custom_technologies',
+                    value: 'Uses Salesforce and Marketo'
                   }
                 ],
-                special_tax_type: 'NONE',
-                original_tax_rate_id: '12345',
-                active: true
+                stage_last_changed_at: '2020-09-30T07:43:32.000Z'
               }
             }
 
             try {
-              const { data } = await apideck.accounting.taxRatesUpdate(params)
+              const { data } = await apideck.crm.opportunitiesUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  /crm/pipelines:
+    get:
+      description: List pipelines
+      operationId: pipelinesAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetPipelines"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: List pipelines
+      tags:
+        - Pipelines
+      x-apideck-api: crm
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.crm.pipelinesAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: pipelines
+    post:
+      description: Create pipeline
+      operationId: pipelinesAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pipeline"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreatePipeline"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Create pipeline
+      tags:
+        - Pipelines
+      x-apideck-api: crm
+      x-apideck-upcoming: true
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              pipeline: {
+                id: 'default',
+                name: 'Sales Pipeline',
+                currency: 'USD',
+                archived: false,
+                display_order: 1,
+                stages: [
+                  {
+                    name: 'Contract Sent',
+                    value: 'CONTRACT_SENT',
+                    display_order: 1
+                  }
+                ]
+              }
+            }
+
+            try {
+              const { data } = await apideck.crm.pipelinesAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/crm/pipelines/{id}":
+    delete:
+      description: Delete pipeline
+      operationId: pipelinesDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeletePipeline"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Delete pipeline
+      tags:
+        - Pipelines
+      x-apideck-api: crm
+      x-apideck-upcoming: true
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.crm.pipelinesDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get pipeline
+      operationId: pipelinesOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetPipeline"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Get pipeline
+      tags:
+        - Pipelines
+      x-apideck-api: crm
+      x-apideck-upcoming: true
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.crm.pipelinesOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update pipeline
+      operationId: pipelinesUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pipeline"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdatePipeline"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Update pipeline
+      tags:
+        - Pipelines
+      x-apideck-api: crm
+      x-apideck-upcoming: true
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              pipeline: {
+                id: 'default',
+                name: 'Sales Pipeline',
+                currency: 'USD',
+                archived: false,
+                display_order: 1,
+                stages: [
+                  {
+                    name: 'Contract Sent',
+                    value: 'CONTRACT_SENT',
+                    display_order: 1
+                  }
+                ]
+              }
+            }
+
+            try {
+              const { data } = await apideck.crm.pipelinesUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  /crm/users:
+    get:
+      description: List users
+      operationId: usersAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetUsers"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: List users
+      tags:
+        - Users
+      x-apideck-api: crm
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.crm.usersAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: users
+    post:
+      description: Create user
+      operationId: usersAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateUser"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Create user
+      tags:
+        - Users
+      x-apideck-api: crm
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              user: {
+                email: 'elon@musk.com',
+                parent_id: '54321',
+                username: 'masterofcoin',
+                first_name: 'Elon',
+                last_name: 'Musk',
+                image: 'https://logo.clearbit.com/spacex.com?s=128',
+                language: 'EN',
+                status: 'active',
+                password: 'supersecretpassword'
+              }
+            }
+
+            try {
+              const { data } = await apideck.crm.usersAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/crm/users/{id}":
+    delete:
+      description: Delete user
+      operationId: usersDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteUser"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Delete user
+      tags:
+        - Users
+      x-apideck-api: crm
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.crm.usersDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get user
+      operationId: usersOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetUser"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Get user
+      tags:
+        - Users
+      x-apideck-api: crm
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.crm.usersOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update user
+      operationId: usersUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateUser"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "402":
+          $ref: "#/components/responses/PaymentRequired"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+      security:
+        - apiKey: []
+      summary: Update user
+      tags:
+        - Users
+      x-apideck-api: crm
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              user: {
+                email: 'elon@musk.com',
+                parent_id: '54321',
+                username: 'masterofcoin',
+                first_name: 'Elon',
+                last_name: 'Musk',
+                image: 'https://logo.clearbit.com/spacex.com?s=128',
+                language: 'EN',
+                status: 'active',
+                password: 'supersecretpassword'
+              }
+            }
+
+            try {
+              const { data } = await apideck.crm.usersUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -2184,6 +3142,22 @@ components:
       required: true
       schema:
         type: string
+    companiesFilter:
+      description: Apply filters (beta)
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/CompaniesFilter"
+      style: deepObject
+    companiesSort:
+      description: Apply sorting (beta)
+      explode: true
+      in: query
+      name: sort
+      schema:
+        $ref: "#/components/schemas/CompaniesSort"
+      style: deepObject
     consumerId:
       description: ID of the consumer which you want to get or push data from
       in: header
@@ -2191,6 +3165,22 @@ components:
       required: true
       schema:
         type: string
+    contactsFilter:
+      description: Apply filters (beta)
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/ContactsFilter"
+      style: deepObject
+    contactsSort:
+      description: Apply sorting (beta)
+      explode: true
+      in: query
+      name: sort
+      schema:
+        $ref: "#/components/schemas/ContactsSort"
+      style: deepObject
     cursor:
       description: Cursor to start from. You can find cursors for next/previous pages in the meta.cursors property of the response.
       in: query
@@ -2205,6 +3195,22 @@ components:
       required: true
       schema:
         type: string
+    leadsFilter:
+      description: Apply filters (beta)
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/LeadsFilter"
+      style: deepObject
+    leadsSort:
+      description: Apply sorting (beta)
+      explode: true
+      in: query
+      name: sort
+      schema:
+        $ref: "#/components/schemas/LeadsSort"
+      style: deepObject
     limit:
       description: Number of records to return
       in: query
@@ -2214,6 +3220,22 @@ components:
         maximum: 200
         minimum: 1
         type: integer
+    opportunitiesFilter:
+      description: Apply filters (beta)
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/OpportunitiesFilter"
+      style: deepObject
+    opportunitiesSort:
+      description: Apply sorting (beta)
+      explode: true
+      in: query
+      name: sort
+      schema:
+        $ref: "#/components/schemas/OpportunitiesSort"
+      style: deepObject
     raw:
       description: Include raw response. Mostly used for debugging purposes
       in: query
@@ -2232,393 +3254,466 @@ components:
       content:
         application/json:
           schema:
-            properties:
-              detail:
-                anyOf:
-                  - example: Missing property foobar
-                    type: string
-                  - example:
-                      missing:
-                        - foobar: required
-                    type: object
-                description: Contains parameter or domain specific information related to the error and why it occured.
-              error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-                example: Bad Request
-                type: string
-              message:
-                description: A human-readable message providing more details about the error.
-                example: Invalid Params
-                type: string
-              ref:
-                description: Link to documentation of error type
-                example: https://developers.apideck.com/errors#requestbodyvalidationerror
-                type: string
-              status_code:
-                description: HTTP status code
-                example: 400
-                type: number
-              type_name:
-                description: The type of error returned
-                example: RequestHeadersValidationError
-                type: string
+            $ref: "#/components/schemas/BadRequest"
       description: Bad Request
-    CreateCompanyResponse:
+    CreateActivityResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateActivityResponse"
+      description: Activity
+    CreateCompany:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/CreateCompanyResponse"
-      description: Companies
-    CreateContactResponse:
+      description: Company created
+    CreateContact:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/CreateContactResponse"
-      description: Contacts
-    CreateInvoiceResponse:
+      description: Contact created
+    CreateLead:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateInvoiceResponse"
-      description: Invoices
-    CreateLedgerAccountResponse:
+            $ref: "#/components/schemas/CreateLeadResponse"
+      description: Lead created
+    CreateNoteResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateLedgerAccountResponse"
-      description: LedgerAccounts
-    CreateTaxRateResponse:
+            $ref: "#/components/schemas/CreateNoteResponse"
+      description: Note
+    CreateOpportunity:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateTaxRateResponse"
-      description: TaxRates
-    DeleteCompanyResponse:
+            $ref: "#/components/schemas/CreateOpportunityResponse"
+      description: Opportunity
+    CreatePipeline:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreatePipelineResponse"
+      description: Pipeline created
+    CreateUser:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateUserResponse"
+      description: User created
+    DeleteActivityResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteActivityResponse"
+      description: Activity
+    DeleteCompany:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/DeleteCompanyResponse"
-      description: Companies
-    DeleteContactResponse:
+      description: Company deleted
+    DeleteContact:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/DeleteContactResponse"
-      description: Contacts
-    DeleteInvoiceResponse:
+      description: Contact deleted
+    DeleteLead:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteInvoiceResponse"
-      description: Invoices
-    DeleteLedgerAccountResponse:
+            $ref: "#/components/schemas/DeleteLeadResponse"
+      description: Lead deleted
+    DeleteNoteResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteLedgerAccountResponse"
-      description: LedgerAccounts
-    DeleteTaxRateResponse:
+            $ref: "#/components/schemas/DeleteNoteResponse"
+      description: Note
+    DeleteOpportunity:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteTaxRateResponse"
-      description: TaxRates
-    GetCompaniesResponse:
+            $ref: "#/components/schemas/DeleteOpportunityResponse"
+      description: Opportunity deleted
+    DeletePipeline:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeletePipelineResponse"
+      description: Pipeline deleted
+    DeleteUser:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeleteUserResponse"
+      description: User deleted
+    GetActivitiesResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetActivitiesResponse"
+      description: Activities
+    GetActivityResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetActivityResponse"
+      description: Activity
+    GetCompanies:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetCompaniesResponse"
-      description: Company
-    GetCompanyResponse:
+      description: Companies
+    GetCompany:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetCompanyResponse"
-      description: Companies
-    GetContactResponse:
+      description: Company
+    GetContact:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetContactResponse"
-      description: Contacts
-    GetContactsResponse:
+      description: Contact
+    GetContacts:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/GetContactsResponse"
       description: Contacts
-    GetInvoiceResponse:
+    GetLead:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetInvoiceResponse"
-      description: Invoices
-    GetInvoicesResponse:
+            $ref: "#/components/schemas/GetLeadResponse"
+      description: Lead
+    GetLeads:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetInvoicesResponse"
-      description: Invoices
-    GetLedgerAccountResponse:
+            $ref: "#/components/schemas/GetLeadsResponse"
+      description: Leads
+    GetNoteResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetLedgerAccountResponse"
-      description: LedgerAccounts
-    GetLedgerAccountsResponse:
+            $ref: "#/components/schemas/GetNoteResponse"
+      description: Note
+    GetNotesResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetLedgerAccountsResponse"
-      description: LedgerAccounts
-    GetTaxRateResponse:
+            $ref: "#/components/schemas/GetNotesResponse"
+      description: Notes
+    GetOpportunities:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetTaxRateResponse"
-      description: TaxRates
-    GetTaxRatesResponse:
+            $ref: "#/components/schemas/GetOpportunitiesResponse"
+      description: Opportunities
+    GetOpportunity:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetTaxRatesResponse"
-      description: TaxRates
-    Invoice:
+            $ref: "#/components/schemas/GetOpportunityResponse"
+      description: Opportunity
+    GetPipeline:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Invoice"
-      description: Invoices
+            $ref: "#/components/schemas/GetPipelineResponse"
+      description: Pipeline
+    GetPipelines:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetPipelinesResponse"
+      description: Pipelines
+    GetUser:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetUserResponse"
+      description: User
+    GetUsers:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetUsersResponse"
+      description: Users
     NotFound:
       content:
         application/json:
           schema:
-            properties:
-              detail:
-                anyOf:
-                  - example: "Could not find widget with id: '123'"
-                    type: string
-                  - example:
-                      not_found:
-                        entity: widget
-                        id: "123"
-                    type: object
-                description: Contains parameter or domain specific information related to the error and why it occured.
-              error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-                example: Not Found
-                type: string
-              message:
-                description: A human-readable message providing more details about the error.
-                example: Unknown Widget
-                type: string
-              ref:
-                description: Link to documentation of error type
-                example: https://developers.apideck.com/errors#entitynotfounderror
-                type: string
-              status_code:
-                description: HTTP status code
-                example: 404
-                type: number
-              type_name:
-                description: The type of error returned
-                example: EntityNotFoundError
-                type: string
+            $ref: "#/components/schemas/NotFoundResponse"
       description: The specified resource was not found
     NotImplemented:
       content:
         application/json:
           schema:
-            properties:
-              detail:
-                anyOf:
-                  - example: Failed to retrieve Widget tokenUrl from 'components.securitySchemes.oauth2.flows'
-                    type: string
-                  - type: object
-                description: Contains parameter or domain specific information related to the error and why it occured.
-              error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-                example: Not Implemented
-                type: string
-              message:
-                description: A human-readable message providing more details about the error.
-                example: Unmapped Attribute
-                type: string
-              ref:
-                description: Link to documentation of error type
-                example: https://developers.apideck.com/errors#mappingerror
-                type: string
-              status_code:
-                description: HTTP status code
-                example: 501
-                type: number
-              type_name:
-                description: The type of error returned
-                example: MappingError
-                type: string
+            $ref: "#/components/schemas/NotImplemented"
       description: Not Implemented
     PaymentRequired:
       content:
         application/json:
           schema:
-            properties:
-              detail:
-                description: Contains parameter or domain specific information related to the error and why it occured.
-                example: You have reached your limit of 2000
-                type: string
-              error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-                example: Payment Required
-                type: string
-              message:
-                description: A human-readable message providing more details about the error.
-                example: Request Limit Reached
-                type: string
-              ref:
-                description: Link to documentation of error type
-                example: https://developers.apideck.com/errors#requestlimiterror
-                type: string
-              status_code:
-                description: HTTP status code
-                example: 402
-                type: number
-              type_name:
-                description: The type of error returned
-                example: RequestLimitError
-                type: string
+            $ref: "#/components/schemas/PaymentRequired"
       description: Payment Required
-    TaxRate:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/TaxRate"
-      description: TaxRates
     Unauthorized:
       content:
         application/json:
           schema:
-            properties:
-              detail:
-                description: Contains parameter or domain specific information related to the error and why it occured.
-                example: Failed to generate valid JWT Session. Verify applicationId is correct
-                type: string
-              error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-                example: Unauthorized
-                type: string
-              message:
-                description: A human-readable message providing more details about the error.
-                example: Unauthorized Request
-                type: string
-              ref:
-                description: Link to documentation of error type
-                example: https://developers.apideck.com/errors#unauthorizederror
-                type: string
-              status_code:
-                description: HTTP status code
-                example: 401
-                type: number
-              type_name:
-                description: The type of error returned
-                example: UnauthorizedError
-                type: string
+            $ref: "#/components/schemas/Unauthorized"
       description: Unauthorized
     UnexpectedError:
       content:
         application/json:
           schema:
-            properties:
-              detail:
-                anyOf:
-                  - example: "Missing Header: x-apideck-consumer-id"
-                    type: string
-                  - example:
-                      missing:
-                        - x-apideck-consumer-id: required
-                    type: object
-                description: Contains parameter or domain specific information related to the error and why it occured.
-              error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-                example: Bad Request
-                type: string
-              message:
-                description: A human-readable message providing more details about the error.
-                example: Invalid Params
-                type: string
-              ref:
-                description: Link to documentation of error type
-                example: https://developers.apideck.com/errors#unauthorizederror
-                type: string
-              status_code:
-                description: HTTP status code
-                example: 400
-                type: number
-              type_name:
-                description: The type of error returned
-                example: RequestHeadersValidationError
-                type: string
+            $ref: "#/components/schemas/UnexpectedError"
       description: Unexpected error
     Unprocessable:
       content:
         application/json:
           schema:
-            properties:
-              detail:
-                description: Contains parameter or domain specific information related to the error and why it occured.
-                example: State did not include unified_api
-                type: string
-              error:
-                description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
-                example: Unprocessable Entity
-                type: string
-              message:
-                description: A human-readable message providing more details about the error.
-                example: Invalid State
-                type: string
-              ref:
-                description: Link to documentation of error type
-                example: https://developers.apideck.com/errors#invalidstateerror
-                type: string
-              status_code:
-                description: HTTP status code
-                example: 422
-                type: number
-              type_name:
-                description: The type of error returned
-                example: InvalidStateError
-                type: string
+            $ref: "#/components/schemas/Unprocessable"
       description: Unprocessable
-    UpdateCompanyResponse:
+    UpdateActivityResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateActivityResponse"
+      description: Activity
+    UpdateCompany:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/UpdateCompanyResponse"
-      description: Companies
-    UpdateContactResponse:
+      description: Company updated
+    UpdateContact:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/UpdateContactResponse"
-      description: Contacts
-    UpdateInvoiceResponse:
+      description: Contact updated
+    UpdateLead:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UpdateInvoiceResponse"
-      description: Invoices
-    UpdateLedgerAccountResponse:
+            $ref: "#/components/schemas/UpdateLeadResponse"
+      description: Lead updated
+    UpdateNoteResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UpdateLedgerAccountResponse"
-      description: LedgerAccounts
-    UpdateTaxRateResponse:
+            $ref: "#/components/schemas/UpdateNoteResponse"
+      description: Note
+    UpdateOpportunity:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UpdateTaxRateResponse"
-      description: TaxRates
+            $ref: "#/components/schemas/UpdateOpportunityResponse"
+      description: Opportunity updated
+    UpdatePipeline:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdatePipelineResponse"
+      description: Pipeline updated
+    UpdateUser:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdateUserResponse"
+      description: User updated
   schemas:
+    Activity:
+      additionalProperties: false
+      properties:
+        account_id:
+          example: "12345"
+          nullable: true
+          type: string
+        activity_date:
+          example: 2021-05-01
+          nullable: true
+          type: string
+        activity_datetime:
+          example: 2021-05-01T12:00:00.000Z
+          minLength: 1
+          nullable: true
+          type: string
+        all_day_event:
+          example: false
+          type: boolean
+        archived:
+          example: false
+          type: boolean
+        asset_id:
+          example: "12345"
+          nullable: true
+          type: string
+        campaign_id:
+          example: "12345"
+          nullable: true
+          type: string
+        case_id:
+          example: "12345"
+          nullable: true
+          type: string
+        child:
+          example: false
+          type: boolean
+        company_id:
+          example: "12345"
+          nullable: true
+          type: string
+        contact_id:
+          example: "12345"
+          nullable: true
+          type: string
+        contract_id:
+          example: "12345"
+          nullable: true
+          type: string
+        created_at:
+          example: 2020-09-30T07:43:32.000Z
+          readOnly: true
+          type: string
+        created_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+        custom_fields:
+          items:
+            $ref: "#/components/schemas/CustomField"
+          type: array
+        custom_object_id:
+          example: "12345"
+          nullable: true
+          type: string
+        deleted:
+          example: false
+          type: boolean
+        description:
+          example: More info about the meeting
+          nullable: true
+          type: string
+        duration_minutes:
+          example: 30
+          nullable: true
+          type: integer
+        duration_seconds:
+          example: 1800
+          minimum: 0
+          nullable: true
+          type: integer
+        end_date:
+          example: 2021-05-01
+          nullable: true
+          type: string
+        end_datetime:
+          example: 2021-05-01T12:30:00.000Z
+          nullable: true
+          type: string
+        event_sub_type:
+          example: debrief
+          nullable: true
+          type: string
+        group_event:
+          example: true
+          type: boolean
+        group_event_type:
+          example: Proposed
+          nullable: true
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        lead_id:
+          example: "12345"
+          nullable: true
+          type: string
+        location:
+          example: Space
+          nullable: true
+          type: string
+        opportunity_id:
+          example: "12345"
+          nullable: true
+          type: string
+        owner_id:
+          example: "12345"
+          nullable: true
+          type: string
+        private:
+          example: true
+          type: boolean
+        product_id:
+          example: "12345"
+          nullable: true
+          type: string
+        recurrent:
+          example: false
+          type: boolean
+        reminder_datetime:
+          example: 2021-05-01T17:00:00.000Z
+          nullable: true
+          type: string
+        reminder_set:
+          example: false
+          nullable: true
+          type: boolean
+        show_as:
+          enum:
+            - free
+            - busy
+          example: busy
+          type: string
+        solution_id:
+          example: "12345"
+          nullable: true
+          type: string
+        start_datetime:
+          example: 2021-05-01T12:00:00.000Z
+          nullable: true
+          type: string
+        title:
+          example: Meeting
+          nullable: true
+          type: string
+        type:
+          enum:
+            - call
+            - meeting
+            - email
+            - note
+            - task
+            - send-letter
+            - send-quote
+            - other
+          example: meeting
+          type: string
+        updated_at:
+          example: 2020-09-30T07:43:32.000Z
+          readOnly: true
+          type: string
+        updated_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+      required:
+        - type
+      type: object
     Address:
       properties:
         city:
@@ -2685,6 +3780,37 @@ components:
           type: string
           x-graphql-type-name: AddressType
       type: object
+    BadRequest:
+      properties:
+        detail:
+          anyOf:
+            - example: Missing property foobar
+              type: string
+            - example:
+                missing:
+                  - foobar: required
+              type: object
+          description: Contains parameter or domain specific information related to the error and why it occured.
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Bad Request
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Invalid Params
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#requestbodyvalidationerror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 400
+          type: number
+        type_name:
+          description: The type of error returned
+          example: RequestHeadersValidationError
+          type: string
     BankAccount:
       properties:
         account_name:
@@ -2720,6 +3846,38 @@ components:
           nullable: true
           type: string
       type: object
+    CompaniesFilter:
+      additionalProperties: false
+      example:
+        name: SpaceX
+      properties:
+        name:
+          description: Name of the company to filter on
+          example: SpaceX
+          type: string
+      type: object
+      x-graphql-type-name: CompaniesFilter
+    CompaniesSort:
+      additionalProperties: false
+      example:
+        by: created_at
+        direction: desc
+      properties:
+        by:
+          description: The field on which to sort the Companies
+          enum:
+            - created_at
+            - updated_at
+            - name
+          example: created_at
+          type: string
+          x-graphql-type-name: CompaniesSortBy
+        direction:
+          $ref: "#/components/schemas/SortDirection"
+      required:
+        - by
+      type: object
+      x-graphql-type-name: CompaniesSort
     Company:
       additionalProperties: false
       properties:
@@ -3060,6 +4218,87 @@ components:
         - middle_name
         - last_name
         - email
+    ContactsFilter:
+      additionalProperties: false
+      example:
+        email: elon@tesla.com
+        first_name: Elon
+        last_name: Musk
+      properties:
+        email:
+          description: E-mail of the contact to filter on
+          example: elon@tesla.com
+          type: string
+        first_name:
+          description: First name of the contact to filter on
+          example: Elon
+          type: string
+        last_name:
+          description: Last name of the contact to filter on
+          example: Musk
+          type: string
+        name:
+          description: Name of the contact to filter on
+          example: Elon Musk
+          type: string
+      type: object
+      x-graphql-type-name: ContactsFilter
+    ContactsSort:
+      additionalProperties: false
+      example:
+        by: created_at
+        direction: desc
+      properties:
+        by:
+          description: The field on which to sort the Contacts
+          enum:
+            - created_at
+            - updated_at
+            - name
+            - first_name
+            - last_name
+            - email
+          example: created_at
+          type: string
+          x-graphql-type-name: ContactsSortBy
+        direction:
+          $ref: "#/components/schemas/SortDirection"
+      required:
+        - by
+      type: object
+      x-graphql-type-name: ContactsSort
+    CreateActivityResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: activities
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     CreateCompanyResponse:
       properties:
         data:
@@ -3070,7 +4309,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Companies
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -3102,7 +4341,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Contacts
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -3124,7 +4363,7 @@ components:
         - operation
         - data
       type: object
-    CreateInvoiceResponse:
+    CreateLeadResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -3134,7 +4373,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Invoices
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -3156,7 +4395,7 @@ components:
         - operation
         - data
       type: object
-    CreateLedgerAccountResponse:
+    CreateNoteResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -3166,7 +4405,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: LedgerAccounts
+          example: notes
           type: string
         service:
           description: Apideck ID of service provider
@@ -3188,7 +4427,7 @@ components:
         - operation
         - data
       type: object
-    CreateTaxRateResponse:
+    CreateOpportunityResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -3198,7 +4437,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: TaxRates
+          example: opportunities
           type: string
         service:
           description: Apideck ID of service provider
@@ -3220,567 +4459,70 @@ components:
         - operation
         - data
       type: object
-    CreatedAt:
-      example: 2020-09-30T07:43:32.000Z
-      format: date-time
-      readOnly: true
-      type: string
-    CreatedBy:
-      example: "12345"
-      nullable: true
-      readOnly: true
-      type: string
-    Currency:
-      description: Indicates the associated currency for an amount of money. Values correspond to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
-      enum:
-        - UNKNOWN_CURRENCY
-        - AED
-        - AFN
-        - ALL
-        - AMD
-        - ANG
-        - AOA
-        - ARS
-        - AUD
-        - AWG
-        - AZN
-        - BAM
-        - BBD
-        - BDT
-        - BGN
-        - BHD
-        - BIF
-        - BMD
-        - BND
-        - BOB
-        - BOV
-        - BRL
-        - BSD
-        - BTN
-        - BWP
-        - BYR
-        - BZD
-        - CAD
-        - CDF
-        - CHE
-        - CHF
-        - CHW
-        - CLF
-        - CLP
-        - CNY
-        - COP
-        - COU
-        - CRC
-        - CUC
-        - CUP
-        - CVE
-        - CZK
-        - DJF
-        - DKK
-        - DOP
-        - DZD
-        - EGP
-        - ERN
-        - ETB
-        - EUR
-        - FJD
-        - FKP
-        - GBP
-        - GEL
-        - GHS
-        - GIP
-        - GMD
-        - GNF
-        - GTQ
-        - GYD
-        - HKD
-        - HNL
-        - HRK
-        - HTG
-        - HUF
-        - IDR
-        - ILS
-        - INR
-        - IQD
-        - IRR
-        - ISK
-        - JMD
-        - JOD
-        - JPY
-        - KES
-        - KGS
-        - KHR
-        - KMF
-        - KPW
-        - KRW
-        - KWD
-        - KYD
-        - KZT
-        - LAK
-        - LBP
-        - LKR
-        - LRD
-        - LSL
-        - LTL
-        - LVL
-        - LYD
-        - MAD
-        - MDL
-        - MGA
-        - MKD
-        - MMK
-        - MNT
-        - MOP
-        - MRO
-        - MUR
-        - MVR
-        - MWK
-        - MXN
-        - MXV
-        - MYR
-        - MZN
-        - NAD
-        - NGN
-        - NIO
-        - NOK
-        - NPR
-        - NZD
-        - OMR
-        - PAB
-        - PEN
-        - PGK
-        - PHP
-        - PKR
-        - PLN
-        - PYG
-        - QAR
-        - RON
-        - RSD
-        - RUB
-        - RWF
-        - SAR
-        - SBD
-        - SCR
-        - SDG
-        - SEK
-        - SGD
-        - SHP
-        - SLL
-        - SOS
-        - SRD
-        - SSP
-        - STD
-        - SVC
-        - SYP
-        - SZL
-        - THB
-        - TJS
-        - TMT
-        - TND
-        - TOP
-        - TRY
-        - TTD
-        - TWD
-        - TZS
-        - UAH
-        - UGX
-        - USD
-        - USN
-        - USS
-        - UYI
-        - UYU
-        - UZS
-        - VEF
-        - VND
-        - VUV
-        - WST
-        - XAF
-        - XAG
-        - XAU
-        - XBA
-        - XBB
-        - XBC
-        - XBD
-        - XCD
-        - XDR
-        - XOF
-        - XPD
-        - XPF
-        - XPT
-        - XTS
-        - XXX
-        - YER
-        - ZAR
-        - ZMK
-        - ZMW
-        - BTC
-      example: USD
-      nullable: true
-      title: Currency
-      type: string
-      x-enum-elements:
-        - description: Unknown currency
-          name: UNKNOWN_CURRENCY
-        - description: United Arab Emirates dirham
-          name: AED
-        - description: Afghan afghani
-          name: AFN
-        - description: Albanian lek
-          name: ALL
-        - description: Armenian dram
-          name: AMD
-        - description: Netherlands Antillean guilder
-          name: ANG
-        - description: Angolan kwanza
-          name: AOA
-        - description: Argentine peso
-          name: ARS
-        - description: Australian dollar
-          name: AUD
-        - description: Aruban florin
-          name: AWG
-        - description: Azerbaijani manat
-          name: AZN
-        - description: Bosnia and Herzegovina convertible mark
-          name: BAM
-        - description: Barbados dollar
-          name: BBD
-        - description: Bangladeshi taka
-          name: BDT
-        - description: Bulgarian lev
-          name: BGN
-        - description: Bahraini dinar
-          name: BHD
-        - description: Burundian franc
-          name: BIF
-        - description: Bermudian dollar
-          name: BMD
-        - description: Brunei dollar
-          name: BND
-        - description: Boliviano
-          name: BOB
-        - description: Bolivian Mvdol
-          name: BOV
-        - description: Brazilian real
-          name: BRL
-        - description: Bahamian dollar
-          name: BSD
-        - description: Bhutanese ngultrum
-          name: BTN
-        - description: Botswana pula
-          name: BWP
-        - description: Belarusian ruble
-          name: BYR
-        - description: Belize dollar
-          name: BZD
-        - description: Canadian dollar
-          name: CAD
-        - description: Congolese franc
-          name: CDF
-        - description: WIR Euro
-          name: CHE
-        - description: Swiss franc
-          name: CHF
-        - description: WIR Franc
-          name: CHW
-        - description: Unidad de Fomento
-          name: CLF
-        - description: Chilean peso
-          name: CLP
-        - description: Chinese yuan
-          name: CNY
-        - description: Colombian peso
-          name: COP
-        - description: Unidad de Valor Real
-          name: COU
-        - description: Costa Rican colon
-          name: CRC
-        - description: Cuban convertible peso
-          name: CUC
-        - description: Cuban peso
-          name: CUP
-        - description: Cape Verdean escudo
-          name: CVE
-        - description: Czech koruna
-          name: CZK
-        - description: Djiboutian franc
-          name: DJF
-        - description: Danish krone
-          name: DKK
-        - description: Dominican peso
-          name: DOP
-        - description: Algerian dinar
-          name: DZD
-        - description: Egyptian pound
-          name: EGP
-        - description: Eritrean nakfa
-          name: ERN
-        - description: Ethiopian birr
-          name: ETB
-        - description: Euro
-          name: EUR
-        - description: Fiji dollar
-          name: FJD
-        - description: Falkland Islands pound
-          name: FKP
-        - description: Pound sterling
-          name: GBP
-        - description: Georgian lari
-          name: GEL
-        - description: Ghanaian cedi
-          name: GHS
-        - description: Gibraltar pound
-          name: GIP
-        - description: Gambian dalasi
-          name: GMD
-        - description: Guinean franc
-          name: GNF
-        - description: Guatemalan quetzal
-          name: GTQ
-        - description: Guyanese dollar
-          name: GYD
-        - description: Hong Kong dollar
-          name: HKD
-        - description: Honduran lempira
-          name: HNL
-        - description: Croatian kuna
-          name: HRK
-        - description: Haitian gourde
-          name: HTG
-        - description: Hungarian forint
-          name: HUF
-        - description: Indonesian rupiah
-          name: IDR
-        - description: Israeli new shekel
-          name: ILS
-        - description: Indian rupee
-          name: INR
-        - description: Iraqi dinar
-          name: IQD
-        - description: Iranian rial
-          name: IRR
-        - description: Icelandic króna
-          name: ISK
-        - description: Jamaican dollar
-          name: JMD
-        - description: Jordanian dinar
-          name: JOD
-        - description: Japanese yen
-          name: JPY
-        - description: Kenyan shilling
-          name: KES
-        - description: Kyrgyzstani som
-          name: KGS
-        - description: Cambodian riel
-          name: KHR
-        - description: Comoro franc
-          name: KMF
-        - description: North Korean won
-          name: KPW
-        - description: South Korean won
-          name: KRW
-        - description: Kuwaiti dinar
-          name: KWD
-        - description: Cayman Islands dollar
-          name: KYD
-        - description: Kazakhstani tenge
-          name: KZT
-        - description: Lao kip
-          name: LAK
-        - description: Lebanese pound
-          name: LBP
-        - description: Sri Lankan rupee
-          name: LKR
-        - description: Liberian dollar
-          name: LRD
-        - description: Lesotho loti
-          name: LSL
-        - description: Lithuanian litas
-          name: LTL
-        - description: Latvian lats
-          name: LVL
-        - description: Libyan dinar
-          name: LYD
-        - description: Moroccan dirham
-          name: MAD
-        - description: Moldovan leu
-          name: MDL
-        - description: Malagasy ariary
-          name: MGA
-        - description: Macedonian denar
-          name: MKD
-        - description: Myanmar kyat
-          name: MMK
-        - description: Mongolian tögrög
-          name: MNT
-        - description: Macanese pataca
-          name: MOP
-        - description: Mauritanian ouguiya
-          name: MRO
-        - description: Mauritian rupee
-          name: MUR
-        - description: Maldivian rufiyaa
-          name: MVR
-        - description: Malawian kwacha
-          name: MWK
-        - description: Mexican peso
-          name: MXN
-        - description: Mexican Unidad de Inversion
-          name: MXV
-        - description: Malaysian ringgit
-          name: MYR
-        - description: Mozambican metical
-          name: MZN
-        - description: Namibian dollar
-          name: NAD
-        - description: Nigerian naira
-          name: NGN
-        - description: Nicaraguan córdoba
-          name: NIO
-        - description: Norwegian krone
-          name: NOK
-        - description: Nepalese rupee
-          name: NPR
-        - description: New Zealand dollar
-          name: NZD
-        - description: Omani rial
-          name: OMR
-        - description: Panamanian balboa
-          name: PAB
-        - description: Peruvian sol
-          name: PEN
-        - description: Papua New Guinean kina
-          name: PGK
-        - description: Philippine peso
-          name: PHP
-        - description: Pakistani rupee
-          name: PKR
-        - description: Polish złoty
-          name: PLN
-        - description: Paraguayan guaraní
-          name: PYG
-        - description: Qatari riyal
-          name: QAR
-        - description: Romanian leu
-          name: RON
-        - description: Serbian dinar
-          name: RSD
-        - description: Russian ruble
-          name: RUB
-        - description: Rwandan franc
-          name: RWF
-        - description: Saudi riyal
-          name: SAR
-        - description: Solomon Islands dollar
-          name: SBD
-        - description: Seychelles rupee
-          name: SCR
-        - description: Sudanese pound
-          name: SDG
-        - description: Swedish krona
-          name: SEK
-        - description: Singapore dollar
-          name: SGD
-        - description: Saint Helena pound
-          name: SHP
-        - description: Sierra Leonean leone
-          name: SLL
-        - description: Somali shilling
-          name: SOS
-        - description: Surinamese dollar
-          name: SRD
-        - description: South Sudanese pound
-          name: SSP
-        - description: São Tomé and Príncipe dobra
-          name: STD
-        - description: Salvadoran colón
-          name: SVC
-        - description: Syrian pound
-          name: SYP
-        - description: Swazi lilangeni
-          name: SZL
-        - description: Thai baht
-          name: THB
-        - description: Tajikstani somoni
-          name: TJS
-        - description: Turkmenistan manat
-          name: TMT
-        - description: Tunisian dinar
-          name: TND
-        - description: Tongan pa'anga
-          name: TOP
-        - description: Turkish lira
-          name: TRY
-        - description: Trinidad and Tobago dollar
-          name: TTD
-        - description: New Taiwan dollar
-          name: TWD
-        - description: Tanzanian shilling
-          name: TZS
-        - description: Ukrainian hryvnia
-          name: UAH
-        - description: Ugandan shilling
-          name: UGX
-        - description: United States dollar
-          name: USD
-        - description: United States dollar (next day)
-          name: USN
-        - description: United States dollar (same day)
-          name: USS
-        - description: Uruguay Peso en Unidedades Indexadas
-          name: UYI
-        - description: Uruguyan peso
-          name: UYU
-        - description: Uzbekistan som
-          name: UZS
-        - description: Venezuelan bolívar soberano
-          name: VEF
-        - description: Vietnamese đồng
-          name: VND
-        - description: Vanuatu vatu
-          name: VUV
-        - description: Samoan tala
-          name: WST
-        - description: CFA franc BEAC
-          name: XAF
-        - description: Silver
-          name: XAG
-        - description: Gold
-          name: XAU
-        - description: European Composite Unit
-          name: XBA
-        - description: European Monetary Unit
-          name: XBB
-        - description: European Unit of Account 9
-          name: XBC
-        - description: European Unit of Account 17
-          name: XBD
-        - description: East Caribbean dollar
-          name: XCD
-        - description: Special drawing rights (International Monetary Fund)
-          name: XDR
-        - description: CFA franc BCEAO
-          name: XOF
-        - description: Palladium
-          name: XPD
-        - description: CFP franc
-          name: XPF
-        - description: Platinum
-          name: XPT
-        - description: Code reserved for testing
-          name: XTS
-        - description: No currency
-          name: XXX
-        - description: Yemeni rial
-          name: YER
-        - description: South African rand
-          name: ZAR
-        - description: Zambian kwacha
-          name: ZMK
-        - description: Zambian kwacha
-          name: ZMW
-        - description: Bitcoin
-          name: BTC
+    CreatePipelineResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: pipelines
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    CreateUserResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: users
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     CustomField:
       additionalProperties: false
       properties:
@@ -3804,6 +4546,38 @@ components:
       required:
         - id
       type: object
+    DeleteActivityResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: activities
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     DeleteCompanyResponse:
       properties:
         data:
@@ -3814,7 +4588,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Companies
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -3846,7 +4620,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Contacts
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -3868,7 +4642,7 @@ components:
         - operation
         - data
       type: object
-    DeleteInvoiceResponse:
+    DeleteLeadResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -3878,7 +4652,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Invoices
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -3900,7 +4674,7 @@ components:
         - operation
         - data
       type: object
-    DeleteLedgerAccountResponse:
+    DeleteNoteResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -3910,7 +4684,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: LedgerAccounts
+          example: notes
           type: string
         service:
           description: Apideck ID of service provider
@@ -3932,7 +4706,7 @@ components:
         - operation
         - data
       type: object
-    DeleteTaxRateResponse:
+    DeleteOpportunityResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -3942,7 +4716,71 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: TaxRates
+          example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    DeletePipelineResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    DeleteUserResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: users
           type: string
         service:
           description: Apideck ID of service provider
@@ -3988,6 +4826,78 @@ components:
       required:
         - email
       type: object
+    GetActivitiesResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Activity"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: activities
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: ActivityList
+    GetActivityResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Activity"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: activities
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: activity
     GetCompaniesResponse:
       properties:
         data:
@@ -4004,7 +4914,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Companies
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -4037,7 +4947,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Companies
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -4059,7 +4969,7 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: Company
+      x-graphql-type-name: company
     GetContactResponse:
       properties:
         data:
@@ -4070,7 +4980,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Contacts
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -4092,7 +5002,6 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: Contact
     GetContactsResponse:
       properties:
         data:
@@ -4109,7 +5018,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Contacts
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -4132,17 +5041,17 @@ components:
         - data
       type: object
       x-graphql-type-name: ContactList
-    GetInvoiceResponse:
+    GetLeadResponse:
       properties:
         data:
-          $ref: "#/components/schemas/Invoice"
+          $ref: "#/components/schemas/Lead"
         operation:
           description: Operation performed
           example: one
           type: string
         resource:
           description: Unified API resource name
-          example: Invoices
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -4164,12 +5073,11 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: Invoice
-    GetInvoicesResponse:
+    GetLeadsResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/Invoice"
+            $ref: "#/components/schemas/Lead"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -4181,7 +5089,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Invoices
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -4203,18 +5111,18 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: InvoiceList
-    GetLedgerAccountResponse:
+      x-graphql-type-name: LeadList
+    GetNoteResponse:
       properties:
         data:
-          $ref: "#/components/schemas/LedgerAccount"
+          $ref: "#/components/schemas/Note"
         operation:
           description: Operation performed
           example: one
           type: string
         resource:
           description: Unified API resource name
-          example: LedgerAccounts
+          example: notes
           type: string
         service:
           description: Apideck ID of service provider
@@ -4236,12 +5144,12 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: LedgerAccount
-    GetLedgerAccountsResponse:
+      x-graphql-type-name: note
+    GetNotesResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/LedgerAccount"
+            $ref: "#/components/schemas/Note"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -4253,7 +5161,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: LedgerAccounts
+          example: notes
           type: string
         service:
           description: Apideck ID of service provider
@@ -4275,45 +5183,12 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: LedgerAccountList
-    GetTaxRateResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/TaxRate"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: TaxRates
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: zoho-crm
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-      x-graphql-type-name: TaxRate
-    GetTaxRatesResponse:
+      x-graphql-type-name: NoteList
+    GetOpportunitiesResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/TaxRate"
+            $ref: "#/components/schemas/Opportunity"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -4325,7 +5200,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: TaxRates
+          example: opportunities
           type: string
         service:
           description: Apideck ID of service provider
@@ -4347,194 +5222,181 @@ components:
         - operation
         - data
       type: object
-      x-graphql-type-name: TaxRateList
-    Id:
-      example: "12345"
-      readOnly: true
-      type: string
-    Invoice:
-      additionalProperties: false
+      x-graphql-type-name: OpportunityList
+    GetOpportunityResponse:
       properties:
-        balance:
-          example: 26500
-          nullable: true
-          title: Balance
-          type: number
-        billing_address:
-          $ref: "#/components/schemas/Address"
-        created_at:
-          $ref: "#/components/schemas/CreatedAt"
-        created_by:
-          $ref: "#/components/schemas/CreatedBy"
-        currency:
-          $ref: "#/components/schemas/Currency"
-        customer:
-          description: The customer this invoice is linked to.
-          nullable: true
-          properties:
-            company_name:
-              example: The boring company
-              minLength: 1
-              nullable: true
-              type: string
-            id:
-              $ref: "#/components/schemas/Id"
-          title: Customer
-          type: object
-        customer_memo:
-          example: Thank you for your business and have a great day!
-          nullable: true
-          title: Customer memo
+        data:
+          $ref: "#/components/schemas/Opportunity"
+        operation:
+          description: Operation performed
+          example: one
           type: string
-        date:
-          description: Date invoice was issued - YYYY-MM-DD
-          example: 2020-09-30
-          format: date
-          title: Invoice date
+        resource:
+          description: Unified API resource name
+          example: opportunities
           type: string
-        deposit:
-          example: 2000
-          nullable: true
-          title: Deposit
-          type: number
-        due_date:
-          description: The invoice due date is the date on which a payment or invoice is scheduled to be received by the seller - YYYY-MM-DD
-          example: 2020-10-30
-          format: date
-          title: Due date
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
           type: string
-        id:
-          $ref: "#/components/schemas/Id"
-        line_items:
-          items:
-            additionalProperties: false
-            properties:
-              description:
-                example: Rock Fountain
-                nullable: true
-                title: Description
-                type: string
-              discount_percentage:
-                example: 15
-                nullable: true
-                title: Amount
-                type: integer
-              general_ledger_account:
-                properties:
-                  id:
-                    $ref: "#/components/schemas/Id"
-                  name:
-                    example: Bank account
-                    minLength: 1
-                    nullable: true
-                    title: Account Name
-                    type: string
-              id:
-                $ref: "#/components/schemas/Id"
-              item_id:
-                description: ID of the linked item
-                example: 12344
-                nullable: true
-                title: Item ID
-                type: integer
-              line_number:
-                example: 1
-                nullable: true
-                title: Line number
-                type: integer
-              quantity:
-                example: 2
-                nullable: true
-                title: Quantity
-                type: integer
-              tax_amount:
-                example: 27500
-                nullable: true
-                title: Tax amount
-                type: integer
-              tax_rate:
-                properties:
-                  code:
-                    example: ABN
-                    minLength: 1
-                    nullable: true
-                    title: Tax code
-                    type: string
-                  id:
-                    $ref: "#/components/schemas/Id"
-                  name:
-                    example: 15% GST on Expenses
-                    minLength: 1
-                    nullable: true
-                    type: string
-              total_amount:
-                example: 27500
-                nullable: true
-                title: Total amount
-                type: integer
-              type:
-                example: Transaction
-                nullable: true
-                title: Type
-                type: string
-              unit_price:
-                example: 27500
-                nullable: true
-                title: Unit price
-                type: integer
-            type: object
-          type: array
-        number:
-          example: OIT00546
-          nullable: true
-          title: Invoice number
-          type: string
-        po_number:
-          description: A PO Number uniquely identifies a purchase order and is generally defined by the buyer. The buyer will match the PO number in the invoice to the Purchase Order.
-          example: "90000117"
-          nullable: true
-          title: Purchase Order number
-          type: string
-        shipping_address:
-          $ref: "#/components/schemas/Address"
         status:
-          description: Invoice status
-          enum:
-            - draft
-            - submitted
-            - partially_paid
-            - paid
-            - void
-          example: paid
-          nullable: true
-          title: Status
+          description: HTTP Response Status
+          example: OK
           type: string
-        sub_total:
-          example: 27500
-          nullable: true
-          title: Sub-total amount
-          type: number
-        total:
-          example: 28500
-          nullable: true
-          title: Total amount
-          type: number
-        total_tax:
-          example: 1000
-          nullable: true
-          title: Total tax amount
-          type: number
-        type:
-          description: ""
-          example: Service
-          nullable: true
-          title: Invoice type
-          type: string
-        updated_at:
-          $ref: "#/components/schemas/UpdatedAt"
-        updated_by:
-          $ref: "#/components/schemas/UpdatedBy"
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
       type: object
+    GetPipelineResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Pipeline"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: pipelines
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    GetPipelinesResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Pipeline"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: pipelines
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: PipelinesList
+    GetUserResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/User"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    GetUsersResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/User"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: users
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-graphql-type-name: UserList
     Lead:
       additionalProperties: false
       properties:
@@ -4648,149 +5510,55 @@ components:
         - email
         - first_name
         - last_name
-    LedgerAccount:
+    LeadsFilter:
       additionalProperties: false
+      example:
+        email: elon@tesla.com
+        first_name: Elon
+        last_name: Musk
       properties:
-        active:
-          example: true
-          nullable: true
-          type: boolean
-        bank_account:
-          $ref: "#/components/schemas/BankAccount"
-        classification:
-          enum:
-            - asset
-            - equity
-            - expense
-            - liability
-            - revenue
-            - income
-            - other_income
-            - other_expense
-            - costs_of_sales
-          example: asset
-          nullable: true
+        email:
+          description: E-mail of the lead to filter on
+          example: elon@tesla.com
           type: string
-        created_at:
-          $ref: "#/components/schemas/CreatedAt"
-        created_by:
-          $ref: "#/components/schemas/CreatedBy"
-        currency:
-          $ref: "#/components/schemas/Currency"
-        current_balance:
-          description: The current balance. A positive integer representing the smallest currency unit (e.g., 20000 cents equals $200.00 or 20000 equals ¥20000, a zero-decimal currency)
-          example: 20000
-          nullable: true
-          type: number
-        description:
-          example: The main checking account
-          minLength: 1
-          nullable: true
+        first_name:
+          description: First name of the lead to filter on
+          example: Elon
           type: string
-        display_id:
-          example: 1-12345
-          readOnly: true
-          type: string
-        fully_qualified_name:
-          example: Asset.Bank.Checking_Account
-          nullable: true
-          type: string
-        id:
-          $ref: "#/components/schemas/Id"
-        last_reconciliation_date:
-          description: Reconciliation Date means the last calendar day of each Reconciliation Period.
-          example: 2020-09-30
-          format: date
-          readOnly: true
-          title: Last Reconciliation Date
-          type: string
-        level:
-          example: "2"
-          nullable: true
+        last_name:
+          description: Last name of the lead to filter on
+          example: Musk
           type: string
         name:
-          example: Bank account
-          nullable: true
+          description: Name of the lead to filter on
+          example: Elon Musk
           type: string
-        nominal_code:
-          example: 91
-          nullable: true
-          type: string
-        opening_balance:
-          description: The opening balance. A positive integer representing the smallest currency unit (e.g., 100 cents equals $1.00 or 100 equals ¥100, a zero-decimal currency)
-          example: 75000
-          nullable: true
-          type: number
-        parent_account:
-          properties:
-            display_id:
-              example: 1-1100
-              readOnly: true
-              title: Display ID
-              type: string
-            id:
-              example: "12345"
-              readOnly: true
-              type: string
-            name:
-              example: Bank Accounts
-              readOnly: true
-              title: Name
-              type: string
-          type: object
-        sub_account:
-          example: true
-          nullable: true
-          type: boolean
-        sub_accounts:
-          items:
-            properties:
-              account_sub_name:
-                example: Petty Cash
-                readOnly: true
-                title: Account Sub Name
-                type: string
-              id:
-                example: "12345"
-                readOnly: true
-                type: string
-          type: array
-        sub_type:
-          example: CHECKING_ACCOUNT
-          nullable: true
-          type: string
-        tax_code:
-          example: N-T
-          nullable: true
-          type: string
-        tax_type:
-          example: USD
-          nullable: true
-          type: string
-        type:
-          enum:
-            - accounts_receivable
-            - bank
-            - current_asset
-            - non_current_asset
-            - other_asset
-            - equity
-            - expense
-            - other_expense
-            - costs_of_sales
-            - accounts_payable
-            - credit_card
-            - current_liability
-            - non_current_liability
-            - other_liability
-          example: bank
-          nullable: true
-          type: string
-        updated_at:
-          $ref: "#/components/schemas/UpdatedAt"
-        updated_by:
-          $ref: "#/components/schemas/UpdatedBy"
       type: object
+      x-graphql-type-name: LeadsFilter
+    LeadsSort:
+      additionalProperties: false
+      example:
+        by: created_at
+        direction: desc
+      properties:
+        by:
+          description: The field on which to sort the Leads
+          enum:
+            - created_at
+            - updated_at
+            - name
+            - first_name
+            - last_name
+            - email
+          example: created_at
+          type: string
+          x-graphql-type-name: LeadsSortBy
+        direction:
+          $ref: "#/components/schemas/SortDirection"
+      required:
+        - by
+      type: object
+      x-graphql-type-name: LeadsSort
     Links:
       description: Links to navigate to previous or next pages through the API
       properties:
@@ -4836,6 +5604,149 @@ components:
           example: 50
           type: integer
       type: object
+    NotFoundResponse:
+      properties:
+        detail:
+          anyOf:
+            - example: "Could not find widget with id: '123'"
+              type: string
+            - example:
+                not_found:
+                  entity: widget
+                  id: "123"
+              type: object
+          description: Contains parameter or domain specific information related to the error and why it occured.
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Not Found
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Unknown Widget
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#entitynotfounderror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 404
+          type: number
+        type_name:
+          description: The type of error returned
+          example: EntityNotFoundError
+          type: string
+    NotImplemented:
+      properties:
+        detail:
+          anyOf:
+            - example: Failed to retrieve Widget tokenUrl from 'components.securitySchemes.oauth2.flows'
+              type: string
+            - type: object
+          description: Contains parameter or domain specific information related to the error and why it occured.
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Not Implemented
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Unmapped Attribute
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#mappingerror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 501
+          type: number
+        type_name:
+          description: The type of error returned
+          example: MappingError
+          type: string
+    Note:
+      additionalProperties: false
+      properties:
+        content:
+          example: Office hours are 9AM-6PM
+          type: string
+        created_at:
+          example: 2020-09-30T07:43:32.000Z
+          readOnly: true
+          type: string
+        created_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+        id:
+          example: "12345"
+          readOnly: true
+          type: string
+        owner_id:
+          example: "12345"
+          type: string
+        title:
+          example: Meeting Notes
+          type: string
+        updated_at:
+          example: 2020-09-30T07:43:32.000Z
+          readOnly: true
+          type: string
+        updated_by:
+          example: "12345"
+          nullable: true
+          readOnly: true
+          type: string
+      type: object
+    OpportunitiesFilter:
+      additionalProperties: false
+      example:
+        monetary_amount: 75000
+        status: Completed
+      properties:
+        monetary_amount:
+          description: Monetary amount to filter on
+          example: 75000
+          type: number
+        status:
+          description: Status to filter on
+          example: Completed
+          type: string
+        title:
+          description: Title of the opportunity to filter on
+          example: Tesla deal
+          type: string
+        win_probability:
+          description: Win probability to filter on
+          example: 50
+          type: number
+      type: object
+      x-graphql-type-name: OpportunitiesFilter
+    OpportunitiesSort:
+      additionalProperties: false
+      example:
+        by: created_at
+        direction: desc
+      properties:
+        by:
+          description: The field on which to sort the Opportunities
+          enum:
+            - created_at
+            - updated_at
+            - title
+            - win_probability
+            - monetary_amount
+            - status
+          example: created_at
+          type: string
+          x-graphql-type-name: OpportunitiesSortBy
+        direction:
+          $ref: "#/components/schemas/SortDirection"
+      required:
+        - by
+      type: object
+      x-graphql-type-name: OpportunitiesSort
     Opportunity:
       additionalProperties: false
       properties:
@@ -5018,6 +5929,32 @@ components:
         - title
         - primary_contact_id
       type: object
+    PaymentRequired:
+      properties:
+        detail:
+          description: Contains parameter or domain specific information related to the error and why it occured.
+          example: You have reached your limit of 2000
+          type: string
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Payment Required
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Request Limit Reached
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#requestlimiterror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 402
+          type: number
+        type_name:
+          description: The type of error returned
+          example: RequestLimitError
+          type: string
     PhoneNumber:
       properties:
         id:
@@ -5109,89 +6046,76 @@ components:
       required:
         - url
       type: object
+    SortDirection:
+      default: asc
+      description: The direction in which to sort the results
+      enum:
+        - asc
+        - desc
+      type: string
     Tags:
       example:
         - New
       items:
         type: string
       type: array
-    TaxRate:
-      additionalProperties: false
+    Unauthorized:
       properties:
-        active:
-          example: true
-          nullable: true
-          title: Active
-          type: boolean
-        code:
-          example: ABN
-          minLength: 1
-          nullable: true
-          title: Tax code
+        detail:
+          description: Contains parameter or domain specific information related to the error and why it occured.
+          example: Failed to generate valid JWT Session. Verify applicationId is correct
           type: string
-        components:
-          items:
-            properties:
-              compound:
-                example: true
-                nullable: true
-                title: Compound
-                type: boolean
-              name:
-                example: City tax
-                minLength: 1
-                type: string
-              rate:
-                example: 10
-                nullable: true
-                title: Tax rate
-                type: number
-          nullable: true
-          title: Tax components
-          type: array
-        created_at:
-          $ref: "#/components/schemas/CreatedAt"
-        created_by:
-          $ref: "#/components/schemas/CreatedBy"
-        description:
-          example: No ABN Withholding
-          nullable: true
-          title: Description
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Unauthorized
           type: string
-        effective_tax_rate:
-          example: 10
-          nullable: true
-          title: Effective tax rate
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Unauthorized Request
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#unauthorizederror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 401
           type: number
-        id:
-          $ref: "#/components/schemas/Id"
-        name:
-          example: 15% GST on Expenses
-          minLength: 1
+        type_name:
+          description: The type of error returned
+          example: UnauthorizedError
           type: string
-        original_tax_rate_id:
-          description: ID of the original tax rate from which the new tax rate is derived. Helps to understand the relationship between corresponding tax rate entities.
-          example: "12345"
-          nullable: true
-          title: Original tax rate ID
+    UnexpectedError:
+      properties:
+        detail:
+          anyOf:
+            - example: "Missing Header: x-apideck-consumer-id"
+              type: string
+            - example:
+                missing:
+                  - x-apideck-consumer-id: required
+              type: object
+          description: Contains parameter or domain specific information related to the error and why it occured.
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Bad Request
           type: string
-        special_tax_type:
-          description: Special tax type to handle zero rate taxes. Used with VAT registered Businesses who receive goods/services (acquisitions) from other EU countries, will need to calculate the VAT due, but not paid, on these acquisitions. The rate of VAT payable is the same that would have been paid if the goods had been supplied by a UK supplier.
-          example: NONE
-          nullable: true
-          title: Description
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Invalid Params
           type: string
-        total_tax_rate:
-          description: Not compounded sum of the components of a tax rate
-          example: 10
-          nullable: true
-          title: Total tax rate
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#unauthorizederror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 400
           type: number
-        updated_at:
-          $ref: "#/components/schemas/UpdatedAt"
-        updated_by:
-          $ref: "#/components/schemas/UpdatedBy"
-      type: object
+        type_name:
+          description: The type of error returned
+          example: RequestHeadersValidationError
+          type: string
     UnifiedId:
       properties:
         id:
@@ -5201,6 +6125,64 @@ components:
       required:
         - id
       title: UnifiedId
+    Unprocessable:
+      properties:
+        detail:
+          description: Contains parameter or domain specific information related to the error and why it occured.
+          example: State did not include unified_api
+          type: string
+        error:
+          description: Contains an explanation of the status_code as defined in HTTP/1.1 standard (RFC 7231)
+          example: Unprocessable Entity
+          type: string
+        message:
+          description: A human-readable message providing more details about the error.
+          example: Invalid State
+          type: string
+        ref:
+          description: Link to documentation of error type
+          example: https://developers.apideck.com/errors#invalidstateerror
+          type: string
+        status_code:
+          description: HTTP status code
+          example: 422
+          type: number
+        type_name:
+          description: The type of error returned
+          example: InvalidStateError
+          type: string
+    UpdateActivityResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: activities
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     UpdateCompanyResponse:
       properties:
         data:
@@ -5211,7 +6193,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Companies
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -5243,7 +6225,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Contacts
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -5265,7 +6247,7 @@ components:
         - operation
         - data
       type: object
-    UpdateInvoiceResponse:
+    UpdateLeadResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -5275,7 +6257,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Invoices
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -5297,7 +6279,7 @@ components:
         - operation
         - data
       type: object
-    UpdateLedgerAccountResponse:
+    UpdateNoteResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -5307,7 +6289,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: LedgerAccounts
+          example: notes
           type: string
         service:
           description: Apideck ID of service provider
@@ -5329,7 +6311,7 @@ components:
         - operation
         - data
       type: object
-    UpdateTaxRateResponse:
+    UpdateOpportunityResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -5339,7 +6321,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: TaxRates
+          example: companies
           type: string
         service:
           description: Apideck ID of service provider
@@ -5361,16 +6343,70 @@ components:
         - operation
         - data
       type: object
-    UpdatedAt:
-      example: 2020-09-30T07:43:32.000Z
-      format: date-time
-      readOnly: true
-      type: string
-    UpdatedBy:
-      example: "12345"
-      nullable: true
-      readOnly: true
-      type: string
+    UpdatePipelineResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: pipelines
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    UpdateUserResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: companies
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: zoho-crm
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     User:
       properties:
         created_at:
@@ -5473,4 +6509,14 @@ components:
         Go to Unify to grab your API KEY https://app.apideck.com/unify/api-keys
       in: header
       name: Authorization
+      type: apiKey
+    applicationId:
+      description: The ID of your Unify application
+      in: header
+      name: x-apideck-app-id
+      type: apiKey
+    consumerId:
+      description: The ID of the consumer which you want to get or push data from
+      in: header
+      name: x-apideck-consumer-id
       type: apiKey

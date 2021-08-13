@@ -46,7 +46,7 @@ info:
     - Search for integrations (upcoming)
     - Give integration suggestions based on provided metadata (email or website) when creating the session (upcoming)
 
-    To use Hosted Vault, you will need to first [__create a session__](https://developers.apideck.com/apis/vault/reference#operation/createSession). This can be achieved by making a POST request to the Vault API to create a valid session for a user, hereafter referred to as the consumer ID.
+    To use Hosted Vault, you will need to first [__create a session__](https://developers.apideck.com/apis/vault/reference#operation/sessionsCreate). This can be achieved by making a POST request to the Vault API to create a valid session for a user, hereafter referred to as the consumer ID.
 
     Example using curl:
 
@@ -163,7 +163,9 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 5.0.1
+  version: 5.1.0
+  x-apideck-api: vault
+  x-apideck-sdk-support: true
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -210,7 +212,7 @@ paths:
         Auth links will have a state parameter included to verify the validity of the request. This is the url your users will use to activate OAuth supported integation providers.
 
         Vault handles the complete Authorization Code Grant Type Flow for you and will redirect you to the dynamic redirect uri you have appended to the url in case this is missing the default redirect uri you have configured for your Unify application.
-      operationId: authorize
+      operationId: connectionsAuthorize
       parameters:
         - $ref: "#/components/parameters/service_id"
         - $ref: "#/components/parameters/application_id"
@@ -236,14 +238,37 @@ paths:
       summary: Authorize
       tags:
         - Connections
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY'
+            })
+
+            const params = {
+              serviceId: 'pipedrive',
+              applicationId: 'application_id_example'
+            }
+
+            try {
+              const { data } = await apideck.vault.connectionsAuthorize(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
       x-graphql-exclude: true
+      x-sdk-exclude: true
   /vault/callback:
     get:
       description: |
         This endpoint gets called after the triggering the authorize flow.
 
         Callback links need a state and code parameter to verify the validity of the request.
-      operationId: callback
+      operationId: connectionsCallback
       parameters:
         - $ref: "#/components/parameters/state"
         - $ref: "#/components/parameters/code"
@@ -266,6 +291,25 @@ paths:
       summary: Callback
       tags:
         - Connections
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY'
+            })
+
+            try {
+              const { data } = await apideck.vault.connectionsCallback({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-exclude: true
+      x-sdk-exclude: true
   /vault/connections:
     get:
       description: |
@@ -298,11 +342,30 @@ paths:
       summary: Get all connections
       tags:
         - Connections
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.vault.connectionsAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
       x-graphql-field-name: connections
   "/vault/connections/{unified_api}/{service_id}":
     delete:
       description: Deletes a connection
-      operationId: deleteConnection
+      operationId: connectionsDelete
       parameters:
         - $ref: "#/components/parameters/x-apideck-consumer-id"
         - $ref: "#/components/parameters/x-apideck-app-id"
@@ -328,6 +391,28 @@ paths:
       summary: Deletes a connection
       tags:
         - Connections
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.vault.connectionsDelete({
+                serviceId: 'pipedrive',
+                unifiedApi: 'crm'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
       x-graphql-field-name: connectionsDelete
     patch:
       description: Update a connection
@@ -359,6 +444,28 @@ paths:
       summary: Update connection
       tags:
         - Connections
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.vault.connectionsUpdate({
+                serviceId: 'pipedrive',
+                unifiedApi: 'crm'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
     post:
       description: |
         Create an authorized connection
@@ -390,11 +497,35 @@ paths:
       summary: Create connection
       tags:
         - Connections
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.vault.connectionsAdd({
+                serviceId: 'pipedrive',
+                unifiedApi: 'crm'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-exclude: true
+      x-sdk-exclude: true
   "/vault/connections/{unified_api}/{service_id}/{resource}/config":
     get:
       description: |
         This endpoint returns custom settings and their defaults required by connection for a given resource.
-      operationId: getConnectionSettings
+      operationId: connectionsGetSettings
       parameters:
         - $ref: "#/components/parameters/x-apideck-consumer-id"
         - $ref: "#/components/parameters/x-apideck-app-id"
@@ -421,10 +552,35 @@ paths:
       summary: Get settings
       tags:
         - Connections
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              unifiedApi: 'crm',
+              serviceId: 'pipedrive',
+              resource: 'leads'
+            }
+
+            try {
+              const { data } = await apideck.vault.connectionsGetSettings(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
       x-graphql-field-name: connectionSettings
     patch:
       description: Update default values for a connection's resource settings
-      operationId: updateConnectionSettings
+      operationId: connectionsUpdateSettings
       parameters:
         - $ref: "#/components/parameters/x-apideck-consumer-id"
         - $ref: "#/components/parameters/x-apideck-app-id"
@@ -458,6 +614,93 @@ paths:
       summary: Update settings
       tags:
         - Connections
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              serviceId: 'pipedrive',
+              unifiedApi: 'crm',
+              resource: 'leads',
+              connectionsSetting: {
+                service_id: 'salesforce',
+                name: 'Salesforce',
+                tag_line:
+                  'CRM software solutions and enterprise cloud computing from Salesforce, the leader in customer relationship management (CRM) and PaaS. Free 30 day trial.',
+                unified_api: 'crm',
+                website: 'https://www.salesforce.com',
+                icon:
+                  'https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png',
+                logo: 'https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg',
+                settings: {
+                  instance_url: 'https://eu28.salesforce.com'
+                },
+                metadata: {
+                  ecosystem: {
+                    name: 'My Ecosystem',
+                    id: 'a6469332-7948-46a6-abc2-87ba3f005025'
+                  },
+                  account: {
+                    name: 'My Company',
+                    id: 'c01458a5-7276-41ce-bc19-639906b0450a'
+                  }
+                },
+                auth_type: 'oauth2',
+                status: 'live',
+                form_fields: [
+                  {
+                    id: 'instance_url',
+                    label: 'Instance url',
+                    value: 'https://eu28.salesforce.com',
+                    placeholder: '',
+                    mask: false,
+                    type: 'text',
+                    required: true,
+                    disabled: false,
+                    custom_field: false
+                  }
+                ],
+                configuration: [
+                  {
+                    resource: 'leads',
+                    defaults: [
+                      {
+                        id: 'ProductInterest',
+                        options: [Array],
+                        value: 'GC5000 series'
+                      }
+                    ]
+                  }
+                ],
+                configurable_resources: ['opportunities', 'companies', 'contacts', 'leads'],
+                resource_schema_support: ['leads'],
+                resource_settings_support: ['leads'],
+                settings_required_for_authorization: ['instance_url'],
+                authorize_url:
+                  'https://unify.apideck.com/vault/authorize/salesforce/<application-id>?state=<state>',
+                revoke_url: 'https://unify.apideck.com/vault/revoke/salesforce/<application-id>?state=<state>',
+                enabled: true,
+                created_at: 1615563533390,
+                updated_at: 1616662325753,
+                state: 'authorized'
+              }
+            }
+
+            try {
+              const { data } = await apideck.vault.connectionsUpdateSettings(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
       x-graphql-field-name: connectionSettingsUpdate
   /vault/consumers:
     get:
@@ -488,6 +731,24 @@ paths:
       summary: Get all consumers
       tags:
         - Consumers
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID'
+            })
+
+            try {
+              const { data } = await apideck.vault.consumersAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
       x-graphql-field-name: consumers
   "/vault/consumers/{consumer_id}":
     get:
@@ -517,12 +778,32 @@ paths:
       summary: Get consumer
       tags:
         - Consumers
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID'
+            })
+
+            try {
+              const { data } = await apideck.vault.consumersOne({
+                consumerId: 'test_user_id'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
       x-graphql-field-name: consumer
   "/vault/consumers/{consumer_id}/stats":
     get:
       description: |
         Get consumer request counts within a given datetime range.
-      operationId: consumerRequestCounts
+      operationId: consumersRequestCounts
       parameters:
         - $ref: "#/components/parameters/x-apideck-app-id"
         - $ref: "#/components/parameters/consumer_id"
@@ -548,7 +829,27 @@ paths:
       summary: Consumer request counts
       tags:
         - Consumers
-      x-graphql-field-name: consumerRequestCounts
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID'
+            })
+
+            try {
+              const { data } = await apideck.vault.consumersRequestCounts({
+                consumerId: 'test_user_id'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-field-name: consumersRequestCounts
   /vault/logs:
     get:
       description: |
@@ -580,6 +881,25 @@ paths:
       summary: Get all consumer request logs
       tags:
         - Logs
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.vault.logsAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
       x-graphql-field-name: logs
   /vault/proxy:
     delete:
@@ -594,13 +914,6 @@ paths:
         - $ref: "#/components/parameters/x-apideck-downstream-authorization"
         - $ref: "#/components/parameters/x-apideck-downstream-url"
         - $ref: "#/components/parameters/x-apideck-downstream-method"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ProxyRequest"
-        description: Depending on the verb/method of the request this will contain the request body you want to POST/PATCH/PUT.
-        required: false
       responses:
         "200":
           $ref: "#/components/responses/Ok"
@@ -611,7 +924,30 @@ paths:
       summary: DELETE
       tags:
         - Proxy
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID',
+              downstreamAuthorization: 'REPLACE_WITH_DOWNSTREAM_AUTHORIZATION',
+              downstreamMethod: 'REPLACE_WITH_DOWNSTREAM_METHOD',
+              downstreamUrl: 'REPLACE_WITH_DOWNSTREAM_URL'
+            })
+
+            try {
+              const { data } = await apideck.vault.deleteProxy({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
       x-graphql-exclude: true
+      x-sdk-exclude: true
     get:
       deprecated: true
       description: |
@@ -634,7 +970,30 @@ paths:
       summary: GET
       tags:
         - Proxy
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID',
+              downstreamAuthorization: 'REPLACE_WITH_DOWNSTREAM_AUTHORIZATION',
+              downstreamMethod: 'REPLACE_WITH_DOWNSTREAM_METHOD',
+              downstreamUrl: 'REPLACE_WITH_DOWNSTREAM_URL'
+            })
+
+            try {
+              const { data } = await apideck.vault.getProxy({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
       x-graphql-exclude: true
+      x-sdk-exclude: true
     patch:
       deprecated: true
       description: |
@@ -664,7 +1023,59 @@ paths:
       summary: PATCH
       tags:
         - Proxy
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID',
+              downstreamAuthorization: 'REPLACE_WITH_DOWNSTREAM_AUTHORIZATION',
+              downstreamMethod: 'REPLACE_WITH_DOWNSTREAM_METHOD',
+              downstreamUrl: 'REPLACE_WITH_DOWNSTREAM_URL'
+            })
+
+            const params = {
+              patchProxy: {
+                account_sid: 'ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+                api_version: '2010-04-01',
+                body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+                date_created: 'Thu, 30 Jul 2015 20:12:31 +0000',
+                date_sent: 'Thu, 30 Jul 2015 20:12:33 +0000',
+                date_updated: 'Thu, 30 Jul 2015 20:12:33 +0000',
+                direction: 'outbound-api',
+                error_code: null,
+                error_message: null,
+                from: '+15017122661',
+                messaging_service_sid: 'MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+                num_media: '0',
+                num_segments: '1',
+                price: null,
+                price_unit: null,
+                sid: 'SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+                status: 'sent',
+                subresource_uris: {
+                  media:
+                    '/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Media.json'
+                },
+                to: '+15558675310',
+                uri:
+                  '/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.json'
+              }
+            }
+
+            try {
+              const { data } = await apideck.vault.patchProxy(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
       x-graphql-exclude: true
+      x-sdk-exclude: true
     post:
       deprecated: true
       description: |
@@ -694,7 +1105,59 @@ paths:
       summary: POST
       tags:
         - Proxy
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID',
+              downstreamAuthorization: 'REPLACE_WITH_DOWNSTREAM_AUTHORIZATION',
+              downstreamMethod: 'REPLACE_WITH_DOWNSTREAM_METHOD',
+              downstreamUrl: 'REPLACE_WITH_DOWNSTREAM_URL'
+            })
+
+            const params = {
+              postProxy: {
+                account_sid: 'ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+                api_version: '2010-04-01',
+                body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+                date_created: 'Thu, 30 Jul 2015 20:12:31 +0000',
+                date_sent: 'Thu, 30 Jul 2015 20:12:33 +0000',
+                date_updated: 'Thu, 30 Jul 2015 20:12:33 +0000',
+                direction: 'outbound-api',
+                error_code: null,
+                error_message: null,
+                from: '+15017122661',
+                messaging_service_sid: 'MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+                num_media: '0',
+                num_segments: '1',
+                price: null,
+                price_unit: null,
+                sid: 'SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+                status: 'sent',
+                subresource_uris: {
+                  media:
+                    '/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Media.json'
+                },
+                to: '+15558675310',
+                uri:
+                  '/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.json'
+              }
+            }
+
+            try {
+              const { data } = await apideck.vault.postProxy(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
       x-graphql-exclude: true
+      x-sdk-exclude: true
     put:
       deprecated: true
       description: |
@@ -724,7 +1187,59 @@ paths:
       summary: PUT
       tags:
         - Proxy
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID',
+              downstreamAuthorization: 'REPLACE_WITH_DOWNSTREAM_AUTHORIZATION',
+              downstreamMethod: 'REPLACE_WITH_DOWNSTREAM_METHOD',
+              downstreamUrl: 'REPLACE_WITH_DOWNSTREAM_URL'
+            })
+
+            const params = {
+              putProxy: {
+                account_sid: 'ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+                api_version: '2010-04-01',
+                body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+                date_created: 'Thu, 30 Jul 2015 20:12:31 +0000',
+                date_sent: 'Thu, 30 Jul 2015 20:12:33 +0000',
+                date_updated: 'Thu, 30 Jul 2015 20:12:33 +0000',
+                direction: 'outbound-api',
+                error_code: null,
+                error_message: null,
+                from: '+15017122661',
+                messaging_service_sid: 'MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+                num_media: '0',
+                num_segments: '1',
+                price: null,
+                price_unit: null,
+                sid: 'SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+                status: 'sent',
+                subresource_uris: {
+                  media:
+                    '/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Media.json'
+                },
+                to: '+15558675310',
+                uri:
+                  '/2010-04-01/Accounts/ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Messages/SMXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.json'
+              }
+            }
+
+            try {
+              const { data } = await apideck.vault.putProxy(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
       x-graphql-exclude: true
+      x-sdk-exclude: true
   "/vault/revoke/{service_id}/{application_id}":
     get:
       description: |
@@ -735,7 +1250,7 @@ paths:
         Auth links will have a state parameter included to verify the validity of the request. This is the url your users will use to activate OAuth supported integation providers.
 
         Vault handles the complete revoke flow for you and will redirect you to the dynamic redirect uri you have appended to the url in case this is missing the default redirect uri you have configured for your Unify application.
-      operationId: revoke
+      operationId: connectionsRevoke
       parameters:
         - $ref: "#/components/parameters/service_id"
         - $ref: "#/components/parameters/application_id"
@@ -761,7 +1276,30 @@ paths:
       summary: Revoke
       tags:
         - Connections
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY'
+            })
+
+            const params = {
+              serviceId: 'pipedrive',
+              applicationId: 'application_id_example'
+            }
+
+            try {
+              const { data } = await apideck.vault.connectionsRevoke(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
       x-graphql-exclude: true
+      x-sdk-exclude: true
   /vault/sessions:
     post:
       description: |
@@ -769,7 +1307,7 @@ paths:
         url to allow temporary access to manage their integrations and settings.
 
         Note: This is a short lived token that will expire after 1 hour (TTL: 3600).
-      operationId: createSession
+      operationId: sessionsCreate
       parameters:
         - $ref: "#/components/parameters/x-apideck-consumer-id"
         - $ref: "#/components/parameters/x-apideck-app-id"
@@ -800,6 +1338,52 @@ paths:
       summary: Create Session
       tags:
         - Sessions
+      x-apideck-api: vault
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              session: {
+                redirect_uri: 'https://mysaas.com/dashboard',
+                consumer_metadata: {
+                  account_name: 'SpaceX',
+                  user_name: 'Elon Musk',
+                  email: 'elon@musk.com',
+                  image: 'https://www.spacex.com/static/images/share.jpg'
+                },
+                theme: {
+                  vault_name: 'Intercom',
+                  primary_color: '#286efa',
+                  sidepanel_background_color: '#286efa',
+                  sidepanel_text_color: '#FFFFFF',
+                  favicon: 'https://res.cloudinary.com/apideck/icons/intercom',
+                  terms_url: 'https://www.termsfeed.com/terms-conditions/957c85c1b089ae9e3219c83eff65377e',
+                  privacy_url: 'https://compliance.apideck.com/privacy-policy'
+                },
+                settings: {
+                  session_length: '30m',
+                  hide_resource_settings: false,
+                  show_logs: true,
+                  sandbox_mode: false
+                }
+              }
+            }
+
+            try {
+              const { data } = await apideck.vault.sessionsCreate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
 components:
   parameters:
     api:
@@ -2269,8 +2853,9 @@ components:
         Learn how to set the Authorization header inside Postman https://learning.postman.com/docs/postman/sending-api-requests/authorization/#api-key
 
         Go to Unify to grab your API KEY https://app.apideck.com/unify/api-keys
-      scheme: bearer
-      type: http
+      in: header
+      name: Authorization
+      type: apiKey
     applicationId:
       description: The ID of your Unify application
       in: header

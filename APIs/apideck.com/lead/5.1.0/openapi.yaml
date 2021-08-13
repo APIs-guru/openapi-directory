@@ -17,7 +17,7 @@ info:
 
     ## GraphQL
 
-    Use the [GraphQL playground](https://unify.apideck.com/graphql) to test out the GraphQL API.
+    Use the [GraphQL playground](https://developers.apideck.com/graphql/playground) to test out the GraphQL API.
 
     ## Headers
 
@@ -267,7 +267,9 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Lead API
-  version: 5.0.1
+  version: 5.1.0
+  x-apideck-api: lead
+  x-apideck-sdk-support: true
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -324,6 +326,25 @@ paths:
       summary: List leads
       tags:
         - Leads
+      x-apideck-api: lead
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.lead.leadsAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
       x-graphql-field-name: leads
     post:
       description: Create lead
@@ -359,6 +380,97 @@ paths:
       summary: Create lead
       tags:
         - Leads
+      x-apideck-api: lead
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              lead: {
+                name: 'Elon Musk',
+                company_name: 'Spacex',
+                owner_id: '54321',
+                company_id: '2',
+                contact_id: '2',
+                lead_source: 'Cold Call',
+                first_name: 'Elon',
+                last_name: 'Musk',
+                description: 'A thinker',
+                prefix: 'Sir',
+                title: 'CEO',
+                language: 'EN',
+                status: 'New',
+                monetary_amount: 75000,
+                currency: 'USD',
+                fax: '+12129876543',
+                websites: [
+                  {
+                    id: '12345',
+                    url: 'http://example.com',
+                    type: 'primary'
+                  }
+                ],
+                addresses: [
+                  {
+                    id: '123',
+                    type: 'primary',
+                    string: '25 Spring Street, Blackburn, VIC 3130',
+                    name: 'HQ US',
+                    line1: 'Main street',
+                    line2: 'apt #',
+                    city: 'San Francisco',
+                    state: 'CA',
+                    postal_code: '94104',
+                    country: 'US',
+                    latitude: '40.759211',
+                    longitude: '-73.984638'
+                  }
+                ],
+                social_links: [
+                  {
+                    id: '12345',
+                    url: 'https://www.twitter.com/apideck-io',
+                    type: 'twitter'
+                  }
+                ],
+                phone_numbers: [
+                  {
+                    id: '12345',
+                    number: '111-111-1111',
+                    type: 'primary'
+                  }
+                ],
+                emails: [
+                  {
+                    id: '123',
+                    email: 'elon@musk.com',
+                    type: 'primary'
+                  }
+                ],
+                custom_fields: [
+                  {
+                    id: 'custom_technologies',
+                    value: 'Uses Salesforce and Marketo'
+                  }
+                ],
+                tags: ['New']
+              }
+            }
+
+            try {
+              const { data } = await apideck.lead.leadsAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
   "/lead/leads/{id}":
     delete:
       description: Delete lead
@@ -389,6 +501,27 @@ paths:
       summary: Delete lead
       tags:
         - Leads
+      x-apideck-api: lead
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.lead.leadsDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
     get:
       description: Get lead
       operationId: leadsOne
@@ -418,6 +551,27 @@ paths:
       summary: Get lead
       tags:
         - Leads
+      x-apideck-api: lead
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.lead.leadsOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
     patch:
       description: Update lead
       operationId: leadsUpdate
@@ -453,6 +607,98 @@ paths:
       summary: Update lead
       tags:
         - Leads
+      x-apideck-api: lead
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              lead: {
+                name: 'Elon Musk',
+                company_name: 'Spacex',
+                owner_id: '54321',
+                company_id: '2',
+                contact_id: '2',
+                lead_source: 'Cold Call',
+                first_name: 'Elon',
+                last_name: 'Musk',
+                description: 'A thinker',
+                prefix: 'Sir',
+                title: 'CEO',
+                language: 'EN',
+                status: 'New',
+                monetary_amount: 75000,
+                currency: 'USD',
+                fax: '+12129876543',
+                websites: [
+                  {
+                    id: '12345',
+                    url: 'http://example.com',
+                    type: 'primary'
+                  }
+                ],
+                addresses: [
+                  {
+                    id: '123',
+                    type: 'primary',
+                    string: '25 Spring Street, Blackburn, VIC 3130',
+                    name: 'HQ US',
+                    line1: 'Main street',
+                    line2: 'apt #',
+                    city: 'San Francisco',
+                    state: 'CA',
+                    postal_code: '94104',
+                    country: 'US',
+                    latitude: '40.759211',
+                    longitude: '-73.984638'
+                  }
+                ],
+                social_links: [
+                  {
+                    id: '12345',
+                    url: 'https://www.twitter.com/apideck-io',
+                    type: 'twitter'
+                  }
+                ],
+                phone_numbers: [
+                  {
+                    id: '12345',
+                    number: '111-111-1111',
+                    type: 'primary'
+                  }
+                ],
+                emails: [
+                  {
+                    id: '123',
+                    email: 'elon@musk.com',
+                    type: 'primary'
+                  }
+                ],
+                custom_fields: [
+                  {
+                    id: 'custom_technologies',
+                    value: 'Uses Salesforce and Marketo'
+                  }
+                ],
+                tags: ['New']
+              }
+            }
+
+            try {
+              const { data } = await apideck.lead.leadsUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
 components:
   parameters:
     cursor:
@@ -784,6 +1030,11 @@ components:
           example: CA
           nullable: true
           type: string
+        string:
+          example: 25 Spring Street, Blackburn, VIC 3130
+          nullable: true
+          title: The address string. Some APIs don't provide structured address data.
+          type: string
         type:
           enum:
             - primary
@@ -830,9 +1081,33 @@ components:
           type: string
     BankAccount:
       properties:
+        account_name:
+          description: The name which you used in opening your bank account.
+          example: SPACEX LLC
+          nullable: true
+          title: Bank Account Name
+          type: string
+        account_number:
+          description: A bank account number is a number that is tied to your bank account. If you have several bank accounts, such as personal, joint, business (and so on), each account will have a different account number.
+          example: "123456789"
+          nullable: true
+          title: Bank Account Number
+          type: string
+        bank_code:
+          description: A bank code is a code assigned by a central bank, a bank supervisory body or a Bankers Association in a country to all its licensed member banks or financial institutions.
+          example: BNH
+          nullable: true
+          title: Bank Code
+          type: string
         bic:
           example: AUDSCHGGXXX
           nullable: true
+          type: string
+        bsb_number:
+          description: A BSB is a 6 digit numeric code used for identifying the branch of an Australian or New Zealand bank or financial institution.
+          example: 062-001
+          nullable: true
+          title: BSB Number
           type: string
         iban:
           example: CH2989144532982975332
@@ -1313,8 +1588,9 @@ components:
         Learn how to set the Authorization header inside Postman https://learning.postman.com/docs/postman/sending-api-requests/authorization/#api-key
 
         Go to Unify to grab your API KEY https://app.apideck.com/unify/api-keys
-      scheme: bearer
-      type: http
+      in: header
+      name: Authorization
+      type: apiKey
     applicationId:
       description: The ID of your Unify application
       in: header

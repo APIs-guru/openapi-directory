@@ -225,7 +225,8 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Proxy API
-  version: 5.0.1
+  version: 5.1.0
+  x-apideck-api: proxy
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -272,6 +273,8 @@ paths:
       summary: DELETE
       tags:
         - Execute
+      x-graphql-exclude: true
+      x-sdk-exclude: true
     get:
       description: |
         Proxies a downstream GET request to a service and injects the necessary credentials into a request stored in Vault. This allows you to have an additional security layer and logging without needing to rely on Unify for normalization.
@@ -295,6 +298,8 @@ paths:
       summary: GET
       tags:
         - Execute
+      x-graphql-exclude: true
+      x-sdk-exclude: true
     patch:
       description: |
         Proxies a downstream PATCH request to a service and injects the necessary credentials into a request stored in Vault. This allows you to have an additional security layer and logging without needing to rely on Unify for normalization.
@@ -347,6 +352,8 @@ paths:
       summary: PATCH
       tags:
         - Execute
+      x-graphql-exclude: true
+      x-sdk-exclude: true
     post:
       description: |
         Proxies a downstream POST request to a service and injects the necessary credentials into a request stored in Vault. This allows you to have an additional security layer and logging without needing to rely on Unify for normalization.
@@ -399,6 +406,8 @@ paths:
       summary: POST
       tags:
         - Execute
+      x-graphql-exclude: true
+      x-sdk-exclude: true
     put:
       description: |
         Proxies a downstream PUT request to a service and injects the necessary credentials into a request stored in Vault. This allows you to have an additional security layer and logging without needing to rely on Unify for normalization.
@@ -451,6 +460,8 @@ paths:
       summary: PUT
       tags:
         - Execute
+      x-graphql-exclude: true
+      x-sdk-exclude: true
 components:
   parameters:
     id:
@@ -579,8 +590,9 @@ components:
         Learn how to set the Authorization header inside Postman https://learning.postman.com/docs/postman/sending-api-requests/authorization/#api-key
 
         Go to Unify to grab your API KEY https://app.apideck.com/unify/api-keys
-      scheme: bearer
-      type: http
+      in: header
+      name: Authorization
+      type: apiKey
     applicationId:
       description: The ID of your Unify application
       in: header
