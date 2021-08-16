@@ -1662,6 +1662,13 @@ components:
           description: The tag of the container image. If not specified, this defaults to the latest tag.
           type: string
       type: object
+    DataprocParameters:
+      description: Parameters used in Dataproc JobType executions.
+      properties:
+        cluster:
+          description: "URI for cluster used to run Dataproc execution. Format: 'projects/{PROJECT_ID}/regions/{REGION}/clusters/{CLUSTER_NAME}"
+          type: string
+      type: object
     Disk:
       description: An instance-attached disk resource.
       properties:
@@ -1820,8 +1827,18 @@ components:
         containerImageUri:
           description: "Container Image URI to a DLVM Example: 'gcr.io/deeplearning-platform-release/base-cu100' More examples can be found at: https://cloud.google.com/ai-platform/deep-learning-containers/docs/choosing-container"
           type: string
+        dataprocParameters:
+          $ref: "#/components/schemas/DataprocParameters"
+          description: Parameters used in Dataproc JobType executions.
         inputNotebookFile:
           description: "Path to the notebook file to execute. Must be in a Google Cloud Storage bucket. Format: gs://{project_id}/{folder}/{notebook_file_name} Ex: gs://notebook_user/scheduled_notebooks/sentiment_notebook.ipynb"
+          type: string
+        jobType:
+          description: The type of Job to be used on this execution.
+          enum:
+            - JOB_TYPE_UNSPECIFIED
+            - VERTEX_AI
+            - DATAPROC
           type: string
         labels:
           additionalProperties:

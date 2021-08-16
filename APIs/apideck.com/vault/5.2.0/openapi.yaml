@@ -163,7 +163,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 5.1.0
+  version: 5.2.0
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -234,7 +234,7 @@ paths:
           $ref: "#/components/responses/Unprocessable"
         default:
           $ref: "#/components/responses/UnexpectedError"
-      security: null
+      security: []
       summary: Authorize
       tags:
         - Connections
@@ -287,7 +287,7 @@ paths:
           $ref: "#/components/responses/Unprocessable"
         default:
           $ref: "#/components/responses/UnexpectedError"
-      security: null
+      security: []
       summary: Callback
       tags:
         - Connections
@@ -1271,8 +1271,7 @@ paths:
           $ref: "#/components/responses/Unprocessable"
         default:
           $ref: "#/components/responses/UnexpectedError"
-      security:
-        - apiKey: []
+      security: []
       summary: Revoke
       tags:
         - Connections

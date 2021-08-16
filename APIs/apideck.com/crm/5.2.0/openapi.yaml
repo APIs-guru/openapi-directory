@@ -267,7 +267,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 5.1.0
+  version: 5.2.0
   x-apideck-api: crm
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -2037,7 +2037,12 @@ paths:
               note: {
                 title: 'Meeting Notes',
                 content: 'Office hours are 9AM-6PM',
-                owner_id: '12345'
+                owner_id: '12345',
+                contact_id: '12345',
+                company_id: '12345',
+                opportunity_id: '12345',
+                lead_id: '12345',
+                active: true
               }
             }
 
@@ -2201,7 +2206,12 @@ paths:
               note: {
                 title: 'Meeting Notes',
                 content: 'Office hours are 9AM-6PM',
-                owner_id: '12345'
+                owner_id: '12345',
+                contact_id: '12345',
+                company_id: '12345',
+                opportunity_id: '12345',
+                lead_id: '12345',
+                active: true
               }
             }
 
@@ -5667,6 +5677,18 @@ components:
     Note:
       additionalProperties: false
       properties:
+        active:
+          example: true
+          nullable: true
+          type: boolean
+        company_id:
+          example: "12345"
+          nullable: true
+          type: string
+        contact_id:
+          example: "12345"
+          nullable: true
+          type: string
         content:
           example: Office hours are 9AM-6PM
           type: string
@@ -5682,6 +5704,14 @@ components:
         id:
           example: "12345"
           readOnly: true
+          type: string
+        lead_id:
+          example: "12345"
+          nullable: true
+          type: string
+        opportunity_id:
+          example: "12345"
+          nullable: true
           type: string
         owner_id:
           example: "12345"

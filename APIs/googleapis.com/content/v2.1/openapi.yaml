@@ -7068,7 +7068,7 @@ components:
     AccountAddress:
       properties:
         country:
-          description: CLDR country code (e.g. "US"). This value cannot be set for a sub-account of an MCA. All MCA sub-accounts inherit the country of their parent MCA.
+          description: CLDR country code (e.g. "US"). All MCA sub-accounts inherit the country of their parent MCA by default, however the country can be updated for individual sub-accounts.
           type: string
         locality:
           description: City, town or commune. May also include dependent localities or sublocalities (e.g. neighborhoods or suburbs).
@@ -11764,7 +11764,7 @@ components:
           $ref: "#/components/schemas/Product"
           description: The product to insert or update. Only required if the method is `insert` or `update`. If the `update` method is used with `updateMask` only to delete a field, then this isn't required. For example, setting `salePrice` on the `updateMask` and not providing a `product` will result in an existing sale price on the product specified by `productId` being deleted.
         productId:
-          description: The ID of the product to mutate. Only defined if the method is `get`, `delete`, or `update`. or `delete`.
+          description: The ID of the product to get or mutate. Only defined if the method is `get`, `delete`, or `update`.
           type: string
         updateMask:
           description: 'The comma-separated list of product attributes to be updated. Example: `"title,salePrice"`. Attributes specified in the update mask without a value specified in the body will be deleted from the product. Only top-level product attributes can be updated. If not defined, product attributes with set values will be updated and other attributes will stay unchanged. Only defined if the method is `update`.'
@@ -12135,6 +12135,8 @@ components:
             - REPRICING_RULE_TYPE_UNSPECIFIED
             - TYPE_STATS_BASED
             - TYPE_COGS_BASED
+            - TYPE_SALES_VOLUME_BASED
+            - TYPE_COMPETITIVE_PRICE
           type: string
       type: object
     RepricingProductReportBuyboxWinningProductStats:
@@ -12190,6 +12192,8 @@ components:
             - REPRICING_RULE_TYPE_UNSPECIFIED
             - TYPE_STATS_BASED
             - TYPE_COGS_BASED
+            - TYPE_SALES_VOLUME_BASED
+            - TYPE_COMPETITIVE_PRICE
           type: string
       type: object
     RepricingRuleCostOfGoodsSaleRule:
@@ -12296,6 +12300,8 @@ components:
             - REPRICING_RULE_TYPE_UNSPECIFIED
             - TYPE_STATS_BASED
             - TYPE_COGS_BASED
+            - TYPE_SALES_VOLUME_BASED
+            - TYPE_COMPETITIVE_PRICE
           type: string
       type: object
     RepricingRuleReportBuyboxWinningRuleStats:

@@ -3935,6 +3935,9 @@ components:
         diskType:
           description: Type of the disk attached to each node (e.g. 'pd-standard', 'pd-ssd' or 'pd-balanced') If unspecified, the default disk type is 'pd-standard'
           type: string
+        gvnic:
+          $ref: "#/components/schemas/VirtualNIC"
+          description: Enable or disable gvnic in the node pool.
         imageType:
           description: The image type to use for this node. Note that for a given image type, the latest version of it will be used.
           type: string
@@ -4849,6 +4852,9 @@ components:
         clusterId:
           description: Deprecated. The name of the cluster to upgrade. This field has been deprecated and replaced by the name field.
           type: string
+        gvnic:
+          $ref: "#/components/schemas/VirtualNIC"
+          description: Enable or disable gvnic on the node pool.
         imageType:
           description: Required. The desired image type for the node pool.
           type: string
@@ -4989,6 +4995,13 @@ components:
       properties:
         enabled:
           description: Enables vertical pod autoscaling.
+          type: boolean
+      type: object
+    VirtualNIC:
+      description: Configuration of gVNIC feature.
+      properties:
+        enabled:
+          description: Whether gVNIC features are enabled in the node pool.
           type: boolean
       type: object
     WorkloadIdentityConfig:

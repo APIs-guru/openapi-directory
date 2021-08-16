@@ -266,7 +266,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 5.1.0
+  version: 5.2.0
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1676,9 +1676,7 @@ paths:
                   account_number: '123456789',
                   account_name: 'SPACEX LLC'
                 },
-                parent_account: {},
-                sub_account: true,
-                sub_accounts: [{}]
+                sub_account: true
               }
             }
 
@@ -1862,9 +1860,7 @@ paths:
                   account_number: '123456789',
                   account_name: 'SPACEX LLC'
                 },
-                parent_account: {},
-                sub_account: true,
-                sub_accounts: [{}]
+                sub_account: true
               }
             }
 
@@ -4724,18 +4720,16 @@ components:
           properties:
             display_id:
               example: 1-1100
-              readOnly: true
               title: Display ID
               type: string
             id:
               example: "12345"
-              readOnly: true
               type: string
             name:
               example: Bank Accounts
-              readOnly: true
               title: Name
               type: string
+          readOnly: true
           type: object
         sub_account:
           example: true
@@ -4753,6 +4747,7 @@ components:
                 example: "12345"
                 readOnly: true
                 type: string
+          readOnly: true
           type: array
         sub_type:
           example: CHECKING_ACCOUNT

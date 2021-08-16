@@ -1211,7 +1211,7 @@ components:
       description: The call participant speaking for a given utterance.
       properties:
         dialogflowParticipant:
-          description: "The name of the Dialogflow participant. Format: projects/{project}/locations/{location}/conversations/{conversation}/participants/{participant}"
+          description: "Deprecated. Use `dialogflow_participant_name` instead. The name of the Dialogflow participant. Format: projects/{project}/locations/{location}/conversations/{conversation}/participants/{participant}"
           type: string
         dialogflowParticipantName:
           description: "The name of the participant provided by Dialogflow. Format: projects/{project}/locations/{location}/conversations/{conversation}/participants/{participant}"
