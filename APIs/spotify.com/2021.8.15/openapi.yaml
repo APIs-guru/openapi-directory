@@ -6,7 +6,7 @@ info:
     name: sonallux
     url: https://github.com/sonallux/spotify-web-api
   title: Spotify Web API
-  version: 2021.7.20
+  version: 2021.8.15
   x-apisguru-categories:
     - media
   x-logo:
@@ -1655,13 +1655,13 @@ paths:
           required: false
           schema:
             type: string
-        - description: "The ID type: either `artist` or `user`."
+        - description: The ID type.
           in: query
           name: type
           required: true
           schema:
             type: string
-        - description: "A comma-separated list of the artist or the user [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). For example: `ids=74ASZWbe4lXaubB36ztrGX,08td7MxkoHQkXnWAYD8d6Q`. A maximum of 50 IDs can be sent in one request."
+        - description: A comma-separated list of the artist or the user [Spotify IDs](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids). A maximum of 50 IDs can be sent in one request.
           in: query
           name: ids
           required: true
@@ -2571,7 +2571,7 @@ paths:
         url: https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-users-saved-shows
       operationId: endpoint-get-users-saved-shows
       parameters:
-        - description: "A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been isued on behalf of the user. The `user-libary-read` scope must have been authorised by the user."
+        - description: "A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been isued on behalf of the user. The `user-library-read` scope must have been authorised by the user."
           in: header
           name: Authorization
           required: true
@@ -2691,7 +2691,7 @@ paths:
         url: https://developer.spotify.com/documentation/web-api/reference/#endpoint-check-users-saved-shows
       operationId: endpoint-check-users-saved-shows
       parameters:
-        - description: "A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been isued on behalf of the user. The `user-libary-read` scope must have been authorised by the user."
+        - description: "A valid access token from the Spotify Accounts service: see the [Web API Authorization Guide](https://developer.spotify.com/documentation/general/guides/authorization-guide/) for details. The access token must have been isued on behalf of the user. The `user-library-read` scope must have been authorised by the user."
           in: header
           name: Authorization
           required: true
@@ -3351,6 +3351,14 @@ paths:
           required: true
           schema:
             type: string
+      requestBody:
+        content:
+          image/jpeg:
+            schema:
+              format: base64
+              type: string
+        description: The new cover image of the playlist as a Base64 encoded JPEG image. Maximum payload size is 256KB.
+        required: true
       responses:
         "202":
           description: |-
@@ -4704,7 +4712,7 @@ components:
         url: https://developer.spotify.com/documentation/web-api/reference/#object-albumobject
       properties:
         album_type:
-          description: "The type of the album: `album`, `single`, or `compilation`."
+          description: The type of the album.
           type: string
         artists:
           description: The artists of the album. Each artist object includes a link in `href` to more detailed information about the artist.
@@ -4712,7 +4720,7 @@ components:
             $ref: "#/components/schemas/ArtistObject"
           type: array
         available_markets:
-          description: "The markets in which the album is available: [ISO 3166-1 alpha-2 country codes](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Note that an album is considered available in a market when at least 1 of its tracks is available in that market."
+          description: "The markets in which the album is available: [ISO 3166-1 alpha-2 country codes](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). Note that an album is considered available in a market when at least one of its tracks is available in that market."
           items:
             type: string
           type: array
@@ -4726,7 +4734,7 @@ components:
         external_urls:
           $ref: "#/components/schemas/ExternalUrlObject"
         genres:
-          description: 'A list of the genres used to classify the album. For example: "Prog Rock" , "Post-Grunge". (If not yet classified, the array is empty.)'
+          description: A list of the genres used to classify the album. (If not yet classified, the array is empty.)
           items:
             type: string
           type: array
@@ -4748,14 +4756,14 @@ components:
           description: The name of the album. In case of an album takedown, the value may be an empty string.
           type: string
         popularity:
-          description: The popularity of the album. The value will be between 0 and 100, with 100 being the most popular. The popularity is calculated from the popularity of the album's individual tracks.
+          description: The popularity of the album, with 100 being the most popular. The popularity is calculated from the popularity of the album's individual tracks.
           format: int32
           type: integer
         release_date:
-          description: The date the album was first released, for example "1981-12-15". Depending on the precision, it might be shown as "1981" or "1981-12".
+          description: The date the album was first released. Depending on the precision, it might be shown as "1981" or "1981-12".
           type: string
         release_date_precision:
-          description: 'The precision with which release_date value is known: "year" , "month" , or "day".'
+          description: The precision with which release_date value is known.
           type: string
         restrictions:
           $ref: "#/components/schemas/AlbumRestrictionObject"
@@ -4797,7 +4805,7 @@ components:
               type: integer
           type: object
         type:
-          description: 'The object type: "album"'
+          description: The object type.
           type: string
         uri:
           description: The Spotify URI for the album.
@@ -4809,13 +4817,7 @@ components:
         url: https://developer.spotify.com/documentation/web-api/reference/#object-albumrestrictionobject
       properties:
         reason:
-          description: |-
-            The reason for the restriction. Supported values:  
-
-            - `market` - The content item is not available in the given market.  
-            - `product` - The content item is not available for the user's subscription type.  
-            - `explicit` - The content item is explicit and the user's account is set to not play explicit content.  
-              Additional reasons may be added in the future. **Note**: If you use this field, make sure that your application safely handles unknown values.
+          description: The reason for the restriction. Albums may be restricted if the content is not available in a given market, to the user's subscription type, or when the user's account is set to not play explicit content. Additional reasons may be added in the future.
           type: string
       type: object
     AlbumsObject:
@@ -4836,7 +4838,7 @@ components:
         followers:
           $ref: "#/components/schemas/FollowersObject"
         genres:
-          description: 'A list of the genres the artist is associated with. For example: `"Prog Rock"` , `"Post-Grunge"`. (If not yet classified, the array is empty.)'
+          description: A list of the genres the artist is associated with. If not yet classified, the array is empty.
           items:
             type: string
           type: array
@@ -4859,7 +4861,7 @@ components:
           format: int32
           type: integer
         type:
-          description: 'The object type: `"artist"`'
+          description: The object type.
           type: string
         uri:
           description: The [Spotify URI](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the artist.
@@ -5167,7 +5169,7 @@ components:
         url: https://developer.spotify.com/documentation/web-api/reference/#object-deviceobject
       properties:
         id:
-          description: The device ID. This may be `null`.
+          description: The device ID.
           type: string
         is_active:
           description: If this device is the currently active device.
@@ -5185,7 +5187,7 @@ components:
           description: Device type, such as "computer", "smartphone" or "speaker".
           type: string
         volume_percent:
-          description: The current volume in percent. This may be null.
+          description: The current volume in percent.
           format: int32
           type: integer
       type: object
@@ -5291,7 +5293,7 @@ components:
           description: The date the episode was first released, for example `"1981-12-15"`. Depending on the precision, it might be shown as `"1981"` or `"1981-12"`.
           type: string
         release_date_precision:
-          description: 'The precision with which `release_date` value is known: `"year"`, `"month"`, or `"day"`.'
+          description: The precision with which `release_date` value is known.
           type: string
         restrictions:
           $ref: "#/components/schemas/EpisodeRestrictionObject"
@@ -5300,7 +5302,7 @@ components:
         show:
           $ref: "#/components/schemas/SimplifiedShowObject"
         type:
-          description: 'The object type: "episode".'
+          description: The object type.
           type: string
         uri:
           description: The [Spotify URI](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the episode.
@@ -5480,14 +5482,14 @@ components:
         url: https://developer.spotify.com/documentation/web-api/reference/#object-imageobject
       properties:
         height:
-          description: "The image height in pixels. If unknown: `null` or not returned."
+          description: The image height in pixels.
           format: int32
           type: integer
         url:
           description: The source URL of the image.
           type: string
         width:
-          description: "The image width in pixels. If unknown: `null` or not returned."
+          description: The image width in pixels.
           format: int32
           type: integer
       type: object
@@ -5846,7 +5848,7 @@ components:
             $ref: "#/components/schemas/ImageObject"
           type: array
         type:
-          description: 'The object type: "user"'
+          description: The object type.
           type: string
         uri:
           description: The [Spotify URI](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for this user.
@@ -6327,7 +6329,7 @@ components:
           description: The publisher of the show.
           type: string
         type:
-          description: 'The object type: "show".'
+          description: The object type.
           type: string
         uri:
           description: The [Spotify URI](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the show.
@@ -6347,10 +6349,10 @@ components:
         url: https://developer.spotify.com/documentation/web-api/reference/#object-simplifiedalbumobject
       properties:
         album_group:
-          description: The field is present when getting an artist's albums. Possible values are "album", "single", "compilation", "appears_on". Compare to album_type this field represents relationship between the artist and the album.
+          description: The field is present when getting an artist's albums. Compare to album_type this field represents relationship between the artist and the album.
           type: string
         album_type:
-          description: 'The type of the album: one of "album", "single", or "compilation".'
+          description: The type of the album.
           type: string
         artists:
           description: The artists of the album. Each artist object includes a link in `href` to more detailed information about the artist.
@@ -6379,19 +6381,19 @@ components:
           description: The name of the album. In case of an album takedown, the value may be an empty string.
           type: string
         release_date:
-          description: The date the album was first released, for example `1981`. Depending on the precision, it might be shown as `1981-12` or `1981-12-15`.
+          description: The date the album was first released.
           type: string
         release_date_precision:
-          description: "The precision with which `release_date` value is known: `year` , `month` , or `day`."
+          description: The precision with which `release_date` value is known.
           type: string
         restrictions:
           $ref: "#/components/schemas/AlbumRestrictionObject"
         total_tracks:
-          description: The total number of tracks in the album.
+          description: The number of tracks in the album.
           format: int32
           type: integer
         type:
-          description: 'The object type: "album"'
+          description: The object type.
           type: string
         uri:
           description: The [Spotify URI](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the album.
@@ -6414,7 +6416,7 @@ components:
           description: The name of the artist.
           type: string
         type:
-          description: 'The object type: `"artist"`'
+          description: The object type.
           type: string
         uri:
           description: The [Spotify URI](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the artist.
@@ -6475,14 +6477,14 @@ components:
           description: The date the episode was first released, for example `"1981-12-15"`. Depending on the precision, it might be shown as `"1981"` or `"1981-12"`.
           type: string
         release_date_precision:
-          description: 'The precision with which `release_date` value is known: `"year"`, `"month"`, or `"day"`.'
+          description: The precision with which `release_date` value is known.
           type: string
         restrictions:
           $ref: "#/components/schemas/EpisodeRestrictionObject"
         resume_point:
           $ref: "#/components/schemas/ResumePointObject"
         type:
-          description: 'The object type: "episode".'
+          description: The object type.
           type: string
         uri:
           description: The [Spotify URI](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the episode.
@@ -6587,7 +6589,7 @@ components:
           description: The publisher of the show.
           type: string
         type:
-          description: 'The object type: "show".'
+          description: The object type.
           type: string
         uri:
           description: The [Spotify URI](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the show.

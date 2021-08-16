@@ -1974,10 +1974,10 @@ paths:
                   type: string
                   x-ms-summary: Folder behaviors path.
                 value:
-                  description: The value of the folder behavior.  Can be a integer, array, or hash depending on the type of folder behavior.
+                  description: The value of the folder behavior.  Can be a integer, array, or hash depending on the type of folder behavior. See The Behavior Types section for example values for each type of behavior.
                   example: '{"method": "GET"}'
                   type: string
-                  x-ms-summary: The value of the folder behavior.  Can be a integer, array, or hash depending on the type of folder behavior.
+                  x-ms-summary: The value of the folder behavior.  Can be a integer, array, or hash depending on the type of folder behavior. See The Behavior Types section for example values for each type of behavior.
               required:
                 - path
                 - behavior
@@ -2356,10 +2356,10 @@ paths:
                       type: integer
                     - type: object
                 value:
-                  description: The value of the folder behavior.  Can be a integer, array, or hash depending on the type of folder behavior.
+                  description: The value of the folder behavior.  Can be a integer, array, or hash depending on the type of folder behavior. See The Behavior Types section for example values for each type of behavior.
                   example: '{"method": "GET"}'
                   type: string
-                  x-ms-summary: The value of the folder behavior.  Can be a integer, array, or hash depending on the type of folder behavior.
+                  x-ms-summary: The value of the folder behavior.  Can be a integer, array, or hash depending on the type of folder behavior. See The Behavior Types section for example values for each type of behavior.
               type: object
       responses:
         "200":
@@ -4132,6 +4132,83 @@ paths:
           description: Too Many Requests
           x-ms-summary: Too Many Requests
       summary: Copy file/folder
+      tags:
+        - file_actions
+      x-authentication:
+        - native_app
+        - office_integration
+  "/file_actions/metadata/{path}":
+    get:
+      description: Return metadata for file/folder
+      operationId: FileActionMetadata
+      parameters:
+        - description: Path to operate on.
+          in: path
+          name: path
+          required: true
+          schema:
+            type: string
+          x-ms-summary: Path to operate on.
+        - description: Request a preview size.  Can be `small` (default), `large`, `xlarge`, or `pdf`.
+          in: query
+          name: preview_size
+          required: false
+          schema:
+            type: string
+          x-ms-summary: Request a preview size.  Can be `small` (default), `large`, `xlarge`, or `pdf`.
+        - description: Include file preview information?
+          in: query
+          name: with_previews
+          required: false
+          schema:
+            type: boolean
+          x-ms-summary: Include file preview information?
+        - description: Include file priority color information?
+          in: query
+          name: with_priority_color
+          required: false
+          schema:
+            type: boolean
+          x-ms-summary: Include file priority color information?
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileEntity"
+          description: The FileActions object.
+          x-ms-summary: The FileActions object.
+        "400":
+          description: Bad Request
+          x-ms-summary: Bad Request
+        "401":
+          description: Unauthorized
+          x-ms-summary: Unauthorized
+        "403":
+          description: Forbidden
+          x-ms-summary: Forbidden
+        "404":
+          description: Not Found
+          x-ms-summary: Not Found
+        "405":
+          description: Method Not Allowed
+          x-ms-summary: Method Not Allowed
+        "409":
+          description: Conflict
+          x-ms-summary: Conflict
+        "412":
+          description: Precondition Failed
+          x-ms-summary: Precondition Failed
+        "422":
+          description: Unprocessable Entity
+          x-ms-summary: Unprocessable Entity
+        "423":
+          description: Locked
+          x-ms-summary: Locked
+        "429":
+          description: Too Many Requests
+          x-ms-summary: Too Many Requests
+      summary: Return metadata for file/folder
       tags:
         - file_actions
       x-authentication:
@@ -17781,6 +17858,10 @@ components:
           example: 1
           format: int32
           type: integer
+        log_url:
+          description: Link to download the log file for this migration.
+          example: https://www.example.com/log_file
+          type: string
         operation:
           description: The type of operation
           enum:
@@ -20724,7 +20805,8 @@ x-behaviors:
         'description' => 'Thanks for coming to the Files.com Job Application Page',
         'show_on_login_page' => true,
         'require_registration' => true,
-        'help_text' => 'If you have trouble here, please contact your recruiter.'
+        'help_text' => 'If you have trouble here, please contact your recruiter.',
+        'path_template' => '{{name}}_{{ip}}'
       })%>
       ```
 
@@ -20738,6 +20820,28 @@ x-behaviors:
       `help_text` | Help text shown on the inbox page.
       `require_registration` | Show a registration page that captures the uploader's name and email address?
       `password` | Password to authenticate to inbox.
+      `path_template` | Template for creating submission subfolders. Can use the uploader's name, email address, ip, company, and any custom form data.
+
+      ## Path Templates
+
+      Admins can customize how submission subfolders are created by providing a path_template value. For example, an inbox can be created with the following `path_template` value:
+
+      > {{name}}_{ip}
+
+      This will result in submission subfolders that look like `john doe_127.0.0.1`.
+
+      Path templates can use any of the following standard fields:
+      * name
+      * company
+      * email
+      * ip
+
+      They can also use any fields defined on the inbox's custom form field set. An inbox with a custom form field set with a field called 'My Field'
+      can have a path template that looks like this:
+
+      > {{name}}_{{My Field}}
+
+      Note: Field names are case-sensitive.
     requires_attachment: false
     supports_mounted_folders: true
     unique_per_folder: false

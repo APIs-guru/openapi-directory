@@ -7320,6 +7320,8 @@ components:
           description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
           format: date-time
           type: string
+        continuous_project_type:
+          type: string
         created_at:
           description: Unix epoch time
           format: int64
@@ -7342,6 +7344,8 @@ components:
         is_api_project:
           type: boolean
         is_certified:
+          type: boolean
+        is_continuous:
           type: boolean
         is_manual:
           type: boolean

@@ -92,167 +92,6 @@ paths:
           schema:
             $ref: "#/definitions/ItemResponse"
         "400":
-          description: Bad Request
-          x-response-codes:
-            errors:
-              "13000":
-                category: REQUEST
-                description: The request contains data that is invalid. Correct the request and submit the call again. For help, see the API Reference documentation for this call.
-                domain: API_FEED
-              "13003":
-                category: REQUEST
-                description: "The 'feed_scope' {feed_scope} submitted is invalid. Valid values: {feedScopes}"
-                domain: API_FEED
-              "13004":
-                category: REQUEST
-                description: The 'category_id' {category_id} submitted is invalid. See the API documentation for help on how to find category IDs.
-                domain: API_FEED
-              "13005":
-                category: REQUEST
-                description: "The 'date' {feedDate} submitted is invalid. Valid values: {earliestDate} to {latestDate} in the past. The format is yyyyMMdd."
-                domain: API_FEED
-              "13007":
-                category: REQUEST
-                description: The feed file requested cannot be found. It is possible the file requested is in the process of being generated. Either change the date or try the call again later.
-                domain: API_FEED
-              "13009":
-                category: REQUEST
-                description: "The mandatory 'feed_scope' query parameter is missing. Valid values: {feedScopes}"
-                domain: API_FEED
-              "13010":
-                category: REQUEST
-                description: The mandatory 'category_id' query parameter is missing.
-                domain: API_FEED
-              "13011":
-                category: REQUEST
-                description: "The mandatory 'date' query parameter is missing. Valid values: {earliestDate} to {latestDate} days in the past. The format is yyyyMMdd."
-                domain: API_FEED
-              "13012":
-                category: REQUEST
-                description: "The marketplace Id {marketplaceId} is invalid. Valid values: {allowedMarketplaces}"
-                domain: API_FEED
-              "13013":
-                category: REQUEST
-                description: "The mandatory 'X-EBAY-C-MARKETPLACE-ID' header is missing. Valid values: {allowedMarketplaces}"
-                domain: API_FEED
-              "13014":
-                category: REQUEST
-                description: "The marketplace Id {marketplaceId} is not supported. Valid values: {allowedMarketplaces}"
-                domain: API_FEED
-              "13015":
-                category: REQUEST
-                description: The mandatory 'Range' request header is missing. For help, see the API Reference documentation for this call.
-                domain: API_FEED
-              "13016":
-                category: REQUEST
-                description: "The 'Range' request header format is invalid. Format: 'bytes=start position-end position'.  For help, see the API Reference documentation for this call."
-                domain: API_FEED
-              "13017":
-                category: REQUEST
-                description: The 'Range' header is invalid. Please verify that the start and end positions are correct. For help, see the API Reference documentation for this call.
-                domain: API_FEED
-              "13018":
-                category: REQUEST
-                description: The start position in the range header is invalid.
-                domain: API_FEED
-              "13019":
-                category: REQUEST
-                description: The end position in the range header is invalid.
-                domain: API_FEED
-              "13022":
-                category: REQUEST
-                description: The 'category_id' {category_id} submitted is not supported.
-                domain: API_FEED
-        "403":
-          description: Forbidden
-          x-response-codes:
-            errors:
-              "13023":
-                category: BUSINESS
-                description: Insufficient permissions to access this API for the marketplace {marketplaceId}. Please contact eBay Technical Support for further assistance.
-                domain: API_FEED
-              "13024":
-                category: BUSINESS
-                description: Insufficient permissions to access this API for the category {category_id}. Please contact eBay Technical Support for further assistance.
-                domain: API_FEED
-        "404":
-          description: Not found
-        "409":
-          description: Conflict
-        "416":
-          description: Range not satisfiable
-        "500":
-          description: Internal Server Error
-          x-response-codes:
-            errors:
-              "13006":
-                category: APPLICATION
-                description: There was a problem with an eBay internal system or process. Wait a few minutes and retry the call. If that doesn't work, contact eBay Support.
-                domain: API_FEED
-      security:
-        - Client Credentials:
-            - https://api.ebay.com/oauth/api_scope/buy.item.feed
-      tags:
-        - item
-  /item_group:
-    get:
-      description: "This method lets you download a TSV_GZIP (tab separated value gzip) Item Group feed file. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. There are two types of item group feed files generated: A daily Item Group feed file containing the item group variation information associated with items returned in the Item feed file for a specific day, category, and marketplace. (feed_scope = NEWLY_LISTED) A weekly Item Group Bootstrap feed file containing all the item group variation information associated with items returned in the Item Bootstrap feed file for all the items in a specific category. (feed_scope = ALL_ACTIVE) Note: Filters are applied to the feed files. For details, see Feed File Filters. When curating the items returned, be sure to code as if these filters are not applied as they can be changed or removed in the future. The contents of these feed files are based on the contents of the corresponding daily Item or Item Bootstrap feed file. When a new Item or Item Bootstrap feed file is generated, the service reads the file and if an item in the file has a primaryItemGroupId value, which indicates the item is part of an item group, it uses that value to return the item group (parent item) information for that item in the corresponding Item Group or Item Group Bootstrap feed file. This information includes the name/value pair of the aspects of the items in this group returned in the variesByLocalizedAspects column. For example, if the item was a shirt some of the variation names could be Size, Color, etc. Also the images for the various aspects are returned in the additionalImageUrls column. The first line in any feed file is the header, which labels the columns and indicates the order of the values on each line. Each header is described in the Response fields section. Combining the Item Group and Item feed files The Item Group or Item Group Bootstrap feed file contains details about the item group (parent item), including the item group ID itemGroupId. You match the value of itemGroupId from the Item Group feed file with the value of primaryItemGroupId from the corresponding daily Item or Item Bootstrap feed file. URLs for this method Production URL: https://api.ebay.com/buy/feed/v1_beta/item_group? Sandbox URL: https://api.sandbox.ebay.com/buy/feed/v1_beta/item_group? Downloading feed files Item Group feed files are binary gzip files. If the file is larger than 100 MB, the download must be streamed in chunks. You specify the size of the chunks in bytes using the Range request header. The content-range response header indicates where in the full resource this partial chunk of data belongs and the total number of bytes in the file. For more information about using these headers, see Retrieving a gzip feed file. Note: The response is always only a TSV_GZIP file. However for documentation purposes, the response is shown as JSON fields so that the value returned in each column can be explained. The order of the response fields, shows you the order of the columns in the feed file. Restrictions For a list of supported sites and other restrictions, see API Restrictions."
-      operationId: getItemGroupFeed
-      parameters:
-        - description: "The ID of the eBay marketplace where the item is hosted. Note: This value is case sensitive. For example: &nbsp;&nbsp;X-EBAY-C-MARKETPLACE-ID = EBAY_US For a list of supported sites see, API Restrictions."
-          in: header
-          name: X-EBAY-C-MARKETPLACE-ID
-          required: true
-          type: string
-        - description: "This header specifies the range in bytes of the chunks of the gzip file being returned. Format: bytes=startpos-endpos For example, the following retrieves the first 10 MBs of the feed file. &nbsp;&nbsp;Range bytes=0-10485760 For more information about using this header, see Retrieving a gzip feed file. Maximum: 100 MB (10MB in the Sandbox)"
-          in: header
-          name: Range
-          required: false
-          type: string
-        - description: "Specifies the type of file to return. Valid Values: NEWLY_LISTED - Returns the Item Group feed file containing the item group variation information for items in the daily Item feed file that were associated with an item group. The items in this type of Item feed file are items that were listed on the day specified by the date parameter in the category specified by the category_id parameter. /item_group?feed_scope=NEWLY_LISTED&amp;category_id=15032&amp;date=20170925 ALL_ACTIVE - Returns the weekly Item Group Bootstrap file containing the item group variation information for items in the weekly Item Bootstrap feed file that were associated with an item group. The items are Good 'Til Cancelled items in the category specified by the category_id parameter. Note: Bootstrap files are generated every Tuesday and the file is available on Wednesday. However, the exact time the file is available can vary so we recommend you download the Bootstrap file on Thursday. The item groups in the file are for the items that were in the specified category on Sunday. /item_group?feed_scope=ALL_ACTIVE&amp;category_id=15032"
-          in: query
-          name: feed_scope
-          required: true
-          type: string
-        - description: "An eBay top-level category ID of the items to be returned in the feed file. The list of eBay category IDs changes over time and category IDs are not the same across all the eBay marketplaces. To get a list of the top-level categories for a marketplaces, you can use the Taxonomy API getCategoryTree method. This method retrieves the complete category tree for the marketplace. The top-level categories are identified by the categoryTreeNodeLevel field. For example: &nbsp;&nbsp;&quot;categoryTreeNodeLevel&quot;: 1 For details see Get Categories for Buy APIs. Restriction: Must be a top-level category"
-          in: query
-          name: category_id
-          required: true
-          type: string
-        - description: "The date of the daily Item Group feed file (feed_scope=NEWLY_LISTED) you want. The date is required only for the daily Item Group feed file. If you specify a date for the Item Group Bootstrap file (feed_scope=ALL_ACTIVE), the date is ignored and the latest file is returned. The date the Item Group Bootstrap feed file was generated is returned in the Last-Modified response header. The Item Group feed files are generated every day and there are 14 daily files available. There is a 48 hour latency when generating the files. This means on July 10, the latest feed file you can download is July 8. Note: The generated files are stored using MST (US Mountain Standard Time), which is -7 hours UTC time. Format: yyyyMMdd Requirement: Requirements: Required only when feed_scope=NEWLY_LISTED Must be within 3-14 days in the past"
-          in: query
-          name: date
-          required: false
-          type: string
-      produces:
-        - application/json
-        - text/tab-separated-values
-      responses:
-        "200":
-          description: Partial Content
-          headers:
-            Content-range:
-              description: "The content-range response header indicates where in the full resource this partial chunk of data belongs. It returns the lower and upper values in bytes (specified by the Range header) of the chunk and the total size of the file being downloaded in bytes. Maximum range: 100 MB The following is an example of a content-range response, where 0-10 is the lower and upper limit in bytes and 1000 is the total size of the file in bytes. &nbsp;&nbsp;0-10/1000 The following example of a content-range response indicates the value of the Range header is invalid and a 416 status code is returned. &nbsp;&nbsp; */1000 For more information and examples, see Retrieving a gzip feed file."
-              type: string
-            Last-Modified:
-              description: "Returns the generated date of the feed file, which will be the latest file available. For example: Last-Modified&nbsp;&nbsp;Wed, 21 Oct 2015 07:28:00 GMT"
-              type: string
-          schema:
-            $ref: "#/definitions/ItemGroupResponse"
-        "204":
-          description: No Content <br />This code is returned when there are no items that meet the criteria for this feed file. See <a href="/api-docs/buy/static/api-feed.html#feed-filters">Feed File Filters</a> for details.
-        "206":
-          description: Partial Content
-          headers:
-            Content-range:
-              description: "The content-range response header indicates where in the full resource this partial chunk of data belongs. It returns the lower and upper values in bytes (specified by the Range header) of the chunk and the total size of the file being downloaded in bytes. Maximum range: 100 MB The following is an example of a content-range response, where 0-10 is the lower and upper limit in bytes and 1000 is the total size of the file in bytes. &nbsp;&nbsp;0-10/1000 The following example of a content-range response indicates the value of the Range header is invalid and a 416 status code is returned. &nbsp;&nbsp; */1000 For more information and examples, see Retrieving a gzip feed file."
-              type: string
-            Last-Modified:
-              description: "Returns the generated date of the feed file, which will be the latest file available. For example: Last-Modified&nbsp;&nbsp;Wed, 21 Oct 2015 07:28:00 GMT"
-              type: string
-          schema:
-            $ref: "#/definitions/ItemGroupResponse"
-        "400":
           description: Bad request
           x-response-codes:
             errors:
@@ -344,6 +183,167 @@ paths:
           description: Range not satisfiable
         "500":
           description: Internal server error
+          x-response-codes:
+            errors:
+              "13006":
+                category: APPLICATION
+                description: There was a problem with an eBay internal system or process. Wait a few minutes and retry the call. If that doesn't work, contact eBay Support.
+                domain: API_FEED
+      security:
+        - Client Credentials:
+            - https://api.ebay.com/oauth/api_scope/buy.item.feed
+      tags:
+        - item
+  /item_group:
+    get:
+      description: "This method lets you download a TSV_GZIP (tab separated value gzip) Item Group feed file. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. There are two types of item group feed files generated: A daily Item Group feed file containing the item group variation information associated with items returned in the Item feed file for a specific day, category, and marketplace. (feed_scope = NEWLY_LISTED) A weekly Item Group Bootstrap feed file containing all the item group variation information associated with items returned in the Item Bootstrap feed file for all the items in a specific category. (feed_scope = ALL_ACTIVE) Note: Filters are applied to the feed files. For details, see Feed File Filters. When curating the items returned, be sure to code as if these filters are not applied as they can be changed or removed in the future. The contents of these feed files are based on the contents of the corresponding daily Item or Item Bootstrap feed file. When a new Item or Item Bootstrap feed file is generated, the service reads the file and if an item in the file has a primaryItemGroupId value, which indicates the item is part of an item group, it uses that value to return the item group (parent item) information for that item in the corresponding Item Group or Item Group Bootstrap feed file. This information includes the name/value pair of the aspects of the items in this group returned in the variesByLocalizedAspects column. For example, if the item was a shirt some of the variation names could be Size, Color, etc. Also the images for the various aspects are returned in the additionalImageUrls column. The first line in any feed file is the header, which labels the columns and indicates the order of the values on each line. Each header is described in the Response fields section. Combining the Item Group and Item feed files The Item Group or Item Group Bootstrap feed file contains details about the item group (parent item), including the item group ID itemGroupId. You match the value of itemGroupId from the Item Group feed file with the value of primaryItemGroupId from the corresponding daily Item or Item Bootstrap feed file. URLs for this method Production URL: https://api.ebay.com/buy/feed/v1_beta/item_group? Sandbox URL: https://api.sandbox.ebay.com/buy/feed/v1_beta/item_group? Downloading feed files Item Group feed files are binary gzip files. If the file is larger than 100 MB, the download must be streamed in chunks. You specify the size of the chunks in bytes using the Range request header. The content-range response header indicates where in the full resource this partial chunk of data belongs and the total number of bytes in the file. For more information about using these headers, see Retrieving a gzip feed file. Note: The response is always only a TSV_GZIP file. However for documentation purposes, the response is shown as JSON fields so that the value returned in each column can be explained. The order of the response fields, shows you the order of the columns in the feed file. Restrictions For a list of supported sites and other restrictions, see API Restrictions."
+      operationId: getItemGroupFeed
+      parameters:
+        - description: "The ID of the eBay marketplace where the item is hosted. Note: This value is case sensitive. For example: &nbsp;&nbsp;X-EBAY-C-MARKETPLACE-ID = EBAY_US For a list of supported sites see, API Restrictions."
+          in: header
+          name: X-EBAY-C-MARKETPLACE-ID
+          required: true
+          type: string
+        - description: "This header specifies the range in bytes of the chunks of the gzip file being returned. Format: bytes=startpos-endpos For example, the following retrieves the first 10 MBs of the feed file. &nbsp;&nbsp;Range bytes=0-10485760 For more information about using this header, see Retrieving a gzip feed file. Maximum: 100 MB (10MB in the Sandbox)"
+          in: header
+          name: Range
+          required: false
+          type: string
+        - description: "Specifies the type of file to return. Valid Values: NEWLY_LISTED - Returns the Item Group feed file containing the item group variation information for items in the daily Item feed file that were associated with an item group. The items in this type of Item feed file are items that were listed on the day specified by the date parameter in the category specified by the category_id parameter. /item_group?feed_scope=NEWLY_LISTED&amp;category_id=15032&amp;date=20170925 ALL_ACTIVE - Returns the weekly Item Group Bootstrap file containing the item group variation information for items in the weekly Item Bootstrap feed file that were associated with an item group. The items are Good 'Til Cancelled items in the category specified by the category_id parameter. Note: Bootstrap files are generated every Tuesday and the file is available on Wednesday. However, the exact time the file is available can vary so we recommend you download the Bootstrap file on Thursday. The item groups in the file are for the items that were in the specified category on Sunday. /item_group?feed_scope=ALL_ACTIVE&amp;category_id=15032"
+          in: query
+          name: feed_scope
+          required: true
+          type: string
+        - description: "An eBay top-level category ID of the items to be returned in the feed file. The list of eBay category IDs changes over time and category IDs are not the same across all the eBay marketplaces. To get a list of the top-level categories for a marketplaces, you can use the Taxonomy API getCategoryTree method. This method retrieves the complete category tree for the marketplace. The top-level categories are identified by the categoryTreeNodeLevel field. For example: &nbsp;&nbsp;&quot;categoryTreeNodeLevel&quot;: 1 For details see Get Categories for Buy APIs. Restriction: Must be a top-level category"
+          in: query
+          name: category_id
+          required: true
+          type: string
+        - description: "The date of the daily Item Group feed file (feed_scope=NEWLY_LISTED) you want. The date is required only for the daily Item Group feed file. If you specify a date for the Item Group Bootstrap file (feed_scope=ALL_ACTIVE), the date is ignored and the latest file is returned. The date the Item Group Bootstrap feed file was generated is returned in the Last-Modified response header. The Item Group feed files are generated every day and there are 14 daily files available. There is a 48 hour latency when generating the files. This means on July 10, the latest feed file you can download is July 8. Note: The generated files are stored using MST (US Mountain Standard Time), which is -7 hours UTC time. Format: yyyyMMdd Requirement: Requirements: Required only when feed_scope=NEWLY_LISTED Must be within 3-14 days in the past"
+          in: query
+          name: date
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/tab-separated-values
+      responses:
+        "200":
+          description: Partial Content
+          headers:
+            Content-range:
+              description: "The content-range response header indicates where in the full resource this partial chunk of data belongs. It returns the lower and upper values in bytes (specified by the Range header) of the chunk and the total size of the file being downloaded in bytes. Maximum range: 100 MB The following is an example of a content-range response, where 0-10 is the lower and upper limit in bytes and 1000 is the total size of the file in bytes. &nbsp;&nbsp;0-10/1000 The following example of a content-range response indicates the value of the Range header is invalid and a 416 status code is returned. &nbsp;&nbsp; */1000 For more information and examples, see Retrieving a gzip feed file."
+              type: string
+            Last-Modified:
+              description: "Returns the generated date of the feed file, which will be the latest file available. For example: Last-Modified&nbsp;&nbsp;Wed, 21 Oct 2015 07:28:00 GMT"
+              type: string
+          schema:
+            $ref: "#/definitions/ItemGroupResponse"
+        "204":
+          description: No Content <br />This code is returned when there are no items that meet the criteria for this feed file. See <a href="/api-docs/buy/static/api-feed.html#feed-filters">Feed File Filters</a> for details.
+        "206":
+          description: Partial Content
+          headers:
+            Content-range:
+              description: "The content-range response header indicates where in the full resource this partial chunk of data belongs. It returns the lower and upper values in bytes (specified by the Range header) of the chunk and the total size of the file being downloaded in bytes. Maximum range: 100 MB The following is an example of a content-range response, where 0-10 is the lower and upper limit in bytes and 1000 is the total size of the file in bytes. &nbsp;&nbsp;0-10/1000 The following example of a content-range response indicates the value of the Range header is invalid and a 416 status code is returned. &nbsp;&nbsp; */1000 For more information and examples, see Retrieving a gzip feed file."
+              type: string
+            Last-Modified:
+              description: "Returns the generated date of the feed file, which will be the latest file available. For example: Last-Modified&nbsp;&nbsp;Wed, 21 Oct 2015 07:28:00 GMT"
+              type: string
+          schema:
+            $ref: "#/definitions/ItemGroupResponse"
+        "400":
+          description: Bad Request
+          x-response-codes:
+            errors:
+              "13000":
+                category: REQUEST
+                description: The request contains data that is invalid. Correct the request and submit the call again. For help, see the API Reference documentation for this call.
+                domain: API_FEED
+              "13003":
+                category: REQUEST
+                description: "The 'feed_scope' {feed_scope} submitted is invalid. Valid values: {feedScopes}"
+                domain: API_FEED
+              "13004":
+                category: REQUEST
+                description: The 'category_id' {category_id} submitted is invalid. See the API documentation for help on how to find category IDs.
+                domain: API_FEED
+              "13005":
+                category: REQUEST
+                description: "The 'date' {feedDate} submitted is invalid. Valid values: {earliestDate} to {latestDate} in the past. The format is yyyyMMdd."
+                domain: API_FEED
+              "13007":
+                category: REQUEST
+                description: The feed file requested cannot be found. It is possible the file requested is in the process of being generated. Either change the date or try the call again later.
+                domain: API_FEED
+              "13009":
+                category: REQUEST
+                description: "The mandatory 'feed_scope' query parameter is missing. Valid values: {feedScopes}"
+                domain: API_FEED
+              "13010":
+                category: REQUEST
+                description: The mandatory 'category_id' query parameter is missing.
+                domain: API_FEED
+              "13011":
+                category: REQUEST
+                description: "The mandatory 'date' query parameter is missing. Valid values: {earliestDate} to {latestDate} days in the past. The format is yyyyMMdd."
+                domain: API_FEED
+              "13012":
+                category: REQUEST
+                description: "The marketplace Id {marketplaceId} is invalid. Valid values: {allowedMarketplaces}"
+                domain: API_FEED
+              "13013":
+                category: REQUEST
+                description: "The mandatory 'X-EBAY-C-MARKETPLACE-ID' header is missing. Valid values: {allowedMarketplaces}"
+                domain: API_FEED
+              "13014":
+                category: REQUEST
+                description: "The marketplace Id {marketplaceId} is not supported. Valid values: {allowedMarketplaces}"
+                domain: API_FEED
+              "13015":
+                category: REQUEST
+                description: The mandatory 'Range' request header is missing. For help, see the API Reference documentation for this call.
+                domain: API_FEED
+              "13016":
+                category: REQUEST
+                description: "The 'Range' request header format is invalid. Format: 'bytes=start position-end position'.  For help, see the API Reference documentation for this call."
+                domain: API_FEED
+              "13017":
+                category: REQUEST
+                description: The 'Range' header is invalid. Please verify that the start and end positions are correct. For help, see the API Reference documentation for this call.
+                domain: API_FEED
+              "13018":
+                category: REQUEST
+                description: The start position in the range header is invalid.
+                domain: API_FEED
+              "13019":
+                category: REQUEST
+                description: The end position in the range header is invalid.
+                domain: API_FEED
+              "13022":
+                category: REQUEST
+                description: The 'category_id' {category_id} submitted is not supported.
+                domain: API_FEED
+        "403":
+          description: Forbidden
+          x-response-codes:
+            errors:
+              "13023":
+                category: BUSINESS
+                description: Insufficient permissions to access this API for the marketplace {marketplaceId}. Please contact eBay Technical Support for further assistance.
+                domain: API_FEED
+              "13024":
+                category: BUSINESS
+                description: Insufficient permissions to access this API for the category {category_id}. Please contact eBay Technical Support for further assistance.
+                domain: API_FEED
+        "404":
+          description: Not found
+        "409":
+          description: Conflict
+        "416":
+          description: Range not satisfiable
+        "500":
+          description: Internal Server Error
           x-response-codes:
             errors:
               "13006":
@@ -495,7 +495,7 @@ paths:
                 description: The 'Range' header is invalid. Please verify that the start and end positions are correct. For help, see the API Reference documentation for this call.
                 domain: API_FEED
         "500":
-          description: Internal Server Error
+          description: Internal server error
           x-response-codes:
             errors:
               "13006":
@@ -643,7 +643,7 @@ paths:
         "416":
           description: Range not satisfiable
         "500":
-          description: Internal Server Error
+          description: Internal server error
           x-response-codes:
             errors:
               "13006":

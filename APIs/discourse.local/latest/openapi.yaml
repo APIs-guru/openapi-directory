@@ -163,6 +163,440 @@ paths:
       summary: Send download backup email
       tags:
         - Backups
+  /admin/badges.json:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  admin_badges:
+                    additionalProperties: false
+                    properties:
+                      badge_grouping_ids:
+                        items: {}
+                        type: array
+                      badge_ids:
+                        items: {}
+                        type: array
+                      badge_type_ids:
+                        items: {}
+                        type: array
+                      protected_system_fields:
+                        items: {}
+                        type: array
+                      triggers:
+                        additionalProperties: false
+                        properties:
+                          none:
+                            type: integer
+                          post_action:
+                            type: integer
+                          post_revision:
+                            type: integer
+                          trust_level_change:
+                            type: integer
+                          user_change:
+                            type: integer
+                        required:
+                          - user_change
+                          - none
+                          - post_revision
+                          - trust_level_change
+                          - post_action
+                        type: object
+                    required:
+                      - protected_system_fields
+                      - triggers
+                      - badge_ids
+                      - badge_grouping_ids
+                      - badge_type_ids
+                    type: object
+                  badge_groupings:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        description:
+                          nullable: true
+                          type: string
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        position:
+                          type: integer
+                        system:
+                          type: boolean
+                      required:
+                        - id
+                        - name
+                        - description
+                        - position
+                        - system
+                      type: object
+                    type: array
+                  badge_types:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        sort_order:
+                          type: integer
+                      required:
+                        - id
+                        - name
+                        - sort_order
+                      type: object
+                    type: array
+                  badges:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        allow_title:
+                          type: boolean
+                        auto_revoke:
+                          type: boolean
+                        badge_grouping_id:
+                          type: integer
+                        badge_type_id:
+                          type: integer
+                        description:
+                          type: string
+                        enabled:
+                          type: boolean
+                        grant_count:
+                          type: integer
+                        i18n_name:
+                          type: string
+                        icon:
+                          type: string
+                        id:
+                          type: integer
+                        image_url:
+                          nullable: true
+                          type: string
+                        listable:
+                          type: boolean
+                        long_description:
+                          type: string
+                        manually_grantable:
+                          type: boolean
+                        multiple_grant:
+                          type: boolean
+                        name:
+                          type: string
+                        query:
+                          nullable: true
+                          type: string
+                        show_posts:
+                          type: boolean
+                        slug:
+                          type: string
+                        system:
+                          type: boolean
+                        target_posts:
+                          type: boolean
+                        trigger:
+                          nullable: true
+                          type: integer
+                      required:
+                        - id
+                        - name
+                        - description
+                        - grant_count
+                        - allow_title
+                        - multiple_grant
+                        - icon
+                        - image_url
+                        - listable
+                        - enabled
+                        - badge_grouping_id
+                        - system
+                        - long_description
+                        - slug
+                        - manually_grantable
+                        - query
+                        - trigger
+                        - target_posts
+                        - auto_revoke
+                        - show_posts
+                        - i18n_name
+                        - badge_type_id
+                      type: object
+                    type: array
+                required:
+                  - badges
+                  - badge_types
+                  - badge_groupings
+                  - admin_badges
+          description: success response
+      summary: List badges
+      tags:
+        - Badges
+    post:
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                badge_type_id:
+                  description: |-
+                    The ID for the badge type. 1 for Gold, 2 for Silver,
+                    3 for Bronze.
+                  type: integer
+                name:
+                  description: The name for the new badge.
+                  type: string
+              required:
+                - name
+                - badge_type_id
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  badge:
+                    additionalProperties: false
+                    properties:
+                      allow_title:
+                        type: boolean
+                      auto_revoke:
+                        type: boolean
+                      badge_grouping_id:
+                        type: integer
+                      badge_type_id:
+                        type: integer
+                      description:
+                        type: string
+                      enabled:
+                        type: boolean
+                      grant_count:
+                        type: integer
+                      icon:
+                        type: string
+                      id:
+                        type: integer
+                      image_url:
+                        nullable: true
+                        type: string
+                      listable:
+                        type: boolean
+                      long_description:
+                        type: string
+                      manually_grantable:
+                        type: boolean
+                      multiple_grant:
+                        type: boolean
+                      name:
+                        type: string
+                      query:
+                        nullable: true
+                        type: string
+                      show_posts:
+                        type: boolean
+                      slug:
+                        type: string
+                      system:
+                        type: boolean
+                      target_posts:
+                        type: boolean
+                      trigger:
+                        nullable: true
+                        type: string
+                    required:
+                      - id
+                      - name
+                      - description
+                      - grant_count
+                      - allow_title
+                      - multiple_grant
+                      - icon
+                      - image_url
+                      - listable
+                      - enabled
+                      - badge_grouping_id
+                      - system
+                      - long_description
+                      - slug
+                      - manually_grantable
+                      - query
+                      - trigger
+                      - target_posts
+                      - auto_revoke
+                      - show_posts
+                      - badge_type_id
+                    type: object
+                  badge_types:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        sort_order:
+                          type: integer
+                      required:
+                        - id
+                        - name
+                        - sort_order
+                      type: object
+                    type: array
+                required:
+                  - badge_types
+                  - badge
+          description: success response
+      summary: Create badge
+      tags:
+        - Badges
+  "/admin/badges/{id}.json":
+    delete:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: success response
+      summary: Delete badge
+      tags:
+        - Badges
+    put:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                badge_type_id:
+                  description: |-
+                    The ID for the badge type. 1 for Gold, 2 for Silver,
+                    3 for Bronze.
+                  type: integer
+                name:
+                  description: The name for the new badge.
+                  type: string
+              required:
+                - name
+                - badge_type_id
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  badge:
+                    additionalProperties: false
+                    properties:
+                      allow_title:
+                        type: boolean
+                      auto_revoke:
+                        type: boolean
+                      badge_grouping_id:
+                        type: integer
+                      badge_type_id:
+                        type: integer
+                      description:
+                        type: string
+                      enabled:
+                        type: boolean
+                      grant_count:
+                        type: integer
+                      icon:
+                        type: string
+                      id:
+                        type: integer
+                      image_url:
+                        nullable: true
+                        type: string
+                      listable:
+                        type: boolean
+                      long_description:
+                        type: string
+                      manually_grantable:
+                        type: boolean
+                      multiple_grant:
+                        type: boolean
+                      name:
+                        type: string
+                      query:
+                        nullable: true
+                        type: string
+                      show_posts:
+                        type: boolean
+                      slug:
+                        type: string
+                      system:
+                        type: boolean
+                      target_posts:
+                        type: boolean
+                      trigger:
+                        nullable: true
+                        type: string
+                    required:
+                      - id
+                      - name
+                      - description
+                      - grant_count
+                      - allow_title
+                      - multiple_grant
+                      - icon
+                      - image_url
+                      - listable
+                      - enabled
+                      - badge_grouping_id
+                      - system
+                      - long_description
+                      - slug
+                      - manually_grantable
+                      - query
+                      - trigger
+                      - target_posts
+                      - auto_revoke
+                      - show_posts
+                      - badge_type_id
+                    type: object
+                  badge_types:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        sort_order:
+                          type: integer
+                      required:
+                        - id
+                        - name
+                        - sort_order
+                      type: object
+                    type: array
+                required:
+                  - badge_types
+                  - badge
+          description: success response
+      summary: Update badge
+      tags:
+        - Badges
   /admin/groups.json:
     post:
       parameters: []
@@ -704,6 +1138,9 @@ paths:
                       - suspended
                     type: object
                   post_count:
+                    type: integer
+                  post_edits_count:
+                    nullable: true
                     type: integer
                   posts_read_count:
                     type: integer
@@ -7266,6 +7703,158 @@ paths:
       summary: Creates an upload
       tags:
         - Uploads
+  "/user-badges/{username}.json":
+    get:
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  badge_types:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        sort_order:
+                          type: integer
+                      required:
+                        - id
+                        - name
+                        - sort_order
+                      type: object
+                    type: array
+                  badges:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        allow_title:
+                          type: boolean
+                        badge_grouping_id:
+                          type: integer
+                        badge_type_id:
+                          type: integer
+                        description:
+                          type: string
+                        enabled:
+                          type: boolean
+                        grant_count:
+                          type: integer
+                        icon:
+                          type: string
+                        id:
+                          type: integer
+                        image_url:
+                          nullable: true
+                          type: string
+                        listable:
+                          type: boolean
+                        manually_grantable:
+                          type: boolean
+                        multiple_grant:
+                          type: boolean
+                        name:
+                          type: string
+                        slug:
+                          type: string
+                        system:
+                          type: boolean
+                      required:
+                        - id
+                        - name
+                        - description
+                        - grant_count
+                        - allow_title
+                        - multiple_grant
+                        - icon
+                        - image_url
+                        - listable
+                        - enabled
+                        - badge_grouping_id
+                        - system
+                        - slug
+                        - manually_grantable
+                        - badge_type_id
+                      type: object
+                    type: array
+                  granted_bies:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        admin:
+                          type: boolean
+                        avatar_template:
+                          type: string
+                        flair_name:
+                          nullable: true
+                          type: string
+                        id:
+                          type: integer
+                        moderator:
+                          type: boolean
+                        name:
+                          type: string
+                        trust_level:
+                          type: integer
+                        username:
+                          type: string
+                      required:
+                        - id
+                        - username
+                        - name
+                        - avatar_template
+                        - flair_name
+                        - admin
+                        - moderator
+                        - trust_level
+                      type: object
+                    type: array
+                  user_badges:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        badge_id:
+                          type: integer
+                        can_favorite:
+                          type: boolean
+                        granted_at:
+                          type: string
+                        granted_by_id:
+                          type: integer
+                        grouping_position:
+                          type: integer
+                        id:
+                          type: integer
+                        is_favorite:
+                          nullable: true
+                          type: string
+                      required:
+                        - id
+                        - granted_at
+                        - grouping_position
+                        - is_favorite
+                        - can_favorite
+                        - badge_id
+                        - granted_by_id
+                      type: object
+                    type: array
+                required:
+                  - user_badges
+          description: success response
+      summary: List badges for a user
+      tags:
+        - Badges
+        - Users
   /user_actions.json:
     get:
       parameters:

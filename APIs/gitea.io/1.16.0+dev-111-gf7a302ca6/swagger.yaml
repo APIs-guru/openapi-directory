@@ -11,7 +11,7 @@ info:
     name: MIT
     url: http://opensource.org/licenses/MIT
   title: Gitea API.
-  version: 1.16.0+dev-88-geaa791bed
+  version: 1.16.0+dev-111-gf7a302ca6
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -314,6 +314,10 @@ responses:
       items:
         $ref: "#/definitions/Milestone"
       type: array
+  Note:
+    description: Note
+    schema:
+      $ref: "#/definitions/Note"
   NotificationCount:
     description: Number of unread notifications
     schema:
@@ -1828,6 +1832,14 @@ paths:
           in: query
           name: review_requested
           type: boolean
+        - description: filter by owner
+          in: query
+          name: owner
+          type: string
+        - description: filter by team (requires organization owner parameter to be provided)
+          in: query
+          name: team
+          type: string
         - description: page number of results to return (1-based)
           in: query
           name: page
@@ -2923,6 +2935,37 @@ paths:
         "422":
           $ref: "#/responses/validationError"
       summary: Get a single commit from a repository
+      tags:
+        - repository
+  "/repos/{owner}/{repo}/git/notes/{sha}":
+    get:
+      operationId: repoGetNote
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: a git ref or commit sha
+          in: path
+          name: sha
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          $ref: "#/responses/Note"
+        "404":
+          $ref: "#/responses/notFound"
+        "422":
+          $ref: "#/responses/validationError"
+      summary: Get a note corresponding to a single commit from a repository
       tags:
         - repository
   "/repos/{owner}/{repo}/git/refs":
@@ -11218,6 +11261,16 @@ definitions:
         format: date-time
         type: string
         x-go-name: Updated
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  Note:
+    description: Note contains information related to a git note
+    properties:
+      commit:
+        $ref: "#/definitions/Commit"
+      message:
+        type: string
+        x-go-name: Message
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   NotificationCount:

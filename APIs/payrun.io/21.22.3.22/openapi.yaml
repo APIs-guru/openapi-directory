@@ -6,7 +6,7 @@ info:
     x-twitter: PayRun_io
   description: Open, scableable, transparent payroll API.
   title: PayRun.IO
-  version: 21.22.3.1
+  version: 21.22.3.22
   x-apisguru-categories:
     - financial
   x-logo:
@@ -7343,7 +7343,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorModel"
           description: Internal Server Error
-      summary: insert journal line tag
+      summary: Insert journal line tag
       tags:
         - Tagging
         - JournalLine
@@ -20503,6 +20503,352 @@ paths:
       summary: Creates a new Journal Instruction template
       tags:
         - Journals
+  "/Permission/{PermissionId}":
+    delete:
+      description: Deletes the permission object from the application
+      operationId: DeletePermission
+      parameters:
+        - description: The permission unique identifier. E.g PERM001
+          in: path
+          name: PermissionId
+          required: true
+          schema:
+            type: string
+        - description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            default: Auto
+            format: string
+            type: string
+        - description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          in: header
+          name: Api-Version
+          required: true
+          schema:
+            default: default
+            format: string
+            type: string
+      responses:
+        "200":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Internal Server Error
+      summary: Deletes the permission object
+      tags:
+        - Permission
+    get:
+      description: Gets the permission object for application
+      operationId: GetPermission
+      parameters:
+        - description: The permission unique identifier. E.g PERM001
+          in: path
+          name: PermissionId
+          required: true
+          schema:
+            type: string
+        - description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            default: Auto
+            format: string
+            type: string
+        - description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          in: header
+          name: Api-Version
+          required: true
+          schema:
+            default: default
+            format: string
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Permission"
+          description: The permission object.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Internal Server Error
+      summary: Gets the permission object
+      tags:
+        - Permission
+    patch:
+      description: Patch the permission object at the specified resource location
+      operationId: PatchPermission
+      parameters:
+        - description: The permission unique identifier. E.g PERM001
+          in: path
+          name: PermissionId
+          required: true
+          schema:
+            type: string
+        - description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            default: Auto
+            format: string
+            type: string
+        - description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          in: header
+          name: Api-Version
+          required: true
+          schema:
+            default: default
+            format: string
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Permission"
+          description: The permission object.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Internal Server Error
+      summary: Patch permission object
+      tags:
+        - Permission
+    put:
+      description: Puts the permission object into the specified resource location
+      operationId: PutPermission
+      parameters:
+        - description: The permission unique identifier. E.g PERM001
+          in: path
+          name: PermissionId
+          required: true
+          schema:
+            type: string
+        - description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            default: Auto
+            format: string
+            type: string
+        - description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          in: header
+          name: Api-Version
+          required: true
+          schema:
+            default: default
+            format: string
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Permission"
+          description: The permission object.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Internal Server Error
+      summary: Puts permisson object
+      tags:
+        - Permission
+  /Permissions:
+    get:
+      description: Gets all permission objects for application
+      operationId: GetPermissions
+      parameters:
+        - description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            default: Auto
+            format: string
+            type: string
+        - description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          in: header
+          name: Api-Version
+          required: true
+          schema:
+            default: default
+            format: string
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LinkCollection"
+          description: The link collection object.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Internal Server Error
+      summary: Gets all permission objects
+      tags:
+        - Permission
+    post:
+      description: Post the new permission object into the application
+      operationId: PostPermission
+      parameters:
+        - description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            default: Auto
+            format: string
+            type: string
+        - description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          in: header
+          name: Api-Version
+          required: true
+          schema:
+            default: default
+            format: string
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Link"
+          description: The link object.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Internal Server Error
+      summary: Post permisson object
+      tags:
+        - Permission
   /Query:
     post:
       description: Get the results for the specified query
@@ -23240,6 +23586,730 @@ paths:
       summary: Create a new transform definition
       tags:
         - Reports
+  "/User/{UserId}":
+    delete:
+      description: Deletes the user object from the application
+      operationId: DeleteUser
+      parameters:
+        - description: The user unique identifier. E.g USER001
+          in: path
+          name: UserId
+          required: true
+          schema:
+            type: string
+        - description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            default: Auto
+            format: string
+            type: string
+        - description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          in: header
+          name: Api-Version
+          required: true
+          schema:
+            default: default
+            format: string
+            type: string
+      responses:
+        "200":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Internal Server Error
+      summary: Deletes the user object
+      tags:
+        - User
+    get:
+      description: Gets the user object for application
+      operationId: GetUser
+      parameters:
+        - description: The user unique identifier. E.g USER001
+          in: path
+          name: UserId
+          required: true
+          schema:
+            type: string
+        - description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            default: Auto
+            format: string
+            type: string
+        - description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          in: header
+          name: Api-Version
+          required: true
+          schema:
+            default: default
+            format: string
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: The user object.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Internal Server Error
+      summary: Gets the user object
+      tags:
+        - User
+    patch:
+      description: Patch the user object at the specified resource location
+      operationId: PatchUser
+      parameters:
+        - description: The user unique identifier. E.g USER001
+          in: path
+          name: UserId
+          required: true
+          schema:
+            type: string
+        - description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            default: Auto
+            format: string
+            type: string
+        - description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          in: header
+          name: Api-Version
+          required: true
+          schema:
+            default: default
+            format: string
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: The user object.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Internal Server Error
+      summary: Patch user object
+      tags:
+        - User
+    put:
+      description: Puts the user object into the specified resource location
+      operationId: PutUser
+      parameters:
+        - description: The user unique identifier. E.g USER001
+          in: path
+          name: UserId
+          required: true
+          schema:
+            type: string
+        - description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            default: Auto
+            format: string
+            type: string
+        - description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          in: header
+          name: Api-Version
+          required: true
+          schema:
+            default: default
+            format: string
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: The user object.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Internal Server Error
+      summary: Puts user object
+      tags:
+        - User
+  "/User/{UserId}/Tag/{TagId}":
+    delete:
+      description: Deletes a tag from the user
+      operationId: DeleteUserTag
+      parameters:
+        - description: The user unique identifier. E.g USER001
+          in: path
+          name: UserId
+          required: true
+          schema:
+            type: string
+        - description: The tag unique identifier. E.g. MyTag
+          in: path
+          name: TagId
+          required: true
+          schema:
+            type: string
+        - description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            default: Auto
+            format: string
+            type: string
+        - description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          in: header
+          name: Api-Version
+          required: true
+          schema:
+            default: default
+            format: string
+            type: string
+      responses:
+        "200":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Internal Server Error
+      summary: Delete user tag
+      tags:
+        - Tagging
+        - User
+    get:
+      description: Gets a tag from the user
+      operationId: GetTagFromUser
+      parameters:
+        - description: The user unique identifier. E.g USER001
+          in: path
+          name: UserId
+          required: true
+          schema:
+            type: string
+        - description: The tag unique identifier. E.g. MyTag
+          in: path
+          name: TagId
+          required: true
+          schema:
+            type: string
+        - description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            default: Auto
+            format: string
+            type: string
+        - description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          in: header
+          name: Api-Version
+          required: true
+          schema:
+            default: default
+            format: string
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tag"
+          description: The tag object.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Internal Server Error
+      summary: Get user tag
+      tags:
+        - Tagging
+        - User
+    put:
+      description: Inserts a tag on the user
+      operationId: PutUserTag
+      parameters:
+        - description: The user unique identifier. E.g USER001
+          in: path
+          name: UserId
+          required: true
+          schema:
+            type: string
+        - description: The tag unique identifier. E.g. MyTag
+          in: path
+          name: TagId
+          required: true
+          schema:
+            type: string
+        - description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            default: Auto
+            format: string
+            type: string
+        - description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          in: header
+          name: Api-Version
+          required: true
+          schema:
+            default: default
+            format: string
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tag"
+          description: The tag object.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Internal Server Error
+      summary: Insert user tag
+      tags:
+        - Tagging
+        - User
+  "/User/{UserId}/Tags":
+    get:
+      description: Gets all tags from the user
+      operationId: GetTagsFromUser
+      parameters:
+        - description: The user unique identifier. E.g USER001
+          in: path
+          name: UserId
+          required: true
+          schema:
+            type: string
+        - description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            default: Auto
+            format: string
+            type: string
+        - description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          in: header
+          name: Api-Version
+          required: true
+          schema:
+            default: default
+            format: string
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LinkCollection"
+          description: The link collection object.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Internal Server Error
+      summary: Get tags from user
+      tags:
+        - Tagging
+        - User
+  /Users:
+    get:
+      description: Gets all user objects for application
+      operationId: GetUsers
+      parameters:
+        - description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            default: Auto
+            format: string
+            type: string
+        - description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          in: header
+          name: Api-Version
+          required: true
+          schema:
+            default: default
+            format: string
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LinkCollection"
+          description: The link collection object.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Internal Server Error
+      summary: Gets all user objects
+      tags:
+        - User
+    post:
+      description: Post the new user object into the application
+      operationId: PostUser
+      parameters:
+        - description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            default: Auto
+            format: string
+            type: string
+        - description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          in: header
+          name: Api-Version
+          required: true
+          schema:
+            default: default
+            format: string
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Link"
+          description: The link object.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Internal Server Error
+      summary: Post user object
+      tags:
+        - User
+  "/Users/Tag/{TagId}":
+    get:
+      description: Gets the users with the specified tag
+      operationId: GetAllUsersWithTag
+      parameters:
+        - description: The tag unique identifier. E.g. MyTag
+          in: path
+          name: TagId
+          required: true
+          schema:
+            type: string
+        - description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            default: Auto
+            format: string
+            type: string
+        - description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          in: header
+          name: Api-Version
+          required: true
+          schema:
+            default: default
+            format: string
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LinkCollection"
+          description: The link collection object.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Internal Server Error
+      summary: Get links to tagged users
+      tags:
+        - Tagging
+        - User
+  /Users/Tags:
+    get:
+      description: Get all tags from all users
+      operationId: GetAllUserTags
+      parameters:
+        - description: The OAuth 1 authorization header. &apos;Auto&apos; enables auto complete.
+          in: header
+          name: Authorization
+          required: true
+          schema:
+            default: Auto
+            format: string
+            type: string
+        - description: The version of the api to target. Omit or set as &apos;default&apos; to target the current api version.
+          in: header
+          name: Api-Version
+          required: true
+          schema:
+            default: default
+            format: string
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LinkCollection"
+          description: The link collection object.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+          description: Internal Server Error
+      summary: Get all user tags
+      tags:
+        - Tagging
+        - User
 components:
   requestBodies:
     AEAssessment:
@@ -23959,7 +25029,7 @@ components:
               type: string
             IssueDate:
               description: The dps messages' issue date
-              format: date-time
+              format: date
               title: IssueDate
               type: string
             LastUpdated:
@@ -25680,6 +26750,43 @@ components:
       type: object
       xml:
         name: Pension
+    Permission:
+      properties:
+        Permission:
+          properties:
+            Description:
+              description: The permissions' description
+              title: Description
+              type: string
+            Expression:
+              description: The permissions' expression
+              title: Expression
+              type: string
+            Name:
+              description: The permissions' name
+              title: Name
+              type: string
+            Policy:
+              description: The permissions' policy
+              enum:
+                - Allow
+                - Deny
+              title: Policy
+              type: string
+            Verbs:
+              description: The permissions' verbs
+              enum:
+                - Read
+                - Write
+                - Delete
+                - All
+              title: Verbs
+              type: string
+          title: Permission
+          type: object
+      type: object
+      xml:
+        name: Permission
     Query:
       properties:
         Query:
@@ -26579,3 +27686,51 @@ components:
       type: object
       xml:
         name: TransformDefinition
+    User:
+      properties:
+        User:
+          properties:
+            MetaData:
+              description: The users' meta data
+              properties: {}
+              title: MetaData
+              type: object
+            Permissions:
+              description: The users' permissions
+              properties:
+                Permission:
+                  items:
+                    properties:
+                      "@href":
+                        description: The links' href
+                        title: "@href"
+                        type: string
+                      "@rel":
+                        description: The links' target type
+                        title: "@rel"
+                        type: string
+                      "@title":
+                        description: The links' title
+                        title: "@title"
+                        type: string
+                  type: array
+              title: Permission
+              type: object
+            Roles:
+              description: The users' roles
+              properties:
+                Role:
+                  items:
+                    type: string
+                  type: array
+              title: Roles
+              type: object
+            UserIdentifier:
+              description: The users' user identifier
+              title: UserIdentifier
+              type: string
+          title: User
+          type: object
+      type: object
+      xml:
+        name: User

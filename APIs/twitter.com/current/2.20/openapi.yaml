@@ -13,7 +13,7 @@ info:
     url: https://developer.twitter.com/en/developer-terms/agreement-and-policy.html
   termsOfService: https://developer.twitter.com/en/developer-terms/agreement-and-policy.html
   title: Twitter API v2
-  version: "2.19"
+  version: "2.20"
   x-apisguru-categories:
     - social
   x-logo:
@@ -1446,6 +1446,7 @@ components:
             - non_public_metrics
             - organic_metrics
             - promoted_metrics
+            - alt_text
           type: string
         minItems: 1
         type: array
@@ -2380,6 +2381,8 @@ components:
       allOf:
         - $ref: "#/components/schemas/CommonMediaFields"
         - properties:
+            alt_text:
+              type: string
             type:
               enum:
                 - photo

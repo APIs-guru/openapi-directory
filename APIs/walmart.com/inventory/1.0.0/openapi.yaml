@@ -856,7 +856,7 @@ paths:
               schema:
                 properties:
                   quantity:
-                    description: Quantity of an item that is input by the seller
+                    description: Information about the quantity in inventory
                     properties:
                       amount:
                         description: The number available in the inventory
@@ -892,7 +892,7 @@ paths:
               schema:
                 properties:
                   quantity:
-                    description: Quantity of an item that is input by the seller
+                    description: Information about the quantity in inventory
                     properties:
                       amount:
                         description: The number available in the inventory
@@ -980,7 +980,7 @@ paths:
             schema:
               properties:
                 quantity:
-                  description: Quantity of an item that is input by the seller
+                  description: Information about the quantity in inventory
                   properties:
                     amount:
                       description: The number available in the inventory
@@ -1016,7 +1016,7 @@ paths:
             schema:
               properties:
                 quantity:
-                  description: Quantity of an item that is input by the seller
+                  description: Information about the quantity in inventory
                   properties:
                     amount:
                       description: The number available in the inventory
@@ -1053,7 +1053,7 @@ paths:
               schema:
                 properties:
                   quantity:
-                    description: Quantity of an item that is input by the seller
+                    description: Information about the quantity in inventory
                     properties:
                       amount:
                         description: The number available in the inventory
@@ -1089,7 +1089,7 @@ paths:
               schema:
                 properties:
                   quantity:
-                    description: Quantity of an item that is input by the seller
+                    description: Information about the quantity in inventory
                     properties:
                       amount:
                         description: The number available in the inventory
@@ -1520,7 +1520,7 @@ components:
     Inventory:
       properties:
         quantity:
-          description: Quantity of an item that is input by the seller
+          description: Information about the quantity in inventory
           properties:
             amount:
               description: The number available in the inventory
@@ -1884,7 +1884,7 @@ components:
           type: string
       type: object
     SupplyQuantity:
-      description: Quantity of an item that is input by the seller
+      description: Information about the quantity in inventory
       properties:
         amount:
           description: The number available in the inventory

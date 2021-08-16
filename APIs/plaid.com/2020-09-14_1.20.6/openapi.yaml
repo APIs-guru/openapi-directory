@@ -13,7 +13,7 @@ info:
   description: The Plaid REST API. Please see https://plaid.com/docs/api for more details.
   termsOfService: https://plaid.com/legal/
   title: The Plaid API
-  version: 2020-09-14_1.19.12
+  version: 2020-09-14_1.20.6
   x-apisguru-categories:
     - financial
   x-origin:
@@ -356,7 +356,7 @@ paths:
   /asset_report/filter:
     post:
       description: |-
-        By default, an Asset Report will contain all of the accounts on a given Item. In some cases, you may not want the Asset Report to contain all accounts. For example, you might have the end user choose which accounts are relevant in Link using the Select Account view, which you can enable in the dashboard. Or, you might always exclude certain account types or subtypes, which you can identify by using the `/accounts/get` endpoint. To narrow an Asset Report to only a subset of accounts, use the `/asset_report/filter` endpoint.
+        By default, an Asset Report will contain all of the accounts on a given Item. In some cases, you may not want the Asset Report to contain all accounts. For example, you might have the end user choose which accounts are relevant in Link using the Account Select view, which you can enable in the dashboard. Or, you might always exclude certain account types or subtypes, which you can identify by using the `/accounts/get` endpoint. To narrow an Asset Report to only a subset of accounts, use the `/asset_report/filter` endpoint.
 
         To exclude certain Accounts from an Asset Report, first use the `/asset_report/create` endpoint to create the report, then send the `asset_report_token` along with a list of `account_ids` to exclude to the `/asset_report/filter` endpoint, to create a new Asset Report which contains only a subset of the original Asset Report's data.
 
@@ -634,7 +634,7 @@ paths:
 
         The response to `/asset_report/pdf/get` is the PDF binary data. The `request_id`  is returned in the `Plaid-Request-ID` header.
 
-        [View a sample PDF Asset Report with Insights](https://plaid.com/documents/sample-asset-report.pdf).
+        [View a sample PDF Asset Report](https://plaid.com/documents/sample-asset-report.pdf).
       externalDocs:
         url: /api/products/#asset_reportpdfget
       operationId: assetReportPdfGet
@@ -724,6 +724,8 @@ paths:
         The `/auth/get` endpoint returns the bank account and bank identification numbers (such as routing numbers, for US accounts) associated with an Item's checking and savings accounts, along with high-level account data and balances when available.
 
         Note: This request may take some time to complete if `auth` was not specified as an initial product when creating the Item. This is because Plaid must communicate directly with the institution to retrieve the data.
+
+        Also note that `/auth/get` will not return data for any new accounts opened after the Item was created. To obtain data for new accounts, create a new Item.
       externalDocs:
         url: /api/products/#authget
       operationId: authGet
@@ -1637,6 +1639,34 @@ paths:
       summary: Retrieve information from the paystubs used for income verification
       tags:
         - plaid
+  /income/verification/refresh:
+    post:
+      description: "`/income/verification/refresh` refreshes a given income verification."
+      externalDocs:
+        url: /api/products/#incomeverificationrefresh
+      operationId: incomeVerificationRefresh
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IncomeVerificationRefreshRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IncomeVerificationRefreshResponse"
+          description: success
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error response.
+      summary: Refresh an income verification
+      tags:
+        - plaid
   /income/verification/summary/get:
     post:
       description: "`/income/verification/summary/get` returns a verification summary for the income that was verified for an end user. It can be called once the status of the verification has been set to `VERIFICATION_STATUS_PROCESSING_COMPLETE`, as reported by the `INCOME: verification_status` webhook. Attempting to call the endpoint before verification has been completed will result in an error."
@@ -1829,6 +1859,20 @@ paths:
                             success: 0.42
                           last_status_change: 2019-02-15T15:50:00Z
                           status: DEGRADED
+                        investments:
+                          breakdown:
+                            error_institution: 0.09
+                            error_plaid: 0.02
+                            success: 0.89
+                          last_status_change: 2019-02-15T15:53:00Z
+                          liabilities:
+                            breakdown:
+                              error_institution: 0.09
+                              error_plaid: 0.02
+                              success: 0.89
+                            last_status_change: 2019-02-15T15:53:00Z
+                            status: HEALTHY
+                          status: HEALTHY
                         investments_updates:
                           breakdown:
                             error_institution: 0.03
@@ -1843,6 +1887,14 @@ paths:
                             error_plaid: 0.01
                             success: 0.9
                           last_status_change: 2019-02-15T15:53:00Z
+                          status: HEALTHY
+                        liabilities_updates:
+                          breakdown:
+                            error_institution: 0.03
+                            error_plaid: 0.02
+                            refresh_interval: NORMAL
+                            success: 0.95
+                          last_status_change: 2019-02-12T08:22:00Z
                           status: HEALTHY
                         logo: null
                         primary_color: "#004966"
@@ -3643,6 +3695,31 @@ paths:
       summary: Set verification status for Sandbox account
       tags:
         - plaid
+  /sandbox/oauth/select_accounts:
+    post:
+      operationId: sandboxOauthSelectAccounts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SandboxOauthSelectAccountsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SandboxOauthSelectAccountsResponse"
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error response.
+      summary: Save the selected accounts when connecting to the Platypus Oauth institution
+      tags:
+        - plaid
   /sandbox/processor_token/create:
     post:
       description: Use the `/sandbox/processor_token/create` endpoint to create a valid `processor_token` for an arbitrary institution ID and test credentials. The created `processor_token` corresponds to a new Sandbox Item. You can then use this `processor_token` with the `/processor/` API endpoints in Sandbox. You can also use `/sandbox/processor_token/create` with the [`user_custom` test username](https://plaid.com/docs/sandbox/user-custom) to generate a test account with custom data.
@@ -3708,6 +3785,148 @@ paths:
                 $ref: "#/components/schemas/Error"
           description: Error response.
       summary: Create a test Item
+      tags:
+        - plaid
+  /signal/decision/report:
+    post:
+      description: After calling `/signal/evaluate`, call `/signal/decision/report` to report whether the transaction was initiated. This endpoint will return an `INVALID_REQUEST` error if called a second time with a different value for `initiated`.
+      externalDocs:
+        url: /signal/reference#signaldecisionreport
+      operationId: signalDecisionReport
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignalDecisionReportRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example-1:
+                  value:
+                    request_id: mdqfuVxeoza6mhu
+              schema:
+                $ref: "#/components/schemas/SignalDecisionReportResponse"
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error response.
+      summary: Report whether you initiated an ACH transaction
+      tags:
+        - plaid
+  /signal/evaluate:
+    post:
+      description: |-
+        Use `/signal/evaluate` to evaluate a planned ACH transaction to get a return risk assessment (such as a risk score and risk tier) and additional risk signals.
+
+        In order to obtain a valid score for an ACH transaction, Plaid must have an access token for the account, and the Item must be healthy (receiving product updates) or have recently been in a healthy state. If the transaction does not meet eligibility requirements, an error will be returned corresponding to the underlying cause.
+      externalDocs:
+        url: /signal/reference#signalevaluate
+      operationId: signalEvaluate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignalEvaluateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example-1:
+                  value:
+                    core_attributes:
+                      address_change_count_28d: 0
+                      address_change_count_90d: 0
+                      available_balance: 420.22
+                      balance_last_updated: 2021-02-25 09:18:21.787082
+                      current_balance: 476
+                      days_since_first_plaid_connection: 510
+                      days_with_negative_balance_count_90d: 0
+                      email_change_count_28d: 0
+                      email_change_count_90d: 0
+                      is_savings_or_money_market_account: false
+                      nsf_overdraft_transactions_count_30d: 1
+                      nsf_overdraft_transactions_count_60d: 2
+                      nsf_overdraft_transactions_count_7d: 1
+                      nsf_overdraft_transactions_count_90d: 2
+                      p10_eod_balance_30d: 320.44
+                      p10_eod_balance_60d: 320.46
+                      p10_eod_balance_90d: 320.23
+                      p50_credit_transactions_amount_28d: 46.79
+                      p50_debit_transactions_amount_28d: 75
+                      p90_eod_balance_30d: 555.71
+                      p90_eod_balance_60d: 449.96
+                      p90_eod_balance_90d: 434.38
+                      p95_credit_transactions_amount_28d: 155.95
+                      p95_debit_transactions_amount_28d: 799.59
+                      phone_change_count_28d: 0
+                      phone_change_count_90d: 0
+                      plaid_connections_count_30d: 7
+                      plaid_connections_count_7d: 6
+                      total_credit_transactions_amount_10d: 507.04
+                      total_debit_transactions_amount_10d: 590.14
+                      total_plaid_connections_count: 15
+                      unauthorized_transactions_count_30d: 0
+                      unauthorized_transactions_count_60d: 0
+                      unauthorized_transactions_count_7d: 0
+                      unauthorized_transactions_count_90d: 0
+                    request_id: mdqfuVxeoza6mhu
+                    scores:
+                      bank_initiated_return_risk:
+                        risk_tier: 7
+                        score: 72
+                      customer_initiated_return_risk:
+                        risk_tier: 1
+                        score: 9
+              schema:
+                $ref: "#/components/schemas/SignalEvaluateResponse"
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error response.
+      summary: Evaluate a planned ACH transaction
+      tags:
+        - plaid
+  /signal/return/report:
+    post:
+      description: Call the `/signal/return/report` endpoint to report a returned transaction that was previously sent to the `/signal/evaluate` endpoint. Your feedback will be used by the model to incorporate the latest risk trend in your portfolio.
+      externalDocs:
+        url: /signal/reference#signalreturnreport
+      operationId: signalReturnReport
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignalReturnReportRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example-1:
+                  value:
+                    request_id: mdqfuVxeoza6mhu
+              schema:
+                $ref: "#/components/schemas/SignalReturnReportResponse"
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: Error response.
+      summary: Report a return for an ACH transaction
       tags:
         - plaid
   /transactions/get:
@@ -4079,9 +4298,10 @@ components:
           type: string
         last_updated_datetime:
           description: |-
-            Timestamp in ISO-8601 format (`YYYY-MM-DDTHH:mm:ssZ`) indicating the last time that the balance for the given account has been updated.
+            Timestamp in ISO-8601 format (`YYYY-MM-DDTHH:mm:ssZ`) indicating the last time that the balance for the given account has been updated
 
             This is currently only provided when the `min_last_updated_datetime` is passed when calling `/accounts/balance/get` for `ins_128026` (Capital One).
+          format: date-time
           nullable: true
           type: string
         limit:
@@ -4495,6 +4715,7 @@ components:
           type: string
         created_at:
           description: The date this application was linked in ISO8601 (YYYY-MM-DD) format in UTC.
+          format: date
           type: string
         logo_url:
           description: A URL that links to the application logo image.
@@ -4555,6 +4776,7 @@ components:
           type: string
         date_generated:
           description: The date and time when the Asset Report was created, in ISO 8601 format (e.g. "2018-04-12T03:32:11Z").
+          format: date-time
           type: string
         days_requested:
           description: The duration of transaction history you requested
@@ -4777,6 +4999,7 @@ components:
           type: array
         date_last_updated:
           description: The date and time when this Item’s data was last retrieved from the financial institution, in ISO 8601 format.
+          format: date-time
           type: string
         institution_id:
           description: The id of the financial institution associated with the Item.
@@ -5099,6 +5322,32 @@ components:
           item_id: eVBnVMp7zdTJLkRNr33Rs6zr7KNJqBFL9DrE6
           webhook_code: AUTOMATICALLY_VERIFIED
           webhook_type: AUTH
+    BankInitiatedReturnRisk:
+      description: 'The object contains a risk score and a risk tier that evaluate the transaction return risk because an account is overdrawn or because an ineligible account is used. Common return codes in this category include: "R01", "R02", "R03", "R04", "R06", “R08”,  "R09", "R13", "R16", "R17", "R20", "R23". These returns have a turnaround time of 2 banking days.'
+      properties:
+        risk_tier:
+          $ref: "#/components/schemas/BankInitiatedRiskTier"
+        score:
+          $ref: "#/components/schemas/SignalScore"
+      required:
+        - risk_tier
+        - score
+      title: BankInitiatedReturnRisk
+      type: object
+    BankInitiatedRiskTier:
+      description: |
+        In the `bank_initiated_return_risk` object, there are eight risk tiers corresponding to the scores:
+          1: Predicted bank-initiated return incidence rate between 0.0% - 0.5%
+          2: Predicted bank-initiated return incidence rate between 0.5% - 1.5%
+          3: Predicted bank-initiated return incidence rate between 1.5% - 3%
+          4: Predicted bank-initiated return incidence rate between 3% - 5%
+          5: Predicted bank-initiated return incidence rate between 5% - 10%
+          6: Predicted bank-initiated return incidence rate between 10% - 15%
+          7: Predicted bank-initiated return incidence rate between 15% and 50%
+          8: Predicted bank-initiated return incidence rate greater than 50%
+      maximum: 8
+      minimum: 1
+      type: integer
     BankTransfer:
       additionalProperties: true
       description: Represents a bank transfer within the Bank Transfers API.
@@ -5116,6 +5365,7 @@ components:
           type: boolean
         created:
           description: The datetime when this bank transfer was created. This will be of the form `2006-01-02T15:04:05Z`
+          format: date-time
           type: string
         custom_tag:
           description: A string containing the custom tag provided by the client in the create request. Will be null if not provided.
@@ -5354,6 +5604,7 @@ components:
           $ref: "#/components/schemas/BankTransferReceiverDetails"
         timestamp:
           description: The datetime when this event occurred. This will be of the form `2006-01-02T15:04:05Z`.
+          format: date-time
           type: string
       required:
         - event_id
@@ -5899,15 +6150,18 @@ components:
           type: number
         last_payment_date:
           description: The date of the last payment. Dates are returned in an ISO 8601 format (YYYY-MM-DD). Availability for this field is limited.
+          format: date
           type: string
         last_statement_issue_date:
           description: The date of the last statement. Dates are returned in an ISO 8601 format (YYYY-MM-DD).
+          format: date
           type: string
         minimum_payment_amount:
           description: The minimum payment due for the next billing cycle.
           type: number
         next_payment_due_date:
           description: The due date for the next payment. The due date is `null` if a payment is not expected. Dates are returned in an ISO 8601 format (YYYY-MM-DD).
+          format: date
           nullable: true
           type: string
       required:
@@ -5931,6 +6185,31 @@ components:
         - account_subtypes
       title: CreditFilter
       type: object
+    CustomerInitiatedReturnRisk:
+      description: 'The object contains a risk score and a risk tier that evaluate the transaction return risk of an unauthorized debit. Common return codes in this category include: “R05”, "R07", "R10", "R11", "R29". These returns typically have a return time frame of up to 60 calendar days. During this period, the customer of financial institutions can dispute a transaction as unauthorized.'
+      properties:
+        risk_tier:
+          $ref: "#/components/schemas/CustomerInitiatedRiskTier"
+        score:
+          $ref: "#/components/schemas/SignalScore"
+      required:
+        - risk_tier
+        - score
+      title: CustomerInitiatedReturnRisk
+      type: object
+    CustomerInitiatedRiskTier:
+      description: |
+        A tier corresponding to the projected likelihood that the transaction, if initiated, will be subject to a return.
+
+        In the `customer_initiated_return_risk` object, there are five risk tiers corresponding to the scores:
+          1: Predicted customer-initiated return incidence rate between 0.00% - 0.02%
+          2: Predicted customer-initiated return incidence rate between 0.02% - 0.05%
+          3: Predicted customer-initiated return incidence rate between 0.05% - 0.1%
+          4: Predicted customer-initiated return incidence rate between 0.1% - 0.5%
+          5: Predicted customer-initiated return incidence rate greater than 0.5%
+      maximum: 5
+      minimum: 1
+      type: integer
     DefaultUpdateWebhook:
       additionalProperties: true
       description: |
@@ -6181,8 +6460,10 @@ components:
             The method used to make the deposit switch.
 
             - `instant` – User instantly switched their direct deposit to a new or existing bank account by connecting their payroll or employer account.
+
             - `mail` – User requested that Plaid contact their employer by mail to make the direct deposit switch.
-            - `pdf` – User generated a PDF or email to be sent to their employer with the information necessary to make the deposit switch.
+
+            - `pdf` – User generated a PDF or email to be sent to their employer with the information necessary to make the deposit switch.'
           enum:
             - instant
             - mail
@@ -6320,7 +6601,7 @@ components:
           description: Deposit switch token, used to initialize Link for the Deposit Switch product
           type: string
         deposit_switch_token_expiration_time:
-          description: Expiration time of the token, in ISO8601 format
+          description: Expiration time of the token, in ISO 8601 format
           type: string
         request_id:
           $ref: "#/components/schemas/RequestID"
@@ -6559,10 +6840,13 @@ components:
           $ref: "#/components/schemas/PaymentInitiationOptionalRestrictionBacs"
         emi_account_id:
           description: The EMI (E-Money Institution) account that this payment is associated with, if any. This EMI account is used as an intermediary account to enable Plaid to reconcile the settlement of funds for Payment Initiation requests.
+          minLength: 1
           nullable: true
           type: string
         iban:
           description: The International Bank Account Number (IBAN) for the payer's account. If provided, the end user will be able to send payments only from the specified bank account.
+          maxLength: 34
+          minLength: 15
           nullable: true
           type: string
         request_refund_details:
@@ -6654,6 +6938,7 @@ components:
       properties:
         end_date:
           description: The end date of the incident, in ISO 8601 format, e.g. `"2020-10-30T15:26:48Z"`.
+          format: date-time
           type: string
         incident_updates:
           description: Updates on the health incident.
@@ -6662,6 +6947,7 @@ components:
           type: array
         start_date:
           description: The start date of the incident, in ISO 8601 format, e.g. `"2020-10-30T15:26:48Z"`.
+          format: date-time
           type: string
         title:
           description: The title of the incident
@@ -6684,6 +6970,7 @@ components:
           type: number
         date:
           description: The date of the calculated historical balance, in an ISO 8601 format (YYYY-MM-DD)
+          format: date
           type: string
         iso_currency_code:
           description: The ISO-4217 currency code of the balance. Always `null` if `unofficial_currency_code` is non-`null`.
@@ -6881,6 +7168,7 @@ components:
           type: string
         updated_date:
           description: The date when the update was published, in ISO 8601 format, e.g. `"2020-10-30T15:26:48Z"`.
+          format: date-time
           type: string
       title: IncidentUpdate
       type: object
@@ -7055,6 +7343,30 @@ components:
         - paystubs
         - request_id
       title: IncomeVerificationPaystubsGetResponse
+      type: object
+    IncomeVerificationRefreshRequest:
+      description: IncomeVerificationRefreshRequest defines the request schema for `/income/verification/refresh`
+      properties:
+        client_id:
+          $ref: "#/components/schemas/APIClientID"
+        income_verification_id:
+          description: The ID of the verification.
+          type: string
+        secret:
+          $ref: "#/components/schemas/APISecret"
+      required:
+        - income_verification_id
+      type: object
+    IncomeVerificationRefreshResponse:
+      description: IncomeVerificationRequestResponse defines the response schema for `/income/verification/refresh`
+      properties:
+        request_id:
+          $ref: "#/components/schemas/RequestID"
+        verification_refresh_status:
+          $ref: "#/components/schemas/VerificationRefreshStatus"
+      required:
+        - request_id
+        - verification_refresh_status
       type: object
     IncomeVerificationStatusWebhook:
       additionalProperties: true
@@ -7257,7 +7569,7 @@ components:
     InstitutionStatus:
       additionalProperties: true
       description: |
-        The status of an institution is determined by the health of its Item logins, Transactions updates, Investments updates, Auth requests, Balance requests, and Identity requests. A login attempt is conducted during the initial Item add in Link. If there is not enough traffic to accurately calculate an institution's status, Plaid will return null rather than potentially inaccurate data.
+        The status of an institution is determined by the health of its Item logins, Transactions updates, Investments updates, Liabilities updates, Auth requests, Balance requests, Identity requests, Investments requests, and Liabilities requests. A login attempt is conducted during the initial Item add in Link. If there is not enough traffic to accurately calculate an institution's status, Plaid will return null rather than potentially inaccurate data.
 
         Institution status is accessible in the Dashboard and via the API using the `/institutions/get_by_id` endpoint with the `include_status` option set to true. Note that institution status is not available in the Sandbox environment.
       properties:
@@ -7273,9 +7585,15 @@ components:
           type: array
         identity:
           $ref: "#/components/schemas/ProductStatus"
+        investments:
+          $ref: "#/components/schemas/ProductStatus"
         investments_updates:
           $ref: "#/components/schemas/ProductStatus"
         item_logins:
+          $ref: "#/components/schemas/ProductStatus"
+        liabilities:
+          $ref: "#/components/schemas/ProductStatus"
+        liabilities_updates:
           $ref: "#/components/schemas/ProductStatus"
         transactions_updates:
           $ref: "#/components/schemas/ProductStatus"
@@ -7312,6 +7630,13 @@ components:
                 success: 0.42
               last_status_change: 2019-02-15T15:50:00Z
               status: DEGRADED
+            investments:
+              breakdown:
+                error_institution: 0.09
+                error_plaid: 0.02
+                success: 0.89
+              last_status_change: 2019-02-15T15:53:00Z
+              status: HEALTHY
             investments_updates:
               breakdown:
                 error_institution: 0.03
@@ -7326,6 +7651,21 @@ components:
                 error_plaid: 0.01
                 success: 0.9
               last_status_change: 2019-02-15T15:53:00Z
+              status: HEALTHY
+            liabilities:
+              breakdown:
+                error_institution: 0.09
+                error_plaid: 0.02
+                success: 0.89
+              last_status_change: 2019-02-15T15:53:00Z
+              status: HEALTHY
+            liabilities_updates:
+              breakdown:
+                error_institution: 0.03
+                error_plaid: 0.02
+                refresh_interval: NORMAL
+                success: 0.95
+              last_status_change: 2019-02-12T08:22:00Z
               status: HEALTHY
             transactions_updates:
               breakdown:
@@ -7785,6 +8125,7 @@ components:
           type: string
         date:
           description: The ISO-8601 posting date for the transaction, or transacted date for pending transactions.
+          format: date
           type: string
         fees:
           description: The combined value of all fees applied to this transaction
@@ -8077,6 +8418,7 @@ components:
             The RFC 3339 timestamp after which the consent provided by the end user will expire. Upon consent expiration, the item will enter the `ITEM_LOGIN_REQUIRED` error state. To circumvent the `ITEM_LOGIN_REQUIRED` error and maintain continuous consent, the end user can reauthenticate via Link’s update mode in advance of the consent expiration time.
 
             Note - This is only relevant for certain OAuth-based institutions. For all other institutions, this field will be null.
+          format: date-time
           nullable: true
           type: string
         error:
@@ -8439,10 +8781,12 @@ components:
       properties:
         last_failed_update:
           description: ISO 8601 timestamp of the last failed investments update for the Item. The status will update each time Plaid fails an attempt to connect with the institution, regardless of whether any new data is available in the update.
+          format: date-time
           nullable: true
           type: string
         last_successful_update:
           description: ISO 8601 timestamp of the last successful investments update for the Item. The status will update each time Plaid successfully connects with the institution, regardless of whether any new data is available in the update.
+          format: date-time
           nullable: true
           type: string
       type: object
@@ -8457,6 +8801,7 @@ components:
           type: string
         sent_at:
           description: ISO 8601 timestamp of when the webhook was fired.
+          format: date-time
           nullable: true
           type: string
       type: object
@@ -8473,10 +8818,12 @@ components:
       properties:
         last_failed_update:
           description: ISO 8601 timestamp of the last failed transactions update for the Item. The status will update each time Plaid fails an attempt to connect with the institution, regardless of whether any new data is available in the update.
+          format: date-time
           nullable: true
           type: string
         last_successful_update:
           description: ISO 8601 timestamp of the last successful transactions update for the Item. The status will update each time Plaid successfully connects with the institution, regardless of whether any new data is available in the update.
+          format: date-time
           nullable: true
           type: string
       type: object
@@ -8695,6 +9042,7 @@ components:
           type: number
         expected_payoff_date:
           description: Override the `expected_payoff_date` field. Can only be set if `type` is `student`.
+          format: date
           type: string
         guarantor:
           description: Override the `guarantor` field. Can only be set if `type` is `student`.
@@ -8724,6 +9072,7 @@ components:
           type: number
         origination_date:
           description: The date on which the loan was initially lent, in ISO 8601 (YYYY-MM-DD) format. Can only be set if `type` is `student`.
+          format: date
           type: string
         payment_reference_number:
           description: Override the `payment_reference_number` field. Can only be set if `type` is `student`.
@@ -8780,12 +9129,12 @@ components:
         - repayment_plan_type
         - sequence_number
         - servicer_address
-      title: ""
+      title: LiabilityOverride
       type: object
     LinkTokenAccountFilters:
       additionalProperties: true
       description: |
-        By default, Link will provide limited account filtering: it will only display Institutions that are compatible with all products supplied in the `products` parameter of `/link/token/create`, and, if `auth` is specified in the `products` array, will also filter out accounts other than `checking` and `savings` accounts on the Select Account pane. You can further limit the accounts shown in Link by using `account_filters` to specify the account subtypes to be shown in Link. Only the specified subtypes will be shown. This filtering applies to both the Account Select view (if enabled) and the Institution Select view. Institutions that do not support the selected subtypes will be omitted from Link. To indicate that all subtypes should be shown, use the value `"all"`. If the `account_filters` filter is used, any account type for which a filter is not specified will be entirely omitted from Link. For a full list of valid types and subtypes, see the [Account schema](https://plaid.com/docs/api/accounts#accounts-schema).
+        By default, Link will provide limited account filtering: it will only display Institutions that are compatible with all products supplied in the `products` parameter of `/link/token/create`, and, if `auth` is specified in the `products` array, will also filter out accounts other than `checking` and `savings` accounts on the Account Select pane. You can further limit the accounts shown in Link by using `account_filters` to specify the account subtypes to be shown in Link. Only the specified subtypes will be shown. This filtering applies to both the Account Select view (if enabled) and the Institution Select view. Institutions that do not support the selected subtypes will be omitted from Link. To indicate that all subtypes should be shown, use the value `"all"`. If the `account_filters` filter is used, any account type for which a filter is not specified will be entirely omitted from Link. For a full list of valid types and subtypes, see the [Account schema](https://plaid.com/docs/api/accounts#accounts-schema).
 
         For institutions using OAuth, the filter will not affect the list of accounts shown by the bank in the OAuth window.
       properties:
@@ -8964,6 +9313,7 @@ components:
       properties:
         payment_id:
           description: The `payment_id` provided by the `/payment_initiation/payment/create` endpoint.
+          minLength: 1
           type: string
       required:
         - payment_id
@@ -8988,6 +9338,7 @@ components:
              Only pass a verification time for an email address that you have verified. If you have performed verification but don’t have the time, you may supply a signal value of the start of the UNIX epoch.
 
              Example: `2020-01-01T00:00:00Z`
+          format: date-time
           type: string
         legal_name:
           description: The user's full legal name. This is an optional field used in the [returning user experience](https://plaid.com/docs/link/returning-user) to associate Items to the user.
@@ -9002,6 +9353,7 @@ components:
              Only pass a verification time for a phone number that you have verified. If you have performed verification but don’t have the time, you may supply a signal value of the start of the UNIX epoch.
 
              Example: `2020-01-01T00:00:00Z`
+          format: date-time
           type: string
         ssn:
           description: To be provided in the format "ddd-dd-dddd". This field is optional and will support not-yet-implemented functionality for new products.
@@ -9331,6 +9683,7 @@ components:
           type: number
         last_payment_date:
           description: The date of the last payment. Dates are returned in an ISO 8601 format (YYYY-MM-DD).
+          format: date
           nullable: true
           type: string
         loan_term:
@@ -9343,6 +9696,7 @@ components:
           type: string
         maturity_date:
           description: Original date on which mortgage is due in full. Dates are returned in an ISO 8601 format (YYYY-MM-DD).
+          format: date
           nullable: true
           type: string
         next_monthly_payment:
@@ -9351,10 +9705,12 @@ components:
           type: number
         next_payment_due_date:
           description: The due date for the next payment. Dates are returned in an ISO 8601 format (YYYY-MM-DD).
+          format: date
           nullable: true
           type: string
         origination_date:
           description: The date on which the loan was initially lent. Dates are returned in an ISO 8601 format (YYYY-MM-DD).
+          format: date
           nullable: true
           type: string
         origination_principal_amount:
@@ -9711,6 +10067,7 @@ components:
       properties:
         estimated_eligibility_date:
           description: The estimated date borrower will have completed 120 qualifying monthly payments. Returned in ISO 8601 format (YYYY-MM-DD).
+          format: date
           nullable: true
           type: string
         payments_made:
@@ -9758,6 +10115,7 @@ components:
           type: number
         end_date:
           description: 'The pay period end date, in ISO 8601 format: "yyyy-mm-dd".'
+          format: date
           nullable: true
           type: string
         gross_earnings:
@@ -9766,10 +10124,12 @@ components:
           type: number
         pay_day:
           description: The date on which the paystub was issued, in ISO 8601 format ("yyyy-mm-dd").
+          format: date
           nullable: true
           type: string
         start_date:
           description: 'The pay period start date, in ISO 8601 format: "yyyy-mm-dd".'
+          format: date
           nullable: true
           type: string
       required:
@@ -9789,6 +10149,8 @@ components:
           enum:
             - GBP
             - EUR
+          maxLength: 3
+          minLength: 3
           type: string
         value:
           description: The amount of the payment. Must contain at most two digits of precision e.g. `1.23`. Minimum accepted value is `1`.
@@ -9805,16 +10167,23 @@ components:
       properties:
         city:
           description: The city where the recipient is located. Maximum of 35 characters.
+          maxLength: 35
+          minLength: 1
           type: string
         country:
           description: The ISO 3166-1 alpha-2 country code where the recipient is located.
+          maxLength: 2
+          minLength: 2
           type: string
         postal_code:
           description: The postal code where the recipient is located. Maximum of 16 characters.
+          maxLength: 16
+          minLength: 1
           type: string
         street:
           description: An array of length 1-2 representing the street address where the recipient is located. Maximum of 70 characters.
           items:
+            minLength: 1
             type: string
           minItems: 1
           type: array
@@ -9874,6 +10243,7 @@ components:
           $ref: "#/components/schemas/SenderBACSNullable"
         emi_account_id:
           description: The EMI (E-Money Institution) account that this payment is associated with, if any. This EMI account is used as an intermediary account to enable Plaid to reconcile the settlement of funds for Payment Initiation requests.
+          minLength: 1
           nullable: true
           type: string
         iban:
@@ -9948,9 +10318,12 @@ components:
           $ref: "#/components/schemas/ExternalPaymentOptions"
         recipient_id:
           description: The ID of the recipient the payment is for.
+          minLength: 1
           type: string
         reference:
           description: A reference for the payment. This must be an alphanumeric string with at most 18 characters and must not contain any special characters (since not all institutions support them).
+          maxLength: 18
+          minLength: 1
           type: string
         schedule:
           $ref: "#/components/schemas/ExternalPaymentScheduleRequest"
@@ -9975,6 +10348,8 @@ components:
             For a payment returned by this endpoint, there is only one possible value:
 
             `PAYMENT_STATUS_INPUT_NEEDED`: The initial phase of the payment
+          enum:
+            - PAYMENT_STATUS_INPUT_NEEDED
           type: string
       required:
         - payment_id
@@ -9988,6 +10363,7 @@ components:
           $ref: "#/components/schemas/APIClientID"
         payment_id:
           description: The `payment_id` returned from `/payment_initiation/payment/create`.
+          minLength: 1
           type: string
         secret:
           $ref: "#/components/schemas/APISecret"
@@ -10058,6 +10434,7 @@ components:
           $ref: "#/components/schemas/APIClientID"
         payment_id:
           description: The `payment_id` returned from `/payment_initiation/payment/create`.
+          minLength: 1
           type: string
         secret:
           $ref: "#/components/schemas/APISecret"
@@ -10109,7 +10486,7 @@ components:
         - name
         - iban
         - bacs
-      title: ""
+      title: PaymentInitiationRecipient
       type: object
     PaymentInitiationRecipientCreateRequest:
       description: PaymentInitiationRecipientCreateRequest defines the request schema for `/payment_initiation/recipient/create`
@@ -10122,10 +10499,13 @@ components:
           $ref: "#/components/schemas/APIClientID"
         iban:
           description: The International Bank Account Number (IBAN) for the recipient. If BACS data is not provided, an IBAN is required.
+          maxLength: 34
+          minLength: 15
           nullable: true
           type: string
         name:
           description: The name of the recipient
+          minLength: 1
           type: string
         secret:
           $ref: "#/components/schemas/APISecret"
@@ -10152,6 +10532,7 @@ components:
           $ref: "#/components/schemas/APIClientID"
         recipient_id:
           description: The ID of the recipient
+          minLength: 1
           type: string
         secret:
           $ref: "#/components/schemas/APISecret"
@@ -10266,13 +10647,14 @@ components:
         - payment_method
         - payment_processor
         - reason
-      title: payment_meta
+      title: PaymentMeta
       type: object
     PaymentScheduleInterval:
       description: The frequency interval of the payment.
       enum:
         - WEEKLY
         - MONTHLY
+      minLength: 1
       title: PaymentScheduleInterval
       type: string
     PaymentStatusUpdateWebhook:
@@ -10362,6 +10744,7 @@ components:
           type: string
         timestamp:
           description: The timestamp of the update, in ISO 8601 format, e.g. `"2017-09-14T14:42:19.350Z"`
+          format: date-time
           type: string
         webhook_code:
           description: "`PAYMENT_STATUS_UPDATE`"
@@ -10474,6 +10857,7 @@ components:
       properties:
         consent_expiration_time:
           description: The date and time at which the Item's access consent will expire, in ISO 8601 format
+          format: date-time
           type: string
         item_id:
           $ref: "#/components/schemas/ItemId"
@@ -10739,7 +11123,29 @@ components:
         client_id:
           $ref: "#/components/schemas/APIClientID"
         processor:
-          description: The processor you are integrating with. Valid values are `"achq"`, `"alpaca"`, `"astra"`, `"check"`, `"checkbook"`, `"circle"`, `"drivewealth"`, `"dwolla"`, `"galileo"`, "`interactive_brokers`", `"lithic"`, `"modern_treasury"`, `"moov"`, `"ocrolus"`, `"prime_trust"`, `"rize"`, `"sila_money"`, `"svb_api"`, `"unit"`, `"vesta"`, `"vopay"`, `"wyre"`
+          description: The processor you are integrating with.
+          enum:
+            - achq
+            - alpaca
+            - astra
+            - check
+            - checkbook
+            - circle
+            - drivewealth
+            - dwolla
+            - galileo
+            - lithic
+            - modern_treasury
+            - moov
+            - ocrolus
+            - prime_trust
+            - rize
+            - sila_money
+            - sbv_api
+            - unit
+            - vesta
+            - vopay
+            - wyre
           type: string
         secret:
           $ref: "#/components/schemas/APISecret"
@@ -10788,12 +11194,13 @@ components:
       type: object
     ProductStatus:
       additionalProperties: true
-      description: A representation of the status health of a request type. Auth requests, Balance requests, Identity requests, Transactions updates, Investments updates, and Item logins each have their own status object.
+      description: A representation of the status health of a request type. Auth requests, Balance requests, Identity requests, Investments requests, Liabilities requests, Transactions updates, Investments updates, Liabilities updates, and Item logins each have their own status object.
       properties:
         breakdown:
           $ref: "#/components/schemas/ProductStatusBreakdown"
         last_status_change:
           description: ISO 8601 formatted timestamp of the last status change for the institution.
+          format: date-time
           type: string
         status:
           description: |-
@@ -10914,9 +11321,13 @@ components:
       properties:
         account:
           description: The account number of the account. Maximum of 10 characters.
+          maxLength: 10
+          minLength: 1
           type: string
         sort_code:
           description: The 6-character sort code of the account.
+          maxLength: 6
+          minLength: 6
           type: string
       title: RecipientBACS
       type: object
@@ -11139,6 +11550,24 @@ components:
       required:
         - request_id
       type: object
+    SandboxOauthSelectAccountsRequest:
+      description: Defines the request schema for `sandbox/oauth/select_accounts`
+      properties:
+        accounts:
+          items:
+            type: string
+          type: array
+        oauth_state_id:
+          type: string
+      required:
+        - oauth_state_id
+        - accounts
+      title: SandboxOauthSelectAccountsRequest
+      type: object
+    SandboxOauthSelectAccountsResponse:
+      description: Defines the response schema for `/sandbox/oauth/select_accounts`
+      title: SandboxOauthSelectAccountsResponse
+      type: object
     SandboxOverridePassword:
       default: pass_good
       description: Test password to use for the creation of the Sandbox Item. Default value is `pass_good`.
@@ -11224,11 +11653,13 @@ components:
       properties:
         end_date:
           description: The most recent date for which to fetch transaction history. Dates should be formatted as YYYY-MM-DD.
+          format: date
           type: string
         start_date:
           description: The earliest date for which to fetch transaction history. Dates should be formatted as YYYY-MM-DD.
+          format: date
           type: string
-      title: ""
+      title: SandboxPublicTokenCreateRequestOptionsTransactions
       type: object
     SandboxPublicTokenCreateResponse:
       additionalProperties: true
@@ -11408,6 +11839,339 @@ components:
         - postal_code
         - country
       title: ServicerAddressData
+      type: object
+    SignalAddressData:
+      additionalProperties: true
+      description: Data about the components comprising an address.
+      nullable: true
+      properties:
+        city:
+          description: The full city name
+          type: string
+        country:
+          description: The ISO 3166-1 alpha-2 country code
+          nullable: true
+          type: string
+        postal_code:
+          description: The postal code
+          nullable: true
+          type: string
+        region:
+          description: |-
+            The region or state
+            Example: `"NC"`
+          nullable: true
+          type: string
+        street:
+          description: |-
+            The full street address
+            Example: `"564 Main Street, APT 15"`
+          type: string
+      title: AddressData
+      type: object
+    SignalDecisionReportRequest:
+      properties:
+        client_id:
+          $ref: "#/components/schemas/APIClientID"
+        client_transaction_id:
+          description: Must be the same as the `client_transaction_id` supplied when calling `/signal/evaluate`
+          type: string
+        initiated:
+          description: "`true` if the ACH transaction was initiated, `false` otherwise."
+          type: boolean
+        secret:
+          $ref: "#/components/schemas/APISecret"
+      required:
+        - client_transaction_id
+        - initiated
+      title: SignalDecisionReportRequest
+      type: object
+    SignalDecisionReportResponse:
+      properties:
+        request_id:
+          $ref: "#/components/schemas/RequestID"
+      required:
+        - request_id
+      title: SignalDecisionReportResponse
+      type: object
+    SignalDevice:
+      description: Details about the end user's device
+      properties:
+        ip_address:
+          description: The IP address of the device that initiated the transaction
+          nullable: true
+          type: string
+        user_agent:
+          description: The user agent of the device that initiated the transaction (e.g. "Mozilla/5.0")
+          nullable: true
+          type: string
+      title: SignalEvaluateDevice
+      type: object
+    SignalEvaluateCoreAttributes:
+      description: The core attributes object contains additional data that can be used to assess the ACH return risk, such as past ACH return events, balance/transaction history, the Item’s connection history in the Plaid network, and identity change history.
+      properties:
+        address_change_count_28d:
+          description: The number of times the account's addresses on file have changed over the past 28 days
+          nullable: true
+          type: integer
+        address_change_count_90d:
+          description: The number of times the account's addresses on file have changed over the past 90 days
+          nullable: true
+          type: integer
+        available_balance:
+          description: Available balance, as of the `balance_last_updated` time. The available balance is the current balance less any outstanding holds or debits that have not yet posted to the account.
+          nullable: true
+          type: number
+        balance_last_updated:
+          description: Timestamp in ISO-8601 format (YYYY-MM-DDTHH:mm:ssZ) indicating the last time that the balance for the given account has been updated.
+          format: date-time
+          nullable: true
+          type: string
+        current_balance:
+          description: Current balance, as of the `balance_last_updated` time. The current balance is the total amount of funds in the account.
+          nullable: true
+          type: number
+        days_since_first_plaid_connection:
+          description: The number of days since the first time the Item was connected to an application via Plaid
+          nullable: true
+          type: integer
+        days_with_negative_balance_count_90d:
+          description: The number of days within the past 90 days when the account that will be debited had a negative end-of-day available balance
+          nullable: true
+          type: integer
+        email_change_count_28d:
+          description: The number of times the account's email addresses on file have changed over the past 28 days
+          nullable: true
+          type: integer
+        email_change_count_90d:
+          description: The number of times the account's email addresses on file have changed over the past 90 days
+          nullable: true
+          type: integer
+        is_savings_or_money_market_account:
+          description: Indicates if the ACH transaction funding account is a savings/money market account
+          type: boolean
+        nsf_overdraft_transactions_count_30d:
+          description: We parse and analyze historical transaction metadata to identify the number of possible past returns due to non-sufficient funds/overdrafts over the past 30 days from the account that will be debited.
+          type: integer
+        nsf_overdraft_transactions_count_60d:
+          description: We parse and analyze historical transaction metadata to identify the number of possible past returns due to non-sufficient funds/overdrafts over the past 60 days from the account that will be debited.
+          type: integer
+        nsf_overdraft_transactions_count_7d:
+          description: We parse and analyze historical transaction metadata to identify the number of possible past returns due to non-sufficient funds/overdrafts over the past 7 days from the account that will be debited.
+          type: integer
+        nsf_overdraft_transactions_count_90d:
+          description: We parse and analyze historical transaction metadata to identify the number of possible past returns due to non-sufficient funds/overdrafts over the past 90 days from the account that will be debited.
+          type: integer
+        p10_eod_balance_30d:
+          description: The 10th percentile of the end-of-day available balance over the past 30 days of the account that will be debited
+          nullable: true
+          type: number
+        p10_eod_balance_60d:
+          description: The 10th percentile of the end-of-day available balance over the past 60 days of the account that will be debited
+          nullable: true
+          type: number
+        p10_eod_balance_90d:
+          description: The 10th percentile of the end-of-day available balance over the past 90 days of the account that will be debited
+          nullable: true
+          type: number
+        p50_credit_transactions_amount_28d:
+          description: The 50th percentile of all credit (inflow) transaction amounts over the past 28 days from the account that will be debited
+          nullable: true
+          type: number
+        p50_debit_transactions_amount_28d:
+          description: The 50th percentile of all debit (outflow) transaction amounts over the past 28 days from the account that will be debited
+          nullable: true
+          type: number
+        p90_eod_balance_30d:
+          description: The 90th percentile of the end-of-day available balance over the past 30 days of the account that will be debited
+          nullable: true
+          type: number
+        p90_eod_balance_60d:
+          description: The 90th percentile of the end-of-day available balance over the past 60 days of the account that will be debited
+          nullable: true
+          type: number
+        p90_eod_balance_90d:
+          description: The 90th percentile of the end-of-day available balance over the past 90 days of the account that will be debited
+          nullable: true
+          type: number
+        p95_credit_transactions_amount_28d:
+          description: The 95th percentile of all credit (inflow) transaction amounts over the past 28 days from the account that will be debited
+          nullable: true
+          type: number
+        p95_debit_transactions_amount_28d:
+          description: The 95th percentile of all debit (outflow) transaction amounts over the past 28 days from the account that will be debited
+          nullable: true
+          type: number
+        phone_change_count_28d:
+          description: The number of times the account's phone numbers on file have changed over the past 28 days
+          nullable: true
+          type: integer
+        phone_change_count_90d:
+          description: The number of times the account's phone numbers on file have changed over the past 90 days
+          nullable: true
+          type: integer
+        plaid_connections_count_30d:
+          description: The number of times the Item has been connected to applications via Plaid over the past 30 days
+          nullable: true
+          type: integer
+        plaid_connections_count_7d:
+          description: The number of times the Item has been connected to applications via Plaid over the past 7 days
+          nullable: true
+          type: integer
+        total_credit_transactions_amount_10d:
+          description: The total credit (inflow) transaction amount over the past 10 days from the account that will be debited
+          type: number
+        total_debit_transactions_amount_10d:
+          description: The total debit (outflow) transaction amount over the past 10 days from the account that will be debited
+          type: number
+        total_plaid_connections_count:
+          description: The total number of times the Item has been connected to applications via Plaid
+          nullable: true
+          type: integer
+        unauthorized_transactions_count_30d:
+          description: We parse and analyze historical transaction metadata to identify the number of possible past returns due to unauthorized transactions over the past 30 days from the account that will be debited.
+          type: integer
+        unauthorized_transactions_count_60d:
+          description: We parse and analyze historical transaction metadata to identify the number of possible past returns due to unauthorized transactions over the past 60 days from the account that will be debited.
+          type: integer
+        unauthorized_transactions_count_7d:
+          description: We parse and analyze historical transaction metadata to identify the number of possible past returns due to unauthorized transactions over the past 7 days from the account that will be debited.
+          type: integer
+        unauthorized_transactions_count_90d:
+          description: We parse and analyze historical transaction metadata to identify the number of possible past returns due to unauthorized transactions over the past 90 days from the account that will be debited.
+          type: integer
+      title: SignalEvaluateCoreAttributes
+      type: object
+    SignalEvaluateRequest:
+      additionalProperties: true
+      properties:
+        access_token:
+          $ref: "#/components/schemas/AccessToken"
+        account_id:
+          description: The `account_id` of the account whose verification status is to be modified
+          type: string
+        amount:
+          description: The transaction amount, in USD (e.g. `102.05`)
+          type: number
+        client_id:
+          $ref: "#/components/schemas/APIClientID"
+        client_transaction_id:
+          description: The unique ID that you would like to use to refer to this transaction. For your convenience mapping your internal data, you could use your internal ID/identifier for this transaction. The max length for this field is 36 characters.
+          maxLength: 36
+          type: string
+        client_user_id:
+          description: A unique ID that identifies the end user in your system. This ID is used to correlate requests by a user with multiple Items. The max length for this field is 36 characters.
+          maxLength: 36
+          type: string
+        device:
+          $ref: "#/components/schemas/SignalDevice"
+        secret:
+          $ref: "#/components/schemas/APISecret"
+        user:
+          $ref: "#/components/schemas/SignalUser"
+      required:
+        - access_token
+        - account_id
+        - client_transaction_id
+        - amount
+      title: SignalEvaluateRequest
+      type: object
+    SignalEvaluateResponse:
+      additionalProperties: true
+      properties:
+        core_attributes:
+          $ref: "#/components/schemas/SignalEvaluateCoreAttributes"
+        request_id:
+          $ref: "#/components/schemas/RequestID"
+        scores:
+          $ref: "#/components/schemas/SignalScores"
+      required:
+        - request_id
+        - scores
+        - core_attributes
+      title: SignalEvaluateResponse
+      type: object
+    SignalPersonName:
+      description: The user's legal name
+      nullable: true
+      properties:
+        family_name:
+          description: The user's family name / surname
+          nullable: true
+          type: string
+        given_name:
+          description: The user's given name. If the user has a one-word name, it should be provided in this field.
+          nullable: true
+          type: string
+        middle_name:
+          description: The user's middle name
+          nullable: true
+          type: string
+        prefix:
+          description: The user's name prefix (e.g. "Mr.")
+          nullable: true
+          type: string
+        suffix:
+          description: The user's name suffix (e.g. "II")
+          nullable: true
+          type: string
+      title: SignalPersonName
+      type: object
+    SignalReturnReportRequest:
+      properties:
+        client_id:
+          $ref: "#/components/schemas/APIClientID"
+        client_transaction_id:
+          description: Must be the same as the `client_transaction_id` supplied when calling `/signal/evaluate`
+          type: string
+        return_code:
+          description: Must be a valid ACH return code (e.g. "R01")
+          type: string
+        secret:
+          $ref: "#/components/schemas/APISecret"
+      required:
+        - client_transaction_id
+        - return_code
+      title: SignalReturnReportRequest
+      type: object
+    SignalReturnReportResponse:
+      properties:
+        request_id:
+          $ref: "#/components/schemas/RequestID"
+      required:
+        - request_id
+      title: SignalReturnReportResponse
+      type: object
+    SignalScore:
+      description: "A score from 0-99 that indicates the transaction return risk: a higher risk score suggests a higher return likelihood."
+      maximum: 100
+      minimum: 0
+      type: integer
+    SignalScores:
+      additionalProperties: true
+      properties:
+        bank_initiated_return_risk:
+          $ref: "#/components/schemas/BankInitiatedReturnRisk"
+        customer_initiated_return_risk:
+          $ref: "#/components/schemas/CustomerInitiatedReturnRisk"
+      title: SignalEvaluateScores
+      type: object
+    SignalUser:
+      description: Details about the end user initiating the transaction (i.e., the account holder).
+      properties:
+        address:
+          $ref: "#/components/schemas/SignalAddressData"
+        email_address:
+          description: The user's email address.
+          nullable: true
+          type: string
+        name:
+          $ref: "#/components/schemas/SignalPersonName"
+        phone_number:
+          description: "The user's phone number, in E.164 format: +{countrycode}{number}. For example: \"+14151234567\""
+          nullable: true
+          type: string
+      title: SignalUser
       type: object
     StandaloneAccountType:
       additionalProperties: true
@@ -11631,11 +12395,13 @@ components:
         disbursement_dates:
           description: The dates on which loaned funds were disbursed or will be disbursed. These are often in the past. Dates are returned in an ISO 8601 format (YYYY-MM-DD).
           items:
+            format: date
             type: string
           nullable: true
           type: array
         expected_payoff_date:
           description: The date when the student loan is expected to be paid off. Availability for this field is limited. Dates are returned in an ISO 8601 format (YYYY-MM-DD).
+          format: date
           nullable: true
           type: string
         guarantor:
@@ -11655,10 +12421,12 @@ components:
           type: number
         last_payment_date:
           description: The date of the last payment. Dates are returned in an ISO 8601 format (YYYY-MM-DD).
+          format: date
           nullable: true
           type: string
         last_statement_issue_date:
           description: The date of the last statement. Dates are returned in an ISO 8601 format (YYYY-MM-DD).
+          format: date
           nullable: true
           type: string
         loan_name:
@@ -11676,11 +12444,13 @@ components:
           type: number
         next_payment_due_date:
           description: The due date for the next payment. The due date is `null` if a payment is not expected. A payment is not expected if `loan_status.type` is `deferment`, `in_school`, `consolidated`, `paid in full`, or `transferred`. Dates are returned in an ISO 8601 format (YYYY-MM-DD).
+          format: date
           nullable: true
           type: string
         origination_date:
           description: |
             The date on which the loan was initially lent. Dates are returned in an ISO 8601 format (YYYY-MM-DD).
+          format: date
           nullable: true
           type: string
         origination_principal_amount:
@@ -11766,6 +12536,7 @@ components:
         end_date:
           description: |
             The date until which the loan will be in its current status. Dates are returned in an ISO 8601 format (YYYY-MM-DD).
+          format: date
           nullable: true
           type: string
         type:
@@ -11832,6 +12603,7 @@ components:
           properties:
             authorized_date:
               description: The date that the transaction was authorized. Dates are returned in an ISO 8601 format ( `YYYY-MM-DD` ).
+              format: date
               nullable: true
               type: string
             authorized_datetime:
@@ -11839,6 +12611,7 @@ components:
                 Date and time when a transaction was authorized in ISO 8601 format ( `YYYY-MM-DDTHH:mm:ssZ` ).
 
                 This field is only populated for UK institutions. For institutions in other countries, will be `null`.
+              format: date-time
               nullable: true
               type: string
             datetime:
@@ -11846,6 +12619,7 @@ components:
                 Date and time when a transaction was posted in ISO 8601 format ( `YYYY-MM-DDTHH:mm:ssZ` ).
 
                 This field is only populated for UK institutions. For institutions in other countries, will be `null`.
+              format: date-time
               nullable: true
               type: string
             merchant_name:
@@ -11919,6 +12693,7 @@ components:
           type: string
         date:
           description: For pending transactions, the date that the transaction occurred; for posted transactions, the date that the transaction posted. Both dates are returned in an ISO 8601 format ( `YYYY-MM-DD` ).
+          format: date
           type: string
         iso_currency_code:
           description: The ISO-4217 currency code of the transaction. Always `null` if `unofficial_currency_code` is non-null.
@@ -12043,6 +12818,7 @@ components:
           type: number
         date:
           description: The date of the transaction, in ISO 8601 format ("yyyy-mm-dd").
+          format: date
           type: string
         description:
           description: The description of the transaction.
@@ -12070,9 +12846,11 @@ components:
           type: string
         date_posted:
           description: The date the transaction posted, in ISO8601 (YYYY-MM-DD) format
+          format: date
           type: string
         date_transacted:
           description: The date of the transaction, in ISO8601 (YYYY-MM-DD) format. Transaction dates in the past or present will result in posted transactions; transaction dates in the future will result in pending transactions. Transactions in Sandbox will move from pending to posted once their transaction date has been reached.
+          format: date
           type: string
         description:
           description: The transaction description.
@@ -12423,6 +13201,15 @@ components:
           item_id: eVBnVMp7zdTJLkRNr33Rs6zr7KNJqBFL9DrE6
           webhook_code: VERIFICATION_EXPIRED
           webhook_type: AUTH
+    VerificationRefreshStatus:
+      description: |-
+        The verification refresh status. One of the following:
+
+        `"VERIFICATION_REFRESH_STATUS_USER_PRESENCE_REQUIRED"` User presence is required to refresh an income verification.
+      enum:
+        - VERIFICATION_REFRESH_STATUS_USER_PRESENCE_REQUIRED
+      title: VerificationRefreshStatus
+      type: string
     VerificationStatus:
       description: |-
         The verification status. One of the following:
@@ -12452,6 +13239,8 @@ components:
           $ref: "#/components/schemas/Cause"
         warning_code:
           description: The warning code identifies a specific kind of warning. Currently, the only possible warning code is `OWNERS_UNAVAILABLE`, which indicates that account-owner information is not available.
+          enum:
+            - OWNERS_UNAVAILABLE
           type: string
         warning_type:
           description: The warning type, which will always be `ASSET_REPORT_WARNING`

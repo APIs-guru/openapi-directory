@@ -2277,6 +2277,33 @@ paths:
                 type: array
           description: ""
       summary: "Scores by Season "
+  "/{format}/ScoresByDate/{date}":
+    get:
+      description: Get game scores for a specified week of a season.
+      operationId: ScoresByDate
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            type: string
+        - description: "The date of the games.<br>Examples: <code>2021-SEP-12</code>, <code>2021-NOV-28</code>."
+          in: path
+          name: date
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Score"
+                type: array
+          description: ""
+      summary: Scores by Date
   "/{format}/ScoresByWeek/{season}/{week}":
     get:
       description: Get game scores for a specified week of a season.

@@ -9271,11 +9271,6 @@ components:
                 - changes_requested
               example: pending
               type: string
-            assignee_section:
-              allOf:
-                - $ref: "#/components/schemas/SectionCompact"
-              nullable: true
-              type: object
             assignee_status:
               description: '*Deprecated* Scheduling status of this task for the user it is assigned to. This field can only be set if the assignee is non-null. Setting this field to "inbox" or "upcoming" inserts it at the top of the section, while the other options will insert at the bottom.'
               enum:
@@ -9547,6 +9542,13 @@ components:
               readOnly: false
               type: string
               x-env-variable: true
+            assignee_section:
+              description: |-
+                The *assignee section* is a subdivision of a project that groups tasks together in the assignee's "My Tasks" list. It can either be a header above a list of tasks in a list view or a column in a board view of "My Tasks."
+                The `assignee_section` property will be returned in the response only if the request was sent by the user who is the assignee of the task. Note that you can only write to `assignee_section` with the gid of an existing section visible in the user's "My Tasks" list.
+              example: "12345"
+              nullable: true
+              type: string
             custom_fields:
               additionalProperties:
                 description: '"{custom_field_gid}" => Value (Can be text, number, etc.)'
@@ -9601,6 +9603,13 @@ components:
             assignee:
               allOf:
                 - $ref: "#/components/schemas/UserCompact"
+              nullable: true
+            assignee_section:
+              allOf:
+                - $ref: "#/components/schemas/SectionCompact"
+                - description: |-
+                    The *assignee section* is a subdivision of a project that groups  tasks together in the assignee's "My Tasks" list. It can either be a  header above a list of tasks in a list view or a column in a board  view of "My Tasks."
+                    The `assignee_section` property will be returned in the response only  if the request was sent by the user who is the assignee of the task.  Note that you can only write to `assignee_section` with the gid of an  existing section visible in the user's "My Tasks" list.
               nullable: true
             custom_fields:
               description: Array of custom field values applied to the task. These represent the custom field values recorded on this project for a particular custom field. For example, these custom field values will contain an `enum_value` property for custom fields of type `enum`, a `text_value` property for custom fields of type `text`, and so on. Please note that the `gid` returned on each custom field value *is identical* to the `gid` of the custom field, which allows referencing the custom field metadata through the `/custom_fields/custom_field-gid` endpoint.
@@ -9788,8 +9797,9 @@ components:
               readOnly: true
               type: string
             photo:
-              description: A map of the user’s profile photo in various sizes, or null if no photo is set. Sizes provided are 21, 27, 36, 60, and 128. Images are in PNG format.
+              description: A map of the user’s profile photo in various sizes, or null if no photo is set. Sizes provided are 21, 27, 36, 60, 128, and 1024. All images are in PNG format, except for 1024 (which is in JPEG format).
               example:
+                image_1024x1024: https://...
                 image_128x128: https://...
                 image_21x21: https://...
                 image_27x27: https://...
@@ -9797,6 +9807,9 @@ components:
                 image_60x60: https://...
               nullable: true
               properties:
+                image_1024x1024:
+                  format: uri
+                  type: string
                 image_128x128:
                   format: uri
                   type: string

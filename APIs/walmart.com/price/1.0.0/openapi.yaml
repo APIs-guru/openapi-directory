@@ -79,6 +79,7 @@ paths:
                   description: A Boolean parameter that allows all sellers to completely enroll in or out of the Competitive Price Adjustment program
                   type: boolean
                 subsidyPreference:
+                  description: A Boolean parameter that determines whether offer level subsidy setting override seller level subsidy setting
                   type: boolean
               type: object
         description: Request fields
@@ -98,6 +99,7 @@ paths:
                         description: A Boolean parameter that allows all sellers to completely enroll in or out of the Competitive Price Adjustment program
                         type: boolean
                       subsidyPreference:
+                        description: A Boolean parameter that determines whether offer level subsidy setting override seller level subsidy setting
                         type: boolean
                     type: object
                 type: object
@@ -359,6 +361,7 @@ paths:
                             type: string
                         type: object
                       currentPriceType:
+                        description: This is applicable only for both promotions and price
                         enum:
                           - BASE
                           - REDUCED
@@ -373,7 +376,7 @@ paths:
                         format: date-time
                         type: string
                       priceDisplayCodes:
-                        description: This is applicable only for promotions
+                        description: Represent promo placement. This is applicable only for promotions
                         enum:
                           - CART
                           - CHECKOUT
@@ -674,6 +677,7 @@ components:
               description: A Boolean parameter that allows all sellers to completely enroll in or out of the Competitive Price Adjustment program
               type: boolean
             subsidyPreference:
+              description: A Boolean parameter that determines whether offer level subsidy setting override seller level subsidy setting
               type: boolean
           type: object
       type: object
@@ -912,6 +916,7 @@ components:
                     type: string
                 type: object
               currentPriceType:
+                description: This is applicable only for both promotions and price
                 enum:
                   - BASE
                   - REDUCED
@@ -926,7 +931,7 @@ components:
                 format: date-time
                 type: string
               priceDisplayCodes:
-                description: This is applicable only for promotions
+                description: Represent promo placement. This is applicable only for promotions
                 enum:
                   - CART
                   - CHECKOUT
@@ -988,6 +993,7 @@ components:
               type: string
           type: object
         currentPriceType:
+          description: This is applicable only for both promotions and price
           enum:
             - BASE
             - REDUCED
@@ -1002,7 +1008,7 @@ components:
           format: date-time
           type: string
         priceDisplayCodes:
-          description: This is applicable only for promotions
+          description: Represent promo placement. This is applicable only for promotions
           enum:
             - CART
             - CHECKOUT
@@ -1026,6 +1032,7 @@ components:
           description: A Boolean parameter that allows all sellers to completely enroll in or out of the Competitive Price Adjustment program
           type: boolean
         subsidyPreference:
+          description: A Boolean parameter that determines whether offer level subsidy setting override seller level subsidy setting
           type: boolean
       type: object
   securitySchemes:

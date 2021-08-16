@@ -447,6 +447,11 @@ tags:
       Networks also support the notion of routes which are automatically applied to private traffic. A route makes sure that all packets for a given `destination` IP prefix will be sent to the address specified in its `gateway`.
     name: Networks
   - name: Network Actions
+  - description: |
+      Placement groups are used to influence the location of interdependent virtual servers in our data centers. The distribution of the different instances within a group is based on a pattern specified in the type. By enforcing certain rules on the placement of instances within our infrastructure, availability can be influenced in a way that fits your needs best.
+
+      In `spread` placement groups, all virtual servers will run on different physical servers. This decreases the probability that some instances might fail together.
+    name: Placement Groups
   - description: Returns prices for resources.
     name: Pricing
   - description: Servers are virtual machines that can be provisioned.
@@ -14229,6 +14234,519 @@ paths:
       summary: Get an Action for a Network
       tags:
         - Network Actions
+  /placement_groups:
+    get:
+      description: Returns all PlacementGroup objects.
+      parameters:
+        - description: Can be used multiple times.
+          in: query
+          name: sort
+          required: false
+          schema:
+            enum:
+              - id
+              - id:asc
+              - id:desc
+              - name
+              - name:asc
+              - name:desc
+              - created
+              - created:asc
+              - created:desc
+            type: string
+        - description: Can be used to filter resources by their name. The response will only contain the resources matching the specified name
+          in: query
+          name: name
+          required: false
+          schema:
+            type: string
+        - description: Can be used to filter resources by labels. The response will only contain resources matching the label selector.
+          in: query
+          name: label_selector
+          required: false
+          schema:
+            type: string
+        - description: Can be used multiple times. The response will only contain PlacementGroups matching the type.
+          in: query
+          name: type
+          required: false
+          schema:
+            enum:
+              - spread
+            title: ParameterType
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                placement_groups:
+                  - created: 2019-01-08T12:10:00+00:00
+                    id: 897
+                    labels:
+                      key: value
+                    name: my Placement Group
+                    servers:
+                      - 4711
+                      - 4712
+                    type: spread
+              schema:
+                properties:
+                  meta:
+                    properties:
+                      pagination:
+                        properties:
+                          last_page:
+                            description: ID of the last page available. Can be null if the current page is the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          next_page:
+                            description: ID of the next page. Can be null if the current page is the last one.
+                            example: 4
+                            nullable: true
+                            type: number
+                          page:
+                            description: Current page number
+                            example: 3
+                            type: number
+                          per_page:
+                            description: Maximum number of items shown per page in the response
+                            example: 25
+                            type: number
+                          previous_page:
+                            description: ID of the previous page. Can be null if the current page is the first one.
+                            example: 2
+                            nullable: true
+                            type: number
+                          total_entries:
+                            description: The total number of entries that exist in the database for this query. Nullable if unknown.
+                            example: 100
+                            nullable: true
+                            type: number
+                        required:
+                          - page
+                          - per_page
+                          - previous_page
+                          - next_page
+                          - last_page
+                          - total_entries
+                        type: object
+                    required:
+                      - pagination
+                    type: object
+                  placement_groups:
+                    items:
+                      properties:
+                        created:
+                          description: Point in time when the Resource was created (in ISO-8601 format)
+                          example: 2016-01-30T23:55:00+00:00
+                          type: string
+                        id:
+                          description: ID of the Resource
+                          example: 42
+                          type: integer
+                        labels:
+                          additionalProperties:
+                            type: string
+                          description: User-defined labels (key-value pairs)
+                          type: object
+                        name:
+                          description: Name of the Resource. Must be unique per Project.
+                          example: my-resource
+                          type: string
+                        servers:
+                          description: Array of IDs of Servers that are part of this Placement Group
+                          example:
+                            - 42
+                          items:
+                            type: integer
+                          type: array
+                        type:
+                          description: Type of the Placement Group
+                          enum:
+                            - spread
+                          example: spread
+                          type: string
+                      required:
+                        - id
+                        - name
+                        - labels
+                        - type
+                        - created
+                        - servers
+                      title: PlacementGroup
+                      type: object
+                    type: array
+                required:
+                  - placement_groups
+                title: PlacementGroupsResponse
+                type: object
+          description: The `placement_groups` key contains an array of PlacementGroup objects
+      summary: Get all PlacementGroups
+      tags:
+        - Placement Groups
+    post:
+      description: |
+        Creates a new PlacementGroup.
+      requestBody:
+        content:
+          application/json:
+            examples:
+              spread:
+                summary: Creating a type `spread` Placement Group
+                value:
+                  name: my Placement Group
+                  type: spread
+            schema:
+              properties:
+                labels:
+                  description: User-defined labels (key-value pairs)
+                  type: object
+                name:
+                  description: Name of the PlacementGroup
+                  example: my Placement Group
+                  type: string
+                type:
+                  description: Define the Placement Group Type.
+                  enum:
+                    - spread
+                  example: spread
+                  type: string
+              required:
+                - name
+                - type
+              title: CreatePlacementGroupRequest
+              type: object
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                spread:
+                  summary: Response when creating a type `spread` PlacementGroup
+                  value:
+                    placement_group:
+                      created: 2019-01-08T12:10:00+00:00
+                      id: 897
+                      labels:
+                        key: value
+                      name: my Placement Group
+                      servers: []
+                      type: spread
+              schema:
+                properties:
+                  action:
+                    nullable: true
+                    properties:
+                      command:
+                        description: Command executed in the Action
+                        example: start_server
+                        type: string
+                      error:
+                        description: Error message for the Action if error occurred, otherwise null
+                        nullable: true
+                        properties:
+                          code:
+                            description: Fixed machine readable code
+                            example: action_failed
+                            type: string
+                          message:
+                            description: Humanized error message
+                            example: Action failed
+                            type: string
+                        required:
+                          - code
+                          - message
+                        type: object
+                      finished:
+                        description: Point in time when the Action was finished (in ISO-8601 format). Only set if the Action is finished otherwise null.
+                        example: 2016-01-30T23:55:00+00:00
+                        nullable: true
+                        type: string
+                      id:
+                        description: ID of the Resource
+                        example: 42
+                        type: integer
+                      progress:
+                        description: Progress of Action in percent
+                        example: 100
+                        type: number
+                      resources:
+                        description: Resources the Action relates to
+                        items:
+                          properties:
+                            id:
+                              description: ID of the Resource
+                              example: 42
+                              type: integer
+                            type:
+                              description: Type of resource referenced
+                              example: server
+                              type: string
+                          required:
+                            - id
+                            - type
+                          type: object
+                        type: array
+                      started:
+                        description: Point in time when the Action was started (in ISO-8601 format)
+                        example: 2016-01-30T23:55:00+00:00
+                        type: string
+                      status:
+                        description: Status of the Action
+                        enum:
+                          - success
+                          - running
+                          - error
+                        type: string
+                    required:
+                      - id
+                      - command
+                      - status
+                      - progress
+                      - started
+                      - finished
+                      - resources
+                      - error
+                    title: NullableAction
+                    type: object
+                  placement_group:
+                    properties:
+                      created:
+                        description: Point in time when the Resource was created (in ISO-8601 format)
+                        example: 2016-01-30T23:55:00+00:00
+                        type: string
+                      id:
+                        description: ID of the Resource
+                        example: 42
+                        type: integer
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: User-defined labels (key-value pairs)
+                        type: object
+                      name:
+                        description: Name of the Resource. Must be unique per Project.
+                        example: my-resource
+                        type: string
+                      servers:
+                        description: Array of IDs of Servers that are part of this Placement Group
+                        example:
+                          - 42
+                        items:
+                          type: integer
+                        type: array
+                      type:
+                        description: Type of the Placement Group
+                        enum:
+                          - spread
+                        example: spread
+                        type: string
+                    required:
+                      - id
+                      - name
+                      - labels
+                      - type
+                      - created
+                      - servers
+                    title: PlacementGroup
+                    type: object
+                required:
+                  - placement_group
+                title: CreatePlacementGroupResponse
+                type: object
+          description: The `PlacementGroup` key contains the PlacementGroup that was just created.
+      summary: Create a PlacementGroup
+      tags:
+        - Placement Groups
+  "/placement_groups/{id}":
+    delete:
+      description: Deletes a PlacementGroup.
+      parameters:
+        - description: ID of the resource
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: PlacementGroup deleted
+      summary: Delete a PlacementGroup
+      tags:
+        - Placement Groups
+    get:
+      description: Gets a specific PlacementGroup object.
+      parameters:
+        - description: ID of the resource
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                placement_group:
+                  created: 2019-01-08T12:10:00+00:00
+                  id: 897
+                  labels:
+                    key: value
+                  name: my Placement Group
+                  servers:
+                    - 4711
+                    - 4712
+                  type: spread
+              schema:
+                properties:
+                  placement_group:
+                    properties:
+                      created:
+                        description: Point in time when the Resource was created (in ISO-8601 format)
+                        example: 2016-01-30T23:55:00+00:00
+                        type: string
+                      id:
+                        description: ID of the Resource
+                        example: 42
+                        type: integer
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: User-defined labels (key-value pairs)
+                        type: object
+                      name:
+                        description: Name of the Resource. Must be unique per Project.
+                        example: my-resource
+                        type: string
+                      servers:
+                        description: Array of IDs of Servers that are part of this Placement Group
+                        example:
+                          - 42
+                        items:
+                          type: integer
+                        type: array
+                      type:
+                        description: Type of the Placement Group
+                        enum:
+                          - spread
+                        example: spread
+                        type: string
+                    required:
+                      - id
+                      - name
+                      - labels
+                      - type
+                      - created
+                      - servers
+                    title: PlacementGroup
+                    type: object
+                required:
+                  - placement_group
+                title: PlacementGroupResponse
+                type: object
+          description: The `placement_group` key contains a PlacementGroup object
+      summary: Get a PlacementGroup
+      tags:
+        - Placement Groups
+    put:
+      description: |
+        Updates the PlacementGroup properties.
+
+        Note that when updating labels, the PlacementGroup’s current set of labels will be replaced with the labels provided in the request body. So, for example, if you want to add a new label, you have to provide all existing labels plus the new label in the request body.
+
+        Note: if the PlacementGroup object changes during the request, the response will be a “conflict” error.
+      parameters:
+        - description: ID of the resource
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                labels:
+                  description: User-defined labels (key-value pairs)
+                  example:
+                    labelkey: value
+                  type: object
+                name:
+                  description: New PlacementGroup name
+                  example: my Placement Group
+                  type: string
+              title: UpdatePlacementGroupRequest
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                placement_group:
+                  created: 2019-01-08T12:10:00+00:00
+                  id: 897
+                  labels:
+                    key: value
+                  name: my Placement Group
+                  servers:
+                    - 4711
+                    - 4712
+                  type: spread
+              schema:
+                properties:
+                  placement_group:
+                    properties:
+                      created:
+                        description: Point in time when the Resource was created (in ISO-8601 format)
+                        example: 2016-01-30T23:55:00+00:00
+                        type: string
+                      id:
+                        description: ID of the Resource
+                        example: 42
+                        type: integer
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: User-defined labels (key-value pairs)
+                        type: object
+                      name:
+                        description: Name of the Resource. Must be unique per Project.
+                        example: my-resource
+                        type: string
+                      servers:
+                        description: Array of IDs of Servers that are part of this Placement Group
+                        example:
+                          - 42
+                        items:
+                          type: integer
+                        type: array
+                      type:
+                        description: Type of the Placement Group
+                        enum:
+                          - spread
+                        example: spread
+                        type: string
+                    required:
+                      - id
+                      - name
+                      - labels
+                      - type
+                      - created
+                      - servers
+                    title: PlacementGroup
+                    type: object
+                required:
+                  - placement_group
+                title: PlacementGroupResponse
+                type: object
+          description: The `certificate` key contains the PlacementGroup that was just updated
+      summary: Update a PlacementGroup
+      tags:
+        - Placement Groups
   /pricing:
     get:
       description: |
@@ -15188,6 +15706,48 @@ paths:
                           example: 123456
                           nullable: true
                           type: number
+                        placement_group:
+                          nullable: true
+                          properties:
+                            created:
+                              description: Point in time when the Resource was created (in ISO-8601 format)
+                              example: 2016-01-30T23:55:00+00:00
+                              type: string
+                            id:
+                              description: ID of the Resource
+                              example: 42
+                              type: integer
+                            labels:
+                              additionalProperties:
+                                type: string
+                              description: User-defined labels (key-value pairs)
+                              type: object
+                            name:
+                              description: Name of the Resource. Must be unique per Project.
+                              example: my-resource
+                              type: string
+                            servers:
+                              description: Array of IDs of Servers that are part of this Placement Group
+                              example:
+                                - 42
+                              items:
+                                type: integer
+                              type: array
+                            type:
+                              description: Type of the Placement Group
+                              enum:
+                                - spread
+                              example: spread
+                              type: string
+                          required:
+                            - id
+                            - name
+                            - labels
+                            - type
+                            - created
+                            - servers
+                          title: PlacementGroupNullable
+                          type: object
                         primary_disk_size:
                           description: Size of the primary Disk
                           example: 50
@@ -16189,6 +16749,48 @@ paths:
                         example: 123456
                         nullable: true
                         type: number
+                      placement_group:
+                        nullable: true
+                        properties:
+                          created:
+                            description: Point in time when the Resource was created (in ISO-8601 format)
+                            example: 2016-01-30T23:55:00+00:00
+                            type: string
+                          id:
+                            description: ID of the Resource
+                            example: 42
+                            type: integer
+                          labels:
+                            additionalProperties:
+                              type: string
+                            description: User-defined labels (key-value pairs)
+                            type: object
+                          name:
+                            description: Name of the Resource. Must be unique per Project.
+                            example: my-resource
+                            type: string
+                          servers:
+                            description: Array of IDs of Servers that are part of this Placement Group
+                            example:
+                              - 42
+                            items:
+                              type: integer
+                            type: array
+                          type:
+                            description: Type of the Placement Group
+                            enum:
+                              - spread
+                            example: spread
+                            type: string
+                        required:
+                          - id
+                          - name
+                          - labels
+                          - type
+                          - created
+                          - servers
+                        title: PlacementGroupNullable
+                        type: object
                       primary_disk_size:
                         description: Size of the primary Disk
                         example: 50
@@ -16894,6 +17496,48 @@ paths:
                         example: 123456
                         nullable: true
                         type: number
+                      placement_group:
+                        nullable: true
+                        properties:
+                          created:
+                            description: Point in time when the Resource was created (in ISO-8601 format)
+                            example: 2016-01-30T23:55:00+00:00
+                            type: string
+                          id:
+                            description: ID of the Resource
+                            example: 42
+                            type: integer
+                          labels:
+                            additionalProperties:
+                              type: string
+                            description: User-defined labels (key-value pairs)
+                            type: object
+                          name:
+                            description: Name of the Resource. Must be unique per Project.
+                            example: my-resource
+                            type: string
+                          servers:
+                            description: Array of IDs of Servers that are part of this Placement Group
+                            example:
+                              - 42
+                            items:
+                              type: integer
+                            type: array
+                          type:
+                            description: Type of the Placement Group
+                            enum:
+                              - spread
+                            example: spread
+                            type: string
+                        required:
+                          - id
+                          - name
+                          - labels
+                          - type
+                          - created
+                          - servers
+                        title: PlacementGroupNullable
+                        type: object
                       primary_disk_size:
                         description: Size of the primary Disk
                         example: 50
@@ -17517,6 +18161,48 @@ paths:
                         example: 123456
                         nullable: true
                         type: number
+                      placement_group:
+                        nullable: true
+                        properties:
+                          created:
+                            description: Point in time when the Resource was created (in ISO-8601 format)
+                            example: 2016-01-30T23:55:00+00:00
+                            type: string
+                          id:
+                            description: ID of the Resource
+                            example: 42
+                            type: integer
+                          labels:
+                            additionalProperties:
+                              type: string
+                            description: User-defined labels (key-value pairs)
+                            type: object
+                          name:
+                            description: Name of the Resource. Must be unique per Project.
+                            example: my-resource
+                            type: string
+                          servers:
+                            description: Array of IDs of Servers that are part of this Placement Group
+                            example:
+                              - 42
+                            items:
+                              type: integer
+                            type: array
+                          type:
+                            description: Type of the Placement Group
+                            enum:
+                              - spread
+                            example: spread
+                            type: string
+                        required:
+                          - id
+                          - name
+                          - labels
+                          - type
+                          - created
+                          - servers
+                        title: PlacementGroupNullable
+                        type: object
                       primary_disk_size:
                         description: Size of the primary Disk
                         example: 50

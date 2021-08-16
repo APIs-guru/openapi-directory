@@ -112,7 +112,12 @@ paths:
       description: Create a new Article by sending article information
       operationId: private_article_create
       requestBody:
-        $ref: "#/components/requestBodies/ArticleCreate"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArticleCreate"
+        description: Article description
+        required: true
       responses:
         "201":
           content:
@@ -841,7 +846,7 @@ paths:
           minimum: 1
           type: integer
     post:
-      description: Initiate new file upload within the article. Either use link to provide only an existing file that will not be uploaded on figshare or use the other 3 parameters(md5, name, size)
+      description: Initiate a new file upload within the article. Either use the link property to point to an existing file that resides elsewhere and will not be uploaded to Figshare or use the other 3 parameters (md5, name, size).
       operationId: private_article_upload_initiate
       requestBody:
         content:
@@ -3641,7 +3646,12 @@ paths:
       description: Create a new Article and associate it with this project
       operationId: private_project_articles_create
       requestBody:
-        $ref: "#/components/requestBodies/ArticleCreate"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArticleProjectCreate"
+        description: Article description
+        required: true
       responses:
         "201":
           content:
@@ -5324,13 +5334,6 @@ paths:
         - projects
 components:
   requestBodies:
-    ArticleCreate:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/ArticleCreate"
-      description: Article description
-      required: true
     AuthorsCreator:
       content:
         application/json:
@@ -5918,6 +5921,114 @@ components:
           description: Reserved Handle
           example: 11172/FK2.FIGSHARE.20345
           type: string
+      type: object
+      x-tag: articles
+    ArticleProjectCreate:
+      properties:
+        authors:
+          default: []
+          description: "List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint."
+          example:
+            - name: John Doe
+            - id: 1000008
+          items:
+            type: object
+          type: array
+        categories:
+          default: []
+          description: List of category ids to be associated with the article(e.g [1, 23, 33, 66])
+          example:
+            - 1
+            - 10
+            - 11
+          items:
+            format: int64
+            type: integer
+          type: array
+        custom_fields:
+          description: List of key, values pairs to be associated with the article
+          example:
+            defined_key: value for it
+          type: object
+        defined_type:
+          description: <b>One of:</b> <code>figure</code> <code>online resource</code> <code>preprint</code> <code>book</code> <code>conference contribution</code> <code>media</code> <code>dataset</code> <code>poster</code> <code>journal contribution</code> <code>presentation</code> <code>thesis</code> <code>software</code>
+          example: media
+          type: string
+        description:
+          default: ""
+          description: The article description. In a publisher case, usually this is the remote article description
+          example: Test description of article
+          maxLength: 10000
+          type: string
+        doi:
+          default: ""
+          description: Not applicable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
+          type: string
+        funding:
+          default: ""
+          description: Grant number or funding authority
+          type: string
+        funding_list:
+          description: Funding creation / update items
+          items:
+            $ref: "#/components/schemas/FundingCreate"
+          type: array
+        handle:
+          default: ""
+          description: Not applicable for regular users. In an institutional case, make sure your group supports setting Handles. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
+          type: string
+        keywords:
+          default: []
+          description: List of tags to be associated with the article. Tags can be used instead
+          example:
+            - tag1
+            - tag2
+          items:
+            type: string
+          type: array
+        license:
+          default: 0
+          description: License id for this article.
+          example: 1
+          format: int64
+          type: integer
+        references:
+          default: []
+          description: List of links to be associated with the article (e.g ["http://link1", "http://link2", "http://link3"])
+          example:
+            - http://figshare.com
+            - http://api.figshare.com
+          items:
+            format: link
+            type: string
+          type: array
+        resource_doi:
+          default: ""
+          description: Not applicable to regular users. In a publisher case, this is the publisher article DOI.
+          type: string
+        resource_title:
+          default: ""
+          description: Not applicable to regular users. In a publisher case, this is the publisher article title.
+          type: string
+        tags:
+          default: []
+          description: List of tags to be associated with the article. Keywords can be used instead
+          example:
+            - tag1
+            - tag2
+          items:
+            type: string
+          type: array
+        timeline:
+          $ref: "#/components/schemas/TimelineUpdate"
+        title:
+          description: Title of article
+          example: Test article title
+          maxLength: 1000
+          minLength: 3
+          type: string
+      required:
+        - title
       type: object
       x-tag: articles
     ArticleSearch:
@@ -6665,12 +6776,12 @@ components:
         group:
           description: only return collections from this group
           example: 2000013
-          format: int64
+          format: int32
           type: integer
         institution:
           description: only return collections from this institution
           example: 2000013
-          format: int64
+          format: int32
           type: integer
         limit:
           description: Number of results included on a page. Used for pagination with query
@@ -6852,11 +6963,11 @@ components:
     FileCreator:
       properties:
         link:
-          description: Url for an existing file that will not be uploaded on figshare
+          description: Url for an existing file that will not be uploaded to Figshare
           example: http://figshare.com/file.txt
           type: string
         md5:
-          description: MD5 sum pre computed on the client side
+          description: MD5 sum pre-computed on client side.
           example: 6c16e6e7d7587bd078e5117dda01d565
           type: string
         name:

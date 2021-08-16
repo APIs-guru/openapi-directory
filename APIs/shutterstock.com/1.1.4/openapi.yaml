@@ -196,6 +196,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock ai-audio list-custom-descriptors --tag Cinematic
   /v2/ai/audio/instruments:
     get:
       description: This endpoint lists the instruments that you can include in computer audio. If you specify more than one search parameter, the API uses an AND condition.
@@ -314,6 +319,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock ai-audio list-custom-instruments --tag Percussion
   /v2/ai/audio/renders:
     get:
       description: This endpoint shows the status of one or more audio renders, including download links for completed audio.
@@ -424,6 +434,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock ai-audio fetch-renders --id L2w7h9VNFlkzpllSUunSYayenKjN --id BeHx3UNXzMBB4dGsC9aa6VxnpcWl
     post:
       description: This endpoint creates rendered audio from timeline data. It returns a render ID that you can use to download the finished audio when it is ready. The render ID is valid for up to 48 hours.
       operationId: createAudioRenders
@@ -841,6 +856,121 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo '{
+              "audio_renders": [
+                {
+                  "preset": "MASTER_MP3",
+                  "filename": "My_audio_ai.mp3",
+                  "timeline": {
+                    "spans": [
+                      {
+                        "id": 111,
+                        "span_type": "metered",
+                        "time": 0,
+                        "tempo": 80,
+                        "regions": [
+                          {
+                            "id": 222,
+                            "descriptor": "documentary_underscore_heartfelt",
+                            "beat": 0,
+                            "end_type": {
+                              "beat": 17,
+                              "event": "ending",
+                              "type": "ringout"
+                            },
+                            "region": "music"
+                          }
+                        ],
+                        "instrument_groups": [
+                          {
+                            "instrument_group": "full_aw_nylon_acoustic_lead_guitar",
+                            "statuses": [
+                              {
+                                "beat": 0,
+                                "status": "active"
+                              }
+                            ]
+                          },
+                          {
+                            "instrument_group": "nice_scoring_viola_ensemble",
+                            "statuses": [
+                              {
+                                "beat": 0,
+                                "status": "active"
+                              }
+                            ]
+                          },
+                          {
+                            "instrument_group": "warm_devonshire_upright_acoustic_piano",
+                            "statuses": [
+                              {
+                                "beat": 0,
+                                "status": "active"
+                              }
+                            ]
+                          },
+                          {
+                            "instrument_group": "nice_scoring_first_violin_ensemble",
+                            "statuses": [
+                              {
+                                "beat": 0,
+                                "status": "active"
+                              }
+                            ]
+                          },
+                          {
+                            "instrument_group": "nice_scoring_second_violin_ensemble",
+                            "statuses": [
+                              {
+                                "beat": 0,
+                                "status": "active"
+                              }
+                            ]
+                          },
+                          {
+                            "instrument_group": "warm_kawai_grand_acoustic_piano_dreamy",
+                            "statuses": [
+                              {
+                                "beat": 0,
+                                "status": "active"
+                              }
+                            ]
+                          },
+                          {
+                            "instrument_group": "sweet_kawai_grand_acoustic_piano",
+                            "statuses": [
+                              {
+                                "beat": 0,
+                                "status": "active"
+                              }
+                            ]
+                          },
+                          {
+                            "instrument_group": "nice_scoring_cello_ensemble",
+                            "statuses": [
+                              {
+                                "beat": 0,
+                                "status": "active"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "span_type": "unmetered",
+                        "time": 15
+                      }
+                    ]
+                  }
+                }
+              ]
+            }' > data.json
+
+            shutterstock ai-audio create-audio-renders data.json
   /v2/audio:
     get:
       description: This endpoint lists information about one or more audio tracks, including the description and publication date.
@@ -1123,6 +1253,15 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo '{
+              "name": "Best rock music"
+            }' > data.json
+
+            shutterstock images create-image-collection data.json
   "/v2/audio/collections/{id}":
     delete:
       description: This endpoint deletes a collection.
@@ -1189,6 +1328,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock audio delete-track-collection 48433111
     get:
       description: This endpoint gets more detailed information about a collection, including the number of items in it and when it was last updated. To get the tracks in collections, use `GET /v2/audio/collections/{id}/items`.
       operationId: getTrackCollection
@@ -1322,6 +1466,15 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo '{
+              "name": "Best rock music"
+            }' > data.json
+
+            shutterstock audio rename-collection 48433107 data.json
   "/v2/audio/collections/{id}/items":
     delete:
       description: This endpoint removes one or more tracks from a collection.
@@ -1406,6 +1559,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock audio delete-track-collection-items 48433119 --item-id 36345523
     get:
       description: This endpoint lists the IDs of tracks in a collection and the date that each was added.
       operationId: getTrackCollectionItems
@@ -1589,6 +1747,22 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo '{
+              "items": [
+                {
+                  "id": "442583"
+                },
+                {
+                  "id": "7491192"
+                }
+              ]
+            }' > data.json
+
+            shutterstock audio add-collection-items 48433115 data.json
   /v2/audio/genres:
     get:
       description: This endpoint returns a list of all audio genres.
@@ -1707,6 +1881,25 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                      - audio:
+                          format:
+                            size: clean_audio
+                          id: "420298"
+                        download_time: 2020-11-11T16:15:20.000Z
+                        id: a10b7a7a5a02113a928f13e5ba196151d6
+                        is_downloadable: true
+                        license: premier_music_extended
+                        metadata:
+                          purchase_order: "123"
+                        user:
+                          username: jsmith
+                    page: 1
+                    per_page: 20
+                    total_count: 1
               schema:
                 $ref: "#/components/schemas/DownloadHistoryDataList"
           description: OK
@@ -1774,6 +1967,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock audio get-track-license-list --start-date "2016-10-03T01:25:13.521Z" --end-date "2016-10-04T13:25:13.521Z"
     post:
       description: This endpoint gets licenses for one or more tracks.
       operationId: licenseTrack
@@ -1919,6 +2117,23 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo '{
+              "audio": [
+                {
+                  "audio_id": "591623",
+                  "license": "audio_platform",
+                  "metadata": {
+                    "customer_id": "12345"
+                  }
+                }
+              ]
+            }' > data.json
+
+            shutterstock audio license-track data.json
   "/v2/audio/licenses/{id}/downloads":
     post:
       description: This endpoint redownloads tracks that you have already received a license for.
@@ -1995,6 +2210,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock audio download-tracks e123
   /v2/audio/moods:
     get:
       description: This endpoint returns a list of all audio moods.
@@ -2357,6 +2577,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock audio search-tracks --query bluegrass --duration-from 60 --moods uplifting
   "/v2/audio/{id}":
     get:
       description: This endpoint shows information about a track, including its genres, instruments, and other attributes.
@@ -2869,6 +3094,13 @@ paths:
 
             $uploadDecodedResponse = json_decode($uploadResponse);
             print_r($uploadDecodedResponse->upload_id);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo "{\"base64_image\":\"`base64 myImage.jpg  | tr -d '\n'`\"}" > data.json
+
+            shutterstock cv upload-image data.json
   /v2/cv/keywords:
     get:
       description: This endpoint returns a list of suggested keywords for a media item that you specify or upload.
@@ -3010,6 +3242,19 @@ paths:
             curl_close($handle);
 
             print_r($keywordsResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo "{\"base64_image\":\"`base64 myImage.jpg  | tr -d '\n'`\"}" > data.json
+
+            shutterstock cv upload-image data.json > response.json
+
+            echo "The next step requires the jq program."
+
+            UPLOAD_ID=$(jq -r .upload_id response.json)
+
+            shutterstock cv get-keywords --asset-id $UPLOAD_ID
   /v2/cv/similar/images:
     get:
       description: This endpoint returns images that are visually similar to an image that you specify or upload.
@@ -3218,6 +3463,19 @@ paths:
             curl_close($handle);
 
             print_r($similarResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo "{\"base64_image\":\"`base64 myImage.jpg  | tr -d '\n'`\"}" > data.json
+
+            shutterstock cv upload-image data.json > response.json
+
+            echo "The next step requires the jq program."
+
+            UPLOAD_ID=$(jq -r .upload_id response.json)
+
+            shutterstock cv get-similar-images --asset-id $UPLOAD_ID
   /v2/cv/similar/videos:
     get:
       description: This endpoint returns videos that are visually similar to an image that you specify or upload.
@@ -3416,6 +3674,19 @@ paths:
             curl_close($handle);
 
             print_r($similarResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo "{\"base64_image\":\"`base64 myImage.jpg  | tr -d '\n'`\"}" > data.json
+
+            shutterstock cv upload-image data.json > response.json
+
+            echo "The next step requires the jq program."
+
+            UPLOAD_ID=$(jq -r .upload_id response.json)
+
+            shutterstock cv get-similar-videos --asset-id $UPLOAD_ID
   /v2/editor/auth:
     post:
       operationId: authVideoEditor
@@ -3807,6 +4078,21 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo '{
+              "editorial": [
+                {
+                  "editorial_id": "8594090h",
+                  "license": "premier_editorial_comp"
+                }
+              ],
+              "country": "USA"
+            }' > data.json
+
+            shutterstock editorial license-editorial-images data.json
   /v2/editorial/images/livefeeds:
     get:
       operationId: getEditorialImageLivefeedList
@@ -4210,6 +4496,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock editorial search-editorial-images --country USA --sort newest --query football --date-start 2018-10-23
   /v2/editorial/images/updated:
     get:
       description: This endpoint lists editorial images that have been updated in the specified time period to update content management systems (CMS) or digital asset management (DAM) systems. In most cases, use the date_updated_start and date_updated_end parameters to specify a range updates based on when the updates happened. You can also use the date_taken_start and date_taken_end parameters to specify a range of updates based on when the image was taken.
@@ -4431,6 +4722,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock editorial get-updated-editorial-images --type edit --country USA --date-updated-start 2020-02-02T13:00:00Z --date-updated-end 2020-02-02T15:00:00Z
   "/v2/editorial/images/{id}":
     get:
       description: This endpoint shows information about an editorial image, including a URL to a preview image and the sizes that it is available in.
@@ -4639,6 +4935,22 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo '{
+              "editorial": [
+                {
+                  "editorial_id": "8594090h",
+                  "license": "premier_editorial_comp"
+                }
+              ],
+              "country": "USA"
+            }' > data.json
+
+
+            shutterstock editorial license-editorial-image data.json
   /v2/editorial/livefeeds:
     get:
       deprecated: true
@@ -5045,6 +5357,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock editorial search-editorial --country USA --sort newest --query football --date-start 2018-10-23
   /v2/editorial/updated:
     get:
       deprecated: true
@@ -5265,6 +5582,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock editorial get-updated-images --type edit --country USA --date-updated-start 2020-02-02T13:00:00Z --date-updated-end 2020-02-02T15:00:00Z
   /v2/editorial/videos/categories:
     get:
       description: This endpoint lists the categories that editorial videos can belong to, which are separate from the categories that other types of assets can belong to.
@@ -5533,6 +5855,21 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo '{
+              "editorial": [
+                {
+                  "editorial_id": "8594090h",
+                  "license": "premier_editorial_video_comp"
+                }
+              ],
+              "country": "USA"
+            }' > data.json
+
+            shutterstock editorial license-editorial-video data.json
   /v2/editorial/videos/search:
     get:
       description: This endpoint searches for editorial videos. If you specify more than one search parameter, the API uses an AND condition. Array parameters can be specified multiple times; in this case, the API uses an AND or an OR condition with those values, depending on the parameter. You can also filter search terms out in the `query` parameter by prefixing the term with NOT.
@@ -5755,6 +6092,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock editorial search-editorial-videos --country USA --sort newest --query football --date-start 2018-10-23
   "/v2/editorial/videos/{id}":
     get:
       description: This endpoint shows information about an editorial image, including a URL to a preview image and the sizes that it is available in.
@@ -6124,6 +6466,13 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo "{\"base64_image\":\"`base64 myImage.jpg  | tr -d '\n'`\"}" > data.json
+
+            shutterstock images upload-ephemeral-image data.json
   /v2/images/categories:
     get:
       description: This endpoint lists the categories (Shutterstock-assigned genres) that images can belong to.
@@ -6323,6 +6672,15 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo '{
+              "name": "My collection"
+            }' > data.json
+
+            shutterstock images create-image-collection data.json
   /v2/images/collections/featured:
     get:
       description: This endpoint lists featured collections of specific types and a name and cover image for each collection.
@@ -6585,6 +6943,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock images delete-image-collection 136351027
     get:
       description: This endpoint gets more detailed information about a collection, including its cover image and timestamps for its creation and most recent update. To get the images in collections, use `GET /v2/images/collections/{id}/items`.
       operationId: getImageCollection
@@ -6732,6 +7095,15 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo '{
+              "name": "My new collection name"
+            }' > data.json
+
+            shutterstock images rename-image-collection 48433107 data.json
   "/v2/images/collections/{id}/items":
     delete:
       description: This endpoint removes one or more images from a collection.
@@ -6812,6 +7184,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock images delete-image-collection-items 186726599 --item-id 495863218
     get:
       description: This endpoint lists the IDs of images in a collection and the date that each was added.
       operationId: getImageCollectionItems
@@ -6988,6 +7365,20 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo '{
+              "items": [
+                {
+                  "id": "49572945",
+                  "media_type": "image"
+                }
+              ]
+            }' > data.json
+
+            shutterstock images add-image-collection-items 126351027 data.json
   /v2/images/licenses:
     get:
       description: This endpoint lists existing licenses.
@@ -7177,6 +7568,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock images get-image-license-list --start-date "2021-01-03T01:25:13.521Z" --end-date "2021-05-04T13:25:13.521Z"
     post:
       description: This endpoint gets licenses for one or more images. You must specify the image IDs in the body parameter and other details like the format, size, and subscription ID either in the query parameter or with each image ID in the body parameter. Values in the body parameter override values in the query parameters.
       operationId: licenseImages
@@ -7352,6 +7748,23 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo '{
+              "images": [
+                {
+                  "image_id": "59656357",
+                  "price": 12.50,
+                  "metadata": {
+                    "customer_id": "12345"
+                  }
+                }
+              ]
+            }' > data.json
+
+            shutterstock images license-images --subscription-id $SUBSCRIPTION_ID data.json
   "/v2/images/licenses/{id}/downloads":
     post:
       description: This endpoint redownloads images that you have already received a license for.
@@ -7455,6 +7868,16 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |+
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo '{
+              "size": "huge"
+            }' > data.json
+
+            shutterstock images download-image e123 data.json
+
   /v2/images/recommendations:
     get:
       description: This endpoint returns images that customers put in the same collection as the specified image IDs.
@@ -7938,6 +8361,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock images search-images --query Vienna --orientation horizontal --sort popular
   /v2/images/search/suggestions:
     get:
       description: This endpoint provides autocomplete suggestions for partial search terms.
@@ -8080,6 +8508,13 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo '{"text": "The beach is a wonderful place to visit. It has beautiful sand and ocean waves."}' > data.json
+
+            shutterstock images get-image-keyword-suggestions data.json
   /v2/images/updated:
     get:
       description: This endpoint lists images that have been updated in the specified time period to update content management systems (CMS) or digital asset management (DAM) systems. In most cases, use the `interval` parameter to show images that were updated recently, but you can also use the `start_date` and `end_date` parameters to specify a range of no more than three days. Do not use the `interval` parameter with either `start_date` or `end_date`.
@@ -8219,6 +8654,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock images get-updated-images --interval "30 MINUTE"
   "/v2/images/{id}":
     get:
       description: This endpoint shows information about an image, including a URL to a preview image and the sizes that it is available in.
@@ -8600,6 +9040,14 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            curl "https://api.shutterstock.com/v2/oauth/access_token" \
+            -X POST \
+            --data-urlencode "client_id=$CLIENT_ID" \
+            --data-urlencode "client_secret=$CLIENT_SECRET" \
+            --data-urlencode "grant_type=authorization_code" \
+            --data-urlencode "code=$CODE"
   /v2/oauth/authorize:
     get:
       description: This endpoint returns a redirect URI (in the 'Location' header) that the customer uses to authorize your application and, together with POST /v2/oauth/access_token, generate an access token that represents that authorization.
@@ -8710,6 +9158,16 @@ paths:
             $options = [ CURLOPT_URL => "https://api.shutterstock.com/v2/oauth/authorize?" . http_build_query($queryFields), CURLOPT_USERAGENT => "php/curl", CURLOPT_RETURNTRANSFER => 1 ];
             $handle = curl_init(); curl_setopt_array($handle, $options); $response = curl_exec($handle); curl_close($handle);
             $decodedResponse = json_decode($response); print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            curl "https://api.shutterstock.com/v2/oauth/authorize" \
+            -X GET \
+            -G \
+            --data-urlencode "scope=licenses.create licenses.view purchases.view" \
+            --data-urlencode "state=demo_`date +%s`" \
+            --data-urlencode "response_type=code" \
+            --data-urlencode "redirect_uri=http://localhost:3000/callback" \
+            --data-urlencode "client_id=$CLIENT_ID"
   /v2/test:
     get:
       operationId: echo
@@ -9176,6 +9634,15 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo '{
+              "name": "New collection name"
+            }' > data.json
+
+            shutterstock videos create-video-collection data.json
   /v2/videos/collections/featured:
     get:
       description: This endpoint lists featured video collections and a name and cover video for each collection.
@@ -9406,6 +9873,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock videos delete-video-collection 17555176
     get:
       description: This endpoint gets more detailed information about a collection, including the timestamp for its creation and the number of videos in it. To get the videos in collections, use GET /v2/videos/collections/{id}/items.
       operationId: getVideoCollection
@@ -9536,6 +10008,15 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo '{
+              "name": "Updated collection name"
+            }' > data.json
+
+            shutterstock videos rename-video-collection 17555176 data.json
   "/v2/videos/collections/{id}/items":
     delete:
       description: This endpoint removes one or more videos from a collection.
@@ -9616,6 +10097,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock videos delete-video-collection-items 17555176 --item-id 495863218
     get:
       description: This endpoint lists the IDs of videos in a collection and the date that each was added.
       operationId: getVideoCollectionItems
@@ -9797,6 +10283,22 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo '{
+              "items": [
+                {
+                  "id": "10120264"
+                },
+                {
+                  "id": "24419024"
+                }
+              ]
+            }' > data.json
+
+            shutterstock videos add-video-collection-items 17555176 data.json
   /v2/videos/licenses:
     get:
       description: This endpoint lists existing licenses.
@@ -10091,6 +10593,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock videos get-video-license-list --start-date "2021-01-03T01:25:13.521Z" --end-date "2021-05-04T13:25:13.521Z"
     post:
       description: This endpoint gets licenses for one or more videos. You must specify the video IDs in the body parameter and the size and subscription ID either in the query parameter or with each video ID in the body parameter. Values in the body parameter override values in the query parameters.
       operationId: licenseVideos
@@ -10249,6 +10756,24 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo '{
+              "videos": [
+                {
+                  "video_id": "2140697",
+                  "size": "hd"
+                },
+                {
+                  "video_id": "5613314",
+                  "size": "4k"
+                }
+              ]
+            }' > data.json
+
+            shutterstock videos license-videos --subscription-id $SUBSCRIPTION_ID data.json
   "/v2/videos/licenses/{id}/downloads":
     post:
       description: This endpoint redownloads videos that you have already received a license for.
@@ -10346,6 +10871,13 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            echo '{}' > data.json
+
+            shutterstock videos download-videos e123 data.json
   /v2/videos/search:
     get:
       description: This endpoint searches for videos. If you specify more than one search parameter, the API uses an AND condition. Array parameters can be specified multiple times; in this case, the API uses an AND or an OR condition with those values, depending on the parameter. You can also filter search terms out in the `query` parameter by prefixing the term with NOT.
@@ -10704,6 +11236,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock videos search-videos --query "hot air balloon" --duration-from 30 --sort popular
   /v2/videos/search/suggestions:
     get:
       description: This endpoint provides autocomplete suggestions for partial search terms.
@@ -10887,6 +11424,11 @@ paths:
 
             $decodedResponse = json_decode($response);
             print_r($decodedResponse);
+        - lang: bash
+          source: |-
+            export SHUTTERSTOCK_API_TOKEN=v2/ODYwYmRlNzBiYjMzNTE2M2UyZTQvMTc4NzI2OTM4L2N1c3RvbWVyLzIvWEtXR01HQ1FaVHRLOG85a
+
+            shutterstock videos get-updated-videos --interval "30 MINUTE"
   "/v2/videos/{id}":
     get:
       description: This endpoint shows information about a video, including URLs to previews and the sizes that it is available in.
@@ -13193,6 +13735,8 @@ components:
           items:
             type: string
           type: array
+        special_instructions:
+          type: string
         title:
           type: string
       required:

@@ -1816,22 +1816,30 @@ paths:
       x-group-parameters: true
     post:
       description: |
-        To create a video, you create its container&parameters first, before adding the video file (exception - when using an existing HTTP source). Videos are public by default. Mp4 encoded versions are created at the highest quality (max 1080p) by default.
+        To create a video, you create its container&parameters first, before adding the video file (exception - when using an existing HTTP source).
+        * Videos are public by default. [Learn about Private videos](https://api.video/blog/tutorials/tutorial-private-videos)
+        * Up to 6 responsive video streams will be created (from 240p to 4k)
+        * Mp4 encoded versions are created at the highest quality (max 1080p) by default.
+        * Panoramic videos are for videos recorded in 360 degrees.  You can toggle this after your 360 video upload.
+        * Searchable parameters: title, description, tags and metadata
 
          ```shell
         $ curl https://ws.api.video/videos \ -H 'Authorization: Bearer {access_token} \ -d '{"title":"My video", 
              "description":"so many details",
              "mp4Support":true
         }'
-
         ```  
 
-        ### Creating a hosted video 
-        You can also create a video directly from one hosted on a third-party server by giving its URI in `source` parameter:
-        ```shell $ curl https://ws.api.video/videos \ -H 'Authorization: Bearer {access_token} \ -d '{"source":"http://uri/to/video.mp4", "title":"My video"}' ```
+        ## add an URL to upload on creation
+        You can also create a video directly from a video hosted on a third-party server by giving its URI in `source` parameter:
+        ```shell
+        $ curl https://ws.api.video/videos \
+        -H 'Authorization: Bearer {access_token} \
+        -d '{"source":"http://uri/to/video.mp4", "title":"My video"}'
+        ```
 
-        In this case, the service will respond `202 Accepted` and download the video asynchronously.
-        ### Track users with Dynamic Metadata
+        In this case, the service will respond `202 Accepted` and ingest the video asynchronously.
+        ## Track users with Dynamic Metadata
         Metadata values can be a key:value where the values are predefined, but Dynamic metadata allows you to enter *any* value for a defined key.  To defined a dynamic metadata pair use:
         ``` "metadata":[{"dynamicKey": "__dynamicKey__"}] ```
 
@@ -2893,7 +2901,12 @@ paths:
         - Videos
       x-client-action: pickThumbnail
     post:
-      description: In creating a thumbnail, you may either upload an image, or you can pick a time in the video to be used as thumbnail. This endpoint is for uploading an image. Use [Pick a Thumbnail](https://docs.api.video/reference#patch_videos-videoid-thumbnail) to pick a time in the video. There may be a short delay before the new thumbnail is delivered to our CDN. Tutorials using [Thumbnail upload](https://api.video/blog/endpoints/videos-upload-a-thumbnail).
+      description: |-
+        The thumbnail is the poster that appears in the player window before video playback begins.
+        This endpoint allows you to upload an image for the thumbnail.
+        To select a still frame from the video using a time stamp, use [Pick a Thumbnail](https://docs.api.video/reference#patch_videos-videoid-thumbnail) to pick a time in the video. 
+        Note: There may be a short delay before the new thumbnail is delivered to our CDN.
+        Tutorials using [Thumbnail upload](https://api.video/blog/endpoints/videos-upload-a-thumbnail).
       operationId: POST_videos-videoId-thumbnail
       parameters:
         - description: "Unique identifier of the chosen video "

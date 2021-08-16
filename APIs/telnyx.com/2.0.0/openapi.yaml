@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.0.0
 servers:
   - description: Version 2.0.0 of the Telnyx API
     url: https://api.telnyx.com/v2
@@ -19,7 +19,7 @@ info:
       version: "3.0"
   x-providerName: telnyx.com
 security:
-  - bearerAuth: []
+  - BearerAuth: []
 tags:
   - description: Access Tokens creation
     name: Access Tokens
@@ -10992,7 +10992,7 @@ components:
       schema:
         type: string
     PageNumber:
-      description: The page number to load
+      description: The page number to load.
       in: query
       name: page[number]
       schema:
@@ -11000,7 +11000,7 @@ components:
         minimum: 1
         type: integer
     PageSize:
-      description: The size of the page
+      description: The size of the page.
       in: query
       name: page[size]
       schema:
@@ -23013,7 +23013,7 @@ components:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/ExternalMessageDetailRecordDto"
+            $ref: "#/components/schemas/MdrDetailResponse"
           type: array
         meta:
           $ref: "#/components/schemas/PaginationMeta"
@@ -23330,86 +23330,150 @@ components:
       type: object
     MessageDetailRecord:
       properties:
+        carrier:
+          description: Country-specific carrier used to send or receive the message
+          example: T-Mobile USA
+          type: string
+        carrier_fee:
+          description: Fee charged by certain carriers in order to deliver certain message types. Telnyx passes this fee on to the customer according to our pricing table
+          example: "0.003"
+          type: string
         cld:
-          description: The destination number for a call, or the callee
+          description: The recipient of the message (to parameter in the Messaging API)
           example: "+1555123456"
           type: string
         cli:
-          description: The number associated with the person initiating the call, or the caller
+          description: The sender of the message (from parameter in the Messaging API). For Alphanumeric ID messages, this is the sender ID value
           example: "+1555123456"
           type: string
+        completed_at:
+          description: Message completion time
+          example: 2020-07-01T00:00:00Z
+          format: date-time
+          type: string
         cost:
-          $ref: "#/components/schemas/MessageCost"
-        country_iso:
-          description: Cld number ISO country code.
+          description: Amount, in the user currency, for the Telnyx billing cost
+          example: "0.003"
+          type: string
+        country_code:
+          description: Two-letter representation of the country of the cld property using the ISO 3166-1 alpha-2 format
           example: US
           type: string
         created_at:
-          description: Message sent time
-          example: 2020-07-01T00:00:00-06:00
+          description: Message creation time
+          example: 2020-07-01T00:00:00Z
           format: date-time
           type: string
+        currency:
+          description: Telnyx account currency used to describe monetary values, including billing cost
+          example: USD
+          type: string
+        delivery_status:
+          description: Final webhook delivery status
+          example: "success: webhook succeeded"
+          type: string
+        delivery_status_failover_url:
+          description: Failover customer-provided URL which Telnyx posts delivery status webhooks to
+          example: https://api.example.com/sms/telnyx/inbound
+          type: string
+        delivery_status_webhook_url:
+          description: Primary customer-provided URL which Telnyx posts delivery status webhooks to
+          example: https://api.example.com/sms/telnyx/inbound
+          type: string
         direction:
-          $ref: "#/components/schemas/Direction"
+          description: Logical direction of the message from the Telnyx customer's perspective. It's inbound when the Telnyx customer receives the message, or outbound otherwise
+          enum:
+            - inbound
+            - outbound
+          example: outbound
+          type: string
         errors:
-          description: Error returned by the gateway in case sending of message failed.
-          example: US
+          description: Telnyx API error codes returned by the Telnyx gateway
           items:
-            description: Error returned by the gateway in case sending of message failed.
             example: "40001"
             type: string
-          properties:
-            empty:
-              type: boolean
           type: array
-        id:
-          description: Message id
-          example: 3ca7bd3d-7d82-4e07-9df4-009123068320
-          type: string
+        fteu:
+          description: Indicates whether this is a Free-To-End-User (FTEU) short code message
+          example: false
+          type: boolean
         mcc:
-          description: Mobile country code.
+          description: Mobile country code. Only available for certain products, such as Global Outbound-Only from Alphanumeric Sender ID
           example: "204"
           type: string
         message_type:
-          $ref: "#/components/schemas/MessageType"
+          description: "Describes the Messaging service used to send the message. Available services are: Short Message Service (SMS), Multimedia Messaging Service (MMS), and Rich Communication Services (RCS)"
+          enum:
+            - SMS
+            - MMS
+            - RCS
+          example: SMS
+          type: string
         mnc:
-          description: Mobile network code.
+          description: Mobile network code. Only available for certain products, such as Global Outbound-Only from Alphanumeric Sender ID
           example: "01"
           type: string
-        normalized_carrier:
-          description: Cld carrier.
-          example: T-Mobile
-          type: string
-        outbound_profile_id:
-          description: Configured profile id. New profiles can be created and configured on Telnyx portal
-          example: 30ef55db-c4a2-4c4a-9804-a68077973d07
-          type: string
-        outbound_profile_name:
-          description: Configured profile name. New profiles can be created and configured on Telnyx portal
-          example: configured-profile-name
-          type: string
+        on_net:
+          description: Indicates whether both sender and recipient numbers are Telnyx-managed
+          example: true
+          type: boolean
         parts:
-          description: Number of parts this message has. Max number of character is 160. If message contains more characters then that it will be broken down in multiple parts
+          description: Number of message parts. The message is broken down in multiple parts when its length surpasses the limit of 160 characters
           example: 2
           type: integer
-        pass_through_fee:
-          $ref: "#/components/schemas/PassThroughFee"
-        product:
-          $ref: "#/components/schemas/Product"
+        profile_id:
+          description: Unique identifier of the Messaging Profile used to send or receive the message
+          example: 30ef55db-c4a2-4c4a-9804-a68077973d07
+          type: string
+        profile_name:
+          description: Name of the Messaging Profile used to send or receive the message
+          example: My Messaging Profile
+          type: string
         rate:
-          $ref: "#/components/schemas/MessageRate"
+          description: Currency amount per billing unit used to calculate the Telnyx billing cost
+          example: "0.003"
+          type: string
         record_type:
           default: message_detail_record
+          description: Identifies the record schema
           example: message_detail_record
           type: string
+        sent_at:
+          description: Time when the message was sent
+          example: 2020-07-01T00:00:00Z
+          format: date-time
+          type: string
+        source_country_code:
+          description: Two-letter representation of the country of the cli property using the ISO 3166-1 alpha-2 format
+          example: US
+          type: string
         status:
-          $ref: "#/components/schemas/MessageStatus"
+          description: Final status of the message after the delivery attempt
+          enum:
+            - gw_timeout
+            - delivered
+            - dlr_unconfirmed
+            - dlr_timeout
+            - received
+            - gw_reject
+            - failed
+          example: delivered
+          type: string
         tags:
-          description: User tag.
-          example: tag1
+          description: Comma-separated tags assigned to the Telnyx number associated with the message
+          example: tag1,tag2,tag3
+          type: string
+        updated_at:
+          description: Message updated time
+          example: 2020-07-01T00:00:00Z
+          format: date-time
           type: string
         user_id:
-          description: User id
+          description: Identifier of the Telnyx account who owns the message
+          example: 3ca7bd3d-7d82-4e07-9df4-009123068320
+          type: string
+        uuid:
+          description: Unique identifier of the message
           example: 3ca7bd3d-7d82-4e07-9df4-009123068320
           type: string
       required:

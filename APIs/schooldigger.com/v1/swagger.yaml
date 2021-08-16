@@ -576,7 +576,7 @@ definitions:
         readOnly: false
         type: string
     type: object
-  APIDistrict1:
+  APIDistrict1Summary:
     properties:
       address:
         $ref: "#/definitions/APILocation"
@@ -666,7 +666,7 @@ definitions:
     properties:
       districtList:
         items:
-          $ref: "#/definitions/APIDistrict1"
+          $ref: "#/definitions/APIDistrict1Summary"
         type: array
       numberOfDistricts:
         description: The total count of districts that match your query
@@ -683,7 +683,7 @@ definitions:
     properties:
       districtList:
         items:
-          $ref: "#/definitions/APIDistrict1"
+          $ref: "#/definitions/APIDistrict1Summary"
         type: array
       numberOfDistricts:
         description: The total count of districts in the entire rank list

@@ -4712,6 +4712,8 @@ paths:
                           title: Regular Expression Denial of Service (ReDoS)
                           url: https://snyk.io/vuln/npm:ms:20170412
                         issueType: vuln
+                        links:
+                          paths: ""
                         pkgName: ms
                         pkgVersions:
                           - 1.0.0
@@ -4864,6 +4866,13 @@ paths:
                         issueType:
                           description: type of the issue ('vuln' or 'license')
                           type: string
+                        links:
+                          description: Onward links from this record
+                          properties:
+                            paths:
+                              description: The URL for the dependency paths that introduce this issue
+                              type: string
+                          type: object
                         pkgName:
                           description: The package name
                           type: string
@@ -5258,6 +5267,8 @@ paths:
                           title: Regular Expression Denial of Service (ReDoS)
                           url: https://snyk.io/vuln/npm:ms:20170412
                         issueType: vuln
+                        links:
+                          paths: ""
                         pkgName: ms
                         pkgVersions:
                           - 1.0.0
@@ -5410,6 +5421,13 @@ paths:
                         issueType:
                           description: type of the issue ('vuln' or 'license')
                           type: string
+                        links:
+                          description: Onward links from this record
+                          properties:
+                            paths:
+                              description: The URL for the dependency paths that introduce this issue
+                              type: string
+                          type: object
                         pkgName:
                           description: The package name
                           type: string
@@ -5484,7 +5502,7 @@ paths:
           name: perPage
           required: true
           schema:
-            default: 10
+            default: 100
             type: number
         - description: The page of results to return.
           example: "2"
@@ -5500,6 +5518,19 @@ paths:
             "*/*":
               schema:
                 properties:
+                  links:
+                    description: Onward links from this record
+                    properties:
+                      last:
+                        description: The URL of the last page of paths for the issue
+                        type: string
+                      next:
+                        description: The URL of the next page of paths for the issue, if not on the last page
+                        type: string
+                      prev:
+                        description: The URL of the previous page of paths for the issue, if not on the first page
+                        type: string
+                    type: object
                   paths:
                     description: A list of the dependency paths that introduce the issue
                     items:
@@ -6052,7 +6083,7 @@ paths:
           name: perPage
           required: true
           schema:
-            default: 10
+            default: 100
             type: number
         - description: The page of results to return.
           example: "2"
@@ -6068,6 +6099,19 @@ paths:
             "*/*":
               schema:
                 properties:
+                  links:
+                    description: Onward links from this record
+                    properties:
+                      last:
+                        description: The URL of the last page of paths for the issue
+                        type: string
+                      next:
+                        description: The URL of the next page of paths for the issue, if not on the last page
+                        type: string
+                      prev:
+                        description: The URL of the previous page of paths for the issue, if not on the first page
+                        type: string
+                    type: object
                   paths:
                     description: A list of the dependency paths that introduce the issue
                     items:
@@ -18987,6 +19031,13 @@ components:
               issueType:
                 description: type of the issue ('vuln' or 'license')
                 type: string
+              links:
+                description: Onward links from this record
+                properties:
+                  paths:
+                    description: The URL for the dependency paths that introduce this issue
+                    type: string
+                type: object
               pkgName:
                 description: The package name
                 type: string
@@ -19764,6 +19815,19 @@ components:
     Issue_counts_over_time: {}
     Issue_paths:
       properties:
+        links:
+          description: Onward links from this record
+          properties:
+            last:
+              description: The URL of the last page of paths for the issue
+              type: string
+            next:
+              description: The URL of the next page of paths for the issue, if not on the last page
+              type: string
+            prev:
+              description: The URL of the previous page of paths for the issue, if not on the first page
+              type: string
+          type: object
         paths:
           description: A list of the dependency paths that introduce the issue
           items:

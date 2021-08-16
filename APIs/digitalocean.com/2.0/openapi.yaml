@@ -407,13 +407,13 @@ tags:
       For documentation on app specifications (`AppSpec` objects), please refer to the [product documentation](https://www.digitalocean.com/docs/app-platform/references/app-specification-reference/).
     name: Apps
   - description: |-
-      The billing endpoints allow you to retrieve your account balance, invoices and billing history.  
+      The billing endpoints allow you to retrieve your account balance, invoices and billing history.
 
-      **Balance:** By sending requests to the `/v2/customers/my/balance` endpoint, you can retrieve the balance information for the requested customer account.  
+      **Balance:** By sending requests to the `/v2/customers/my/balance` endpoint, you can retrieve the balance information for the requested customer account.
 
-      **Invoices:** [Invoices](https://www.digitalocean.com/docs/accounts/billing/invoices/) are generated on the first of each month for every DigitalOcean customer. An invoice preview is generated daily, which can be accessed with the `preview` keyword in place of `$INVOICE_UUID`. To interact with  invoices, you will generally send requests to the invoices endpoint at `/v2/customers/my/invoices`.  
+      **Invoices:** [Invoices](https://www.digitalocean.com/docs/accounts/billing/invoices/) are generated on the first of each month for every DigitalOcean customer. An invoice preview is generated daily, which can be accessed with the `preview` keyword in place of `$INVOICE_UUID`. To interact with invoices, you will generally send requests to the invoices endpoint at `/v2/customers/my/invoices`.
 
-      **Billing History:** Billing history is a record of billing events for your account. For example, entries may include events like payments made, invoices issued, or credits granted. To interact with invoices, you will generally send requests to the invoices endpoint at `/v2/customers/my/billing_history`.  
+      **Billing History:** Billing history is a record of billing events for your account. For example, entries may include events like payments made, invoices issued, or credits granted. To interact with invoices, you will generally send requests to the invoices endpoint at `/v2/customers/my/billing_history`.
     name: Billing
   - description: |-
       [DigitalOcean Block Storage Volumes](https://www.digitalocean.com/docs/volumes/) provide expanded storage capacity for your Droplets and can be moved between Droplets within a specific region.
@@ -440,7 +440,7 @@ tags:
       simplifies the creation and management of highly available database clusters. Currently, it
       offers support for [PostgreSQL](http://www.digitalocean.com/docs/databases/postgresql/),
       [Redis](https://www.digitalocean.com/docs/databases/redis/),
-      [MySQL](https://www.digitalocean.com/docs/databases/mysql/), and 
+      [MySQL](https://www.digitalocean.com/docs/databases/mysql/), and
       [MongoDB](https://www.digitalocean.com/docs/databases/mongodb/).
 
       By sending requests to the `/v2/databases` endpoint, you can list, create, or delete
@@ -1339,9 +1339,9 @@ paths:
             client = DropletKit::Client.new(access_token: token)
 
             client.ssh_keys.find(id: 512190) 
-    patch:
+    put:
       description: To update the name of an SSH key, send a PUT request to either `/v2/account/keys/$SSH_KEY_ID` or `/v2/account/keys/$SSH_KEY_FINGERPRINT`. Set the `name` attribute to the new name you want to use.
-      operationId: patch_ssh_key
+      operationId: update_ssh_key
       parameters:
         - $ref: "#/paths/~1v2~1account~1keys~1%7Bssh_key_identifier%7D/get/parameters/0"
       requestBody:
@@ -6821,6 +6821,7 @@ paths:
                             - k8s
                             - ip_addr
                             - tag
+                            - app
                           example: droplet
                           type: string
                         uuid:
@@ -10812,6 +10813,10 @@ paths:
                           description: A string specifying the UUID of the VPC to which the Droplet will be assigned. If excluded, the Droplet will be assigned to your account's default VPC for the region.
                           example: 760e09ef-dc84-11e8-981e-3cfdfeaae000
                           type: string
+                        with_droplet_agent:
+                          description: A boolean indicating whether to install the DigitalOcean agent used for providing access to the Droplet web console in the control panel. By default, the agent is installed on new Droplets but installation errors (i.e. OS not supported) are ignored. To prevent it from being installed, set to `false`. To make installation errors fatal, explicitly set it to `true`.
+                          example: true
+                          type: boolean
                       required:
                         - region
                         - size
@@ -21466,6 +21471,9 @@ paths:
                                 - v1/insights/droplet/disk_read
                                 - v1/insights/droplet/disk_write
                                 - v1/insights/droplet/public_outbound_bandwidth
+                                - v1/insights/droplet/public_inbound_bandwidth
+                                - v1/insights/droplet/private_outbound_bandwidth
+                                - v1/insights/droplet/private_inbound_bandwidth
                               example: v1/insights/droplet/cpu
                               format: string
                               type: string
@@ -21596,6 +21604,9 @@ paths:
                     - v1/insights/droplet/disk_read
                     - v1/insights/droplet/disk_write
                     - v1/insights/droplet/public_outbound_bandwidth
+                    - v1/insights/droplet/public_inbound_bandwidth
+                    - v1/insights/droplet/private_outbound_bandwidth
+                    - v1/insights/droplet/private_inbound_bandwidth
                   example: v1/insights/droplet/cpu
                   format: string
                   type: string
@@ -21623,7 +21634,7 @@ paths:
                 - alerts
                 - enabled
               type: object
-        description: "The 'type' field dictates what type of entity that the alert policy applies to and hence what type of entity is passed in the 'entities' array. If both the 'tags' array and 'entities' array are empty the alert policy applies to all entities of the relevant type that are owned by the user account. Otherwise the following table shows the valid entity types for each type of alert policy: <table><thead><tr><td>Type</td><td>Description</td><td>Valid Entity Type</td></tr></thead><tr><td>v1/insights/droplet/memory_utilization_percent</td><td>alert on the percent of memory utilization</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/disk_read</td><td>alert on the rate of disk read I/O in MBps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/load_5</td><td>alert on the 5 minute load average</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/load_15</td><td>alert on the 15 minute load average</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/disk_utilization_percent</td><td>alert on the percent of disk utilization</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/cpu</td><td>alert on the percent of CPU utilization</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/disk_write</td><td>alert on the rate of disk write I/O in MBps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/public_outbound_bandwidth</td><td>alert on the rate of public outbound bandwidth in Mbps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/load_1</td><td>alert on the 1 minute load average</td><td>droplet ID</td></tr></table>"
+        description: "The 'type' field dictates what type of entity that the alert policy applies to and hence what type of entity is passed in the 'entities' array. If both the 'tags' array and 'entities' array are empty the alert policy applies to all entities of the relevant type that are owned by the user account. Otherwise the following table shows the valid entity types for each type of alert policy: <table><thead><tr><td>Type</td><td>Description</td><td>Valid Entity Type</td></tr></thead><tr><td>v1/insights/droplet/memory_utilization_percent</td><td>alert on the percent of memory utilization</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/disk_read</td><td>alert on the rate of disk read I/O in MBps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/load_5</td><td>alert on the 5 minute load average</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/load_15</td><td>alert on the 15 minute load average</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/disk_utilization_percent</td><td>alert on the percent of disk utilization</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/cpu</td><td>alert on the percent of CPU utilization</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/disk_write</td><td>alert on the rate of disk write I/O in MBps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/public_outbound_bandwidth</td><td>alert on the rate of public outbound bandwidth in Mbps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/public_inbound_bandwidth</td><td>alert on the rate of public inbound bandwidth in Mbps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/private_outbound_bandwidth</td><td>alert on the rate of private outbound bandwidth in Mbps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/private_inbound_bandwidth</td><td>alert on the rate of private inbound bandwidth in Mbps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/load_1</td><td>alert on the 1 minute load average</td><td>droplet ID</td></tr></table>"
         required: true
       responses:
         "200":
@@ -21709,7 +21720,7 @@ paths:
           application/json:
             schema:
               $ref: "#/paths/~1v2~1monitoring~1alerts/post/requestBody/content/application~1json/schema"
-        description: "The 'type' field dictates what type of entity that the alert policy applies to and hence what type of entity is passed in the 'entities' array. If both the 'tags' array and 'entities' array are empty the alert policy applies to all entities of the relevant type that are owned by the user account. Otherwise the following table shows the valid entity types for each type of alert policy: <table><thead><tr><td>Type</td><td>Description</td><td>Valid Entity Type</td></tr></thead><tr><td>v1/insights/droplet/memory_utilization_percent</td><td>alert on the percent of memory utilization</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/disk_read</td><td>alert on the rate of disk read I/O in MBps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/load_5</td><td>alert on the 5 minute load average</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/load_15</td><td>alert on the 15 minute load average</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/disk_utilization_percent</td><td>alert on the percent of disk utilization</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/cpu</td><td>alert on the percent of CPU utilization</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/disk_write</td><td>alert on the rate of disk write I/O in MBps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/public_outbound_bandwidth</td><td>alert on the rate of public outbound bandwidth in Mbps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/load_1</td><td>alert on the 1 minute load average</td><td>droplet ID</td></tr></table>"
+        description: "The 'type' field dictates what type of entity that the alert policy applies to and hence what type of entity is passed in the 'entities' array. If both the 'tags' array and 'entities' array are empty the alert policy applies to all entities of the relevant type that are owned by the user account. Otherwise the following table shows the valid entity types for each type of alert policy: <table><thead><tr><td>Type</td><td>Description</td><td>Valid Entity Type</td></tr></thead><tr><td>v1/insights/droplet/memory_utilization_percent</td><td>alert on the percent of memory utilization</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/disk_read</td><td>alert on the rate of disk read I/O in MBps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/load_5</td><td>alert on the 5 minute load average</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/load_15</td><td>alert on the 15 minute load average</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/disk_utilization_percent</td><td>alert on the percent of disk utilization</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/cpu</td><td>alert on the percent of CPU utilization</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/disk_write</td><td>alert on the rate of disk write I/O in MBps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/public_outbound_bandwidth</td><td>alert on the rate of public outbound bandwidth in Mbps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/public_inbound_bandwidth</td><td>alert on the rate of public inbound bandwidth in Mbps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/private_outbound_bandwidth</td><td>alert on the rate of private outbound bandwidth in Mbps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/private_inbound_bandwidth</td><td>alert on the rate of private inbound bandwidth in Mbps</td><td>droplet ID</td></tr><tr><td>v1/insights/droplet/load_1</td><td>alert on the 1 minute load average</td><td>droplet ID</td></tr></table>"
         required: true
       responses:
         "200":
@@ -25845,6 +25856,15 @@ paths:
         content:
           application/json:
             examples:
+              Volume from a snapshot:
+                value:
+                  description: A new volume based on a snapshot
+                  filesystem_label: ext4_volume_01
+                  filesystem_type: ext4
+                  name: snapshot_example
+                  region: nyc1
+                  size_gigabytes: 10
+                  snapshot_id: b0798135-fb76-11eb-946a-0a58ac146f33
               ext4 volume:
                 value:
                   description: Block store for examples
@@ -25865,6 +25885,11 @@ paths:
               anyOf:
                 - allOf:
                     - $ref: "#/paths/~1v2~1volumes/get/responses/200/content/application~1json/schema/allOf/0/properties/volumes/items/allOf/0"
+                    - properties:
+                        snapshot_id:
+                          description: The unique identifier for the volume snapshot from which to create the volume.
+                          example: b0798135-fb76-11eb-946a-0a58ac146f33
+                          type: string
                     - discriminator:
                         mapping:
                           EXT4: ./new_volume_ext4.yml
@@ -25888,18 +25913,27 @@ paths:
                         region:
                           $ref: "#/paths/~1v2~1droplets/get/responses/200/content/application~1json/schema/allOf/0/properties/droplets/items/properties/image/properties/regions/items"
                       required:
+                        - name
+                        - size_gigabytes
+                        - region
                         - filesystem_type
                   type: object
                 - allOf:
                     - $ref: "#/paths/~1v2~1volumes/get/responses/200/content/application~1json/schema/allOf/0/properties/volumes/items/allOf/0"
                     - $ref: "#/paths/~1v2~1volumes/post/requestBody/content/application~1json/schema/anyOf/0/allOf/1"
+                    - $ref: "#/paths/~1v2~1volumes/post/requestBody/content/application~1json/schema/anyOf/0/allOf/2"
                     - properties:
                         filesystem_label:
                           allOf:
-                            - $ref: "#/paths/~1v2~1volumes/post/requestBody/content/application~1json/schema/anyOf/0/allOf/2/properties/filesystem_label/allOf/0"
+                            - $ref: "#/paths/~1v2~1volumes/post/requestBody/content/application~1json/schema/anyOf/0/allOf/3/properties/filesystem_label/allOf/0"
                             - maxLength: 12
                         region:
                           $ref: "#/paths/~1v2~1droplets/get/responses/200/content/application~1json/schema/allOf/0/properties/droplets/items/properties/image/properties/regions/items"
+                      required:
+                        - name
+                        - size_gigabytes
+                        - region
+                        - filesystem_type
                   type: object
               discriminator:
                 mapping:

@@ -995,7 +995,7 @@ paths:
 
             \                    Location header set to the location of the image.\r
 
-            \                    If false is specified, the download URI will be returned in the response message.\r
+            \                    If false is specified, the download URI will be returned in the response message. Default is true.\r
 
             \                </remarks>"
           in: query
@@ -1008,7 +1008,7 @@ paths:
 
               \                    Location header set to the location of the image.\r
 
-              \                    If false is specified, the download URI will be returned in the response message.\r
+              \                    If false is specified, the download URI will be returned in the response message. Default is true.\r
 
               \                </remarks>"
             type: boolean
@@ -1194,7 +1194,7 @@ paths:
 
             \                    Location header set to the location of the video.\r
 
-            \                    If false is specified, the download URI will be returned in the response message.\r
+            \                    If false is specified, the download URI will be returned in the response message. Default is false.\r
 
             \                </remarks>"
           in: query
@@ -1207,7 +1207,7 @@ paths:
 
               \                    Location header set to the location of the video.\r
 
-              \                    If false is specified, the download URI will be returned in the response message.\r
+              \                    If false is specified, the download URI will be returned in the response message. Default is false.\r
 
               \                </remarks>"
             type: boolean
@@ -1500,12 +1500,12 @@ paths:
             nullable: true
             type: array
           style: form
-        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field are estimates."
+        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes, height, and width returned by 'download_sizes' field are estimates."
           explode: false
           in: query
           name: fields
           schema:
-            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field are estimates."
+            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes, height, and width returned by 'download_sizes' field are estimates."
             items:
               $ref: "#/components/schemas/ImageDetailFieldValues"
             nullable: true
@@ -1651,12 +1651,12 @@ paths:
             description: An image id. For more than one image please use the /v3/images endpoint.
             nullable: true
             type: string
-        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field are estimates."
+        - description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes, height, and width returned by 'download_sizes' field are estimates."
           explode: false
           in: query
           name: fields
           schema:
-            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes returned by 'download_sizes' field are estimates."
+            description: "Specifies fields to return. Defaults to 'summary_set'. NOTE: Bytes, height, and width returned by 'download_sizes' field are estimates."
             items:
               $ref: "#/components/schemas/ImageDetailFieldValues"
             nullable: true
@@ -4455,7 +4455,7 @@ paths:
           schema:
             description: Specifies fields to return. Defaults to 'summary_set'.
             items:
-              $ref: "#/components/schemas/VideosFieldValues"
+              $ref: "#/components/schemas/EditorialVideosFieldValues"
             nullable: true
             type: array
           style: form
@@ -5183,7 +5183,7 @@ paths:
           schema:
             description: Specifies fields to return. Defaults to 'summary_set'.
             items:
-              $ref: "#/components/schemas/VideosFieldValues"
+              $ref: "#/components/schemas/BlendedVideosFieldValues"
             nullable: true
             type: array
           style: form
@@ -5352,7 +5352,7 @@ paths:
           schema:
             description: Comma delimited list of fields to retrieve for the videos
             items:
-              $ref: "#/components/schemas/VideosFieldValues"
+              $ref: "#/components/schemas/BlendedVideosFieldValues"
             nullable: true
             type: array
           style: form
@@ -5772,6 +5772,171 @@ components:
         - newest
         - random
       type: string
+    BlendedVideoSearchItem:
+      additionalProperties: false
+      properties:
+        allowed_use:
+          $ref: "#/components/schemas/AllowedUse"
+        artist:
+          nullable: true
+          type: string
+        asset_family:
+          nullable: true
+          type: string
+        caption:
+          nullable: true
+          type: string
+        clip_length:
+          nullable: true
+          type: string
+        collection_code:
+          nullable: true
+          type: string
+        collection_id:
+          format: int32
+          nullable: true
+          type: integer
+        collection_name:
+          nullable: true
+          type: string
+        color_type:
+          nullable: true
+          type: string
+        copyright:
+          nullable: true
+          type: string
+        date_created:
+          format: date-time
+          nullable: true
+          type: string
+        display_sizes:
+          items:
+            $ref: "#/components/schemas/VideoSearchItemDisplaySize"
+          nullable: true
+          type: array
+        download_product:
+          nullable: true
+          type: string
+        era:
+          nullable: true
+          type: string
+        event_ids:
+          items:
+            format: int32
+            type: integer
+          nullable: true
+          type: array
+        id:
+          nullable: true
+          type: string
+        istock_licenses:
+          items:
+            $ref: "#/components/schemas/IStockLicense"
+          nullable: true
+          type: array
+        keywords:
+          items:
+            $ref: "#/components/schemas/Keyword"
+          nullable: true
+          type: array
+        largest_downloads:
+          items:
+            $ref: "#/components/schemas/Download"
+          nullable: true
+          type: array
+        license_model:
+          nullable: true
+          type: string
+        mastered_to:
+          nullable: true
+          type: string
+        originally_shot_on:
+          nullable: true
+          type: string
+        product_types:
+          items:
+            type: string
+          nullable: true
+          type: array
+        referral_destinations:
+          items:
+            $ref: "#/components/schemas/ReferralDestination"
+          nullable: true
+          type: array
+        shot_speed:
+          nullable: true
+          type: string
+        source:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+      type: object
+    BlendedVideoSearchResults:
+      additionalProperties: false
+      properties:
+        facets:
+          $ref: "#/components/schemas/SearchFacetsResponse"
+        related_searches:
+          items:
+            $ref: "#/components/schemas/RelatedSearch"
+          nullable: true
+          type: array
+        result_count:
+          format: int32
+          type: integer
+        videos:
+          items:
+            $ref: "#/components/schemas/BlendedVideoSearchItem"
+          nullable: true
+          type: array
+      type: object
+    BlendedVideosFieldValues:
+      enum:
+        - allowed_use
+        - artist
+        - aspect_ratio
+        - asset_family
+        - call_for_image
+        - caption
+        - clip_length
+        - collection_code
+        - collection_id
+        - collection_name
+        - color_type
+        - comp
+        - copyright
+        - date_created
+        - date_submitted
+        - detail_set
+        - display_set
+        - download_product
+        - download_sizes
+        - editorial_segments
+        - entity_details
+        - era
+        - event_ids
+        - id
+        - istock_collection
+        - keywords
+        - largest_downloads
+        - license_model
+        - mastered_to
+        - object_name
+        - orientation
+        - originally_shot_on
+        - preview
+        - product_types
+        - quality_rank
+        - referral_destinations
+        - shot_speed
+        - source
+        - summary_set
+        - thumb
+        - title
+        - istock_licenses
+      type: string
     BoardAsset:
       additionalProperties: false
       properties:
@@ -6178,6 +6343,104 @@ components:
         - title
         - uri_oembed
       type: string
+    CreativeVideoSearchItem:
+      additionalProperties: false
+      properties:
+        allowed_use:
+          $ref: "#/components/schemas/AllowedUse"
+        artist:
+          nullable: true
+          type: string
+        asset_family:
+          nullable: true
+          type: string
+        caption:
+          nullable: true
+          type: string
+        clip_length:
+          nullable: true
+          type: string
+        collection_code:
+          nullable: true
+          type: string
+        collection_id:
+          format: int32
+          nullable: true
+          type: integer
+        collection_name:
+          nullable: true
+          type: string
+        color_type:
+          nullable: true
+          type: string
+        copyright:
+          nullable: true
+          type: string
+        date_created:
+          format: date-time
+          nullable: true
+          type: string
+        display_sizes:
+          items:
+            $ref: "#/components/schemas/VideoSearchItemDisplaySize"
+          nullable: true
+          type: array
+        download_product:
+          nullable: true
+          type: string
+        era:
+          nullable: true
+          type: string
+        event_ids:
+          items:
+            format: int32
+            type: integer
+          nullable: true
+          type: array
+        id:
+          nullable: true
+          type: string
+        istock_licenses:
+          items:
+            $ref: "#/components/schemas/IStockLicense"
+          nullable: true
+          type: array
+        keywords:
+          items:
+            $ref: "#/components/schemas/Keyword"
+          nullable: true
+          type: array
+        largest_downloads:
+          items:
+            $ref: "#/components/schemas/Download"
+          nullable: true
+          type: array
+        license_model:
+          nullable: true
+          type: string
+        mastered_to:
+          nullable: true
+          type: string
+        originally_shot_on:
+          nullable: true
+          type: string
+        product_types:
+          items:
+            type: string
+          nullable: true
+          type: array
+        referral_destinations:
+          items:
+            $ref: "#/components/schemas/ReferralDestination"
+          nullable: true
+          type: array
+        shot_speed:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+      type: object
     CreativeVideoSearchResults:
       additionalProperties: false
       properties:
@@ -6195,7 +6458,7 @@ components:
           type: integer
         videos:
           items:
-            $ref: "#/components/schemas/VideoSearchItem"
+            $ref: "#/components/schemas/CreativeVideoSearchItem"
           nullable: true
           type: array
       type: object
@@ -6242,7 +6505,6 @@ components:
         - quality_rank
         - referral_destinations
         - shot_speed
-        - source
         - summary_set
         - thumb
         - title
@@ -6459,6 +6721,107 @@ components:
         - locations
         - specific_people
       type: string
+    EditorialVideoSearchItem:
+      additionalProperties: false
+      properties:
+        allowed_use:
+          $ref: "#/components/schemas/AllowedUse"
+        artist:
+          nullable: true
+          type: string
+        asset_family:
+          nullable: true
+          type: string
+        caption:
+          nullable: true
+          type: string
+        clip_length:
+          nullable: true
+          type: string
+        collection_code:
+          nullable: true
+          type: string
+        collection_id:
+          format: int32
+          nullable: true
+          type: integer
+        collection_name:
+          nullable: true
+          type: string
+        color_type:
+          nullable: true
+          type: string
+        copyright:
+          nullable: true
+          type: string
+        date_created:
+          format: date-time
+          nullable: true
+          type: string
+        display_sizes:
+          items:
+            $ref: "#/components/schemas/VideoSearchItemDisplaySize"
+          nullable: true
+          type: array
+        download_product:
+          nullable: true
+          type: string
+        era:
+          nullable: true
+          type: string
+        event_ids:
+          items:
+            format: int32
+            type: integer
+          nullable: true
+          type: array
+        id:
+          nullable: true
+          type: string
+        istock_licenses:
+          items:
+            $ref: "#/components/schemas/IStockLicense"
+          nullable: true
+          type: array
+        keywords:
+          items:
+            $ref: "#/components/schemas/Keyword"
+          nullable: true
+          type: array
+        largest_downloads:
+          items:
+            $ref: "#/components/schemas/Download"
+          nullable: true
+          type: array
+        license_model:
+          nullable: true
+          type: string
+        mastered_to:
+          nullable: true
+          type: string
+        originally_shot_on:
+          nullable: true
+          type: string
+        product_types:
+          items:
+            type: string
+          nullable: true
+          type: array
+        referral_destinations:
+          items:
+            $ref: "#/components/schemas/ReferralDestination"
+          nullable: true
+          type: array
+        shot_speed:
+          nullable: true
+          type: string
+        source:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+      type: object
     EditorialVideoSearchResults:
       additionalProperties: false
       properties:
@@ -6474,7 +6837,7 @@ components:
           type: integer
         videos:
           items:
-            $ref: "#/components/schemas/VideoSearchItem"
+            $ref: "#/components/schemas/EditorialVideoSearchItem"
           nullable: true
           type: array
       type: object
@@ -6482,6 +6845,51 @@ components:
       enum:
         - raw
         - produced
+      type: string
+    EditorialVideosFieldValues:
+      enum:
+        - allowed_use
+        - artist
+        - aspect_ratio
+        - asset_family
+        - call_for_image
+        - caption
+        - clip_length
+        - collection_code
+        - collection_id
+        - collection_name
+        - color_type
+        - comp
+        - copyright
+        - date_created
+        - date_submitted
+        - detail_set
+        - display_set
+        - download_product
+        - download_sizes
+        - editorial_segments
+        - entity_details
+        - era
+        - event_ids
+        - id
+        - istock_collection
+        - keywords
+        - largest_downloads
+        - license_model
+        - mastered_to
+        - object_name
+        - orientation
+        - originally_shot_on
+        - preview
+        - product_types
+        - quality_rank
+        - referral_destinations
+        - shot_speed
+        - source
+        - summary_set
+        - thumb
+        - title
+        - istock_licenses
       type: string
     Entertainment:
       additionalProperties: false
@@ -7751,107 +8159,6 @@ components:
         - horizontal
         - vertical
       type: string
-    VideoSearchItem:
-      additionalProperties: false
-      properties:
-        allowed_use:
-          $ref: "#/components/schemas/AllowedUse"
-        artist:
-          nullable: true
-          type: string
-        asset_family:
-          nullable: true
-          type: string
-        caption:
-          nullable: true
-          type: string
-        clip_length:
-          nullable: true
-          type: string
-        collection_code:
-          nullable: true
-          type: string
-        collection_id:
-          format: int32
-          nullable: true
-          type: integer
-        collection_name:
-          nullable: true
-          type: string
-        color_type:
-          nullable: true
-          type: string
-        copyright:
-          nullable: true
-          type: string
-        date_created:
-          format: date-time
-          nullable: true
-          type: string
-        display_sizes:
-          items:
-            $ref: "#/components/schemas/VideoSearchItemDisplaySize"
-          nullable: true
-          type: array
-        download_product:
-          nullable: true
-          type: string
-        era:
-          nullable: true
-          type: string
-        event_ids:
-          items:
-            format: int32
-            type: integer
-          nullable: true
-          type: array
-        id:
-          nullable: true
-          type: string
-        istock_licenses:
-          items:
-            $ref: "#/components/schemas/IStockLicense"
-          nullable: true
-          type: array
-        keywords:
-          items:
-            $ref: "#/components/schemas/Keyword"
-          nullable: true
-          type: array
-        largest_downloads:
-          items:
-            $ref: "#/components/schemas/Download"
-          nullable: true
-          type: array
-        license_model:
-          nullable: true
-          type: string
-        mastered_to:
-          nullable: true
-          type: string
-        originally_shot_on:
-          nullable: true
-          type: string
-        product_types:
-          items:
-            type: string
-          nullable: true
-          type: array
-        referral_destinations:
-          items:
-            $ref: "#/components/schemas/ReferralDestination"
-          nullable: true
-          type: array
-        shot_speed:
-          nullable: true
-          type: string
-        source:
-          nullable: true
-          type: string
-        title:
-          nullable: true
-          type: string
-      type: object
     VideoSearchItemDisplaySize:
       additionalProperties: false
       properties:
@@ -7867,70 +8174,6 @@ components:
           nullable: true
           type: string
       type: object
-    VideoSearchItemVideoSearchResults:
-      additionalProperties: false
-      properties:
-        facets:
-          $ref: "#/components/schemas/SearchFacetsResponse"
-        related_searches:
-          items:
-            $ref: "#/components/schemas/RelatedSearch"
-          nullable: true
-          type: array
-        result_count:
-          format: int32
-          type: integer
-        videos:
-          items:
-            $ref: "#/components/schemas/VideoSearchItem"
-          nullable: true
-          type: array
-      type: object
-    VideosFieldValues:
-      enum:
-        - allowed_use
-        - artist
-        - aspect_ratio
-        - asset_family
-        - call_for_image
-        - caption
-        - clip_length
-        - collection_code
-        - collection_id
-        - collection_name
-        - color_type
-        - comp
-        - copyright
-        - date_created
-        - date_submitted
-        - detail_set
-        - display_set
-        - download_product
-        - download_sizes
-        - editorial_segments
-        - entity_details
-        - era
-        - event_ids
-        - id
-        - istock_collection
-        - keywords
-        - largest_downloads
-        - license_model
-        - mastered_to
-        - object_name
-        - orientation
-        - originally_shot_on
-        - preview
-        - product_types
-        - quality_rank
-        - referral_destinations
-        - shot_speed
-        - source
-        - summary_set
-        - thumb
-        - title
-        - istock_licenses
-      type: string
     ViewpointsFilterType:
       enum:
         - lockdown

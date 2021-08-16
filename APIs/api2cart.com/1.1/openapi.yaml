@@ -3271,6 +3271,12 @@ paths:
           required: true
           schema:
             type: string
+        - description: Metafield namespace
+          in: query
+          name: namespace
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -3320,6 +3326,12 @@ paths:
         - description: Key
           in: query
           name: key
+          required: true
+          schema:
+            type: string
+        - description: Entity id
+          in: query
+          name: id
           required: true
           schema:
             type: string
@@ -7278,13 +7290,6 @@ paths:
           required: false
           schema:
             type: string
-        - description: Set this parameter in order to choose which product variants fields you want to retrieve
-          in: query
-          name: product_variant_params
-          required: false
-          schema:
-            default: force_all
-            type: string
         - description: Report request id
           in: query
           name: report_request_id
@@ -7420,13 +7425,6 @@ paths:
           name: product_ids
           required: false
           schema:
-            type: string
-        - description: Set this parameter in order to choose which product variants fields you want to retrieve
-          in: query
-          name: product_variant_params
-          required: false
-          schema:
-            default: force_all
             type: string
         - description: Retrieve entities starting from the specified id.
           in: query
@@ -10294,6 +10292,8 @@ components:
         id:
           type: string
         key:
+          type: string
+        namespace:
           type: string
         value:
           type: string

@@ -11,7 +11,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Anchore Engine API Server
-  version: 0.1.18
+  version: 0.1.19
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -1734,7 +1734,8 @@ paths:
           required: false
           schema:
             type: boolean
-        - in: query
+        - description: Filter results to include only vulnerabilities that are not marked as invalid by upstream OS vendor data. When set to true, it will filter out all vulnerabilities where `will_not_fix` is False. If false all vulnerabilities are returned regardless of `will_not_fix`
+          in: query
           name: vendor_only
           required: false
           schema:
@@ -4714,6 +4715,9 @@ components:
           description: A version for the package. If null, then references all versions
           nullable: true
           type: string
+        will_not_fix:
+          description: Whether a vendor will or will not fix a vulnerabitlity
+          type: boolean
       type: object
     PaginatedImageList:
       allOf:
@@ -5483,6 +5487,9 @@ components:
           $ref: "#/components/schemas/VendorDataList"
         vuln:
           description: The vulnerability identifier, such as CVE-2017-100, or RHSA-2017123
+          type: string
+        will_not_fix:
+          description: Whether a vendor will fix or not fix the vulnerability
           type: string
       type: object
     VulnerabilityList:

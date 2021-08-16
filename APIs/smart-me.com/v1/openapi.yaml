@@ -3054,11 +3054,17 @@ components:
           description: The Brightness of the LCD Matrix display. 0 = minimum, 255 = maximum
           format: byte
           type: string
+        DnsName:
+          description: The DNS name of the pico's internal ip
+          type: string
         IdleImageData:
           description: The base 64 string for the "no car connected" image
           type: string
         IdleImageUrl:
           description: The url of the idle image
+          type: string
+        InternalIp:
+          description: The internal IP address
           type: string
         LoadmanagementGroupId:
           description: The ID of the loadmanagement group
@@ -3071,6 +3077,9 @@ components:
           description: The max current of this station (in A)
           format: int32
           type: integer
+        ModbusTcp:
+          description: Flag if ModbusTcp is enabled
+          type: boolean
         Name:
           description: The name of the station
           type: string
