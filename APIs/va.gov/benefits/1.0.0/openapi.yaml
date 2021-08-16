@@ -112,7 +112,7 @@ info:
   x-serviceName: benefits
 tags:
   - description: VA Benefits document upload functionality
-    name: document_uploads
+    name: VBA Documents
 paths:
   /path:
     put:
@@ -179,12 +179,6 @@ paths:
       responses:
         "200":
           description: Document upload staged
-        "400":
-          content:
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/DocumentUploadFailure"
-          description: Document upload failed
         "401":
           content:
             application/json:
@@ -198,6 +192,38 @@ paths:
                   - data
                 type: object
           description: Unauthorized request
+        "403":
+          content:
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/DocumentUploadFailure"
+          description: Document upload failed
+        "422":
+          content:
+            application/json:
+              schema:
+                properties:
+                  errors:
+                    items:
+                      $ref: "#/components/schemas/ErrorModel"
+                    type: array
+                required:
+                  - errors
+                type: object
+          description: Unprocessable Entity
+        "429":
+          content:
+            application/json:
+              schema:
+                properties:
+                  Message:
+                    description: message
+                    example: API rate limit exceeded
+                    type: string
+                required:
+                  - data
+                type: object
+          description: Too many requests
         "500":
           content:
             application/json:
@@ -249,7 +275,7 @@ paths:
           description: Internal server error
       summary: Accepts document upload.
       tags:
-        - document_uploads
+        - VBA Documents
   /uploads:
     post:
       operationId: postBenefitsDocumentUpload
@@ -370,7 +396,7 @@ paths:
         - apikey: []
       summary: Get a location for subsequent document upload PUT request
       tags:
-        - document_uploads
+        - VBA Documents
   /uploads/report:
     post:
       operationId: getBenefitsDocumentUploadStatusReport
@@ -500,7 +526,7 @@ paths:
         - apikey: []
       summary: Get a bulk status report for a list of previous uploads
       tags:
-        - document_uploads
+        - VBA Documents
   "/uploads/{id}":
     get:
       operationId: getBenefitsDocumentUploadStatus
@@ -599,19 +625,6 @@ paths:
                   - data
                 type: object
           description: Not found
-        "422":
-          content:
-            application/json:
-              schema:
-                properties:
-                  errors:
-                    items:
-                      $ref: "#/components/schemas/ErrorModel"
-                    type: array
-                required:
-                  - errors
-                type: object
-          description: Unprocessable Entity
         "429":
           content:
             application/json:
@@ -678,7 +691,7 @@ paths:
         - apikey: []
       summary: Get status for a previous benefits document upload
       tags:
-        - document_uploads
+        - VBA Documents
   "/uploads/{id}/download":
     get:
       description: An endpoint that will allow you to see exactly what the server sees. We split apart all submitted docs and metadata and zip the file to make it available to you to help with debugging purposes. Files are deleted after 10 days. Only available in testing environments, not production.
@@ -842,7 +855,7 @@ paths:
         - apikey: []
       summary: Download zip of "what the server sees"
       tags:
-        - document_uploads
+        - VBA Documents
 components:
   examples: {}
   links: {}
@@ -924,18 +937,11 @@ components:
       properties:
         Code:
           description: Error code
-          example: Bad Digest
+          example: SignatureDoesNotMatch
           type: string
         Message:
           description: Error detail
-          example: A client error (InvalidDigest) occurred when calling the PutObject operation - The Content-MD5 you specified was invalid.
-          type: string
-        RequestId:
-          description: Identifier for debug purposes
-          type: string
-        Resource:
-          description: Resource description
-          example: /vba_documents/6d8433c1-cd55-4c24-affd-f592287a7572.upload
+          example: The request signature we calculated does not match the signature you provided. Check your key and signing method.
           type: string
       type: object
       xml:
