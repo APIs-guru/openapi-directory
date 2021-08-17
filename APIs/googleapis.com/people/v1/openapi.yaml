@@ -1467,7 +1467,7 @@ components:
           type: array
       type: object
     BatchCreateContactsResponse:
-      description: If not successful, returns BatchCreateContactsErrorDetails.contacts which contains a list of errors for each invalid contact. The response to a request to create a batch of contacts.
+      description: If not successful, returns BatchCreateContactsErrorDetails which contains a list of errors for each invalid contact. The response to a request to create a batch of contacts.
       properties:
         createdPeople:
           description: The contacts that were created, unless the request `read_mask` is empty.
@@ -1521,7 +1521,7 @@ components:
           type: string
       type: object
     BatchUpdateContactsResponse:
-      description: If not successful, returns BatchUpdateContactsErrorDetails.contacts, a list of errors corresponding to each contact. The response to a request to update a batch of contacts.
+      description: If not successful, returns BatchUpdateContactsErrorDetails, a list of errors corresponding to each contact. The response to a request to update a batch of contacts.
       properties:
         updateResult:
           additionalProperties:
@@ -1823,13 +1823,14 @@ components:
       description: Metadata about a field.
       properties:
         primary:
-          description: True if the field is the primary field for the person.
+          description: Output only. True if the field is the primary field for all sources in the person. Each person will have at most one field with `primary` set to true.
+          readOnly: true
           type: boolean
         source:
           $ref: "#/components/schemas/Source"
           description: The source of the field.
         sourcePrimary:
-          description: True if the field is the primary field for the source.
+          description: True if the field is the primary field for the source. Each source must have at most one field with `source_primary` set to true.
           type: boolean
         verified:
           description: Output only. True if the field is verified; false if the field is unverified. A verified field is typically a name, email address, phone number, or website that has been confirmed to be owned by the person.

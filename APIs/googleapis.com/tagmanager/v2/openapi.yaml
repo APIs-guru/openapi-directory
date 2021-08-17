@@ -269,6 +269,81 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
+  "/tagmanager/v2/{parent}/clients":
+    get:
+      description: Lists all GTM Clients of a GTM container workspace.
+      operationId: tagmanager.accounts.containers.workspaces.clients.list
+      parameters:
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Continuation token for fetching the next page of results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListClientsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
+          Oauth2c:
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
+        - Oauth2:
+            - https://www.googleapis.com/auth/tagmanager.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/tagmanager.readonly
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a GTM Client.
+      operationId: tagmanager.accounts.containers.workspaces.clients.create
+      parameters:
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Client"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Client"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
+          Oauth2c:
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
+      tags:
+        - accounts
   "/tagmanager/v2/{parent}/containers":
     get:
       description: Lists all Containers that belongs to a GTM Account.
@@ -2798,6 +2873,17 @@ components:
           description: Continuation token for fetching the next page of results.
           type: string
       type: object
+    ListClientsResponse:
+      properties:
+        client:
+          description: All GTM Clients of a GTM Container.
+          items:
+            $ref: "#/components/schemas/Client"
+          type: array
+        nextPageToken:
+          description: Continuation token for fetching the next page of results.
+          type: string
+      type: object
     ListContainerVersionsResponse:
       description: List container versions response.
       properties:
@@ -3011,6 +3097,13 @@ components:
         enabled:
           description: Whether the built-in variable is enabled after reversion.
           type: boolean
+      type: object
+    RevertClientResponse:
+      description: The result of reverting a client in a workspace.
+      properties:
+        client:
+          $ref: "#/components/schemas/Client"
+          description: Client as it appears in the latest container version since the last workspace synchronization operation. If no client is present, that means the client was deleted in the latest container version.
       type: object
     RevertFolderResponse:
       description: The result of reverting folder changes in a workspace.

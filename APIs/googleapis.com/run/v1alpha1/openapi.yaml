@@ -928,24 +928,24 @@ components:
           type: integer
       type: object
     Volume:
-      description: Not supported by Cloud Run Volume represents a named volume in a container.
+      description: Volume represents a named volume in a container.
       properties:
         configMap:
           $ref: "#/components/schemas/ConfigMapVolumeSource"
         name:
-          description: Volume's name.
+          description: Volume's name. In Cloud Run Fully Managed, the name 'cloudsql' is reserved.
           type: string
         secret:
           $ref: "#/components/schemas/SecretVolumeSource"
       type: object
     VolumeMount:
-      description: Not supported by Cloud Run VolumeMount describes a mounting of a Volume within a container.
+      description: VolumeMount describes a mounting of a Volume within a container.
       properties:
         mountPath:
           description: Path within the container at which the volume should be mounted. Must not contain ':'.
           type: string
         name:
-          description: This must match the Name of a Volume.
+          description: The name of the volume. There must be a corresponding Volume with the same name.
           type: string
         readOnly:
           description: (Optional) Only true is accepted. Defaults to true.
