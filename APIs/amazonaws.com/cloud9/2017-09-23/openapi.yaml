@@ -1161,6 +1161,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectionType'
             - description: '<p>The connection type used for connecting to an Amazon EC2 environment. Valid values are <code>CONNECT_SSH</code> (default) and <code>CONNECT_SSM</code> (connected through Amazon EC2 Systems Manager).</p> <p>For more information, see <a href="https://docs.aws.amazon.com/cloud9/latest/user-guide/ec2-ssm.html">Accessing no-ingress EC2 instances with Amazon EC2 Systems Manager</a> in the <i>Cloud9 User Guide</i>.</p>'
+        dryRun:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     BadRequestException: {}
     ConflictException: {}
     NotFoundException: {}
@@ -1448,6 +1452,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EnvironmentDescription'
             - description: Any new or replacement description for the environment.
+        managedCredentialsAction:
+          allOf:
+            - $ref: '#/components/schemas/ManagedCredentialsAction'
+            - description: '<p>Allows the environment owner to turn on or turn off the Amazon Web Services managed temporary credentials for an Cloud9 environment by using one of the following values:</p> <ul> <li> <p> <code>ENABLE</code> </p> </li> <li> <p> <code>DISABLE</code> </p> </li> </ul> <note> <p>Only the environment owner can change the status of managed temporary credentials. An <code>AccessDeniedException</code> is thrown if an attempt to turn on or turn off managed temporary credentials is made by an account that''s not the environment owner.</p> </note>'
     UpdateEnvironmentMembershipResult:
       type: object
       example:
@@ -1531,6 +1539,8 @@ components:
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 200
+    NullableBoolean:
+      type: boolean
     MemberPermissions:
       type: string
       enum:
@@ -1696,6 +1706,11 @@ components:
     Timestamp:
       type: string
       format: date-time
+    ManagedCredentialsAction:
+      type: string
+      enum:
+        - ENABLE
+        - DISABLE
     TagKey:
       type: string
       minLength: 1
