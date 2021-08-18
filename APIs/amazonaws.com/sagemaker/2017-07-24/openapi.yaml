@@ -10325,6 +10325,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
             - description: '<p>The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.</p> <p>The KmsKeyId can be any of the following formats: </p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul> <p>The KMS key policy must grant permission to the IAM role that you specify in your <code>CreateEndpoint</code>, <code>UpdateEndpoint</code> requests. For more information, refer to the Amazon Web Services Key Management Service section<a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html"> Using Key Policies in Amazon Web Services KMS </a> </p> <note> <p>Certain Nitro-based instances include local storage, dependent on the instance type. Local storage volumes are encrypted using a hardware module on the instance. You can''t request a <code>KmsKeyId</code> when using an instance type with local storage. If any of the models that you specify in the <code>ProductionVariants</code> parameter use nitro-based instances with local storage, do not specify a value for the <code>KmsKeyId</code> parameter. If you specify a value for <code>KmsKeyId</code> when using any nitro-based instances with local storage, the call to <code>CreateEndpointConfig</code> fails.</p> <p>For a list of instance types that support local instance storage, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes">Instance Store Volumes</a>.</p> <p>For more information about local instance storage encryption, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html">SSD Instance Store Volumes</a>.</p> </note>'
+        AsyncInferenceConfig:
+          allOf:
+            - $ref: '#/components/schemas/AsyncInferenceConfig'
+            - description: 'Specifies configuration for how an endpoint performs asynchronous inference. This is a required field in order for your Endpoint to be invoked using <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html"> <code>InvokeEndpointAsync</code> </a>.'
     CreateExperimentResponse:
       type: object
       properties:
@@ -11037,6 +11041,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RootAccess'
             - description: '<p>Whether root access is enabled or disabled for users of the notebook instance. The default value is <code>Enabled</code>.</p> <note> <p>Lifecycle configurations need root access to be able to set up a notebook instance. Because of this, lifecycle configurations associated with a notebook instance always run with root access even if you disable root access for users.</p> </note>'
+        PlatformIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/PlatformIdentifier'
+            - description: The platform identifier of the notebook instance runtime environment.
     CreateNotebookInstanceLifecycleConfigOutput:
       type: object
       properties:
@@ -13072,6 +13080,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DeploymentConfig'
             - description: The most recent deployment configuration for the endpoint.
+        AsyncInferenceConfig:
+          allOf:
+            - $ref: '#/components/schemas/AsyncInferenceConfig'
+            - description: 'Returns the description of an endpoint configuration created using the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html"> <code>CreateEndpointConfig</code> </a> API.'
     DescribeEndpointInput:
       type: object
       required:
@@ -13112,6 +13124,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: A timestamp that shows when the endpoint configuration was created.
+        AsyncInferenceConfig:
+          allOf:
+            - $ref: '#/components/schemas/AsyncInferenceConfig'
+            - description: 'Returns the description of an endpoint configuration created using the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html"> <code>CreateEndpointConfig</code> </a> API.'
     DescribeEndpointConfigInput:
       type: object
       required:
@@ -14136,6 +14152,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RootAccess'
             - description: '<p>Whether root access is enabled or disabled for users of the notebook instance.</p> <note> <p>Lifecycle configurations need root access to be able to set up a notebook instance. Because of this, lifecycle configurations associated with a notebook instance always run with root access even if you disable root access for users.</p> </note>'
+        PlatformIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/PlatformIdentifier'
+            - description: The platform identifier of the notebook instance runtime environment.
     DescribeNotebookInstanceInput:
       type: object
       required:
@@ -19529,6 +19549,74 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The domain associated with the user.
       description: 'Information about the user who created or modified an experiment, trial, or trial component.'
+    MaxConcurrentInvocationsPerInstance:
+      type: integer
+      minimum: 1
+      maximum: 1000
+    AsyncInferenceClientConfig:
+      type: object
+      properties:
+        MaxConcurrentInvocationsPerInstance:
+          allOf:
+            - $ref: '#/components/schemas/MaxConcurrentInvocationsPerInstance'
+            - description: 'The maximum number of concurrent requests sent by the SageMaker client to the model container. If no value is provided, Amazon SageMaker will choose an optimal value for you.'
+      description: Configures the behavior of the client used by Amazon SageMaker to interact with the model container during asynchronous inference.
+    AsyncInferenceOutputConfig:
+      type: object
+      required:
+        - S3OutputPath
+      properties:
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: <p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the asynchronous inference output in Amazon S3.</p> <p/>
+        S3OutputPath:
+          allOf:
+            - $ref: '#/components/schemas/DestinationS3Uri'
+            - description: The Amazon S3 location to upload inference responses to.
+        NotificationConfig:
+          allOf:
+            - $ref: '#/components/schemas/AsyncInferenceNotificationConfig'
+            - description: Specifies the configuration for notifications of inference results for asynchronous inference.
+      description: Specifies the configuration for asynchronous inference invocation outputs.
+    AsyncInferenceConfig:
+      type: object
+      required:
+        - OutputConfig
+      properties:
+        ClientConfig:
+          allOf:
+            - $ref: '#/components/schemas/AsyncInferenceClientConfig'
+            - description: Configures the behavior of the client used by Amazon SageMaker to interact with the model container during asynchronous inference.
+        OutputConfig:
+          allOf:
+            - $ref: '#/components/schemas/AsyncInferenceOutputConfig'
+            - description: Specifies the configuration for asynchronous inference invocation outputs.
+      description: Specifies configuration for how an endpoint performs asynchronous inference.
+    SnsTopicArn:
+      type: string
+      pattern: 'arn:aws[a-z\-]*:sns:[a-z0-9\-]*:[0-9]{12}:[a-zA-Z0-9_.-]+'
+      maxLength: 2048
+    AsyncInferenceNotificationConfig:
+      type: object
+      properties:
+        SuccessTopic:
+          allOf:
+            - $ref: '#/components/schemas/SnsTopicArn'
+            - description: 'Amazon SNS topic to post a notification to when inference completes successfully. If no topic is provided, no notification is sent on success.'
+        ErrorTopic:
+          allOf:
+            - $ref: '#/components/schemas/SnsTopicArn'
+            - description: 'Amazon SNS topic to post a notification to when inference fails. If no topic is provided, no notification is sent on failure.'
+      description: Specifies the configuration for notifications of inference results for asynchronous inference.
+    KmsKeyId:
+      type: string
+      pattern: .*
+      maxLength: 2048
+    DestinationS3Uri:
+      type: string
+      pattern: '^(https|s3)://([^/])/?(.*)$'
+      maxLength: 512
     AthenaCatalog:
       type: string
       description: The name of the data catalog used in Athena query execution.
@@ -19557,10 +19645,6 @@ components:
       type: string
       pattern: '^(https|s3)://([^/]+)/?(.*)$'
       maxLength: 1024
-    KmsKeyId:
-      type: string
-      pattern: .*
-      maxLength: 2048
     AthenaResultFormat:
       type: string
       enum:
@@ -20956,7 +21040,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ContainerDefinition'
-      maxItems: 5
+      maxItems: 15
     ContainerEntrypointString:
       type: string
       pattern: .*
@@ -22263,6 +22347,14 @@ components:
         - ml.m5.4xlarge
         - ml.m5.12xlarge
         - ml.m5.24xlarge
+        - ml.m5d.large
+        - ml.m5d.xlarge
+        - ml.m5d.2xlarge
+        - ml.m5d.4xlarge
+        - ml.m5d.8xlarge
+        - ml.m5d.12xlarge
+        - ml.m5d.16xlarge
+        - ml.m5d.24xlarge
         - ml.c4.xlarge
         - ml.c4.2xlarge
         - ml.c4.4xlarge
@@ -22283,6 +22375,21 @@ components:
         - ml.p3.2xlarge
         - ml.p3.8xlarge
         - ml.p3.16xlarge
+        - ml.p3dn.24xlarge
+        - ml.g4dn.xlarge
+        - ml.g4dn.2xlarge
+        - ml.g4dn.4xlarge
+        - ml.g4dn.8xlarge
+        - ml.g4dn.12xlarge
+        - ml.g4dn.16xlarge
+        - ml.r5.large
+        - ml.r5.xlarge
+        - ml.r5.2xlarge
+        - ml.r5.4xlarge
+        - ml.r5.8xlarge
+        - ml.r5.12xlarge
+        - ml.r5.16xlarge
+        - ml.r5.24xlarge
     SubnetId:
       type: string
       pattern: '[-0-9a-zA-Z]+'
@@ -22314,6 +22421,10 @@ components:
       enum:
         - Enabled
         - Disabled
+    PlatformIdentifier:
+      type: string
+      pattern: ^(notebook-al1-v1|notebook-al2-v1)$
+      maxLength: 15
     NotebookInstanceLifecycleConfigList:
       type: array
       items:
@@ -22848,8 +22959,8 @@ components:
         NotificationTopicArn:
           allOf:
             - $ref: '#/components/schemas/NotificationTopicArn'
-            - description: The ARN for the SNS topic to which notifications should be published.
-      description: Configures SNS notifications of available or expiring work items for work teams.
+            - description: The ARN for the Amazon SNS topic to which notifications should be published.
+      description: Configures Amazon SNS notifications of available or expiring work items for work teams.
     WorkteamArn:
       type: string
       pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:workteam/.*'
@@ -22892,10 +23003,6 @@ components:
       type: integer
       minimum: 0
       maximum: 100
-    DestinationS3Uri:
-      type: string
-      pattern: '^(https|s3)://([^/])/?(.*)$'
-      maxLength: 512
     DataCaptureConfigSummary:
       type: object
       required:
@@ -24162,7 +24269,7 @@ components:
       minimum: 0
     TaskCount:
       type: integer
-      minimum: 1
+      minimum: 0
     DesiredWeightAndCapacity:
       type: object
       required:
@@ -25642,7 +25749,7 @@ components:
       items:
         $ref: '#/components/schemas/ModelPackageContainerDefinition'
       minItems: 1
-      maxItems: 5
+      maxItems: 15
     TransformInstanceTypes:
       type: array
       items:
@@ -25656,6 +25763,9 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ResponseMIMEType'
+    InitialTaskCount:
+      type: integer
+      minimum: 1
     IntegerParameterRange:
       type: object
       required:
@@ -25872,10 +25982,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/LabelingJobForWorkteamSummary'
-    SnsTopicArn:
-      type: string
-      pattern: 'arn:aws[a-z\-]*:sns:[a-z0-9\-]*:[0-9]{12}:[a-zA-Z0-9_.-]+'
-      maxLength: 2048
     MaxHumanLabeledObjectCount:
       type: integer
       minimum: 1
@@ -27959,7 +28065,7 @@ components:
             - description: The name of the model that you want to host. This is the name that you specified when creating the model.
         InitialInstanceCount:
           allOf:
-            - $ref: '#/components/schemas/TaskCount'
+            - $ref: '#/components/schemas/InitialTaskCount'
             - description: Number of instances to launch initially.
         InstanceType:
           allOf:
