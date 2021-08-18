@@ -1071,6 +1071,17 @@ components:
         affectedVersion:
           $ref: "#/components/schemas/Version"
           description: Required. The version of the package that is installed on the resource affected by this vulnerability.
+        effectiveSeverity:
+          description: Output only. The distro or language system assigned severity for this vulnerability when that is available and note provider assigned severity when it is not available.
+          enum:
+            - SEVERITY_UNSPECIFIED
+            - MINIMAL
+            - LOW
+            - MEDIUM
+            - HIGH
+            - CRITICAL
+          readOnly: true
+          type: string
         fixAvailable:
           description: Output only. Whether a fix is available for this package.
           type: boolean
@@ -1083,6 +1094,9 @@ components:
         fixedVersion:
           $ref: "#/components/schemas/Version"
           description: Required. The version of the package this vulnerability was fixed in. Setting this to VersionKind.MAXIMUM means no fix is yet available.
+        packageType:
+          description: The type of package (e.g. OS, MAVEN, GO).
+          type: string
       type: object
     PackageOccurrence:
       description: Details on how a particular software package was installed on a system.
@@ -1297,7 +1311,7 @@ components:
           format: float
           type: number
         effectiveSeverity:
-          description: The distro assigned severity for this vulnerability when it is available, otherwise this is the note provider assigned severity.
+          description: The distro assigned severity for this vulnerability when it is available, otherwise this is the note provider assigned severity. When there are multiple PackageIssues for this vulnerability, they can have different effective severities because some might be provided by the distro while others are provided by the language ecosystem for a language pack. For this reason, it is advised to use the effective severity on the PackageIssue level. In the case where multiple PackageIssues have differing effective severities, this field should be the highest severity for any of the PackageIssues.
           enum:
             - SEVERITY_UNSPECIFIED
             - MINIMAL
