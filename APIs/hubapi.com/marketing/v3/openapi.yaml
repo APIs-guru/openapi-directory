@@ -51,7 +51,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
-        - oauth2:
+        - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Create a marketing event
       tags:
@@ -72,7 +72,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
-        - oauth2:
+        - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Delete multiple marketing events
       tags:
@@ -101,7 +101,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
-        - oauth2:
+        - oauth2_legacy:
             - crm.objects.marketing_events.read
       summary: Search for marketing events
       tags:
@@ -128,7 +128,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
-        - oauth2:
+        - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Create or update multiple marketing events
       tags:
@@ -162,7 +162,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
-        - oauth2:
+        - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Delete a marketing event
       tags:
@@ -198,7 +198,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
-        - oauth2:
+        - oauth2_legacy:
             - crm.objects.marketing_events.read
       summary: Get a marketing event
       tags:
@@ -241,7 +241,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
-        - oauth2:
+        - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Update a marketing event
       tags:
@@ -276,7 +276,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
-        - oauth2:
+        - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Create or update a marketing event
       tags:
@@ -313,7 +313,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
-        - oauth2:
+        - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Mark a marketing event as cancelled
       tags:
@@ -359,7 +359,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
-        - oauth2:
+        - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Record
       tags:
@@ -405,7 +405,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
-        - oauth2:
+        - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Record
       tags:
@@ -1194,7 +1194,7 @@ components:
       in: query
       name: hapikey
       type: apiKey
-    oauth2:
+    oauth2_legacy:
       flows:
         authorizationCode:
           authorizationUrl: https://app.hubspot.com/oauth/authorize

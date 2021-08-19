@@ -83,7 +83,7 @@ info:
 
     ![](https://developers.apideck.com/api-references/vault/connection-flow.png)
 
-    ## How does Vault integrate with Unify and Proxy?
+    ## Unify and Proxy integration
 
     The only thing you need to use the Unify APIs and Proxy is the consumer id; thereafter, Vault will do the look-up in the background to handle the token injection before performing the API call(s).
 
@@ -163,7 +163,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 5.2.0
+  version: 5.3.0
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -645,14 +645,11 @@ paths:
                   instance_url: 'https://eu28.salesforce.com'
                 },
                 metadata: {
-                  ecosystem: {
-                    name: 'My Ecosystem',
-                    id: 'a6469332-7948-46a6-abc2-87ba3f005025'
-                  },
                   account: {
                     name: 'My Company',
                     id: 'c01458a5-7276-41ce-bc19-639906b0450a'
-                  }
+                  },
+                  plan: 'enterprise'
                 },
                 auth_type: 'oauth2',
                 status: 'live',
@@ -1359,6 +1356,19 @@ paths:
                   email: 'elon@musk.com',
                   image: 'https://www.spacex.com/static/images/share.jpg'
                 },
+                custom_consumer_settings: {
+                  feature_flag_1: true,
+                  tax_rates: [
+                    {
+                      id: '6',
+                      label: '6%'
+                    },
+                    {
+                      id: '21',
+                      label: '21%'
+                    }
+                  ]
+                },
                 theme: {
                   vault_name: 'Intercom',
                   primary_color: '#286efa',
@@ -1873,19 +1883,15 @@ components:
           example: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
           type: string
         metadata:
+          additionalProperties: true
+          description: Attach your own consumer specific metadata
           example:
             account:
               id: c01458a5-7276-41ce-bc19-639906b0450a
               name: My Company
-            ecosystem:
-              id: a6469332-7948-46a6-abc2-87ba3f005025
-              name: My Ecosystem
+            plan: enterprise
           nullable: true
-          properties:
-            account:
-              $ref: "#/components/schemas/ConnectionMetadata"
-            ecosystem:
-              $ref: "#/components/schemas/ConnectionMetadata"
+          properties: {}
           type: object
         name:
           example: Salesforce
@@ -1951,6 +1957,7 @@ components:
           type: string
       type: object
     ConnectionState:
+      description: "[Connection state flow](#section/Connection-state)"
       enum:
         - available
         - callable
@@ -2156,12 +2163,14 @@ components:
     FormField:
       properties:
         custom_field:
+          example: false
           type: boolean
         description:
           example: Slack channel to push notification to
           nullable: true
           type: string
         disabled:
+          example: false
           nullable: true
           type: boolean
         id:
@@ -2171,6 +2180,9 @@ components:
           example: Channel
           type: string
         options:
+          example:
+            - label: General Channel
+              value: general
           items:
             $ref: "#/components/schemas/FormFieldOption"
           type: array
@@ -2179,6 +2191,7 @@ components:
           nullable: true
           type: string
         required:
+          example: true
           type: boolean
         type:
           enum:
@@ -2195,6 +2208,7 @@ components:
             - date
             - time
             - number
+          example: select
       type: object
     FormFieldOption:
       anyOf:
@@ -2659,6 +2673,19 @@ components:
       properties:
         consumer_metadata:
           $ref: "#/components/schemas/ConsumerMetadata"
+        custom_consumer_settings:
+          additionalProperties: true
+          description: Custom consumer settings that are passed part of the session.
+          example:
+            feature_flag_1: true
+            tax_rates:
+              - id: "6"
+                label: 6%
+              - id: "21"
+                label: 21%
+          properties: {}
+          title: Custom consumer settings
+          type: object
         redirect_uri:
           example: https://mysaas.com/dashboard
           type: string

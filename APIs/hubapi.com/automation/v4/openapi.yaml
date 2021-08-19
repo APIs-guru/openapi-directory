@@ -41,9 +41,9 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
-        - oauth2:
+        - oauth2_legacy:
             - automation
+        - hapikey: []
       summary: Complete a batch of callbacks
       tags:
         - Callbacks
@@ -74,9 +74,9 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
-        - oauth2:
+        - oauth2_legacy:
             - automation
+        - hapikey: []
       summary: Complete a callback
       tags:
         - Callbacks
@@ -1783,7 +1783,7 @@ components:
       in: query
       name: hapikey
       type: apiKey
-    oauth2:
+    oauth2_legacy:
       flows:
         authorizationCode:
           authorizationUrl: https://app.hubspot.com/oauth/authorize

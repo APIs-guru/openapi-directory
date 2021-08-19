@@ -38,7 +38,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
-        - oauth2:
+        - oauth2_legacy:
             - conversations.visitor_identification.tokens.create
       summary: Generate a token
       tags:
@@ -165,7 +165,7 @@ components:
       in: query
       name: hapikey
       type: apiKey
-    oauth2:
+    oauth2_legacy:
       flows:
         authorizationCode:
           authorizationUrl: https://app.hubspot.com/oauth/authorize

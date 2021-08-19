@@ -179,9 +179,6 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
-        - oauth2:
-            - content
-            - cms.knowledge_base.settings.write
       summary: Get current domains
       tags:
         - Domains
@@ -238,9 +235,6 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
-        - oauth2:
-            - content
-            - cms.knowledge_base.settings.write
       summary: Get a single domain
       tags:
         - Domains
@@ -715,15 +709,6 @@ components:
       in: query
       name: hapikey
       type: apiKey
-    oauth2:
-      flows:
-        authorizationCode:
-          authorizationUrl: https://app.hubspot.com/oauth/authorize
-          scopes:
-            cms.knowledge_base.settings.write: Update knowledge base settings
-            content: Read from and write to my Content
-          tokenUrl: https://api.hubapi.com/oauth/v1/token
-      type: oauth2
 x-hubspot-available-client-libraries:
   - PHP
   - Node

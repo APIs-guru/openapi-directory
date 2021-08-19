@@ -107,9 +107,9 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - oauth2:
-            - business-intelligence
         - hapikey: []
+        - oauth2_legacy:
+            - business-intelligence
       summary: Returns a collection of events matching a query.
       tags:
         - Events
@@ -284,7 +284,7 @@ components:
       in: query
       name: hapikey
       type: apiKey
-    oauth2:
+    oauth2_legacy:
       flows:
         authorizationCode:
           authorizationUrl: https://app.hubspot.com/oauth/authorize

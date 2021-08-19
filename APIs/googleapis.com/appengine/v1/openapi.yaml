@@ -1985,9 +1985,6 @@ components:
         name:
           description: "Full path to the Application resource in the API. Example: apps/myapp.@OutputOnly"
           type: string
-        serviceAccount:
-          description: The service account associated with the application. This is the app-level default identity. If no identity provided during create version, Admin API will fallback to this one.
-          type: string
         servingStatus:
           description: Serving status of this application.
           enum:
@@ -3348,8 +3345,8 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/appengine.admin: View and manage your applications deployed on Google App Engine
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-            https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud services and see the email address of your Google Account
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -3358,7 +3355,7 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/appengine.admin: View and manage your applications deployed on Google App Engine
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
-            https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud services and see the email address of your Google Account
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

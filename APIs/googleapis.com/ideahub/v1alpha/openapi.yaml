@@ -35,20 +35,6 @@ paths:
       description: List ideas for a given Creator and filter and sort options.
       operationId: ideahub.ideas.list
       parameters:
-        - description: Identifies the platform from which this user is accessing Idea Hub.
-          in: query
-          name: creator.platform
-          schema:
-            enum:
-              - UNKNOWN
-              - BLOGGER
-              - SITEKIT
-            type: string
-        - description: Identifies the platform account (blog/site/etc.) for which to fetch Ideas.
-          in: query
-          name: creator.platformId
-          schema:
-            type: string
         - description: "Allows filtering. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions are implicitly combined, as if the `AND` operator was always used. The `OR` operator is currently unsupported. * Supported functions: - `saved(bool)`: If set to true, fetches only saved ideas. If set to false, fetches all except saved ideas. Can't be simultaneously used with `dismissed(bool)`. - `dismissed(bool)`: If set to true, fetches only dismissed ideas. Can't be simultaneously used with `saved(bool)`. The `false` value is currently unsupported. Examples: * `saved(true)` * `saved(false)` * `dismissed(true)` The length of this field should be no more than 500 characters."
           in: query
           name: filter
@@ -183,20 +169,6 @@ paths:
           in: path
           name: parent
           required: true
-          schema:
-            type: string
-        - description: Identifies the platform from which this user is accessing Idea Hub.
-          in: query
-          name: creator.platform
-          schema:
-            enum:
-              - UNKNOWN
-              - BLOGGER
-              - SITEKIT
-            type: string
-        - description: Identifies the platform account (blog/site/etc.) for which to fetch Ideas.
-          in: query
-          name: creator.platformId
           schema:
             type: string
         - description: "Allows filtering. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions are implicitly combined, as if the `AND` operator was always used. The `OR` operator is currently unsupported. * Supported functions: - `saved(bool)`: If set to true, fetches only saved ideas. If set to false, fetches all except saved ideas. Can't be simultaneously used with `dismissed(bool)`. - `dismissed(bool)`: If set to true, fetches only dismissed ideas. Can't be simultaneously used with `saved(bool)`. The `false` value is currently unsupported. Examples: * `saved(true)` * `saved(false)` * `dismissed(true)` The length of this field should be no more than 500 characters."

@@ -500,6 +500,7 @@ components:
             - HIPAA
             - HITRUST
             - EU_REGIONS_AND_SUPPORT
+            - CA_REGIONS_AND_SUPPORT
           type: string
         createTime:
           description: Optional. Time when the operation was created.
@@ -538,6 +539,7 @@ components:
             - HIPAA
             - HITRUST
             - EU_REGIONS_AND_SUPPORT
+            - CA_REGIONS_AND_SUPPORT
           type: string
         createTime:
           description: Output only. Immutable. The Workload creation timestamp.
@@ -725,7 +727,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -733,6 +735,6 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud Platform data
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
